@@ -6,10 +6,10 @@ import java.util.Map;
 import model.structural.Element;
 
 /**
- * <p>Classe de Modelo <b>AttributeUML</b>.</p>
- * <p>Classe responsavel por representar o <b>Atributo UML</b> no SMartyModeling.</p>
+ * <p>Class of Model <b>AttributeUML</b>.</p>
+ * <p>Class responsible for representing <b>Attribute UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  04/04/2019
+ * @since  20/05/2019
  * @see    model.structural.Element
  */
 public class AttributeUML extends Element {
@@ -174,10 +174,10 @@ public class AttributeUML extends Element {
     }
     
     /**
-     * Metodo responsavel por retornar o Simbolo da Visibilidade UML.
-     * @return Simbolo da Visibilidade UML.
+     * Method responsible for returning Visibility Symbol.
+     * @return Visibility Symbol.
      */
-    private String getSimboloVisibilidade() {
+    private String getVisibilitySymbol() {
         if (this.visibility.equals("public"))
             return "+";
         if (this.visibility.equals("protected"))
@@ -188,26 +188,26 @@ public class AttributeUML extends Element {
     }
     
     /**
-     * Metodo responsavel por retornar a Descricao do Atributo UML.
-     * @return Descricao do Atributo UML.
+     * Method responsible for returning Signature.
+     * @return Signature.
      */
-    public String getAssinatura() {
-        return this.getSimboloVisibilidade() + " " + this.nome + " : " + this.printTipo();
+    public String getSignature() {
+        return this.getVisibilitySymbol() + " " + this.name + " : " + this.printTypeUML();
     }
     
     @Override
     public String getIcon() {
-        return "src/imagens/icones/diagrama/classes/atributo.png";
+        return "src/images/icons/diagram/classs/attribute.png";
     }
     
     @Override
     public String getTitle() {
-        return this.getAssinatura();
+        return this.getSignature();
     }
     
     @Override
     public String getStyleLabel() {
-        return "estiloAtributoUML" + this.id;
+        return "styleAttributeUML" + this.id;
     }
     
     @Override
@@ -228,30 +228,30 @@ public class AttributeUML extends Element {
     }
     
     /**
-     * Metodo responsavel por retornar o Tipo do Atributo UML.
-     * @return Tipo do Atributo UML.
+     * Method responsible for exporting the Type UML.
+     * @return Type UML.
      */
-    private String exportarTipo() {
-        if (this.tipo == null)
-            return "tipo=\"TIPO#21\" ";
-        return "tipo=\"" + this.tipo.getId() + "\" ";
+    private String exportType() {
+        if (this.typeUML == null)
+            return " type=\"TYPE#21\"";
+        return " type=\"" + this.typeUML.getId() + "\"";
     }
     
     @Override
     public String export() {
-        String export  = "      <atributo ";
-               export += "id=\""           + this.id           + "\" ";
-               export += "nome=\""         + this.nome         + "\" ";
-               export += this.exportarTipo();
-               export += "visibilidade=\"" + this.visibility + "\" ";
-               export += "estatico=\""     + this.static_     + "\" ";
-               export += "constante=\""    + this.final_    + "\"";
+        String export  = "      <"        + this.type;
+               export += " id=\""         + this.id          + "\"";
+               export += " name=\""       + this.name        + "\"";
+               export += this.exportType();
+               export += " visibility=\"" + this.visibility + "\"";
+               export += " static=\""     + this.static_    + "\"";
+               export += " final=\""      + this.final_     + "\"";
                export += "/>\n";
         return export;
     }
     
     @Override
     public String toString() {
-        return this.getAssinatura();
+        return this.getSignature();
     }
 }

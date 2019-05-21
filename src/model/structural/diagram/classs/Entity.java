@@ -100,7 +100,7 @@ public abstract class Entity extends Element {
      * Method responsible for returning Methods List.
      * @return Methods List.
      */
-    public List<MetodoUML> getMethodsList() {
+    public List<MethodUML> getMethodsList() {
         return new ArrayList<>(this.methods.values());
     }
 
@@ -116,7 +116,7 @@ public abstract class Entity extends Element {
      * Method responsible for adding a Method UML.
      * @param method Method UML.
      */
-    public void addMethod(MetodoUML method) {
+    public void addMethod(MethodUML method) {
         this.methods.put(method.getId(), method);
         this.updateSize();
     }
@@ -125,7 +125,7 @@ public abstract class Entity extends Element {
      * Method responsible for removing a Method UML.
      * @param method Method UML.
      */
-    public void removeMethod(MetodoUML method) {
+    public void removeMethod(MethodUML method) {
         this.methods.remove(method.getId());
     }
 
@@ -252,8 +252,8 @@ public abstract class Entity extends Element {
      */
     public String exportMethods() {
         String export  = "";
-        for (MetodoUML   method : this.getMethodsList())
-               export += method.exportar();
+        for (MethodUML   method : this.getMethodsList())
+               export += method.export();
         return export;
     }
     

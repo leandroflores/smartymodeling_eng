@@ -11,117 +11,117 @@ import model.structural.variability.Variability;
 import org.w3c.dom.Element;
 
 /**
- * <p>Classe de Modelo <b>Diagrama</b>.</p>
- * <p>Classe responsavel por representar o <b>Diagrama</b> no SMartyModeling.</p>
+ * <p>Class of Model <b>Diagram</b>.</p>
+ * <p>Class responsible for representing <b>Diagram</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  14/01/2019
+ * @since  20/05/2019
  * @see    model.structural.Exportable
  */
-public abstract class Diagrama implements Cloneable, Exportable {
-    protected Project projeto;
+public abstract class Diagram implements Exportable {
+    protected Project project;
     protected String  id;
-    protected String  nome;
-    protected String  tipo;
-    protected HashMap elementos;
-    protected HashMap associacoes;
-    protected HashMap variabilidades;
+    protected String  name;
+    protected String  type;
+    protected HashMap elements;
+    protected HashMap associations;
+    protected HashMap variabilities;
     
     /**
-     * Metodo construtor padrao da Classe.
+     * Default constructor method of Class.
      */
-    public Diagrama() {
-        this.elementos      = new HashMap<>();
-        this.associacoes    = new HashMap<>();
-        this.variabilidades = new HashMap<>();
+    public Diagram() {
+        this.elements      = new HashMap<>();
+        this.associations  = new HashMap<>();
+        this.variabilities = new HashMap<>();
     }
     
     /**
-     * Metodo construtor alternativo da Classe.
-     * @param projeto Project.
+     * Alternative constructor method of Class.
+     * @param project Project.
      */
-    public Diagrama(Project projeto) {
+    public Diagram(Project project) {
         this();
-        this.projeto = projeto;
+        this.project = project;
         this.id      = "";
-        this.nome    = "Diagrama";
-        this.tipo    = "";
+        this.name    = "Diagram";
+        this.type    = "";
     }
     
     /**
-     * Metodo construtor alternativo da Classe.
-     * @param projeto Project.
-     * @param elemento Element W3C.
+     * Alternative constructor method of Class.
+     * @param project Project.
+     * @param element W3C Element W3C.
      */
-    public Diagrama(Project projeto, Element elemento) {
+    public Diagram(Project project, Element element) {
         this();
-        this.projeto = projeto;
-        this.id      = elemento.getAttribute("id");
-        this.nome    = elemento.getAttribute("nome");
-        this.tipo    = elemento.getAttribute("tipo");
+        this.project = project;
+        this.id      = element.getAttribute("id");
+        this.name    = element.getAttribute("name");
+        this.type    = element.getAttribute("type");
     }
 
     /**
-     * Metodo responsavel por retornar o Project do Diagrama.
-     * @return Project do Diagrama.
+     * Method responsible for returning Diagram Project.
+     * @return Diagram Project.
      */
-    public Project getProjeto() {
-        return this.projeto;
+    public Project getProject() {
+        return this.project;
     }
 
     /**
-     * Metodo responsavel por definir o Project do Diagrama.
-     * @param projeto Project do Diagrama.
+     * Method responsible for defining Diagram Project.
+     * @param project Diagram Project.
      */
-    public void setProjeto(Project projeto) {
-        this.projeto = projeto;
+    public void setProject(Project project) {
+        this.project = project;
     }
     
     /**
-     * Metodo responsavel por retornar o Id do Diagrama.
-     * @return Id do Diagrama.
+     * Metodo responsavel por retornar o Id do Diagram.
+     * @return Id do Diagram.
      */
     public String getId() {
         return this.id;
     }
 
     /**
-     * Metodo responsavel por definir o Id do Diagrama.
-     * @param id Id do Diagrama.
+     * Metodo responsavel por definir o Id do Diagram.
+     * @param id Id do Diagram.
      */
     public void setId(String id) {
         this.id = id;
     }
 
     /**
-     * Metodo responsavel por retornar o Nome do Diagrama.
-     * @return Nome do Diagrama.
+     * Metodo responsavel por retornar o Nome do Diagram.
+     * @return Nome do Diagram.
      */
-    public String getNome() {
-        return this.nome;
+    public String getName() {
+        return this.name;
     }
 
     /**
-     * Metodo responsavel por definir o Nome do Diagrama.
-     * @param nome Nome do Diagrama.
+     * Metodo responsavel por definir o Nome do Diagram.
+     * @param name Nome do Diagram.
      */
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
     
     /**
-     * Metodo responsavel por retornar o Tipo do Diagrama.
-     * @return Tipo do Diagrama.
+     * Metodo responsavel por retornar o Tipo do Diagram.
+     * @return Tipo do Diagram.
      */
-    public String getTipo() {
-        return this.tipo;
+    public String getType() {
+        return this.type;
     }
     
     /**
-     * Metodo responsavel por definir o Tipo do Diagrama.
-     * @param tipo Tipo do Diagrama.
+     * Metodo responsavel por definir o Tipo do Diagram.
+     * @param type Tipo do Diagram.
      */
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setType(String type) {
+        this.type = type;
     }
     
     /**
@@ -130,7 +130,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @return Proximo Id.
      */
     public String nextId(String rotulo) {
-        return this.projeto.nextId(rotulo);
+        return this.project.nextId(rotulo);
     }
     
     /**
@@ -138,7 +138,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @return Lista de Elementos.
      */
     public HashMap<String, Element> getElementos() {
-        return this.elementos;
+        return this.elements;
     }
     
     /**
@@ -146,7 +146,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @return Lista de Elementos.
      */
     public List<Element> getListaElementos() {
-        ArrayList<Element> lista = new ArrayList<>(this.elementos.values());
+        ArrayList<Element> lista = new ArrayList<>(this.elements.values());
                             lista.sort(this.getComparatorElemento());
         return              lista;
     }
@@ -197,8 +197,8 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @param elemento Element.
      */
     public void addElemento(Element elemento) {
-        this.elementos.put(elemento.getId(), elemento);
-        this.projeto.objects.put(elemento.getId(), elemento);
+        this.elements.put(elemento.getId(), elemento);
+        this.project.objects.put(elemento.getId(), elemento);
     }
     
     /**
@@ -207,13 +207,13 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @param nome Nome do Element.
      */
     public void updateElemento(Element elemento, String nome) {
-        String nomeValido = nome.replaceAll(this.getProjeto().getPerfil().getIdentificadorObrigatorio()     + "\n", "")
-                                .replaceAll(this.getProjeto().getPerfil().getIdentificadorOpcional()        + "\n", "")
-                                .replaceAll(this.getProjeto().getPerfil().getIdentificadorPontoDeVariacao() + "\n", "")
-                                .replaceAll(this.getProjeto().getPerfil().getIdentificadorInclusivo()       + "\n", "")
-                                .replaceAll(this.getProjeto().getPerfil().getIdentificadorExclusivo()       + "\n", "")
-                                .replaceAll(this.getProjeto().getPerfil().getIdentificadorMutex()           + "\n", "")
-                                .replaceAll(this.getProjeto().getPerfil().getIdentificadorRequires()        + "\n", "")
+        String nomeValido = nome.replaceAll(this.getProject().getPerfil().getIdentificadorObrigatorio()     + "\n", "")
+                                .replaceAll(this.getProject().getPerfil().getIdentificadorOpcional()        + "\n", "")
+                                .replaceAll(this.getProject().getPerfil().getIdentificadorPontoDeVariacao() + "\n", "")
+                                .replaceAll(this.getProject().getPerfil().getIdentificadorInclusivo()       + "\n", "")
+                                .replaceAll(this.getProject().getPerfil().getIdentificadorExclusivo()       + "\n", "")
+                                .replaceAll(this.getProject().getPerfil().getIdentificadorMutex()           + "\n", "")
+                                .replaceAll(this.getProject().getPerfil().getIdentificadorRequires()        + "\n", "")
                                 .replaceAll(">", "").replaceAll("<", "");
         elemento.setName(nomeValido);
     }
@@ -224,7 +224,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @return Element encontrado.
      */
     public Element getElemento(String id) {
-        return (Element) this.elementos.get(id);
+        return (Element) this.elements.get(id);
     }
     
     /**
@@ -234,8 +234,8 @@ public abstract class Diagrama implements Cloneable, Exportable {
     public void removeElemento(Element elemento) {
         this.removeAssociacao(elemento);
         this.removeVariabilidade(elemento);
-        this.projeto.objects.remove(elemento.getId());
-        this.elementos.remove(elemento.getId());
+        this.project.objects.remove(elemento.getId());
+        this.elements.remove(elemento.getId());
     }
     
     /**
@@ -243,7 +243,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @param elementos Lista de Elementos.
      */
     public void setElementos(HashMap<String, Element> elementos) {
-        this.elementos = elementos;
+        this.elements = elementos;
     }
     
     /**
@@ -251,7 +251,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @return Lista de Associacoes.
      */
     public HashMap<String, Association> getAssociacoes() {
-        return this.associacoes;
+        return this.associations;
     }
     
     /**
@@ -259,7 +259,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @return Lista de Associacoes.
      */
     public List<Association> getListaAssociacoes() {
-        ArrayList<Association> lista = new ArrayList<>(this.associacoes.values());
+        ArrayList<Association> lista = new ArrayList<>(this.associations.values());
                               lista.sort(this.getComparatorAssociacao());
         return                lista;
     }
@@ -284,7 +284,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @param requires Requires.
      */
     public void addRequires(Requires requires) {
-        if (this.associacoes.containsKey(requires.getId()) == false)
+        if (this.associations.containsKey(requires.getId()) == false)
             this.addAssociacao(requires);
     }
     
@@ -297,8 +297,8 @@ public abstract class Diagrama implements Cloneable, Exportable {
     }
     
     /**
-     * Metodo responsavel por retornar a Lista de Requires do Diagrama.
-     * @return Lista de Requires do Diagrama.
+     * Metodo responsavel por retornar a Lista de Requires do Diagram.
+     * @return Lista de Requires do Diagram.
      */
     public List<Requires> getListaRequires() {
         List<Requires> requires = new ArrayList<>();
@@ -314,7 +314,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @param mutex Mutex.
      */
     public void addMutex(Mutex mutex) {
-        if (this.associacoes.containsKey(mutex.getId()) == false)
+        if (this.associations.containsKey(mutex.getId()) == false)
             this.addAssociacao(mutex);
     }
     
@@ -327,8 +327,8 @@ public abstract class Diagrama implements Cloneable, Exportable {
     }
     
     /**
-     * Metodo responsavel por retornar a Lista de Mutex do Diagrama.
-     * @return Lista de Mutex do Diagrama.
+     * Metodo responsavel por retornar a Lista de Mutex do Diagram.
+     * @return Lista de Mutex do Diagram.
      */
     public List<Mutex> getListaMutex() {
         List<Mutex> mutex = new ArrayList<>();
@@ -344,7 +344,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @param heranca Inheritance.
      */
     public void addHeranca(Inheritance heranca) {
-        if (this.associacoes.containsKey(heranca.getId()) == false)
+        if (this.associations.containsKey(heranca.getId()) == false)
             this.addAssociacao(heranca);
     }
     
@@ -357,8 +357,8 @@ public abstract class Diagrama implements Cloneable, Exportable {
     }
     
     /**
-     * Metodo responsavel por retornar a Lista de Herancas do Diagrama.
-     * @return Lista de Herancas do Diagrama.
+     * Metodo responsavel por retornar a Lista de Herancas do Diagram.
+     * @return Lista de Herancas do Diagram.
      */
     public List<Inheritance> getListaHerancas() {
         List<Inheritance> herancas = new ArrayList<>();
@@ -374,8 +374,8 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @param associacao Association.
      */
     public void addAssociacao(Association associacao) {
-        this.associacoes.put(associacao.getId(), associacao);
-        this.projeto.objects.put(associacao.getId(), associacao);
+        this.associations.put(associacao.getId(), associacao);
+        this.project.objects.put(associacao.getId(), associacao);
     }
     
     /**
@@ -384,7 +384,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @return Association encontrada.
      */
     public Association getAssociacao(String id) {
-        return (Association) this.associacoes.get(id);
+        return (Association) this.associations.get(id);
     }
     
     /**
@@ -392,8 +392,8 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @param associacao Association.
      */
     public void removeAssociacao(Association associacao) {
-        this.projeto.objects.remove(associacao.getId());
-        this.associacoes.remove(associacao.getId());
+        this.project.objects.remove(associacao.getId());
+        this.associations.remove(associacao.getId());
     }
     
     /**
@@ -412,7 +412,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @param associacoes Lista de Associacoes.
      */
     public void setAssociacoes(HashMap<String, Association> associacoes) {
-        this.associacoes = associacoes;
+        this.associations = associacoes;
     }
     
     /**
@@ -420,7 +420,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @return Lista de Variabilidades.
      */
     public HashMap<String, Variability> getVariabilidades() {
-        return this.variabilidades;
+        return this.variabilities;
     }
     
     /**
@@ -428,7 +428,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @return Lista de Variabilidades.
      */
     public List<Variability> getListaVariabilidades() {
-        ArrayList<Variability> lista = new ArrayList<>(this.variabilidades.values());
+        ArrayList<Variability> lista = new ArrayList<>(this.variabilities.values());
                                  lista.sort(this.getComparatorVariabilidade());
         return                   lista;
     }
@@ -451,10 +451,10 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @param variabilidade Variability.
      */
     public void addVariabilidade(Variability variabilidade) {
-        variabilidade.setId(this.projeto.nextVariabilityId());
-        if (this.variabilidades.get(variabilidade.getId()) == null) {
-            this.variabilidades.put(variabilidade.getId(), variabilidade);
-            this.projeto.variabilities.put(variabilidade.getId(), variabilidade);
+        variabilidade.setId(this.project.nextVariabilityId());
+        if (this.variabilities.get(variabilidade.getId()) == null) {
+            this.variabilities.put(variabilidade.getId(), variabilidade);
+            this.project.variabilities.put(variabilidade.getId(), variabilidade);
         }
     }
     
@@ -464,7 +464,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @return Variability encontrada.
      */
     public Variability getVariabilidade(String id) {
-        return (Variability) this.variabilidades.get(id);
+        return (Variability) this.variabilities.get(id);
     }
     
     /**
@@ -472,8 +472,8 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @param variabilidade Variability.
      */
     public void removeVariabilidade(Variability variabilidade) {
-        this.projeto.variabilities.remove(variabilidade.getId());
-        this.variabilidades.remove(variabilidade.getId());
+        this.project.variabilities.remove(variabilidade.getId());
+        this.variabilities.remove(variabilidade.getId());
     }
     
     /**
@@ -511,7 +511,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @param variabilidades Lista de Variabilidades.
      */
     public void setVariabilidades(HashMap<String, Variability> variabilidades) {
-        this.variabilidades = variabilidades;
+        this.variabilities = variabilidades;
     }
     
     /**
@@ -519,7 +519,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @return Tipo Padrao.
      */
     public TypeUML getTipoPadrao() {
-        return this.projeto.getObjectType();
+        return this.project.getObjectType();
     }
     
     /**
@@ -527,12 +527,12 @@ public abstract class Diagrama implements Cloneable, Exportable {
      * @return Tipo void.
      */
     public TypeUML getTipoVoid() {
-        return this.projeto.getVoidType();
+        return this.project.getVoidType();
     }
     
     /**
      * Metodo responsavel por retornar os Estereotipos de um Element.
-     * @param  elemento Element do Diagrama.
+     * @param  elemento Element do Diagram.
      * @return Estereotipos do Element.
      */
     public String getEstereotipos(Element elemento) {
@@ -542,7 +542,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
         String exclusivo   = this.getEstereotipoExclusivo(elemento);
         String toReturn    = "";
         if (!inclusivo.equals("") || !exclusivo.equals(""))
-               toReturn   += estereotipo.replaceAll(this.getProjeto().getPerfil().getIdentificadorObrigatorio() + "\n", "");
+               toReturn   += estereotipo.replaceAll(this.getProject().getPerfil().getIdentificadorObrigatorio() + "\n", "");
         else
                toReturn   += estereotipo;
         return toReturn   + inclusivo + exclusivo;
@@ -550,13 +550,13 @@ public abstract class Diagrama implements Cloneable, Exportable {
     
     /**
      * Metodo responsavel por retornar o Estereotipo Opcional do Element.
-     * @param  elemento Element do Diagrama.
+     * @param  elemento Element do Diagram.
      * @return Estereotipo Opcional do Element.
      */
     public String getEstereotipoOpcional(Element elemento) {
         if (elemento.isObrigatorio())
-            return this.getProjeto().getPerfil().getIdentificadorObrigatorio() + "\n";
-        return this.getProjeto().getPerfil().getIdentificadorOpcional() + "\n";
+            return this.getProject().getPerfil().getIdentificadorObrigatorio() + "\n";
+        return this.getProject().getPerfil().getIdentificadorOpcional() + "\n";
     }
     
     /**
@@ -576,11 +576,11 @@ public abstract class Diagrama implements Cloneable, Exportable {
     
     /**
      * Metodo responsavel por retornar o Estereotipo Ponto de Variacao do Element.
-     * @param  elemento Element do Diagrama.
+     * @param  elemento Element do Diagram.
      * @return Estereotipo Ponto de Variacao do Element.
      */
     public String getEstereotipoPontoDeVariacao(Element elemento) {
-        return this.filterPontosDeVariacao(elemento).isEmpty() ? "" : this.getProjeto().getPerfil().getIdentificadorPontoDeVariacao() + "\n";
+        return this.filterPontosDeVariacao(elemento).isEmpty() ? "" : this.getProject().getPerfil().getIdentificadorPontoDeVariacao() + "\n";
     }
     
     /**
@@ -602,20 +602,20 @@ public abstract class Diagrama implements Cloneable, Exportable {
     
     /**
      * Metodo responsavel por retornar o Estereotipo Inclusivo do Element.
-     * @param  elemento Element do Diagrama.
+     * @param  elemento Element do Diagram.
      * @return Estereotipo Inclusivo do Element.
      */
     public String getEstereotipoInclusivo(Element elemento) {
-        return this.filterVariantes(elemento, "inclusiva").isEmpty() ? "" : this.getProjeto().getPerfil().getIdentificadorInclusivo() + "\n";
+        return this.filterVariantes(elemento, "inclusiva").isEmpty() ? "" : this.getProject().getPerfil().getIdentificadorInclusivo() + "\n";
     }
     
     /**
      * Metodo responsavel por retornar o Estereotipo Exclusivo do Element.
-     * @param  elemento Element do Diagrama.
+     * @param  elemento Element do Diagram.
      * @return Estereotipo Exclusivo do Element.
      */
     public String getEstereotipoExclusivo(Element elemento) {
-        return this.filterVariantes(elemento, "exclusiva").isEmpty() ? "" : this.getProjeto().getPerfil().getIdentificadorExclusivo() + "\n";
+        return this.filterVariantes(elemento, "exclusiva").isEmpty() ? "" : this.getProject().getPerfil().getIdentificadorExclusivo() + "\n";
     }
     
     /**
@@ -654,7 +654,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
     }
     
     /**
-     * Metodo responsavel por Exportar os Dados dos Elementos do Diagrama.
+     * Metodo responsavel por Exportar os Dados dos Elementos do Diagram.
      * @return String com os Dados dos Elementos.
      */
     private String exportarElementos() {
@@ -665,7 +665,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
     }
     
     /**
-     * Metodo responsavel por Exportar os Dados das Associacoes do Diagrama.
+     * Metodo responsavel por Exportar os Dados das Associacoes do Diagram.
      * @return String com os Dados das Associacoes.
      */
     private String exportarAssociacoes() {
@@ -676,7 +676,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
     }
     
     /**
-     * Metodo responsavel por Exportar os Dados das Variabilidades do Diagrama.
+     * Metodo responsavel por Exportar os Dados das Variabilidades do Diagram.
      * @return String com os Dados das Variabilidades.
      */
     private String exportarVariabilidades() {
@@ -688,7 +688,7 @@ public abstract class Diagrama implements Cloneable, Exportable {
     
     @Override
     public String export() {
-        String export  = "  <diagrama id=\"" + this.id + "\" nome=\"" + this.nome + "\" tipo=\"" + this.tipo + "\">\n";
+        String export  = "  <diagrama id=\"" + this.id + "\" nome=\"" + this.name + "\" tipo=\"" + this.type + "\">\n";
                export += this.exportarElementos();
                export += this.exportarAssociacoes();
                export += this.exportarVariabilidades();
@@ -702,19 +702,19 @@ public abstract class Diagrama implements Cloneable, Exportable {
     public abstract void init();
     
     /**
-     * Metodo responsavel por retornar o Caminho do Icone do Diagrama.
-     * @return Caminho do Icone do Diagrama.
+     * Metodo responsavel por retornar o Caminho do Icone do Diagram.
+     * @return Caminho do Icone do Diagram.
      */
     public abstract String getIcone();
     
     /**
-     * Metodo responsavel por retornar um Clone do Diagrama.
-     * @return Clone do Diagrama.
+     * Metodo responsavel por retornar um Clone do Diagram.
+     * @return Clone do Diagram.
      */
-    public abstract Diagrama getClone();
+    public abstract Diagram getClone();
     
     @Override
     public String toString() {
-        return this.id + " - " + this.nome + "(" + this.tipo + ")";
+        return this.id + " - " + this.name + "(" + this.type + ")";
     }
 }

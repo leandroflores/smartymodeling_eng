@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneLayout;
-import model.structural.Diagrama;
+import model.structural.Diagram;
 import model.structural.Project;
 import visao.Operacao;
 import visao.View;
@@ -121,7 +121,7 @@ public final class ViewMenu extends View implements Operacao {
     }
     
     /**
-     * Metodo responsavel por criar o Menu de Diagrama da View Menu.
+     * Metodo responsavel por criar o Menu de Diagram da View Menu.
      */
     private void createMenuDiagrama() {
         this.createMenu("menuDiagrama", "Diagrama");
@@ -216,7 +216,7 @@ public final class ViewMenu extends View implements Operacao {
      * Metodo Teste por enquanto...
      * @param diagrama 
      */
-    public void showDiagrama(Diagrama diagrama) {
+    public void showDiagrama(Diagram diagrama) {
         this.painelModelagem.addDiagrama(diagrama);
         this.painelModelagem.updateUI();
     }
@@ -451,48 +451,48 @@ public final class ViewMenu extends View implements Operacao {
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Diagrama.
-     * @return Menu Diagrama.
+     * Metodo responsavel por retornar o Menu Diagram.
+     * @return Menu Diagram.
      */
     public JMenu getMenuDiagrama() {
         return this.menus.get("menuDiagrama");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item do Diagrama Atividades.
-     * @return Menu Item do Diagrama Atividades.
+     * Metodo responsavel por retornar o Menu Item do Diagram Atividades.
+     * @return Menu Item do Diagram Atividades.
      */
     public JMenuItem getMenuItemDiagramaAtividades() {
         return this.menuItens.get("menuItemDiagramaAtividades");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item do Diagrama Casos de Uso.
-     * @return Menu Item do Diagrama Casos de Uso.
+     * Metodo responsavel por retornar o Menu Item do Diagram Casos de Uso.
+     * @return Menu Item do Diagram Casos de Uso.
      */
     public JMenuItem getMenuItemDiagramaCasosDeUso() {
         return this.menuItens.get("menuItemDiagramaCasosDeUso");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item do Diagrama Classes.
-     * @return Menu Item do Diagrama Classes.
+     * Metodo responsavel por retornar o Menu Item do Diagram Classes.
+     * @return Menu Item do Diagram Classes.
      */
     public JMenuItem getMenuItemDiagramaClasses() {
         return this.menuItens.get("menuItemDiagramaClasses");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item do Diagrama Componentes.
-     * @return Menu Item do Diagrama Componentes.
+     * Metodo responsavel por retornar o Menu Item do Diagram Componentes.
+     * @return Menu Item do Diagram Componentes.
      */
     public JMenuItem getMenuItemDiagramaComponentes() {
         return this.menuItens.get("menuItemDiagramaComponentes");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item do Diagrama Sequencia.
-     * @return Menu Item do Diagrama Sequencia.
+     * Metodo responsavel por retornar o Menu Item do Diagram Sequencia.
+     * @return Menu Item do Diagram Sequencia.
      */
     public JMenuItem getMenuItemDiagramaSequencia() {
         return this.menuItens.get("menuItemDiagramaSequencia");

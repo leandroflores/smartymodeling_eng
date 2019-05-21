@@ -202,7 +202,7 @@ public class Project implements Exportable {
      * Method responsible for returning the Diagrams List.
      * @return Diagrams List.
      */
-    public List<Diagrama> getDiagramsList() {
+    public List<Diagram> getDiagramsList() {
         return new ArrayList<>(this.diagrams.values());
     }
     
@@ -224,7 +224,7 @@ public class Project implements Exportable {
      * Method responsible for adding a Diagram.
      * @param diagram Diagram.
      */
-    public void addDiagram(Diagrama diagram) {
+    public void addDiagram(Diagram diagram) {
         diagram.setId(this.nextDiagramId());
         if (this.diagrams.get(diagram.getId()) == null)
             this.diagrams.put(diagram.getId(), diagram);
@@ -234,7 +234,7 @@ public class Project implements Exportable {
      * Method responsible for removing the Elements from a Diagram.
      * @param diagram Diagram.
      */
-    private void removeElements(Diagrama diagram) {
+    private void removeElements(Diagram diagram) {
         for (int i = diagram.getListaElementos().size() - 1; i >= 0; i--)
             diagram.removeElemento(diagram.getListaElementos().get(i));
     }
@@ -243,7 +243,7 @@ public class Project implements Exportable {
      * Method responsible for removing a Diagram.
      * @param diagram Diagram.
      */
-    public void removeDiagram(Diagrama diagram) {
+    public void removeDiagram(Diagram diagram) {
         this.removeElements(diagram);
         this.diagrams.remove(diagram.getId());
     }
@@ -254,7 +254,7 @@ public class Project implements Exportable {
      */
     private String exportDiagrams() {
         String export  = "";
-        for (Diagrama diagram : this.getDiagramsList())
+        for (Diagram diagram : this.getDiagramsList())
                export += diagram.export();
         return export;
     }
@@ -432,7 +432,7 @@ public class Project implements Exportable {
     private String exportTypes() {
         String export  = "";
         for (TypeUML type : this.getTypesList())
-               export += type.exportar();
+               export += type.export();
         return export;
     }
     
@@ -585,11 +585,11 @@ public class Project implements Exportable {
     
     @Override
     public String export() {
-        String export  = "<projeto id=\"" + this.id + "\" nome=\"" + this.name + "\" versao=\"" + this.version + "\">\n";
-               export += "  <tipos>\n" + this.exportTypes() + "  </tipos>\n";
+        String export  = "<project id=\"" + this.id + "\" name=\"" + this.name + "\" version=\"" + this.version + "\">\n";
+               export += "  <types>\n" + this.exportTypes() + "  </types>\n";
                export += this.perfil.export();
                export += this.exportDiagrams();
-               export += "</projeto>";
+               export += "</project>";
         return export;
     }
     
@@ -602,23 +602,23 @@ public class Project implements Exportable {
     }
 
     @Override
-    public boolean equals(Object objeto) {
-        if (objeto instanceof Project == false)
+    public boolean equals(Object object) {
+        if (object instanceof Project == false)
             return false;
-        return Objects.equals(this.id, ((Project) objeto).getId());
+        return Objects.equals(this.id, ((Project) object).getId());
     }
 
     @Override
     public String toString() {
-        String projeto  = "Id             = " + this.id             + "\n";
-               projeto += "Nome           = " + this.name           + "\n";
-               projeto += "Caminho        = " + this.path        + "\n";
-               projeto += "Versao         = " + this.version         + "\n";
-               projeto += "Diagramas      = " + this.diagrams      + "\n";
-               projeto += "Estereotipos   = " + this.stereotypes   + "\n";
-               projeto += "Variabilidades = " + this.variabilities + "\n";
-               projeto += "Objetos        = " + this.objects        + "\n";
-               projeto += "Tipos          = " + this.types          + "\n";
+        String projeto  = "Id            = " + this.id            + "\n";
+               projeto += "Name          = " + this.name          + "\n";
+               projeto += "Path          = " + this.path          + "\n";
+               projeto += "Version       = " + this.version       + "\n";
+               projeto += "Diagrams      = " + this.diagrams      + "\n";
+               projeto += "Stereotypes   = " + this.stereotypes   + "\n";
+               projeto += "Variabilities = " + this.variabilities + "\n";
+               projeto += "Objects       = " + this.objects       + "\n";
+               projeto += "Types         = " + this.types         + "\n";
         return projeto;
     }
 }
