@@ -235,8 +235,8 @@ public class Project implements Exportable {
      * @param diagram Diagram.
      */
     private void removeElements(Diagram diagram) {
-        for (int i = diagram.getListaElementos().size() - 1; i >= 0; i--)
-            diagram.removeElemento(diagram.getListaElementos().get(i));
+        for (int i = diagram.getElementsList().size() - 1; i >= 0; i--)
+            diagram.removeElement(diagram.getElementsList().get(i));
     }
     
     /**

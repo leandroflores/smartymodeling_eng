@@ -296,7 +296,7 @@ public abstract class View extends JFrame {
      * @param  id JFileChooser Id.
      * @return New JFileChooser.
      */
-    public JFileChooser createFileChooserArquivo(String id) {
+    public JFileChooser createFileChooser(String id) {
         JFileChooser fileChooser = new JFileChooser();
                      fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                      fileChooser.setFileFilter(new FileNameExtensionFilter("SMARTY", "smty", "smty"));
@@ -309,7 +309,7 @@ public abstract class View extends JFrame {
      * @param  id JFileChooser Id.
      * @return New Image JFileChooser.
      */
-    public JFileChooser createImageFileChooser(String id) {
+    public JFileChooser createImageChooser(String id) {
         JFileChooser fileChooser = new JFileChooser();
                      fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                      fileChooser.setFileFilter(new FileNameExtensionFilter("PNG", "png", "png"));

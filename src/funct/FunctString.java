@@ -243,6 +243,19 @@ public class FunctString {
     }
     
     /**
+     * Method responsible for returning a List of Strings.
+     * @param  values String with values separated by space.
+     * @return List of Strings.
+     */
+    public List<String> stringToList(String values) {
+        List<String> list  = new ArrayList<>();
+        String[]     array = values.split("\\ ");
+        for (String current : array)
+                     list.add(current.trim());
+        return       list;
+    }
+    
+    /**
      * 
      * Method responsible for checking if a mask is valid.
      * @param  string String.

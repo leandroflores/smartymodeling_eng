@@ -18,73 +18,74 @@ import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneLayout;
 import model.structural.Diagram;
 import model.structural.Project;
-import visao.Operacao;
-import visao.View;
-import visao.ViewStyle;
+import view.Operation;
+import view.View;
+import view.ViewStyle;
 import visao.painel.modelagem.PainelModelagem;
 import visao.painel.principal.PainelPrincipal;
 import visao.painel.projeto.PainelProjeto;
 
 /**
  * <p>Class of View <b>ViewMenu</b>.</p>
- * <p>Classe responsavel por definir a <b>Interface de Menu Principal</b> do SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>View Menu</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  14/01/2018
+ * @since  21/05/2019
  * @see    controlador.visao.estruturais.ControllerViewMenu
- * @see    visao.Operacao
- * @see    visao.View
+ * @see    view.Operation
+ * @see    view.View
  */
-public final class ViewMenu extends View implements Operacao {
-    private Project  projeto;
+public final class ViewMenu extends View implements Operation {
+    private Project  project;
     private Double   zoom;
-    private boolean  salvo;
+    private boolean  save;
     private JMenuBar menuBar;
     
-    private PainelPrincipal painelPrincipal;
-    private PainelProjeto   painelProjeto;
-    private PainelModelagem painelModelagem;
+//    private PainelPrincipal painelPrincipal;
+//    private PainelProjeto   painelProjeto;
+//    private PainelModelagem painelModelagem;
     
     /**
-     * Metodo constutor padrao da Classe.
+     * Default constructor method of Class.
      */
     public ViewMenu() {
         super();
         this.controller = new ControllerViewMenu(this);
-        this.projeto    = null;
+        this.project    = null;
         this.zoom       = 1.00d;
-        this.salvo      = true;
+        this.save       = true;
         this.initComponents();
         this.update();
     }
     
     /**
-     * Metodo responsavel por inicializar os componentes da View.
+     * Method responsible for initializing Components.
      */
     private void initComponents() {
         this.addKeyListener(this.controller);
 //        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        this.setTitle(ViewStyle.SISTEMA + "Menu Principal");
+        this.setTitle(ViewStyle.SYSTEM + "Menu");
         this.addMenu();
-        this.createFileChooserArquivo("fileChooserProjeto");
-        this.createFileChooserImage("fileChooserImagem");
-        this.addPainelPrincipal();
-        this.addPainelProjeto();
-        this.addPainelModelagem();
+        this.createFileChooser("fileChooserProject");
+        this.createImageChooser("fileChooserImage");
+        
+//        this.addPainelPrincipal();
+//        this.addPainelProjeto();
+//        this.addPainelModelagem();
     }
     
     /**
-     * Metodo responsavel por adicionar a barra de menus ao Frame.
+     * Method responsible for adding Menu Bar to View.
      */
     private void addMenu() {
         this.menuBar = new JMenuBar();
         
-        this.createMenuArquivo();
-        this.createMenuDiagrama();
-        this.createMenuLinhaProduto();
-        this.createMenuSistema();
+        this.createFileMenu();
+        this.createDiagramMenu();
+        this.createProductLineMenu();
+        this.createSystemMenu();
         
-        this.menuBar.add(this.getMenuArquivo());
-        this.menuBar.add(this.getMenuDiagrama());
+        this.menuBar.add(this.getFileMenu());
+        this.menuBar.add(this.getMenuDiagram());
         this.menuBar.add(this.getMenuLinhaProduto());
         this.menuBar.add(this.getMenuSistema());
         
@@ -92,61 +93,61 @@ public final class ViewMenu extends View implements Operacao {
     }
     
     /**
-     * Metodo responsavel por criar o Menu de Arquivo da View Menu.
+     * Method responsible for creating File Menu.
      */
-    private void createMenuArquivo() {
-        this.createMenu("menuArquivo", "Arquivo");
+    private void createFileMenu() {
+        this.createMenu("menuFile", "File");
         
-        this.createMenuItem("menuItemNovoProjeto",   "Novo Projeto",   "arquivo/novo.png");
-        this.getMenuItemNovoProjeto().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
-        this.createMenuItem("menuItemAbrirProjeto",  "Abrir Projeto",  "arquivo/abrir.png");
-        this.getMenuItemAbrirProjeto().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
-        this.createMenuItem("menuItemSalvarProjeto", "Salvar Projeto", "arquivo/salvar.png");
-        this.getMenuItemSalvarProjeto().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
-        this.createMenuItem("menuItemFecharProjeto", "Fechar Projeto", "arquivo/fechar.png");
-        this.getMenuItemFecharProjeto().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
-        this.createMenuItem("menuItemSairSistema",   "Sair",           "arquivo/sair.png");
-        this.getMenuItemSairSistema().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
+        this.createMenuItem("menuItemNewProject",   "New Project",   "file/new.png");
+        this.getMenuItemNewProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
+        this.createMenuItem("menuItemOpenProject",  "Open Projeto",  "file/open.png");
+        this.getMenuItemOpenProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+        this.createMenuItem("menuItemSaveProject",  "Save Project",  "file/save.png");
+        this.getMenuItemSaveProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
+        this.createMenuItem("menuItemCloseProject", "Close Project", "file/close.png");
+        this.getMenuItemCloseProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
+        this.createMenuItem("menuItemExitSystem",   "Exit",          "file/exit.png");
+        this.getMenuItemExitSystem().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
         
-        this.getMenuArquivo().add(this.getMenuItemNovoProjeto());
-        this.getMenuArquivo().addSeparator();
-        this.getMenuArquivo().add(this.getMenuItemAbrirProjeto());
-        this.getMenuArquivo().add(this.getMenuItemSalvarProjeto());
-        this.getMenuItemSalvarProjeto().setEnabled(false);
-        this.getMenuArquivo().addSeparator();
-        this.getMenuArquivo().add(this.getMenuItemFecharProjeto());
-        this.getMenuItemFecharProjeto().setEnabled(false);
-        this.getMenuArquivo().addSeparator();
-        this.getMenuArquivo().add(this.getMenuItemSairSistema());
+        this.getFileMenu().add(this.getMenuItemNewProject());
+        this.getFileMenu().addSeparator();
+        this.getFileMenu().add(this.getMenuItemOpenProject());
+        this.getFileMenu().add(this.getMenuItemSaveProject());
+        this.getMenuItemSaveProject().setEnabled(false);
+        this.getFileMenu().addSeparator();
+        this.getFileMenu().add(this.getMenuItemCloseProject());
+        this.getMenuItemCloseProject().setEnabled(false);
+        this.getFileMenu().addSeparator();
+        this.getFileMenu().add(this.getMenuItemExitSystem());
     }
     
     /**
-     * Metodo responsavel por criar o Menu de Diagram da View Menu.
+     * Method responsible for creating Diagram Menu.
      */
-    private void createMenuDiagrama() {
-        this.createMenu("menuDiagrama", "Diagrama");
+    private void createDiagramMenu() {
+        this.createMenu("menuDiagram", "Diagram");
         
-        this.createMenuItem("menuItemDiagramaAtividades",  "Diagrama de Atividades",   "diagrama/atividades.png");
-        this.createMenuItem("menuItemDiagramaCasosDeUso",  "Diagrama de Casos de Uso", "diagrama/casos-de-uso.png");
-        this.createMenuItem("menuItemDiagramaClasses",     "Diagrama de Classes",      "diagrama/classes.png");
-        this.createMenuItem("menuItemDiagramaComponentes", "Diagrama de Componentes",  "diagrama/componentes.png");
-        this.createMenuItem("menuItemDiagramaSequencia",   "Diagrama de Sequência",    "diagrama/sequencia.png");
+        this.createMenuItem("menuItemActivityDiagram",  "Activity Diagram",  "diagram/activity.png");
+        this.createMenuItem("menuItemClassDiagram",     "Class Diagram",     "diagram/class.png");
+        this.createMenuItem("menuItemComponentDiagram", "Component Diagram", "diagram/component.png");
+        this.createMenuItem("menuItemSequenceDiagram",  "Sequence Diagram",  "diagram/sequence.png");
+        this.createMenuItem("menuItemUseCaseDiagram",   "Use Case Diagram",  "diagram/use-case.png");
         
-        this.getMenuDiagrama().add(this.getMenuItemDiagramaAtividades());
-        this.getMenuDiagrama().add(this.getMenuItemDiagramaCasosDeUso());
-        this.getMenuDiagrama().add(this.getMenuItemDiagramaClasses());
-        this.getMenuDiagrama().add(this.getMenuItemDiagramaComponentes());
-        this.getMenuDiagrama().add(this.getMenuItemDiagramaSequencia());
+        this.getMenuDiagram().add(this.getMenuItemActivityDiagram());
+        this.getMenuDiagram().add(this.getMenuItemClassDiagram());
+        this.getMenuDiagram().add(this.getMenuItemComponentDiagram());
+        this.getMenuDiagram().add(this.getMenuItemSequenceDiagram());
+        this.getMenuDiagram().add(this.getMenuItemUseCaseDiagram());
     }
     
     /**
-     * Metodo responsavel por criar o Menu de Linha de Produto da View Menu.
+     * Method responsible for creating Product Line Menu.
      */
-    private void createMenuLinhaProduto() {
-        this.createMenu("menuLinhaProduto", "Linha de Produto");
+    private void createProductLineMenu() {
+        this.createMenu("menuProductLine", "Product Line");
         
-        this.createMenuItem("menuItemInstanciarProduto",        "Instanciar Produto",        "sistema/sobre.png");
-        this.createMenuItem("menuItemGerenciarIdentificadores", "Gerenciar Identificadores", "sistema/sobre.png");
+        this.createMenuItem("menuItemInstantiateProduct", "Instantiate Product", "system/info.png");
+        this.createMenuItem("menuItemManageIdentifiers",  "Manage Identifiers",  "system/info.png");
         
         this.getMenuLinhaProduto().add(this.getMenuItemInstanciarProduto());
         this.getMenuLinhaProduto().add(this.getMenuItemGerenciarIdentificadores());
@@ -155,7 +156,7 @@ public final class ViewMenu extends View implements Operacao {
     /**
      * Metodo responsavel por criar o Menu de Sistema da View Menu.
      */
-    private void createMenuSistema() {
+    private void createSystemMenu() {
         this.createMenu("menuSistema", "Sistema");
         
         this.createMenuItem("menuItemSistemaSobre", "Sobre", "sistema/sobre.png");
@@ -172,10 +173,10 @@ public final class ViewMenu extends View implements Operacao {
      * Metodo responsavel por atualizar o Titulo da View.
      */
     public void setTitle() {
-        if (this.projeto == null)
+        if (this.project == null)
             this.setTitle(ViewStyle.SISTEMA + "Menu Principal");
         else
-            this.setTitle(ViewStyle.SISTEMA + this.projeto.getPath());
+            this.setTitle(ViewStyle.SISTEMA + this.project.getPath());
     }
     
     /**
@@ -258,11 +259,11 @@ public final class ViewMenu extends View implements Operacao {
      * Metodo responsavel por desabilitar os Menus Itens dos Diagramas.
      */
     private void setMenuItemDiagramas(boolean flag) {
-        this.getMenuItemDiagramaAtividades().setEnabled(flag);
-        this.getMenuItemDiagramaCasosDeUso().setEnabled(flag);
-        this.getMenuItemDiagramaClasses().setEnabled(flag);
-        this.getMenuItemDiagramaComponentes().setEnabled(flag);
-        this.getMenuItemDiagramaSequencia().setEnabled(flag);
+        this.getMenuItemActivityDiagram().setEnabled(flag);
+        this.getMenuItemUseCaseDiagram().setEnabled(flag);
+        this.getMenuItemClassDiagram().setEnabled(flag);
+        this.getMenuItemComponentDiagram().setEnabled(flag);
+        this.getMenuItemSequenceDiagram().setEnabled(flag);
         
         this.getMenuItemInstanciarProduto().setEnabled(flag);
         this.getMenuItemGerenciarIdentificadores().setEnabled(flag);
@@ -272,13 +273,13 @@ public final class ViewMenu extends View implements Operacao {
      * Metodo responsavel por setar o padrao dos Paineis nao Salvo.
      */
     public void updateSalvar() {
-        if (this.salvo == true) {
-            this.getMenuItemSalvarProjeto().setEnabled(false);
+        if (this.save == true) {
+            this.getMenuItemSaveProject().setEnabled(false);
             this.getPainelPrincipal().getButtonSalvarProjeto().setEnabled(false);
             this.getPainelPrincipal().getButtonDesfazer().setEnabled(false);
             this.getPainelPrincipal().getButtonRefazer().setEnabled(false);
         }else {
-            this.getMenuItemSalvarProjeto().setEnabled(true);
+            this.getMenuItemSaveProject().setEnabled(true);
             this.getPainelPrincipal().getButtonSalvarProjeto().setEnabled(true);
         }
     }
@@ -289,7 +290,7 @@ public final class ViewMenu extends View implements Operacao {
     public void updatePainelPrincipal() {
         this.setPainelMenu();
         this.painelPrincipal.upPainelPrincipal();
-        if (this.projeto == null)
+        if (this.project == null)
             this.painelPrincipal.setSemProjeto();
         this.updateSalvar();
     }
@@ -298,7 +299,7 @@ public final class ViewMenu extends View implements Operacao {
      * Metodo responsavel por atualizar o Painel de Project.
      */
     public void updatePainelProjeto() {
-        if (this.projeto != null) {
+        if (this.project != null) {
             this.painelProjeto = new PainelProjeto(this);
             this.painelProjeto.init();
             this.getScrollPaneProjeto().setViewportView(this.painelProjeto);
@@ -313,7 +314,7 @@ public final class ViewMenu extends View implements Operacao {
      * Metodo responsavel por atualizar o Painel de Modelagem.
      */
     public void updatePainelModelagem() {
-        if (this.projeto == null)
+        if (this.project == null)
             this.painelModelagem.clear();
         this.painelModelagem.updateDiagrama();
         this.painelModelagem.updateUI();
@@ -374,16 +375,16 @@ public final class ViewMenu extends View implements Operacao {
      * Metodo responsavel por retornar o Project.
      * @return Project.
      */
-    public Project getProjeto() {
-        return this.projeto;
+    public Project getProject() {
+        return this.project;
     }
     
     /**
      * Metodo responsavel por definir o Project.
-     * @param projeto Project.
+     * @param project Project.
      */
-    public void setProjeto(Project projeto) {
-        this.projeto = projeto;
+    public void setProject(Project project) {
+        this.project = project;
     }
     
     /**
@@ -403,99 +404,99 @@ public final class ViewMenu extends View implements Operacao {
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Arquivo.
-     * @return Menu Arquivo.
+     * Method responsible for returning File Menu.
+     * @return File Menu.
      */
-    public JMenu getMenuArquivo() {
-        return this.menus.get("menuArquivo");
+    public JMenu getFileMenu() {
+        return this.menus.get("menuFile");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item de Novo Project.
-     * @return Menu Item de Novo Project.
+     * Method responsible for returning Menu Item New Project.
+     * @return Menu Item New Project.
      */
-    public JMenuItem getMenuItemNovoProjeto() {
-        return this.menuItens.get("menuItemNovoProjeto");
+    public JMenuItem getMenuItemNewProject() {
+        return this.menuItens.get("menuItemNewProject");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item de Abrir Project.
-     * @return Menu Item de Abrir Project.
+     * Method responsible for returning Menu Item Open Project.
+     * @return Menu Item Open Project.
      */
-    public JMenuItem getMenuItemAbrirProjeto() {
-        return this.menuItens.get("menuItemAbrirProjeto");
+    public JMenuItem getMenuItemOpenProject() {
+        return this.menuItens.get("menuItemOpenProject");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item de Salvar Project.
-     * @return Menu Item de Salvar Project.
+     * Method responsible for returning Menu Item Save Project.
+     * @return Menu Item Save Project.
      */
-    public JMenuItem getMenuItemSalvarProjeto() {
-        return this.menuItens.get("menuItemSalvarProjeto");
+    public JMenuItem getMenuItemSaveProject() {
+        return this.menuItens.get("menuItemSaveProject");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item de Fechar Project.
-     * @return Menu Item de Fechar Project.
+     * Method responsible for returning Menu Item Close Project.
+     * @return Menu Item Close Project.
      */
-    public JMenuItem getMenuItemFecharProjeto() {
-        return this.menuItens.get("menuItemFecharProjeto");
+    public JMenuItem getMenuItemCloseProject() {
+        return this.menuItens.get("menuItemCloseProject");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item de Sair do Sistema.
-     * @return Menu Item de Sair do Sistema.
+     * Method responsible for returning Menu Item Exit System.
+     * @return Menu Item Exit System.
      */
-    public JMenuItem getMenuItemSairSistema() {
-        return this.menuItens.get("menuItemSairSistema");
+    public JMenuItem getMenuItemExitSystem() {
+        return this.menuItens.get("menuItemExitSystem");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Diagram.
+     * Method responsible for returning Menu Diagram.
      * @return Menu Diagram.
      */
-    public JMenu getMenuDiagrama() {
-        return this.menus.get("menuDiagrama");
+    public JMenu getMenuDiagram() {
+        return this.menus.get("menuDiagram");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item do Diagram Atividades.
-     * @return Menu Item do Diagram Atividades.
+     * Method responsible for returning Menu Item Activity Diagram.
+     * @return Menu Item Activity Diagram.
      */
-    public JMenuItem getMenuItemDiagramaAtividades() {
-        return this.menuItens.get("menuItemDiagramaAtividades");
+    public JMenuItem getMenuItemActivityDiagram() {
+        return this.menuItens.get("menuItemActivityDiagram");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item do Diagram Casos de Uso.
-     * @return Menu Item do Diagram Casos de Uso.
+     * Method responsible for returning Menu Item Class Diagram.
+     * @return Menu Item Class Diagram.
      */
-    public JMenuItem getMenuItemDiagramaCasosDeUso() {
-        return this.menuItens.get("menuItemDiagramaCasosDeUso");
+    public JMenuItem getMenuItemClassDiagram() {
+        return this.menuItens.get("menuItemClassDiagram");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item do Diagram Classes.
-     * @return Menu Item do Diagram Classes.
+     * Method responsible for returning Menu Item Component Diagram.
+     * @return Menu Item Component Diagram.
      */
-    public JMenuItem getMenuItemDiagramaClasses() {
-        return this.menuItens.get("menuItemDiagramaClasses");
+    public JMenuItem getMenuItemComponentDiagram() {
+        return this.menuItens.get("menuItemComponentDiagram");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item do Diagram Componentes.
-     * @return Menu Item do Diagram Componentes.
+     * Method responsible for returning Menu Item Sequence Diagram.
+     * @return Menu Item Sequence Diagram.
      */
-    public JMenuItem getMenuItemDiagramaComponentes() {
-        return this.menuItens.get("menuItemDiagramaComponentes");
+    public JMenuItem getMenuItemSequenceDiagram() {
+        return this.menuItens.get("menuItemSequenceDiagram");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item do Diagram Sequencia.
-     * @return Menu Item do Diagram Sequencia.
+     * Method responsible for returning Menu Item Use Case Diagram.
+     * @return Menu Item Use Case Diagram.
      */
-    public JMenuItem getMenuItemDiagramaSequencia() {
-        return this.menuItens.get("menuItemDiagramaSequencia");
+    public JMenuItem getMenuItemUseCaseDiagram() {
+        return this.menuItens.get("menuItemUseCaseDiagram");
     }
     
     /**
@@ -558,16 +559,16 @@ public final class ViewMenu extends View implements Operacao {
      * Metodo responsavel por retornar a flag Salvo.
      * @return 
      */
-    public boolean isSalvo() {
-        return salvo;
+    public boolean isSave() {
+        return save;
     }
 
     /**
      * Metodo responsavel por definir a flag Salvo.
-     * @param salvo Flag Salvo.
+     * @param save Flag Salvo.
      */
-    public void setSalvo(boolean salvo) {
-        this.salvo = salvo;
+    public void setSave(boolean save) {
+        this.save = save;
         this.updateSalvar();
     }
     

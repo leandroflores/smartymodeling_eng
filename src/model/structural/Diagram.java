@@ -1,5 +1,6 @@
 package model.structural;
 
+import funct.FunctString;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -8,7 +9,6 @@ import model.structural.diagram.classs.TypeUML;
 import model.structural.variability.Mutex;
 import model.structural.variability.Requires;
 import model.structural.variability.Variability;
-import org.w3c.dom.Element;
 
 /**
  * <p>Class of Model <b>Diagram</b>.</p>
@@ -50,15 +50,32 @@ public abstract class Diagram implements Exportable {
     /**
      * Alternative constructor method of Class.
      * @param project Project.
-     * @param element W3C Element W3C.
+     * @param element W3C Element.
      */
-    public Diagram(Project project, Element element) {
+    public Diagram(Project project, org.w3c.dom.Element element) {
         this();
         this.project = project;
         this.id      = element.getAttribute("id");
         this.name    = element.getAttribute("name");
         this.type    = element.getAttribute("type");
     }
+    
+    /**
+     * Method responsible for initializing HashMaps.
+     */
+    public abstract void init();
+    
+    /**
+     * Method responsible for returning Diagram Icon Path.
+     * @return Diagram Icon Path.
+     */
+    public abstract String getIcon();
+    
+    /**
+     * Method responsible for returning Diagram Clone.
+     * @return Diagram Clone.
+     */
+    public abstract Diagram getClone();
 
     /**
      * Method responsible for returning Diagram Project.
@@ -77,641 +94,635 @@ public abstract class Diagram implements Exportable {
     }
     
     /**
-     * Metodo responsavel por retornar o Id do Diagram.
-     * @return Id do Diagram.
+     * Method responsible for returning Diagram Id.
+     * @return Diagram Id.
      */
     public String getId() {
         return this.id;
     }
 
     /**
-     * Metodo responsavel por definir o Id do Diagram.
-     * @param id Id do Diagram.
+     * Method responsible for defining Diagram Id.
+     * @param id Diagram Id.
      */
     public void setId(String id) {
         this.id = id;
     }
 
     /**
-     * Metodo responsavel por retornar o Nome do Diagram.
-     * @return Nome do Diagram.
+     * Method responsible for returning Diagram Name.
+     * @return Diagram Name.
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     * Metodo responsavel por definir o Nome do Diagram.
-     * @param name Nome do Diagram.
+     * Method responsible for defining Diagram Name.
+     * @param name Diagram Name.
      */
     public void setName(String name) {
         this.name = name;
     }
     
     /**
-     * Metodo responsavel por retornar o Tipo do Diagram.
-     * @return Tipo do Diagram.
+     * Method responsible for returning Diagram Type.
+     * @return Diagram Type.
      */
     public String getType() {
         return this.type;
     }
     
     /**
-     * Metodo responsavel por definir o Tipo do Diagram.
-     * @param type Tipo do Diagram.
+     * Method responsible for defining Diagram Type.
+     * @param type Diagram Type.
      */
     public void setType(String type) {
         this.type = type;
     }
     
     /**
-     * Metodo responsavel por retornar o Proximo Id.
-     * @param  rotulo Rotulo do Objeto.
-     * @return Proximo Id.
+     *  Method responsible for returing Next Id.
+     * @param  label Object Label.
+     * @return Next Id.
      */
-    public String nextId(String rotulo) {
-        return this.project.nextId(rotulo);
+    public String nextId(String label) {
+        return this.project.nextId(label);
     }
     
     /**
-     * Metodo responsavel por retornar a Lista de Elementos.
-     * @return Lista de Elementos.
+     * Method responsible for returning Elements HashMap.
+     * @return Elements HashMap.
      */
-    public HashMap<String, Element> getElementos() {
+    public HashMap<String, Element> getElements() {
         return this.elements;
     }
     
     /**
-     * Metodo responsavel por retornar a Lista de Elementos.
-     * @return Lista de Elementos.
+     * Method responsible for returning Elements List.
+     * @return Elements List.
      */
-    public List<Element> getListaElementos() {
-        ArrayList<Element> lista = new ArrayList<>(this.elements.values());
-                            lista.sort(this.getComparatorElemento());
-        return              lista;
+    public List<Element> getElementsList() {
+        ArrayList<Element> list = new ArrayList<>(this.elements.values());
+                           list.sort(this.getElementComparator());
+        return             list;
     }
     
-    
-    public List<Element> filterElementosOpcionais() {
-        List<Element> lista  = this.getListaElementos();
+    /**
+     * Method responsible for returning Elements by Mandatory Flag.
+     * @param  mandatory Mandatory Flag.
+     * @return Elements by Mandatory Flag.
+     */
+    public List<Element> filterElements(boolean mandatory) {
+        List<Element> list   = this.getElementsList();
         List<Element> filter = new ArrayList<>();
-        for (int i = 0; i < lista.size(); i++) {
-            if (this.filterVariantes(lista.get(i), "").isEmpty())
-                filter.add(lista.get(i));
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).isMandatory() == mandatory)
+                filter.add(list.get(i));
         }
         return filter;
     }
     
     /**
-     * Metodo responsavel por filtrar os Elementos pela flag Obrigatorio.
-     * @param  obrigatorio Flag obrigatorio.
-     * @return Lista de Elementos filtrados.
+     * Method responsible for returning Optional Elements.
+     * @return Optional Elements.
      */
-    public List<Element> filterElementos(boolean obrigatorio) {
-        List<Element> lista  = this.getListaElementos();
+    public List<Element> filterOptionalElements() {
+        List<Element> list   = this.getElementsList();
         List<Element> filter = new ArrayList<>();
-        for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).isObrigatorio() == obrigatorio)
-                filter.add(lista.get(i));
+        for (int i = 0; i < list.size(); i++) {
+            if (this.filterVariants(list.get(i), "").isEmpty())
+                filter.add(list.get(i));
         }
         return filter;
     }
     
     /**
-     * Metodo responsavel por retornar o Comparator do Element.
-     * @return Comparator do Element.
+     * Method responsible for returning Element Comparator.
+     * @return Element Comparator.
      */
-    private Comparator<Element> getComparatorElemento() {
+    private Comparator<Element> getElementComparator() {
         return new Comparator<Element>() {
             @Override
-            public int compare(Element elemento1, Element elemento2) {
-                if (elemento1.getTipo().compareTo(elemento2.getTipo()) == 0)
-                     return elemento1.getName().compareTo(elemento2.getName());
-                return elemento1.getTipo().compareTo(elemento2.getTipo());
+            public int compare(Element element1, Element element2) {
+                if (element1.getType().compareTo(element2.getType()) == 0)
+                     return element1.getName().compareTo(element2.getName());
+                return element1.getType().compareTo(element2.getType());
             }
         };
     }
     
     /**
-     * Metodo responsavel por adicionar um Element.
-     * @param elemento Element.
+     * Method responsible for adding a Element.
+     * @param element Element.
      */
-    public void addElemento(Element elemento) {
-        this.elements.put(elemento.getId(), elemento);
-        this.project.objects.put(elemento.getId(), elemento);
+    public void addElement(Element element) {
+        this.elements.put(element.getId(), element);
+        this.project.objects.put(element.getId(), element);
     }
     
     /**
-     * Metodo responsavel por atualizar o Nome do Element.
-     * @param elemento Element.
-     * @param nome Nome do Element.
+     * Method responsible for updating Element Name.
+     * @param element Element.
+     * @param name Element Name.
      */
-    public void updateElemento(Element elemento, String nome) {
-        String nomeValido = nome.replaceAll(this.getProject().getPerfil().getIdentificadorObrigatorio()     + "\n", "")
-                                .replaceAll(this.getProject().getPerfil().getIdentificadorOpcional()        + "\n", "")
-                                .replaceAll(this.getProject().getPerfil().getIdentificadorPontoDeVariacao() + "\n", "")
-                                .replaceAll(this.getProject().getPerfil().getIdentificadorInclusivo()       + "\n", "")
-                                .replaceAll(this.getProject().getPerfil().getIdentificadorExclusivo()       + "\n", "")
-                                .replaceAll(this.getProject().getPerfil().getIdentificadorMutex()           + "\n", "")
-                                .replaceAll(this.getProject().getPerfil().getIdentificadorRequires()        + "\n", "")
-                                .replaceAll(">", "").replaceAll("<", "");
-        elemento.setName(nomeValido);
+    public void updateElement(Element element, String name) {
+        String nameChecked = name.replaceAll(this.getProject().getPerfil().getIdentificadorObrigatorio()     + "\n", "")
+                                 .replaceAll(this.getProject().getPerfil().getIdentificadorOpcional()        + "\n", "")
+                                 .replaceAll(this.getProject().getPerfil().getIdentificadorPontoDeVariacao() + "\n", "")
+                                 .replaceAll(this.getProject().getPerfil().getIdentificadorInclusivo()       + "\n", "")
+                                 .replaceAll(this.getProject().getPerfil().getIdentificadorExclusivo()       + "\n", "")
+                                 .replaceAll(this.getProject().getPerfil().getIdentificadorMutex()           + "\n", "")
+                                 .replaceAll(this.getProject().getPerfil().getIdentificadorRequires()        + "\n", "")
+                                 .replaceAll(">", "").replaceAll("<", "");
+        element.setName(nameChecked);
     }
     
     /**
-     * Metodo responsavel por retornar um Element pelo Id.
-     * @param  id Id do Element.
-     * @return Element encontrado.
+     * Method responsible for returning a Element by Id.
+     * @param  id Element Id.
+     * @return Element found.
      */
-    public Element getElemento(String id) {
+    public Element getElement(String id) {
         return (Element) this.elements.get(id);
     }
     
     /**
-     * Metodo responsavel por remover um Element.
-     * @param elemento Element.
+     * Method responsible for removing a Element.
+     * @param element Element.
      */
-    public void removeElemento(Element elemento) {
-        this.removeAssociacao(elemento);
-        this.removeVariabilidade(elemento);
-        this.project.objects.remove(elemento.getId());
-        this.elements.remove(elemento.getId());
+    public void removeElement(Element element) {
+        this.removeAssociation(element);
+        this.removeVariability(element);
+        this.project.objects.remove(element.getId());
+        this.elements.remove(element.getId());
     }
     
     /**
-     * Metodo responsavel por definir a Lista de Elementos.
-     * @param elementos Lista de Elementos.
+     * Method responsible for defining Elements List.
+     * @param elements Elements List.
      */
-    public void setElementos(HashMap<String, Element> elementos) {
-        this.elements = elementos;
+    public void setElements(HashMap<String, Element> elements) {
+        this.elements = elements;
     }
     
     /**
-     * Metodo responsavel por retornar a Lista de Associacoes.
-     * @return Lista de Associacoes.
+     * Method responsible for returning a Associations List By Class.
+     * @param  classs Association Class.
+     * @return Associations List.
      */
-    public HashMap<String, Association> getAssociacoes() {
+    private List filterAssociations(Class classs) {
+        List    list = new ArrayList();
+        for (Association association : this.getAssociationsList()) {
+            if (association.getClass().equals(classs))
+                list.add(association);
+        }
+        return  list;
+    }
+    
+    /**
+     * Method responsible for returning a Associations List By Element and Class.
+     * @param  element Element.
+     * @param  classs Association Class.
+     * @return Associations List.
+     */
+    public List<Association> filterAssociations(Element element, Class classs) {
+        List<Association> list   = this.getAssociationsList();
+        List<Association> filter = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getClass().equals(classs)
+            &&  list.get(i).contains(element))
+                filter.add(list.get(i));
+        }
+        return filter;
+    }
+    
+    /**
+     * Method responsible for returning Associations HashMap.
+     * @return Associations HashMap.
+     */
+    public HashMap<String, Association> getAssociations() {
         return this.associations;
     }
     
     /**
-     * Metodo responsavel por retornar a Lista de Associacoes.
-     * @return Lista de Associacoes.
+     * Method responsible for returning Associations List.
+     * @return Associations List.
      */
-    public List<Association> getListaAssociacoes() {
-        ArrayList<Association> lista = new ArrayList<>(this.associations.values());
-                              lista.sort(this.getComparatorAssociacao());
-        return                lista;
+    public List<Association> getAssociationsList() {
+        ArrayList<Association> list = new ArrayList<>(this.associations.values());
+                               list.sort(this.getAssociationComparator());
+        return                 list;
     }
     
     /**
-     * Metodo responsavel por retornar o Comparator da Association.
-     * @return Comparator da Association.
+     * Method responsible for returning Association Comparator.
+     * @return Association Comparator.
      */
-    private Comparator<Association> getComparatorAssociacao() {
+    private Comparator<Association> getAssociationComparator() {
         return new Comparator<Association>() {
             @Override
-            public int compare(Association associacao1, Association associacao2) {
-                if (associacao1.getType().compareTo(associacao2.getType()) == 0)
-                     return associacao1.getType().compareTo(associacao2.getType());
-                return associacao1.getType().compareTo(associacao2.getType());
+            public int compare(Association association1, Association association2) {
+                if (association1.getType().compareTo(association2.getType()) == 0)
+                     return association1.getId().compareTo(association2.getId());
+                return association1.getType().compareTo(association2.getType());
             }
         };
     }
     
     /**
-     * Metodo responsavel por adicionar o Requires.
+     * Method responsible for adding a Requires.
      * @param requires Requires.
      */
     public void addRequires(Requires requires) {
         if (this.associations.containsKey(requires.getId()) == false)
-            this.addAssociacao(requires);
+            this.addAssociation(requires);
     }
     
     /**
-     * Metodo responsavel por remover o Requires.
+     * Method responsible for removing a Requires.
      * @param requires Requires.
      */
     public void removeRequires(Requires requires) {
-        this.removeAssociacao(requires);
+        this.removeAssociation(requires);
     }
     
     /**
-     * Metodo responsavel por retornar a Lista de Requires do Diagram.
-     * @return Lista de Requires do Diagram.
+     * Method responsible for returning Requires List.
+     * @return Requires List.
      */
-    public List<Requires> getListaRequires() {
-        List<Requires> requires = new ArrayList<>();
-        for (int i = 0; i < this.getListaAssociacoes().size(); i++) {
-            if (this.getListaAssociacoes().get(i) instanceof Requires)
-                requires.add((Requires) this.getListaAssociacoes().get(i));
-        }
-        return requires;    
+    public List<Requires> getRequiresList() {
+        return (List<Requires>) this.filterAssociations(Requires.class);
     }
     
     /**
-     * Metodo responsavel por adicionar o Mutex.
+     * Method responsible for returning Requires List by Element.
+     * @param  element Element.
+     * @return Requires List.
+     */
+    public List<Association> getRequiresList(Element element) {
+        return this.filterAssociations(element, Requires.class);
+    }
+    
+    /**
+     * Method responsible for adding a Mutex.
      * @param mutex Mutex.
      */
     public void addMutex(Mutex mutex) {
         if (this.associations.containsKey(mutex.getId()) == false)
-            this.addAssociacao(mutex);
+            this.addAssociation(mutex);
     }
     
     /**
-     * Metodo responsavel por remover o Mutex.
+     * Method responsible for removing a Mutex.
      * @param mutex Mutex.
      */
-    public void removeMutex(Requires mutex) {
-        this.removeAssociacao(mutex);
+    public void removeMutex(Mutex mutex) {
+        this.removeAssociation(mutex);
     }
     
     /**
-     * Metodo responsavel por retornar a Lista de Mutex do Diagram.
-     * @return Lista de Mutex do Diagram.
+     * Method responsible for returning Mutex List.
+     * @return Mutex List.
      */
-    public List<Mutex> getListaMutex() {
-        List<Mutex> mutex = new ArrayList<>();
-        for (int i = 0; i < this.getListaAssociacoes().size(); i++) {
-            if (this.getListaAssociacoes().get(i) instanceof Mutex)
-                mutex.add((Mutex) this.getListaAssociacoes().get(i));
-        }
-        return mutex;
+    public List<Mutex> getMutexList() {
+        return (List<Mutex>) this.filterAssociations(Requires.class);
     }
     
     /**
-     * Metodo responsavel por adicionar a Inheritance.
-     * @param heranca Inheritance.
+     * Method responsible for returning Mutex List by Element.
+     * @param  element Element.
+     * @return Mutex List.
      */
-    public void addHeranca(Inheritance heranca) {
-        if (this.associations.containsKey(heranca.getId()) == false)
-            this.addAssociacao(heranca);
+    public List<Association> getMutexList(Element element) {
+        return this.filterAssociations(element, Mutex.class);
     }
     
     /**
-     * Metodo responsavel por remover a Inheritance.
-     * @param heranca Inheritance.
+     * Method responsible for adding a Inheritance.
+     * @param inheritance Inheritance.
      */
-    public void removeHeranca(Inheritance heranca) {
-        this.removeAssociacao(heranca);
+    public void addInheritance(Inheritance inheritance) {
+        if (this.associations.containsKey(inheritance.getId()) == false)
+            this.addAssociation(inheritance);
     }
     
     /**
-     * Metodo responsavel por retornar a Lista de Herancas do Diagram.
-     * @return Lista de Herancas do Diagram.
+     * Method responsible for removing a Inheritance.
+     * @param inheritance Inheritance.
      */
-    public List<Inheritance> getListaHerancas() {
-        List<Inheritance> herancas = new ArrayList<>();
-        for (int i = 0; i < this.getListaAssociacoes().size(); i++) {
-            if (this.getListaAssociacoes().get(i) instanceof Inheritance)
-                herancas.add((Inheritance) this.getListaAssociacoes().get(i));
-        }
-        return herancas;
+    public void removeInheritance(Inheritance inheritance) {
+        this.removeAssociation(inheritance);
     }
     
     /**
-     * Metodo responsavel por adicionar uma Association.
-     * @param associacao Association.
+     * Method responsible for returning Inheritance List.
+     * @return Inheritance List.
      */
-    public void addAssociacao(Association associacao) {
-        this.associations.put(associacao.getId(), associacao);
-        this.project.objects.put(associacao.getId(), associacao);
+    public List<Inheritance> getInheritanceList() {
+        return (List<Inheritance>) this.filterAssociations(Inheritance.class);
     }
     
     /**
-     * Metodo responsavel por retornar uma Association pelo Id.
-     * @param  id Id da Association.
-     * @return Association encontrada.
+     * Method responsible for adding a Association.
+     * @param association Association.
      */
-    public Association getAssociacao(String id) {
+    public void addAssociation(Association association) {
+        this.associations.put(association.getId(), association);
+        this.project.objects.put(association.getId(), association);
+    }
+    
+    /**
+     * Method responsible for returning a Association by Id.
+     * @param  id Association Id.
+     * @return Association found.
+     */
+    public Association getAssociation(String id) {
         return (Association) this.associations.get(id);
     }
     
     /**
-     * Metodo responsavel por remover uma Association.
-     * @param associacao Association.
+     * Method responsible for removing a Association.
+     * @param association Association.
      */
-    public void removeAssociacao(Association associacao) {
-        this.project.objects.remove(associacao.getId());
-        this.associations.remove(associacao.getId());
+    public void removeAssociation(Association association) {
+        this.project.objects.remove(association.getId());
+        this.associations.remove(association.getId());
     }
     
     /**
-     * Metodo responsavel por remover a Association pelo Element.
-     * @param elemento Element.
+     * Method responsible for removing a Association by Element.
+     * @param element Element.
      */
-    private void removeAssociacao(Element elemento) {
-        for (Association associacao : this.getListaAssociacoes()) {
-            if (associacao.contains(elemento))
-                this.removeAssociacao(associacao);
+    private void removeAssociation(Element element) {
+        for (Association association : this.getAssociationsList()) {
+            if (association.contains(element))
+                this.removeAssociation(association);
         }
     }
     
     /**
-     * Metodo responsavel por definir a Lista de Associacoes.
-     * @param associacoes Lista de Associacoes.
+     * Method responsible for defining Associations List.
+     * @param associations Associations List.
      */
-    public void setAssociacoes(HashMap<String, Association> associacoes) {
-        this.associations = associacoes;
+    public void setAssociations(HashMap<String, Association> associations) {
+        this.associations = associations;
     }
     
     /**
-     * Metodo responsavel por retornar a Lista de Variabilidades.
-     * @return Lista de Variabilidades.
+     * Method responsible for returning Variabilities HashMap.
+     * @return Variabilities HashMap.
      */
-    public HashMap<String, Variability> getVariabilidades() {
+    public HashMap<String, Variability> getVariabilities() {
         return this.variabilities;
     }
     
     /**
-     * Metodo responsavel por retornar a Lista de Variabilidades.
-     * @return Lista de Variabilidades.
+     * Method responsible for returning Variabilities List.
+     * @return Variabilities List.
      */
-    public List<Variability> getListaVariabilidades() {
-        ArrayList<Variability> lista = new ArrayList<>(this.variabilities.values());
-                                 lista.sort(this.getComparatorVariabilidade());
-        return                   lista;
+    public List<Variability> getVariabilitiesList() {
+        ArrayList<Variability> list = new ArrayList<>(this.variabilities.values());
+                               list.sort(this.getVariabilityComparator());
+        return                 list;
     }
     
     /**
-     * Metodo responsavel por retornar o Comparator da Variability.
-     * @return Comparator da Variability.
+     * Method responsible for returning Variability Comparator.
+     * @return Variability Comparator.
      */
-    private Comparator<Variability> getComparatorVariabilidade() {
+    private Comparator<Variability> getVariabilityComparator() {
         return new Comparator<Variability>() {
             @Override
-            public int compare(Variability variabilidade1, Variability variabilidade2) {
-                return variabilidade1.getName().compareTo(variabilidade2.getName());
+            public int compare(Variability variability1, Variability variability2) {
+                return variability1.getName().compareTo(variability2.getName());
             }
         };
     }
     
     /**
-     * Metodo responsavel por adicionar uma Variability.
-     * @param variabilidade Variability.
+     * Method responsible for adding a Variability.
+     * @param variability Variability.
      */
-    public void addVariabilidade(Variability variabilidade) {
-        variabilidade.setId(this.project.nextVariabilityId());
-        if (this.variabilities.get(variabilidade.getId()) == null) {
-            this.variabilities.put(variabilidade.getId(), variabilidade);
-            this.project.variabilities.put(variabilidade.getId(), variabilidade);
+    public void addVariability(Variability variability) {
+        variability.setId(this.project.nextVariabilityId());
+        if (this.variabilities.get(variability.getId()) == null) {
+            this.variabilities.put(variability.getId(), variability);
+            this.project.variabilities.put(variability.getId(), variability);
         }
     }
     
     /**
-     * Metodo responsavel por retornar uma Variability pelo Id.
-     * @param  id Id da Variability.
-     * @return Variability encontrada.
+     * Method responsible for returning a Variability by Id.
+     * @param  id Variability Id.
+     * @return Variability found.
      */
-    public Variability getVariabilidade(String id) {
+    public Variability getVariability(String id) {
         return (Variability) this.variabilities.get(id);
     }
     
     /**
-     * Metodo responsavel por remover uma Variability.
-     * @param variabilidade Variability.
+     * Method responsible for removing a Variability.
+     * @param variability Variability.
      */
-    public void removeVariabilidade(Variability variabilidade) {
-        this.project.variabilities.remove(variabilidade.getId());
-        this.variabilities.remove(variabilidade.getId());
+    public void removeVariability(Variability variability) {
+        this.project.variabilities.remove(variability.getId());
+        this.variabilities.remove(variability.getId());
     }
     
     /**
-     * Metodo responsavel por remover a Variability pelo Element.
-     * @param elemento Element.
+     * Method responsible for removing a Variability by Element.
+     * @param element Element.
      */
-    private void removeVariabilidade(Element elemento) {
-        this.removePontoDeVariacao(elemento);
-        this.removeVariantes(elemento);
+    private void removeVariability(Element element) {
+        this.removeVariationPoint(element);
+        this.removeVariants(element);
     }
     
     /**
-     * Metodo responsavel por remover as Variabilidades pelo Ponto de Variacao.
-     * @param elemento Ponto de Variacao.
+     * Method responsible for removing Variabilities by Variation Point.
+     * @param element Variation Point.
      */
-    private void removePontoDeVariacao(Element elemento) {
-        for (Variability variabilidade : this.filterPontosDeVariacao(elemento))
-            this.removeVariabilidade(variabilidade);
+    private void removeVariationPoint(Element element) {
+        for (Variability variabilidade : this.getVariationPoints(element))
+            this.removeVariability(variabilidade);
     }
     
     /**
-     * Metodo responsavel por remover a Variante das Variabilidades.
-     * @param elemento Variante.
+     * Method responsible for removing Variants by Element.
+     * @param element Element.
      */
-    private void removeVariantes(Element elemento) {
-        for (Variability variabilidade : this.filterVariantes(elemento, "")) {
-            variabilidade.removeVariant(elemento);
+    private void removeVariants(Element element) {
+        for (Variability variabilidade : this.filterVariants(element, "")) {
+            variabilidade.removeVariant(element);
             if (variabilidade.emptyVariants())
-                this.removeVariabilidade(variabilidade);
+                this.removeVariability(variabilidade);
         }
     }
     
     /**
-     * Metodo responsavel por definir a Lista de Variabilidades.
-     * @param variabilidades Lista de Variabilidades.
+     * Method responsible for defining Variabilities HashMap.
+     * @param variabilities Variabilities HashMap.
      */
-    public void setVariabilidades(HashMap<String, Variability> variabilidades) {
-        this.variabilities = variabilidades;
+    public void setVariabilities(HashMap<String, Variability> variabilities) {
+        this.variabilities = variabilities;
     }
     
     /**
-     * Metodo responsavel por retornar o Tipo Padrao.
-     * @return Tipo Padrao.
+     * Method responsible for returning Object Type.
+     * @return Object Type.
      */
-    public TypeUML getTipoPadrao() {
+    public TypeUML getObjectType() {
         return this.project.getObjectType();
     }
     
     /**
-     * Metodo responsavel por retornar o Tipo void.
-     * @return Tipo void.
+     * Method responsible for returning Void Type.
+     * @return Void Type.
      */
-    public TypeUML getTipoVoid() {
+    public TypeUML getVoidType() {
         return this.project.getVoidType();
     }
     
     /**
-     * Metodo responsavel por retornar os Estereotipos de um Element.
-     * @param  elemento Element do Diagram.
-     * @return Estereotipos do Element.
+     * Method responsible for returning Stereotypes by Element.
+     * @param  element Element.
+     * @return Stereotypes found.
      */
-    public String getEstereotipos(Element elemento) {
-        String estereotipo = this.getEstereotipoOpcional(elemento)
-                           + this.getEstereotipoPontoDeVariacao(elemento);
-        String inclusivo   = this.getEstereotipoInclusivo(elemento);
-        String exclusivo   = this.getEstereotipoExclusivo(elemento);
+    public String getStereotypesByElement(Element element) {
+        String stereotype  = this.getOptionalStereotype(element)
+                           + this.getVariationPointStereotype(element);
+        String inclusive   = this.getInclusiveStereotype(element);
+        String exclusive   = this.getExclusiveStereotype(element);
         String toReturn    = "";
-        if (!inclusivo.equals("") || !exclusivo.equals(""))
-               toReturn   += estereotipo.replaceAll(this.getProject().getPerfil().getIdentificadorObrigatorio() + "\n", "");
+        if (!inclusive.equals("") || !exclusive.equals(""))
+               toReturn   += stereotype.replaceAll(this.getProject().getPerfil().getIdentificadorObrigatorio() + "\n", "");
         else
-               toReturn   += estereotipo;
-        return toReturn   + inclusivo + exclusivo;
+               toReturn   += stereotype;
+        return toReturn   + inclusive + exclusive;
     }
     
     /**
-     * Metodo responsavel por retornar o Estereotipo Opcional do Element.
-     * @param  elemento Element do Diagram.
-     * @return Estereotipo Opcional do Element.
+     * Method responsible for returning Stereotypes List by Element.
+     * @param  element Element.
+     * @return Stereotypes List
      */
-    public String getEstereotipoOpcional(Element elemento) {
-        if (elemento.isObrigatorio())
+    public List<String> getStereotypesList(Element element) {
+        return new FunctString().stringToList(this.getStereotypesByElement(element));
+    }
+    
+    /**
+     * Method responsible for returning Optional Stereotype by Element.
+     * @param  element Element.
+     * @return Optional Stereotype.
+     */
+    public String getOptionalStereotype(Element element) {
+        if (element.isMandatory())
             return this.getProject().getPerfil().getIdentificadorObrigatorio() + "\n";
         return this.getProject().getPerfil().getIdentificadorOpcional() + "\n";
     }
     
     /**
-     * Metodo responsavel por retornar a Lista de Pontos da Variacao do Element.
-     * @param  elemento Element.
-     * @return Lista de Pontos da Variacao.
+     * Method responsible for returning Variation Point Steretype by Element.
+     * @param  element Element.
+     * @return Variation Point Steretype.
      */
-    public List<Variability> filterPontosDeVariacao(Element elemento) {
-        List<Variability> lista  = this.getListaVariabilidades();
+    public String getVariationPointStereotype(Element element) {
+        return this.getVariationPoints(element).isEmpty() ? "" : this.getProject().getPerfil().getIdentificadorPontoDeVariacao() + "\n";
+    }
+    
+    /**
+     * Method responsible for returning Variation Points by Element.
+     * @param  element Element.
+     * @return Variation Points.
+     */
+    public List<Variability> getVariationPoints(Element element) {
+        List<Variability> list   = this.getVariabilitiesList();
         List<Variability> filter = new ArrayList<>();
-        for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getVariationPoint().equals(elemento))
-                filter.add(lista.get(i));
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getVariationPoint().equals(element))
+                filter.add(list.get(i));
         }
         return filter;
     }
     
     /**
-     * Metodo responsavel por retornar o Estereotipo Ponto de Variacao do Element.
-     * @param  elemento Element do Diagram.
-     * @return Estereotipo Ponto de Variacao do Element.
+     * Method responsible for returning Variants List by Element and Constraint.
+     * @param  element Element.
+     * @param  constraint Variability Constraint.
+     * @return Variants List.
      */
-    public String getEstereotipoPontoDeVariacao(Element elemento) {
-        return this.filterPontosDeVariacao(elemento).isEmpty() ? "" : this.getProject().getPerfil().getIdentificadorPontoDeVariacao() + "\n";
-    }
-    
-    /**
-     * Metodo responsavel por retornar a Lista de Variantes do Element.
-     * @param  elemento Element.
-     * @param  tipo Tipo da Variability.
-     * @return Lista de Variantes.
-     */
-    public List<Variability> filterVariantes(Element elemento, String tipo) {
-        List<Variability> lista  = this.getListaVariabilidades();
+    public List<Variability> filterVariants(Element element, String constraint) {
+        List<Variability> list   = this.getVariabilitiesList();
         List<Variability> filter = new ArrayList<>();
-        for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getConstraint().toLowerCase().contains(tipo)
-            &&  lista.get(i).isVariante(elemento))
-                filter.add(lista.get(i));
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getConstraint().toLowerCase().contains(constraint)
+            &&  list.get(i).isVariant(element))
+                filter.add(list.get(i));
         }
         return filter;
     }
     
     /**
-     * Metodo responsavel por retornar o Estereotipo Inclusivo do Element.
-     * @param  elemento Element do Diagram.
-     * @return Estereotipo Inclusivo do Element.
+     * Method responsible for returning Inclusive Stereotype by Element.
+     * @param  element Element.
+     * @return Inclusive Stereotype.
      */
-    public String getEstereotipoInclusivo(Element elemento) {
-        return this.filterVariantes(elemento, "inclusiva").isEmpty() ? "" : this.getProject().getPerfil().getIdentificadorInclusivo() + "\n";
+    public String getInclusiveStereotype(Element element) {
+        return this.filterVariants(element, "inclusive").isEmpty() ? "" : this.getProject().getPerfil().getIdentificadorInclusivo() + "\n";
     }
     
     /**
-     * Metodo responsavel por retornar o Estereotipo Exclusivo do Element.
-     * @param  elemento Element do Diagram.
-     * @return Estereotipo Exclusivo do Element.
+     * Method responsible for returning Exclusive Stereotype by Element.
+     * @param  element Element.
+     * @return Exclusive Stereotype.
      */
-    public String getEstereotipoExclusivo(Element elemento) {
-        return this.filterVariantes(elemento, "exclusiva").isEmpty() ? "" : this.getProject().getPerfil().getIdentificadorExclusivo() + "\n";
+    public String getExclusiveStereotype(Element element) {
+        return this.filterVariants(element, "exclusive").isEmpty() ? "" : this.getProject().getPerfil().getIdentificadorExclusivo() + "\n";
     }
     
     /**
-     * Metodo responsavel por retornar a Lista de Associacoes pelo Element e Classe.
-     * @param  elemento Element.
-     * @param  classe Classe da Association.
-     * @return Lista de Associacoes.
+     * Method responsible for returning Elements to export.
+     * @return Elements to export.
      */
-    public List<Association> filterAssociacoes(Element elemento, Class classe) {
-        List<Association> lista  = this.getListaAssociacoes();
-        List<Association> filter = new ArrayList<>();
-        for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getClass().equals(classe)
-            &&  lista.get(i).contains(elemento))
-                filter.add(lista.get(i));
-        }
-        return filter;
-    }
-    
-    /**
-     * Metodo responsavel por retornar a Lista de Requires pelo Element.
-     * @param  elemento Element.
-     * @return Lista de Requires.
-     */
-    public List<Association> filterRequires(Element elemento) {
-        return this.filterAssociacoes(elemento, Requires.class);
-    }
-    
-    /**
-     * Metodo responsavel por retornar a Lista de Mutex pelo Element.
-     * @param  elemento Element.
-     * @return Lista de Mutex.
-     */
-    public List<Association> filterMutex(Element elemento) {
-        return this.filterAssociacoes(elemento, Mutex.class);
-    }
-    
-    /**
-     * Metodo responsavel por Exportar os Dados dos Elementos do Diagram.
-     * @return String com os Dados dos Elementos.
-     */
-    private String exportarElementos() {
+    private String exportElements() {
         String export  = "";
-        for (Element elemento : this.getListaElementos())
-               export += elemento.export();
+        for (Element element : this.getElementsList())
+               export += element.export();
         return export;
     }
     
     /**
-     * Metodo responsavel por Exportar os Dados das Associacoes do Diagram.
-     * @return String com os Dados das Associacoes.
+     * Method responsible for returning Associations to export.
+     * @return Associations to export.
      */
-    private String exportarAssociacoes() {
+    private String exportAssociations() {
         String export  = "";
-        for (Association associacao : this.getListaAssociacoes())
-               export += associacao.export();
+        for (Association association : this.getAssociationsList())
+               export += association.export();
         return export;
     }
     
     /**
-     * Metodo responsavel por Exportar os Dados das Variabilidades do Diagram.
-     * @return String com os Dados das Variabilidades.
+     * Method responsible for returning Variabilities to export.
+     * @return Variabilities to export.
      */
-    private String exportarVariabilidades() {
+    private String exportVariabilities() {
         String export  = "";
-        for (Variability variabilidade : this.getListaVariabilidades())
-               export += variabilidade.exportar();
+        for (Variability variability : this.getVariabilitiesList())
+               export += variability.export();
         return export;
     }
     
     @Override
     public String export() {
-        String export  = "  <diagrama id=\"" + this.id + "\" nome=\"" + this.name + "\" tipo=\"" + this.type + "\">\n";
-               export += this.exportarElementos();
-               export += this.exportarAssociacoes();
-               export += this.exportarVariabilidades();
-               export += "  </diagrama>\n";
+        String export  = "  <diagram id=\"" + this.id + "\" name=\"" + this.name + "\" type=\"" + this.type + "\">\n";
+               export += this.exportElements();
+               export += this.exportAssociations();
+               export += this.exportVariabilities();
+               export += "  </diagram>\n";
         return export;
     }
-    
-    /**
-     * Metodo responsavel por inicializar os Dados.
-     */
-    public abstract void init();
-    
-    /**
-     * Metodo responsavel por retornar o Caminho do Icone do Diagram.
-     * @return Caminho do Icone do Diagram.
-     */
-    public abstract String getIcone();
-    
-    /**
-     * Metodo responsavel por retornar um Clone do Diagram.
-     * @return Clone do Diagram.
-     */
-    public abstract Diagram getClone();
     
     @Override
     public String toString() {

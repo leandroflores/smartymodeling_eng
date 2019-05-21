@@ -79,7 +79,8 @@ public abstract class Element implements Exportable, Modelable {
      * @param name Element Name.
      */
     public void setName(String name) {
-        this.name = name.trim();
+        if (!name.toString().trim().equals(""))
+            this.name = name.trim();
     }
     
     /**
