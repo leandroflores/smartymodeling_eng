@@ -1,8 +1,9 @@
-package model.structural;
+package model.structural.base;
 
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
+import model.structural.base.interfaces.Exportable;
 import org.w3c.dom.Element;
 
 /**
@@ -10,7 +11,7 @@ import org.w3c.dom.Element;
  * <p>Class responsible for representing <b>Stereotype</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  20/05/2019
- * @see    model.structural.Exportable
+ * @see    model.structural.base.interfaces.Exportable
  */
 public class Stereotype implements Exportable {
     private String id;
@@ -77,15 +78,15 @@ public class Stereotype implements Exportable {
     
     public Map getStyle() {
         Map    style = new HashMap<>();
-               style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
+               style.put(mxConstants.STYLE_MOVABLE,   "0");
+               style.put(mxConstants.STYLE_EDITABLE,  "0");
+               style.put(mxConstants.STYLE_FOLDABLE,  "0");
+               style.put(mxConstants.STYLE_FONTSIZE,  "15");
+               style.put(mxConstants.STYLE_RESIZABLE, "0");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
                style.put(mxConstants.STYLE_STROKECOLOR, "#9999FF");
-               style.put(mxConstants.STYLE_EDITABLE,  "0");
-               style.put(mxConstants.STYLE_RESIZABLE, "0");
-               style.put(mxConstants.STYLE_MOVABLE,   "0");
-               style.put(mxConstants.STYLE_FOLDABLE,  "0");
-               style.put(mxConstants.STYLE_FONTSIZE,  "15");
+               style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
                style.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_SHADOW);
         return style;
     }

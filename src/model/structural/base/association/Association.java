@@ -1,13 +1,17 @@
-package model.structural;
+package model.structural.base.association;
+
+import model.structural.base.Element;
+import model.structural.base.interfaces.Exportable;
+import model.structural.base.interfaces.Modelable;
 
 /**
  * <p>Class of Model <b>Association</b>.</p>
  * <p>Class responsible for representing <b>Association</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  20/05/2019
- * @see    model.structural.Element
- * @see    model.structural.Exportable
- * @see    model.structural.Modelable
+ * @see    model.structural.base.Element
+ * @see    model.structural.base.interfaces.Exportable
+ * @see    model.structural.base.interfaces.Modelable
  */
 public abstract class Association implements Exportable, Modelable {
     protected Element source;

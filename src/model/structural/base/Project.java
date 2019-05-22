@@ -1,5 +1,6 @@
-package model.structural;
+package model.structural.base;
 
+import model.structural.base.association.Association;
 import funct.FunctDate;
 import funct.FunctString;
 import java.util.ArrayList;
@@ -8,8 +9,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import model.structural.base.interfaces.Exportable;
 import model.structural.diagram.classs.TypeUML;
-import model.structural.variability.Variability;
+import model.structural.base.variability.Variability;
 
 /**
  * <p>Class of Model <b>Project</b>.</p>
@@ -22,7 +24,7 @@ public class Project implements Exportable {
     private String  name;
     private String  path;
     private String  version;
-    private Perfil  perfil;
+    private Profile  perfil;
     private HashMap diagrams;
     public  HashMap types;
     public  HashMap variabilities;
@@ -36,7 +38,7 @@ public class Project implements Exportable {
     public Project() {
         this.id      = new FunctString().md5(new FunctDate().getFormattedDate(new Date()));
         this.name    = "Project0";
-        this.path    = "New_Projeto.smty";
+        this.path    = "New_Project.smty";
         this.version = "1.0";
         this.init();
         this.loadPrimitiveTypes();
@@ -60,7 +62,7 @@ public class Project implements Exportable {
      * Method responsible for initializing HashMaps.
      */
     private void init() {
-        this.perfil        = new Perfil();
+        this.perfil        = new Profile();
         this.diagrams      = new HashMap();
         this.types         = new HashMap();
         this.variabilities = new HashMap();
@@ -149,18 +151,18 @@ public class Project implements Exportable {
     }
     
     /**
-     * Metodo responsavel por retornar o Perfil do Project.
-     * @return Perfil do Project.
+     * Metodo responsavel por retornar o Profile do Project.
+     * @return Profile do Project.
      */
-    public Perfil getPerfil() {
+    public Profile getPerfil() {
         return this.perfil;
     }
     
     /**
-     * Metodo responsavel por definir o Perfil do Project.
-     * @param perfil Perfil do Project.
+     * Metodo responsavel por definir o Profile do Project.
+     * @param perfil Profile do Project.
      */
-    public void setPerfil(Perfil perfil) {
+    public void setPerfil(Profile perfil) {
         this.perfil = perfil;
     }
     

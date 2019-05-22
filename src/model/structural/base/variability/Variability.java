@@ -1,26 +1,27 @@
-package model.structural.variability;
+package model.structural.base.variability;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.structural.Element;
-import model.structural.Exportable;
+import model.structural.base.Element;
+import model.structural.base.interfaces.Exportable;
 
 /**
  * <p>Class of Model <b>Variability</b>.</p>
  * <p>Class responsible for representing <b>Variability</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  20/05/2019
- * @see    model.structural.Exportable
+ * @see    model.structural.base.Element
+ * @see    model.structural.base.interfaces.Exportable
  */
 public class Variability implements Exportable {
-    private String   id;
-    private String   name;
-    private Element  variationPoint;
-    private String   constraint;
-    private String   bindingTime;
-    private boolean  allowsBindingVar;
-    private Integer  minimum;
-    private Integer  maximum;
+    private String  id;
+    private String  name;
+    private Element variationPoint;
+    private String  constraint;
+    private String  bindingTime;
+    private boolean allowsBindingVar;
+    private Integer minimum;
+    private Integer maximum;
     private List<Element> variants;
     
     /**

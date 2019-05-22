@@ -6,14 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import model.structural.Element;
+import model.structural.base.Element;
 
 /**
  * <p>Classe de Modelo <b>MethodUML</b>.</p>
  * <p>Class responsible for representing <b>Method UML</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  20/05/2019
- * @see    model.structural.Element
+ * @see    model.structural.base.Element
  * @see    model.structural.diagram.classs.ParameterUML
  * @see    model.structural.diagram.classs.TypeUML
  */

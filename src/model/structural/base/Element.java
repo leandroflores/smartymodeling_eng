@@ -1,14 +1,16 @@
-package model.structural;
+package model.structural.base;
 
 import java.awt.Point;
+import model.structural.base.interfaces.Exportable;
+import model.structural.base.interfaces.Modelable;
 
 /**
  * <p>Class of Model <b>Element</b>.</p>
  * <p>Class responsible for representing the <b>Element</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  20/05/2019
- * @see    model.structural.Exportable
- * @see    model.structural.Modelable
+ * @see    model.structural.base.interfaces.Exportable
+ * @see    model.structural.base.interfaces.Modelable
  */
 public abstract class Element implements Exportable, Modelable {
     protected String  id;
@@ -79,7 +81,7 @@ public abstract class Element implements Exportable, Modelable {
      * @param name Element Name.
      */
     public void setName(String name) {
-        if (!name.toString().trim().equals(""))
+        if (!name.trim().equals(""))
             this.name = name.trim();
     }
     

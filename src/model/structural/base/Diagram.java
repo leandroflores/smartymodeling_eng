@@ -1,21 +1,24 @@
-package model.structural;
+package model.structural.base;
 
+import model.structural.base.association.Association;
+import model.structural.base.association.Generalization;
 import funct.FunctString;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import model.structural.base.interfaces.Exportable;
 import model.structural.diagram.classs.TypeUML;
-import model.structural.variability.Mutex;
-import model.structural.variability.Requires;
-import model.structural.variability.Variability;
+import model.structural.base.variability.Mutex;
+import model.structural.base.variability.Requires;
+import model.structural.base.variability.Variability;
 
 /**
  * <p>Class of Model <b>Diagram</b>.</p>
  * <p>Class responsible for representing <b>Diagram</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  20/05/2019
- * @see    model.structural.Exportable
+ * @see    model.structural.base.interfaces.Exportable
  */
 public abstract class Diagram implements Exportable {
     protected Project project;
@@ -227,15 +230,7 @@ public abstract class Diagram implements Exportable {
      * @param name Element Name.
      */
     public void updateElement(Element element, String name) {
-        String nameChecked = name.replaceAll(this.getProject().getPerfil().getIdentificadorObrigatorio()     + "\n", "")
-                                 .replaceAll(this.getProject().getPerfil().getIdentificadorOpcional()        + "\n", "")
-                                 .replaceAll(this.getProject().getPerfil().getIdentificadorPontoDeVariacao() + "\n", "")
-                                 .replaceAll(this.getProject().getPerfil().getIdentificadorInclusivo()       + "\n", "")
-                                 .replaceAll(this.getProject().getPerfil().getIdentificadorExclusivo()       + "\n", "")
-                                 .replaceAll(this.getProject().getPerfil().getIdentificadorMutex()           + "\n", "")
-                                 .replaceAll(this.getProject().getPerfil().getIdentificadorRequires()        + "\n", "")
-                                 .replaceAll(">", "").replaceAll("<", "");
-        element.setName(nameChecked);
+        element.setName(name.replaceAll(">", "").replaceAll("<", ""));
     }
     
     /**
@@ -399,28 +394,28 @@ public abstract class Diagram implements Exportable {
     }
     
     /**
-     * Method responsible for adding a Inheritance.
-     * @param inheritance Inheritance.
+     * Method responsible for adding a Generalization.
+     * @param generalization Generalization.
      */
-    public void addInheritance(Inheritance inheritance) {
-        if (this.associations.containsKey(inheritance.getId()) == false)
-            this.addAssociation(inheritance);
+    public void addGeneralization(Generalization generalization) {
+        if (this.associations.containsKey(generalization.getId()) == false)
+            this.addAssociation(generalization);
     }
     
     /**
-     * Method responsible for removing a Inheritance.
-     * @param inheritance Inheritance.
+     * Method responsible for removing a Generalization.
+     * @param generalization Generalization.
      */
-    public void removeInheritance(Inheritance inheritance) {
-        this.removeAssociation(inheritance);
+    public void removeGeneralization(Generalization generalization) {
+        this.removeAssociation(generalization);
     }
     
     /**
-     * Method responsible for returning Inheritance List.
-     * @return Inheritance List.
+     * Method responsible for returning Generalization List.
+     * @return Generalization List.
      */
-    public List<Inheritance> getInheritanceList() {
-        return (List<Inheritance>) this.filterAssociations(Inheritance.class);
+    public List<Generalization> getGeneralizationsList() {
+        return (List<Generalization>) this.filterAssociations(Generalization.class);
     }
     
     /**
@@ -596,7 +591,7 @@ public abstract class Diagram implements Exportable {
         String exclusive   = this.getExclusiveStereotype(element);
         String toReturn    = "";
         if (!inclusive.equals("") || !exclusive.equals(""))
-               toReturn   += stereotype.replaceAll(this.getProject().getPerfil().getIdentificadorObrigatorio() + "\n", "");
+               toReturn   += stereotype.replaceAll(this.getProject().getPerfil().getMandatory() + "\n", "");
         else
                toReturn   += stereotype;
         return toReturn   + inclusive + exclusive;
@@ -618,8 +613,8 @@ public abstract class Diagram implements Exportable {
      */
     public String getOptionalStereotype(Element element) {
         if (element.isMandatory())
-            return this.getProject().getPerfil().getIdentificadorObrigatorio() + "\n";
-        return this.getProject().getPerfil().getIdentificadorOpcional() + "\n";
+            return this.getProject().getPerfil().getMandatory() + "\n";
+        return this.getProject().getPerfil().getOptional() + "\n";
     }
     
     /**
@@ -628,7 +623,7 @@ public abstract class Diagram implements Exportable {
      * @return Variation Point Steretype.
      */
     public String getVariationPointStereotype(Element element) {
-        return this.getVariationPoints(element).isEmpty() ? "" : this.getProject().getPerfil().getIdentificadorPontoDeVariacao() + "\n";
+        return this.getVariationPoints(element).isEmpty() ? "" : this.getProject().getPerfil().getVariationPoint() + "\n";
     }
     
     /**
@@ -669,7 +664,7 @@ public abstract class Diagram implements Exportable {
      * @return Inclusive Stereotype.
      */
     public String getInclusiveStereotype(Element element) {
-        return this.filterVariants(element, "inclusive").isEmpty() ? "" : this.getProject().getPerfil().getIdentificadorInclusivo() + "\n";
+        return this.filterVariants(element, "inclusive").isEmpty() ? "" : this.getProject().getPerfil().getInclusive() + "\n";
     }
     
     /**
@@ -678,7 +673,7 @@ public abstract class Diagram implements Exportable {
      * @return Exclusive Stereotype.
      */
     public String getExclusiveStereotype(Element element) {
-        return this.filterVariants(element, "exclusive").isEmpty() ? "" : this.getProject().getPerfil().getIdentificadorExclusivo() + "\n";
+        return this.filterVariants(element, "exclusive").isEmpty() ? "" : this.getProject().getPerfil().getExclusive() + "\n";
     }
     
     /**

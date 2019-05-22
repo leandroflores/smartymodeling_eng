@@ -1,4 +1,4 @@
-package model.structural;
+package model.structural.base.interfaces;
 
 /**
  * <p>Inteface of Model <b>Exportable</b>.</p>

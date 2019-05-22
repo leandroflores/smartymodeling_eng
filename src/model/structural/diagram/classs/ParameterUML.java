@@ -1,6 +1,6 @@
 package model.structural.diagram.classs;
 
-import model.structural.Exportable;
+import model.structural.base.interfaces.Exportable;
 import org.w3c.dom.Element;
 
 /**
@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
  * <p>Class responsible for representing <b>Parameter UML</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  20/05/2019
- * @see    model.structural.Exportable
+ * @see    model.structural.base.interfaces.Exportable
  * @see    model.structural.diagram.classs.TypeUML
  */
 public class ParameterUML implements Exportable {

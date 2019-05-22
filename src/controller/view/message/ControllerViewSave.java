@@ -7,7 +7,7 @@ import view.message.ViewSave;
 
 /**
  * <p>Class of Controller <b>ControllerViewSave</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewSave</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>Events</b> from <b>ViewSave</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  20/05/2019
  * @see    controller.view.ControllerViewModal
@@ -46,7 +46,7 @@ public class ControllerViewSave extends ControllerViewModal {
      * Method responsible for Saving the Project.
      */
     private void save() {
-        this.viewSave.getViewMenu().getController().salvarDados();
+        this.viewSave.getViewMenu().getController().exportProject();
         this.nextOperation();
     }
     
@@ -57,15 +57,15 @@ public class ControllerViewSave extends ControllerViewModal {
         if (null != this.viewSave.getCode())
             switch (this.viewSave.getCode()) {
             case 1:
-                this.viewSave.getViewMenu().getController().novoProjeto();
+                this.viewSave.getViewMenu().getController().createNewProject();
                 this.viewSave.dispose();
                 break;
             case 2:
-                this.viewSave.getViewMenu().getController().abrirProjeto();
+                this.viewSave.getViewMenu().getController().openProject();
                 this.viewSave.dispose();
                 break;
             case 3:
-                this.viewSave.getViewMenu().getController().fecharProjeto();
+                this.viewSave.getViewMenu().getController().closeProject();
                 this.viewSave.dispose();
                 break;
             case 4:

@@ -1,29 +1,19 @@
 package view.structural;
 
-import controlador.visao.estruturais.ControllerViewMenu;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+import controller.view.structural.ControllerViewMenu;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.Iterator;
-import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
-import javax.swing.ScrollPaneLayout;
-import model.structural.Diagram;
-import model.structural.Project;
+import model.structural.base.Diagram;
+import model.structural.base.Project;
 import view.Operation;
 import view.View;
 import view.ViewStyle;
-import visao.painel.modelagem.PainelModelagem;
-import visao.painel.principal.PainelPrincipal;
-import visao.painel.projeto.PainelProjeto;
 
 /**
  * <p>Class of View <b>ViewMenu</b>.</p>
@@ -86,8 +76,8 @@ public final class ViewMenu extends View implements Operation {
         
         this.menuBar.add(this.getFileMenu());
         this.menuBar.add(this.getMenuDiagram());
-        this.menuBar.add(this.getMenuLinhaProduto());
-        this.menuBar.add(this.getMenuSistema());
+        this.menuBar.add(this.getMenuProductLine());
+        this.menuBar.add(this.getMenuSystem());
         
         this.setJMenuBar(this.menuBar);
     }
@@ -100,7 +90,7 @@ public final class ViewMenu extends View implements Operation {
         
         this.createMenuItem("menuItemNewProject",   "New Project",   "file/new.png");
         this.getMenuItemNewProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
-        this.createMenuItem("menuItemOpenProject",  "Open Projeto",  "file/open.png");
+        this.createMenuItem("menuItemOpenProject",  "Open Project",  "file/open.png");
         this.getMenuItemOpenProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
         this.createMenuItem("menuItemSaveProject",  "Save Project",  "file/save.png");
         this.getMenuItemSaveProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
@@ -146,80 +136,80 @@ public final class ViewMenu extends View implements Operation {
     private void createProductLineMenu() {
         this.createMenu("menuProductLine", "Product Line");
         
-        this.createMenuItem("menuItemInstantiateProduct", "Instantiate Product", "system/info.png");
-        this.createMenuItem("menuItemManageIdentifiers",  "Manage Identifiers",  "system/info.png");
+        this.createMenuItem("menuItemInstantiateNewProduct", "Instantiate New Product", "system/info.png");
+        this.createMenuItem("menuItemManageIdentifiers",     "Manage Identifiers",      "system/info.png");
         
-        this.getMenuLinhaProduto().add(this.getMenuItemInstanciarProduto());
-        this.getMenuLinhaProduto().add(this.getMenuItemGerenciarIdentificadores());
+        this.getMenuProductLine().add(this.getMenuItemInstantiateNewProduct());
+        this.getMenuProductLine().add(this.getMenuItemManageIdentifiers());
     }
     
     /**
-     * Metodo responsavel por criar o Menu de Sistema da View Menu.
+     * Method responsible for creating System Menu.
      */
     private void createSystemMenu() {
-        this.createMenu("menuSistema", "Sistema");
+        this.createMenu("menuSystem", "System");
         
-        this.createMenuItem("menuItemSistemaSobre", "Sobre", "sistema/sobre.png");
-        this.createMenuItem("menuItemSistemaSite",  "Site",  "sistema/site.png");
-        this.createMenuItem("menuItemSistemaSair",  "Sair",  "sistema/sair.png");
+        this.createMenuItem("menuItemSystemInfo", "Information", "system/info.png");
+        this.createMenuItem("menuItemSystemSite", "Site",        "system/site.png");
+        this.createMenuItem("menuItemSystemExit", "Exit",        "system/exit.png");
         
-        this.getMenuSistema().add(this.getMenuItemSistemaSobre());
-        this.getMenuSistema().add(this.getMenuItemSistemaSite());
-        this.getMenuSistema().addSeparator();
-        this.getMenuSistema().add(this.getMenuItemSistemaSair());
+        this.getMenuSystem().add(this.getMenuItemSystemInfo());
+        this.getMenuSystem().add(this.getMenuItemSystemSite());
+        this.getMenuSystem().addSeparator();
+        this.getMenuSystem().add(this.getMenuItemSystemExit());
     }
     
     /**
-     * Metodo responsavel por atualizar o Titulo da View.
+     * Method responsible for setting View Title.
      */
     public void setTitle() {
         if (this.project == null)
-            this.setTitle(ViewStyle.SISTEMA + "Menu Principal");
+            this.setTitle(ViewStyle.SYSTEM + "Menu");
         else
-            this.setTitle(ViewStyle.SISTEMA + this.project.getPath());
+            this.setTitle(ViewStyle.SYSTEM + this.project.getPath());
     }
     
     /**
-     * Metodo responsavel por adicionar o Painel Principal da View Menu.
+     * Method responsible for adding Panel Main on View.
      */
-    private void addPainelPrincipal() {
+    private void addPanelMain() {
         this.setTitle();
-        this.painelPrincipal = new PainelPrincipal(this);
-        this.painelPrincipal.setPreferredSize(new Dimension(1356, 35));
-        this.getContentPane().add(this.painelPrincipal);
+//        this.painelPrincipal = new PainelPrincipal(this);
+//        this.painelPrincipal.setPreferredSize(new Dimension(1356, 35));
+//        this.getContentPane().add(this.painelPrincipal);
     }
     
     /**
-     * Metodo responsavel por adicionar o Painel do Project.
+     * Method responsible for adding Panel Project on View.
      */
-    private void addPainelProjeto() {
-        this.painelProjeto = new PainelProjeto(this);
-        this.createScrollPane("scrollPaneProjeto");
-        this.getScrollPaneProjeto().setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        this.getScrollPaneProjeto().setPreferredSize(new Dimension(250, 625));
-        this.getScrollPaneProjeto().setLayout(new ScrollPaneLayout());
-        this.getContentPane().add(this.getScrollPaneProjeto());
+    private void addPanelProject() {
+//        this.painelProjeto = new PainelProjeto(this);
+//        this.createScrollPane("scrollPaneProjeto");
+//        this.getScrollPaneProjeto().setBorder(BorderFactory.createLineBorder(Color.BLACK));
+//        this.getScrollPaneProjeto().setPreferredSize(new Dimension(250, 625));
+//        this.getScrollPaneProjeto().setLayout(new ScrollPaneLayout());
+//        this.getContentPane().add(this.getScrollPaneProjeto());
     }
     
     /**
-     * Metodo responsavel por adicionar o Painel de Modelagem a View Menu.
+     * Method responsible for adding Panel Modeling on View.
      */
-    private void addPainelModelagem() {
-        this.painelModelagem = new PainelModelagem(this);
-        this.createScrollPane("scrollPaneModelagem");
-        this.getScrollPaneModelagem().setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        this.getScrollPaneModelagem().setViewportView(this.painelModelagem);
-        this.getScrollPaneModelagem().setPreferredSize(new Dimension(1100, 625));
-        this.getContentPane().add(this.getScrollPaneModelagem(), BorderLayout.EAST);
+    private void addPanelModeling() {
+//        this.painelModelagem = new PainelModelagem(this);
+//        this.createScrollPane("scrollPaneModelagem");
+//        this.getScrollPaneModelagem().setBorder(BorderFactory.createLineBorder(Color.BLACK));
+//        this.getScrollPaneModelagem().setViewportView(this.painelModelagem);
+//        this.getScrollPaneModelagem().setPreferredSize(new Dimension(1100, 625));
+//        this.getContentPane().add(this.getScrollPaneModelagem(), BorderLayout.EAST);
     }
     
     /**
-     * Metodo Teste por enquanto...
-     * @param diagrama 
+     * Method responsible for showing a Diagram.
+     * @param diagram Diagram.
      */
-    public void showDiagrama(Diagram diagrama) {
-        this.painelModelagem.addDiagrama(diagrama);
-        this.painelModelagem.updateUI();
+    public void showDiagrama(Diagram diagram) {
+//        this.painelModelagem.addDiagrama(diagram);
+//        this.painelModelagem.updateUI();
     }
     
     /**
@@ -227,152 +217,153 @@ public final class ViewMenu extends View implements Operation {
      */
     public void update() {
         this.setTitle();
-        this.updatePainelPrincipal();
-        this.updatePainelProjeto();
-        this.updatePainelModelagem();
+        this.updatePanelMain();
+        this.updatePanelProject();
+        this.updatePanelModeling();
     }
     
     /**
-     * Metodo responsavel por setar o padrao do Painel de Menu.
+     * Method responsible for setting Painel Default on View.
      */
-    private void setPainelMenu() {
+    private void setPanelMenu() {
         Iterator<JMenuItem> iterator = this.menuItens.values().iterator();
         while (iterator.hasNext())
             iterator.next().setEnabled(true);
     }
     
     /**
-     * Metodo responsavel por Bloquear os Menus Itens dos Diagramas.
+     * Method responsible for locking Diagram Menu Items.
      */
     private void lockDiagramas() {
-        this.setMenuItemDiagramas(false);
+        this.setDiagramMenuItems(false);
     }
     
     /**
-     * Metodo responsavel por Desbloquear os Menus Itens dos Diagramas.
+     * Method responsible for unlocking Diagram Menu Items.
      */
     private void unlockDiagramas() {
-        this.setMenuItemDiagramas(true);
+        this.setDiagramMenuItems(true);
     }
     
     /**
-     * Metodo responsavel por desabilitar os Menus Itens dos Diagramas.
+     * Method responsible for enabling Diagram Menu Items.
+     * @param flag Enable Flag.
      */
-    private void setMenuItemDiagramas(boolean flag) {
+    private void setDiagramMenuItems(boolean flag) {
         this.getMenuItemActivityDiagram().setEnabled(flag);
         this.getMenuItemUseCaseDiagram().setEnabled(flag);
         this.getMenuItemClassDiagram().setEnabled(flag);
         this.getMenuItemComponentDiagram().setEnabled(flag);
         this.getMenuItemSequenceDiagram().setEnabled(flag);
         
-        this.getMenuItemInstanciarProduto().setEnabled(flag);
-        this.getMenuItemGerenciarIdentificadores().setEnabled(flag);
+        this.getMenuItemInstantiateNewProduct().setEnabled(flag);
+        this.getMenuItemManageIdentifiers().setEnabled(flag);
     }
     
     /**
      * Metodo responsavel por setar o padrao dos Paineis nao Salvo.
      */
-    public void updateSalvar() {
+    public void updateSave() {
         if (this.save == true) {
             this.getMenuItemSaveProject().setEnabled(false);
-            this.getPainelPrincipal().getButtonSalvarProjeto().setEnabled(false);
-            this.getPainelPrincipal().getButtonDesfazer().setEnabled(false);
-            this.getPainelPrincipal().getButtonRefazer().setEnabled(false);
+//            this.getPainelPrincipal().getButtonSalvarProjeto().setEnabled(false);
+//            this.getPainelPrincipal().getButtonDesfazer().setEnabled(false);
+//            this.getPainelPrincipal().getButtonRefazer().setEnabled(false);
         }else {
             this.getMenuItemSaveProject().setEnabled(true);
-            this.getPainelPrincipal().getButtonSalvarProjeto().setEnabled(true);
+//            this.getPainelPrincipal().getButtonSalvarProjeto().setEnabled(true);
         }
     }
     
     /**
-     * Metodo responsavel por atualizar o Painel Principal.
+     * Method responsible for updating Panel Main.
      */
-    public void updatePainelPrincipal() {
-        this.setPainelMenu();
-        this.painelPrincipal.upPainelPrincipal();
-        if (this.project == null)
-            this.painelPrincipal.setSemProjeto();
-        this.updateSalvar();
+    public void updatePanelMain() {
+        this.setPanelMenu();
+//        this.painelPrincipal.upPainelPrincipal();
+//        if (this.project == null)
+//            this.painelPrincipal.setSemProjeto();
+        this.updateSave();
     }
     
     /**
-     * Metodo responsavel por atualizar o Painel de Project.
+     * Method responsible for updating Panel Project.
      */
-    public void updatePainelProjeto() {
+    public void updatePanelProject() {
         if (this.project != null) {
-            this.painelProjeto = new PainelProjeto(this);
-            this.painelProjeto.init();
-            this.getScrollPaneProjeto().setViewportView(this.painelProjeto);
+//            this.painelProjeto = new PainelProjeto(this);
+//            this.painelProjeto.init();
+//            this.getScrollPaneProjeto().setViewportView(this.painelProjeto);
             this.unlockDiagramas();
         }else {
-            this.getScrollPaneProjeto().setViewportView(this.createLabel(""));
+//            this.getScrollPaneProjeto().setViewportView(this.createLabel(""));
             this.lockDiagramas();
         }
     }
     
     /**
-     * Metodo responsavel por atualizar o Painel de Modelagem.
+     * Method responsible for updating Panel Modeling.
      */
-    public void updatePainelModelagem() {
-        if (this.project == null)
-            this.painelModelagem.clear();
-        this.painelModelagem.updateDiagrama();
-        this.painelModelagem.updateUI();
+    public void updatePanelModeling() {
+//        if (this.project == null)
+//            this.painelModelagem.clear();
+//        this.painelModelagem.updateDiagrama();
+//        this.painelModelagem.updateUI();
     }
     
     @Override
-    public void operacao() {
+    public void operation() {
         this.dispose();
     }
     
     /**
-     * Metodo responsavel por redefinir o Zoom.
+     * Method responsible for resetting Zoom.
      */
     private void resetZoom() {
-        this.getPainelPrincipal().getButtonZoomOriginal().setEnabled(this.zoom != 1.00d);
-        this.getPainelPrincipal().getButtonZoomIn().setEnabled(this.zoom < 3.00d);
-        this.getPainelPrincipal().getButtonZoomOut().setEnabled(this.zoom > 0.20d);
+//        this.getPainelPrincipal().getButtonZoomOriginal().setEnabled(this.zoom != 1.00d);
+//        this.getPainelPrincipal().getButtonZoomIn().setEnabled(this.zoom < 3.00d);
+//        this.getPainelPrincipal().getButtonZoomOut().setEnabled(this.zoom > 0.20d);
     }
     
     /**
-     * Metodo responsavel por definir o Zoom Padrao.
+     * Method responsible for setting Original Zoom.
      */
-    public void zoomOriginal() {
+    public void setOriginalZoom() {
         this.zoom = 1.0;
         this.resetZoom();
-        this.painelModelagem.setZoom(this.zoom);
+//        this.painelModelagem.setZoom(this.zoom);
     }
     
     /**
-     * Metodo responsavel por executar o Zoom In.
+     * Method responsible for running Zoom In.
      */
     public void zoomIn() {
         this.zoom += 0.10;
         this.zoom  = (this.zoom > 3.00) ? 3.00 : this.zoom;
         this.resetZoom();
-        this.painelModelagem.setZoom(this.zoom);
+//        this.painelModelagem.setZoom(this.zoom);
     }
     
     /**
-     * Metodo responsavel por executar o Zoom Out.
+     * Method responsible for running Zoom Out.
      */
     public void zoomOut() {
         this.zoom -= 0.10;
         this.zoom  = (this.zoom <= 0.20) ? 0.20 : this.zoom;
         this.resetZoom();
-        this.painelModelagem.setZoom(this.zoom);
+//        this.painelModelagem.setZoom(this.zoom);
     }
     
     /**
-     * Metodo responsavel por retornar o Controller da ViewMenu.
-     * @return Controller da ViewMenu.
+     * Method responsible for returning Controller.
+     * @return Controller.
      */
     public ControllerViewMenu getController() {
         return (ControllerViewMenu) this.controller;
     }
     
     /**
-     * Metodo responsavel por retornar o Project.
+     * Method responsible for returning Project.
      * @return Project.
      */
     public Project getProject() {
@@ -380,7 +371,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Metodo responsavel por definir o Project.
+     * Method responsible for defining Project.
      * @param project Project.
      */
     public void setProject(Project project) {
@@ -388,19 +379,19 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Metodo responsavel por retornar o JFileChooser Project.
+     * Method responsible for returning JFileChooser Project.
      * @return JFileChooser Project.
      */
-    public JFileChooser getFileChooserProjeto() {
-        return this.fileChoosers.get("fileChooserProjeto");
+    public JFileChooser getFileChooserProject() {
+        return this.fileChoosers.get("fileChooserProject");
     }
     
     /**
-     * Metodo responsavel por retornar o JFileChooser Imagem.
-     * @return JFileChooser Imagem.
+     * Method responsible for returning JFileChooser Image.
+     * @return JFileChooser Image.
      */
-    public JFileChooser getFileChooserImagem() {
-        return this.fileChoosers.get("fileChooserImagem");
+    public JFileChooser getFileChooserImage() {
+        return this.fileChoosers.get("fileChooserImage");
     }
     
     /**
@@ -500,125 +491,125 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Linha de Produto.
-     * @return Menu Linha de Produto.
+     * Method responsible for returning Menu Product Line.
+     * @return Menu Product Line.
      */
-    public JMenu getMenuLinhaProduto() {
-        return this.menus.get("menuLinhaProduto");
+    public JMenu getMenuProductLine() {
+        return this.menus.get("menuProductLine");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item Instanciar Produto.
-     * @return Menu Item Instanciar Produto.
+     * Method responsible for returning Menu Item Instantiate New Product.
+     * @return Menu Item Instantiate New Product.
      */
-    public JMenuItem getMenuItemInstanciarProduto() {
-        return this.menuItens.get("menuItemInstanciarProduto");
+    public JMenuItem getMenuItemInstantiateNewProduct() {
+        return this.menuItens.get("menuItemInstantiateNewProduct");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item Gerenciar Identificadores.
-     * @return Menu Item Gerenciar Identificadores.
+     * Method responsible for returning Menu Item Manage Identifiers.
+     * @return Menu Item Manage Identifiers.
      */
-    public JMenuItem getMenuItemGerenciarIdentificadores() {
-        return this.menuItens.get("menuItemGerenciarIdentificadores");
+    public JMenuItem getMenuItemManageIdentifiers() {
+        return this.menuItens.get("menuItemManageIdentifiers");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Sistema.
-     * @return Menu Sistema.
+     * Method responsible for returning Menu System.
+     * @return Menu System.
      */
-    public JMenu getMenuSistema() {
-        return this.menus.get("menuSistema");
+    public JMenu getMenuSystem() {
+        return this.menus.get("menuSystem");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item do Sistema Sobre.
-     * @return Menu Item do Sistema Sobre.
+     * Method responsible for returning Menu Item System Info.
+     * @return Menu Item System Info.
      */
-    public JMenuItem getMenuItemSistemaSobre() {
-        return this.menuItens.get("menuItemSistemaSobre");
+    public JMenuItem getMenuItemSystemInfo() {
+        return this.menuItens.get("menuItemSystemInfo");
     }
     
     /**
-     * Metodo responsavel por retornar o Menu Item do Sistema Site.
-     * @return Menu Item do Sistema Site.
+     * Method responsible for returning Menu Item System Site.
+     * @return Menu Item System Site.
      */
-    public JMenuItem getMenuItemSistemaSite() {
-        return this.menuItens.get("menuItemSistemaSite");
+    public JMenuItem getMenuItemSystemSite() {
+        return this.menuItens.get("menuItemSystemSite");
     }
 
     /**
-     * Metodo responsavel por retornar o Menu Item do Sistema Sair.
-     * @return Menu Item do Sistema Sair.
+     * Method responsible for returning Menu Item System Exit.
+     * @return Menu Item System Exit.
      */
-    public JMenuItem getMenuItemSistemaSair() {
-        return this.menuItens.get("menuItemSistemaSair");
+    public JMenuItem getMenuItemSystemExit() {
+        return this.menuItens.get("menuItemSystemExit");
     }
 
     /**
-     * Metodo responsavel por retornar a flag Salvo.
-     * @return 
+     * Method responsible for returning Save Flag.
+     * @return Save Flag.
      */
     public boolean isSave() {
-        return save;
+        return this.save;
     }
 
     /**
-     * Metodo responsavel por definir a flag Salvo.
-     * @param save Flag Salvo.
+     * Method responsible for defining Save Flag.
+     * @param save Save Flag.
      */
     public void setSave(boolean save) {
         this.save = save;
-        this.updateSalvar();
+        this.updateSave();
     }
     
     /**
      * Metodo responsavel por retornar o Painel Principal.
      * @return Painel Principal.
      */
-    public PainelPrincipal getPainelPrincipal() {
-        return this.painelPrincipal;
-    }
+//    public PainelPrincipal getPainelPrincipal() {
+//        return this.painelPrincipal;
+//    }
     
     /**
      * Metodo responsavel por retornar o JScrollPane Project.
      * @return JScrollPane Project.
      */
-    public JScrollPane getScrollPaneProjeto() {
-        return this.scrollPanes.get("scrollPaneProjeto");
-    }
+//    public JScrollPane getScrollPaneProjeto() {
+//        return this.scrollPanes.get("scrollPaneProjeto");
+//    }
     
     /**
      * Metodo responsavel por retornar o JPanel do Project.
      * @return JPanel do Project.
      */
-    public PainelProjeto getPainelProjeto() {
-        return this.painelProjeto;
-    }
+//    public PainelProjeto getPainelProjeto() {
+//        return this.painelProjeto;
+//    }
     
     /**
      * Metodo responsavel por retornar o JScrollPane Modelagem.
      * @return JScrollPane do Project.
      */
-    public JScrollPane getScrollPaneModelagem() {
-        return this.scrollPanes.get("scrollPaneModelagem");
-    }
+//    public JScrollPane getScrollPaneModelagem() {
+//        return this.scrollPanes.get("scrollPaneModelagem");
+//    }
     
     /**
      * Metodo responsavel por retornar o Painel de Modelagem.
      * @return Painel de Modelagem.
      */
-    public PainelModelagem getPainelModelagem() {
-        return this.painelModelagem;
-    }
+//    public PainelModelagem getPainelModelagem() {
+//        return this.painelModelagem;
+//    }
     
     /**
      * Metodo responsavel por retornar o JPanel do Logo.
      * @return JPanel do Logo.
      */
-    public JPanel getPainelLogo() {
-        return this.panels.get("painelLogo");
-    }
+//    public JPanel getPainelLogo() {
+//        return this.panels.get("painelLogo");
+//    }
     
     /**
      * Metodo principal do Project.

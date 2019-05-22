@@ -1,4 +1,4 @@
-package model.structural;
+package model.structural.base.interfaces;
 
 import java.util.Map;
 

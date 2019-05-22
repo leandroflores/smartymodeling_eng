@@ -3,14 +3,14 @@ package model.structural.diagram.classs;
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
-import model.structural.Element;
+import model.structural.base.Element;
 
 /**
  * <p>Class of Model <b>AttributeUML</b>.</p>
  * <p>Class responsible for representing <b>Attribute UML</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  20/05/2019
- * @see    model.structural.Element
+ * @see    model.structural.base.Element
  */
 public class AttributeUML extends Element {
     private Entity  entity;

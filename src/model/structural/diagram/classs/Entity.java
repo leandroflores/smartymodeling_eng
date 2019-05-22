@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import model.structural.Element;
+import model.structural.base.Element;
 
 /**
  * <p>Class of Model <b>Entity</b>.</p>
  * <p>Class responsible for representing <b>Entity</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  20/05/2019
- * @see    model.structural.Element
+ * @see    model.structural.base.Element
  */
 public abstract class Entity extends Element {
     private final HashMap attributes;
