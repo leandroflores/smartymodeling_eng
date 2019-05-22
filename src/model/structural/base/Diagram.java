@@ -591,7 +591,7 @@ public abstract class Diagram implements Exportable {
         String exclusive   = this.getExclusiveStereotype(element);
         String toReturn    = "";
         if (!inclusive.equals("") || !exclusive.equals(""))
-               toReturn   += stereotype.replaceAll(this.getProject().getPerfil().getMandatory() + "\n", "");
+               toReturn   += stereotype.replaceAll(this.getProject().getProfile().getMandatory() + "\n", "");
         else
                toReturn   += stereotype;
         return toReturn   + inclusive + exclusive;
@@ -613,8 +613,8 @@ public abstract class Diagram implements Exportable {
      */
     public String getOptionalStereotype(Element element) {
         if (element.isMandatory())
-            return this.getProject().getPerfil().getMandatory() + "\n";
-        return this.getProject().getPerfil().getOptional() + "\n";
+            return this.getProject().getProfile().getMandatory() + "\n";
+        return this.getProject().getProfile().getOptional() + "\n";
     }
     
     /**
@@ -623,7 +623,7 @@ public abstract class Diagram implements Exportable {
      * @return Variation Point Steretype.
      */
     public String getVariationPointStereotype(Element element) {
-        return this.getVariationPoints(element).isEmpty() ? "" : this.getProject().getPerfil().getVariationPoint() + "\n";
+        return this.getVariationPoints(element).isEmpty() ? "" : this.getProject().getProfile().getVariationPoint() + "\n";
     }
     
     /**
@@ -664,7 +664,7 @@ public abstract class Diagram implements Exportable {
      * @return Inclusive Stereotype.
      */
     public String getInclusiveStereotype(Element element) {
-        return this.filterVariants(element, "inclusive").isEmpty() ? "" : this.getProject().getPerfil().getInclusive() + "\n";
+        return this.filterVariants(element, "inclusive").isEmpty() ? "" : this.getProject().getProfile().getInclusive() + "\n";
     }
     
     /**
@@ -673,7 +673,7 @@ public abstract class Diagram implements Exportable {
      * @return Exclusive Stereotype.
      */
     public String getExclusiveStereotype(Element element) {
-        return this.filterVariants(element, "exclusive").isEmpty() ? "" : this.getProject().getPerfil().getExclusive() + "\n";
+        return this.filterVariants(element, "exclusive").isEmpty() ? "" : this.getProject().getProfile().getExclusive() + "\n";
     }
     
     /**

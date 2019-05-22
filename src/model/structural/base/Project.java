@@ -24,7 +24,7 @@ public class Project implements Exportable {
     private String  name;
     private String  path;
     private String  version;
-    private Profile  perfil;
+    private Profile profile;
     private HashMap diagrams;
     public  HashMap types;
     public  HashMap variabilities;
@@ -62,13 +62,36 @@ public class Project implements Exportable {
      * Method responsible for initializing HashMaps.
      */
     private void init() {
-        this.perfil        = new Profile();
+        this.profile       = this.getDefaultProfile();
         this.diagrams      = new HashMap();
         this.types         = new HashMap();
         this.variabilities = new HashMap();
         this.stereotypes   = new HashMap();
         this.links         = new HashMap();
         this.objects       = new HashMap();
+    }
+    
+    /**
+     * Method responsible for returning Default Profile.
+     * @return Default Profile.
+     */
+    private Profile getDefaultProfile() {
+        this.loadStereotypes();
+        Profile defaultProfile = new Profile();
+                defaultProfile.setMandatory((Stereotype) this.stereotypes.get("STEREOTYPE#1"));
+                defaultProfile.setOptional((Stereotype) this.stereotypes.get("STEREOTYPE#2"));
+                defaultProfile.setVariationPoint((Stereotype) this.stereotypes.get("STEREOTYPE#3"));
+                defaultProfile.setInclusive((Stereotype) this.stereotypes.get("STEREOTYPE#4"));
+                defaultProfile.setExclusive((Stereotype) this.stereotypes.get("STEREOTYPE#5"));
+        return  defaultProfile;
+    }
+    
+    /**
+     * Method responsible for loading Stereotypes.
+     */
+    private void loadStereotypes() {
+        if (this.stereotypes.isEmpty())
+            this.loadSMartyStereotypes();
     }
     
     /**
@@ -154,16 +177,16 @@ public class Project implements Exportable {
      * Metodo responsavel por retornar o Profile do Project.
      * @return Profile do Project.
      */
-    public Profile getPerfil() {
-        return this.perfil;
+    public Profile getProfile() {
+        return this.profile;
     }
     
     /**
      * Metodo responsavel por definir o Profile do Project.
-     * @param perfil Profile do Project.
+     * @param profile Profile do Project.
      */
-    public void setPerfil(Profile perfil) {
-        this.perfil = perfil;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
     
     /**
@@ -589,7 +612,7 @@ public class Project implements Exportable {
     public String export() {
         String export  = "<project id=\"" + this.id + "\" name=\"" + this.name + "\" version=\"" + this.version + "\">\n";
                export += "  <types>\n" + this.exportTypes() + "  </types>\n";
-               export += this.perfil.export();
+               export += this.profile.export();
                export += this.exportDiagrams();
                export += "</project>";
         return export;
