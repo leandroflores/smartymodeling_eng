@@ -4,10 +4,11 @@ import controller.Controller;
 import funct.FunctView;
 import funct.FunctString;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.HashMap;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -43,6 +44,7 @@ public abstract class Panel extends JPanel {
         super();
         this.init();
         this.setSettings();
+        this.addComponents();
     }
     
     /**
@@ -55,6 +57,11 @@ public abstract class Panel extends JPanel {
         this.checkBoxes   = new HashMap<>();
         this.fileChoosers = new HashMap<>();
     }
+    
+    /**
+     * Method responsible for adding the Components.
+     */
+    protected abstract void addComponents();
     
     /**
      * Method responsible for returning the Default Color.
@@ -76,7 +83,7 @@ public abstract class Panel extends JPanel {
      * Method responsible for defining the settings for the Panel.
      */
     private void setSettings() {
-        this.setLayout(new FlowLayout(FlowLayout.CENTER));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
     
     /**
@@ -108,6 +115,21 @@ public abstract class Panel extends JPanel {
      */
     protected JLabel createLabel(String title, int size) {
         JLabel label = new JLabel(title, SwingConstants.RIGHT);
+               label.addKeyListener(this.controller);
+               label.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
+               label.setPreferredSize(new Dimension(size, ViewStyle.HEIGHT));
+        return label;
+    }
+    
+    /**
+     * Method responsible for returning a new Center JLabel.
+     * @param  title JLabel Title.
+     * @param  size JLabel Size.
+     * @return New Center JLabel.
+     */
+    protected JLabel createCenterLabel(String title, int size) {
+        JLabel label = new JLabel(title, SwingConstants.RIGHT);
+               label.setAlignmentX(Component.CENTER_ALIGNMENT);
                label.addKeyListener(this.controller);
                label.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
                label.setPreferredSize(new Dimension(size, ViewStyle.HEIGHT));

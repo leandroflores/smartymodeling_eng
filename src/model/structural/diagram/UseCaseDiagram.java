@@ -25,8 +25,8 @@ import model.structural.diagram.usecase.UseCaseUML;
  * @see    model.structural.diagram.usecase.UseCaseUML
  */
 public final class UseCaseDiagram extends Diagram {
-    private HashMap<String, ActorUML>   actorsUML;
-    private HashMap<String, UseCaseUML> useCasesUML;
+    private HashMap<String, ActorUML>    actorsUML;
+    private HashMap<String, UseCaseUML>  useCasesUML;
     private HashMap<String, Association> realizationsUML;
     private HashMap<String, Association> extendsUML;
     private HashMap<String, Association> includesUML;

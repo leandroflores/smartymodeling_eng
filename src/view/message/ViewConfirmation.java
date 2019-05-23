@@ -2,7 +2,7 @@ package view.message;
 
 import controller.view.message.ControllerViewConfirmation;
 import javax.swing.JButton;
-import view.Operation;
+import view.interfaces.Operation;
 import view.View;
 import view.ViewModal;
 import view.ViewStyle;
@@ -13,7 +13,7 @@ import view.ViewStyle;
  * @author Leandro
  * @since  20/05/2019
  * @see    controller.view.message.ControllerViewConfirmation
- * @see    view.Operation
+ * @see    view.interfaces.Operation
  * @see    view.View
  * @see    view.ViewModal
  */
@@ -58,15 +58,15 @@ public final class ViewConfirmation extends ViewModal {
     
     @Override
     public void addHeader() {
-        this.addLinhas(1);
+        this.addLines(1);
         this.add(this.createLabelImage("icons/header/help.png"));
-        this.addLinhas(1);
+        this.addLines(1);
     }
     
     @Override
     public void addComponents() {
         this.add(this.createLabel(this.message));
-        this.addLinhas(1);
+        this.addLines(1);
     }
 
     @Override

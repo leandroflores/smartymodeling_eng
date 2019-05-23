@@ -43,15 +43,15 @@ public final class ViewSave extends ViewModal {
     
     @Override
     public void addHeader() {
-        this.addLinhas(1);
+        this.addLines(1);
         this.add(this.createLabelImage("icons/header/help.png"));
-        this.addLinhas(1);
+        this.addLines(1);
     }
     
     @Override
     public void addComponents() {
         this.add(this.createLabel("Do you want to save Project changes?"));
-        this.addLinhas(1);
+        this.addLines(1);
     }
 
     @Override

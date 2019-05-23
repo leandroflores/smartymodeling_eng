@@ -53,14 +53,14 @@ public final class ViewError extends ViewModal {
     
     @Override
     public void addHeader() {
-        this.addLinhas(1);
+        this.addLines(1);
         this.add(this.createLabelImage("icons/delete.png"));
     }
     
     @Override
     public void addComponents() {
         this.add(this.createLabel(this.message));
-        this.addLinhas(1);
+        this.addLines(1);
     }
     
     @Override

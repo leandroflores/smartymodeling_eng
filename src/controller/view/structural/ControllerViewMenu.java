@@ -1,11 +1,19 @@
 package controller.view.structural;
 
 import controller.view.ControllerView;
+import file.exportation.ExportProject;
+import file.importation.ImportProject;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 import model.structural.base.Project;
+import org.xml.sax.SAXException;
+import view.message.ViewError;
 import view.message.ViewSave;
 import view.structural.ViewMenu;
+import view.system.ViewSystemInformation;
 
 /**
  * <p>Class of Controller <b>ControllerViewMenu</b>.</p>
@@ -53,8 +61,8 @@ public class ControllerViewMenu extends ControllerView {
             this.instantiateNewProduct();
 //        else if (this.viewMenu.getMenuItemManageIdentifiers().equals(event.getSource()))
 //            this.gerenciarIdentificadores();
-//        else if (this.viewMenu.getMenuItemSystemInfo().equals(event.getSource()))
-//            new ViewSistemaSobre(this.viewMenu).setVisible(true);
+        else if (this.viewMenu.getMenuItemSystemInformation().equals(event.getSource()))
+            new ViewSystemInformation(this.viewMenu).setVisible(true);
         else if (this.viewMenu.getMenuItemSystemExit().equals(event.getSource()))
             this.exit();
     }
@@ -102,12 +110,12 @@ public class ControllerViewMenu extends ControllerView {
 //        this.viewMenu.getPainelModelagem().clear();
         if (this.viewMenu.getFileChooserProject().showSaveDialog(this.viewMenu) != 1) {
             String path = this.viewMenu.getFileChooserProject().getSelectedFile().getAbsolutePath();
-//            try {
-//                this.viewMenu.setProject(new ImportProjeto(path).getProjeto());
+            try {
+                this.viewMenu.setProject(new ImportProject(path).getProject());
                 this.viewMenu.update();
-//            }catch (IOException | ParserConfigurationException | SAXException | XPathExpressionException exception) {
-//                new ViewError(this.viewMenu, "Erro ao abrir Projeto!").setVisible(true);
-//            }
+            }catch (IOException | ParserConfigurationException | SAXException | XPathExpressionException exception) {
+                new ViewError(this.viewMenu, "Error opening Project!").setVisible(true);
+            }
         }
     }
     
@@ -139,10 +147,12 @@ public class ControllerViewMenu extends ControllerView {
      * Method responsible for exporting Project.
      */
     public void exportProject() {
-//        try {
-//            new ExportProjeto(this.viewMenu.getProject(), this.viewMenu.getFileChooserProject().getSelectedFile().getAbsolutePath()).exportar();;
-//            this.viewMenu.setSave(true);
-//        }catch (IOException exception) {}
+        try {
+            new ExportProject(this.viewMenu.getProject(), this.viewMenu.getFileChooserProject().getSelectedFile().getAbsolutePath()).export();
+            this.viewMenu.setSave(true);
+        }catch (IOException exception) {
+            new ViewError(this.viewMenu, "Error writing Project File!").setVisible(true);
+        }
     }
     
     /**

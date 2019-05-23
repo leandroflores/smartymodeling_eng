@@ -1,5 +1,6 @@
 package view;
 
+import view.interfaces.InterfaceView;
 import controller.Controller;
 import funct.FunctDate;
 import funct.FunctView;
@@ -22,7 +23,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -115,7 +115,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
     @Override
     public void addHeader() {
         this.setTitle();
-        this.addLinhas(1);
+        this.addLines(1);
     }
     
     /**
@@ -129,7 +129,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      * Method responsible for adding Lines to View Modal.
      * @param number Number of Lines.
      */
-    protected void addLinhas(int number) {
+    protected void addLines(int number) {
         for (int i = 0; i < number; i++)
             this.add(new JLabel(new FunctString().getSpaces(1000)));
     }

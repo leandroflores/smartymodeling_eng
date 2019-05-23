@@ -11,7 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
-import view.Operation;
+import view.interfaces.Operation;
 import view.View;
 import view.ViewStyle;
 
@@ -21,7 +21,7 @@ import view.ViewStyle;
  * @author Leandro
  * @since  21/05/2019
  * @see    controlador.visao.estruturais.ControllerViewMenu
- * @see    view.Operation
+ * @see    view.interfaces.Operation
  * @see    view.View
  */
 public final class ViewMenu extends View implements Operation {
@@ -149,11 +149,11 @@ public final class ViewMenu extends View implements Operation {
     private void createSystemMenu() {
         this.createMenu("menuSystem", "System");
         
-        this.createMenuItem("menuItemSystemInfo", "Information", "system/info.png");
-        this.createMenuItem("menuItemSystemSite", "Site",        "system/site.png");
-        this.createMenuItem("menuItemSystemExit", "Exit",        "system/exit.png");
+        this.createMenuItem("menuItemSystemInformation", "Information", "system/info.png");
+        this.createMenuItem("menuItemSystemSite",        "Site",        "system/site.png");
+        this.createMenuItem("menuItemSystemExit",        "Exit",        "system/exit.png");
         
-        this.getMenuSystem().add(this.getMenuItemSystemInfo());
+        this.getMenuSystem().add(this.getMenuItemSystemInformation());
         this.getMenuSystem().add(this.getMenuItemSystemSite());
         this.getMenuSystem().addSeparator();
         this.getMenuSystem().add(this.getMenuItemSystemExit());
@@ -523,11 +523,11 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item System Info.
-     * @return Menu Item System Info.
+     * Method responsible for returning Menu Item System Information.
+     * @return Menu Item System Information.
      */
-    public JMenuItem getMenuItemSystemInfo() {
-        return this.menuItens.get("menuItemSystemInfo");
+    public JMenuItem getMenuItemSystemInformation() {
+        return this.menuItens.get("menuItemSystemInformation");
     }
     
     /**

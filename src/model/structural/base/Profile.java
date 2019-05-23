@@ -99,23 +99,23 @@ public class Profile implements Exportable {
 
     @Override
     public String export() {
-        String export  = "  <profile>\n";
-               export += "    <mandatory>"      + this.mandatory      + "</mandatory>\n";
-               export += "    <optional>"       + this.optional       + "</optional>\n";
-               export += "    <variationPoint>" + this.variationPoint + "</variationPoint>\n";
-               export += "    <inclusive>"      + this.inclusive      + "</inclusive>\n";
-               export += "    <exclusive>"      + this.exclusive      + "</exclusive>\n";
-               export += "  </profile>\n";
+        String export  = "  <profile";
+               export += " mandatory=\""      + this.mandatory.getId()      + "\"";
+               export += " optional=\""       + this.optional.getId()       + "\"";
+               export += " variationPoint=\"" + this.variationPoint.getId() + "\"";
+               export += " inclusive=\""      + this.inclusive.getId()      + "\"";
+               export += " exclusive=\""      + this.exclusive.getId()      + "\"";
+               export += "/>\n";
         return export;
     }
     
     @Override
     public String toString() {
-        String perfil =  "Mandatory       = " + this.mandatory      + "\n";
-               perfil += "Optional        = " + this.optional       + "\n";
-               perfil += "Variation Point = " + this.variationPoint + "\n";
-               perfil += "Inclusive       = " + this.inclusive      + "\n";
-               perfil += "Exclusive       = " + this.exclusive      + "\n";
-        return perfil;
+        String profile  = "Mandatory       = " + this.mandatory      + "\n";
+               profile += "Optional        = " + this.optional       + "\n";
+               profile += "Variation Point = " + this.variationPoint + "\n";
+               profile += "Inclusive       = " + this.inclusive      + "\n";
+               profile += "Exclusive       = " + this.exclusive      + "\n";
+        return profile;
     }
 }

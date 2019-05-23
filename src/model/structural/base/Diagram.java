@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import model.structural.base.association.Dependency;
 import model.structural.base.interfaces.Exportable;
 import model.structural.diagram.classs.TypeUML;
 import model.structural.base.variability.Mutex;
@@ -416,6 +417,31 @@ public abstract class Diagram implements Exportable {
      */
     public List<Generalization> getGeneralizationsList() {
         return (List<Generalization>) this.filterAssociations(Generalization.class);
+    }
+    
+    /**
+     * Method responsible for adding a Dependency.
+     * @param dependency Dependency.
+     */
+    public void addDependency(Dependency dependency) {
+        if (this.associations.containsKey(dependency.getId()) == false)
+            this.addAssociation(dependency);
+    }
+    
+    /**
+     * Method responsible for removing a Dependency.
+     * @param dependency Dependency.
+     */
+    public void removeDependency(Dependency dependency) {
+        this.removeAssociation(dependency);
+    }
+    
+    /**
+     * Method responsible for returning Dependency List.
+     * @return Dependency List.
+     */
+    public List<Dependency> getDependenciesList() {
+        return (List<Dependency>) this.filterAssociations(Dependency.class);
     }
     
     /**

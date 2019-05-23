@@ -62,13 +62,13 @@ public class Project implements Exportable {
      * Method responsible for initializing HashMaps.
      */
     private void init() {
-        this.profile       = this.getDefaultProfile();
         this.diagrams      = new HashMap();
         this.types         = new HashMap();
         this.variabilities = new HashMap();
         this.stereotypes   = new HashMap();
         this.links         = new HashMap();
         this.objects       = new HashMap();
+        this.profile       = this.getDefaultProfile();
     }
     
     /**
@@ -607,11 +607,22 @@ public class Project implements Exportable {
         return this.getDefaultStereotype();
     }
     
+    /**
+     * Method responsible for exporting the Stereotypes.
+     * @return Stereotypes.
+     */
+    private String exportStereotypes() {
+        String export  = "";
+        for (Stereotype stereotype : this.getStereotypesList())
+               export += stereotype.export();
+        return export;
+    }
     
     @Override
     public String export() {
         String export  = "<project id=\"" + this.id + "\" name=\"" + this.name + "\" version=\"" + this.version + "\">\n";
-               export += "  <types>\n" + this.exportTypes() + "  </types>\n";
+               export += "  <types>\n"       + this.exportTypes()       + "  </types>\n";
+               export += "  <stereotypes>\n" + this.exportStereotypes() + "  </stereotypes>\n";
                export += this.profile.export();
                export += this.exportDiagrams();
                export += "</project>";
