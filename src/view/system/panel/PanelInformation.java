@@ -11,6 +11,13 @@ import view.Panel;
  */
 public final class PanelInformation extends Panel {
     
+    /**
+     * Default constructor method of Class.
+     */
+    public PanelInformation() {
+        this.addComponents();
+    }
+    
     @Override
     protected void addComponents() {
         this.add(this.createCenterLabel("SMartyModeling - Version 2.0", 800));

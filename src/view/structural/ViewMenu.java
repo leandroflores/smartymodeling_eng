@@ -14,6 +14,7 @@ import model.structural.base.Project;
 import view.interfaces.Operation;
 import view.View;
 import view.ViewStyle;
+import view.panel.main.PanelMain;
 
 /**
  * <p>Class of View <b>ViewMenu</b>.</p>
@@ -30,7 +31,7 @@ public final class ViewMenu extends View implements Operation {
     private boolean  save;
     private JMenuBar menuBar;
     
-//    private PainelPrincipal painelPrincipal;
+    private PanelMain panelMain;
 //    private PainelProjeto   painelProjeto;
 //    private PainelModelagem painelModelagem;
     
@@ -58,7 +59,7 @@ public final class ViewMenu extends View implements Operation {
         this.createFileChooser("fileChooserProject");
         this.createImageChooser("fileChooserImage");
         
-//        this.addPainelPrincipal();
+        this.addPanelMain();
 //        this.addPainelProjeto();
 //        this.addPainelModelagem();
     }
@@ -174,9 +175,10 @@ public final class ViewMenu extends View implements Operation {
      */
     private void addPanelMain() {
         this.setTitle();
-//        this.painelPrincipal = new PainelPrincipal(this);
+
+        this.panelMain = new PanelMain(this);
 //        this.painelPrincipal.setPreferredSize(new Dimension(1356, 35));
-//        this.getContentPane().add(this.painelPrincipal);
+        this.getContentPane().add(this.panelMain);
     }
     
     /**

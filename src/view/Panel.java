@@ -44,7 +44,6 @@ public abstract class Panel extends JPanel {
         super();
         this.init();
         this.setSettings();
-        this.addComponents();
     }
     
     /**

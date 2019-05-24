@@ -1,6 +1,8 @@
 package view.panel.main;
 
+import java.awt.FlowLayout;
 import java.util.Iterator;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import view.Panel;
 import view.structural.ViewMenu;
@@ -13,7 +15,7 @@ import view.structural.ViewMenu;
  * @see    view.Panel
  * @see    view.structural.ViewMenu
  */
-public class PanelMain extends Panel {
+public final class PanelMain extends Panel {
     private final ViewMenu viewMenu;
     
     /**
@@ -23,7 +25,9 @@ public class PanelMain extends Panel {
     public PanelMain(ViewMenu viewMenu) {
         this.viewMenu   = viewMenu;
 //        this.controller = new ControllerPainelPrincipal(this);
-        
+        this.setLayout(new FlowLayout(FlowLayout.CENTER));
+        // Olhar Grid Layout (https://stackoverflow.com/questions/18491408/i-need-to-make-my-jpanel-resize-dynamically-as-new-components-are-being-added-to)
+        this.addComponents();
     }
     
     @Override
@@ -67,7 +71,7 @@ public class PanelMain extends Panel {
      * Method responsible for adding Zoom Buttons.
      */
     private void addZoomButtons() {
-        this.add(this.createButton("zoomOriginalButton", "", "Zoom 100%", this.getPath("zoom-original")));
+        this.add(this.createButton("originalZoomButton", "", "Zoom 100%", this.getPath("zoom-original")));
         this.add(this.createButton("zoomInButton",       "", "Zoom +",    this.getPath("zoom-in")));
         this.add(this.createButton("zoomOutButton",      "", "Zoom -",    this.getPath("zoom-out")));
         this.add(this.createLabel("", 15));
@@ -103,10 +107,10 @@ public class PanelMain extends Panel {
         this.getCloseProjectButton().setEnabled(false);
         this.getRedoButton().setEnabled(false);
         this.getUndoButton().setEnabled(false);
-        this.getButtonZoomOriginal().setEnabled(false);
-        this.getButtonZoomIn().setEnabled(false);
-        this.getButtonZoomOut().setEnabled(false);
-        this.getButtonExportarImagem().setEnabled(false);
+        this.getOriginalZoomButton().setEnabled(false);
+        this.getZoomInButton().setEnabled(false);
+        this.getZoomOutButton().setEnabled(false);
+        this.getExportImageButton().setEnabled(false);
     }
     
     /**
@@ -118,98 +122,98 @@ public class PanelMain extends Panel {
     }
     
     /**
-     * Method responsible for returning New Project JButton.
-     * @return New Project JButton.
+     * Method responsible for returning New Project Button.
+     * @return New Project Button.
      */
     public JButton getNewProjectButton() {
         return this.buttons.get("newProjectButton");
     }
     
     /**
-     * Method responsible for returning JButton Open Project.
-     * @return JButton Open Project.
+     * Method responsible for returning Open Project Button.
+     * @return Open Project Button.
      */
     public JButton getOpenProjectButton() {
         return this.buttons.get("openProjectButton");
     }
     
     /**
-     * Method responsible for returning Save Project JButton.
-     * @return Save Project JButton.
+     * Method responsible for returning Save Project Button.
+     * @return Save Project Button.
      */
     public JButton getSaveProjectButton() {
         return this.buttons.get("saveProjectButton");
     }
     
     /**
-     * Method responsible for returning Close Project JButton.
-     * @return Close Project JButton.
+     * Method responsible for returning Close Project Button.
+     * @return Close Project Button.
      */
     public JButton getCloseProjectButton() {
         return this.buttons.get("closeProjectButton");
     }
     
     /**
-     * Method responsible for returning Undo JButton.
-     * @return Undo JButton.
+     * Method responsible for returning Undo Button.
+     * @return Undo Button.
      */
     public JButton getUndoButton() {
         return this.buttons.get("undoButton");
     }
     
     /**
-     * Method responsible for returning Redo JButton.
-     * @return Redo JButton.
+     * Method responsible for returning Redo Button.
+     * @return Redo Button.
      */
     public JButton getRedoButton() {
-        return this.buttons.get("buttonRefazer");
+        return this.buttons.get("redoButton");
     }
     
     /**
-     * Metodo responsavel por retornar o JButton Zoom Original.
-     * @return JButton Zoom Original.
+     * Method responsible for returning Original Zoom Button.
+     * @return Original Zoom Button.
      */
-    public JButton getButtonZoomOriginal() {
-        return this.buttons.get("buttonZoomOriginal");
+    public JButton getOriginalZoomButton() {
+        return this.buttons.get("originalZoomButton");
     }
     
     /**
-     * Metodo responsavel por retornar o JButton Zoom In.
-     * @return JButton Zoom In.
+     * Method responsible for returning Zoom In Button.
+     * @return Zoom In Button.
      */
-    public JButton getButtonZoomIn() {
-        return this.buttons.get("buttonZoomIn");
+    public JButton getZoomInButton() {
+        return this.buttons.get("zoomInButton");
     }
     
     /**
-     * Metodo responsavel por retornar o JButton Zoom Out.
-     * @return JButton Zoom Out.
+     * Method responsible for returning Zoom Out Button.
+     * @return Zoom Out Button.
      */
-    public JButton getButtonZoomOut() {
-        return this.buttons.get("buttonZoomOut");
+    public JButton getZoomOutButton() {
+        return this.buttons.get("zoomOutButton");
     }
     
     /**
-     * Metodo responsavel por retornar o JButton Exportar Imagem.
-     * @return JButton Exportar Imagem.
+     * Method responsible for returning Export Image Button.
+     * @return Export Image Button.
      */
-    public JButton getButtonExportarImagem() {
-        return this.buttons.get("buttonExportarImagem");
+    public JButton getExportImageButton() {
+        return this.buttons.get("exportImageButton");
     }
     
     /**
-     * Metodo responsavel por retornar o JButton Ajuda.
-     * @return JButton Ajuda.
+     * Method responsible for returning Help Button.
+     * @return Help Button.
      */
-    public JButton getButtonAjuda() {
-        return this.buttons.get("buttonAjuda");
+    public JButton getHelpButton() {
+        return this.buttons.get("helpButton");
     }
     
     /**
-     * Metodo responsavel por retornar o JButton Informacoes.
-     * @return JButton Informacoes.
+     * Method responsible for returning Version Button.
+     * @return Version Button.
      */
-    public JButton getButtonInformacoes() {
-        return this.buttons.get("buttonInformacoes");
+    public JButton getVersionButton() {
+        return this.buttons.get("versionButton");
     }
 }
