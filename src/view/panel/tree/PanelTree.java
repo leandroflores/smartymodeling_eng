@@ -1,6 +1,6 @@
 package view.panel.tree;
 
-import controlador.visao.painel.projeto.popup.ControllerTreePopup;
+import controller.view.panel.tree.popup.ControllerTreePopup;
 import java.awt.FlowLayout;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -79,7 +79,7 @@ public class PanelTree extends Panel {
     private DefaultMutableTreeNode getNode(Diagram diagram) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(diagram);
                this.addElements(diagram, node);
-//               this.addAssociacoes(diagrama,    node);
+//               this.addAssociations(diagrama, node);
                this.addVariabilities(diagram, node);
         return node;
     }
@@ -106,8 +106,8 @@ public class PanelTree extends Panel {
      */
     private DefaultMutableTreeNode getNode(Entity entity) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(entity);
-            this.addAttributes(entity, node);
-            this.addMethods(entity, node);
+            this.addAttributesUML(entity, node);
+            this.addMethodsUML(entity, node);
         return node;
     }
     
@@ -116,7 +116,7 @@ public class PanelTree extends Panel {
      * @param entity Entity.
      * @param node Entity Node.
      */
-    private void addAttributes(Entity entity, DefaultMutableTreeNode node) {
+    private void addAttributesUML(Entity entity, DefaultMutableTreeNode node) {
         for (int i = 0; i < entity.getAttributesList().size(); i++)
             node.add(new DefaultMutableTreeNode(entity.getAttributesList().get(i)));
     }
@@ -126,7 +126,7 @@ public class PanelTree extends Panel {
      * @param entity Entity.
      * @param node Entity Node.
      */
-    private void addMethods(Entity entity, DefaultMutableTreeNode node) {
+    private void addMethodsUML(Entity entity, DefaultMutableTreeNode node) {
         for (int i = 0; i < entity.getMethodsList().size(); i++)
             node.add(new DefaultMutableTreeNode(entity.getMethodsList().get(i)));
     }
@@ -149,7 +149,6 @@ public class PanelTree extends Panel {
     private void addVariabilities(Diagram diagram, DefaultMutableTreeNode node) {
         for (int i = 0; i < diagram.getVariabilitiesList().size(); i++)
             node.add(this.getNode(diagram.getVariabilitiesList().get(i)));
-//            node.add(new DefaultMutableTreeNode(diagrama.getListaVariabilidades().get(i)));
     }
     
     /**

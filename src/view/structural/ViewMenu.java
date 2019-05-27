@@ -10,6 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneConstants;
@@ -19,6 +20,8 @@ import view.interfaces.Operation;
 import view.View;
 import view.ViewStyle;
 import view.panel.main.PanelMain;
+import view.panel.modeling.PanelModeling;
+import view.panel.tree.PanelTree;
 
 /**
  * <p>Class of View <b>ViewMenu</b>.</p>
@@ -36,8 +39,8 @@ public final class ViewMenu extends View implements Operation {
     private JMenuBar menuBar;
     
     private PanelMain panelMain;
-//    private PainelProjeto   painelProjeto;
-//    private PainelModelagem painelModelagem;
+    private PanelTree panelTree;
+    private PanelModeling panelModeling;
     
     /**
      * Default constructor method of Class.
@@ -66,8 +69,8 @@ public final class ViewMenu extends View implements Operation {
         this.createImageChooser("fileChooserImage");
         
         this.addPanelMain();
-//        this.addPainelProjeto();
-//        this.addPainelModelagem();
+        this.addPanelTree();
+        this.addPanelModeling();
     }
     
     /**
@@ -193,21 +196,22 @@ public final class ViewMenu extends View implements Operation {
     /**
      * Method responsible for adding Panel Project on View.
      */
-    private void addPanelProject() {
-//        this.painelProjeto = new PainelProjeto(this);
-//        this.createScrollPane("scrollPaneProjeto");
+    private void addPanelTree() {
+        this.panelTree = new PanelTree(this);
+        this.createScrollPane("scrollPanelTree");
+        this.getScrollPanelTree().setViewportView(this.panelTree);        
 //        this.getScrollPaneProjeto().setBorder(BorderFactory.createLineBorder(Color.BLACK));
 //        this.getScrollPaneProjeto().setPreferredSize(new Dimension(250, 625));
 //        this.getScrollPaneProjeto().setLayout(new ScrollPaneLayout());
-//        this.getContentPane().add(this.getScrollPaneProjeto());
+        this.getContentPane().add(this.getScrollPanelTree(), BorderLayout.CENTER);
     }
     
     /**
      * Method responsible for adding Panel Modeling on View.
      */
     private void addPanelModeling() {
-//        this.painelModelagem = new PainelModelagem(this);
-//        this.createScrollPane("scrollPaneModelagem");
+        this.panelModeling = new PanelModeling(this);
+        this.createScrollPane("scrollPanelModeling");
 //        this.getScrollPaneModelagem().setBorder(BorderFactory.createLineBorder(Color.BLACK));
 //        this.getScrollPaneModelagem().setViewportView(this.painelModelagem);
 //        this.getScrollPaneModelagem().setPreferredSize(new Dimension(1100, 625));
@@ -218,7 +222,7 @@ public final class ViewMenu extends View implements Operation {
      * Method responsible for showing a Diagram.
      * @param diagram Diagram.
      */
-    public void showDiagrama(Diagram diagram) {
+    public void showDiagram(Diagram diagram) {
 //        this.painelModelagem.addDiagrama(diagram);
 //        this.painelModelagem.updateUI();
     }
@@ -277,12 +281,12 @@ public final class ViewMenu extends View implements Operation {
     public void updateSave() {
         if (this.save == true) {
             this.getMenuItemSaveProject().setEnabled(false);
-//            this.getPanelMain().getButtonSalvarProjeto().setEnabled(false);
-//            this.getPanelMain().getButtonDesfazer().setEnabled(false);
-//            this.getPanelMain().getButtonRefazer().setEnabled(false);
+            this.getPanelMain().getSaveProjectButton().setEnabled(false);
+            this.getPanelMain().getUndoButton().setEnabled(false);
+            this.getPanelMain().getRedoButton().setEnabled(false);
         }else {
             this.getMenuItemSaveProject().setEnabled(true);
-//            this.getPanelMain().getButtonSalvarProjeto().setEnabled(true);
+            this.getPanelMain().getSaveProjectButton().setEnabled(true);
         }
     }
     
@@ -291,9 +295,9 @@ public final class ViewMenu extends View implements Operation {
      */
     public void updatePanelMain() {
         this.setPanelMenu();
-//        this.painelPrincipal.upPainelPrincipal();
-//        if (this.project == null)
-//            this.painelPrincipal.setSemProjeto();
+        this.panelMain.activate();
+        if (this.project == null)
+            this.panelMain.setNoProject();
         this.updateSave();
     }
     
@@ -331,9 +335,9 @@ public final class ViewMenu extends View implements Operation {
      * Method responsible for resetting Zoom.
      */
     private void resetZoom() {
-//        this.getPanelMain().getButtonZoomOriginal().setEnabled(this.zoom != 1.00d);
-//        this.getPanelMain().getButtonZoomIn().setEnabled(this.zoom < 3.00d);
-//        this.getPanelMain().getButtonZoomOut().setEnabled(this.zoom > 0.20d);
+        this.getPanelMain().getOriginalZoomButton().setEnabled(this.zoom != 1.00d);
+        this.getPanelMain().getZoomInButton().setEnabled(this.zoom  < 3.00d);
+        this.getPanelMain().getZoomOutButton().setEnabled(this.zoom > 0.20d);
     }
     
     /**
@@ -342,7 +346,7 @@ public final class ViewMenu extends View implements Operation {
     public void setOriginalZoom() {
         this.zoom = 1.0;
         this.resetZoom();
-//        this.painelModelagem.setZoom(this.zoom);
+        this.panelModeling.setZoom(this.zoom);
     }
     
     /**
@@ -352,7 +356,7 @@ public final class ViewMenu extends View implements Operation {
         this.zoom += 0.10;
         this.zoom  = (this.zoom > 3.00) ? 3.00 : this.zoom;
         this.resetZoom();
-//        this.painelModelagem.setZoom(this.zoom);
+        this.panelModeling.setZoom(this.zoom);
     }
     
     /**
@@ -362,7 +366,7 @@ public final class ViewMenu extends View implements Operation {
         this.zoom -= 0.10;
         this.zoom  = (this.zoom <= 0.20) ? 0.20 : this.zoom;
         this.resetZoom();
-//        this.painelModelagem.setZoom(this.zoom);
+        this.panelModeling.setZoom(this.zoom);
     }
     
     @Override
@@ -599,47 +603,47 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Metodo responsavel por retornar o JScrollPane Project.
-     * @return JScrollPane Project.
+     * Method responsible for returning Panel Tree.
+     * @return Panel Tree.
      */
-//    public JScrollPane getScrollPaneProjeto() {
-//        return this.scrollPanes.get("scrollPaneProjeto");
-//    }
+    public PanelTree getPanelTree() {
+        return this.panelTree;
+    }
     
     /**
-     * Metodo responsavel por retornar o JPanel do Project.
-     * @return JPanel do Project.
+     * Method responsible for returning Panel Tree Scroll.
+     * @return Panel Tree Scroll.
      */
-//    public PainelProjeto getPainelProjeto() {
-//        return this.painelProjeto;
-//    }
+    public JScrollPane getScrollPanelTree() {
+        return this.scrollPanes.get("scrollPanelTree");
+    }
     
     /**
-     * Metodo responsavel por retornar o JScrollPane Modelagem.
-     * @return JScrollPane do Project.
+     * Method responsible for returning Panel Modeling.
+     * @return Panel Modeling.
      */
-//    public JScrollPane getScrollPaneModelagem() {
-//        return this.scrollPanes.get("scrollPaneModelagem");
-//    }
+    public PanelModeling getPanelModeling() {
+        return this.panelModeling;
+    }
     
     /**
-     * Metodo responsavel por retornar o Painel de Modelagem.
-     * @return Painel de Modelagem.
+     * Method responsible for returning Panel Modeling Scroll.
+     * @return Panel Modeling Scroll.
      */
-//    public PainelModelagem getPainelModelagem() {
-//        return this.painelModelagem;
-//    }
+    public JScrollPane getScrollPanelModeling() {
+        return this.scrollPanes.get("scrollPanelModeling");
+    }
     
     /**
-     * Metodo responsavel por retornar o JPanel do Logo.
-     * @return JPanel do Logo.
+     * Method responsible for returning Panel Logo.
+     * @return Panel Logo.
      */
-//    public JPanel getPainelLogo() {
-//        return this.panels.get("painelLogo");
-//    }
+    public JPanel getPanelLogo() {
+        return this.panels.get("painelLogo");
+    }
     
     /**
-     * Metodo principal do Project.
+     * Main Method of SMartyModeling.
      * @param args 
      */
     public static void main(String[] args) {

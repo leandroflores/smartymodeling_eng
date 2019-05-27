@@ -87,7 +87,8 @@ public class ControllerViewMenu extends ControllerView {
      * Method responsible for creating a New Project.
      */
     public void createNewProject() {
-//        this.viewMenu.getPainelModelagem().clear();
+        System.out.println("Test");
+        this.viewMenu.getPanelModeling().clear();
         this.viewMenu.setProject(new Project());
         this.viewMenu.setSave(true);
         this.viewMenu.update();
@@ -107,7 +108,7 @@ public class ControllerViewMenu extends ControllerView {
      * Method responsible for opening a Project.
      */
     public void openProject() {
-//        this.viewMenu.getPainelModelagem().clear();
+//        this.viewMenu.getPanelModeling().clear();
         if (this.viewMenu.getFileChooserProject().showSaveDialog(this.viewMenu) != 1) {
             String path = this.viewMenu.getFileChooserProject().getSelectedFile().getAbsolutePath();
             try {
@@ -190,7 +191,7 @@ public class ControllerViewMenu extends ControllerView {
         if (this.viewMenu.getProject() != null) {
 //            DiagramaAtividades diagrama = new DiagramaAtividades(this.viewMenu.getProjeto());
 //            this.viewMenu.getProjeto().addDiagrama(diagrama);
-//            this.viewMenu.showDiagrama(diagrama);
+//            this.viewMenu.showDiagram(diagrama);
         }
         this.viewMenu.update();
     }
@@ -202,7 +203,7 @@ public class ControllerViewMenu extends ControllerView {
         if (this.viewMenu.getProject() != null) {
 //            DiagramaClasses diagrama = new DiagramaClasses(this.viewMenu.getProjeto());
 //            this.viewMenu.getProjeto().addDiagrama(diagrama);
-//            this.viewMenu.showDiagrama(diagrama);
+//            this.viewMenu.showDiagram(diagrama);
         }
         this.viewMenu.update();
     }
@@ -214,7 +215,7 @@ public class ControllerViewMenu extends ControllerView {
         if (this.viewMenu.getProject() != null) {
 //            DiagramaComponentes diagrama = new DiagramaComponentes(this.viewMenu.getProjeto());
 //            this.viewMenu.getProjeto().addDiagrama(diagrama);
-//            this.viewMenu.showDiagrama(diagrama);
+//            this.viewMenu.showDiagram(diagrama);
         }
         this.viewMenu.update();
     }
@@ -226,7 +227,7 @@ public class ControllerViewMenu extends ControllerView {
         if (this.viewMenu.getProject() != null) {
 //            DiagramaCasosDeUso diagrama = new DiagramaCasosDeUso(this.viewMenu.getProjeto());
 //            this.viewMenu.getProjeto().addDiagrama(diagrama);
-//            this.viewMenu.showDiagrama(diagrama);
+//            this.viewMenu.showDiagram(diagrama);
         }
         this.viewMenu.update();
     }
@@ -238,7 +239,7 @@ public class ControllerViewMenu extends ControllerView {
         if (this.viewMenu.getProject() != null) {
 //            DiagramaCasosDeUso diagrama = new DiagramaCasosDeUso(this.viewMenu.getProjeto());
 //            this.viewMenu.getProjeto().addDiagrama(diagrama);
-//            this.viewMenu.showDiagrama(diagrama);
+//            this.viewMenu.showDiagram(diagrama);
         }
         this.viewMenu.update();
     }
@@ -247,8 +248,8 @@ public class ControllerViewMenu extends ControllerView {
      * Method responsible for instantiating a New Product.
      */
     private void instantiateNewProduct() {
-//        if (this.viewMenu.getPainelModelagem().getPainelDiagrama() != null)
-//            new ViewInstanciarProduto(this.viewMenu, this.viewMenu.getPainelModelagem().getPainelDiagrama().getDiagrama()).setVisible(true);
+//        if (this.viewMenu.getPanelModeling().getPainelDiagrama() != null)
+//            new ViewInstanciarProduto(this.viewMenu, this.viewMenu.getPanelModeling().getPainelDiagrama().getDiagrama()).setVisible(true);
     }
     
     /**
@@ -256,8 +257,8 @@ public class ControllerViewMenu extends ControllerView {
      * Method responsible for editing Profile.
      */
     private void editProfile() {
-//        if (this.viewMenu.getPainelModelagem().getPainelDiagrama() != null)
-//            new ViewEditarPerfil(this.viewMenu.getPainelModelagem(), this.viewMenu.getPainelModelagem().getPainelDiagrama().getDiagrama().getProjeto().getPerfil()).setVisible(true);
+//        if (this.viewMenu.getPanelModeling().getPainelDiagrama() != null)
+//            new ViewEditarPerfil(this.viewMenu.getPanelModeling(), this.viewMenu.getPanelModeling().getPainelDiagrama().getDiagrama().getProjeto().getPerfil()).setVisible(true);
     }
     
     /**
@@ -266,7 +267,7 @@ public class ControllerViewMenu extends ControllerView {
     public void exportDiagramImage() {
         if (this.viewMenu.getFileChooserImage().showSaveDialog(this.viewMenu) != 1) {
             String        path  = this.viewMenu.getFileChooserImage().getSelectedFile().getAbsolutePath();
-//            BufferedImage image = this.viewMenu.getPainelModelagem().getImage();
+//            BufferedImage image = this.viewMenu.getPanelModeling().getImage();
 //            if (image != null) {
 //                try {
 //                    path = (path.toLowerCase().endsWith(".png")) ? path : path + ".png";

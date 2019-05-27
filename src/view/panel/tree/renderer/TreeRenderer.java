@@ -19,9 +19,8 @@ import model.structural.diagram.classs.MethodUML;
  * <p>Class of View <b>TreeRenderer</b>.</p>
  * <p>Class responsible for defining the <b>Tree Renderer</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  14/01/2019
+ * @since  27/05/2019
  * @see    javax.swing.tree.DefaultTreeCellRenderer
- * @see    javax.swing.tree.TreeCellRenderer
  */
 public class TreeRenderer extends DefaultTreeCellRenderer {
     protected JTree tree;

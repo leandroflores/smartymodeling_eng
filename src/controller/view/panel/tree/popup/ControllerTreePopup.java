@@ -6,7 +6,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
+import model.structural.base.Diagram;
 import model.structural.base.Project;
+import model.structural.base.variability.Variability;
+import model.structural.diagram.classs.AttributeUML;
+import model.structural.diagram.classs.MethodUML;
 import view.panel.tree.popup.TreePopup;
 
 /**
@@ -65,10 +69,10 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
                 this.showPanelDiagram(node);
                 break;
             case KeyEvent.VK_DELETE:
-                this.excluir(node.getUserObject(), node);
+                this.delete(node.getUserObject(), node);
                 break;
             case KeyEvent.VK_F2:
-                this.editar(node.getUserObject(), node);
+                this.edit(node.getUserObject(), node);
                 break;
             default:
                 break;
@@ -85,137 +89,138 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      */
     private void showPopup(DefaultMutableTreeNode node, MouseEvent event) {
         if (node.getUserObject() instanceof Project)
-                this.treePopup.getMenuItemDelete().setVisible(false);
-            else
-                this.treePopup.getMenuItemDelete().setVisible(true);
-            this.treePopup.show(event.getComponent(), event.getX(), event.getY());
+            this.treePopup.getMenuItemDelete().setVisible(false);
+        else
+            this.treePopup.getMenuItemDelete().setVisible(true);
+        this.treePopup.show(event.getComponent(), event.getX(), event.getY());
     }
 
     /**
-     * Metodo responsavel por apresentar a
-     * @param node Node da JTree.
+     * Method responsible for showing Panel Diagram.
+     * @param node JTree Node.
      */
     private void showPanelDiagram(DefaultMutableTreeNode node) {
-        if (node.getUserObject() instanceof Diagrama)
-            this.treePopup.getPainelProjeto().getViewMenu().showDiagrama((Diagrama) node.getUserObject());
+        if (node.getUserObject() instanceof Diagram)
+            this.treePopup.getPanelTree().getViewMenu().showDiagram((Diagram) node.getUserObject());
     }
     
     /**
-     * Metodo responsavel por excluir o Node da JTree.
+     * Method responsible for deleting JTree Node.
+     * @param object Object.
+     * @param node JTree Node.
+     */
+    private void delete(Object object, DefaultMutableTreeNode node) {
+        if (object instanceof Diagram)
+            System.out.println("Diagram");
+//            new ViewExcluirDiagrama(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((Diagrama) object)).setVisible(true);
+//        else if (object instanceof Element)
+//            new ViewExcluirElemento(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((Elemento) object)).setVisible(true);
+        else if (object instanceof Variability)
+            this.deleteVariability(object, node);
+        else if (object instanceof AttributeUML)
+            this.deleteAttributeUML(object, node);
+        else if (object instanceof MethodUML)
+            this.deleteMethodUML(object, node);
+    }
+    
+    /**
+     * Method responsible for deleting Variability.
+     * @param object Object.
+     * @param node JTree Node.
+     */
+    private void deleteVariability(Object object, DefaultMutableTreeNode node) {
+        Diagram     diagram     = this.getDiagram((DefaultMutableTreeNode) node.getParent());
+        Variability variability = (Variability) object;
+//        new ViewExcluirVariabilidade(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), diagrama, variability).setVisible(true);
+    }
+    
+    /**
+     * Method responsible for deleting Attribute UML.
+     * @param object Object.
+     * @param node JTree Node.
+     */
+    private void deleteAttributeUML(Object object, DefaultMutableTreeNode node) {
+//        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());
+//        AtributoUML     atributo = (AtributoUML) object;
+//                        diagrama.removeAtributo(atributo);
+//        this.treePopup.getPanelTree().getViewMenu().getPanelModeling().getPainelDiagrama().atualizarDiagrama();
+//        this.treePopup.getPanelTree().getViewMenu().update();
+//        this.treePopup.getPanelTree().getViewMenu().setSalvo(false);
+    }
+    
+    /**
+     * Method responsible for deleting Method UML.
+     * @param object Object.
+     * @param node JTree Node.
+     */
+    private void deleteMethodUML(Object object, DefaultMutableTreeNode node) {
+//        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());
+//        MetodoUML       metodo = (MetodoUML) object;
+//                        diagrama.removeMetodo(metodo);
+//        this.treePopup.getPanelTree().getViewMenu().getPanelModeling().getPainelDiagrama().atualizarDiagrama();
+//        this.treePopup.getPanelTree().getViewMenu().update();
+//        this.treePopup.getPanelTree().getViewMenu().setSalvo(false);
+    }
+    
+    /**
+     * Method responsible for editing JTree Node.
+     * @param object Object.
+     * @param node JTree Node.
+     */
+    private void edit(Object object, DefaultMutableTreeNode node) {
+//        if (object instanceof Projeto)
+//            new ViewEditarProjeto(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((Projeto) object)).setVisible(true);
+//        else if (object instanceof Diagrama)
+//            new ViewEditarDiagrama(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((Diagrama) object)).setVisible(true);
+//        else if (object instanceof Elemento)
+//            new ViewEditarElemento(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((Elemento) object)).setVisible(true);
+//        else if (object instanceof Variabilidade)
+//            this.editarVariabilidade(object, node);
+//        else if (object instanceof AtributoUML)
+//            this.editarAtributo(object, node);
+//        else if (object instanceof MetodoUML)
+//            this.editarMetodo(object, node);
+    }
+    
+    /**
+     * Method responsible for editing Variability.
      * @param objeto Objeto selecionado.
      * @param node Node da JTree.
      */
-    private void excluir(Object objeto, DefaultMutableTreeNode node) {
-        if (objeto instanceof Diagrama)
-            new ViewExcluirDiagrama(this.treePopup.getPainelProjeto().getViewMenu().getPainelModelagem(), ((Diagrama) objeto)).setVisible(true);
-        else if (objeto instanceof Elemento)
-            new ViewExcluirElemento(this.treePopup.getPainelProjeto().getViewMenu().getPainelModelagem(), ((Elemento) objeto)).setVisible(true);
-        else if (objeto instanceof Variabilidade)
-            this.excluirVariabilidade(objeto, node);
-        else if (objeto instanceof AtributoUML)
-            this.excluirAtributo(objeto, node);
-        else if (objeto instanceof MetodoUML)
-            this.excluirMetodo(objeto, node);
+    private void editVariability(Object objeto, DefaultMutableTreeNode node) {
+        Diagram     diagram     = this.getDiagram((DefaultMutableTreeNode) node.getParent());
+        Variability variability = (Variability) objeto;
+//        new ViewEditarVariabilidade(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), diagram, variability).setVisible(true);
     }
     
     /**
-     * Metodo responsavel por excluir a Variabilidade.
-     * @param objeto Objeto selecionado.
-     * @param node Node da JTree.
+     * Method responsible for editing Attribute UML.
+     * @param object Object.
+     * @param node JTree Node.
      */
-    private void excluirVariabilidade(Object objeto, DefaultMutableTreeNode node) {
-        Diagrama      diagrama      = this.getDiagrama((DefaultMutableTreeNode) node.getParent());
-        Variabilidade variabilidade = (Variabilidade) objeto;
-        new ViewExcluirVariabilidade(this.treePopup.getPainelProjeto().getViewMenu().getPainelModelagem(), diagrama, variabilidade).setVisible(true);
+    private void editAttributeUML(Object object, DefaultMutableTreeNode node) {
+//        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());
+//        AtributoUML     atributo = (AtributoUML) object;
+//        new ViewEditarAtributo(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), diagrama, atributo).setVisible(true);
     }
     
     /**
-     * Metodo responsavel por excluir o Atributo UML.
-     * @param objeto Objeto selecionado.
-     * @param node Node da JTree.
+     * Method responsible for editing Method UML.
+     * @param object Object.
+     * @param node JTree Node.
      */
-    private void excluirAtributo(Object objeto, DefaultMutableTreeNode node) {
-        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());
-        AtributoUML     atributo = (AtributoUML) objeto;
-                        diagrama.removeAtributo(atributo);
-        this.treePopup.getPainelProjeto().getViewMenu().getPainelModelagem().getPainelDiagrama().atualizarDiagrama();
-        this.treePopup.getPainelProjeto().getViewMenu().update();
-        this.treePopup.getPainelProjeto().getViewMenu().setSalvo(false);
+    private void editMethodUML(Object object, DefaultMutableTreeNode node) {
+//        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());;
+//        MetodoUML       metodo   = (MetodoUML) object;
+//        new ViewEditarMetodo(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), diagrama, metodo).setVisible(true);
     }
     
     /**
-     * Metodo responsavel por excluir o Metodo UML.
-     * @param objeto Objeto selecionado.
-     * @param node Node da JTree.
+     * Method responsible for returning Diagram.
+     * @param  node JTree Node.
+     * @return Diagram.
      */
-    private void excluirMetodo(Object objeto, DefaultMutableTreeNode node) {
-        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());
-        MetodoUML       metodo = (MetodoUML) objeto;
-                        diagrama.removeMetodo(metodo);
-        this.treePopup.getPainelProjeto().getViewMenu().getPainelModelagem().getPainelDiagrama().atualizarDiagrama();
-        this.treePopup.getPainelProjeto().getViewMenu().update();
-        this.treePopup.getPainelProjeto().getViewMenu().setSalvo(false);
-    }
-    
-    /**
-     * Metodo responsavel por editar o Node da JTree.
-     * @param objeto Objeto selecionado.
-     * @param node Node da JTree.
-     */
-    private void editar(Object objeto, DefaultMutableTreeNode node) {
-        if (objeto instanceof Projeto)
-            new ViewEditarProjeto(this.treePopup.getPainelProjeto().getViewMenu().getPainelModelagem(), ((Projeto) objeto)).setVisible(true);
-        else if (objeto instanceof Diagrama)
-            new ViewEditarDiagrama(this.treePopup.getPainelProjeto().getViewMenu().getPainelModelagem(), ((Diagrama) objeto)).setVisible(true);
-        else if (objeto instanceof Elemento)
-            new ViewEditarElemento(this.treePopup.getPainelProjeto().getViewMenu().getPainelModelagem(), ((Elemento) objeto)).setVisible(true);
-        else if (objeto instanceof Variabilidade)
-            this.editarVariabilidade(objeto, node);
-        else if (objeto instanceof AtributoUML)
-            this.editarAtributo(objeto, node);
-        else if (objeto instanceof MetodoUML)
-            this.editarMetodo(objeto, node);
-    }
-    
-    /**
-     * Metodo responsavel por editar a Variabilidade.
-     * @param objeto Objeto selecionado.
-     * @param node Node da JTree.
-     */
-    private void editarVariabilidade(Object objeto, DefaultMutableTreeNode node) {
-        Diagrama      diagrama      = this.getDiagrama((DefaultMutableTreeNode) node.getParent());
-        Variabilidade variabilidade = (Variabilidade) objeto;
-        new ViewEditarVariabilidade(this.treePopup.getPainelProjeto().getViewMenu().getPainelModelagem(), diagrama, variabilidade).setVisible(true);
-    }
-    
-    /**
-     * Metodo responsavel por editar o Atributo UML.
-     * @param objeto Objeto selecionado.
-     * @param node Node da JTree.
-     */
-    private void editarAtributo(Object objeto, DefaultMutableTreeNode node) {
-        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());
-        AtributoUML     atributo = (AtributoUML) objeto;
-        new ViewEditarAtributo(this.treePopup.getPainelProjeto().getViewMenu().getPainelModelagem(), diagrama, atributo).setVisible(true);
-    }
-    
-    /**
-     * Metodo responsavel por editar o Metodo UML.
-     * @param objeto Objeto selecionado.
-     * @param node Node da JTree.
-     */
-    private void editarMetodo(Object objeto, DefaultMutableTreeNode node) {
-        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());
-        MetodoUML       metodo   = (MetodoUML) objeto;
-        new ViewEditarMetodo(this.treePopup.getPainelProjeto().getViewMenu().getPainelModelagem(), diagrama, metodo).setVisible(true);
-    }
-    
-    /**
-     * Metodo responsavel por retornar o Diagrama do Node.
-     * @param  node Node da JTree.
-     * @return Diagrama.
-     */
-    private Diagrama getDiagrama(DefaultMutableTreeNode node) {
-        return (Diagrama) node.getUserObject();
+    private Diagram getDiagram(DefaultMutableTreeNode node) {
+        return (Diagram) node.getUserObject();
     }
 }
