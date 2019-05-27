@@ -1,6 +1,8 @@
 package view.structural;
 
 import controller.view.structural.ControllerViewMenu;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.Iterator;
@@ -8,7 +10,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
+import javax.swing.ScrollPaneConstants;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
 import view.interfaces.Operation;
@@ -52,9 +56,11 @@ public final class ViewMenu extends View implements Operation {
      * Method responsible for initializing Components.
      */
     private void initComponents() {
-        this.addKeyListener(this.controller);
-//        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setTitle(ViewStyle.SYSTEM + "Menu");
+        this.addKeyListener(this.controller);
+        this.setLayout(new GridLayout(15, 2));
+//        this.setLayout(new BorderLayout());
+//        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addMenu();
         this.createFileChooser("fileChooserProject");
         this.createImageChooser("fileChooserImage");
@@ -137,8 +143,8 @@ public final class ViewMenu extends View implements Operation {
     private void createProductLineMenu() {
         this.createMenu("menuProductLine", "Product Line");
         
-        this.createMenuItem("menuItemInstantiateNewProduct", "Instantiate New Product", "system/info.png");
-        this.createMenuItem("menuItemManageIdentifiers",     "Manage Identifiers",      "system/info.png");
+        this.createMenuItem("menuItemInstantiateNewProduct", "Instantiate New Product", "system/information.png");
+        this.createMenuItem("menuItemManageIdentifiers",     "Manage Identifiers",      "system/information.png");
         
         this.getMenuProductLine().add(this.getMenuItemInstantiateNewProduct());
         this.getMenuProductLine().add(this.getMenuItemManageIdentifiers());
@@ -150,7 +156,7 @@ public final class ViewMenu extends View implements Operation {
     private void createSystemMenu() {
         this.createMenu("menuSystem", "System");
         
-        this.createMenuItem("menuItemSystemInformation", "Information", "system/info.png");
+        this.createMenuItem("menuItemSystemInformation", "Information", "system/information.png");
         this.createMenuItem("menuItemSystemSite",        "Site",        "system/site.png");
         this.createMenuItem("menuItemSystemExit",        "Exit",        "system/exit.png");
         
@@ -177,8 +183,11 @@ public final class ViewMenu extends View implements Operation {
         this.setTitle();
 
         this.panelMain = new PanelMain(this);
-//        this.painelPrincipal.setPreferredSize(new Dimension(1356, 35));
-        this.getContentPane().add(this.panelMain);
+        this.createScrollPane("scrollPanelMain");
+        this.getScrollPanelMain().setViewportView(this.panelMain);
+//        this.getScrollPanelMain().setMaximumSize(new Dimension(Integer.MAX_VALUE, 35));
+//        this.getScrollPanelMain().setSize(new Dimension(1356, 35));
+        this.getContentPane().add(this.getScrollPanelMain(), BorderLayout.CENTER);
     }
     
     /**
@@ -268,12 +277,12 @@ public final class ViewMenu extends View implements Operation {
     public void updateSave() {
         if (this.save == true) {
             this.getMenuItemSaveProject().setEnabled(false);
-//            this.getPainelPrincipal().getButtonSalvarProjeto().setEnabled(false);
-//            this.getPainelPrincipal().getButtonDesfazer().setEnabled(false);
-//            this.getPainelPrincipal().getButtonRefazer().setEnabled(false);
+//            this.getPanelMain().getButtonSalvarProjeto().setEnabled(false);
+//            this.getPanelMain().getButtonDesfazer().setEnabled(false);
+//            this.getPanelMain().getButtonRefazer().setEnabled(false);
         }else {
             this.getMenuItemSaveProject().setEnabled(true);
-//            this.getPainelPrincipal().getButtonSalvarProjeto().setEnabled(true);
+//            this.getPanelMain().getButtonSalvarProjeto().setEnabled(true);
         }
     }
     
@@ -322,9 +331,9 @@ public final class ViewMenu extends View implements Operation {
      * Method responsible for resetting Zoom.
      */
     private void resetZoom() {
-//        this.getPainelPrincipal().getButtonZoomOriginal().setEnabled(this.zoom != 1.00d);
-//        this.getPainelPrincipal().getButtonZoomIn().setEnabled(this.zoom < 3.00d);
-//        this.getPainelPrincipal().getButtonZoomOut().setEnabled(this.zoom > 0.20d);
+//        this.getPanelMain().getButtonZoomOriginal().setEnabled(this.zoom != 1.00d);
+//        this.getPanelMain().getButtonZoomIn().setEnabled(this.zoom < 3.00d);
+//        this.getPanelMain().getButtonZoomOut().setEnabled(this.zoom > 0.20d);
     }
     
     /**
@@ -354,6 +363,14 @@ public final class ViewMenu extends View implements Operation {
         this.zoom  = (this.zoom <= 0.20) ? 0.20 : this.zoom;
         this.resetZoom();
 //        this.painelModelagem.setZoom(this.zoom);
+    }
+    
+    @Override
+    protected JScrollPane createScrollPane(String id) {
+        JScrollPane scrollPane = super.createScrollPane(id);
+                    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        return      scrollPane;
     }
     
     /**
@@ -566,12 +583,20 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Metodo responsavel por retornar o Painel Principal.
-     * @return Painel Principal.
+     * Method responsible for returning Panel Main.
+     * @return Panel Main.
      */
-//    public PainelPrincipal getPainelPrincipal() {
-//        return this.painelPrincipal;
-//    }
+    public PanelMain getPanelMain() {
+        return this.panelMain;
+    }
+    
+    /**
+     * Method responsible for returning Panel Main Scroll.
+     * @return Panel Main Scroll.
+     */
+    public JScrollPane getScrollPanelMain() {
+        return this.scrollPanes.get("scrollPanelMain");
+    }
     
     /**
      * Metodo responsavel por retornar o JScrollPane Project.

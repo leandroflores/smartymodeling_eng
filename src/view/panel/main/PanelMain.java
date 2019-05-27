@@ -1,14 +1,14 @@
 package view.panel.main;
 
-import java.awt.FlowLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.util.Iterator;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import view.Panel;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of Panel <b>PanelMain</b>.</p> 
+ * <p>Class of View <b>PanelMain</b>.</p> 
  * <p>Class responsible for defining the <b>Main Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  23/05/2019
@@ -25,7 +25,10 @@ public final class PanelMain extends Panel {
     public PanelMain(ViewMenu viewMenu) {
         this.viewMenu   = viewMenu;
 //        this.controller = new ControllerPainelPrincipal(this);
-        this.setLayout(new FlowLayout(FlowLayout.CENTER));
+//        this.setLayout(new FlowLayout(FlowLayout.CENTER));
+        this.setLayout(new GridLayout(0, 18));
+//        this.setMaximumSize(new Dimension(20, 20));
+        this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 10));
         // Olhar Grid Layout (https://stackoverflow.com/questions/18491408/i-need-to-make-my-jpanel-resize-dynamically-as-new-components-are-being-added-to)
         this.addComponents();
     }
@@ -51,40 +54,42 @@ public final class PanelMain extends Panel {
      * Method responsible for adding Project Buttons.
      */
     private void addProjectButtons() {
+        this.add(this.createLabel(""));
         this.add(this.createButton("newProjectButton",   "", "New Project",   this.getPath("new-project")));
         this.add(this.createButton("openProjectButton",  "", "Open Project",  this.getPath("open-project")));
         this.add(this.createButton("saveProjectButton",  "", "Save Project",  this.getPath("save-project")));
         this.add(this.createButton("closeProjectButton", "", "Close Project", this.getPath("close-project")));
-        this.add(this.createLabel("", 15));
     }
     
     /**
      * Method responsible for adding Action Buttons.
      */
     private void addActionButtons() {
+        this.add(this.createLabel(""));
         this.add(this.createButton("undoButton", "", "Undo", this.getPath("undo")));
         this.add(this.createButton("redoButton", "", "Redo", this.getPath("redo")));
-        this.add(this.createLabel("", 15));
     }
     
     /**
      * Method responsible for adding Zoom Buttons.
      */
     private void addZoomButtons() {
+        this.add(this.createLabel(""));
         this.add(this.createButton("originalZoomButton", "", "Zoom 100%", this.getPath("zoom-original")));
         this.add(this.createButton("zoomInButton",       "", "Zoom +",    this.getPath("zoom-in")));
         this.add(this.createButton("zoomOutButton",      "", "Zoom -",    this.getPath("zoom-out")));
-        this.add(this.createLabel("", 15));
     }
     
     /**
      * Method responsible for adding Extra Buttons.
      */
     private void addExtraButtons() {
+        this.add(this.createLabel(""));
         this.add(this.createButton("exportImageButton", "", "Export Image", this.getPath("export-image")));
-        this.add(this.createLabel("", 15));
+        this.add(this.createLabel(""));
         this.add(this.createButton("helpButton",        "", "Help",         this.getPath("help")));
         this.add(this.createButton("versionButton",     "", "Version",      this.getPath("version")));
+        this.add(this.createLabel(""));
     }
     
     /**
@@ -93,7 +98,7 @@ public final class PanelMain extends Panel {
     public void activate() {
         Iterator<JButton> iterator = this.buttons.values().iterator();
         while (iterator.hasNext())
-            iterator.next().setEnabled(true);
+               iterator.next().setEnabled(true);
     }
     
     /**
