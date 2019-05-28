@@ -2,8 +2,9 @@ package controller.view.panel.diagram.types;
 
 import controller.view.panel.diagram.ControllerPanelDiagram;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import model.structural.diagram.usecase.ActorUML;
+import model.structural.diagram.usecase.UseCaseUML;
 import view.panel.diagram.types.PanelUseCaseDiagram;
 
 /**
@@ -29,64 +30,61 @@ public class ControllerPanelUseCaseDiagram extends ControllerPanelDiagram {
     @Override
     public void actionPerformed(ActionEvent event) {
         super.actionPerformed(event);
-        if (this.panelDiagram.getButtonAtor().equals(event.getSource()))
-            this.addAtor();
-        else if (this.panelDiagram.getButtonCasoDeUso().equals(event.getSource()))
-            this.addCasoDeUso();
-    }
-    
-    @Override
-    public void keyPressed(KeyEvent event) {
-        super.keyPressed(event);
+        if (this.panelDiagram.getActorButton().equals(event.getSource()))
+            this.setAddActor();
+        else if (this.panelDiagram.getUseCaseButton().equals(event.getSource()))
+            this.setAddUseCase();
     }
     
     @Override
     public void mousePressed(MouseEvent evento) {
-        if (this.panelDiagram.getOperacao().equals("Ator"))
-            this.addAtor(evento);
-        else if (this.panelDiagram.getOperacao().equals("CasoDeUso"))
-            this.addCasoDeUso(evento);
+        if (this.panelDiagram.getOperation().equals("Actor"))
+            this.addActor(evento);
+        else if (this.panelDiagram.getOperation().equals("UseCase"))
+            this.addUseCase(evento);
     }
     
     /**
-     * Metodo responsavel por definir a Operacao Adicionar Ator.
+     * Method responsible for defining Add Actor Operation.
      */
-    public void addAtor() {
+    public void setAddActor() {
         this.panelDiagram.resetBackground();
-        this.panelDiagram.getButtonAtor().setBackground(this.getCorSelect());
-        this.panelDiagram.setOperacao("Ator");
+        this.panelDiagram.getActorButton().setBackground(this.getFocusColor());
+        this.panelDiagram.setOperation("Actor");
     }
     
     /**
-     * Metodo responsavel por definir a Operacao Adicionar Caso de Uso.
+     * Method responsible for defining Add Use Case Operation.
      */
-    public void addCasoDeUso() {
+    public void setAddUseCase() {
         this.panelDiagram.resetBackground();
-        this.panelDiagram.getButtonCasoDeUso().setBackground(this.getCorSelect());
-        this.panelDiagram.setOperacao("CasoDeUso");
+        this.panelDiagram.getUseCaseButton().setBackground(this.getFocusColor());
+        this.panelDiagram.setOperation("UseCase");
     }
 
     /**
-     * Metodo responsavel por adicionar um Novo Ator UML.
-     * @param evento Evento do Mouse.
+     * Method responsible for adding a new Actor.
+     * @param event Mouse Event.
      */
-    public void addAtor(MouseEvent evento) {
-        AtorUML ator = new AtorUML();
-                ator.setPosicao(evento.getX(), evento.getY());
-        this.panelDiagram.getDiagrama().addAtor(ator);
-        this.panelDiagram.atualizarDiagrama();
+    public void addActor(MouseEvent event) {
+        ActorUML actor = new ActorUML();
+                 actor.setPosition(event.getX(), event.getY());
+        this.panelDiagram.getDiagram().addActor(actor);
+                 actor.setDefaultName();
+        this.panelDiagram.updateDiagram();
         this.panelDiagram.getViewMenu().update();
     }
     
     /**
-     * Metodo responsavel por adicionar um Novo Caso de Uso UML.
-     * @param evento Evento do Mouse.
+     * Method responsible for adding a new Use Case.
+     * @param event Mouse Event.
      */
-    public void addCasoDeUso(MouseEvent evento) {
-        CasoDeUsoUML casoDeUso = new CasoDeUsoUML();
-                     casoDeUso.setPosicao(evento.getX(), evento.getY());
-        this.panelDiagram.getDiagrama().addCasoDeUso(casoDeUso);
-        this.panelDiagram.atualizarDiagrama();
+    public void addUseCase(MouseEvent event) {
+        UseCaseUML useCase = new UseCaseUML();
+                   useCase.setPosition(event.getX(), event.getY());
+        this.panelDiagram.getDiagram().addUseCase(useCase);
+                   useCase.setDefaultName();
+        this.panelDiagram.updateDiagram();
         this.panelDiagram.getViewMenu().update();
     }
 }

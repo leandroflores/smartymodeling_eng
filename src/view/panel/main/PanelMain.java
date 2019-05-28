@@ -1,5 +1,6 @@
 package view.panel.main;
 
+import controller.view.panel.main.ControllerPanelMain;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.Iterator;
@@ -24,7 +25,7 @@ public final class PanelMain extends Panel {
      */
     public PanelMain(ViewMenu viewMenu) {
         this.viewMenu   = viewMenu;
-//        this.controller = new ControllerPainelPrincipal(this);
+        this.controller = new ControllerPanelMain(this);
 //        this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setLayout(new GridLayout(0, 18));
 //        this.setMaximumSize(new Dimension(20, 20));

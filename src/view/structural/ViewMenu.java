@@ -3,7 +3,6 @@ package view.structural;
 import controller.view.structural.ControllerViewMenu;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.Iterator;
@@ -30,7 +29,7 @@ import view.panel.tree.PanelTree;
  * <p>Class responsible for defining the <b>View Menu</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  21/05/2019
- * @see    controlador.visao.estruturais.ControllerViewMenu
+ * @see    controller.view.structural.ControllerViewMenu
  * @see    view.interfaces.Operation
  * @see    view.View
  */
@@ -40,7 +39,8 @@ public final class ViewMenu extends View implements Operation {
     private boolean  save;
     
     private JMenuBar   menuBar;
-    private JSplitPane splitPane;
+    private JSplitPane mainSplitPane;
+    private JSplitPane auxSplitPane;
     
     private PanelMain     panelMain;
     private PanelTree     panelTree;
@@ -215,11 +215,15 @@ public final class ViewMenu extends View implements Operation {
         this.getScrollPanelModeling().setMinimumSize(new Dimension(400, 100));
         this.getScrollPanelModeling().setPreferredSize(new Dimension(1500, 100));
 
-        this.splitPane = this.createSplitPane();
-        this.splitPane.setLeftComponent(this.getScrollPanelTree());
-        this.splitPane.setRightComponent(this.getScrollPanelModeling());
+        this.mainSplitPane = this.createSplitPane();
+        this.auxSplitPane  = this.createSplitPane();
         
-        this.getContentPane().add(this.splitPane, BorderLayout.WEST);
+        this.auxSplitPane.setLeftComponent(this.getScrollPanelTree());
+        this.auxSplitPane.setRightComponent(this.getScrollPanelModeling());
+        this.mainSplitPane.setLeftComponent(this.auxSplitPane);
+        this.mainSplitPane.setRightComponent(this.createPainel("idPanel"));
+        
+        this.getContentPane().add(this.mainSplitPane, BorderLayout.WEST);
     }
     
     /**
@@ -245,8 +249,8 @@ public final class ViewMenu extends View implements Operation {
      * @param diagram Diagram.
      */
     public void showDiagram(Diagram diagram) {
-//        this.painelModelagem.addDiagrama(diagram);
-//        this.painelModelagem.updateUI();
+        this.panelModeling.addDiagram(diagram);
+        this.panelModeling.updateUI();
     }
     
     /**
@@ -255,7 +259,7 @@ public final class ViewMenu extends View implements Operation {
     public void update() {
         this.setTitle();
         this.updatePanelMain();
-        this.updatePanelProject();
+        this.updateTreePanel();
         this.updatePanelModeling();
     }
     
@@ -324,16 +328,14 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for updating Panel Project.
+     * Method responsible for updating Tree Panel.
      */
-    public void updatePanelProject() {
+    public void updateTreePanel() {
         if (this.project != null) {
-//            this.painelProjeto = new PainelProjeto(this);
-//            this.painelProjeto.init();
-//            this.getScrollPaneProjeto().setViewportView(this.painelProjeto);
+            this.panelTree = new PanelTree(this);
+            this.getScrollPanelTree().setViewportView(this.panelTree);
             this.unlockDiagramas();
         }else {
-//            this.getScrollPaneProjeto().setViewportView(this.createLabel(""));
             this.lockDiagramas();
         }
     }
@@ -342,10 +344,10 @@ public final class ViewMenu extends View implements Operation {
      * Method responsible for updating Panel Modeling.
      */
     public void updatePanelModeling() {
-//        if (this.project == null)
-//            this.painelModelagem.clear();
-//        this.painelModelagem.updateDiagrama();
-//        this.painelModelagem.updateUI();
+        if (this.project == null)
+            this.panelModeling.clear();
+        this.panelModeling.updateDiagrams();
+        this.panelModeling.updateUI();
     }
     
     @Override

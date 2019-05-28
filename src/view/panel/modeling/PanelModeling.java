@@ -7,8 +7,10 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
+import model.structural.diagram.UseCaseDiagram;
 import view.Panel;
 import view.panel.diagram.PanelDiagram;
+import view.panel.diagram.types.PanelUseCaseDiagram;
 import view.panel.logo.PanelLogo;
 import view.panel.tabbed.PanelTabbed;
 import view.structural.ViewMenu;
@@ -63,7 +65,6 @@ public final class PanelModeling extends Panel {
             this.tabs.put(id, component);
             get = component;
         }
-//        this.tabbedPane.setSelectedComponent(get);
         this.panelTabbed.setSelectedComponent(get);
     }
     
@@ -89,9 +90,9 @@ public final class PanelModeling extends Panel {
      * Method responsible for updating Diagrams.
      */
     public void updateDiagrams() {
-        for (Component componente : this.panelTabbed.getComponents()) {
-            if (componente instanceof PanelDiagram)
-                ((PanelDiagram) componente).updateDiagram();
+        for (Component component : this.panelTabbed.getComponents()) {
+            if (component instanceof PanelDiagram)
+                ((PanelDiagram) component).updateDiagram();
         }
     }
     
@@ -101,18 +102,18 @@ public final class PanelModeling extends Panel {
      * @return New Diagram Panel.
      */
     private PanelDiagram createPanelDiagram(Diagram diagram) {
-//        switch (diagram.getType()) {
+        switch (diagram.getType()) {
 //            case "Activity":
 //                return new PainelDiagramaAtividades(this.viewMenu,  (DiagramaAtividades) diagram);
-//            case "Use Cases":
-//                return new PainelDiagramaCasosDeUso(this.viewMenu,  (DiagramaCasosDeUso)  diagram);
+            case "UseCase":
+                return new PanelUseCaseDiagram(this.viewMenu, (UseCaseDiagram) diagram);
 //            case "Class":
 //                return new PainelDiagramaClasses(this.viewMenu,     (DiagramaClasses) diagram);
 //            case "Components":
 //                return new PainelDiagramaComponentes(this.viewMenu, (DiagramaComponentes) diagram);
 //            default:
 //                break;
-//        }
+        }
 //        return new PainelDiagramaCasosDeUso(this.viewMenu, (DiagramaCasosDeUso) diagram);
         return null;
     }
@@ -147,8 +148,6 @@ public final class PanelModeling extends Panel {
         if (this.tabs.get(diagram.getId()) != null) {
             Integer index = this.panelTabbed.getComponentZOrder(this.tabs.get(diagram.getId()));
             this.panelTabbed.setTitleAt(index, diagram.getName());
-//            Integer indice = this.tabbedPane.getComponentZOrder(this.abas.get(diagrama.getId()));
-//            this.tabbedPane.setTitleAt(indice, diagrama.getNome());
         }
     }
     
@@ -181,7 +180,8 @@ public final class PanelModeling extends Panel {
     public void clear() {
         this.tabs = new HashMap<>();
         this.panelTabbed.removeAll();
-        this.addTab("Start", "Start", new PanelLogo(this.viewMenu));
+        if (this.viewMenu.getProject() == null)
+            this.addTab("Start", "Start", new PanelLogo(this.viewMenu));
     }
     
     /**
@@ -189,9 +189,9 @@ public final class PanelModeling extends Panel {
      * @return Panel Diagram.
      */
     public PanelDiagram getPanelDiagram() {
-        Component componente = this.tabbedPane.getSelectedComponent();
-        if (componente instanceof PanelDiagram)
-            return (PanelDiagram) componente;
+        Component component = this.panelTabbed.getSelectedComponent();
+        if (component instanceof PanelDiagram)
+            return (PanelDiagram) component;
         return null;
     }
     

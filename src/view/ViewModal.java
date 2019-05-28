@@ -312,6 +312,18 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
     }
     
     /**
+     * Method responsible for returning a new JScrollPane.
+     * @param  id JScrollPane Id.
+     * @return New JScrollPane of a JPanel.
+     */
+    public JScrollPane createScrollPane(String id) {
+        JScrollPane scrollPane = new JScrollPane();
+//                    scrollPane.setPreferredSize(new Dimension(390, 120));
+                    this.scrollPanes.put(id, scrollPane);
+        return      scrollPane;
+    }
+    
+    /**
      * Method responsible for returning a new JScrollPane of a JPanel.
      * @param  id JScrollPane Id.
      * @param  painel JScrollPane JPanel.

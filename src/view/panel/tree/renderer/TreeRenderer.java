@@ -39,7 +39,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
      * @return Image Icon.
      */
     protected ImageIcon getImage(String name) {
-        return new ImageIcon("src/images/icons/" + name + "png");
+        return new ImageIcon("src/images/icons/" + name + ".png");
     }
     
     /**

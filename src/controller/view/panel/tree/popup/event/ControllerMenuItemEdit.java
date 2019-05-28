@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
+import model.structural.base.Project;
+import view.edit.ViewEditProject;
 import view.panel.tree.popup.TreePopup;
 
 
@@ -41,8 +43,8 @@ public class ControllerMenuItemEdit implements ActionListener {
      * @param node JTree Node.
      */
     private void action(Object object, DefaultMutableTreeNode node) {
-//        if (object instanceof Project)
-//            new ViewEditarProjeto(this.popup.getPainelProjeto().getViewMenu().getPainelModelagem(), (Projeto) object).setVisible(true);
+        if (object instanceof Project)
+            new ViewEditProject(this.popup.getPanelTree().getViewMenu().getPanelModeling(), (Project) object).setVisible(true);
 //        else if (object instanceof Diagrama)
 //            new ViewEditarDiagrama(this.popup.getPainelProjeto().getViewMenu().getPainelModelagem(), (Diagrama) object).setVisible(true);
 //        else if (object instanceof Elemento)

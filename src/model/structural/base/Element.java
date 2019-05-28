@@ -1,5 +1,6 @@
 package model.structural.base;
 
+import funct.FunctString;
 import java.awt.Point;
 import model.structural.base.interfaces.Exportable;
 import model.structural.base.interfaces.Modelable;
@@ -76,6 +77,14 @@ public abstract class Element implements Exportable, Modelable {
         return this.name;
     }
 
+    /**
+     * Method responsible for defining Default Name.
+     */
+    public void setDefaultName() {
+        if (this.id != null)
+            this.setName(new FunctString().getInitUpperCase(this.id.replaceAll("#", "")));
+    }
+    
     /**
      * Method responsible for defining the Element Name.
      * @param name Element Name.

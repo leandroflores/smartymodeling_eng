@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import model.structural.base.Project;
+import model.structural.diagram.UseCaseDiagram;
 import org.xml.sax.SAXException;
 import view.message.ViewError;
 import view.message.ViewSave;
@@ -87,9 +88,8 @@ public class ControllerViewMenu extends ControllerView {
      * Method responsible for creating a New Project.
      */
     public void createNewProject() {
-        System.out.println("Test");
-        this.viewMenu.getPanelModeling().clear();
         this.viewMenu.setProject(new Project());
+        this.viewMenu.getPanelModeling().clear();
         this.viewMenu.setSave(true);
         this.viewMenu.update();
     }
@@ -237,9 +237,9 @@ public class ControllerViewMenu extends ControllerView {
      */
     private void newUseCaseDiagram() {
         if (this.viewMenu.getProject() != null) {
-//            DiagramaCasosDeUso diagrama = new DiagramaCasosDeUso(this.viewMenu.getProjeto());
-//            this.viewMenu.getProjeto().addDiagrama(diagrama);
-//            this.viewMenu.showDiagram(diagrama);
+            UseCaseDiagram diagram = new UseCaseDiagram(this.viewMenu.getProject());
+            this.viewMenu.getProject().addDiagram(diagram);
+            this.viewMenu.showDiagram(diagram);
         }
         this.viewMenu.update();
     }

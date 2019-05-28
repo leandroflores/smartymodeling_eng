@@ -1,6 +1,9 @@
 package view.panel.diagram.types;
 
 import com.mxgraph.util.mxConstants;
+import com.mxgraph.util.mxEvent;
+import controller.view.panel.diagram.association.types.ControllerEventAssociationUseCase;
+import controller.view.panel.diagram.types.ControllerPanelUseCaseDiagram;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -14,6 +17,8 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Use Case Diagram Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  28/05/2019
+ * @see    controller.view.panel.diagram.association.types.ControllerEventAssociationUseCase
+ * @see    controller.view.panel.diagram.types.ControllerPanelUseCaseDiagram
  * @see    model.structural.diagram.UseCaseDiagram
  * @see    view.panel.diagram.PanelDiagram
  */
@@ -28,7 +33,7 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
     public PanelUseCaseDiagram(ViewMenu view, UseCaseDiagram diagram) {
         super(view, diagram);
         this.diagram    = diagram;
-//        this.controller = new ControllerPainelDiagramaCasosDeUso(this);
+        this.controller = new ControllerPanelUseCaseDiagram(this);
         this.initComponents();
         this.addComponents();
         this.getClickButton().setBackground(this.getFocusColor());
@@ -38,7 +43,7 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
     public void addComponents() {
         this.addOperationsPanel();
         this.addPanelModeling();
-//        this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventoAssociacaoCasosDeUso(this));
+        this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationUseCase(this));
     }
     
     @Override
@@ -51,8 +56,8 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
                panel.add(this.createButton("editButton",        "", "Edit",            "edit.png"));
                panel.add(this.createButton("deleteButton",      "", "Delete",          "delete.png"));
                panel.add(this.createComboBox("associationComboBox", this.getAssociationItems(), 50));
-       this.add(panel, BorderLayout.PAGE_START);
-       this.add(new JSeparator(), BorderLayout.PAGE_END);
+       this.add(panel);
+//       this.add(new JSeparator(), BorderLayout.PAGE_END);
        this.getClickButton().setBackground(this.getFocusColor());
     }
     
@@ -72,8 +77,8 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
     @Override
     public void resetBackground() {
         this.getClickButton().setBackground(this.getFocusColor());
-        this.getActorButton().setBackground(this.getFocusColor());
-        this.getUseCaseButton().setBackground(this.getFocusColor());
+        this.getActorButton().setBackground(this.getDefaultColor());
+        this.getUseCaseButton().setBackground(this.getDefaultColor());
     }
     
     @Override

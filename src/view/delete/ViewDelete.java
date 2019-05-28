@@ -12,7 +12,7 @@ import view.panel.modeling.PanelModeling;
  * <p>Class responsible for defining the <b>Delete View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  27/05/2019
- * @see    controller.view.ControllerViewModal
+ * @see    controller.view.delete.ControllerViewDelete
  * @see    view.panel.modeling.PanelModeling
  * @see    view.ViewModal
  */
