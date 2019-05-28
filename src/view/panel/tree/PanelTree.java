@@ -22,7 +22,7 @@ import view.structural.ViewMenu;
  * @see    model.structural.base.Project
  * @see    view.Panel
  */
-public class PanelTree extends Panel {
+public final class PanelTree extends Panel {
     private final ViewMenu viewMenu;
     private final Project  project;
     private TreePopup treePopup;
@@ -35,6 +35,7 @@ public class PanelTree extends Panel {
     public PanelTree(ViewMenu viewMenu) {
         this.viewMenu = viewMenu;
         this.project  = this.viewMenu.getProject();
+        this.addComponents();
     }
     
     @Override
@@ -67,8 +68,10 @@ public class PanelTree extends Panel {
      * @param root Tree Node.
      */
     private void addDiagrams(DefaultMutableTreeNode root) {
-        for (int i = 0; i < this.project.getDiagramsList().size(); i++)
-            root.add(this.getNode(project.getDiagramsList().get(i)));
+        if (this.project != null) {
+            for (int i = 0; i < this.project.getDiagramsList().size(); i++)
+                root.add(this.getNode(project.getDiagramsList().get(i)));
+        }
     }
     
     /**

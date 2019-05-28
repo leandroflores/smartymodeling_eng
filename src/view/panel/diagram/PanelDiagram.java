@@ -15,6 +15,7 @@ import java.awt.Dimension;
 import java.util.HashMap;
 import java.awt.BorderLayout;
 import java.util.Map;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -174,7 +175,7 @@ public abstract class PanelDiagram extends Panel {
     }
     
     /**
-     * Method responsible for defining Click Operation.
+     * Method responsible for setting Click Operation.
      */
     public void setClick() {
         this.resetBackground();
@@ -186,8 +187,17 @@ public abstract class PanelDiagram extends Panel {
      * Method responsible for returning Default Edge Style.
      * @return Default Edge Style.
      */
-    private Map<String, Object> getDefaultEdgeStyle() {
+    protected Map<String, Object> getDefaultEdgeStyle() {
         return this.getGraph().getStylesheet().getStyles().get("defaultEdge");
+    }
+    
+    /**
+     * Method responsible for returning Image by URL.
+     * @param  url URL Image.
+     * @return Association Image.
+     */
+    protected ImageIcon getAssociationImage(String url) {
+        return new ImageIcon("src/images/icons/associations/" + url + ".png");
     }
     
     /**

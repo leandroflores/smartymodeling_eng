@@ -2,6 +2,7 @@ package view.structural;
 
 import controller.view.structural.ControllerViewMenu;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -12,6 +13,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneConstants;
 import model.structural.base.Diagram;
@@ -36,10 +38,12 @@ public final class ViewMenu extends View implements Operation {
     private Project  project;
     private Double   zoom;
     private boolean  save;
-    private JMenuBar menuBar;
     
-    private PanelMain panelMain;
-    private PanelTree panelTree;
+    private JMenuBar   menuBar;
+    private JSplitPane splitPane;
+    
+    private PanelMain     panelMain;
+    private PanelTree     panelTree;
     private PanelModeling panelModeling;
     
     /**
@@ -61,7 +65,7 @@ public final class ViewMenu extends View implements Operation {
     private void initComponents() {
         this.setTitle(ViewStyle.SYSTEM + "Menu");
         this.addKeyListener(this.controller);
-        this.setLayout(new GridLayout(15, 2));
+        this.setLayout(new BorderLayout(2, 4));
 //        this.setLayout(new BorderLayout());
 //        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addMenu();
@@ -69,8 +73,9 @@ public final class ViewMenu extends View implements Operation {
         this.createImageChooser("fileChooserImage");
         
         this.addPanelMain();
-        this.addPanelTree();
-        this.addPanelModeling();
+        this.addPanelProject();
+//        this.initPanelTree();
+//        this.initPanelModeling();
     }
     
     /**
@@ -188,34 +193,51 @@ public final class ViewMenu extends View implements Operation {
         this.panelMain = new PanelMain(this);
         this.createScrollPane("scrollPanelMain");
         this.getScrollPanelMain().setViewportView(this.panelMain);
-//        this.getScrollPanelMain().setMaximumSize(new Dimension(Integer.MAX_VALUE, 35));
-//        this.getScrollPanelMain().setSize(new Dimension(1356, 35));
-        this.getContentPane().add(this.getScrollPanelMain(), BorderLayout.CENTER);
+        this.getContentPane().add(this.getScrollPanelMain(), BorderLayout.NORTH);
+    }
+    
+    private JSplitPane createSplitPane() {
+        JSplitPane split = new JSplitPane();
+                   split.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
+//                   splitPane.setLayout(new GridLayout(2, 0));
+        return     split;
     }
     
     /**
      * Method responsible for adding Panel Project on View.
      */
-    private void addPanelTree() {
-        this.panelTree = new PanelTree(this);
-        this.createScrollPane("scrollPanelTree");
-        this.getScrollPanelTree().setViewportView(this.panelTree);        
-//        this.getScrollPaneProjeto().setBorder(BorderFactory.createLineBorder(Color.BLACK));
-//        this.getScrollPaneProjeto().setPreferredSize(new Dimension(250, 625));
-//        this.getScrollPaneProjeto().setLayout(new ScrollPaneLayout());
-        this.getContentPane().add(this.getScrollPanelTree(), BorderLayout.CENTER);
+    private void addPanelProject() {
+        this.initPanelTree();
+        this.initPanelModeling();
+        
+        this.getScrollPanelTree().setMinimumSize(new Dimension(200, 100));
+        this.getScrollPanelTree().setPreferredSize(new Dimension(100, 100));
+        this.getScrollPanelModeling().setMinimumSize(new Dimension(400, 100));
+        this.getScrollPanelModeling().setPreferredSize(new Dimension(1500, 100));
+
+        this.splitPane = this.createSplitPane();
+        this.splitPane.setLeftComponent(this.getScrollPanelTree());
+        this.splitPane.setRightComponent(this.getScrollPanelModeling());
+        
+        this.getContentPane().add(this.splitPane, BorderLayout.WEST);
     }
     
     /**
-     * Method responsible for adding Panel Modeling on View.
+     * Method responsible for initializing Project Panel.
      */
-    private void addPanelModeling() {
+    private void initPanelTree() {
+        this.panelTree = new PanelTree(this);
+        this.createScrollPane("scrollPanelTree");
+        this.getScrollPanelTree().setViewportView(this.panelTree);
+    }
+    
+    /**
+     * Method responsible for initializing Modeling Panel.
+     */
+    private void initPanelModeling() {
         this.panelModeling = new PanelModeling(this);
         this.createScrollPane("scrollPanelModeling");
-//        this.getScrollPaneModelagem().setBorder(BorderFactory.createLineBorder(Color.BLACK));
-//        this.getScrollPaneModelagem().setViewportView(this.painelModelagem);
-//        this.getScrollPaneModelagem().setPreferredSize(new Dimension(1100, 625));
-//        this.getContentPane().add(this.getScrollPaneModelagem(), BorderLayout.EAST);
+        this.getScrollPanelModeling().setViewportView(this.panelModeling);
     }
     
     /**
