@@ -47,6 +47,11 @@ public final class ViewEditDiagram extends ViewEdit {
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.setPreferredSize(new Dimension(550, 200));
         
+        this.addPanelBaseDiagram();
+        
+        this.add(this.tabbedPane);
+        
+        this.addLines(1);
     }
     
     /**

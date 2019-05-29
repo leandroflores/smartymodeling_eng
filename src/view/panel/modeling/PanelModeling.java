@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
-import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import model.structural.diagram.UseCaseDiagram;
 import view.Panel;
@@ -25,7 +24,6 @@ import view.structural.ViewMenu;
  */
 public final class PanelModeling extends Panel {
     private final ViewMenu viewMenu;
-    private JTabbedPane tabbedPane;
     private PanelTabbed panelTabbed;
     private HashMap<String, Component> tabs;
     
@@ -44,7 +42,6 @@ public final class PanelModeling extends Panel {
     
     @Override
     protected void addComponents() {
-        this.tabbedPane  = new JTabbedPane();
         this.panelTabbed = new PanelTabbed();
 
         this.add(this.panelTabbed);
@@ -59,8 +56,6 @@ public final class PanelModeling extends Panel {
     private void addTab(String id, String title, Component component) {
         Component get = this.tabs.get(id);
         if (get == null) {
-//            this.tabbedPane.addTab(titulo, componente);
-//            System.out.println("" + title);
             this.panelTabbed.addTab(title, component);
             this.tabs.put(id, component);
             get = component;
@@ -133,7 +128,6 @@ public final class PanelModeling extends Panel {
      */
     public void removeDiagram(Diagram diagram) {
         if (this.tabs.get(diagram.getId()) != null) {
-//            this.tabbedPane.remove(this.abas.get(diagrama.getId()));
             this.panelTabbed.remove(this.tabs.get(diagram.getId()));
             this.tabs.remove(diagram.getId());
             this.updateUI();
@@ -146,8 +140,12 @@ public final class PanelModeling extends Panel {
      */
     public void updateDiagram(Diagram diagram) {
         if (this.tabs.get(diagram.getId()) != null) {
-            Integer index = this.panelTabbed.getComponentZOrder(this.tabs.get(diagram.getId()));
-            this.panelTabbed.setTitleAt(index, diagram.getName());
+            this.removeDiagram(diagram);
+            this.addDiagram(diagram);
+//            Integer index = this.panelTabbed.getComponentZOrder(this.tabs.get(diagram.getId())) - 1;
+//            System.out.println("Index: " + index);
+//            System.out.println("Size.: " + this.panelTabbed.getTabRunCount());
+//            this.panelTabbed.setTitleAt(index, diagram.getName());;
         }
     }
     

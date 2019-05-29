@@ -130,6 +130,14 @@ public abstract class Diagram implements Exportable {
     }
     
     /**
+     * Method responsible for defining Default Name.
+     */
+    public void setDefaultName() {
+        if (this.id != null)
+            this.setName(new FunctString().getInitUpperCase(this.id.replaceAll("#", "").replaceAll("-", "")));
+    }
+    
+    /**
      * Method responsible for returning Diagram Type.
      * @return Diagram Type.
      */

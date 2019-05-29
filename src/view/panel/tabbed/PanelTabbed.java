@@ -80,17 +80,17 @@ public class PanelTabbed extends JTabbedPane {
     }
     /* ClickListener */
     public class CloseListener implements MouseListener {
-        private final Component painel;
+        private final Component component;
         private final String title;
 
         /**
-         * Metodo construtor padrao da Classe.
-         * @param painel Painel.
-         * @param title Titulo.
+         * Default constructor method of Class.
+         * @param component Component.
+         * @param title Title.
          */
-        public CloseListener(Component painel, String title) {
-            this.painel = painel;
-            this.title  = title;
+        public CloseListener(Component component, String title) {
+            this.component = component;
+            this.title     = title;
         }
 
         @Override
@@ -99,7 +99,7 @@ public class PanelTabbed extends JTabbedPane {
                 JButton     button = (JButton)     event.getSource();
                 JTabbedPane tabbed = (JTabbedPane) button.getParent().getParent().getParent();
                 System.out.println(this.title);
-                            tabbed.remove(this.painel);
+                            tabbed.remove(this.component);
             }
         }
 

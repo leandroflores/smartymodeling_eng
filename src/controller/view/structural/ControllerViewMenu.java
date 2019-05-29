@@ -239,6 +239,7 @@ public class ControllerViewMenu extends ControllerView {
         if (this.viewMenu.getProject() != null) {
             UseCaseDiagram diagram = new UseCaseDiagram(this.viewMenu.getProject());
             this.viewMenu.getProject().addDiagram(diagram);
+                           diagram.setDefaultName();
             this.viewMenu.showDiagram(diagram);
         }
         this.viewMenu.update();

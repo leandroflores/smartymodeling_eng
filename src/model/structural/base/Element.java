@@ -83,7 +83,7 @@ public abstract class Element implements Exportable, Modelable {
      */
     public void setDefaultName() {
         if (this.id != null)
-            this.setName(new FunctString().getInitUpperCase(this.id.replaceAll("#", "")));
+            this.setName(new FunctString().getInitUpperCase(this.id.replaceAll("#", "").replaceAll("-", "")));
     }
     
     /**
