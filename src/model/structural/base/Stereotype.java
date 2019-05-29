@@ -3,6 +3,7 @@ package model.structural.base;
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import model.structural.base.interfaces.Exportable;
 import org.w3c.dom.Element;
 
@@ -94,6 +95,20 @@ public class Stereotype implements Exportable {
     @Override
     public String export() {
         return "  <stereotype id=\"" + this.id + "\" name=\"" + this.name + "\"/>\n";
+    }
+    
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Stereotype == false)
+            return false;
+        return Objects.equals(this.id, ((Stereotype) object).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        int    hash = 7;
+               hash = 97 * hash + Objects.hashCode(this.id);
+        return hash;
     }
     
     @Override

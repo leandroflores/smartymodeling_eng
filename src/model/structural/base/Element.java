@@ -2,6 +2,7 @@ package model.structural.base;
 
 import funct.FunctString;
 import java.awt.Point;
+import java.util.Objects;
 import model.structural.base.interfaces.Exportable;
 import model.structural.base.interfaces.Modelable;
 
@@ -297,6 +298,21 @@ public abstract class Element implements Exportable, Modelable {
                export += " width=\""     + this.getWidth()  + "\"";
                export += "/>\n";
         return export;
+    }
+    
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Element == false)
+            return false;
+        return Objects.equals(this.id, ((Element) object).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        int    hash = 5;
+               hash = 61 * hash + Objects.hashCode(this.id);
+               hash = 61 * hash + Objects.hashCode(this.type);
+        return hash;
     }
     
     @Override

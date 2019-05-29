@@ -2,24 +2,22 @@ package view.edit.panel;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 import view.Panel;
 
 /**
- * <p>Class of Panel <b>PanelProject</b>.</p> 
- * <p>Class responsible for defining a Panel for the <b>Project</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelDataProject</b>.</p> 
+ * <p>Class responsible for defining a Panel for showing the <b>Data Project</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  28/05/2019
  * @see    view.Panel
  */
-public final class PanelProject extends Panel {
+public final class PanelDataProject extends Panel {
     
     /**
      * Default constructor method of Class.
      */
-    public PanelProject() {
+    public PanelDataProject() {
         this.setSettings();
         this.addComponents();
     }
@@ -28,18 +26,23 @@ public final class PanelProject extends Panel {
      * Method responsible for defining the Settings.
      */
     private void setSettings() {
-        this.setLayout(new GridLayout(0, 2));
-        this.setSize(200, 200);
-        this.setPreferredSize(new Dimension(400, 50));
+        this.setLayout(new FlowLayout(FlowLayout.CENTER));
+        this.setPreferredSize(new Dimension(300, 100));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Path*: ", 120));
-        this.add(this.createTextFieldNoEditable("pathTextField", "", 30));
+        this.addLines(1);
+        
+        this.add(this.createLabel("Path*: ", 80));
+        this.add(this.createTextFieldNoEditable("pathTextField", "", 15));
 
-        this.add(this.createLabel("Name*: ", 120));
-        this.add(this.createTextField("nameTextField", "", 30));
+        this.addLines(1);
+        
+        this.add(this.createLabel("Name*: ", 80));
+        this.add(this.createTextField("nameTextField", "", 15));
+        
+        this.addLines(1);
     }
     
     /**

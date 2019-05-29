@@ -1,6 +1,7 @@
 package view.edit;
 
 import javax.swing.JButton;
+import javax.swing.JTabbedPane;
 import view.ViewModal;
 import view.panel.modeling.PanelModeling;
 import view.structural.ViewMenu;
@@ -14,6 +15,7 @@ import view.structural.ViewMenu;
  */
 public abstract class ViewEdit extends ViewModal {
     protected final PanelModeling panel;
+    protected JTabbedPane tabbedPane;
     
     /**
      * Default constructor method of Class.

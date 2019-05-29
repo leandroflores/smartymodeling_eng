@@ -1,10 +1,11 @@
 package view.edit;
 
+import controller.view.edit.ControllerViewEditProject;
+import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 import model.structural.base.Project;
-import view.edit.panel.PanelProject;
+import view.edit.panel.PanelDataProject;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -12,13 +13,12 @@ import view.panel.modeling.PanelModeling;
  * <p>Class responsible for defining the <b>Project Edit View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  28/05/2019
- * @see    controller.view.edit.
+ * @see    controller.view.edit.ControllerViewEditProject
  * @see    view.edit.ViewEdit
  */
 public final class ViewEditProject extends ViewEdit {
     private final Project project;
-    private JTabbedPane   tabbedPane;
-    private PanelProject  panelProject;
+    private PanelDataProject panelDataProject;
     
     /**
      * Default constructor method of Class.
@@ -28,57 +28,48 @@ public final class ViewEditProject extends ViewEdit {
     public ViewEditProject(PanelModeling panel, Project project) {
         super(panel);
         this.project    = project;
-//        this.controller = new ControllerViewEditarProjeto(this);
+        this.controller = new ControllerViewEditProject(this);
         this.title      = "Edit Project";
         this.initComponents();
     }
     
     @Override
     public void initComponents() {
-        this.setSize(580, 500);
+        this.setSize(600, 320);
         this.addHeader();
         this.addComponents();
-//        this.addFooter();
+        this.addFooter();
         this.setValues();
     }
     
     @Override
     public void addComponents() {
         this.tabbedPane = new JTabbedPane();
+        this.tabbedPane.setPreferredSize(new Dimension(550, 200));
         
-        this.createPanelProject();
-        
-        this.tabbedPane.add("Base", this.panelProject);
+        this.addPanelProject();
         
         this.add(this.tabbedPane);
-//        this.tabbedPane.add
-//        this.add(this.createLabel("Caminho: ", 120));
-//        this.add(this.createTextFieldNoEditable("textFieldCaminho", this.project.getCaminho(), 30));
-//        
-//        this.addLinhas(1);
-//        
-//        this.add(this.createLabel("Nome*: ", 120));
-//        this.add(this.createTextField("textFieldNome", "", 30));
-//        
-//        this.addLinhas(1);
         
+        this.addLines(1);
     }
     
     /**
-     * Method responsible for creating Panel Project.
+     * Method responsible for adding the Panel Project.
      */
-    private void createPanelProject() {
-        this.panelProject = new PanelProject();
-        this.createScrollPane("scrollPanelProject", this.panelProject);
-        this.getScrollPanelProject().setViewportView(this.panelProject);
+    private void addPanelProject() {
+        this.panelDataProject = new PanelDataProject();
+        this.createScrollPane("scrollPanelDataProject", this.panelDataProject);
+        this.getScrollPanelDataProject().setViewportView(this.panelDataProject);
+        this.tabbedPane.add("Project", this.getScrollPanelDataProject());
     }
     
     @Override
     public void setValues() {
-        this.panelProject.getPathTextField().setText(this.project.getPath());
-        this.panelProject.getNameTextField().setText(this.project.getName());
+        this.panelDataProject.getPathTextField().setText(this.project.getPath());
+        this.panelDataProject.getNameTextField().setText(this.project.getName());
         
-        this.panelProject.getNameTextField().requestFocus();
+        this.panelDataProject.getNameTextField().requestFocus();
     }
     
     /**
@@ -90,18 +81,18 @@ public final class ViewEditProject extends ViewEdit {
     }
     
     /**
-     * Method responsible for returning Panel Project.
-     * @return Panel Project.
+     * Method responsible for returning Panel Data Project.
+     * @return Panel Data Project.
      */
-    public JScrollPane getScrollPanelProject() {
-        return this.scrollPanes.get("scrollPanelProject");
+    public JScrollPane getScrollPanelDataProject() {
+        return this.scrollPanes.get("scrollPanelDataProject");
     }
     
     /**
-     * Method responsible for returning Panel Project.
-     * @return Panel Project.
+     * Method responsible for returning Panel Data Project.
+     * @return Panel Data Project.
      */
-    public PanelProject getPanelProject() {
-        return this.panelProject;
+    public PanelDataProject getPanelDataProject() {
+        return this.panelDataProject;
     }
 }

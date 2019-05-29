@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import model.structural.base.association.Link;
 import model.structural.base.interfaces.Exportable;
 import model.structural.diagram.classs.TypeUML;
 import model.structural.base.variability.Variability;
@@ -567,7 +568,8 @@ public class Project implements Exportable {
      * Method responsible for removing a Stereotype.
      * @param stereotype Stereotype.
      */
-    public void removeStereotype(TypeUML stereotype) {
+    public void removeStereotype(Stereotype stereotype) {
+        this.removeLinks(stereotype);
         this.stereotypes.remove(stereotype.getId());
     }
     
@@ -618,6 +620,100 @@ public class Project implements Exportable {
         return export;
     }
     
+    /**
+     * Method responsible for returning the Links HashMap.
+     * @return Links HashMap.
+     */
+    public HashMap getLinks() {
+        return this.links;
+    }
+    
+    /**
+     * Method responsible for returning the Links List.
+     * @return Links List.
+     */
+    public List<Link> getLinksList() {
+        return new ArrayList<>(this.links.values());
+    }
+    
+    /**
+     * Method responsible for adding a Link.
+     * @param link Link.
+     */
+    public void addLink(Link link) {
+        if (this.links.containsKey(link.getId()) == false)
+            this.links.put(link.getId(), link);
+    }
+    
+    /**
+     * Method responsible for returning the Links by Element.
+     * @param  element Element.
+     * @return Links by Element.
+     */
+    public List<Link> filterLinksByElement(Element element) {
+        List<Link> list   = this.getLinksList();
+        List<Link> filter = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getElement().equals(element))
+                   filter.add(list.get(i));
+        }
+        return     filter;
+    }
+    
+    /**
+     * Method responsible for returning the Links by Stereotype.
+     * @param  stereotype Stereotype.
+     * @return Links by Stereotype.
+     */
+    public List<Link> filterLinksByStereotype(Stereotype stereotype) {
+        List<Link> list   = this.getLinksList();
+        List<Link> filter = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getStereotype().equals(stereotype))
+                   filter.add(list.get(i));
+        }
+        return     filter;
+    }
+    
+    /**
+     * Method responsible for removing a Link.
+     * @param link Link.
+     */
+    public void removeLink(Link link) {
+        this.links.remove(link.getId());
+    }
+    
+    /**
+     * Method responsible for removing the Links by Element.
+     * @param element Element.
+     */
+    public void removeLinks(Element element) {
+        List<Link> filter = this.filterLinksByElement(element);
+        for (int i = 0; i < filter.size(); i++)
+            this.removeLink(filter.get(i));
+    }
+    
+    /**
+     * Method responsible for removing the Links by Stereotype.
+     * @param stereotype Stereotype.
+     */
+    public void removeLinks(Stereotype stereotype) {
+        List<Link> filter = this.filterLinksByStereotype(stereotype);
+        for (int i = 0; i < filter.size(); i++)
+            this.removeLink(filter.get(i));
+    }
+    
+    /**
+     * Method responsible for exporting the Links.
+     * @return Links.
+     */
+    private String exportLinks() {
+        String export  = "";
+        for (Link link : this.getLinksList())
+               export += link.export();
+        return export;
+    }
+    
     @Override
     public String export() {
         String export  = "<project id=\"" + this.id + "\" name=\"" + this.name + "\" version=\"" + this.version + "\">\n";
@@ -625,6 +721,7 @@ public class Project implements Exportable {
                export += "  <stereotypes>\n" + this.exportStereotypes() + "  </stereotypes>\n";
                export += this.profile.export();
                export += this.exportDiagrams();
+               export += "  <links>\n"       + this.exportLinks()       + "  </links>\n";
                export += "</project>";
         return export;
     }
@@ -646,15 +743,15 @@ public class Project implements Exportable {
 
     @Override
     public String toString() {
-        String projeto  = "Id            = " + this.id            + "\n";
-               projeto += "Name          = " + this.name          + "\n";
-               projeto += "Path          = " + this.path          + "\n";
-               projeto += "Version       = " + this.version       + "\n";
-               projeto += "Diagrams      = " + this.diagrams      + "\n";
-               projeto += "Stereotypes   = " + this.stereotypes   + "\n";
-               projeto += "Variabilities = " + this.variabilities + "\n";
-               projeto += "Objects       = " + this.objects       + "\n";
-               projeto += "Types         = " + this.types         + "\n";
-        return projeto;
+        String project  = "Id            = " + this.id            + "\n";
+               project += "Name          = " + this.name          + "\n";
+               project += "Path          = " + this.path          + "\n";
+               project += "Version       = " + this.version       + "\n";
+               project += "Diagrams      = " + this.diagrams      + "\n";
+               project += "Stereotypes   = " + this.stereotypes   + "\n";
+               project += "Variabilities = " + this.variabilities + "\n";
+               project += "Objects       = " + this.objects       + "\n";
+               project += "Types         = " + this.types         + "\n";
+        return project;
     }
 }

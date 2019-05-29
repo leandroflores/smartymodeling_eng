@@ -66,6 +66,7 @@ public final class ViewMenu extends View implements Operation {
         this.setTitle(ViewStyle.SYSTEM + "Menu");
         this.addKeyListener(this.controller);
         this.setLayout(new BorderLayout(2, 4));
+//        this.setExtendedState();
 //        this.setLayout(new BorderLayout());
 //        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addMenu();
@@ -214,7 +215,7 @@ public final class ViewMenu extends View implements Operation {
         this.getScrollPanelTree().setPreferredSize(new Dimension(100, 100));
         this.getScrollPanelModeling().setMinimumSize(new Dimension(400, 100));
         this.getScrollPanelModeling().setPreferredSize(new Dimension(1500, 100));
-
+       
         this.mainSplitPane = this.createSplitPane();
         this.auxSplitPane  = this.createSplitPane();
         

@@ -95,6 +95,18 @@ public abstract class Panel extends JPanel {
     }
     
     /**
+     * Method responsible for adding Lines by Row and Colum Settings.
+     * @param rows Rows Number.
+     * @param columns Columns Number.
+     */
+    protected void addLines(int rows, int columns) {
+        for (int i = 0; i < rows; i++) {
+            for (int x = 0; x < columns; x++)
+                this.add(this.createLabel(""));
+        }
+    }
+    
+    /**
      * Method responsible for returning a new JLabel.
      * @param  title JLabel Title.
      * @return New JLabel.

@@ -32,6 +32,15 @@ public class Link implements Exportable {
     public Element getElement() {
         return this.element;
     }
+    
+    /**
+     * Method responsible for returning if Link contains the Element.
+     * @param  element Element.
+     * @return Link contains the Element.
+     */
+    public boolean contains(Element element) {
+        return this.element.equals(element);
+    }
 
     /**
      * Method responsible for setting Link Element.
@@ -47,6 +56,15 @@ public class Link implements Exportable {
      */
     public Stereotype getStereotype() {
         return this.stereotype;
+    }
+    
+    /**
+     * Method responsible for returning if Link contains the Stereotype.
+     * @param  stereotype Stereotype.
+     * @return Link contains the Stereotype.
+     */
+    public boolean contains(Stereotype stereotype) {
+        return this.stereotype.equals(stereotype);
     }
 
     /**
