@@ -12,6 +12,7 @@ import javax.xml.xpath.XPathFactory;
 import model.structural.base.Profile;
 import model.structural.base.Project;
 import model.structural.base.Stereotype;
+import model.structural.base.association.Link;
 import model.structural.diagram.classs.TypeUML;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -87,6 +88,7 @@ public class ImportProject {
         this.importStereotypes();
         this.importProfile();
         this.importDiagrams();
+        this.importLinks();
         
         return this.project;
     }
@@ -173,6 +175,21 @@ public class ImportProject {
 //                break;
             default:
                 break;
+        }
+    }
+    
+    /**
+     * Method responsible for importing Project Links.
+     * @throws XPathExpressionException
+     */
+    private void importLinks() throws XPathExpressionException {
+        this.expression = "/project/links/link";
+        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
+        for (int i = 0; i < this.nodeList.getLength(); i++) {
+            Element current = (Element) this.nodeList.item(i);
+            Link    link    = new Link((model.structural.base.Element) this.project.objects.get(current.getAttribute("element")), 
+                                                          (Stereotype) this.project.getStereotypes().get(current.getAttribute("stereotype")));
+            this.project.addLink(link);
         }
     }
 }

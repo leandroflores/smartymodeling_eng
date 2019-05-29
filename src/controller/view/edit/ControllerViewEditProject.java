@@ -27,7 +27,7 @@ public class ControllerViewEditProject extends ControllerViewEdit {
      * @return Name checked.
      */
     private boolean checkName() {
-        return this.check(this.viewEditProject.getPanelDataProject().getNameTextField(), "Name is a required field!");
+        return this.check(this.viewEditProject.getPanelBaseProject().getNameTextField(), "Name is a required field!");
     }
     
     @Override
@@ -37,7 +37,7 @@ public class ControllerViewEditProject extends ControllerViewEdit {
 
     @Override
     public void save() {
-        this.viewEditProject.getProject().setName(this.viewEditProject.getPanelDataProject().getNameTextField().getText());
+        this.viewEditProject.getProject().setName(this.viewEditProject.getPanelBaseProject().getNameTextField().getText());
         this.viewEditProject.getViewMenu().update();
         this.viewEditProject.dispose();
     }

@@ -1,33 +1,23 @@
-package view.edit.panel;
+package view.edit.panel.base;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.util.List;
 import javax.swing.JTextField;
-import model.structural.base.Element;
-import model.structural.base.Project;
-import model.structural.base.association.Link;
 import view.Panel;
 
 /**
- * <p>Class of View <b>PanelProject</b>.</p> 
- * <p>Class responsible for defining a Panel for the <b>Stereotypes</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelBaseProject</b>.</p> 
+ * <p>Class responsible for defining a Panel for showing the <b>Project Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  29/05/2019
  * @see    view.Panel
  */
-public final class PanelStereotype extends Panel {
-    private final Project project;
-    private final Element element;
+public final class PanelBaseProject extends Panel {
     
     /**
      * Default constructor method of Class.
-     * @param project Project.
-     * @param element Element.
      */
-    public PanelStereotype(Project project, Element element) {
-        this.project = project;
-        this.element = element;
+    public PanelBaseProject() {
         this.setSettings();
         this.addComponents();
     }
@@ -37,17 +27,22 @@ public final class PanelStereotype extends Panel {
      */
     private void setSettings() {
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
-        this.setPreferredSize(new Dimension(400, 200));
+        this.setPreferredSize(new Dimension(300, 100));
     }
     
     @Override
     protected void addComponents() {
         this.addLines(1);
-        List<Link> filter = this.project.filterLinksByElement(this.element);
-        for (int i = 0; i < filter.size(); i++) {
-            this.add(this.createLabel(filter.get(i).toString()));
-            this.addLines(1);
-        }
+        
+        this.add(this.createLabel("Path*: ", 80));
+        this.add(this.createTextFieldNoEditable("pathTextField", "", 15));
+
+        this.addLines(1);
+        
+        this.add(this.createLabel("Name*: ", 80));
+        this.add(this.createTextField("nameTextField", "", 15));
+        
+        this.addLines(1);
     }
     
     /**

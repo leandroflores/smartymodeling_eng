@@ -18,6 +18,21 @@ public class Link implements Exportable {
     private Stereotype stereotype;
     
     /**
+     * Default constructor method of Class.
+     */
+    public Link() {}
+    
+    /**
+     * Alternative constructor method of Class.
+     * @param element Element.
+     * @param stereotype Stereotype.
+     */
+    public Link(Element element, Stereotype stereotype) {
+        this.element    = element;
+        this.stereotype = stereotype;
+    }
+    
+    /**
      * Method responsible for returning Link Id.
      * @return Link Id.
      */

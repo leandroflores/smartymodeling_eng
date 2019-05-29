@@ -1,4 +1,4 @@
-package view.edit.panel;
+package view.edit.panel.base;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -6,18 +6,18 @@ import javax.swing.JTextField;
 import view.Panel;
 
 /**
- * <p>Class of View <b>PanelDataDiagram</b>.</p> 
- * <p>Class responsible for defining a Panel for showing the <b>Data Diagram</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelBaseDiagram</b>.</p> 
+ * <p>Class responsible for defining a Panel for showing the <b>Diagram Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  29/05/2019
  * @see    view.Panel
  */
-public final class PanelDataDiagram extends Panel {
+public final class PanelBaseDiagram extends Panel {
     
     /**
      * Default constructor method of Class.
      */
-    public PanelDataDiagram() {
+    public PanelBaseDiagram() {
         this.setSettings();
         this.addComponents();
     }

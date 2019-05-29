@@ -59,7 +59,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     public void setDiagramIcon(Diagram diagram) {
         this.setText(diagram.getName());
         this.setToolTipText(diagram.getName());
-        this.setIcon(this.getImage("diagram"));
+        this.setIcon(this.getImage(diagram.getIcon()));
     }
     
     /**

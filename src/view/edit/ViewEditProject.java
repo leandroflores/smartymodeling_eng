@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Project;
-import view.edit.panel.PanelDataProject;
+import view.edit.panel.base.PanelBaseProject;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -18,7 +18,7 @@ import view.panel.modeling.PanelModeling;
  */
 public final class ViewEditProject extends ViewEdit {
     private final Project project;
-    private PanelDataProject panelDataProject;
+    private PanelBaseProject panelBaseProject;
     
     /**
      * Default constructor method of Class.
@@ -47,29 +47,29 @@ public final class ViewEditProject extends ViewEdit {
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.setPreferredSize(new Dimension(550, 200));
         
-        this.addPanelProject();
+        this.addPanelBaseProject();
         
         this.add(this.tabbedPane);
-        
+
         this.addLines(1);
     }
     
     /**
-     * Method responsible for adding the Panel Project.
+     * Method responsible for adding the Panel Base Project.
      */
-    private void addPanelProject() {
-        this.panelDataProject = new PanelDataProject();
-        this.createScrollPane("scrollPanelDataProject", this.panelDataProject);
-        this.getScrollPanelDataProject().setViewportView(this.panelDataProject);
-        this.tabbedPane.add("Project", this.getScrollPanelDataProject());
+    private void addPanelBaseProject() {
+        this.panelBaseProject = new PanelBaseProject();
+        this.createScrollPane("scrollPanelBaseProject", this.panelBaseProject);
+        this.getScrollPanelBaseProject().setViewportView(this.panelBaseProject);
+        this.tabbedPane.add("Project", this.getScrollPanelBaseProject());
     }
     
     @Override
     public void setValues() {
-        this.panelDataProject.getPathTextField().setText(this.project.getPath());
-        this.panelDataProject.getNameTextField().setText(this.project.getName());
+        this.panelBaseProject.getPathTextField().setText(this.project.getPath());
+        this.panelBaseProject.getNameTextField().setText(this.project.getName());
         
-        this.panelDataProject.getNameTextField().requestFocus();
+        this.panelBaseProject.getNameTextField().requestFocus();
     }
     
     /**
@@ -84,15 +84,15 @@ public final class ViewEditProject extends ViewEdit {
      * Method responsible for returning Panel Data Project.
      * @return Panel Data Project.
      */
-    public JScrollPane getScrollPanelDataProject() {
-        return this.scrollPanes.get("scrollPanelDataProject");
+    public JScrollPane getScrollPanelBaseProject() {
+        return this.scrollPanes.get("scrollPanelBaseProject");
     }
     
     /**
      * Method responsible for returning Panel Data Project.
      * @return Panel Data Project.
      */
-    public PanelDataProject getPanelDataProject() {
-        return this.panelDataProject;
+    public PanelBaseProject getPanelBaseProject() {
+        return this.panelBaseProject;
     }
 }
