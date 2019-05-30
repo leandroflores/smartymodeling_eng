@@ -7,7 +7,6 @@ import javax.swing.JTextField;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.Stereotype;
-import model.structural.base.association.Link;
 import view.Panel;
 
 /**

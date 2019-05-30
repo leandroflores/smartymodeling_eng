@@ -291,7 +291,7 @@ public abstract class Diagram implements Exportable {
      * @param  classs Association Class.
      * @return Associations List.
      */
-    public List<Association> filterAssociations(Element element, Class classs) {
+    public List filterAssociations(Element element, Class classs) {
         List<Association> list   = this.getAssociationsList();
         List<Association> filter = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
@@ -435,6 +435,15 @@ public abstract class Diagram implements Exportable {
     public void addDependency(Dependency dependency) {
         if (this.associations.containsKey(dependency.getId()) == false)
             this.addAssociation(dependency);
+    }
+    
+    /**
+     * Method responsible for returning Dependencies by Element.
+     * @param  element Element.
+     * @return Dependencies found.
+     */
+    public List<Dependency> filterDependency(Element element) {
+        return (List<Dependency>) this.filterAssociations(element, Dependency.class);
     }
     
     /**

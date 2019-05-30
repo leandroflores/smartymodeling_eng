@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Element;
+import view.edit.panel.association.PanelDependency;
 import view.edit.panel.base.PanelBaseElement;
 import view.edit.panel.stereotype.PanelStereotype;
 import view.panel.modeling.PanelModeling;
@@ -22,6 +23,7 @@ public final class ViewEditElement extends ViewEdit {
     private final Element element;
     private PanelBaseElement panelBaseElement;
     private PanelStereotype  panelStereotype;
+    private PanelDependency  panelDependency;
     
     /**
      * Default constructor method of Class.
@@ -52,6 +54,7 @@ public final class ViewEditElement extends ViewEdit {
         
         this.addPanelBaseElement();
         this.addPanelStereotype();
+        this.addPanelDependency();
         
         this.add(this.tabbedPane);
         
@@ -72,11 +75,20 @@ public final class ViewEditElement extends ViewEdit {
      * Method responsible for adding the Panel Stereotype.
      */
     private void addPanelStereotype() {
-        System.out.println("Element: " + this.element);
         this.panelStereotype  = new PanelStereotype(this.getViewMenu().getProject(), this.element);
         this.createScrollPane("scrollPanelStereotype",  this.panelStereotype);
         this.getScrollPanelStereotype().setViewportView(this.panelStereotype);
         this.tabbedPane.add("Stereotype", this.getScrollPanelStereotype());
+    }
+    
+    /**
+     * Method responsible for adding the Panel Dependency.
+     */
+    private void addPanelDependency() {
+        this.panelDependency  = new PanelDependency(this.getViewMenu().getProject(), this.element);
+        this.createScrollPane("scrollPanelDependency",  this.panelDependency);
+        this.getScrollPanelDependency().setViewportView(this.panelDependency);
+        this.tabbedPane.add("Dependency", this.getScrollPanelDependency());
     }
     
     @Override
@@ -125,5 +137,21 @@ public final class ViewEditElement extends ViewEdit {
      */
     public PanelStereotype getPanelStereotype() {
         return this.panelStereotype;
+    }
+    
+    /**
+     * Method responsible for returning Scroll Panel Dependency.
+     * @return Scroll Panel Dependency.
+     */
+    public JScrollPane getScrollPanelDependency() {
+        return this.scrollPanes.get("scrollPanelDependency");
+    }
+    
+    /**
+     * Method responsible for returning Panel Dependency.
+     * @return Panel Dependency.
+     */
+    public PanelDependency getPanelDependency() {
+        return this.panelDependency;
     }
 }

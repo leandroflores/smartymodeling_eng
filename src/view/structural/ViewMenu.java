@@ -40,7 +40,7 @@ public final class ViewMenu extends View implements Operation {
     
     private JMenuBar   menuBar;
     private JSplitPane mainSplitPane;
-    private JSplitPane auxSplitPane;
+//    private JSplitPane auxSplitPane;
     
     private PanelMain     panelMain;
     private PanelTree     panelTree;
@@ -217,12 +217,12 @@ public final class ViewMenu extends View implements Operation {
         this.getScrollPanelModeling().setPreferredSize(new Dimension(1500, 100));
        
         this.mainSplitPane = this.createSplitPane();
-        this.auxSplitPane  = this.createSplitPane();
+//        this.auxSplitPane  = this.createSplitPane();
         
-        this.auxSplitPane.setLeftComponent(this.getScrollPanelTree());
-        this.auxSplitPane.setRightComponent(this.getScrollPanelModeling());
-        this.mainSplitPane.setLeftComponent(this.auxSplitPane);
-        this.mainSplitPane.setRightComponent(this.createPainel("idPanel"));
+        this.mainSplitPane.setLeftComponent(this.getScrollPanelTree());
+        this.mainSplitPane.setRightComponent(this.getScrollPanelModeling());
+//        this.mainSplitPane.setLeftComponent(this.auxSplitPane);
+//        this.mainSplitPane.setRightComponent(this.createPainel("idPanel"));
         
         this.getContentPane().add(this.mainSplitPane, BorderLayout.WEST);
     }

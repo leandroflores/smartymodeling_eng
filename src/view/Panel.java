@@ -15,10 +15,15 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.ColorUIResource;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 /**
  * <p>Class of View <b>Panel</b>.</p> 
@@ -36,6 +41,11 @@ public abstract class Panel extends JPanel {
     protected HashMap<String, JCheckBox> checkBoxes;
     protected HashMap<String, JTextField> textFields;
     protected HashMap<String, JFileChooser> fileChoosers;
+    
+    protected HashMap<String, JTable> tables;
+    protected HashMap<String, TableModel> tableModels;
+    protected HashMap<String, JScrollPane> scrollPanes;
+    protected HashMap<String, TableColumnModel> tableColumnModels;
     
     /**
      * Default constructor method of Classe.
@@ -55,6 +65,11 @@ public abstract class Panel extends JPanel {
         this.comboBoxes   = new HashMap<>();
         this.checkBoxes   = new HashMap<>();
         this.fileChoosers = new HashMap<>();
+        
+        this.tables            = new HashMap<>();
+        this.tableModels       = new HashMap<>();
+        this.scrollPanes       = new HashMap<>();
+        this.tableColumnModels = new HashMap<>();
     }
     
     /**
@@ -252,6 +267,90 @@ public abstract class Panel extends JPanel {
         JButton button = this.createButton(id, title, url);
                 button.setToolTipText(focusTitle);
         return  button;
+    }
+    
+    /**
+     * Method responsible for returning a new JTable.
+     * @param  id JTable Id.
+     * @return New JTable.
+     */
+    public JTable createTable(String id) {
+        JTable table = new JTable(this.createTableModel());
+               table.addKeyListener(this.controller);
+        this.createScrollPane(id, table);
+        this.tableModels.put(id, table.getModel());
+        this.tableColumnModels.put(id, table.getColumnModel());
+        this.tables.put(id, table);
+        return table;
+    }
+    
+    /**
+     * Method responsible for returning a new DefaultTableModel.
+     * @return New DefaultTableModel.
+     */
+    private DefaultTableModel createTableModel() {
+        return new DefaultTableModel() {
+                   @Override
+                   public boolean isCellEditable(int row, int col){   
+                        return true;
+                   }};
+    }
+    
+    /**
+     * Method responsible for returning a new JScrollPane of a JTable.
+     * @param  id JScrollPane Id.
+     * @param  table JScrollPane JTable.
+     * @return New JScrollPane of a JTable.
+     */
+    public JScrollPane createScrollPane(String id, JTable table) {
+        JScrollPane scrollPane = new JScrollPane(table);
+                    scrollPane.setPreferredSize(new Dimension(380, 150));
+                    this.scrollPanes.put(id, scrollPane);
+        return      scrollPane;
+    }
+    
+    /**
+     * Method responsible for adding the Columns on Table.
+     * @param id Table Id.
+     * @param values Columns Values.
+     */
+    protected void addColumns(String id, String[] values) {
+        for (String value : values)
+            ((DefaultTableModel) this.tableModels.get(id)).addColumn(value);
+    }
+    
+    /**
+     * Method responsible for defining the Columns Size on Table.
+     * @param id Table Id. 
+     * @param size Array de Tamanhos.
+     */
+    protected void setColumnsSize(String id, int[] size) {
+        for (int i = 0; i < size.length; i++)
+            this.tables.get(id).getColumnModel().getColumn(i).setPreferredWidth(size[i]);
+    }
+    
+    /**
+     * Method responsible for adding Lines on Table.
+     * @param id Table Id. 
+     * @param values Values.
+     */
+    public void addRows(String id, String[][] values) {
+        this.clearTable(id);
+        for (String[] value : values) {
+            ((DefaultTableModel) this.tableModels.get(id)).addRow(value);
+            this.tables.get(id).setEditingRow(JTable.AUTO_RESIZE_NEXT_COLUMN);
+            this.tables.get(id).setEditingRow(0);
+        }
+    }
+    
+    /**
+     * Method responsible to clear the Table.
+     * @param id Table Id.
+     */
+    public void clearTable(String id) {
+        while (this.tableModels.get(id).getRowCount() > 0)
+            ((DefaultTableModel) this.tableModels.get(id)).removeRow(0);
+        this.tables.get(id).removeAll();
     }
     
     /**

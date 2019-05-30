@@ -55,9 +55,9 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
     protected HashMap<String, JRadioButton> radioButtons;
     protected HashMap<String, JFileChooser> fileChoosers;
     
-    protected HashMap<String, JScrollPane> scrollPanes;
     protected HashMap<String, JTable> tables;
     protected HashMap<String, TableModel> tableModels;
+    protected HashMap<String, JScrollPane> scrollPanes;
     protected HashMap<String, TableColumnModel> tableColumnModels;
     
     /**
@@ -94,9 +94,9 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
         this.tables         = new HashMap<>();
         this.lists          = new HashMap<>();
         
-        this.scrollPanes       = new HashMap<>();
         this.tables            = new HashMap<>();
         this.tableModels       = new HashMap<>();
+        this.scrollPanes       = new HashMap<>();
         this.tableColumnModels = new HashMap<>();
     }
     
@@ -393,9 +393,9 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
     }
     
     /**
-     * Metodo responsavel por retornar uma Nova JTable.
-     * @param  id Identificador da JTable.
-     * @return Nova JTable.
+     * Method responsible for returning a new JTable.
+     * @param  id JTable Id.
+     * @return New JTable.
      */
     public JTable createTable(String id) {
         JTable table = new JTable(this.createTableModel());
