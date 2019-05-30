@@ -4,11 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
+import model.structural.base.Element;
 import model.structural.base.Project;
 import view.edit.ViewEditDiagram;
+import view.edit.ViewEditElement;
 import view.edit.ViewEditProject;
 import view.panel.tree.popup.TreePopup;
-
 
 /**
  * <p>Class of Controller <b>ControllerMenuItemEdit</b>.</p>
@@ -48,8 +49,8 @@ public class ControllerMenuItemEdit implements ActionListener {
             new ViewEditProject(this.popup.getPanelTree().getViewMenu().getPanelModeling(), (Project) object).setVisible(true);
         else if (object instanceof Diagram)
             new ViewEditDiagram(this.popup.getPanelTree().getViewMenu().getPanelModeling(), (Diagram) object).setVisible(true);
-//        else if (object instanceof Elemento)
-//            new ViewEditarElemento(this.popup.getPainelProjeto().getViewMenu().getPainelModelagem(), (Elemento) object).setVisible(true);
+        else if (object instanceof Element)
+            new ViewEditElement(this.popup.getPanelTree().getViewMenu().getPanelModeling(), (Element) object).setVisible(true);
 //        else if (object instanceof Variabilidade)
 //            this.editarVariabilidade(object, node);
     }

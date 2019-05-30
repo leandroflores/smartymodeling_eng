@@ -76,7 +76,7 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
     
     @Override
     public void resetBackground() {
-        this.getClickButton().setBackground(this.getFocusColor());
+        this.getClickButton().setBackground(this.getDefaultColor());
         this.getActorButton().setBackground(this.getDefaultColor());
         this.getUseCaseButton().setBackground(this.getDefaultColor());
     }

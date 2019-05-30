@@ -1,6 +1,6 @@
 package file.importation;
 
-import file.importation.diagram.ImportUseCaseDiagram;
+import file.importation.diagram.types.ImportUseCaseDiagram;
 import java.io.File;
 import java.io.IOException;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -161,7 +161,7 @@ public class ImportProject {
      */
     private void importDiagram(Element element, int index) throws XPathExpressionException {
         switch (index) {
-            case 0:
+            case 4:
                 this.project.addDiagram(new ImportUseCaseDiagram(this.project, element).importDiagram());
                 break;
 //            case 1:

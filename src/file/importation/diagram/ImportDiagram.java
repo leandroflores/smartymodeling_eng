@@ -1,4 +1,4 @@
-package file.importation;
+package file.importation.diagram;
 
 import model.structural.base.Diagram;
 import model.structural.base.association.Dependency;

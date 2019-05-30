@@ -1,6 +1,6 @@
-package file.importation.diagram;
+package file.importation.diagram.types;
 
-import file.importation.ImportDiagram;
+import file.importation.diagram.ImportDiagram;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.diagram.UseCaseDiagram;
@@ -17,7 +17,7 @@ import org.w3c.dom.NodeList;
  * <p>Class responsible for <b>Importing Use Case Diagram</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  23/05/2019
- * @see    file.importation.ImportDiagram
+ * @see    file.importation.diagram.ImportDiagram
  * @see    model.structural.diagram.UseCaseDiagram
  */
 public class ImportUseCaseDiagram extends ImportDiagram {

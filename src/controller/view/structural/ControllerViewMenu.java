@@ -108,7 +108,6 @@ public class ControllerViewMenu extends ControllerView {
      * Method responsible for opening a Project.
      */
     public void openProject() {
-//        this.viewMenu.getPanelModeling().clear();
         if (this.viewMenu.getFileChooserProject().showSaveDialog(this.viewMenu) != 1) {
             String path = this.viewMenu.getFileChooserProject().getSelectedFile().getAbsolutePath();
             try {
@@ -118,6 +117,8 @@ public class ControllerViewMenu extends ControllerView {
                 new ViewError(this.viewMenu, "Error opening Project!").setVisible(true);
             }
         }
+        this.viewMenu.getPanelModeling().clear();
+        this.viewMenu.update();
     }
     
     /**

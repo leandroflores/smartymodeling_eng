@@ -94,7 +94,7 @@ public class Stereotype implements Exportable {
 
     @Override
     public String export() {
-        return "  <stereotype id=\"" + this.id + "\" name=\"" + this.name + "\"/>\n";
+        return "    <stereotype id=\"" + this.id + "\" name=\"" + this.name + "\"/>\n";
     }
     
     @Override

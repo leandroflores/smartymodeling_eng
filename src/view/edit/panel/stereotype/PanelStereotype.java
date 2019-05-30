@@ -1,4 +1,4 @@
-package view.edit.panel.base;
+package view.edit.panel.stereotype;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JTextField;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.base.Stereotype;
 import model.structural.base.association.Link;
 import view.Panel;
 
@@ -43,7 +44,8 @@ public final class PanelStereotype extends Panel {
     @Override
     protected void addComponents() {
         this.addLines(1);
-        List<Link> filter = this.project.filterLinksByElement(this.element);
+//        List<Link> filter = this.project.filterLinksByElement(this.element);
+        List<Stereotype> filter = this.project.getStereotypesList();
         for (int i = 0; i < filter.size(); i++) {
             this.add(this.createLabel(filter.get(i).toString()));
             this.addLines(1);

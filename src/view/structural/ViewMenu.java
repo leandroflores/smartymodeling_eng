@@ -337,6 +337,7 @@ public final class ViewMenu extends View implements Operation {
             this.getScrollPanelTree().setViewportView(this.panelTree);
             this.unlockDiagramas();
         }else {
+            this.getScrollPanelTree().setViewportView(this.createLabel(""));
             this.lockDiagramas();
         }
     }

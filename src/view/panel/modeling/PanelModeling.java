@@ -42,8 +42,7 @@ public final class PanelModeling extends Panel {
     
     @Override
     protected void addComponents() {
-        this.panelTabbed = new PanelTabbed();
-
+        this.panelTabbed = new PanelTabbed(this);
         this.add(this.panelTabbed);
     }
     
@@ -191,6 +190,14 @@ public final class PanelModeling extends Panel {
         if (component instanceof PanelDiagram)
             return (PanelDiagram) component;
         return null;
+    }
+    
+    /**
+     * Method responsible for returning the Panel Tabbed.
+     * @return Panel Tabbed.
+     */
+    public PanelTabbed getPanelTabbed() {
+        return this.panelTabbed;
     }
     
     /**
