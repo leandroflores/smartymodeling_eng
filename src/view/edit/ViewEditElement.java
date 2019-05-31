@@ -40,7 +40,7 @@ public final class ViewEditElement extends ViewEdit {
     
     @Override
     public void initComponents() {
-        this.setSize(600, 320);
+        this.setSize(640, 500);
         this.addHeader();
         this.addComponents();
         this.addFooter();
@@ -50,7 +50,7 @@ public final class ViewEditElement extends ViewEdit {
     @Override
     public void addComponents() {
         this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 200));
+        this.tabbedPane.setPreferredSize(new Dimension(570, 375));
         
         this.addPanelBaseElement();
         this.addPanelStereotype();

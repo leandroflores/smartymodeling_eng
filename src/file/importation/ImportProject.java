@@ -112,7 +112,7 @@ public class ImportProject {
      * @throws XPathExpressionException
      */
     private void importStereotypes() throws XPathExpressionException {
-        this.expression = "/project/stereotypes/stereotypes";
+        this.expression = "/project/stereotypes/stereotype";
         this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
         for (int i = 0; i < this.nodeList.getLength(); i++) {
             Element    element    = (Element) this.nodeList.item(i);

@@ -127,8 +127,11 @@ public final class PanelModeling extends Panel {
      */
     public void removeDiagram(Diagram diagram) {
         if (this.tabs.get(diagram.getId()) != null) {
+            System.out.println("Remove " + diagram.getId() + " " + diagram.getName());
             this.panelTabbed.remove(this.tabs.get(diagram.getId()));
             this.tabs.remove(diagram.getId());
+            System.out.println("Tabs " + this.tabs);
+            System.out.println();
             this.updateUI();
         }
     }

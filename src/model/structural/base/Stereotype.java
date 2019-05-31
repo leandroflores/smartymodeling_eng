@@ -44,6 +44,15 @@ public class Stereotype implements Exportable {
         this.id   = id.trim();
         this.name = name.toLowerCase().trim();
     }
+    
+    /**
+     * Alternative constructor method of Class.
+     * @param name Stereotype Name.
+     */
+    public Stereotype(String name) {
+        this.id   = null;
+        this.name = name.toLowerCase().trim();
+    }
 
     /**
      * Method responsible for returning the Stereotype Id.

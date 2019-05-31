@@ -8,12 +8,14 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.HashMap;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -36,6 +38,7 @@ import javax.swing.table.TableModel;
 public abstract class Panel extends JPanel {
     protected Controller controller;
     
+    protected HashMap<String, JList> lists;
     protected HashMap<String, JButton> buttons;
     protected HashMap<String, JComboBox> comboBoxes;
     protected HashMap<String, JCheckBox> checkBoxes;
@@ -60,6 +63,7 @@ public abstract class Panel extends JPanel {
      * Method responsible for starting the Lists.
      */
     private void init() {
+        this.lists        = new HashMap<>();
         this.buttons      = new HashMap<>();
         this.textFields   = new HashMap<>();
         this.comboBoxes   = new HashMap<>();
@@ -240,6 +244,24 @@ public abstract class Panel extends JPanel {
      * Method responsible for returning a new JButton.
      * @param  id JButton Id.
      * @param  title JButton Title.
+     * @return New JButton.
+     */
+    protected JButton createButton(String id, String title) {
+        JButton button = new JButton();
+                button.setText(title);
+                button.setToolTipText(title);
+                button.addActionListener(this.controller);
+                button.addKeyListener(this.controller);
+                button.setPreferredSize(new Dimension(75, 30));
+                button.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
+                this.buttons.put(id, button);
+        return  button;
+    }
+    
+    /**
+     * Method responsible for returning a new JButton.
+     * @param  id JButton Id.
+     * @param  title JButton Title.
      * @param  url JButton Image URL.
      * @return New JButton.
      */
@@ -270,6 +292,35 @@ public abstract class Panel extends JPanel {
     }
     
     /**
+     * Method responsible for returning a new JList.
+     * @param  id JList Id.
+     * @return New JList.
+     */
+    public JList createList(String id) {
+        JList  list = new JList();
+               list.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+               list.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
+               list.setPreferredSize(new Dimension(340, 100));
+               list.addKeyListener(this.controller);
+               this.createScrollPane(id, list);
+               this.lists.put(id, list);
+        return list;
+    }
+    
+    /**
+     * Method responsible for returning a new JScrollPane of a JList.
+     * @param  id Id JScrollPane.
+     * @param  list JList.
+     * @return New JScrollPane of a JList.
+     */
+    private JScrollPane createScrollPane(String id, JList list) {
+        JScrollPane scrollPane = new JScrollPane(list);
+                    scrollPane.setPreferredSize(new Dimension(390, 120));
+                    this.scrollPanes.put(id, scrollPane);
+        return      scrollPane;
+    }
+    
+    /**
      * Method responsible for returning a new JTable.
      * @param  id JTable Id.
      * @return New JTable.
@@ -294,6 +345,17 @@ public abstract class Panel extends JPanel {
                    public boolean isCellEditable(int row, int col){   
                         return true;
                    }};
+    }
+    
+    /**
+     * Method responsible for returning a new JScrollPane.
+     * @param  id JScrollPane Id.
+     * @return New JScrollPane.
+     */
+    public JScrollPane createScrollPane(String id) {
+        JScrollPane scrollPane = new JScrollPane();
+                    this.scrollPanes.put(id, scrollPane);
+        return      scrollPane;
     }
     
     /**

@@ -47,13 +47,13 @@ public class UseCaseUML extends Element {
     @Override
     public Map getStyle() {
         Map    estilo = new HashMap<>();
-               estilo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_CENTER);
-               estilo.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
+               estilo.put(mxConstants.STYLE_FONTSIZE, "15");
+               estilo.put(mxConstants.STYLE_EDITABLE, "1");
                estilo.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                estilo.put(mxConstants.STYLE_FILLCOLOR,   "#9999ff");
                estilo.put(mxConstants.STYLE_STROKECOLOR, "#000000");
-               estilo.put(mxConstants.STYLE_FONTSIZE, "15");
-               estilo.put(mxConstants.STYLE_EDITABLE, "1");
+               estilo.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
+               estilo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_CENTER);
         return estilo;
     }
 }

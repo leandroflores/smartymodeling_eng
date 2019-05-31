@@ -55,10 +55,6 @@ public class ControllerMenuItemEdit implements ActionListener {
 //            this.editarVariabilidade(object, node);
     }
     
-    private Diagram getDiagram(DefaultMutableTreeNode node) {
-        node.getPa
-    }
-    
     /**
      * Method responsible for editing the Variability.
      * @param object Object.

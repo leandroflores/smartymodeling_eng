@@ -229,7 +229,16 @@ public class Project implements Exportable {
      * @return Diagrams List.
      */
     public List<Diagram> getDiagramsList() {
-        return new ArrayList<>(this.diagrams.values());
+        ArrayList list = new ArrayList<>(this.diagrams.values());
+                  list.sort(new Comparator<Diagram>() {
+                      @Override
+                      public int compare(Diagram diagramA, Diagram diagramB) {
+                          if (diagramA.getType().equals(diagramB.getType()))
+                              return diagramA.getName().compareTo(diagramB.getName());
+                          return diagramA.getType().compareTo(diagramB.getType());
+                      }
+                  });
+        return    list;
     }
     
     /**
@@ -606,7 +615,8 @@ public class Project implements Exportable {
             if (stereotype.getName().equals(name))
                 return stereotype;
         }
-        return this.getDefaultStereotype();
+//        return this.getDefaultStereotype();
+        return null;
     }
     
     /**
@@ -643,6 +653,16 @@ public class Project implements Exportable {
     public void addLink(Link link) {
         if (this.links.containsKey(link.getId()) == false)
             this.links.put(link.getId(), link);
+    }
+    
+    /**
+     * Method responsible for returning the Link by Element and Stereotype.
+     * @param  element Element.
+     * @param  stereotype Stereotype.
+     * @return Link by Element and Stereotype.
+     */
+    public Link getLink(Element element, Stereotype stereotype) {
+        return (Link) links.get("LINK#" + element.getId() + "-" + stereotype.getId());
     }
     
     /**

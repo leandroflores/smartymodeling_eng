@@ -7,8 +7,12 @@ import model.structural.base.Diagram;
 import view.panel.tabbed.PanelTabTitle;
 
 /**
- *
+ * <p>Class of Controller <b>ControllerPanelTabTitle</b>.</p>
+ * <p>Class responsible for controlling the <b>Events</b> from the <b>Panel Tab Title</b> of SMartyModeling.</p>
  * @author Leandro
+ * @since  31/05/2019
+ * @see    controller.view.ControllerPanel
+ * @see    view.panel.tabbed.PanelTabTitle
  */
 public class ControllerPanelTabTitle extends ControllerPanel {
     private final PanelTabTitle panel;
@@ -43,18 +47,7 @@ public class ControllerPanelTabTitle extends ControllerPanel {
      * Method responsible for closing the Tab.
      */
     private void closeTab() {
-        if (this.panel.getPanelModeling().getPanelDiagram() == null) {
-            System.out.println("AA");
-            this.panel.getPanelModeling().clear();
-        }else {
-            System.out.println(this.getDiagram().getId());
-            this.panel.getPanelModeling().removeDiagram(this.getDiagram());
-            System.out.println();
-        }
-//        this.panel.upd
-//        this.panel.getPanelModeling().getPanelTabbed().remove
-//        System.out.println("Close Tab: " + this.panel.getComponent());
-////        this.panel.getPanelModeling().
-//        System.out.println();
+        if (this.panel.getDiagram() != null)
+            this.panel.getPanelModeling().removeDiagram(this.panel.getDiagram());
     }
 }

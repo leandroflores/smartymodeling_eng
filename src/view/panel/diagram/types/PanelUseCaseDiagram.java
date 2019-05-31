@@ -4,10 +4,9 @@ import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationUseCase;
 import controller.view.panel.diagram.types.ControllerPanelUseCaseDiagram;
-import java.awt.BorderLayout;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import model.structural.diagram.UseCaseDiagram;
 import view.panel.diagram.PanelDiagram;
 import view.structural.ViewMenu;
@@ -41,6 +40,7 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
     
     @Override
     public void addComponents() {
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.addOperationsPanel();
         this.addPanelModeling();
         this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationUseCase(this));

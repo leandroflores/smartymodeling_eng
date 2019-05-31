@@ -7,7 +7,9 @@ import java.awt.Insets;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import model.structural.base.Diagram;
 import view.Panel;
+import view.panel.diagram.PanelDiagram;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -69,6 +71,16 @@ public final class PanelTabTitle extends Panel {
     public void setTitle(String title) {
         this.title = title;
         this.titleLabel.setText(this.title);
+    }
+    
+    /**
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
+     */
+    public Diagram getDiagram() {
+        if (this.getComponent() instanceof PanelDiagram)
+            return ((PanelDiagram) this.getComponent()).getDiagram();
+        return null;
     }
     
     /**

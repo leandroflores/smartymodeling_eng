@@ -256,6 +256,18 @@ public class FunctString {
     }
     
     /**
+     * Method responsible for returning a String with List values.
+     * @param  list List.
+     * @return String with List values.
+     */
+    public String listToString(List<String> list) {
+        String values = "";
+        for (String current : list)
+               values += current + "\n";
+        return values;
+    }
+    
+    /**
      * 
      * Method responsible for checking if a mask is valid.
      * @param  string String.

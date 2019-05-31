@@ -17,7 +17,6 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
@@ -89,8 +88,6 @@ public abstract class PanelDiagram extends Panel {
      * Method responsible for adding Panel Modeling.
      */
     public void addPanelModeling() {
-        JPanel      panel  = new JPanel();
-        JScrollPane scroll = new JScrollPane();
         this.graph       = new mxGraph();
         this.parent      = this.graph.getDefaultParent();
         this.zoom        = 1.0d;
@@ -125,11 +122,9 @@ public abstract class PanelDiagram extends Panel {
         this.component.setEnterStopsCellEditing(true);
         this.component.refresh();
         
-        scroll.setViewportView(this.component);
-        this.add(scroll);
-//        this.set
-//        panel.add(this.component);
-//        this.add(panel);
+        this.createScrollPane("scrollPaneDiagram");
+        this.getScrollPaneDiagram().setViewportView(this.component);
+        this.add(this.getScrollPaneDiagram());
     }
     
     /**
@@ -231,6 +226,14 @@ public abstract class PanelDiagram extends Panel {
     public void setZoom(Double zoom) {
         this.zoom = zoom;
         this.graph.getView().setScale(this.zoom);
+    }
+    
+    /**
+     * Method responsible for returning the Scroll Pane Diagram.
+     * @return Scroll Pane Diagram.
+     */
+    public JScrollPane getScrollPaneDiagram() {
+        return this.scrollPanes.get("scrollPaneDiagram");
     }
     
     /**
