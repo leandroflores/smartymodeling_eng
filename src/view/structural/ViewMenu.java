@@ -260,7 +260,7 @@ public final class ViewMenu extends View implements Operation {
     public void update() {
         this.setTitle();
         this.updatePanelMain();
-        this.updateTreePanel();
+        this.updatePanelTree();
         this.updatePanelModeling();
     }
     
@@ -303,7 +303,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Metodo responsavel por setar o padrao dos Paineis nao Salvo.
+     * Method responsible for setting the Save Project Flag.
      */
     public void updateSave() {
         if (this.save == true) {
@@ -329,9 +329,9 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for updating Tree Panel.
+     * Method responsible for updating Panel Tree.
      */
-    public void updateTreePanel() {
+    public void updatePanelTree() {
         if (this.project != null) {
             this.panelTree = new PanelTree(this);
             this.getScrollPanelTree().setViewportView(this.panelTree);

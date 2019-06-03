@@ -1,4 +1,4 @@
-package model.structural.diagram.classs;
+package model.structural.diagram.classs.base;
 
 import com.mxgraph.util.mxConstants;
 import java.util.ArrayList;
@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import model.structural.base.Element;
+import model.structural.diagram.classs.Entity;
 
 /**
  * <p>Classe de Modelo <b>MethodUML</b>.</p>
@@ -14,8 +15,8 @@ import model.structural.base.Element;
  * @author Leandro
  * @since  20/05/2019
  * @see    model.structural.base.Element
- * @see    model.structural.diagram.classs.ParameterUML
- * @see    model.structural.diagram.classs.TypeUML
+ * @see    model.structural.diagram.classs.base.ParameterUML
+ * @see    model.structural.diagram.classs.base.TypeUML
  */
 public class MethodUML extends Element {
     private Entity  entity;

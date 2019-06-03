@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import model.structural.base.association.Dependency;
 import model.structural.base.interfaces.Exportable;
-import model.structural.diagram.classs.TypeUML;
+import model.structural.diagram.classs.base.TypeUML;
 import model.structural.base.variability.Mutex;
 import model.structural.base.variability.Requires;
 import model.structural.base.variability.Variability;

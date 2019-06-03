@@ -1,4 +1,4 @@
-package model.structural.diagram.classs;
+package model.structural.diagram.classs.base;
 
 import model.structural.base.interfaces.Exportable;
 import org.w3c.dom.Element;

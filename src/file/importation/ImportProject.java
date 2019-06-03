@@ -13,7 +13,7 @@ import model.structural.base.Profile;
 import model.structural.base.Project;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Link;
-import model.structural.diagram.classs.TypeUML;
+import model.structural.diagram.classs.base.TypeUML;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;

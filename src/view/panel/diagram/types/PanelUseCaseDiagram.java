@@ -1,5 +1,6 @@
 package view.panel.diagram.types;
 
+import com.mxgraph.model.mxCell;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationUseCase;
@@ -7,6 +8,7 @@ import controller.view.panel.diagram.types.ControllerPanelUseCaseDiagram;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import model.structural.base.Element;
 import model.structural.diagram.UseCaseDiagram;
 import view.panel.diagram.PanelDiagram;
 import view.structural.ViewMenu;

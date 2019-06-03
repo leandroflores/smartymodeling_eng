@@ -9,8 +9,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.base.variability.Variability;
-import model.structural.diagram.classs.AttributeUML;
-import model.structural.diagram.classs.MethodUML;
+import model.structural.diagram.classs.base.AttributeUML;
+import model.structural.diagram.classs.base.MethodUML;
 import view.panel.tree.popup.TreePopup;
 
 /**

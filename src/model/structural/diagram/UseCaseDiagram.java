@@ -16,7 +16,7 @@ import model.structural.diagram.usecase.UseCaseUML;
 
 /**
  * <p>Class of Model <b>UseCaseDiagram</b>.</p>
- * <p>Class responsible for representing <b>Use Case Diagram</b> in SMartyModeling.</p>
+ * <p>Class responsible for representing the <b>Use Case Diagram</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  22/05/2019
  * @see    model.structural.base.association.Association

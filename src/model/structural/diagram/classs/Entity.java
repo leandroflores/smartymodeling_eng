@@ -1,5 +1,7 @@
 package model.structural.diagram.classs;
 
+import model.structural.diagram.classs.base.MethodUML;
+import model.structural.diagram.classs.base.AttributeUML;
 import com.mxgraph.util.mxConstants;
 import java.awt.Point;
 import java.util.ArrayList;

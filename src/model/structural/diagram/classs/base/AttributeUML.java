@@ -1,9 +1,10 @@
-package model.structural.diagram.classs;
+package model.structural.diagram.classs.base;
 
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
 import model.structural.base.Element;
+import model.structural.diagram.classs.Entity;
 
 /**
  * <p>Class of Model <b>AttributeUML</b>.</p>

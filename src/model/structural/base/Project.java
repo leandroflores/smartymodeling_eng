@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import model.structural.base.association.Link;
 import model.structural.base.interfaces.Exportable;
-import model.structural.diagram.classs.TypeUML;
+import model.structural.diagram.classs.base.TypeUML;
 import model.structural.base.variability.Variability;
 
 /**
