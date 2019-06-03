@@ -1,6 +1,5 @@
 package view.panel.diagram.types;
 
-import com.mxgraph.model.mxCell;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationUseCase;
@@ -8,7 +7,6 @@ import controller.view.panel.diagram.types.ControllerPanelUseCaseDiagram;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import model.structural.base.Element;
 import model.structural.diagram.UseCaseDiagram;
 import view.panel.diagram.PanelDiagram;
 import view.structural.ViewMenu;
@@ -44,7 +42,7 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
     public void addComponents() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.addOperationsPanel();
-        this.addPanelModeling();
+        this.addModelingPanel();
         this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationUseCase(this));
     }
     
@@ -59,7 +57,6 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
                panel.add(this.createButton("deleteButton",      "", "Delete",          "delete.png"));
                panel.add(this.createComboBox("associationComboBox", this.getAssociationItems(), 50));
        this.add(panel);
-//       this.add(new JSeparator(), BorderLayout.PAGE_END);
        this.getClickButton().setBackground(this.getFocusColor());
     }
     
@@ -130,7 +127,7 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
     }
     
     /**
-     * Method responsible for returning Actor Button.
+     * Method responsible for returning the Actor Button.
      * @return Actor Button.
      */
     public JButton getActorButton() {
@@ -138,7 +135,7 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
     }
     
     /**
-     * Method responsible for returning Use Case Button.
+     * Method responsible for returning the Use Case Button.
      * @return Use Case Button.
      */
     public JButton getUseCaseButton() {

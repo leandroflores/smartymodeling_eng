@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 import model.structural.base.association.Association;
 import model.structural.diagram.classs.Entity;
+import org.w3c.dom.Element;
 
 /**
  * <p>Class of Model <b>AssociationUML</b>.</p>
@@ -16,8 +17,15 @@ import model.structural.diagram.classs.Entity;
  * @see    model.structural.diagram.classs.Entity
  */
 public class AssociationUML extends Association {
+    private String  name;
     private String  category;
     private boolean direction;
+    private String  sourceName;
+    private Integer sourceMin;
+    private Integer sourceMax;
+    private String  targetName;
+    private Integer targetMin;
+    private Integer targetMax;
     
     /**
      * Default constructor method of Class.
@@ -28,8 +36,22 @@ public class AssociationUML extends Association {
         this.source    = source;
         this.target    = target;
         this.type      = "association";
+        this.name      = "";
         this.category  = "normal";
         this.direction = false;
+        this.setDefault();
+    }
+    
+    /**
+     * Alternative constructor method of Class.
+     * @param element W3C Element.
+     */
+    public AssociationUML(Element element) {
+        this.type      = "association";
+        this.name      = element.getAttribute("name");
+        this.category  = element.getAttribute("category");
+        this.direction = element.getAttribute("direction").contains("true");
+        this.setDefault();
     }
     
     /**
@@ -42,10 +64,20 @@ public class AssociationUML extends Association {
         this.source    = source;
         this.target    = target;
         this.type      = "association";
+        this.name      = "";
         this.category  = category;
         this.direction = false;
+        this.setDefault();
     }
 
+    /**
+     * Method responsible for setting the Default Parameters.
+     */
+    private void setDefault() {
+        this.setDefaultSource();
+        this.setDefaultTarget();
+    }
+    
     @Override
     public Entity getSource() {
         return (Entity) this.source;
@@ -72,6 +104,22 @@ public class AssociationUML extends Association {
         this.target = target;
     }
 
+    /**
+     * Method responsible for returning the Name.
+     * @return Name.
+     */
+    public String getName() {
+        return this.name;
+    }
+    
+    /**
+     * Method responsible for setting the Name.
+     * @param name Name.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     /**
      * Method responsible for returning the Category.
      * @return Category.
@@ -102,6 +150,165 @@ public class AssociationUML extends Association {
      */
     public void setDirection(boolean direction) {
         this.direction = direction;
+    }
+
+    /**
+     * Method responsible for setting the Source by W3C Element.
+     * @param element W3C Element.
+     */
+    public void setSource(Element element) {
+        this.setName(element.getAttribute("name"));
+        
+    }
+    
+    /**
+     * Method responsible for returning the Source Name.
+     * @return Source Name.
+     */
+    public String getSourceName() {
+        return this.sourceName;
+    }
+
+    /**
+     * Method responsible for setting the Source Name.
+     * @param sourceName Source Name.
+     */
+    public void setSourceName(String sourceName) {
+        this.sourceName = sourceName;
+    }
+
+    /**
+     * Method responsible for returning the Source Min.
+     * @return Source Min.
+     */
+    public Integer getSourceMin() {
+        return this.sourceMin;
+    }
+
+    /**
+     * Method responsible for setting the Source Min.
+     * @param sourceMin Source Min.
+     */
+    public void setSourceMin(Integer sourceMin) {
+        this.sourceMin = sourceMin;
+    }
+    
+    /**
+     * Method responsible for setting the Source Min by W3C Element.
+     * @param element W3C Element.
+     */
+    public void setSourceMin(Element element) {
+        String value   = element.getAttribute("min").trim();
+        this.sourceMin = (value.equals("*")) ? 0 : Integer.parseInt(value);
+    }
+
+    /**
+     * Method responsible for returning the Source Max.
+     * @return Source Max.
+     */
+    public Integer getSourceMax() {
+        return this.sourceMax;
+    }
+
+    /**
+     * Method responsible for setting the Source Max.
+     * @param sourceMax Source Max.
+     */
+    public void setSourceMax(Integer sourceMax) {
+        this.sourceMax = sourceMax;
+    }
+    
+    /**
+     * Method responsible for setting the Source Max by W3C Element.
+     * @param element W3C Element.
+     */
+    public void setSourceMax(Element element) {
+        String value   = element.getAttribute("max").trim();
+        this.sourceMax = (value.equals("*")) ? Integer.MAX_VALUE : Integer.parseInt(value);
+    }
+
+    /**
+     * Method responsible for setting the Default Source.
+     */
+    public void setDefaultSource() {
+        this.sourceName = "";
+        this.sourceMin  = 1;
+        this.sourceMax  = 1;
+    }
+    
+    /**
+     * Method responsible for returning the Target Name.
+     * @return Target Name.
+     */
+    public String getTargetName() {
+        return this.targetName;
+    }
+
+    /**
+     * Method responsible for setting the Target Name.
+     * @param targetName Target Name.
+     */
+    public void setTargetName(String targetName) {
+        this.targetName = targetName;
+    }
+
+    /**
+     * Method responsible for returning the Target Min.
+     * @return Target Min.
+     */
+    public Integer getTargetMin() {
+        return this.targetMin;
+    }
+
+    /**
+     * Method responsible for setting the Target Min.
+     * @param targetMin Target Min.
+     */
+    public void setTargetMin(Integer targetMin) {
+        this.targetMin = targetMin;
+    }
+    
+    /**
+     * Method responsible for setting the Target Min by W3C Element.
+     * @param element W3C Element.
+     */
+    public void setTargetMin(Element element) {
+        String value   = element.getAttribute("min").trim();
+        this.targetMin = (value.equals("*")) ? 0 : Integer.parseInt(value);
+    }
+
+    /**
+     * Method responsible for returning the Target Max.
+     * @return Target Max.
+     */
+    public Integer getTargetMax() {
+        return this.targetMax;
+    }
+
+    /**
+     * Method responsible for setting the Target Max.
+     * @param targetMax Target Max.
+     */
+    public void setTargetMax(Integer targetMax) {
+        this.targetMax = targetMax;
+    }
+    
+    /**
+     * Method responsible for setting the Target Max by W3C Element.
+     * @param element W3C Element.
+     */
+    public void setTargetMax(Element element) {
+        String value   = element.getAttribute("max").trim();
+        this.targetMax = (value.equals("*")) ? Integer.MAX_VALUE : Integer.parseInt(value);
+    }
+    
+    /**
+     * Method responsible for setting the Default Target.
+     */
+    public void setDefaultTarget() {
+        this.targetName = "";
+        this.targetMin  = 1;
+        this.targetMax  = 1;
     }
     
     /**
@@ -143,6 +350,7 @@ public class AssociationUML extends Association {
         String export  = "    <" + this.type;
                export += " source=\""    + this.source.getId()  + "\"";
                export += " target=\""    + this.target.getId()  + "\"";
+               export += " name=\""      + this.name.trim()     + "\"";
                export += " category=\""  + this.category.trim() + "\"";
                export += " direction=\"" + this.direction       + "\"";
                export += "/>\n";
@@ -154,7 +362,7 @@ public class AssociationUML extends Association {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_DASHED,    "1");
                style.put(mxConstants.STYLE_MOVABLE,   "0");
-               style.put(mxConstants.STYLE_EDITABLE,  "0");
+               style.put(mxConstants.STYLE_EDITABLE,  "1");
                style.put(mxConstants.STYLE_FONTCOLOR, "#000000");
                style.put(mxConstants.STYLE_ENDARROW,    this.getEndArrow());
                style.put(mxConstants.STYLE_STARTARROW,  this.getStartArrow());

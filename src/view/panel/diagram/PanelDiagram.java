@@ -85,9 +85,9 @@ public abstract class PanelDiagram extends Panel {
     public abstract void setStyle();
     
     /**
-     * Method responsible for adding Panel Modeling.
+     * Method responsible for adding Modeling Panel.
      */
-    public void addPanelModeling() {
+    public void addModelingPanel() {
         this.graph       = new mxGraph();
         this.parent      = this.graph.getDefaultParent();
         this.zoom        = 1.0d;

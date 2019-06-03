@@ -134,7 +134,7 @@ public final class ClassDiagram extends Diagram {
      * Method responsible for adding a Class UML.
      * @param class_ Class UML.
      */
-    public void addClasse(ClassUML class_) {
+    public void addClass(ClassUML class_) {
         class_.setId(this.nextClassId());
         if (this.classUML.get(class_.getId()) == null) {
             this.classUML.put(class_.getId(), class_);
@@ -333,47 +333,47 @@ public final class ClassDiagram extends Diagram {
     }
     
     /**
-     * Metodo responsavel por remover a Associacao UML.
-     * @param associacao Associacao UML.
+     * Method responsible for removing a Association UML.
+     * @param association Association UML.
      */
-    public void removeAssociacaoUML(AssociacaoUML associacao) {
-        this.removeAssociacao(associacao);
-        this.associationsUML.remove(associacao.getId());
+    public void removeAssociationUML(AssociationUML association) {
+        this.removeAssociation(association);
+        this.associationsUML.remove(association.getId());
     }
     
     /**
-     * Metodo responsavel por retornar a Array de Visibilidades.
-     * @return Array de Visibilidades.
+     * Method responsible for returning the Visibilities Array.
+     * @return Visibilities Array.
      */
-    public String[] getVisibilidades() {
+    public String[] getVisibilities() {
         return new String[] {"private", "protected", "default", "public"};
     }
     
     @Override
-    public String getIcone() {
-        return "src/imagens/icones/diagrama/classes.png";
+    public String getIcon() {
+        return "src/images/icons/diagram/class.png";
     }
     
     @Override
     public ClassDiagram getClone() {
         try {
-            ClassDiagram diagrama = (ClassDiagram) super.clone();
-                            diagrama.setElementos(new HashMap<>(this.elementos));
-                            diagrama.setAssociacoes(new HashMap<>(this.associationsUML));
-                            diagrama.setVariabilidades(new HashMap<>(this.variabilidades));
-            return          diagrama;
+            ClassDiagram diagram = (ClassDiagram) super.clone();
+                         diagram.setElements(new HashMap<>(this.elements));
+                         diagram.setAssociations(new HashMap<>(this.associationsUML));
+                         diagram.setVariabilities(new HashMap<>(this.variabilities));
+            return       diagram;
         } catch (CloneNotSupportedException exception) {
-            System.out.println("Erro");
+            System.out.println("Error");
             return null;
         }
     }
     
     @Override
     public String toString() {
-        String diagrama  = "Id         = " + this.id         + "\n";
-               diagrama += "Pacotes    = " + this.packagesUML    + "\n";
-               diagrama += "Classes    = " + this.classUML    + "\n";
-               diagrama += "Interfaces = " + this.interfacesUML + "\n";
-        return diagrama;
+        String diagram  = "Id         = " + this.id            + "\n";
+               diagram += "Packages   = " + this.packagesUML   + "\n";
+               diagram += "Classs     = " + this.classUML      + "\n";
+               diagram += "Interfaces = " + this.interfacesUML + "\n";
+        return diagram;
     }
 }

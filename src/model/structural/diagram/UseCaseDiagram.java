@@ -239,12 +239,12 @@ public final class UseCaseDiagram extends Diagram {
     
     @Override
     public String toString() {
-        String diagrama  = "Id           = " + this.id              + "\n";
-               diagrama += "Actors       = " + this.actorsUML       + "\n";
-               diagrama += "Use Cases    = " + this.useCasesUML     + "\n";
-               diagrama += "Realizations = " + this.realizationsUML + "\n";
-               diagrama += "Extends      = " + this.extendsUML      + "\n";
-               diagrama += "Includes     = " + this.includesUML     + "\n";
-        return diagrama;
+        String diagram  = "Id           = " + this.id              + "\n";
+               diagram += "Actors       = " + this.actorsUML       + "\n";
+               diagram += "Use Cases    = " + this.useCasesUML     + "\n";
+               diagram += "Realizations = " + this.realizationsUML + "\n";
+               diagram += "Extends      = " + this.extendsUML      + "\n";
+               diagram += "Includes     = " + this.includesUML     + "\n";
+        return diagram;
     }
 }

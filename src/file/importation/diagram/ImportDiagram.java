@@ -37,9 +37,9 @@ public abstract class ImportDiagram {
     }
     
     /**
-     * Method responsible for importing the Associations.
+     * Method responsible for importing the Relationships.
      */
-    protected void importAssociations() {
+    protected void importRelationships() {
         this.addGeneralizations();
         this.addDependencies();
     }

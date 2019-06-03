@@ -42,7 +42,7 @@ public class ImportUseCaseDiagram extends ImportDiagram {
           this.importExtends();
           this.importIncludes();
          super.importVariabilities();
-         super.importAssociations();
+         super.importRelationships();
         return this.diagram;
     }
     
