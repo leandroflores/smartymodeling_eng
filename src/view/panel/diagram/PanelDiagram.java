@@ -1,5 +1,6 @@
 package view.panel.diagram;
 
+import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
@@ -121,6 +122,9 @@ public abstract class PanelDiagram extends Panel {
         this.component.setPreferredSize(new Dimension(1075, 500));
         this.component.setEnterStopsCellEditing(true);
         this.component.refresh();
+     
+        mxParallelEdgeLayout layout = new mxParallelEdgeLayout(this.graph);
+                             layout.execute(this.graph.getDefaultParent());
         
         this.createScrollPane("scrollPaneDiagram");
         this.getScrollPaneDiagram().setViewportView(this.component);
@@ -202,7 +206,7 @@ public abstract class PanelDiagram extends Panel {
     /**
      * Method responsible for setting Dependency Style.
      */
-    public void setDependenyStyle() {
+    public void setDependencyStyle() {
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "1");
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_OPEN);
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);

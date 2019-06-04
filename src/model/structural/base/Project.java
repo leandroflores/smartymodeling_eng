@@ -13,6 +13,7 @@ import model.structural.base.association.Link;
 import model.structural.base.interfaces.Exportable;
 import model.structural.diagram.classs.base.TypeUML;
 import model.structural.base.variability.Variability;
+import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.Entity;
 
 /**
@@ -41,7 +42,7 @@ public class Project implements Exportable {
         this.id      = new FunctString().md5(new FunctDate().getFormattedDate(new Date()));
         this.name    = "Project0";
         this.path    = "New_Project.smty";
-        this.version = "1.0";
+        this.version = "2.0";
         this.init();
         this.loadPrimitiveTypes();
         this.loadSMartyStereotypes();
@@ -383,6 +384,11 @@ public class Project implements Exportable {
      */
     public void removeEntityType(Entity entity) {
         if (this.types.get(entity.getId()) != null) {
+            List<Diagram> list = this.getDiagramsList();
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i) instanceof ClassDiagram)
+                    System.out.println("Class Diagram: " + (ClassDiagram) list.get(i));
+            }
             System.out.println("Remove Type: " + this.types.get(entity.getId()));
         }
     }

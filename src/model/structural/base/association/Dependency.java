@@ -40,11 +40,13 @@ public class Dependency extends Association {
     @Override
     public Map getStyle() {
         Map    style = new HashMap<>();
-               style.put(mxConstants.STYLE_DASHED,   "1");
-               style.put(mxConstants.STYLE_EDITABLE, "0");
+               style.put(mxConstants.STYLE_DASHED,    "1");
+               style.put(mxConstants.STYLE_EDITABLE,  "0");
+               style.put(mxConstants.STYLE_STARTSIZE, "15");
+               style.put(mxConstants.STYLE_ENDSIZE,   "15");
                style.put(mxConstants.STYLE_FILLCOLOR,   "#FFFFFF");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
-               style.put(mxConstants.STYLE_ENDARROW,   mxConstants.ARROW_BLOCK);
+               style.put(mxConstants.STYLE_ENDARROW,   mxConstants.ARROW_OPEN);
                style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);
         return style;
     }

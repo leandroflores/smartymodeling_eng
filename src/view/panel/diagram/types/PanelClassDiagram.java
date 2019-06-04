@@ -3,6 +3,7 @@ package view.panel.diagram.types;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
+import controller.view.panel.diagram.association.types.ControllerEventAssociationClass;
 import controller.view.panel.diagram.event.classs.ControllerEventChange;
 import controller.view.panel.diagram.event.classs.ControllerEventEdit;
 import controller.view.panel.diagram.event.classs.ControllerEventSelect;
@@ -63,7 +64,7 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.component.getGraph().getSelectionModel().addListener(mxEvent.CHANGE, new ControllerEventSelect(this));
 //        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
 //        this.componente.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventoPacote(this));
-//        this.componente.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventoAssociacaoClasses(this));
+        this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationClass(this));
 //        this.componente.getGraph().addListener(mxEvent.GROUP_CELLS, new ControllerEventoPacote(this));
     }
     
@@ -216,7 +217,7 @@ public final class PanelClassDiagram extends PanelDiagram {
      */
     private void addStereotypeCells(mxCell parent, Entity entity) {
         this.graph.getStylesheet().putCellStyle("stereotypeStyle",  entity.getStereotypeStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(stereotypo)", this.diagram.getStereotypesByElement(entity), 5, 6, entity.getWidth() - 10, 20, "stereotypeStyle");
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(stereotype)", this.diagram.getStereotypesByElement(entity), 5, 6, entity.getWidth() - 10, 20, "stereotypeStyle");
                cell.setConnectable(false);
         this.identifiers.put(cell, entity.getId());
     }
@@ -312,12 +313,14 @@ public final class PanelClassDiagram extends PanelDiagram {
         for (int i = 0; i < associations.size(); i++) {
             Association association = associations.get(i);
             this.graph.getStylesheet().putCellStyle(association.getStyleLabel(), association.getStyle());
-            if (association instanceof  AssociationUML) {
-                this.addAssociationUML((AssociationUML) association);
-            }else {
-                Object edge = this.graph.insertEdge(this.parent, null, association.getTitle(), this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
-                this.identifiers.put(edge, association.getId());
-            }
+            Object edge = this.graph.insertEdge(this.parent, association.getId(), association.getTitle(), this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
+            this.identifiers.put(edge, association.getId());
+//            if (association instanceof  AssociationUML) {
+//                this.addAssociationUML((AssociationUML) association);
+//            }else {
+//                Object edge = this.graph.insertEdge(this.parent, null, association.getTitle(), this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
+//                this.identifiers.put(edge, association.getId());
+//            }
         }
     }
     
@@ -354,6 +357,13 @@ public final class PanelClassDiagram extends PanelDiagram {
                 this.setGeneralizationStyle();
                 break;
             case 7:
+                this.setRealizationStyle();
+                break;
+            case 8:
+                this.setDependencyStyle();
+                break;
+            case  9:
+            case 10:
                 this.setRealizationStyle();
                 break;
             default:

@@ -96,7 +96,7 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
                 this.setGeneralizationStyle();
                 break;
             default:
-                this.setDependenyStyle();
+                this.setDependencyStyle();
                 break;
         }
     }

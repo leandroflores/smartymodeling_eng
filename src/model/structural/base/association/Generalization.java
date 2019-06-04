@@ -42,6 +42,8 @@ public class Generalization extends Association {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_DASHED,   "0");
                style.put(mxConstants.STYLE_EDITABLE, "0");
+               style.put(mxConstants.STYLE_STARTSIZE, "15");
+               style.put(mxConstants.STYLE_ENDSIZE,   "15");
                style.put(mxConstants.STYLE_FILLCOLOR,   "#FFFFFF");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_ENDARROW,   mxConstants.ARROW_BLOCK);

@@ -7,10 +7,12 @@ import com.mxgraph.util.mxEventSource.mxIEventListener;
 import java.util.ArrayList;
 import java.util.List;
 import model.structural.base.Element;
+import model.structural.base.association.Association;
 import model.structural.diagram.classs.base.AttributeUML;
 import model.structural.diagram.classs.base.MethodUML;
 import model.structural.diagram.classs.base.ParameterUML;
 import model.structural.diagram.classs.base.TypeUML;
+import model.structural.diagram.classs.base.association.AssociationUML;
 import view.panel.diagram.types.PanelClassDiagram;
 
 /**
@@ -42,16 +44,18 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     
     /**
      * Method responsible for changing the Selected Element.
-     * @param element Selected Element.
+     * @param object Selected Object.
      * @param id Element Id.
      */
-    private void change(Object element, String id) {
+    private void change(Object object, String id) {
         if      (this.panel.getDiagram().getElement(id) instanceof AttributeUML)
-            this.changeAttribute(element, (AttributeUML) this.panel.getDiagram().getElement(id));
+            this.changeAttribute(object, (AttributeUML) this.panel.getDiagram().getElement(id));
         else if (this.panel.getDiagram().getElement(id) instanceof MethodUML)
-            this.changeMethod(element,   (MethodUML)    this.panel.getDiagram().getElement(id));
+            this.changeMethod(object,    (MethodUML)    this.panel.getDiagram().getElement(id));
         else if (this.panel.getDiagram().getElement(id) != null)
-            this.changeElement(element, (Element)       this.panel.getDiagram().getElement(id));
+            this.changeElement(object,   (Element)      this.panel.getDiagram().getElement(id));
+        else if (this.panel.getDiagram().getAssociation(id) != null)
+            this.changeAssociation(object, this.panel.getDiagram().getAssociation(id));
     }
     
     /**
@@ -126,6 +130,17 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
             this.panel.getViewMenu().getPanelModeling().getViewMenu().update();
             this.panel.getViewMenu().setSave(false);
         }
+    }
+    
+    /**
+     * Method responsible for changing the Association.
+     * @param object Graph Object.
+     * @param association Association.
+     */
+    private void changeAssociation(Object object, Association association) {
+        mxCell cell = (mxCell) object;
+        if (association instanceof AssociationUML)
+            ((AssociationUML) association).setName(cell.getValue().toString().trim());
     }
     
     /**
@@ -254,15 +269,15 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     private String getId(Object cell) {
         if (this.panel.getIdentifiers().get(cell) != null)
             return this.panel.getIdentifiers().get(cell);
-        return this.getElementId((mxCell) cell);
+        return this.getCellId((mxCell) cell);
     }
     
     /**
-     * Method responsible for returning the Element Id by Name Cell.
-     * @param  cell Name Cell.
-     * @return Element Id.
+     * Method responsible for returning the Cell Id by Cell.
+     * @param  cell Cell.
+     * @return Cell Id.
      */
-    private String getElementId(mxCell cell) {
+    private String getCellId(mxCell cell) {
         if (cell != null) {
             if (cell.getId().endsWith("(name)"))
                 return cell.getId().substring(0, cell.getId().indexOf("("));

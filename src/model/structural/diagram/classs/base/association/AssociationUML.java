@@ -59,15 +59,21 @@ public class AssociationUML extends Association {
      * @param source Source Entity.
      * @param target Target Entity.
      * @param category Association Category.
+     * @param direction Association Direction Flag.
      */
-    public AssociationUML(Entity source, Entity target, String category) {
+    public AssociationUML(Entity source, Entity target, String category, boolean direction) {
         this.source    = source;
         this.target    = target;
         this.type      = "association";
         this.name      = "";
         this.category  = category;
-        this.direction = false;
+        this.direction = direction;
         this.setDefault();
+    }
+    
+    @Override
+    public String getId() {
+        return this.category.toUpperCase().trim() + "#" + this.source.getId() + "-" + this.target.getId();
     }
 
     /**
@@ -323,21 +329,21 @@ public class AssociationUML extends Association {
      * Method responsible for returning the Start Arrow.
      * @return Start Arrow.
      */
-    private String getStartArrow() {
-        return (this.category.toLowerCase().trim().equals("normal")) ? mxConstants.ARROW_OPEN : mxConstants.ARROW_DIAMOND;
+    private Object getStartArrow() {
+        return (this.category.toLowerCase().trim().equals("normal")) ? mxConstants.ARROW_SPACING : mxConstants.ARROW_DIAMOND;
     }
     
     /**
      * Method responsible for returning the End Arrow.
      * @return End Arrow.
      */
-    private String getEndArrow() {
-        return (this.direction) ? mxConstants.ARROW_OPEN : mxConstants.ARROW_CLASSIC;
+    private Object getEndArrow() {
+        return (this.direction) ? mxConstants.ARROW_OPEN : mxConstants.ARROW_SPACING;
     }
     
     @Override
     public String getTitle() {
-        return "";
+        return this.name;
     }
     
     @Override
@@ -360,10 +366,12 @@ public class AssociationUML extends Association {
     @Override
     public Map getStyle() {
         Map    style = new HashMap<>();
-               style.put(mxConstants.STYLE_DASHED,    "1");
+               style.put(mxConstants.STYLE_DASHED,    "0");
                style.put(mxConstants.STYLE_MOVABLE,   "0");
                style.put(mxConstants.STYLE_EDITABLE,  "1");
                style.put(mxConstants.STYLE_FONTCOLOR, "#000000");
+               style.put(mxConstants.STYLE_STARTSIZE, "15");
+               style.put(mxConstants.STYLE_ENDSIZE,   "15");
                style.put(mxConstants.STYLE_ENDARROW,    this.getEndArrow());
                style.put(mxConstants.STYLE_STARTARROW,  this.getStartArrow());
                style.put(mxConstants.STYLE_STROKECOLOR, this.getStrokeColor());

@@ -60,7 +60,6 @@ public class ImportClassDiagram extends ImportDiagram {
             Element  current = (Element) classs.item(i);
             ClassUML class_  = new ClassUML(current);
                      class_.setTypeUML(this.project.getEntityType(class_));
-                     System.out.println("Class Type: " + class_.getTypeUML());
                 this.importAttributes(current, class_);
                 this.importMethods(current, class_);
             this.classDiagram.addClass(class_);

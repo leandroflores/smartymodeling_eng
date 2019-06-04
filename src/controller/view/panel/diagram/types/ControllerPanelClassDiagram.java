@@ -197,7 +197,11 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
             this.panelDiagram.getDiagram().removeAttribute((AttributeUML) this.panelDiagram.getDiagram().getElement(id));
         else if (this.panelDiagram.getDiagram().getElement(id) instanceof MethodUML)
             this.panelDiagram.getDiagram().removeMethod((MethodUML) this.panelDiagram.getDiagram().getElement(id));
-        else if (this.panelDiagram.getDiagram().getElement(id)     != null)
+        else if (this.panelDiagram.getDiagram().getElement(id) instanceof ClassUML)
+            this.panelDiagram.getDiagram().removeClass((ClassUML) this.panelDiagram.getDiagram().getElement(id));
+        else if (this.panelDiagram.getDiagram().getElement(id) instanceof InterfaceUML)
+            this.panelDiagram.getDiagram().removeInterface((InterfaceUML) this.panelDiagram.getDiagram().getElement(id));
+        else if (this.panelDiagram.getDiagram().getElement(id) != null)
             new ViewDeleteElement(this.panelDiagram.getViewMenu().getPanelModeling(), this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
         else if (this.panelDiagram.getDiagram().getAssociation(id) != null)
             this.panelDiagram.getDiagram().removeAssociation(this.panelDiagram.getDiagram().getAssociation(id));
