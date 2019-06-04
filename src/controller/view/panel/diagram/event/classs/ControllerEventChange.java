@@ -9,6 +9,8 @@ import java.util.List;
 import model.structural.base.Element;
 import model.structural.diagram.classs.base.AttributeUML;
 import model.structural.diagram.classs.base.MethodUML;
+import model.structural.diagram.classs.base.ParameterUML;
+import model.structural.diagram.classs.base.TypeUML;
 import view.panel.diagram.types.PanelClassDiagram;
 
 /**
@@ -47,9 +49,9 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
         if      (this.panel.getDiagram().getElement(id) instanceof AttributeUML)
             this.changeAttribute(element, (AttributeUML) this.panel.getDiagram().getElement(id));
         else if (this.panel.getDiagram().getElement(id) instanceof MethodUML)
-            this.updateMetodo(element,   (MethodUML)    this.panel.getDiagram().getElement(id));
+            this.changeMethod(element,   (MethodUML)    this.panel.getDiagram().getElement(id));
         else if (this.panel.getDiagram().getElement(id) != null)
-            this.updateElemento(element, (Element)      this.panel.getDiagram().getElemento(id));
+            this.changeElement(element, (Element)       this.panel.getDiagram().getElement(id));
     }
     
     /**
@@ -61,11 +63,11 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
         mxCell cell      = (mxCell) object;
         String signature = cell.getValue().toString().trim();
         if (this.checkAttribute(signature)) {
-            attribute.setVisibilidade(this.getVisibilidade(signature));
-            attribute.setNome(this.getNome(signature, ":"));
-            attribute.setTipo(this.getTipo(signature));
-            this.panel.getViewMenu().getPainelModelagem().updateDiagrama();
-            this.panel.getViewMenu().setSalvo(false);
+            attribute.setVisibility(this.getVisibility(signature));
+            attribute.setName(this.getName(signature, ":"));
+            attribute.setTypeUML(this.getType(signature, true));
+            this.panel.getViewMenu().getPanelModeling().updateDiagram(this.panel.getDiagram());
+            this.panel.getViewMenu().setSave(false);
         }
     }
     
@@ -77,172 +79,171 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     private boolean checkAttribute(String signature) {
         return     this.checkVisibility(signature) 
                &&  signature.contains(":")
-               && !this.getNome(signature, ":").equals("");
+               && !this.getName(signature, ":").equals("");
     }
     
     /**
-     * Metodo responsavel por atualizar o Elemento.
-     * @param objeto Objeto do Grafo.
-     * @param elemento Elemento.
+     * Method responsible for changing the Method UML.
+     * @param object Graph Object.
+     * @param method Method UML.
      */
-    private void updateElemento(Object objeto, Elemento elemento) {
-        mxCell celula = (mxCell) objeto;
-        if (celula.getValue().toString().equals("") == false) {
-            elemento.setNome(celula.getValue().toString());
+    private void changeMethod(Object object, MethodUML method) {
+        mxCell cell      = (mxCell) object;
+        String signature = cell.getValue().toString().trim();
+        if (this.checkMethod(signature)) {
+            method.setVisibility(this.getVisibility(signature));
+            method.setName(this.getName(signature, "("));
+            method.setParameters(this.getParameters(signature));
+            method.setReturn(this.getType(signature, false));
+            this.panel.getViewMenu().getPanelModeling().updateDiagram(this.panel.getDiagram());
+            this.panel.getViewMenu().setSave(false);
+        }
+    }
+    
+    /**
+     * Method responsible for checking the Method Signature.
+     * @param  signature Method Signature.
+     * @return Signature checked.
+     */
+    private boolean checkMethod(String signature) {
+        return     this.checkVisibility(signature) 
+               &&  signature.contains("(")
+               &&  signature.contains(")")
+               &&  signature.indexOf("(") < signature.indexOf(")")
+               && !this.getName(signature, "(").equals("")
+               &&  signature.contains(":");
+    }
+    
+    /**
+     * Method responsible for changing the Element.
+     * @param object Graph Object.
+     * @param element Element.
+     */
+    private void changeElement(Object object, Element element) {
+        mxCell cell = (mxCell) object;
+        if (cell.getValue().toString().equals("") == false) {
+            element.setName(cell.getValue().toString());
 //            this.painel.getViewMenu().getPainelModelagem().getViewMenu().update();
-            this.panel.getViewMenu().setSalvo(false);
-        }
-    }
-    
-    
-    
-    /**
-     * Metodo responsavel por atualizar o Metodo UML.
-     * @param objeto Objeto do Grafo.
-     * @param metodo Metodo UML.
-     */
-    private void updateMetodo(Object objeto, MetodoUML metodo) {
-        mxCell celula     = (mxCell) objeto;
-        String assinatura = celula.getValue().toString().trim();
-        if (this.checkMetodo(assinatura)) {
-            metodo.setVisibilidade(this.getVisibilidade(assinatura));
-            metodo.setNome(this.getNome(assinatura, "("));
-            metodo.setParametros(this.getParametros(assinatura));
-            metodo.setRetorno(this.getRetorno(assinatura));
-            this.panel.getViewMenu().getPainelModelagem().updateDiagrama();
-            this.panel.getViewMenu().setSalvo(false);
+            this.panel.getViewMenu().setSave(false);
         }
     }
     
     /**
-     * Metodo responsavel por checar os Simbolos da Assinatura do Metodo.
-     * @param  assinatura Assinatura do Metodo.
-     * @return Simbolos da Assinatura do Metodo validos.
+     * Method responsible for checking the Signature Visibility.
+     * @param  signature Signature Visibility.
+     * @return Signature Visibility checked.
      */
-    private boolean checkMetodo(String assinatura) {
-        return     this.checkVisibility(assinatura) 
-               &&  assinatura.contains("(")
-               &&  assinatura.contains(")")
-               &&  assinatura.indexOf("(") < assinatura.indexOf(")")
-               && !this.getNome(assinatura, "(").equals("")
-               &&  assinatura.contains(":");
+    private boolean checkVisibility(String signature) {
+        return signature.startsWith("+")
+            || signature.startsWith("-")
+            || signature.startsWith("#")
+            || signature.startsWith("~");
     }
     
     /**
-     * Metodo responsavel por validar a Visibilidade da Assinatura.
-     * @param  assinatura Assinatura.
-     * @return Visibilidade da Assinatura valida.
+     * Method responsible for returning the Visibility by Signature.
+     * @param  signature Signature.
+     * @return Visibility.
      */
-    private boolean checkVisibility(String assinatura) {
-        return assinatura.startsWith("+")
-            || assinatura.startsWith("-")
-            || assinatura.startsWith("#")
-            || assinatura.startsWith("~");
-    }
-    
-    /**
-     * Metodo responsavel por retornar a Visibilidade pela Assinatura.
-     * @param  assinatura Assinatura.
-     * @return Visilidade da Assinatura.
-     */
-    private String getVisibilidade(String assinatura) {
-        if (assinatura.startsWith("+"))
+    private String getVisibility(String signature) {
+        if (signature.startsWith("+"))
             return "public";
-        else if (assinatura.startsWith("#"))
+        else if (signature.startsWith("#"))
             return "protected";
-        else if (assinatura.startsWith("-"))
+        else if (signature.startsWith("-"))
             return "private";
         return "default";
     }
     
     /**
-     * Metodo responsavel por retornar o Nome pela Assinatura.
-     * @param  assinatura Assinatura.
-     * @param  simbolo Simbolo.
-     * @return Nome da Assinatura.
+     * Method responsible for returning the Name by Signature.
+     * @param  signature Signature.
+     * @param  symbol Symbol.
+     * @return Name.
      */
-    private String getNome(String assinatura, String simbolo) {
-        if (assinatura.contains(simbolo))
-            return assinatura.substring(1, assinatura.indexOf(simbolo)).trim();
+    private String getName(String signature, String symbol) {
+        if (signature.contains(symbol))
+            return signature.substring(1, signature.trim().indexOf(symbol)).trim();
         return "";
     }
     
     /**
-     * Metodo responsavel por retornar o Tipo pela Assinatura.
-     * @param  assinatura Assinatura.
-     * @return Tipo da Assinatura.
+     * Method responsible for returning the Type UML by Signature.
+     * @param  signature Signature.
+     * @param  object Object Flag.
+     * @return Type UML.
      */
-    private TipoUML getTipo(String assinatura) {
-        if (assinatura.contains(":"))
-            return this.panel.getDiagrama().getProjeto().getTipoByNome(assinatura.substring(assinatura.indexOf(":") + 1).trim());
-        return this.panel.getDiagrama().getTipoPadrao();
+    private TypeUML getType(String signature, boolean object) {
+        if (signature.contains(":"))
+            return this.panel.getDiagram().getProject().getTypeByName(signature.substring(signature.trim().indexOf(":") + 1).trim());
+        return object ? this.panel.getDiagram().getObjectType() : this.panel.getDiagram().getVoidType();
     }
     
     /**
-     * Metodo responsavel por retornar a String de Parametros pela Assinatura do Metodo.
-     * @param  assinatura Assinatura do Metodo.
-     * @return String de Parametros pela Assinatura do Metodo.
+     * Method responsible for returning the Parameters Signature by Signature.
+     * @param  signature Signature.
+     * @return Parameters Signature.
      */
-    private String getStringParametros(String assinatura) {
-        return assinatura.substring(assinatura.indexOf("(") + 1, assinatura.indexOf(")")).trim();
+    private String getParametersSignature(String signature) {
+        return signature.substring(signature.indexOf("(") + 1, signature.indexOf(")")).trim();
     }
     
     /**
-     * Metodo responsavel por retornar a Array de Parametros pela Assinatura do Metodo.
-     * @param  assinatura Assinatura do Metodo.
-     * @return Array de Parametros pela Assinatura do Metodo.
+     * Method responsible for returning the Parameters List by Signature.
+     * @param  signature Method Signature.
+     * @return Parameters List.
      */
-    private String[] getListaParametros(String assinatura) {
-        return this.getStringParametros(assinatura).split("\\,");
+    private String[] getParametersList(String signature) {
+        return this.getParametersSignature(signature).split("\\,");
     }
     
     /**
-     * Metodo responsavel por retornar a Lista de Parametros pela Assinatura do Metodo.
-     * @param  assinatura Assinatura do Metodo.
-     * @return Lista de Parametros pela Assinatura do Metodo.
+     * Method responsible for returning the Parameters List by Method Signature.
+     * @param  signature Method Signature.
+     * @return Parameters List.
      */
-    private List<ParametroUML> getParametros(String assinatura) {
-        List<ParametroUML> parametros = new ArrayList<>();
-        for (String string : this.getListaParametros(assinatura)) {
-            ParametroUML parametro = this.getParametro(string.trim());
-            if (!parametro.getNome().equals("") && parametro.getTipo() != null)
-                parametros.add(parametro);
+    private List<ParameterUML> getParameters(String signature) {
+        List<ParameterUML> parameters = new ArrayList<>();
+        for (String string : this.getParametersList(signature)) {
+            ParameterUML parameter = this.getParameter(string.trim());
+            if (!parameter.getName().equals("") && parameter.getType() != null)
+                parameters.add(parameter);
         }
-        return  parametros;
+        return  parameters;
     }
     
     /**
-     * Metodo responsavel por retornar o Parametro UML pela String.
-     * @param  string String.
-     * @return Parametro UML pela String.
+     * Method responsible for returning the Parameter by Signature.
+     * @param  signature Signature.
+     * @return Parameter.
      */
-    private ParametroUML getParametro(String string) {
-        ParametroUML parametro = new ParametroUML();
-                     parametro.setNome(this.getNomeParametro(string));
-                     parametro.setTipo(this.getTipo(string));
-        return       parametro;
+    private ParameterUML getParameter(String signature) {
+        ParameterUML parameter = new ParameterUML();
+                     parameter.setName(this.getParameterName(signature));
+                     parameter.setType(this.getParameterType(signature));
+        return       parameter;
     }
     
     /**
-     * Metodo responsavel por retornar o Nome pela Assinatura do Parametro.
-     * @param  assinatura Assinatura do Parametro.
-     * @return Nome pela Assinatura do Parametro.
+     * Method responsible for returning the Parameter Name by Signature.
+     * @param  signature Signature.
+     * @return Parameter Name.
      */
-    private String getNomeParametro(String assinatura) {
-        if (assinatura.contains(":"))
-            return assinatura.substring(0, assinatura.indexOf(":")).trim();
+    private String getParameterName(String signature) {
+        if (signature.contains(":"))
+            return signature.substring(0, signature.indexOf(":")).trim();
         return "";
     }
     
     /**
-     * Metodo responsavel por retornar o Retorno pela Assinatura.
-     * @param  assinatura Assinatura.
-     * @return Retorno da Assinatura.
+     * Method responsible for returning the Parameter Type by Signature.
+     * @param  signature Signature.
+     * @return Parameter Type.
      */
-    private TipoUML getRetorno(String assinatura) {
-        if (assinatura.contains(":"))
-            return this.panel.getDiagrama().getProjeto().getTipoByNome(assinatura.substring(assinatura.lastIndexOf(":") + 1).trim());
-        return this.panel.getDiagrama().getTipoPadrao();
+    private TypeUML getParameterType(String signature) {
+        if (signature.contains(":"))
+            return this.panel.getDiagram().getProject().getTypeByName(signature.substring(signature.lastIndexOf(":") + 1).trim());
+        return this.panel.getDiagram().getObjectType();
     }
     
     /**

@@ -8,11 +8,11 @@ import model.structural.base.association.Association;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
-import model.structural.diagram.usecase.ActorUML;
-import model.structural.diagram.usecase.ExtendUML;
-import model.structural.diagram.usecase.IncludeUML;
-import model.structural.diagram.usecase.RealizationUML;
-import model.structural.diagram.usecase.UseCaseUML;
+import model.structural.diagram.usecase.base.ActorUML;
+import model.structural.diagram.usecase.base.association.ExtendUML;
+import model.structural.diagram.usecase.base.association.IncludeUML;
+import model.structural.diagram.usecase.base.association.RealizationUML;
+import model.structural.diagram.usecase.base.UseCaseUML;
 
 /**
  * <p>Class of Model <b>UseCaseDiagram</b>.</p>
@@ -21,8 +21,8 @@ import model.structural.diagram.usecase.UseCaseUML;
  * @since  22/05/2019
  * @see    model.structural.base.association.Association
  * @see    model.structural.base.Diagram
- * @see    model.structural.diagram.usecase.ActorUML
- * @see    model.structural.diagram.usecase.UseCaseUML
+ * @see    model.structural.diagram.usecase.base.ActorUML
+ * @see    model.structural.diagram.usecase.base.UseCaseUML
  */
 public final class UseCaseDiagram extends Diagram {
     private HashMap<String, ActorUML>    actorsUML;

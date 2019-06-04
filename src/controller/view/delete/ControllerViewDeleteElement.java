@@ -3,8 +3,8 @@ package controller.view.delete;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.diagram.UseCaseDiagram;
-import model.structural.diagram.usecase.ActorUML;
-import model.structural.diagram.usecase.UseCaseUML;
+import model.structural.diagram.usecase.base.ActorUML;
+import model.structural.diagram.usecase.base.UseCaseUML;
 import view.delete.ViewDeleteElement;
 
 /**

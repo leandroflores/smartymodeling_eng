@@ -1,4 +1,4 @@
-package model.structural.diagram.usecase;
+package model.structural.diagram.usecase.base;
 
 import com.mxgraph.util.mxConstants;
 import java.awt.Point;

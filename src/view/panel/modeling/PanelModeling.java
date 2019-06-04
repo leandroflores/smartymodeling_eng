@@ -6,9 +6,11 @@ import java.awt.Component;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import model.structural.base.Diagram;
+import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import view.Panel;
 import view.panel.diagram.PanelDiagram;
+import view.panel.diagram.types.PanelClassDiagram;
 import view.panel.diagram.types.PanelUseCaseDiagram;
 import view.panel.logo.PanelLogo;
 import view.panel.tabbed.PanelTabbed;
@@ -99,10 +101,11 @@ public final class PanelModeling extends Panel {
         switch (diagram.getType()) {
 //            case "Activity":
 //                return new PainelDiagramaAtividades(this.viewMenu,  (DiagramaAtividades) diagram);
+            case "Class":
+                return new PanelClassDiagram(this.viewMenu,   (ClassDiagram)   diagram);
             case "UseCase":
                 return new PanelUseCaseDiagram(this.viewMenu, (UseCaseDiagram) diagram);
-//            case "Class":
-//                return new PainelDiagramaClasses(this.viewMenu,     (DiagramaClasses) diagram);
+            
 //            case "Components":
 //                return new PainelDiagramaComponentes(this.viewMenu, (DiagramaComponentes) diagram);
 //            default:

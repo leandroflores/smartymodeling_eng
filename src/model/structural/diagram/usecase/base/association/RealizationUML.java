@@ -1,10 +1,12 @@
-package model.structural.diagram.usecase;
+package model.structural.diagram.usecase.base.association;
 
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import model.structural.base.association.Association;
+import model.structural.diagram.usecase.base.ActorUML;
+import model.structural.diagram.usecase.base.UseCaseUML;
 
 /**
  * <p>Class of Model <b>RealizationUML</b>.</p>
@@ -12,8 +14,8 @@ import model.structural.base.association.Association;
  * @author Leandro
  * @since  22/05/2019
  * @see    model.structural.base.association.Association
- * @see    model.structural.diagram.usecase.ActorUML
- * @see    model.structural.diagram.usecase.UseCaseUML
+ * @see    model.structural.diagram.usecase.base.ActorUML
+ * @see    model.structural.diagram.usecase.base.UseCaseUML
  */
 public class RealizationUML extends Association {
     

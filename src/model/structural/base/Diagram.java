@@ -231,6 +231,7 @@ public abstract class Diagram implements Exportable {
     public void addElement(Element element) {
         this.elements.put(element.getId(), element);
         this.project.objects.put(element.getId(), element);
+        System.out.println("Project Elements: " + this.project.objects);
     }
     
     /**

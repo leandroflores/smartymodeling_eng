@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import model.structural.base.Project;
+import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import org.xml.sax.SAXException;
 import view.message.ViewError;
@@ -202,9 +203,10 @@ public class ControllerViewMenu extends ControllerView {
      */
     private void newClassDiagram() {
         if (this.viewMenu.getProject() != null) {
-//            DiagramaClasses diagrama = new DiagramaClasses(this.viewMenu.getProjeto());
-//            this.viewMenu.getProjeto().addDiagrama(diagrama);
-//            this.viewMenu.showDiagram(diagrama);
+            ClassDiagram diagram = new ClassDiagram(this.viewMenu.getProject());
+            this.viewMenu.getProject().addDiagram(diagram);
+                         diagram.setDefaultName();
+            this.viewMenu.showDiagram(diagram);
         }
         this.viewMenu.update();
     }

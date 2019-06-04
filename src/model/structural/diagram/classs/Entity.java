@@ -79,6 +79,7 @@ public abstract class Entity extends Element {
      */
     public void addAttribute(AttributeUML attribute) {
         this.attributes.put(attribute.getId(), attribute);
+        System.out.println("Entity Attributes: " + this.attributes);
         this.updateSize();
     }
     

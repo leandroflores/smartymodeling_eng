@@ -3,8 +3,8 @@ package controller.view.panel.diagram.types;
 import controller.view.panel.diagram.ControllerPanelDiagram;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
-import model.structural.diagram.usecase.ActorUML;
-import model.structural.diagram.usecase.UseCaseUML;
+import model.structural.diagram.usecase.base.ActorUML;
+import model.structural.diagram.usecase.base.UseCaseUML;
 import view.panel.diagram.types.PanelUseCaseDiagram;
 
 /**

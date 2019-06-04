@@ -1,30 +1,31 @@
-package model.structural.diagram.usecase;
+package model.structural.diagram.usecase.base.association;
 
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import model.structural.base.association.Association;
+import model.structural.diagram.usecase.base.UseCaseUML;
 
 /**
- * <p>Class of Model <b>ExtendUML</b>.</p>
- * <p>Class responsible for representing <b>Extend UML</b> in SMartyModeling.</p>
+ * <p>Class of Model <b>IncludeUML</b>.</p>
+ * <p>Class responsible for representing <b>Include UML</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  22/05/2019
  * @see    model.structural.base.association.Association
- * @see    model.structural.diagram.usecase.UseCaseUML
+ * @see    model.structural.diagram.usecase.base.UseCaseUML
  */
-public class ExtendUML extends Association {
+public class IncludeUML extends Association {
     
     /**
      * Default constructor method of Class.
      * @param source Use Case UML.
      * @param target Use Case UML.
      */
-    public ExtendUML(UseCaseUML source, UseCaseUML target) {
+    public IncludeUML(UseCaseUML source, UseCaseUML target) {
         this.source = source;
         this.target = target;
-        this.type   = "extend";
+        this.type   = "include";
     }
 
     @Override
@@ -49,18 +50,18 @@ public class ExtendUML extends Association {
      * Method responsible for setting Target.
      * @param target Use Case UML.
      */
-    public void setDestino(UseCaseUML target) {
+    public void setTarget(UseCaseUML target) {
         this.target = target;
     }
     
     @Override
     public String getTitle() {
-        return "<<extend>>";
+        return "<<include>>";
     }
     
     @Override
     public String getStyleLabel() {
-        return "styleExtendUML";
+        return "styleIncludeUML";
     }
     
     @Override
@@ -71,9 +72,9 @@ public class ExtendUML extends Association {
                style.put(mxConstants.STYLE_EDITABLE, "0");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
-               style.put(mxConstants.STYLE_SHAPE,      mxConstants.SHAPE_CONNECTOR);
                style.put(mxConstants.STYLE_ENDARROW,   mxConstants.ARROW_OPEN);
                style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);
+               style.put(mxConstants.STYLE_SHAPE,      mxConstants.SHAPE_CONNECTOR);
         return style;
     }
     
@@ -87,9 +88,9 @@ public class ExtendUML extends Association {
     
     @Override
     public boolean equals(Object object) {
-        if (object instanceof ExtendUML == false)
+        if (object instanceof IncludeUML == false)
             return false;
-        return this.source.equals(((ExtendUML) object).getSource())
-            && this.target.equals(((ExtendUML) object).getTarget());
+        return this.source.equals(((IncludeUML) object).getSource())
+            && this.target.equals(((IncludeUML) object).getTarget());
     }
 }

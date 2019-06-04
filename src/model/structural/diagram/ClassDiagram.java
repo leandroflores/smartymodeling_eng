@@ -9,8 +9,8 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.association.Association;
 import model.structural.diagram.classs.Entity;
-import model.structural.diagram.classs.association.AssociationUML;
-import model.structural.diagram.classs.association.RealizationUML;
+import model.structural.diagram.classs.base.association.AssociationUML;
+import model.structural.diagram.classs.base.association.RealizationUML;
 import model.structural.diagram.classs.base.AttributeUML;
 import model.structural.diagram.classs.base.ClassUML;
 import model.structural.diagram.classs.base.InterfaceUML;
@@ -216,6 +216,7 @@ public final class ClassDiagram extends Diagram {
      * @return Next Attribute Id.
      */
     public String nextAttributeId() {
+        System.out.println(this.nextId("ATTRIBUTE#"));
         return this.nextId("ATTRIBUTE#");
     }
     
@@ -225,9 +226,11 @@ public final class ClassDiagram extends Diagram {
      */
     public void addAttribute(AttributeUML attribute) {
         attribute.setId(this.nextAttributeId());
+        System.out.println("Attribute Id: " + attribute.getId());
         if (this.attributesUML.get(attribute.getId()) == null) {
             this.attributesUML.put(attribute.getId(), attribute);
             this.addElement(attribute);
+            System.out.println("Diagram Attributes: " + this.attributesUML);
         }
     }
     
@@ -264,6 +267,7 @@ public final class ClassDiagram extends Diagram {
      */
     public void addMethod(MethodUML method) {
         method.setId(this.nextMethodId());
+        System.out.println("Method: " + method.getId());
         if (this.methodsUML.get(method.getId()) == null) {
             this.methodsUML.put(method.getId(), method);
             this.addElement(method);
@@ -351,7 +355,7 @@ public final class ClassDiagram extends Diagram {
     
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/class.png";
+        return "diagram/class";
     }
     
     @Override

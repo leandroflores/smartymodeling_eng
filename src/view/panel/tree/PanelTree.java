@@ -2,13 +2,17 @@ package view.panel.tree;
 
 import controller.view.panel.tree.popup.ControllerTreePopup;
 import java.awt.FlowLayout;
+import java.util.List;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import model.structural.base.Diagram;
+import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.classs.Entity;
+import model.structural.diagram.classs.base.AttributeUML;
+import model.structural.diagram.classs.base.MethodUML;
 import view.Panel;
 import view.panel.tree.popup.TreePopup;
 import view.panel.tree.renderer.TreeRenderer;
@@ -93,12 +97,23 @@ public final class PanelTree extends Panel {
      * @param node Diagram Node.
      */
     private void addElements(Diagram diagram, DefaultMutableTreeNode node) {
-        for (int i = 0; i < diagram.getElementsList().size(); i++) {
-            if (diagram.getElementsList().get(i) instanceof Entity)
-                node.add(this.getNode((Entity) diagram.getElementsList().get(i)));
-            else
+        List<Element> elements = diagram.getElementsList();
+        for (int i = 0; i < elements.size(); i++) {
+            if (elements.get(i) instanceof Entity)
+                node.add(this.getNode((Entity) elements.get(i)));
+            else if (this.checkElement(elements.get(i)))
                 node.add(new DefaultMutableTreeNode(diagram.getElementsList().get(i)));
         }
+    }
+    
+    /**
+     * Method responsible for checking the Element is not Method or Attribute.
+     * @param  element Element.
+     * @return Element is not a Method or Attribute.
+     */
+    private boolean checkElement(Element element) {
+        return ((element instanceof AttributeUML == false)
+             && (element instanceof MethodUML   == false));
     }
     
     /**
@@ -150,8 +165,9 @@ public final class PanelTree extends Panel {
      * @param node Diagram Node.
      */
     private void addVariabilities(Diagram diagram, DefaultMutableTreeNode node) {
-        for (int i = 0; i < diagram.getVariabilitiesList().size(); i++)
-            node.add(this.getNode(diagram.getVariabilitiesList().get(i)));
+        List<Variability>   variabilities = diagram.getVariabilitiesList();
+        for (int i = 0; i < variabilities.size(); i++)
+            node.add(this.getNode(variabilities.get(i)));
     }
     
     /**

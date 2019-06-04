@@ -1,4 +1,4 @@
-package model.structural.diagram.classs.association;
+package model.structural.diagram.classs.base.association;
 
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;

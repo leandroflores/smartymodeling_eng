@@ -4,11 +4,11 @@ import file.importation.diagram.ImportDiagram;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.diagram.UseCaseDiagram;
-import model.structural.diagram.usecase.ActorUML;
-import model.structural.diagram.usecase.ExtendUML;
-import model.structural.diagram.usecase.IncludeUML;
-import model.structural.diagram.usecase.RealizationUML;
-import model.structural.diagram.usecase.UseCaseUML;
+import model.structural.diagram.usecase.base.ActorUML;
+import model.structural.diagram.usecase.base.association.ExtendUML;
+import model.structural.diagram.usecase.base.association.IncludeUML;
+import model.structural.diagram.usecase.base.association.RealizationUML;
+import model.structural.diagram.usecase.base.UseCaseUML;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 

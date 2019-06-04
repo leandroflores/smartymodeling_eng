@@ -3,7 +3,9 @@ package view.panel.diagram.types;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
+import controller.view.panel.diagram.event.classs.ControllerEventChange;
 import controller.view.panel.diagram.event.classs.ControllerEventEdit;
+import controller.view.panel.diagram.event.classs.ControllerEventSelect;
 import controller.view.panel.diagram.types.ControllerPanelClassDiagram;
 import java.util.List;
 import javax.swing.BoxLayout;
@@ -12,7 +14,7 @@ import javax.swing.JPanel;
 import model.structural.base.association.Association;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.Entity;
-import model.structural.diagram.classs.association.AssociationUML;
+import model.structural.diagram.classs.base.association.AssociationUML;
 import model.structural.diagram.classs.base.AttributeUML;
 import model.structural.diagram.classs.base.ClassUML;
 import model.structural.diagram.classs.base.InterfaceUML;
@@ -57,9 +59,9 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.addModelingPanel();
         
         this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
-//        this.componente.addListener(mxEvent.LABEL_CHANGED, new ControllerEventoAtualizar(this));
-//        this.componente.getGraph().getSelectionModel().addListener(mxEvent.CHANGE, new ControllerEventoSelecionar(this));
-//        this.componente.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventoMovimento(this));
+        this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
+        this.component.getGraph().getSelectionModel().addListener(mxEvent.CHANGE, new ControllerEventSelect(this));
+//        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
 //        this.componente.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventoPacote(this));
 //        this.componente.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventoAssociacaoClasses(this));
 //        this.componente.getGraph().addListener(mxEvent.GROUP_CELLS, new ControllerEventoPacote(this));
@@ -68,13 +70,13 @@ public final class PanelClassDiagram extends PanelDiagram {
     @Override
     public void addOperationsPanel() {
         JPanel panel = new JPanel();
-               panel.add(this.createButton("clickButton",        "", "Select",          "click.png"));
-               panel.add(this.createButton("packageButton",      "", "New Package",     "diagram/classs/package.png"));
-               panel.add(this.createButton("classeButton",       "", "New Class",       "diagram/classs/class.png"));
-               panel.add(this.createButton("interfaceButton",    "", "New Interface",   "diagram/classs/interface.png"));
-               panel.add(this.createButton("variabilityButton",  "", "New Variability", "variability.png"));
-               panel.add(this.createButton("editButton",         "", "Edit",            "edit.png"));
-               panel.add(this.createButton("deleteButton",       "", "Delete",          "delete.png"));
+               panel.add(this.createButton("clickButton",       "", "Select",          "click.png"));
+               panel.add(this.createButton("packageButton",     "", "New Package",     "diagram/classs/package.png"));
+               panel.add(this.createButton("classButton",       "", "New Class",       "diagram/classs/class.png"));
+               panel.add(this.createButton("interfaceButton",   "", "New Interface",   "diagram/classs/interface.png"));
+               panel.add(this.createButton("variabilityButton", "", "New Variability", "variability.png"));
+               panel.add(this.createButton("editButton",        "", "Edit",            "edit.png"));
+               panel.add(this.createButton("deleteButton",      "", "Delete",          "delete.png"));
                panel.add(this.createComboBox("associationComboBox", this.getAssociationItems(), 50));
        this.add(panel);
        this.getClickButton().setBackground(this.getFocusColor());
