@@ -139,6 +139,7 @@ public final class ClassDiagram extends Diagram {
         if (this.classUML.get(class_.getId()) == null) {
             this.classUML.put(class_.getId(), class_);
             this.addElement(class_);
+            this.project.addEntityType(class_);
         }
     }
     
@@ -147,6 +148,7 @@ public final class ClassDiagram extends Diagram {
      * @param classe_ Class UML.
      */
     public void removeClass(ClassUML classe_) {
+        this.project.removeEntityType(classe_);
         this.removeAttributes(classe_);
         this.removeMethods(classe_);
         this.removeAssociations(classe_);
@@ -179,6 +181,7 @@ public final class ClassDiagram extends Diagram {
         if (this.interfacesUML.get(interface_.getId()) == null) {
             this.interfacesUML.put(interface_.getId(), interface_);
             this.addElement(interface_);
+            this.project.addEntityType(interface_);
         }
     }
     
@@ -187,6 +190,7 @@ public final class ClassDiagram extends Diagram {
      * @param interface_ Interface UML.
      */
     public void removeInterface(InterfaceUML interface_) {
+        this.project.removeEntityType(interface_);
         this.removeAttributes(interface_);
         this.removeMethods(interface_);
         this.removeAssociations(interface_);
@@ -216,7 +220,6 @@ public final class ClassDiagram extends Diagram {
      * @return Next Attribute Id.
      */
     public String nextAttributeId() {
-        System.out.println(this.nextId("ATTRIBUTE#"));
         return this.nextId("ATTRIBUTE#");
     }
     
@@ -226,11 +229,9 @@ public final class ClassDiagram extends Diagram {
      */
     public void addAttribute(AttributeUML attribute) {
         attribute.setId(this.nextAttributeId());
-        System.out.println("Attribute Id: " + attribute.getId());
         if (this.attributesUML.get(attribute.getId()) == null) {
             this.attributesUML.put(attribute.getId(), attribute);
             this.addElement(attribute);
-            System.out.println("Diagram Attributes: " + this.attributesUML);
         }
     }
     
@@ -267,7 +268,6 @@ public final class ClassDiagram extends Diagram {
      */
     public void addMethod(MethodUML method) {
         method.setId(this.nextMethodId());
-        System.out.println("Method: " + method.getId());
         if (this.methodsUML.get(method.getId()) == null) {
             this.methodsUML.put(method.getId(), method);
             this.addElement(method);

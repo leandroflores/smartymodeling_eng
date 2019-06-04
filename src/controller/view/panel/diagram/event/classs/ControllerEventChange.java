@@ -123,7 +123,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
         mxCell cell = (mxCell) object;
         if (cell.getValue().toString().equals("") == false) {
             element.setName(cell.getValue().toString());
-//            this.painel.getViewMenu().getPainelModelagem().getViewMenu().update();
+            this.panel.getViewMenu().getPanelModeling().getViewMenu().update();
             this.panel.getViewMenu().setSave(false);
         }
     }

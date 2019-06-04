@@ -32,7 +32,7 @@ public class MethodUML extends Element {
      * Default constructor method of Class.
      */
     public MethodUML() {
-        this.id          = "";
+        this.id          = null;
         this.name        = "method";
         this.type        = "method";
         this.entity      = null;
@@ -64,6 +64,12 @@ public class MethodUML extends Element {
         this.setReturn(element);
     }
 
+    @Override
+    public void setDefaultName() {
+        super.setDefaultName();
+        this.name = this.name.toLowerCase().trim();
+    }
+    
     /**
      * Method responsible for returning Entity.
      * @return Entity.
@@ -397,29 +403,29 @@ public class MethodUML extends Element {
      */
     private String exportReturn() {
         if (this.return_ == null)
-            return "return=\"TIPO#42\" ";
-        return "return=\"" + this.return_.getId() + "\" ";
+            return "return=\"TIPO#42\"";
+        return "return=\"" + this.return_.getId() + "\"";
     }
     
     @Override
     public String export() {
-        String export  = "      <" + this.type + "";
-               export += " id=\""          + this.id          + "\"";
-               export += " name=\""        + this.name        + "\"";
-               export += this.exportReturn();
-               export += " visibility=\""  + this.visibility  + "\"";
-               export += " constructor=\"" + this.constructor + "\"";
-               export += " static=\""      + this.static_     + "\"";
-               export += " final=\""       + this.final_      + "\"";
-               export += " abstract=\""    + this.abstract_   + "\"";
-               export += ">\n";
-               export += exportParameters();
-               export += "      </metodo>\n";
-        return export;
+        String    export  = "      <"  + this.type + "";
+                  export += " id=\""          + this.id          + "\"";
+                  export += " name=\""        + this.name        + "\"";
+                  export += " "               + this.exportReturn();
+                  export += " visibility=\""  + this.visibility  + "\"";
+                  export += " constructor=\"" + this.constructor + "\"";
+                  export += " static=\""      + this.static_     + "\"";
+                  export += " final=\""       + this.final_      + "\"";
+                  export += " abstract=\""    + this.abstract_   + "\"";
+                  export += ">\n";
+                  export += exportParameters();
+                  export += "      </" + this.type + ">\n";
+        return    export;
     }
     
     /**
-     * Method responsible for exporting Method Parameters.
+     * Method responsible for exporting the Method Parameters.
      * @return Method Parameters.
      */
     private String exportParameters() {

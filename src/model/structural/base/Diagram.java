@@ -231,7 +231,6 @@ public abstract class Diagram implements Exportable {
     public void addElement(Element element) {
         this.elements.put(element.getId(), element);
         this.project.objects.put(element.getId(), element);
-        System.out.println("Project Elements: " + this.project.objects);
     }
     
     /**
@@ -727,8 +726,11 @@ public abstract class Diagram implements Exportable {
      */
     private String exportElements() {
         String export  = "";
-        for (Element element : this.getElementsList())
+        for (Element element : this.getElementsList()) {
+            if   ((element.getType().equals("attribute") == false)
+              &&  (element.getType().equals("method")    == false))
                export += element.export();
+        }
         return export;
     }
     

@@ -5,10 +5,13 @@ import model.structural.diagram.classs.base.AttributeUML;
 import com.mxgraph.util.mxConstants;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import model.structural.base.Element;
+import model.structural.diagram.classs.base.TypeUML;
 
 /**
  * <p>Class of Model <b>Entity</b>.</p>
@@ -18,8 +21,9 @@ import model.structural.base.Element;
  * @see    model.structural.base.Element
  */
 public abstract class Entity extends Element {
-    private final HashMap attributes;
-    private final HashMap methods;
+    private TypeUML typeUML;
+    private final LinkedHashMap attributes;
+    private final LinkedHashMap methods;
     
     /**
      * Default constructor method of Class.
@@ -27,8 +31,8 @@ public abstract class Entity extends Element {
     public Entity() {
         this.mandatory  = true;
         this.size       = new Point(200, 120);
-        this.attributes = new HashMap();
-        this.methods    = new HashMap();
+        this.attributes = new LinkedHashMap();
+        this.methods    = new LinkedHashMap();
     }
 
     /**
@@ -37,12 +41,34 @@ public abstract class Entity extends Element {
      */
     public Entity(org.w3c.dom.Element element) {
         super(element, true);
-        this.attributes = new HashMap();
-        this.methods    = new HashMap();
+        this.attributes = new LinkedHashMap();
+        this.methods    = new LinkedHashMap();
+    }
+
+    @Override
+    public void setName(String name) {
+        super.setName(name);
+        this.typeUML.setName(this.getName());
     }
     
     /**
-     * Method responsible for returning Attributes HashMap.
+     * Method responsible for returning the Type UML.
+     * @return Type UML.
+     */
+    public TypeUML getTypeUML() {
+        return this.typeUML;
+    }
+
+    /**
+     * Method responsible for setting the Type UML.
+     * @param typeUML Type UML.
+     */
+    public void setTypeUML(TypeUML typeUML) {
+        this.typeUML = typeUML;
+    }
+    
+    /**
+     * Method responsible for returning the Attributes HashMap.
      * @return Attributes HashMap.
      */
     public HashMap getAttributes() {
@@ -50,7 +76,7 @@ public abstract class Entity extends Element {
     }
     
     /**
-     * Method responsible for returning Attributes List.
+     * Method responsible for returning the Attributes List.
      * @return Attributes List.
      */
     public List<AttributeUML> getAttributesList() {
@@ -58,7 +84,7 @@ public abstract class Entity extends Element {
     }
     
     /**
-     * Method responsible for returning Attributes Position.
+     * Method responsible for returning the Attributes Position.
      * @return Attributes Position.
      */
     public Integer getAttributesPosition() {
@@ -79,7 +105,6 @@ public abstract class Entity extends Element {
      */
     public void addAttribute(AttributeUML attribute) {
         this.attributes.put(attribute.getId(), attribute);
-        System.out.println("Entity Attributes: " + this.attributes);
         this.updateSize();
     }
     
@@ -130,6 +155,19 @@ public abstract class Entity extends Element {
      */
     public void removeMethod(MethodUML method) {
         this.methods.remove(method.getId());
+    }
+    
+    /**
+     * Method responsible for returning the Comparator.
+     * @return Comparator.
+     */
+    private Comparator<Element> getComparator() {
+        return new Comparator<Element>() {
+            @Override
+            public int compare(Element element1, Element element2) {
+                return element1.getId().compareTo(element2.getId());
+            }
+        };
     }
 
     @Override

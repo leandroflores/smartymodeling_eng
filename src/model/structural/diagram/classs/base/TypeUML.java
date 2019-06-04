@@ -1,6 +1,7 @@
 package model.structural.diagram.classs.base;
 
 import model.structural.base.interfaces.Exportable;
+import model.structural.diagram.classs.Entity;
 import org.w3c.dom.Element;
 
 /**
@@ -73,6 +74,18 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
         this.name      = element.getAttribute("name");
         this.primitive = element.getAttribute("primitive").equals("true");
         this.standard  = element.getAttribute("standard").equals("true");
+    }
+    
+    /**
+     * Alternative constructor method of Class.
+     * @param entity Entity.
+     */
+    public TypeUML(Entity entity) {
+        this.id        = entity.getId();
+        this.path      = "";
+        this.name      = entity.getName();
+        this.primitive = false;
+        this.standard  = false;
     }
 
     /**

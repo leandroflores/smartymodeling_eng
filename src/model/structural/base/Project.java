@@ -13,6 +13,7 @@ import model.structural.base.association.Link;
 import model.structural.base.interfaces.Exportable;
 import model.structural.diagram.classs.base.TypeUML;
 import model.structural.base.variability.Variability;
+import model.structural.diagram.classs.Entity;
 
 /**
  * <p>Class of Model <b>Project</b>.</p>
@@ -310,8 +311,8 @@ public class Project implements Exportable {
         ArrayList list = new ArrayList<>(this.types.values());
                   list.sort(new Comparator<TypeUML>() {
                       @Override
-                      public int compare(TypeUML tipoA, TypeUML tipoB) {
-                          return tipoA.getName().compareTo(tipoB.getName());
+                      public int compare(TypeUML typeA, TypeUML typeB) {
+                          return typeA.getName().compareTo(typeB.getName());
                       }
                   });
         return    list;
@@ -350,11 +351,40 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Type by Entity.
+     * @param  entity Entity.
+     * @return Entity Type.
+     */
+    public TypeUML getEntityType(Entity entity) {
+        return (TypeUML) this.types.get(entity.getId());
+    }
+    
+    /**
+     * Method responsible for adding a Entity Type.
+     * @param entity Entity.
+     */
+    public void addEntityType(Entity entity) {
+        TypeUML type = new TypeUML(entity);
+        this.types.put(type.getId(), type);
+                entity.setTypeUML(type);
+    }
+    
+    /**
      * Method responsible for removing a UML Type.
      * @param type UML Type.
      */
     public void removeType(TypeUML type) {
         this.types.remove(type.getId());
+    }
+    
+    /**
+     * Method responsible for removing a Entity Type.
+     * @param entity Entity 
+     */
+    public void removeEntityType(Entity entity) {
+        if (this.types.get(entity.getId()) != null) {
+            System.out.println("Remove Type: " + this.types.get(entity.getId()));
+        }
     }
     
     /**

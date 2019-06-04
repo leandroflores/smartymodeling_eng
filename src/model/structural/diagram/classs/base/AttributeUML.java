@@ -24,7 +24,7 @@ public class AttributeUML extends Element {
      * Default constructor method of Class.
      */
     public AttributeUML() {
-        this.id         = "";
+        this.id         = null;
         this.name       = "attribute";
         this.type       = "attribute";
         this.entity     = null;
@@ -40,7 +40,7 @@ public class AttributeUML extends Element {
      */
     public AttributeUML(org.w3c.dom.Element element) {
         this.id         = element.getAttribute("id");
-        this.name       = element.getAttribute("nome");
+        this.name       = element.getAttribute("name");
         this.type       = "attribute";
         this.entity     = null;
         this.typeUML    = null;
@@ -49,6 +49,12 @@ public class AttributeUML extends Element {
         this.final_     = element.getAttribute("final_").trim().equals("true");
     }
 
+    @Override
+    public void setDefaultName() {
+        super.setDefaultName();
+        this.name = this.name.toLowerCase().trim();
+    }
+    
     /**
      * Method responsible for returning Entity.
      * @return Entity.

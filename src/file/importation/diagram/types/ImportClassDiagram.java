@@ -25,6 +25,7 @@ import org.w3c.dom.NodeList;
  * @see    model.structural.diagram.ClassDiagram
  */
 public class ImportClassDiagram extends ImportDiagram {
+    private final Project project;
     private final ClassDiagram classDiagram;
     
     /**
@@ -33,6 +34,7 @@ public class ImportClassDiagram extends ImportDiagram {
      * @param element W3C Element.
      */
     public ImportClassDiagram(Project project, Element element) {
+        this.project      = project;
         this.classDiagram = new ClassDiagram(project, element);
         this.diagram      = this.classDiagram;
         this.element      = element;
@@ -57,6 +59,8 @@ public class ImportClassDiagram extends ImportDiagram {
         for (int i = 0; i < classs.getLength(); i++) {
             Element  current = (Element) classs.item(i);
             ClassUML class_  = new ClassUML(current);
+                     class_.setTypeUML(this.project.getEntityType(class_));
+                     System.out.println("Class Type: " + class_.getTypeUML());
                 this.importAttributes(current, class_);
                 this.importMethods(current, class_);
             this.classDiagram.addClass(class_);
@@ -71,6 +75,7 @@ public class ImportClassDiagram extends ImportDiagram {
         for (int i = 0; i < interfaces.getLength(); i++) {
             Element      current    = (Element) interfaces.item(i);
             InterfaceUML interface_ = new InterfaceUML(current);
+                         interface_.setTypeUML(this.project.getEntityType(interface_));
                 this.importAttributes(current, interface_);
                 this.importMethods(current, interface_);
             this.classDiagram.addInterface(interface_);
