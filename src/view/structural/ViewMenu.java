@@ -255,7 +255,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Metodo responsavel por Atualizar os Componentes da View.
+     * Method responsible for updating the View.
      */
     public void update() {
         this.setTitle();

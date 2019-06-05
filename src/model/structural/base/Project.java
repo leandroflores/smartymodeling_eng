@@ -383,13 +383,15 @@ public class Project implements Exportable {
      * @param entity Entity 
      */
     public void removeEntityType(Entity entity) {
-        if (this.types.get(entity.getId()) != null) {
+        TypeUML oldType = (TypeUML) this.types.get(entity.getId());
+        TypeUML newType = this.getObjectType();
+        if (oldType != null) {
             List<Diagram> list = this.getDiagramsList();
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i) instanceof ClassDiagram)
-                    System.out.println("Class Diagram: " + (ClassDiagram) list.get(i));
+                    ((ClassDiagram) list.get(i)).changeTypeUML(oldType, newType);
             }
-            System.out.println("Remove Type: " + this.types.get(entity.getId()));
+            this.removeType(oldType);
         }
     }
     

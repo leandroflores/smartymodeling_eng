@@ -2,7 +2,11 @@ package controller.view.delete;
 
 import model.structural.base.Diagram;
 import model.structural.base.Element;
+import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.UseCaseDiagram;
+import model.structural.diagram.classs.base.ClassUML;
+import model.structural.diagram.classs.base.InterfaceUML;
+import model.structural.diagram.classs.base.PackageUML;
 import model.structural.diagram.usecase.base.ActorUML;
 import model.structural.diagram.usecase.base.UseCaseUML;
 import view.delete.ViewDeleteElement;
@@ -27,12 +31,12 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
     public ControllerViewDeleteElement(ViewDeleteElement viewDelete) {
         super(viewDelete);
         this.viewDeleteElement = viewDelete;
-        this.element            = viewDelete.getElement();
+        this.element           = viewDelete.getElement();
     }
     
     @Override
     public void delete() {
-        this.deleteElement(this.viewDeleteElement.getPanelModeling().getPanelDiagram().getDiagram());
+        this.delete(this.viewDeleteElement.getPanelModeling().getPanelDiagram().getDiagram());
         this.viewDeleteElement.getPanelModeling().getViewMenu().update();
         this.viewDeleteElement.dispose();
     }
@@ -41,20 +45,18 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
      * Method responsible for deleting a Element from Diagram.
      * @param diagram Diagram.
      */
-    private void deleteElement(Diagram diagram) {
+    private void delete(Diagram diagram) {
         if (diagram instanceof UseCaseDiagram)
-            this.deleteUseCasesDiagram((UseCaseDiagram) diagram);
-//        else if (diagram instanceof DiagramaClasses)
-//            this.removeDiagramaClasses((DiagramaClasses) diagram);
-//        else if (diagram instanceof DiagramaComponentes)
-//            this.removeDiagramaComponentes((DiagramaComponentes) diagram);
+            this.deleteElement((UseCaseDiagram) diagram);
+        else if (diagram instanceof ClassDiagram)
+            this.deleteElement((ClassDiagram) diagram);
     }
     
     /**
      * Method responsible for deleting a Element from a Use Cases Diagram.
      * @param diagram Use Cases Diagram.
      */
-    private void deleteUseCasesDiagram(UseCaseDiagram diagram) {
+    private void deleteElement(UseCaseDiagram diagram) {
         if (this.element instanceof ActorUML)
             diagram.removeActor((ActorUML) this.element);
         else if (this.element instanceof UseCaseUML)
@@ -62,26 +64,15 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
     }
     
     /**
-     * Metodo responsavel por remover um Elemento do Diagrama de Classes.
-     * @param diagrama Diagrama de Classes.
+     * Method responsible for deleting a Element from a Class Diagram.
+     * @param diagram Class Diagram.
      */
-//    private void removeDiagramaClasses(DiagramaClasses diagrama) {
-//        if (this.element instanceof PacoteUML)
-//            diagrama.removePacote((PacoteUML) this.element);
-//        else if (this.element instanceof ClasseUML)
-//            diagrama.removeClasse((ClasseUML) this.element);
-//        else if (this.element instanceof InterfaceUML)
-//            diagrama.removeInterface((InterfaceUML) this.element);
-//    }
-    
-    /**
-     * Metodo responsavel por remover um Elemento do Diagrama de Componentes.
-     * @param diagrama Diagrama de Componentes.
-     */
-//    private void removeDiagramaComponentes(DiagramaComponentes diagrama) {
-//        if (this.element instanceof ComponenteUML)
-//            diagrama.removeComponente((ComponenteUML) this.element);
-//        else if (this.element instanceof modelo.estruturais.diagrama.componentes.InterfaceUML)
-//            diagrama.removeInterface((modelo.estruturais.diagrama.componentes.InterfaceUML) this.element);
-//    }
+    private void deleteElement(ClassDiagram diagram) {
+        if (this.element instanceof PackageUML)
+            diagram.removePackage((PackageUML) this.element);
+        else if (this.element instanceof ClassUML)
+            diagram.removeClass((ClassUML) this.element);
+        else if (this.element instanceof InterfaceUML)
+            diagram.removeInterface((InterfaceUML) this.element);
+    }
 }

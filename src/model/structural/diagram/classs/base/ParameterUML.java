@@ -47,6 +47,16 @@ public class ParameterUML implements Exportable {
     }
 
     /**
+     * Method responsible for changing the Type UML.
+     * @param oldType Old Type.
+     * @param newType New Type.
+     */
+    public void changeTypeUML(TypeUML oldType, TypeUML newType) {
+        if (this.type.equals(oldType))
+            this.type = newType;
+    }
+    
+    /**
      * Method responsible for defining Parameter Type UML.
      * @param type Parameter Type UML.
      */

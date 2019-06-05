@@ -86,6 +86,16 @@ public class AttributeUML extends Element {
     public void setTypeUML(TypeUML typeUML) {
         this.typeUML = typeUML;
     }
+    
+    /**
+     * Method responsible for changing the Type UML.
+     * @param oldType Old Type.
+     * @param newType New Type.
+     */
+    public void changeTypeUML(TypeUML oldType, TypeUML newType) {
+        if (this.typeUML.equals(oldType))
+            this.typeUML = newType;
+    }
 
     /**
      * Method responsible for returning Visibility.

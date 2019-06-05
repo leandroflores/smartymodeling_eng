@@ -71,6 +71,16 @@ public class MethodUML extends Element {
     }
     
     /**
+     * Method responsible for changing the Type UML.
+     * @param oldType Old Type.
+     * @param newType New Type.
+     */
+    public void changeTypeUML(TypeUML oldType, TypeUML newType) {
+        this.changeReturn(oldType, newType);
+        this.changeParameterTypes(oldType, newType);
+    }
+    
+    /**
      * Method responsible for returning Entity.
      * @return Entity.
      */
@@ -109,6 +119,16 @@ public class MethodUML extends Element {
     private void setReturn(org.w3c.dom.Element element) {
         if (this.constructor)
             this.return_ = null;
+    }
+    
+    /**
+     * Method responsible for changing the Return.
+     * @param oldType Old Type.
+     * @param newType New Type.
+     */
+    private void changeReturn(TypeUML oldType, TypeUML newType) {
+        if (this.return_.equals(oldType))
+            this.return_ = newType;
     }
     
     /**
@@ -214,6 +234,17 @@ public class MethodUML extends Element {
      */
     public void setParameters(List<ParameterUML> parameters) {
         this.parameters = parameters;
+    }
+    
+    /**
+     * Method responsible for changing the Paremeter Types.
+     * @param oldType Old Type.
+     * @param newType New Type.
+     */
+    private void changeParameterTypes(TypeUML oldType, TypeUML newType) {
+        List<ParameterUML>  list = this.getParameters();
+        for (int i = 0; i < list.size(); i++)
+            list.get(i).changeTypeUML(oldType, newType);
     }
     
     /**

@@ -16,6 +16,7 @@ import model.structural.diagram.classs.base.ClassUML;
 import model.structural.diagram.classs.base.InterfaceUML;
 import model.structural.diagram.classs.base.MethodUML;
 import model.structural.diagram.classs.base.PackageUML;
+import model.structural.diagram.classs.base.TypeUML;
 
 /**
  * <p>Class of Model <b>ClassDiagram</b>.</p>
@@ -67,6 +68,16 @@ public final class ClassDiagram extends Diagram {
         this.methodsUML      = new HashMap<>();
         this.associationsUML = new HashMap<>();
         this.realizationsUML = new HashMap<>();
+    }
+    
+    /**
+     * Method responsible for changing the Type UML.
+     * @param oldType Old Type.
+     * @param newType New Type.
+     */
+    public void changeTypeUML(TypeUML oldType, TypeUML newType) {
+        this.changeClassTypes(oldType, newType);
+        this.changeInterfaceTypes(oldType, newType);
     }
     
     /**
@@ -157,6 +168,17 @@ public final class ClassDiagram extends Diagram {
     }
     
     /**
+     * Method responsible for changing the Class Types.
+     * @param oldType Old Type.
+     * @param newType New Type.
+     */
+    private void changeClassTypes(TypeUML oldType, TypeUML newType) {
+        List<ClassUML> list = this.getClassList();
+        for (int i = 0; i < list.size(); i++)
+            list.get(i).changeType(oldType, newType);
+    }
+    
+    /**
      * Method responsible for returning the Class List.
      * @return Class List.
      */
@@ -196,6 +218,17 @@ public final class ClassDiagram extends Diagram {
         this.removeAssociations(interface_);
         this.removeElement(interface_);
         this.interfacesUML.remove(interface_.getId());
+    }
+    
+    /**
+     * Method responsible for changing the Interface Types.
+     * @param oldType Old Type.
+     * @param newType New Type.
+     */
+    private void changeInterfaceTypes(TypeUML oldType, TypeUML newType) {
+        List<InterfaceUML>  list = this.getInterfacesList();
+        for (int i = 0; i < list.size(); i++)
+            list.get(i).changeType(oldType, newType);
     }
     
     /**

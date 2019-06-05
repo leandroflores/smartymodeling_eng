@@ -45,6 +45,16 @@ public abstract class Entity extends Element {
         this.methods    = new LinkedHashMap();
     }
 
+    /**
+     * Method responsible for changing the Types of Attributes and Methods.
+     * @param oldType Old Type.
+     * @param newType New Type.
+     */
+    public void changeType(TypeUML oldType, TypeUML newType) {
+         this.changeAttributeTypes(oldType, newType);
+         this.changeMethodTypes(oldType, newType);
+    }
+    
     @Override
     public void setName(String name) {
         super.setName(name);
@@ -81,6 +91,17 @@ public abstract class Entity extends Element {
      */
     public List<AttributeUML> getAttributesList() {
         return new ArrayList<>(this.attributes.values());
+    }
+    
+    /**
+     * Method responsible for changing the Attribute Types.
+     * @param oldType Old Type.
+     * @param newType New Type.
+     */
+    private void changeAttributeTypes(TypeUML oldType, TypeUML newType) {
+        List<AttributeUML>  list = this.getAttributesList();
+        for (int i = 0; i < list.size(); i++)
+            list.get(i).changeTypeUML(oldType, newType);
     }
     
     /**
@@ -130,6 +151,17 @@ public abstract class Entity extends Element {
      */
     public List<MethodUML> getMethodsList() {
         return new ArrayList<>(this.methods.values());
+    }
+    
+    /**
+     * Method responsible for changing the Method Types.
+     * @param oldType Old Type.
+     * @param newType New Type.
+     */
+    private void changeMethodTypes(TypeUML oldType, TypeUML newType) {
+        List<MethodUML>     list = this.getMethodsList();
+        for (int i = 0; i < list.size(); i++)
+            list.get(i).changeTypeUML(oldType, newType);
     }
 
     /**
