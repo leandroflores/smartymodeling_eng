@@ -44,11 +44,11 @@ public class ControllerEventEdit extends mxEventSource implements mxIEventListen
      */
     private void edit(Object element, String id) {
         if      (this.panel.getDiagram().getElement(id) instanceof AttributeUML)
-            this.editAttribute(element, (AttributeUML) this.panel.getDiagram().getElement(id));
+            this.edit(element, (AttributeUML) this.panel.getDiagram().getElement(id));
         else if (this.panel.getDiagram().getElement(id) instanceof MethodUML)
-            this.editMethod(element,    (MethodUML)    this.panel.getDiagram().getElement(id));
+            this.edit(element,    (MethodUML)    this.panel.getDiagram().getElement(id));
         else if (this.panel.getDiagram().getElement(id) != null)
-            this.editElement(element, (Element)    this.panel.getDiagram().getElement(id));
+            this.edit(element, (Element)    this.panel.getDiagram().getElement(id));
         
     }
     
@@ -57,7 +57,7 @@ public class ControllerEventEdit extends mxEventSource implements mxIEventListen
      * @param object Graph Object.
      * @param attribute Attribute UML.
      */
-    private void editAttribute(Object object, AttributeUML attribute) {
+    private void edit(Object object, AttributeUML attribute) {
         mxCell cell = (mxCell) object;
                cell.setValue(attribute.getSignature());
     }
@@ -67,7 +67,7 @@ public class ControllerEventEdit extends mxEventSource implements mxIEventListen
      * @param object Graph Object.
      * @param method Method UML.
      */
-    private void editMethod(Object object, MethodUML method) {
+    private void edit(Object object, MethodUML method) {
         mxCell cell = (mxCell) object;
                cell.setValue(method.getTitle());
     }
@@ -77,7 +77,7 @@ public class ControllerEventEdit extends mxEventSource implements mxIEventListen
      * @param object Graph Object.
      * @param element Element.
      */
-    private void editElement(Object object, Element element) {
+    private void edit(Object object, Element element) {
         String       id    = element.getId() + "(name)";
         mxGraphModel model = (mxGraphModel) this.panel.getGraph().getModel();
         mxCell       cell  = (mxCell) model.getCell(id);

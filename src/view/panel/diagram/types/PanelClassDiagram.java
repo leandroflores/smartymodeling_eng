@@ -217,7 +217,7 @@ public final class PanelClassDiagram extends PanelDiagram {
      */
     private void addStereotypeCells(mxCell parent, Entity entity) {
         this.graph.getStylesheet().putCellStyle("stereotypeStyle",  entity.getStereotypeStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(stereotype)", this.diagram.getStereotypesByElement(entity), 5, 6, entity.getWidth() - 10, 20, "stereotypeStyle");
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(stereotype)", this.diagram.getStereotypes(entity), 5, 6, entity.getWidth() - 10, 20, "stereotypeStyle");
                cell.setConnectable(false);
         this.identifiers.put(cell, entity.getId());
     }

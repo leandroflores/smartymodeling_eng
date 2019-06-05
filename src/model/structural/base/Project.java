@@ -272,8 +272,9 @@ public class Project implements Exportable {
      * @param diagram Diagram.
      */
     private void removeElements(Diagram diagram) {
-        for (int i = diagram.getElementsList().size() - 1; i >= 0; i--)
-            diagram.removeElement(diagram.getElementsList().get(i));
+        List<Element> list = diagram.getElementsList();
+        for (int i =  list.size() - 1; i >= 0; i--)
+            diagram.removeElement(list.get(i));
     }
     
     /**
@@ -609,6 +610,26 @@ public class Project implements Exportable {
     public void addDefaultStereotype(Stereotype stereotype) {
         if (stereotype.getId() != null)
             this.stereotypes.put(stereotype.getId(), stereotype);
+    }
+    
+    /**
+     * Method responsible for adding the Element Stereotype.
+     * @param element Element.
+     */
+    public void addElementStereotype(Element element) {
+        Stereotype stereotype = element.isMandatory() ? this.profile.getMandatory() : this.profile.getOptional();
+        this.addLink(new Link(element, stereotype));
+        System.out.println(this.links);
+    }
+    
+    /**
+     * Method responsible for updating the Element Stereotype.
+     * @param element Element.
+     */
+    public void updateElementStereotype(Element element) {
+        this.removeLink(new Link(element, this.profile.getMandatory()));
+        this.removeLink(new Link(element, this.profile.getOptional()));
+        this.addElementStereotype(element);
     }
     
     /**

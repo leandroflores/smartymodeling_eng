@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import model.structural.base.association.Dependency;
+import model.structural.base.association.Link;
 import model.structural.base.interfaces.Exportable;
 import model.structural.diagram.classs.base.TypeUML;
 import model.structural.base.variability.Mutex;
@@ -231,15 +232,7 @@ public abstract class Diagram implements Exportable {
     public void addElement(Element element) {
         this.elements.put(element.getId(), element);
         this.project.objects.put(element.getId(), element);
-    }
-    
-    /**
-     * Method responsible for updating Element Name.
-     * @param element Element.
-     * @param name Element Name.
-     */
-    public void updateElement(Element element, String name) {
-        element.setName(name.replaceAll(">", "").replaceAll("<", ""));
+        this.project.addElementStereotype(element);
     }
     
     /**
@@ -624,41 +617,28 @@ public abstract class Diagram implements Exportable {
     }
     
     /**
-     * Method responsible for returning Stereotypes by Element.
+     * Method responsible for returning the Stereotypes by Element.
      * @param  element Element.
-     * @return Stereotypes found.
+     * @return Stereotypes.
      */
-    public String getStereotypesByElement(Element element) {
-        String stereotype  = this.getOptionalStereotype(element)
-                           + this.getVariationPointStereotype(element);
-        String inclusive   = this.getInclusiveStereotype(element);
-        String exclusive   = this.getExclusiveStereotype(element);
-        String toReturn    = "";
-        if (!inclusive.equals("") || !exclusive.equals(""))
-               toReturn   += stereotype.replaceAll(this.getProject().getProfile().getMandatory() + "\n", "");
-        else
-               toReturn   += stereotype;
-        return toReturn   + inclusive + exclusive;
+    public String getStereotypes(Element element) {
+        String stereotype  = "";
+        for (Stereotype current : this.getStereotypesList(element))
+               stereotype += current.toString() + "\n";
+        return stereotype;
     }
     
     /**
-     * Method responsible for returning Stereotypes List by Element.
+     * Method responsible for returning the Stereotypes List by Element.
      * @param  element Element.
-     * @return Stereotypes List
+     * @return Stereotypes List.
      */
-    public List<String> getStereotypesList(Element element) {
-        return new FunctString().stringToList(this.getStereotypesByElement(element));
-    }
-    
-    /**
-     * Method responsible for returning Optional Stereotype by Element.
-     * @param  element Element.
-     * @return Optional Stereotype.
-     */
-    public String getOptionalStereotype(Element element) {
-        if (element.isMandatory())
-            return this.getProject().getProfile().getMandatory() + "\n";
-        return this.getProject().getProfile().getOptional() + "\n";
+    public List<Stereotype> getStereotypesList(Element element) {
+        List   stereotypes = new ArrayList<>();
+        List<Link> links   = this.project.filterLinksByElement(element);
+        for (int i = 0; i <    links.size(); i++)
+               stereotypes.add(links.get(i).getStereotype());
+        return stereotypes;
     }
     
     /**
@@ -666,8 +646,8 @@ public abstract class Diagram implements Exportable {
      * @param  element Element.
      * @return Variation Point Steretype.
      */
-    public String getVariationPointStereotype(Element element) {
-        return this.getVariationPoints(element).isEmpty() ? "" : this.getProject().getProfile().getVariationPoint() + "\n";
+    public Stereotype getVariationPointStereotype(Element element) {
+        return this.getVariationPoints(element).isEmpty() ? null : this.getProject().getProfile().getVariationPoint();
     }
     
     /**
@@ -707,8 +687,8 @@ public abstract class Diagram implements Exportable {
      * @param  element Element.
      * @return Inclusive Stereotype.
      */
-    public String getInclusiveStereotype(Element element) {
-        return this.filterVariants(element, "inclusive").isEmpty() ? "" : this.getProject().getProfile().getInclusive() + "\n";
+    public Stereotype getInclusiveStereotype(Element element) {
+        return this.filterVariants(element, "inclusive").isEmpty() ? null : this.getProject().getProfile().getInclusive();
     }
     
     /**
@@ -716,8 +696,8 @@ public abstract class Diagram implements Exportable {
      * @param  element Element.
      * @return Exclusive Stereotype.
      */
-    public String getExclusiveStereotype(Element element) {
-        return this.filterVariants(element, "exclusive").isEmpty() ? "" : this.getProject().getProfile().getExclusive() + "\n";
+    public Stereotype getExclusiveStereotype(Element element) {
+        return this.filterVariants(element, "exclusive").isEmpty() ? null : this.getProject().getProfile().getExclusive();
     }
     
     /**

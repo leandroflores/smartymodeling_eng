@@ -34,8 +34,8 @@ public final class PanelStereotype extends Panel {
      */
     public PanelStereotype(Project project, Element element) {
         this.project    = project;
-        this.controller = new ControllerPanelStereotype(this);
         this.element    = element;
+        this.controller = new ControllerPanelStereotype(this);
         this.setSettings();
         this.addComponents();
         this.update();

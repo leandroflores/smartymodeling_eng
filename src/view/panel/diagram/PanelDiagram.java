@@ -157,7 +157,7 @@ public abstract class PanelDiagram extends Panel {
         for (int i = 0; i < this.diagram.getElementsList().size(); i++) {
             Element element = this.diagram.getElementsList().get(i);
             this.graph.getStylesheet().putCellStyle(element.getStyleLabel(), element.getStyle());
-            String  title   = this.diagram.getStereotypesByElement(element) + element.getName();
+            String  title   = this.diagram.getStereotypes(element) + element.getName();
             mxCell  cell    = (mxCell) this.graph.insertVertex(this.parent, null, title, element.getPosition().x, element.getPosition().y, element.getSize().x, element.getSize().y, element.getStyleLabel());
             this.identifiers.put(cell, element.getId());
             this.objects.put(element.getId(), cell);
