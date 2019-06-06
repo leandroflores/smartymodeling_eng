@@ -3,16 +3,17 @@ package controller.view.panel.tree.popup.event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.base.AttributeUML;
+import model.structural.diagram.classs.base.MethodUML;
 import view.edit.ViewEditDiagram;
 import view.edit.ViewEditElement;
 import view.edit.ViewEditProject;
 import view.edit.classs.ViewEditAttribute;
+import view.edit.classs.ViewEditMethod;
 import view.panel.tree.popup.TreePopup;
 
 /**
@@ -55,6 +56,8 @@ public class ControllerMenuItemEdit implements ActionListener {
             new ViewEditDiagram(this.popup.getPanelTree().getViewMenu().getPanelModeling(), (Diagram) object).setVisible(true);
         else if (object instanceof AttributeUML)
             new ViewEditAttribute(this.popup.getPanelTree().getViewMenu().getPanelModeling(), this.getClassDiagram(node), (AttributeUML) object).setVisible(true);
+        else if (object instanceof MethodUML)
+            new ViewEditMethod(this.popup.getPanelTree().getViewMenu().getPanelModeling(), this.getClassDiagram(node), (MethodUML) object).setVisible(true);
         else if (object instanceof Element)
             new ViewEditElement(this.popup.getPanelTree().getViewMenu().getPanelModeling(), (Element) object).setVisible(true);
 //        else if (object instanceof Variabilidade)

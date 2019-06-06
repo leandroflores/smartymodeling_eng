@@ -1,43 +1,43 @@
 package view.edit.classs;
 
-import controller.view.edit.classs.ControllerViewEditAttribute;
+import controller.view.edit.classs.ControllerViewEditMethod;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.classs.base.AttributeUML;
+import model.structural.diagram.classs.base.MethodUML;
 import view.edit.ViewEdit;
-import view.edit.panel.base.classs.PanelBaseAttribute;
+import view.edit.panel.base.classs.PanelBaseMethod;
 import view.edit.panel.stereotype.PanelStereotype;
 import view.panel.modeling.PanelModeling;
 
 /**
- * <p>Class of View <b>ViewEditAttribute</b>.</p>
- * <p>Class responsible for defining the <b>Attribute Edit View</b> of SMartyModeling.</p>
+ * <p>Class of View <b>ViewEditMethod</b>.</p>
+ * <p>Class responsible for defining the <b>Method Edit View</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  05/06/2019
- * @see    controller.view.edit.classs.ControllerViewEditAttribute
- * @see    model.structural.diagram.classs.base.AttributeUML
+ * @since  06/06/2019
+ * @see    controller.view.edit.classs.ControllerViewEditMethod
+ * @see    model.structural.diagram.classs.base.MethodUML
  * @see    view.edit.ViewEdit
  */
-public final class ViewEditAttribute extends ViewEdit {
+public final class ViewEditMethod extends ViewEdit {
     private final ClassDiagram diagram;
-    private final AttributeUML attribute;
-    private PanelBaseAttribute panelBaseAttribute;
-    private PanelStereotype    panelStereotype;
+    private final MethodUML method;
+    private PanelBaseMethod panelBaseMethod;
+    private PanelStereotype panelStereotype;
     
     /**
      * Default constructor method of Class.
      * @param panel Panel Modeling.
      * @param diagram Class Diagram.
-     * @param attribute Attribute UML.
+     * @param method Method UML.
      */
-    public ViewEditAttribute(PanelModeling panel, ClassDiagram diagram, AttributeUML attribute) {
+    public ViewEditMethod(PanelModeling panel, ClassDiagram diagram, MethodUML method) {
         super(panel);
         this.diagram    = diagram;
-        this.attribute  = attribute;
-        this.controller = new ControllerViewEditAttribute(this);
-        this.title      = "Edit Attribute";
+        this.method     = method;
+        this.controller = new ControllerViewEditMethod(this);
+        this.title      = "Edit Method";
         this.initComponents();
     }
     
@@ -67,17 +67,17 @@ public final class ViewEditAttribute extends ViewEdit {
      * Method responsible for adding the Panel Base Attribute.
      */
     private void addPanelBaseAttribute() {
-        this.panelBaseAttribute = new PanelBaseAttribute(this.diagram, this.attribute);
-        this.createScrollPane("scrollPanelBaseAttribute", this.panelBaseAttribute);
-        this.getScrollPanelBaseAttribute().setViewportView(this.panelBaseAttribute);
-        this.tabbedPane.add("Attribute", this.getScrollPanelBaseAttribute());
+        this.panelBaseMethod = new PanelBaseMethod(this.diagram, this.method);
+        this.createScrollPane("scrollPanelBaseMethod", this.panelBaseMethod);
+        this.getScrollPanelBaseMethod().setViewportView(this.panelBaseMethod);
+        this.tabbedPane.add("Method", this.getScrollPanelBaseMethod());
     }
     
     /**
      * Method responsible for adding the Panel Stereotype.
      */
     private void addPanelStereotype() {
-        this.panelStereotype  = new PanelStereotype(this.getViewMenu().getProject(), this.attribute);
+        this.panelStereotype  = new PanelStereotype(this.getViewMenu().getProject(), this.method);
         this.createScrollPane("scrollPanelStereotype",  this.panelStereotype);
         this.getScrollPanelStereotype().setViewportView(this.panelStereotype);
         this.tabbedPane.add("Stereotype", this.getScrollPanelStereotype());
@@ -85,15 +85,15 @@ public final class ViewEditAttribute extends ViewEdit {
     
     @Override
     public void setValues() {
-        this.panelBaseAttribute.setValues();
+        this.panelBaseMethod.setValues();
     }
     
     /**
-     * Method responsible for returning the Scroll Panel Base Attribute.
-     * @return Scroll Panel Base Attribute.
+     * Method responsible for returning the Scroll Panel Base Method.
+     * @return Scroll Panel Base Method.
      */
-    public JScrollPane getScrollPanelBaseAttribute() {
-        return this.scrollPanes.get("scrollPanelBaseAttribute");
+    public JScrollPane getScrollPanelBaseMethod() {
+        return this.scrollPanes.get("scrollPanelBaseMethod");
     }
     
     /**

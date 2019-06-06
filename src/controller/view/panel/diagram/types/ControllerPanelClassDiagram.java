@@ -13,6 +13,9 @@ import model.structural.diagram.classs.base.InterfaceUML;
 import model.structural.diagram.classs.base.MethodUML;
 import model.structural.diagram.classs.base.PackageUML;
 import view.delete.ViewDeleteElement;
+import view.edit.ViewEditElement;
+import view.edit.classs.ViewEditAttribute;
+import view.edit.classs.ViewEditMethod;
 import view.panel.diagram.types.PanelClassDiagram;
 
 /**
@@ -115,7 +118,7 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
      * @param event Mouse Event.
      */
     public void addClass(MouseEvent event) {
-        ClassUML classUML = new ClassUML();
+        ClassUML classUML = new ClassUML(this.panelDiagram.getDiagram());
                  classUML.setPosition(event.getX(), event.getY());
         this.panelDiagram.getDiagram().addClass(classUML);
                  classUML.setDefaultName();
@@ -128,7 +131,7 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
      * @param event Mouse Event.
      */
     public void addInterface(MouseEvent event) {
-        InterfaceUML interfaceUML = new InterfaceUML();
+        InterfaceUML interfaceUML = new InterfaceUML(this.panelDiagram.getDiagram());
                      interfaceUML.setPosition(event.getX(), event.getY());
         this.panelDiagram.getDiagram().addInterface(interfaceUML);
                      interfaceUML.setDefaultName();
@@ -157,11 +160,14 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
      */
     private void edit(mxCell cell, String id) {
         if      (this.panelDiagram.getDiagram().getElement(id) instanceof AttributeUML)
-            this.panelDiagram.getComponent().startEditingAtCell(cell);
+            new ViewEditAttribute(this.panelDiagram.getViewMenu().getPanelModeling(), this.panelDiagram.getDiagram(), (AttributeUML) this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
+//            this.panelDiagram.getComponent().startEditingAtCell(cell);
         else if (this.panelDiagram.getDiagram().getElement(id) instanceof MethodUML)
-            this.panelDiagram.getComponent().startEditingAtCell(cell);
+            new ViewEditMethod(this.panelDiagram.getViewMenu().getPanelModeling(), this.panelDiagram.getDiagram(),       (MethodUML) this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
+//            this.panelDiagram.getComponent().startEditingAtCell(cell);
         else if (this.panelDiagram.getDiagram().getElement(id) != null)
-            this.editElement(this.panelDiagram.getDiagram().getElement(id));
+            new ViewEditElement(this.panelDiagram.getViewMenu().getPanelModeling(), this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
+//            this.editElement(this.panelDiagram.getDiagram().getElement(id));
     }
     
     /**

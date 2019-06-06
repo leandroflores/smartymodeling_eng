@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import model.structural.base.Stereotype;
 import model.structural.base.association.Association;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.Entity;
@@ -185,7 +186,7 @@ public final class PanelClassDiagram extends PanelDiagram {
      * @param entity Entity.
      */
     private void insert(mxCell vertex, Entity entity) {
-        this.addStereotypeCells(vertex, entity);
+        this.addStereotypeCells2(vertex, entity);
 //        this.addCelulaInterface(vertice, entidade);
         this.addNameCell(vertex, entity);
         this.addLineCell(vertex, 60, entity);
@@ -216,8 +217,26 @@ public final class PanelClassDiagram extends PanelDiagram {
      * @param entity Entity.
      */
     private void addStereotypeCells(mxCell parent, Entity entity) {
+        List<Stereotype>  stereotypes = this.diagram.getStereotypesList(entity);
+        for (int i = 0; i < stereotypes.size(); i++) {
+            Stereotype stereotype = stereotypes.get(i);
+            this.graph.getStylesheet().putCellStyle("stereotypeStyle", stereotype.getStyle());
+            mxCell       cell      = (mxCell) this.graph.insertVertex(parent, stereotype.getId(), stereotype.getName(), 5, 70 + (i * 16), entity.getWidth() - 10, 15, "stereotypeStyle");
+                         cell.setConnectable(false);
+                         cell.setId(stereotype.getId());
+            this.identifiers.put(cell,         stereotype.getId());
+            this.identifiers.put(cell.getId(), stereotype.getId());
+        }
+    }
+    
+    /**
+     * Method responsible for adding the Stereotype Cells.
+     * @param parent Parent Cell.
+     * @param entity Entity.
+     */
+    private void addStereotypeCells2(mxCell parent, Entity entity) {
         this.graph.getStylesheet().putCellStyle("stereotypeStyle",  entity.getStereotypeStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(stereotype)", this.diagram.getStereotypes(entity), 5, 6, entity.getWidth() - 10, 20, "stereotypeStyle");
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId(), this.diagram.getStereotypes(entity, "\n"), 5, 6, entity.getWidth() - 10, 20, "stereotypeStyle");
                cell.setConnectable(false);
         this.identifiers.put(cell, entity.getId());
     }
@@ -269,7 +288,7 @@ public final class PanelClassDiagram extends PanelDiagram {
         for (int i = 0; i < attributes.size(); i++) {
             AttributeUML attribute = attributes.get(i);
             this.graph.getStylesheet().putCellStyle(attribute.getStyleLabel(), attribute.getStyle());
-            mxCell       cell      = (mxCell) this.graph.insertVertex(parent, attribute.getId(), attribute.getSignature(), 5, 70 + (i * 16), entity.getWidth() - 10, 15, attribute.getStyleLabel());
+            mxCell       cell      = (mxCell) this.graph.insertVertex(parent, attribute.getId(), attribute.getCompleteSignature(), 5, 70 + (i * 16), entity.getWidth() - 10, 15, attribute.getStyleLabel());
                          cell.setConnectable(false);
                          cell.setId(attribute.getId());
             this.identifiers.put(cell,         attribute.getId());

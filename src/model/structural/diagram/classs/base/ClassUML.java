@@ -1,5 +1,6 @@
 package model.structural.diagram.classs.base;
 
+import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.Entity;
 import org.w3c.dom.Element;
 
@@ -16,9 +17,10 @@ public class ClassUML extends Entity {
     
     /**
      * Default constructor method of Class.
+     * @param diagram Class Diagram.
      */
-    public ClassUML() {
-        super();
+    public ClassUML(ClassDiagram diagram) {
+        super(diagram);
         this.name      = "Class";
         this.type      = "class";
         this.abstract_ = false;

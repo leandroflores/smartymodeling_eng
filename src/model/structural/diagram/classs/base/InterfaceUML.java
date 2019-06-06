@@ -1,5 +1,6 @@
 package model.structural.diagram.classs.base;
 
+import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.Entity;
 import org.w3c.dom.Element;
 
@@ -14,9 +15,10 @@ public class InterfaceUML extends Entity {
     
     /**
      * Default constructor method of Class.
+     * @param diagram Class Diagram.
      */
-    public InterfaceUML() {
-        super();
+    public InterfaceUML(ClassDiagram diagram) {
+        super(diagram);
         this.name = "Interface";
         this.type = "interface";
     }

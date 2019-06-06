@@ -205,7 +205,15 @@ public class AttributeUML extends Element {
     }
     
     /**
-     * Method responsible for returning Signature.
+     * Method responsible for returning the Complete Signature.
+     * @return Complete Signature.
+     */
+    public String getCompleteSignature() {
+        return (this.entity.getStereotypes(this) + this.getSignature()).trim();
+    }
+    
+    /**
+     * Method responsible for returning the Signature.
      * @return Signature.
      */
     public String getSignature() {

@@ -151,6 +151,7 @@ public final class ClassDiagram extends Diagram {
             this.classUML.put(class_.getId(), class_);
             this.addElement(class_);
             this.project.addEntityType(class_);
+            class_.setDiagram(this);
         }
     }
     
@@ -204,6 +205,7 @@ public final class ClassDiagram extends Diagram {
             this.interfacesUML.put(interface_.getId(), interface_);
             this.addElement(interface_);
             this.project.addEntityType(interface_);
+            interface_.setDiagram(this);
         }
     }
     

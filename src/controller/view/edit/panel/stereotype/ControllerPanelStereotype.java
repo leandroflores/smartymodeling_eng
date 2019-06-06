@@ -13,7 +13,7 @@ import view.edit.panel.stereotype.PanelStereotype;
  * @author Leandro
  * @since  31/05/2019
  * @see    controller.view.ControllerPanel
- * @see    view.panel.diagram.PanelDiagram
+ * @see    view.edit.panel.stereotype.PanelStereotype
  */
 public class ControllerPanelStereotype extends ControllerPanel {
     private final PanelStereotype panelStereotype;
@@ -46,7 +46,10 @@ public class ControllerPanelStereotype extends ControllerPanel {
     private void newStereotype() {
         String name = this.panelStereotype.getStereotypeTextField().getText().trim();
         if ((this.check(name)) && (this.panelStereotype.getProject().getStereotypeByName(name) == null)) {
-            this.panelStereotype.getProject().addStereotype(new Stereotype(name));
+            Stereotype stereotype = new Stereotype(name);
+            this.panelStereotype.getProject().addStereotype(stereotype);
+            this.panelStereotype.getProject().addLink(new Link(this.panelStereotype.getElement(), stereotype));
+            this.panelStereotype.updateList();
             this.panelStereotype.updateComboBox();
             this.panelStereotype.getStereotypeTextField().setText("");
             this.panelStereotype.getStereotypeTextField().requestFocus();

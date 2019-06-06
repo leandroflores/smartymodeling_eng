@@ -621,12 +621,13 @@ public abstract class Diagram implements Exportable {
     /**
      * Method responsible for returning the Stereotypes by Element.
      * @param  element Element.
+     * @param  delimiter Delimiter.
      * @return Stereotypes.
      */
-    public String getStereotypes(Element element) {
+    public String getStereotypes(Element element, String delimiter) {
         String stereotype  = "";
         for (Stereotype current : this.getStereotypesList(element))
-               stereotype += current.toString() + "\n";
+               stereotype += current.toString() + delimiter;
         return stereotype;
     }
     

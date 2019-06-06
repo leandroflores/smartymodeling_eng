@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import model.structural.base.Element;
+import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.base.TypeUML;
 
 /**
@@ -21,14 +22,17 @@ import model.structural.diagram.classs.base.TypeUML;
  * @see    model.structural.base.Element
  */
 public abstract class Entity extends Element {
+    private ClassDiagram diagram;
     private TypeUML typeUML;
     private final LinkedHashMap attributes;
     private final LinkedHashMap methods;
     
     /**
      * Default constructor method of Class.
+     * @param diagram Class Diagram.
      */
-    public Entity() {
+    public Entity(ClassDiagram diagram) {
+        this.diagram    = diagram;
         this.mandatory  = true;
         this.size       = new Point(200, 120);
         this.attributes = new LinkedHashMap();
@@ -59,6 +63,31 @@ public abstract class Entity extends Element {
     public void setName(String name) {
         super.setName(name);
         this.typeUML.setName(this.getName());
+    }
+
+    /**
+     * Method responsible for returning the Class Diagram.
+     * @return Class Diagram.
+     */
+    public ClassDiagram getDiagram() {
+        return this.diagram;
+    }
+
+    /**
+     * Method responsible for setting the Class Diagram.
+     * @param diagram Class Diagram.
+     */
+    public void setDiagram(ClassDiagram diagram) {
+        this.diagram = diagram;
+    }
+    
+    /**
+     * Method responsible for returning the Stereotypes by Element.
+     * @param  element Element.
+     * @return Stereotypes.
+     */
+    public String getStereotypes(Element element) {
+        return this.diagram.getStereotypes(element, " ");
     }
     
     /**

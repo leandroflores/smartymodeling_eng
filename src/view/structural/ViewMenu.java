@@ -2,6 +2,7 @@ package view.structural;
 
 import controller.view.structural.ControllerViewMenu;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -197,11 +198,17 @@ public final class ViewMenu extends View implements Operation {
         this.getContentPane().add(this.getScrollPanelMain(), BorderLayout.NORTH);
     }
     
-    private JSplitPane createSplitPane() {
+    private JSplitPane createSplitPane(boolean flag) {
         JSplitPane split = new JSplitPane();
-                   split.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
+                   split.setOrientation(flag ? JSplitPane.HORIZONTAL_SPLIT : JSplitPane.VERTICAL_SPLIT);
 //                   splitPane.setLayout(new GridLayout(2, 0));
         return     split;
+    }
+    
+    private JPanel createPanelTest() {
+        JPanel panel = new JPanel();
+               panel.setBackground(Color.red);
+        return panel;
     }
     
     /**
@@ -216,13 +223,14 @@ public final class ViewMenu extends View implements Operation {
         this.getScrollPanelModeling().setMinimumSize(new Dimension(400, 100));
         this.getScrollPanelModeling().setPreferredSize(new Dimension(1500, 100));
        
-        this.mainSplitPane = this.createSplitPane();
+        this.mainSplitPane = this.createSplitPane(true);
 //        this.auxSplitPane  = this.createSplitPane();
         
         this.mainSplitPane.setLeftComponent(this.getScrollPanelTree());
         this.mainSplitPane.setRightComponent(this.getScrollPanelModeling());
 //        this.mainSplitPane.setLeftComponent(this.auxSplitPane);
 //        this.mainSplitPane.setRightComponent(this.createPainel("idPanel"));
+        
         
         this.getContentPane().add(this.mainSplitPane, BorderLayout.WEST);
     }

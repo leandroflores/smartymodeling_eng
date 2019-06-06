@@ -321,19 +321,27 @@ public class MethodUML extends Element {
     }
     
     /**
-     * Method responsible for returning Method Signature.
-     * @return Method Signature.
+     * Method responsible for returning the Complete Signature.
+     * @return Complete Signature.
      */
-    public String getSignature() {
+    public String getCompleteSignature() {
+        return this.entity.getStereotypes(this) + this.getSignature();
+    }
+    
+    /**
+     * Method responsible for returning the Short Signature.
+     * @return Short Signature.
+     */
+    public String getShortSignature() {
         return this.name + this.parameters();
     }
     
     /**
-     * Method responsible for returning Method Complete Signature.
-     * @return Method Complete Signature.
+     * Method responsible for returning the Signature.
+     * @return Signature.
      */
-    public String getCompleteSignature() {
-        return this.getVisibilitySymbol() + " " + this.getSignature() + this.printReturnType();
+    public String getSignature() {
+        return this.getVisibilitySymbol() + " " + this.getShortSignature() + this.printReturnType();
     }
     
     /**
@@ -389,7 +397,7 @@ public class MethodUML extends Element {
     
     @Override
     public String getTitle() {
-        return this.getCompleteSignature();
+        return this.getSignature();
     }
     
     @Override
@@ -472,7 +480,7 @@ public class MethodUML extends Element {
             return false;
         if (object instanceof MethodUML == false)
             return false;
-        return this.getSignature().equals(((MethodUML) object).getSignature());
+        return this.getShortSignature().equals(((MethodUML) object).getShortSignature());
     }
 
     @Override
