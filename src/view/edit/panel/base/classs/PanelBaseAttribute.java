@@ -37,7 +37,7 @@ public final class PanelBaseAttribute extends Panel {
      */
     private void setSettings() {
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
-        this.setPreferredSize(new Dimension(300, 100));
+        this.setPreferredSize(new Dimension(360, 100));
     }
     
     @Override
@@ -46,16 +46,19 @@ public final class PanelBaseAttribute extends Panel {
         
         this.add(this.createLabel("Visibility: ", 120));
         this.add(this.createComboBox("visibilityComboBox", this.diagram.getVisibilities(), 30));
-//        this.getVisibilityComboBox().setPreferredSize(new Dimension(400, 30));
+        this.getVisibilityComboBox().setPreferredSize(new Dimension(350, 30));
         this.addLines(1);
         
         this.add(this.createLabel("Name*: ", 120));
-        this.add(this.createTextField("nameTextField", "", 30));
+        this.add(this.createTextField("nameTextField", "", 25));
+        this.getNameTextField().setPreferredSize(new Dimension(350, 30));
+        this.getNameTextField().setSize(new Dimension(350, 30));
         
         this.addLines(1);
         
         this.add(this.createLabel("Type: ", 120));
         this.add(this.createComboBox("typeComboBox", this.diagram.getProject().getTypesList().toArray(), 30));
+        this.getTypeComboBox().setPreferredSize(new Dimension(350, 30));
         
         this.addLines(1);
         

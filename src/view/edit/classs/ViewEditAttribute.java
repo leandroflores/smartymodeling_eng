@@ -7,6 +7,7 @@ import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.base.AttributeUML;
 import view.edit.ViewEdit;
 import view.edit.panel.base.classs.PanelBaseAttribute;
+import view.edit.panel.stereotype.PanelStereotype;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -22,6 +23,7 @@ public final class ViewEditAttribute extends ViewEdit {
     private final ClassDiagram diagram;
     private final AttributeUML attribute;
     private PanelBaseAttribute panelBaseAttribute;
+    private PanelStereotype    panelStereotype;
     
     /**
      * Default constructor method of Class.
@@ -40,7 +42,7 @@ public final class ViewEditAttribute extends ViewEdit {
     
     @Override
     public void initComponents() {
-        this.setSize(580, 370);
+        this.setSize(600, 445);
         this.addHeader();
         this.addComponents();
         this.addFooter();
@@ -50,9 +52,10 @@ public final class ViewEditAttribute extends ViewEdit {
     @Override
     public void addComponents() {
         this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(570, 375));
+        this.tabbedPane.setPreferredSize(new Dimension(550, 325));
         
         this.addPanelBaseAttribute();
+        this.addPanelStereotype();
         
         this.add(this.tabbedPane);
         
@@ -67,6 +70,16 @@ public final class ViewEditAttribute extends ViewEdit {
         this.createScrollPane("scrollPanelBaseAttribute", this.panelBaseAttribute);
         this.getScrollPanelBaseAttribute().setViewportView(this.panelBaseAttribute);
         this.tabbedPane.add("Attribute", this.getScrollPanelBaseAttribute());
+    }
+    
+    /**
+     * Method responsible for adding the Panel Stereotype.
+     */
+    private void addPanelStereotype() {
+        this.panelStereotype  = new PanelStereotype(this.getViewMenu().getProject(), this.attribute);
+        this.createScrollPane("scrollPanelStereotype",  this.panelStereotype);
+        this.getScrollPanelStereotype().setViewportView(this.panelStereotype);
+        this.tabbedPane.add("Stereotype", this.getScrollPanelStereotype());
     }
     
     @Override
@@ -110,5 +123,21 @@ public final class ViewEditAttribute extends ViewEdit {
      */
     public JScrollPane getScrollPanelBaseAttribute() {
         return this.scrollPanes.get("scrollPanelBaseAttribute");
+    }
+    
+    /**
+     * Method responsible for returning the Scroll Panel Stereotype.
+     * @return Scroll Panel Stereotype.
+     */
+    public JScrollPane getScrollPanelStereotype() {
+        return this.scrollPanes.get("scrollPanelStereotype");
+    }
+    
+    /**
+     * Method responsible for returning the Panel Stereotype.
+     * @return Panel Stereotype.
+     */
+    public PanelStereotype getPanelStereotype() {
+        return this.panelStereotype;
     }
 }

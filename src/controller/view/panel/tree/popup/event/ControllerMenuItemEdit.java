@@ -3,12 +3,16 @@ package controller.view.panel.tree.popup.event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.diagram.ClassDiagram;
+import model.structural.diagram.classs.base.AttributeUML;
 import view.edit.ViewEditDiagram;
 import view.edit.ViewEditElement;
 import view.edit.ViewEditProject;
+import view.edit.classs.ViewEditAttribute;
 import view.panel.tree.popup.TreePopup;
 
 /**
@@ -49,6 +53,8 @@ public class ControllerMenuItemEdit implements ActionListener {
             new ViewEditProject(this.popup.getPanelTree().getViewMenu().getPanelModeling(), (Project) object).setVisible(true);
         else if (object instanceof Diagram)
             new ViewEditDiagram(this.popup.getPanelTree().getViewMenu().getPanelModeling(), (Diagram) object).setVisible(true);
+        else if (object instanceof AttributeUML)
+            new ViewEditAttribute(this.popup.getPanelTree().getViewMenu().getPanelModeling(), this.getClassDiagram(node), (AttributeUML) object).setVisible(true);
         else if (object instanceof Element)
             new ViewEditElement(this.popup.getPanelTree().getViewMenu().getPanelModeling(), (Element) object).setVisible(true);
 //        else if (object instanceof Variabilidade)
@@ -64,6 +70,18 @@ public class ControllerMenuItemEdit implements ActionListener {
 //        Diagram       diagrama      = this.getDiagrama((DefaultMutableTreeNode) node.getParent());
 //        Variabilidade variabilidade = (Variabilidade) object;
 //        new ViewEditarVariabilidade(this.popup.getPainelProjeto().getViewMenu().getPainelModelagem(), diagrama, variabilidade).setVisible(true);
+    }
+    
+    /**
+     * Method responsible for returning the Class Diagram from Node.
+     * @param  node JTree Node.
+     * @return Class Diagram.
+     */
+    private ClassDiagram getClassDiagram(DefaultMutableTreeNode node) {
+        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
+        while ((parent != null) && !(parent.getUserObject() instanceof ClassDiagram))
+            parent = (DefaultMutableTreeNode) parent.getParent();
+        return parent == null ? null : (ClassDiagram) parent.getUserObject();
     }
     
     /**

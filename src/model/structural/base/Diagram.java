@@ -14,6 +14,8 @@ import model.structural.diagram.classs.base.TypeUML;
 import model.structural.base.variability.Mutex;
 import model.structural.base.variability.Requires;
 import model.structural.base.variability.Variability;
+import model.structural.diagram.classs.base.AttributeUML;
+import model.structural.diagram.classs.base.MethodUML;
 
 /**
  * <p>Class of Model <b>Diagram</b>.</p>

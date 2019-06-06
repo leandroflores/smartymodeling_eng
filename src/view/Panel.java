@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.ColorUIResource;
@@ -354,6 +355,8 @@ public abstract class Panel extends JPanel {
      */
     public JScrollPane createScrollPane(String id) {
         JScrollPane scrollPane = new JScrollPane();
+                    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
                     this.scrollPanes.put(id, scrollPane);
         return      scrollPane;
     }

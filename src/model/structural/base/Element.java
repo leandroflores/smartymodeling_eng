@@ -120,6 +120,16 @@ public abstract class Element implements Exportable, Modelable {
     }
 
     /**
+     * Method responsible for returning the Element Default Flag.
+     * @return Element Default Flag.
+     */
+    public boolean isDefault() {
+        return !this.getType().toLowerCase().trim().equals("attribute")
+            && !this.getType().toLowerCase().trim().equals("method")
+            && !this.getType().toLowerCase().trim().equals("package");
+    }
+    
+    /**
      * Method responsible for defining the Element Mandatory.
      * @param mandatory Element Mandatory.
      */

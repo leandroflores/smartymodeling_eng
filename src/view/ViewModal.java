@@ -26,6 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -332,6 +333,8 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
     public JScrollPane createScrollPane(String id, JPanel painel) {
         JScrollPane scrollPane = new JScrollPane(painel);
                     scrollPane.setPreferredSize(new Dimension(390, 120));
+                    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
                     this.scrollPanes.put(id, scrollPane);
         return      scrollPane;
     }

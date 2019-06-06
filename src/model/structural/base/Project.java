@@ -617,9 +617,10 @@ public class Project implements Exportable {
      * @param element Element.
      */
     public void addElementStereotype(Element element) {
-        Stereotype stereotype = element.isMandatory() ? this.profile.getMandatory() : this.profile.getOptional();
-        this.addLink(new Link(element, stereotype));
-        System.out.println(this.links);
+        if (element.isDefault()) {
+            Stereotype stereotype = element.isMandatory() ? this.profile.getMandatory() : this.profile.getOptional();
+            this.addLink(new Link(element, stereotype));
+        }
     }
     
     /**
@@ -627,9 +628,11 @@ public class Project implements Exportable {
      * @param element Element.
      */
     public void updateElementStereotype(Element element) {
-        this.removeLink(new Link(element, this.profile.getMandatory()));
-        this.removeLink(new Link(element, this.profile.getOptional()));
-        this.addElementStereotype(element);
+        if (element.isDefault()) {
+            this.removeLink(new Link(element, this.profile.getMandatory()));
+            this.removeLink(new Link(element, this.profile.getOptional()));
+            this.addElementStereotype(element);
+        }
     }
     
     /**
