@@ -34,6 +34,7 @@ public final class PanelBaseMethod extends Panel {
         this.controller = new ControllerPanelBaseMethod(this);
         this.setSettings();
         this.addComponents();
+        this.setValues();
     }
     
     /**
@@ -60,7 +61,7 @@ public final class PanelBaseMethod extends Panel {
         
         this.add(this.createLabel("Constructor: ", 120));
         this.add(this.createCheckBox("constructorCheckBox", ""));
-        this.add(this.createLabel("Return: ", 120));
+        this.add(this.createLabel("Return: ", 100));
         this.add(this.createComboBox("returnComboBox", this.diagram.getProject().getTypesList().toArray(), 30));
         this.getReturnComboBox().setPreferredSize(new Dimension(200, 30));
         
@@ -83,6 +84,7 @@ public final class PanelBaseMethod extends Panel {
         this.getNameTextField().setText(this.method.getName());
         this.getConstructorCheckBox().setSelected(this.method.isConstructor());
         this.getReturnComboBox().setSelectedItem(this.method.getReturn());
+        this.getReturnComboBox().setEnabled(!this.method.isConstructor());
         this.getAbstractCheckBox().setSelected(this.method.isAbstract());
         this.getStaticCheckBox().setSelected(this.method.isStatic());
         this.getFinalCheckBox().setSelected(this.method.isFinal());
