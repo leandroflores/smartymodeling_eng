@@ -247,6 +247,14 @@ public abstract class Element implements Exportable, Modelable {
     }
     
     /**
+     * Method responsible for updating the Element Width.
+     * @param width Element Width.
+     */
+    public void setWidth(Integer width) {
+        this.size.x = width;
+    }
+    
+    /**
      * Method responsible for defining the Size Point.
      * @param  element W3C Element.
      */

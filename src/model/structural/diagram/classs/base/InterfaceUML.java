@@ -21,6 +21,7 @@ public class InterfaceUML extends Entity {
         super(diagram);
         this.name = "Interface";
         this.type = "interface";
+        super.updateSize();
     }
     
     /**
@@ -30,6 +31,7 @@ public class InterfaceUML extends Entity {
     public InterfaceUML(Element element) {
         super(element);
         this.type = "interface";
+        super.updateSize();
     }
     
     @Override

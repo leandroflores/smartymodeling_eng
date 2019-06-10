@@ -25,6 +25,7 @@ public class ClassUML extends Entity {
         this.type      = "class";
         this.abstract_ = false;
         this.final_    = false;
+        super.updateSize();
     }
     
     /**
@@ -36,6 +37,7 @@ public class ClassUML extends Entity {
         this.type      = "class";
         this.abstract_ = element.getAttribute("abstract").equals("true");
         this.final_    = element.getAttribute("final").equals("true");
+        super.updateSize();
     }
 
     /**
@@ -79,7 +81,7 @@ public class ClassUML extends Entity {
     
     @Override
     public String getStyleLabel() {
-        return "styleClassUML";
+        return "styleClassUML" + this.id;
     }
     
     @Override

@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import model.structural.base.Element;
+import model.structural.base.Stereotype;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.base.TypeUML;
 
@@ -48,6 +49,58 @@ public abstract class Entity extends Element {
         this.attributes = new LinkedHashMap();
         this.methods    = new LinkedHashMap();
     }
+    
+    /**
+     * Method responsible for updating the Entity Size.
+     */
+    public void updateSize() {
+        this.setMinHeight();
+        this.setMinWidth();
+    }
+    
+    /**
+     * Method responsible for returning the Min Height.
+     * @return Min Height.
+     */
+    public Integer getMinHeight() {
+        return    5
+               + 21 * this.getStereotypesList().size()
+               +  5
+               + (this.type.equals("interface") ? 20 : 0)
+               + 25
+               +  3
+               +  5
+               + 16 * this.getAttributesList().size()
+               +  3
+               + 16 * this.getMethodsList().size()
+               +  5;
+    }
+    
+    /**
+     * Method responsible for setting the Min Height.
+     */
+    private void setMinHeight() {
+        Integer height = this.getMinHeight();
+        this.setHeight(height > this.getHeight() ? height : this.getHeight());
+    }
+    
+    /**
+     * Method responsible for returning the Min Width.
+     * @return Min Width.
+     */
+    public Integer getMinWidth() {
+        return 200;
+    }
+    
+    /**
+     * Method responsible for setting the Min Width.
+     */
+    private void setMinWidth() {
+        Integer width = this.getMinWidth();
+//        System.out.println("width: " + width + " - " + "old width: " + this.getWidth());
+        this.setWidth(width  >  this.getWidth() ?  width : this.getWidth());
+//        System.out.println("new width: " + this.getWidth());
+    }
 
     /**
      * Method responsible for changing the Types of Attributes and Methods.
@@ -82,12 +135,36 @@ public abstract class Entity extends Element {
     }
     
     /**
+     * Method responsible for returning the Stereotypes List.
+     * @return Stereotypes List.
+     */
+    public List<Stereotype> getStereotypesList() {
+        return this.diagram.getStereotypesList(this);
+    }
+    
+    /**
      * Method responsible for returning the Stereotypes by Element.
      * @param  element Element.
      * @return Stereotypes.
      */
     public String getStereotypes(Element element) {
         return this.diagram.getStereotypes(element, " ");
+    }
+    
+    /**
+     * Method responsible for returning the Interface Position.
+     * @return Interface Position.
+     */
+    public Integer getInterfacePosition() {
+        return this.getStereotypesList().size() * 21 + 5;
+    }
+    
+    /**
+     * Method responsible for returning the Name Position.
+     * @return Name Position.
+     */
+    public Integer getNamePosition() {
+        return this.getStereotypesList().size() * 21 + ((this.getType().equals("interface")) ? 20 : 0) + 5;
     }
     
     /**
@@ -138,15 +215,7 @@ public abstract class Entity extends Element {
      * @return Attributes Position.
      */
     public Integer getAttributesPosition() {
-        return 70 + this.attributes.size() * 16 + 5;
-    }
-
-    /**
-     * Method responsible for updating the Size.
-     */
-    private void updateSize() {
-        if (this.getHeight() + 20 < this.getHeight())
-            this.setHeight(this.getHeight() + 20);
+        return this.getNamePosition() + 30;
     }
     
     /**
@@ -296,10 +365,10 @@ public abstract class Entity extends Element {
     }
     
     /**
-     * Method responsible for returning Add Attribute Style.
-     * @return Add Attribute Style.
+     * Method responsible for returning New Attribute Style.
+     * @return New Attribute Style.
      */
-    public Map getAddAttributeStyle() {
+    public Map getNewAttributeStyle() {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
                style.put(mxConstants.STYLE_FONTCOLOR,   "#FFFF1A");
@@ -314,10 +383,10 @@ public abstract class Entity extends Element {
     }
     
     /**
-     * Method responsible for returning Add Method Style.
-     * @return Add Method Style.
+     * Method responsible for returning New Method Style.
+     * @return New Method Style.
      */
-    public Map getAddMethodStyle() {
+    public Map getNewMethodStyle() {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
                style.put(mxConstants.STYLE_FONTCOLOR,   "#4AAD7D");

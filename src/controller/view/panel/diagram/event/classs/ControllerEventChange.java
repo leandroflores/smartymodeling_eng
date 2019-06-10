@@ -48,14 +48,14 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @param id Element Id.
      */
     private void change(Object object, String id) {
-        if      (this.panel.getDiagram().getElement(id) instanceof AttributeUML)
+        if (this.panel.getDiagram().getAssociation(id)  != null)
+            this.changeAssociation(object, this.panel.getDiagram().getAssociation(id));
+        else if (this.panel.getDiagram().getElement(id) instanceof AttributeUML)
             this.changeAttribute(object, (AttributeUML) this.panel.getDiagram().getElement(id));
         else if (this.panel.getDiagram().getElement(id) instanceof MethodUML)
             this.changeMethod(object,    (MethodUML)    this.panel.getDiagram().getElement(id));
         else if (this.panel.getDiagram().getElement(id) != null)
             this.changeElement(object,   (Element)      this.panel.getDiagram().getElement(id));
-        else if (this.panel.getDiagram().getAssociation(id) != null)
-            this.changeAssociation(object, this.panel.getDiagram().getAssociation(id));
     }
     
     /**

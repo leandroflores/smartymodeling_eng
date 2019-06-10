@@ -6,6 +6,7 @@ import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationClass;
 import controller.view.panel.diagram.event.classs.ControllerEventChange;
 import controller.view.panel.diagram.event.classs.ControllerEventEdit;
+import controller.view.panel.diagram.event.classs.ControllerEventResize;
 import controller.view.panel.diagram.event.classs.ControllerEventSelect;
 import controller.view.panel.diagram.types.ControllerPanelClassDiagram;
 import java.util.List;
@@ -63,6 +64,8 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
         this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
         this.component.getGraph().getSelectionModel().addListener(mxEvent.CHANGE, new ControllerEventSelect(this));
+        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
+//        this.component.getGraph().addListener(mxEvent.RESIZE_CELLS,  new ControllerEventResize(this));
 //        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
 //        this.componente.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventoPacote(this));
         this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationClass(this));
@@ -186,31 +189,17 @@ public final class PanelClassDiagram extends PanelDiagram {
      * @param entity Entity.
      */
     private void insert(mxCell vertex, Entity entity) {
-        this.addStereotypeCells2(vertex, entity);
-//        this.addCelulaInterface(vertice, entidade);
+        this.addStereotypeCells(vertex, entity);
+        this.addInterfaceStereotypeCell(vertex, entity);
         this.addNameCell(vertex, entity);
-        this.addLineCell(vertex, 60, entity);
-        this.addAddAttributeCell(vertex, entity);
+        this.addLineCell(vertex, entity.getNamePosition() + 27, entity);
+        this.addNewAttributeCell(vertex, entity);
         this.addAttributesCells(vertex, entity);
-        this.addLineCell(vertex, entity.getAttributesPosition(), entity);
-        this.addAddMethodCell(vertex, entity);
-        this.addMethodsCells(vertex, entity);
+//        this.addLineCell(vertex, entity.getMethodsPosition(), entity);
+//        this.addAddMethodCell(vertex, entity);
+//        this.addMethodsCells(vertex, entity);
     }
 
-    /**
-     * Method responsible for adding the Interface Cell.
-     * @param parent Parent Cell.
-     * @param entity Entity.
-     */
-    private void addInterfaceCell(mxCell parent, Entity entity) {
-        if (entity instanceof InterfaceUML) {
-            this.graph.getStylesheet().putCellStyle("stereotypeStyle",  entity.getStereotypeStyle());
-            mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(interface)", "<<interface>>", 5, 6, entity.getWidth() - 10, 20, "stereotypeStyle");
-                   cell.setConnectable(false);
-            this.identifiers.put(cell, entity.getId());
-        }
-    }
-    
     /**
      * Method responsible for adding the Stereotype Cells.
      * @param parent Parent Cell.
@@ -220,25 +209,27 @@ public final class PanelClassDiagram extends PanelDiagram {
         List<Stereotype>  stereotypes = this.diagram.getStereotypesList(entity);
         for (int i = 0; i < stereotypes.size(); i++) {
             Stereotype stereotype = stereotypes.get(i);
-            this.graph.getStylesheet().putCellStyle("stereotypeStyle", stereotype.getStyle());
-            mxCell       cell      = (mxCell) this.graph.insertVertex(parent, stereotype.getId(), stereotype.getName(), 5, 70 + (i * 16), entity.getWidth() - 10, 15, "stereotypeStyle");
-                         cell.setConnectable(false);
-                         cell.setId(stereotype.getId());
+            this.graph.getStylesheet().putCellStyle("stereotypeStyle", stereotype.getStyle()); 
+            mxCell     cell       = (mxCell) this.graph.insertVertex(parent, "LINK#" + entity.getId() + "-" + stereotype.getId(), stereotype.toString(), 5, (i * 21) + 5, entity.getWidth() - 10, 20, "stereotypeStyle");
+                       cell.setConnectable(false);
+                       cell.setId(stereotype.getId());
             this.identifiers.put(cell,         stereotype.getId());
             this.identifiers.put(cell.getId(), stereotype.getId());
         }
     }
     
     /**
-     * Method responsible for adding the Stereotype Cells.
+     * Method responsible for adding the Interface Stereotype Cell.
      * @param parent Parent Cell.
      * @param entity Entity.
      */
-    private void addStereotypeCells2(mxCell parent, Entity entity) {
-        this.graph.getStylesheet().putCellStyle("stereotypeStyle",  entity.getStereotypeStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId(), this.diagram.getStereotypes(entity, "\n"), 5, 6, entity.getWidth() - 10, 20, "stereotypeStyle");
-               cell.setConnectable(false);
-        this.identifiers.put(cell, entity.getId());
+    private void addInterfaceStereotypeCell(mxCell parent, Entity entity) {
+        if (entity instanceof InterfaceUML) {
+            this.graph.getStylesheet().putCellStyle("stereotypeStyle",  entity.getStereotypeStyle());
+            mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(interface)", "<<interface>>", 5, entity.getInterfacePosition(), entity.getWidth() - 10, 20, "stereotypeStyle");
+                   cell.setConnectable(false);
+            this.identifiers.put(cell, entity.getId());
+        }
     }
     
     /**
@@ -248,7 +239,7 @@ public final class PanelClassDiagram extends PanelDiagram {
      */
     private void addNameCell(mxCell parent, Entity entity) {
         this.graph.getStylesheet().putCellStyle("nameStyle", entity.getNameStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(name)", entity.getName(), 5, 28, entity.getWidth() - 10, 25, "nameStyle");
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(name)", entity.getName(), 5, entity.getNamePosition(), entity.getWidth() - 10, 25, "nameStyle");
                cell.setConnectable(false);
                cell.setId(entity.getId() + "(name)");
         this.identifiers.put(cell.getId(), entity.getId());
@@ -271,9 +262,9 @@ public final class PanelClassDiagram extends PanelDiagram {
      * @param parent Parent Cell.
      * @param entity Entity.
      */
-    private void addAddAttributeCell(mxCell parent, Entity entity) {
-        this.graph.getStylesheet().putCellStyle("addAttributeStyle", entity.getAddAttributeStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(addAttribute)", "", 5, 62, 5, 5, "addAttributeStyle");
+    private void addNewAttributeCell(mxCell parent, Entity entity) {
+        this.graph.getStylesheet().putCellStyle("newAttributeStyle", entity.getNewAttributeStyle());
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(newAttribute)", "", 5, entity.getAttributesPosition(), 5, 5, "newAttributeStyle");
                cell.setConnectable(false);
         this.identifiers.put(cell, entity.getId());
     }
@@ -288,7 +279,7 @@ public final class PanelClassDiagram extends PanelDiagram {
         for (int i = 0; i < attributes.size(); i++) {
             AttributeUML attribute = attributes.get(i);
             this.graph.getStylesheet().putCellStyle(attribute.getStyleLabel(), attribute.getStyle());
-            mxCell       cell      = (mxCell) this.graph.insertVertex(parent, attribute.getId(), attribute.getCompleteSignature(), 5, 70 + (i * 16), entity.getWidth() - 10, 15, attribute.getStyleLabel());
+            mxCell       cell      = (mxCell) this.graph.insertVertex(parent, attribute.getId(), attribute.getCompleteSignature(), 5, entity.getAttributesPosition() + (i * 16) + 6, entity.getWidth() - 10, 15, attribute.getStyleLabel());
                          cell.setConnectable(false);
                          cell.setId(attribute.getId());
             this.identifiers.put(cell,         attribute.getId());
@@ -297,13 +288,13 @@ public final class PanelClassDiagram extends PanelDiagram {
     }
     
     /**
-     * Method responsible for adding the Add Method Cell.
+     * Method responsible for adding the New Method Cell.
      * @param parent Parent Cell.
      * @param entity Entity.
      */
-    private void addAddMethodCell(mxCell parent, Entity entity) {
-        this.graph.getStylesheet().putCellStyle("addMethodStyle", entity.getAddMethodStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(addMethod)", "", 5, entity.getAttributesPosition() + 5, 10, 5, "addMethodStyle");
+    private void addNewMethodCell(mxCell parent, Entity entity) {
+        this.graph.getStylesheet().putCellStyle("newMethodStyle", entity.getNewMethodStyle());
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(newMethod)", "", 5, entity.getAttributesPosition() + 5, 10, 5, "newMethodStyle");
                cell.setConnectable(false); 
         this.identifiers.put(cell, entity.getId());
     }

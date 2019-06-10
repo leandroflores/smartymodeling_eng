@@ -33,21 +33,29 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
             if (this.panel.getGraph().getSelectionCell() instanceof mxCell) {
                 mxCell cell = (mxCell) this.panel.getGraph().getSelectionCell();
                 String id   = this.panel.getIdentifiers().get(cell);
-                if (cell.getId().endsWith("(addAttribute)"))
-                    this.addAttribute(cell, (Entity) this.panel.getDiagram().getElement(id));
-                else if (cell.getId().endsWith("(addMethod)"))
-                    this.addMethod(cell, (Entity) this.panel.getDiagram().getElement(id));
+                this.select(cell, id);
             }
         }
     }
     
     /**
-     * Method responsible for adding a Attribute to a Entity.
+     * Method responsible for selecting the Element.
+     * @param cell Graph Cell.
+     * @param id Element Id.
+     */
+    private void select(mxCell cell, String id) {
+        if (cell.getId().endsWith("(newAttribute)"))
+            this.newAttribute(cell, (Entity) this.panel.getDiagram().getElement(id));
+        else if (cell.getId().endsWith("(newMethod)"))
+            this.newMethod(cell, (Entity) this.panel.getDiagram().getElement(id));
+    }
+    
+    /**
+     * Method responsible for adding a new Attribute to a Entity.
      * @param cell Graph Cell.
      * @param entity Entity.
      */
-    private void addAttribute(mxCell cell, Entity entity) {
-//        System.out.println("Add Attribute: " + this.panel.getDiagram().nextAttributeId());
+    private void newAttribute(mxCell cell, Entity entity) {
         AttributeUML attribute = new AttributeUML();
                      this.panel.getDiagram().addAttribute(attribute);
                      attribute.setEntity(entity);
@@ -60,11 +68,11 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
     }
     
     /**
-     * Method responsible for adding a Method to a Entity.
+     * Method responsible for adding a new Method to a Entity.
      * @param cell Graph Cell.
      * @param entity Entity.
      */
-    private void addMethod(mxCell cell, Entity entity) {
+    private void newMethod(mxCell cell, Entity entity) {
         MethodUML method = new MethodUML();
                   method.setId(this.panel.getDiagram().nextMethodId());
                   method.setEntity(entity);
