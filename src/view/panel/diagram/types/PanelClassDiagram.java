@@ -195,9 +195,9 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.addLineCell(vertex, entity.getNamePosition() + 27, entity);
         this.addNewAttributeCell(vertex, entity);
         this.addAttributesCells(vertex, entity);
-//        this.addLineCell(vertex, entity.getMethodsPosition(), entity);
-//        this.addAddMethodCell(vertex, entity);
-//        this.addMethodsCells(vertex, entity);
+        this.addLineCell(vertex, entity.getMethodsPosition(), entity);
+        this.addNewMethodCell(vertex, entity);
+        this.addMethodsCells(vertex, entity);
     }
 
     /**
@@ -294,7 +294,7 @@ public final class PanelClassDiagram extends PanelDiagram {
      */
     private void addNewMethodCell(mxCell parent, Entity entity) {
         this.graph.getStylesheet().putCellStyle("newMethodStyle", entity.getNewMethodStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(newMethod)", "", 5, entity.getAttributesPosition() + 5, 10, 5, "newMethodStyle");
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(newMethod)", "", 5, entity.getMethodsPosition() + 5, 10, 5, "newMethodStyle");
                cell.setConnectable(false); 
         this.identifiers.put(cell, entity.getId());
     }
@@ -309,7 +309,7 @@ public final class PanelClassDiagram extends PanelDiagram {
         for (int i = 0; i < methods.size(); i++) {
             MethodUML method = methods.get(i);
             this.graph.getStylesheet().putCellStyle(method.getStyleLabel(), method.getStyle());
-            mxCell    cell   = (mxCell) this.graph.insertVertex(parent, method.getId(), method.getCompleteSignature(), 5, entity.getAttributesPosition() + 10 + (i * 16), entity.getWidth() - 10, 15, method.getStyleLabel());
+            mxCell    cell   = (mxCell) this.graph.insertVertex(parent, method.getId(), method.getCompleteSignature(), 5, entity.getMethodsPosition() + 10 + (i * 16), entity.getWidth() - 10, 15, method.getStyleLabel());
                       cell.setConnectable(false);
                       cell.setId(method.getId());
             this.identifiers.put(cell,         method.getId());

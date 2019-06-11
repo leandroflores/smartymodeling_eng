@@ -33,12 +33,21 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
     @Override
     public void invoke(Object object, mxEventObject evento) {
         Object  cell    = this.panel.getGraph().getSelectionCell();
-        String  id      = ((mxCell) cell).getId();
+        String  id      = this.getId(cell);
         Element element = this.panel.getDiagram().getElement(id);
         if (element != null)
             this.resize(element, cell);
-        this.panel.getViewMenu().setSave(false);
-        this.panel.updateDiagram();
+    }
+    
+    /**
+     * Method responsible for returning the Cell Id.
+     * @param  cell Graph Cell.
+     * @return Cell Id.
+     */
+    private String getId(Object cell) {
+        if ((cell != null) && (cell instanceof mxCell))
+            return ((mxCell) cell).getId();
+        return "";
     }
     
     /**
@@ -63,6 +72,8 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
         Integer width  = new Double(this.panel.getGraph().getCellGeometry(cell).getWidth()).intValue();
         entity.setHeight(height > entity.getMinHeight() ? height : entity.getMinHeight());
         entity.setWidth( width  >  entity.getMinWidth() ?  width :  entity.getMinWidth());
+        this.panel.getViewMenu().setSave(false);
+        this.panel.updateDiagram();
     }
     
     /**
@@ -73,5 +84,7 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
     private void resize(PackageUML packageUML, Object cell) {
         mxRectangle coordinates = this.panel.getGraph().getCellGeometry(cell);
         packageUML.setSize(new Double(coordinates.getHeight()).intValue(), new Double(coordinates.getWidth()).intValue());
+        this.panel.getViewMenu().setSave(false);
+        this.panel.updateDiagram();
     }
 }

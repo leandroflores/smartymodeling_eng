@@ -67,7 +67,14 @@ public class MethodUML extends Element {
     @Override
     public void setDefaultName() {
         super.setDefaultName();
+        this.setName(this.getName());
+    }
+    
+    @Override
+    public void setName(String name) {
+        super.setName(name);
         this.name = this.name.toLowerCase().trim();
+        this.entity.setMinWidth();
     }
     
     /**

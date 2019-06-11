@@ -5,6 +5,7 @@ import model.structural.diagram.classs.base.AttributeUML;
 import com.mxgraph.util.mxConstants;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -66,20 +67,21 @@ public abstract class Entity extends Element {
         return    5
                + 21 * this.getStereotypesList().size()
                +  5
-               + (this.type.equals("interface") ? 20 : 0)
+               + (this.type.equals("interface") ? 22 : 0)
                + 25
                +  3
                +  5
                + 16 * this.getAttributesList().size()
                +  3
+               +  5
                + 16 * this.getMethodsList().size()
-               +  5;
+               + 5;
     }
     
     /**
      * Method responsible for setting the Min Height.
      */
-    private void setMinHeight() {
+    public void setMinHeight() {
         Integer height = this.getMinHeight();
         this.setHeight(height > this.getHeight() ? height : this.getHeight());
     }
@@ -89,13 +91,15 @@ public abstract class Entity extends Element {
      * @return Min Width.
      */
     public Integer getMinWidth() {
-        return 200;
+        Integer[]   sizes = new Integer[]{this.getStereotypeSize(), this.getNameSize(), this.getAttributeSize(), this.getMethodSize(), 200};
+        Arrays.sort(sizes);
+        return sizes[4];
     }
     
     /**
      * Method responsible for setting the Min Width.
      */
-    private void setMinWidth() {
+    public void setMinWidth() {
         Integer width = this.getMinWidth();
 //        System.out.println("width: " + width + " - " + "old width: " + this.getWidth());
         this.setWidth(width  >  this.getWidth() ?  width : this.getWidth());
@@ -116,6 +120,7 @@ public abstract class Entity extends Element {
     public void setName(String name) {
         super.setName(name);
         this.typeUML.setName(this.getName());
+        this.setMinWidth();
     }
 
     /**
@@ -143,6 +148,20 @@ public abstract class Entity extends Element {
     }
     
     /**
+     * Method responsible for returning the Stereotype Size.
+     * @return Stereotype Size.
+     */
+    public Integer getStereotypeSize() {
+        Integer lenght  = 0;
+        Integer current;
+        for (Stereotype stereotype : this.getStereotypesList()) {
+                current = stereotype.toString().length() * 8;
+                lenght  = lenght > current ? lenght : current;
+        }
+        return  lenght;
+    }
+    
+    /**
      * Method responsible for returning the Stereotypes by Element.
      * @param  element Element.
      * @return Stereotypes.
@@ -165,6 +184,14 @@ public abstract class Entity extends Element {
      */
     public Integer getNamePosition() {
         return this.getStereotypesList().size() * 21 + ((this.getType().equals("interface")) ? 20 : 0) + 5;
+    }
+    
+    /**
+     * Method responsible for returning the Name Size.
+     * @return Name Size.
+     */
+    private Integer getNameSize() {
+        return 10 * this.name.length();
     }
     
     /**
@@ -219,6 +246,20 @@ public abstract class Entity extends Element {
     }
     
     /**
+     * Method responsible for returning the Attribute Size.
+     * @return Attribute Size.
+     */
+    public Integer getAttributeSize() {
+        Integer lenght  = 0;
+        Integer current;
+        for (AttributeUML attribute : this.getAttributesList()) {
+                current = attribute.getCompleteSignature().length() * 8;
+                lenght  = lenght > current ? lenght : current;
+        }
+        return  lenght;
+    }
+    
+    /**
      * Method responsible for adding a Attribute UML.
      * @param attribute Attribute UML.
      */
@@ -267,7 +308,24 @@ public abstract class Entity extends Element {
      * @return Methods Position.
      */
     public Integer getMethodsPosition() {
-        return this.getAttributesPosition() + 5;
+        return this.getAttributesPosition() 
+             +  5 
+             + 16 * this.getAttributesList().size()
+             +  3;
+    }
+    
+    /**
+     * Method responsible for returning the Method Size.
+     * @return Method Size.
+     */
+    public Integer getMethodSize() {
+        Integer lenght  = 0;
+        Integer current;
+        for (MethodUML method : this.getMethodsList()) {
+                current = method.getCompleteSignature().length() * 8;
+                lenght  = lenght > current ? lenght : current;
+        }
+        return  lenght;
     }
     
     /**

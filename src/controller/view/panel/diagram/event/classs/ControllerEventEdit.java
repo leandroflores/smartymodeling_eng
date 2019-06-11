@@ -49,7 +49,6 @@ public class ControllerEventEdit extends mxEventSource implements mxIEventListen
             this.edit(element,    (MethodUML)    this.panel.getDiagram().getElement(id));
         else if (this.panel.getDiagram().getElement(id) != null)
             this.edit(element, (Element)    this.panel.getDiagram().getElement(id));
-        
     }
     
     /**

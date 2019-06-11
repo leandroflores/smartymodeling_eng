@@ -644,6 +644,8 @@ public abstract class Diagram implements Exportable {
         return stereotypes;
     }
     
+    
+    
     /**
      * Method responsible for returning Variation Point Steretype by Element.
      * @param  element Element.
