@@ -23,7 +23,7 @@ import view.View;
 import view.ViewStyle;
 import view.panel.main.PanelMain;
 import view.panel.modeling.PanelModeling;
-import view.panel.tree.PanelTree;
+import view.panel.project.PanelProject;
 
 /**
  * <p>Class of View <b>ViewMenu</b>.</p>
@@ -41,10 +41,9 @@ public final class ViewMenu extends View implements Operation {
     
     private JMenuBar   menuBar;
     private JSplitPane mainSplitPane;
-//    private JSplitPane auxSplitPane;
     
     private PanelMain     panelMain;
-    private PanelTree     panelTree;
+    private PanelProject  panelProject;
     private PanelModeling panelModeling;
     
     /**
@@ -215,33 +214,28 @@ public final class ViewMenu extends View implements Operation {
      * Method responsible for adding Panel Project on View.
      */
     private void addPanelProject() {
-        this.initPanelTree();
+        this.initPanelProject();
         this.initPanelModeling();
         
-        this.getScrollPanelTree().setMinimumSize(new Dimension(200, 100));
-        this.getScrollPanelTree().setPreferredSize(new Dimension(100, 100));
+        this.getScrollPanelProject().setMinimumSize(new Dimension(200, 100));
+        this.getScrollPanelProject().setPreferredSize(new Dimension(150, 100));
         this.getScrollPanelModeling().setMinimumSize(new Dimension(400, 100));
         this.getScrollPanelModeling().setPreferredSize(new Dimension(1500, 100));
        
         this.mainSplitPane = this.createSplitPane(true);
-//        this.auxSplitPane  = this.createSplitPane();
-        
-        this.mainSplitPane.setLeftComponent(this.getScrollPanelTree());
+        this.mainSplitPane.setLeftComponent(this.getScrollPanelProject());
         this.mainSplitPane.setRightComponent(this.getScrollPanelModeling());
-//        this.mainSplitPane.setLeftComponent(this.auxSplitPane);
-//        this.mainSplitPane.setRightComponent(this.createPainel("idPanel"));
-        
         
         this.getContentPane().add(this.mainSplitPane, BorderLayout.WEST);
     }
     
     /**
-     * Method responsible for initializing Project Panel.
+     * Method responsible for initializing the Panel Project.
      */
-    private void initPanelTree() {
-        this.panelTree = new PanelTree(this);
-        this.createScrollPane("scrollPanelTree");
-        this.getScrollPanelTree().setViewportView(this.panelTree);
+    private void initPanelProject() {
+        this.panelProject = new PanelProject(this);
+        this.createScrollPane("scrollPanelProject");
+        this.getScrollPanelProject().setViewportView(this.panelProject);
     }
     
     /**
@@ -341,11 +335,11 @@ public final class ViewMenu extends View implements Operation {
      */
     public void updatePanelTree() {
         if (this.project != null) {
-            this.panelTree = new PanelTree(this);
-            this.getScrollPanelTree().setViewportView(this.panelTree);
+            this.panelProject = new PanelProject(this);
+            this.getScrollPanelProject().setViewportView(this.panelProject);
             this.unlockDiagramas();
         }else {
-            this.getScrollPanelTree().setViewportView(this.createLabel(""));
+            this.getScrollPanelProject().setViewportView(this.createLabel(""));
             this.lockDiagramas();
         }
     }
@@ -637,19 +631,19 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Panel Tree.
-     * @return Panel Tree.
+     * Method responsible for returning the Panel Project.
+     * @return Panel Project.
      */
-    public PanelTree getPanelTree() {
-        return this.panelTree;
+    public PanelProject getPanelProject() {
+        return this.panelProject;
     }
     
     /**
-     * Method responsible for returning Panel Tree Scroll.
-     * @return Panel Tree Scroll.
+     * Method responsible for returning the Scroll Panel Project.
+     * @return Scroll Panel Project.
      */
-    public JScrollPane getScrollPanelTree() {
-        return this.scrollPanes.get("scrollPanelTree");
+    public JScrollPane getScrollPanelProject() {
+        return this.scrollPanes.get("scrollPanelProject");
     }
     
     /**

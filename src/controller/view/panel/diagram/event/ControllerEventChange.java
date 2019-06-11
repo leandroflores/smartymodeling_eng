@@ -38,6 +38,6 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
         }
         this.panel.updateDiagram();
         this.panel.getViewMenu().getPanelMain().updateUI();
-        this.panel.getViewMenu().getPanelTree().updateUI();
+        this.panel.getViewMenu().getPanelProject().updateUI();
     }
 }

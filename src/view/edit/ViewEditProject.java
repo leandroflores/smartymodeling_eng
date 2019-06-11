@@ -58,7 +58,7 @@ public final class ViewEditProject extends ViewEdit {
      * Method responsible for adding the Panel Base Project.
      */
     private void addPanelBaseProject() {
-        this.panelBaseProject = new PanelBaseProject();
+        this.panelBaseProject = new PanelBaseProject(this.getViewMenu());
         this.createScrollPane("scrollPanelBaseProject", this.panelBaseProject);
         this.getScrollPanelBaseProject().setViewportView(this.panelBaseProject);
         this.tabbedPane.add("Project", this.getScrollPanelBaseProject());

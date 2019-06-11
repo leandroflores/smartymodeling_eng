@@ -43,8 +43,10 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     @Override
     public void mouseClicked(MouseEvent event) {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanelTree().getTree().getLastSelectedPathComponent();
-        if (SwingUtilities.isLeftMouseButton(event) == false)
+        if (!SwingUtilities.isLeftMouseButton(event))
             this.showPopup(node, event);
+        else if (event.getClickCount() == 1)
+            this.showPanelEdit(node);
         else if (event.getClickCount() == 2)
             this.showPanelDiagram(node);
     }
@@ -96,7 +98,16 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     }
 
     /**
-     * Method responsible for showing Panel Diagram.
+     * Method responsible for showing the Panel Edit.
+     * @param node JTree Node.
+     */
+    private void showPanelEdit(DefaultMutableTreeNode node) {
+        if (node.getUserObject() != null)
+            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEdit(node.getUserObject());
+    }
+    
+    /**
+     * Method responsible for showing the Panel Diagram.
      * @param node JTree Node.
      */
     private void showPanelDiagram(DefaultMutableTreeNode node) {
@@ -112,9 +123,9 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     private void delete(Object object, DefaultMutableTreeNode node) {
         if (object instanceof Diagram)
             System.out.println("Diagram");
-//            new ViewExcluirDiagrama(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((Diagrama) object)).setVisible(true);
+//            new ViewExcluirDiagrama(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), ((Diagrama) object)).setVisible(true);
 //        else if (object instanceof Element)
-//            new ViewExcluirElemento(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((Elemento) object)).setVisible(true);
+//            new ViewExcluirElemento(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), ((Elemento) object)).setVisible(true);
         else if (object instanceof Variability)
             this.deleteVariability(object, node);
         else if (object instanceof AttributeUML)
@@ -131,7 +142,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     private void deleteVariability(Object object, DefaultMutableTreeNode node) {
         Diagram     diagram     = this.getDiagram((DefaultMutableTreeNode) node.getParent());
         Variability variability = (Variability) object;
-//        new ViewExcluirVariabilidade(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), diagrama, variability).setVisible(true);
+//        new ViewExcluirVariabilidade(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), diagrama, variability).setVisible(true);
     }
     
     /**
@@ -143,9 +154,9 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
 //        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());
 //        AtributoUML     atributo = (AtributoUML) object;
 //                        diagrama.removeAtributo(atributo);
-//        this.treePopup.getPanelTree().getViewMenu().getPanelModeling().getPainelDiagrama().atualizarDiagrama();
-//        this.treePopup.getPanelTree().getViewMenu().update();
-//        this.treePopup.getPanelTree().getViewMenu().setSalvo(false);
+//        this.treePopup.getPanelProject().getViewMenu().getPanelModeling().getPainelDiagrama().atualizarDiagrama();
+//        this.treePopup.getPanelProject().getViewMenu().update();
+//        this.treePopup.getPanelProject().getViewMenu().setSalvo(false);
     }
     
     /**
@@ -157,9 +168,9 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
 //        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());
 //        MetodoUML       metodo = (MetodoUML) object;
 //                        diagrama.removeMetodo(metodo);
-//        this.treePopup.getPanelTree().getViewMenu().getPanelModeling().getPainelDiagrama().atualizarDiagrama();
-//        this.treePopup.getPanelTree().getViewMenu().update();
-//        this.treePopup.getPanelTree().getViewMenu().setSalvo(false);
+//        this.treePopup.getPanelProject().getViewMenu().getPanelModeling().getPainelDiagrama().atualizarDiagrama();
+//        this.treePopup.getPanelProject().getViewMenu().update();
+//        this.treePopup.getPanelProject().getViewMenu().setSalvo(false);
     }
     
     /**
@@ -169,11 +180,11 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      */
     private void edit(Object object, DefaultMutableTreeNode node) {
 //        if (object instanceof Projeto)
-//            new ViewEditarProjeto(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((Projeto) object)).setVisible(true);
+//            new ViewEditarProjeto(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), ((Projeto) object)).setVisible(true);
 //        else if (object instanceof Diagrama)
-//            new ViewEditarDiagrama(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((Diagrama) object)).setVisible(true);
+//            new ViewEditarDiagrama(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), ((Diagrama) object)).setVisible(true);
 //        else if (object instanceof Elemento)
-//            new ViewEditarElemento(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((Elemento) object)).setVisible(true);
+//            new ViewEditarElemento(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), ((Elemento) object)).setVisible(true);
 //        else if (object instanceof Variabilidade)
 //            this.editarVariabilidade(object, node);
 //        else if (object instanceof AtributoUML)
@@ -190,7 +201,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     private void editVariability(Object objeto, DefaultMutableTreeNode node) {
         Diagram     diagram     = this.getDiagram((DefaultMutableTreeNode) node.getParent());
         Variability variability = (Variability) objeto;
-//        new ViewEditarVariabilidade(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), diagram, variability).setVisible(true);
+//        new ViewEditarVariabilidade(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), diagram, variability).setVisible(true);
     }
     
     /**
@@ -201,7 +212,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     private void editAttributeUML(Object object, DefaultMutableTreeNode node) {
 //        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());
 //        AtributoUML     atributo = (AtributoUML) object;
-//        new ViewEditarAtributo(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), diagrama, atributo).setVisible(true);
+//        new ViewEditarAtributo(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), diagrama, atributo).setVisible(true);
     }
     
     /**
@@ -212,7 +223,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     private void editMethodUML(Object object, DefaultMutableTreeNode node) {
 //        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());;
 //        MetodoUML       metodo   = (MetodoUML) object;
-//        new ViewEditarMetodo(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), diagrama, metodo).setVisible(true);
+//        new ViewEditarMetodo(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), diagrama, metodo).setVisible(true);
     }
     
     /**

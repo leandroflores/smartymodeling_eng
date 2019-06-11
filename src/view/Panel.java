@@ -322,6 +322,21 @@ public abstract class Panel extends JPanel {
     }
     
     /**
+     * Method responsible for returning a new JScrollPane of a JPanel.
+     * @param  id JScrollPane Id.
+     * @param  painel JScrollPane JPanel.
+     * @return New JScrollPane of a JPanel.
+     */
+    public JScrollPane createScrollPane(String id, JPanel painel) {
+        JScrollPane scrollPane = new JScrollPane(painel);
+                    scrollPane.setPreferredSize(new Dimension(390, 120));
+                    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+                    this.scrollPanes.put(id, scrollPane);
+        return      scrollPane;
+    }
+    
+    /**
      * Method responsible for returning a new JTable.
      * @param  id JTable Id.
      * @return New JTable.

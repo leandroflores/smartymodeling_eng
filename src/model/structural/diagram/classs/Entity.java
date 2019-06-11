@@ -101,9 +101,7 @@ public abstract class Entity extends Element {
      */
     public void setMinWidth() {
         Integer width = this.getMinWidth();
-//        System.out.println("width: " + width + " - " + "old width: " + this.getWidth());
         this.setWidth(width  >  this.getWidth() ?  width : this.getWidth());
-//        System.out.println("new width: " + this.getWidth());
     }
 
     /**
@@ -253,7 +251,7 @@ public abstract class Entity extends Element {
         Integer lenght  = 0;
         Integer current;
         for (AttributeUML attribute : this.getAttributesList()) {
-                current = attribute.getCompleteSignature().length() * 8;
+                current = attribute.getCompleteSignature().length() * 7;
                 lenght  = lenght > current ? lenght : current;
         }
         return  lenght;
@@ -322,7 +320,7 @@ public abstract class Entity extends Element {
         Integer lenght  = 0;
         Integer current;
         for (MethodUML method : this.getMethodsList()) {
-                current = method.getCompleteSignature().length() * 8;
+                current = method.getCompleteSignature().length() * 7;
                 lenght  = lenght > current ? lenght : current;
         }
         return  lenght;
