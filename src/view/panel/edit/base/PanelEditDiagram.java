@@ -1,11 +1,12 @@
 package view.panel.edit.base;
 
-import view.panel.edit.*;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import model.structural.base.Diagram;
 import model.structural.base.Project;
-import view.edit.panel.base.PanelBaseProject;
+import view.edit.panel.base.PanelBaseDiagram;
+import view.panel.edit.PanelEdit;
 import view.structural.ViewMenu;
 
 /**
@@ -17,15 +18,18 @@ import view.structural.ViewMenu;
  */
 public final class PanelEditDiagram extends PanelEdit {
     private final Project project;
-    private PanelBaseProject panelBaseProject;
+    private final Diagram diagram;
+    private PanelBaseDiagram panelBaseDiagram;
     
     /**
      * Default constructor method of Class.
      * @param viewMenu View Menu.
+     * @param diagram Diagram.
      */
-    public PanelEditDiagram(ViewMenu viewMenu) {
+    public PanelEditDiagram(ViewMenu viewMenu, Diagram diagram) {
         super(viewMenu);
         this.project = this.viewMenu.getProject();
+        this.diagram = diagram;
         this.setPreferredSize(new Dimension(200, 100));
         this.addComponents();
     }
@@ -35,7 +39,7 @@ public final class PanelEditDiagram extends PanelEdit {
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.setPreferredSize(new Dimension(100, 100));
         
-        this.addPanelBaseProject();
+        this.addPanelBaseDiagram();
         
         this.add(this.tabbedPane);
 
@@ -43,28 +47,28 @@ public final class PanelEditDiagram extends PanelEdit {
     }
     
     /**
-     * Method responsible for adding the Panel Base Project.
+     * Method responsible for adding the Panel Base Diagram.
      */
-    private void addPanelBaseProject() {
-        this.panelBaseProject = new PanelBaseProject(this.getViewMenu());
-        this.createScrollPane("scrollPanelBaseProject", this.panelBaseProject);
-        this.getScrollPanelBaseProject().setViewportView(this.panelBaseProject);
-        this.tabbedPane.add("Project", this.getScrollPanelBaseProject());
+    private void addPanelBaseDiagram() {
+        this.panelBaseDiagram = new PanelBaseDiagram(this.viewMenu, this.diagram);
+        this.createScrollPane("scrollPanelBaseDiagram",  this.panelBaseDiagram);
+        this.getScrollPanelBaseDiagram().setViewportView(this.panelBaseDiagram);
+        this.tabbedPane.add("Diagram", this.getScrollPanelBaseDiagram());
     }
     
     /**
-     * Method responsible for returning the Project.
-     * @return Project.
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
      */
-    public Project getProject() {
-        return this.project;
+    public Diagram getDiagram() {
+        return this.diagram;
     }
     
     /**
-     * Method responsible for returning the Scroll Panel Base Project.
-     * @return Scroll Panel Base Project.
+     * Method responsible for returning the Scroll Panel Base Diagram.
+     * @return Scroll Panel Base Diagram.
      */
-    public JScrollPane getScrollPanelBaseProject() {
-        return this.scrollPanes.get("scrollPanelBaseProject");
+    public JScrollPane getScrollPanelBaseDiagram() {
+        return this.scrollPanes.get("scrollPanelBaseDiagram");
     }
 }

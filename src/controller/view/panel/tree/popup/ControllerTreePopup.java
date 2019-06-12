@@ -9,6 +9,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.base.variability.Variability;
+import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.base.AttributeUML;
 import model.structural.diagram.classs.base.MethodUML;
 import view.panel.tree.popup.TreePopup;
@@ -224,6 +225,18 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
 //        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());;
 //        MetodoUML       metodo   = (MetodoUML) object;
 //        new ViewEditarMetodo(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), diagrama, metodo).setVisible(true);
+    }
+    
+    /**
+     * Method responsible for returning the Class Diagram from Node.
+     * @param  node JTree Node.
+     * @return Class Diagram.
+     */
+    private ClassDiagram getClassDiagram(DefaultMutableTreeNode node) {
+        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
+        while ((parent != null) && !(parent.getUserObject() instanceof ClassDiagram))
+            parent = (DefaultMutableTreeNode) parent.getParent();
+        return parent == null ? null : (ClassDiagram) parent.getUserObject();
     }
     
     /**

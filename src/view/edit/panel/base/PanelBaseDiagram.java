@@ -1,48 +1,80 @@
 package view.edit.panel.base;
 
+import controller.view.edit.panel.base.ControllerPanelBaseDiagram;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import javax.swing.JTextField;
+import model.structural.base.Diagram;
 import view.Panel;
+import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseDiagram</b>.</p> 
  * <p>Class responsible for defining a Panel for showing the <b>Diagram Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  29/05/2019
+ * @see    controller.view.edit.panel.base.ControllerPanelBaseDiagram
+ * @see    model.structural.base.Diagram
  * @see    view.Panel
  */
 public final class PanelBaseDiagram extends Panel {
+    private final ViewMenu viewMenu;
+    private final Diagram diagram;
     
     /**
      * Default constructor method of Class.
+     * @param viewMenu View Menu.
+     * @param diagram Diagram.
      */
-    public PanelBaseDiagram() {
+    public PanelBaseDiagram(ViewMenu viewMenu, Diagram diagram) {
+        this.viewMenu   = viewMenu;
+        this.diagram    = diagram;
+        this.controller = new ControllerPanelBaseDiagram(this);
         this.setSettings();
         this.addComponents();
+        this.setValues();
     }
     
     /**
      * Method responsible for defining the Settings.
      */
     private void setSettings() {
-        this.setLayout(new FlowLayout(FlowLayout.CENTER));
-        this.setPreferredSize(new Dimension(300, 100));
+        this.setLayout(new GridLayout(5, 1, 2, 5));
+        this.setPreferredSize(new Dimension(50, 50));
+        this.setSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.addLines(1);
-        
-        this.add(this.createLabel("Name*: ", 80));
+        this.add(this.createLabel("Name*: "));
         this.add(this.createTextField("nameTextField", "", 15));
         
-        this.addLines(1);
-        
-        this.add(this.createLabel("Type: ",  80));
+        this.add(this.createLabel("Type: "));
         this.add(this.createTextFieldNoEditable("typeTextField", "", 15));
-        
-        this.addLines(1);
+    }
+    
+    /**
+     * Method responsible for setting the Diagram Values.
+     */
+    public void setValues() {
+        this.getNameTextField().setText(this.diagram.getName());
+        this.getTypeTextField().setText(this.diagram.getType());
+    }
+    
+    /**
+     * Method responsible for returning the View Menu.
+     * @return View Menu.
+     */
+    public ViewMenu getViewMenu() {
+        return this.viewMenu;
+    }
+    
+    /**
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
+     */
+    public Diagram getDiagram() {
+        return this.diagram;
     }
     
     /**

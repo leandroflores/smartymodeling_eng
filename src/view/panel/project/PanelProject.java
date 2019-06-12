@@ -10,6 +10,7 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import view.Panel;
 import view.panel.edit.PanelEdit;
+import view.panel.edit.base.PanelEditDiagram;
 import view.panel.edit.base.PanelEditProject;
 import view.panel.tree.PanelTree;
 import view.structural.ViewMenu;
@@ -96,16 +97,22 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEdit(Object object) {
         if (object instanceof Project) {
-            System.out.println("Project: " + (Project) object);
             this.panelEdit = new PanelEditProject(this.viewMenu);
-            this.panelEdit.updateUI();
-            this.getScrollPanelEdit().setViewportView(this.panelEdit);
-            this.getScrollPanelEdit().updateUI();
         }else if (object instanceof Diagram) {
-            System.out.println("Diagram: " + (Diagram) object);
+            this.panelEdit = new PanelEditDiagram(this.viewMenu, (Diagram) object);
         }else if (object instanceof Element) {
             System.out.println("Element: " + (Element) object);
         }
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for updating the Panel Edit.
+     */
+    public void updatePanelEdit() {
+        this.panelEdit.updateUI();
+        this.getScrollPanelEdit().setViewportView(this.panelEdit);
+        this.getScrollPanelEdit().updateUI();
     }
     
     /**

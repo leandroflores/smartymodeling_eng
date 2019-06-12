@@ -1,6 +1,6 @@
 package view.edit.panel.base.classs;
 
-import controller.view.edit.panel.base.classs.ControllerPanelBaseAttribute;
+import controller.view.edit.panel.base.classs.ControllerPanelBaseAttributeUML;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.JCheckBox;
@@ -11,27 +11,27 @@ import model.structural.diagram.classs.base.AttributeUML;
 import view.Panel;
 
 /**
- * <p>Class of View <b>PanelBaseAttribute</b>.</p> 
- * <p>Class responsible for defining a Panel for showing the <b>Attribute Base</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelBaseAttributeUML</b>.</p> 
+ * <p>Class responsible for defining a Base Panel for the <b>Attribute UML</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  05/06/2019
- * @see    controller.view.edit.panel.base.classs.ControllerPanelBaseAttribute
+ * @see    controller.view.edit.panel.base.classs.ControllerPanelBaseAttributeUML
  * @see    model.structural.diagram.classs.base.AttributeUML
  * @see    view.Panel
  */
-public final class PanelBaseAttribute extends Panel {
+public final class PanelBaseAttributeUML extends Panel {
     private final ClassDiagram diagram;
-    private final AttributeUML attribute;
+    private final AttributeUML attributeUML;
     
     /**
      * Default constructor method of Class.
      * @param diagram Class Diagram.
-     * @param attribute Attribute UML.
+     * @param attributeUML Attribute UML.
      */
-    public PanelBaseAttribute(ClassDiagram diagram, AttributeUML attribute) {
-        this.diagram    = diagram;
-        this.attribute  = attribute;
-        this.controller = new ControllerPanelBaseAttribute(this);
+    public PanelBaseAttributeUML(ClassDiagram diagram, AttributeUML attributeUML) {
+        this.diagram      = diagram;
+        this.attributeUML = attributeUML;
+        this.controller   = new ControllerPanelBaseAttributeUML(this);
         this.setSettings();
         this.addComponents();
     }
@@ -75,11 +75,11 @@ public final class PanelBaseAttribute extends Panel {
      * Method responsible for setting the Attribute Values.
      */
     public void setValues() {
-        this.getVisibilityComboBox().setSelectedItem(this.attribute.getVisibility());
-        this.getNameTextField().setText(this.attribute.getName());
-        this.getTypeComboBox().setSelectedItem(this.attribute.getTypeUML());
-        this.getStaticCheckBox().setSelected(this.attribute.isStatic());
-        this.getFinalCheckBox().setSelected(this.attribute.isFinal());
+        this.getVisibilityComboBox().setSelectedItem(this.attributeUML.getVisibility());
+        this.getNameTextField().setText(this.attributeUML.getName());
+        this.getTypeComboBox().setSelectedItem(this.attributeUML.getTypeUML());
+        this.getStaticCheckBox().setSelected(this.attributeUML.isStatic());
+        this.getFinalCheckBox().setSelected(this.attributeUML.isFinal());
     }
     
     /**
@@ -91,11 +91,11 @@ public final class PanelBaseAttribute extends Panel {
     }
     
     /**
-     * Method responsible for returning the Attribute.
-     * @return Attribute.
+     * Method responsible for returning the Attribute UML.
+     * @return Attribute UML.
      */
-    public AttributeUML getAttribute() {
-        return this.attribute;
+    public AttributeUML getAttributeUML() {
+        return this.attributeUML;
     }
     
     /**

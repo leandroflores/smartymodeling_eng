@@ -2,8 +2,6 @@ package controller.view.edit.panel.base;
 
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import view.edit.panel.base.PanelBaseProject;
 

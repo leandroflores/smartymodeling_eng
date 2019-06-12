@@ -58,7 +58,7 @@ public final class ViewEditDiagram extends ViewEdit {
      * Method responsible for adding the Panel Base Diagram.
      */
     private void addPanelBaseDiagram() {
-        this.panelBaseDiagram = new PanelBaseDiagram();
+        this.panelBaseDiagram = new PanelBaseDiagram(this.getViewMenu(), this.diagram);
         this.createScrollPane("scrollPanelBaseDiagram",  this.panelBaseDiagram);
         this.getScrollPanelBaseDiagram().setViewportView(this.panelBaseDiagram);
         this.tabbedPane.add("Diagram", this.getScrollPanelBaseDiagram());

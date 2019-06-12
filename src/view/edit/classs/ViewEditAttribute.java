@@ -7,7 +7,7 @@ import javax.swing.JTabbedPane;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.base.AttributeUML;
 import view.edit.ViewEdit;
-import view.edit.panel.base.classs.PanelBaseAttribute;
+import view.edit.panel.base.classs.PanelBaseAttributeUML;
 import view.edit.panel.stereotype.PanelStereotype;
 import view.panel.modeling.PanelModeling;
 
@@ -23,7 +23,7 @@ import view.panel.modeling.PanelModeling;
 public final class ViewEditAttribute extends ViewEdit {
     private final ClassDiagram diagram;
     private final AttributeUML attribute;
-    private PanelBaseAttribute panelBaseAttribute;
+    private PanelBaseAttributeUML panelBaseAttributeUML;
     private PanelStereotype    panelStereotype;
     
     /**
@@ -67,9 +67,9 @@ public final class ViewEditAttribute extends ViewEdit {
      * Method responsible for adding the Panel Base Attribute.
      */
     private void addPanelBaseAttribute() {
-        this.panelBaseAttribute = new PanelBaseAttribute(this.diagram, this.attribute);
-        this.createScrollPane("scrollPanelBaseAttribute", this.panelBaseAttribute);
-        this.getScrollPanelBaseAttribute().setViewportView(this.panelBaseAttribute);
+        this.panelBaseAttributeUML = new PanelBaseAttributeUML(this.diagram, this.attribute);
+        this.createScrollPane("scrollPanelBaseAttribute", this.panelBaseAttributeUML);
+        this.getScrollPanelBaseAttribute().setViewportView(this.panelBaseAttributeUML);
         this.tabbedPane.add("Attribute", this.getScrollPanelBaseAttribute());
     }
     
@@ -85,7 +85,7 @@ public final class ViewEditAttribute extends ViewEdit {
     
     @Override
     public void setValues() {
-        this.panelBaseAttribute.setValues();
+        this.panelBaseAttributeUML.setValues();
     }
     
     /**

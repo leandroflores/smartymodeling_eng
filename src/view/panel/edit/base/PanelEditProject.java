@@ -1,16 +1,16 @@
 package view.panel.edit.base;
 
-import view.panel.edit.*;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import view.edit.panel.base.PanelBaseProject;
+import view.panel.edit.PanelEdit;
 import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditProject</b>.</p> 
- * <p>Class responsible for defining a Panel for Edit <b>Project</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining a Panel for Edit the <b>Project</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  11/06/2019
  * @see    model.structural.base.Project
