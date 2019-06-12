@@ -62,6 +62,7 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
                      attribute.setTypeUML(this.panel.getDiagram().getObjectType());
                      entity.addAttribute(attribute);
                      attribute.setDefaultName();
+                     entity.updateSize();
         this.panel.updateDiagram();
         this.panel.getViewMenu().update();
         this.panel.getViewMenu().setSave(false);
@@ -80,6 +81,7 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
                   entity.addMethod(method);
                   this.panel.getDiagram().addMethod(method);
                   method.setDefaultName();
+                  entity.updateSize();
         this.panel.updateDiagram();
         this.panel.getViewMenu().update();
         this.panel.getViewMenu().setSave(false);

@@ -44,8 +44,8 @@ public final class PanelProject extends Panel {
      */
     private void initComponents() {
         this.setLayout(new GridBagLayout());
-        this.setPreferredSize(new Dimension(250, 250));
-        this.setMinimumSize(new Dimension(500, 220));
+        this.setPreferredSize(new Dimension(240, 250));
+        this.setMinimumSize(new Dimension(240, 220));
     }
     
     @Override

@@ -37,7 +37,7 @@ public class ClassUML extends Entity {
         this.type      = "class";
         this.abstract_ = element.getAttribute("abstract").equals("true");
         this.final_    = element.getAttribute("final").equals("true");
-        super.updateSize();
+//        super.updateSize();
     }
 
     /**

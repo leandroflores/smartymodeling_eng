@@ -263,7 +263,7 @@ public abstract class Entity extends Element {
      */
     public void addAttribute(AttributeUML attribute) {
         this.attributes.put(attribute.getId(), attribute);
-        this.updateSize();
+//        this.updateSize();
     }
     
     /**
@@ -332,7 +332,7 @@ public abstract class Entity extends Element {
      */
     public void addMethod(MethodUML method) {
         this.methods.put(method.getId(), method);
-        this.updateSize();
+//        this.updateSize();
     }
     
     /**

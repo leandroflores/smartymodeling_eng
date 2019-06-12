@@ -31,7 +31,7 @@ public class InterfaceUML extends Entity {
     public InterfaceUML(Element element) {
         super(element);
         this.type = "interface";
-        super.updateSize();
+//        super.updateSize();
     }
     
     @Override

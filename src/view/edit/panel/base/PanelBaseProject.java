@@ -2,7 +2,7 @@ package view.edit.panel.base;
 
 import controller.view.edit.panel.base.ControllerPanelBaseProject;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import javax.swing.JTextField;
 import model.structural.base.Project;
 import view.Panel;
@@ -31,29 +31,37 @@ public final class PanelBaseProject extends Panel {
         this.controller = new ControllerPanelBaseProject(this);
         this.setSettings();
         this.addComponents();
+        this.setValues();
     }
     
     /**
      * Method responsible for defining the Settings.
      */
     private void setSettings() {
-        this.setLayout(new FlowLayout(FlowLayout.CENTER));
-        this.setPreferredSize(new Dimension(300, 100));
+        this.setLayout(new GridLayout(5, 1, 2, 5));
+        this.setPreferredSize(new Dimension(50, 50));
+        this.setSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.addLines(1);
+        this.add(this.createLabel("Version: "));
+        this.add(this.createTextFieldNoEditable("versionTextField", "", 5));
         
-        this.add(this.createLabel("Path*: ", 80));
-        this.add(this.createTextFieldNoEditable("pathTextField", "", 15));
-
-        this.addLines(1);
+        this.add(this.createLabel("Path: "));
+        this.add(this.createTextFieldNoEditable("pathTextField", "", 5));
         
-        this.add(this.createLabel("Name*: ", 80));
-        this.add(this.createTextField("nameTextField", "", 15));
-        
-        this.addLines(1);
+        this.add(this.createLabel("Name*: "));
+        this.add(this.createTextField("nameTextField", "", 5));
+    }
+    
+    /**
+     * Method responsible for setting the Project Values.
+     */
+    public void setValues() {
+        this.getVersionTextField().setText(this.project.getVersion());
+        this.getPathTextField().setText(this.project.getPath());
+        this.getNameTextField().setText(this.project.getName());
     }
     
     /**
@@ -70,6 +78,14 @@ public final class PanelBaseProject extends Panel {
      */
     public Project getProject() {
         return this.project;
+    }
+    
+    /**
+     * Method responsible for returning the Version Text Field.
+     * @return Version Text Field.
+     */
+    public JTextField getVersionTextField() {
+        return this.textFields.get("versionTextField");
     }
     
     /**

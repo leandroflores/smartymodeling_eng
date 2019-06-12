@@ -9,14 +9,13 @@ import view.edit.panel.base.PanelBaseProject;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelEditProject</b>.</p> 
- * <p>Class responsible for defining a Panel for Edit <b>Project</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelEditDiagram</b>.</p> 
+ * <p>Class responsible for defining a Panel for Edit the <b>Diagram</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  11/06/2019
- * @see    model.structural.base.Project
+ * @since  12/06/2019
  * @see    view.panel.edit.PanelEdit
  */
-public final class PanelEditProject extends PanelEdit {
+public final class PanelEditDiagram extends PanelEdit {
     private final Project project;
     private PanelBaseProject panelBaseProject;
     
@@ -24,7 +23,7 @@ public final class PanelEditProject extends PanelEdit {
      * Default constructor method of Class.
      * @param viewMenu View Menu.
      */
-    public PanelEditProject(ViewMenu viewMenu) {
+    public PanelEditDiagram(ViewMenu viewMenu) {
         super(viewMenu);
         this.project = this.viewMenu.getProject();
         this.setPreferredSize(new Dimension(200, 100));

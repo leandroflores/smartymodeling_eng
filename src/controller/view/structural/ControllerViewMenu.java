@@ -5,6 +5,7 @@ import file.exportation.ExportProject;
 import file.importation.ImportProject;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
@@ -151,8 +152,10 @@ public class ControllerViewMenu extends ControllerView {
      */
     public void exportProject() {
         try {
-            new ExportProject(this.viewMenu.getProject(), this.viewMenu.getFileChooserProject().getSelectedFile().getAbsolutePath()).export();
-            this.viewMenu.setSave(true);
+            if (this.viewMenu.getFileChooserProject().getSelectedFile() != null) {
+                new ExportProject(this.viewMenu.getProject(), this.viewMenu.getFileChooserProject().getSelectedFile().getAbsolutePath()).export();
+                this.viewMenu.setSave(true);
+            }
         }catch (IOException exception) {
             new ViewError(this.viewMenu, "Error writing Project File!").setVisible(true);
         }
