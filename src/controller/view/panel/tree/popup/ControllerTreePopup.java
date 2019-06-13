@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
+import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ClassDiagram;
@@ -103,8 +104,49 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      * @param node JTree Node.
      */
     private void showPanelEdit(DefaultMutableTreeNode node) {
-        if (node.getUserObject() != null)
-            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEdit(node.getUserObject());
+        if (node.getUserObject() != null) {
+            Diagram diagram = this.getDiagram(node);
+            if (node.getUserObject() instanceof Project)
+                this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditProject();
+            else if (node.getUserObject() instanceof Diagram)
+                this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) node.getUserObject());
+            else if (node.getUserObject() instanceof Variability)
+                this.showPanelEditVariability(diagram, (Variability) node.getUserObject());
+            else if (node.getUserObject() instanceof Element)
+                this.showPanelEdit(diagram, (Element) node.getUserObject());
+        }
+    }
+    
+    /**
+     * Method responsible for showing the Panel Edit Variability.
+     * @param diagram Diagram.
+     * @param variability Variability.
+     */
+    private void showPanelEditVariability(Diagram diagram, Variability variability) {
+        System.out.println("Diagram: "     + diagram);
+        System.out.println("Variability: " + variability);
+        System.out.println("");
+    }
+    
+    /**
+     * Method responsible for showing the Panel Edit.
+     * @param diagram Diagram.
+     * @param element Element.
+     */
+    private void showPanelEdit(Diagram diagram, Element element) {
+        if (diagram instanceof ClassDiagram)
+            this.showPanelEditElement((ClassDiagram) diagram, element);
+    }
+    
+    /**
+     * Method responsible for showing the Panel Edit Element.
+     * @param diagram Class Diagram.
+     * @param element Element.
+     */
+    private void showPanelEditElement(ClassDiagram diagram, Element element) {
+        System.out.println("Diagram: " + diagram);
+        System.out.println("Element: " + element);
+        System.out.println("");
     }
     
     /**
@@ -141,7 +183,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      * @param node JTree Node.
      */
     private void deleteVariability(Object object, DefaultMutableTreeNode node) {
-        Diagram     diagram     = this.getDiagram((DefaultMutableTreeNode) node.getParent());
+        Diagram     diagram     = this.getDiagram(node);
         Variability variability = (Variability) object;
 //        new ViewExcluirVariabilidade(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), diagrama, variability).setVisible(true);
     }
@@ -228,23 +270,14 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     }
     
     /**
-     * Method responsible for returning the Class Diagram from Node.
-     * @param  node JTree Node.
-     * @return Class Diagram.
-     */
-    private ClassDiagram getClassDiagram(DefaultMutableTreeNode node) {
-        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
-        while ((parent != null) && !(parent.getUserObject() instanceof ClassDiagram))
-            parent = (DefaultMutableTreeNode) parent.getParent();
-        return parent == null ? null : (ClassDiagram) parent.getUserObject();
-    }
-    
-    /**
-     * Method responsible for returning Diagram.
+     * Method responsible for returning the Diagram from Node.
      * @param  node JTree Node.
      * @return Diagram.
      */
     private Diagram getDiagram(DefaultMutableTreeNode node) {
-        return (Diagram) node.getUserObject();
+        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
+        while ((parent != null) && !(parent.getUserObject() instanceof Diagram))
+            parent = (DefaultMutableTreeNode) parent.getParent();
+        return parent == null ? null : (Diagram) parent.getUserObject();
     }
 }

@@ -39,8 +39,6 @@ public final class PanelEditProject extends PanelEdit {
         this.addPanelBaseProject();
         
         this.add(this.tabbedPane);
-
-        this.addLines(1);
     }
     
     /**

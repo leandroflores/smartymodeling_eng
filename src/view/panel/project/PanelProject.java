@@ -8,6 +8,8 @@ import javax.swing.JSplitPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.diagram.ClassDiagram;
+import model.structural.diagram.classs.base.AttributeUML;
 import view.Panel;
 import view.panel.edit.PanelEdit;
 import view.panel.edit.base.PanelEditDiagram;
@@ -92,17 +94,30 @@ public final class PanelProject extends Panel {
     }
     
     /**
-     * Method responsible for initializing the Panel Edit.
-     * @param object Object.
+     * Method responsible for initializing the Panel Edit Project.
      */
-    public void initPanelEdit(Object object) {
-        if (object instanceof Project) {
-            this.panelEdit = new PanelEditProject(this.viewMenu);
-        }else if (object instanceof Diagram) {
-            this.panelEdit = new PanelEditDiagram(this.viewMenu, (Diagram) object);
-        }else if (object instanceof Element) {
-            System.out.println("Element: " + (Element) object);
-        }
+    public void initPanelEditProject() {
+        this.panelEdit = new PanelEditProject(this.viewMenu);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Diagram.
+     * @param diagram Diagram.
+     */
+    public void initPanelEditDiagram(Diagram diagram) {
+        this.panelEdit = new PanelEditDiagram(this.viewMenu, diagram);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Element.
+     * @param diagram Class Diagram.
+     * @param element Element.
+     */
+    public void initPanelEditElement(ClassDiagram diagram, Element element) {
+        if (element instanceof AttributeUML)
+            System.out.println("Attribute: " + (AttributeUML) element);
         this.updatePanelEdit();
     }
     
