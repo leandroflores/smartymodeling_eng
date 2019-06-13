@@ -67,7 +67,7 @@ public final class ViewEditAttribute extends ViewEdit {
      * Method responsible for adding the Panel Base Attribute.
      */
     private void addPanelBaseAttribute() {
-        this.panelBaseAttributeUML = new PanelBaseAttributeUML(this.diagram, this.attribute);
+        this.panelBaseAttributeUML = new PanelBaseAttributeUML(this.getViewMenu(), this.diagram, this.attribute);
         this.createScrollPane("scrollPanelBaseAttribute", this.panelBaseAttributeUML);
         this.getScrollPanelBaseAttribute().setViewportView(this.panelBaseAttributeUML);
         this.tabbedPane.add("Attribute", this.getScrollPanelBaseAttribute());
@@ -77,7 +77,7 @@ public final class ViewEditAttribute extends ViewEdit {
      * Method responsible for adding the Panel Stereotype.
      */
     private void addPanelStereotype() {
-        this.panelStereotype  = new PanelStereotype(this.getViewMenu().getProject(), this.attribute);
+        this.panelStereotype  = new PanelStereotype(this.getViewMenu(), this.attribute);
         this.createScrollPane("scrollPanelStereotype",  this.panelStereotype);
         this.getScrollPanelStereotype().setViewportView(this.panelStereotype);
         this.tabbedPane.add("Stereotype", this.getScrollPanelStereotype());

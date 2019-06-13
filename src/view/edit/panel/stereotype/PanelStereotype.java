@@ -15,25 +15,29 @@ import model.structural.base.Project;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Link;
 import view.Panel;
+import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelProject</b>.</p> 
  * <p>Class responsible for defining a Panel for the <b>Stereotypes</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  29/05/2019
+ * @see    controller.view.edit.panel.stereotype.ControllerPanelStereotype
  * @see    view.Panel
  */
 public final class PanelStereotype extends Panel {
-    private final Project project;
-    private final Element element;
+    private final ViewMenu viewMenu;
+    private final Project  project;
+    private final Element  element;
     
     /**
      * Default constructor method of Class.
-     * @param project Project.
+     * @param viewMenu View Menu.
      * @param element Element.
      */
-    public PanelStereotype(Project project, Element element) {
-        this.project    = project;
+    public PanelStereotype(ViewMenu viewMenu, Element element) {
+        this.viewMenu   = viewMenu;
+        this.project    = this.viewMenu.getProject();
         this.element    = element;
         this.controller = new ControllerPanelStereotype(this);
         this.setSettings();
@@ -52,26 +56,26 @@ public final class PanelStereotype extends Panel {
     
     @Override
     protected void addComponents() {
-        this.addLines(1);
+//        this.addLines(1);
         
         this.add(this.createLabel("New: ", 40));
         this.add(this.createTextField("stereotypeTextField", "", 16));
         this.add(this.createButton("newStereotypeButton", "New Stereotype"));
         this.getNewStereotypeButton().setPreferredSize(new Dimension(200, 30));
         
-        this.addLines(1);
+//        this.addLines(1);
         
         this.add(this.createComboBox("stereotypeComboBox", this.getValues(), 285));
         this.add(this.createButton("addStereotypeButton",    "", "Add Stereotype",    "add.png"));
         this.add(this.createButton("removeStereotypeButton", "", "Remove Stereotype", "remove.png"));
         
-        this.addLines(1);
+//        this.addLines(1);
         
         this.createList("stereotypesList");
         this.add(this.getStereotypesScrollPane());
         this.getStereotypesScrollPane().setPreferredSize(new Dimension(450, 140));
         
-        this.addLines(1);
+//        this.addLines(1);
     }
     
     /**
@@ -109,6 +113,14 @@ public final class PanelStereotype extends Panel {
         for (Link link : this.project.filterLinksByElement(this.element))
             model.addElement(link.getStereotype());
         this.getStereotypesList().setModel(model);
+    }
+    
+    /**
+     * Method responsible for returning the View Menu.
+     * @return View Menu.
+     */
+    public ViewMenu getViewMenu() {
+        return this.viewMenu;
     }
     
     /**

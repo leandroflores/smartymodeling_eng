@@ -4,8 +4,10 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.UseCaseDiagram;
+import model.structural.diagram.classs.base.AttributeUML;
 import model.structural.diagram.classs.base.ClassUML;
 import model.structural.diagram.classs.base.InterfaceUML;
+import model.structural.diagram.classs.base.MethodUML;
 import model.structural.diagram.classs.base.PackageUML;
 import model.structural.diagram.usecase.base.ActorUML;
 import model.structural.diagram.usecase.base.UseCaseUML;
@@ -74,5 +76,9 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
             diagram.removeClass((ClassUML) this.element);
         else if (this.element instanceof InterfaceUML)
             diagram.removeInterface((InterfaceUML) this.element);
+        else if (this.element instanceof AttributeUML)
+            diagram.removeAttribute((AttributeUML) this.element);
+        else if (this.element instanceof MethodUML)
+            diagram.removeMethod((MethodUML) this.element);
     }
 }

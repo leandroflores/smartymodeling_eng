@@ -14,6 +14,7 @@ import view.Panel;
 import view.panel.edit.PanelEdit;
 import view.panel.edit.base.PanelEditDiagram;
 import view.panel.edit.base.PanelEditProject;
+import view.panel.edit.base.classs.PanelEditAttributeUML;
 import view.panel.tree.PanelTree;
 import view.structural.ViewMenu;
 
@@ -117,7 +118,8 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditElement(ClassDiagram diagram, Element element) {
         if (element instanceof AttributeUML)
-            System.out.println("Attribute: " + (AttributeUML) element);
+            this.panelEdit = new PanelEditAttributeUML(this.viewMenu, diagram, (AttributeUML) element);
+//            System.out.println("Attribute: " + (AttributeUML) element);
         this.updatePanelEdit();
     }
     

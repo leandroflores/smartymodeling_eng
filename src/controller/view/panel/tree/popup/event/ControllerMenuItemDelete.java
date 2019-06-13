@@ -4,6 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
+import model.structural.base.Element;
+import model.structural.base.variability.Variability;
+import view.delete.ViewDeleteDiagram;
+import view.delete.ViewDeleteElement;
+import view.delete.ViewDeleteVariability;
 import view.panel.tree.popup.TreePopup;
 
 /**
@@ -35,36 +40,28 @@ public class ControllerMenuItemDelete implements ActionListener {
     }
     
     /**
-     * Method responsible for forwarding Action.
+     * Method responsible for forwarding the Action.
      * @param object Object.
      * @param node JTree Node.
      */
     private void action(Object object, DefaultMutableTreeNode node) {
-//        if (object instanceof Diagrama)
-//            new ViewExcluirDiagrama(this.popup.getPainelProjeto().getViewMenu().getPainelModelagem(), ((Diagrama) object)).setVisible(true);
-//        else if (object instanceof Elemento)
-//            new ViewExcluirElemento(this.popup.getPainelProjeto().getViewMenu().getPainelModelagem(), ((Elemento) object)).setVisible(true);
-//        else if (object instanceof Variabilidade)
-//            this.excluirVariabilidade(object, node);
+        if (object instanceof Diagram)
+            new ViewDeleteDiagram(this.popup.getPanelTree().getViewMenu().getPanelModeling(), ((Diagram) object)).setVisible(true);
+        else if (object instanceof Element)
+            new ViewDeleteElement(this.popup.getPanelTree().getViewMenu().getPanelModeling(), ((Element) object)).setVisible(true);
+        else if (object instanceof Variability)
+            new ViewDeleteVariability(this.popup.getPanelTree().getViewMenu().getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
     }
     
     /**
-     * Method responsible for deleting the Variability.
-     * @param object Object.
-     * @param node JTree Node.
-     */
-    private void deleteVariability(Object object, DefaultMutableTreeNode node) {
-//        Diagrama      diagrama      = this.getDiagrama((DefaultMutableTreeNode) node.getParent());
-//        Variabilidade variabilidade = (Variabilidade) object;
-//        new ViewExcluirVariabilidade(this.popup.getPainelProjeto().getViewMenu().getPainelModelagem(), diagrama, variabilidade).setVisible(true);
-    }
-    
-    /**
-     * Method responsible for returning Diagram from Node.
+     * Method responsible for returning the Diagram from Node.
      * @param  node JTree Node.
      * @return Diagram.
      */
     private Diagram getDiagram(DefaultMutableTreeNode node) {
-        return (Diagram) node.getUserObject();
+        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
+        while ((parent != null) && !(parent.getUserObject() instanceof Diagram))
+            parent = (DefaultMutableTreeNode) parent.getParent();
+        return parent == null ? null : (Diagram) parent.getUserObject();
     }
 }

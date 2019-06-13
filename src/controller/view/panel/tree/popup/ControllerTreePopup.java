@@ -13,6 +13,14 @@ import model.structural.base.variability.Variability;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.base.AttributeUML;
 import model.structural.diagram.classs.base.MethodUML;
+import view.delete.ViewDeleteDiagram;
+import view.delete.ViewDeleteElement;
+import view.delete.ViewDeleteVariability;
+import view.edit.ViewEditDiagram;
+import view.edit.ViewEditElement;
+import view.edit.ViewEditProject;
+import view.edit.classs.ViewEditAttribute;
+import view.edit.classs.ViewEditMethod;
 import view.panel.tree.popup.TreePopup;
 
 /**
@@ -123,9 +131,9 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      * @param variability Variability.
      */
     private void showPanelEditVariability(Diagram diagram, Variability variability) {
-        System.out.println("Diagram: "     + diagram);
-        System.out.println("Variability: " + variability);
-        System.out.println("");
+//        System.out.println("Diagram: "     + diagram);
+//        System.out.println("Variability: " + variability);
+//        System.out.println("");
     }
     
     /**
@@ -135,18 +143,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      */
     private void showPanelEdit(Diagram diagram, Element element) {
         if (diagram instanceof ClassDiagram)
-            this.showPanelEditElement((ClassDiagram) diagram, element);
-    }
-    
-    /**
-     * Method responsible for showing the Panel Edit Element.
-     * @param diagram Class Diagram.
-     * @param element Element.
-     */
-    private void showPanelEditElement(ClassDiagram diagram, Element element) {
-        System.out.println("Diagram: " + diagram);
-        System.out.println("Element: " + element);
-        System.out.println("");
+            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((ClassDiagram) diagram, element);
     }
     
     /**
@@ -159,61 +156,17 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     }
     
     /**
-     * Method responsible for deleting JTree Node.
+     * Method responsible for deleting the JTree Node.
      * @param object Object.
      * @param node JTree Node.
      */
     private void delete(Object object, DefaultMutableTreeNode node) {
         if (object instanceof Diagram)
-            System.out.println("Diagram");
-//            new ViewExcluirDiagrama(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), ((Diagrama) object)).setVisible(true);
-//        else if (object instanceof Element)
-//            new ViewExcluirElemento(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), ((Elemento) object)).setVisible(true);
+            new ViewDeleteDiagram(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), (Diagram) object).setVisible(true);
+        else if (object instanceof Element)
+            new ViewDeleteElement(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), (Element) object).setVisible(true);
         else if (object instanceof Variability)
-            this.deleteVariability(object, node);
-        else if (object instanceof AttributeUML)
-            this.deleteAttributeUML(object, node);
-        else if (object instanceof MethodUML)
-            this.deleteMethodUML(object, node);
-    }
-    
-    /**
-     * Method responsible for deleting Variability.
-     * @param object Object.
-     * @param node JTree Node.
-     */
-    private void deleteVariability(Object object, DefaultMutableTreeNode node) {
-        Diagram     diagram     = this.getDiagram(node);
-        Variability variability = (Variability) object;
-//        new ViewExcluirVariabilidade(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), diagrama, variability).setVisible(true);
-    }
-    
-    /**
-     * Method responsible for deleting Attribute UML.
-     * @param object Object.
-     * @param node JTree Node.
-     */
-    private void deleteAttributeUML(Object object, DefaultMutableTreeNode node) {
-//        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());
-//        AtributoUML     atributo = (AtributoUML) object;
-//                        diagrama.removeAtributo(atributo);
-//        this.treePopup.getPanelProject().getViewMenu().getPanelModeling().getPainelDiagrama().atualizarDiagrama();
-//        this.treePopup.getPanelProject().getViewMenu().update();
-//        this.treePopup.getPanelProject().getViewMenu().setSalvo(false);
-    }
-    
-    /**
-     * Method responsible for deleting Method UML.
-     * @param object Object.
-     * @param node JTree Node.
-     */
-    private void deleteMethodUML(Object object, DefaultMutableTreeNode node) {
-//        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());
-//        MetodoUML       metodo = (MetodoUML) object;
-//                        diagrama.removeMetodo(metodo);
-//        this.treePopup.getPanelProject().getViewMenu().getPanelModeling().getPainelDiagrama().atualizarDiagrama();
-//        this.treePopup.getPanelProject().getViewMenu().update();
-//        this.treePopup.getPanelProject().getViewMenu().setSalvo(false);
+            new ViewDeleteVariability(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
     }
     
     /**
@@ -222,18 +175,18 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      * @param node JTree Node.
      */
     private void edit(Object object, DefaultMutableTreeNode node) {
-//        if (object instanceof Projeto)
-//            new ViewEditarProjeto(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), ((Projeto) object)).setVisible(true);
-//        else if (object instanceof Diagrama)
-//            new ViewEditarDiagrama(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), ((Diagrama) object)).setVisible(true);
-//        else if (object instanceof Elemento)
-//            new ViewEditarElemento(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), ((Elemento) object)).setVisible(true);
-//        else if (object instanceof Variabilidade)
-//            this.editarVariabilidade(object, node);
-//        else if (object instanceof AtributoUML)
-//            this.editarAtributo(object, node);
-//        else if (object instanceof MetodoUML)
-//            this.editarMetodo(object, node);
+        if (object instanceof Project)
+            new ViewEditProject(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((Project) object)).setVisible(true);
+        else if (object instanceof Diagram)
+            new ViewEditDiagram(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((Diagram) object)).setVisible(true);
+        else if (object instanceof Variability)
+            this.editVariability(object, node);
+        else if (object instanceof AttributeUML)
+            new ViewEditAttribute(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((ClassDiagram) this.getDiagram(node)), ((AttributeUML) object)).setVisible(true);
+        else if (object instanceof MethodUML)
+            new ViewEditMethod(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((ClassDiagram) this.getDiagram(node)), ((MethodUML) object)).setVisible(true);
+        else if (object instanceof Element)
+            new ViewEditElement(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((Element) object)).setVisible(true);
     }
     
     /**
@@ -244,29 +197,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     private void editVariability(Object objeto, DefaultMutableTreeNode node) {
         Diagram     diagram     = this.getDiagram((DefaultMutableTreeNode) node.getParent());
         Variability variability = (Variability) objeto;
-//        new ViewEditarVariabilidade(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), diagram, variability).setVisible(true);
-    }
-    
-    /**
-     * Method responsible for editing Attribute UML.
-     * @param object Object.
-     * @param node JTree Node.
-     */
-    private void editAttributeUML(Object object, DefaultMutableTreeNode node) {
-//        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());
-//        AtributoUML     atributo = (AtributoUML) object;
-//        new ViewEditarAtributo(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), diagrama, atributo).setVisible(true);
-    }
-    
-    /**
-     * Method responsible for editing Method UML.
-     * @param object Object.
-     * @param node JTree Node.
-     */
-    private void editMethodUML(Object object, DefaultMutableTreeNode node) {
-//        DiagramaClasses diagrama = (DiagramaClasses) this.getDiagrama((DefaultMutableTreeNode) node.getParent().getParent());;
-//        MetodoUML       metodo   = (MetodoUML) object;
-//        new ViewEditarMetodo(this.treePopup.getPanelProject().getViewMenu().getPanelModeling(), diagrama, metodo).setVisible(true);
+        
     }
     
     /**

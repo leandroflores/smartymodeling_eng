@@ -75,7 +75,7 @@ public final class ViewEditElement extends ViewEdit {
      * Method responsible for adding the Panel Stereotype.
      */
     private void addPanelStereotype() {
-        this.panelStereotype  = new PanelStereotype(this.getViewMenu().getProject(), this.element);
+        this.panelStereotype  = new PanelStereotype(this.getViewMenu(), this.element);
         this.createScrollPane("scrollPanelStereotype",  this.panelStereotype);
         this.getScrollPanelStereotype().setViewportView(this.panelStereotype);
         this.tabbedPane.add("Stereotype", this.getScrollPanelStereotype());

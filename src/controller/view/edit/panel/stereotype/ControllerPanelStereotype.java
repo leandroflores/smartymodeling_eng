@@ -3,8 +3,12 @@ package controller.view.edit.panel.stereotype;
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import model.structural.base.Element;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Link;
+import model.structural.diagram.classs.Entity;
+import model.structural.diagram.classs.base.AttributeUML;
+import model.structural.diagram.classs.base.MethodUML;
 import view.edit.panel.stereotype.PanelStereotype;
 
 /**
@@ -35,6 +39,21 @@ public class ControllerPanelStereotype extends ControllerPanel {
             this.addStereotype();
         else if (this.panelStereotype.getRemoveStereotypeButton().equals(event.getSource()))
             this.removeStereotype();
+        this.updateSize(this.panelStereotype.getElement());
+        this.panelStereotype.getViewMenu().getPanelModeling().updateDiagrams();
+    }
+    
+    /**
+     * Method responsible for updating the Element Size.
+     * @param element Element.
+     */
+    private void updateSize(Element element) {
+        if (element instanceof AttributeUML)
+            ((AttributeUML) element).getEntity().updateSize();
+        else if (element instanceof MethodUML)
+            ((MethodUML) element).getEntity().updateSize();
+        else if (element instanceof Entity)
+            ((Entity) element).updateSize();
     }
     
     @Override

@@ -52,7 +52,7 @@ public final class PanelEditAttributeUML extends PanelEditElement {
      * Method responsible for adding the Panel Base Attribute UML.
      */
     private void addPanelBaseAttributeUML() {
-        this.panelBaseAttributeUML = new PanelBaseAttributeUML(this.diagram, this.attributeUML);
+        this.panelBaseAttributeUML = new PanelBaseAttributeUML(this.viewMenu, this.diagram, this.attributeUML);
         this.createScrollPane("scrollPanelBaseAttributeUML", this.panelBaseAttributeUML);
         this.getScrollPanelBaseAttributeUML().setViewportView(this.panelBaseAttributeUML);
         this.tabbedPane.add("Attribute", this.getScrollPanelBaseAttributeUML());

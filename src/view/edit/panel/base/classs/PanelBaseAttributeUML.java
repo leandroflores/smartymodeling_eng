@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.base.AttributeUML;
 import view.Panel;
+import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseAttributeUML</b>.</p> 
@@ -20,20 +21,24 @@ import view.Panel;
  * @see    view.Panel
  */
 public final class PanelBaseAttributeUML extends Panel {
+    private final ViewMenu viewMenu;
     private final ClassDiagram diagram;
     private final AttributeUML attributeUML;
     
     /**
      * Default constructor method of Class.
+     * @param viewMenu View Menu.
      * @param diagram Class Diagram.
      * @param attributeUML Attribute UML.
      */
-    public PanelBaseAttributeUML(ClassDiagram diagram, AttributeUML attributeUML) {
+    public PanelBaseAttributeUML(ViewMenu viewMenu, ClassDiagram diagram, AttributeUML attributeUML) {
+        this.viewMenu     = viewMenu;
         this.diagram      = diagram;
         this.attributeUML = attributeUML;
         this.controller   = new ControllerPanelBaseAttributeUML(this);
         this.setSettings();
         this.addComponents();
+        this.setValues();
     }
     
     /**
@@ -80,6 +85,14 @@ public final class PanelBaseAttributeUML extends Panel {
         this.getTypeComboBox().setSelectedItem(this.attributeUML.getTypeUML());
         this.getStaticCheckBox().setSelected(this.attributeUML.isStatic());
         this.getFinalCheckBox().setSelected(this.attributeUML.isFinal());
+    }
+    
+    /**
+     * Method responsible for returning the View Menu.
+     * @return View Menu.
+     */
+    public ViewMenu getViewMenu() {
+        return this.viewMenu;
     }
     
     /**
