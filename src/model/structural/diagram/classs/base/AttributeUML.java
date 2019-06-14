@@ -45,8 +45,8 @@ public class AttributeUML extends Element {
         this.entity     = null;
         this.typeUML    = null;
         this.visibility = element.getAttribute("visibility");
-        this.static_    = element.getAttribute("static_").trim().equals("true");
-        this.final_     = element.getAttribute("final_").trim().equals("true");
+        this.static_    = element.getAttribute("static").trim().equals("true");
+        this.final_     = element.getAttribute("final").trim().equals("true");
     }
 
     @Override

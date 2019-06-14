@@ -47,6 +47,7 @@ public class ControllerPanelBaseAttributeUML extends ControllerPanel {
      * Method responsible for setting the Attribute Values.
      */
     private void update() {
+        System.out.println("Update");
         this.panelBaseAttributeUML.getAttributeUML().setVisibility(this.panelBaseAttributeUML.getVisibilityComboBox().getSelectedItem().toString());
         this.panelBaseAttributeUML.getAttributeUML().setName(this.panelBaseAttributeUML.getNameTextField().getText().trim());
         this.panelBaseAttributeUML.getAttributeUML().setTypeUML((TypeUML) this.panelBaseAttributeUML.getTypeComboBox().getSelectedItem());
@@ -54,6 +55,5 @@ public class ControllerPanelBaseAttributeUML extends ControllerPanel {
         this.panelBaseAttributeUML.getAttributeUML().setFinal(this.panelBaseAttributeUML.getFinalCheckBox().isSelected());
         this.panelBaseAttributeUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseAttributeUML.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseAttributeUML.getDiagram());
-//        this.panelBaseAttributeUML.setValues();
     }
 }

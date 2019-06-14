@@ -55,7 +55,7 @@ public final class PanelBaseElement extends Panel {
         this.add(this.createTextField("nameTextField", "", 20));
         
         this.add(this.createLabel("Mandatory: ", 120));
-        this.add(this.createCheckBox("mandatoryCheckBox", ""));
+        this.add(this.createCheckBox("mandatoryCheckBox", "", this.element.isMandatory()));
 //        this.add(this.createLabel("", 250));
 //        
 //        this.addLines(1);

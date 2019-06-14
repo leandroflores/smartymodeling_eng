@@ -54,24 +54,24 @@ public final class PanelBaseAttributeUML extends Panel {
         this.addLines(1);
         
         this.add(this.createLabel("Visibility: ", 120));
-        this.add(this.createComboBox("visibilityComboBox", this.diagram.getVisibilities(), 30));
+        this.add(this.createComboBox("visibilityComboBox", this.diagram.getVisibilities(), 30, this.attributeUML.getVisibility()));
         this.getVisibilityComboBox().setPreferredSize(new Dimension(325, 30));
         this.addLines(1);
         
         this.add(this.createLabel("Name*: ", 120));
-        this.add(this.createTextField("nameTextField", "", 25));
+        this.add(this.createTextField("nameTextField", this.attributeUML.getName(), 25));
         
         this.addLines(1);
         
         this.add(this.createLabel("Type: ", 120));
-        this.add(this.createComboBox("typeComboBox", this.diagram.getProject().getTypesList().toArray(), 30));
+        this.add(this.createComboBox("typeComboBox", this.diagram.getProject().getTypesList().toArray(), 30, this.attributeUML.getTypeUML()));
         this.getTypeComboBox().setPreferredSize(new Dimension(325, 30));
         
         this.addLines(1);
         
-        this.add(this.createCheckBox("staticCheckBox", "Static"));
+        this.add(this.createCheckBox("staticCheckBox", "Static", this.attributeUML.isStatic()));
         this.add(this.createLabel("", 5));
-        this.add(this.createCheckBox("finalCheckBox",  "Final"));
+        this.add(this.createCheckBox("finalCheckBox",  "Final",  this.attributeUML.isFinal()));
         
         this.addLines(1);
     }
@@ -80,12 +80,14 @@ public final class PanelBaseAttributeUML extends Panel {
      * Method responsible for setting the Attribute Values.
      */
     public void setValues() {
-        System.out.println("");
         this.getVisibilityComboBox().setSelectedItem(this.attributeUML.getVisibility());
         this.getNameTextField().setText(this.attributeUML.getName());
         this.getTypeComboBox().setSelectedItem(this.attributeUML.getTypeUML());
         this.getStaticCheckBox().setSelected(this.attributeUML.isStatic());
         this.getFinalCheckBox().setSelected(this.attributeUML.isFinal());
+//        this.getStaticCheckBox().setSelected(true);
+//        this.getFinalCheckBox().setSelected(true);
+        System.out.println("Set Values\n");
     }
     
     /**

@@ -50,28 +50,28 @@ public final class PanelBaseMethod extends Panel {
         this.addLines(1);
         
         this.add(this.createLabel("Visibility: ", 120));
-        this.add(this.createComboBox("visibilityComboBox", this.diagram.getVisibilities(), 30));
+        this.add(this.createComboBox("visibilityComboBox", this.diagram.getVisibilities(), 30, this.method.getVisibility()));
         this.getVisibilityComboBox().setPreferredSize(new Dimension(325, 30));
         this.addLines(1);
         
         this.add(this.createLabel("Name*: ", 120));
-        this.add(this.createTextField("nameTextField", "", 25));
+        this.add(this.createTextField("nameTextField", this.method.getName(), 25));
         
         this.addLines(1);
         
         this.add(this.createLabel("Constructor: ", 120));
-        this.add(this.createCheckBox("constructorCheckBox", ""));
+        this.add(this.createCheckBox("constructorCheckBox", "", this.method.isConstructor()));
         this.add(this.createLabel("Return: ", 100));
-        this.add(this.createComboBox("returnComboBox", this.diagram.getProject().getTypesList().toArray(), 30));
+        this.add(this.createComboBox("returnComboBox", this.diagram.getProject().getTypesList().toArray(), 30, this.method.getReturn()));
         this.getReturnComboBox().setPreferredSize(new Dimension(200, 30));
         
         this.addLines(1);
         
-        this.add(this.createCheckBox("abstractCheckBox", "Abstract"));
+        this.add(this.createCheckBox("abstractCheckBox", "Abstract", this.method.isAbstract()));
         this.add(this.createLabel("", 5));
-        this.add(this.createCheckBox("staticCheckBox",     "Static"));
+        this.add(this.createCheckBox("staticCheckBox",   "Static",   this.method.isStatic()));
         this.add(this.createLabel("", 5));
-        this.add(this.createCheckBox("finalCheckBox",      "Final"));
+        this.add(this.createCheckBox("finalCheckBox",     "Final",   this.method.isFinal()));
         
         this.addLines(1);
     }

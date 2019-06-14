@@ -227,13 +227,36 @@ public abstract class Panel extends JPanel {
     }
     
     /**
+     * Method responsible for returning a new JComboBox.
+     * @param  id JComboBox Id.
+     * @param  values JComboBox Values.
+     * @param  size JComboBox Size.
+     * @param  object Selected Object.
+     * @return New JComboBox.
+     */
+    protected JComboBox createComboBox(String id, Object[] values, int size, Object object) {
+        JComboBox comboBox = new JComboBox(values);
+                  comboBox.setSelectedItem(object);
+                  comboBox.addActionListener(this.controller);
+                  comboBox.addKeyListener(this.controller);
+                  comboBox.setAlignmentX(CENTER_ALIGNMENT);
+                  comboBox.setAlignmentY(CENTER_ALIGNMENT);
+                  comboBox.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
+                  comboBox.setPreferredSize(new Dimension(size, ViewStyle.HEIGHT));
+                  this.comboBoxes.put(id, comboBox);
+        return    comboBox;
+    }
+    
+    /**
      * Method responsible for returning a new JCheckBox.
      * @param  id JCheckBox Id.
      * @param  title JCheckBox Title.
+     * @param  selected Selected Flag.
      * @return New JCheckBox.
      */
-    public JCheckBox createCheckBox(String id, String title) {
+    public JCheckBox createCheckBox(String id, String title, boolean selected) {
         JCheckBox checkBox = new JCheckBox(title);
+                  checkBox.setSelected(selected);
                   checkBox.addActionListener(this.controller);
                   checkBox.addKeyListener(this.controller);
                   checkBox.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
