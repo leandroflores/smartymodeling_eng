@@ -59,7 +59,7 @@ public class AttributeUML extends Element {
     @Override
     public void setName(String name) {
         super.setName(name);
-        this.name = this.name.toLowerCase().trim();
+        this.name = this.getName().replaceAll(" ", "");
         this.entity.setMinWidth();
     }
     

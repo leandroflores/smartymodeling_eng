@@ -92,7 +92,18 @@ public abstract class Element implements Exportable, Modelable {
      */
     public void setName(String name) {
         if (!name.trim().equals(""))
-            this.name = name.replaceAll("<", "").replaceAll(">", "").replaceAll("#", "").trim();
+            this.name = name.replaceAll("<", "")
+                            .replaceAll(">", "")
+                            .replaceAll("#", "")
+                            .replaceAll("\\+", "")
+                            .replaceAll("-", "")
+                            .replaceAll("\\*", "")
+                            .replaceAll("/", "")
+                            .replaceAll("\\.", "")
+                            .replaceAll("%", "")
+                            .replaceAll("$", "")
+                            .replaceAll("!", "")
+                            .replaceAll("\\?", "").trim();
     }
     
     /**

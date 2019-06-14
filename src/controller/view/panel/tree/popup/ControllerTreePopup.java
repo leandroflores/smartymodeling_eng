@@ -186,7 +186,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
         else if (object instanceof MethodUML)
             new ViewEditMethod(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((ClassDiagram) this.getDiagram(node)), ((MethodUML) object)).setVisible(true);
         else if (object instanceof Element)
-            new ViewEditElement(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((Element) object)).setVisible(true);
+            new ViewEditElement(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), this.getDiagram(node), ((Element) object)).setVisible(true);
     }
     
     /**

@@ -37,6 +37,12 @@ public class ControllerPanelBaseAttributeUML extends ControllerPanel {
             this.update();
     }
     
+    @Override
+    public void keyReleased(KeyEvent event) {
+        if (this.panelBaseAttributeUML.getNameTextField().equals(event.getSource()))
+            this.update();
+    }
+    
     /**
      * Method responsible for setting the Attribute Values.
      */
@@ -48,6 +54,6 @@ public class ControllerPanelBaseAttributeUML extends ControllerPanel {
         this.panelBaseAttributeUML.getAttributeUML().setFinal(this.panelBaseAttributeUML.getFinalCheckBox().isSelected());
         this.panelBaseAttributeUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseAttributeUML.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseAttributeUML.getDiagram());
-        this.panelBaseAttributeUML.setValues();
+//        this.panelBaseAttributeUML.setValues();
     }
 }

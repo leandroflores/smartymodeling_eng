@@ -80,6 +80,7 @@ public final class PanelBaseAttributeUML extends Panel {
      * Method responsible for setting the Attribute Values.
      */
     public void setValues() {
+        System.out.println("");
         this.getVisibilityComboBox().setSelectedItem(this.attributeUML.getVisibility());
         this.getNameTextField().setText(this.attributeUML.getName());
         this.getTypeComboBox().setSelectedItem(this.attributeUML.getTypeUML());

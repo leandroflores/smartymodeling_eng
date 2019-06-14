@@ -4,6 +4,7 @@ import controller.view.edit.ControllerViewEditElement;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import model.structural.base.Diagram;
 import model.structural.base.Element;
 import view.edit.panel.association.PanelDependency;
 import view.edit.panel.base.PanelBaseElement;
@@ -21,6 +22,7 @@ import view.panel.modeling.PanelModeling;
  */
 public final class ViewEditElement extends ViewEdit {
     private final Element element;
+    private final Diagram diagram;
     private PanelBaseElement panelBaseElement;
     private PanelStereotype  panelStereotype;
     private PanelDependency  panelDependency;
@@ -28,11 +30,13 @@ public final class ViewEditElement extends ViewEdit {
     /**
      * Default constructor method of Class.
      * @param panel Panel Modeling.
+     * @param diagram Diagram.
      * @param element Element.
      */
-    public ViewEditElement(PanelModeling panel, Element element) {
+    public ViewEditElement(PanelModeling panel, Diagram diagram, Element element) {
         super(panel);
         this.element    = element;
+        this.diagram    = diagram;
         this.controller = new ControllerViewEditElement(this);
         this.title      = "Edit Element";
         this.initComponents();
@@ -65,7 +69,7 @@ public final class ViewEditElement extends ViewEdit {
      * Method responsible for adding the Panel Base Element.
      */
     private void addPanelBaseElement() {
-        this.panelBaseElement = new PanelBaseElement();
+        this.panelBaseElement = new PanelBaseElement(this.panelBaseElement.getViewMenu(), diagram, element);
         this.createScrollPane("scrollPanelBaseElement", this.panelBaseElement);
         this.getScrollPanelBaseElement().setViewportView(this.panelBaseElement);
         this.tabbedPane.add("Element", this.getScrollPanelBaseElement());

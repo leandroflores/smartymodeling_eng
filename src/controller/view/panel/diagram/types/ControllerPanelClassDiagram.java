@@ -163,10 +163,10 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
             new ViewEditAttribute(this.panelDiagram.getViewMenu().getPanelModeling(), this.panelDiagram.getDiagram(), (AttributeUML) this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
 //            this.panelDiagram.getComponent().startEditingAtCell(cell);
         else if (this.panelDiagram.getDiagram().getElement(id) instanceof MethodUML)
-            new ViewEditMethod(this.panelDiagram.getViewMenu().getPanelModeling(), this.panelDiagram.getDiagram(),       (MethodUML) this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
+            new ViewEditMethod(this.panelDiagram.getViewMenu().getPanelModeling(),    this.panelDiagram.getDiagram(), (MethodUML)  this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
 //            this.panelDiagram.getComponent().startEditingAtCell(cell);
         else if (this.panelDiagram.getDiagram().getElement(id) != null)
-            new ViewEditElement(this.panelDiagram.getViewMenu().getPanelModeling(), this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
+            new ViewEditElement(this.panelDiagram.getViewMenu().getPanelModeling(),   this.panelDiagram.getDiagram(), this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
 //            this.editElement(this.panelDiagram.getDiagram().getElement(id));
     }
     

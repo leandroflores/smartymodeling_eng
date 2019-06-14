@@ -57,9 +57,9 @@ public class ControllerMenuItemEdit implements ActionListener {
         else if (object instanceof AttributeUML)
             new ViewEditAttribute(this.popup.getPanelTree().getViewMenu().getPanelModeling(), this.getClassDiagram(node), (AttributeUML) object).setVisible(true);
         else if (object instanceof MethodUML)
-            new ViewEditMethod(this.popup.getPanelTree().getViewMenu().getPanelModeling(), this.getClassDiagram(node), (MethodUML) object).setVisible(true);
+            new ViewEditMethod(this.popup.getPanelTree().getViewMenu().getPanelModeling(),    this.getClassDiagram(node), (MethodUML) object).setVisible(true);
         else if (object instanceof Element)
-            new ViewEditElement(this.popup.getPanelTree().getViewMenu().getPanelModeling(), (Element) object).setVisible(true);
+            new ViewEditElement(this.popup.getPanelTree().getViewMenu().getPanelModeling(),   this.getDiagram(node), (Element) object).setVisible(true);
 //        else if (object instanceof Variabilidade)
 //            this.editarVariabilidade(object, node);
     }
