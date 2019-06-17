@@ -44,7 +44,7 @@ public final class PanelBaseElement extends Panel {
      * Method responsible for defining the Settings.
      */
     private void setSettings() {
-        this.setLayout(new GridLayout(5, 1, 2, 5));
+        this.setLayout(new GridLayout(2, 2));
         this.setPreferredSize(new Dimension(50, 50));
         this.setSize(new Dimension(50, 50));
     }
@@ -56,9 +56,6 @@ public final class PanelBaseElement extends Panel {
         
         this.add(this.createLabel("Mandatory: ", 120));
         this.add(this.createCheckBox("mandatoryCheckBox", "", this.element.isMandatory()));
-//        this.add(this.createLabel("", 250));
-//        
-//        this.addLines(1);
     }
     
     /**

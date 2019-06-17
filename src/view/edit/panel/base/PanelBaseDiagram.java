@@ -39,7 +39,7 @@ public final class PanelBaseDiagram extends Panel {
      * Method responsible for defining the Settings.
      */
     private void setSettings() {
-        this.setLayout(new GridLayout(5, 1, 2, 5));
+        this.setLayout(new GridLayout(5, 2));
         this.setPreferredSize(new Dimension(50, 50));
         this.setSize(new Dimension(50, 50));
     }

@@ -92,7 +92,10 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     }
 
     @Override
-    public void keyReleased(KeyEvent evento) {}
+    public void keyReleased(KeyEvent evento) {
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanelTree().getTree().getLastSelectedPathComponent();
+        this.showPanelEdit(node);
+    }
     
     /**
      * Method responsible for showing Popup.

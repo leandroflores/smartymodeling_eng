@@ -324,7 +324,7 @@ public abstract class Panel extends JPanel {
         JList  list = new JList();
                list.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                list.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
-               list.setPreferredSize(new Dimension(340, 100));
+//               list.setPreferredSize(new Dimension(340, 100));;
                list.addKeyListener(this.controller);
                this.createScrollPane(id, list);
                this.lists.put(id, list);
@@ -338,7 +338,8 @@ public abstract class Panel extends JPanel {
      * @return New JScrollPane of a JList.
      */
     private JScrollPane createScrollPane(String id, JList list) {
-        JScrollPane scrollPane = new JScrollPane(list);
+        JScrollPane scrollPane = new JScrollPane();
+                    scrollPane.setViewportView(list);
                     scrollPane.setPreferredSize(new Dimension(390, 120));
                     this.scrollPanes.put(id, scrollPane);
         return      scrollPane;

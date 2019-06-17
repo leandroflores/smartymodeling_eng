@@ -10,12 +10,16 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.base.AttributeUML;
+import model.structural.diagram.classs.base.ClassUML;
+import model.structural.diagram.classs.base.InterfaceUML;
 import model.structural.diagram.classs.base.MethodUML;
 import view.Panel;
 import view.panel.edit.PanelEdit;
 import view.panel.edit.base.PanelEditDiagram;
 import view.panel.edit.base.PanelEditProject;
 import view.panel.edit.base.classs.PanelEditAttributeUML;
+import view.panel.edit.base.classs.PanelEditClassUML;
+import view.panel.edit.base.classs.PanelEditInterfaceUML;
 import view.panel.edit.base.classs.PanelEditMethodUML;
 import view.panel.tree.PanelTree;
 import view.structural.ViewMenu;
@@ -123,6 +127,10 @@ public final class PanelProject extends Panel {
             this.panelEdit = new PanelEditAttributeUML(this.viewMenu, diagram, (AttributeUML) element);
         else if (element instanceof MethodUML)
             this.panelEdit = new PanelEditMethodUML(this.viewMenu, diagram, (MethodUML) element);
+        else if (element instanceof ClassUML)
+            this.panelEdit = new PanelEditClassUML(this.viewMenu, diagram, (ClassUML) element);
+        else if (element instanceof InterfaceUML)
+            this.panelEdit = new PanelEditInterfaceUML(this.viewMenu, diagram, (InterfaceUML) element);
         this.updatePanelEdit();
     }
     

@@ -45,6 +45,12 @@ public class ControllerPanelBaseMethodUML extends ControllerPanel {
             this.update();
     }
     
+    @Override
+    public void keyReleased(KeyEvent event) {
+        if (this.panelBaseMethodUML.getNameTextField().equals(event.getSource()))
+            this.update();
+    }
+    
     /**
      * Method responsible for updating the Constructor.
      */
@@ -106,6 +112,7 @@ public class ControllerPanelBaseMethodUML extends ControllerPanel {
         this.panelBaseMethodUML.getMethodUML().setAbstract(this.panelBaseMethodUML.getAbstractCheckBox().isSelected());
         this.panelBaseMethodUML.getMethodUML().setStatic(this.panelBaseMethodUML.getStaticCheckBox().isSelected());
         this.panelBaseMethodUML.getMethodUML().setFinal(this.panelBaseMethodUML.getFinalCheckBox().isSelected());
+        this.panelBaseMethodUML.getViewMenu().setSave(false);
         this.panelBaseMethodUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseMethodUML.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseMethodUML.getDiagram());
     }

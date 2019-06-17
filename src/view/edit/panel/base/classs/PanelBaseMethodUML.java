@@ -66,13 +66,13 @@ public final class PanelBaseMethodUML extends Panel {
         this.getReturnComboBox().setPreferredSize(new Dimension(200, 30));
         
         this.add(this.createLabel("Abstract: "));
-        this.add(this.createCheckBox("abstractCheckBox", "Abstract", this.methodUML.isAbstract()));
+        this.add(this.createCheckBox("abstractCheckBox", "", this.methodUML.isAbstract()));
         
         this.add(this.createLabel("Static: "));
-        this.add(this.createCheckBox("staticCheckBox",   "Static",   this.methodUML.isStatic()));
+        this.add(this.createCheckBox("staticCheckBox",   "", this.methodUML.isStatic()));
         
         this.add(this.createLabel("Final: "));
-        this.add(this.createCheckBox("finalCheckBox",     "Final",   this.methodUML.isFinal()));
+        this.add(this.createCheckBox("finalCheckBox",    "", this.methodUML.isFinal()));
     }
     
     /**

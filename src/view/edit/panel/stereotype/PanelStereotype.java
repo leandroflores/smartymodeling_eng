@@ -2,10 +2,8 @@ package view.edit.panel.stereotype;
 
 import controller.view.edit.panel.stereotype.ControllerPanelStereotype;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -62,17 +60,13 @@ public final class PanelStereotype extends Panel {
         this.add(this.createLabel("New: "), this.getConstraints(1, 1, 0, 0));
         this.add(this.createTextField("stereotypeTextField", "", 16), this.getConstraints(2, 1, 1, 0));
         this.add(this.createButton("newStereotypeButton", "New Stereotype"), this.getConstraints(2, 1, 3, 0));
-//      
-        this.add(this.createComboBox("stereotypeComboBox", this.getValues(), 285), this.getConstraints(3, 1, 0, 1));
+      
+        this.add(this.createComboBox("stereotypeComboBox", this.getValues(), 100), this.getConstraints(3, 1, 0, 1));
         this.add(this.createButton("addStereotypeButton",    "", "Add Stereotype",    "add.png"),    this.getConstraints(1, 1, 3, 1));
         this.add(this.createButton("removeStereotypeButton", "", "Remove Stereotype", "remove.png"), this.getConstraints(1, 1, 4, 1));
         
         this.createList("stereotypesList");
-        this.getStereotypesList().setPreferredSize(new Dimension(100, 250));
-        this.getStereotypesList().setSize(new Dimension(100, 250));
-        this.getStereotypesScrollPane().setPreferredSize(new Dimension(100, 250));
-        this.getStereotypesScrollPane().setSize(new Dimension(100, 250));
-        this.add(this.getStereotypesScrollPane(), this.getConstraints(5, 3, 0, 2));
+        this.add(this.getStereotypesScrollPane(), this.getConstraints(5, 10, 0, 2));
     }
     
     /**

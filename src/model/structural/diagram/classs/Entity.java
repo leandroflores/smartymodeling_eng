@@ -18,7 +18,7 @@ import model.structural.diagram.classs.base.TypeUML;
 
 /**
  * <p>Class of Model <b>Entity</b>.</p>
- * <p>Class responsible for representing <b>Entity</b> in SMartyModeling.</p>
+ * <p>Class responsible for representing the <b>Entity</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  20/05/2019
  * @see    model.structural.base.Element
