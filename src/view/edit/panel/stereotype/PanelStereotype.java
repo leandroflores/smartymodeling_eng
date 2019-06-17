@@ -3,6 +3,9 @@ package view.edit.panel.stereotype;
 import controller.view.edit.panel.stereotype.ControllerPanelStereotype;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -49,33 +52,45 @@ public final class PanelStereotype extends Panel {
      * Method responsible for defining the Settings.
      */
     private void setSettings() {
-//        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setLayout(new FlowLayout(FlowLayout.CENTER));
-        this.setPreferredSize(new Dimension(400, 200));
+                                   // R  C
+        this.setLayout(new GridBagLayout());
+        this.setPreferredSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-//        this.addLines(1);
-        
-        this.add(this.createLabel("New: ", 40));
-        this.add(this.createTextField("stereotypeTextField", "", 16));
-        this.add(this.createButton("newStereotypeButton", "New Stereotype"));
-        this.getNewStereotypeButton().setPreferredSize(new Dimension(200, 30));
-        
-//        this.addLines(1);
-        
-        this.add(this.createComboBox("stereotypeComboBox", this.getValues(), 285));
-        this.add(this.createButton("addStereotypeButton",    "", "Add Stereotype",    "add.png"));
-        this.add(this.createButton("removeStereotypeButton", "", "Remove Stereotype", "remove.png"));
-        
-//        this.addLines(1);
+        this.add(this.createLabel("New: "), this.getConstraints(1, 1, 0, 0));
+        this.add(this.createTextField("stereotypeTextField", "", 16), this.getConstraints(2, 1, 1, 0));
+        this.add(this.createButton("newStereotypeButton", "New Stereotype"), this.getConstraints(2, 1, 3, 0));
+//      
+        this.add(this.createComboBox("stereotypeComboBox", this.getValues(), 285), this.getConstraints(3, 1, 0, 1));
+        this.add(this.createButton("addStereotypeButton",    "", "Add Stereotype",    "add.png"),    this.getConstraints(1, 1, 3, 1));
+        this.add(this.createButton("removeStereotypeButton", "", "Remove Stereotype", "remove.png"), this.getConstraints(1, 1, 4, 1));
         
         this.createList("stereotypesList");
-        this.add(this.getStereotypesScrollPane());
-        this.getStereotypesScrollPane().setPreferredSize(new Dimension(450, 140));
-        
-//        this.addLines(1);
+        this.getStereotypesList().setPreferredSize(new Dimension(100, 250));
+        this.getStereotypesList().setSize(new Dimension(100, 250));
+        this.getStereotypesScrollPane().setPreferredSize(new Dimension(100, 250));
+        this.getStereotypesScrollPane().setSize(new Dimension(100, 250));
+        this.add(this.getStereotypesScrollPane(), this.getConstraints(5, 3, 0, 2));
+    }
+    
+    /**
+     * Method responsible for returning the Constraints.
+     * @param  width Width Constraints.
+     * @param  height Height Constraints.
+     * @param  x X Position Grid.
+     * @param  y Y Position Grid.
+     * @return Constraints.
+     */
+    private GridBagConstraints getConstraints(int width, int height, int x, int y) {
+        GridBagConstraints constraints = new GridBagConstraints();
+                           constraints.gridheight = height;
+                           constraints.gridwidth  = width;
+                           constraints.gridx      = x;
+                           constraints.gridy      = y;
+                           constraints.fill       = GridBagConstraints.HORIZONTAL;
+        return constraints;
     }
     
     /**

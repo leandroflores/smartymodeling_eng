@@ -2,7 +2,7 @@ package view.edit.panel.base.classs;
 
 import controller.view.edit.panel.base.classs.ControllerPanelBaseAttributeUML;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -45,35 +45,28 @@ public final class PanelBaseAttributeUML extends Panel {
      * Method responsible for defining the Settings.
      */
     private void setSettings() {
-        this.setLayout(new FlowLayout(FlowLayout.CENTER));
-        this.setPreferredSize(new Dimension(360, 100));
+        this.setLayout(new GridLayout(5, 2, 2, 5));
+        this.setPreferredSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.addLines(1);
-        
-        this.add(this.createLabel("Visibility: ", 120));
+        this.add(this.createLabel("Visibility: "));
         this.add(this.createComboBox("visibilityComboBox", this.diagram.getVisibilities(), 30, this.attributeUML.getVisibility()));
         this.getVisibilityComboBox().setPreferredSize(new Dimension(325, 30));
-        this.addLines(1);
         
-        this.add(this.createLabel("Name*: ", 120));
+        this.add(this.createLabel("Name*: "));
         this.add(this.createTextField("nameTextField", this.attributeUML.getName(), 25));
         
-        this.addLines(1);
-        
-        this.add(this.createLabel("Type: ", 120));
+        this.add(this.createLabel("Type: "));
         this.add(this.createComboBox("typeComboBox", this.diagram.getProject().getTypesList().toArray(), 30, this.attributeUML.getTypeUML()));
         this.getTypeComboBox().setPreferredSize(new Dimension(325, 30));
         
-        this.addLines(1);
+        this.add(this.createLabel("Static: "));
+        this.add(this.createCheckBox("staticCheckBox", "", this.attributeUML.isStatic()));
         
-        this.add(this.createCheckBox("staticCheckBox", "Static", this.attributeUML.isStatic()));
-        this.add(this.createLabel("", 5));
-        this.add(this.createCheckBox("finalCheckBox",  "Final",  this.attributeUML.isFinal()));
-        
-        this.addLines(1);
+        this.add(this.createLabel("Final: "));
+        this.add(this.createCheckBox("finalCheckBox",  "", this.attributeUML.isFinal()));
     }
     
     /**
@@ -85,9 +78,6 @@ public final class PanelBaseAttributeUML extends Panel {
         this.getTypeComboBox().setSelectedItem(this.attributeUML.getTypeUML());
         this.getStaticCheckBox().setSelected(this.attributeUML.isStatic());
         this.getFinalCheckBox().setSelected(this.attributeUML.isFinal());
-//        this.getStaticCheckBox().setSelected(true);
-//        this.getFinalCheckBox().setSelected(true);
-        System.out.println("Set Values\n");
     }
     
     /**

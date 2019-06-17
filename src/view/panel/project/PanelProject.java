@@ -10,11 +10,13 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.base.AttributeUML;
+import model.structural.diagram.classs.base.MethodUML;
 import view.Panel;
 import view.panel.edit.PanelEdit;
 import view.panel.edit.base.PanelEditDiagram;
 import view.panel.edit.base.PanelEditProject;
 import view.panel.edit.base.classs.PanelEditAttributeUML;
+import view.panel.edit.base.classs.PanelEditMethodUML;
 import view.panel.tree.PanelTree;
 import view.structural.ViewMenu;
 
@@ -119,7 +121,8 @@ public final class PanelProject extends Panel {
     public void initPanelEditElement(ClassDiagram diagram, Element element) {
         if (element instanceof AttributeUML)
             this.panelEdit = new PanelEditAttributeUML(this.viewMenu, diagram, (AttributeUML) element);
-//            System.out.println("Attribute: " + (AttributeUML) element);
+        else if (element instanceof MethodUML)
+            this.panelEdit = new PanelEditMethodUML(this.viewMenu, diagram, (MethodUML) element);
         this.updatePanelEdit();
     }
     

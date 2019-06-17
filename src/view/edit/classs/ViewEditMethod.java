@@ -7,7 +7,7 @@ import javax.swing.JTabbedPane;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.base.MethodUML;
 import view.edit.ViewEdit;
-import view.edit.panel.base.classs.PanelBaseMethod;
+import view.edit.panel.base.classs.PanelBaseMethodUML;
 import view.edit.panel.stereotype.PanelStereotype;
 import view.panel.modeling.PanelModeling;
 
@@ -23,7 +23,7 @@ import view.panel.modeling.PanelModeling;
 public final class ViewEditMethod extends ViewEdit {
     private final ClassDiagram diagram;
     private final MethodUML method;
-    private PanelBaseMethod panelBaseMethod;
+    private PanelBaseMethodUML panelBaseMethod;
     private PanelStereotype panelStereotype;
     
     /**
@@ -55,7 +55,7 @@ public final class ViewEditMethod extends ViewEdit {
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.setPreferredSize(new Dimension(550, 325));
         
-        this.addPanelBaseAttribute();
+        this.addPanelBaseMethod();
         this.addPanelStereotype();
         
         this.add(this.tabbedPane);
@@ -64,10 +64,10 @@ public final class ViewEditMethod extends ViewEdit {
     }
     
     /**
-     * Method responsible for adding the Panel Base Attribute.
+     * Method responsible for adding the Panel Base Method.
      */
-    private void addPanelBaseAttribute() {
-        this.panelBaseMethod = new PanelBaseMethod(this.diagram, this.method);
+    private void addPanelBaseMethod() {
+        this.panelBaseMethod = new PanelBaseMethodUML(this.getViewMenu(), this.diagram, this.method);
         this.createScrollPane("scrollPanelBaseMethod", this.panelBaseMethod);
         this.getScrollPanelBaseMethod().setViewportView(this.panelBaseMethod);
         this.tabbedPane.add("Method", this.getScrollPanelBaseMethod());

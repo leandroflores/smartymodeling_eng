@@ -46,13 +46,13 @@ public final class PanelBaseProject extends Panel {
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Version: "));
-        this.add(this.createTextFieldNoEditable("versionTextField", "", 5));
+        this.add(this.createTextFieldNoEditable("versionTextField", this.project.getVersion(), 5));
         
         this.add(this.createLabel("Path: "));
-        this.add(this.createTextFieldNoEditable("pathTextField", "", 5));
+        this.add(this.createTextFieldNoEditable("pathTextField", this.project.getPath(), 5));
         
         this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", "", 5));
+        this.add(this.createTextField("nameTextField", this.project.getName(), 5));
     }
     
     /**
