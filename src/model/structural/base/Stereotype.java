@@ -15,15 +15,17 @@ import org.w3c.dom.Element;
  * @see    model.structural.base.interfaces.Exportable
  */
 public class Stereotype implements Exportable {
-    private String id;
-    private String name;
+    private String  id;
+    private String  name;
+    private boolean primitive;
     
     /**
      * Default constructor method of Class.
      */
     public Stereotype() {
-        this.id   = "";
-        this.name = "stereotype";
+        this.id        = "";
+        this.name      = "stereotype";
+        this.primitive = false;
     }
     
     /**
@@ -31,18 +33,21 @@ public class Stereotype implements Exportable {
      * @param element W3C Element.
      */
     public Stereotype(Element element) {
-        this.id   = element.getAttribute("id").trim();
-        this.name = element.getAttribute("name").toLowerCase().trim();
+        this.id        = element.getAttribute("id").trim();
+        this.name      = element.getAttribute("name").toLowerCase().trim();
+        this.primitive = element.getAttribute("primitive").trim().toLowerCase().equals("true");
     }
     
     /**
      * Alternative constructor method of Class.
      * @param id Stereotype Id.
      * @param name Stereotype Name.
+     * @param primitive Stereotype Primitive.
      */
-    public Stereotype(String id, String name) {
-        this.id   = id.trim();
-        this.name = name.toLowerCase().trim();
+    public Stereotype(String id, String name, boolean primitive) {
+        this.id        = id.trim();
+        this.name      = name.toLowerCase().trim();
+        this.primitive = primitive;
     }
     
     /**
@@ -50,8 +55,9 @@ public class Stereotype implements Exportable {
      * @param name Stereotype Name.
      */
     public Stereotype(String name) {
-        this.id   = null;
-        this.name = name.toLowerCase().trim();
+        this.id        = null;
+        this.name      = name.toLowerCase().trim();
+        this.primitive = false;
     }
 
     /**
@@ -85,6 +91,22 @@ public class Stereotype implements Exportable {
     public void setName(String name) {
         this.name = name.toLowerCase().trim();
     }
+
+    /**
+     * Method responsible for returning the Stereotype Primitive Flag.
+     * @return Stereotype Primitive Flag.
+     */
+    public boolean isPrimitive() {
+        return this.primitive;
+    }
+
+    /**
+     * Method responsible for defining the Stereotype Primitive Flag.
+     * @param primitive Stereotype Primitive Flag.
+     */
+    public void setPrimitive(boolean primitive) {
+        this.primitive = primitive;
+    }
     
     public Map getStyle() {
         Map    style = new HashMap<>();
@@ -103,7 +125,7 @@ public class Stereotype implements Exportable {
 
     @Override
     public String export() {
-        return "    <stereotype id=\"" + this.id + "\" name=\"" + this.name + "\"/>\n";
+        return "    <stereotype id=\"" + this.id + "\" name=\"" + this.name + "\"" + " primitive=\"" + this.primitive + "\"/>\n";
     }
     
     @Override

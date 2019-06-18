@@ -50,7 +50,6 @@ public final class PanelStereotype extends Panel {
      * Method responsible for defining the Settings.
      */
     private void setSettings() {
-                                   // R  C
         this.setLayout(new GridBagLayout());
         this.setPreferredSize(new Dimension(50, 50));
     }
@@ -108,7 +107,7 @@ public final class PanelStereotype extends Panel {
      */
     public void updateComboBox() {
         this.getStereotypeComboBox().removeAllItems();
-        for (Stereotype stereotype : this.project.getStereotypesList())
+        for (Stereotype stereotype : this.project.getStereotypesList(false))
             this.getStereotypeComboBox().addItem(stereotype);
         this.getStereotypeComboBox().setPreferredSize(new Dimension(285, 30));
     }
@@ -119,7 +118,7 @@ public final class PanelStereotype extends Panel {
     public void updateList() {
         this.getStereotypesList().removeAll();
         DefaultListModel model = new DefaultListModel();
-        for (Link link : this.project.filterLinksByElement(this.element))
+        for (Link link : this.project.getLinksByElement(this.element))
             model.addElement(link.getStereotype());
         this.getStereotypesList().setModel(model);
     }

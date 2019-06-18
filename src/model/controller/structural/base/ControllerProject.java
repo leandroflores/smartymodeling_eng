@@ -1,9 +1,6 @@
 package model.controller.structural.base;
 
-import java.util.Arrays;
 import java.util.List;
-import model.structural.base.Diagram;
-import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.Stereotype;
 
@@ -26,11 +23,11 @@ public class ControllerProject {
     }
     
     /**
-     * Method responsible for returning Stereotypes Array.
+     * Method responsible for returning the Stereotypes Array.
      * @return Stereotypes Array.
      */
     public Stereotype[] getStereotypes() {
-        List<Stereotype> list  = this.project.getStereotypesList();
+        List<Stereotype> list  = this.project.getStereotypesList(false);
         Stereotype[]     array = new Stereotype[list.size()];
         for (int i = 0; i < list.size(); i++)
                  array[i] = list.get(i);

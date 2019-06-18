@@ -90,6 +90,14 @@ public class Link implements Exportable {
         this.stereotype = stereotype;
     }
     
+    /**
+     * Method responsible for returning the Link Signature.
+     * @return Link Signature.
+     */
+    public String getSignature() {
+        return this.stereotype.isPrimitive() + this.stereotype.getName();
+    }
+    
     @Override
     public String export() {
         String export  = "    <link";

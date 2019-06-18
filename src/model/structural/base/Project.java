@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 import model.structural.base.association.Link;
@@ -65,12 +66,12 @@ public class Project implements Exportable {
      * Method responsible for initializing HashMaps.
      */
     private void init() {
-        this.diagrams      = new HashMap();
-        this.types         = new HashMap();
-        this.variabilities = new HashMap();
-        this.stereotypes   = new HashMap();
-        this.links         = new HashMap();
-        this.objects       = new HashMap();
+        this.diagrams      = new LinkedHashMap();
+        this.types         = new LinkedHashMap();
+        this.variabilities = new LinkedHashMap();
+        this.stereotypes   = new LinkedHashMap();
+        this.links         = new LinkedHashMap();
+        this.objects       = new LinkedHashMap();
         this.profile       = this.getDefaultProfile();
     }
     
@@ -401,56 +402,56 @@ public class Project implements Exportable {
      */
     private void loadPrimitiveTypes() {
         this.addDefaultType(new TypeUML("TYPE#1",  "", "boolean", true));
-        this.addDefaultType(new TypeUML("TYPE#2",  "", "byte", true));
-        this.addDefaultType(new TypeUML("TYPE#3",  "", "char", true));
-        this.addDefaultType(new TypeUML("TYPE#4",  "", "double", true));
-        this.addDefaultType(new TypeUML("TYPE#5",  "", "float", true));
-        this.addDefaultType(new TypeUML("TYPE#6",  "", "int", true));
-        this.addDefaultType(new TypeUML("TYPE#7",  "", "long", true));
-        this.addDefaultType(new TypeUML("TYPE#8",  "", "short", true));
-        this.addDefaultType(new TypeUML("TYPE#9",  "", "void", true));
-        this.addDefaultType(new TypeUML("TYPE#10", "java.lang", "Boolean", false));
-        this.addDefaultType(new TypeUML("TYPE#11", "java.lang", "Byte", false));
-        this.addDefaultType(new TypeUML("TYPE#12", "java.lang", "Character", false));
-        this.addDefaultType(new TypeUML("TYPE#13", "java.lang", "Double", false));
-        this.addDefaultType(new TypeUML("TYPE#14", "java.lang", "Enum", false));
-        this.addDefaultType(new TypeUML("TYPE#15", "java.lang", "Exception", false));
-        this.addDefaultType(new TypeUML("TYPE#16", "java.lang", "Float", false));
-        this.addDefaultType(new TypeUML("TYPE#17", "java.lang", "Integer", false));
-        this.addDefaultType(new TypeUML("TYPE#18", "java.lang", "Long", false));
-        this.addDefaultType(new TypeUML("TYPE#19", "java.lang", "Math", false));
-        this.addDefaultType(new TypeUML("TYPE#20", "java.lang", "Number", false));
-        this.addDefaultType(new TypeUML("TYPE#21", "java.lang", "Object", false));
-        this.addDefaultType(new TypeUML("TYPE#22", "java.lang", "Package", false));
-        this.addDefaultType(new TypeUML("TYPE#23", "java.lang", "Short", false));
-        this.addDefaultType(new TypeUML("TYPE#24", "java.lang", "String", false));
-        this.addDefaultType(new TypeUML("TYPE#25", "java.lang", "StringBuffer", false));
+        this.addDefaultType(new TypeUML("TYPE#2",  "", "byte",    true));
+        this.addDefaultType(new TypeUML("TYPE#3",  "", "char",    true));
+        this.addDefaultType(new TypeUML("TYPE#4",  "", "double",  true));
+        this.addDefaultType(new TypeUML("TYPE#5",  "", "float",   true));
+        this.addDefaultType(new TypeUML("TYPE#6",  "", "int",     true));
+        this.addDefaultType(new TypeUML("TYPE#7",  "", "long",    true));
+        this.addDefaultType(new TypeUML("TYPE#8",  "", "short",   true));
+        this.addDefaultType(new TypeUML("TYPE#9",  "", "void",    true));
+        this.addDefaultType(new TypeUML("TYPE#10", "java.lang", "Boolean",       false));
+        this.addDefaultType(new TypeUML("TYPE#11", "java.lang", "Byte",          false));
+        this.addDefaultType(new TypeUML("TYPE#12", "java.lang", "Character",     false));
+        this.addDefaultType(new TypeUML("TYPE#13", "java.lang", "Double",        false));
+        this.addDefaultType(new TypeUML("TYPE#14", "java.lang", "Enum",          false));
+        this.addDefaultType(new TypeUML("TYPE#15", "java.lang", "Exception",     false));
+        this.addDefaultType(new TypeUML("TYPE#16", "java.lang", "Float",         false));
+        this.addDefaultType(new TypeUML("TYPE#17", "java.lang", "Integer",       false));
+        this.addDefaultType(new TypeUML("TYPE#18", "java.lang", "Long",          false));
+        this.addDefaultType(new TypeUML("TYPE#19", "java.lang", "Math",          false));
+        this.addDefaultType(new TypeUML("TYPE#20", "java.lang", "Number",        false));
+        this.addDefaultType(new TypeUML("TYPE#21", "java.lang", "Object",        false));
+        this.addDefaultType(new TypeUML("TYPE#22", "java.lang", "Package",       false));
+        this.addDefaultType(new TypeUML("TYPE#23", "java.lang", "Short",         false));
+        this.addDefaultType(new TypeUML("TYPE#24", "java.lang", "String",        false));
+        this.addDefaultType(new TypeUML("TYPE#25", "java.lang", "StringBuffer",  false));
         this.addDefaultType(new TypeUML("TYPE#26", "java.lang", "StringBuilder", false));
-        this.addDefaultType(new TypeUML("TYPE#27", "java.lang", "Thread", false));
-        this.addDefaultType(new TypeUML("TYPE#28", "java.lang", "Void", false));
-        this.addDefaultType(new TypeUML("TYPE#29", "java.util", "Arrays", false));
-        this.addDefaultType(new TypeUML("TYPE#30", "java.util", "Collections", false));
-        this.addDefaultType(new TypeUML("TYPE#31", "java.util", "Date", false));
-        this.addDefaultType(new TypeUML("TYPE#32", "java.util", "EnumMap", false));
-        this.addDefaultType(new TypeUML("TYPE#33", "java.util", "EnumSet", false));
+        this.addDefaultType(new TypeUML("TYPE#27", "java.lang", "Thread",        false));
+        this.addDefaultType(new TypeUML("TYPE#28", "java.lang", "Void",          false));
+        this.addDefaultType(new TypeUML("TYPE#29", "java.util", "Arrays",        false));
+        this.addDefaultType(new TypeUML("TYPE#30", "java.util", "Collections",   false));
+        this.addDefaultType(new TypeUML("TYPE#31", "java.util", "Date",          false));
+        this.addDefaultType(new TypeUML("TYPE#32", "java.util", "EnumMap",       false));
+        this.addDefaultType(new TypeUML("TYPE#33", "java.util", "EnumSet",       false));
         this.addDefaultType(new TypeUML("TYPE#34", "java.util", "EventListener", false));
-        this.addDefaultType(new TypeUML("TYPE#35", "java.util", "HashMap", false));
-        this.addDefaultType(new TypeUML("TYPE#36", "java.util", "HashSet", false));
-        this.addDefaultType(new TypeUML("TYPE#37", "java.util", "Hashtable", false));
+        this.addDefaultType(new TypeUML("TYPE#35", "java.util", "HashMap",       false));
+        this.addDefaultType(new TypeUML("TYPE#36", "java.util", "HashSet",       false));
+        this.addDefaultType(new TypeUML("TYPE#37", "java.util", "Hashtable",     false));
         this.addDefaultType(new TypeUML("TYPE#38", "java.util", "LinkedHashMap", false));
         this.addDefaultType(new TypeUML("TYPE#39", "java.util", "LinkedHashSet", false));
-        this.addDefaultType(new TypeUML("TYPE#40", "java.util", "LinkedList", false));
-        this.addDefaultType(new TypeUML("TYPE#41", "java.util", "List", false));
-        this.addDefaultType(new TypeUML("TYPE#42", "java.util", "Map", false));
-        this.addDefaultType(new TypeUML("TYPE#43", "java.util", "Queue", false));
-        this.addDefaultType(new TypeUML("TYPE#44", "java.util", "Random", false));
+        this.addDefaultType(new TypeUML("TYPE#40", "java.util", "LinkedList",    false));
+        this.addDefaultType(new TypeUML("TYPE#41", "java.util", "List",    false));
+        this.addDefaultType(new TypeUML("TYPE#42", "java.util", "Map",     false));
+        this.addDefaultType(new TypeUML("TYPE#43", "java.util", "Queue",   false));
+        this.addDefaultType(new TypeUML("TYPE#44", "java.util", "Random",  false));
         this.addDefaultType(new TypeUML("TYPE#45", "java.util", "Scanner", false));
-        this.addDefaultType(new TypeUML("TYPE#46", "java.util", "Set", false));
-        this.addDefaultType(new TypeUML("TYPE#47", "java.util", "Stack", false));
-        this.addDefaultType(new TypeUML("TYPE#48", "java.util", "Timer", false));
+        this.addDefaultType(new TypeUML("TYPE#46", "java.util", "Set",     false));
+        this.addDefaultType(new TypeUML("TYPE#47", "java.util", "Stack",   false));
+        this.addDefaultType(new TypeUML("TYPE#48", "java.util", "Timer",   false));
         this.addDefaultType(new TypeUML("TYPE#49", "java.util", "TreeMap", false));
         this.addDefaultType(new TypeUML("TYPE#50", "java.util", "TreeSet", false));
-        this.addDefaultType(new TypeUML("TYPE#51", "java.util", "Vector", false));
+        this.addDefaultType(new TypeUML("TYPE#51", "java.util", "Vector",  false));
     }
     
     /**
@@ -571,13 +572,35 @@ public class Project implements Exportable {
      */
     public List<Stereotype> getStereotypesList() {
         ArrayList list = new ArrayList<>(this.stereotypes.values());
-                  list.sort(new Comparator<Stereotype>() {
-                      @Override
-                      public int compare(Stereotype stereotypeA, Stereotype stereotypeB) {
-                          return stereotypeA.getName().compareTo(stereotypeB.getName());                          
-                      }
-                  });
+                  list.sort(this.getStereotypeComparator());
         return    list;
+    }
+    
+    /**
+     * Method responsible for returning the Stereotypes List by Primitive Flag.
+     * @param  primitive Primitive Flag.
+     * @return Stereotypes List.
+     */
+    public List<Stereotype> getStereotypesList(boolean primitive) {
+        List<Stereotype> filter = new ArrayList<>();
+        for (Object stereotype : this.stereotypes.values()) {
+            if (((Stereotype) stereotype).isPrimitive() == primitive)
+                filter.add((Stereotype) stereotype);
+        }
+                filter.sort(this.getStereotypeComparator());
+        return  filter;
+    }
+    
+    /**
+     * Method responsible for returning the Stereotype Comparator.
+     * @return Stereotype Comparator.
+     */
+    private Comparator getStereotypeComparator() {
+        return new Comparator<Stereotype>() {
+                @Override
+                public int compare(Stereotype stereotypeA, Stereotype stereotypeB) {
+                    return stereotypeA.getName().compareTo(stereotypeB.getName());                          
+                }};
     }
     
     /**
@@ -648,13 +671,14 @@ public class Project implements Exportable {
      * Method responsible for loading the SMarty Stereotypes.
      */
     private void loadSMartyStereotypes() {
-        this.addDefaultStereotype(new Stereotype("STEREOTYPE#1", "mandatory"));
-        this.addDefaultStereotype(new Stereotype("STEREOTYPE#2", "optional"));
-        this.addDefaultStereotype(new Stereotype("STEREOTYPE#3", "variationPoint"));
-        this.addDefaultStereotype(new Stereotype("STEREOTYPE#4", "alternative_OR"));
-        this.addDefaultStereotype(new Stereotype("STEREOTYPE#5", "alternative_XOR"));
-        this.addDefaultStereotype(new Stereotype("STEREOTYPE#6", "requires"));
-        this.addDefaultStereotype(new Stereotype("STEREOTYPE#7", "mutex"));
+        this.addDefaultStereotype(new Stereotype("STEREOTYPE#1", "mandatory",       true));
+        this.addDefaultStereotype(new Stereotype("STEREOTYPE#2", "optional",        true));
+        this.addDefaultStereotype(new Stereotype("STEREOTYPE#3", "variationPoint",  true));
+        this.addDefaultStereotype(new Stereotype("STEREOTYPE#4", "alternative_OR",  true));
+        this.addDefaultStereotype(new Stereotype("STEREOTYPE#5", "alternative_XOR", true));
+        this.addDefaultStereotype(new Stereotype("STEREOTYPE#6", "requires",        true));
+        this.addDefaultStereotype(new Stereotype("STEREOTYPE#7", "mutex",           true));
+        this.addDefaultStereotype(new Stereotype("STEREOTYPE#8", "stereotype",      false));
     }
     
     /**
@@ -705,7 +729,21 @@ public class Project implements Exportable {
      * @return Links List.
      */
     public List<Link> getLinksList() {
-        return new ArrayList<>(this.links.values());
+        ArrayList list = new ArrayList<>(this.links.values());
+                  list.sort(this.getLinkComparator());
+        return    list;
+    }
+    
+    /**
+     * Method responsible for returning the Link Comparator.
+     * @return Link Comparator.
+     */
+    private Comparator getLinkComparator() {
+        return new Comparator<Link>() {
+                @Override
+                public int compare(Link linkA, Link linkB) {
+                    return linkA.getSignature().compareTo(linkB.getSignature());
+                }};
     }
     
     /**
@@ -732,12 +770,11 @@ public class Project implements Exportable {
      * @param  element Element.
      * @return Links by Element.
      */
-    public List<Link> filterLinksByElement(Element element) {
-        List<Link> list   = this.getLinksList();
+    public List<Link> getLinksByElement(Element element) {
         List<Link> filter = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getElement().equals(element))
-                   filter.add(list.get(i));
+        for (Link link : this.getLinksList()) {
+            if (link.getElement().equals(element))
+                   filter.add(link);
         }
         return     filter;
     }
@@ -747,12 +784,11 @@ public class Project implements Exportable {
      * @param  stereotype Stereotype.
      * @return Links by Stereotype.
      */
-    public List<Link> filterLinksByStereotype(Stereotype stereotype) {
-        List<Link> list   = this.getLinksList();
+    public List<Link> getLinksByStereotype(Stereotype stereotype) {
         List<Link> filter = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getStereotype().equals(stereotype))
-                   filter.add(list.get(i));
+        for (Link link : this.getLinksList()) {
+            if (link.getStereotype().equals(stereotype))
+                   filter.add(link);
         }
         return     filter;
     }
@@ -770,7 +806,7 @@ public class Project implements Exportable {
      * @param element Element.
      */
     public void removeLinks(Element element) {
-        List<Link> filter = this.filterLinksByElement(element);
+        List<Link> filter = this.getLinksByElement(element);
         for (int i = 0; i < filter.size(); i++)
             this.removeLink(filter.get(i));
     }
@@ -780,7 +816,7 @@ public class Project implements Exportable {
      * @param stereotype Stereotype.
      */
     public void removeLinks(Stereotype stereotype) {
-        List<Link> filter = this.filterLinksByStereotype(stereotype);
+        List<Link> filter = this.getLinksByStereotype(stereotype);
         for (int i = 0; i < filter.size(); i++)
             this.removeLink(filter.get(i));
     }
@@ -834,6 +870,7 @@ public class Project implements Exportable {
                project += "Variabilities = " + this.variabilities + "\n";
                project += "Objects       = " + this.objects       + "\n";
                project += "Types         = " + this.types         + "\n";
+               project += "Links         = " + this.links         + "\n";
         return project;
     }
 }

@@ -72,8 +72,8 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
         this.id        = element.getAttribute("id");
         this.path      = element.getAttribute("path");
         this.name      = element.getAttribute("name");
-        this.primitive = element.getAttribute("primitive").equals("true");
-        this.standard  = element.getAttribute("standard").equals("true");
+        this.primitive = element.getAttribute("primitive").trim().toLowerCase().equals("true");
+        this.standard  = element.getAttribute("standard").trim().toLowerCase().equals("true");
     }
     
     /**

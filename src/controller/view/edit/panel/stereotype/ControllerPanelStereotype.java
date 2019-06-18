@@ -41,6 +41,7 @@ public class ControllerPanelStereotype extends ControllerPanel {
             this.removeStereotype();
         this.updateSize(this.panelStereotype.getElement());
         this.panelStereotype.getViewMenu().getPanelModeling().updateDiagrams();
+        this.panelStereotype.getViewMenu().setSave(false);
     }
     
     /**

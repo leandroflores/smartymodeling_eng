@@ -6,6 +6,7 @@ import funct.FunctString;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import model.structural.base.association.Dependency;
 import model.structural.base.association.Link;
@@ -35,9 +36,9 @@ public abstract class Diagram implements Exportable {
      * Default constructor method of Class.
      */
     public Diagram() {
-        this.elements      = new HashMap<>();
-        this.associations  = new HashMap<>();
-        this.variabilities = new HashMap<>();
+        this.elements      = new LinkedHashMap<>();
+        this.associations  = new LinkedHashMap<>();
+        this.variabilities = new LinkedHashMap<>();
     }
     
     /**
@@ -66,7 +67,7 @@ public abstract class Diagram implements Exportable {
     }
     
     /**
-     * Method responsible for initializing HashMaps.
+     * Method responsible for initializing the HashMaps.
      */
     public abstract void init();
     
@@ -636,7 +637,7 @@ public abstract class Diagram implements Exportable {
      */
     public List<Stereotype> getStereotypesList(Element element) {
         List   stereotypes = new ArrayList<>();
-        List<Link> links   = this.project.filterLinksByElement(element);
+        List<Link> links   = this.project.getLinksByElement(element);
         for (int i = 0; i <    links.size(); i++)
                stereotypes.add(links.get(i).getStereotype());
         return stereotypes;
