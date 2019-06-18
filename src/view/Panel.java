@@ -438,9 +438,9 @@ public abstract class Panel extends JPanel {
      * @param id Table Id. 
      * @param values Values.
      */
-    public void addRows(String id, String[][] values) {
+    public void addRows(String id, Object[][] values) {
         this.clearTable(id);
-        for (String[] value : values) {
+        for (Object[] value : values) {
             ((DefaultTableModel) this.tableModels.get(id)).addRow(value);
             this.tables.get(id).setEditingRow(JTable.AUTO_RESIZE_NEXT_COLUMN);
             this.tables.get(id).setEditingRow(0);

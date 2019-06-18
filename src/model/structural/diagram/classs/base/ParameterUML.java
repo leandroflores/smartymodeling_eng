@@ -89,6 +89,14 @@ public class ParameterUML implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Parameter Values.
+     * @return Parameter Values.
+     */
+    public Object[] getValues() {
+        return new Object[] {this.name, this.type};
+    }
+    
+    /**
      * Method responsible for printing Parameter UML.
      * @return Parameter UML.
      */
