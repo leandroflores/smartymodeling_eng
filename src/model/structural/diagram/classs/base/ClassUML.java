@@ -1,5 +1,7 @@
 package model.structural.diagram.classs.base;
 
+import com.mxgraph.util.mxConstants;
+import java.util.Map;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.Entity;
 import org.w3c.dom.Element;
@@ -82,6 +84,13 @@ public class ClassUML extends Entity {
     @Override
     public String getStyleLabel() {
         return "styleClassUML" + this.id;
+    }
+    
+    @Override
+    public Map getNameStyle() {
+        Map    style = super.getNameStyle();
+               style.put(mxConstants.STYLE_FONTSTYLE, this.abstract_ ? 3 : 1);
+        return style;
     }
     
     @Override

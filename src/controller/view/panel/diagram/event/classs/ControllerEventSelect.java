@@ -48,6 +48,8 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
             this.newAttribute(cell, (Entity) this.panel.getDiagram().getElement(id));
         else if (cell.getId().endsWith("(newMethod)"))
             this.newMethod(cell, (Entity) this.panel.getDiagram().getElement(id));
+//        else if (this.panel.getIdentifiers().get(cell) != null)
+//            this.updateEditPanel(cell);
     }
     
     /**
@@ -85,5 +87,16 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
         this.panel.updateDiagram();
         this.panel.getViewMenu().update();
         this.panel.getViewMenu().setSave(false);
+    }
+    
+    /**
+     * Method responsible for updating the Edit Panel.
+     * @param cell Graph Cell.
+     * @param id Object Id.
+     */
+    private void updateEditPanel(mxCell cell) {
+        String id = this.panel.getIdentifiers().get(cell);
+        if (this.panel.getDiagram().getElement(id) != null)
+            this.panel.getViewMenu().getPanelProject().initPanelEditElement(this.panel.getDiagram(), this.panel.getDiagram().getElement(id));
     }
 }
