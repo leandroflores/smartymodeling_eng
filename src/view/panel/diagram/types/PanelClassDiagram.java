@@ -295,7 +295,7 @@ public final class PanelClassDiagram extends PanelDiagram {
     private void addNewMethodCell(mxCell parent, Entity entity) {
         this.graph.getStylesheet().putCellStyle("newMethodStyle", entity.getNewMethodStyle());
         mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(newMethod)", "", 5, entity.getMethodsPosition() + 5, 10, 5, "newMethodStyle");
-               cell.setConnectable(false); 
+               cell.setConnectable(false);
         this.identifiers.put(cell, entity.getId());
     }
     
@@ -323,23 +323,49 @@ public final class PanelClassDiagram extends PanelDiagram {
         for (int i = 0; i < associations.size(); i++) {
             Association association = associations.get(i);
             this.graph.getStylesheet().putCellStyle(association.getStyleLabel(), association.getStyle());
-            Object edge = this.graph.insertEdge(this.parent, association.getId(), association.getTitle(), this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
-            this.identifiers.put(edge, association.getId());
-//            if (association instanceof  AssociationUML) {
-//                this.addAssociationUML((AssociationUML) association);
-//            }else {
-//                Object edge = this.graph.insertEdge(this.parent, null, association.getTitle(), this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
-//                this.identifiers.put(edge, association.getId());
-//            }
+            this.addNormalAssociation(association);
+            if (association instanceof AssociationUML)
+                this.addAssociationUML((AssociationUML) association); 
         }
     }
     
     /**
-     * Method responsible for adding the Association UML.
-     * @param association Association UML.
+     * Method responsible for adding the Normal Association.
+     * @param association Association.
      */
-    private void addAssociationUML(AssociationUML association) {
-        System.out.println(association.export());
+    private void addNormalAssociation(Association association) {
+        mxCell edge = (mxCell) this.graph.insertEdge(this.parent, association.getId(), association.getTitle(), this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
+//        System.out.println(edge.getGeometry());
+//        System.out.println(edge.get);
+//        System.out.println(this.graph.get(edge));
+        this.identifiers.put(edge, association.getId());
+    }
+    
+    /**
+     * Method responsible for adding the Association UML.
+     * @param associationUML Association UML.
+     */
+    private void addAssociationUML(AssociationUML associationUML) {
+        this.graph.getStylesheet().putCellStyle(associationUML.getCardinalityLabel(), associationUML.getCardinalityStyle());
+        mxCell  sEntity = (mxCell) this.objects.get(associationUML.getSource().getId());
+        mxCell  tEntity = (mxCell) this.objects.get(associationUML.getTarget().getId());
+//        System.out.println("Source Entity: " + sEntity.getGeometry());
+        Integer x       = new Double((sEntity.getGeometry().getX() + sEntity.getGeometry().getWidth())  / 2).intValue();
+        Integer y       = new Double((sEntity.getGeometry().getY() + sEntity.getGeometry().getHeight()) / 2).intValue();
+        mxCell  source  = (mxCell) this.graph.insertVertex(this.parent, associationUML.getId() + "(source)", associationUML.getSourceLabel(), x, y, 30, 20, associationUML.getCardinalityLabel());
+                source.setConnectable(false);
+//        System.out.println(associationUML.export());
+               
+    }
+    
+    private Integer getX(AssociationUML associationUML) {
+        return new Double(associationUML.getSource().getPosition().getX()).intValue();
+//             + new Double(associationUML.getSource().getSize().getX()).intValue();
+    }
+    
+    private Integer getY(AssociationUML associationUML) {
+        return new Double(associationUML.getSource().getPosition().getY()).intValue();
+//             + new Double(associationUML.getSource().getSize().getY()).intValue();
     }
     
     @Override

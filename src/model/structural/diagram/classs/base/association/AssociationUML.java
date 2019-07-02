@@ -163,8 +163,9 @@ public class AssociationUML extends Association {
      * @param element W3C Element.
      */
     public void setSource(Element element) {
-        this.setName(element.getAttribute("name"));
-        
+        this.setSourceName(element.getAttribute("name"));
+        this.setSourceMin(element);
+        this.setSourceMax(element);
     }
     
     /**
@@ -243,6 +244,30 @@ public class AssociationUML extends Association {
     }
     
     /**
+     * Method responsible for returning the Source Label.
+     * @return Source Label.
+     */
+    public String getSourceLabel() {
+        if (this.sourceMin.equals(0) && this.sourceMax.equals(Integer.MAX_VALUE))
+            return "*";
+        if (this.sourceMin.equals(this.sourceMax))
+            return Integer.toString(this.sourceMin);
+        return this.sourceMin + ".." + this.sourceMax;
+    }
+    
+    /**
+     * Method responsible for returning the Source.
+     * @return Source.
+     */
+    public String exportSource() {
+        String export  = "        <source ";
+               export += "name=\"" + this.sourceName + "\" ";
+               export += "min=\""  + this.sourceMin  + "\" ";
+               export += "max=\""  + this.sourceMax  + "\"/>\n";
+        return export;
+    }
+    
+    /**
      * Method responsible for returning the Target Name.
      * @return Target Name.
      */
@@ -318,6 +343,18 @@ public class AssociationUML extends Association {
     }
     
     /**
+     * Method responsible for returning the Target.
+     * @return Target.
+     */
+    public String exportTarget() {
+        String export  = "        <target ";
+               export += "name=\"" + this.sourceName + "\" ";
+               export += "min=\""  + this.sourceMin  + "\" ";
+               export += "max=\""  + this.sourceMax  + "\"/>\n"; 
+       return export;
+    }
+    
+    /**
      * Method responsible for returning the Stroke Color.
      * @return Stroke Color.
      */
@@ -353,14 +390,44 @@ public class AssociationUML extends Association {
     
     @Override
     public String export() {
-        String export  = "    <" + this.type;
+        String export  = "    <"         + this.type;
                export += " source=\""    + this.source.getId()  + "\"";
                export += " target=\""    + this.target.getId()  + "\"";
                export += " name=\""      + this.name.trim()     + "\"";
                export += " category=\""  + this.category.trim() + "\"";
                export += " direction=\"" + this.direction       + "\"";
-               export += "/>\n";
+               export += ">\n";
+               export += this.exportSource();
+               export += this.exportTarget();
+               export += "    </"        + this.type            + ">\n";
         return export;
+    }
+    
+    /**
+     * Method responsible for returning the Cardinality Style Label.
+     * @return Cardinality Style Label.
+     */
+    public String getCardinalityLabel() {
+        return "styleCardinality";
+    }
+    
+    /**
+     * Method responsible for returning the Cardinality Style Map.
+     * @return Cardinality Style Map.
+     */
+    public Map getCardinalityStyle() {
+        Map    style = new HashMap<>();
+               style.put(mxConstants.STYLE_MOVABLE,   "1");
+               style.put(mxConstants.STYLE_EDITABLE,  "1");
+               style.put(mxConstants.STYLE_FOLDABLE,  "0");
+               style.put(mxConstants.STYLE_FONTSIZE,  "10");
+               style.put(mxConstants.STYLE_RESIZABLE, "0");
+               style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
+               style.put(mxConstants.STYLE_FILLCOLOR,   "#E6E6FA");
+               style.put(mxConstants.STYLE_STROKECOLOR, "#E6E6FA");
+               style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
+               style.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_SHADOW);
+        return style;
     }
     
     @Override

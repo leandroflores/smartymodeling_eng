@@ -108,6 +108,10 @@ public class Stereotype implements Exportable {
         this.primitive = primitive;
     }
     
+    /**
+     * Method responsible for returning the Style Map.
+     * @return Style Map.
+     */
     public Map getStyle() {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_MOVABLE,   "0");

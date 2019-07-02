@@ -226,6 +226,22 @@ public abstract class Element implements Exportable, Modelable {
     }
 
     /**
+     * Method responsible for returning the X Center.
+     * @return X Center.
+     */
+    public Integer getXCenter() {
+        return (this.getX() + this.getWidth()) / 2;
+    }
+    
+    /**
+     * Method responsible for returning the Y Center.
+     * @return Y Center.
+     */
+    public Integer getYCenter() {
+        return (this.getY() + this.getHeight()) / 2;
+    }
+    
+    /**
      * Method responsible for returning the Element Size.
      * @return Element Size.
      */

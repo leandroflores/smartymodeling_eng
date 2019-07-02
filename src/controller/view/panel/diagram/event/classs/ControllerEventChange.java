@@ -56,6 +56,58 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
             this.changeMethod(object,    (MethodUML)    this.panel.getDiagram().getElement(id));
         else if (this.panel.getDiagram().getElement(id) != null)
             this.changeElement(object,   (Element)      this.panel.getDiagram().getElement(id));
+        else if (id != null)
+            this.changeCardinality(object, id);
+    }
+    
+    private void changeCardinality(Object object, String id) {
+        mxCell cell = (mxCell) object;
+        if (id.endsWith("(source)"))
+            this.changeSourceCardinality(object, id, cell);
+        else if (id.endsWith("(target)"))
+            this.changeTargetCardinality(object, id);
+//        System.out.println("Cardinality");
+//        System.out.println("Object: " + object);
+//        System.out.println("Id....: " + id);
+////        System.out.println(this.panel.getIdentifiers().get(object));
+//        System.out.println(this.panel.getIdentifiers().get(object));
+//        System.out.println("");
+    }
+    
+    private void changeSourceCardinality(Object object, String id, mxCell cell) {
+        AssociationUML associationUML = (AssociationUML) this.panel.getDiagram().getAssociation(id.substring(0, id.indexOf("(")));
+                       associationUML.setSourceMin(this.getMin(cell.getValue().toString().trim()));
+                       associationUML.setSourceMax(this.getMax(cell.getValue().toString().trim()));
+//        if (associationUML != null)
+//        System.out.println("Source Cardinality");
+//        System.out.println(id.substring(0, id.indexOf("(")));
+//        System.out.println(this.panel.getDiagram().getAssociation(id.substring(0, id.indexOf("("))));
+//        System.out.println(this.panel.getDiagram().getAssociation(id.substring(0, id.indexOf("("))));
+//        System.out.println(cell.getValue().toString().trim());        
+//        System.out.println("");
+    }
+    
+    
+    
+    private void changeTargetCardinality(Object object, String id) {
+        System.out.println("Target Cardinality");
+        
+    }
+    
+    private Integer getMin(String value) {
+        if (value.equals("*"))
+            return 0;
+        if (value.contains(".."))
+            return Integer.parseInt(value.substring(0, value.indexOf(".")));
+        return Integer.parseInt(value);
+    }
+    
+    private Integer getMax(String value) {
+        if (value.equals("*"))
+            return Integer.MAX_VALUE;
+        if (value.contains(".."))
+            return Integer.parseInt(value.substring(value.lastIndexOf(".") + 1));
+        return Integer.parseInt(value);
     }
     
     /**
