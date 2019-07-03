@@ -6,6 +6,7 @@ import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationClass;
 import controller.view.panel.diagram.event.classs.ControllerEventChange;
 import controller.view.panel.diagram.event.classs.ControllerEventEdit;
+import controller.view.panel.diagram.event.classs.ControllerEventMove;
 import controller.view.panel.diagram.event.classs.ControllerEventResize;
 import controller.view.panel.diagram.event.classs.ControllerEventSelect;
 import controller.view.panel.diagram.types.ControllerPanelClassDiagram;
@@ -66,7 +67,7 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.component.getGraph().getSelectionModel().addListener(mxEvent.CHANGE, new ControllerEventSelect(this));
         this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
 //        this.component.getGraph().addListener(mxEvent.RESIZE_CELLS,  new ControllerEventResize(this));
-//        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
+        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
 //        this.componente.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventoPacote(this));
         this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationClass(this));
 //        this.componente.getGraph().addListener(mxEvent.GROUP_CELLS, new ControllerEventoPacote(this));
@@ -335,9 +336,6 @@ public final class PanelClassDiagram extends PanelDiagram {
      */
     private void addNormalAssociation(Association association) {
         mxCell edge = (mxCell) this.graph.insertEdge(this.parent, association.getId(), association.getTitle(), this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
-//        System.out.println(edge.getGeometry());
-//        System.out.println(edge.get);
-//        System.out.println(this.graph.get(edge));
         this.identifiers.put(edge, association.getId());
     }
     
@@ -347,25 +345,12 @@ public final class PanelClassDiagram extends PanelDiagram {
      */
     private void addAssociationUML(AssociationUML associationUML) {
         this.graph.getStylesheet().putCellStyle(associationUML.getCardinalityLabel(), associationUML.getCardinalityStyle());
-        mxCell  sEntity = (mxCell) this.objects.get(associationUML.getSource().getId());
-        mxCell  tEntity = (mxCell) this.objects.get(associationUML.getTarget().getId());
-//        System.out.println("Source Entity: " + sEntity.getGeometry());
-        Integer x       = new Double((sEntity.getGeometry().getX() + sEntity.getGeometry().getWidth())  / 2).intValue();
-        Integer y       = new Double((sEntity.getGeometry().getY() + sEntity.getGeometry().getHeight()) / 2).intValue();
-        mxCell  source  = (mxCell) this.graph.insertVertex(this.parent, associationUML.getId() + "(source)", associationUML.getSourceLabel(), x, y, 30, 20, associationUML.getCardinalityLabel());
-                source.setConnectable(false);
-//        System.out.println(associationUML.export());
-               
-    }
-    
-    private Integer getX(AssociationUML associationUML) {
-        return new Double(associationUML.getSource().getPosition().getX()).intValue();
-//             + new Double(associationUML.getSource().getSize().getX()).intValue();
-    }
-    
-    private Integer getY(AssociationUML associationUML) {
-        return new Double(associationUML.getSource().getPosition().getY()).intValue();
-//             + new Double(associationUML.getSource().getSize().getY()).intValue();
+        mxCell source = (mxCell) this.graph.insertVertex(this.parent, associationUML.getId() + "(source)", associationUML.getSourceLabel(), associationUML.getSourceX(), associationUML.getSourceY(), 30, 20, associationUML.getCardinalityLabel());
+               source.setConnectable(false);
+        mxCell target = (mxCell) this.graph.insertVertex(this.parent, associationUML.getId() + "(target)", associationUML.getTargetLabel(), associationUML.getTargetX(), associationUML.getTargetY(), 30, 20, associationUML.getCardinalityLabel());
+               target.setConnectable(false);
+        this.identifiers.put(source, associationUML.getId() + "(source)");
+        this.identifiers.put(target, associationUML.getId() + "(target)");
     }
     
     @Override

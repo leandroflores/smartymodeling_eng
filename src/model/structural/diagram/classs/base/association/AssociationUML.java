@@ -1,6 +1,7 @@
 package model.structural.diagram.classs.base.association;
 
 import com.mxgraph.util.mxConstants;
+import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -23,9 +24,11 @@ public class AssociationUML extends Association {
     private String  sourceName;
     private Integer sourceMin;
     private Integer sourceMax;
+    private Point   sourcePos;
     private String  targetName;
     private Integer targetMin;
     private Integer targetMax;
+    private Point   targetPos;
     
     /**
      * Default constructor method of Class.
@@ -51,7 +54,8 @@ public class AssociationUML extends Association {
         this.name      = element.getAttribute("name");
         this.category  = element.getAttribute("category");
         this.direction = element.getAttribute("direction").contains("true");
-        this.setDefault();
+        this.setSource(element);
+        this.setTarget(element);
     }
     
     /**
@@ -162,10 +166,11 @@ public class AssociationUML extends Association {
      * Method responsible for setting the Source by W3C Element.
      * @param element W3C Element.
      */
-    public void setSource(Element element) {
-        this.setSourceName(element.getAttribute("name"));
+    private void setSource(Element element) {
+        this.setSourceName(element.getAttribute("sourceName"));
         this.setSourceMin(element);
         this.setSourceMax(element);
+        this.setSourcePosition(element);
     }
     
     /**
@@ -205,7 +210,7 @@ public class AssociationUML extends Association {
      * @param element W3C Element.
      */
     public void setSourceMin(Element element) {
-        String value   = element.getAttribute("min").trim();
+        String value   = element.getAttribute("sourceMin").trim();
         this.sourceMin = (value.equals("*")) ? 0 : Integer.parseInt(value);
     }
 
@@ -230,8 +235,79 @@ public class AssociationUML extends Association {
      * @param element W3C Element.
      */
     public void setSourceMax(Element element) {
-        String value   = element.getAttribute("max").trim();
+        String value   = element.getAttribute("sourceMax").trim();
         this.sourceMax = (value.equals("*")) ? Integer.MAX_VALUE : Integer.parseInt(value);
+    }
+    
+    /**
+     * Method responsible for returning the Source Position.
+     * @return Source Position.
+     */
+    public Point getSourcePosition() {
+        return this.sourcePos;
+    }
+
+    /**
+     * Method responsible for returning the Source X Position.
+     * @return Source X Position.
+     */
+    public Integer getSourceX() {
+        return this.sourcePos.x;
+    }
+    
+    /**
+     * Method responsible for calculating Position Shift Source X.
+     * @param distance Distance.
+     */
+    public void dxSource(Integer distance) {
+        this.dx(this.sourcePos, distance);
+    }
+    
+    /**
+     * Method responsible for returning the Source Y Position.
+     * @return Source Y Position.
+     */
+    public Integer getSourceY() {
+        return this.sourcePos.y;
+    }
+    
+    /**
+     * Method responsible for calculating Position Shift Source Y.
+     * @param distance Distance.
+     */
+    public void dySource(Integer distance) {
+        this.dy(this.sourcePos, distance);
+    }
+    
+    /**
+     * Method responsible for defining the Source Position Point.
+     * @param  element W3C Element.
+     */
+    private void setSourcePosition(Element element) {
+        Double x = 0.0d;
+        Double y = 0.0d;
+        try {
+            x = Double.parseDouble(element.getAttribute("sourceX"));
+            y = Double.parseDouble(element.getAttribute("sourceY"));
+        }catch (NumberFormatException exception) {}
+        this.setSourcePosition(new Point(x.intValue(), y.intValue()));
+    }
+    
+    /**
+     * Method responsible for defining the Source Position.
+     * @param x X Position.
+     * @param y Y Position.
+     */
+    public void setSourcePosition(Integer x, Integer y) {
+        this.sourcePos = new Point(x, y);
+    }
+    
+    /**
+     * Method responsible for defining the Source Position.
+     * @param sourcePosition Source Position.
+     */
+    public void setSourcePosition(Point sourcePosition) {
+        this.sourcePos = sourcePosition;
     }
 
     /**
@@ -241,6 +317,7 @@ public class AssociationUML extends Association {
         this.sourceName = "";
         this.sourceMin  = 1;
         this.sourceMax  = 1;
+        this.sourcePos  = new Point(this.source.getXCenter(), this.source.getYCenter());
     }
     
     /**
@@ -252,7 +329,7 @@ public class AssociationUML extends Association {
             return "*";
         if (this.sourceMin.equals(this.sourceMax))
             return Integer.toString(this.sourceMin);
-        return this.sourceMin + ".." + this.sourceMax;
+        return this.sourceMin + ".." + (this.sourceMax.equals(Integer.MAX_VALUE) ? "*" : this.sourceMax);
     }
     
     /**
@@ -260,11 +337,24 @@ public class AssociationUML extends Association {
      * @return Source.
      */
     public String exportSource() {
-        String export  = "        <source ";
-               export += "name=\"" + this.sourceName + "\" ";
-               export += "min=\""  + this.sourceMin  + "\" ";
-               export += "max=\""  + this.sourceMax  + "\"/>\n";
+        String export  = " source=\""     + this.source.getId() + "\"";
+               export += " sourceName=\"" + this.sourceName     + "\"";
+               export += " sourceMin=\""  + this.sourceMin      + "\"";
+               export += " sourceMax=\""  + this.sourceMax      + "\"";
+               export += " sourceX=\""    + this.getSourceX()   + "\"";
+               export += " sourceY=\""    + this.getSourceY()   + "\"";
         return export;
+    }
+    
+    /**
+     * Method responsible for setting the Target by W3C Element.
+     * @param element W3C Element.
+     */
+    private void setTarget(Element element) {
+        this.setTargetName(element.getAttribute("targetName"));
+        this.setTargetMin(element);
+        this.setTargetMax(element);
+        this.setTargetPosition(element);
     }
     
     /**
@@ -304,7 +394,7 @@ public class AssociationUML extends Association {
      * @param element W3C Element.
      */
     public void setTargetMin(Element element) {
-        String value   = element.getAttribute("min").trim();
+        String value   = element.getAttribute("targetMin").trim();
         this.targetMin = (value.equals("*")) ? 0 : Integer.parseInt(value);
     }
 
@@ -329,8 +419,79 @@ public class AssociationUML extends Association {
      * @param element W3C Element.
      */
     public void setTargetMax(Element element) {
-        String value   = element.getAttribute("max").trim();
+        String value   = element.getAttribute("targetMax").trim();
         this.targetMax = (value.equals("*")) ? Integer.MAX_VALUE : Integer.parseInt(value);
+    }
+    
+    /**
+     * Method responsible for returning the Target Position.
+     * @return Target Position.
+     */
+    public Point getTargetPosition() {
+        return this.targetPos;
+    }
+
+    /**
+     * Method responsible for returning the Target X Position.
+     * @return Target X Position.
+     */
+    public Integer getTargetX() {
+        return this.targetPos.x;
+    }
+    
+    /**
+     * Method responsible for calculating Position Shift Target X.
+     * @param distance Distance.
+     */
+    public void dxTarget(Integer distance) {
+        this.dx(this.targetPos, distance);
+    }
+    
+    /**
+     * Method responsible for returning the Target Y Position.
+     * @return Target Y Position.
+     */
+    public Integer getTargetY() {
+        return this.targetPos.y;
+    }
+    
+    /**
+     * Method responsible for calculating Position Shift Target Y.
+     * @param distance Distance.
+     */
+    public void dyTarget(Integer distance) {
+        this.dy(this.targetPos, distance);
+    }
+    
+    /**
+     * Method responsible for defining the Target Position Point.
+     * @param  element W3C Element.
+     */
+    private void setTargetPosition(org.w3c.dom.Element element) {
+        Double x = 0.0d;
+        Double y = 0.0d;
+        try {
+            x = Double.parseDouble(element.getAttribute("targetX"));
+            y = Double.parseDouble(element.getAttribute("targetY"));
+        }catch (NumberFormatException exception) {}
+        this.setTargetPosition(new Point(x.intValue(), y.intValue()));
+    }
+    
+    /**
+     * Method responsible for defining the Target Position.
+     * @param x X Position.
+     * @param y Y Position.
+     */
+    public void setTargetPosition(Integer x, Integer y) {
+        this.targetPos = new Point(x, y);
+    }
+    
+    /**
+     * Method responsible for defining the Target Position.
+     * @param targetPosition Target Position.
+     */
+    public void setTargetPosition(Point targetPosition) {
+        this.targetPos = targetPosition;
     }
     
     /**
@@ -340,6 +501,19 @@ public class AssociationUML extends Association {
         this.targetName = "";
         this.targetMin  = 1;
         this.targetMax  = 1;
+        this.targetPos  = new Point(this.target.getXCenter(), this.target.getYCenter());
+    }
+    
+    /**
+     * Method responsible for returning the Target Label.
+     * @return Target Label.
+     */
+    public String getTargetLabel() {
+        if (this.targetMin.equals(0) && this.targetMax.equals(Integer.MAX_VALUE))
+            return "*";
+        if (this.targetMin.equals(this.targetMax))
+            return Integer.toString(this.targetMin);
+        return this.targetMin + ".." + (this.targetMax.equals(Integer.MAX_VALUE) ? "*" : this.targetMax);
     }
     
     /**
@@ -347,11 +521,37 @@ public class AssociationUML extends Association {
      * @return Target.
      */
     public String exportTarget() {
-        String export  = "        <target ";
-               export += "name=\"" + this.sourceName + "\" ";
-               export += "min=\""  + this.sourceMin  + "\" ";
-               export += "max=\""  + this.sourceMax  + "\"/>\n"; 
-       return export;
+        String export  = " target=\""     + this.target.getId() + "\"";
+               export += " targetName=\"" + this.targetName     + "\"";
+               export += " targetMin=\""  + this.targetMin      + "\"";
+               export += " targetMax=\""  + this.targetMax      + "\"";
+               export += " targetX=\""    + this.getTargetX()   + "\"";
+               export += " targetY=\""    + this.getTargetY()   + "\"";
+        return export;
+    }
+    
+    /**
+     * Method responsible for calculating Position Shift X.
+     * @param position Position.
+     * @param distance Distance.
+     */
+    public void dx(Point position, Integer distance) {
+        if (position.x + distance < 0)
+            position.x  = 0;
+        else
+            position.x += distance;
+    }
+    
+    /**
+     * Method responsible for calculating Position Shift Y.
+     * @param position Position.
+     * @param distance Distance.
+     */
+    public void dy(Point position, Integer distance) {
+        if (position.y + distance < 0)
+            position.y  = 0;
+        else
+            position.y += distance;
     }
     
     /**
@@ -391,15 +591,12 @@ public class AssociationUML extends Association {
     @Override
     public String export() {
         String export  = "    <"         + this.type;
-               export += " source=\""    + this.source.getId()  + "\"";
-               export += " target=\""    + this.target.getId()  + "\"";
                export += " name=\""      + this.name.trim()     + "\"";
                export += " category=\""  + this.category.trim() + "\"";
                export += " direction=\"" + this.direction       + "\"";
-               export += ">\n";
                export += this.exportSource();
                export += this.exportTarget();
-               export += "    </"        + this.type            + ">\n";
+               export += "/>\n";
         return export;
     }
     

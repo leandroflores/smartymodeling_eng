@@ -25,13 +25,13 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
     }
     
     @Override
-    public void invoke(Object object, mxEventObject evento) {
+    public void invoke(Object object, mxEventObject event) {
         Object  cell    = this.panel.getGraph().getSelectionCell();
         String  id      = this.panel.getIdentifiers().get(cell);
         Element element = this.panel.getDiagram().getElement(id);
         if (element != null) {
-            element.dx(((Double) evento.getProperty("dx")).intValue());
-            element.dy(((Double) evento.getProperty("dy")).intValue());
+            element.dx(((Double) event.getProperty("dx")).intValue());
+            element.dy(((Double) event.getProperty("dy")).intValue());
             this.panel.getViewMenu().setSave(false);
         }
     }

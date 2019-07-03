@@ -3,6 +3,8 @@ package controller.view.panel.diagram.event.classs;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
+import model.structural.base.Element;
+import model.structural.diagram.classs.base.association.AssociationUML;
 import view.panel.diagram.types.PanelClassDiagram;
 
 /**
@@ -24,45 +26,69 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
     }
     
     @Override
-    public void invoke(Object object, mxEventObject evento) {
-        
-//        System.out.println("AA");
-//         System.out.println(object);
-//         System.out.println((mxGraph) object);
-//         System.out.println(this.painel.getGrafo());
-//         System.out.println(evento.getProperties());
-//         
-//         System.out.println(this.painel.getGrafo().getSelectionCell());
-//         System.out.println(this.painel.getGrafo().getSelectionCell().getClass());
-        
-         
-         
-//        try {
-//            Object   objetoA  = this.painel.getGrafo().getSelectionCell();
-//            Object   objetoC  = evento.getProperties();
-//            Object   objetoB  = ((mxCell) this.painel.getGrafo().getSelectionCell()).getParent();
-//            System.out.println(objetoA);
-//            System.out.println(this.painel.getObjetos().get(objetoA));
-//            System.out.println(objetoB);
-//            System.out.println(this.painel.getObjetos().get(objetoB));
-//        }catch (Exception exception) {
-//            System.out.println("Erro");
-//        }
-//        System.out.println("");
-        
-//        
-////        System.out.println(object);
-////        System.out.println(object instanceof mxCell);
-//        System.out.println(objeto);
-//        System.out.println(objeto instanceof mxCell);
-//        System.out.println(((mxCell) objeto).getParent());
-//        System.out.println(((mxCell) objeto).getParent() instanceof mxCell);
-//        System.out.println();
-        
-//        if (elemento != null) {
-//            elemento.dx(((Double) evento.getProperty("dx")).intValue());
-//            elemento.dy(((Double) evento.getProperty("dy")).intValue());
-//            this.painel.getViewMenu().setSalvo(false);
-//        }
+    public void invoke(Object object, mxEventObject event) {
+        Object cell = this.panel.getGraph().getSelectionCell();
+        String id   = this.panel.getIdentifiers().get(cell);
+        this.move(id, event);
+    }
+    
+    /**
+     * Method responsible for moving the Selected Element.
+     * @param object Graph Object.
+     * @param id Element Id.
+     * @param event Event.
+     */
+    private void move(String id, mxEventObject event) {
+        if (this.panel.getDiagram().getElement(id) != null)
+            this.moveElement(this.panel.getDiagram().getElement(id), event);
+        else if (id != null)
+            this.moveCardinality(id, event);
+    }
+    
+    /**
+     * Method responsible for moving the Element.
+     * @param element Element.
+     * @param event Event.
+     */
+    private void moveElement(Element element, mxEventObject event) {
+        element.dx(((Double) event.getProperty("dx")).intValue());
+        element.dy(((Double) event.getProperty("dy")).intValue());
+        this.panel.getViewMenu().setSave(false);
+    }
+    
+    /**
+     * Method responsible for changing the Cardinality.
+     * @param id Association Id.
+     * @param event Event.
+     */
+    private void moveCardinality(String id, mxEventObject event) {
+        if (id.endsWith("(source)"))
+            this.moveSourceCardinality(id, event);
+        else if (id.endsWith("(target)"))
+            this.moveTargetCardinality(id, event);
+    }
+    
+    /**
+     * Method responsible for changing the Source Cardinality.
+     * @param id Association Id.
+     * @param event Event.
+     */
+    private void moveSourceCardinality(String id, mxEventObject event) {
+        AssociationUML associationUML = (AssociationUML) this.panel.getDiagram().getAssociation(id.substring(0, id.indexOf("(")));
+                       associationUML.dxSource(((Double) event.getProperty("dx")).intValue());
+                       associationUML.dySource(((Double) event.getProperty("dy")).intValue());
+        this.panel.getViewMenu().setSave(false);
+    }
+    
+    /**
+     * Method responsible for changing the Target Cardinality.
+     * @param id Association Id.
+     * @param event Event.
+     */
+    private void moveTargetCardinality(String id, mxEventObject event) {
+        AssociationUML associationUML = (AssociationUML) this.panel.getDiagram().getAssociation(id.substring(0, id.indexOf("(")));
+                       associationUML.dxTarget(((Double) event.getProperty("dx")).intValue());
+                       associationUML.dyTarget(((Double) event.getProperty("dy")).intValue());
+        this.panel.getViewMenu().setSave(false);               
     }
 }

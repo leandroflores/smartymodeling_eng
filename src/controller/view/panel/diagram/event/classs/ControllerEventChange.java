@@ -60,56 +60,6 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
             this.changeCardinality(object, id);
     }
     
-    private void changeCardinality(Object object, String id) {
-        mxCell cell = (mxCell) object;
-        if (id.endsWith("(source)"))
-            this.changeSourceCardinality(object, id, cell);
-        else if (id.endsWith("(target)"))
-            this.changeTargetCardinality(object, id);
-//        System.out.println("Cardinality");
-//        System.out.println("Object: " + object);
-//        System.out.println("Id....: " + id);
-////        System.out.println(this.panel.getIdentifiers().get(object));
-//        System.out.println(this.panel.getIdentifiers().get(object));
-//        System.out.println("");
-    }
-    
-    private void changeSourceCardinality(Object object, String id, mxCell cell) {
-        AssociationUML associationUML = (AssociationUML) this.panel.getDiagram().getAssociation(id.substring(0, id.indexOf("(")));
-                       associationUML.setSourceMin(this.getMin(cell.getValue().toString().trim()));
-                       associationUML.setSourceMax(this.getMax(cell.getValue().toString().trim()));
-//        if (associationUML != null)
-//        System.out.println("Source Cardinality");
-//        System.out.println(id.substring(0, id.indexOf("(")));
-//        System.out.println(this.panel.getDiagram().getAssociation(id.substring(0, id.indexOf("("))));
-//        System.out.println(this.panel.getDiagram().getAssociation(id.substring(0, id.indexOf("("))));
-//        System.out.println(cell.getValue().toString().trim());        
-//        System.out.println("");
-    }
-    
-    
-    
-    private void changeTargetCardinality(Object object, String id) {
-        System.out.println("Target Cardinality");
-        
-    }
-    
-    private Integer getMin(String value) {
-        if (value.equals("*"))
-            return 0;
-        if (value.contains(".."))
-            return Integer.parseInt(value.substring(0, value.indexOf(".")));
-        return Integer.parseInt(value);
-    }
-    
-    private Integer getMax(String value) {
-        if (value.equals("*"))
-            return Integer.MAX_VALUE;
-        if (value.contains(".."))
-            return Integer.parseInt(value.substring(value.lastIndexOf(".") + 1));
-        return Integer.parseInt(value);
-    }
-    
     /**
      * Method responsible for changing the Attribute UML.
      * @param object Graph Object.
@@ -193,6 +143,43 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
         mxCell cell = (mxCell) object;
         if (association instanceof AssociationUML)
             ((AssociationUML) association).setName(cell.getValue().toString().trim());
+    }
+    
+    /**
+     * Method responsible for changing the Cardinality.
+     * @param object Graph Object.
+     * @param id Association Id.
+     */
+    private void changeCardinality(Object object, String id) {
+        mxCell cell = (mxCell) object;
+        if (id.endsWith("(source)"))
+            this.changeSourceCardinality(object, id, cell);
+        else if (id.endsWith("(target)"))
+            this.changeTargetCardinality(object, id, cell);
+    }
+    
+    /**
+     * Method responsible for changing the Source Cardinality.
+     * @param object Graph Object.
+     * @param id Association Id.
+     * @param cell Graph Cell.
+     */
+    private void changeSourceCardinality(Object object, String id, mxCell cell) {
+        AssociationUML associationUML = (AssociationUML) this.panel.getDiagram().getAssociation(id.substring(0, id.indexOf("(")));
+                       associationUML.setSourceMin(this.getMin(cell.getValue().toString().trim()));
+                       associationUML.setSourceMax(this.getMax(cell.getValue().toString().trim()));
+    }
+    
+    /**
+     * Method responsible for changing the Target Cardinality.
+     * @param object Graph Object.
+     * @param id Association Id.
+     * @param cell Graph Cell.
+     */
+    private void changeTargetCardinality(Object object, String id, mxCell cell) {
+        AssociationUML associationUML = (AssociationUML) this.panel.getDiagram().getAssociation(id.substring(0, id.indexOf("(")));
+                       associationUML.setTargetMin(this.getMin(cell.getValue().toString().trim()));
+                       associationUML.setTargetMax(this.getMax(cell.getValue().toString().trim()));
     }
     
     /**
@@ -336,5 +323,43 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
             return cell.getId();
         }
         return "";
+    }
+    
+    /**
+     * Method responsible for returning the Min by String Value.
+     * @param  value String Value.
+     * @return Min parsed.
+     */
+    private Integer getMin(String value) {
+        if (value.equals("*"))
+            return 0;
+        if (value.contains(".."))
+            return Integer.parseInt(value.substring(0, value.indexOf(".")));
+        return Integer.parseInt(value);
+    }
+    
+    /**
+     * Method responsible for returning the Max by String Value.
+     * @param  value String Value.
+     * @return Max parsed.
+     */
+    private Integer getMax(String value) {
+        if (value.equals("*"))
+            return Integer.MAX_VALUE;
+        if (value.contains(".."))
+            return this.getValue(value.substring(value.lastIndexOf(".") + 1));
+        return Integer.parseInt(value);
+    }
+    
+    /**
+     * Method responsible for returning the Integer by Value.
+     * @param  value String Value.
+     * @return Integer parsed.
+     */
+    private Integer getValue(String value) {
+        try {
+            Integer.parseInt(value);
+        }catch (NumberFormatException exception) {}
+        return Integer.MAX_VALUE;
     }
 }
