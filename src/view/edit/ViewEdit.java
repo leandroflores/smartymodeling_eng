@@ -11,6 +11,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Edit View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  28/05/2019
+ * @see    controller.view.edit.ControllerViewEdit
  * @see    view.ViewModal
  */
 public abstract class ViewEdit extends ViewModal {

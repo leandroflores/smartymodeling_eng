@@ -6,6 +6,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.base.variability.Variability;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.base.AttributeUML;
 import model.structural.diagram.classs.base.MethodUML;
@@ -70,9 +71,9 @@ public class ControllerMenuItemEdit implements ActionListener {
      * @param node JTree Node.
      */
     private void editVariability(Object object, DefaultMutableTreeNode node) {
-//        Diagram       diagrama      = this.getDiagrama((DefaultMutableTreeNode) node.getParent());
-//        Variabilidade variabilidade = (Variabilidade) object;
-//        new ViewEditarVariabilidade(this.popup.getPainelProjeto().getViewMenu().getPainelModelagem(), diagrama, variabilidade).setVisible(true);
+        Diagram     diagram     = this.getDiagram((DefaultMutableTreeNode) node.getParent());
+        Variability variability = (Variability) object;
+//        new ViewEditarVariabilidade(this.popup.getPainelProjeto().getViewMenu().getPainelModelagem(), diagram, variability).setVisible(true);
     }
     
     /**

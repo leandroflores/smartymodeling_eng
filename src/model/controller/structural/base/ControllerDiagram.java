@@ -30,10 +30,10 @@ public class ControllerDiagram {
      */
     public String[] getElements() {
         List<Element> elements = this.diagram.getElementsList();
-        String[] array = new String[elements.size()];
+        String[]      array    = new String[elements.size()];
         for (int i = 0; i < elements.size(); i++)
-                 array[i] = elements.get(i).getAbstract();
+                    array[i] = elements.get(i).getAbstract();
         Arrays.sort(array);
-        return   array;
+        return      array;
     }
 }

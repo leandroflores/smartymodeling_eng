@@ -28,6 +28,7 @@ public class Variability implements Exportable {
      * Default constructor method of Class.
      */
     public Variability() {
+        this.name     = "Variability Name";
         this.variants = new ArrayList<>();
     }
 

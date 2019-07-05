@@ -134,9 +134,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      * @param variability Variability.
      */
     private void showPanelEditVariability(Diagram diagram, Variability variability) {
-//        System.out.println("Diagram: "     + diagram);
-//        System.out.println("Variability: " + variability);
-//        System.out.println("");
+        this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditVariability(diagram, variability);
     }
     
     /**

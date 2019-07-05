@@ -8,6 +8,7 @@ import javax.swing.JSplitPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.base.variability.Variability;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classs.base.AttributeUML;
 import model.structural.diagram.classs.base.ClassUML;
@@ -21,6 +22,7 @@ import view.panel.edit.base.classs.PanelEditAttributeUML;
 import view.panel.edit.base.classs.PanelEditClassUML;
 import view.panel.edit.base.classs.PanelEditInterfaceUML;
 import view.panel.edit.base.classs.PanelEditMethodUML;
+import view.panel.edit.base.variability.PanelEditVariability;
 import view.panel.tree.PanelTree;
 import view.structural.ViewMenu;
 
@@ -131,6 +133,16 @@ public final class PanelProject extends Panel {
             this.panelEdit = new PanelEditClassUML(this.viewMenu, diagram, (ClassUML) element);
         else if (element instanceof InterfaceUML)
             this.panelEdit = new PanelEditInterfaceUML(this.viewMenu, diagram, (InterfaceUML) element);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Variability.
+     * @param diagram Diagram.
+     * @param variability Variability.
+     */
+    public void initPanelEditVariability(Diagram diagram, Variability variability) {
+        this.panelEdit = new PanelEditVariability(this.viewMenu, diagram, variability);
         this.updatePanelEdit();
     }
     

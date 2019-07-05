@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
 import view.delete.ViewDeleteElement;
+import view.new_.ViewNewVariability;
 import view.panel.diagram.PanelDiagram;
 
 /**
@@ -93,7 +94,7 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
         this.panelDiagram.getClickButton().setBackground(this.getDefaultColor());
         this.panelDiagram.setOperation("Click");
         if (this.panelDiagram.getDiagram().getElementsList().isEmpty() == false) {
-//            new ViewCadastroVariabilidade(this.panelDiagram.getViewMenu().getPanelModeling(), this.panelDiagram.getDiagrama()).setVisible(true);
+            new ViewNewVariability(this.panelDiagram.getViewMenu().getPanelModeling(), this.panelDiagram.getDiagram()).setVisible(true);
             this.panelDiagram.getViewMenu().setSave(false);
         }
     }

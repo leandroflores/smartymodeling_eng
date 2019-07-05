@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.util.HashMap;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -468,5 +469,23 @@ public abstract class Panel extends JPanel {
                      fileChooser.setFileFilter(new FileNameExtensionFilter("SMARTY", "smty", "smty"));
                      this.fileChoosers.put(id, fileChooser);
         return       fileChooser;
+    }
+    
+    /**
+     * Method responsible for returning the Constraints.
+     * @param  width Width Constraints.
+     * @param  height Height Constraints.
+     * @param  x X Position Grid.
+     * @param  y Y Position Grid.
+     * @return Constraints.
+     */
+    protected GridBagConstraints getConstraints(int width, int height, int x, int y) {
+        GridBagConstraints constraints = new GridBagConstraints();
+                           constraints.gridheight = height;
+                           constraints.gridwidth  = width;
+                           constraints.gridx      = x;
+                           constraints.gridy      = y;
+                           constraints.fill       = GridBagConstraints.HORIZONTAL;
+        return constraints;
     }
 }

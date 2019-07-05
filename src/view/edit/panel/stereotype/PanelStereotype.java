@@ -2,7 +2,6 @@ package view.edit.panel.stereotype;
 
 import controller.view.edit.panel.stereotype.ControllerPanelStereotype;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -66,24 +65,6 @@ public final class PanelStereotype extends Panel {
         
         this.createList("stereotypesList");
         this.add(this.getStereotypesScrollPane(), this.getConstraints(5, 10, 0, 2));
-    }
-    
-    /**
-     * Method responsible for returning the Constraints.
-     * @param  width Width Constraints.
-     * @param  height Height Constraints.
-     * @param  x X Position Grid.
-     * @param  y Y Position Grid.
-     * @return Constraints.
-     */
-    private GridBagConstraints getConstraints(int width, int height, int x, int y) {
-        GridBagConstraints constraints = new GridBagConstraints();
-                           constraints.gridheight = height;
-                           constraints.gridwidth  = width;
-                           constraints.gridx      = x;
-                           constraints.gridy      = y;
-                           constraints.fill       = GridBagConstraints.HORIZONTAL;
-        return constraints;
     }
     
     /**
