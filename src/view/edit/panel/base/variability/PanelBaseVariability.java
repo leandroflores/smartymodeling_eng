@@ -64,7 +64,7 @@ public final class PanelBaseVariability extends Panel {
         this.add(this.createComboBox("bindingTimeComboBox", ControllerVariability.BINDINGS, 15));
         
         this.add(this.createLabel("Allows Binding Var: "));
-        this.add(this.createCheckBox("allowsBindingVarCheckBox", "", true));
+        this.add(this.createCheckBox("allowsAddingVarCheckBox", "", true));
     }
     
     /**
@@ -72,7 +72,27 @@ public final class PanelBaseVariability extends Panel {
      */
     public void setValues() {
         this.getNameTextField().setText(this.variability.getName());
-//        this.getVariationPointComboBox().setText(this.diagram.getType());
+        this.setVariationPoint();
+        this.getBindingTimeComboBox().setSelectedItem(this.variability.getBindingTime());
+        this.getAllowsAddingVarCheckBox().setSelected(this.variability.isAllowsBindingVar());
+    }
+    
+    /**
+     * Method responsible for setting the Variation Point.
+     */
+    public void setVariationPoint() {
+        String item = this.getVariationPointComboBox().getSelectedItem().toString();
+        String id   = item.substring(item.indexOf("[") + 1, item.indexOf("]")).trim();
+        this.variability.setVariationPoint(this.diagram.getElement(id));
+        this.setVariantes();
+    }
+    
+    /**
+     * Method responsible for setting the Variants.
+     */
+    private void setVariantes() {
+        if (this.variability.getVariationPoint() != null)
+            this.variability.getVariants().remove(this.variability.getVariationPoint());
     }
     
     /**

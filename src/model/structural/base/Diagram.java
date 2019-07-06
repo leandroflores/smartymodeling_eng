@@ -540,8 +540,8 @@ public abstract class Diagram implements Exportable {
     public void addVariability(Variability variability) {
         variability.setId(this.project.nextVariabilityId());
         if (this.variabilities.get(variability.getId()) == null) {
+            this.project.addVariability(variability);
             this.variabilities.put(variability.getId(), variability);
-            this.project.variabilities.put(variability.getId(), variability);
         }
     }
     
@@ -642,8 +642,6 @@ public abstract class Diagram implements Exportable {
                stereotypes.add(links.get(i).getStereotype());
         return stereotypes;
     }
-    
-    
     
     /**
      * Method responsible for returning Variation Point Steretype by Element.

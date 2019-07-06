@@ -548,6 +548,28 @@ public class Project implements Exportable {
     public void addVariability(Variability variability) {
         variability.setId(this.nextVariabilityId());
         this.variabilities.put(variability.getId(), variability);
+        this.addVariabilityStereotype(variability);
+    }
+    
+    /**
+     * Method responsible for returning the Variant Stereotype.
+     * @param  variability Variability.
+     * @return Variant Stereotype.
+     */
+    public Stereotype getVariantStereotype(Variability variability) {
+        if (variability.getConstraint().equals("Inclusive"))
+            return this.profile.getInclusive();
+        return this.profile.getExclusive();
+    }
+    
+    /**
+     * Method responsible for adding the Variability Stereotype.
+     * @param variability Variability.
+     */
+    public void addVariabilityStereotype(Variability variability) {
+        this.addLink(new Link(variability.getVariationPoint(), this.profile.getVariationPoint()));
+        for (Element variant : variability.getVariants())
+            this.addLink(new Link(variant, this.getVariantStereotype(variability)));
     }
     
     /**

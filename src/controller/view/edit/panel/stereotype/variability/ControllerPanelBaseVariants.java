@@ -14,7 +14,7 @@ import view.edit.panel.base.variability.PanelBaseVariants;
  * @see    view.edit.panel.base.variability.PanelBaseVariants
  */
 public class ControllerPanelBaseVariants extends ControllerPanel {
-    private final PanelBaseVariants panelVariants;
+    private final PanelBaseVariants panelBaseVariants;
 
     /**
      * Default constructor method of Class.
@@ -22,17 +22,23 @@ public class ControllerPanelBaseVariants extends ControllerPanel {
      */
     public ControllerPanelBaseVariants(PanelBaseVariants panel) {
         super(panel);
-        this.panelVariants = panel;
+        this.panelBaseVariants = panel;
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
+        if (this.panelBaseVariants.getConstraintComboBox().equals(event.getSource()))
+            this.panelBaseVariants.updateValues();
+        else if (this.panelBaseVariants.getAddVariantButton().equals(event.getSource()))
+            this.panelBaseVariants.addVariant();
+        else if (this.panelBaseVariants.getDelVariantButton().equals(event.getSource()))
+            this.panelBaseVariants.delVariant();
         this.update();
     }
     
     @Override
     public void keyPressed(KeyEvent event) {
-        if (this.panelVariants.getConstraintComboBox().equals(event.getSource()))
+        if (this.panelBaseVariants.getConstraintComboBox().equals(event.getSource()))
             this.update();
     }
     
@@ -46,12 +52,13 @@ public class ControllerPanelBaseVariants extends ControllerPanel {
      * Method responsible for setting the Project Values.
      */
     private void update() {
-//        this.panelVariability.getVariability().setName(this.panelVariability.getNameTextField().getText().trim());
-//        this.panelVariability.getVariability().setVariationPoint((Element) this.panelVariability.getVariationPointComboBox().getSelectedItem());
-//        this.panelVariability.getVariability().setBindingTime((String) this.panelVariability.getBindingTimeComboBox().getSelectedItem());
-//        this.panelVariability.getVariability().setAllowsBindingVar(this.panelVariability.getAllowsAddingVarCheckBox().isSelected());
-        this.panelVariants.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelVariants.getViewMenu().getPanelModeling().updateDiagram(this.panelVariants.getDiagram());
-        this.panelVariants.getViewMenu().setSave(false);
+        System.out.println("Update Variants");
+        this.panelBaseVariants.getVariability().setConstraint(this.panelBaseVariants.getConstraintComboBox().getSelectedItem().toString());
+        this.panelBaseVariants.getVariability().setMinimum(Integer.parseInt(this.panelBaseVariants.getMinimumTextField().getText().trim()));
+        this.panelBaseVariants.getVariability().setMaximum(Integer.parseInt(this.panelBaseVariants.getMaximumTextField().getText().trim()));
+        
+        this.panelBaseVariants.getViewMenu().getPanelProject().getPanelTree().updateUI();
+        this.panelBaseVariants.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseVariants.getDiagram());
+        this.panelBaseVariants.getViewMenu().setSave(false);
     }
 }

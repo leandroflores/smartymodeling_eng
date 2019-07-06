@@ -28,8 +28,10 @@ public class Variability implements Exportable {
      * Default constructor method of Class.
      */
     public Variability() {
-        this.name     = "Variability Name";
-        this.variants = new ArrayList<>();
+        this.name        = "Variability Name";
+        this.constraint  = "Exclusive";
+        this.bindingTime = "DESIGN_TIME";
+        this.variants    = new ArrayList<>();
     }
 
     /**

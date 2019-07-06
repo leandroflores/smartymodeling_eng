@@ -8,6 +8,6 @@ package model.controller.structural.base.variability;
  * @see    model.structural.base.variability.Variability
  */
 public class ControllerVariability {
-    public static final String[] TYPES    = {"EXCLUSIVE", "INCLUSIVE"};
+    public static final String[] TYPES    = {"Exclusive", "Inclusive"};
     public static final String[] BINDINGS = {"DESIGN_TIME", "LINK_TIME", "COMPILE_TIME", "RUNTIME"};
 }

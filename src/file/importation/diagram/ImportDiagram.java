@@ -53,10 +53,10 @@ public abstract class ImportDiagram {
             Element     current     = (Element) variabilities.item(i);
             Variability variability = new Variability(current);
                         variability.setVariationPoint(this.diagram.getElement(current.getAttribute("variationPoint")));
-            this.diagram.addVariability(variability);
             NodeList    variants    = current.getElementsByTagName("variant");
             for (int x = 0; x < variants.getLength(); x++)
                 variability.addVariant(this.diagram.getElement(((Element) variants.item(x)).getAttribute("id")));
+            this.diagram.addVariability(variability);
         }
     }
     
