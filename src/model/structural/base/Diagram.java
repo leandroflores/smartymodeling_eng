@@ -183,6 +183,19 @@ public abstract class Diagram implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Default Elements List.
+     * @return Default Elements List.
+     */
+    public List<Element> getDefaultElementsList() {
+        List<Element> filter  = new ArrayList<>();
+        for (Element  element : this.getElementsList()) {
+            if (element.isDefault())
+                filter.add(element);
+        }
+        return  filter;
+    }
+    
+    /**
      * Method responsible for returning Elements by Mandatory Flag.
      * @param  mandatory Mandatory Flag.
      * @return Elements by Mandatory Flag.
@@ -615,6 +628,93 @@ public abstract class Diagram implements Exportable {
      */
     public TypeUML getVoidType() {
         return this.project.getVoidType();
+    }
+    
+    /**
+     * Method responsible for reseting the Profile Stereotypes of a Element.
+     * @param element Element.
+     */
+    public void resetProfileStereotypes(Element element) {
+        List<Link> links = this.project.getLinksByElement(element);
+        for (int i = links.size() - 1; i >= 0; i--) {
+            if (links.get(i).getStereotype().isPrimitive())
+                this.project.removeLink(links.get(i));
+        }
+    }
+    
+    /**
+     * Method responsible for updating the Stereotype Elements.
+     */
+    public void updateElementsStereotype() {
+        for (Element element : this.getElementsList())
+            this.updateStereotype(element);
+    }
+    
+    /**
+     * Method responsible for updating the Element Stereotype.
+     * @param element Element.
+     */
+    public void updateStereotype(Element element) {
+        this.resetProfileStereotypes(element);
+        boolean varPoint  = this.updateVariationPointStereotype(element);
+        boolean inclusive = this.updateInclusiveStereotype(element);
+        boolean exclusive = this.updateExclusiveStereotype(element);
+        if (!varPoint && !inclusive && !exclusive)
+            this.updateDefaultStereotype(element);
+    }
+    
+    /**
+     * Method responsible for updating the Default Stereotype of a Element.
+     * @param element Element.
+     */
+    public void updateDefaultStereotype(Element element) {
+        if (element.isDefault()) {
+            this.project.removeLink(new Link(element, this.project.getProfile().getMandatory()));
+            this.project.removeLink(new Link(element, this.project.getProfile().getOptional()));
+            this.project.addElementStereotype(element);
+        }
+    }
+    
+    /**
+     * Method responsible for updating the Variation Point Stereotype of a Element.
+     * @param  element Element.
+     * @return Variation Point Stereotype.
+     */
+    public boolean updateVariationPointStereotype(Element element) {
+        Stereotype stereotype = this.getVariationPointStereotype(element);
+        if (stereotype != null) {
+            this.project.addLink(new Link(element, stereotype));
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Method responsible for updating the Inclusive Stereotype of a Element.
+     * @param  element Element.
+     * @return Inclusive Stereotype.
+     */
+    public boolean updateInclusiveStereotype(Element element) {
+        Stereotype stereotype = this.getInclusiveStereotype(element);
+        if (stereotype != null) {
+            this.project.addLink(new Link(element, stereotype));
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Method responsible for updating the Exclusive Stereotype of a Element.
+     * @param  element Element.
+     * @return Exclusive Stereotype.
+     */
+    public boolean updateExclusiveStereotype(Element element) {
+        Stereotype stereotype = this.getExclusiveStereotype(element);
+        if (stereotype != null) {
+            this.project.addLink(new Link(element, stereotype));
+            return true;
+        }
+        return false;
     }
     
     /**

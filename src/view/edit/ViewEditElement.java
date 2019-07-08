@@ -104,6 +104,14 @@ public final class ViewEditElement extends ViewEdit {
     }
     
     /**
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
+     */
+    public Diagram getDiagram() {
+        return this.diagram;
+    }
+    
+    /**
      * Method responsible for returning the Element.
      * @return Element.
      */

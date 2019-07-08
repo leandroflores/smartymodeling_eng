@@ -52,13 +52,12 @@ public class ControllerPanelBaseVariants extends ControllerPanel {
      * Method responsible for setting the Project Values.
      */
     private void update() {
-        System.out.println("Update Variants");
         this.panelBaseVariants.getVariability().setConstraint(this.panelBaseVariants.getConstraintComboBox().getSelectedItem().toString());
         this.panelBaseVariants.getVariability().setMinimum(Integer.parseInt(this.panelBaseVariants.getMinimumTextField().getText().trim()));
         this.panelBaseVariants.getVariability().setMaximum(Integer.parseInt(this.panelBaseVariants.getMaximumTextField().getText().trim()));
-        
-        this.panelBaseVariants.getViewMenu().getPanelProject().getPanelTree().updateUI();
+        this.panelBaseVariants.getDiagram().updateElementsStereotype();
         this.panelBaseVariants.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseVariants.getDiagram());
+        this.panelBaseVariants.getViewMenu().getPanelProject().getPanelTree().updateUI(); 
         this.panelBaseVariants.getViewMenu().setSave(false);
     }
 }

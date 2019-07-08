@@ -70,7 +70,7 @@ public class ControllerPanelBaseClassUML extends ControllerPanel {
         this.panelBaseClassUML.getClassUML().setAbstract(this.panelBaseClassUML.getAbstractCheckBox().isSelected());
         this.panelBaseClassUML.getClassUML().setFinal(this.panelBaseClassUML.getFinalCheckBox().isSelected());
         this.panelBaseClassUML.getClassUML().setMandatory(this.panelBaseClassUML.getMandatoryCheckBox().isSelected());
-        this.panelBaseClassUML.getDiagram().getProject().updateElementStereotype(this.panelBaseClassUML.getClassUML());
+        this.panelBaseClassUML.getDiagram().updateStereotype(this.panelBaseClassUML.getClassUML());
         this.panelBaseClassUML.getViewMenu().setSave(false);
         this.panelBaseClassUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseClassUML.getViewMenu().getPanelModeling().updateDiagrams();

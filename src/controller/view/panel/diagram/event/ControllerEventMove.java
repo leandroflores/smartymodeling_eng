@@ -29,6 +29,7 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
         Object  cell    = this.panel.getGraph().getSelectionCell();
         String  id      = this.panel.getIdentifiers().get(cell);
         Element element = this.panel.getDiagram().getElement(id);
+        System.out.println("Element: " + element);
         if (element != null) {
             element.dx(((Double) event.getProperty("dx")).intValue());
             element.dy(((Double) event.getProperty("dy")).intValue());

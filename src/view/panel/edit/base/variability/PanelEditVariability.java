@@ -45,6 +45,7 @@ public final class PanelEditVariability extends PanelEdit {
         this.tabbedPane.setPreferredSize(new Dimension(100, 100));
         
         this.addPanelBaseVariability();
+        this.addPanelBaseVariants();
         
         this.add(this.tabbedPane);
     }
@@ -57,6 +58,16 @@ public final class PanelEditVariability extends PanelEdit {
         this.createScrollPane("scrollPanelBaseVariability",  this.panelBaseVariability);
         this.getScrollPanelBaseVariability().setViewportView(this.panelBaseVariability);
         this.tabbedPane.add("Variability", this.getScrollPanelBaseVariability());
+    }
+    
+    /**
+     * Method responsible for adding the Panel Base Variants.
+     */
+    private void addPanelBaseVariants() {
+        this.panelBaseVariants = new PanelBaseVariants(this.viewMenu, this.diagram, this.variability);
+        this.createScrollPane("scrollPanelBaseVariants",  this.panelBaseVariants);
+        this.getScrollPanelBaseVariants().setViewportView(this.panelBaseVariants);
+        this.tabbedPane.add("Variants", this.getScrollPanelBaseVariants());
     }
     
     /**
@@ -81,5 +92,13 @@ public final class PanelEditVariability extends PanelEdit {
      */
     public JScrollPane getScrollPanelBaseVariability() {
         return this.scrollPanes.get("scrollPanelBaseVariability");
+    }
+    
+    /**
+     * Method responsible for returning the Scroll Panel Base Variants.
+     * @return Scroll Panel Base Variants.
+     */
+    public JScrollPane getScrollPanelBaseVariants() {
+        return this.scrollPanes.get("scrollPanelBaseVariants");
     }
 }

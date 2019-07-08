@@ -36,4 +36,17 @@ public class ControllerDiagram {
         Arrays.sort(array);
         return      array;
     }
+    
+    /**
+     * Method responsible for returning the Default Elements Array.
+     * @return Default Elements Array.
+     */
+    public String[] getDefaultElements() {
+        List<Element> elements = this.diagram.getDefaultElementsList();
+        String[]      array    = new String[elements.size()];
+        for (int i = 0; i < elements.size(); i++)
+                    array[i] = elements.get(i).getAbstract();
+        Arrays.sort(array);
+        return      array;
+    }
 }

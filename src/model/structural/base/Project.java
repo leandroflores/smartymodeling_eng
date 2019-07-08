@@ -669,18 +669,6 @@ public class Project implements Exportable {
     }
     
     /**
-     * Method responsible for updating the Element Stereotype.
-     * @param element Element.
-     */
-    public void updateElementStereotype(Element element) {
-        if (element.isDefault()) {
-            this.removeLink(new Link(element, this.profile.getMandatory()));
-            this.removeLink(new Link(element, this.profile.getOptional()));
-            this.addElementStereotype(element);
-        }
-    }
-    
-    /**
      * Method responsible for removing a Stereotype.
      * @param stereotype Stereotype.
      */

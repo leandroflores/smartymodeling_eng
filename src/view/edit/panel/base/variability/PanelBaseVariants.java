@@ -64,7 +64,7 @@ public final class PanelBaseVariants extends Panel {
         this.add(this.createTextFieldNoEditable("maximumTextField", "0", 3), this.getConstraints(1, 1, 4, 0));        
         
         this.add(this.createLabel("Variant: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("variantComboBox", new ControllerDiagram(this.diagram).getElements(), 150), this.getConstraints(2, 1, 1, 1));
+        this.add(this.createComboBox("variantComboBox", new ControllerDiagram(this.diagram).getDefaultElements(), 250), this.getConstraints(2, 1, 1, 1));
         this.add(this.createButton("addVariantButton", "", "add.png"), this.getConstraints(1, 1, 3, 1));
         this.add(this.createButton("delVariantButton", "", "not.png"), this.getConstraints(1, 1, 4, 1));
         

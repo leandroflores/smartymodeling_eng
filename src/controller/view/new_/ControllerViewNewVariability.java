@@ -88,6 +88,7 @@ public class ControllerViewNewVariability extends ControllerViewNew implements C
     public void insert() {
         Variability variability = this.viewNewVariability.getVariability();
         this.viewNewVariability.getDiagram().addVariability(variability);
+        this.viewNewVariability.getDiagram().updateElementsStereotype();
         this.viewNewVariability.getViewMenu().getPanelModeling().updateDiagram(this.viewNewVariability.getDiagram());
         this.viewNewVariability.getViewMenu().update();
         this.viewNewVariability.dispose();

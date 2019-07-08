@@ -58,7 +58,7 @@ public final class PanelBaseVariability extends Panel {
         this.add(this.createTextField("nameTextField", "", 15));
         
         this.add(this.createLabel("Variation Point*: "));
-        this.add(this.createComboBox("variationPointComboBox", new ControllerDiagram(this.diagram).getElements(), 15));
+        this.add(this.createComboBox("variationPointComboBox", new ControllerDiagram(this.diagram).getDefaultElements(), 15));
 
         this.add(this.createLabel("Binding Time*: "));
         this.add(this.createComboBox("bindingTimeComboBox", ControllerVariability.BINDINGS, 15));
@@ -85,6 +85,7 @@ public final class PanelBaseVariability extends Panel {
         String id   = item.substring(item.indexOf("[") + 1, item.indexOf("]")).trim();
         this.variability.setVariationPoint(this.diagram.getElement(id));
         this.setVariantes();
+        this.diagram.updateElementsStereotype();
     }
     
     /**
