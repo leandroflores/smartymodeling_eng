@@ -74,7 +74,9 @@ public final class PanelClassDiagram extends PanelDiagram {
 
         // Testar Evento com o Group Cell:
         this.component.getGraph().addListener(mxEvent.FOLD_CELLS, new ControllerEventGroup(this));
+        this.component.getGraph().getSelectionModel().addListener(mxEvent.FOLD_CELLS, new ControllerEventGroup(this));
         this.component.addListener(mxEvent.FOLD_CELLS, new ControllerEventGroup(this));
+        this.component.getConnectionHandler().addListener(mxEvent.FOLD_CELLS, new ControllerEventGroup(this));
     }
     
     @Override
