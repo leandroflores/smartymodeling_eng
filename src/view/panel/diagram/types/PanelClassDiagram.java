@@ -6,6 +6,7 @@ import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationClass;
 import controller.view.panel.diagram.event.classs.ControllerEventChange;
 import controller.view.panel.diagram.event.classs.ControllerEventEdit;
+import controller.view.panel.diagram.event.classs.ControllerEventGroup;
 import controller.view.panel.diagram.event.classs.ControllerEventMove;
 import controller.view.panel.diagram.event.classs.ControllerEventResize;
 import controller.view.panel.diagram.event.classs.ControllerEventSelect;
@@ -66,11 +67,14 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
         this.component.getGraph().getSelectionModel().addListener(mxEvent.CHANGE, new ControllerEventSelect(this));
         this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
-//        this.component.getGraph().addListener(mxEvent.RESIZE_CELLS,  new ControllerEventResize(this));
         this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
-//        this.componente.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventoPacote(this));
         this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationClass(this));
-//        this.componente.getGraph().addListener(mxEvent.GROUP_CELLS, new ControllerEventoPacote(this));
+//        this.component.getGraph().addListener(mxEvent.RESIZE_CELLS,  new ControllerEventResize(this));
+//        this.componente.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventoPacote(this));
+
+        // Testar Evento com o Group Cell:
+        this.component.getGraph().addListener(mxEvent.FOLD_CELLS, new ControllerEventGroup(this));
+        this.component.addListener(mxEvent.FOLD_CELLS, new ControllerEventGroup(this));
     }
     
     @Override

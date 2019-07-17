@@ -8,7 +8,6 @@ import com.mxgraph.util.mxEvent;
 import com.mxgraph.view.mxGraph;
 import controller.view.panel.diagram.ControllerPanelDiagram;
 import controller.view.panel.diagram.event.ControllerEventEdit;
-import controller.view.panel.diagram.event.ControllerEventMove;
 import controller.view.panel.diagram.event.ControllerEventResize;
 import controller.view.panel.diagram.event.ControllerEventChange;
 import java.awt.Color;
@@ -111,7 +110,7 @@ public abstract class PanelDiagram extends Panel {
         this.component.getGraphControl().addMouseListener((ControllerPanelDiagram) this.controller);
         this.component.getGraphControl().getGraphContainer().addKeyListener((ControllerPanelDiagram) controller);
         this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
-        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
+//        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
         this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
         this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
         

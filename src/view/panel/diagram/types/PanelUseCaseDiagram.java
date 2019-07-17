@@ -3,6 +3,7 @@ package view.panel.diagram.types;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationUseCase;
+import controller.view.panel.diagram.event.ControllerEventMove;
 import controller.view.panel.diagram.types.ControllerPanelUseCaseDiagram;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -44,6 +45,7 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
         this.addOperationsPanel();
         this.addModelingPanel();
         this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationUseCase(this));
+        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
     }
     
     @Override
