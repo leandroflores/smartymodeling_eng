@@ -1,7 +1,7 @@
-package model.structural.diagram.classs;
+package model.structural.diagram.classes;
 
-import model.structural.diagram.classs.base.MethodUML;
-import model.structural.diagram.classs.base.AttributeUML;
+import model.structural.diagram.classes.base.MethodUML;
+import model.structural.diagram.classes.base.AttributeUML;
 import com.mxgraph.util.mxConstants;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.Map;
 import model.structural.base.Element;
 import model.structural.base.Stereotype;
 import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.classs.base.TypeUML;
+import model.structural.diagram.classes.base.TypeUML;
 
 /**
  * <p>Class of Model <b>Entity</b>.</p>

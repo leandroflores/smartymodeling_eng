@@ -4,11 +4,11 @@ import com.mxgraph.model.mxCell;
 import controller.view.panel.diagram.association.ControllerEventAssociation;
 import model.structural.base.Element;
 import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.classs.Entity;
-import model.structural.diagram.classs.base.ClassUML;
-import model.structural.diagram.classs.base.InterfaceUML;
-import model.structural.diagram.classs.base.association.AssociationUML;
-import model.structural.diagram.classs.base.association.RealizationUML;
+import model.structural.diagram.classes.Entity;
+import model.structural.diagram.classes.base.ClassUML;
+import model.structural.diagram.classes.base.InterfaceUML;
+import model.structural.diagram.classes.base.association.AssociationUML;
+import model.structural.diagram.classes.base.association.RealizationUML;
 import view.panel.diagram.types.PanelClassDiagram;
 
 /**

@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Objects;
 import model.structural.base.association.Link;
 import model.structural.base.interfaces.Exportable;
-import model.structural.diagram.classs.base.TypeUML;
+import model.structural.diagram.classes.base.TypeUML;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.classs.Entity;
+import model.structural.diagram.classes.Entity;
 
 /**
  * <p>Class of Model <b>Project</b>.</p>
@@ -104,13 +104,13 @@ public class Project implements Exportable {
      * @return Next Id.
      */
     public String nextId(String label) {
-        Integer index  = 1;
-        String  nextId = label + index;
+        Integer index   = 1;
+        String  nextId  = label + index;
         while (this.objects.get(nextId) != null) {
-            index += 1;
-            nextId = label + index;
+                index  += 1;
+                nextId  = label + index;
         }
-        return nextId;
+        return  nextId;
     }
     
     /**

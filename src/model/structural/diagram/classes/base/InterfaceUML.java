@@ -1,7 +1,7 @@
-package model.structural.diagram.classs.base;
+package model.structural.diagram.classes.base;
 
 import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.classs.Entity;
+import model.structural.diagram.classes.Entity;
 import org.w3c.dom.Element;
 
 /**
@@ -9,7 +9,7 @@ import org.w3c.dom.Element;
  * <p>Class responsible for representing <b>Interface UML</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  03/06/2019
- * @see    model.structural.diagram.classs.Entity
+ * @see    model.structural.diagram.classes.Entity
  */
 public class InterfaceUML extends Entity {
     
@@ -49,7 +49,7 @@ public class InterfaceUML extends Entity {
     
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/classs/interface.png";
+        return "src/images/icons/diagram/classes/interface.png";
     }
     
     @Override

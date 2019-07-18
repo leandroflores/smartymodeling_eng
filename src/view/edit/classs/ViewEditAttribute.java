@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.classs.base.AttributeUML;
+import model.structural.diagram.classes.base.AttributeUML;
 import view.edit.ViewEdit;
 import view.edit.panel.base.classs.PanelBaseAttributeUML;
 import view.edit.panel.stereotype.PanelStereotype;
@@ -17,7 +17,7 @@ import view.panel.modeling.PanelModeling;
  * @author Leandro
  * @since  05/06/2019
  * @see    controller.view.edit.classs.ControllerViewEditAttribute
- * @see    model.structural.diagram.classs.base.AttributeUML
+ * @see    model.structural.diagram.classes.base.AttributeUML
  * @see    view.edit.ViewEdit
  */
 public final class ViewEditAttribute extends ViewEdit {

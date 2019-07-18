@@ -4,9 +4,9 @@ import com.mxgraph.model.mxCell;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
-import model.structural.diagram.classs.Entity;
-import model.structural.diagram.classs.base.AttributeUML;
-import model.structural.diagram.classs.base.MethodUML;
+import model.structural.diagram.classes.Entity;
+import model.structural.diagram.classes.base.AttributeUML;
+import model.structural.diagram.classes.base.MethodUML;
 import view.panel.diagram.types.PanelClassDiagram;
 
 /**

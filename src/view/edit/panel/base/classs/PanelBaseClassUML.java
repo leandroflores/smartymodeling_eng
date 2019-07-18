@@ -6,7 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.classs.base.ClassUML;
+import model.structural.diagram.classes.base.ClassUML;
 import view.Panel;
 import view.structural.ViewMenu;
 
@@ -16,7 +16,7 @@ import view.structural.ViewMenu;
  * @author Leandro
  * @since  17/06/2019
  * @see    controller.view.edit.panel.base.classs.
- * @see    model.structural.diagram.classs.base.ClassUML
+ * @see    model.structural.diagram.classes.base.ClassUML
  * @see    view.Panel
  */
 public final class PanelBaseClassUML extends Panel {

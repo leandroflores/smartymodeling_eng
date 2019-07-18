@@ -7,7 +7,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.classs.base.MethodUML;
+import model.structural.diagram.classes.base.MethodUML;
 import view.Panel;
 import view.structural.ViewMenu;
 
@@ -17,7 +17,7 @@ import view.structural.ViewMenu;
  * @author Leandro
  * @since  16/06/2019
  * @see    controller.view.edit.panel.base.classs.ControllerPanelBaseMethodUML
- * @see    model.structural.diagram.classs.base.MethodUML
+ * @see    model.structural.diagram.classes.base.MethodUML
  * @see    view.Panel
  */
 public final class PanelBaseMethodUML extends Panel {

@@ -12,8 +12,8 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.association.Association;
 import model.structural.base.variability.Variability;
-import model.structural.diagram.classs.base.AttributeUML;
-import model.structural.diagram.classs.base.MethodUML;
+import model.structural.diagram.classes.base.AttributeUML;
+import model.structural.diagram.classes.base.MethodUML;
 
 /**
  * <p>Class of View <b>TreeRenderer</b>.</p>

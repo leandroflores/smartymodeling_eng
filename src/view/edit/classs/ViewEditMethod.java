@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.classs.base.MethodUML;
+import model.structural.diagram.classes.base.MethodUML;
 import view.edit.ViewEdit;
 import view.edit.panel.base.classs.PanelBaseMethodUML;
 import view.edit.panel.stereotype.PanelStereotype;
@@ -17,7 +17,7 @@ import view.panel.modeling.PanelModeling;
  * @author Leandro
  * @since  06/06/2019
  * @see    controller.view.edit.classs.ControllerViewEditMethod
- * @see    model.structural.diagram.classs.base.MethodUML
+ * @see    model.structural.diagram.classes.base.MethodUML
  * @see    view.edit.ViewEdit
  */
 public final class ViewEditMethod extends ViewEdit {

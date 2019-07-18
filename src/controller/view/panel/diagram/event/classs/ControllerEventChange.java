@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
-import model.structural.diagram.classs.base.AttributeUML;
-import model.structural.diagram.classs.base.MethodUML;
-import model.structural.diagram.classs.base.ParameterUML;
-import model.structural.diagram.classs.base.TypeUML;
-import model.structural.diagram.classs.base.association.AssociationUML;
+import model.structural.diagram.classes.base.AttributeUML;
+import model.structural.diagram.classes.base.MethodUML;
+import model.structural.diagram.classes.base.ParameterUML;
+import model.structural.diagram.classes.base.TypeUML;
+import model.structural.diagram.classes.base.association.AssociationUML;
 import view.panel.diagram.types.PanelClassDiagram;
 
 /**

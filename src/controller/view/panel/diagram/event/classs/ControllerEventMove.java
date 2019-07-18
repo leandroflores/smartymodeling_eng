@@ -4,7 +4,7 @@ import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import model.structural.base.Element;
-import model.structural.diagram.classs.base.association.AssociationUML;
+import model.structural.diagram.classes.base.association.AssociationUML;
 import view.panel.diagram.types.PanelClassDiagram;
 
 /**

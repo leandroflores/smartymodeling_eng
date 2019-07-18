@@ -1,7 +1,7 @@
-package model.structural.diagram.classs.base;
+package model.structural.diagram.classes.base;
 
 import model.structural.base.interfaces.Exportable;
-import model.structural.diagram.classs.Entity;
+import model.structural.diagram.classes.Entity;
 import org.w3c.dom.Element;
 
 /**

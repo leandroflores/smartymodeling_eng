@@ -18,13 +18,13 @@ import javax.swing.JPanel;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Association;
 import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.classs.Entity;
-import model.structural.diagram.classs.base.association.AssociationUML;
-import model.structural.diagram.classs.base.AttributeUML;
-import model.structural.diagram.classs.base.ClassUML;
-import model.structural.diagram.classs.base.InterfaceUML;
-import model.structural.diagram.classs.base.MethodUML;
-import model.structural.diagram.classs.base.PackageUML;
+import model.structural.diagram.classes.Entity;
+import model.structural.diagram.classes.base.association.AssociationUML;
+import model.structural.diagram.classes.base.AttributeUML;
+import model.structural.diagram.classes.base.ClassUML;
+import model.structural.diagram.classes.base.InterfaceUML;
+import model.structural.diagram.classes.base.MethodUML;
+import model.structural.diagram.classes.base.PackageUML;
 import view.panel.diagram.PanelDiagram;
 import view.structural.ViewMenu;
 
@@ -73,10 +73,10 @@ public final class PanelClassDiagram extends PanelDiagram {
 //        this.componente.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventoPacote(this));
 
         // Testar Evento com o Group Cell:
-        this.component.getGraph().addListener(mxEvent.FOLD_CELLS, new ControllerEventGroup(this));
-        this.component.getGraph().getSelectionModel().addListener(mxEvent.FOLD_CELLS, new ControllerEventGroup(this));
-        this.component.addListener(mxEvent.FOLD_CELLS, new ControllerEventGroup(this));
-        this.component.getConnectionHandler().addListener(mxEvent.FOLD_CELLS, new ControllerEventGroup(this));
+        this.component.getGraph().addListener(mxEvent.CELLS_FOLDED, new ControllerEventGroup(this));
+        this.component.getGraph().getSelectionModel().addListener(mxEvent.CELLS_FOLDED, new ControllerEventGroup(this));
+        this.component.addListener(mxEvent.CELLS_FOLDED, new ControllerEventGroup(this));
+        this.component.getConnectionHandler().addListener(mxEvent.CELLS_FOLDED, new ControllerEventGroup(this));
     }
     
     @Override

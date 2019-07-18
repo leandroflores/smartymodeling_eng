@@ -1,4 +1,4 @@
-package model.structural.diagram.classs.base.association;
+package model.structural.diagram.classes.base.association;
 
 import com.mxgraph.util.mxConstants;
 import java.awt.Point;
@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import model.structural.base.association.Association;
-import model.structural.diagram.classs.Entity;
+import model.structural.diagram.classes.Entity;
 import org.w3c.dom.Element;
 
 /**
@@ -15,7 +15,7 @@ import org.w3c.dom.Element;
  * @author Leandro
  * @since  03/06/2019
  * @see    model.structural.base.association.Association
- * @see    model.structural.diagram.classs.Entity
+ * @see    model.structural.diagram.classes.Entity
  */
 public class AssociationUML extends Association {
     private String  name;

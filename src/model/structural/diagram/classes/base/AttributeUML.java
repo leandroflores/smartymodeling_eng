@@ -1,10 +1,10 @@
-package model.structural.diagram.classs.base;
+package model.structural.diagram.classes.base;
 
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
 import model.structural.base.Element;
-import model.structural.diagram.classs.Entity;
+import model.structural.diagram.classes.Entity;
 
 /**
  * <p>Class of Model <b>AttributeUML</b>.</p>
@@ -230,7 +230,7 @@ public class AttributeUML extends Element {
     
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/classs/attribute.png";
+        return "src/images/icons/diagram/classes/attribute.png";
     }
     
     @Override

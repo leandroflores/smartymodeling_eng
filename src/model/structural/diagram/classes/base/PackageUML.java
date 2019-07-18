@@ -1,4 +1,4 @@
-package model.structural.diagram.classs.base;
+package model.structural.diagram.classes.base;
 
 import com.mxgraph.util.mxConstants;
 import java.awt.Point;
@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.structural.base.Element;
-import model.structural.diagram.classs.Entity;
+import model.structural.diagram.classes.Entity;
 
 /**
  * <p>Class of Model <b>PackageUML</b>.</p>
@@ -143,7 +143,7 @@ public class PackageUML extends Element {
     
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/classs/package.png";
+        return "src/images/icons/diagram/classes/package.png";
     }
     
     @Override

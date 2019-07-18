@@ -3,8 +3,8 @@ package view.edit.panel.base.classs.entity;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.classs.base.MethodUML;
-import model.structural.diagram.classs.base.ParameterUML;
+import model.structural.diagram.classes.base.MethodUML;
+import model.structural.diagram.classes.base.ParameterUML;
 import view.Panel;
 import view.structural.ViewMenu;
 
@@ -14,7 +14,7 @@ import view.structural.ViewMenu;
  * @author Leandro
  * @since  18/06/2019
  * @see    controller.view.edit.panel.base.classs.
- * @see    model.structural.diagram.classs.base.MethodUML
+ * @see    model.structural.diagram.classes.base.MethodUML
  * @see    view.Panel
  */
 public final class PanelParametersUML extends Panel {

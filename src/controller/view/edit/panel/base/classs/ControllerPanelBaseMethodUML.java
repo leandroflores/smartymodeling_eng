@@ -3,7 +3,7 @@ package controller.view.edit.panel.base.classs;
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import model.structural.diagram.classs.base.TypeUML;
+import model.structural.diagram.classes.base.TypeUML;
 import view.edit.panel.base.classs.PanelBaseMethodUML;
 
 /**

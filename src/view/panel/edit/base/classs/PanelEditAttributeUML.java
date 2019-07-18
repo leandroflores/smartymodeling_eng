@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.classs.base.AttributeUML;
+import model.structural.diagram.classes.base.AttributeUML;
 import view.edit.panel.base.classs.PanelBaseAttributeUML;
 import view.panel.edit.base.PanelEditElement;
 import view.structural.ViewMenu;
@@ -14,7 +14,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining a Panel for Edit the <b>Attribute UML</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  12/06/2019
- * @see    model.structural.diagram.classs.base.AttributeUML
+ * @see    model.structural.diagram.classes.base.AttributeUML
  * @see    view.panel.edit.base.PanelEditElement
  */
 public final class PanelEditAttributeUML extends PanelEditElement {

@@ -1,9 +1,9 @@
-package model.structural.diagram.classs.base;
+package model.structural.diagram.classes.base;
 
 import com.mxgraph.util.mxConstants;
 import java.util.Map;
 import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.classs.Entity;
+import model.structural.diagram.classes.Entity;
 import org.w3c.dom.Element;
 
 /**
@@ -11,7 +11,7 @@ import org.w3c.dom.Element;
  * <p>Class responsible for representing <b>Class UML</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  03/06/2019
- * @see    model.structural.diagram.classs.Entity
+ * @see    model.structural.diagram.classes.Entity
  */
 public class ClassUML extends Entity {
     private boolean abstract_;
@@ -78,7 +78,7 @@ public class ClassUML extends Entity {
     
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/classs/class.png";
+        return "src/images/icons/diagram/classes/class.png";
     }
     
     @Override

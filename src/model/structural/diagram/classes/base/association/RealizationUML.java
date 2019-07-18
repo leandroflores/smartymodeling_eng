@@ -1,12 +1,12 @@
-package model.structural.diagram.classs.base.association;
+package model.structural.diagram.classes.base.association;
 
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import model.structural.base.association.Association;
-import model.structural.diagram.classs.base.ClassUML;
-import model.structural.diagram.classs.base.InterfaceUML;
+import model.structural.diagram.classes.base.ClassUML;
+import model.structural.diagram.classes.base.InterfaceUML;
 
 /**
  * <p>Class of Model <b>RealizationUML</b>.</p>
@@ -14,8 +14,8 @@ import model.structural.diagram.classs.base.InterfaceUML;
  * @author Leandro
  * @since  03/06/2019
  * @see    model.structural.base.association.Association
- * @see    model.structural.diagram.classs.base.ClassUML
- * @see    model.structural.diagram.classs.base.InterfaceUML
+ * @see    model.structural.diagram.classes.base.ClassUML
+ * @see    model.structural.diagram.classes.base.InterfaceUML
  */
 public class RealizationUML extends Association {
     

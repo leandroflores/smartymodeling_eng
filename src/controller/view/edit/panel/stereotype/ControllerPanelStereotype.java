@@ -6,9 +6,9 @@ import java.awt.event.KeyEvent;
 import model.structural.base.Element;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Link;
-import model.structural.diagram.classs.Entity;
-import model.structural.diagram.classs.base.AttributeUML;
-import model.structural.diagram.classs.base.MethodUML;
+import model.structural.diagram.classes.Entity;
+import model.structural.diagram.classes.base.AttributeUML;
+import model.structural.diagram.classes.base.MethodUML;
 import view.edit.panel.stereotype.PanelStereotype;
 
 /**

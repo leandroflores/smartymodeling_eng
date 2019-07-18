@@ -6,8 +6,8 @@ import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import com.mxgraph.util.mxRectangle;
 import model.structural.base.Element;
-import model.structural.diagram.classs.Entity;
-import model.structural.diagram.classs.base.PackageUML;
+import model.structural.diagram.classes.Entity;
+import model.structural.diagram.classes.base.PackageUML;
 import view.panel.diagram.types.PanelClassDiagram;
 
 /**

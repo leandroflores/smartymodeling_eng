@@ -8,27 +8,28 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.association.Association;
-import model.structural.diagram.classs.Entity;
-import model.structural.diagram.classs.base.association.AssociationUML;
-import model.structural.diagram.classs.base.association.RealizationUML;
-import model.structural.diagram.classs.base.AttributeUML;
-import model.structural.diagram.classs.base.ClassUML;
-import model.structural.diagram.classs.base.InterfaceUML;
-import model.structural.diagram.classs.base.MethodUML;
-import model.structural.diagram.classs.base.PackageUML;
-import model.structural.diagram.classs.base.TypeUML;
+import model.structural.diagram.classes.Entity;
+import model.structural.diagram.classes.base.association.AssociationUML;
+import model.structural.diagram.classes.base.association.RealizationUML;
+import model.structural.diagram.classes.base.AttributeUML;
+import model.structural.diagram.classes.base.ClassUML;
+import model.structural.diagram.classes.base.InterfaceUML;
+import model.structural.diagram.classes.base.MethodUML;
+import model.structural.diagram.classes.base.PackageUML;
+import model.structural.diagram.classes.base.TypeUML;
 
 /**
  * <p>Class of Model <b>ClassDiagram</b>.</p>
  * <p>Class responsible for representing the <b>Class Diagram</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  03/06/2019
+ * @see    model.structural.base.Diagram
  * @see    model.structural.base.association.Association
- * @see    model.structural.diagram.classs.base.AttributeUML
- * @see    model.structural.diagram.classs.base.ClassUML
- * @see    model.structural.diagram.classs.base.InterfaceUML
- * @see    model.structural.diagram.classs.base.MethodUML
- * @see    model.structural.diagram.classs.base.PackageUML
+ * @see    model.structural.diagram.classes.base.AttributeUML
+ * @see    model.structural.diagram.classes.base.ClassUML
+ * @see    model.structural.diagram.classes.base.InterfaceUML
+ * @see    model.structural.diagram.classes.base.MethodUML
+ * @see    model.structural.diagram.classes.base.PackageUML
  */
 public final class ClassDiagram extends Diagram {
     private HashMap<String, PackageUML>   packagesUML;
