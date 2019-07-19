@@ -36,14 +36,14 @@ public class ImportUseCaseDiagram extends ImportDiagram {
     
     @Override
     public Diagram importDiagram() {
-          this.importActors();
-          this.importUseCases();
-          this.importRealizations();
-          this.importExtends();
-          this.importIncludes();
-         super.importVariabilities();
-         super.importRelationships();
-        return this.diagram;
+                this.importActors();
+                this.importUseCases();
+                this.importRealizations();
+                this.importExtends();
+                this.importIncludes();
+               super.importRelationships();
+               super.importVariabilities();
+        return  this.diagram;
     }
     
     /**

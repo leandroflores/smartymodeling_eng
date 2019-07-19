@@ -54,9 +54,6 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.getClickButton().setBackground(this.getFocusColor());
     }
     
-    /**
-     * Metodo responsavel por adicionar os Componentes na View Painel.
-     */
     @Override
     public void addComponents() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

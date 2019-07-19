@@ -42,22 +42,22 @@ public class ImportClassDiagram extends ImportDiagram {
     
     @Override
     public Diagram importDiagram() {
-        this.importClass();
-        this.importInterfaces();
-        this.importRealizations();
-        this.importAssociations();
-        this.importRelationships();
-        super.importVariabilities();
-        return this.diagram;
+                this.importClasses();
+                this.importInterfaces();
+                this.importRealizations();
+                this.importAssociations();
+               super.importRelationships();
+               super.importVariabilities();
+        return  this.diagram;
     }
     
     /**
-     * Method responsible for importing the Class.
+     * Method responsible for importing the Classes.
      */
-    private void importClass() {
-        NodeList classs = this.element.getElementsByTagName("class");
-        for (int i = 0; i < classs.getLength(); i++) {
-            Element  current = (Element) classs.item(i);
+    private void importClasses() {
+        NodeList classes = this.element.getElementsByTagName("class");
+        for (int i = 0; i < classes.getLength(); i++) {
+            Element  current = (Element) classes.item(i);
             ClassUML class_  = new ClassUML(current);
                      class_.setTypeUML(this.project.getEntityType(class_));
                 this.importAttributes(current, class_);

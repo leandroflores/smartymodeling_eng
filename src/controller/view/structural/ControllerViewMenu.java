@@ -5,11 +5,11 @@ import file.exportation.ExportProject;
 import file.importation.ImportProject;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import model.structural.base.Project;
+import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import org.xml.sax.SAXException;
@@ -194,9 +194,10 @@ public class ControllerViewMenu extends ControllerView {
      */
     private void newActivityDiagram() {
         if (this.viewMenu.getProject() != null) {
-//            DiagramaAtividades diagrama = new DiagramaAtividades(this.viewMenu.getProjeto());
-//            this.viewMenu.getProjeto().addDiagrama(diagrama);
-//            this.viewMenu.showDiagram(diagrama);
+            ActivityDiagram diagram = new ActivityDiagram(this.viewMenu.getProject());
+            this.viewMenu.getProject().addDiagram(diagram);
+                            diagram.setDefaultName();
+            this.viewMenu.showDiagram(diagram);
         }
         this.viewMenu.update();
     }
