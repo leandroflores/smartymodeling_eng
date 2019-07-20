@@ -34,7 +34,7 @@ public class ExtendUML extends Association {
     }
 
     /**
-     * Method responsible for setting Source.
+     * Method responsible for setting the Source.
      * @param source Use Case UML.
      */
     public void setSource(UseCaseUML source) {

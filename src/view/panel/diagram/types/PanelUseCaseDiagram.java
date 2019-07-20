@@ -3,7 +3,10 @@ package view.panel.diagram.types;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationUseCase;
+import controller.view.panel.diagram.event.ControllerEventChange;
+import controller.view.panel.diagram.event.ControllerEventEdit;
 import controller.view.panel.diagram.event.ControllerEventMove;
+import controller.view.panel.diagram.event.ControllerEventResize;
 import controller.view.panel.diagram.types.ControllerPanelUseCaseDiagram;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
@@ -45,8 +48,7 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.addOperationsPanel();
         this.addModelingPanel();
-        this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationUseCase(this));
-        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
+        this.addControllers();
     }
     
     @Override
@@ -104,6 +106,15 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
                 break;
         }
     }
+    
+    @Override
+     public void addControllers() {
+        this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationUseCase(this));
+        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
+        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
+        this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
+        this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
+     }
     
     /**
      * Method responsible for setting Realization Style.

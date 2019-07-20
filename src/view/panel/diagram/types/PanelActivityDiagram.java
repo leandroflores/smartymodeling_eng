@@ -3,6 +3,10 @@ package view.panel.diagram.types;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationActivity;
+import controller.view.panel.diagram.event.ControllerEventChange;
+import controller.view.panel.diagram.event.ControllerEventEdit;
+import controller.view.panel.diagram.event.ControllerEventMove;
+import controller.view.panel.diagram.event.ControllerEventResize;
 import controller.view.panel.diagram.types.ControllerPanelActivityDiagram;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -43,7 +47,7 @@ public final class PanelActivityDiagram extends PanelDiagram {
     public void addComponents() {
         this.addOperationsPanel();
         this.addModelingPanel();
-        this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationActivity(this));
+        this.addControllers();
     }
     
     @Override
@@ -122,6 +126,15 @@ public final class PanelActivityDiagram extends PanelDiagram {
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
     }
+    
+    @Override
+     public void addControllers() {
+        this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationActivity(this));
+        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
+        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
+        this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
+        this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
+     }
     
     @Override
     public ActivityDiagram getDiagram() {

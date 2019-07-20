@@ -6,7 +6,6 @@ import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationClass;
 import controller.view.panel.diagram.event.classes.ControllerEventChange;
 import controller.view.panel.diagram.event.classes.ControllerEventEdit;
-import controller.view.panel.diagram.event.classes.ControllerEventGroup;
 import controller.view.panel.diagram.event.classes.ControllerEventMove;
 import controller.view.panel.diagram.event.classes.ControllerEventResize;
 import controller.view.panel.diagram.event.classes.ControllerEventSelect;
@@ -60,21 +59,7 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.addOperationsPanel();
         this.addModelingPanel();
-        
-        this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
-        this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
-        this.component.getGraph().getSelectionModel().addListener(mxEvent.CHANGE, new ControllerEventSelect(this));
-        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
-        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
-        this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationClass(this));
-//        this.component.getGraph().addListener(mxEvent.RESIZE_CELLS,  new ControllerEventResize(this));
-//        this.componente.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventoPacote(this));
-
-        // Testar Evento com o Group Cell:
-        this.component.getGraph().addListener(mxEvent.CELLS_FOLDED, new ControllerEventGroup(this));
-        this.component.getGraph().getSelectionModel().addListener(mxEvent.CELLS_FOLDED, new ControllerEventGroup(this));
-        this.component.addListener(mxEvent.CELLS_FOLDED, new ControllerEventGroup(this));
-        this.component.getConnectionHandler().addListener(mxEvent.CELLS_FOLDED, new ControllerEventGroup(this));
+        this.addControllers();
     }
     
     @Override
@@ -442,6 +427,16 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_BLOCK);
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
+    }
+    
+    @Override
+    public void addControllers() {
+        this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
+        this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
+        this.component.getGraph().getSelectionModel().addListener(mxEvent.CHANGE, new ControllerEventSelect(this));
+        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
+        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
+        this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationClass(this));
     }
     
     @Override

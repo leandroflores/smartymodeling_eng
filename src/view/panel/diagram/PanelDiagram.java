@@ -85,6 +85,11 @@ public abstract class PanelDiagram extends Panel {
     public abstract void setStyle();
     
     /**
+     * Method responsible for adding the Diagram Panel Controllers.
+     */
+    public abstract void addControllers();
+    
+    /**
      * Method responsible for adding Modeling Panel.
      */
     public void addModelingPanel() {
@@ -109,11 +114,6 @@ public abstract class PanelDiagram extends Panel {
         
         this.component.getGraphControl().addMouseListener((ControllerPanelDiagram) this.controller);
         this.component.getGraphControl().getGraphContainer().addKeyListener((ControllerPanelDiagram) controller);
-        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
-//        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
-        this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
-        this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
-        
         this.graph.setDisconnectOnMove(false);
         this.graph.setCellsDisconnectable(false);
         

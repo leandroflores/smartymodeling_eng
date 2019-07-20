@@ -47,10 +47,10 @@ public class ComponentUML extends Element {
     public Map getStyle() {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
-               style.put(mxConstants.STYLE_FONTSIZE, "15");
                style.put(mxConstants.STYLE_EDITABLE, "1");
                style.put(mxConstants.STYLE_FOLDABLE, "0");
-               style.put(mxConstants.STYLE_FONTCOLOR,   "BLACK");
+               style.put(mxConstants.STYLE_FONTSIZE, "15");
+               style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_CENTER);
