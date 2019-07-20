@@ -5,6 +5,7 @@ import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationUseCase;
 import controller.view.panel.diagram.event.ControllerEventMove;
 import controller.view.panel.diagram.types.ControllerPanelUseCaseDiagram;
+import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -51,6 +52,7 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
     @Override
     public void addOperationsPanel() {
         JPanel panel = new JPanel();
+               panel.setLayout(new FlowLayout(FlowLayout.LEFT));
                panel.add(this.createButton("clickButton",       "", "Select",          "click.png"));
                panel.add(this.createButton("actorButton",       "", "New Actor",       "diagram/usecase/actor.png"));
                panel.add(this.createButton("useCaseButton",     "", "New Use Case",    "diagram/usecase/use-case.png"));

@@ -1,6 +1,6 @@
 package view.edit.panel.base.classs;
 
-import controller.view.edit.panel.base.classs.ControllerPanelBaseClassUML;
+import controller.view.edit.panel.base.classes.ControllerPanelBaseClassUML;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JCheckBox;

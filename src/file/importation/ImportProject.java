@@ -1,5 +1,6 @@
 package file.importation;
 
+import file.importation.diagram.types.ImportActivityDiagram;
 import file.importation.diagram.types.ImportClassDiagram;
 import file.importation.diagram.types.ImportUseCaseDiagram;
 import java.io.File;
@@ -162,21 +163,15 @@ public class ImportProject {
      */
     private void importDiagram(Element element, int index) throws XPathExpressionException {
         switch (index) {
+            case 0:
+                this.project.addDiagram(new ImportActivityDiagram(this.project, element).importDiagram());
+                break;
             case 1:
                 this.project.addDiagram(new ImportClassDiagram(this.project, element).importDiagram());
                 break;
             case 4:
                 this.project.addDiagram(new ImportUseCaseDiagram(this.project, element).importDiagram());
                 break;
-//            case 1:
-//                this.project.addDiagrama(new ImportDiagramaClasses(this.project, element).importDiagrama());
-//                break;
-//            case 3:
-//                this.project.addDiagrama(new ImportDiagramaComponentes(this.project, element).importDiagrama());
-//                break;
-//            case 4:
-//                this.project.addDiagrama(new ImportDiagramaAtividades(this.project, element).importDiagrama());
-//                break;
             default:
                 break;
         }

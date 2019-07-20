@@ -1,6 +1,6 @@
 package view.edit.panel.base.classs;
 
-import controller.view.edit.panel.base.classs.ControllerPanelBaseMethodUML;
+import controller.view.edit.panel.base.classes.ControllerPanelBaseMethodUML;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JCheckBox;
@@ -16,7 +16,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining a Base Panel for the <b>Method UML</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  16/06/2019
- * @see    controller.view.edit.panel.base.classs.ControllerPanelBaseMethodUML
+ * @see    controller.view.edit.panel.base.classes.ControllerPanelBaseMethodUML
  * @see    model.structural.diagram.classes.base.MethodUML
  * @see    view.Panel
  */

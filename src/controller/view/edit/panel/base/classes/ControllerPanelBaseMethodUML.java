@@ -1,4 +1,4 @@
-package controller.view.edit.panel.base.classs;
+package controller.view.edit.panel.base.classes;
 
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;

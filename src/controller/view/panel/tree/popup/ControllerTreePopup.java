@@ -10,7 +10,9 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.variability.Variability;
+import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
+import model.structural.diagram.UseCaseDiagram;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
 import view.delete.ViewDeleteDiagram;
@@ -143,8 +145,12 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      * @param element Element.
      */
     private void showPanelEdit(Diagram diagram, Element element) {
-        if (diagram instanceof ClassDiagram)
+        if (diagram instanceof ActivityDiagram)
+            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((ActivityDiagram) diagram, element);
+        else if (diagram instanceof ClassDiagram)
             this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((ClassDiagram) diagram, element);
+        else if (diagram instanceof UseCaseDiagram)
+            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((UseCaseDiagram) diagram, element);
     }
     
     /**

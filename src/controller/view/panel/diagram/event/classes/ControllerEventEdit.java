@@ -1,4 +1,4 @@
-package controller.view.panel.diagram.event.classs;
+package controller.view.panel.diagram.event.classes;
 
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGraphModel;

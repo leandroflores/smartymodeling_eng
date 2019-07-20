@@ -5,6 +5,7 @@ import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationActivity;
 import controller.view.panel.diagram.types.ControllerPanelActivityDiagram;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -48,6 +49,7 @@ public final class PanelActivityDiagram extends PanelDiagram {
     @Override
     public void addOperationsPanel() {
         JPanel panel = new JPanel();
+               panel.setLayout(new FlowLayout(FlowLayout.LEFT));
                panel.add(this.createButton("clickButton",       "", "Select",          "click.png"));
                panel.add(this.createButton("initialButton",     "", "New Initial",     "diagram/activity/initial.png"));
                panel.add(this.createButton("activityButton",    "", "New Activity",    "diagram/activity/activity.png"));

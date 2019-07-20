@@ -9,19 +9,29 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.variability.Variability;
+import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
+import model.structural.diagram.UseCaseDiagram;
+import model.structural.diagram.activity.base.ActivityUML;
+import model.structural.diagram.activity.base.DecisionUML;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.ClassUML;
 import model.structural.diagram.classes.base.InterfaceUML;
 import model.structural.diagram.classes.base.MethodUML;
+import model.structural.diagram.usecase.base.ActorUML;
+import model.structural.diagram.usecase.base.UseCaseUML;
 import view.Panel;
 import view.panel.edit.PanelEdit;
 import view.panel.edit.base.PanelEditDiagram;
 import view.panel.edit.base.PanelEditProject;
-import view.panel.edit.base.classs.PanelEditAttributeUML;
-import view.panel.edit.base.classs.PanelEditClassUML;
-import view.panel.edit.base.classs.PanelEditInterfaceUML;
-import view.panel.edit.base.classs.PanelEditMethodUML;
+import view.panel.edit.base.activity.PanelEditActivityUML;
+import view.panel.edit.base.activity.PanelEditDecisionUML;
+import view.panel.edit.base.classes.PanelEditAttributeUML;
+import view.panel.edit.base.classes.PanelEditClassUML;
+import view.panel.edit.base.classes.PanelEditInterfaceUML;
+import view.panel.edit.base.classes.PanelEditMethodUML;
+import view.panel.edit.base.usecase.PanelEditActorUML;
+import view.panel.edit.base.usecase.PanelEditUseCaseUML;
 import view.panel.edit.base.variability.PanelEditVariability;
 import view.panel.tree.PanelTree;
 import view.structural.ViewMenu;
@@ -121,6 +131,19 @@ public final class PanelProject extends Panel {
     
     /**
      * Method responsible for initializing the Panel Edit Element.
+     * @param diagram Activity Diagram.
+     * @param element Element.
+     */
+    public void initPanelEditElement(ActivityDiagram diagram, Element element) {
+        if (element instanceof ActivityUML)
+            this.panelEdit = new PanelEditActivityUML(this.viewMenu, diagram, (ActivityUML) element);
+        else if (element instanceof DecisionUML)
+            this.panelEdit = new PanelEditDecisionUML(this.viewMenu, diagram, (DecisionUML) element);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Element.
      * @param diagram Class Diagram.
      * @param element Element.
      */
@@ -133,6 +156,19 @@ public final class PanelProject extends Panel {
             this.panelEdit = new PanelEditClassUML(this.viewMenu, diagram, (ClassUML) element);
         else if (element instanceof InterfaceUML)
             this.panelEdit = new PanelEditInterfaceUML(this.viewMenu, diagram, (InterfaceUML) element);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Element.
+     * @param diagram Use Case Diagram.
+     * @param element Element.
+     */
+    public void initPanelEditElement(UseCaseDiagram diagram, Element element) {
+        if (element instanceof ActorUML)
+            this.panelEdit = new PanelEditActorUML(this.viewMenu, diagram, (ActorUML) element);
+        else if (element instanceof UseCaseUML)
+            this.panelEdit = new PanelEditUseCaseUML(this.viewMenu, diagram, (UseCaseUML) element);
         this.updatePanelEdit();
     }
     

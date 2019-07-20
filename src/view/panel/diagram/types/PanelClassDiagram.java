@@ -4,13 +4,14 @@ import com.mxgraph.model.mxCell;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationClass;
-import controller.view.panel.diagram.event.classs.ControllerEventChange;
-import controller.view.panel.diagram.event.classs.ControllerEventEdit;
-import controller.view.panel.diagram.event.classs.ControllerEventGroup;
-import controller.view.panel.diagram.event.classs.ControllerEventMove;
-import controller.view.panel.diagram.event.classs.ControllerEventResize;
-import controller.view.panel.diagram.event.classs.ControllerEventSelect;
+import controller.view.panel.diagram.event.classes.ControllerEventChange;
+import controller.view.panel.diagram.event.classes.ControllerEventEdit;
+import controller.view.panel.diagram.event.classes.ControllerEventGroup;
+import controller.view.panel.diagram.event.classes.ControllerEventMove;
+import controller.view.panel.diagram.event.classes.ControllerEventResize;
+import controller.view.panel.diagram.event.classes.ControllerEventSelect;
 import controller.view.panel.diagram.types.ControllerPanelClassDiagram;
+import java.awt.FlowLayout;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -79,10 +80,11 @@ public final class PanelClassDiagram extends PanelDiagram {
     @Override
     public void addOperationsPanel() {
         JPanel panel = new JPanel();
+               panel.setLayout(new FlowLayout(FlowLayout.LEFT));
                panel.add(this.createButton("clickButton",       "", "Select",          "click.png"));
-               panel.add(this.createButton("packageButton",     "", "New Package",     "diagram/classs/package.png"));
-               panel.add(this.createButton("classButton",       "", "New Class",       "diagram/classs/class.png"));
-               panel.add(this.createButton("interfaceButton",   "", "New Interface",   "diagram/classs/interface.png"));
+               panel.add(this.createButton("packageButton",     "", "New Package",     "diagram/classes/package.png"));
+               panel.add(this.createButton("classButton",       "", "New Class",       "diagram/classes/class.png"));
+               panel.add(this.createButton("interfaceButton",   "", "New Interface",   "diagram/classes/interface.png"));
                panel.add(this.createButton("variabilityButton", "", "New Variability", "variability.png"));
                panel.add(this.createButton("editButton",        "", "Edit",            "edit.png"));
                panel.add(this.createButton("deleteButton",      "", "Delete",          "delete.png"));
@@ -94,14 +96,14 @@ public final class PanelClassDiagram extends PanelDiagram {
     @Override
     public Object[] getAssociationItems() {
         Object[] items  = {
-            this.getAssociationImage("classs/association"),
-            this.getAssociationImage("classs/directed-association"),
-            this.getAssociationImage("classs/aggregation"),
-            this.getAssociationImage("classs/directed-aggregation"),
-            this.getAssociationImage("classs/composition"),
-            this.getAssociationImage("classs/directed-composition"),
+            this.getAssociationImage("classes/association"),
+            this.getAssociationImage("classes/directed-association"),
+            this.getAssociationImage("classes/aggregation"),
+            this.getAssociationImage("classes/directed-aggregation"),
+            this.getAssociationImage("classes/composition"),
+            this.getAssociationImage("classes/directed-composition"),
             this.getAssociationImage("generalization"),
-            this.getAssociationImage("classs/realization"),
+            this.getAssociationImage("classes/realization"),
             this.getAssociationImage("dependency"),
             this.getAssociationImage("requires"),
             this.getAssociationImage("mutex")};

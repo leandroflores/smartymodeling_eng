@@ -1,4 +1,4 @@
-package view.panel.edit.base.classs;
+package view.panel.edit.base.classes;
 
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
