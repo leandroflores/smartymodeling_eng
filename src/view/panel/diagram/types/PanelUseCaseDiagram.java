@@ -53,15 +53,15 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
     
     @Override
     public void addOperationsPanel() {
-        JPanel panel = new JPanel();
-               panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-               panel.add(this.createButton("clickButton",       "", "Select",          "click.png"));
-               panel.add(this.createButton("actorButton",       "", "New Actor",       "diagram/usecase/actor.png"));
-               panel.add(this.createButton("useCaseButton",     "", "New Use Case",    "diagram/usecase/use-case.png"));
-               panel.add(this.createButton("variabilityButton", "", "New Variability", "variability.png"));
-               panel.add(this.createButton("editButton",        "", "Edit",            "edit.png"));
-               panel.add(this.createButton("deleteButton",      "", "Delete",          "delete.png"));
-               panel.add(this.createComboBox("associationComboBox", this.getAssociationItems(), 50));
+        JPanel  panel = new JPanel();
+                panel.setLayout(new FlowLayout(FlowLayout.LEFT));
+                panel.add(this.createButton("clickButton",       "", "Select",          "click.png"));
+                panel.add(this.createButton("actorButton",       "", "New Actor",       "diagram/usecase/actor.png"));
+                panel.add(this.createButton("useCaseButton",     "", "New Use Case",    "diagram/usecase/use-case.png"));
+                panel.add(this.createButton("variabilityButton", "", "New Variability", "variability.png"));
+                panel.add(this.createButton("editButton",        "", "Edit",            "edit.png"));
+                panel.add(this.createButton("deleteButton",      "", "Delete",          "delete.png"));
+                panel.add(this.createComboBox("associationComboBox", this.getAssociationItems(), 50));
        this.add(panel);
        this.getClickButton().setBackground(this.getFocusColor());
     }

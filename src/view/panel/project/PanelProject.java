@@ -11,6 +11,7 @@ import model.structural.base.Project;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
+import model.structural.diagram.ComponentDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import model.structural.diagram.activity.base.ActivityUML;
 import model.structural.diagram.activity.base.DecisionUML;
@@ -18,6 +19,7 @@ import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.ClassUML;
 import model.structural.diagram.classes.base.InterfaceUML;
 import model.structural.diagram.classes.base.MethodUML;
+import model.structural.diagram.component.base.ComponentUML;
 import model.structural.diagram.usecase.base.ActorUML;
 import model.structural.diagram.usecase.base.UseCaseUML;
 import view.Panel;
@@ -30,6 +32,7 @@ import view.panel.edit.base.classes.PanelEditAttributeUML;
 import view.panel.edit.base.classes.PanelEditClassUML;
 import view.panel.edit.base.classes.PanelEditInterfaceUML;
 import view.panel.edit.base.classes.PanelEditMethodUML;
+import view.panel.edit.base.component.PanelEditComponentUML;
 import view.panel.edit.base.usecase.PanelEditActorUML;
 import view.panel.edit.base.usecase.PanelEditUseCaseUML;
 import view.panel.edit.base.variability.PanelEditVariability;
@@ -156,6 +159,19 @@ public final class PanelProject extends Panel {
             this.panelEdit = new PanelEditClassUML(this.viewMenu, diagram, (ClassUML) element);
         else if (element instanceof InterfaceUML)
             this.panelEdit = new PanelEditInterfaceUML(this.viewMenu, diagram, (InterfaceUML) element);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Element.
+     * @param diagram Component Diagram.
+     * @param element Element.
+     */
+    public void initPanelEditElement(ComponentDiagram diagram, Element element) {
+        if (element instanceof ComponentUML)
+            this.panelEdit = new PanelEditComponentUML(this.viewMenu, diagram, (ComponentUML) element);
+        else if (element instanceof model.structural.diagram.component.base.InterfaceUML)
+            this.panelEdit = new view.panel.edit.base.component.PanelEditInterfaceUML(this.viewMenu, diagram, (model.structural.diagram.component.base.InterfaceUML) element);
         this.updatePanelEdit();
     }
     

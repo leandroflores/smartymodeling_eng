@@ -152,11 +152,11 @@ public final class ViewMenu extends View implements Operation {
     private void createProductLineMenu() {
         this.createMenu("menuProductLine", "Product Line");
         
-        this.createMenuItem("menuItemInstantiateNewProduct", "Instantiate New Product", "system/information.png");
-        this.createMenuItem("menuItemManageIdentifiers",     "Manage Identifiers",      "system/information.png");
+        this.createMenuItem("menuItemEditProfile",        "Edit Profile",        "system/information.png");
+        this.createMenuItem("menuItemInstantiateProduct", "Instantiate Product", "system/information.png");
         
-        this.getMenuProductLine().add(this.getMenuItemInstantiateNewProduct());
-        this.getMenuProductLine().add(this.getMenuItemManageIdentifiers());
+        this.getMenuProductLine().add(this.getMenuItemInstantiateProduct());
+        this.getMenuProductLine().add(this.getMenuItemEditProfile());
     }
     
     /**
@@ -300,8 +300,8 @@ public final class ViewMenu extends View implements Operation {
         this.getMenuItemComponentDiagram().setEnabled(flag);
         this.getMenuItemSequenceDiagram().setEnabled(flag);
         
-        this.getMenuItemInstantiateNewProduct().setEnabled(flag);
-        this.getMenuItemManageIdentifiers().setEnabled(flag);
+        this.getMenuItemInstantiateProduct().setEnabled(flag);
+        this.getMenuItemEditProfile().setEnabled(flag);
     }
     
     /**
@@ -550,19 +550,19 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item Instantiate New Product.
-     * @return Menu Item Instantiate New Product.
+     * Method responsible for returning the Menu Item Edit Profile.
+     * @return Menu Item Edit Profile.
      */
-    public JMenuItem getMenuItemInstantiateNewProduct() {
-        return this.menuItens.get("menuItemInstantiateNewProduct");
+    public JMenuItem getMenuItemEditProfile() {
+        return this.menuItens.get("menuItemEditProfile");
     }
     
     /**
-     * Method responsible for returning Menu Item Manage Identifiers.
-     * @return Menu Item Manage Identifiers.
+     * Method responsible for returning the Menu Item Instantiate Product.
+     * @return Menu Item Instantiate Product.
      */
-    public JMenuItem getMenuItemManageIdentifiers() {
-        return this.menuItens.get("menuItemManageIdentifiers");
+    public JMenuItem getMenuItemInstantiateProduct() {
+        return this.menuItens.get("menuItemInstantiateProduct");
     }
     
     /**

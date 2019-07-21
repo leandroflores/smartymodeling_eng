@@ -43,6 +43,7 @@ public class ImportActivityDiagram extends ImportDiagram {
                 this.importFinals();
                 this.importJoins();
                 this.importFlows();
+               super.importRelationships();
                super.importVariabilities();
         return  this.diagram;
     }

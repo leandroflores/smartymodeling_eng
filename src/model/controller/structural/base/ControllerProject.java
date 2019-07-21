@@ -26,6 +26,18 @@ public class ControllerProject {
      * Method responsible for returning the Stereotypes Array.
      * @return Stereotypes Array.
      */
+    public Stereotype[] getAllStereotypes() {
+        List<Stereotype> list  = this.project.getStereotypesList();
+        Stereotype[]     array = new Stereotype[list.size()];
+        for (int i = 0; i < list.size(); i++)
+                 array[i] = list.get(i);
+        return   array;
+    }
+    
+    /**
+     * Method responsible for returning the Stereotypes Array.
+     * @return Stereotypes Array.
+     */
     public Stereotype[] getStereotypes() {
         List<Stereotype> list  = this.project.getStereotypesList(false);
         Stereotype[]     array = new Stereotype[list.size()];

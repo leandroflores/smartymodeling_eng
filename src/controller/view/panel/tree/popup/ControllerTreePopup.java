@@ -12,6 +12,7 @@ import model.structural.base.Project;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
+import model.structural.diagram.ComponentDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
@@ -149,6 +150,8 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
             this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((ActivityDiagram) diagram, element);
         else if (diagram instanceof ClassDiagram)
             this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((ClassDiagram) diagram, element);
+        else if (diagram instanceof ComponentDiagram)
+            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((ComponentDiagram) diagram, element);
         else if (diagram instanceof UseCaseDiagram)
             this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((UseCaseDiagram) diagram, element);
     }
@@ -198,12 +201,12 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     
     /**
      * Method responsible for editing Variability.
-     * @param objeto Objeto selecionado.
-     * @param node Node da JTree.
+     * @param object Selected Object.
+     * @param node JTree Node.
      */
-    private void editVariability(Object objeto, DefaultMutableTreeNode node) {
+    private void editVariability(Object object, DefaultMutableTreeNode node) {
         Diagram     diagram     = this.getDiagram((DefaultMutableTreeNode) node.getParent());
-        Variability variability = (Variability) objeto;
+        Variability variability = (Variability) object;
         
     }
     

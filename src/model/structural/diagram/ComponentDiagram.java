@@ -5,10 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.structural.base.Diagram;
+import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.association.Association;
 import model.structural.diagram.component.base.ComponentUML;
 import model.structural.diagram.component.base.InterfaceUML;
+import model.structural.diagram.component.base.association.ComunicationUML;
 
 /**
  * <p>Class of Model <b>ComponentDiagram</b>.</p>
@@ -78,7 +80,7 @@ public final class ComponentDiagram extends Diagram {
      * @param componentUML Component UML.
      */
     public void removeComponent(ComponentUML componentUML) {
-        this.removeAssociacoes(componentUML);
+        this.removeAssociations(componentUML);
         this.removeElement(componentUML);
         this.components.remove(componentUML.getId());
     }
@@ -92,99 +94,98 @@ public final class ComponentDiagram extends Diagram {
     }
     
     /**
-     * Metodo responsavel por retornar o Proximo Id para a Interface UML.
-     * @return Proximo Id para a Interface UML.
+     * Method responsible for returning the next Interface Id.
+     * @return Next Interface Id.
      */
-    private String nextIdInterface() {
+    private String nextInterfaceId() {
         return this.nextId("INTERFACE#");
     }
     
     /**
-     * Metodo responsavel por adicionar a Interface UML.
+     * Method responsible for adding a Interface UML.
      * @param interfaceUML Interface UML.
      */
     public void addInterface(InterfaceUML interfaceUML) {
-        interfaceUML.setId(this.nextIdInterface());
+        interfaceUML.setId(this.nextInterfaceId());
         if (this.interfaces.get(interfaceUML.getId()) == null) {
             this.interfaces.put(interfaceUML.getId(), interfaceUML);
-            this.addElemento(interfaceUML);
+            this.addElement(interfaceUML);
         }
     }
     
     /**
-     * Metodo responsavel por remover a Interface UML.
+     * Method responsible for removing a Interface UML.
      * @param interfaceUML Interface UML.
      */
     public void removeInterface(InterfaceUML interfaceUML) {
-        this.removeAssociacoes(interfaceUML);
-        this.removeElemento(interfaceUML);
+        this.removeAssociations(interfaceUML);
+        this.removeElement(interfaceUML);
         this.interfaces.remove(interfaceUML.getId());
     }
     
     /**
-     * Metodo responsavel por retornar a Lista de Interfaces.
-     * @return Lista de Interfaces.
+     * Method responsible for returning the Interfaces List.
+     * @return Interfaces List.
      */
     public List<InterfaceUML> getInterfaces() {
         return new ArrayList<>(this.interfaces.values());
     }
     
     /**
-     * Metodo responsavel por adicionar a Comunicacao UML.
-     * @param comunicacao Comunicacao UML.
+     * Method responsible for adding a Comunication UML.
+     * @param comunicationUML Comunication UML.
      */
-    public void addComunicacao(ComunicacaoUML comunicacao) {
-        if (this.comunications.get(comunicacao.getId()) == null) {
-            this.comunications.put(comunicacao.getId(), comunicacao);
-            this.addAssociacao(comunicacao);
+    public void addComunication(ComunicationUML comunicationUML) {
+        if (this.comunications.get(comunicationUML.getId()) == null) {
+            this.comunications.put(comunicationUML.getId(), comunicationUML);
+            this.addAssociation(comunicationUML);
         }
     }
     
     /**
-     * Metodo responsavel por remover a Comunicacao UML.
-     * @param comunicacao Comunicacao UML.
+     * Method responsible for removing a Comunication UML.
+     * @param comunicationUML Comunication UML.
      */
-    public void removeComunicacao(ComunicacaoUML comunicacao) {
-        this.removeAssociacao(comunicacao);
-        this.associacoes.remove(comunicacao.getId());
+    public void removeComunication(ComunicationUML comunicationUML) {
+        this.removeAssociation(comunicationUML);
+        this.associations.remove(comunicationUML.getId());
     }
     
     /**
-     * Metodo responsavel por remover as Associacoes pelo Elemento.
-     * @param elemento Elemento.
+     * Method responsible for removing the Associations by Element.
+     * @param element Element.
      */
-    private void removeAssociacoes(Elemento elemento) {
-        this.removeAssociacao(elemento, this.comunications);
+    private void removeAssociations(Element element) {
+        this.removeAssociation(element, this.comunications);
     }
     
     /**
-     * Metodo responsavel por remover uma Associacao pelo Elemento.
-     * @param elemento Elemento.
-     * @param map Map de Associacoes.
+     * Method responsible for removing the Association by Element.
+     * @param element Element.
+     * @param map Associations Map.
      */
-    private void removeAssociacao(Elemento elemento, Map<String, Associacao> map) {
-        for (Associacao associacao : map.values()) {
-            if (associacao.getOrigem().equals(elemento)
-             || associacao.getDestino().equals(elemento))
-                this.removeAssociacao(associacao);
+    private void removeAssociation(Element element, Map<String, Association> map) {
+        for (Association association : map.values()) {
+            if (association.contains(element))
+                this.removeAssociation(association);
         }
     }
     
     @Override
-    public String getIcone() {
-        return "src/imagens/icones/diagrama/componentes.png";
+    public String getIcon() {
+        return "diagram/component";
     }
     
     @Override
     public ComponentDiagram getClone() {
         try {
-            ComponentDiagram diagrama = (ComponentDiagram) super.clone();
-                                diagrama.setElementos(new HashMap<>(this.elementos));
-                                diagrama.setAssociacoes(new HashMap<>(this.associacoes));
-                                diagrama.setVariabilidades(new HashMap<>(this.variabilidades));
-            return              diagrama;
+            ComponentDiagram diagram = (ComponentDiagram) super.clone();
+                             diagram.setElements(new HashMap<>(this.elements));
+                             diagram.setAssociations(new HashMap<>(this.associations));
+                             diagram.setVariabilities(new HashMap<>(this.variabilities));
+            return           diagram;
         } catch (CloneNotSupportedException exception) {
-            System.out.println("Erro");
+            System.out.println("Error");
             return null;
         }
     }

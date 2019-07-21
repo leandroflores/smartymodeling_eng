@@ -51,7 +51,7 @@ public class ControllerPanelBaseDiagram extends ControllerPanel {
     }
     
     /**
-     * Method responsible for setting the Project Values.
+     * Method responsible for setting the Diagram Values.
      */
     private void update() {
         this.panelBaseDiagram.getDiagram().setName(this.panelBaseDiagram.getNameTextField().getText().trim());

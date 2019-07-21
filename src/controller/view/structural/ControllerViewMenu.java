@@ -5,15 +5,21 @@ import file.exportation.ExportProject;
 import file.importation.ImportProject;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import model.structural.base.Project;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
+import model.structural.diagram.ComponentDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import org.xml.sax.SAXException;
+import view.edit.ViewEditProfile;
 import view.message.ViewError;
+import view.message.ViewMessage;
 import view.message.ViewSave;
 import view.structural.ViewMenu;
 import view.system.ViewSystemInformation;
@@ -60,10 +66,10 @@ public class ControllerViewMenu extends ControllerView {
             this.newSequenceDiagram();
         else if (this.viewMenu.getMenuItemUseCaseDiagram().equals(event.getSource()))
             this.newUseCaseDiagram();
-        else if (this.viewMenu.getMenuItemInstantiateNewProduct().equals(event.getSource()))
+        else if (this.viewMenu.getMenuItemInstantiateProduct().equals(event.getSource()))
             this.instantiateNewProduct();
-//        else if (this.viewMenu.getMenuItemManageIdentifiers().equals(event.getSource()))
-//            this.gerenciarIdentificadores();
+        else if (this.viewMenu.getMenuItemEditProfile().equals(event.getSource()))
+            this.editProfile();
         else if (this.viewMenu.getMenuItemSystemInformation().equals(event.getSource()))
             new ViewSystemInformation(this.viewMenu).setVisible(true);
         else if (this.viewMenu.getMenuItemSystemExit().equals(event.getSource()))
@@ -220,9 +226,9 @@ public class ControllerViewMenu extends ControllerView {
      */
     private void newComponentDiagram() {
         if (this.viewMenu.getProject() != null) {
-//            DiagramaComponentes diagrama = new DiagramaComponentes(this.viewMenu.getProjeto());
-//            this.viewMenu.getProjeto().addDiagrama(diagrama);
-//            this.viewMenu.showDiagram(diagrama);
+            ComponentDiagram diagram = new ComponentDiagram(this.viewMenu.getProject());
+            this.viewMenu.getProject().addDiagram(diagram);
+            this.viewMenu.showDiagram(diagram);
         }
         this.viewMenu.update();
     }
@@ -261,12 +267,11 @@ public class ControllerViewMenu extends ControllerView {
     }
     
     /**
-     * Metodo responsavel por abriar a View Gerenciar Identificador.
-     * Method responsible for editing Profile.
+     * Method responsible for editing the Profile.
      */
     private void editProfile() {
-//        if (this.viewMenu.getPanelModeling().getPainelDiagrama() != null)
-//            new ViewEditarPerfil(this.viewMenu.getPanelModeling(), this.viewMenu.getPanelModeling().getPainelDiagrama().getDiagrama().getProjeto().getPerfil()).setVisible(true);
+        if (this.viewMenu.getPanelModeling() != null)
+            new ViewEditProfile(this.viewMenu.getPanelModeling(), this.viewMenu.getProject().getProfile()).setVisible(true);
     }
     
     /**
@@ -275,15 +280,16 @@ public class ControllerViewMenu extends ControllerView {
     public void exportDiagramImage() {
         if (this.viewMenu.getFileChooserImage().showSaveDialog(this.viewMenu) != 1) {
             String        path  = this.viewMenu.getFileChooserImage().getSelectedFile().getAbsolutePath();
-//            BufferedImage image = this.viewMenu.getPanelModeling().getImage();
-//            if (image != null) {
-//                try {
-//                    path = (path.toLowerCase().endsWith(".png")) ? path : path + ".png";
-//                    ImageIO.write(image, "PNG", new File(path));
-//                } catch (IOException exception) {
-//                    new ViewErro(this.viewMenu, "Erro na Criação da Imagem!").setVisible(true);
-//                }
-//            }
+            BufferedImage image = this.viewMenu.getPanelModeling().getImage();
+            if (image != null) {
+                try {
+                    path = (path.toLowerCase().endsWith(".png")) ? path : path + ".png";
+                    ImageIO.write(image, "PNG", new File(path));
+                    new ViewMessage(this.viewMenu, "Image exported Successfully!").setVisible(true);
+                } catch (IOException exception) {
+                    new ViewError(this.viewMenu, "Error to export Image!").setVisible(true);
+                }
+            }
         }
     }
 }

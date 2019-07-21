@@ -28,8 +28,21 @@ public class ComunicationUML extends Association {
     public ComunicationUML(ComponentUML componentUML, InterfaceUML interfaceUML) {
         this.source   = componentUML;
         this.target   = interfaceUML;
-        this.type     = "comunication";
         this.category = "required";
+        this.type     = "comunication";
+    }
+    
+    /**
+     * Alternative constructor method of Class.
+     * @param componentUML Component UML.
+     * @param interfaceUML Interface UML.
+     * @param category Category.
+     */
+    public ComunicationUML(ComponentUML componentUML, InterfaceUML interfaceUML, String category) {
+        this.source   = componentUML;
+        this.target   = interfaceUML;
+        this.category = category;
+        this.type     = "comunication";
     }
 
     @Override

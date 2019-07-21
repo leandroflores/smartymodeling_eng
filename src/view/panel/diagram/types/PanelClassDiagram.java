@@ -64,16 +64,16 @@ public final class PanelClassDiagram extends PanelDiagram {
     
     @Override
     public void addOperationsPanel() {
-        JPanel panel = new JPanel();
-               panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-               panel.add(this.createButton("clickButton",       "", "Select",          "click.png"));
-               panel.add(this.createButton("packageButton",     "", "New Package",     "diagram/classes/package.png"));
-               panel.add(this.createButton("classButton",       "", "New Class",       "diagram/classes/class.png"));
-               panel.add(this.createButton("interfaceButton",   "", "New Interface",   "diagram/classes/interface.png"));
-               panel.add(this.createButton("variabilityButton", "", "New Variability", "variability.png"));
-               panel.add(this.createButton("editButton",        "", "Edit",            "edit.png"));
-               panel.add(this.createButton("deleteButton",      "", "Delete",          "delete.png"));
-               panel.add(this.createComboBox("associationComboBox", this.getAssociationItems(), 50));
+        JPanel  panel = new JPanel();
+                panel.setLayout(new FlowLayout(FlowLayout.LEFT));
+                panel.add(this.createButton("clickButton",       "", "Select",          "click.png"));
+                panel.add(this.createButton("packageButton",     "", "New Package",     "diagram/classes/package.png"));
+                panel.add(this.createButton("classButton",       "", "New Class",       "diagram/classes/class.png"));
+                panel.add(this.createButton("interfaceButton",   "", "New Interface",   "diagram/classes/interface.png"));
+                panel.add(this.createButton("variabilityButton", "", "New Variability", "variability.png"));
+                panel.add(this.createButton("editButton",        "", "Edit",            "edit.png"));
+                panel.add(this.createButton("deleteButton",      "", "Delete",          "delete.png"));
+                panel.add(this.createComboBox("associationComboBox", this.getAssociationItems(), 50));
        this.add(panel);
        this.getClickButton().setBackground(this.getFocusColor());
     }

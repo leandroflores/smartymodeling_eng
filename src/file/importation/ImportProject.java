@@ -2,6 +2,7 @@ package file.importation;
 
 import file.importation.diagram.types.ImportActivityDiagram;
 import file.importation.diagram.types.ImportClassDiagram;
+import file.importation.diagram.types.ImportComponentDiagram;
 import file.importation.diagram.types.ImportUseCaseDiagram;
 import java.io.File;
 import java.io.IOException;
@@ -168,6 +169,9 @@ public class ImportProject {
                 break;
             case 1:
                 this.project.addDiagram(new ImportClassDiagram(this.project, element).importDiagram());
+                break;
+            case 2:
+                this.project.addDiagram(new ImportComponentDiagram(this.project, element).importDiagram());
                 break;
             case 4:
                 this.project.addDiagram(new ImportUseCaseDiagram(this.project, element).importDiagram());
