@@ -66,7 +66,7 @@ public final class ViewEditProfile extends ViewEdit {
     
     @Override
     public void setValues() {
-        this.panelBaseProfile.getMandatoryComboBox().requestFocus();
+        this.panelBaseProfile.getMandatoryTextField().requestFocus();
     }
     
     /**

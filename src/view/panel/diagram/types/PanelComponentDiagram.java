@@ -1,5 +1,6 @@
 package view.panel.diagram.types;
 
+import com.mxgraph.model.mxCell;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationComponent;
@@ -10,10 +11,14 @@ import controller.view.panel.diagram.event.ControllerEventResize;
 import controller.view.panel.diagram.types.ControllerPanelComponentDiagram;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import model.structural.diagram.ComponentDiagram;
+import model.structural.diagram.component.base.ComponentUML;
+import model.structural.diagram.component.base.InterfaceUML;
 import view.panel.diagram.PanelDiagram;
 import view.structural.ViewMenu;
 
@@ -84,35 +89,55 @@ public final class PanelComponentDiagram extends PanelDiagram {
         this.getInterfaceButton().setBackground(this.getDefaultColor());
     }
     
-//    @Override
-//    public void addElements() {
-//        for (int i = 0; i < this.diagram.getListaElementos().size(); i++) {
-//            Elemento elemento = this.diagram.getListaElementos().get(i);
-//            this.grafo.getStylesheet().putCellStyle(elemento.getRotuloEstilo(), elemento.getEstilo());
-//            this.grafo.getStylesheet().putCellStyle("estiloImagemComponente", this.getEstiloImagemComponente());
-//            String   titulo   = this.diagram.getEstereotipos(elemento) + elemento.getNome();
-//            mxCell   vertice  = (mxCell) this.grafo.insertVertex(this.parent, null, titulo, elemento.getPosicao().x, elemento.getPosicao().y, elemento.getTamanho().x, elemento.getTamanho().y, elemento.getRotuloEstilo());
-//            if (elemento instanceof ComponenteUML) {
-//                this.grafo.insertVertex(vertice, null, "", 10, 10, 20, 20, "estiloImagemComponente");
-//            }
-//            this.objetos.put(vertice, elemento.getId());
-//            this.entidades.put(elemento.getId(), vertice);
-//        }
-//    }
+    @Override
+    public void addElements() {
+        this.addComponentsUML();
+        this.addInterfacesUML();
+    }
     
-//    /**
-//     * Metodo responsavel por retornar o Estilo da Imagem do Componente UML.
-//     * @return Estilo da Imagem do Componente UML.
-//     */
-//    private Map getEstiloImagemComponente() {
-//        Map    estilo = new HashMap<>();
-//               estilo.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_IMAGE);
-//               estilo.put(mxConstants.STYLE_IMAGE, "/imagens/diagramas/componentes/componente.png");
-//               estilo.put(mxConstants.STYLE_EDITABLE, 0);
-//               estilo.put(mxConstants.STYLE_RESIZABLE, 0);
-//               estilo.put(mxConstants.STYLE_MOVABLE, 0);
-//        return estilo;
-//    }
+    /**
+     * Method responsible for adding the Diagram Components.
+     */
+    private void addComponentsUML() {
+        this.graph.getStylesheet().putCellStyle("styleImageComponent", this.getImageComponentStyle());
+        for (ComponentUML componentUML : this.diagram.getComponents()) {
+            this.graph.getStylesheet().putCellStyle(componentUML.getStyleLabel(), componentUML.getStyle());
+            String title  = this.diagram.getStereotypes(componentUML, "\n") + componentUML.getName();
+            mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, componentUML.getId(), title, componentUML.getPosition().x, componentUML.getPosition().y, componentUML.getSize().x, componentUML.getSize().y, componentUML.getStyleLabel());
+                   vertex.setConnectable(true);
+            this.graph.insertVertex(vertex, null, "", 10, 10, 20, 20, "styleImageComponent");
+            this.identifiers.put(vertex, componentUML.getId());
+            this.objects.put(componentUML.getId(), vertex);
+        }
+    }
+    
+    /**
+     * Method responsible for adding the Diagram Interfaces.
+     */
+    private void addInterfacesUML() {
+        for (InterfaceUML interfaceUML : this.diagram.getInterfaces()) {
+            this.graph.getStylesheet().putCellStyle(interfaceUML.getStyleLabel(), interfaceUML.getStyle());
+            String title  = this.diagram.getStereotypes(interfaceUML, "\n") + interfaceUML.getName();
+            mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, interfaceUML.getId(), title, interfaceUML.getPosition().x, interfaceUML.getPosition().y, interfaceUML.getSize().x, interfaceUML.getSize().y, interfaceUML.getStyleLabel());
+                   vertex.setConnectable(true);
+            this.identifiers.put(vertex, interfaceUML.getId());
+            this.objects.put(interfaceUML.getId(), vertex);
+        }
+    }
+    
+    /**
+     * Method responsible for returning the Image Component Style.
+     * @return Image Component Style.
+     */
+    private Map getImageComponentStyle() {
+        Map    style = new HashMap<>();
+               style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_IMAGE);
+               style.put(mxConstants.STYLE_IMAGE, "/images/diagram/component/component.png");
+               style.put(mxConstants.STYLE_MOVABLE,   0);
+               style.put(mxConstants.STYLE_EDITABLE,  0);
+               style.put(mxConstants.STYLE_RESIZABLE, 0);
+        return style;
+    }
     
     @Override
     public void setStyle() {

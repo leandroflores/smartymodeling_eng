@@ -141,6 +141,14 @@ public abstract class Element implements Exportable, Modelable {
     }
     
     /**
+     * Method responsible for returning Stereotype Flag.
+     * @return Stereotype Flag.
+     */
+    public boolean allowStereotype() {
+        return true;
+    }
+    
+    /**
      * Method responsible for defining the Element Mandatory.
      * @param mandatory Element Mandatory.
      */

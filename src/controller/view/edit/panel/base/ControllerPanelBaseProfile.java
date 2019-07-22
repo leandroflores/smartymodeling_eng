@@ -3,7 +3,6 @@ package controller.view.edit.panel.base;
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import model.structural.base.Stereotype;
 import view.edit.panel.base.PanelBaseProfile;
 
 /**
@@ -53,11 +52,11 @@ public class ControllerPanelBaseProfile extends ControllerPanel {
      * Method responsible for updating the Profile Values.
      */
     private void updateProfile() {
-        this.panelBaseProfile.getProfile().setMandatory((Stereotype) this.panelBaseProfile.getMandatoryComboBox().getSelectedItem());
-        this.panelBaseProfile.getProfile().setOptional((Stereotype)  this.panelBaseProfile.getOptionalComboBox().getSelectedItem());
-        this.panelBaseProfile.getProfile().setVariationPoint((Stereotype) this.panelBaseProfile.getVarPointComboBox().getSelectedItem());
-        this.panelBaseProfile.getProfile().setInclusive((Stereotype) this.panelBaseProfile.getInclusiveComboBox().getSelectedItem());
-        this.panelBaseProfile.getProfile().setExclusive((Stereotype) this.panelBaseProfile.getExclusiveComboBox().getSelectedItem());
+        this.panelBaseProfile.getProfile().getMandatory().setName(this.panelBaseProfile.getMandatoryTextField().getText());
+        this.panelBaseProfile.getProfile().getOptional().setName(this.panelBaseProfile.getOptionalTextField().getText());
+        this.panelBaseProfile.getProfile().getVariationPoint().setName(this.panelBaseProfile.getVarPointTextField().getText());
+        this.panelBaseProfile.getProfile().getInclusive().setName(this.panelBaseProfile.getInclusiveTextField().getText());
+        this.panelBaseProfile.getProfile().getExclusive().setName(this.panelBaseProfile.getExclusiveTextField().getText());
     }
     
     /**

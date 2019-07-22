@@ -2,13 +2,21 @@ package controller.view.delete;
 
 import model.structural.base.Diagram;
 import model.structural.base.Element;
+import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
+import model.structural.diagram.ComponentDiagram;
 import model.structural.diagram.UseCaseDiagram;
+import model.structural.diagram.activity.base.ActivityUML;
+import model.structural.diagram.activity.base.DecisionUML;
+import model.structural.diagram.activity.base.FinalUML;
+import model.structural.diagram.activity.base.InitialUML;
+import model.structural.diagram.activity.base.JoinUML;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.ClassUML;
 import model.structural.diagram.classes.base.InterfaceUML;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.PackageUML;
+import model.structural.diagram.component.base.ComponentUML;
 import model.structural.diagram.usecase.base.ActorUML;
 import model.structural.diagram.usecase.base.UseCaseUML;
 import view.delete.ViewDeleteElement;
@@ -48,21 +56,31 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
      * @param diagram Diagram.
      */
     private void delete(Diagram diagram) {
-        if (diagram instanceof UseCaseDiagram)
-            this.deleteElement((UseCaseDiagram) diagram);
+        if (diagram instanceof ActivityDiagram)
+            this.deleteElement((ActivityDiagram) diagram);
         else if (diagram instanceof ClassDiagram)
             this.deleteElement((ClassDiagram) diagram);
+        else if (diagram instanceof ComponentDiagram)
+            this.deleteElement((ComponentDiagram) diagram);
+        else if (diagram instanceof UseCaseDiagram)
+            this.deleteElement((UseCaseDiagram) diagram);
     }
     
     /**
-     * Method responsible for deleting a Element from a Use Cases Diagram.
-     * @param diagram Use Cases Diagram.
+     * Method responsible for deleting a Element from a Activity Diagram.
+     * @param diagram Activity Diagram.
      */
-    private void deleteElement(UseCaseDiagram diagram) {
-        if (this.element instanceof ActorUML)
-            diagram.removeActor((ActorUML) this.element);
-        else if (this.element instanceof UseCaseUML)
-            diagram.removeUseCase((UseCaseUML) this.element);
+    private void deleteElement(ActivityDiagram diagram) {
+        if (this.element instanceof ActivityUML)
+            diagram.removeActivity((ActivityUML) this.element);
+        else if (this.element instanceof DecisionUML)
+            diagram.removeDecision((DecisionUML) this.element);
+        else if (this.element instanceof FinalUML)
+            diagram.removeFinal((FinalUML) this.element);
+        else if (this.element instanceof InitialUML)
+            diagram.removeInitial((InitialUML) this.element);
+        else if (this.element instanceof JoinUML)
+            diagram.removeJoin((JoinUML) this.element);
     }
     
     /**
@@ -80,5 +98,27 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
             diagram.removeAttribute((AttributeUML) this.element);
         else if (this.element instanceof MethodUML)
             diagram.removeMethod((MethodUML) this.element);
+    }
+    
+    /**
+     * Method responsible for deleting a Element from a Component Diagram.
+     * @param diagram Component Diagram.
+     */
+    private void deleteElement(ComponentDiagram diagram) {
+        if (this.element instanceof ComponentUML)
+            diagram.removeComponent((ComponentUML) this.element);
+        else if (this.element instanceof model.structural.diagram.component.base.InterfaceUML)
+            diagram.removeInterface((model.structural.diagram.component.base.InterfaceUML) this.element);
+    }
+    
+    /**
+     * Method responsible for deleting a Element from a Use Cases Diagram.
+     * @param diagram Use Cases Diagram.
+     */
+    private void deleteElement(UseCaseDiagram diagram) {
+        if (this.element instanceof ActorUML)
+            diagram.removeActor((ActorUML) this.element);
+        else if (this.element instanceof UseCaseUML)
+            diagram.removeUseCase((UseCaseUML) this.element);
     }
 }

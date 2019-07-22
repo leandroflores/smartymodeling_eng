@@ -105,14 +105,15 @@ public final class ViewMenu extends View implements Operation {
         this.createMenu("menuFile", "File");
         
         this.createMenuItem("menuItemNewProject",   "New Project",   "file/new.png");
-        this.getMenuItemNewProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
         this.createMenuItem("menuItemOpenProject",  "Open Project",  "file/open.png");
-        this.getMenuItemOpenProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
         this.createMenuItem("menuItemSaveProject",  "Save Project",  "file/save.png");
-        this.getMenuItemSaveProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
         this.createMenuItem("menuItemCloseProject", "Close Project", "file/close.png");
-        this.getMenuItemCloseProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
         this.createMenuItem("menuItemExitSystem",   "Exit",          "file/exit.png");
+        
+        this.getMenuItemNewProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
+        this.getMenuItemOpenProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+        this.getMenuItemSaveProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
+        this.getMenuItemCloseProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
         this.getMenuItemExitSystem().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
         
         this.getFileMenu().add(this.getMenuItemNewProject());
@@ -139,6 +140,12 @@ public final class ViewMenu extends View implements Operation {
         this.createMenuItem("menuItemSequenceDiagram",  "Sequence Diagram",  "diagram/sequence.png");
         this.createMenuItem("menuItemUseCaseDiagram",   "Use Case Diagram",  "diagram/use-case.png");
         
+        this.getMenuItemActivityDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
+        this.getMenuItemClassDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
+        this.getMenuItemComponentDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK));
+        this.getMenuItemSequenceDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
+        this.getMenuItemUseCaseDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_MASK));
+        
         this.getMenuDiagram().add(this.getMenuItemActivityDiagram());
         this.getMenuDiagram().add(this.getMenuItemClassDiagram());
         this.getMenuDiagram().add(this.getMenuItemComponentDiagram());
@@ -155,8 +162,8 @@ public final class ViewMenu extends View implements Operation {
         this.createMenuItem("menuItemEditProfile",        "Edit Profile",        "system/information.png");
         this.createMenuItem("menuItemInstantiateProduct", "Instantiate Product", "system/information.png");
         
-        this.getMenuProductLine().add(this.getMenuItemInstantiateProduct());
         this.getMenuProductLine().add(this.getMenuItemEditProfile());
+        this.getMenuProductLine().add(this.getMenuItemInstantiateProduct());
     }
     
     /**
@@ -168,6 +175,10 @@ public final class ViewMenu extends View implements Operation {
         this.createMenuItem("menuItemSystemInformation", "Information", "system/information.png");
         this.createMenuItem("menuItemSystemSite",        "Site",        "system/site.png");
         this.createMenuItem("menuItemSystemExit",        "Exit",        "system/exit.png");
+        
+        this.getMenuItemSystemInformation().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK));
+        this.getMenuItemSystemSite().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_MASK));
+        this.getMenuItemSystemExit().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_MASK));
         
         this.getMenuSystem().add(this.getMenuItemSystemInformation());
         this.getMenuSystem().add(this.getMenuItemSystemSite());

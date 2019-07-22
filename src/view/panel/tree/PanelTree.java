@@ -97,7 +97,7 @@ public final class PanelTree extends Panel {
      * @param node Diagram Node.
      */
     private void addElements(Diagram diagram, DefaultMutableTreeNode node) {
-        List<Element> elements = diagram.getElementsList();
+        List<Element> elements = diagram.getTreeElementsList();
         for (int i = 0; i < elements.size(); i++) {
             if (elements.get(i) instanceof Entity)
                 node.add(this.getNode((Entity) elements.get(i)));

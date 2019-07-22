@@ -173,6 +173,14 @@ public abstract class Diagram implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Tree Elements List.
+     * @return Tree Elements List.
+     */
+    public List<Element> getTreeElementsList() {
+        return this.getElementsList();
+    }
+    
+    /**
      * Method responsible for returning Elements List.
      * @return Elements List.
      */

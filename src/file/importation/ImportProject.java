@@ -93,6 +93,7 @@ public class ImportProject {
         this.importDiagrams();
         this.importLinks();
         
+               this.project.updateStereotypes();
         return this.project;
     }
     

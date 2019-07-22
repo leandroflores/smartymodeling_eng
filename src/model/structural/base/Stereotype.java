@@ -14,7 +14,7 @@ import org.w3c.dom.Element;
  * @since  20/05/2019
  * @see    model.structural.base.interfaces.Exportable
  */
-public class Stereotype implements Exportable {
+public final class Stereotype implements Exportable {
     private String  id;
     private String  name;
     private boolean primitive;
@@ -24,8 +24,8 @@ public class Stereotype implements Exportable {
      */
     public Stereotype() {
         this.id        = "";
-        this.name      = "stereotype";
         this.primitive = false;
+        this.name      = "stereotype";
     }
     
     /**
@@ -34,8 +34,8 @@ public class Stereotype implements Exportable {
      */
     public Stereotype(Element element) {
         this.id        = element.getAttribute("id").trim();
-        this.name      = element.getAttribute("name").toLowerCase().trim();
         this.primitive = element.getAttribute("primitive").trim().toLowerCase().equals("true");
+        this.setName(element.getAttribute("name"));
     }
     
     /**
@@ -46,8 +46,8 @@ public class Stereotype implements Exportable {
      */
     public Stereotype(String id, String name, boolean primitive) {
         this.id        = id.trim();
-        this.name      = name.toLowerCase().trim();
         this.primitive = primitive;
+        this.setName(name);
     }
     
     /**
@@ -56,8 +56,8 @@ public class Stereotype implements Exportable {
      */
     public Stereotype(String name) {
         this.id        = null;
-        this.name      = name.toLowerCase().trim();
         this.primitive = false;
+        this.setName(name);
     }
 
     /**
@@ -89,7 +89,7 @@ public class Stereotype implements Exportable {
      * @param name Stereotype Name.
      */
     public void setName(String name) {
-        this.name = name.toLowerCase().trim();
+        this.name = this.primitive ? name.trim() : name.toLowerCase().trim();
     }
 
     /**

@@ -4,6 +4,8 @@ import com.mxgraph.model.mxCell;
 import controller.view.panel.diagram.association.ControllerEventAssociation;
 import model.structural.base.Element;
 import model.structural.diagram.ActivityDiagram;
+import model.structural.diagram.activity.base.FinalUML;
+import model.structural.diagram.activity.base.InitialUML;
 import model.structural.diagram.activity.base.association.FlowUML;
 import view.panel.diagram.types.PanelActivityDiagram;
 
@@ -76,6 +78,9 @@ public class ControllerEventAssociationActivity extends ControllerEventAssociati
     private FlowUML createFlowUML(mxCell association) {
         Element source = this.getSource(association);
         Element target = this.getTarget(association);
-        return new FlowUML(source, target);
+        if   ((source instanceof FinalUML == false) 
+           && (target instanceof InitialUML == false))
+            return new FlowUML(source, target);
+        return null;
     }
 }

@@ -22,7 +22,7 @@ public class DecisionUML extends Element {
         this.name      = "";
         this.type      = "decision";
         this.mandatory = true;
-        this.size      = new Point(60, 60);
+        this.size      = new Point(140, 60);
     }
     
     /**
@@ -34,6 +34,11 @@ public class DecisionUML extends Element {
         this.type = "decision";
     }
 
+    @Override
+    public boolean allowStereotype() {
+        return false;
+    }
+    
     @Override
     public String getIcon() {
         return "src/images/icons/diagram/activity/decision.png";

@@ -22,7 +22,7 @@ public class FinalUML extends Element {
         this.name      = "";
         this.type      = "final";
         this.mandatory = true;
-        this.size      = new Point(40, 40);
+        this.size      = new Point(30, 30);
     }
     
     /**
@@ -32,6 +32,11 @@ public class FinalUML extends Element {
     public FinalUML(org.w3c.dom.Element element) {
         super(element, true);
         this.type = "final";
+    }
+    
+    @Override
+    public boolean allowStereotype() {
+        return false;
     }
 
     @Override

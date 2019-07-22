@@ -33,6 +33,11 @@ public class JoinUML extends Element {
         super(element, true);
         this.type = "join";
     }
+    
+    @Override
+    public boolean allowStereotype() {
+        return false;
+    }
 
     @Override
     public String getIcon() {

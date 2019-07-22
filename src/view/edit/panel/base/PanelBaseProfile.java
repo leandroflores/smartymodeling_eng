@@ -3,10 +3,8 @@ package view.edit.panel.base;
 import controller.view.edit.panel.base.ControllerPanelBaseProfile;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import javax.swing.JComboBox;
-import model.controller.structural.base.ControllerProject;
+import javax.swing.JTextField;
 import model.structural.base.Profile;
-import model.structural.base.Stereotype;
 import view.Panel;
 import view.structural.ViewMenu;
 
@@ -48,33 +46,31 @@ public final class PanelBaseProfile extends Panel {
     
     @Override
     protected void addComponents() {
-        Stereotype[] values = new ControllerProject(this.viewMenu.getProject()).getAllStereotypes();
-        
         this.add(this.createLabel("Mandatory*: "));
-        this.add(this.createComboBox("mandatoryComboBox", values, 200, this.profile.getMandatory()));
+        this.add(this.createTextField("mandatoryTextField",  "", 20));
         
         this.add(this.createLabel("Optional*: "));
-        this.add(this.createComboBox("optionalComboBox",  values, 200, this.profile.getOptional()));
+        this.add(this.createTextField("optionalTextField",  "", 20));
         
         this.add(this.createLabel("Var. Point*: "));
-        this.add(this.createComboBox("varPointComboBox",  values, 200, this.profile.getVariationPoint()));
+        this.add(this.createTextField("varPointTextField",  "", 20));
         
         this.add(this.createLabel("Inclusive*: "));
-        this.add(this.createComboBox("inclusiveComboBox", values, 200, this.profile.getInclusive()));
+        this.add(this.createTextField("inclusiveTextField", "", 20));
         
         this.add(this.createLabel("Exclusive*: "));
-        this.add(this.createComboBox("exclusiveComboBox", values, 200, this.profile.getExclusive()));
+        this.add(this.createTextField("exclusiveTextField", "", 20));
     }
     
     /**
-     * Method responsible for setting the Diagram Values.
+     * Method responsible for setting the Profile Values.
      */
     public void setValues() {
-        this.getMandatoryComboBox().setSelectedItem(this.profile.getMandatory());
-        this.getOptionalComboBox().setSelectedItem(this.profile.getOptional());
-        this.getVarPointComboBox().setSelectedItem(this.profile.getVariationPoint());
-        this.getInclusiveComboBox().setSelectedItem(this.profile.getInclusive());
-        this.getExclusiveComboBox().setSelectedItem(this.profile.getExclusive());
+        this.getMandatoryTextField().setText(this.profile.getMandatory().getName());
+        this.getOptionalTextField().setText(this.profile.getOptional().getName());
+        this.getVarPointTextField().setText(this.profile.getVariationPoint().getName());
+        this.getInclusiveTextField().setText(this.profile.getInclusive().getName());
+        this.getExclusiveTextField().setText(this.profile.getExclusive().getName());
     }
     
     /**
@@ -94,42 +90,42 @@ public final class PanelBaseProfile extends Panel {
     }
     
     /**
-     * Method responsible for returning the Mandatory Combo Box.
-     * @return Mandatory Combo Box.
+     * Method responsible for returning the Mandatory Text Field.
+     * @return Mandatory Text Field.
      */
-    public JComboBox getMandatoryComboBox() {
-        return this.comboBoxes.get("mandatoryComboBox");
+    public JTextField getMandatoryTextField() {
+        return this.textFields.get("mandatoryTextField");
     }
     
     /**
-     * Method responsible for returning the Optional Combo Box.
-     * @return Optional Combo Box.
+     * Method responsible for returning the Optional Text Field.
+     * @return Optional Text Field.
      */
-    public JComboBox getOptionalComboBox() {
-        return this.comboBoxes.get("optionalComboBox");
+    public JTextField getOptionalTextField() {
+        return this.textFields.get("optionalTextField");
     }
     
     /**
-     * Method responsible for returning the Variation Point Combo Box.
-     * @return Variation Point Combo Box.
+     * Method responsible for returning the Variation Point Text Field.
+     * @return Variation Point Text Field.
      */
-    public JComboBox getVarPointComboBox() {
-        return this.comboBoxes.get("varPointComboBox");
+    public JTextField getVarPointTextField() {
+        return this.textFields.get("varPointTextField");
     }
     
     /**
-     * Method responsible for returning the Inclusive Combo Box.
-     * @return Inclusive Combo Box.
+     * Method responsible for returning the Inclusive Text Field.
+     * @return Inclusive Text Field.
      */
-    public JComboBox getInclusiveComboBox() {
-        return this.comboBoxes.get("inclusiveComboBox");
+    public JTextField getInclusiveTextField() {
+        return this.textFields.get("inclusiveTextField");
     }
     
     /**
-     * Method responsible for returning the Exclusive Combo Box.
-     * @return Exclusive Combo Box.
+     * Method responsible for returning the Exclusive Text Field.
+     * @return Exclusive Text Field.
      */
-    public JComboBox getExclusiveComboBox() {
-        return this.comboBoxes.get("exclusiveComboBox");
+    public JTextField getExclusiveTextField() {
+        return this.textFields.get("exclusiveTextField");
     }
 }

@@ -245,6 +245,14 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for updating the Stereotypes.
+     */
+    public void updateStereotypes() {
+        for (Diagram diagram : this.getDiagramsList())
+            diagram.updateElementsStereotype();
+    }
+    
+    /**
      * Method responsible for returning the Next Diagram Id.
      * @return Next Diagram Id.
      */
@@ -662,7 +670,7 @@ public class Project implements Exportable {
      * @param element Element.
      */
     public void addElementStereotype(Element element) {
-        if (element.isDefault()) {
+        if (element.isDefault() && element.allowStereotype()) {
             Stereotype stereotype = element.isMandatory() ? this.profile.getMandatory() : this.profile.getOptional();
             this.addLink(new Link(element, stereotype));
         }
@@ -761,8 +769,10 @@ public class Project implements Exportable {
      * @param link Link.
      */
     public void addLink(Link link) {
-        if (this.links.containsKey(link.getId()) == false)
-            this.links.put(link.getId(), link);
+        if (link.getElement().allowStereotype()) {
+            if (this.links.containsKey(link.getId()) == false)
+                this.links.put(link.getId(), link);
+        }
     }
     
     /**

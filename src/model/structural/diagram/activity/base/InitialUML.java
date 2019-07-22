@@ -22,7 +22,7 @@ public class InitialUML extends Element {
         this.name      = "";
         this.type      = "initial";
         this.mandatory = true;
-        this.size      = new Point(40, 40);
+        this.size      = new Point(30, 30);
     }
     
     /**
@@ -34,6 +34,11 @@ public class InitialUML extends Element {
         this.type = "initial";
     }
 
+    @Override
+    public boolean allowStereotype() {
+        return false;
+    }
+    
     @Override
     public String getIcon() {
         return "src/images/icons/diagram/activity/initial.png";
