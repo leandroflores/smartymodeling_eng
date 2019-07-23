@@ -14,15 +14,27 @@ import view.structural.ViewMenu;
  * @see    view.ViewModal
  */
 public abstract class ViewNew extends ViewModal {
+    protected final ViewMenu view;
     protected final PanelModeling panel;
     protected JTabbedPane tabbedPane;
     
     /**
      * Default constructor method of Class.
+     * @param view View Menu.
+     */
+    public ViewNew(ViewMenu view) {
+        super(view);
+        this.view  = view;
+        this.panel = null;
+    }
+    
+    /**
+     * Alternative constructor method of Class.
      * @param panel Painel de Modelagem.
      */
     public ViewNew(PanelModeling panel) {
         super(panel.getViewMenu());
+        this.view  = panel.getViewMenu();
         this.panel = panel;
     }
     
@@ -37,7 +49,7 @@ public abstract class ViewNew extends ViewModal {
      * @return View Menu.
      */
     public ViewMenu getViewMenu() {
-        return this.panel.getViewMenu();
+        return this.view;
     }
     
     /**

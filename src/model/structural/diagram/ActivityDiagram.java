@@ -304,13 +304,6 @@ public final class ActivityDiagram extends Diagram {
     
     @Override
     public String toString() {
-        String diagram  = "Id         = " + this.id         + "\n";
-               diagram += "Activities = " + this.activities + "\n";
-               diagram += "Decisions  = " + this.decisions  + "\n";
-               diagram += "Initials   = " + this.initials   + "\n";
-               diagram += "Finals     = " + this.finals     + "\n";
-               diagram += "Joins      = " + this.joins      + "\n";
-               diagram += "Flows      = " + this.flows      + "\n";
-        return diagram;
+        return super.toString();
     }
 }

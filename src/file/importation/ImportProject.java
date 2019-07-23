@@ -16,6 +16,7 @@ import model.structural.base.Profile;
 import model.structural.base.Project;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Link;
+import model.structural.base.traceability.Traceability;
 import model.structural.diagram.classes.base.TypeUML;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -91,6 +92,7 @@ public class ImportProject {
         this.importStereotypes();
         this.importProfile();
         this.importDiagrams();
+        this.importTraceabilities();
         this.importLinks();
         
                this.project.updateStereotypes();
@@ -179,6 +181,24 @@ public class ImportProject {
                 break;
             default:
                 break;
+        }
+    }
+    
+    /**
+     * Method responsible for importing Project Traceabilities.
+     * @throws XPathExpressionException 
+     */
+    private void importTraceabilities() throws XPathExpressionException {
+        this.expression = "/project/traceability";
+        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
+        for (int i = 0; i < this.nodeList.getLength(); i++) {
+            Element      current      = (Element) this.nodeList.item(i);
+            Traceability traceability = new Traceability(current);
+                         traceability.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
+            NodeList     elements     = current.getElementsByTagName("element");
+            for (int x = 0; x < elements.getLength(); x++)
+                         traceability.addElement((model.structural.base.Element) this.project.objects.get(((Element) elements.item(x)).getAttribute("id")));
+            this.project.addTraceability(traceability);
         }
     }
     

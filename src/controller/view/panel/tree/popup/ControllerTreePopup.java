@@ -9,6 +9,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
@@ -126,6 +127,8 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
                 this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) node.getUserObject());
             else if (node.getUserObject() instanceof Variability)
                 this.showPanelEditVariability(diagram, (Variability) node.getUserObject());
+            else if (node.getUserObject() instanceof Traceability)
+                this.showPanelEditTraceability((Traceability) node.getUserObject());
             else if (node.getUserObject() instanceof Element)
                 this.showPanelEdit(diagram, (Element) node.getUserObject());
         }
@@ -138,6 +141,14 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      */
     private void showPanelEditVariability(Diagram diagram, Variability variability) {
         this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditVariability(diagram, variability);
+    }
+    
+    /**
+     * Method responsible for showing the Panel Edit Traceability.
+     * @param traceability Traceability.
+     */
+    private void showPanelEditTraceability(Traceability traceability) {
+        this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditTraceability(traceability);
     }
     
     /**

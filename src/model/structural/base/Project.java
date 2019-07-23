@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import model.structural.base.association.Link;
 import model.structural.base.interfaces.Exportable;
+import model.structural.base.traceability.Traceability;
 import model.structural.diagram.classes.base.TypeUML;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ClassDiagram;
@@ -32,6 +33,7 @@ public class Project implements Exportable {
     private HashMap diagrams;
     public  HashMap types;
     public  HashMap variabilities;
+    public  HashMap traceabilities;
     public  HashMap stereotypes;
     public  HashMap links;
     public  HashMap objects;
@@ -66,13 +68,14 @@ public class Project implements Exportable {
      * Method responsible for initializing HashMaps.
      */
     private void init() {
-        this.diagrams      = new LinkedHashMap();
-        this.types         = new LinkedHashMap();
-        this.variabilities = new LinkedHashMap();
-        this.stereotypes   = new LinkedHashMap();
-        this.links         = new LinkedHashMap();
-        this.objects       = new LinkedHashMap();
-        this.profile       = this.getDefaultProfile();
+        this.diagrams       = new LinkedHashMap();
+        this.types          = new LinkedHashMap();
+        this.variabilities  = new LinkedHashMap();
+        this.traceabilities = new LinkedHashMap();
+        this.stereotypes    = new LinkedHashMap();
+        this.links          = new LinkedHashMap();
+        this.objects        = new LinkedHashMap();
+        this.profile        = this.getDefaultProfile();
     }
     
     /**
@@ -589,6 +592,76 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Next Traceability Id.
+     * @return Next Traceability Id.
+     */
+    public String nextTraceabilityId() {
+        Integer index  = 1;
+        String  nextId = "TRACEABILITY#" + index;
+        while (this.traceabilities.get(nextId) != null) {
+            index += 1;
+            nextId = "TRACEABILITY#" + index;
+        }
+        return nextId;
+    }
+    
+    /**
+     * Method responsible for adding a Traceability.
+     * @param traceability Traceability.
+     */
+    public void addTraceability(Traceability traceability) {
+        traceability.setId(this.nextTraceabilityId());
+        this.traceabilities.put(traceability.getId(), traceability);
+    }
+    
+    /**
+     * Method responsible for returning a Traceability by Id.
+     * @param  id Traceability Id.
+     * @return Traceability found.
+     */
+    public Traceability getTraceability(String id) {
+        return (Traceability) this.traceabilities.get(id);
+    }
+    
+    /**
+     * Method responsible for removing a Traceability.
+     * @param traceability Traceability.
+     */
+    public void removeTraceability(Traceability traceability) {
+        this.traceabilities.remove(traceability.getId());
+    }
+    
+    /**
+     * Method responsible for removing a Traceability by Element.
+     * @param element Element.
+     */
+    public void removeTraceability(Element element) {
+        for (Traceability traceability : this.getTraceabilitiesList()) {
+            if (traceability.contains(element))
+                traceability.removeElement(element);
+        }
+    }
+    
+    /**
+     * Method responsible for returning Traceabilities List.
+     * @return Traceabilities List.
+     */
+    public List<Traceability> getTraceabilitiesList() {
+        return new ArrayList<>(this.traceabilities.values());
+    }
+    
+    /**
+     * Method responsible for exporting the Traceabilities.
+     * @return Traceabilities.
+     */
+    private String exportTraceabilities() {
+        String export  = "";
+        for (Traceability traceability : this.getTraceabilitiesList())
+               export += traceability.export();
+        return export;
+    }
+    
+    /**
      * Method responsible for returning the Stereotypes HashMap.
      * @return Stereotypes HashMap.
      */
@@ -859,6 +932,7 @@ public class Project implements Exportable {
                export += "  <stereotypes>\n" + this.exportStereotypes() + "  </stereotypes>\n";
                export += this.profile.export();
                export += this.exportDiagrams();
+               export += this.exportTraceabilities();
                export += "  <links>\n"       + this.exportLinks()       + "  </links>\n";
                export += "</project>";
         return export;

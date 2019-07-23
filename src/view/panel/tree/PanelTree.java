@@ -9,6 +9,7 @@ import javax.swing.tree.TreeSelectionModel;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.AttributeUML;
@@ -55,6 +56,7 @@ public final class PanelTree extends Panel {
         this.tree.addKeyListener(new ControllerTreePopup(this.treePopup));
         this.tree.setCellRenderer(new TreeRenderer(this.tree));
         this.addDiagrams(raiz);
+        this.addTraceabilities(raiz);
 //        this.expandTree();
         this.add(this.tree);
     }
@@ -75,6 +77,20 @@ public final class PanelTree extends Panel {
         if (this.project != null) {
             for (int i = 0; i < this.project.getDiagramsList().size(); i++)
                 root.add(this.getNode(project.getDiagramsList().get(i)));
+        }
+    }
+    
+    /**
+     * Method responsible for adding Traceabilities.
+     * @param root Tree Node.
+     */
+    private void addTraceabilities(DefaultMutableTreeNode root) {
+        if (this.project != null) {
+            DefaultMutableTreeNode traceabilityNode = new DefaultMutableTreeNode("Traceabilities");
+            List<Traceability>     traceabilities   = this.project.getTraceabilitiesList();
+            for (int i = 0; i < traceabilities.size(); i++)
+                     traceabilityNode.add(new DefaultMutableTreeNode(traceabilities.get(i)));
+            root.add(traceabilityNode);
         }
     }
     

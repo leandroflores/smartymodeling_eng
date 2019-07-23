@@ -192,10 +192,6 @@ public final class ComponentDiagram extends Diagram {
     
     @Override
     public String toString() {
-        String diagram  = "Id            = " + this.id            + "\n";
-               diagram += "Components    = " + this.components    + "\n";
-               diagram += "Interfaces    = " + this.interfaces    + "\n";
-               diagram += "Comunications = " + this.comunications + "\n";
-        return diagram;
+        return super.toString();
     }
 }

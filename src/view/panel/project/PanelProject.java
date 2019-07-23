@@ -8,6 +8,7 @@ import javax.swing.JSplitPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
@@ -33,6 +34,7 @@ import view.panel.edit.base.classes.PanelEditClassUML;
 import view.panel.edit.base.classes.PanelEditInterfaceUML;
 import view.panel.edit.base.classes.PanelEditMethodUML;
 import view.panel.edit.base.component.PanelEditComponentUML;
+import view.panel.edit.base.traceability.PanelEditTraceability;
 import view.panel.edit.base.usecase.PanelEditActorUML;
 import view.panel.edit.base.usecase.PanelEditUseCaseUML;
 import view.panel.edit.base.variability.PanelEditVariability;
@@ -195,6 +197,15 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditVariability(Diagram diagram, Variability variability) {
         this.panelEdit = new PanelEditVariability(this.viewMenu, diagram, variability);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Traceability.
+     * @param traceability Traceability.
+     */
+    public void initPanelEditTraceability(Traceability traceability) {
+        this.panelEdit = new PanelEditTraceability(this.viewMenu, traceability);
         this.updatePanelEdit();
     }
     

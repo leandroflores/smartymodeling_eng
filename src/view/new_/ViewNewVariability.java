@@ -16,7 +16,7 @@ import view.panel.modeling.PanelModeling;
  * <p>Class responsible for defining the <b>New Variability View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  04/07/2019
- * @see    controller.view.new_.
+ * @see    controller.view.new_.ControllerViewNewVariability
  * @see    model.structural.base.variability.Variability
  * @see    view.new_.ViewNew
  */

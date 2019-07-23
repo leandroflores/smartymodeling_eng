@@ -410,10 +410,6 @@ public final class ClassDiagram extends Diagram {
     
     @Override
     public String toString() {
-        String diagram  = "Id         = " + this.id            + "\n";
-               diagram += "Packages   = " + this.packagesUML   + "\n";
-               diagram += "Classs     = " + this.classUML      + "\n";
-               diagram += "Interfaces = " + this.interfacesUML + "\n";
-        return diagram;
+        return super.toString();
     }
 }

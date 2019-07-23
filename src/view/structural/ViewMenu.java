@@ -161,9 +161,11 @@ public final class ViewMenu extends View implements Operation {
         
         this.createMenuItem("menuItemEditProfile",        "Edit Profile",        "system/information.png");
         this.createMenuItem("menuItemInstantiateProduct", "Instantiate Product", "system/information.png");
+        this.createMenuItem("menuItemNewTraceability",    "New Traceability",    "product_line/traceability.png");
         
         this.getMenuProductLine().add(this.getMenuItemEditProfile());
         this.getMenuProductLine().add(this.getMenuItemInstantiateProduct());
+        this.getMenuProductLine().add(this.getMenuItemNewTraceability());
     }
     
     /**
@@ -311,8 +313,9 @@ public final class ViewMenu extends View implements Operation {
         this.getMenuItemComponentDiagram().setEnabled(flag);
         this.getMenuItemSequenceDiagram().setEnabled(flag);
         
-        this.getMenuItemInstantiateProduct().setEnabled(flag);
         this.getMenuItemEditProfile().setEnabled(flag);
+        this.getMenuItemInstantiateProduct().setEnabled(flag);
+        this.getMenuItemNewTraceability().setEnabled(flag);
     }
     
     /**
@@ -574,6 +577,14 @@ public final class ViewMenu extends View implements Operation {
      */
     public JMenuItem getMenuItemInstantiateProduct() {
         return this.menuItens.get("menuItemInstantiateProduct");
+    }
+    
+    /**
+     * Method responsible for returning the Menu Item New Traceability.
+     * @return Menu Item New Traceability.
+     */
+    public JMenuItem getMenuItemNewTraceability() {
+        return this.menuItens.get("menuItemNewTraceability");
     }
     
     /**

@@ -239,12 +239,6 @@ public final class UseCaseDiagram extends Diagram {
     
     @Override
     public String toString() {
-        String diagram  = "Id           = " + this.id              + "\n";
-               diagram += "Actors       = " + this.actorsUML       + "\n";
-               diagram += "Use Cases    = " + this.useCasesUML     + "\n";
-               diagram += "Realizations = " + this.realizationsUML + "\n";
-               diagram += "Extends      = " + this.extendsUML      + "\n";
-               diagram += "Includes     = " + this.includesUML     + "\n";
-        return diagram;
+        return super.toString();
     }
 }

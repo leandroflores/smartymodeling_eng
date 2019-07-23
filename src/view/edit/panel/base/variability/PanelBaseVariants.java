@@ -1,6 +1,6 @@
 package view.edit.panel.base.variability;
 
-import controller.view.edit.panel.stereotype.variability.ControllerPanelBaseVariants;
+import controller.view.edit.panel.variability.ControllerPanelBaseVariants;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.DefaultListModel;

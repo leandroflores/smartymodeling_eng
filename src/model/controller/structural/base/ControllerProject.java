@@ -1,6 +1,7 @@
 package model.controller.structural.base;
 
 import java.util.List;
+import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.base.Stereotype;
 
@@ -20,6 +21,18 @@ public class ControllerProject {
      */
     public ControllerProject(Project project) {
         this.project = project;
+    }
+    
+    /**
+     * Method responsible for returning the Diagrams Array.
+     * @return Diagrams Array.
+     */
+    public Diagram[] getDiagrams() {
+        List<Diagram> list  = this.project.getDiagramsList();
+        Diagram[]     array = new Diagram[list.size()];
+        for (int i = 0; i < list.size(); i++)
+                array[i] = list.get(i);
+        return  array;
     }
     
     /**

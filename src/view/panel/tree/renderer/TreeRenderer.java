@@ -11,6 +11,7 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.association.Association;
+import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
@@ -109,7 +110,17 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     public void setVariabilityIcon(Variability variability) {
         this.setText(variability.getName());
         this.setToolTipText(variability.getName());
-        this.setIcon(this.getImage("variability"));
+        this.setIcon(new ImageIcon(variability.getIcon()));
+    }
+    
+    /**
+     * Method responsible for defining Traceability.
+     * @param traceability Traceability.
+     */
+    public void setTraceabilityIcon(Traceability traceability) {
+        this.setText(traceability.getName());
+        this.setToolTipText(traceability.getName());
+        this.setIcon(new ImageIcon(traceability.getIcon()));
     }
     
     @Override
@@ -130,6 +141,8 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
             this.setAssociationIcon((Association) object);
         else if (object instanceof Variability)
             this.setVariabilityIcon((Variability) object);
+        else if (object instanceof Traceability)
+            this.setTraceabilityIcon((Traceability) object);
         return this;
     }
     

@@ -1,4 +1,4 @@
-package controller.view.edit.panel.stereotype.variability;
+package controller.view.edit.panel.variability;
 
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;

@@ -21,6 +21,7 @@ import view.edit.ViewEditProfile;
 import view.message.ViewError;
 import view.message.ViewMessage;
 import view.message.ViewSave;
+import view.new_.ViewNewTraceability;
 import view.structural.ViewMenu;
 import view.system.ViewSystemInformation;
 
@@ -66,10 +67,12 @@ public class ControllerViewMenu extends ControllerView {
             this.newSequenceDiagram();
         else if (this.viewMenu.getMenuItemUseCaseDiagram().equals(event.getSource()))
             this.newUseCaseDiagram();
-        else if (this.viewMenu.getMenuItemInstantiateProduct().equals(event.getSource()))
-            this.instantiateNewProduct();
         else if (this.viewMenu.getMenuItemEditProfile().equals(event.getSource()))
             this.editProfile();
+        else if (this.viewMenu.getMenuItemInstantiateProduct().equals(event.getSource()))
+            this.instantiateNewProduct();
+        else if (this.viewMenu.getMenuItemNewTraceability().equals(event.getSource()))
+            this.newTraceability();
         else if (this.viewMenu.getMenuItemSystemInformation().equals(event.getSource()))
             new ViewSystemInformation(this.viewMenu).setVisible(true);
         else if (this.viewMenu.getMenuItemSystemExit().equals(event.getSource()))
@@ -259,6 +262,14 @@ public class ControllerViewMenu extends ControllerView {
     }
     
     /**
+     * Method responsible for editing the Profile.
+     */
+    private void editProfile() {
+        if (this.viewMenu.getPanelModeling() != null)
+            new ViewEditProfile(this.viewMenu.getPanelModeling(), this.viewMenu.getProject().getProfile()).setVisible(true);
+    }
+    
+    /**
      * Method responsible for instantiating a New Product.
      */
     private void instantiateNewProduct() {
@@ -267,11 +278,13 @@ public class ControllerViewMenu extends ControllerView {
     }
     
     /**
-     * Method responsible for editing the Profile.
+     * Method responsible for inserting a New Traceability.
      */
-    private void editProfile() {
-        if (this.viewMenu.getPanelModeling() != null)
-            new ViewEditProfile(this.viewMenu.getPanelModeling(), this.viewMenu.getProject().getProfile()).setVisible(true);
+    private void newTraceability() {
+        if (this.viewMenu.getProject() != null) {
+            if (!this.viewMenu.getProject().getDiagrams().isEmpty())
+                new ViewNewTraceability(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+        }
     }
     
     /**
