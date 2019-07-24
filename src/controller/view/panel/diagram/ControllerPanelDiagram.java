@@ -9,7 +9,7 @@ import java.awt.event.MouseListener;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
 import view.delete.ViewDeleteElement;
-import view.new_.ViewNewVariability;
+import view.new_.variability.ViewNewVariability;
 import view.panel.diagram.PanelDiagram;
 
 /**

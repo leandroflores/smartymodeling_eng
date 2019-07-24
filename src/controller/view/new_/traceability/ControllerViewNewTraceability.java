@@ -1,9 +1,10 @@
-package controller.view.new_;
+package controller.view.new_.traceability;
 
+import controller.view.new_.ControllerViewNew;
 import java.awt.event.ActionEvent;
 import model.structural.base.traceability.Traceability;
 import view.message.ViewError;
-import view.new_.ViewNewTraceability;
+import view.new_.traceability.ViewNewTraceability;
 
 /**
  * <p>Class of Controller <b>ControllerViewNewTraceability</b>.</p>
@@ -11,7 +12,7 @@ import view.new_.ViewNewTraceability;
  * @author Leandro
  * @since  05/07/2019
  * @see    controller.view.new_.ControllerViewNew
- * @see    view.new_.ViewNewTraceability
+ * @see    view.new_.traceability.ViewNewTraceability
  */
 public class ControllerViewNewTraceability extends ControllerViewNew {
     private final ViewNewTraceability viewNewTraceability;

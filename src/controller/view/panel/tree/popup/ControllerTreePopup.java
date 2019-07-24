@@ -19,7 +19,7 @@ import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
 import view.delete.ViewDeleteDiagram;
 import view.delete.ViewDeleteElement;
-import view.delete.ViewDeleteVariability;
+import view.delete.variability.ViewDeleteVariability;
 import view.edit.ViewEditDiagram;
 import view.edit.ViewEditElement;
 import view.edit.ViewEditProject;

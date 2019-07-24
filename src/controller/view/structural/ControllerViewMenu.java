@@ -21,7 +21,7 @@ import view.edit.ViewEditProfile;
 import view.message.ViewError;
 import view.message.ViewMessage;
 import view.message.ViewSave;
-import view.new_.ViewNewTraceability;
+import view.new_.traceability.ViewNewTraceability;
 import view.structural.ViewMenu;
 import view.system.ViewSystemInformation;
 

@@ -5,10 +5,12 @@ import java.awt.event.ActionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
+import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
 import view.delete.ViewDeleteDiagram;
 import view.delete.ViewDeleteElement;
-import view.delete.ViewDeleteVariability;
+import view.delete.traceability.ViewDeleteTraceability;
+import view.delete.variability.ViewDeleteVariability;
 import view.panel.tree.popup.TreePopup;
 
 /**
@@ -51,6 +53,8 @@ public class ControllerMenuItemDelete implements ActionListener {
             new ViewDeleteElement(this.popup.getPanelTree().getViewMenu().getPanelModeling(), ((Element) object)).setVisible(true);
         else if (object instanceof Variability)
             new ViewDeleteVariability(this.popup.getPanelTree().getViewMenu().getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
+        else if (object instanceof Traceability)
+            new ViewDeleteTraceability(this.popup.getPanelTree().getViewMenu().getPanelModeling(), (Traceability) object).setVisible(true);
     }
     
     /**

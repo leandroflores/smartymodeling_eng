@@ -1,7 +1,8 @@
-package controller.view.delete;
+package controller.view.delete.variability;
 
+import controller.view.delete.ControllerViewDelete;
 import model.structural.base.variability.Variability;
-import view.delete.ViewDeleteVariability;
+import view.delete.variability.ViewDeleteVariability;
 
 /**
  * <p>Class of Controller <b>ControllerViewDeleteVariability</b>.</p>
@@ -10,7 +11,7 @@ import view.delete.ViewDeleteVariability;
  * @since  27/05/2019
  * @see    controller.view.delete.ControllerViewDelete
  * @see    model.structural.base.variability.Variability
- * @see    view.delete.ViewDeleteVariability
+ * @see    view.delete.variability.ViewDeleteVariability
  */
 public class ControllerViewDeleteVariability extends ControllerViewDelete {
     private final ViewDeleteVariability viewDeleteVariability;

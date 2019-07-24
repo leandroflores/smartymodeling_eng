@@ -1,9 +1,10 @@
-package view.delete;
+package view.delete.variability;
 
-import controller.view.delete.ControllerViewDeleteVariability;
+import controller.view.delete.variability.ControllerViewDeleteVariability;
 import model.structural.base.Diagram;
 import model.structural.base.variability.Variability;
 import view.ViewStyle;
+import view.delete.ViewDelete;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -11,7 +12,7 @@ import view.panel.modeling.PanelModeling;
  * <p>Class responsible for defining the <b>Variability Delete View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  27/05/2019
- * @see    controller.view.delete.ControllerViewDeleteVariability
+ * @see    controller.view.delete.variability.ControllerViewDeleteVariability
  * @see    model.structural.base.variability.Variability
  * @see    view.delete.ViewDelete
  */

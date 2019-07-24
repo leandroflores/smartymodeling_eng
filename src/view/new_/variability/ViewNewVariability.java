@@ -1,6 +1,6 @@
-package view.new_;
+package view.new_.variability;
 
-import controller.view.new_.ControllerViewNewVariability;
+import controller.view.new_.variability.ControllerViewNewVariability;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -9,6 +9,7 @@ import model.structural.base.Diagram;
 import model.structural.base.variability.Variability;
 import view.edit.panel.base.variability.PanelBaseVariability;
 import view.edit.panel.base.variability.PanelBaseVariants;
+import view.new_.ViewNew;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -16,7 +17,7 @@ import view.panel.modeling.PanelModeling;
  * <p>Class responsible for defining the <b>New Variability View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  04/07/2019
- * @see    controller.view.new_.ControllerViewNewVariability
+ * @see    controller.view.new_.variability.ControllerViewNewVariability
  * @see    model.structural.base.variability.Variability
  * @see    view.new_.ViewNew
  */

@@ -1,6 +1,6 @@
-package view.new_;
+package view.new_.traceability;
 
-import controller.view.new_.ControllerViewNewTraceability;
+import controller.view.new_.traceability.ControllerViewNewTraceability;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -9,6 +9,7 @@ import model.structural.base.Project;
 import model.structural.base.traceability.Traceability;
 import view.edit.panel.base.traceability.PanelBaseElements;
 import view.edit.panel.base.traceability.PanelBaseTraceability;
+import view.new_.ViewNew;
 import view.structural.ViewMenu;
 
 /**
@@ -16,7 +17,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>New Traceability View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  22/07/2019
- * @see    controller.view.new_.ControllerViewNewTraceability
+ * @see    controller.view.new_.traceability.ControllerViewNewTraceability
  * @see    model.structural.base.traceability.Traceability
  * @see    view.new_.ViewNew
  */

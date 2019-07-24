@@ -1,12 +1,13 @@
-package controller.view.new_;
+package controller.view.new_.variability;
 
+import controller.view.new_.ControllerViewNew;
 import java.awt.event.ActionEvent;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import model.structural.base.variability.Variability;
 import view.message.ViewError;
-import view.new_.ViewNewVariability;
+import view.new_.variability.ViewNewVariability;
 
 /**
  * <p>Class of Controller <b>ControllerViewNewVariability</b>.</p>
@@ -14,7 +15,7 @@ import view.new_.ViewNewVariability;
  * @author Leandro
  * @since  05/07/2019
  * @see    controller.view.new_.ControllerViewNew
- * @see    view.new_.ViewNewVariability
+ * @see    view.new_.variability.ViewNewVariability
  */
 public class ControllerViewNewVariability extends ControllerViewNew implements ChangeListener {
     private final ViewNewVariability viewNewVariability;

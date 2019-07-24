@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import view.View;
 import view.ViewModal;
 import view.panel.modeling.PanelModeling;
+import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>ViewDelete</b>.</p>
@@ -17,14 +18,26 @@ import view.panel.modeling.PanelModeling;
  * @see    view.ViewModal
  */
 public abstract class ViewDelete extends ViewModal {
+    protected final ViewMenu view;
     protected final PanelModeling panel;
     
     /**
      * Default constructor method of Class.
+     * @param view View Menu.
+     */
+    public ViewDelete(ViewMenu view) {
+        super(view);
+        this.view  = view;
+        this.panel = null;
+    }
+    
+    /**
+     * Alternative constructor method of Class.
      * @param panel Panel Modeling.
      */
     public ViewDelete(PanelModeling panel) {
         super(panel.getViewMenu());
+        this.view  = panel.getViewMenu();
         this.panel = panel;
         this.setSettings();
     }
