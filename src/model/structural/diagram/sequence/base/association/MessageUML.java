@@ -1,62 +1,64 @@
-package model.structural.diagram.usecase.base.association;
+package model.structural.diagram.sequence.base.association;
 
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import model.structural.base.association.Association;
-import model.structural.diagram.usecase.base.UseCaseUML;
+import model.structural.diagram.sequence.base.LifelineUML;
 
 /**
- * <p>Class of Model <b>ExtendUML</b>.</p>
- * <p>Class responsible for representing <b>Extend UML</b> in SMartyModeling.</p>
+ * <p>Class of Model <b>MessageUML</b>.</p>
+ * <p>Class responsible for representing the <b>Message UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  22/05/2019
+ * @since  25/07/2019
  * @see    model.structural.base.association.Association
- * @see    model.structural.diagram.usecase.base.UseCaseUML
+ * @see    model.structural.diagram.sequence.base.LifelineUML
  */
-public class ExtendUML extends Association {
+public class MessageUML extends Association {
+    private String category;
+    private String name;
     
     /**
      * Default constructor method of Class.
-     * @param source Use Case UML.
-     * @param target Use Case UML.
+     * @param source Lifeline UML.
+     * @param target Lifeline UML.
      */
-    public ExtendUML(UseCaseUML source, UseCaseUML target) {
+    public MessageUML(LifelineUML source, LifelineUML target) {
         this.source = source;
         this.target = target;
-        this.type   = "extend";
+        this.type   = "message";
     }
 
     @Override
-    public UseCaseUML getSource() {
-        return (UseCaseUML) this.source;
+    public LifelineUML getSource() {
+        return (LifelineUML) this.source;
     }
 
     /**
      * Method responsible for setting the Source.
-     * @param source Use Case UML.
+     * @param source Lifeline UML.
      */
-    public void setSource(UseCaseUML source) {
+    public void setSource(LifelineUML source) {
         this.source = source;
     }
 
     @Override
-    public UseCaseUML getTarget() {
-        return (UseCaseUML) this.target;
+    public LifelineUML getTarget() {
+        return (LifelineUML) this.target;
     }
 
     /**
      * Method responsible for setting Target.
-     * @param target Use Case UML.
+     * @param target Lifeline UML.
      */
-    public void setTarget(UseCaseUML target) {
+    public void setTarget(LifelineUML target) {
         this.target = target;
     }
     
     @Override
     public String getTitle() {
-        return "<<extend>>";
+        return "<<>>";
     }
     
     @Override
@@ -88,9 +90,9 @@ public class ExtendUML extends Association {
     
     @Override
     public boolean equals(Object object) {
-        if (object instanceof ExtendUML == false)
+        if (object instanceof MessageUML == false)
             return false;
-        return this.source.equals(((ExtendUML) object).getSource())
-            && this.target.equals(((ExtendUML) object).getTarget());
+        return this.source.equals(((MessageUML) object).getSource())
+            && this.target.equals(((MessageUML) object).getTarget());
     }
 }

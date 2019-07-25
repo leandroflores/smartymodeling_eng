@@ -1,4 +1,4 @@
-package controller.view.edit.panel.variability;
+package controller.view.edit.panel.base.variability;
 
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;

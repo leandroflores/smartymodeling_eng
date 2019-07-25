@@ -9,12 +9,14 @@ import model.structural.base.Diagram;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.ComponentDiagram;
+import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import view.Panel;
 import view.panel.diagram.PanelDiagram;
 import view.panel.diagram.types.PanelActivityDiagram;
 import view.panel.diagram.types.PanelClassDiagram;
 import view.panel.diagram.types.PanelComponentDiagram;
+import view.panel.diagram.types.PanelSequenceDiagram;
 import view.panel.diagram.types.PanelUseCaseDiagram;
 import view.panel.logo.PanelLogo;
 import view.panel.tabbed.PanelTabbed;
@@ -104,15 +106,17 @@ public final class PanelModeling extends Panel {
     private PanelDiagram createPanelDiagram(Diagram diagram) {
         switch (diagram.getType()) {
             case "Activity":
-                return new PanelActivityDiagram(this.viewMenu, (ActivityDiagram) diagram);
+                return new PanelActivityDiagram(this.viewMenu,  (ActivityDiagram) diagram);
             case "Class":
-                return new PanelClassDiagram(this.viewMenu, (ClassDiagram)   diagram);
+                return new PanelClassDiagram(this.viewMenu,     (ClassDiagram)   diagram);
             case "Component":
                 return new PanelComponentDiagram(this.viewMenu, (ComponentDiagram) diagram);
+            case "Sequence":
+                return new PanelSequenceDiagram(this.viewMenu,  (SequenceDiagram) diagram);
             case "UseCase":
-                return new PanelUseCaseDiagram(this.viewMenu, (UseCaseDiagram) diagram);
-//            default:
-//                break;
+                return new PanelUseCaseDiagram(this.viewMenu,   (UseCaseDiagram) diagram);
+            default:
+                break;
         }
 //        return new PainelDiagramaCasosDeUso(this.viewMenu, (DiagramaCasosDeUso) diagram);
         return null;

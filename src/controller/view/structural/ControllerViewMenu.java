@@ -15,6 +15,7 @@ import model.structural.base.Project;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.ComponentDiagram;
+import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import org.xml.sax.SAXException;
 import view.edit.ViewEditProfile;
@@ -241,9 +242,9 @@ public class ControllerViewMenu extends ControllerView {
      */
     private void newSequenceDiagram() {
         if (this.viewMenu.getProject() != null) {
-//            DiagramaCasosDeUso diagrama = new DiagramaCasosDeUso(this.viewMenu.getProjeto());
-//            this.viewMenu.getProjeto().addDiagrama(diagrama);
-//            this.viewMenu.showDiagram(diagrama);
+            SequenceDiagram diagram = new SequenceDiagram(this.viewMenu.getProject());
+            this.viewMenu.getProject().addDiagram(diagram);
+            this.viewMenu.showDiagram(diagram);
         }
         this.viewMenu.update();
     }

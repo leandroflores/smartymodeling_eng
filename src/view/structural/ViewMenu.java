@@ -88,11 +88,13 @@ public final class ViewMenu extends View implements Operation {
         this.createFileMenu();
         this.createDiagramMenu();
         this.createProductLineMenu();
+        this.createEvaluationMenu();
         this.createSystemMenu();
         
         this.menuBar.add(this.getFileMenu());
         this.menuBar.add(this.getMenuDiagram());
         this.menuBar.add(this.getMenuProductLine());
+        this.menuBar.add(this.getMenuEvaluation());
         this.menuBar.add(this.getMenuSystem());
         
         this.setJMenuBar(this.menuBar);
@@ -166,6 +168,17 @@ public final class ViewMenu extends View implements Operation {
         this.getMenuProductLine().add(this.getMenuItemEditProfile());
         this.getMenuProductLine().add(this.getMenuItemInstantiateProduct());
         this.getMenuProductLine().add(this.getMenuItemNewTraceability());
+    }
+    
+    /**
+     * Method responsible for creating Evaluation Menu.
+     */
+    private void createEvaluationMenu() {
+        this.createMenu("menuEvaluation", "Evaluation");
+        
+        this.createMenuItem("menuItemEvaluationMetric",  "Metric", "evaluation/metric.png");
+        
+        this.getMenuEvaluation().add(this.getMenuItemEvaluationMetric());
     }
     
     /**
@@ -585,6 +598,22 @@ public final class ViewMenu extends View implements Operation {
      */
     public JMenuItem getMenuItemNewTraceability() {
         return this.menuItens.get("menuItemNewTraceability");
+    }
+    
+    /**
+     * Method responsible for returning Menu Evaluation.
+     * @return Menu Evaluation.
+     */
+    public JMenu getMenuEvaluation() {
+        return this.menus.get("menuEvaluation");
+    }
+    
+    /**
+     * Method responsible for returning the Menu Item Evaluation Metric.
+     * @return Menu Item Evaluation Metric.
+     */
+    public JMenuItem getMenuItemEvaluationMetric() {
+        return this.menuItens.get("menuItemEvaluationMetric");
     }
     
     /**

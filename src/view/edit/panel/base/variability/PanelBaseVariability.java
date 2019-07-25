@@ -1,6 +1,6 @@
 package view.edit.panel.base.variability;
 
-import controller.view.edit.panel.variability.ControllerPanelBaseVariability;
+import controller.view.edit.panel.base.variability.ControllerPanelBaseVariability;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JCheckBox;
@@ -18,7 +18,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining a Panel for showing the <b>Variability Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  04/07/2019
- * @see    controller.view.edit.panel.variability.ControllerPanelBaseVariability
+ * @see    controller.view.edit.panel.base.variability.ControllerPanelBaseVariability
  * @see    model.structural.base.variability.Variability
  * @see    view.Panel
  */

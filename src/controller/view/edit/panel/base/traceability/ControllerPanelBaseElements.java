@@ -1,4 +1,4 @@
-package controller.view.edit.panel.traceability;
+package controller.view.edit.panel.base.traceability;
 
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
