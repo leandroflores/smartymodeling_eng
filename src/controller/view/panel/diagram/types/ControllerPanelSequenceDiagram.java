@@ -4,10 +4,7 @@ import controller.view.panel.diagram.ControllerPanelDiagram;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import model.structural.diagram.sequence.base.LifelineUML;
-import model.structural.diagram.usecase.base.ActorUML;
-import model.structural.diagram.usecase.base.UseCaseUML;
 import view.panel.diagram.types.PanelSequenceDiagram;
-import view.panel.diagram.types.PanelUseCaseDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerPanelSequenceDiagram</b>.</p>
@@ -40,10 +37,10 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
     
     @Override
     public void mousePressed(MouseEvent evento) {
-        if (this.panelDiagram.getOperation().equals("Actor"))
+        if (this.panelDiagram.getOperation().equals("LifelineActor"))
             this.addLifelineActor(evento);
-        else if (this.panelDiagram.getOperation().equals("UseCase"))
-            this.addUseCase(evento);
+        else if (this.panelDiagram.getOperation().equals("LifelineClass"))
+            this.addLifelineClass(evento);
     }
     
     /**
@@ -70,7 +67,7 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
      */
     public void addLifelineActor(MouseEvent event) {
         LifelineUML lifeline = new LifelineUML();
-                    lifeline.setPosition(event.getX(), event.getY());
+                    lifeline.setPosition(event.getX(), 20);
         this.panelDiagram.getDiagram().addLifeline(lifeline);
 //                    lifeline.setDefaultName();
         this.panelDiagram.updateDiagram();
@@ -81,9 +78,10 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
      * Method responsible for adding a new Lifeline Class.
      * @param event Mouse Event.
      */
-    public void addUseCase(MouseEvent event) {
+    public void addLifelineClass(MouseEvent event) {
         LifelineUML lifeline = new LifelineUML();
-                    lifeline.setPosition(event.getX(), event.getY());
+                    lifeline.setPosition(event.getX(), 20);
+//                    lifeline.setElement(this.panelDiagram.getDiagram().getProject().getDefaultStereotype());
         this.panelDiagram.getDiagram().addLifeline(lifeline);
 //                   lifeline.setDefaultName();
         this.panelDiagram.updateDiagram();

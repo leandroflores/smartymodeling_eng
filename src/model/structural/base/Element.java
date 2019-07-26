@@ -238,7 +238,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return X Center.
      */
     public Integer getXCenter() {
-        return (this.getX() + this.getWidth()) / 2;
+        return this.getX() + (this.getWidth() / 2);
     }
     
     /**
@@ -246,7 +246,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Y Center.
      */
     public Integer getYCenter() {
-        return (this.getY() + this.getHeight()) / 2;
+        return this.getY() + (this.getHeight() / 2);
     }
     
     /**

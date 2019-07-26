@@ -1,6 +1,7 @@
 package model.structural.diagram;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,7 +85,7 @@ public final class SequenceDiagram extends Diagram {
      * Method responsible for returning the Lifelines List.
      * @return Lifelines List.
      */
-    public List<LifelineUML> getLifelines() {
+    public List<LifelineUML> getLifelinesList() {
         return new ArrayList<>(this.lifelines.values());
     }
     
@@ -94,6 +95,7 @@ public final class SequenceDiagram extends Diagram {
      */
     public void addMessage(MessageUML message) {
         if (this.messages.get(message.getId()) == null) {
+            message.setSequence(this.nextSequence());
             this.messages.put(message.getId(), message);
             this.addAssociation(message);
         }
@@ -106,6 +108,7 @@ public final class SequenceDiagram extends Diagram {
     public void removeMessage(MessageUML message) {
         this.removeAssociation(message);
         this.associations.remove(message.getId());
+        this.updateSequence();
     }
     
     /**
@@ -127,6 +130,51 @@ public final class SequenceDiagram extends Diagram {
              || association.getTarget().equals(element))
                 this.removeAssociation(association);
         }
+    }
+    
+    /**
+     * Method responsible for returning the Next Sequence.
+     * @return Next Sequence.
+     */
+    public Integer nextSequence() {
+        return this.getMessageList().size() + 1;
+    }
+    
+    /**
+     * Method responsible for updating the Sequence.
+     */
+    public void updateSequence() {
+        List<MessageUML> list = this.getMessageList();
+        for (int i = 0; i < list.size(); i++)
+            list.get(i).setSequence(i + 1);
+    }
+    
+    /**
+     * Method responsible for returning the Message List.
+     * @return Message List.
+     */
+    public List<MessageUML> getMessageList() {
+        ArrayList<MessageUML>  message = new ArrayList<>();
+        ArrayList<Association> list    = new ArrayList<>(this.messages.values());
+        for (Association association : list)
+            message.add((MessageUML) association);
+               message.sort(this.getMessageComparator());
+        return message;
+    }
+    
+    /**
+     * Method responsible for returning the Message Comparator.
+     * @return Message Comparator.
+     */
+    private Comparator<MessageUML> getMessageComparator() {
+        return new Comparator<MessageUML>() {
+            @Override
+            public int compare(MessageUML messageA, MessageUML messageB) {
+                if (messageA.getSequence() <= messageB.getSequence())
+                    return -1;
+                return 1;
+            }
+        };
     }
     
     @Override
