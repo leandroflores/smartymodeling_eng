@@ -4,7 +4,6 @@ import com.mxgraph.model.mxCell;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
-import com.mxgraph.util.mxRectangle;
 import model.structural.base.Element;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.PackageUML;
@@ -82,8 +81,9 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
      * @param cell Graph Cell.
      */
     private void resize(PackageUML packageUML, Object cell) {
-        mxRectangle coordinates = this.panel.getGraph().getCellGeometry(cell);
-        packageUML.setSize(new Double(coordinates.getHeight()).intValue(), new Double(coordinates.getWidth()).intValue());
+        Integer height = new Double(this.panel.getGraph().getCellGeometry(cell).getHeight()).intValue();
+        Integer width  = new Double(this.panel.getGraph().getCellGeometry(cell).getWidth()).intValue();
+                packageUML.setSize(height, width);
         this.panel.getViewMenu().setSave(false);
         this.panel.updateDiagram();
     }

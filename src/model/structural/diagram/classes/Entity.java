@@ -14,6 +14,7 @@ import java.util.Map;
 import model.structural.base.Element;
 import model.structural.base.Stereotype;
 import model.structural.diagram.ClassDiagram;
+import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.classes.base.TypeUML;
 
 /**
@@ -25,7 +26,8 @@ import model.structural.diagram.classes.base.TypeUML;
  */
 public abstract class Entity extends Element {
     private ClassDiagram diagram;
-    private TypeUML typeUML;
+    private PackageUML packageUML;
+    private TypeUML    typeUML;
     private final LinkedHashMap attributes;
     private final LinkedHashMap methods;
     
@@ -35,6 +37,7 @@ public abstract class Entity extends Element {
      */
     public Entity(ClassDiagram diagram) {
         this.diagram    = diagram;
+        this.packageUML = null;
         this.mandatory  = true;
         this.size       = new Point(200, 120);
         this.attributes = new LinkedHashMap();
@@ -47,6 +50,7 @@ public abstract class Entity extends Element {
      */
     public Entity(org.w3c.dom.Element element) {
         super(element, true);
+        this.packageUML = null;
         this.attributes = new LinkedHashMap();
         this.methods    = new LinkedHashMap();
     }
@@ -135,6 +139,22 @@ public abstract class Entity extends Element {
      */
     public void setDiagram(ClassDiagram diagram) {
         this.diagram = diagram;
+    }
+
+    /**
+     * Method responsible for returning the Package UML.
+     * @return Package UML.
+     */
+    public PackageUML getPackageUML() {
+        return this.packageUML;
+    }
+
+    /**
+     * Method responsible for setting the Package UML.
+     * @param packageUML Package UML.
+     */
+    public void setPackageUML(PackageUML packageUML) {
+        this.packageUML = packageUML;
     }
     
     /**

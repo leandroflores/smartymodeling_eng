@@ -45,6 +45,65 @@ public class PackageUML extends Element {
         this.entities = new HashMap<>();
     }
 
+    @Override
+    public void setDefaultName() {
+        super.setDefaultName();
+        this.name = this.name.toLowerCase();
+    }
+    
+    @Override
+    public void dx(Integer distance) {
+        super.dx(distance);
+        this.dxPackages(distance);
+        this.dxEntities(distance);
+    }
+    
+    /**
+     * Method responsible for moving X.
+     * @param distance Distance.
+     */
+    private void dxPackages(Integer distance) {
+        for (PackageUML packageUML : this.getPackagesList()) {
+            System.out.println(packageUML);
+            System.out.println("");
+            packageUML.dx(distance);
+        }
+    }
+    
+    /**
+     * Method responsible for moving X.
+     * @param distance Distance.
+     */
+    private void dxEntities(Integer distance) {
+        for (Entity entity : this.getEntitiesList())
+            entity.dx(distance);
+    }
+    
+    @Override
+    public void dy(Integer distance) {
+        super.dy(distance);
+        this.dyPackages(distance);
+        this.dyEntities(distance);
+    }
+    
+    /**
+     * Method responsible for moving Y.
+     * @param distance Distance.
+     */
+    private void dyPackages(Integer distance) {
+        for (PackageUML packageUML : this.getPackagesList())
+            packageUML.dy(distance);
+    }
+    
+    /**
+     * Method responsible for moving Y.
+     * @param distance Distance.
+     */
+    private void dyEntities(Integer distance) {
+        for (Entity entity : this.getEntitiesList())
+            entity.dy(distance);
+    }
+    
     /**
      * Method responsible for returning the Parent Package.
      * @return Parent Package.
@@ -148,7 +207,17 @@ public class PackageUML extends Element {
     
     @Override
     public String getStyleLabel() {
-        return "stylePackageUML";
+        return "stylePackageUML" + this.id;
+    }
+    
+    /**
+     * Method responsible for returning the Fill Color Code.
+     * @return Fill Color Code.
+     */
+    private String getFillColor() {
+        if (this.parent == null)
+            return "#EEEEEE";
+        return "#9999FF";
     }
     
     @Override
@@ -156,8 +225,8 @@ public class PackageUML extends Element {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_EDITABLE, "0");
                style.put(mxConstants.STYLE_FOLDABLE, "0");
-               style.put(mxConstants.STYLE_FILLCOLOR,   "#EEEEEE");
-               style.put(mxConstants.STYLE_STROKECOLOR, "#EEEEEE");
+               style.put(mxConstants.STYLE_FILLCOLOR,   this.getFillColor());
+               style.put(mxConstants.STYLE_STROKECOLOR, this.getFillColor());
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
                style.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_CENTER);
         return style;
@@ -200,8 +269,6 @@ public class PackageUML extends Element {
     
     @Override
     public String toString() {
-        if (this.parent == null)
-            return this.name;
-        return this.parent.toString() + "." + this.name;
+        return this.name;
     }
 }

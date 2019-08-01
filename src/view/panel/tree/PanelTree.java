@@ -14,6 +14,7 @@ import model.structural.base.variability.Variability;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
+import model.structural.diagram.classes.base.PackageUML;
 import view.Panel;
 import view.panel.tree.popup.TreePopup;
 import view.panel.tree.renderer.TreeRenderer;
@@ -115,7 +116,9 @@ public final class PanelTree extends Panel {
     private void addElements(Diagram diagram, DefaultMutableTreeNode node) {
         List<Element> elements = diagram.getTreeElementsList();
         for (int i = 0; i < elements.size(); i++) {
-            if (elements.get(i) instanceof Entity)
+            if (elements.get(i) instanceof PackageUML)
+                node.add(this.getNode((PackageUML) elements.get(i)));
+            else if (elements.get(i) instanceof Entity)
                 node.add(this.getNode((Entity) elements.get(i)));
             else if (this.checkElement(elements.get(i)))
                 node.add(new DefaultMutableTreeNode(diagram.getElementsList().get(i)));
@@ -130,6 +133,38 @@ public final class PanelTree extends Panel {
     private boolean checkElement(Element element) {
         return ((element instanceof AttributeUML == false)
              && (element instanceof MethodUML   == false));
+    }
+    
+    /**
+     * 
+     * @param packageUML
+     * @return 
+     */
+    private DefaultMutableTreeNode getNode(PackageUML packageUML) {
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(packageUML);
+            this.addEntities(packageUML, node);
+            this.addPackages(packageUML, node);
+        return node;
+    }
+    
+    /**
+     * Method responsible for adding the Entities Nodes.
+     * @param packageUML Package UML.
+     * @param node Package Node.
+     */
+    private void addEntities(PackageUML packageUML, DefaultMutableTreeNode node) {
+        for (Entity current : packageUML.getEntitiesList())
+            node.add(this.getNode(current));
+    }
+    
+    /**
+     * Method responsible for adding the Packages Nodes.
+     * @param packageUML Package UML.
+     * @param node Package Node.
+     */
+    private void addPackages(PackageUML packageUML, DefaultMutableTreeNode node) {
+        for (PackageUML current : packageUML.getPackagesList())
+            node.add(this.getNode(current));
     }
     
     /**

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import model.structural.base.Element;
+import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.ClassUML;
 import model.structural.diagram.classes.base.InterfaceUML;
@@ -97,18 +98,57 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
         this.panelDiagram.getInterfaceButton().setBackground(this.getFocusColor());
         this.panelDiagram.setOperation("Interface");
     }
-
+    
+    /**
+     * Method responsible for returning the Parent Package UML.
+     * @param  event Mouse Event.
+     * @return Parent Package UML.
+     */
+    private PackageUML getParent(MouseEvent event) {
+        Object  cell    = this.panelDiagram.getComponent().getCellAt(event.getX(), event.getY());
+        String  id      = this.panelDiagram.getIdentifiers().get(cell);
+        Element element = this.panelDiagram.getDiagram().getElement(id);
+        if ((element != null) && (element instanceof PackageUML))
+            return (PackageUML) element;
+        return null;
+    }
+    
+    /**
+     * Method responsible for setting the Parent.
+     * @param parent Package UML.
+     * @param packageUML Package UML.
+     */
+    private void setParent(PackageUML parent, PackageUML packageUML) {
+        if (parent != null) {
+            packageUML.setPosition((packageUML.getX() - parent.getX()), (packageUML.getY() - parent.getY()));
+            packageUML.setParent(packageUML);
+            parent.addPackage(packageUML);
+        }
+    }
+    
+    /**
+     * Method responsible for setting the Parent.
+     * @param parent Package UML.
+     * @param entity Entity.
+     */
+    private void setParent(PackageUML parent, Entity entity) {
+        if (parent != null) {
+            entity.setPosition((entity.getX() - parent.getX()), (entity.getY() - parent.getY()));
+            entity.setPackageUML(parent);
+            parent.addEntity(entity);
+        }
+    }
+    
     /**
      * Method responsible for adding a new Package UML.
      * @param event Mouse Event.
      */
     public void addPackage(MouseEvent event) {
-//        System.out.println(this.painelDiagrama.getGrafo().getSelectionCell());
-//        this.getPacote(evento);
         PackageUML packageUML = new PackageUML();
                    packageUML.setPosition(event.getX(), event.getY());
         this.panelDiagram.getDiagram().addPackage(packageUML);
                    packageUML.setDefaultName();
+        this.setParent(this.getParent(event), packageUML);
         this.panelDiagram.updateDiagram();
         this.panelDiagram.getViewMenu().update();
     }
@@ -122,6 +162,7 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
                  classUML.setPosition(event.getX(), event.getY());
         this.panelDiagram.getDiagram().addClass(classUML);
                  classUML.setDefaultName();
+        this.setParent(this.getParent(event), classUML);
         this.panelDiagram.updateDiagram();
         this.panelDiagram.getViewMenu().update();
     }
@@ -135,6 +176,7 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
                      interfaceUML.setPosition(event.getX(), event.getY());
         this.panelDiagram.getDiagram().addInterface(interfaceUML);
                      interfaceUML.setDefaultName();
+        this.setParent(this.getParent(event), interfaceUML);
         this.panelDiagram.updateDiagram();
         this.panelDiagram.getViewMenu().update();
     }
@@ -159,7 +201,7 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
      * @param id Element Id.
      */
     private void edit(mxCell cell, String id) {
-        if      (this.panelDiagram.getDiagram().getElement(id) instanceof AttributeUML)
+        if (this.panelDiagram.getDiagram().getElement(id) instanceof AttributeUML)
             new ViewEditAttribute(this.panelDiagram.getViewMenu().getPanelModeling(), this.panelDiagram.getDiagram(), (AttributeUML) this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
 //            this.panelDiagram.getComponent().startEditingAtCell(cell);
         else if (this.panelDiagram.getDiagram().getElement(id) instanceof MethodUML)
@@ -208,14 +250,4 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
         else if (this.panelDiagram.getDiagram().getAssociation(id) != null)
             this.panelDiagram.getDiagram().removeAssociation(this.panelDiagram.getDiagram().getAssociation(id));
     }
-    
-//    private PacoteUML getPacote(MouseEvent evento) {
-//        if (this.painelDiagrama.getGrafo().getSelectionCell() != null) {
-//            Object celula = this.painelDiagrama.getGrafo().getSelectionCell();
-//            System.out.println(this.painelDiagrama.getObjetos());
-//            System.out.println(celula);
-//            System.out.println(this.painelDiagrama.getObjetos().get(celula));
-//        }
-//        return null;
-//    }
 }

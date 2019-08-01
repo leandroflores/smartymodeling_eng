@@ -620,8 +620,8 @@ public class AssociationUML extends Association {
                style.put(mxConstants.STYLE_FONTSIZE,  "10");
                style.put(mxConstants.STYLE_RESIZABLE, "0");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-               style.put(mxConstants.STYLE_FILLCOLOR,   "#E6E6FA");
-               style.put(mxConstants.STYLE_STROKECOLOR, "#E6E6FA");
+               style.put(mxConstants.STYLE_FILLCOLOR,   "#EEEEEE");
+               style.put(mxConstants.STYLE_STROKECOLOR, "#EEEEEE");
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
                style.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_SHADOW);
         return style;

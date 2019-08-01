@@ -130,6 +130,9 @@ public abstract class PanelDiagram extends Panel {
      * Method responsible for cleaning the Diagram.
      */
     public void clearDiagram() {
+//        this.graph.removeCells();
+//        this.graph.removeCellsFromParent();
+//        this.graph.re
         this.graph.removeCells(this.graph.getChildVertices(this.graph.getDefaultParent()));
     }
     

@@ -390,6 +390,18 @@ public final class ClassDiagram extends Diagram {
     }
     
     @Override
+    public List<Element> getTreeElementsList() {
+        List<Element> filter  = new ArrayList<>();
+        for (Element  element : this.getElementsList()) {
+            if ((element instanceof PackageUML)  && ((PackageUML) element).getParent() == null)
+                filter.add(element);
+            else if ((element instanceof Entity) && ((Entity) element).getPackageUML() == null)
+                filter.add(element);
+        }
+        return  filter;
+    }
+    
+    @Override
     public String getIcon() {
         return "diagram/class";
     }

@@ -6,6 +6,7 @@ import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationClass;
 import controller.view.panel.diagram.event.classes.ControllerEventChange;
 import controller.view.panel.diagram.event.classes.ControllerEventEdit;
+import controller.view.panel.diagram.event.classes.ControllerEventGroup;
 import controller.view.panel.diagram.event.classes.ControllerEventMove;
 import controller.view.panel.diagram.event.classes.ControllerEventResize;
 import controller.view.panel.diagram.event.classes.ControllerEventSelect;
@@ -115,12 +116,44 @@ public final class PanelClassDiagram extends PanelDiagram {
      */
     private void addPackages() {
         for (PackageUML packageUML : this.diagram.getPackagesList()) {
-            this.graph.getStylesheet().putCellStyle(packageUML.getStyleLabel(), packageUML.getStyle());
-            mxCell   vertex  = (mxCell) this.graph.insertVertex(this.parent, packageUML.getId(), "", packageUML.getPosition().x, packageUML.getPosition().y, packageUML.getSize().x, packageUML.getSize().y, packageUML.getStyleLabel());
-                     vertex.setConnectable(false);
-//            this.insert(vertex, packageUML);
-            this.identifiers.put(vertex, packageUML.getId());
-            this.objects.put(packageUML.getId(), vertex);
+            if (packageUML.getParent() == null)
+                this.addPackage(this.parent, packageUML);
+        }
+    }
+    
+    private void addPackage(Object parent, PackageUML packageUML) {
+        this.graph.getStylesheet().putCellStyle(packageUML.getStyleLabel(), packageUML.getStyle());
+        mxCell   vertex  = (mxCell) this.graph.insertVertex(this.parent, packageUML.getId(), "", packageUML.getPosition().x, packageUML.getPosition().y, packageUML.getSize().x, packageUML.getSize().y, packageUML.getStyleLabel());
+                 vertex.setConnectable(false);
+        this.insert(vertex, packageUML);
+            this.addPackages(packageUML, vertex);
+            this.addEntities(packageUML, vertex);
+        this.identifiers.put(vertex, packageUML.getId());
+        this.objects.put(packageUML.getId(), vertex);
+    }
+    
+    /**
+     * Method responsible for adding the Package Childs.
+     * @param packageUML Package UML.
+     * @param parent Parent Vertex.
+     */
+    private void addPackages(PackageUML packageUML, Object parent) {
+        for (PackageUML current : packageUML.getPackagesList()) {
+            this.addPackage(parent, current);
+        }
+    }
+    
+    /**
+     * Method responsible for adding the Package Entities.
+     * @param packageUML Package UML.
+     * @param parent Parent Vertex.
+     */
+    private void addEntities(PackageUML packageUML, Object parent) {
+        for (Entity entity : packageUML.getEntitiesList()) {
+            if (entity instanceof ClassUML)
+                this.addClass(parent, (ClassUML) entity);
+            else if (entity instanceof InterfaceUML)
+                this.addInterface(parent, (InterfaceUML) entity);
         }
     }
     
@@ -129,13 +162,23 @@ public final class PanelClassDiagram extends PanelDiagram {
      */
     private void addClasses() {
         for (ClassUML classUML : this.diagram.getClassList()) {
-            this.graph.getStylesheet().putCellStyle(classUML.getStyleLabel(), classUML.getStyle());
-            mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, classUML.getId(), "", classUML.getPosition().x, classUML.getPosition().y, classUML.getSize().x, classUML.getSize().y, classUML.getStyleLabel());
-                   vertex.setConnectable(true);
-            this.insert(vertex, classUML);
-            this.identifiers.put(vertex, classUML.getId());
-            this.objects.put(classUML.getId(), vertex);
+            if (classUML.getPackageUML() == null)
+                this.addClass(this.parent, classUML);
         }
+    }
+    
+    /**
+     * Method responsible for adding the Class UML.
+     * @param parent Parent Vertex.
+     * @param classUML Class UML.
+     */
+    private void addClass(Object parent, ClassUML classUML) {
+        this.graph.getStylesheet().putCellStyle(classUML.getStyleLabel(), classUML.getStyle());
+        mxCell vertex = (mxCell) this.graph.insertVertex(parent, classUML.getId(), "", classUML.getPosition().x, classUML.getPosition().y, classUML.getSize().x, classUML.getSize().y, classUML.getStyleLabel());
+               vertex.setConnectable(true);
+        this.insert(vertex, classUML);
+        this.identifiers.put(vertex, classUML.getId());
+        this.objects.put(classUML.getId(), vertex);
     }
     
     /**
@@ -143,13 +186,23 @@ public final class PanelClassDiagram extends PanelDiagram {
      */
     private void addInterfaces() {
         for (InterfaceUML interfaceUML : this.diagram.getInterfacesList()) {
-            this.graph.getStylesheet().putCellStyle(interfaceUML.getStyleLabel(), interfaceUML.getStyle());
-            mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, interfaceUML.getId(), "", interfaceUML.getPosition().x, interfaceUML.getPosition().y, interfaceUML.getSize().x, interfaceUML.getSize().y, interfaceUML.getStyleLabel());
-                   vertex.setConnectable(true);
-            this.insert(vertex, interfaceUML);
-            this.identifiers.put(vertex, interfaceUML.getId());
-            this.objects.put(interfaceUML.getId(), vertex);
+            if (interfaceUML.getPackageUML() == null)
+                this.addInterface(this.parent, interfaceUML);
         }
+    }
+    
+    /**
+     * Method responsible for adding the Interface UML.
+     * @param parent Parent Vertex.
+     * @param interfaceUML Interface UML.
+     */
+    private void addInterface(Object parent, InterfaceUML interfaceUML) {
+        this.graph.getStylesheet().putCellStyle(interfaceUML.getStyleLabel(), interfaceUML.getStyle());
+        mxCell vertex = (mxCell) this.graph.insertVertex(parent, interfaceUML.getId(), "", interfaceUML.getPosition().x, interfaceUML.getPosition().y, interfaceUML.getSize().x, interfaceUML.getSize().y, interfaceUML.getStyleLabel());
+               vertex.setConnectable(true);
+        this.insert(vertex, interfaceUML);
+        this.identifiers.put(vertex, interfaceUML.getId());
+        this.objects.put(interfaceUML.getId(), vertex);
     }
     
     /**
@@ -161,9 +214,9 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.graph.getStylesheet().putCellStyle("packageHeader", packageUML.getPackageStyle());
         this.graph.getStylesheet().putCellStyle("packageName",   packageUML.getNameStyle());
         
-        mxCell head = (mxCell) this.graph.insertVertex(vertex, packageUML.getId() + "(name)",                    "",  0,  0, packageUML.getWidth() * 0.3,                     15,  "packageHeader");
-        mxCell body = (mxCell) this.graph.insertVertex(vertex, null,                                             "",  0, 15, packageUML.getWidth(),       packageUML.getHeight(),  "packageHeader");
-        mxCell name = (mxCell) this.graph.insertVertex(body,   null,                          packageUML.toString(),  5,  5, packageUML.getWidth()- 10,                       15,  "packageName");
+        mxCell head = (mxCell) this.graph.insertVertex(vertex, packageUML.getId() + "(name)",                    "",  0,  0, packageUML.getWidth() * 0.3,                          15, "packageHeader");
+        mxCell body = (mxCell) this.graph.insertVertex(vertex, packageUML.getId() + "(body)",                    "",  0, 15, packageUML.getWidth(),       packageUML.getHeight() - 15, "packageHeader");
+        mxCell name = (mxCell) this.graph.insertVertex(body,   packageUML.getId() + "(name)", packageUML.toString(),  5,  5, packageUML.getWidth() - 10,                           15, "packageName");
                
                head.setConnectable(false);
                body.setConnectable(false);
@@ -437,6 +490,8 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
         this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
         this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
+        
+        this.component.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventGroup(this));
     }
     
     @Override
