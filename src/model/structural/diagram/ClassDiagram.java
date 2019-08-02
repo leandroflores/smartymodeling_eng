@@ -103,26 +103,45 @@ public final class ClassDiagram extends Diagram {
     
     /**
      * Method responsible for removing a Package UML.
-     * @param package_ Package UML.
+     * @param packageUML Package UML.
      */
-    public void removePackage(PackageUML package_) {
-        this.removeEntities(package_);
-        this.removeAssociations(package_);
-        this.removeElement(package_);
-        this.packagesUML.remove(package_.getId());
+    public void removePackage(PackageUML packageUML) {
+        this.updateParents(packageUML);
+        this.removePackages(packageUML);
+        this.removeEntities(packageUML);
+        this.removeAssociations(packageUML);
+        this.removeElement(packageUML);
+        this.packagesUML.remove(packageUML.getId());
+    }
+    
+    /**
+     * Method responsible for updating the Parent Packages.
+     * @param packageUML Package UML.
+     */
+    private void updateParents(PackageUML packageUML) {
+        for (PackageUML current : this.getPackagesList())
+            current.removePackage(packageUML);
+    }
+    
+    /**
+     * Method responsible for removing the Packages from a Package UML.
+     * @param packageUML Package UML.
+     */
+    private void removePackages(PackageUML packageUML) {
+        for (PackageUML current : packageUML.getPackagesList())
+            this.removePackage(current);
     }
     
     /**
      * Method responsible for removing the Entities from a Package UML.
-     * @param package_ Package UML.
+     * @param packageUML Package UML.
      */
-    private void removeEntities(PackageUML package_) {
-        List<Entity> list = package_.getEntitiesList();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) instanceof ClassUML)
-                this.removeClass((ClassUML) list.get(i));
-            else if (list.get(i) instanceof InterfaceUML)
-                this.removeInterface((InterfaceUML) list.get(i));
+    private void removeEntities(PackageUML packageUML) {
+        for (Entity current : packageUML.getEntitiesList()) {
+            if (current instanceof ClassUML)
+                this.removeClass((ClassUML) current);
+            else
+                this.removeInterface((InterfaceUML) current);
         }
     }
     
@@ -387,6 +406,32 @@ public final class ClassDiagram extends Diagram {
      */
     public String[] getVisibilities() {
         return new String[] {"private", "protected", "default", "public"};
+    }
+    
+    /**
+     * Method responsible for returning the References to export.
+     * @return References to export.
+     */
+    private String exportReferences() {
+        String  export  = "";
+        for (PackageUML current : this.getPackagesList()) {
+            if (current.getParent() != null)
+                export += "    <reference package=\"" + current.getId() + "\" parent=\"" + current.getParent().getId() + "\"/>\n";
+        }
+        return  export;
+    }
+    
+    @Override
+    public String export() {
+        String export  = "  <diagram id=\"" + this.id + "\" name=\"" + this.name + "\" type=\"" + this.type + "\">\n";
+               export += this.export((List<Element>) this.getList(this.packagesUML));
+               export += this.export((List<Element>) this.getList(this.classUML));
+               export += this.export((List<Element>) this.getList(this.interfacesUML));
+               export += this.exportAssociations();
+               export += this.exportReferences();
+               export += this.exportVariabilities();
+               export += "  </diagram>\n";
+        return export;
     }
     
     @Override

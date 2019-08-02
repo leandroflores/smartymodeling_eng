@@ -148,7 +148,28 @@ public abstract class Entity extends Element {
     public PackageUML getPackageUML() {
         return this.packageUML;
     }
-
+    
+    /**
+     * Method responsible for reseting the Package UML.
+     */
+    public void resetPackageUML() {
+        if (this.packageUML != null)
+            this.packageUML.removeEntity(this);
+        this.packageUML = null;
+    }
+    
+    /**
+     * Method responsible for changing the Entity Package UML.
+     * @param newPackageUML New Package.
+     */
+    public void changePackageUML(PackageUML newPackageUML) {
+        if (this.packageUML != null)
+            this.packageUML.removeEntity(this);
+        if (newPackageUML   != null)
+            newPackageUML.addEntity(this);
+        this.setPackageUML(newPackageUML);
+    }
+    
     /**
      * Method responsible for setting the Package UML.
      * @param packageUML Package UML.
@@ -481,6 +502,16 @@ public abstract class Entity extends Element {
      * @return Header.
      */
     public abstract String exportHeader();
+    
+    /**
+     * Method responsible for exporting the Parent.
+     * @return Parent.
+     */
+    protected String exportParent() {
+        if (this.packageUML == null)
+            return " parent=\"\"";
+        return " parent=\"" + this.getPackageUML().getId() + "\"";
+    }
     
     /**
      * Method responsible for exporting Attributes.

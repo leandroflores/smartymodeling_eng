@@ -123,7 +123,7 @@ public final class PanelClassDiagram extends PanelDiagram {
     
     private void addPackage(Object parent, PackageUML packageUML) {
         this.graph.getStylesheet().putCellStyle(packageUML.getStyleLabel(), packageUML.getStyle());
-        mxCell   vertex  = (mxCell) this.graph.insertVertex(this.parent, packageUML.getId(), "", packageUML.getPosition().x, packageUML.getPosition().y, packageUML.getSize().x, packageUML.getSize().y, packageUML.getStyleLabel());
+        mxCell   vertex  = (mxCell) this.graph.insertVertex(parent, packageUML.getId(), "", packageUML.getPosition().x, packageUML.getPosition().y, packageUML.getSize().x, packageUML.getSize().y, packageUML.getStyleLabel());
                  vertex.setConnectable(false);
         this.insert(vertex, packageUML);
             this.addPackages(packageUML, vertex);
@@ -490,7 +490,6 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
         this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
         this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
-        
         this.component.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventGroup(this));
     }
     

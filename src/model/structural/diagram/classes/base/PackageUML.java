@@ -113,6 +113,27 @@ public class PackageUML extends Element {
     }
 
     /**
+     * Method responsible for reseting the Parent.
+     */
+    public void resetParent() {
+        if (this.parent != null)
+            this.parent.removePackage(this);
+        this.parent = null;
+    }
+    
+    /**
+     * Method responsible for changing the Parent Package UML.
+     * @param newPackageUML New Package.
+     */
+    public void changePackageUML(PackageUML newPackageUML) {
+        if (this.parent   != null)
+            this.parent.removePackage(this);
+        if (newPackageUML != null)
+            newPackageUML.addPackage(this);
+        this.setParent(newPackageUML);
+    }
+    
+    /**
      * Method responsible for setting the Parent Package.
      * @param parent Parent Package.
      */
@@ -141,7 +162,8 @@ public class PackageUML extends Element {
      * @param package_ Package UML.
      */
     public void addPackage(PackageUML package_) {
-        this.packages.put(package_.getId(), package_);
+        if (!package_.equals(this))
+            this.packages.put(package_.getId(), package_);
     }
     
     /**

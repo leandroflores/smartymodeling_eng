@@ -812,10 +812,31 @@ public abstract class Diagram implements Exportable {
     }
     
     /**
+     * Method responsible for returning the List Values.
+     * @param  hash Hash Map.
+     * @return List Values.
+     */
+    protected List getList(HashMap hash) {
+        return new ArrayList<>(hash.values());
+    }
+    
+    /**
+     * Method responsible for returning Elements to export.
+     * @param  elements Elements List.
+     * @return Elements to Export.
+     */
+    protected String export(List<Element> elements) {
+        String export  = "";
+        for (Element current : elements)
+               export += current.export();
+        return export;
+    }
+    
+    /**
      * Method responsible for returning Elements to export.
      * @return Elements to export.
      */
-    private String exportElements() {
+    protected String exportElements() {
         String export  = "";
         for (Element element : this.getElementsList()) {
             if   ((element.getType().equals("attribute") == false)
@@ -829,7 +850,7 @@ public abstract class Diagram implements Exportable {
      * Method responsible for returning Associations to export.
      * @return Associations to export.
      */
-    private String exportAssociations() {
+    protected String exportAssociations() {
         String export  = "";
         for (Association association : this.getAssociationsList())
                export += association.export();
@@ -840,7 +861,7 @@ public abstract class Diagram implements Exportable {
      * Method responsible for returning Variabilities to export.
      * @return Variabilities to export.
      */
-    private String exportVariabilities() {
+    protected String exportVariabilities() {
         String export  = "";
         for (Variability variability : this.getVariabilitiesList())
                export += variability.export();

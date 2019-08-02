@@ -5,6 +5,7 @@ import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import model.structural.base.Element;
+import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.PackageUML;
 import view.panel.diagram.types.PanelClassDiagram;
 
@@ -30,22 +31,85 @@ public class ControllerEventGroup extends mxEventSource implements mxIEventListe
     
     @Override
     public void invoke(Object object, mxEventObject event) {
-        mxCell  cell    = (mxCell) this.panel.getGraph().getSelectionCell();
-        String  parent  = this.getId(this.getCellId(cell.getParent()));
-        System.out.println("P: " + parent);
-        System.out.println("X: " + cell.getGeometry().getX());
-        System.out.println("Y: " + cell.getGeometry().getY());
-        System.out.println("");
-//        System.out.println(cell.getGeometry().getX());
-//        String  id      = this.getCellId(this.panel.getGraph().getSelectionCell());
-//        Element element = this.panel.getDiagram().getElement(id);
-//        PackageUML packageUML = (PackageUML) this.panel.getDiagram().getElement(parent);
-//        
-//        this.panel.getComponent().getCel
-//        System.out.println("Cell..: " + cell);
-//        System.out.println("Id....: " + id);
-//        System.out.println("Eleme.: " + element);
-//        System.out.println("Parent: " + parent);
+        mxCell     cell    = (mxCell) this.panel.getGraph().getSelectionCell();
+        Element    element = this.getElement(cell);
+        PackageUML parent  = this.getParent(this.getId(this.getCellId(cell.getParent())));
+        if (this.getId(this.getCellId(cell.getParent())).trim().equals("1"))
+            this.updateDefaultParent(element);
+        else if (parent != null)
+            this.updateParent(parent, element);
+    }
+    
+    /**
+     * Method responsible for returning the Element Selected.
+     * @param  cell Graph Cell.
+     * @return Element Selected.
+     */
+    private Element getElement(mxCell cell) {
+        Element element = this.panel.getDiagram().getElement(this.getCellId(cell));
+        if (element != null)
+            element.setPosition((int) cell.getGeometry().getX(), (int) cell.getGeometry().getY());
+        return  element;
+    }
+    
+    /**
+     * Method responsible for returning the Parent Object.
+     * @param  parentId Parent Id.
+     * @return Parent Package.
+     */
+    private PackageUML getParent(String parentId) {
+        Element parent = this.panel.getDiagram().getElement(parentId);
+        if (parent instanceof PackageUML)
+            return (PackageUML) parent;
+        return null;
+    }
+    
+    /**
+     * Method responsible for updating the Default Parent.
+     * @param element Element.
+     */
+    private void updateDefaultParent(Element element) {
+        if (element instanceof Entity)
+            ((Entity) element).resetPackageUML();
+        else if (element instanceof PackageUML)
+            ((PackageUML) element).resetParent();
+        this.panel.getViewMenu().setSave(false);
+        this.panel.getViewMenu().update();
+        this.panel.updateDiagram();
+    }
+    
+    /**
+     * Method responsible for updating the Default Parent.
+     * @param element Element.
+     */
+    private void updateParent(PackageUML parent, Element element) {
+        if (element instanceof Entity)
+            this.updateParent(parent, (Entity) element);
+        else if (element instanceof PackageUML)
+            this.updateParent(parent, (PackageUML) element);
+        this.panel.getViewMenu().setSave(false);
+        this.panel.getViewMenu().update();
+        this.panel.updateDiagram();
+    }
+    
+    /**
+     * Method responsible for updating the Parent Entity.
+     * @param parent Parent Package.
+     * @param entity Entity.
+     */
+    private void updateParent(PackageUML parent, Entity entity) {
+        if (parent != entity.getPackageUML())
+            entity.changePackageUML(parent);
+    }
+    
+    /**
+     * Method responsible for updating the Parent Package.
+     * @param parent Parent Package.
+     * @param packageUML Package UML.
+     */
+    private void updateParent(PackageUML parent, PackageUML packageUML) {
+        if (parent != packageUML.getParent())
+            packageUML.changePackageUML(parent);
     }
     
     /**
