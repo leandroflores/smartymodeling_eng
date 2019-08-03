@@ -122,7 +122,10 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
         if (parent != null) {
             packageUML.setPosition((packageUML.getX() - parent.getX()), (packageUML.getY() - parent.getY()));
             packageUML.setParent(packageUML);
-            parent.addPackage(packageUML);
+            if (!parent.equals(packageUML)) {
+                parent.addPackage(packageUML);
+                parent.updateSize();
+            }
         }
     }
     
@@ -136,6 +139,7 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
             entity.setPosition((entity.getX() - parent.getX()), (entity.getY() - parent.getY()));
             entity.setPackageUML(parent);
             parent.addEntity(entity);
+            parent.updateSize();
         }
     }
     

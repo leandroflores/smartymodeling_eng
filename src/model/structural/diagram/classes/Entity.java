@@ -61,6 +61,7 @@ public abstract class Entity extends Element {
     public void updateSize() {
         this.setMinHeight();
         this.setMinWidth();
+        this.updatePackageSize();
     }
     
     /**
@@ -109,6 +110,22 @@ public abstract class Entity extends Element {
     }
 
     /**
+     * Method responsible for returning the Absolute Height.
+     * @return Absolute Height.
+     */
+    public Integer getAbsoluteHeight() {
+        return this.getY() + this.getHeight() + 10;
+    }
+    
+    /**
+     * Method responsible for returning the Absolute Width.
+     * @return Absolute Width.
+     */
+    public Integer getAbsoluteWidth() {
+        return this.getX() + this.getWidth()  + 10;
+    }
+    
+    /**
      * Method responsible for changing the Types of Attributes and Methods.
      * @param oldType Old Type.
      * @param newType New Type.
@@ -125,6 +142,26 @@ public abstract class Entity extends Element {
         this.setMinWidth();
     }
 
+    @Override
+    public void dx(Integer distance) {
+        super.dx(distance);
+        this.updatePackageSize();
+    }
+
+    @Override
+    public void dy(Integer distance) {
+        super.dy(distance);
+        this.updatePackageSize();
+    }
+    
+    /**
+     * Method responsible for updating the Package Size.
+     */
+    public void updatePackageSize() {
+        if (this.packageUML != null)
+            this.packageUML.updateSize();
+    }
+    
     /**
      * Method responsible for returning the Class Diagram.
      * @return Class Diagram.

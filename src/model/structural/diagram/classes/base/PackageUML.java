@@ -51,21 +51,124 @@ public class PackageUML extends Element {
         this.name = this.name.toLowerCase();
     }
     
+    /**
+     * Method responsible for updating the Package Size.
+     */
+    public void updateSize() {
+        this.setMinHeight();
+        this.setMinWidth();
+        this.updateParentSize();
+    }
+    
+    /**
+     * Method responsible for updating the Parent Size.
+     */
+    public void updateParentSize() {
+        System.out.println("Current: " + this + " - Parent: " + this.parent);
+        if ((this.parent != null) && (!this.parent.equals(this)))
+             this.parent.updateSize();
+    }
+    
+    /**
+     * Method responsible for setting the Min Height.
+     */
+    public void setMinHeight() {
+        Integer height = this.getMinHeight();
+        this.setHeight(height > this.getHeight() ? height : this.getHeight());
+    }
+    
+    /**
+     * Method responsible for setting the Min Width.
+     */
+    public void setMinWidth() {
+        Integer width = this.getMinWidth();
+        this.setWidth(width  >  this.getWidth() ?  width : this.getWidth());
+    }
+    
+    /**
+     * Method responsible for returning the Min Height.
+     * @return Min Height.
+     */
+    public Integer getMinHeight() {
+        Integer minPackages = this.getPackagesMinHeight();
+        Integer minEntities = this.getEntitiesMinHeight();
+        return  minPackages > minEntities ? minPackages : minEntities;
+    }
+    
+    /**
+     * Method responsible for returning the Packages Min Height.
+     * @return Packages Min Height.
+     */
+    public Integer getPackagesMinHeight() {
+        Integer minimum = 100;
+        for (PackageUML packageUML : this.getPackagesList()) {
+            if (packageUML.getAbsoluteHeight() > minimum)
+                minimum = packageUML.getAbsoluteHeight();
+        }
+        return  minimum;
+    }
+    
+    /**
+     * Method responsible for returning the Entities Min Height.
+     * @return Entities Min Height.
+     */
+    public Integer getEntitiesMinHeight() {
+        Integer minimum = 100;
+        for (Entity entity : this.getEntitiesList()) {
+            if (entity.getAbsoluteHeight() > minimum)
+                minimum = entity.getAbsoluteHeight();
+        }
+        return  minimum;
+    }
+    
+    /**
+     * Method responsible for returning the Min Width.
+     * @return Min Width.
+     */
+    public Integer getMinWidth() {
+        Integer minPackages = this.getPackagesMinWidth();
+        Integer minEntities = this.getEntitiesMinWidth();
+        return  minPackages > minEntities ? minPackages : minEntities;
+    }
+    
+    /**
+     * Method responsible for returning the Packages Min Width.
+     * @return Packages Min Width.
+     */
+    public Integer getPackagesMinWidth() {
+        Integer minimum = 100;
+        for (PackageUML packageUML : this.getPackagesList()) {
+            if (packageUML.getAbsoluteWidth() > minimum)
+                minimum = packageUML.getAbsoluteWidth();
+        }
+        return  minimum;
+    }
+    
+    /**
+     * Method responsible for returning the Entities Min Width.
+     * @return Entities Min Width.
+     */
+    public Integer getEntitiesMinWidth() {
+        Integer minimum = 100;
+        for (Entity entity : this.getEntitiesList()) {
+            if (entity.getAbsoluteWidth() > minimum)
+                minimum = entity.getAbsoluteWidth();
+        }
+        return  minimum;
+    }
+    
     @Override
     public void dx(Integer distance) {
         super.dx(distance);
-        this.dxPackages(distance);
-        this.dxEntities(distance);
+        this.updateSize();
     }
     
     /**
      * Method responsible for moving X.
      * @param distance Distance.
      */
-    private void dxPackages(Integer distance) {
+    public void dxPackages(Integer distance) {
         for (PackageUML packageUML : this.getPackagesList()) {
-            System.out.println(packageUML);
-            System.out.println("");
             packageUML.dx(distance);
         }
     }
@@ -74,7 +177,7 @@ public class PackageUML extends Element {
      * Method responsible for moving X.
      * @param distance Distance.
      */
-    private void dxEntities(Integer distance) {
+    public void dxEntities(Integer distance) {
         for (Entity entity : this.getEntitiesList())
             entity.dx(distance);
     }
@@ -82,15 +185,14 @@ public class PackageUML extends Element {
     @Override
     public void dy(Integer distance) {
         super.dy(distance);
-        this.dyPackages(distance);
-        this.dyEntities(distance);
+        this.updateSize();
     }
     
     /**
      * Method responsible for moving Y.
      * @param distance Distance.
      */
-    private void dyPackages(Integer distance) {
+    public void dyPackages(Integer distance) {
         for (PackageUML packageUML : this.getPackagesList())
             packageUML.dy(distance);
     }
@@ -99,9 +201,25 @@ public class PackageUML extends Element {
      * Method responsible for moving Y.
      * @param distance Distance.
      */
-    private void dyEntities(Integer distance) {
+    public void dyEntities(Integer distance) {
         for (Entity entity : this.getEntitiesList())
             entity.dy(distance);
+    }
+    
+    /**
+     * Method responsible for returning the Absolute Height.
+     * @return Absolute Height.
+     */
+    public Integer getAbsoluteHeight() {
+        return this.getY() + this.getHeight() + 10;
+    }
+    
+    /**
+     * Method responsible for returning the Absolute Width.
+     * @return Absolute Width.
+     */
+    public Integer getAbsoluteWidth() {
+        return this.getX() + this.getWidth()  + 10;
     }
     
     /**

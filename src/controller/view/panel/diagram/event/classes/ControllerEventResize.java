@@ -34,7 +34,7 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
         Object  cell    = this.panel.getGraph().getSelectionCell();
         String  id      = this.getId(cell);
         Element element = this.panel.getDiagram().getElement(id);
-        if (element != null)
+        if (element != null) 
             this.resize(element, cell);
     }
     
