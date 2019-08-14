@@ -85,11 +85,33 @@ public abstract class PanelDiagram extends Panel {
      */
     public abstract void addControllers();
     
+    private mxGraph createMxGraph() {
+        return new mxGraph() {
+            @Override
+            public boolean isValidDropTarget(Object cell, Object[] cells) {
+                return      isCellsMovable() 
+                        && !isCellLocked(cell) 
+                        && this.isValidParent(cell, cells);
+            }
+            
+            public boolean isValidParent(Object cell, Object[] cells) {
+                for (Object object : cells) {
+                    if (((mxCell) object).getId().equals(((mxCell) cell).getId()))
+                        return false;
+                }
+                
+                if  (((mxCell) cell).getParent() == null)
+                    return true;
+                return this.isValidParent(((mxCell) cell).getParent(), cells);
+            }
+        };
+    }
+    
     /**
      * Method responsible for adding Modeling Panel.
      */
     public void addModelingPanel() {
-        this.graph       = new mxGraph();
+        this.graph       = this.createMxGraph();
         this.parent      = this.graph.getDefaultParent();
         this.zoom        = 1.0d;
         this.identifiers = new HashMap<>();

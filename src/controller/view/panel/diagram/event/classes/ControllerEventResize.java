@@ -69,8 +69,9 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
     private void resize(Entity entity, Object cell) {
         Integer height = new Double(this.panel.getGraph().getCellGeometry(cell).getHeight()).intValue();
         Integer width  = new Double(this.panel.getGraph().getCellGeometry(cell).getWidth()).intValue();
-        entity.setHeight(height > entity.getMinHeight() ? height : entity.getMinHeight());
-        entity.setWidth( width  >  entity.getMinWidth() ?  width :  entity.getMinWidth());
+                entity.setHeight(height > entity.getMinHeight() ? height : entity.getMinHeight());
+                entity.setWidth( width  >  entity.getMinWidth() ?  width :  entity.getMinWidth());
+                entity.updatePackageSize();
         this.panel.getViewMenu().setSave(false);
         this.panel.updateDiagram();
     }
@@ -84,6 +85,7 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
         Integer height = new Double(this.panel.getGraph().getCellGeometry(cell).getHeight()).intValue();
         Integer width  = new Double(this.panel.getGraph().getCellGeometry(cell).getWidth()).intValue();
                 packageUML.setSize(height, width);
+                packageUML.updateParentSize();
         this.panel.getViewMenu().setSave(false);
         this.panel.updateDiagram();
     }

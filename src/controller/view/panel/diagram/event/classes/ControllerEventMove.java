@@ -4,6 +4,8 @@ import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import model.structural.base.Element;
+import model.structural.diagram.classes.Entity;
+import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.classes.base.association.AssociationUML;
 import view.panel.diagram.types.PanelClassDiagram;
 
@@ -39,12 +41,44 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      * @param event Event.
      */
     private void move(String id, mxEventObject event) {
-        if (id != null)
+        if (id != null) {
+            Element element = this.panel.getDiagram().getElement(id);
+                    element.setGlobalX(this.getGlobalX(element) + (int) (double) event.getProperty("dx"));
+                    element.setGlobalY(this.getGlobalY(element) + (int) (double) event.getProperty("dy"));
             this.moveCardinality(id, event);
+        }
 //        if (this.panel.getDiagram().getElement(id) != null)
 //            this.moveElement(this.panel.getDiagram().getElement(id), event);
 //        else if (id != null)
 //            this.moveCardinality(id, event);
+    }
+    
+    public int getGlobalX(Element element) {
+        if (element instanceof PackageUML) {
+            if (((PackageUML) element).getParent() == null)
+                return element.getX();
+            else
+                return element.getX() + this.getGlobalX(((PackageUML) element).getParent());
+        }else {
+            if (((Entity) element).getPackageUML() == null)
+                return element.getX();
+            else
+                return element.getX() + this.getGlobalX(((Entity) element).getPackageUML());
+        }
+    }
+    
+    public int getGlobalY(Element element) {
+        if (element instanceof PackageUML) {
+            if (((PackageUML) element).getParent() == null)
+                return element.getY();
+            else
+                return element.getY() + this.getGlobalY(((PackageUML) element).getParent());
+        }else {
+            if (((Entity) element).getPackageUML() == null)
+                return element.getY();
+            else
+                return element.getY() + this.getGlobalY(((Entity) element).getPackageUML());
+        }
     }
     
     /**

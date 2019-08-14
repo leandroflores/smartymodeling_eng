@@ -20,6 +20,7 @@ public abstract class Element implements Exportable, Modelable {
     protected String  type;
     protected boolean mandatory;
     protected Point   position;
+    protected Point   global;
     protected Point   size;
     
     /**
@@ -28,6 +29,7 @@ public abstract class Element implements Exportable, Modelable {
     public Element() {
         this.mandatory = true;
         this.position  = new Point(0, 0);
+        this.global    = new Point(0, 0);
         this.size      = new Point(0, 0);
     }
     
@@ -233,6 +235,30 @@ public abstract class Element implements Exportable, Modelable {
         this.position = position;
     }
 
+    public Point getGlobal() {
+        return global;
+    }
+    
+    public Integer getGlobalX() {
+        return this.global.x;
+    }
+    
+    public Integer getGlobalY() {
+        return this.global.y;
+    }
+    
+    public void setGlobalX(Integer x) {
+        this.global.x = x;
+    }
+    
+    public void setGlobalY(Integer y) {
+        this.global.y = y;
+    }
+
+    public void setGlobal(Point global) {
+        this.global = global;
+    }
+    
     /**
      * Method responsible for returning the X Center.
      * @return X Center.

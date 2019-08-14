@@ -64,7 +64,7 @@ public class PackageUML extends Element {
      * Method responsible for updating the Parent Size.
      */
     public void updateParentSize() {
-        System.out.println("Current: " + this + " - Parent: " + this.parent);
+//        System.out.println("Current: " + this + " - Parent: " + this.parent);
         if ((this.parent != null) && (!this.parent.equals(this)))
              this.parent.updateSize();
     }
@@ -246,8 +246,10 @@ public class PackageUML extends Element {
     public void changePackageUML(PackageUML newPackageUML) {
         if (this.parent   != null)
             this.parent.removePackage(this);
-        if (newPackageUML != null)
+        if (newPackageUML != null) {
             newPackageUML.addPackage(this);
+            newPackageUML.updateSize();
+        }
         this.setParent(newPackageUML);
     }
     
@@ -380,6 +382,7 @@ public class PackageUML extends Element {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_MOVABLE,   "0");
                style.put(mxConstants.STYLE_FOLDABLE,  "0");
+               style.put(mxConstants.STYLE_DASH_PATTERN,  "0");
                style.put(mxConstants.STYLE_EDITABLE,  "0");
                style.put(mxConstants.STYLE_RESIZABLE, "0");
                style.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
@@ -397,6 +400,7 @@ public class PackageUML extends Element {
                style.put(mxConstants.STYLE_MOVABLE,   "0");
                style.put(mxConstants.STYLE_EDITABLE,  "1");
                style.put(mxConstants.STYLE_FOLDABLE,  "0");
+               style.put(mxConstants.STYLE_DASH_PATTERN,  "0");
                style.put(mxConstants.STYLE_FONTSIZE,  "15");
                style.put(mxConstants.STYLE_RESIZABLE, "0");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
