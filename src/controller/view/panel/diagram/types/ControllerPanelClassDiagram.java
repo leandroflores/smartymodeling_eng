@@ -146,7 +146,7 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
      * @param event Mouse Event.
      */
     public void addPackage(MouseEvent event) {
-        PackageUML packageUML = new PackageUML();
+        PackageUML packageUML = new PackageUML(this.panelDiagram.getDiagram());
                    packageUML.setPosition(event.getX(), event.getY());
         this.panelDiagram.getDiagram().addPackage(packageUML);
                    packageUML.setDefaultName();

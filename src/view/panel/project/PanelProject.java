@@ -20,6 +20,7 @@ import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.ClassUML;
 import model.structural.diagram.classes.base.InterfaceUML;
 import model.structural.diagram.classes.base.MethodUML;
+import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.component.base.ComponentUML;
 import model.structural.diagram.usecase.base.ActorUML;
 import model.structural.diagram.usecase.base.UseCaseUML;
@@ -33,6 +34,7 @@ import view.panel.edit.base.classes.PanelEditAttributeUML;
 import view.panel.edit.base.classes.PanelEditClassUML;
 import view.panel.edit.base.classes.PanelEditInterfaceUML;
 import view.panel.edit.base.classes.PanelEditMethodUML;
+import view.panel.edit.base.classes.PanelEditPackageUML;
 import view.panel.edit.base.component.PanelEditComponentUML;
 import view.panel.edit.base.traceability.PanelEditTraceability;
 import view.panel.edit.base.usecase.PanelEditActorUML;
@@ -161,6 +163,8 @@ public final class PanelProject extends Panel {
             this.panelEdit = new PanelEditClassUML(this.viewMenu, diagram, (ClassUML) element);
         else if (element instanceof InterfaceUML)
             this.panelEdit = new PanelEditInterfaceUML(this.viewMenu, diagram, (InterfaceUML) element);
+        else if (element instanceof PackageUML)
+            this.panelEdit = new PanelEditPackageUML(this.viewMenu, diagram, (PackageUML) element);
         this.updatePanelEdit();
     }
     

@@ -58,13 +58,23 @@ public final class PanelBaseVariability extends Panel {
         this.add(this.createTextField("nameTextField", "", 15));
         
         this.add(this.createLabel("Variation Point*: "));
-        this.add(this.createComboBox("variationPointComboBox", new ControllerDiagram(this.diagram).getDefaultElements(), 15, this.variability.getVariationPoint().getAbstract()));
+        this.add(this.createComboBox("variationPointComboBox", new ControllerDiagram(this.diagram).getDefaultElements(), 15, this.getSelectedItem()));
 
         this.add(this.createLabel("Binding Time*: "));
         this.add(this.createComboBox("bindingTimeComboBox", ControllerVariability.BINDINGS, 15));
         
         this.add(this.createLabel("Allows Binding Var: "));
         this.add(this.createCheckBox("allowsAddingVarCheckBox", "", true));
+    }
+    
+    /**
+     * Method responsible for returning the Selected Item.
+     * @return Selected Item.
+     */
+    private Object getSelectedItem() {
+        if (this.variability.getVariationPoint() != null)
+            return this.variability.getVariationPoint().getAbstract();
+        return "";
     }
     
     /**

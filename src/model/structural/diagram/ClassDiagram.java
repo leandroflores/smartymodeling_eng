@@ -98,6 +98,7 @@ public final class ClassDiagram extends Diagram {
         if (this.packagesUML.get(package_.getId()) == null) {
             this.packagesUML.put(package_.getId(), package_);
             this.addElement(package_);
+            package_.setDiagram(this);
         }
     }
     

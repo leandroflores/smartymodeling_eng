@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.structural.base.Element;
+import model.structural.base.Stereotype;
+import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.Entity;
 
 /**
@@ -17,14 +19,17 @@ import model.structural.diagram.classes.Entity;
  * @see    model.structural.base.Element
  */
 public class PackageUML extends Element {
+    private ClassDiagram diagram;
     private PackageUML parent;
     private HashMap    packages;
     private HashMap    entities;
     
     /**
      * Default constructor method of Class.
+     * @param diagram Class Diagram.
      */
-    public PackageUML() {
+    public PackageUML(ClassDiagram diagram) {
+        this.diagram   = diagram;
         this.parent    = null;
         this.packages  = new HashMap<>();
         this.entities  = new HashMap<>();
@@ -90,8 +95,9 @@ public class PackageUML extends Element {
      * @return Min Height.
      */
     public Integer getMinHeight() {
-        Integer minPackages = this.getPackagesMinHeight();
-        Integer minEntities = this.getEntitiesMinHeight();
+        Integer minStereotypes = this.getStereotypesList().size() * 21 + 50;
+        Integer minPackages    = this.getPackagesMinHeight();
+        Integer minEntities    = this.getEntitiesMinHeight();
         return  minPackages > minEntities ? minPackages : minEntities;
     }
     
@@ -157,6 +163,14 @@ public class PackageUML extends Element {
         return  minimum;
     }
     
+    /**
+     * Method responsible for returning the Name Position.
+     * @return Name Position.
+     */
+    public Integer getNamePosition() {
+        return (this.getStereotypesList().size() * 21) + 5;
+    }
+    
     @Override
     public void dx(Integer distance) {
         super.dx(distance);
@@ -220,6 +234,30 @@ public class PackageUML extends Element {
      */
     public Integer getAbsoluteWidth() {
         return this.getX() + this.getWidth()  + 10;
+    }
+    
+    /**
+     * Method responsible for returning the Stereotypes List.
+     * @return Stereotypes List.
+     */
+    public List<Stereotype> getStereotypesList() {
+        return this.diagram.getStereotypesList(this);
+    }
+    
+    /**
+     * Method responsible for returning the Class Diagram.
+     * @return Class Diagram.
+     */
+    public ClassDiagram getDiagram() {
+        return this.diagram;
+    }
+
+    /**
+     * Method responsible for setting the Class Diagram.
+     * @param diagram Class Diagram.
+     */
+    public void setDiagram(ClassDiagram diagram) {
+        this.diagram = diagram;
     }
     
     /**

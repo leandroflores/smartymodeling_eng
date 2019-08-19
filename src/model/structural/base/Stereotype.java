@@ -122,6 +122,7 @@ public final class Stereotype implements Exportable {
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
                style.put(mxConstants.STYLE_STROKECOLOR, "#9999FF");
+               style.put(mxConstants.STYLE_DASH_PATTERN,  "0");
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
                style.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_SHADOW);
         return style;

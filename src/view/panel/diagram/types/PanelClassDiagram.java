@@ -216,15 +216,46 @@ public final class PanelClassDiagram extends PanelDiagram {
         
         mxCell head = (mxCell) this.graph.insertVertex(vertex, packageUML.getId() + "(name)",                    "",  0,  0, packageUML.getWidth() * 0.3,                          15, "packageHeader");
         mxCell body = (mxCell) this.graph.insertVertex(vertex, packageUML.getId() + "(body)",                    "",  0, 15, packageUML.getWidth(),       packageUML.getHeight() - 15, "packageHeader");
-        mxCell name = (mxCell) this.graph.insertVertex(body,   packageUML.getId() + "(name)", packageUML.toString(),  5,  5, packageUML.getWidth() - 10,                           15, "packageName");
-               
+               this.addStereotypeCells(body, packageUML);
+               this.addNameCell(body, packageUML);
+
                head.setConnectable(false);
                body.setConnectable(false);
-               name.setConnectable(false);
         
         this.identifiers.put(head, packageUML.getId());
         this.identifiers.put(body, packageUML.getId());
-        this.identifiers.put(name, packageUML.getId());
+    }
+    
+    /**
+     * Method responsible for adding the Stereotype Cells.
+     * @param parent Parent Cell.
+     * @param packageUML Package UML.
+     */
+    private void addStereotypeCells(mxCell parent, PackageUML packageUML) {
+        List<Stereotype>  stereotypes = this.diagram.getStereotypesList(packageUML);
+        for (int i = 0; i < stereotypes.size(); i++) {
+            Stereotype stereotype = stereotypes.get(i);
+            this.graph.getStylesheet().putCellStyle("stereotypeStyle", stereotype.getStyle()); 
+            mxCell     cell       = (mxCell) this.graph.insertVertex(parent, "LINK#" + packageUML.getId() + "-" + stereotype.getId(), stereotype.toString(), 5, (i * 21) + 5, packageUML.getWidth() - 10, 20, "stereotypeStyle");
+                       cell.setConnectable(false);
+                       cell.setTerminal(null, true);
+                       cell.setId(stereotype.getId());
+            this.identifiers.put(cell,         stereotype.getId());
+            this.identifiers.put(cell.getId(), packageUML.getId());
+        }
+    }
+    
+    /**
+     * Method responsible for adding the Name Cell.
+     * @param parent Parent Cell.
+     * @param packageUML Package UML.
+     */
+    private void addNameCell(mxCell parent, PackageUML packageUML) {
+        this.graph.getStylesheet().putCellStyle("nameStyle", packageUML.getNameStyle());
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, packageUML.getId() + "(name)", packageUML.getName(), 5, packageUML.getNamePosition(), packageUML.getWidth() - 10, 25, "nameStyle");
+               cell.setConnectable(false);
+               cell.setId(packageUML.getId() + "(name)");
+        this.identifiers.put(cell.getId(), packageUML.getId());
     }
     
     /**
