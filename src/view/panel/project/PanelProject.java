@@ -8,6 +8,7 @@ import javax.swing.JSplitPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.base.evaluation.Metric;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ActivityDiagram;
@@ -36,6 +37,7 @@ import view.panel.edit.base.classes.PanelEditInterfaceUML;
 import view.panel.edit.base.classes.PanelEditMethodUML;
 import view.panel.edit.base.classes.PanelEditPackageUML;
 import view.panel.edit.base.component.PanelEditComponentUML;
+import view.panel.edit.base.evaluation.PanelEditMetric;
 import view.panel.edit.base.traceability.PanelEditTraceability;
 import view.panel.edit.base.usecase.PanelEditActorUML;
 import view.panel.edit.base.usecase.PanelEditUseCaseUML;
@@ -210,6 +212,15 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditTraceability(Traceability traceability) {
         this.panelEdit = new PanelEditTraceability(this.viewMenu, traceability);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Metric.
+     * @param metric Metric.
+     */
+    public void initPanelEditMetric(Metric metric) {
+        this.panelEdit = new PanelEditMetric(this.viewMenu, metric);
         this.updatePanelEdit();
     }
     

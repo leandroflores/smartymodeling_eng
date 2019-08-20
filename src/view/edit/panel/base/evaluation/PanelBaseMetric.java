@@ -1,10 +1,10 @@
 package view.edit.panel.base.evaluation;
 
+import controller.view.edit.panel.base.evaluation.ControllerPanelBaseMetric;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import javax.swing.JComboBox;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import model.controller.structural.base.evaluation.ControllerMetric;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Metric;
 import view.Panel;
@@ -33,7 +33,7 @@ public final class PanelBaseMetric extends Panel {
         this.viewMenu   = viewMenu;
         this.project    = this.viewMenu.getProject();
         this.metric     = metric;
-//        this.controller = new ControllerPanelBaseVariability(this);
+        this.controller = new ControllerPanelBaseMetric(this);
         this.setSettings();
         this.addComponents();
         this.setValues();
@@ -53,11 +53,11 @@ public final class PanelBaseMetric extends Panel {
         this.add(this.createLabel("Name*: "));
         this.add(this.createTextField("nameTextField", "", 15));
         
-        this.add(this.createLabel("Target*: "));
-        this.add(this.createComboBox("targetComboBox", ControllerMetric.TARGETS, 15));
+        this.add(this.createLabel("Label*: "));
+        this.add(this.createTextField("labelTextField", "", 15));
         
-        this.add(this.createLabel("Operation*: "));
-        this.add(this.createTextField("operationTextField", "", 15));
+        this.add(this.createLabel("Description*: "));
+        this.add(this.createTextArea("descriptionTextArea"));
     }
     
     /**
@@ -65,8 +65,8 @@ public final class PanelBaseMetric extends Panel {
      */
     public void setValues() {
         this.getNameTextField().setText(this.metric.getName());
-        this.getTargetComboBox().setSelectedItem(this.metric.getTarget());
-        this.getOperationTextField().setText(this.metric.getOperation());
+        this.getLabelTextField().setText(this.metric.getLabel());
+        this.getDescriptionTextArea().setText(this.metric.getDescription());
     }
     
     /**
@@ -102,18 +102,18 @@ public final class PanelBaseMetric extends Panel {
     }
     
     /**
-     * Method responsible for returning the Target Combo Box.
-     * @return Target Combo Box.
+     * Method responsible for returning the Label Text Field.
+     * @return Label Text Field.
      */
-    public JComboBox getTargetComboBox() {
-        return this.comboBoxes.get("targetComboBox");
+    public JTextField getLabelTextField() {
+        return this.textFields.get("labelTextField");
     }
     
     /**
-     * Method responsible for returning the Operation Text Field.
-     * @return Operation Text Field.
+     * Method responsible for returning the Description Text Area.
+     * @return Description Text Area.
      */
-    public JTextField getOperationTextField() {
-        return this.textFields.get("operationTextField");
+    public JTextArea getDescriptionTextArea() {
+        return this.textAreas.get("descriptionTextArea");
     }
 }

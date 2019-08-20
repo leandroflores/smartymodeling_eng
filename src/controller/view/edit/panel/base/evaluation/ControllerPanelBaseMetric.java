@@ -46,7 +46,7 @@ public class ControllerPanelBaseMetric extends ControllerPanel {
      */
     private boolean check() {
         return this.check(this.panelBaseMetric.getNameTextField().getText())
-            && this.check(this.panelBaseMetric.getOperationTextField().getText());
+            && this.check(this.panelBaseMetric.getLabelTextField().getText());
     }
     
     /**
@@ -54,8 +54,8 @@ public class ControllerPanelBaseMetric extends ControllerPanel {
      */
     public void update() {
         this.panelBaseMetric.getMetric().setName(this.panelBaseMetric.getNameTextField().getText().trim());
-        this.panelBaseMetric.getMetric().setTarget(this.panelBaseMetric.getTargetComboBox().getSelectedItem().toString());
-        this.panelBaseMetric.getMetric().setOperation(this.panelBaseMetric.getOperationTextField().getText().trim());
+        this.panelBaseMetric.getMetric().setLabel(this.panelBaseMetric.getLabelTextField().getText().trim());
+        this.panelBaseMetric.getMetric().setDescription(this.panelBaseMetric.getDescriptionTextArea().getText().trim());
         this.panelBaseMetric.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseMetric.getViewMenu().setSave(false);
     }

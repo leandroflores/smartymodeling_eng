@@ -22,6 +22,7 @@ import view.edit.ViewEditProfile;
 import view.message.ViewError;
 import view.message.ViewMessage;
 import view.message.ViewSave;
+import view.new_.evaluation.ViewNewMetric;
 import view.new_.traceability.ViewNewTraceability;
 import view.structural.ViewMenu;
 import view.system.ViewSystemInformation;
@@ -74,6 +75,8 @@ public class ControllerViewMenu extends ControllerView {
             this.instantiateNewProduct();
         else if (this.viewMenu.getMenuItemNewTraceability().equals(event.getSource()))
             this.newTraceability();
+        else if (this.viewMenu.getMenuItemEvaluationMetric().equals(event.getSource()))
+            this.newMetric();
         else if (this.viewMenu.getMenuItemSystemInformation().equals(event.getSource()))
             new ViewSystemInformation(this.viewMenu).setVisible(true);
         else if (this.viewMenu.getMenuItemSystemExit().equals(event.getSource()))
@@ -286,6 +289,14 @@ public class ControllerViewMenu extends ControllerView {
             if (!this.viewMenu.getProject().getDiagrams().isEmpty())
                 new ViewNewTraceability(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
         }
+    }
+    
+    /**
+     * Method responsible for inserting a New Metric.
+     */
+    private void newMetric() {
+        if (this.viewMenu.getProject() != null)
+            new ViewNewMetric(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
     }
     
     /**

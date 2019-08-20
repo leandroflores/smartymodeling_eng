@@ -9,6 +9,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.base.evaluation.Metric;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ActivityDiagram;
@@ -129,6 +130,8 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
                 this.showPanelEditVariability(diagram, (Variability) node.getUserObject());
             else if (node.getUserObject() instanceof Traceability)
                 this.showPanelEditTraceability((Traceability) node.getUserObject());
+            else if (node.getUserObject() instanceof Metric)
+                this.showPanelEditMetric((Metric) node.getUserObject());
             else if (node.getUserObject() instanceof Element)
                 this.showPanelEdit(diagram, (Element) node.getUserObject());
         }
@@ -149,6 +152,14 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      */
     private void showPanelEditTraceability(Traceability traceability) {
         this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditTraceability(traceability);
+    }
+    
+    /**
+     * Method responsible for showing the Panel Edit Metric.
+     * @param metric Metric.
+     */
+    private void showPanelEditMetric(Metric metric) {
+        this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditMetric(metric);
     }
     
     /**

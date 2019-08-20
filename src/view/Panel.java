@@ -20,6 +20,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
@@ -45,6 +46,7 @@ public abstract class Panel extends JPanel {
     protected HashMap<String, JComboBox> comboBoxes;
     protected HashMap<String, JCheckBox> checkBoxes;
     protected HashMap<String, JTextField> textFields;
+    protected HashMap<String, JTextArea>  textAreas;
     protected HashMap<String, JFileChooser> fileChoosers;
     
     protected HashMap<String, JTable> tables;
@@ -68,6 +70,7 @@ public abstract class Panel extends JPanel {
         this.lists        = new HashMap<>();
         this.buttons      = new HashMap<>();
         this.textFields   = new HashMap<>();
+        this.textAreas    = new HashMap<>();
         this.comboBoxes   = new HashMap<>();
         this.checkBoxes   = new HashMap<>();
         this.fileChoosers = new HashMap<>();
@@ -330,6 +333,33 @@ public abstract class Panel extends JPanel {
                this.createScrollPane(id, list);
                this.lists.put(id, list);
         return list;
+    }
+    
+    /**
+     * Method responsible for returning a new JTextArea.
+     * @param  id JTextArea Id.
+     * @return New JTextArea.
+     */
+    public JTextArea createTextArea(String id) {
+        JTextArea textArea = new JTextArea(10, 30);
+                  textArea.addKeyListener(this.controller);
+                  textArea.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
+                  this.textAreas.put(id, textArea);
+                  this.createScrollPane(id, textArea);
+        return    textArea;
+    }
+    
+    /**
+     * Method responsible for returning a new JScrollPane of a JTextArea.
+     * @param  id JScrollPane Id.
+     * @param  textArea JScrollPane JTextArea.
+     * @return New JScrollPane of a JTextArea.
+     */
+    private JScrollPane createScrollPane(String id, JTextArea textArea) {
+        JScrollPane scrollPane = new JScrollPane(textArea);
+                    scrollPane.setPreferredSize(new Dimension(380, 150));
+                    this.scrollPanes.put(id, scrollPane);
+        return      scrollPane;
     }
     
     /**

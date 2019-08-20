@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 import model.structural.base.association.Link;
+import model.structural.base.evaluation.Metric;
 import model.structural.base.interfaces.Exportable;
 import model.structural.base.traceability.Traceability;
 import model.structural.diagram.classes.base.TypeUML;
@@ -34,6 +35,7 @@ public class Project implements Exportable {
     public  HashMap types;
     public  HashMap variabilities;
     public  HashMap traceabilities;
+    public  HashMap metrics;
     public  HashMap stereotypes;
     public  HashMap links;
     public  HashMap objects;
@@ -72,6 +74,7 @@ public class Project implements Exportable {
         this.types          = new LinkedHashMap();
         this.variabilities  = new LinkedHashMap();
         this.traceabilities = new LinkedHashMap();
+        this.metrics        = new LinkedHashMap();
         this.stereotypes    = new LinkedHashMap();
         this.links          = new LinkedHashMap();
         this.objects        = new LinkedHashMap();
@@ -662,6 +665,65 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Next Metric Id.
+     * @return Next Metric Id.
+     */
+    public String nextMetricId() {
+        Integer index  = 1;
+        String  nextId = "METRIC#" + index;
+        while (this.metrics.get(nextId) != null) {
+            index += 1;
+            nextId = "METRIC#" + index;
+        }
+        return nextId;
+    }
+    
+    /**
+     * Method responsible for adding a Metric.
+     * @param metric Metric.
+     */
+    public void addMetric(Metric metric) {
+        metric.setId(this.nextMetricId());
+        this.metrics.put(metric.getId(), metric);
+    }
+    
+    /**
+     * Method responsible for returning a Metric by Id.
+     * @param  id Metric Id.
+     * @return Metric found.
+     */
+    public Metric getMetric(String id) {
+        return (Metric) this.metrics.get(id);
+    }
+    
+    /**
+     * Method responsible for removing a Metric.
+     * @param metric Metric.
+     */
+    public void removeMetric(Metric metric) {
+        this.metrics.remove(metric.getId());
+    }
+    
+    /**
+     * Method responsible for returning Metrics List.
+     * @return Metrics List.
+     */
+    public List<Metric> getMetricsList() {
+        return new ArrayList<>(this.metrics.values());
+    }
+    
+    /**
+     * Method responsible for exporting the Metrics.
+     * @return Metrics.
+     */
+    private String exportMetrics() {
+        String export  = "";
+        for (Metric metric : this.getMetricsList())
+               export += metric.export();
+        return export;
+    }
+    
+    /**
      * Method responsible for returning the Stereotypes HashMap.
      * @return Stereotypes HashMap.
      */
@@ -933,6 +995,7 @@ public class Project implements Exportable {
                export += this.profile.export();
                export += this.exportDiagrams();
                export += this.exportTraceabilities();
+               export += this.exportMetrics();
                export += "  <links>\n"       + this.exportLinks()       + "  </links>\n";
                export += "</project>";
         return export;
