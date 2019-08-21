@@ -12,7 +12,7 @@ import view.new_.ViewNew;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>ViewEditMetric</b>.</p>
+ * <p>Class of View <b>ViewNewMetric</b>.</p>
  * <p>Class responsible for defining the <b>New Metric View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  20/08/2019

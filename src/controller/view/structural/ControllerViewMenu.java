@@ -23,6 +23,7 @@ import view.message.ViewError;
 import view.message.ViewMessage;
 import view.message.ViewSave;
 import view.new_.evaluation.ViewNewMetric;
+import view.new_.product.ViewNewProduct;
 import view.new_.traceability.ViewNewTraceability;
 import view.structural.ViewMenu;
 import view.system.ViewSystemInformation;
@@ -277,8 +278,11 @@ public class ControllerViewMenu extends ControllerView {
      * Method responsible for instantiating a New Product.
      */
     private void instantiateNewProduct() {
-//        if (this.viewMenu.getPanelModeling().getPainelDiagrama() != null)
-//            new ViewInstanciarProduto(this.viewMenu, this.viewMenu.getPanelModeling().getPainelDiagrama().getDiagrama()).setVisible(true);
+        if (this.viewMenu.getPanelModeling().getPanelDiagram() != null) {
+            new ViewNewProduct(this.viewMenu, this.viewMenu.getPanelModeling().getPanelDiagram().getDiagram()).setVisible(true);
+        }else {
+            new ViewMessage(this.viewMenu, "Open a Diagram to instantiate a new Product!").setVisible(true);
+        }
     }
     
     /**

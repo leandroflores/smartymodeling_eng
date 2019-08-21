@@ -226,7 +226,7 @@ public abstract class Diagram implements Exportable {
         List<Element> list   = this.getElementsList();
         List<Element> filter = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            if (this.filterVariants(list.get(i), "").isEmpty())
+            if ((list.get(i).isDefault()) && (this.filterVariants(list.get(i), "").isEmpty()))
                 filter.add(list.get(i));
         }
         return filter;
