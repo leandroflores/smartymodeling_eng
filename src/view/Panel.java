@@ -341,7 +341,7 @@ public abstract class Panel extends JPanel {
      * @return New JTextArea.
      */
     public JTextArea createTextArea(String id) {
-        JTextArea textArea = new JTextArea(10, 30);
+        JTextArea textArea = new JTextArea(5, 10);
                   textArea.addKeyListener(this.controller);
                   textArea.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
                   this.textAreas.put(id, textArea);
@@ -357,7 +357,7 @@ public abstract class Panel extends JPanel {
      */
     private JScrollPane createScrollPane(String id, JTextArea textArea) {
         JScrollPane scrollPane = new JScrollPane(textArea);
-                    scrollPane.setPreferredSize(new Dimension(380, 150));
+                    scrollPane.setPreferredSize(new Dimension(200, 100));
                     this.scrollPanes.put(id, scrollPane);
         return      scrollPane;
     }

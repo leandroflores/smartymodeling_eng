@@ -16,6 +16,7 @@ import model.structural.base.Profile;
 import model.structural.base.Project;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Link;
+import model.structural.base.evaluation.Metric;
 import model.structural.base.traceability.Traceability;
 import model.structural.diagram.classes.base.TypeUML;
 import org.w3c.dom.Document;
@@ -93,6 +94,7 @@ public class ImportProject {
         this.importProfile();
         this.importDiagrams();
         this.importTraceabilities();
+        this.importMetrics();
         this.importLinks();
         
                this.project.updateStereotypes();
@@ -199,6 +201,22 @@ public class ImportProject {
             for (int x = 0; x < elements.getLength(); x++)
                          traceability.addElement((model.structural.base.Element) this.project.objects.get(((Element) elements.item(x)).getAttribute("id")));
             this.project.addTraceability(traceability);
+        }
+    }
+    
+    /**
+     * Method responsible for importing Project Metrics.
+     * @throws XPathExpressionException 
+     */
+    private void importMetrics() throws XPathExpressionException {
+        this.expression = "/project/metric";
+        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
+        for (int i = 0; i < this.nodeList.getLength(); i++) {
+            Element current = (Element) this.nodeList.item(i);
+            Metric  metric  = new Metric(current);
+                    metric.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
+                    metric.setOperation(current.getElementsByTagName("operation").item(0).getTextContent());
+            this.project.addMetric(metric);
         }
     }
     

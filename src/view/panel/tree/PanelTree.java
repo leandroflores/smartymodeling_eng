@@ -88,11 +88,11 @@ public final class PanelTree extends Panel {
      * @param root Tree Node.
      */
     private void addTraceabilities(DefaultMutableTreeNode root) {
-        if (this.project != null) {
+        if ((this.project != null)  && (!this.project.getTraceabilitiesList().isEmpty())) {
             DefaultMutableTreeNode traceabilityNode = new DefaultMutableTreeNode("Traceabilities");
             List<Traceability>     traceabilities   = this.project.getTraceabilitiesList();
             for (int i = 0; i < traceabilities.size(); i++)
-                     traceabilityNode.add(new DefaultMutableTreeNode(traceabilities.get(i)));
+                     traceabilityNode.add(this.getNode(traceabilities.get(i)));
             root.add(traceabilityNode);
         }
     }
@@ -102,7 +102,7 @@ public final class PanelTree extends Panel {
      * @param root Tree Node.
      */
     private void addMetrics(DefaultMutableTreeNode root) {
-        if (this.project != null) {
+        if ((this.project != null) && (!this.project.getMetricsList().isEmpty())) {
             DefaultMutableTreeNode metricNode = new DefaultMutableTreeNode("Metrics");
             List<Metric>           metrics    = this.project.getMetricsList();
             for (int i = 0; i < metrics.size(); i++)
@@ -152,9 +152,9 @@ public final class PanelTree extends Panel {
     }
     
     /**
-     * 
-     * @param packageUML
-     * @return 
+     * Method responsible for returning the Package Node.
+     * @param  packageUML Package UML.
+     * @return Package Node.
      */
     private DefaultMutableTreeNode getNode(PackageUML packageUML) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(packageUML);
@@ -266,6 +266,28 @@ public final class PanelTree extends Panel {
     private void addVariants(Variability variability, DefaultMutableTreeNode node) {
         for (int i = 0; i < variability.getVariants().size(); i++)
             node.add(new DefaultMutableTreeNode(variability.getVariants().get(i)));
+    }
+    
+    /**
+     * Method responsible for returning the Traceability Node.
+     * @param  traceability Traceability.
+     * @return Traceability Node.
+     */
+    private DefaultMutableTreeNode getNode(Traceability traceability) {
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(traceability);
+            this.addElements(traceability, node);
+        return node;
+    }
+    
+    /**
+     * Method responsible for adding Traceability Elements.
+     * @param traceability Traceability.
+     * @param node Traceability Node.
+     */
+    private void addElements(Traceability traceability, DefaultMutableTreeNode node) {
+        List<Element> elements = traceability.getElements();
+        for (int i = 0; i < elements.size(); i++)
+            node.add(new DefaultMutableTreeNode(elements.get(i)));
     }
     
     /**

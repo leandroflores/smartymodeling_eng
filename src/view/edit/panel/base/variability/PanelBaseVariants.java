@@ -52,8 +52,8 @@ public final class PanelBaseVariants extends Panel {
      */
     private void setSettings() {
         this.setLayout(new GridBagLayout());
-        this.setPreferredSize(new Dimension(300, 300));
-        this.setSize(new Dimension(300, 300));
+        this.setPreferredSize(new Dimension(200, 300));
+        this.setSize(new Dimension(200, 300));
     }
     
     @Override

@@ -11,6 +11,7 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.association.Association;
+import model.structural.base.evaluation.Metric;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.classes.base.AttributeUML;
@@ -123,6 +124,16 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
         this.setIcon(new ImageIcon(traceability.getIcon()));
     }
     
+    /**
+     * Method responsible for defining Metric.
+     * @param metric Metric.
+     */
+    public void setMetricIcon(Metric metric) {
+        this.setText(metric.getName());
+        this.setToolTipText(metric.getName());
+        this.setIcon(new ImageIcon(metric.getIcon()));
+    }
+    
     @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
         Component component = super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
@@ -143,6 +154,8 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
             this.setVariabilityIcon((Variability) object);
         else if (object instanceof Traceability)
             this.setTraceabilityIcon((Traceability) object);
+        else if (object instanceof Metric)
+            this.setMetricIcon((Metric) object);
         return this;
     }
     
