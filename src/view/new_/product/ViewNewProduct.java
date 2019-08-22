@@ -10,6 +10,7 @@ import model.structural.base.Element;
 import model.structural.base.product.Product;
 import model.structural.base.variability.Variability;
 import view.edit.panel.base.product.PanelBaseOptional;
+import view.edit.panel.base.product.PanelBaseVariationPoints;
 import view.message.ViewMessage;
 import view.new_.ViewNew;
 import view.structural.ViewMenu;
@@ -147,10 +148,10 @@ public final class ViewNewProduct extends ViewNew {
     }
     
     /**
-     * Method responsible for adding the Variation Point Tabbed Pane.
+     * Method responsible for adding the Variation Points Tabbed Pane.
      */
-    public void addVariationPointTabbedPane() {
-//        this.tabbedPane.add("Variation Points", new PainelPontosDeVariacao(this));
+    public void addVariationPointsTabbedPane() {
+        this.tabbedPane.add("Variation Points", new PanelBaseVariationPoints(this));
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(1));
         this.tabbedPane.setEnabledAt(0, false);
     }

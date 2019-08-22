@@ -17,7 +17,7 @@ import view.edit.panel.base.product.PanelBaseOptional;
  * @see    view.edit.panel.base.product.PanelBaseOptional
  */
 public class ControllerPanelBaseOptional extends ControllerPanel {
-    private final PanelBaseOptional painelBaseOptional;
+    private final PanelBaseOptional panelBaseOptional;
 
     /**
      * Default constructor method of Class.
@@ -25,14 +25,14 @@ public class ControllerPanelBaseOptional extends ControllerPanel {
      */
     public ControllerPanelBaseOptional(PanelBaseOptional panel) {
         super(panel);
-        this.painelBaseOptional = panel;
+        this.panelBaseOptional = panel;
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.painelBaseOptional.getBackButton().equals(event.getSource()))
-            this.painelBaseOptional.getViewNewProduct().dispose();
-        else if (this.painelBaseOptional.getNextButton().equals(event.getSource()))
+        if (this.panelBaseOptional.getBackButton().equals(event.getSource()))
+            this.panelBaseOptional.getViewNewProduct().dispose();
+        else if (this.panelBaseOptional.getNextButton().equals(event.getSource()))
             this.next();
     }
     
@@ -44,21 +44,17 @@ public class ControllerPanelBaseOptional extends ControllerPanel {
      */
     public void next() {
         this.updateProduct();
-        this.painelBaseOptional.getViewNewProduct().addVariationPointTabbedPane();
+        this.panelBaseOptional.getViewNewProduct().addVariationPointsTabbedPane();
     }
     
     /**
      * Method responsible for updating the Diagram.
      */
     private void updateProduct() {
-        List<Element> elements = this.painelBaseOptional.getViewNewProduct().getDiagram().filterOptionalElements();
+        List<Element> elements = this.panelBaseOptional.getViewNewProduct().getDiagram().filterOptionalElements();
         for (Element  element : elements) {
-            if (this.painelBaseOptional.getCheckBox(element).isSelected())
-                this.painelBaseOptional.getViewNewProduct().increment(element);
-//            else
-//                this.painelOpcional.getProduto().removeElemento(elemento);
+            if (this.panelBaseOptional.getCheckBox(element).isSelected())
+                this.panelBaseOptional.getViewNewProduct().increment(element);
         }
     }
-
-    
 }

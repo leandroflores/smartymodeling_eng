@@ -35,7 +35,7 @@ public class PanelBaseOptional extends Panel {
     }
     
     /**
-     * Metodo responsavel por adicionar os Componentes.
+     * Method responsible for initializing the Components.
      */
     private void initComponents() {
         this.setPreferredSize(new Dimension(600, 350));
