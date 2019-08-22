@@ -1,6 +1,7 @@
 package model.structural.base.traceability;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import model.structural.base.Element;
 import model.structural.base.interfaces.Exportable;
@@ -23,7 +24,7 @@ public class Traceability implements Exportable {
      * Default constructor method of Class.
      */
     public Traceability() {
-        this.elements = new ArrayList<>();
+        this.elements = new LinkedList<>();
     }
     
     /**

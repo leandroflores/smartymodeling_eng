@@ -8,9 +8,11 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import model.structural.base.Diagram;
+import model.structural.base.product.Product;
 import view.Panel;
 import view.panel.diagram.PanelDiagram;
 import view.panel.modeling.PanelModeling;
+import view.panel.product.PanelProduct;
 
 /**
  * 
@@ -80,6 +82,16 @@ public final class PanelTabTitle extends Panel {
     public Diagram getDiagram() {
         if (this.getComponent() instanceof PanelDiagram)
             return ((PanelDiagram) this.getComponent()).getDiagram();
+        return null;
+    }
+    
+    /**
+     * Method responsible for returning the Product.
+     * @return Product.
+     */
+    public Product getProduct() {
+        if (this.getComponent() instanceof PanelProduct)
+            return ((PanelProduct) this.getComponent()).getProduct();
         return null;
     }
     

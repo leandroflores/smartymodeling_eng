@@ -1,5 +1,6 @@
 package view.new_.product;
 
+import controller.view.new_.product.ControllerViewNewProduct;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import model.structural.base.Element;
 import model.structural.base.product.Product;
 import model.structural.base.variability.Variability;
 import view.edit.panel.base.product.PanelBaseOptional;
+import view.edit.panel.base.product.PanelBaseProduct;
 import view.edit.panel.base.product.PanelBaseVariationPoints;
 import view.message.ViewMessage;
 import view.new_.ViewNew;
@@ -20,11 +22,15 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>New Product View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  21/08/2019
- * @see    controller.view.new_.
+ * @see    controller.view.new_.product.ControllerViewNewProduct
  * @see    view.new_.ViewNew
  */
 public final class ViewNewProduct extends ViewNew {
     private final Diagram diagram;
+    private Product product;
+    private PanelBaseOptional panelBaseOptional;
+    private PanelBaseVariationPoints panelBaseVariationPoints;
+    private PanelBaseProduct panelBaseProduct;
     private HashMap<String, Integer> components;
     
     /**
@@ -35,7 +41,7 @@ public final class ViewNewProduct extends ViewNew {
     public ViewNewProduct(ViewMenu view, Diagram diagram) {
         super(view);
         this.diagram    = diagram;
-//        this.controller = new ControllerViewInstanciarProduto(this);
+        this.controller = new ControllerViewNewProduct(this);
         this.title      = "New Product";
         this.initComponents();
     }
@@ -76,8 +82,9 @@ public final class ViewNewProduct extends ViewNew {
     public void addOptionalTabbedPane() {
         this.updateComponents();
         
+        this.panelBaseOptional = new PanelBaseOptional(this);
         this.tabbedPane.removeAll();
-        this.tabbedPane.add("Optionals", new PanelBaseOptional(this));
+        this.tabbedPane.add("Optionals", this.panelBaseOptional);
     }
     
     /**
@@ -98,7 +105,6 @@ public final class ViewNewProduct extends ViewNew {
      */
     private void updateComponents() {
         this.components = new HashMap();
-        System.out.println(this.diagram);
         for (Element element : this.diagram.getElementsList())
             this.components.put(element.getId(), 0);
     }
@@ -112,30 +118,29 @@ public final class ViewNewProduct extends ViewNew {
     }
     
     /**
-     * Method responsible for showing the New Product.
+     * Method responsible for creating a New Product.
+     * @return New Product.
      */
-    public void showNewProduct() {
-        Product product = this.newProduct();
-        if (product.isEmpty())
-            new ViewMessage(this, "Empty Product!").setVisible(true);
-//        else
-//            this.view.getPanelModeling().addProduto(product);
-        this.dispose();
+    public Product createNewProduct() {
+        Product newProduct = new Product();
+                newProduct.setName("NewProduct");
+                newProduct.setIdentifiers(this.components);
+                newProduct.setElements(this.diagram.getElements());
+                newProduct.setAssociations(this.diagram.getAssociations());
+                newProduct.update();
+        return  newProduct;
     }
     
     /**
-     * Method responsible for returning a New Product.
-     * @return New Product.
+     * Method responsible for showing the New Product.
      */
-    private Product newProduct() {
-        Product product = new Product();
-                product.setId("Product");
-                product.setName("New Product");
-                product.setIdentifiers(this.components);
-                product.setElements(this.diagram.getElements());
-                product.setAssociations(this.diagram.getAssociations());
-                product.update();
-        return  product;
+    public void showNewProduct() {
+        this.product = this.panelBaseProduct.getProduct();
+        if (this.product.isEmpty())
+            new ViewMessage(this, "Empty Product!").setVisible(true);
+        else
+            this.view.getPanelModeling().addProduct(this.product);
+        this.dispose();
     }
     
     /**
@@ -151,7 +156,8 @@ public final class ViewNewProduct extends ViewNew {
      * Method responsible for adding the Variation Points Tabbed Pane.
      */
     public void addVariationPointsTabbedPane() {
-        this.tabbedPane.add("Variation Points", new PanelBaseVariationPoints(this));
+        this.panelBaseVariationPoints = new PanelBaseVariationPoints(this);
+        this.tabbedPane.add("Variation Points", this.panelBaseVariationPoints);
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(1));
         this.tabbedPane.setEnabledAt(0, false);
     }
@@ -163,6 +169,25 @@ public final class ViewNewProduct extends ViewNew {
         this.tabbedPane.getComponent(0).setEnabled(true);
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(0));
         this.tabbedPane.remove(1);
+    }
+    
+    /**
+     * Method responsible for adding the Product Tabbed Pane.
+     */
+    public void addProductTabbedPane() {
+        this.panelBaseProduct = new PanelBaseProduct(this, this.createNewProduct());
+        this.tabbedPane.add("New Product", this.panelBaseProduct);
+        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(2));
+        this.tabbedPane.setEnabledAt(1, false);
+    }
+    
+    /**
+     * Method responsible for removing the Product Tabbed Pane.
+     */
+    public void removeProductTabbedPane() {
+        this.tabbedPane.getComponent(1).setEnabled(true);
+        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(1));
+        this.tabbedPane.remove(2);
     }
     
     /**
@@ -178,6 +203,22 @@ public final class ViewNewProduct extends ViewNew {
      */
     public Diagram getDiagram() {
         return this.diagram;
+    }
+
+    /**
+     * Method responsible for returning the Panel Base Optional.
+     * @return Panel Base Optional.
+     */
+    public PanelBaseOptional getPanelBaseOptional() {
+        return this.panelBaseOptional;
+    }
+
+    /**
+     * Method responsible for returning the Panel Base Variation Points.
+     * @return Panel Base Variation Points.
+     */
+    public PanelBaseVariationPoints getPanelBaseVariationPoints() {
+        return this.panelBaseVariationPoints;
     }
     
     /**

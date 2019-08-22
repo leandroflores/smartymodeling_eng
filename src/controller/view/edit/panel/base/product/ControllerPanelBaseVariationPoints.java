@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import model.structural.base.Element;
+import model.structural.base.product.Product;
 import model.structural.base.variability.Variability;
 import view.edit.panel.base.product.PanelBaseVariationPoints;
 import view.message.ViewError;
@@ -50,13 +51,14 @@ public class ControllerPanelBaseVariationPoints extends ControllerPanel {
     /**
      * Method responsible for create a New Product.
      */
-    private void newProduct() {
+    public void newProduct() {
         if (this.checkVariabilities()) {
             for (Variability variability : this.panelBaseVariationPoints.getViewNewProduct().getDiagram().getVariabilitiesList()) {
                 if (this.panelBaseVariationPoints.getVariabilityCheckBox(variability).isSelected())
                     this.insertVariability(variability);
             }
-            this.panelBaseVariationPoints.getViewNewProduct().showNewProduct();
+            this.panelBaseVariationPoints.getViewNewProduct().addProductTabbedPane();
+//            this.panelBaseVariationPoints.getViewNewProduct().showNewProduct();
         }
     }
     
@@ -194,6 +196,15 @@ public class ControllerPanelBaseVariationPoints extends ControllerPanel {
     }
     
     /**
+     * Method responsible for checking the Variabilities.
+     * @return Variabilities checked.
+     */
+    public boolean checkVariabilities() {
+        return this.checkInclusiveVariabilities()
+            && this.checkExclusiveVariabilities();
+    }
+    
+    /**
      * Method responsible for checking the Inclusive Variabilities.
      * @return Inclusive Variabilities checked.
      */
@@ -252,14 +263,5 @@ public class ControllerPanelBaseVariationPoints extends ControllerPanel {
                 return false;
         }
         return true;
-    }
-    
-    /**
-     * Method responsible for checking the Variabilities.
-     * @return Variabilities checked.
-     */
-    public boolean checkVariabilities() {
-        return this.checkInclusiveVariabilities()
-            && this.checkExclusiveVariabilities();
     }
 }

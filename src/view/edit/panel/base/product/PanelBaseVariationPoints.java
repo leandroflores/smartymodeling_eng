@@ -1,5 +1,6 @@
 package view.edit.panel.base.product;
 
+import controller.view.edit.panel.base.product.ControllerPanelBaseVariationPoints;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.List;
@@ -9,6 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import model.structural.base.Element;
+import model.structural.base.product.Product;
 import model.structural.base.variability.Variability;
 import view.Panel;
 import view.new_.product.ViewNewProduct;
@@ -18,12 +20,13 @@ import view.new_.product.ViewNewProduct;
  * <p>Class responsible for defining a Panel for showing the <b>Variation Points Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  22/08/2019
- * @see    controller.view.edit.panel.base.product.
+ * @see    controller.view.edit.panel.base.product.ControllerPanelBaseVariationPoints
  * @see    model.structural.base.product.Product
  * @see    view.Panel
  */
 public class PanelBaseVariationPoints extends Panel {
     private final ViewNewProduct view;
+    private Product product;
     
     /**
      * Default constructor method of Class.
@@ -31,7 +34,7 @@ public class PanelBaseVariationPoints extends Panel {
      */
     public PanelBaseVariationPoints(ViewNewProduct view) {
         this.view       = view;
-//        this.controller = new ControllerPainelPontosDeVariacao(this);
+        this.controller = new ControllerPanelBaseVariationPoints(this);
         this.initComponents();
     }
     
@@ -155,8 +158,8 @@ public class PanelBaseVariationPoints extends Panel {
      */
     private void updateComponentes() {
         List<Variability> variabilities = this.view.filterVariabilities();
-//        for (Variability  variability   : this.view.getDiagram().getVariabilitiesList())
-//            ((ControllerPainelPontosDeVariacao) controller).setFlag(variability, variabilities.contains(variability));
+        for (Variability  variability   : this.view.getDiagram().getVariabilitiesList())
+            this.getController().setFlag(variability, variabilities.contains(variability));
     }
     
     /**
@@ -176,6 +179,14 @@ public class PanelBaseVariationPoints extends Panel {
      */
     public ViewNewProduct getViewNewProduct() {
         return this.view;
+    }
+    
+    /**
+     * Method responsible for returning the View Controller.
+     * @return View Controller.
+     */
+    public ControllerPanelBaseVariationPoints getController() {
+        return (ControllerPanelBaseVariationPoints) this.controller;
     }
     
     /**

@@ -256,8 +256,8 @@ public class Variability implements Exportable {
      */
     private String exportVariants() {
         String export  = "";
-        for (Element variante : this.variants)
-               export += "      <variant id=\"" + variante.getId() + "\"/>\n";
+        for (Element variant : this.variants)
+               export += "      <variant id=\"" + variant.getId() + "\"/>\n";
         return export;
     }
     

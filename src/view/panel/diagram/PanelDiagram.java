@@ -25,6 +25,8 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Diagram Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  27/05/2019
+ * @see    controller.view.panel.diagram.ControllerPanelDiagram
+ * @see    model.structural.base.Diagram
  * @see    view.Panel
  */
 public abstract class PanelDiagram extends Panel {

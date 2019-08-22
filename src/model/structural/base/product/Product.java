@@ -75,6 +75,14 @@ public class Product implements Exportable {
     }
     
     /**
+     * Method responsible for returning if Product is Empty.
+     * @return 
+     */
+    public boolean isEmpty() {
+        return this.getElementsList().isEmpty();
+    }
+    
+    /**
      * Method responsible for returning the Identifiers List.
      * @return Identifiers List.
      */
@@ -88,6 +96,35 @@ public class Product implements Exportable {
      */
     public void setIdentifiers(HashMap<String, Integer> identifiers) {
         this.identifiers = identifiers;
+    }
+    
+    /**
+     * Method responsible for returning if Product contains a Element.
+     * @param  element Element.
+     * @return Product contains Element.
+     */
+    public boolean contains(Element element) {
+        return this.elements.get(element.getId()) != null;
+    }
+    
+    /**
+     * Method responsible for removing a Element.
+     * @param  element Element.
+     */
+    public void remove(Element element) {
+        this.removeAssociations(element);
+        this.elements.remove(element.getId());
+    }
+    
+    /**
+     * Method responsible for removing the Association by Element.
+     * @param element Element.
+     */
+    public void removeAssociations(Element element) {
+        for (Association association : this.getAssociationsList()) {
+            if (association.contains(element))
+                this.associations.remove(association.getId());
+        }
     }
     
     /**
@@ -111,7 +148,7 @@ public class Product implements Exportable {
      * @param elements Product Elements.
      */
     public void setElements(HashMap<String, Element> elements) {
-        this.elements = elements;
+        this.elements = (HashMap) elements.clone();
     }
     
     /**
@@ -120,6 +157,14 @@ public class Product implements Exportable {
      */
     public HashMap<String, Association> getAssociations() {
         return this.associations;
+    }
+    
+    /**
+     * Method responsible for removing a Association.
+     * @param  association Association.
+     */
+    public void remove(Association association) {
+        this.associations.remove(association.getId());
     }
     
     /**
@@ -135,15 +180,7 @@ public class Product implements Exportable {
      * @param associations Product Associations.
      */
     public void setAssociations(HashMap<String, Association> associations) {
-        this.associations = associations;
-    }
-    
-    /**
-     * Method responsible for returning if the Product is Empty.
-     * @return Product is Empty.
-     */
-    public boolean isEmpty() {
-        return this.elements.isEmpty();
+        this.associations = (HashMap) associations.clone();
     }
     
     /**
@@ -194,7 +231,7 @@ public class Product implements Exportable {
     private String exportElements() {
         String export  = "";
         for (Element element : this.getElementsList())
-               export += element.export();
+               export += "    <element id=\"" + element.getId() + "\"/>\n";
         return export;
     }
     
@@ -205,7 +242,7 @@ public class Product implements Exportable {
     private String exportAssociations() {
         String export  = "";
         for (Association association : this.getAssociationsList())
-               export += association.export();
+               export += "    <association id=\"" + association.getId() + "\"/>\n";
         return export;
     }
         

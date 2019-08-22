@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import model.structural.base.Diagram;
+import model.structural.base.product.Product;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.ComponentDiagram;
@@ -19,6 +20,7 @@ import view.panel.diagram.types.PanelComponentDiagram;
 import view.panel.diagram.types.PanelSequenceDiagram;
 import view.panel.diagram.types.PanelUseCaseDiagram;
 import view.panel.logo.PanelLogo;
+import view.panel.product.PanelProduct;
 import view.panel.tabbed.PanelTabbed;
 import view.structural.ViewMenu;
 
@@ -78,15 +80,14 @@ public final class PanelModeling extends Panel {
         this.addTab(diagram.getId(), diagram.getName(), this.createPanelDiagram(diagram));
     }
     
-    
-//    public void addProduto(Produto produto) {
-//        PainelProduto componente = this.createPainelProduto(produto);
-////        this.tabbedPane.addTab(produto.getNome(), componente);
-//        this.panelTabbed.addTab(produto.getNome(), componente);
-//        this.tabs.put(produto.getId(), componente);
-////        this.tabbedPane.setSelectedComponent(componente);
-//        this.panelTabbed.setSelectedComponent(componente);
-//    }
+    /**
+     * Method responsible for adding a Product.
+     * @param product Product. 
+     */
+    public void addProduct(Product product) {
+        PanelProduct component = this.createPanelProduct(product);
+        this.addTab(product.getId(), product.getName(), component);
+    }
     
     /**
      * Method responsible for updating Diagrams.
@@ -118,18 +119,17 @@ public final class PanelModeling extends Panel {
             default:
                 break;
         }
-//        return new PainelDiagramaCasosDeUso(this.viewMenu, (DiagramaCasosDeUso) diagram);
         return null;
     }
     
-//    /**
-//     * Method responsible for returning a new Product Panel.
-//     * @param  produto Produto.
-//     * @return Novo Painel de Produto.
-//     */
-//    private PainelProduto createPainelProduto(Produto produto) {
-//        return new PainelProduto(this.viewMenu, produto);
-//    }
+    /**
+     * Method responsible for returning a New Product Panel.
+     * @param  product Product.
+     * @return New Product Panel.
+     */
+    private PanelProduct createPanelProduct(Product product) {
+        return new PanelProduct(this.viewMenu, product);
+    }
     
     /**
      * Method responsible for removing a Diagram from Panel Modeling.
@@ -139,6 +139,18 @@ public final class PanelModeling extends Panel {
         if (this.tabs.get(diagram.getId()) != null) {
             this.panelTabbed.remove(this.tabs.get(diagram.getId()));
             this.tabs.remove(diagram.getId());
+            this.updateUI();
+        }
+    }
+    
+    /**
+     * Method responsible for removing a Product from Panel Modeling.
+     * @param product Product.
+     */
+    public void removeProduct(Product product) {
+        if (this.tabs.get(product.getId()) != null) {
+            this.panelTabbed.remove(this.tabs.get(product.getId()));
+            this.tabs.remove(product.getId());
             this.updateUI();
         }
     }
@@ -161,8 +173,8 @@ public final class PanelModeling extends Panel {
     public void setZoom(Double zoom) {
         if (this.getPanelDiagram() != null)
             this.getPanelDiagram().setZoom(zoom);
-//        else if (this.getPainelProduto() != null);
-//            this.getPainelProduto().setZoom(zoom);
+        else if (this.getPanelProduct() != null);
+            this.getPanelProduct().setZoom(zoom);
     }
     
     /**
@@ -172,8 +184,8 @@ public final class PanelModeling extends Panel {
     public BufferedImage getImage() {
         if (this.getPanelDiagram() != null)
             return mxCellRenderer.createBufferedImage(this.getPanelDiagram().getGraph(), null, 1, Color.WHITE, true, null);
-//        else if (this.getPainelProduto() != null)
-//            return mxCellRenderer.createBufferedImage(this.getPainelProduto().getGrafo(),  null, 1, Color.WHITE, true, null);
+        else if (this.getPanelProduct() != null)
+            return mxCellRenderer.createBufferedImage(this.getPanelProduct().getGraph(), null, 1, Color.WHITE, true, null);
         return null;
     }
     
@@ -195,6 +207,17 @@ public final class PanelModeling extends Panel {
         Component component = this.panelTabbed.getSelectedComponent();
         if (component instanceof PanelDiagram)
             return (PanelDiagram) component;
+        return null;
+    }
+    
+    /**
+     * Method responsible for returning Panel Product.
+     * @return Panel Product.
+     */
+    public PanelProduct getPanelProduct() {
+        Component component = this.panelTabbed.getSelectedComponent();
+        if (component instanceof PanelProduct)
+            return (PanelProduct) component;
         return null;
     }
     

@@ -13,6 +13,7 @@ import java.util.Objects;
 import model.structural.base.association.Link;
 import model.structural.base.evaluation.Metric;
 import model.structural.base.interfaces.Exportable;
+import model.structural.base.product.Product;
 import model.structural.base.traceability.Traceability;
 import model.structural.diagram.classes.base.TypeUML;
 import model.structural.base.variability.Variability;
@@ -36,6 +37,7 @@ public class Project implements Exportable {
     public  HashMap variabilities;
     public  HashMap traceabilities;
     public  HashMap metrics;
+    public  HashMap products;
     public  HashMap stereotypes;
     public  HashMap links;
     public  HashMap objects;
@@ -75,6 +77,7 @@ public class Project implements Exportable {
         this.variabilities  = new LinkedHashMap();
         this.traceabilities = new LinkedHashMap();
         this.metrics        = new LinkedHashMap();
+        this.products       = new LinkedHashMap();
         this.stereotypes    = new LinkedHashMap();
         this.links          = new LinkedHashMap();
         this.objects        = new LinkedHashMap();
@@ -724,6 +727,96 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Next Product Id.
+     * @return Next Product Id.
+     */
+    public String nextProductId() {
+        Integer index  = 1;
+        String  nextId = "PRODUCT#" + index;
+        while (this.products.get(nextId) != null) {
+            index += 1;
+            nextId = "PRODUCT#" + index;
+        }
+        return nextId;
+    }
+    
+    /**
+     * Method responsible for adding a Product.
+     * @param product Product.
+     */
+    public void addProduct(Product product) {
+        product.setId(this.nextProductId());
+        this.products.put(product.getId(), product);
+    }
+    
+    /**
+     * Method responsible for returning a Product by Id.
+     * @param  id Product Id.
+     * @return Product found.
+     */
+    public Product getProduct(String id) {
+        return (Product) this.products.get(id);
+    }
+    
+    /**
+     * Method responsible for removing a Element of a Product.
+     * @param element Element.
+     */
+    public void removeProduct(Element element) {
+        for (Product product : this.getProductsList()) 
+            this.remove(product, element);
+    }
+    
+    /**
+     * Method responsible for removing a Element from a Product.
+     * @param product Product.
+     * @param element Element.
+     */
+    private void remove(Product product, Element element) {
+        if (product.contains(element)) {
+            product.remove(element);
+            if (product.isEmpty())
+                this.removeProduct(product);
+        }
+    }
+    
+    /**
+     * Method responsible for removing a Association from a Product.
+     * @param association Association.
+     */
+    public void removeProduct(Association association) {
+        for (Product product : this.getProductsList()) 
+            product.remove(association);
+    }
+    
+    /**
+     * Method responsible for removing a Product.
+     * @param product Product.
+     */
+    public void removeProduct(Product product) {
+        this.products.remove(product.getId());
+    }
+    
+    /**
+     * Method responsible for returning Products List.
+     * @return Products List.
+     */
+    public List<Product> getProductsList() {
+        return new ArrayList<>(this.products.values());
+    }
+    
+    /**
+     * Method responsible for exporting the Products.
+     * @return Products.
+     */
+    private String exportProducts() {
+        String export  = "";
+        for (Product product : this.getProductsList())
+               export += product.export();
+        return export;
+    }
+    
+    /**
      * Method responsible for returning the Stereotypes HashMap.
      * @return Stereotypes HashMap.
      */
@@ -996,6 +1089,7 @@ public class Project implements Exportable {
                export += this.exportDiagrams();
                export += this.exportTraceabilities();
                export += this.exportMetrics();
+               export += this.exportProducts();
                export += "  <links>\n"       + this.exportLinks()       + "  </links>\n";
                export += "</project>";
         return export;
@@ -1018,16 +1112,19 @@ public class Project implements Exportable {
 
     @Override
     public String toString() {
-        String project  = "Id            = " + this.id            + "\n";
-               project += "Name          = " + this.name          + "\n";
-               project += "Path          = " + this.path          + "\n";
-               project += "Version       = " + this.version       + "\n";
-               project += "Diagrams      = " + this.diagrams      + "\n";
-               project += "Stereotypes   = " + this.stereotypes   + "\n";
-               project += "Variabilities = " + this.variabilities + "\n";
-               project += "Objects       = " + this.objects       + "\n";
-               project += "Types         = " + this.types         + "\n";
-               project += "Links         = " + this.links         + "\n";
+        String project  = "Id             = " + this.id             + "\n";
+               project += "Name           = " + this.name           + "\n";
+               project += "Path           = " + this.path           + "\n";
+               project += "Version        = " + this.version        + "\n";
+               project += "Diagrams       = " + this.diagrams       + "\n";
+               project += "Traceabilities = " + this.traceabilities + "\n";
+               project += "Metrics        = " + this.metrics        + "\n";
+               project += "Products       = " + this.products       + "\n";
+               project += "Stereotypes    = " + this.stereotypes    + "\n";
+               project += "Variabilities  = " + this.variabilities  + "\n";
+               project += "Objects        = " + this.objects        + "\n";
+               project += "Types          = " + this.types          + "\n";
+               project += "Links          = " + this.links          + "\n";
         return project;
     }
 }

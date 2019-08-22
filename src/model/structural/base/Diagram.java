@@ -274,6 +274,7 @@ public abstract class Diagram implements Exportable {
         this.removeAssociation(element);
         this.removeVariability(element);
         this.project.removeTraceability(element);
+        this.project.removeProduct(element);
         this.project.removeLinks(element);
         this.project.objects.remove(element.getId());
         this.elements.remove(element.getId());
@@ -501,6 +502,7 @@ public abstract class Diagram implements Exportable {
      * @param association Association.
      */
     public void removeAssociation(Association association) {
+        this.project.removeProduct(association);
         this.project.objects.remove(association.getId());
         this.associations.remove(association.getId());
     }
