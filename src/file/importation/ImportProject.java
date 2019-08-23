@@ -17,6 +17,7 @@ import model.structural.base.Project;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Link;
 import model.structural.base.evaluation.Metric;
+import model.structural.base.product.Product;
 import model.structural.base.traceability.Traceability;
 import model.structural.diagram.classes.base.TypeUML;
 import org.w3c.dom.Document;
@@ -95,6 +96,7 @@ public class ImportProject {
         this.importDiagrams();
         this.importTraceabilities();
         this.importMetrics();
+        this.importProducts();
         this.importLinks();
         
                this.project.updateStereotypes();
@@ -217,6 +219,48 @@ public class ImportProject {
                     metric.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
                     metric.setOperation(current.getElementsByTagName("operation").item(0).getTextContent());
             this.project.addMetric(metric);
+        }
+    }
+    
+    /**
+     * Method responsible for importing Project Products.
+     * @throws XPathExpressionException 
+     */
+    private void importProducts() throws XPathExpressionException {
+        this.expression = "/project/product";
+        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
+        for (int i = 0; i < this.nodeList.getLength(); i++) {
+            Element current = (Element) this.nodeList.item(i);
+            Product product = new Product(current);
+                this.addElements(product, current);
+                this.addAssociations(product, current);
+            this.project.addProduct(product);
+        }
+    }
+    
+    /**
+     * Method responsible for adding the Product Elements.
+     * @param product Product.
+     * @param current W3C Element.
+     */
+    private void addElements(Product product, Element current) {
+        NodeList elements = current.getElementsByTagName("element");
+        for (int i = 0; i < elements.getLength(); i++) {
+            model.structural.base.Element element = (model.structural.base.Element) this.project.objects.get(((Element) elements.item(i)).getAttribute("id"));
+            product.getElements().put(element.getId(), element);
+        }
+    }
+    
+    /**
+     * Method responsible for adding the Product Associations.
+     * @param product Product.
+     * @param current W3C Element.
+     */
+    private void addAssociations(Product product, Element current) {
+        NodeList associations = current.getElementsByTagName("association");
+        for (int i = 0; i < associations.getLength(); i++) {
+            model.structural.base.association.Association association = (model.structural.base.association.Association) this.project.objects.get(((Element) associations.item(i)).getAttribute("id"));
+            product.getAssociations().put(association.getId(), association);
         }
     }
     

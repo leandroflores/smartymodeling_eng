@@ -139,7 +139,9 @@ public abstract class Element implements Exportable, Modelable {
     public boolean isDefault() {
         return !this.getType().toLowerCase().trim().equals("attribute")
             && !this.getType().toLowerCase().trim().equals("method")
-            && !this.getType().toLowerCase().trim().equals("package");
+            && !this.getType().toLowerCase().trim().equals("package")
+            && !this.getType().toLowerCase().trim().equals("initial")
+            && !this.getType().toLowerCase().trim().equals("final");
     }
     
     /**
