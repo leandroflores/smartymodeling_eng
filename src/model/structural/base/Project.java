@@ -522,10 +522,10 @@ public class Project implements Exportable {
      * @return Types.
      */
     private String exportTypes() {
-        String export  = "";
+        String export  = "  <types>\n";
         for (TypeUML type : this.getTypesList())
                export += type.export();
-        return export;
+        return export  + "  </types>\n";
     }
     
     /**
@@ -810,10 +810,10 @@ public class Project implements Exportable {
      * @return Products.
      */
     private String exportProducts() {
-        String export  = "";
+        String export  = "  <products>\n";
         for (Product product : this.getProductsList())
                export += product.export();
-        return export;
+        return export  + "  </products>\n";
     }
     
     /**
@@ -956,10 +956,10 @@ public class Project implements Exportable {
      * @return Stereotypes.
      */
     private String exportStereotypes() {
-        String export  = "";
+        String export  = "  <stereotypes>\n";
         for (Stereotype stereotype : this.getStereotypesList())
                export += stereotype.export();
-        return export;
+        return export  + "  </stereotypes>\n";
     }
     
     /**
@@ -1074,23 +1074,23 @@ public class Project implements Exportable {
      * @return Links.
      */
     private String exportLinks() {
-        String export  = "";
+        String export  = "  <links>\n";
         for (Link link : this.getLinksList())
                export += link.export();
-        return export;
+        return export  + "  </links>\n";
     }
     
     @Override
     public String export() {
         String export  = "<project id=\"" + this.id + "\" name=\"" + this.name + "\" version=\"" + this.version + "\">\n";
-               export += "  <types>\n"       + this.exportTypes()       + "  </types>\n";
-               export += "  <stereotypes>\n" + this.exportStereotypes() + "  </stereotypes>\n";
+               export += this.exportTypes();
+               export += this.exportStereotypes();
                export += this.profile.export();
                export += this.exportDiagrams();
                export += this.exportTraceabilities();
                export += this.exportMetrics();
+               export += this.exportLinks();
                export += this.exportProducts();
-               export += "  <links>\n"       + this.exportLinks()       + "  </links>\n";
                export += "</project>";
         return export;
     }
@@ -1119,12 +1119,12 @@ public class Project implements Exportable {
                project += "Diagrams       = " + this.diagrams       + "\n";
                project += "Traceabilities = " + this.traceabilities + "\n";
                project += "Metrics        = " + this.metrics        + "\n";
-               project += "Products       = " + this.products       + "\n";
                project += "Stereotypes    = " + this.stereotypes    + "\n";
                project += "Variabilities  = " + this.variabilities  + "\n";
                project += "Objects        = " + this.objects        + "\n";
                project += "Types          = " + this.types          + "\n";
                project += "Links          = " + this.links          + "\n";
+               project += "Products       = " + this.products       + "\n";
         return project;
     }
 }

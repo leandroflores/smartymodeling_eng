@@ -231,7 +231,7 @@ public class Product implements Exportable {
     private String exportElements() {
         String export  = "";
         for (Element element : this.getElementsList())
-               export += "    <element id=\"" + element.getId() + "\"/>\n";
+               export += "      <element id=\"" + element.getId() + "\"/>\n";
         return export;
     }
     
@@ -242,16 +242,16 @@ public class Product implements Exportable {
     private String exportAssociations() {
         String export  = "";
         for (Association association : this.getAssociationsList())
-               export += "    <association id=\"" + association.getId() + "\"/>\n";
+               export += "      <association id=\"" + association.getId() + "\"/>\n";
         return export;
     }
         
     @Override
     public String export() {
-        String export  = "  <product id=\"" + this.id + "\" name=\"" + this.name + "\">\n";
+        String export  = "    <product id=\"" + this.id + "\" name=\"" + this.name + "\">\n";
                export += this.exportElements();
                export += this.exportAssociations();
-               export += "  </product>\n";
+               export += "    </product>\n";
         return export;
     }
     
