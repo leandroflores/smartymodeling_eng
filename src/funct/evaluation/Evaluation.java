@@ -4,14 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import model.structural.base.Diagram;
 
 /**
- * <p>Class of Functions <b>FunctEvaluation</b>.</p>
- * <p>Class responsible for operations involving <b>Metrics</b> and <b>Measures</b>.</p>
+ * <p>Class of Functions <b>Evaluation</b>.</p>
+ * <p>Class responsible for operations involving <b>Evaluation</b> and <b>Measures</b>.</p>
  * @author Leandro
  * @since  02/09/2019
  */
-public class FunctEvaluation {
+public abstract class Evaluation {
+    private final Diagram diagram;
+    
+    /**
+     * Default constructor method of Class.
+     * @param diagram Diagram.
+     */
+    public Evaluation(Diagram diagram) {
+        this.diagram = diagram;
+    }
     
     /**
      * Method responsible for returning the Expression.
@@ -62,39 +72,16 @@ public class FunctEvaluation {
      * @return Clause Value.
      */
     protected Double getClauseValue(String clause) {
-        String keyword = this.getKeyword(clause);
-        String filter  = this.getFilter(clause);
-        System.out.println("Keyword: " + keyword);
-        System.out.println("Filter.: " + filter);
-        System.out.println("");
-        return null;
+        return this.getClauseValue(this.getKeyword(clause), this.getFilter(clause));
     }
     
     /**
-     * Method responsible for returning the Actor Filters.
-     * @param  filter Clause Filter.
-     * @return Actor Filters.
+     * Method responsible for returning the Clause Value.
+     * @param  keyword Keyword.
+     * @param  filter Filter.
+     * @return Clause Value.
      */
-    private Object[] getActorFilters(String filter) {
-        Object[] filters    = new Object[2];
-                 filters[0] = this.getNames(filter);
-                     filter = this.clearNames(filter);
-                 filters[1] = this.getMandatory(filter);
-        return   filters;
-    }
-    
-    /**
-     * Method responsible for returning the Use Case Filters.
-     * @param  filter Clause Filter.
-     * @return Use Case Filters.
-     */
-    private Object[] getUseCaseFilters(String filter) {
-        Object[] filters    = new Object[2];
-                 filters[0] = this.getNames(filter);
-                     filter = this.clearNames(filter);
-                 filters[1] = this.getMandatory(filter);
-        return   filters;
-    }
+    protected abstract Double getClauseValue(String keyword, String filter);
     
     /**
      * Method responsible for checking the Expression Character.
@@ -130,7 +117,7 @@ public class FunctEvaluation {
      * @param  filter Clause Filter.
      * @return New Filter.
      */
-    private String clearNames(String filter) {
+    protected String clearNames(String filter) {
         if (!filter.contains("[") || (!filter.contains("]")))
             return filter;
         if (filter.indexOf("[") > filter.indexOf("]"))
@@ -143,7 +130,7 @@ public class FunctEvaluation {
      * @param  filter Clause Filter.
      * @return Names List.
      */
-    private List<String> getNames(String filter) {
+    protected List<String> getNames(String filter) {
         if (!filter.contains("[") || (!filter.contains("]")))
             return new ArrayList<>();
         if (filter.indexOf("[") > filter.indexOf("]"))

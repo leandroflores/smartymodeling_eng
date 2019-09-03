@@ -1,4 +1,4 @@
-package funct.evaluation.types;
+package funct.evaluation.base;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,19 +6,21 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 
 /**
- * <p>Class of Metric <b>MetricElement</b>.</p>
+ * <p>Class of Metric <b>EvaluateElement</b>.</p>
  * <p>Class responsible por extract the Metrics of <b>Element</b>.</p>
  * @author Leandro
  * @since  02/09/2019
+ * @see    model.structural.base.Diagram
+ * @see    model.structural.base.Element
  */
-public class MetricElement {
+public class EvaluateElement {
     private final Diagram diagram;
     
     /**
      * Default constructor method of Class.
      * @param diagram Diagram.
      */
-    public MetricElement(Diagram diagram) {
+    public EvaluateElement(Diagram diagram) {
         this.diagram = diagram;
     }
     
@@ -102,6 +104,4 @@ public class MetricElement {
         }
         return filter;
     }
-    
-    
 }
