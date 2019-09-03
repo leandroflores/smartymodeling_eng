@@ -29,6 +29,14 @@ public class FunctDate {
     }
     
     /**
+     * Method responsible for returning the System Current Formatted Date.
+     * @return System Current Formatted Date.
+     */
+    public String getCurrentFormattedDate() {
+        return this.getFormattedDate(this.getCurrentDate());
+    }
+    
+    /**
      * Method responsible for returning a System Current Time.
      * @return System Current Time.
      */

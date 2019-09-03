@@ -1,5 +1,6 @@
 package model.structural.base.evaluation;
 
+import funct.FunctDate;
 import model.structural.base.interfaces.Exportable;
 
 /**
@@ -19,18 +20,24 @@ public class Measure implements Exportable {
      /**
      * Default constructor method of Class.
      */
-    public Measure() {}
+    public Measure() {
+        this.id     = "";
+        this.name   = "NewMeasure";
+        this.date   = new FunctDate().getCurrentFormattedDate();
+        this.metric = null;
+        this.value  = 0.0d;
+    }
     
     /**
      * Alternative constructor method of Class.
      * @param element W3C Element.
      */
     public Measure(org.w3c.dom.Element element) {
-        this.id          = element.getAttribute("id");
-        this.name        = element.getAttribute("name");
-        this.date        = null;
-        this.metric      = null;
-        this.value       = 0.0d;
+        this.id     = element.getAttribute("id");
+        this.name   = element.getAttribute("name");
+        this.date   = new FunctDate().getCurrentFormattedDate();
+        this.metric = null;
+        this.value  = 0.0d;
     }
     
     /**

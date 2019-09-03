@@ -176,9 +176,11 @@ public final class ViewMenu extends View implements Operation {
     private void createEvaluationMenu() {
         this.createMenu("menuEvaluation", "Evaluation");
         
-        this.createMenuItem("menuItemEvaluationMetric",  "New Metric", "evaluation/metric.png");
+        this.createMenuItem("menuItemEvaluationMetric",  "New Metric",  "evaluation/metric.png");
+        this.createMenuItem("menuItemEvaluationMeasure", "New Measure", "evaluation/measure.png");
         
         this.getMenuEvaluation().add(this.getMenuItemEvaluationMetric());
+        this.getMenuEvaluation().add(this.getMenuItemEvaluationMeasure());
     }
     
     /**
@@ -329,6 +331,9 @@ public final class ViewMenu extends View implements Operation {
         this.getMenuItemEditProfile().setEnabled(flag);
         this.getMenuItemInstantiateProduct().setEnabled(flag);
         this.getMenuItemNewTraceability().setEnabled(flag);
+        
+        this.getMenuItemEvaluationMetric().setEnabled(flag);
+        this.getMenuItemEvaluationMeasure().setEnabled(flag);
     }
     
     /**
@@ -614,6 +619,14 @@ public final class ViewMenu extends View implements Operation {
      */
     public JMenuItem getMenuItemEvaluationMetric() {
         return this.menuItens.get("menuItemEvaluationMetric");
+    }
+    
+    /**
+     * Method responsible for returning the Menu Item Evaluation Measure.
+     * @return Menu Item Evaluation Measure.
+     */
+    public JMenuItem getMenuItemEvaluationMeasure() {
+        return this.menuItens.get("menuItemEvaluationMeasure");
     }
     
     /**

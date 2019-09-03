@@ -22,6 +22,7 @@ import view.edit.ViewEditProfile;
 import view.message.ViewError;
 import view.message.ViewMessage;
 import view.message.ViewSave;
+import view.new_.evaluation.ViewNewMeasure;
 import view.new_.evaluation.ViewNewMetric;
 import view.new_.product.ViewNewProduct;
 import view.new_.traceability.ViewNewTraceability;
@@ -78,6 +79,8 @@ public class ControllerViewMenu extends ControllerView {
             this.newTraceability();
         else if (this.viewMenu.getMenuItemEvaluationMetric().equals(event.getSource()))
             this.newMetric();
+        else if (this.viewMenu.getMenuItemEvaluationMeasure().equals(event.getSource()))
+            this.newMeasure();
         else if (this.viewMenu.getMenuItemSystemInformation().equals(event.getSource()))
             new ViewSystemInformation(this.viewMenu).setVisible(true);
         else if (this.viewMenu.getMenuItemSystemExit().equals(event.getSource()))
@@ -301,6 +304,18 @@ public class ControllerViewMenu extends ControllerView {
     private void newMetric() {
         if (this.viewMenu.getProject() != null)
             new ViewNewMetric(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+    }
+    
+    /**
+     * Method responsible for inserting a New Measure.
+     */
+    private void newMeasure() {
+        if (this.viewMenu.getProject() != null) {
+            if (this.viewMenu.getProject().getMetricsList().isEmpty() == false)
+                new ViewNewMeasure(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+            else
+                new ViewError(this.viewMenu, "Metrics List is void!").setVisible(true);
+        }
     }
     
     /**
