@@ -28,7 +28,7 @@ public class ComunicationUML extends Association {
     public ComunicationUML(ComponentUML componentUML, InterfaceUML interfaceUML) {
         this.source   = componentUML;
         this.target   = interfaceUML;
-        this.category = "required";
+        this.category = "provided";
         this.type     = "comunication";
     }
     
@@ -98,29 +98,29 @@ public class ComunicationUML extends Association {
     }
     
     /**
-     * Method responsible for returning the Dashed Style.
-     * @return Dashed Style.
-     */
-    private String getDashedStyle() {
-        if (this.category.toLowerCase().trim().equals("required"))
-            return "1";
-        return "0";
-    }
-    
-    /**
      * Method responsible for returning the End Arrow Style.
      * @return End Arrow Style.
      */
     private Object getEndArrowStyle() {
         if (this.category.toLowerCase().trim().equals("provided"))
             return mxConstants.ARROW_SPACING;
-        return mxConstants.ARROW_OPEN;
+        return mxConstants.ARROW_OVAL;
+    }
+    
+    @Override
+    public String export() {
+        String export  = "    <"         + this.type;
+               export += " component=\"" + this.source.getId()  + "\"";
+               export += " interface=\"" + this.target.getId()  + "\"";
+               export += " category=\""  + this.category.trim() + "\"";
+               export += "/>\n";
+        return export;
     }
     
     @Override
     public Map getStyle() {
         Map    style = new HashMap<>();
-               style.put(mxConstants.STYLE_DASHED,   this.getDashedStyle());
+               style.put(mxConstants.STYLE_DASHED,   "0");
                style.put(mxConstants.STYLE_MOVABLE,  "0");
                style.put(mxConstants.STYLE_EDITABLE, "0");
                style.put(mxConstants.STYLE_ENDARROW,   this.getEndArrowStyle());

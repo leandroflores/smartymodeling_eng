@@ -31,6 +31,7 @@ public class InterfaceUML extends Element {
      */
     public InterfaceUML(org.w3c.dom.Element element) {
         super(element, true);
+        this.type = "interface";
     }
     
     @Override

@@ -44,12 +44,16 @@ public class ControllerEventAssociationComponent extends ControllerEventAssociat
     public void createAssociation(mxCell association) {
         switch (this.panelDiagram.getType()) {
             case 0:
+            case 1:
                 this.addComunicationUML(association);
                 break;
-            case 1:
+            case 2:
+                this.addDependency(association);
+                break;
+            case 3:
                 this.addRequires(association);
                 break;
-            case 2:
+            case 4:
                 this.addMutex(association);
                 break;
             default:
@@ -102,7 +106,7 @@ public class ControllerEventAssociationComponent extends ControllerEventAssociat
      */
     private String getCategory() {
         if (this.panelDiagram.getAssociationComboBox().getSelectedIndex() == 0)
-            return "provide";
-        return "require";
+            return "provided";
+        return "required";
     }
 }

@@ -1,14 +1,10 @@
 package view.edit.panel.base.evaluation;
 
-import controller.view.edit.panel.base.evaluation.ControllerPanelBaseOperation;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
-import model.controller.structural.base.evaluation.ControllerMetric;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
-import model.structural.base.evaluation.Metric;
 import view.Panel;
 import view.structural.ViewMenu;
 
@@ -52,9 +48,6 @@ public final class PanelBaseEvaluation extends Panel {
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Metric*: "));
-        this.add(this.createComboBox("metricComboBox", new ControllerMetric(this.project).getMetrics(), 15));
-        
         this.add(this.createLabel("Operation*: "));
         this.add(this.createTextFieldNoEditable("operationTextField", "", 15));
     }
@@ -63,16 +56,10 @@ public final class PanelBaseEvaluation extends Panel {
      * Method responsible for setting the Operation Values.
      */
     public void setValues() {
-        this.setMetric();
-//        this.getOperationTextField().setText(this.measure.getOperation());
+//        this.setMetric();
+        this.getOperationTextField().setText(this.measure.getMetric().getOperation());
     }
     
-    /**
-     * Method responsible for setting the Metric.
-     */
-    public void setMetric() {
-        this.measure.setMetric((Metric) this.getMetricComboBox().getSelectedItem());
-    }
     
     /**
      * Method responsible for returning the View Menu.
@@ -98,13 +85,7 @@ public final class PanelBaseEvaluation extends Panel {
         return this.measure;
     }
     
-    /**
-     * Method responsible for returning the Metric Combo Box.
-     * @return Metric Combo Box.
-     */
-    public JComboBox getMetricComboBox() {
-        return this.comboBoxes.get("metricComboBox");
-    }
+    
     
     /**
      * Method responsible for returning the Operation Text Field.

@@ -31,6 +31,7 @@ public class ComponentUML extends Element {
      */
     public ComponentUML(org.w3c.dom.Element element) {
         super(element, true);
+        this.type = "component";
     }
     
     @Override
