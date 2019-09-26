@@ -3,7 +3,10 @@ package controller.view.structural;
 import controller.view.ControllerView;
 import file.exportation.ExportProject;
 import file.importation.ImportProject;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -37,7 +40,7 @@ import view.system.ViewSystemInformation;
  * @see    controller.view.ControllerView
  * @see    view.structural.ViewMenu
  */
-public class ControllerViewMenu extends ControllerView {
+public class ControllerViewMenu extends ControllerView implements ComponentListener {
     private final ViewMenu viewMenu;
 
     /**
@@ -335,5 +338,55 @@ public class ControllerViewMenu extends ControllerView {
                 }
             }
         }
+    }
+
+    /**
+     * Method responsible for resizing the Panel Project.
+     */
+    private void resizePanelProject() {
+        Integer width  = new Double(this.viewMenu.getSize().getWidth() * 0.2).intValue();
+        Integer height = new Double(this.viewMenu.getSize().getHeight()).intValue() - 70;
+        this.viewMenu.getScrollPanelProject().setPreferredSize(new Dimension(width, height));
+    }
+    
+    /**
+     * Method responsible for resizing the Panel Modeling.
+     */
+    private void resizePanelModeling() {
+        Integer width  = new Double(this.viewMenu.getSize().getWidth() * 0.8).intValue() - 30;
+        Integer height = new Double(this.viewMenu.getSize().getHeight()).intValue() - 100;
+        this.viewMenu.getScrollPanelModeling().setPreferredSize(new Dimension(width, height));
+    }
+    
+    @Override
+    public void componentResized(ComponentEvent e) {
+        System.out.println("Resized");
+        this.resizePanelProject();
+        this.resizePanelModeling();
+        System.out.println("");
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+        System.out.println("Moved");
+        this.resizePanelProject();
+        this.resizePanelModeling();
+        System.out.println("");
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+        System.out.println("Shown");
+        this.resizePanelProject();
+        this.resizePanelModeling();
+        System.out.println("");
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
+        System.out.println("Hidden");
+        this.resizePanelProject();
+        this.resizePanelModeling();
+        System.out.println("");
     }
 }

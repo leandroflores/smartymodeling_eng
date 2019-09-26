@@ -30,7 +30,7 @@ public final class PanelLogo extends Panel {
     @Override
     protected void addComponents() {
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
-        this.add(new JLabel(new FunctView().createImage("logo.png")));
+        this.add(new JLabel(new FunctView().createImage("logo-eng.png")));
         this.setPreferredSize(new Dimension(1075, 570));
     }
 }

@@ -2,8 +2,8 @@ package view.structural;
 
 import controller.view.structural.ControllerViewMenu;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ComponentListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.Iterator;
@@ -11,7 +11,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.KeyStroke;
@@ -52,6 +51,7 @@ public final class ViewMenu extends View implements Operation {
     public ViewMenu() {
         super();
         this.controller = new ControllerViewMenu(this);
+        this.addComponentListener((ComponentListener) this.controller);
         this.project    = null;
         this.zoom       = 1.00d;
         this.save       = true;
@@ -221,21 +221,22 @@ public final class ViewMenu extends View implements Operation {
 
         this.panelMain = new PanelMain(this);
         this.createScrollPane("scrollPanelMain");
+        this.getScrollPanelMain().setMinimumSize(new Dimension(200, 50));
+        this.getScrollPanelMain().setPreferredSize(new Dimension(200, 50));
         this.getScrollPanelMain().setViewportView(this.panelMain);
         this.getContentPane().add(this.getScrollPanelMain(), BorderLayout.NORTH);
     }
     
+    /**
+     * Method responsible for returning a new Split Pane.
+     * @param  flag Orientation Flag.
+     * @return New Split Pane.
+     */
     private JSplitPane createSplitPane(boolean flag) {
         JSplitPane split = new JSplitPane();
                    split.setOrientation(flag ? JSplitPane.HORIZONTAL_SPLIT : JSplitPane.VERTICAL_SPLIT);
 //                   splitPane.setLayout(new GridLayout(2, 0));
         return     split;
-    }
-    
-    private JPanel createPanelTest() {
-        JPanel panel = new JPanel();
-               panel.setBackground(Color.red);
-        return panel;
     }
     
     /**
@@ -247,8 +248,10 @@ public final class ViewMenu extends View implements Operation {
         
         this.getScrollPanelProject().setMinimumSize(new Dimension(200, 100));
         this.getScrollPanelProject().setPreferredSize(new Dimension(250, 100));
-        this.getScrollPanelModeling().setMinimumSize(new Dimension(400, 100));
-        this.getScrollPanelModeling().setPreferredSize(new Dimension(1500, 100));
+//        this.getScrollPanelModeling().setMinimumSize(new Dimension(400, 100));
+        
+        this.getScrollPanelModeling().setPreferredSize(new Dimension((int) (this.getWidth() * 0.7), this.getHeight() - 100));
+//        this.getScrollPanelModeling().setPreferredSize(new Dimension(500, 100));
        
         this.mainSplitPane = this.createSplitPane(true);
         this.mainSplitPane.setLeftComponent(this.getScrollPanelProject());
@@ -263,6 +266,7 @@ public final class ViewMenu extends View implements Operation {
     private void initPanelProject() {
         this.panelProject = new PanelProject(this);
         this.createScrollPane("scrollPanelProject");
+//        this.
         this.getScrollPanelProject().setViewportView(this.panelProject);
     }
     
@@ -724,14 +728,6 @@ public final class ViewMenu extends View implements Operation {
      */
     public JScrollPane getScrollPanelModeling() {
         return this.scrollPanes.get("scrollPanelModeling");
-    }
-    
-    /**
-     * Method responsible for returning Panel Logo.
-     * @return Panel Logo.
-     */
-    public JPanel getPanelLogo() {
-        return this.panels.get("painelLogo");
     }
     
     /**

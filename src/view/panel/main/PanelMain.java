@@ -26,11 +26,9 @@ public final class PanelMain extends Panel {
     public PanelMain(ViewMenu viewMenu) {
         this.viewMenu   = viewMenu;
         this.controller = new ControllerPanelMain(this);
-//        this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.setLayout(new GridLayout(0, 18));
-//        this.setMaximumSize(new Dimension(20, 20));
-        this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 10));
-        // Olhar Grid Layout (https://stackoverflow.com/questions/18491408/i-need-to-make-my-jpanel-resize-dynamically-as-new-components-are-being-added-to)
+        this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
+        this.setMinimumSize(new Dimension(0, 50));
         this.addComponents();
     }
     
