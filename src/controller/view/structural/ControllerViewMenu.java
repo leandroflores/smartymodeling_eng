@@ -159,7 +159,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * @return Path.
      */
     public String getPath() {
-        String path = "";
+        String path = "New_Project.smty";
         if (this.viewMenu.getFileChooserProject().showSaveDialog(this.viewMenu) != 1) {
             path = this.viewMenu.getFileChooserProject().getSelectedFile().getAbsolutePath();
             path = (path.toLowerCase().endsWith(".smty")) ? path : path + ".smty";
@@ -360,33 +360,25 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     
     @Override
     public void componentResized(ComponentEvent e) {
-        System.out.println("Resized");
         this.resizePanelProject();
         this.resizePanelModeling();
-        System.out.println("");
     }
 
     @Override
     public void componentMoved(ComponentEvent e) {
-        System.out.println("Moved");
         this.resizePanelProject();
         this.resizePanelModeling();
-        System.out.println("");
     }
 
     @Override
     public void componentShown(ComponentEvent e) {
-        System.out.println("Shown");
         this.resizePanelProject();
         this.resizePanelModeling();
-        System.out.println("");
     }
 
     @Override
     public void componentHidden(ComponentEvent e) {
-        System.out.println("Hidden");
         this.resizePanelProject();
         this.resizePanelModeling();
-        System.out.println("");
     }
 }

@@ -173,7 +173,7 @@ public final class PanelModeling extends Panel {
     public void setZoom(Double zoom) {
         if (this.getPanelDiagram() != null)
             this.getPanelDiagram().setZoom(zoom);
-        else if (this.getPanelProduct() != null);
+        else if (this.getPanelProduct() != null)
             this.getPanelProduct().setZoom(zoom);
     }
     
