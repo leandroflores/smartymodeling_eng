@@ -4,8 +4,8 @@ import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import model.structural.base.Element;
 import model.structural.base.association.Association;
-import model.structural.diagram.sequence.base.LifelineUML;
 
 /**
  * <p>Class of Model <b>MessageUML</b>.</p>
@@ -22,10 +22,10 @@ public class MessageUML extends Association {
     
     /**
      * Default constructor method of Class.
-     * @param source Lifeline UML.
-     * @param target Lifeline UML.
+     * @param source Element.
+     * @param target Element.
      */
-    public MessageUML(LifelineUML source, LifelineUML target) {
+    public MessageUML(Element source, Element target) {
         this.source   = source;
         this.target   = target;
         this.type     = "message";
@@ -34,42 +34,16 @@ public class MessageUML extends Association {
     
     /**
      * Default constructor method of Class.
-     * @param source Lifeline UML.
-     * @param target Lifeline UML.
+     * @param source Element.
+     * @param target Element.
      * @param category Category.
      */
-    public MessageUML(LifelineUML source, LifelineUML target, String category) {
+    public MessageUML(Element source, Element target, String category) {
         this.source   = source;
         this.target   = target;
         this.category = category;
         this.sequence = 0;
         this.type     = "message";
-    }
-
-    @Override
-    public LifelineUML getSource() {
-        return (LifelineUML) this.source;
-    }
-
-    /**
-     * Method responsible for setting the Source.
-     * @param source Lifeline UML.
-     */
-    public void setSource(LifelineUML source) {
-        this.source = source;
-    }
-
-    @Override
-    public LifelineUML getTarget() {
-        return (LifelineUML) this.target;
-    }
-
-    /**
-     * Method responsible for setting Target.
-     * @param target Lifeline UML.
-     */
-    public void setTarget(LifelineUML target) {
-        this.target = target;
     }
 
     /**
@@ -148,8 +122,8 @@ public class MessageUML extends Association {
                style.put(mxConstants.STYLE_MOVABLE,  "0");
                style.put(mxConstants.STYLE_EDITABLE, "1");
                style.put(mxConstants.STYLE_FILLCOLOR,   "#FFFFFF");
+               style.put(mxConstants.STYLE_STROKECOLOR, "#EEEEEE");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-               style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_SHAPE,      mxConstants.SHAPE_CONNECTOR);
                style.put(mxConstants.STYLE_ENDARROW,   this.getEndArrow());
                style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);

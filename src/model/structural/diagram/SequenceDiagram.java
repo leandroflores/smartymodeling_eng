@@ -9,6 +9,7 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.association.Association;
+import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
 import model.structural.diagram.sequence.base.association.MessageUML;
 
@@ -20,9 +21,11 @@ import model.structural.diagram.sequence.base.association.MessageUML;
  * @see    model.structural.base.Diagram
  * @see    model.structural.base.association.Association
  * @see    model.structural.diagram.sequence.base.LifelineUML
+ * @see    model.structural.diagram.sequence.base.InstanceUML
  */
 public final class SequenceDiagram extends Diagram {
     private HashMap<String, LifelineUML> lifelines;
+    private HashMap<String, InstanceUML> instances;
     private HashMap<String, Association> messages;
 
     /**
@@ -48,11 +51,12 @@ public final class SequenceDiagram extends Diagram {
     public void init() {
         this.type      = "Sequence";
         this.lifelines = new HashMap<>();
+        this.instances = new HashMap<>();
         this.messages  = new HashMap<>();
     }
     
     /**
-     * Method responsible for returning the next Lifeline Id.
+     * Method responsible for returning the Next Lifeline Id.
      * @return Next Lifeline Id.
      */
     private String nextLifelineId() {
@@ -87,6 +91,44 @@ public final class SequenceDiagram extends Diagram {
      */
     public List<LifelineUML> getLifelinesList() {
         return new ArrayList<>(this.lifelines.values());
+    }
+    
+    /**
+     * Method responsible for returning the Next Instance Id.
+     * @return Next Instance Id.
+     */
+    private String nextInstanceId() {
+        return this.nextId("INSTANCE#");
+    }
+    
+    /**
+     * Method responsible for adding a Instance UML.
+     * @param instance Instance UML.
+     */
+    public void addInstance(InstanceUML instance) {
+        instance.setId(this.nextInstanceId());
+        if (this.instances.get(instance.getId()) == null) {
+            this.instances.put(instance.getId(), instance);
+            this.addElement(instance);
+        }
+    }
+    
+    /**
+     * Method responsible for removing a Instance UML.
+     * @param instance Instance UML.
+     */
+    public void removeInstance(InstanceUML instance) {
+        this.removeAssociations(instance);
+        this.removeElement(instance);
+        this.instances.remove(instance.getId());
+    }
+    
+    /**
+     * Method responsible for returning the Instances List.
+     * @return Instances List.
+     */
+    public List<InstanceUML> getInstancesList() {
+        return new ArrayList<>(this.instances.values());
     }
     
     /**

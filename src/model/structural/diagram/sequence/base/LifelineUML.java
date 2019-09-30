@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 import model.structural.base.Element;
+import model.structural.diagram.usecase.base.ActorUML;
 
 /**
  * <p>Class of Model <b>LifelineUML</b>.</p>
@@ -14,7 +15,7 @@ import model.structural.base.Element;
  * @see    model.structural.base.Element
  */
 public class LifelineUML extends Element {
-    private Element element;
+    private ActorUML actor;
     
     /**
      * Default constructor method of Class.
@@ -24,6 +25,7 @@ public class LifelineUML extends Element {
         this.type      = "lifeline";
         this.mandatory = true;
         this.size      = new Point(200, 350);
+        this.actor     = null;
     }
     
     /**
@@ -36,29 +38,55 @@ public class LifelineUML extends Element {
     }
 
     /**
-     * Method responsible for returning the Element.
-     * @return Element.
+     * Method responsible for returning the Actor UML.
+     * @return Actor UML.
      */
-    public Element getElement() {
-        return this.element;
+    public ActorUML getActor() {
+        return this.actor;
     }
 
     /**
-     * Method responsible for setting the Element.
-     * @param element Element.
+     * Method responsible for setting the Actor UML.
+     * @param actor Actor UML.
      */
-    public void setElement(Element element) {
-        this.element = element;
+    public void setActor(ActorUML actor) {
+        this.actor = actor;
     }
 
+    /**
+     * Method responsible for returning the Name Size.
+     * @return Name Size.
+     */
+    public Integer getNameSize() {
+        return 10 * this.name.length();
+    }
+    
+    /**
+     * Method responsible for returning the Signature.
+     * @return Signature.
+     */
+    public String getSignature() {
+        return this.name + " : " + this.getActorName();
+    }
+    
+    /**
+     * Method responsible for returning the Actor Name.
+     * @return Actor Name.
+     */
+    public String getActorName() {
+        if (this.actor != null)
+            return this.actor.getName();
+        return "Actor";
+    }
+    
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/usecase/use-case.png";
+        return "src/images/icons/diagram/sequence/lifeline.png";
     }
     
     @Override
     public String getStyleLabel() {
-        return "styleUseCaseUML";
+        return "styleLifelineUML";
     }
     
     /**
@@ -86,14 +114,6 @@ public class LifelineUML extends Element {
      */
     public Map getLineStyle() {
         Map    style = new HashMap<>();
-//               style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_LINE);
-////               style.put(mxConstants.STYLE_ORTHOGONAL, "1");
-//               style.put(mxConstants.STYLE_ROTATION,  90);
-//               style.put(mxConstants.STYLE_EDITABLE,  "0");
-//               style.put(mxConstants.STYLE_RESIZABLE, "0");
-//               style.put(mxConstants.STYLE_MOVABLE,   "0");
-//               style.put(mxConstants.STYLE_FOLDABLE,  "0");
-//               style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_DASHED,   "0");
                style.put(mxConstants.STYLE_EDITABLE, "0");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");

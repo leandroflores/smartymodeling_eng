@@ -15,7 +15,9 @@ import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import model.structural.base.Element;
 import model.structural.diagram.SequenceDiagram;
+import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
 import model.structural.diagram.sequence.base.association.MessageUML;
 import view.panel.diagram.PanelDiagram;
@@ -58,12 +60,12 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     public void addOperationsPanel() {
         JPanel  panel = new JPanel();
                 panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-                panel.add(this.createButton("clickButton",         "", "Select",             "click.png"));
-                panel.add(this.createButton("lifelineActorButton", "", "New Actor Lifeline", "diagram/sequence/lifeline-actor.png"));
-                panel.add(this.createButton("lifelineClassButton", "", "New Class Lifeline", "diagram/sequence/lifeline-class.png"));
-                panel.add(this.createButton("variabilityButton",   "", "New Variability",    "variability.png"));
-                panel.add(this.createButton("editButton",          "", "Edit",               "edit.png"));
-                panel.add(this.createButton("deleteButton",        "", "Delete",             "delete.png"));
+                panel.add(this.createButton("clickButton",       "", "Select",             "click.png"));
+                panel.add(this.createButton("lifelineButton",    "", "New Actor Lifeline", "diagram/sequence/lifeline.png"));
+                panel.add(this.createButton("instanceButton",    "", "New Class Instance", "diagram/sequence/instance.png"));
+                panel.add(this.createButton("variabilityButton", "", "New Variability",    "variability.png"));
+                panel.add(this.createButton("editButton",        "", "Edit",               "edit.png"));
+                panel.add(this.createButton("deleteButton",      "", "Delete",             "delete.png"));
                 panel.add(this.createComboBox("associationComboBox", this.getAssociationItems(), 50));
        this.add(panel, BorderLayout.PAGE_START);
        this.add(new JSeparator(), BorderLayout.PAGE_END);
@@ -84,79 +86,106 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     @Override
     public void resetBackground() {
         this.getClickButton().setBackground(this.getDefaultColor());
-        this.getLifelineActorButton().setBackground(this.getDefaultColor());
-        this.getLifelineClassButton().setBackground(this.getDefaultColor());
+        this.getLifelineButton().setBackground(this.getDefaultColor());
+        this.getInstanceButton().setBackground(this.getDefaultColor());
     }
     
     @Override
     public void addElements() {
         this.addLifelines();
+        this.addInstances();
     }
     
     /**
-     * Method responsible for adding the Lifelines.
+     * Method responsible for adding the Diagram Lifelines.
      */
     private void addLifelines() {
+        this.graph.getStylesheet().putCellStyle("styleImageActor", this.getImageActorStyle());
         for (LifelineUML lifeline : this.diagram.getLifelinesList()) {
             this.graph.getStylesheet().putCellStyle(lifeline.getStyleLabel(), lifeline.getStyle());
-//            this.graph.getStylesheet().putCellStyle("styleImageActor", this.getImageActorStyle());
-//            this.graph.getStylesheet().putCellStyle("styleEndPoint",   this.getEndPointStyle());
+            
             mxCell vertex   = (mxCell) this.graph.insertVertex(this.parent, lifeline.getId(), "", lifeline.getPosition().x, lifeline.getPosition().y, lifeline.getSize().x, lifeline.getSize().y, lifeline.getStyleLabel());
                    vertex.setConnectable(true);
             this.addNameCell(vertex, lifeline);
             this.addEndPointCell(vertex, lifeline);
             this.addLineCell(vertex, lifeline);
-//            mxCell line     = (mxCell) this.graph.insertVertex(this.parent, null, "", lifeline.getXCenter(), lifeline.getY() + lifeline.getHeight(), 2, 130);
-//            mxCell endPoint = (mxCell) this.graph.insertVertex(this.parent, null, "", lifeline.getXCenter(), 150, 10, 10, "styleEndPoint");
-//            this.graph.insertVertex(vertex,      null, "", 10, 5, 20, 20, "styleImageActor");
-            
-//            this.insert(vertex, lifeline);
+            this.graph.insertVertex(vertex, null, "", 5, 10, 20, 20, "styleImageActor");
+
             this.identifiers.put(vertex, lifeline.getId());
             this.objects.put(lifeline.getId(), vertex);
         }
     }
     
     /**
-     * Method responsible for adding the Name Cell.
-     * @param parent Parent Cell.
-     * @param lifeline Lifeline.
+     * Method responsible for adding the Diagram Instances.
      */
-    private void addNameCell(mxCell parent, LifelineUML lifeline) {
-        this.graph.getStylesheet().putCellStyle("nameStyle", lifeline.getNameStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, lifeline.getId() + "(name)", lifeline.getName(), 0, 0, lifeline.getWidth(), 50, "nameStyle");
-               cell.setConnectable(false);
-               cell.setId(lifeline.getId() + "(name)");
-        this.identifiers.put(cell.getId(), lifeline.getId());
-        this.objects.put(lifeline.getId() + "(name)", cell);
+    private void addInstances() {
+        for (InstanceUML instance : this.diagram.getInstancesList()) {
+            this.graph.getStylesheet().putCellStyle(instance.getStyleLabel(), instance.getStyle());
+            
+            mxCell vertex   = (mxCell) this.graph.insertVertex(this.parent, instance.getId(), "", instance.getPosition().x, instance.getPosition().y, instance.getSize().x, instance.getSize().y, instance.getStyleLabel());
+                   vertex.setConnectable(true);
+            this.addNameCell(vertex, instance);
+            this.addEndPointCell(vertex, instance);
+            this.addLineCell(vertex, instance);
+
+            this.identifiers.put(vertex, instance.getId());
+            this.objects.put(instance.getId(), vertex);
+        }
     }
     
     /**
-     * Method responsible for adding the End Point Cell.
+     * Method responsible for adding the Name Cell.
      * @param parent Parent Cell.
-     * @param lifeline Lifeline.
+     * @param element Element.
      */
-    private void addEndPointCell(mxCell parent, LifelineUML lifeline) {
-        this.graph.getStylesheet().putCellStyle("endPointStyle", lifeline.getEndPointStyle());
-        Integer x   = lifeline.getWidth()  / 2;
-        Integer y   = lifeline.getHeight();
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, lifeline.getId() + "(point)", "", x, y, 10, 10, "endPointStyle");
+    private void addNameCell(mxCell parent, Element element) {
+        this.graph.getStylesheet().putCellStyle("nameStyle", this.getNameStyle());
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, element.getId() + "(name)", this.getSignature(element), 0, 0, element.getWidth(), 50, "nameStyle");
                cell.setConnectable(false);
-               cell.setId(lifeline.getId() + "(point)");
-        this.identifiers.put(cell.getId(), lifeline.getId());
-        this.objects.put(lifeline.getId() + "(point)", cell);
+               cell.setId(element.getId() + "(name)");
+        this.identifiers.put(cell.getId(), element.getId());
+        this.objects.put(element.getId() + "(name)", cell);
+    }
+    
+    /**
+     * Method responsible for returning the Element Signature.
+     * @param  element Element.
+     * @return Element Signature.
+     */
+    private String getSignature(Element element) {
+        if (element instanceof LifelineUML)
+            return ((LifelineUML) element).getSignature();
+        return ((InstanceUML) element).getSignature();
     }
     
     /**
      * Method responsible for adding the Line Cell.
      * @param parent Parent Cell.
-     * @param lifeline Lifeline.
+     * @param element Element.
      */
-    private void addLineCell(mxCell parent, LifelineUML lifeline) {
-        this.graph.getStylesheet().putCellStyle("lineStyle", lifeline.getLineStyle());
-        Object edge = this.graph.insertEdge(this.parent, lifeline.getId(), "", this.objects.get(lifeline.getId() + "(name)"), this.objects.get(lifeline.getId() + "(point)"), "lineStyle");
+    private void addLineCell(mxCell parent, Element element) {
+        this.graph.getStylesheet().putCellStyle("lineStyle", this.getLineStyle());
+        Object edge = this.graph.insertEdge(this.parent, element.getId(), "", this.objects.get(element.getId() + "(name)"), this.objects.get(element.getId() + "(point)"), "lineStyle");
         mxCell cell = (mxCell) edge;
-        this.identifiers.put(edge, lifeline.getId());
-//        /this.identifiers.put(cell, lifeline.getId());
+        this.identifiers.put(edge, element.getId());
+        //this.identifiers.put(cell, lifeline.getId());
+    }
+    
+    /**
+     * Method responsible for adding the End Point Cell.
+     * @param parent Parent Cell.
+     * @param element Element.
+     */
+    private void addEndPointCell(mxCell parent, Element element) {
+        this.graph.getStylesheet().putCellStyle("endPointStyle", this.getEndPointStyle());
+        Integer x   = element.getWidth() / 2;
+        Integer y   = element.getHeight();
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, element.getId() + "(point)", "", x, y, 10, 10, "endPointStyle");
+               cell.setConnectable(false);
+               cell.setId(element.getId() + "(point)");
+        this.identifiers.put(cell.getId(), element.getId());
+        this.objects.put(element.getId() + "(point)", cell);
     }
     
     /**
@@ -174,15 +203,36 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     }
     
     /**
-     * Method responsible for returning the Line Style.
+     * Method responsible for returning the Name Style.
+     * @return Name Style.
+     */
+    public Map getNameStyle() {
+        Map    style = new HashMap<>();
+               style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
+               style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
+               style.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
+               style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+               style.put(mxConstants.STYLE_EDITABLE,  "1");
+               style.put(mxConstants.STYLE_RESIZABLE, "0");
+               style.put(mxConstants.STYLE_MOVABLE,   "0");
+               style.put(mxConstants.STYLE_FOLDABLE,  "0");
+               style.put(mxConstants.STYLE_FONTSIZE,  "15");
+               style.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_BOLD);
+        return style;
+    }
+    
+    /**
+     * Method responsible for returning Line Style.
      * @return Line Style.
      */
-    private Map getLineStyle() {
+    public Map getLineStyle() {
         Map    style = new HashMap<>();
-               style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_LINE);
-               style.put(mxConstants.STYLE_MOVABLE,   0);
-               style.put(mxConstants.STYLE_EDITABLE,  0);
-               style.put(mxConstants.STYLE_RESIZABLE, 0);
+               style.put(mxConstants.STYLE_DASHED,   "0");
+               style.put(mxConstants.STYLE_EDITABLE, "0");
+               style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
+               style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+               style.put(mxConstants.STYLE_ENDARROW,   mxConstants.ARROW_SPACING);
+               style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);
         return style;
     }
     
@@ -190,12 +240,15 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      * Method responsible for returning the End Point Style.
      * @return End Point Style.
      */
-    private Map getEndPointStyle() {
+    public Map getEndPointStyle() {
         Map    style = new HashMap<>();
-               style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_CYLINDER);
-               style.put(mxConstants.STYLE_MOVABLE,   0);
-               style.put(mxConstants.STYLE_EDITABLE,  0);
-               style.put(mxConstants.STYLE_RESIZABLE, 0);
+               style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
+               style.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_BOTTOM);
+               style.put(mxConstants.STYLE_FONTSIZE, "15");
+               style.put(mxConstants.STYLE_EDITABLE, "0");
+               style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
+               style.put(mxConstants.STYLE_FILLCOLOR,   "#000000");
+               style.put(mxConstants.STYLE_STROKECOLOR, "#FFFFFF");
         return style;
     }
     
@@ -209,23 +262,32 @@ public final class PanelSequenceDiagram extends PanelDiagram {
         }
     }
     
+    /**
+     * Method responsible for adding the Message Points.
+     * @param message Message UML.
+     */
     private void addPoints(MessageUML message) {
         this.getDefaultEdgeStyle().put(message.getStyleLabel(), message.getStyle());
         Object source = this.addPoint(message, message.getSource());
         Object target = this.addPoint(message, message.getTarget());
         Object edge   = this.graph.insertEdge(this.parent, message.getId(), message.getTitle(), source, target, message.getStyleLabel());
-        mxCell cell   = (mxCell) edge;
+//        mxCell cell   = (mxCell) edge;
         this.identifiers.put(edge, message.getId());
 //        mxCell cell = (mxCell) this.graph.insertVertex(parent, lifeline.getId() + "(point)", "", x, y, 10, 10, "endPointStyle");
 //               cell.setConnectable(false);
     }
      
-    
-    private mxCell addPoint(MessageUML message, LifelineUML lifeline) {
+    /**
+     * Method responsible for returning the Point Cell.
+     * @param  message Message UML.
+     * @param  element Element.
+     * @return Point Cell.
+     */
+    private mxCell addPoint(MessageUML message, Element element) {
         this.getDefaultEdgeStyle().put("pointStyle", this.getPointStyle());
-        Integer x = lifeline.getWidth() / 2;
+        Integer x = element.getWidth() / 2;
         Integer y = 50 + (message.getSequence() * 25);
-        mxCell cell = (mxCell) this.graph.insertVertex(this.objects.get(lifeline.getId()), null, "", x, y, 5, 5, "pointStyle");
+        mxCell cell = (mxCell) this.graph.insertVertex(this.objects.get(element.getId()), null, "", x, y, 5, 5, "pointStyle");
                cell.setConnectable(false);
         return cell;
     }
@@ -236,7 +298,6 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      */
     private Map getPointStyle() {
         Map    style = this.getEndPointStyle();
-//         style.put(mxConstants.STYLE_FILLCOLOR,   "#E6E6FA");
                style.put(mxConstants.STYLE_FILLCOLOR, "#FFFFFF");
         return style;
     }
@@ -288,18 +349,18 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     }
     
     /**
-     * Method responsible for returning the Lifeline Actor Button.
-     * @return Lifeline Actor Button.
+     * Method responsible for returning the Lifeline Button.
+     * @return Lifeline Button.
      */
-    public JButton getLifelineActorButton() {
-        return this.buttons.get("lifelineActorButton");
+    public JButton getLifelineButton() {
+        return this.buttons.get("lifelineButton");
     }
     
     /**
-     * Method responsible for returning the Lifeline Class Button.
-     * @return Lifeline Class Button.
+     * Method responsible for returning the Instance Button.
+     * @return Instance Button.
      */
-    public JButton getLifelineClassButton() {
-        return this.buttons.get("lifelineClassButton");
+    public JButton getInstanceButton() {
+        return this.buttons.get("instanceButton");
     }
 }

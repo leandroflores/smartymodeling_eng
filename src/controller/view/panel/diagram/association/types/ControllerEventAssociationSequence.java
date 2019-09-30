@@ -79,7 +79,7 @@ public class ControllerEventAssociationSequence extends ControllerEventAssociati
         Element source = this.getSource(association);
         Element target = this.getTarget(association);
         try {
-            return new MessageUML((LifelineUML) source, (LifelineUML) target, this.getCategory());
+            return new MessageUML(source, target, this.getCategory());
         }catch (ClassCastException exception) {
             return null;
         }

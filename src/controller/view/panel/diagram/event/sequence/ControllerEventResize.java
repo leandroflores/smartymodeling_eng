@@ -68,8 +68,8 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
         Integer width  = new Double(this.panel.getGraph().getCellGeometry(cell).getWidth()).intValue();
                 lifelineUML.setHeight(height);
                 lifelineUML.setWidth(width);
-//        lifelineUML.setHeight(height > lifelineUML.getMinHeight() ? height : lifelineUML.getMinHeight());
-//        lifelineUML.setWidth( width  >  lifelineUML.getMinWidth() ?  width :  lifelineUML.getMinWidth());
+        lifelineUML.setHeight(height >  350 ? height : 350);
+        lifelineUML.setWidth( width  >  lifelineUML.getNameSize() ?  width :  lifelineUML.getNameSize());
         this.panel.getViewMenu().setSave(false);
         this.panel.updateDiagram();
     }
