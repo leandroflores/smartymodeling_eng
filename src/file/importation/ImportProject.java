@@ -3,6 +3,7 @@ package file.importation;
 import file.importation.diagram.types.ImportActivityDiagram;
 import file.importation.diagram.types.ImportClassDiagram;
 import file.importation.diagram.types.ImportComponentDiagram;
+import file.importation.diagram.types.ImportSequenceDiagram;
 import file.importation.diagram.types.ImportUseCaseDiagram;
 import java.io.File;
 import java.io.IOException;
@@ -153,7 +154,7 @@ public class ImportProject {
      * @throws XPathExpressionException 
      */
     private void importDiagrams() throws XPathExpressionException {
-        String[] types = {"Activity", "Class", "Component", "Sequence", "UseCase"};
+        String[] types = {"Activity", "Class", "Component", "UseCase", "Sequence"};
         for (int i = 0; i < types.length; i++) {
             this.expression = "/project/diagram";
             String filter   = this.expression + "[@type='" + types[i] + "']";
@@ -180,8 +181,11 @@ public class ImportProject {
             case 2:
                 this.project.addDiagram(new ImportComponentDiagram(this.project, element).importDiagram());
                 break;
-            case 4:
+            case 3:
                 this.project.addDiagram(new ImportUseCaseDiagram(this.project, element).importDiagram());
+                break;
+            case 4:
+                this.project.addDiagram(new ImportSequenceDiagram(this.project, element).importDiagram());
                 break;
             default:
                 break;

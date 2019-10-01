@@ -140,6 +140,7 @@ public final class SequenceDiagram extends Diagram {
             message.setSequence(this.nextSequence());
             this.messages.put(message.getId(), message);
             this.addAssociation(message);
+            this.updateSequence();
         }
     }
     

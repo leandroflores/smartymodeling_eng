@@ -48,9 +48,7 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      * @param event Event.
      */
     private void moveElement(Element element, mxEventObject event) {
-        System.out.println("Move " + element);
         element.dx(((Double) event.getProperty("dx")).intValue());
-//        element.dy(((Double) event.getProperty("dy")).intValue());
         this.panel.getViewMenu().setSave(false); 
    }
 }

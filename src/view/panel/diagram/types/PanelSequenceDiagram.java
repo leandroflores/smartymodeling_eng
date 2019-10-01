@@ -169,7 +169,6 @@ public final class PanelSequenceDiagram extends PanelDiagram {
         Object edge = this.graph.insertEdge(this.parent, element.getId(), "", this.objects.get(element.getId() + "(name)"), this.objects.get(element.getId() + "(point)"), "lineStyle");
         mxCell cell = (mxCell) edge;
         this.identifiers.put(edge, element.getId());
-        //this.identifiers.put(cell, lifeline.getId());
     }
     
     /**

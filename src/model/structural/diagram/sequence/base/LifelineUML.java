@@ -153,4 +153,29 @@ public class LifelineUML extends Element {
                style.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_CENTER);
         return style;
     }
+    
+    /**
+     * Method responsible for returning the Actor Id.
+     * @return Actor Id.
+     */
+    private String getActorId() {
+        if (this.actor != null)
+            return this.actor.getId();
+        return "";
+    }
+    
+    @Override
+    public String export() {
+        String export  = "    <"         + this.type;
+               export += " id=\""        + this.id           + "\"";
+               export += " name=\""      + this.name         + "\"";
+               export += " actor=\""     + this.getActorId() + "\"";
+               export += " mandatory=\"" + this.mandatory    + "\"";
+               export += " x=\""         + this.getX()       + "\"";
+               export += " y=\""         + this.getY()       + "\"";
+               export += " height=\""    + this.getHeight()  + "\"";
+               export += " width=\""     + this.getWidth()   + "\"";
+               export += "/>\n";
+        return export;
+    }
 }

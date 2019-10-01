@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 import model.structural.base.Element;
+import model.structural.diagram.classes.base.ClassUML;
 
 /**
  * <p>Class of Model <b>InstanceUML</b>.</p>
@@ -14,7 +15,7 @@ import model.structural.base.Element;
  * @see    model.structural.base.Element
  */
 public class InstanceUML extends Element {
-    private Element element;
+    private ClassUML classUML;
     
     /**
      * Default constructor method of Class.
@@ -24,6 +25,7 @@ public class InstanceUML extends Element {
         this.type      = "instance";
         this.mandatory = true;
         this.size      = new Point(200, 350);
+        this.classUML  = null;
     }
     
     /**
@@ -32,23 +34,24 @@ public class InstanceUML extends Element {
      */
     public InstanceUML(org.w3c.dom.Element element) {
         super(element, true);
-        this.type = "instance";
+        this.type     = "instance";
+        this.classUML = null;
     }
 
     /**
-     * Method responsible for returning the Element.
-     * @return Element.
+     * Method responsible for returning the Class UML.
+     * @return Class UML.
      */
-    public Element getElement() {
-        return this.element;
+    public ClassUML getClassUML() {
+        return this.classUML;
     }
 
     /**
-     * Method responsible for setting the Element.
-     * @param element Element.
+     * Method responsible for setting the Class UML.
+     * @param classUML Class UML.
      */
-    public void setElement(Element element) {
-        this.element = element;
+    public void setClassUML(ClassUML classUML) {
+        this.classUML = classUML;
     }
     
     /**
@@ -64,8 +67,8 @@ public class InstanceUML extends Element {
      * @return Class Name.
      */
     public String getClassName() {
-        if (this.element != null)
-            return this.element.getName();
+        if (this.classUML != null)
+            return this.classUML.getName();
         return "";
     }
 
@@ -92,5 +95,30 @@ public class InstanceUML extends Element {
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
                style.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_CENTER);
         return style;
+    }
+    
+    /**
+     * Method responsible for returning the Class Id.
+     * @return Class Id.
+     */
+    private String getClassId() {
+        if (this.classUML != null)
+            return this.classUML.getId();
+        return "";
+    }
+    
+    @Override
+    public String export() {
+        String export  = "    <"         + this.type;
+               export += " id=\""        + this.id           + "\"";
+               export += " name=\""      + this.name         + "\"";
+               export += " class=\""     + this.getClassId() + "\"";
+               export += " mandatory=\"" + this.mandatory    + "\"";
+               export += " x=\""         + this.getX()       + "\"";
+               export += " y=\""         + this.getY()       + "\"";
+               export += " height=\""    + this.getHeight()  + "\"";
+               export += " width=\""     + this.getWidth()   + "\"";
+               export += "/>\n";
+        return export;
     }
 }

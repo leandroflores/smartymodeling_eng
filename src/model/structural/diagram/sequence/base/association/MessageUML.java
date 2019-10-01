@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
+import model.structural.diagram.classes.base.MethodUML;
 
 /**
  * <p>Class of Model <b>MessageUML</b>.</p>
@@ -16,9 +17,10 @@ import model.structural.base.association.Association;
  * @see    model.structural.diagram.sequence.base.LifelineUML
  */
 public class MessageUML extends Association {
-    private String  category;
-    private String  name;
-    private Integer sequence;
+    private String    category;
+    private String    name;
+    private Integer   sequence;
+    private MethodUML method;
     
     /**
      * Default constructor method of Class.
@@ -30,6 +32,7 @@ public class MessageUML extends Association {
         this.target   = target;
         this.type     = "message";
         this.sequence = 0;
+        this.method   = null;
     }
     
     /**
@@ -41,9 +44,11 @@ public class MessageUML extends Association {
     public MessageUML(Element source, Element target, String category) {
         this.source   = source;
         this.target   = target;
+        this.type     = "message";
+        this.name     = ".operation()";
         this.category = category;
         this.sequence = 0;
-        this.type     = "message";
+        this.method   = null;
     }
 
     /**
@@ -93,10 +98,41 @@ public class MessageUML extends Association {
     public void setSequence(Integer sequence) {
         this.sequence = sequence;
     }
+
+    /**
+     * Method responsible for returning the Method UML.
+     * @return Method UML.
+     */
+    public MethodUML getMethod() {
+        return this.method;
+    }
+
+    /**
+     * Method responsible for setting the Method UML.
+     * @param method Method UML.
+     */
+    public void setMethod(MethodUML method) {
+        if (method != null) {
+            this.method = method;
+            this.name   = this.method.getSignature();
+        }else {
+            this.name   = ".operation()";
+        }
+    }
+    
+    /**
+     * Method responsible for returning the Signature.
+     * @return Signature.
+     */
+    private String getSignature() {
+        if (this.method == null)
+            return ". operation()";
+        return method.getSignature();
+    }
     
     @Override
     public String getTitle() {
-        return this.sequence + ". operation()";
+        return this.sequence + this.getSignature();
     }
     
     @Override
@@ -144,5 +180,28 @@ public class MessageUML extends Association {
             return false;
         return this.source.equals(((MessageUML) object).getSource())
             && this.target.equals(((MessageUML) object).getTarget());
+    }
+    
+    /**
+     * Method responsible for returning the Method Id.
+     * @return Method Id.
+     */
+    private String getMethodId() {
+        if (this.method != null) 
+            return this.method.getId();
+        return "";
+    }
+    
+    @Override
+    public String export() {
+        String export  = "    <"        + this.type;
+               export += " source=\""   + this.source.getId()  + "\"";
+               export += " target=\""   + this.target.getId()  + "\"";
+               export += " name=\""     + this.name.trim()     + "\"";
+               export += " category=\"" + this.category.trim() + "\"";
+               export += " sequence=\"" + this.sequence        + "\"";
+               export += " method=\""   + this.getMethodId()   + "\"";
+               export += "/>\n";
+        return export;
     }
 }
