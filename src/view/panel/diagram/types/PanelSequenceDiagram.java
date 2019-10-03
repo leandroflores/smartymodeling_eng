@@ -257,7 +257,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
         for (int i = 0; i < messages.size(); i++) {
             MessageUML message = messages.get(i);
             this.addPoints(message);
-            System.out.println(message.getId() + " " + message.getSequence());
+//            System.out.println(message.getId() + " " + message.getSequence());
         }
     }
     

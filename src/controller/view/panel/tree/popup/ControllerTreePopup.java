@@ -15,6 +15,7 @@ import model.structural.base.variability.Variability;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.ComponentDiagram;
+import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
@@ -175,7 +176,9 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
         else if (diagram instanceof ComponentDiagram)
             this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((ComponentDiagram) diagram, element);
         else if (diagram instanceof UseCaseDiagram)
-            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((UseCaseDiagram) diagram, element);
+            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((UseCaseDiagram)  diagram, element);
+        else if (diagram instanceof SequenceDiagram)
+            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((SequenceDiagram) diagram, element);
     }
     
     /**

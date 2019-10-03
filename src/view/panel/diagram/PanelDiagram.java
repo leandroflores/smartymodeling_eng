@@ -158,6 +158,7 @@ public abstract class PanelDiagram extends Panel {
 //        this.graph.removeCellsFromParent();
 //        this.graph.re
         this.graph.removeCells(this.graph.getChildVertices(this.graph.getDefaultParent()));
+        this.graph.removeCells();
     }
     
     /**

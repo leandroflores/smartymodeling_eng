@@ -14,6 +14,7 @@ import model.structural.base.variability.Variability;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.ComponentDiagram;
+import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import model.structural.diagram.activity.base.ActivityUML;
 import model.structural.diagram.activity.base.DecisionUML;
@@ -23,6 +24,8 @@ import model.structural.diagram.classes.base.InterfaceUML;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.component.base.ComponentUML;
+import model.structural.diagram.sequence.base.InstanceUML;
+import model.structural.diagram.sequence.base.LifelineUML;
 import model.structural.diagram.usecase.base.ActorUML;
 import model.structural.diagram.usecase.base.UseCaseUML;
 import view.Panel;
@@ -38,6 +41,8 @@ import view.panel.edit.base.classes.PanelEditMethodUML;
 import view.panel.edit.base.classes.PanelEditPackageUML;
 import view.panel.edit.base.component.PanelEditComponentUML;
 import view.panel.edit.base.evaluation.PanelEditMetric;
+import view.panel.edit.base.sequence.PanelEditInstanceUML;
+import view.panel.edit.base.sequence.PanelEditLifelineUML;
 import view.panel.edit.base.traceability.PanelEditTraceability;
 import view.panel.edit.base.usecase.PanelEditActorUML;
 import view.panel.edit.base.usecase.PanelEditUseCaseUML;
@@ -193,6 +198,19 @@ public final class PanelProject extends Panel {
             this.panelEdit = new PanelEditActorUML(this.viewMenu, diagram, (ActorUML) element);
         else if (element instanceof UseCaseUML)
             this.panelEdit = new PanelEditUseCaseUML(this.viewMenu, diagram, (UseCaseUML) element);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Element.
+     * @param diagram Sequence Diagram.
+     * @param element Element.
+     */
+    public void initPanelEditElement(SequenceDiagram diagram, Element element) {
+        if (element instanceof LifelineUML)
+            this.panelEdit = new PanelEditLifelineUML(this.viewMenu, diagram, (LifelineUML) element);
+        else if (element instanceof InstanceUML)
+            this.panelEdit = new PanelEditInstanceUML(this.viewMenu, diagram, (InstanceUML) element);
         this.updatePanelEdit();
     }
     

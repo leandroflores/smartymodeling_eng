@@ -19,6 +19,8 @@ import model.structural.diagram.classes.base.TypeUML;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.Entity;
+import model.structural.diagram.classes.base.ClassUML;
+import model.structural.diagram.usecase.base.ActorUML;
 
 /**
  * <p>Class of Model <b>Project</b>.</p>
@@ -336,6 +338,32 @@ public class Project implements Exportable {
                       }
                   });
         return    list;
+    }
+    
+    /**
+     * Method responsible for returning the Actors List.
+     * @return Actors List.
+     */
+    public List<ActorUML> getActorsList() {
+        List<ActorUML> actors = new ArrayList<>();
+        for (Element element : this.getElements()) {
+            if (element instanceof ActorUML)
+                actors.add((ActorUML) element);
+        }
+        return actors;
+    }
+    
+    /**
+     * Method responsible for returning the Classes List.
+     * @return Classes List.
+     */
+    public List<ClassUML> getClassesList() {
+        List<ClassUML> classes = new ArrayList<>();
+        for (Element element : this.getElements()) {
+            if (element instanceof ClassUML)
+                classes.add((ClassUML) element);
+        }
+        return classes;
     }
     
     /**
