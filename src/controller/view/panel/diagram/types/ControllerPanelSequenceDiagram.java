@@ -82,9 +82,8 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
     public void addInstance(MouseEvent event) {
         InstanceUML instance = new InstanceUML();
                     instance.setPosition(event.getX(), 20);
-//                    lifeline.setActor(this.panelDiagram.getDiagram().getProject().getDefaultStereotype());
         this.panelDiagram.getDiagram().addInstance(instance);
-//                   lifeline.setDefaultName();
+                    instance.setDefaultName();
         this.panelDiagram.updateDiagram();
         this.panelDiagram.getViewMenu().update();
     }

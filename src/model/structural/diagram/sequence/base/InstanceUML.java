@@ -72,6 +72,14 @@ public class InstanceUML extends Element {
         return "";
     }
 
+    /**
+     * Method responsible for returning the Name Size.
+     * @return Name Size.
+     */
+    public Integer getNameSize() {
+        return 10 * this.name.length();
+    }
+    
     @Override
     public String getIcon() {
         return "src/images/icons/diagram/sequence/instance.png";

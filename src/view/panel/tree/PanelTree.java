@@ -12,10 +12,12 @@ import model.structural.base.Project;
 import model.structural.base.evaluation.Metric;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
+import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.PackageUML;
+import model.structural.diagram.sequence.base.association.MessageUML;
 import view.Panel;
 import view.panel.tree.popup.TreePopup;
 import view.panel.tree.renderer.TreeRenderer;
@@ -78,8 +80,8 @@ public final class PanelTree extends Panel {
      */
     private void addDiagrams(DefaultMutableTreeNode root) {
         if (this.project != null) {
-            for (int i = 0; i < this.project.getDiagramsList().size(); i++)
-                root.add(this.getNode(project.getDiagramsList().get(i)));
+            for (Diagram diagram : this.project.getDiagramsList())
+                root.add(this.getNode(diagram));
         }
     }
     
@@ -119,7 +121,7 @@ public final class PanelTree extends Panel {
     private DefaultMutableTreeNode getNode(Diagram diagram) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(diagram);
                this.addElements(diagram, node);
-//               this.addAssociations(diagrama, node);
+               this.addAssociations(diagram, node);
                this.addVariabilities(diagram, node);
         return node;
     }
@@ -222,8 +224,10 @@ public final class PanelTree extends Panel {
      * @param node Diagram Node.
      */
     private void addAssociations(Diagram diagram, DefaultMutableTreeNode node) {
-        for (int i = 0; i < diagram.getAssociationsList().size(); i++)
-            node.add(new DefaultMutableTreeNode(diagram.getAssociationsList().get(i)));
+        if (diagram.getType().equalsIgnoreCase("Sequence")) {
+            for (MessageUML message : ((SequenceDiagram) diagram).getMessageList())
+                node.add(new DefaultMutableTreeNode(message));
+        }
     }
     
     /**

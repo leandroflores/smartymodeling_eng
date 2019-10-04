@@ -5,12 +5,10 @@ import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationSequence;
 import controller.view.panel.diagram.event.sequence.ControllerEventMove;
-import controller.view.panel.diagram.event.sequence.ControllerEventResize;
 import controller.view.panel.diagram.types.ControllerPanelSequenceDiagram;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -253,12 +251,8 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     
     @Override
     public void addAssociations() {
-        List<MessageUML> messages = this.diagram.getMessageList();
-        for (int i = 0; i < messages.size(); i++) {
-            MessageUML message = messages.get(i);
+        for (MessageUML message : this.diagram.getMessageList())
             this.addPoints(message);
-//            System.out.println(message.getId() + " " + message.getSequence());
-        }
     }
     
     /**
@@ -266,14 +260,12 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      * @param message Message UML.
      */
     private void addPoints(MessageUML message) {
-        this.getDefaultEdgeStyle().put(message.getStyleLabel(), message.getStyle());
+        this.graph.getStylesheet().putCellStyle(message.getStyleLabel(), message.getStyle());
         Object source = this.addPoint(message, message.getSource());
         Object target = this.addPoint(message, message.getTarget());
         Object edge   = this.graph.insertEdge(this.parent, message.getId(), message.getTitle(), source, target, message.getStyleLabel());
-//        mxCell cell   = (mxCell) edge;
-        this.identifiers.put(edge, message.getId());
-//        mxCell cell = (mxCell) this.graph.insertVertex(parent, lifeline.getId() + "(point)", "", x, y, 10, 10, "endPointStyle");
-//               cell.setConnectable(false);
+        mxCell cell   = (mxCell) edge;
+        this.identifiers.put(cell, message.getId());
     }
      
     /**
@@ -326,20 +318,20 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      */
     private void setMessageStyle(boolean flag) {
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED, "0");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,  flag ?  mxConstants.ARROW_OPEN : mxConstants.ARROW_BLOCK);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,   flag ?  mxConstants.ARROW_OPEN : mxConstants.ARROW_BLOCK);
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_FILLCOLOR,   "#FFFFFF");
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_FONTCOLOR,   "#000000");
     }
     
     @Override
      public void addControllers() {
         this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationSequence(this));
-//        this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationActivity(this));
 //        this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
 //        this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
         this.component.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventMove(this));
-        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
+//        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
      }
     
     @Override

@@ -5,6 +5,7 @@ import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import model.structural.base.Element;
+import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
 import view.panel.diagram.types.PanelSequenceDiagram;
 
@@ -56,10 +57,12 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
     private void resize(Element element, Object cell) {
         if (element instanceof LifelineUML)
             this.resize((LifelineUML) element, cell);
+        else if (element instanceof InstanceUML)
+            this.resize((InstanceUML) element, cell);
     }
     
     /**
-     * Method responsible for resizing the Entity.
+     * Method responsible for resizing the Instance UML.
      * @param lifelineUML LifelineUML.
      * @param cell Graph Cell.
      */
@@ -68,6 +71,20 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
         Integer width  = new Double(this.panel.getGraph().getCellGeometry(cell).getWidth()).intValue();
             lifelineUML.setHeight(height >  350 ? height : 350);
             lifelineUML.setWidth( width  >  lifelineUML.getNameSize() ?  width :  lifelineUML.getNameSize());
+        this.panel.getViewMenu().setSave(false);
+        this.panel.updateDiagram();
+    }
+    
+    /**
+     * Method responsible for resizing the Instance UML.
+     * @param instanceUML Instance UML.
+     * @param cell Graph Cell.
+     */
+    private void resize(InstanceUML instanceUML, Object cell) {
+        Integer height = new Double(this.panel.getGraph().getCellGeometry(cell).getHeight()).intValue();
+        Integer width  = new Double(this.panel.getGraph().getCellGeometry(cell).getWidth()).intValue();
+            instanceUML.setHeight(height >  350 ? height : 350);
+            instanceUML.setWidth( width  >  instanceUML.getNameSize() ?  width :  instanceUML.getNameSize());
         this.panel.getViewMenu().setSave(false);
         this.panel.updateDiagram();
     }

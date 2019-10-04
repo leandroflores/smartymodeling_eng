@@ -137,7 +137,7 @@ public class MessageUML extends Association {
     
     @Override
     public String getStyleLabel() {
-        return "styleMessageUML";
+        return "styleMessageUML" + this.getId();
     }
 
     /**
@@ -159,7 +159,7 @@ public class MessageUML extends Association {
                style.put(mxConstants.STYLE_EDITABLE, "1");
 //               style.put(mxConstants.STYLE_FILLCOLOR,   "#FFFFFF");
 //               style.put(mxConstants.STYLE_STROKECOLOR, "#EEEEEE");
-               style.put(mxConstants.STYLE_FONTCOLOR,   "#AAAAAA");
+               style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_SHAPE,      mxConstants.SHAPE_CONNECTOR);
                style.put(mxConstants.STYLE_ENDARROW,   this.getEndArrow());
                style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);
@@ -203,5 +203,10 @@ public class MessageUML extends Association {
                export += " method=\""   + this.getMethodId()   + "\"";
                export += "/>\n";
         return export;
+    }
+    
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
