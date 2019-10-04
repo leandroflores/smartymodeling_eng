@@ -341,29 +341,39 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for returning the List by Type.
+     * @param  type Element Type.
+     * @return Elements List.
+     */
+    public List getList(String type) {
+        List list = new ArrayList<>();
+        for (Element element : this.getElements()) {
+            if (element.getType().equalsIgnoreCase(type))
+                list.add(element);
+        }
+        return list;
+    }
+    
+    /**
      * Method responsible for returning the Actors List.
      * @return Actors List.
      */
     public List<ActorUML> getActorsList() {
-        List<ActorUML> actors = new ArrayList<>();
-        for (Element element : this.getElements()) {
-            if (element instanceof ActorUML)
-                actors.add((ActorUML) element);
-        }
-        return actors;
+        return this.getList("actor");
     }
     
     /**
-     * Method responsible for returning the Classes List.
-     * @return Classes List.
+     * Method responsible for returning the Element by Type and Name.
+     * @param  type Element Type.
+     * @param  name Element Name.
+     * @return Element found.
      */
-    public List<ClassUML> getClassesList() {
-        List<ClassUML> classes = new ArrayList<>();
-        for (Element element : this.getElements()) {
-            if (element instanceof ClassUML)
-                classes.add((ClassUML) element);
+    public Element getByName(String type, String name) {
+        for (Object element : this.getList(type)) {
+            if (((Element) element).getName().equalsIgnoreCase(name))
+                return (Element) element;
         }
-        return classes;
+        return null;
     }
     
     /**

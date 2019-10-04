@@ -4,6 +4,7 @@ import com.mxgraph.model.mxCell;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationSequence;
+import controller.view.panel.diagram.event.sequence.ControllerEventEdit;
 import controller.view.panel.diagram.event.sequence.ControllerEventMove;
 import controller.view.panel.diagram.types.ControllerPanelSequenceDiagram;
 import java.awt.BorderLayout;
@@ -328,7 +329,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     @Override
      public void addControllers() {
         this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationSequence(this));
-//        this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
+        this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
 //        this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
         this.component.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventMove(this));
 //        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));

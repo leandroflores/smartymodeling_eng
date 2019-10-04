@@ -8,6 +8,7 @@ import javax.swing.JSplitPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.base.association.Association;
 import model.structural.base.evaluation.Metric;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
@@ -26,6 +27,7 @@ import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.component.base.ComponentUML;
 import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
+import model.structural.diagram.sequence.base.association.MessageUML;
 import model.structural.diagram.usecase.base.ActorUML;
 import model.structural.diagram.usecase.base.UseCaseUML;
 import view.Panel;
@@ -43,6 +45,7 @@ import view.panel.edit.base.component.PanelEditComponentUML;
 import view.panel.edit.base.evaluation.PanelEditMetric;
 import view.panel.edit.base.sequence.PanelEditInstanceUML;
 import view.panel.edit.base.sequence.PanelEditLifelineUML;
+import view.panel.edit.base.sequence.PanelEditMessageUML;
 import view.panel.edit.base.traceability.PanelEditTraceability;
 import view.panel.edit.base.usecase.PanelEditActorUML;
 import view.panel.edit.base.usecase.PanelEditUseCaseUML;
@@ -211,6 +214,17 @@ public final class PanelProject extends Panel {
             this.panelEdit = new PanelEditLifelineUML(this.viewMenu, diagram, (LifelineUML) element);
         else if (element instanceof InstanceUML)
             this.panelEdit = new PanelEditInstanceUML(this.viewMenu, diagram, (InstanceUML) element);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Association.
+     * @param diagram Sequence Diagram.
+     * @param association Association.
+     */
+    public void initPanelEditAssociation(SequenceDiagram diagram, Association association) {
+        if (association instanceof MessageUML)
+            this.panelEdit = new PanelEditMessageUML(this.viewMenu, diagram, (MessageUML) association);
         this.updatePanelEdit();
     }
     

@@ -391,6 +391,19 @@ public abstract class Entity extends Element {
     }
     
     /**
+     * Method responsible for returning the Method by Name.
+     * @param  name Method Name.
+     * @return Method found.
+     */
+    public MethodUML getMethodByName(String name) {
+        for (MethodUML method : this.getMethodsList()) {
+            if (method.getName().equalsIgnoreCase(name))
+                return method;
+        }
+        return null;
+    }
+    
+    /**
      * Method responsible for returning the Method Size.
      * @return Method Size.
      */

@@ -114,7 +114,7 @@ public class MessageUML extends Association {
     public void setMethod(MethodUML method) {
         if (method != null) {
             this.method = method;
-            this.name   = this.method.getSignature();
+            this.name   = this.method.getShortSignature();
         }else {
             this.name   = ".operation()";
         }
@@ -151,14 +151,22 @@ public class MessageUML extends Association {
             
     }
     
+    /**
+     * Method responsible for returning the Method Id.
+     * @return Method Id.
+     */
+    private String getMethodId() {
+        if (this.method != null) 
+            return this.method.getId();
+        return "";
+    }
+    
     @Override
     public Map getStyle() {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_DASHED,   "0");
                style.put(mxConstants.STYLE_MOVABLE,  "0");
                style.put(mxConstants.STYLE_EDITABLE, "1");
-//               style.put(mxConstants.STYLE_FILLCOLOR,   "#FFFFFF");
-//               style.put(mxConstants.STYLE_STROKECOLOR, "#EEEEEE");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_SHAPE,      mxConstants.SHAPE_CONNECTOR);
                style.put(mxConstants.STYLE_ENDARROW,   this.getEndArrow());
@@ -180,16 +188,6 @@ public class MessageUML extends Association {
             return false;
         return this.source.equals(((MessageUML) object).getSource())
             && this.target.equals(((MessageUML) object).getTarget());
-    }
-    
-    /**
-     * Method responsible for returning the Method Id.
-     * @return Method Id.
-     */
-    private String getMethodId() {
-        if (this.method != null) 
-            return this.method.getId();
-        return "";
     }
     
     @Override

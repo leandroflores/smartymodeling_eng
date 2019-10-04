@@ -9,6 +9,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.base.association.Association;
 import model.structural.base.evaluation.Metric;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
@@ -135,6 +136,8 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
                 this.showPanelEditMetric((Metric) node.getUserObject());
             else if (node.getUserObject() instanceof Element)
                 this.showPanelEdit(diagram, (Element) node.getUserObject());
+            else if (node.getUserObject() instanceof Association)
+                this.showPanelEdit(diagram, (Association) node.getUserObject());
         }
     }
     
@@ -179,6 +182,16 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
             this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((UseCaseDiagram)  diagram, element);
         else if (diagram instanceof SequenceDiagram)
             this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((SequenceDiagram) diagram, element);
+    }
+    
+    /**
+     * Method responsible for showing the Panel Edit.
+     * @param diagram Diagram.
+     * @param association Association.
+     */
+    private void showPanelEdit(Diagram diagram, Association association) {
+        if (diagram instanceof SequenceDiagram)
+            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditAssociation((SequenceDiagram) diagram, association);
     }
     
     /**
