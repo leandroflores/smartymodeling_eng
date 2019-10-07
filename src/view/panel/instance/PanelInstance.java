@@ -3,7 +3,11 @@ package view.panel.instance;
 import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.util.mxEvent;
 import com.mxgraph.view.mxGraph;
+import controller.view.panel.instance.ControllerPanelInstance;
+import controller.view.panel.instance.event.ControllerEventMove;
+import controller.view.panel.instance.event.ControllerEventResize;
 import java.awt.Color;
 import java.util.HashMap;
 import java.awt.Dimension;
@@ -26,8 +30,8 @@ import view.structural.ViewMenu;
  * @see    view.Panel
  */
 public abstract class PanelInstance extends Panel {
-    private final ViewMenu viewMenu;
-    private final Instance instance;
+    protected final ViewMenu viewMenu;
+    protected final Instance instance;
     protected Double  zoom;
     protected Object  parent;
     protected mxGraph graph;
@@ -54,9 +58,12 @@ public abstract class PanelInstance extends Panel {
     }
     
     /**
-     * Method responsible for adding the Diagram Panel Controllers.
+     * Method responsible for adding the Instance Panel Controllers.
      */
-    public abstract void addControllers();
+    public void addControllers() {
+        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
+        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
+    }
     
     private mxGraph createMxGraph() {
         return new mxGraph() {
@@ -102,8 +109,8 @@ public abstract class PanelInstance extends Panel {
         
         this.component = new mxGraphComponent(this.graph);
         
-//        this.component.getGraphControl().addMouseListener((ControllerPanelDiagram) this.controller);
-//        this.component.getGraphControl().getGraphContainer().addKeyListener((ControllerPanelDiagram) controller);
+        this.component.getGraphControl().addMouseListener((ControllerPanelInstance) this.controller);
+        this.component.getGraphControl().getGraphContainer().addKeyListener((ControllerPanelInstance) this.controller);
         this.graph.setDisconnectOnMove(false);
         this.graph.setCellsDisconnectable(false);
         

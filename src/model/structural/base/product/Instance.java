@@ -108,6 +108,19 @@ public class Instance implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Artefact by Element.
+     * @param  element Element.
+     * @return Artefact found.
+     */
+    public Artefact getArtefact(Element element) {
+        for (Artefact  artefact : this.getArtefactsList()) {
+            if (artefact.getElement().equals(element))
+                return artefact;
+        }
+        return null;
+    }
+    
+    /**
      * Method responsible for returning if the Instance contains a Element.
      * @param  element Element.
      * @return Instance contains Element.

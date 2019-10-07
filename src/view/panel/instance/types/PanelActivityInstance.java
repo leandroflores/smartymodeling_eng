@@ -3,32 +3,32 @@ package view.panel.instance.types;
 import controller.view.panel.instance.ControllerPanelInstance;
 import javax.swing.BoxLayout;
 import model.structural.base.product.Instance;
-import model.structural.diagram.UseCaseDiagram;
+import model.structural.diagram.ActivityDiagram;
 import view.panel.instance.PanelInstance;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelUseCaseInstance</b>.</p>
- * <p>Class responsible for defining the <b>Use Case Instance Panel</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelActivityInstance</b>.</p>
+ * <p>Class responsible for defining the <b>Activity Instance Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  06/10/2019
+ * @since  07/10/2019
  * @see    controller.view.panel.instance.ControllerPanelInstance
  * @see    controller.view.panel.instance.event.ControllerEventMove
  * @see    controller.view.panel.instance.event.ControllerEventResize
- * @see    model.structural.diagram.UseCaseDiagram
+ * @see    model.structural.diagram.ActivityDiagram
  * @see    model.structural.base.product.Instance
  * @see    view.panel.instance.PanelInstance
  */
-public final class PanelUseCaseInstance extends PanelInstance {
-    private final UseCaseDiagram diagram;
+public final class PanelActivityInstance extends PanelInstance {
+    private final ActivityDiagram diagram;
 
     /**
      * Default constructor method of Class.
      * @param view View Menu.
      * @param instance Instance.
-     * @param diagram Use Case Diagram.
+     * @param diagram Activity Diagram.
      */
-    public PanelUseCaseInstance(ViewMenu view, Instance instance, UseCaseDiagram diagram) {
+    public PanelActivityInstance(ViewMenu view, Instance instance, ActivityDiagram diagram) {
         super(view, instance);
         this.diagram    = diagram;
         this.controller = new ControllerPanelInstance(this);
@@ -44,10 +44,10 @@ public final class PanelUseCaseInstance extends PanelInstance {
     }
     
     /**
-     * Method responsible for returning the Use Case Diagram.
-     * @return Use Case Diagram.
+     * Method responsible for returning the Activity Diagram.
+     * @return Activity Diagram.
      */
-    public UseCaseDiagram getDiagram() {
+    public ActivityDiagram getDiagram() {
         return this.diagram;
     }
 }
