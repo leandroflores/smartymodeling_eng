@@ -237,28 +237,52 @@ public abstract class Element implements Exportable, Modelable {
         this.position = position;
     }
 
+    /**
+     * Method responsible for returning the Element Global Position.
+     * @return Element Global Position.
+     */
     public Point getGlobal() {
-        return global;
+        return this.global;
     }
     
+    /**
+     * Method responsible for setting the Element Global Position.
+     * @param global Element Global Position.
+     */
+    public void setGlobal(Point global) {
+        this.global = global;
+    }
+    
+    /**
+     * Method responsible for returning the Element X Global Position.
+     * @return Element X Global Position.
+     */
     public Integer getGlobalX() {
         return this.global.x;
     }
     
-    public Integer getGlobalY() {
-        return this.global.y;
-    }
-    
+    /**
+     * Method responsible for setting the Element X Global Position.
+     * @param x Element X Global Position.
+     */
     public void setGlobalX(Integer x) {
         this.global.x = x;
     }
     
+    /**
+     * Method responsible for returning the Element Y Global Position.
+     * @return Element Y Global Position.
+     */
+    public Integer getGlobalY() {
+        return this.global.y;
+    }
+    
+    /**
+     * Method responsible for setting the Element Y Global Position.
+     * @param y Element Y Global Position.
+     */
     public void setGlobalY(Integer y) {
         this.global.y = y;
-    }
-
-    public void setGlobal(Point global) {
-        this.global = global;
     }
     
     /**

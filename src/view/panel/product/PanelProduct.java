@@ -10,13 +10,13 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
-import model.structural.base.product.Product;
+import model.structural.base.product.test.Product_Final;
 import view.Panel;
 import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelProduct</b>.</p>
- * <p>Class responsible for defining the <b>Product Panel</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Product_Final Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  22/08/2019
  * @see    controller.view.panel.
@@ -25,7 +25,7 @@ import view.structural.ViewMenu;
  */
 public final class PanelProduct extends Panel {
     private final ViewMenu viewMenu;
-    private final Product  product;
+    private final Product_Final  product;
     protected Double   zoom;
     protected Object   parent;
     protected mxGraph  graph;
@@ -36,9 +36,9 @@ public final class PanelProduct extends Panel {
     /**
      * Default constructor method of Class.
      * @param view View Menu.
-     * @param product Product.
+     * @param product Product_Final.
      */
-    public PanelProduct(ViewMenu view, Product product) {
+    public PanelProduct(ViewMenu view, Product_Final product) {
         super();
         this.viewMenu = view;
         this.product  = product;
@@ -60,7 +60,7 @@ public final class PanelProduct extends Panel {
     }
     
     /**
-     * Method responsible for creating the Product Panel.
+     * Method responsible for creating the Product_Final Panel.
      */
     public void createProductPanel() {
         JPanel panel = new JPanel();
@@ -146,10 +146,10 @@ public final class PanelProduct extends Panel {
     }
     
     /**
-     * Method responsible for returning the Product.
-     * @return Product.
+     * Method responsible for returning the Product_Final.
+     * @return Product_Final.
      */
-    public Product getProduct() {
+    public Product_Final getProduct() {
         return this.product;
     }
 

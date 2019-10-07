@@ -5,6 +5,7 @@ import model.structural.base.Element;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.ComponentDiagram;
+import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import model.structural.diagram.activity.base.ActivityUML;
 import model.structural.diagram.activity.base.DecisionUML;
@@ -17,6 +18,8 @@ import model.structural.diagram.classes.base.InterfaceUML;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.component.base.ComponentUML;
+import model.structural.diagram.sequence.base.InstanceUML;
+import model.structural.diagram.sequence.base.LifelineUML;
 import model.structural.diagram.usecase.base.ActorUML;
 import model.structural.diagram.usecase.base.UseCaseUML;
 import view.delete.ViewDeleteElement;
@@ -64,6 +67,8 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
             this.deleteElement((ComponentDiagram) diagram);
         else if (diagram instanceof UseCaseDiagram)
             this.deleteElement((UseCaseDiagram) diagram);
+        else if (diagram instanceof SequenceDiagram)
+            this.deleteElement((SequenceDiagram) diagram);
     }
     
     /**
@@ -120,5 +125,16 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
             diagram.removeActor((ActorUML) this.element);
         else if (this.element instanceof UseCaseUML)
             diagram.removeUseCase((UseCaseUML) this.element);
+    }
+    
+    /**
+     * Method responsible for deleting a Element from a Sequence Diagram.
+     * @param diagram Sequence Diagram.
+     */
+    private void deleteElement(SequenceDiagram diagram) {
+        if (this.element instanceof LifelineUML)
+            diagram.removeLifeline((LifelineUML) this.element);
+        else if (this.element instanceof InstanceUML)
+            diagram.removeInstance((InstanceUML) this.element);
     }
 }

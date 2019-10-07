@@ -6,6 +6,7 @@ import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
+import model.structural.diagram.classes.base.ClassUML;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
@@ -50,10 +51,10 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
             this.changeAssociation(object, this.panel.getDiagram().getAssociation(id));
         else if (this.panel.getDiagram().getElement(id) instanceof LifelineUML)
             this.changeLifeline(object, (LifelineUML) this.panel.getDiagram().getElement(id));
-//        else if (this.panel.getDiagram().getElement(id) instanceof MethodUML)
-//            this.changeMethod(object,    (MethodUML)    this.panel.getDiagram().getElement(id));
+        else if (this.panel.getDiagram().getElement(id) instanceof InstanceUML)
+            this.changeInstance(object, (InstanceUML) this.panel.getDiagram().getElement(id));
         else if (this.panel.getDiagram().getElement(id) != null)
-            this.changeElement(object,   (Element)      this.panel.getDiagram().getElement(id));
+            this.changeElement(object,  (Element)     this.panel.getDiagram().getElement(id));
     }
     
     /**
@@ -64,9 +65,25 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     private void changeLifeline(Object object, LifelineUML lifeline) {
         mxCell cell      = (mxCell) object;
         String signature = cell.getValue().toString().trim();
-        if (this.checkLifeline(signature)) {
+        if (this.check(signature)) {
             lifeline.setName(this.getName(signature, ":"));
             lifeline.setActor(this.getActor(signature));
+            this.panel.getViewMenu().getPanelModeling().updateDiagram(this.panel.getDiagram());
+            this.panel.getViewMenu().setSave(false);
+        }
+    }
+    
+    /**
+     * Method responsible for changing the Instance UML.
+     * @param object Graph Object.
+     * @param instance Instance UML.
+     */
+    private void changeInstance(Object object, InstanceUML instance) {
+        mxCell cell      = (mxCell) object;
+        String signature = cell.getValue().toString().trim();
+        if (this.check(signature)) {
+            instance.setName(this.getName(signature, ":"));
+            instance.setClassUML(this.getClass(signature));
             this.panel.getViewMenu().getPanelModeling().updateDiagram(this.panel.getDiagram());
             this.panel.getViewMenu().setSave(false);
         }
@@ -77,7 +94,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @param  signature Lifeline Signature.
      * @return Lifeline Signature checked.
      */
-    private boolean checkLifeline(String signature) {
+    private boolean check(String signature) {
         return     signature.contains(":")
                && !this.getName(signature, ":").equals("");
     }
@@ -140,6 +157,17 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     private ActorUML getActor(String signature) {
         if (signature.contains(":"))
             return (ActorUML) this.panel.getDiagram().getProject().getByName("actor", signature.substring(signature.trim().indexOf(":") + 1).trim());
+        return null;
+    }
+    
+    /**
+     * Method responsible for returning the Class UML by Signature.
+     * @param  signature Signature.
+     * @return Class UML.
+     */
+    private ClassUML getClass(String signature) {
+        if (signature.contains(":"))
+            return (ClassUML) this.panel.getDiagram().getProject().getByName("class", signature.substring(signature.trim().indexOf(":") + 1).trim());
         return null;
     }
     

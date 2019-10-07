@@ -6,7 +6,7 @@ import java.awt.Component;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import model.structural.base.Diagram;
-import model.structural.base.product.Product;
+import model.structural.base.product.test.Product_Final;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.ComponentDiagram;
@@ -81,10 +81,10 @@ public final class PanelModeling extends Panel {
     }
     
     /**
-     * Method responsible for adding a Product.
-     * @param product Product. 
+     * Method responsible for adding a Product_Final.
+     * @param product Product_Final. 
      */
-    public void addProduct(Product product) {
+    public void addProduct(Product_Final product) {
         PanelProduct component = this.createPanelProduct(product);
         this.addTab(product.getId(), product.getName(), component);
     }
@@ -123,11 +123,11 @@ public final class PanelModeling extends Panel {
     }
     
     /**
-     * Method responsible for returning a New Product Panel.
-     * @param  product Product.
-     * @return New Product Panel.
+     * Method responsible for returning a New Product_Final Panel.
+     * @param  product Product_Final.
+     * @return New Product_Final Panel.
      */
-    private PanelProduct createPanelProduct(Product product) {
+    private PanelProduct createPanelProduct(Product_Final product) {
         return new PanelProduct(this.viewMenu, product);
     }
     
@@ -144,10 +144,10 @@ public final class PanelModeling extends Panel {
     }
     
     /**
-     * Method responsible for removing a Product from Panel Modeling.
-     * @param product Product.
+     * Method responsible for removing a Product_Final from Panel Modeling.
+     * @param product Product_Final.
      */
-    public void removeProduct(Product product) {
+    public void removeProduct(Product_Final product) {
         if (this.tabs.get(product.getId()) != null) {
             this.panelTabbed.remove(this.tabs.get(product.getId()));
             this.tabs.remove(product.getId());
@@ -211,8 +211,8 @@ public final class PanelModeling extends Panel {
     }
     
     /**
-     * Method responsible for returning Panel Product.
-     * @return Panel Product.
+     * Method responsible for returning Panel Product_Final.
+     * @return Panel Product_Final.
      */
     public PanelProduct getPanelProduct() {
         Component component = this.panelTabbed.getSelectedComponent();

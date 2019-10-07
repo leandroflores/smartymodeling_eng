@@ -8,7 +8,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
-import model.structural.base.product.Product;
+import model.structural.base.product.test.Product_Final;
 import model.structural.base.variability.Variability;
 import view.edit.panel.base.product.PanelBaseOptional;
 import view.edit.panel.base.product.PanelBaseProduct;
@@ -19,7 +19,7 @@ import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>ViewNewProduct</b>.</p>
- * <p>Class responsible for defining the <b>New Product View</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>New Product_Final View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  21/08/2019
  * @see    controller.view.new_.product.ControllerViewNewProduct
@@ -27,7 +27,7 @@ import view.structural.ViewMenu;
  */
 public final class ViewNewProduct extends ViewNew {
     private final Diagram diagram;
-    private Product product;
+    private Product_Final product;
     private PanelBaseOptional panelBaseOptional;
     private PanelBaseVariationPoints panelBaseVariationPoints;
     private PanelBaseProduct panelBaseProduct;
@@ -118,11 +118,11 @@ public final class ViewNewProduct extends ViewNew {
     }
     
     /**
-     * Method responsible for creating a New Product.
-     * @return New Product.
+     * Method responsible for creating a New Product_Final.
+     * @return New Product_Final.
      */
-    public Product createNewProduct() {
-        Product newProduct = new Product();
+    public Product_Final createNewProduct() {
+        Product_Final newProduct = new Product_Final();
                 newProduct.setName("NewProduct");
                 newProduct.setIdentifiers(this.components);
                 newProduct.setElements(this.diagram.getElements());
@@ -132,7 +132,7 @@ public final class ViewNewProduct extends ViewNew {
     }
     
     /**
-     * Method responsible for showing the New Product.
+     * Method responsible for showing the New Product_Final.
      */
     public void showNewProduct() {
         this.product = this.panelBaseProduct.getProduct();
@@ -172,7 +172,7 @@ public final class ViewNewProduct extends ViewNew {
     }
     
     /**
-     * Method responsible for adding the Product Tabbed Pane.
+     * Method responsible for adding the Product_Final Tabbed Pane.
      */
     public void addProductTabbedPane() {
         this.panelBaseProduct = new PanelBaseProduct(this, this.createNewProduct());
@@ -182,7 +182,7 @@ public final class ViewNewProduct extends ViewNew {
     }
     
     /**
-     * Method responsible for removing the Product Tabbed Pane.
+     * Method responsible for removing the Product_Final Tabbed Pane.
      */
     public void removeProductTabbedPane() {
         this.tabbedPane.getComponent(1).setEnabled(true);

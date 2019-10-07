@@ -50,7 +50,8 @@ public class LifelineUML extends Element {
      * @param actor Actor UML.
      */
     public void setActor(ActorUML actor) {
-        this.actor = actor;
+        this.actor =  actor;
+        this.name  = (actor == null) ? "lifeline" : actor.getName().toLowerCase().trim();
     }
 
     /**

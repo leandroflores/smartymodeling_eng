@@ -4,7 +4,7 @@ import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import model.structural.base.Diagram;
-import model.structural.base.product.Product;
+import model.structural.base.product.test.Product_Final;
 import view.panel.tabbed.PanelTabTitle;
 
 /**
@@ -45,10 +45,10 @@ public class ControllerPanelTabTitle extends ControllerPanel {
     }
     
     /**
-     * Method responsible for returning the Product.
-     * @return Product.
+     * Method responsible for returning the Product_Final.
+     * @return Product_Final.
      */
-    private Product getProduct() {
+    private Product_Final getProduct() {
         return this.panel.getPanelModeling().getPanelProduct().getProduct();
     }
     

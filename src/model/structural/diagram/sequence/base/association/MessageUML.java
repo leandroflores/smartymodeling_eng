@@ -51,6 +51,11 @@ public class MessageUML extends Association {
         this.method   = null;
     }
 
+    @Override
+    public String getId() {
+        return super.getId() + "(" + this.sequence + ")";
+    }
+    
     /**
      * Method responsible for returning the Category.
      * @return Category.
@@ -112,12 +117,8 @@ public class MessageUML extends Association {
      * @param method Method UML.
      */
     public void setMethod(MethodUML method) {
-        if (method != null) {
-            this.method = method;
-            this.name   = this.method.getShortSignature();
-        }else {
-            this.name   = ".operation()";
-        }
+        this.method =  method;
+        this.name   = (method == null) ? ".operation" : method.getShortSignature();
     }
     
     /**
@@ -127,7 +128,7 @@ public class MessageUML extends Association {
     private String getSignature() {
         if (this.method == null)
             return ". operation()";
-        return method.getSignature();
+        return method.getShortSignature();
     }
     
     @Override

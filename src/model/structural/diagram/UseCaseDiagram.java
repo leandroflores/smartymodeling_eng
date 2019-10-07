@@ -85,6 +85,7 @@ public final class UseCaseDiagram extends Diagram {
      * @param actorUML Actor UML.
      */
     public void removeActor(ActorUML actorUML) {
+        this.project.reset(actorUML);
         this.removeAssociations(actorUML);
         this.removeElement(actorUML);
         this.actorsUML.remove(actorUML.getId());

@@ -54,7 +54,7 @@ public final class PanelBaseLifelineUML extends Panel {
         this.add(this.createTextField("nameTextField", this.lifelineUML.getName(), 25));
         
         this.add(this.createLabel("Actor: "));
-        this.add(this.createComboBox("actorComboBox", this.diagram.getProject().getActorsList().toArray(), 30));
+        this.add(this.createComboBox("actorComboBox", this.diagram.getProject().getElements("actor").toArray(), 30));
         this.getActorComboBox().setPreferredSize(new Dimension(325, 30));
     }
     

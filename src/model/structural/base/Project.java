@@ -13,13 +13,15 @@ import java.util.Objects;
 import model.structural.base.association.Link;
 import model.structural.base.evaluation.Metric;
 import model.structural.base.interfaces.Exportable;
-import model.structural.base.product.Product;
+import model.structural.base.product.test.Product_Final;
 import model.structural.base.traceability.Traceability;
 import model.structural.diagram.classes.base.TypeUML;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ClassDiagram;
+import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.ClassUML;
+import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.usecase.base.ActorUML;
 
 /**
@@ -341,11 +343,11 @@ public class Project implements Exportable {
     }
     
     /**
-     * Method responsible for returning the List by Type.
+     * Method responsible for returning the Elements by Type.
      * @param  type Element Type.
      * @return Elements List.
      */
-    public List getList(String type) {
+    public List getElements(String type) {
         List list = new ArrayList<>();
         for (Element element : this.getElements()) {
             if (element.getType().equalsIgnoreCase(type))
@@ -355,11 +357,17 @@ public class Project implements Exportable {
     }
     
     /**
-     * Method responsible for returning the Actors List.
-     * @return Actors List.
+     * Method responsible for returning the Diagrams by Type.
+     * @param  type Diagram Type.
+     * @return Diagrams List.
      */
-    public List<ActorUML> getActorsList() {
-        return this.getList("actor");
+    public List getDiagrams(String type) {
+        List list = new ArrayList<>();
+        for (Diagram diagram : this.getDiagramsList()) {
+            if (diagram.getType().equalsIgnoreCase(type))
+                list.add(diagram);
+        }
+        return list;
     }
     
     /**
@@ -369,7 +377,7 @@ public class Project implements Exportable {
      * @return Element found.
      */
     public Element getByName(String type, String name) {
-        for (Object element : this.getList(type)) {
+        for (Object element : this.getElements(type)) {
             if (((Element) element).getName().equalsIgnoreCase(name))
                 return (Element) element;
         }
@@ -443,11 +451,8 @@ public class Project implements Exportable {
         TypeUML oldType = (TypeUML) this.types.get(entity.getId());
         TypeUML newType = this.getObjectType();
         if (oldType != null) {
-            List<Diagram> list = this.getDiagramsList();
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i) instanceof ClassDiagram)
-                    ((ClassDiagram) list.get(i)).changeTypeUML(oldType, newType);
-            }
+            for (Object diagram : this.getDiagrams("class"))
+                ((ClassDiagram) diagram).changeTypeUML(oldType, newType);
             this.removeType(oldType);
         }
     }
@@ -765,8 +770,8 @@ public class Project implements Exportable {
     }
     
     /**
-     * Method responsible for returning the Next Product Id.
-     * @return Next Product Id.
+     * Method responsible for returning the Next Product_Final Id.
+     * @return Next Product_Final Id.
      */
     public String nextProductId() {
         Integer index  = 1;
@@ -779,38 +784,38 @@ public class Project implements Exportable {
     }
     
     /**
-     * Method responsible for adding a Product.
-     * @param product Product.
+     * Method responsible for adding a Product_Final.
+     * @param product Product_Final.
      */
-    public void addProduct(Product product) {
+    public void addProduct(Product_Final product) {
         product.setId(this.nextProductId());
         this.products.put(product.getId(), product);
     }
     
     /**
-     * Method responsible for returning a Product by Id.
-     * @param  id Product Id.
-     * @return Product found.
+     * Method responsible for returning a Product_Final by Id.
+     * @param  id Product_Final Id.
+     * @return Product_Final found.
      */
-    public Product getProduct(String id) {
-        return (Product) this.products.get(id);
+    public Product_Final getProduct(String id) {
+        return (Product_Final) this.products.get(id);
     }
     
     /**
-     * Method responsible for removing a Element of a Product.
+     * Method responsible for removing a Element of a Product_Final.
      * @param element Element.
      */
     public void removeProduct(Element element) {
-        for (Product product : this.getProductsList()) 
+        for (Product_Final product : this.getProductsList()) 
             this.remove(product, element);
     }
     
     /**
-     * Method responsible for removing a Element from a Product.
-     * @param product Product.
+     * Method responsible for removing a Element from a Product_Final.
+     * @param product Product_Final.
      * @param element Element.
      */
-    private void remove(Product product, Element element) {
+    private void remove(Product_Final product, Element element) {
         if (product.contains(element)) {
             product.remove(element);
             if (product.isEmpty())
@@ -819,19 +824,19 @@ public class Project implements Exportable {
     }
     
     /**
-     * Method responsible for removing a Association from a Product.
+     * Method responsible for removing a Association from a Product_Final.
      * @param association Association.
      */
     public void removeProduct(Association association) {
-        for (Product product : this.getProductsList()) 
+        for (Product_Final product : this.getProductsList()) 
             product.remove(association);
     }
     
     /**
-     * Method responsible for removing a Product.
-     * @param product Product.
+     * Method responsible for removing a Product_Final.
+     * @param product Product_Final.
      */
-    public void removeProduct(Product product) {
+    public void removeProduct(Product_Final product) {
         this.products.remove(product.getId());
     }
     
@@ -839,7 +844,7 @@ public class Project implements Exportable {
      * Method responsible for returning Products List.
      * @return Products List.
      */
-    public List<Product> getProductsList() {
+    public List<Product_Final> getProductsList() {
         return new ArrayList<>(this.products.values());
     }
     
@@ -849,7 +854,7 @@ public class Project implements Exportable {
      */
     private String exportProducts() {
         String export  = "  <products>\n";
-        for (Product product : this.getProductsList())
+        for (Product_Final product : this.getProductsList())
                export += product.export();
         return export  + "  </products>\n";
     }
@@ -1105,6 +1110,33 @@ public class Project implements Exportable {
         List<Link> filter = this.getLinksByStereotype(stereotype);
         for (int i = 0; i < filter.size(); i++)
             this.removeLink(filter.get(i));
+    }
+    
+    /**
+     * Method responsible for reseting the Actor UML on Sequence Diagram.
+     * @param actor Actor UML.
+     */
+    public void reset(ActorUML actor) {
+        for (Object diagram : this.getDiagrams("sequence"))
+            ((SequenceDiagram) diagram).resetLifeline(actor);
+    }
+    
+    /**
+     * Method responsible for reseting the Class UML on Sequence Diagram.
+     * @param class_ Class UML.
+     */
+    public void reset(ClassUML class_) {
+        for (Object diagram : this.getDiagrams("sequence"))
+            ((SequenceDiagram) diagram).resetInstance(class_);
+    }
+    
+    /**
+     * Method responsible for reseting the Method UML on Sequence Diagram.
+     * @param method Method UML.
+     */
+    public void reset(MethodUML method) {
+        for (Object diagram : this.getDiagrams("sequence"))
+            ((SequenceDiagram) diagram).resetMessage(method);
     }
     
     /**

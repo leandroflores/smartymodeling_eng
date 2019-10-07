@@ -178,15 +178,16 @@ public final class ClassDiagram extends Diagram {
     
     /**
      * Method responsible for removing a Class UML.
-     * @param classe_ Class UML.
+     * @param class_ Class UML.
      */
-    public void removeClass(ClassUML classe_) {
-        this.project.removeEntityType(classe_);
-        this.removeAttributes(classe_);
-        this.removeMethods(classe_);
-        this.removeAssociations(classe_);
-        this.removeElement(classe_);
-        this.classUML.remove(classe_.getId());
+    public void removeClass(ClassUML class_) {
+        this.project.removeEntityType(class_);
+        this.project.reset(class_);
+        this.removeAttributes(class_);
+        this.removeMethods(class_);
+        this.removeAssociations(class_);
+        this.removeElement(class_);
+        this.classUML.remove(class_.getId());
     }
     
     /**
@@ -336,6 +337,7 @@ public final class ClassDiagram extends Diagram {
      */
     public void removeMethod(MethodUML method) {
         method.getEntity().removeMethod(method);
+        this.project.reset(method);
         this.removeElement(method);
         this.methodsUML.remove(method.getId());
     }

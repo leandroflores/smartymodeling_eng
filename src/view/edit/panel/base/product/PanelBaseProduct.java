@@ -5,13 +5,13 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import model.structural.base.product.Product;
+import model.structural.base.product.test.Product_Final;
 import view.Panel;
 import view.new_.product.ViewNewProduct;
 
 /**
  * <p>Class of View <b>PanelBaseProduct</b>.</p> 
- * <p>Class responsible for defining a Panel for showing the <b>Product Base</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining a Panel for showing the <b>Product_Final Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  22/08/2019
  * @see    controller.view.edit.panel.base.product.ControllerPanelBaseProduct
@@ -20,14 +20,14 @@ import view.new_.product.ViewNewProduct;
  */
 public class PanelBaseProduct extends Panel {
     private final ViewNewProduct view;
-    private final Product product;
+    private final Product_Final product;
     
     /**
      * Default constructor method of Class.
-     * @param view View New Product.
-     * @param product Product.
+     * @param view View New Product_Final.
+     * @param product Product_Final.
      */
-    public PanelBaseProduct(ViewNewProduct view, Product product) {
+    public PanelBaseProduct(ViewNewProduct view, Product_Final product) {
         this.view       = view;
         this.product    = product;
         this.controller = new ControllerPanelBaseProduct(this);
@@ -88,18 +88,18 @@ public class PanelBaseProduct extends Panel {
     }
     
     /**
-     * Method responsible for returning the View New Product.
-     * @return View New Product.
+     * Method responsible for returning the View New Product_Final.
+     * @return View New Product_Final.
      */
     public ViewNewProduct getViewNewProduct() {
         return this.view;
     }
     
     /**
-     * Method responsible for returning the Product.
-     * @return Product.
+     * Method responsible for returning the Product_Final.
+     * @return Product_Final.
      */
-    public Product getProduct() {
+    public Product_Final getProduct() {
         return this.product;
     }
     

@@ -19,7 +19,7 @@ public class ControllerPanelBaseProduct extends ControllerPanel {
 
     /**
      * Default constructor method of Class.
-     * @param panel Panel Base Product.
+     * @param panel Panel Base Product_Final.
      */
     public ControllerPanelBaseProduct(PanelBaseProduct panel) {
         super(panel);

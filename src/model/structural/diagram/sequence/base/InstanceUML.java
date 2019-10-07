@@ -51,7 +51,8 @@ public class InstanceUML extends Element {
      * @param classUML Class UML.
      */
     public void setClassUML(ClassUML classUML) {
-        this.classUML = classUML;
+        this.classUML =  classUML;
+        this.name     = (classUML == null) ? "instance" : classUML.getName().toLowerCase().trim();
     }
     
     /**

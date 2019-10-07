@@ -54,7 +54,7 @@ public final class PanelBaseInstanceUML extends Panel {
         this.add(this.createTextField("nameTextField", this.instanceUML.getName(), 25));
         
         this.add(this.createLabel("Class: "));
-        this.add(this.createComboBox("classComboBox", this.diagram.getProject().getList("class").toArray(), 30));
+        this.add(this.createComboBox("classComboBox", this.diagram.getProject().getElements("class").toArray(), 30));
         this.getClassComboBox().setPreferredSize(new Dimension(325, 30));
     }
     

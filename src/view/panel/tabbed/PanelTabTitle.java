@@ -8,7 +8,7 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import model.structural.base.Diagram;
-import model.structural.base.product.Product;
+import model.structural.base.product.test.Product_Final;
 import view.Panel;
 import view.panel.diagram.PanelDiagram;
 import view.panel.modeling.PanelModeling;
@@ -86,10 +86,10 @@ public final class PanelTabTitle extends Panel {
     }
     
     /**
-     * Method responsible for returning the Product.
-     * @return Product.
+     * Method responsible for returning the Product_Final.
+     * @return Product_Final.
      */
-    public Product getProduct() {
+    public Product_Final getProduct() {
         if (this.getComponent() instanceof PanelProduct)
             return ((PanelProduct) this.getComponent()).getProduct();
         return null;

@@ -9,9 +9,12 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.association.Association;
+import model.structural.diagram.classes.base.ClassUML;
+import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
 import model.structural.diagram.sequence.base.association.MessageUML;
+import model.structural.diagram.usecase.base.ActorUML;
 
 /**
  * <p>Class of Model <b>SequenceDiagram</b>.</p>
@@ -76,6 +79,19 @@ public final class SequenceDiagram extends Diagram {
     }
     
     /**
+     * Method responsible for reseting the Lifeline by Element.
+     * @param element Element.
+     */
+    public void resetLifeline(Element element) {
+        if (element instanceof ActorUML) {
+            for (LifelineUML lifeline : this.getLifelinesList()) {
+                if (lifeline.getActor().equals(element))
+                    lifeline.setActor(null);
+            }
+        }
+    }
+    
+    /**
      * Method responsible for removing a Lifeline UML.
      * @param lifeline Lifeline UML.
      */
@@ -114,6 +130,19 @@ public final class SequenceDiagram extends Diagram {
     }
     
     /**
+     * Method responsible for reseting the Instance by Element.
+     * @param element Element.
+     */
+    public void resetInstance(Element element) {
+        if (element instanceof ClassUML) {
+            for (InstanceUML instance : this.getInstancesList()) {
+                if (instance.getClassUML().equals(element))
+                    instance.setClassUML(null);
+            }
+        }
+    }
+    
+    /**
      * Method responsible for removing a Instance UML.
      * @param instance Instance UML.
      */
@@ -136,11 +165,24 @@ public final class SequenceDiagram extends Diagram {
      * @param message Message UML.
      */
     public void addMessage(MessageUML message) {
+        message.setSequence(this.nextSequence());
         if (this.messages.get(message.getId()) == null) {
-            message.setSequence(this.nextSequence());
             this.messages.put(message.getId(), message);
             this.addAssociation(message);
             this.updateSequence();
+        }
+    }
+    
+    /**
+     * Method responsible for reseting the Message by Element.
+     * @param element Element.
+     */
+    public void resetMessage(Element element) {
+        if (element instanceof MethodUML) {
+            for (MessageUML message : this.getMessageList()) {
+                if (message.getMethod().equals(element))
+                    message.setMethod(null);
+            }
         }
     }
     

@@ -70,7 +70,7 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
         LifelineUML lifeline = new LifelineUML();
                     lifeline.setPosition(event.getX(), 20);
         this.panelDiagram.getDiagram().addLifeline(lifeline);
-//                    lifeline.setDefaultName();
+                    lifeline.setDefaultName();
         this.panelDiagram.updateDiagram();
         this.panelDiagram.getViewMenu().update();
     }
