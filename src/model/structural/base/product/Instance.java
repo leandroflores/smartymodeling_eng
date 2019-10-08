@@ -20,6 +20,7 @@ import model.structural.base.variability.Requires;
 public class Instance implements Exportable {
     private String  id;
     private String  name;
+    private Product product;
     private Diagram diagram;
     private HashMap artefacts;
     private HashMap associations;
@@ -28,6 +29,8 @@ public class Instance implements Exportable {
      * Default constructor method of Class.
      */
     public Instance() {
+        this.product      = null;
+        this.diagram      = null;
         this.artefacts    = new HashMap<>();
         this.associations = new HashMap<>();
     }
@@ -75,6 +78,22 @@ public class Instance implements Exportable {
     }
 
     /**
+     * Method responsible for returning the Instance Product.
+     * @return Instance Product.
+     */
+    public Product getProduct() {
+        return this.product;
+    }
+
+    /**
+     * Method responsible for setting the Instance Product.
+     * @param product Instance Product.
+     */
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+    
+    /**
      * Method responsible for returning the Instance Diagram.
      * @return Instance Diagram.
      */
@@ -91,11 +110,50 @@ public class Instance implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Instance Artefacts.
+     * @return Instance Artefacts.
+     */
+    public HashMap<String, Artefact> getArtefacts() {
+        return this.artefacts;
+    }
+    
+    /**
+     * Method responsible for returning the Artefacts List.
+     * @return Artefacts List.
+     */
+    public List<Artefact> getArtefactsList() {
+        return new ArrayList<>(this.artefacts.values());
+    }
+    
+    /**
      * Method responsible for returning if Instance is Empty.
      * @return Instance is Empty.
      */
     public boolean isEmpty() {
         return this.getArtefactsList().isEmpty();
+    }
+    
+    /**
+     * Method responsible for returning the Next Artefact Id.
+     * @return Next Artefact Id.
+     */
+    public String nextArtefactId() {
+        Integer index  = 1;
+        String  nextId = "ARTEFACT#" + index;
+        while (this.artefacts.get(nextId) != null) {
+            index += 1;
+            nextId = "ARTEFACT#" + index;
+        }
+        return nextId;
+    }
+    
+    /**
+     * Method responsible for adding a Artefact.
+     * @param artefact Artefact.
+     */
+    public void addArtefact(Artefact artefact) {
+        artefact.setId(this.nextArtefactId());
+        this.artefacts.put(artefact.getId(), artefact);
     }
     
     /**
@@ -137,36 +195,20 @@ public class Instance implements Exportable {
      * Method responsible for removing a Artefact.
      * @param  artefact Artefact.
      */
-    public void remove(Artefact artefact) {
+    public void removeArtefact(Artefact artefact) {
         this.removeAssociations(artefact);
         this.artefacts.remove(artefact.getId());
     }
     
     /**
-     * Method responsible for removing the Association by Artefact.
-     * @param artefact Artefact.
+     * Method responsible for removing a Artefact by Element.
+     * @param element Element.
      */
-    public void removeAssociations(Artefact artefact) {
-        for (Association association : this.getAssociationsList()) {
-            if (association.contains(artefact.getElement()))
-                this.associations.remove(association.getId());
+    public void remove(Element element) {
+        for (Artefact artefact : this.getArtefactsList()) {
+            if (artefact.getElement().equals(element))
+                this.removeArtefact(artefact);
         }
-    }
-    
-    /**
-     * Method responsible for returning the Instance Artefacts.
-     * @return Instance Artefacts.
-     */
-    public HashMap<String, Artefact> getArtefacts() {
-        return this.artefacts;
-    }
-    
-    /**
-     * Method responsible for returning the Artefacts List.
-     * @return Artefacts List.
-     */
-    public List<Artefact> getArtefactsList() {
-        return new ArrayList<>(this.artefacts.values());
     }
     
     /**
@@ -186,19 +228,30 @@ public class Instance implements Exportable {
     }
     
     /**
-     * Method responsible for removing a Association.
-     * @param  association Association.
-     */
-    public void remove(Association association) {
-        this.associations.remove(association.getId());
-    }
-    
-    /**
      * Method responsible for returning the Associations List.
      * @return Associations List.
      */
     public List<Association> getAssociationsList() {
         return new ArrayList<>(this.associations.values());
+    }
+    
+    /**
+     * Method responsible for removing the Association by Artefact.
+     * @param artefact Artefact.
+     */
+    public void removeAssociations(Artefact artefact) {
+        for (Association association : this.getAssociationsList()) {
+            if (association.contains(artefact.getElement()))
+                this.associations.remove(association.getId());
+        }
+    }
+    
+    /**
+     * Method responsible for removing a Association.
+     * @param  association Association.
+     */
+    public void remove(Association association) {
+        this.associations.remove(association.getId());
     }
     
     /**
@@ -224,7 +277,7 @@ public class Instance implements Exportable {
     private void updateArtifacts() {
 //        for (Artefact artifact : this.getElementsList()) {
 //            if (this.getIdentifiers().get(artifact.getId()) <= 0)
-//                this.artifacts.remove(artifact.getId());
+//                this.artifacts.removeArtefact(artifact.getId());
 //        }
     }
     

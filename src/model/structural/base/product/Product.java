@@ -3,6 +3,8 @@ package model.structural.base.product;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import model.structural.base.Element;
+import model.structural.base.association.Association;
 import model.structural.base.interfaces.Exportable;
 
 /**
@@ -15,6 +17,7 @@ import model.structural.base.interfaces.Exportable;
 public class Product implements Exportable {
     private String  id;
     private String  name;
+    private String  version;
     private HashMap instances;
     
     /**
@@ -22,6 +25,7 @@ public class Product implements Exportable {
      */
     public Product() {
         this.instances = new HashMap<>();
+        this.version   = "1.0";
     }
     
     /**
@@ -30,8 +34,9 @@ public class Product implements Exportable {
      */
     public Product(org.w3c.dom.Element element) {
         this();
-        this.id   = element.getAttribute("id");
-        this.name = element.getAttribute("name");
+        this.id      = element.getAttribute("id");
+        this.name    = element.getAttribute("name");
+        this.version = element.getAttribute("version");
     }
     
     /**
@@ -65,6 +70,22 @@ public class Product implements Exportable {
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * Method responsible for returning the Product Version.
+     * @return Product Version.
+     */
+    public String getVersion() {
+        return this.version;
+    }
+
+    /**
+     * Method responsible for setting the Product Version.
+     * @param version Product Version.
+     */
+    public void setVersion(String version) {
+        this.version = version;
+    }
     
     /**
      * Method responsible for returning if Product is Empty.
@@ -91,11 +112,34 @@ public class Product implements Exportable {
     }
     
     /**
-     * Method responsible for setting the Product Instances.
-     * @param instances Product Instances.
+     * Method responsible for returning the Next Instance Id.
+     * @return Next Instance Id.
      */
-    public void setInstances(HashMap<String, Instance> instances) {
-        this.instances = instances;
+    public String nextInstanceId() {
+        Integer index  = 1;
+        String  nextId = "INSTANCE#" + index;
+        while (this.instances.get(nextId) != null) {
+            index += 1;
+            nextId = "INSTANCE#" + index;
+        }
+        return nextId;
+    }
+    
+    /**
+     * Method responsible for adding a Instance.
+     * @param instance Instance.
+     */
+    public void addInstance(Instance instance) {
+        instance.setId(this.nextInstanceId());
+        this.instances.put(instance.getId(), instance);
+    }
+    
+    /**
+     * Method responsible for removing a Instance.
+     * @param instance Instance.
+     */
+    public void removeInstance(Instance instance) {
+        this.instances.remove(instance.getId());
     }
     
     /**
@@ -108,10 +152,36 @@ public class Product implements Exportable {
                export += instance.export();
         return export;
     }
-        
+    
+    /**
+     * Method responsible for setting the Product Instances.
+     * @param instances Product Instances.
+     */
+    public void setInstances(HashMap<String, Instance> instances) {
+        this.instances = instances;
+    }
+    
+    /**
+     * Method responsible for removing the Artefacts by Element.
+     * @param element Element.
+     */
+    public void remove(Element element) {
+        for (Instance instance : this.getInstancesList())
+            instance.remove(element);
+    }
+    
+    /**
+     * Method responsible for removing the Artefacts by Association.
+     * @param association Association.
+     */
+    public void remove(Association association) {
+        for (Instance instance : this.getInstancesList())
+            instance.remove(association);
+    }
+    
     @Override
     public String export() {
-        String export  = "    <product id=\"" + this.id + "\" name=\"" + this.name + "\">\n";
+        String export  = "    <product id=\"" + this.id + "\" name=\"" + this.name + "\" version=\"" + this.version + "\">\n";
                export += this.exportInstances();
                export += "    </product>\n";
         return export;
@@ -119,6 +189,6 @@ public class Product implements Exportable {
     
     @Override
     public String toString() {
-        return this.id + " - " + this.name;
+        return this.id + " - " + this.name + " (" + this.version + ")";
     }
 }

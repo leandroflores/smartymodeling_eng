@@ -1,6 +1,6 @@
-package view.new_.product;
+package view.new_.product.test;
 
-import controller.view.new_.product.ControllerViewNewProduct;
+import controller.view.new_.product.test.ControllerViewNewProduct_Final;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,27 +10,27 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.product.test.Product_Final;
 import model.structural.base.variability.Variability;
-import view.edit.panel.base.product.PanelBaseOptional;
-import view.edit.panel.base.product.PanelBaseProduct;
-import view.edit.panel.base.product.PanelBaseVariationPoints;
+import view.edit.panel.base.product.test.PanelBaseOpt;
+import view.edit.panel.base.product.test.PanelBaseProduct_Final;
+import view.edit.panel.base.product.test.PanelBaseVarPoints;
 import view.message.ViewMessage;
 import view.new_.ViewNew;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>ViewNewProduct</b>.</p>
+ * <p>Class of View <b>ViewNewProduct_Final</b>.</p>
  * <p>Class responsible for defining the <b>New Product_Final View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  21/08/2019
- * @see    controller.view.new_.product.ControllerViewNewProduct
+ * @see    controller.view.new_.product.test.ControllerViewNewProduct_Final
  * @see    view.new_.ViewNew
  */
-public final class ViewNewProduct extends ViewNew {
+public final class ViewNewProduct_Final extends ViewNew {
     private final Diagram diagram;
     private Product_Final product;
-    private PanelBaseOptional panelBaseOptional;
-    private PanelBaseVariationPoints panelBaseVariationPoints;
-    private PanelBaseProduct panelBaseProduct;
+    private PanelBaseOpt panelBaseOptional;
+    private PanelBaseVarPoints panelBaseVariationPoints;
+    private PanelBaseProduct_Final panelBaseProduct;
     private HashMap<String, Integer> components;
     
     /**
@@ -38,10 +38,10 @@ public final class ViewNewProduct extends ViewNew {
      * @param view View Menu.
      * @param diagram Diagram.
      */
-    public ViewNewProduct(ViewMenu view, Diagram diagram) {
+    public ViewNewProduct_Final(ViewMenu view, Diagram diagram) {
         super(view);
         this.diagram    = diagram;
-        this.controller = new ControllerViewNewProduct(this);
+        this.controller = new ControllerViewNewProduct_Final(this);
         this.title      = "New Product";
         this.initComponents();
     }
@@ -82,7 +82,7 @@ public final class ViewNewProduct extends ViewNew {
     public void addOptionalTabbedPane() {
         this.updateComponents();
         
-        this.panelBaseOptional = new PanelBaseOptional(this);
+        this.panelBaseOptional = new PanelBaseOpt(this);
         this.tabbedPane.removeAll();
         this.tabbedPane.add("Optionals", this.panelBaseOptional);
     }
@@ -156,7 +156,7 @@ public final class ViewNewProduct extends ViewNew {
      * Method responsible for adding the Variation Points Tabbed Pane.
      */
     public void addVariationPointsTabbedPane() {
-        this.panelBaseVariationPoints = new PanelBaseVariationPoints(this);
+        this.panelBaseVariationPoints = new PanelBaseVarPoints(this);
         this.tabbedPane.add("Variation Points", this.panelBaseVariationPoints);
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(1));
         this.tabbedPane.setEnabledAt(0, false);
@@ -175,7 +175,7 @@ public final class ViewNewProduct extends ViewNew {
      * Method responsible for adding the Product_Final Tabbed Pane.
      */
     public void addProductTabbedPane() {
-        this.panelBaseProduct = new PanelBaseProduct(this, this.createNewProduct());
+        this.panelBaseProduct = new PanelBaseProduct_Final(this, this.createNewProduct());
         this.tabbedPane.add("New Product", this.panelBaseProduct);
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(2));
         this.tabbedPane.setEnabledAt(1, false);
@@ -209,7 +209,7 @@ public final class ViewNewProduct extends ViewNew {
      * Method responsible for returning the Panel Base Optional.
      * @return Panel Base Optional.
      */
-    public PanelBaseOptional getPanelBaseOptional() {
+    public PanelBaseOpt getPanelBaseOptional() {
         return this.panelBaseOptional;
     }
 
@@ -217,7 +217,7 @@ public final class ViewNewProduct extends ViewNew {
      * Method responsible for returning the Panel Base Variation Points.
      * @return Panel Base Variation Points.
      */
-    public PanelBaseVariationPoints getPanelBaseVariationPoints() {
+    public PanelBaseVarPoints getPanelBaseVariationPoints() {
         return this.panelBaseVariationPoints;
     }
     

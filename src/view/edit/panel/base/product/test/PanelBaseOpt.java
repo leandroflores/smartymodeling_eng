@@ -1,6 +1,6 @@
-package view.edit.panel.base.product;
+package view.edit.panel.base.product.test;
 
-import controller.view.edit.panel.base.product.ControllerPanelBaseOptional;
+import controller.view.edit.panel.base.product.test.ControllerPanelBaseOpt;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -10,27 +10,27 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import model.structural.base.Element;
 import view.Panel;
-import view.new_.product.ViewNewProduct;
+import view.new_.product.test.ViewNewProduct_Final;
 
 /**
- * <p>Class of View <b>PanelBaseOptional</b>.</p> 
+ * <p>Class of View <b>PanelBaseOpt</b>.</p> 
  * <p>Class responsible for defining a Panel for showing the <b>Optional Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  21/08/2019
- * @see    controller.view.edit.panel.base.product.ControllerPanelBaseOptional
+ * @see    controller.view.edit.panel.base.product.test.ControllerPanelBaseOpt
  * @see    model.structural.base.product.Product
  * @see    view.Panel
  */
-public class PanelBaseOptional extends Panel {
-    private final ViewNewProduct view;
+public class PanelBaseOpt extends Panel {
+    private final ViewNewProduct_Final view;
     
     /**
      * Default constructor method of Class.
      * @param view View New Product.
      */
-    public PanelBaseOptional(ViewNewProduct view) {
+    public PanelBaseOpt(ViewNewProduct_Final view) {
         this.view       = view;
-        this.controller = new ControllerPanelBaseOptional(this);
+        this.controller = new ControllerPanelBaseOpt(this);
         this.initComponents();
     }
     
@@ -112,7 +112,7 @@ public class PanelBaseOptional extends Panel {
      * Method responsible for returning the View New Product.
      * @return View New Product.
      */
-    public ViewNewProduct getViewNewProduct() {
+    public ViewNewProduct_Final getViewNewProduct() {
         return this.view;
     }
     

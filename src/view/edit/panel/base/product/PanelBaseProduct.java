@@ -2,109 +2,83 @@ package view.edit.panel.base.product;
 
 import controller.view.edit.panel.base.product.ControllerPanelBaseProduct;
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import javax.swing.JButton;
+import java.awt.GridLayout;
 import javax.swing.JTextField;
-import model.structural.base.product.test.Product_Final;
+import model.structural.base.product.Product;
 import view.Panel;
-import view.new_.product.ViewNewProduct;
+import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseProduct</b>.</p> 
- * <p>Class responsible for defining a Panel for showing the <b>Product_Final Base</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining a Panel for showing the <b>Product Base</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  22/08/2019
+ * @since  07/10/2019
  * @see    controller.view.edit.panel.base.product.ControllerPanelBaseProduct
  * @see    model.structural.base.product.Product
  * @see    view.Panel
  */
-public class PanelBaseProduct extends Panel {
-    private final ViewNewProduct view;
-    private final Product_Final product;
+public final class PanelBaseProduct extends Panel {
+    private final ViewMenu viewMenu;
+    private final Product product;
     
     /**
      * Default constructor method of Class.
-     * @param view View New Product_Final.
-     * @param product Product_Final.
+     * @param viewMenu View Menu.
+     * @param product Product.
      */
-    public PanelBaseProduct(ViewNewProduct view, Product_Final product) {
-        this.view       = view;
+    public PanelBaseProduct(ViewMenu viewMenu, Product product) {
+        this.viewMenu   = viewMenu;
         this.product    = product;
         this.controller = new ControllerPanelBaseProduct(this);
-        this.initComponents();
-    }
-    
-    /**
-     * Method responsible for initializing the Components.
-     */
-    private void initComponents() {
-        this.setPreferredSize(new Dimension(600, 350));
-        this.setLayout(new GridBagLayout());
-        this.addHeader();
+        this.setSettings();
         this.addComponents();
-        this.addFooter();
         this.setValues();
     }
     
     /**
-     * Method responsible for adding the Header.
+     * Method responsible for defining the Settings.
      */
-    public void addHeader() {
-        this.add(this.createLabel("Finishing the new Product:"), this.getConstraints(6, 1, 0, 0));
+    private void setSettings() {
+        this.setLayout(new GridLayout(5, 2));
+        this.setPreferredSize(new Dimension(50, 50));
+        this.setSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name*: "), this.getConstraints(2, 1, 0, 1));
-        this.add(this.createTextField("nameTextField", "", 10),     this.getConstraints(4, 1, 2, 1));
+        this.add(this.createLabel("Name*: "));
+        this.add(this.createTextField("nameTextField", "", 15));
         
-        this.add(this.createLabel("Elements: "), this.getConstraints(2, 1, 0, 2));
-        this.add(this.createTextFieldNoEditable("elementsTextField", "", 10), this.getConstraints(4, 1, 2, 2));
-        
-        this.add(this.createLabel("Associations: "), this.getConstraints(2, 1, 0, 3));
-        this.add(this.createTextFieldNoEditable("associationsTextField", "", 10), this.getConstraints(4, 1, 2, 3));
+        this.add(this.createLabel("Version*: "));
+        this.add(this.createTextField("versionTextField", "", 15));
     }
     
     /**
-     * Method responsible for adding the Panel Footer.
-     */
-    public void addFooter() {
-        this.add(this.createButton("backButton", "  Back  ", "Back", "back.png"), this.getConstraints(3, 1, 0, 4));
-        this.add(this.createButton("nextButton", "  Next  ", "Next", "next.png"), this.getConstraints(3, 1, 3, 4));
-        
-        this.getBackButton().setPreferredSize(new Dimension(150, 30));
-        this.getNextButton().setPreferredSize(new Dimension(150, 30));
-    }
-    
-    /**
-     * Method responsible for setting the Values.
+     * Method responsible for setting the Product Values.
      */
     public void setValues() {
         this.getNameTextField().setText(this.product.getName());
-        this.getElementsTextField().setText(Integer.toString(this.product.getElements().size()));
-        this.getAssociationsTextField().setText(Integer.toString(this.product.getAssociations().size()));
-        
-        this.getNameTextField().requestFocus();
+        this.getVersionTextField().setText(this.product.getVersion());
     }
     
     /**
-     * Method responsible for returning the View New Product_Final.
-     * @return View New Product_Final.
+     * Method responsible for returning the View Menu.
+     * @return View Menu.
      */
-    public ViewNewProduct getViewNewProduct() {
-        return this.view;
+    public ViewMenu getViewMenu() {
+        return this.viewMenu;
     }
     
     /**
-     * Method responsible for returning the Product_Final.
-     * @return Product_Final.
+     * Method responsible for returning the Product.
+     * @return Product.
      */
-    public Product_Final getProduct() {
+    public Product getProduct() {
         return this.product;
     }
     
     /**
-     * Method responsible for returning the Name Text Field.
+     * Method responsible for returning Name Text Field.
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
@@ -112,34 +86,10 @@ public class PanelBaseProduct extends Panel {
     }
     
     /**
-     * Method responsible for returning the Elements Field.
-     * @return Elements Field.
+     * Method responsible for returning Version Text Field.
+     * @return Version Text Field.
      */
-    public JTextField getElementsTextField() {
-        return this.textFields.get("elementsTextField");
-    }
-    
-    /**
-     * Method responsible for returning the Associations Field.
-     * @return Associations Field.
-     */
-    public JTextField getAssociationsTextField() {
-        return this.textFields.get("associationsTextField");
-    }
-    
-    /**
-     * Method responsible for returning the Back Button.
-     * @return Back Button.
-     */
-    public JButton getBackButton() {
-        return this.buttons.get("backButton");
-    }
-    
-    /**
-     * Method responsible for returning the Next Button.
-     * @return Next Button.
-     */
-    public JButton getNextButton() {
-        return this.buttons.get("nextButton");
+    public JTextField getVersionTextField() {
+        return this.textFields.get("versionTextField");
     }
 }

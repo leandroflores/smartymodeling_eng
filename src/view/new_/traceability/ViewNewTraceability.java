@@ -4,7 +4,6 @@ import controller.view.new_.traceability.ControllerViewNewTraceability;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.event.ChangeListener;
 import model.structural.base.Project;
 import model.structural.base.traceability.Traceability;
 import view.edit.panel.base.traceability.PanelBaseElements;

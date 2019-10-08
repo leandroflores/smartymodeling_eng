@@ -1,4 +1,4 @@
-package controller.view.edit.panel.base.product;
+package controller.view.edit.panel.base.product.test;
 
 
 import controller.view.ControllerPanel;
@@ -6,24 +6,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import model.structural.base.Element;
-import view.edit.panel.base.product.PanelBaseOptional;
+import view.edit.panel.base.product.test.PanelBaseOpt;
 
 /**
- * <p>Class of Controller <b>ControllerPanelBaseOptional</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseOptional</b> of SMartyModeling.</p>
+ * <p>Class of Controller <b>ControllerPanelBaseOpt</b>.</p>
+ * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseOpt</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  21/08/2019
  * @see    controller.view.ControllerPanel
- * @see    view.edit.panel.base.product.PanelBaseOptional
+ * @see    view.edit.panel.base.product.test.PanelBaseOpt
  */
-public class ControllerPanelBaseOptional extends ControllerPanel {
-    private final PanelBaseOptional panelBaseOptional;
+public class ControllerPanelBaseOpt extends ControllerPanel {
+    private final PanelBaseOpt panelBaseOptional;
 
     /**
      * Default constructor method of Class.
      * @param panel Panel Base Optional.
      */
-    public ControllerPanelBaseOptional(PanelBaseOptional panel) {
+    public ControllerPanelBaseOpt(PanelBaseOpt panel) {
         super(panel);
         this.panelBaseOptional = panel;
     }

@@ -1,4 +1,4 @@
-package controller.view.edit.panel.base.product;
+package controller.view.edit.panel.base.product.test;
 
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
@@ -8,27 +8,26 @@ import java.util.List;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import model.structural.base.Element;
-import model.structural.base.product.Product;
 import model.structural.base.variability.Variability;
-import view.edit.panel.base.product.PanelBaseVariationPoints;
+import view.edit.panel.base.product.test.PanelBaseVarPoints;
 import view.message.ViewError;
 
 /**
- * <p>Class of Controller <b>ControllerPanelBaseVariationPoints</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseVariationPoints</b> of SMartyModeling.</p>
+ * <p>Class of Controller <b>ControllerPanelBaseVarPoints</b>.</p>
+ * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseVarPoints</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  22/08/2019
  * @see    controller.view.ControllerPanel
- * @see    view.edit.panel.base.product.PanelBaseVariationPoints
+ * @see    view.edit.panel.base.product.test.PanelBaseVarPoints
  */
-public class ControllerPanelBaseVariationPoints extends ControllerPanel {
-    private final PanelBaseVariationPoints panelBaseVariationPoints;
+public class ControllerPanelBaseVarPoints extends ControllerPanel {
+    private final PanelBaseVarPoints panelBaseVariationPoints;
     
     /**
      * Default constructor method of Class.
      * @param panel Panel Base Variation Points.
      */
-    public ControllerPanelBaseVariationPoints(PanelBaseVariationPoints panel) {
+    public ControllerPanelBaseVarPoints(PanelBaseVarPoints panel) {
         super(panel);
         this.panelBaseVariationPoints = panel;
     }

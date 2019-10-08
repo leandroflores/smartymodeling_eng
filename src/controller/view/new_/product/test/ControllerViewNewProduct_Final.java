@@ -1,24 +1,24 @@
-package controller.view.new_.product;
+package controller.view.new_.product.test;
 
 import controller.view.new_.ControllerViewNew;
-import view.new_.product.ViewNewProduct;
+import view.new_.product.test.ViewNewProduct_Final;
 
 /**
- * <p>Class of Controller <b>ControllerViewNewProduct</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewNewProduct</b> of SMartyModeling.</p>
+ * <p>Class of Controller <b>ControllerViewNewProduct_Final</b>.</p>
+ * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewNewProduct_Final</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  22/08/2019
  * @see    controller.view.new_.ControllerViewNew
- * @see    view.new_.product.ViewNewProduct
+ * @see    view.new_.product.test.ViewNewProduct_Final
  */
-public class ControllerViewNewProduct extends ControllerViewNew {
-    private final ViewNewProduct viewNewProduct;
+public class ControllerViewNewProduct_Final extends ControllerViewNew {
+    private final ViewNewProduct_Final viewNewProduct;
     
     /**
      * Default constructor method of Class.
      * @param view View New Product.
      */
-    public ControllerViewNewProduct(ViewNewProduct view) {
+    public ControllerViewNewProduct_Final(ViewNewProduct_Final view) {
         super(view);
         this.viewNewProduct = view;
     }

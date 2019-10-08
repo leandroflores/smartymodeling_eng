@@ -1,6 +1,6 @@
-package view.edit.panel.base.product;
+package view.edit.panel.base.product.test;
 
-import controller.view.edit.panel.base.product.ControllerPanelBaseVariationPoints;
+import controller.view.edit.panel.base.product.test.ControllerPanelBaseVarPoints;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.List;
@@ -13,28 +13,28 @@ import model.structural.base.Element;
 import model.structural.base.product.Product;
 import model.structural.base.variability.Variability;
 import view.Panel;
-import view.new_.product.ViewNewProduct;
+import view.new_.product.test.ViewNewProduct_Final;
 
 /**
- * <p>Class of View <b>PanelBaseVariationPoints</b>.</p> 
+ * <p>Class of View <b>PanelBaseVarPoints</b>.</p> 
  * <p>Class responsible for defining a Panel for showing the <b>Variation Points Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  22/08/2019
- * @see    controller.view.edit.panel.base.product.ControllerPanelBaseVariationPoints
+ * @see    controller.view.edit.panel.base.product.test.ControllerPanelBaseVarPoints
  * @see    model.structural.base.product.Product
  * @see    view.Panel
  */
-public class PanelBaseVariationPoints extends Panel {
-    private final ViewNewProduct view;
+public class PanelBaseVarPoints extends Panel {
+    private final ViewNewProduct_Final view;
     private Product product;
     
     /**
      * Default constructor method of Class.
      * @param view View New Product.
      */
-    public PanelBaseVariationPoints(ViewNewProduct view) {
+    public PanelBaseVarPoints(ViewNewProduct_Final view) {
         this.view       = view;
-        this.controller = new ControllerPanelBaseVariationPoints(this);
+        this.controller = new ControllerPanelBaseVarPoints(this);
         this.initComponents();
     }
     
@@ -177,7 +177,7 @@ public class PanelBaseVariationPoints extends Panel {
      * Method responsible for returning the View New Product.
      * @return View New Product.
      */
-    public ViewNewProduct getViewNewProduct() {
+    public ViewNewProduct_Final getViewNewProduct() {
         return this.view;
     }
     
@@ -185,8 +185,8 @@ public class PanelBaseVariationPoints extends Panel {
      * Method responsible for returning the View Controller.
      * @return View Controller.
      */
-    public ControllerPanelBaseVariationPoints getController() {
-        return (ControllerPanelBaseVariationPoints) this.controller;
+    public ControllerPanelBaseVarPoints getController() {
+        return (ControllerPanelBaseVarPoints) this.controller;
     }
     
     /**
