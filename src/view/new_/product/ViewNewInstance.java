@@ -6,12 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JTabbedPane;
+import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.product.Artefact;
 import model.structural.base.product.Instance;
 import model.structural.base.variability.Variability;
+import view.edit.panel.base.product.PanelBaseArtefacts;
 import view.edit.panel.base.product.PanelBaseInstance;
 import view.edit.panel.base.product.PanelBaseOptional;
+import view.edit.panel.base.product.PanelBaseVarPoints;
 import view.new_.ViewNew;
 import view.structural.ViewMenu;
 
@@ -26,8 +29,10 @@ import view.structural.ViewMenu;
  */
 public final class ViewNewInstance extends ViewNew {
     private final Instance instance;
-    private PanelBaseInstance panelBaseInstance;
-    private PanelBaseOptional panelBaseOptional;
+    private PanelBaseInstance  panelBaseInstance;
+    private PanelBaseOptional  panelBaseOptional;
+    private PanelBaseVarPoints panelBaseVarPoints;
+    private PanelBaseArtefacts panelBaseArtefacts;
     private HashMap<String, Integer> elements;
     
     /**
@@ -89,6 +94,53 @@ public final class ViewNewInstance extends ViewNew {
     }
 
     /**
+     * Method responsible for removing the Panel Base Optional.
+     */
+    public void removePanelBaseOptional() {
+        this.tabbedPane.getComponent(0).setEnabled(true);
+        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(0));
+        this.tabbedPane.remove(1);
+    }
+    
+    /**
+     * Method responsible for adding the Panel Base Var Points.
+     */
+    public void addPanelBaseVarPoints() {
+        this.panelBaseVarPoints = new PanelBaseVarPoints(this);
+        this.tabbedPane.add("Variation Points", this.panelBaseVarPoints);
+        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(2));
+        this.tabbedPane.setEnabledAt(1, false);
+    }
+    
+    /**
+     * Method responsible for removing the Panel Base Optional.
+     */
+    public void removePanelBaseVarPoints() {
+        this.tabbedPane.getComponent(1).setEnabled(true);
+        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(1));
+        this.tabbedPane.remove(2);
+    }
+    
+    /**
+     * Method responsible for adding the Panel Base Artefacts.
+     */
+    public void addPanelBaseArtefacts() {
+        this.panelBaseArtefacts = new PanelBaseArtefacts(this);
+        this.tabbedPane.add("Artefacts", this.panelBaseArtefacts);
+        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(3));
+        this.tabbedPane.setEnabledAt(2, false);
+    }
+    
+    /**
+     * Method responsible for removing the Panel Base Artefacts.
+     */
+    public void removePanelBaseArtefacts() {
+        this.tabbedPane.getComponent(2).setEnabled(true);
+        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(2));
+        this.tabbedPane.remove(3);
+    }
+    
+    /**
      * Method responsible for returning if a Element is Variation Point.
      * @param element Element.
      * @return Element is Variation Point.
@@ -138,11 +190,29 @@ public final class ViewNewInstance extends ViewNew {
     }
     
     /**
+     * Method responsible for adding the New Instance.
+     */
+    public void addNewInstance() {
+        if (this.instance.getProduct() != null) {
+            this.instance.getProduct().addInstance(this.instance);
+            this.view.showInstance(this.instance);
+        }
+    }
+    
+    /**
      * Method responsible for returning the Instance.
      * @return Instance.
      */
     public Instance getInstance() {
         return this.instance;
+    }
+    
+    /**
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
+     */
+    public Diagram getDiagram() {
+        return this.instance.getDiagram();
     }
     
     /**

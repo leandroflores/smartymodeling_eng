@@ -42,7 +42,7 @@ public class ControllerPanelBaseProduct_Final extends ControllerPanel {
      */
     public void showNewProduct() {
         this.panelBaseProduct.getProduct().setName(this.panelBaseProduct.getNameTextField().getText().trim());
-        this.panelBaseProduct.getViewNewProduct().getViewMenu().getProject().addProduct(this.panelBaseProduct.getProduct());
+//        this.panelBaseProduct.getViewNewProduct().getViewMenu().getProject().addProduct(this.panelBaseProduct.getProduct());
         this.panelBaseProduct.getViewNewProduct().showNewProduct();
     }
 }

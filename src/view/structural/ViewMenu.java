@@ -17,6 +17,7 @@ import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneConstants;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
+import model.structural.base.product.Instance;
 import view.interfaces.Operation;
 import view.View;
 import view.ViewStyle;
@@ -285,6 +286,15 @@ public final class ViewMenu extends View implements Operation {
      */
     public void showDiagram(Diagram diagram) {
         this.panelModeling.addDiagram(diagram);
+        this.panelModeling.updateUI();
+    }
+    
+    /**
+     * Method responsible for showing a Instance.
+     * @param instance Instance.
+     */
+    public void showInstance(Instance instance) {
+        this.panelModeling.addInstance(instance);
         this.panelModeling.updateUI();
     }
     

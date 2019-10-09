@@ -1,6 +1,6 @@
 package view.edit.panel.base.product;
 
-import controller.view.edit.panel.base.product.test.ControllerPanelBaseVariationPoints;
+import controller.view.edit.panel.base.product.ControllerPanelBaseVarPoints;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.List;
@@ -13,7 +13,6 @@ import model.structural.base.Element;
 import model.structural.base.variability.Variability;
 import view.Panel;
 import view.new_.product.ViewNewInstance;
-import view.new_.product.test.ViewNewProduct_Final;
 
 /**
  * <p>Class of View <b>PanelBaseVarPoints</b>.</p> 
@@ -33,7 +32,7 @@ public class PanelBaseVarPoints extends Panel {
      */
     public PanelBaseVarPoints(ViewNewInstance view) {
         this.viewNew    = view;
-//        this.controller = new ControllerPanelBaseVariationPoints(this);
+        this.controller = new ControllerPanelBaseVarPoints(this);
         this.initComponents();
     }
     
@@ -182,8 +181,8 @@ public class PanelBaseVarPoints extends Panel {
      * Method responsible for returning the View Controller.
      * @return View Controller.
      */
-    public ControllerPanelBaseVariationPoints getController() {
-        return (ControllerPanelBaseVariationPoints) this.controller;
+    public ControllerPanelBaseVarPoints getController() {
+        return (ControllerPanelBaseVarPoints) this.controller;
     }
     
     /**

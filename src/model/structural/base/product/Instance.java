@@ -52,6 +52,14 @@ public class Instance implements Exportable {
     public String getId() {
         return this.id;
     }
+    
+    /**
+     * Method responsible for returning the Instance Complete Id.
+     * @return Instance Complete Id.
+     */
+    public String getCompleteId() {
+        return this.product.getId() + " - " + this.id;
+    }
 
     /**
      * Method responsible for setting the Instance Id.

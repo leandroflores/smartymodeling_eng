@@ -13,7 +13,7 @@ import java.util.Objects;
 import model.structural.base.association.Link;
 import model.structural.base.evaluation.Metric;
 import model.structural.base.interfaces.Exportable;
-import model.structural.base.product.test.Product_Final;
+import model.structural.base.product.Product;
 import model.structural.base.traceability.Traceability;
 import model.structural.diagram.classes.base.TypeUML;
 import model.structural.base.variability.Variability;
@@ -770,8 +770,8 @@ public class Project implements Exportable {
     }
     
     /**
-     * Method responsible for returning the Next Product_Final Id.
-     * @return Next Product_Final Id.
+     * Method responsible for returning the Next Product Id.
+     * @return Next Product Id.
      */
     public String nextProductId() {
         Integer index  = 1;
@@ -784,38 +784,38 @@ public class Project implements Exportable {
     }
     
     /**
-     * Method responsible for adding a Product_Final.
-     * @param product Product_Final.
+     * Method responsible for adding a Product.
+     * @param product Product.
      */
-    public void addProduct(Product_Final product) {
+    public void addProduct(Product product) {
         product.setId(this.nextProductId());
         this.products.put(product.getId(), product);
     }
     
     /**
-     * Method responsible for returning a Product_Final by Id.
-     * @param  id Product_Final Id.
-     * @return Product_Final found.
+     * Method responsible for returning a Product by Id.
+     * @param  id Product Id.
+     * @return Product found.
      */
-    public Product_Final getProduct(String id) {
-        return (Product_Final) this.products.get(id);
+    public Product getProduct(String id) {
+        return (Product) this.products.get(id);
     }
     
     /**
-     * Method responsible for removing a Element of a Product_Final.
+     * Method responsible for removing a Element of a Product.
      * @param element Element.
      */
     public void removeProduct(Element element) {
-        for (Product_Final product : this.getProductsList()) 
+        for (Product product : this.getProductsList()) 
             this.remove(product, element);
     }
     
     /**
-     * Method responsible for removing a Element from a Product_Final.
-     * @param product Product_Final.
+     * Method responsible for removing a Element from a Product.
+     * @param product Product.
      * @param element Element.
      */
-    private void remove(Product_Final product, Element element) {
+    private void remove(Product product, Element element) {
         if (product.contains(element)) {
             product.remove(element);
             if (product.isEmpty())
@@ -824,19 +824,19 @@ public class Project implements Exportable {
     }
     
     /**
-     * Method responsible for removing a Association from a Product_Final.
+     * Method responsible for removing a Association from a Product.
      * @param association Association.
      */
     public void removeProduct(Association association) {
-        for (Product_Final product : this.getProductsList()) 
+        for (Product product : this.getProductsList()) 
             product.remove(association);
     }
     
     /**
-     * Method responsible for removing a Product_Final.
-     * @param product Product_Final.
+     * Method responsible for removing a Product.
+     * @param product Product.
      */
-    public void removeProduct(Product_Final product) {
+    public void removeProduct(Product product) {
         this.products.remove(product.getId());
     }
     
@@ -844,7 +844,7 @@ public class Project implements Exportable {
      * Method responsible for returning Products List.
      * @return Products List.
      */
-    public List<Product_Final> getProductsList() {
+    public List<Product> getProductsList() {
         return new ArrayList<>(this.products.values());
     }
     
@@ -854,7 +854,7 @@ public class Project implements Exportable {
      */
     private String exportProducts() {
         String export  = "  <products>\n";
-        for (Product_Final product : this.getProductsList())
+        for (Product product : this.getProductsList())
                export += product.export();
         return export  + "  </products>\n";
     }

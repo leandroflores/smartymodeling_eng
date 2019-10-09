@@ -18,14 +18,16 @@ public class Product implements Exportable {
     private String  id;
     private String  name;
     private String  version;
+    private String  description;
     private HashMap instances;
     
     /**
      * Default constructor method of Class.
      */
     public Product() {
-        this.instances = new HashMap<>();
-        this.version   = "1.0";
+        this.version     = "1.0";
+        this.description = "";
+        this.instances   = new HashMap<>();
     }
     
     /**
@@ -34,9 +36,10 @@ public class Product implements Exportable {
      */
     public Product(org.w3c.dom.Element element) {
         this();
-        this.id      = element.getAttribute("id");
-        this.name    = element.getAttribute("name");
-        this.version = element.getAttribute("version");
+        this.id          = element.getAttribute("id");
+        this.name        = element.getAttribute("name");
+        this.version     = element.getAttribute("version");
+        this.description = "";
     }
     
     /**
@@ -86,6 +89,24 @@ public class Product implements Exportable {
     public void setVersion(String version) {
         this.version = version;
     }
+
+    /**
+     * Method responsible for returning the Product Description.
+     * @return Product Description.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Method responsible for returning the Product Description.
+     * @param description Product Description.
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
     
     /**
      * Method responsible for returning if Product is Empty.
@@ -159,6 +180,19 @@ public class Product implements Exportable {
      */
     public void setInstances(HashMap<String, Instance> instances) {
         this.instances = instances;
+    }
+    
+    /**
+     * Method responsible for returning if a Product contains a Element.
+     * @param  element Element.
+     * @return Product contains a Element.
+     */
+    public boolean contains(Element element) {
+        for (Instance instance : this.getInstancesList()) {
+            if (instance.contains(element))
+                return true;
+        }
+        return false;
     }
     
     /**

@@ -238,7 +238,7 @@ public class ImportProject {
             Product_Final product = new Product_Final(current);
                 this.addElements(product, current);
                 this.addAssociations(product, current);
-            this.project.addProduct(product);
+//            this.project.addProduct(product);
         }
     }
     

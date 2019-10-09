@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import model.structural.base.Diagram;
+import model.structural.base.product.Instance;
 import model.structural.base.product.test.Product_Final;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
@@ -19,6 +20,11 @@ import view.panel.diagram.types.PanelClassDiagram;
 import view.panel.diagram.types.PanelComponentDiagram;
 import view.panel.diagram.types.PanelSequenceDiagram;
 import view.panel.diagram.types.PanelUseCaseDiagram;
+import view.panel.instance.PanelInstance;
+import view.panel.instance.types.PanelActivityInstance;
+import view.panel.instance.types.PanelClassInstance;
+import view.panel.instance.types.PanelComponentInstance;
+import view.panel.instance.types.PanelUseCaseInstance;
 import view.panel.logo.PanelLogo;
 import view.panel.product.PanelProduct;
 import view.panel.tabbed.PanelTabbed;
@@ -77,7 +83,15 @@ public final class PanelModeling extends Panel {
      * @param diagram Diagram.
      */
     public void addDiagram(Diagram diagram) {
-        this.addTab(diagram.getId(), diagram.getName(), this.createPanelDiagram(diagram));
+        this.addTab(diagram.getId(),  diagram.getName(), this.createPanelDiagram(diagram));
+    }
+    
+    /**
+     * Method responsible for adding a Instance.
+     * @param instance Instance.
+     */
+    public void addInstance(Instance instance) {
+        this.addTab(instance.getCompleteId(), instance.getName(), this.createPanelInstance(instance));
     }
     
     /**
@@ -116,6 +130,29 @@ public final class PanelModeling extends Panel {
                 return new PanelSequenceDiagram(this.viewMenu,  (SequenceDiagram) diagram);
             case "UseCase":
                 return new PanelUseCaseDiagram(this.viewMenu,   (UseCaseDiagram) diagram);
+            default:
+                break;
+        }
+        return null;
+    }
+    
+    /**
+     * Method responsible for returning a New Instance Panel.
+     * @param  instance Instance.
+     * @return New Instance Panel.
+     */
+    private PanelInstance createPanelInstance(Instance instance) {
+        switch (instance.getDiagram().getType()) {
+            case "Activity":
+                return new PanelActivityInstance(this.viewMenu, instance, (ActivityDiagram) instance.getDiagram());
+            case "Class":
+                return new PanelClassInstance(this.viewMenu, instance, (ClassDiagram) instance.getDiagram());
+            case "Component":
+                return new PanelComponentInstance(this.viewMenu, instance, (ComponentDiagram) instance.getDiagram());
+//            case "Sequence":
+//                return new PanelSequenceInstance(this.viewMenu, instance, (SequenceDiagram) instance.getDiagram());
+            case "UseCase":
+                return new PanelUseCaseInstance(this.viewMenu, instance, (UseCaseDiagram) instance.getDiagram());
             default:
                 break;
         }

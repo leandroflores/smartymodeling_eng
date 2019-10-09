@@ -58,8 +58,7 @@ public class ControllerPanelBaseVarPoints extends ControllerPanel {
                 if (this.panelBaseVarPoints.getVariabilityCheckBox(variability).isSelected())
                     this.insertVariability(variability);
             }
-            this.panelBaseVarPoints.getViewNewInstance().addProductTabbedPane();
-//            this.panelBaseVariationPoints.getViewNewProduct().showNewProduct();
+            this.panelBaseVarPoints.getViewNewInstance().addPanelBaseArtefacts();
         }
     }
     
@@ -79,9 +78,9 @@ public class ControllerPanelBaseVarPoints extends ControllerPanel {
      * @param variability Exclusive Variability.
      */
     private void insertExclusiveVariability(Variability variability) {
-        this.panelBaseVarPoints.getViewNewProduct().increment(variability.getVariationPoint());
+        this.panelBaseVarPoints.getViewNewInstance().add(variability.getVariationPoint());
         Element element = (Element) this.panelBaseVarPoints.getVariabilityComboBox(variability).getSelectedItem();
-        this.panelBaseVarPoints.getViewNewProduct().increment(element);
+        this.panelBaseVarPoints.getViewNewInstance().add(element);
     }
     
     /**
@@ -89,9 +88,9 @@ public class ControllerPanelBaseVarPoints extends ControllerPanel {
      * @param variability Inclusive Variability.
      */
     private void insertInclusiveVariability(Variability variability) {
-        this.panelBaseVarPoints.getViewNewProduct().increment(variability.getVariationPoint());
+        this.panelBaseVarPoints.getViewNewInstance().add(variability.getVariationPoint());
         for (Element variant : this.getVariantsSelected(variability))
-            this.panelBaseVarPoints.getViewNewProduct().increment(variant);
+            this.panelBaseVarPoints.getViewNewInstance().add(variant);
     }
     
     /**
@@ -124,10 +123,10 @@ public class ControllerPanelBaseVarPoints extends ControllerPanel {
      * @param comboBox Combo Box.
      */
     private void actionComboBox(JComboBox comboBox) {
-        Variability  variability = this.panelBaseVarPoints.getViewNewProduct().getDiagram().getVariability(comboBox.getName());
+        Variability  variability = this.panelBaseVarPoints.getViewNewInstance().getDiagram().getVariability(comboBox.getName());
         Element      variante    = (Element) comboBox.getSelectedItem();
         for (Element element : variability.getVariants()) {
-            for (Variability current : this.panelBaseVarPoints.getViewNewProduct().getDiagram().getVariationPoints(element))
+            for (Variability current : this.panelBaseVarPoints.getViewNewInstance().getDiagram().getVariationPoints(element))
                 this.setFlag(current, current.getVariationPoint().equals(variante));
         }
     }
@@ -138,10 +137,10 @@ public class ControllerPanelBaseVarPoints extends ControllerPanel {
      * @param variantId Variant Id.
      */
     private void actionVariant(String variabilityId, String variantId) {
-        Variability variability = this.panelBaseVarPoints.getViewNewProduct().getDiagram().getVariability(variabilityId);
-        Element     element     = this.panelBaseVarPoints.getViewNewProduct().getDiagram().getElement(variantId);
+        Variability variability = this.panelBaseVarPoints.getViewNewInstance().getDiagram().getVariability(variabilityId);
+        Element     element     = this.panelBaseVarPoints.getViewNewInstance().getDiagram().getElement(variantId);
         JCheckBox   checkBox    = this.panelBaseVarPoints.getVariantCheckBox(variability, element);
-        for (Variability current : this.panelBaseVarPoints.getViewNewProduct().getDiagram().getVariationPoints(element)) {
+        for (Variability current : this.panelBaseVarPoints.getViewNewInstance().getDiagram().getVariationPoints(element)) {
             this.panelBaseVarPoints.getVariabilityCheckBox(current).setSelected(checkBox.isSelected());
             this.setFlag(current, checkBox.isSelected());
         }
@@ -189,7 +188,7 @@ public class ControllerPanelBaseVarPoints extends ControllerPanel {
      */
     public List<Variability> getVariabilitiesSelected() {
         List<Variability> filter = new ArrayList<>();
-        for (Variability variability : this.panelBaseVarPoints.getViewNewProduct().getDiagram().getVariabilitiesList()) {
+        for (Variability variability : this.panelBaseVarPoints.getViewNewInstance().getDiagram().getVariabilitiesList()) {
             if (this.panelBaseVarPoints.getVariabilityCheckBox(variability).isSelected())
                 filter.add(variability);
         }
@@ -213,7 +212,7 @@ public class ControllerPanelBaseVarPoints extends ControllerPanel {
         for (Variability variability : this.getVariabilitiesSelected()) {
             if (variability.getConstraint().toLowerCase().trim().equals("inclusive")) {
                 if (this.checkInclusiveVariability(variability) == false) {
-                    new ViewError(this.panelBaseVarPoints.getViewNewProduct(), "Select a Variant of " + variability.getName()).setVisible(true);
+                    new ViewError(this.panelBaseVarPoints.getViewNewInstance(), "Select a Variant of " + variability.getName()).setVisible(true);
                     return false;
                 }
             }
@@ -242,7 +241,7 @@ public class ControllerPanelBaseVarPoints extends ControllerPanel {
         for (Variability variability : this.getVariabilitiesSelected()) {
             if (variability.getConstraint().toLowerCase().trim().equals("exclusive")) {
                 if (this.checkExclusiveVariability(variability) == false) {
-                    new ViewError(this.panelBaseVarPoints.getViewNewProduct(), "Select a Variant of " + variability.getName()).setVisible(true);
+                    new ViewError(this.panelBaseVarPoints.getViewNewInstance(), "Select a Variant of " + variability.getName()).setVisible(true);
                     this.panelBaseVarPoints.getVariabilityComboBox(variability).requestFocus();
                     this.panelBaseVarPoints.getVariabilityComboBox(variability).setPopupVisible(true);
                     return false;
@@ -259,7 +258,7 @@ public class ControllerPanelBaseVarPoints extends ControllerPanel {
      */
     private boolean checkExclusiveVariability(Variability variability) {
         Element variationPoint = (Element) this.panelBaseVarPoints.getVariabilityComboBox(variability).getSelectedItem();
-        for (Variability current : this.panelBaseVarPoints.getViewNewProduct().getDiagram().getVariationPoints(variationPoint)) {
+        for (Variability current : this.panelBaseVarPoints.getViewNewInstance().getDiagram().getVariationPoints(variationPoint)) {
             if (this.panelBaseVarPoints.getVariabilityCheckBox(current).isSelected() == false)
                 return false;
         }
