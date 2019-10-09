@@ -31,6 +31,10 @@ public class ControllerPanelBaseInstance extends ControllerPanel {
     @Override
     public void actionPerformed(ActionEvent event) {
         this.update();
+        if (this.panelBaseInstance.getBackButton().equals(event.getSource()))
+            this.panelBaseInstance.getViewNew().dispose();
+        else if (this.panelBaseInstance.getNextButton().equals(event.getSource()))
+            this.next();
     }
     
     @Override
@@ -52,12 +56,20 @@ public class ControllerPanelBaseInstance extends ControllerPanel {
     }
     
     /**
+     * Method responsible for going to Next Panel.
+     */
+    public void next() {
+        this.update();
+//        this.panelBaseInstance.getViewNewProduct().addVariationPointsTabbedPane();
+    }
+    
+    /**
      * Method responsible for setting the Instance Values.
      */
     private void update() {
         this.panelBaseInstance.getInstance().setProduct((Product) this.panelBaseInstance.getProductComboBox().getSelectedItem());
         this.panelBaseInstance.getInstance().setDiagram((Diagram) this.panelBaseInstance.getDiagramComboBox().getSelectedItem());
         this.panelBaseInstance.getInstance().setName(this.panelBaseInstance.getNameTextField().getText().trim());
-        this.panelBaseInstance.getViewMenu().setSave(false);
+        this.panelBaseInstance.getViewNew().getViewMenu().setSave(false);
     }
 }

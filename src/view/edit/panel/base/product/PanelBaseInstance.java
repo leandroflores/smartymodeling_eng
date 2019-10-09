@@ -2,34 +2,34 @@ package view.edit.panel.base.product;
 
 import controller.view.edit.panel.base.product.ControllerPanelBaseInstance;
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.base.product.Instance;
 import view.Panel;
-import view.structural.ViewMenu;
+import view.new_.product.ViewNewInstance;
 
 /**
  * <p>Class of View <b>PanelBaseInstance</b>.</p> 
  * <p>Class responsible for defining a Panel for showing the <b>Instance Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  07/10/2019
- * @see    controller.view.edit.panel.base.product.
+ * @see    controller.view.edit.panel.base.product.ControllerPanelBaseInstance
  * @see    model.structural.base.product.Instance
  * @see    view.Panel
  */
 public final class PanelBaseInstance extends Panel {
-    private final ViewMenu viewMenu;
+    private final ViewNewInstance viewNew;
     private final Instance instance;
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View New Instance.
      * @param instance Instance.
      */
-    public PanelBaseInstance(ViewMenu viewMenu, Instance instance) {
-        this.viewMenu   = viewMenu;
+    public PanelBaseInstance(ViewNewInstance view, Instance instance) {
+        this.viewNew    = view;
         this.instance   = instance;
         this.controller = new ControllerPanelBaseInstance(this);
         this.setSettings();
@@ -42,21 +42,21 @@ public final class PanelBaseInstance extends Panel {
      * Method responsible for defining the Settings.
      */
     private void setSettings() {
-        this.setLayout(new GridBagLayout());
+        this.setLayout(new GridLayout(4, 2));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Product*: "), this.getConstraints(1, 1, 0, 0));
-        this.add(this.createComboBox("productComboBox", this.viewMenu.getProject().getProductsList().toArray(), 15), this.getConstraints(3, 1, 1, 0));
+        this.add(this.createLabel("Product*: "));
+        this.add(this.createComboBox("productComboBox", this.viewNew.getViewMenu().getProject().getProductsList().toArray(), 15));
         this.getProductComboBox().setPreferredSize(new Dimension(325, 30));
         
-        this.add(this.createLabel("Diagram*: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("diagramComboBox", this.viewMenu.getProject().getDiagramsList().toArray(), 15), this.getConstraints(3, 1, 1, 1));
+        this.add(this.createLabel("Diagram*: "));
+        this.add(this.createComboBox("diagramComboBox", this.viewNew.getViewMenu().getProject().getDiagramsList().toArray(), 15));
         this.getDiagramComboBox().setPreferredSize(new Dimension(325, 30));
         
-        this.add(this.createLabel("Name*: "), this.getConstraints(1, 1, 0, 2));
-        this.add(this.createTextField("nameTextField", "", 15), this.getConstraints(3, 1, 1, 2));
+        this.add(this.createLabel("Name*: "));
+        this.add(this.createTextField("nameTextField", "", 15));
     }
     
     /**
@@ -88,17 +88,19 @@ public final class PanelBaseInstance extends Panel {
      * Method responsible for adding the Panel Footer.
      */
     public void addFooter() {
-        this.add(this.createButton("nextButton", "  Next  ", "Next", "next.png"), this.getConstraints(2, 1, 1, 3));
+        this.add(this.createButton("backButton", "  Back  ", "Back", "back.png"));
+        this.add(this.createButton("nextButton", "  Next  ", "Next", "next.png"));
         
+        this.getBackButton().setPreferredSize(new Dimension(150, 30));
         this.getNextButton().setPreferredSize(new Dimension(150, 30));
     }
     
     /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
+     * Method responsible for returning the View New Instance.
+     * @return View New Instance.
      */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
+    public ViewNewInstance getViewNew() {
+        return this.viewNew;
     }
     
     /**
@@ -131,6 +133,14 @@ public final class PanelBaseInstance extends Panel {
      */
     public JTextField getNameTextField() {
         return this.textFields.get("nameTextField");
+    }
+    
+    /**
+     * Method responsible for returning the Back Button.
+     * @return Back Button.
+     */
+    public JButton getBackButton() {
+        return this.buttons.get("backButton");
     }
     
     /**

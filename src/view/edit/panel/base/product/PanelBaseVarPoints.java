@@ -1,6 +1,6 @@
-package view.edit.panel.base.product.test;
+package view.edit.panel.base.product;
 
-import controller.view.edit.panel.base.product.test.ControllerPanelBaseVarPoints;
+import controller.view.edit.panel.base.product.test.ControllerPanelBaseVariationPoints;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.List;
@@ -10,31 +10,30 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import model.structural.base.Element;
-import model.structural.base.product.Product;
 import model.structural.base.variability.Variability;
 import view.Panel;
+import view.new_.product.ViewNewInstance;
 import view.new_.product.test.ViewNewProduct_Final;
 
 /**
  * <p>Class of View <b>PanelBaseVarPoints</b>.</p> 
  * <p>Class responsible for defining a Panel for showing the <b>Variation Points Base</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  22/08/2019
- * @see    controller.view.edit.panel.base.product.test.ControllerPanelBaseVarPoints
- * @see    model.structural.base.product.Product
+ * @since  09/10/2019
+ * @see    controller.view.edit.panel.base.product.
+ * @see    model.structural.base.product.Instance
  * @see    view.Panel
  */
 public class PanelBaseVarPoints extends Panel {
-    private final ViewNewProduct_Final view;
-    private Product product;
+    private final ViewNewInstance viewNew;
     
     /**
      * Default constructor method of Class.
-     * @param view View New Product.
+     * @param view View New Instance.
      */
-    public PanelBaseVarPoints(ViewNewProduct_Final view) {
-        this.view       = view;
-        this.controller = new ControllerPanelBaseVarPoints(this);
+    public PanelBaseVarPoints(ViewNewInstance view) {
+        this.viewNew    = view;
+//        this.controller = new ControllerPanelBaseVariationPoints(this);
         this.initComponents();
     }
     
@@ -47,14 +46,14 @@ public class PanelBaseVarPoints extends Panel {
         this.addHeader();
         this.addComponents();
         this.addFooter();
-        this.updateComponentes();
+        this.updateElements();
     }
     
     /**
      * Method responsible for adding the Header.
      */
     public void addHeader() {
-        this.add(this.createLabel("Solve the Variation Points for the new Product:"));
+        this.add(this.createLabel("Solve the Variation Points for the New Instance:"));
     }
     
     @Override
@@ -72,10 +71,8 @@ public class PanelBaseVarPoints extends Panel {
      */
     private JPanel createVariabilitiesPanel() {
         JPanel panel = new JPanel();
-//        List<Variabilidade> variabilidades = this.view.getDiagrama().getListaVariabilidades();
-        for (Variability variability : this.view.getDiagram().getVariabilitiesList())
+        for (Variability variability : this.viewNew.getInstance().getDiagram().getVariabilitiesList())
                this.addVariability(panel, variability);
-//               panel.setPreferredSize(new Dimension(480, variabilidades.size() * 70));
         return panel;
     }
     
@@ -95,13 +92,13 @@ public class PanelBaseVarPoints extends Panel {
     }
     
     /**
-     * Method responsible for returning ta new Variability Check Box.
+     * Method responsible for returning a new Variability Check Box.
      * @param  variability Variability.
      * @return New Variability Check Box.
      */
     public JCheckBox createVariabilityCheckBox(Variability variability) {
-        JCheckBox checkBox = this.createCheckBox("checkBox" + variability.getId(), "", this.view.isVariationPoint(variability.getVariationPoint()));
-                  checkBox.setSelected(this.view.isVariationPoint(variability.getVariationPoint()));
+        JCheckBox checkBox = this.createCheckBox("checkBox" + variability.getId(), "", this.viewNew.isVariationPoint(variability.getVariationPoint()));
+                  checkBox.setSelected(this.viewNew.isVariationPoint(variability.getVariationPoint()));
                   checkBox.setEnabled(false);
                   checkBox.setName(variability.getId());
         return    checkBox;
@@ -156,9 +153,9 @@ public class PanelBaseVarPoints extends Panel {
     /**
      * Method responsible for updating the Elements.
      */
-    private void updateComponentes() {
-        List<Variability> variabilities = this.view.filterVariabilities();
-        for (Variability  variability   : this.view.getDiagram().getVariabilitiesList())
+    private void updateElements() {
+        List<Variability> variabilities = this.viewNew.getVariabilities();
+        for (Variability  variability   : this.viewNew.getInstance().getDiagram().getVariabilitiesList())
             this.getController().setFlag(variability, variabilities.contains(variability));
     }
     
@@ -174,19 +171,19 @@ public class PanelBaseVarPoints extends Panel {
     }
     
     /**
-     * Method responsible for returning the View New Product.
-     * @return View New Product.
+     * Method responsible for returning the View New Instance.
+     * @return View New Instance.
      */
-    public ViewNewProduct_Final getViewNewProduct() {
-        return this.view;
+    public ViewNewInstance getViewNewInstance() {
+        return this.viewNew;
     }
     
     /**
      * Method responsible for returning the View Controller.
      * @return View Controller.
      */
-    public ControllerPanelBaseVarPoints getController() {
-        return (ControllerPanelBaseVarPoints) this.controller;
+    public ControllerPanelBaseVariationPoints getController() {
+        return (ControllerPanelBaseVariationPoints) this.controller;
     }
     
     /**

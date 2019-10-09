@@ -12,7 +12,7 @@ import model.structural.base.product.test.Product_Final;
 import model.structural.base.variability.Variability;
 import view.edit.panel.base.product.test.PanelBaseOpt;
 import view.edit.panel.base.product.test.PanelBaseProduct_Final;
-import view.edit.panel.base.product.test.PanelBaseVarPoints;
+import view.edit.panel.base.product.test.PanelBaseVariationPoints;
 import view.message.ViewMessage;
 import view.new_.ViewNew;
 import view.structural.ViewMenu;
@@ -29,7 +29,7 @@ public final class ViewNewProduct_Final extends ViewNew {
     private final Diagram diagram;
     private Product_Final product;
     private PanelBaseOpt panelBaseOptional;
-    private PanelBaseVarPoints panelBaseVariationPoints;
+    private PanelBaseVariationPoints panelBaseVariationPoints;
     private PanelBaseProduct_Final panelBaseProduct;
     private HashMap<String, Integer> components;
     
@@ -156,7 +156,7 @@ public final class ViewNewProduct_Final extends ViewNew {
      * Method responsible for adding the Variation Points Tabbed Pane.
      */
     public void addVariationPointsTabbedPane() {
-        this.panelBaseVariationPoints = new PanelBaseVarPoints(this);
+        this.panelBaseVariationPoints = new PanelBaseVariationPoints(this);
         this.tabbedPane.add("Variation Points", this.panelBaseVariationPoints);
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(1));
         this.tabbedPane.setEnabledAt(0, false);
@@ -217,7 +217,7 @@ public final class ViewNewProduct_Final extends ViewNew {
      * Method responsible for returning the Panel Base Variation Points.
      * @return Panel Base Variation Points.
      */
-    public PanelBaseVarPoints getPanelBaseVariationPoints() {
+    public PanelBaseVariationPoints getPanelBaseVariationPoints() {
         return this.panelBaseVariationPoints;
     }
     

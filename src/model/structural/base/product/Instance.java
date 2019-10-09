@@ -201,6 +201,14 @@ public class Instance implements Exportable {
     }
     
     /**
+     * Method responsible for reseting the Instance.
+     */
+    public void reset() {
+        this.artefacts    = new HashMap();
+        this.associations = new HashMap();
+    }
+    
+    /**
      * Method responsible for removing a Artefact by Element.
      * @param element Element.
      */
