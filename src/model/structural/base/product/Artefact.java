@@ -325,7 +325,7 @@ public class Artefact implements Exportable, Modelable {
      * @return Artefact Icon.
      */
     public String getIcon() {
-        return this.element.getIcon();
+        return "src/images/icons/product/artefact.png";
     }
     
     @Override

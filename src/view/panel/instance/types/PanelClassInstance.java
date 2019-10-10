@@ -43,7 +43,6 @@ public final class PanelClassInstance extends PanelInstance {
         super(view, instance);
         this.diagram    = diagram;
         this.controller = new ControllerPanelInstance(this);
-        this.initComponents();
         this.addComponents();
     }
     

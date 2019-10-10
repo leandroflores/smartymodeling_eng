@@ -56,6 +56,7 @@ public class ControllerPanelBaseProduct extends ControllerPanel {
     private void update() {
         this.panelBaseProduct.getProduct().setName(this.panelBaseProduct.getNameTextField().getText().trim());
         this.panelBaseProduct.getProduct().setVersion(this.panelBaseProduct.getVersionTextField().getText().trim());
+        this.panelBaseProduct.getProduct().setDescription(this.panelBaseProduct.getDescriptionTextArea().getText());
         this.panelBaseProduct.getViewMenu().getPanelProject().getPanelTree().updateUI();
 //        this.panelBaseProduct.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseProduct.getProduct());
         this.panelBaseProduct.getViewMenu().setSave(false);

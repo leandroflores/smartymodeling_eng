@@ -30,7 +30,7 @@ public class ControllerPanelBaseOptional extends ControllerPanel {
     @Override
     public void actionPerformed(ActionEvent event) {
         if (this.panelBaseOptional.getBackButton().equals(event.getSource()))
-            this.panelBaseOptional.getViewNewInstance().addPanelBaseInstance();
+            this.panelBaseOptional.getViewNewInstance().removePanelBaseOptional();
         else if (this.panelBaseOptional.getNextButton().equals(event.getSource()))
             this.next();
     }
@@ -43,7 +43,7 @@ public class ControllerPanelBaseOptional extends ControllerPanel {
      */
     public void next() {
         this.updateProduct();
-        this.panelBaseOptional.getViewNewInstance().addPanelBaseOptional();
+        this.panelBaseOptional.getViewNewInstance().addPanelBaseVarPoints();
     }
     
     /**

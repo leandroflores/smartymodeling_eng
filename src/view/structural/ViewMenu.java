@@ -163,10 +163,12 @@ public final class ViewMenu extends View implements Operation {
         this.createMenu("menuProductLine", "Product Line");
         
         this.createMenuItem("menuItemEditProfile",        "Edit Profile",        "system/information.png");
+        this.createMenuItem("menuItemNewProduct",         "New Product",         "product_line/product.png");
         this.createMenuItem("menuItemInstantiateProduct", "Instantiate Product", "system/information.png");
         this.createMenuItem("menuItemNewTraceability",    "New Traceability",    "product_line/traceability.png");
         
         this.getMenuProductLine().add(this.getMenuItemEditProfile());
+        this.getMenuProductLine().add(this.getMenuItemNewProduct());
         this.getMenuProductLine().add(this.getMenuItemInstantiateProduct());
         this.getMenuProductLine().add(this.getMenuItemNewTraceability());
     }
@@ -602,6 +604,14 @@ public final class ViewMenu extends View implements Operation {
      */
     public JMenuItem getMenuItemEditProfile() {
         return this.menuItens.get("menuItemEditProfile");
+    }
+    
+    /**
+     * Method responsible for returning the Menu Item New Product.
+     * @return Menu Item New Product.
+     */
+    public JMenuItem getMenuItemNewProduct() {
+        return this.menuItens.get("menuItemNewProduct");
     }
     
     /**

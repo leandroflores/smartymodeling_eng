@@ -181,6 +181,18 @@ public final class PanelModeling extends Panel {
     }
     
     /**
+     * Method responsible for removing a Instance from Panel Modeling.
+     * @param instance Instance.
+     */
+    public void removeInstance(Instance instance) {
+        if (this.tabs.get(instance.getCompleteId()) != null) {
+            this.panelTabbed.remove(this.tabs.get(instance.getCompleteId()));
+            this.tabs.remove(instance.getCompleteId());
+            this.updateUI();
+        }
+    }
+    
+    /**
      * Method responsible for removing a Product_Final from Panel Modeling.
      * @param product Product_Final.
      */
@@ -244,6 +256,17 @@ public final class PanelModeling extends Panel {
         Component component = this.panelTabbed.getSelectedComponent();
         if (component instanceof PanelDiagram)
             return (PanelDiagram) component;
+        return null;
+    }
+    
+    /**
+     * Method responsible for returning the Panel Instance.
+     * @return Panel Instance.
+     */
+    public PanelInstance getPanelInstance() {
+        Component component = this.panelTabbed.getSelectedComponent();
+        if (component instanceof PanelInstance)
+            return (PanelInstance) component;
         return null;
     }
     

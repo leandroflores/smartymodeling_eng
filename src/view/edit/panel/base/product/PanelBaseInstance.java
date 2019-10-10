@@ -99,7 +99,7 @@ public final class PanelBaseInstance extends Panel {
      * Method responsible for returning the View New Instance.
      * @return View New Instance.
      */
-    public ViewNewInstance getViewNew() {
+    public ViewNewInstance getViewNewInstance() {
         return this.viewNew;
     }
     

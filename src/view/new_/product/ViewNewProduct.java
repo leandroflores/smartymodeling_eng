@@ -1,5 +1,6 @@
 package view.new_.product;
 
+import controller.view.new_.product.ControllerViewNewProduct;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -14,7 +15,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>New Product View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  09/08/2019
- * @see    controller.view.new_.evaluation.ControllerViewNewMetric
+ * @see    controller.view.new_.product.ControllerViewNewProduct
  * @see    model.structural.base.product.Product
  * @see    view.new_.ViewNew
  */
@@ -32,7 +33,7 @@ public final class ViewNewProduct extends ViewNew {
         super(view);
         this.project    = project;
         this.product    = new Product();
-//        this.controller = new ControllerViewNewMetric(this);
+        this.controller = new ControllerViewNewProduct(this);
         this.title      = "New Product";
         this.initComponents();
     }

@@ -12,6 +12,9 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.association.Association;
 import model.structural.base.evaluation.Metric;
+import model.structural.base.product.Artefact;
+import model.structural.base.product.Instance;
+import model.structural.base.product.Product;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.classes.base.AttributeUML;
@@ -134,6 +137,36 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
         this.setIcon(new ImageIcon(metric.getIcon()));
     }
     
+    /**
+     * Method responsible for defining the Product.
+     * @param product Product.
+     */
+    public void setProductIcon(Product product) {
+        this.setText(product.getName());
+        this.setToolTipText(product.getName());
+        this.setIcon(new ImageIcon(product.getIcon()));
+    }
+    
+    /**
+     * Method responsible for defining the Instance.
+     * @param instance Instance.
+     */
+    public void setInstanceIcon(Instance instance) {
+        this.setText(instance.getName());
+        this.setToolTipText(instance.getName());
+        this.setIcon(new ImageIcon(instance.getIcon()));
+    }
+    
+    /**
+     * Method responsible for defining the Artefact.
+     * @param artefact Artefact.
+     */
+    public void setArtefactIcon(Artefact artefact) {
+        this.setText(artefact.getElement().getName());
+        this.setToolTipText(artefact.getElement().getName());
+        this.setIcon(new ImageIcon(artefact.getIcon()));
+    }
+    
     @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
         Component component = super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
@@ -156,6 +189,12 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
             this.setTraceabilityIcon((Traceability) object);
         else if (object instanceof Metric)
             this.setMetricIcon((Metric) object);
+        else if (object instanceof Product)
+            this.setProductIcon((Product) object);
+        else if (object instanceof Instance)
+            this.setInstanceIcon((Instance) object);
+        else if (object instanceof Artefact)
+            this.setArtefactIcon((Artefact) object);
         return this;
     }
     

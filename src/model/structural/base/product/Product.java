@@ -213,6 +213,14 @@ public class Product implements Exportable {
             instance.remove(association);
     }
     
+    /**
+     * Method responsible for returning the Product Icon.
+     * @return Product Icon.
+     */
+    public String getIcon() {
+        return "src/images/icons/product/product.png";
+    }
+    
     @Override
     public String export() {
         String export  = "    <product id=\"" + this.id + "\" name=\"" + this.name + "\" version=\"" + this.version + "\">\n";

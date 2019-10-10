@@ -11,6 +11,7 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.association.Association;
 import model.structural.base.evaluation.Metric;
+import model.structural.base.product.Product;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ActivityDiagram;
@@ -134,6 +135,8 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
                 this.showPanelEditTraceability((Traceability) node.getUserObject());
             else if (node.getUserObject() instanceof Metric)
                 this.showPanelEditMetric((Metric) node.getUserObject());
+            else if (node.getUserObject() instanceof Product)
+                this.showPanelEditProduct((Product) node.getUserObject());
             else if (node.getUserObject() instanceof Element)
                 this.showPanelEdit(diagram, (Element) node.getUserObject());
             else if (node.getUserObject() instanceof Association)
@@ -164,6 +167,14 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      */
     private void showPanelEditMetric(Metric metric) {
         this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditMetric(metric);
+    }
+    
+    /**
+     * Method responsible for showing the Panel Edit Product.
+     * @param product Product.
+     */
+    private void showPanelEditProduct(Product product) {
+        this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditProduct(product);
     }
     
     /**

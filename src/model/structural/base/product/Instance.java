@@ -313,10 +313,18 @@ public class Instance implements Exportable {
      */
     private void updateAssociations() {
         for (Association association : this.getAssociationsList()) {
-            if ((this.artefacts.get(association.getSource().getId()) == null)
-             || (this.artefacts.get(association.getTarget().getId()) == null))
+            if (this.contains(association.getSource())
+             && this.contains(association.getTarget()))
                 this.associations.remove(association.getId());
         }
+    }
+    
+    /**
+     * Method responsible for returning the Instance Icon.
+     * @return Instance Icon.
+     */
+    public String getIcon() {
+        return "src/images/icons/product/instance.png";
     }
         
     /**

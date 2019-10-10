@@ -28,6 +28,7 @@ import view.message.ViewSave;
 import view.new_.evaluation.ViewNewMeasure;
 import view.new_.evaluation.ViewNewMetric;
 import view.new_.product.ViewNewInstance;
+import view.new_.product.ViewNewProduct;
 import view.new_.traceability.ViewNewTraceability;
 import view.structural.ViewMenu;
 import view.system.ViewSystemInformation;
@@ -76,6 +77,8 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             this.newUseCaseDiagram();
         else if (this.viewMenu.getMenuItemEditProfile().equals(event.getSource()))
             this.editProfile();
+        else if (this.viewMenu.getMenuItemNewProduct().equals(event.getSource()))
+            this.newProduct();
         else if (this.viewMenu.getMenuItemInstantiateProduct().equals(event.getSource()))
             this.instantiateNewProduct();
         else if (this.viewMenu.getMenuItemNewTraceability().equals(event.getSource()))
@@ -278,6 +281,14 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     private void editProfile() {
         if (this.viewMenu.getPanelModeling() != null)
             new ViewEditProfile(this.viewMenu.getPanelModeling(), this.viewMenu.getProject().getProfile()).setVisible(true);
+    }
+    
+    /**
+     * Method responsible for inserting a New Product.
+     */
+    private void newProduct() {
+        if (this.viewMenu.getProject() != null)
+            new ViewNewProduct(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
     }
     
     /**

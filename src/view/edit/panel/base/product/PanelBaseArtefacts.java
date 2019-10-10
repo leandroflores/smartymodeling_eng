@@ -1,5 +1,6 @@
 package view.edit.panel.base.product;
 
+import controller.view.edit.panel.base.product.ControllerPanelBaseArtefacts;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -13,7 +14,7 @@ import view.new_.product.ViewNewInstance;
  * <p>Class responsible for defining a Panel for showing the <b>Artefacts Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  09/10/2019
- * @see    controller.view.edit.panel.base.
+ * @see    controller.view.edit.panel.base.product.ControllerPanelBaseArtefacts
  * @see    model.structural.base.product.Instance
  * @see    view.Panel
  */
@@ -26,7 +27,7 @@ public class PanelBaseArtefacts extends Panel {
      */
     public PanelBaseArtefacts(ViewNewInstance view) {
         this.viewNew    = view;
-//        this.controller = new ControllerPanelBaseProduct_Final(this);
+        this.controller = new ControllerPanelBaseArtefacts(this);
         this.initComponents();
     }
     

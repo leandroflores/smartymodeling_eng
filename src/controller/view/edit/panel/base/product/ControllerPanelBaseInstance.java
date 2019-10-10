@@ -32,7 +32,7 @@ public class ControllerPanelBaseInstance extends ControllerPanel {
     public void actionPerformed(ActionEvent event) {
         this.update();
         if (this.panelBaseInstance.getBackButton().equals(event.getSource()))
-            this.panelBaseInstance.getViewNew().dispose();
+            this.panelBaseInstance.getViewNewInstance().dispose();
         else if (this.panelBaseInstance.getNextButton().equals(event.getSource()))
             this.next();
     }
@@ -60,7 +60,7 @@ public class ControllerPanelBaseInstance extends ControllerPanel {
      */
     public void next() {
         this.update();
-//        this.panelBaseInstance.getViewNewProduct().addVariationPointsTabbedPane();
+        this.panelBaseInstance.getViewNewInstance().addPanelBaseOptional();
     }
     
     /**
@@ -70,6 +70,6 @@ public class ControllerPanelBaseInstance extends ControllerPanel {
         this.panelBaseInstance.getInstance().setProduct((Product) this.panelBaseInstance.getProductComboBox().getSelectedItem());
         this.panelBaseInstance.getInstance().setDiagram((Diagram) this.panelBaseInstance.getDiagramComboBox().getSelectedItem());
         this.panelBaseInstance.getInstance().setName(this.panelBaseInstance.getNameTextField().getText().trim());
-        this.panelBaseInstance.getViewNew().getViewMenu().setSave(false);
+        this.panelBaseInstance.getViewNewInstance().getViewMenu().setSave(false);
     }
 }

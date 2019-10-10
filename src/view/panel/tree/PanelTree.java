@@ -10,6 +10,9 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Metric;
+import model.structural.base.product.Artefact;
+import model.structural.base.product.Instance;
+import model.structural.base.product.Product;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.SequenceDiagram;
@@ -62,6 +65,7 @@ public final class PanelTree extends Panel {
         this.addDiagrams(raiz);
         this.addTraceabilities(raiz);
         this.addMetrics(raiz);
+        this.addProducts(raiz);
 //        this.expandTree();
         this.add(this.tree);
     }
@@ -92,9 +96,8 @@ public final class PanelTree extends Panel {
     private void addTraceabilities(DefaultMutableTreeNode root) {
         if ((this.project != null)  && (!this.project.getTraceabilitiesList().isEmpty())) {
             DefaultMutableTreeNode traceabilityNode = new DefaultMutableTreeNode("Traceabilities");
-            List<Traceability>     traceabilities   = this.project.getTraceabilitiesList();
-            for (int i = 0; i < traceabilities.size(); i++)
-                     traceabilityNode.add(this.getNode(traceabilities.get(i)));
+            for (Traceability traceability : this.project.getTraceabilitiesList())
+                     traceabilityNode.add(this.getNode(traceability));
             root.add(traceabilityNode);
         }
     }
@@ -106,10 +109,22 @@ public final class PanelTree extends Panel {
     private void addMetrics(DefaultMutableTreeNode root) {
         if ((this.project != null) && (!this.project.getMetricsList().isEmpty())) {
             DefaultMutableTreeNode metricNode = new DefaultMutableTreeNode("Metrics");
-            List<Metric>           metrics    = this.project.getMetricsList();
-            for (int i = 0; i < metrics.size(); i++)
-                     metricNode.add(new DefaultMutableTreeNode(metrics.get(i)));
+            for (Metric metric : this.project.getMetricsList())
+                     metricNode.add(new DefaultMutableTreeNode(metric));
             root.add(metricNode);
+        }
+    }
+    
+    /**
+     * Method responsible for adding the Products.
+     * @param root Tree Node.
+     */
+    private void addProducts(DefaultMutableTreeNode root) {
+        if ((this.project != null) && (!this.project.getProductsList().isEmpty())) {
+            DefaultMutableTreeNode productNode = new DefaultMutableTreeNode("Products");
+            for (Product product : this.project.getProductsList())
+                     productNode.add(this.getNode(product));
+            root.add(productNode);
         }
     }
     
@@ -289,9 +304,50 @@ public final class PanelTree extends Panel {
      * @param node Traceability Node.
      */
     private void addElements(Traceability traceability, DefaultMutableTreeNode node) {
-        List<Element> elements = traceability.getElements();
-        for (int i = 0; i < elements.size(); i++)
-            node.add(new DefaultMutableTreeNode(elements.get(i)));
+        for (Element element : traceability.getElements())
+            node.add(new DefaultMutableTreeNode(element));
+    }
+    
+    /**
+     * Method responsible for returning the Product Node.
+     * @param  product Product.
+     * @return Product Node.
+     */
+    private DefaultMutableTreeNode getNode(Product product) {
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(product);
+            this.addInstances(product, node);
+        return node;
+    }
+    
+    /**
+     *  Method responsible for adding Traceability Elements.
+     * @param product Product.
+     * @param node Product Node.
+     */
+    private void addInstances(Product product, DefaultMutableTreeNode node) {
+        for (Instance instance : product.getInstancesList())
+            node.add(this.getNode(instance));
+    }
+    
+    /**
+     * Method responsible for returning the Instance Node.
+     * @param  instance Instance.
+     * @return Instance Node.
+     */
+    private DefaultMutableTreeNode getNode(Instance instance) {
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(instance);
+            this.addArtefacts(instance, node);
+        return node;
+    }
+    
+    /**
+     *  Method responsible for adding Instance Artefacts.
+     * @param instance Instance.
+     * @param node Instance Node.
+     */
+    private void addArtefacts(Instance instance, DefaultMutableTreeNode node) {
+        for (Artefact artefact : instance.getArtefactsList())
+            node.add(new DefaultMutableTreeNode(artefact));
     }
     
     /**

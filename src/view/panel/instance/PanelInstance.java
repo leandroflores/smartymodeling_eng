@@ -51,13 +51,6 @@ public abstract class PanelInstance extends Panel {
     }
     
     /**
-     * Method responsible for initializing the Components.
-     */
-    protected void initComponents() {
-        
-    }
-    
-    /**
      * Method responsible for adding the Instance Panel Controllers.
      */
     public void addControllers() {
@@ -128,12 +121,9 @@ public abstract class PanelInstance extends Panel {
     }
     
     /**
-     * Method responsible for cleaning the Diagram.
+     * Method responsible for cleaning the Instance.
      */
     public void clearDiagram() {
-//        this.graph.removeCellsFromParent();
-//        this.graph.removeCells();
-//        this.graph.removeCells(this.graph.getChildVertices(this.graph.getDefaultParent()));
         this.graph.removeCells(this.graph.getChildCells(this.graph.getDefaultParent(), true, true));
     }
     

@@ -194,8 +194,11 @@ public final class ViewNewInstance extends ViewNew {
      */
     public void addNewInstance() {
         if (this.instance.getProduct() != null) {
+            this.updateInstance();
+            this.instance.update();
             this.instance.getProduct().addInstance(this.instance);
             this.view.showInstance(this.instance);
+            this.dispose();
         }
     }
     

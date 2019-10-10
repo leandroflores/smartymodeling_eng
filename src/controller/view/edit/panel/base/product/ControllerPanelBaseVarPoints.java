@@ -36,10 +36,10 @@ public class ControllerPanelBaseVarPoints extends ControllerPanel {
     
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.panelBaseVarPoints.getNextButton().equals(event.getSource()))
+        if (this.panelBaseVarPoints.getBackButton().equals(event.getSource()))
+            this.panelBaseVarPoints.getViewNewInstance().removePanelBaseVarPoints();
+        else if (this.panelBaseVarPoints.getNextButton().equals(event.getSource()))
             this.newInstance();
-        else if (this.panelBaseVarPoints.getBackButton().equals(event.getSource()))
-            this.panelBaseVarPoints.getViewNewInstance().addPanelBaseOptional();
         else if (event.getSource() instanceof JCheckBox)
             this.actionCheckBox((JCheckBox) event.getSource());
         else if (event.getSource() instanceof JComboBox)
