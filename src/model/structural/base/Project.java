@@ -305,6 +305,7 @@ public class Project implements Exportable {
      */
     public void removeDiagram(Diagram diagram) {
         this.removeElements(diagram);
+        this.removeInstances(diagram);
         this.diagrams.remove(diagram.getId());
     }
     
@@ -808,6 +809,15 @@ public class Project implements Exportable {
     public void removeProduct(Element element) {
         for (Product product : this.getProductsList()) 
             this.remove(product, element);
+    }
+    
+    /**
+     * Method responsible for removing the Instances by Diagram.
+     * @param diagram Diagram.
+     */
+    public void removeInstances(Diagram diagram) {
+        for (Product product : this.getProductsList())
+            product.removeInstance(diagram);
     }
     
     /**

@@ -99,6 +99,7 @@ public abstract class PanelInstance extends Panel {
         this.graph.setAllowNegativeCoordinates(false);
         this.graph.setAllowLoops(false);
         this.graph.setSplitEnabled(false);
+        this.graph.setConnectableEdges(false);
         
         this.component = new mxGraphComponent(this.graph);
         
@@ -131,6 +132,7 @@ public abstract class PanelInstance extends Panel {
      * Method responsible for updating the Instance.
      */
     public void updateInstance() {
+        System.out.println("AAAA");
         this.clearDiagram();
         this.identifiers = new HashMap<>();
         
@@ -146,6 +148,7 @@ public abstract class PanelInstance extends Panel {
             Element element = artifact.getElement();
             this.graph.getStylesheet().putCellStyle(artifact.getStyleLabel(), artifact.getStyle());
             String title = element.getName();
+            System.out.println("Element Name: " + element.getName());
             mxCell cell  = (mxCell) this.graph.insertVertex(this.parent, null, title, artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
             this.identifiers.put(cell, artifact.getId());
             this.objects.put(artifact.getId(), cell);

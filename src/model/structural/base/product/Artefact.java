@@ -1,6 +1,8 @@
 package model.structural.base.product;
 
+import com.mxgraph.util.mxConstants;
 import java.awt.Point;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import model.structural.base.Element;
@@ -48,8 +50,8 @@ public class Artefact implements Exportable, Modelable {
      * @param element W3C Element.
      */
     public Artefact(org.w3c.dom.Element element) {
-        this();
-        this.id = element.getAttribute("id");
+        this.id     = element.getAttribute("id");
+        this.global = new Point(0, 0);
     }
     
     /**
@@ -325,7 +327,7 @@ public class Artefact implements Exportable, Modelable {
      * @return Artefact Icon.
      */
     public String getIcon() {
-        return "src/images/icons/product/artefact.png";
+        return this.element.getIcon();
     }
     
     @Override
@@ -335,19 +337,21 @@ public class Artefact implements Exportable, Modelable {
 
     @Override
     public Map getStyle() {
-        return this.element.getStyle();
+        Map    style = new HashMap(this.element.getStyle());
+               style.put(mxConstants.STYLE_EDITABLE, "0");
+        return style;
     }
     
     @Override
     public String export() {
         String export  = "        "; 
-               export += "<artifact"; 
-               export += " id=\""        + this.id          + "\"";
-               export += " element=\""   + this.element     + "\"";
-               export += " x=\""         + this.getX()      + "\"";
-               export += " y=\""         + this.getY()      + "\"";
-               export += " height=\""    + this.getHeight() + "\"";
-               export += " width=\""     + this.getWidth()  + "\"";
+               export += "<artefact"; 
+               export += " id=\""        + this.id              + "\"";
+               export += " element=\""   + this.element.getId() + "\"";
+               export += " x=\""         + this.getX()          + "\"";
+               export += " y=\""         + this.getY()          + "\"";
+               export += " height=\""    + this.getHeight()     + "\"";
+               export += " width=\""     + this.getWidth()      + "\"";
                export += "/>\n";
         return export;
     }

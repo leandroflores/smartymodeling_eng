@@ -13,12 +13,16 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import model.structural.base.Diagram;
 import model.structural.base.Profile;
 import model.structural.base.Project;
 import model.structural.base.Stereotype;
+import model.structural.base.association.Association;
 import model.structural.base.association.Link;
 import model.structural.base.evaluation.Metric;
-import model.structural.base.product.test.Product_Final;
+import model.structural.base.product.Artefact;
+import model.structural.base.product.Instance;
+import model.structural.base.product.Product;
 import model.structural.base.traceability.Traceability;
 import model.structural.diagram.classes.base.TypeUML;
 import org.w3c.dom.Document;
@@ -231,40 +235,61 @@ public class ImportProject {
      * @throws XPathExpressionException 
      */
     private void importProducts() throws XPathExpressionException {
-        this.expression = "/project/product";
+        this.expression = "/project/products/product";
         this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
         for (int i = 0; i < this.nodeList.getLength(); i++) {
             Element current = (Element) this.nodeList.item(i);
-            Product_Final product = new Product_Final(current);
-                this.addElements(product, current);
-                this.addAssociations(product, current);
-//            this.project.addProduct(product);
+            Product product = new Product(current);
+                    product.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
+                this.addInstances(product, current);
+            this.project.addProduct(product);
         }
     }
     
     /**
-     * Method responsible for adding the Product_Final Elements.
-     * @param product Product_Final.
+     * Method responsible for adding the Product Instances.
+     * @param product Product.
      * @param current W3C Element.
      */
-    private void addElements(Product_Final product, Element current) {
-        NodeList elements = current.getElementsByTagName("element");
-        for (int i = 0; i < elements.getLength(); i++) {
-            model.structural.base.Element element = (model.structural.base.Element) this.project.objects.get(((Element) elements.item(i)).getAttribute("id"));
-            product.getElements().put(element.getId(), element);
+    private void addInstances(Product product, Element current) {
+        NodeList instances = current.getElementsByTagName("instance");
+        for (int i = 0; i < instances.getLength(); i++) {
+            Element  node     = (Element) instances.item(i);
+            Instance instance = new Instance(node);
+                     instance.setProduct(product);
+                     instance.setDiagram((Diagram) this.project.getDiagrams().get(node.getAttribute("diagram")));
+                     this.addArtefacts(instance, node);
+                     this.addAssociations(instance, node);
+            product.addInstance(instance);
         }
     }
     
     /**
-     * Method responsible for adding the Product_Final Associations.
-     * @param product Product_Final.
+     * Method responsible for adding the Instance Artefacts.
+     * @param instance Instance.
      * @param current W3C Element.
      */
-    private void addAssociations(Product_Final product, Element current) {
-        NodeList associations = current.getElementsByTagName("association");
-        for (int i = 0; i < associations.getLength(); i++) {
-            model.structural.base.association.Association association = (model.structural.base.association.Association) this.project.objects.get(((Element) associations.item(i)).getAttribute("id"));
-            product.getAssociations().put(association.getId(), association);
+    private void addArtefacts(Instance instance, Element current) {
+        NodeList artefacts = current.getElementsByTagName("artefact");
+        for (int i = 0; i < artefacts.getLength(); i++) {
+            Element  node     = (Element) artefacts.item(i);
+            Artefact artefact = new Artefact(node, true);
+                     artefact.setElement((model.structural.base.Element) instance.getDiagram().getElement(node.getAttribute("element")));
+            instance.addArtefact(artefact);
+        }
+    }
+    
+    /**
+     * Method responsible for adding the Instance Associations.
+     * @param instance Instance.
+     * @param current W3C Element.
+     */
+    private void addAssociations(Instance instance, Element current) {
+        NodeList list = current.getElementsByTagName("association");
+        for (int i = 0; i < list.getLength(); i++) {
+            Element     node        = (Element) list.item(i);
+            Association association = (Association) instance.getDiagram().getAssociation(node.getAttribute("id"));
+            instance.getAssociations().put(association.getId(), association);
         }
     }
     

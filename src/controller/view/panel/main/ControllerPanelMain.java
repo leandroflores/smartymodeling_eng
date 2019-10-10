@@ -43,7 +43,7 @@ public class ControllerPanelMain extends ControllerPanel {
         else if (this.panelMain.getZoomOutButton().equals(event.getSource()))
             this.panelMain.getViewMenu().zoomOut();
         else if (this.panelMain.getExportImageButton().equals(event.getSource()))
-            this.panelMain.getViewMenu().getController().exportDiagramImage();
+            this.panelMain.getViewMenu().getController().exportImage();
         else if (this.panelMain.getVersionButton().equals(event.getSource()))
             new ViewSystemInformation(this.panelMain.getViewMenu()).setVisible(true);
     }

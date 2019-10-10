@@ -334,9 +334,9 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     }
     
     /**
-     * Method responsible for exporting Diagram Image.
+     * Method responsible for exporting the Image.
      */
-    public void exportDiagramImage() {
+    public void exportImage() {
         if (this.viewMenu.getFileChooserImage().showSaveDialog(this.viewMenu) != 1) {
             String        path  = this.viewMenu.getFileChooserImage().getSelectedFile().getAbsolutePath();
             BufferedImage image = this.viewMenu.getPanelModeling().getImage();

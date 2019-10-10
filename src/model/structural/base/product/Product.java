@@ -3,6 +3,7 @@ package model.structural.base.product;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
 import model.structural.base.interfaces.Exportable;
@@ -156,6 +157,17 @@ public class Product implements Exportable {
     }
     
     /**
+     * Method responsible for removing a Instance by Diagram.
+     * @param diagram Diagram.
+     */
+    public void removeInstance(Diagram diagram) {
+        for (Instance instance : this.getInstancesList()) {
+            if (instance.getDiagram().equals(diagram))
+                this.removeInstance(instance);
+        }
+    }
+    
+    /**
      * Method responsible for removing a Instance.
      * @param instance Instance.
      */
@@ -223,7 +235,8 @@ public class Product implements Exportable {
     
     @Override
     public String export() {
-        String export  = "    <product id=\"" + this.id + "\" name=\"" + this.name + "\" version=\"" + this.version + "\">\n";
+        String export  = "    <product id=\""  + this.id + "\" name=\"" + this.name + "\" version=\"" + this.version + "\">\n";
+               export += "      <description>" + this.description + "</description>\n";
                export += this.exportInstances();
                export += "    </product>\n";
         return export;

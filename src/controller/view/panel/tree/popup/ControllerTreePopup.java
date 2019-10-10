@@ -11,6 +11,7 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.association.Association;
 import model.structural.base.evaluation.Metric;
+import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
@@ -66,7 +67,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
         else if (event.getClickCount() == 1)
             this.showPanelEdit(node);
         else if (event.getClickCount() == 2)
-            this.showPanelDiagram(node);
+            this.showPanel(node);
     }
     
     @Override
@@ -86,7 +87,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanelTree().getTree().getLastSelectedPathComponent();
         switch (event.getKeyCode()) {
             case KeyEvent.VK_ENTER:
-                this.showPanelDiagram(node);
+                this.showPanel(node);
                 break;
             case KeyEvent.VK_DELETE:
                 this.delete(node.getUserObject(), node);
@@ -205,13 +206,11 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
             this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditAssociation((SequenceDiagram) diagram, association);
     }
     
-    /**
-     * Method responsible for showing the Panel Diagram.
-     * @param node JTree Node.
-     */
-    private void showPanelDiagram(DefaultMutableTreeNode node) {
-        if (node.getUserObject() instanceof Diagram)
-            this.treePopup.getPanelTree().getViewMenu().showDiagram((Diagram) node.getUserObject());
+    private void showPanel(DefaultMutableTreeNode node) {
+        if (node.getUserObject() instanceof Diagram) 
+            this.treePopup.getPanelTree().getViewMenu().showDiagram( (Diagram)  node.getUserObject());
+        else if (node.getUserObject() instanceof Instance) 
+            this.treePopup.getPanelTree().getViewMenu().showInstance((Instance) node.getUserObject());
     }
     
     /**

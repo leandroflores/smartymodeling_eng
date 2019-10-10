@@ -398,7 +398,7 @@ public final class ViewMenu extends View implements Operation {
     public void updatePanelModeling() {
         if (this.project == null)
             this.panelModeling.clear();
-        this.panelModeling.updateDiagrams();
+        this.panelModeling.updateModelingPanel();
         this.panelModeling.updateUI();
     }
     
@@ -432,7 +432,6 @@ public final class ViewMenu extends View implements Operation {
         this.zoom += 0.10;
         this.zoom  = (this.zoom > 3.00) ? 3.00 : this.zoom;
         this.resetZoom();
-        System.out.println("Zoom In: " + this.zoom);
         this.panelModeling.setZoom(this.zoom);
     }
     

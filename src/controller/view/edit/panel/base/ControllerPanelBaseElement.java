@@ -58,7 +58,7 @@ public class ControllerPanelBaseElement extends ControllerPanel {
         this.panelBaseElement.getElement().setMandatory(this.panelBaseElement.getMandatoryCheckBox().isSelected());
         this.panelBaseElement.getDiagram().updateStereotype(this.panelBaseElement.getElement());
         this.panelBaseElement.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseElement.getViewMenu().getPanelModeling().updateDiagrams();
+        this.panelBaseElement.getViewMenu().getPanelModeling().updateModelingPanel();
         this.panelBaseElement.getViewMenu().setSave(false);
     }
 }

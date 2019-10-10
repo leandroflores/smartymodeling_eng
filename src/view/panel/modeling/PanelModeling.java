@@ -104,12 +104,14 @@ public final class PanelModeling extends Panel {
     }
     
     /**
-     * Method responsible for updating Diagrams.
+     * Method responsible for updating the Modeling Panel.
      */
-    public void updateDiagrams() {
+    public void updateModelingPanel() {
         for (Component component : this.panelTabbed.getComponents()) {
             if (component instanceof PanelDiagram)
-                ((PanelDiagram) component).updateDiagram();
+                ((PanelDiagram)  component).updateDiagram();
+            else if (component instanceof PanelInstance)
+                ((PanelInstance) component).updateInstance();
         }
     }
     
@@ -216,24 +218,29 @@ public final class PanelModeling extends Panel {
     }
     
     /**
-     * Method responsible for defining the Zoom.
+     * Method responsible for setting the Zoom.
      * @param zoom Zoom Value.
      */
     public void setZoom(Double zoom) {
         if (this.getPanelDiagram() != null)
             this.getPanelDiagram().setZoom(zoom);
+        else if (this.getPanelInstance() != null)
+            this.getPanelInstance().setZoom(zoom);
         else if (this.getPanelProduct() != null)
             this.getPanelProduct().setZoom(zoom);
     }
     
     /**
-     * Method responsible for returning a Diagram Image.
-     * @return Diagram Image.
+     * Method responsible for returning a Image.
+     * @return Image.
      */
     public BufferedImage getImage() {
+        Color color = new Color(0, 0, 0, 200);
         if (this.getPanelDiagram() != null)
             return mxCellRenderer.createBufferedImage(this.getPanelDiagram().getGraph(), null, 1, Color.WHITE, true, null);
-        else if (this.getPanelProduct() != null)
+        else if (this.getPanelInstance() != null)
+            return mxCellRenderer.createBufferedImage(this.getPanelInstance().getGraph(), null, 1, Color.WHITE, true, null);
+        else if (this.getPanelProduct()  != null)
             return mxCellRenderer.createBufferedImage(this.getPanelProduct().getGraph(), null, 1, Color.WHITE, true, null);
         return null;
     }
