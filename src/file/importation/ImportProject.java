@@ -20,7 +20,7 @@ import model.structural.base.Stereotype;
 import model.structural.base.association.Association;
 import model.structural.base.association.Link;
 import model.structural.base.evaluation.Metric;
-import model.structural.base.product.Artefact;
+import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.base.traceability.Traceability;
@@ -258,7 +258,7 @@ public class ImportProject {
             Instance instance = new Instance(node);
                      instance.setProduct(product);
                      instance.setDiagram((Diagram) this.project.getDiagrams().get(node.getAttribute("diagram")));
-                     this.addArtefacts(instance, node);
+                     this.addArtifacts(instance, node);
                      this.addAssociations(instance, node);
             product.addInstance(instance);
         }
@@ -269,13 +269,13 @@ public class ImportProject {
      * @param instance Instance.
      * @param current W3C Element.
      */
-    private void addArtefacts(Instance instance, Element current) {
-        NodeList artefacts = current.getElementsByTagName("artefact");
-        for (int i = 0; i < artefacts.getLength(); i++) {
-            Element  node     = (Element) artefacts.item(i);
-            Artefact artefact = new Artefact(node, true);
-                     artefact.setElement((model.structural.base.Element) instance.getDiagram().getElement(node.getAttribute("element")));
-            instance.addArtefact(artefact);
+    private void addArtifacts(Instance instance, Element current) {
+        NodeList artifacts = current.getElementsByTagName("artifact");
+        for (int i = 0; i < artifacts.getLength(); i++) {
+            Element  node     = (Element) artifacts.item(i);
+            Artifact artifact = new Artifact(node, true);
+                     artifact.setElement((model.structural.base.Element) instance.getDiagram().getElement(node.getAttribute("element")));
+            instance.addArtifact(artifact);
         }
     }
     

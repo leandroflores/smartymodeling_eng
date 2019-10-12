@@ -58,7 +58,7 @@ public class ControllerPanelBaseVarPoints extends ControllerPanel {
                 if (this.panelBaseVarPoints.getVariabilityCheckBox(variability).isSelected())
                     this.insertVariability(variability);
             }
-            this.panelBaseVarPoints.getViewNewInstance().addPanelBaseArtefacts();
+            this.panelBaseVarPoints.getViewNewInstance().addPanelBaseArtifacts();
         }
     }
     

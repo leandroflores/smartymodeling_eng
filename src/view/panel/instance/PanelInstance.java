@@ -15,7 +15,7 @@ import java.util.Map;
 import javax.swing.JScrollPane;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
-import model.structural.base.product.Artefact;
+import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import view.Panel;
 import view.structural.ViewMenu;
@@ -42,7 +42,7 @@ public abstract class PanelInstance extends Panel {
     /**
      * Default constructor method of Class.
      * @param view View Menu.
-     * @param instance Diagram.
+     * @param instance Instance.
      */
     public PanelInstance(ViewMenu view, Instance instance) {
         super();
@@ -58,6 +58,10 @@ public abstract class PanelInstance extends Panel {
         this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
     }
     
+    /**
+     * Method responsible for creating a New mxGraph.
+     * @return New mxGraph.
+     */
     private mxGraph createMxGraph() {
         return new mxGraph() {
             @Override
@@ -81,7 +85,7 @@ public abstract class PanelInstance extends Panel {
     }
     
     /**
-     * Method responsible for adding Modeling Panel.
+     * Method responsible for adding the Instance Panel.
      */
     public void addInstancePanel() {
         this.graph       = this.createMxGraph();
@@ -124,7 +128,7 @@ public abstract class PanelInstance extends Panel {
     /**
      * Method responsible for cleaning the Instance.
      */
-    public void clearDiagram() {
+    public void clearInstance() {
         this.graph.removeCells(this.graph.getChildCells(this.graph.getDefaultParent(), true, true));
     }
     
@@ -132,36 +136,34 @@ public abstract class PanelInstance extends Panel {
      * Method responsible for updating the Instance.
      */
     public void updateInstance() {
-        System.out.println("AAAA");
-        this.clearDiagram();
+        this.clearInstance();
         this.identifiers = new HashMap<>();
         
-        this.addElements();
+        this.addArtifacts();
         this.addAssociations();
     }
     
     /**
-     * Method responsible for adding Diagram Elements.
+     * Method responsible for adding the Instance Artifacts.
      */
-    public void addElements() {
-        for (Artefact artifact : this.instance.getArtefactsList()) {
+    public void addArtifacts() {
+        for (Artifact artifact : this.instance.getArtifactsList()) {
             Element element = artifact.getElement();
             this.graph.getStylesheet().putCellStyle(artifact.getStyleLabel(), artifact.getStyle());
-            String title = element.getName();
-            System.out.println("Element Name: " + element.getName());
-            mxCell cell  = (mxCell) this.graph.insertVertex(this.parent, null, title, artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
+            String  title   = element.getName();
+            mxCell  cell    = (mxCell) this.graph.insertVertex(this.parent, null, title, artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
             this.identifiers.put(cell, artifact.getId());
             this.objects.put(artifact.getId(), cell);
         }
     }
     
     /**
-     * Method responsible for returning the Artefact Id by Element.
+     * Method responsible for returning the Artifact Id by Element.
      * @param  element Element.
-     * @return Artefact Id.
+     * @return Artifact Id.
      */
     public String getId(Element element) {
-        for (Artefact artifact : this.instance.getArtefactsList()) {
+        for (Artifact artifact : this.instance.getArtifactsList()) {
             if (artifact.getElement().equals(element))
                 return artifact.getId();
         }

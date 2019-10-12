@@ -1,6 +1,6 @@
 package view.edit.panel.base.product;
 
-import controller.view.edit.panel.base.product.ControllerPanelBaseArtefacts;
+import controller.view.edit.panel.base.product.ControllerPanelBaseArtifacts;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -10,24 +10,24 @@ import view.Panel;
 import view.new_.product.ViewNewInstance;
 
 /**
- * <p>Class of View <b>PanelBaseArtefacts</b>.</p> 
+ * <p>Class of View <b>PanelBaseArtifacts</b>.</p> 
  * <p>Class responsible for defining a Panel for showing the <b>Artefacts Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  09/10/2019
- * @see    controller.view.edit.panel.base.product.ControllerPanelBaseArtefacts
+ * @see    controller.view.edit.panel.base.product.ControllerPanelBaseArtifacts
  * @see    model.structural.base.product.Instance
  * @see    view.Panel
  */
-public class PanelBaseArtefacts extends Panel {
+public class PanelBaseArtifacts extends Panel {
     private final ViewNewInstance viewNew;
     
     /**
      * Default constructor method of Class.
      * @param view View New Instance.
      */
-    public PanelBaseArtefacts(ViewNewInstance view) {
+    public PanelBaseArtifacts(ViewNewInstance view) {
         this.viewNew    = view;
-        this.controller = new ControllerPanelBaseArtefacts(this);
+        this.controller = new ControllerPanelBaseArtifacts(this);
         this.initComponents();
     }
     
@@ -77,8 +77,10 @@ public class PanelBaseArtefacts extends Panel {
      * Method responsible for setting the Values.
      */
     public void setValues() {
+        this.viewNew.getController().newInstance();
+        
         this.getNameTextField().setText(this.viewNew.getInstance().getName());
-        this.getElementsTextField().setText(Integer.toString(this.viewNew.getInstance().getArtefactsList().size()));
+        this.getElementsTextField().setText(Integer.toString(this.viewNew.getInstance().getArtifactsList().size()));
         this.getAssociationsTextField().setText(Integer.toString(this.viewNew.getInstance().getAssociationsList().size()));
         
         this.getNameTextField().requestFocus();
@@ -90,6 +92,14 @@ public class PanelBaseArtefacts extends Panel {
      */
     public ViewNewInstance getViewNewInstance() {
         return this.viewNew;
+    }
+    
+    /**
+     * Method responsible for returning the Controller.
+     * @return Controller.
+     */
+    public ControllerPanelBaseArtifacts getController() {
+        return (ControllerPanelBaseArtifacts) this.controller;
     }
     
     /**

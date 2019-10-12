@@ -10,14 +10,14 @@ import model.structural.base.interfaces.Exportable;
 import model.structural.base.interfaces.Modelable;
 
 /**
- * <p>Class of Model <b>Artefact</b>.</p>
- * <p>Class responsible for representing the <b>Artefact</b> in SMartyModeling.</p>
+ * <p>Class of Model <b>Artifact</b>.</p>
+ * <p>Class responsible for representing the <b>Artifact</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  06/10/2019
  * @see    model.structural.base.interfaces.Exportable
  * @see    model.structural.base.interfaces.Modelable
  */
-public class Artefact implements Exportable, Modelable {
+public class Artifact implements Exportable, Modelable {
     private String  id;
     private Element element;
     private Point   position;
@@ -27,7 +27,7 @@ public class Artefact implements Exportable, Modelable {
     /**
      * Default constructor method of Class.
      */
-    public Artefact() {
+    public Artifact() {
         this.element  = null;
         this.position = new Point(0, 0);
         this.global   = new Point(0, 0);
@@ -38,7 +38,7 @@ public class Artefact implements Exportable, Modelable {
      * Alternative constructor method of Class.
      * @param element Element.
      */
-    public Artefact(Element element) {
+    public Artifact(Element element) {
         this.element  = element;
         this.position = new Point(element.getPosition());
         this.global   = new Point(element.getGlobal());
@@ -49,7 +49,7 @@ public class Artefact implements Exportable, Modelable {
      * Alternative constructor method of Class.
      * @param element W3C Element.
      */
-    public Artefact(org.w3c.dom.Element element) {
+    public Artifact(org.w3c.dom.Element element) {
         this.id     = element.getAttribute("id");
         this.global = new Point(0, 0);
     }
@@ -59,47 +59,47 @@ public class Artefact implements Exportable, Modelable {
      * @param element W3C Element.
      * @param position Reading Coordinates.
      */
-    public Artefact(org.w3c.dom.Element element, boolean position) {
+    public Artifact(org.w3c.dom.Element element, boolean position) {
         this(element);
         this.setPosition(element);
         this.setSize(element);
     }
     
     /**
-     * Method responsible for returning the Artefact Id.
-     * @return Artefact Id.
+     * Method responsible for returning the Artifact Id.
+     * @return Artifact Id.
      */
     public String getId() {
         return this.id;
     }
 
     /**
-     * Method responsible for defining the Artefact Id.
-     * @param id Artefact Id.
+     * Method responsible for defining the Artifact Id.
+     * @param id Artifact Id.
      */
     public void setId(String id) {
         this.id = (this.id == null) ? id : this.id;
     }
 
     /**
-     * Method responsible for returning the Artefact Element.
-     * @return Artefact Element.
+     * Method responsible for returning the Artifact Element.
+     * @return Artifact Element.
      */
     public Element getElement() {
         return this.element;
     }
 
     /**
-     * Method responsible for defining the Artefact Element.
-     * @param element Artefact Element.
+     * Method responsible for defining the Artifact Element.
+     * @param element Artifact Element.
      */
     public void setElement(Element element) {
         this.element = element;
     }
     
     /**
-     * Method responsible for returning the Artefact Position.
-     * @return Artefact Position.
+     * Method responsible for returning the Artifact Position.
+     * @return Artifact Position.
      */
     public Point getPosition() {
         return this.position;
@@ -125,8 +125,8 @@ public class Artefact implements Exportable, Modelable {
     }
     
     /**
-     * Method responsible for returning the Artefact Y Position.
-     * @return Artefact Y Position.
+     * Method responsible for returning the Artifact Y Position.
+     * @return Artifact Y Position.
      */
     public Integer getY() {
         return this.position.y;
@@ -158,7 +158,7 @@ public class Artefact implements Exportable, Modelable {
     }
     
     /**
-     * Method responsible for defining the Artefact Position.
+     * Method responsible for defining the Artifact Position.
      * @param x X Position.
      * @param y Y Position.
      */
@@ -167,7 +167,7 @@ public class Artefact implements Exportable, Modelable {
     }
     
     /**
-     * Method responsible for defining the Artefact Position.
+     * Method responsible for defining the Artifact Position.
      * @param position Element Position.
      */
     public void setPosition(Point position) {
@@ -175,48 +175,48 @@ public class Artefact implements Exportable, Modelable {
     }
 
     /**
-     * Method responsible for returning the Artefact Global Position.
-     * @return Artefact Global Position.
+     * Method responsible for returning the Artifact Global Position.
+     * @return Artifact Global Position.
      */
     public Point getGlobal() {
         return this.global;
     }
     
     /**
-     * Method responsible for setting the Artefact Global Position.
-     * @param global Artefact Global Position.
+     * Method responsible for setting the Artifact Global Position.
+     * @param global Artifact Global Position.
      */
     public void setGlobal(Point global) {
         this.global = global;
     }
     
     /**
-     * Method responsible for returning the Artefact X Global Position.
-     * @return Artefact X Global Position.
+     * Method responsible for returning the Artifact X Global Position.
+     * @return Artifact X Global Position.
      */
     public Integer getGlobalX() {
         return this.global.x;
     }
     
     /**
-     * Method responsible for setting the Artefact X Global Position.
-     * @param x Artefact X Global Position.
+     * Method responsible for setting the Artifact X Global Position.
+     * @param x Artifact X Global Position.
      */
     public void setGlobalX(Integer x) {
         this.global.x = x;
     }
     
     /**
-     * Method responsible for returning the Artefact Y Global Position.
-     * @return Artefact Y Global Position.
+     * Method responsible for returning the Artifact Y Global Position.
+     * @return Artifact Y Global Position.
      */
     public Integer getGlobalY() {
         return this.global.y;
     }
     
     /**
-     * Method responsible for setting the Artefact Y Global Position.
-     * @param y Artefact Y Global Position.
+     * Method responsible for setting the Artifact Y Global Position.
+     * @param y Artifact Y Global Position.
      */
     public void setGlobalY(Integer y) {
         this.global.y = y;
@@ -239,40 +239,40 @@ public class Artefact implements Exportable, Modelable {
     }
     
     /**
-     * Method responsible for returning the Artefact Size.
-     * @return Artefact Size.
+     * Method responsible for returning the Artifact Size.
+     * @return Artifact Size.
      */
     public Point getSize() {
         return this.size;
     }
 
     /**
-     * Method responsible for returning the Artefact Height.
-     * @return Artefact Height.
+     * Method responsible for returning the Artifact Height.
+     * @return Artifact Height.
      */
     public Integer getHeight() {
         return this.size.y;
     }
     
     /**
-     * Method responsible for updating the Artefact Height.
-     * @param height Artefact Height.
+     * Method responsible for updating the Artifact Height.
+     * @param height Artifact Height.
      */
     public void setHeight(Integer height) {
         this.size.y = height;
     }
     
     /**
-     * Method responsible for returning the Artefact Width.
-     * @return Artefact Width.
+     * Method responsible for returning the Artifact Width.
+     * @return Artifact Width.
      */
     public Integer getWidth() {
         return this.size.x;
     }
     
     /**
-     * Method responsible for updating the Artefact Width.
-     * @param width Artefact Width.
+     * Method responsible for updating the Artifact Width.
+     * @param width Artifact Width.
      */
     public void setWidth(Integer width) {
         this.size.x = width;
@@ -293,17 +293,17 @@ public class Artefact implements Exportable, Modelable {
     }
     
     /**
-     * Method responsible for defining the Artefact Position.
-     * @param width Artefact Width.
-     * @param height Artefact Height.
+     * Method responsible for defining the Artifact Position.
+     * @param width Artifact Width.
+     * @param height Artifact Height.
      */
     public void setSize(Integer width, Integer height) {
         this.size = new Point(height, width);
     }
     
     /**
-     * Method responsible for returning the Artefact Size.
-     * @param size Artefact Size.
+     * Method responsible for returning the Artifact Size.
+     * @param size Artifact Size.
      */
     public void setSize(Point size) {
         this.size = size;
@@ -315,16 +315,16 @@ public class Artefact implements Exportable, Modelable {
     }
     
     /**
-     * Method responsible for returning the Artefact Abstract.
-     * @return Artefact Abstract.
+     * Method responsible for returning the Artifact Abstract.
+     * @return Artifact Abstract.
      */
     public String getAbstract() {
         return "[" + this.getId() + "] " + this.element.getName();
     }
     
     /**
-     * Method responsible for returning the Artefact Icon.
-     * @return Artefact Icon.
+     * Method responsible for returning the Artifact Icon.
+     * @return Artifact Icon.
      */
     public String getIcon() {
         return this.element.getIcon();
@@ -345,7 +345,7 @@ public class Artefact implements Exportable, Modelable {
     @Override
     public String export() {
         String export  = "        "; 
-               export += "<artefact"; 
+               export += "<artifact"; 
                export += " id=\""        + this.id              + "\"";
                export += " element=\""   + this.element.getId() + "\"";
                export += " x=\""         + this.getX()          + "\"";
@@ -358,9 +358,9 @@ public class Artefact implements Exportable, Modelable {
     
     @Override
     public boolean equals(Object object) {
-        if (object instanceof Artefact == false)
+        if (object instanceof Artifact == false)
             return false;
-        return Objects.equals(this.id, ((Artefact) object).getId());
+        return Objects.equals(this.id, ((Artifact) object).getId());
     }
 
     @Override

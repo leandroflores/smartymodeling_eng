@@ -10,7 +10,7 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Metric;
-import model.structural.base.product.Artefact;
+import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.base.traceability.Traceability;
@@ -320,7 +320,7 @@ public final class PanelTree extends Panel {
     }
     
     /**
-     *  Method responsible for adding Traceability Elements.
+     *  Method responsible for adding the Product Instances.
      * @param product Product.
      * @param node Product Node.
      */
@@ -336,22 +336,22 @@ public final class PanelTree extends Panel {
      */
     private DefaultMutableTreeNode getNode(Instance instance) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(instance);
-            this.addArtefacts(instance, node);
+            this.addArtifacts(instance, node);
         return node;
     }
     
     /**
-     *  Method responsible for adding Instance Artefacts.
+     *  Method responsible for adding the Instance Artifacts.
      * @param instance Instance.
      * @param node Instance Node.
      */
-    private void addArtefacts(Instance instance, DefaultMutableTreeNode node) {
-        for (Artefact artefact : instance.getArtefactsList())
-            node.add(new DefaultMutableTreeNode(artefact));
+    private void addArtifacts(Instance instance, DefaultMutableTreeNode node) {
+        for (Artifact artifact : instance.getArtifactsList())
+            node.add(new DefaultMutableTreeNode(artifact));
     }
     
     /**
-     * Method responsible for returning View Menu.
+     * Method responsible for returning the View Menu.
      * @return View Menu.
      */
     public ViewMenu getViewMenu() {
@@ -359,7 +359,7 @@ public final class PanelTree extends Panel {
     }
     
     /**
-     * Method responsible for returning Tree.
+     * Method responsible for returning the Tree.
      * @return Tree.
      */
     public JTree getTree() {

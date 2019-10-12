@@ -6,7 +6,7 @@ import controller.view.panel.instance.ControllerPanelInstance;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.BoxLayout;
-import model.structural.base.product.Artefact;
+import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.diagram.ComponentDiagram;
 import model.structural.diagram.component.base.ComponentUML;
@@ -50,7 +50,7 @@ public final class PanelComponentInstance extends PanelInstance {
     }
     
     @Override
-    public void addElements() {
+    public void addArtifacts() {
         this.addComponentsUML();
         this.addInterfacesUML();
     }
@@ -60,16 +60,16 @@ public final class PanelComponentInstance extends PanelInstance {
      */
     private void addComponentsUML() {
         this.graph.getStylesheet().putCellStyle("styleImageComponent", this.getImageComponentStyle());
-        for (Artefact artefact : this.instance.getArtefactsList()) {
-            if (artefact.getElement() instanceof ComponentUML) {
-                ComponentUML componentUML = (ComponentUML) artefact.getElement();
-                this.graph.getStylesheet().putCellStyle(artefact.getStyleLabel(), artefact.getStyle());
+        for (Artifact artifact : this.instance.getArtifactsList()) {
+            if (artifact.getElement() instanceof ComponentUML) {
+                ComponentUML componentUML = (ComponentUML) artifact.getElement();
+                this.graph.getStylesheet().putCellStyle(artifact.getStyleLabel(), artifact.getStyle());
                 String title  = componentUML.getName();
-                mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, artefact.getId(), title, artefact.getPosition().x, artefact.getPosition().y, artefact.getSize().x, artefact.getSize().y, artefact.getStyleLabel());
+                mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, artifact.getId(), title, artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
                        vertex.setConnectable(false);
                 this.graph.insertVertex(vertex, null, "", 10, 10, 20, 20, "styleImageComponent");
-                this.identifiers.put(vertex, artefact.getId());
-                this.objects.put(artefact.getId(), vertex);
+                this.identifiers.put(vertex, artifact.getId());
+                this.objects.put(artifact.getId(), vertex);
             }
         }
     }
@@ -78,15 +78,15 @@ public final class PanelComponentInstance extends PanelInstance {
      * Method responsible for adding the Instance Interfaces.
      */
     private void addInterfacesUML() {
-        for (Artefact artefact : this.instance.getArtefactsList()) {
-            if (artefact.getElement() instanceof InterfaceUML) {
-                InterfaceUML interfaceUML = (InterfaceUML) artefact.getElement();
-                this.graph.getStylesheet().putCellStyle(artefact.getStyleLabel(), artefact.getStyle());
+        for (Artifact artifact : this.instance.getArtifactsList()) {
+            if (artifact.getElement() instanceof InterfaceUML) {
+                InterfaceUML interfaceUML = (InterfaceUML) artifact.getElement();
+                this.graph.getStylesheet().putCellStyle(artifact.getStyleLabel(), artifact.getStyle());
                 String title  = interfaceUML.getName();
-                mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, artefact.getId(), title, artefact.getPosition().x, artefact.getPosition().y, artefact.getSize().x, artefact.getSize().y, artefact.getStyleLabel());
+                mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, artifact.getId(), title, artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
                        vertex.setConnectable(false);
-                this.identifiers.put(vertex, artefact.getId());
-                this.objects.put(artefact.getId(), vertex);
+                this.identifiers.put(vertex, artifact.getId());
+                this.objects.put(artifact.getId(), vertex);
             }
         }
     }

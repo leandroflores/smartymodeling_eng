@@ -51,7 +51,6 @@ public final class PanelModeling extends Panel {
         super();
         this.viewMenu = view;
         this.tabs     = new HashMap<>();
-//        this.controller = new ControllerPainelModelagem(this);
         this.addComponents();
         this.clear();
     }
@@ -111,6 +110,16 @@ public final class PanelModeling extends Panel {
             if (component instanceof PanelDiagram)
                 ((PanelDiagram)  component).updateDiagram();
             else if (component instanceof PanelInstance)
+                ((PanelInstance) component).updateInstance();
+        }
+    }
+    
+    /**
+     * Method responsible for updating the Instance Panels.
+     */
+    public void updateInstancePanels() {
+        for (Component component : this.panelTabbed.getComponents()) {
+            if (component instanceof PanelInstance)
                 ((PanelInstance) component).updateInstance();
         }
     }

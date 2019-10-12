@@ -34,6 +34,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
         if (element != null) {
             mxCell celula = (mxCell) cell;
             element.setName(celula.getValue().toString());
+            this.panel.getViewMenu().getPanelModeling().updateInstancePanels();
             this.panel.getViewMenu().setSave(false);
         }
         this.panel.updateDiagram();

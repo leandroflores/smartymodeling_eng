@@ -22,7 +22,7 @@ public class Instance implements Exportable {
     private String  name;
     private Product product;
     private Diagram diagram;
-    private HashMap artefacts;
+    private HashMap artifacts;
     private HashMap associations;
     
     /**
@@ -31,7 +31,7 @@ public class Instance implements Exportable {
     public Instance() {
         this.product      = null;
         this.diagram      = null;
-        this.artefacts    = new HashMap<>();
+        this.artifacts    = new HashMap<>();
         this.associations = new HashMap<>();
     }
     
@@ -118,19 +118,19 @@ public class Instance implements Exportable {
     }
     
     /**
-     * Method responsible for returning the Instance Artefacts.
-     * @return Instance Artefacts.
+     * Method responsible for returning the Instance Artifacts.
+     * @return Instance Artifacts.
      */
-    public HashMap<String, Artefact> getArtefacts() {
-        return this.artefacts;
+    public HashMap<String, Artifact> getArtifacts() {
+        return this.artifacts;
     }
     
     /**
-     * Method responsible for returning the Artefacts List.
-     * @return Artefacts List.
+     * Method responsible for returning the Artifacts List.
+     * @return Artifacts List.
      */
-    public List<Artefact> getArtefactsList() {
-        return new ArrayList<>(this.artefacts.values());
+    public List<Artifact> getArtifactsList() {
+        return new ArrayList<>(this.artifacts.values());
     }
     
     /**
@@ -138,50 +138,50 @@ public class Instance implements Exportable {
      * @return Instance is Empty.
      */
     public boolean isEmpty() {
-        return this.getArtefactsList().isEmpty();
+        return this.getArtifactsList().isEmpty();
     }
     
     /**
-     * Method responsible for returning the Next Artefact Id.
-     * @return Next Artefact Id.
+     * Method responsible for returning the Next Artifact Id.
+     * @return Next Artifact Id.
      */
     public String nextArtefactId() {
         Integer index  = 1;
-        String  nextId = "ARTEFACT#" + index;
-        while (this.artefacts.get(nextId) != null) {
+        String  nextId = "ARTIFACT#" + index;
+        while (this.artifacts.get(nextId) != null) {
             index += 1;
-            nextId = "ARTEFACT#" + index;
+            nextId = "ARTIFACT#" + index;
         }
         return nextId;
     }
     
     /**
-     * Method responsible for adding a Artefact.
-     * @param artefact Artefact.
+     * Method responsible for adding a Artifact.
+     * @param artifact Artifact.
      */
-    public void addArtefact(Artefact artefact) {
-        artefact.setId(this.nextArtefactId());
-        this.artefacts.put(artefact.getId(), artefact);
+    public void addArtifact(Artifact artifact) {
+        artifact.setId(this.nextArtefactId());
+        this.artifacts.put(artifact.getId(), artifact);
     }
     
     /**
-     * Method responsible for returning a Artefact by Id.
-     * @param  id Artefact Id.
-     * @return Artefact found.
+     * Method responsible for returning a Artifact by Id.
+     * @param  id Artifact Id.
+     * @return Artifact found.
      */
-    public Artefact getArtefact(String id) {
-        return (Artefact) this.artefacts.get(id);
+    public Artifact getArtifact(String id) {
+        return (Artifact) this.artifacts.get(id);
     }
     
     /**
-     * Method responsible for returning the Artefact by Element.
+     * Method responsible for returning the Artifact by Element.
      * @param  element Element.
-     * @return Artefact found.
+     * @return Artifact found.
      */
-    public Artefact getArtefact(Element element) {
-        for (Artefact  artefact : this.getArtefactsList()) {
-            if (artefact.getElement().equals(element))
-                return artefact;
+    public Artifact getArtifact(Element element) {
+        for (Artifact  artifact : this.getArtifactsList()) {
+            if (artifact.getElement().equals(element))
+                return artifact;
         }
         return null;
     }
@@ -192,7 +192,7 @@ public class Instance implements Exportable {
      * @return Instance contains Element.
      */
     public boolean contains(Element element) {
-        for (Artefact artefact : this.getArtefactsList()) {
+        for (Artifact artefact : this.getArtifactsList()) {
             if (artefact.getElement().equals(element))
                 return true;
         }
@@ -200,39 +200,39 @@ public class Instance implements Exportable {
     }
     
     /**
-     * Method responsible for removing a Artefact.
-     * @param  artefact Artefact.
+     * Method responsible for removing a Artifact.
+     * @param  artifact Artifact.
      */
-    public void removeArtefact(Artefact artefact) {
-        this.removeAssociations(artefact);
-        this.artefacts.remove(artefact.getId());
+    public void removeArtifact(Artifact artifact) {
+        this.removeAssociations(artifact);
+        this.artifacts.remove(artifact.getId());
     }
     
     /**
      * Method responsible for reseting the Instance.
      */
     public void reset() {
-        this.artefacts    = new HashMap();
+        this.artifacts    = new HashMap();
         this.associations = new HashMap();
     }
     
     /**
-     * Method responsible for removing a Artefact by Element.
+     * Method responsible for removing a Artifact by Element.
      * @param element Element.
      */
     public void remove(Element element) {
-        for (Artefact artefact : this.getArtefactsList()) {
-            if (artefact.getElement().equals(element))
-                this.removeArtefact(artefact);
+        for (Artifact artifact : this.getArtifactsList()) {
+            if (artifact.getElement().equals(element))
+                this.removeArtifact(artifact);
         }
     }
     
     /**
-     * Method responsible for setting the Instance Artefacts.
-     * @param artefacts Instance Artefacts.
+     * Method responsible for setting the Instance Artifacts.
+     * @param artifacts Instance Artifacts.
      */
-    public void setArtefacts(HashMap<String, Artefact> artefacts) {
-        this.artefacts = (HashMap) artefacts.clone();
+    public void setArtifacts(HashMap<String, Artifact> artifacts) {
+        this.artifacts = (HashMap) artifacts.clone();
     }
     
     /**
@@ -252,10 +252,10 @@ public class Instance implements Exportable {
     }
     
     /**
-     * Method responsible for removing the Association by Artefact.
-     * @param artefact Artefact.
+     * Method responsible for removing the Association by Artifact.
+     * @param artefact Artifact.
      */
-    public void removeAssociations(Artefact artefact) {
+    public void removeAssociations(Artifact artefact) {
         for (Association association : this.getAssociationsList()) {
             if (association.contains(artefact.getElement()))
                 this.associations.remove(association.getId());
@@ -271,30 +271,30 @@ public class Instance implements Exportable {
     }
     
     /**
-     * Method responsible for setting the Artefact Associations.
-     * @param associations Artefact Associations.
+     * Method responsible for setting the Artifact Associations.
+     * @param associations Artifact Associations.
      */
     public void setAssociations(HashMap<String, Association> associations) {
         this.associations = (HashMap) associations.clone();
     }
     
     /**
-     * Method responsible for updating the Artefact Artifacts and Associations.
+     * Method responsible for updating the Artifact Artifacts and Associations.
      */
     public void update() {
-//        this.updateArtifacts();
+        this.addAssociations();
         this.removeAssociations();
-        this.updateAssociations();
     }
     
     /**
-     * Method responsible for updating the Artifacts.
+     * Method responsible for adding the Instance Associations.
      */
-    private void updateArtifacts() {
-//        for (Artefact artifact : this.getElementsList()) {
-//            if (this.getIdentifiers().get(artifact.getId()) <= 0)
-//                this.artifacts.removeArtefact(artifact.getId());
-//        }
+    public void addAssociations() {
+        for (Association association : this.diagram.getAssociationsList()) {
+            if ((this.contains(association.getSource()))
+             && (this.contains(association.getTarget())))
+                    this.associations.put(association.getId(), association);
+        }
     }
     
     /**
@@ -304,17 +304,6 @@ public class Instance implements Exportable {
         for (Association association : this.getAssociationsList()) {
             if (association instanceof Requires
              || association instanceof Mutex)
-                this.associations.remove(association.getId());
-        }
-    }
-    
-    /**
-     * Method responsible for updating the Associations.
-     */
-    private void updateAssociations() {
-        for (Association association : this.getAssociationsList()) {
-            if (this.contains(association.getSource())
-             && this.contains(association.getTarget()))
                 this.associations.remove(association.getId());
         }
     }
@@ -333,7 +322,7 @@ public class Instance implements Exportable {
      */
     private String exportArtifacts() {
         String export  = "";
-        for (Artefact artifact : this.getArtefactsList())
+        for (Artifact artifact : this.getArtifactsList())
                export += artifact.export();
         return export;
     }

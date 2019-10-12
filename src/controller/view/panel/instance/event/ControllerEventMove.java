@@ -3,7 +3,7 @@ package controller.view.panel.instance.event;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
-import model.structural.base.product.Artefact;
+import model.structural.base.product.Artifact;
 import view.panel.instance.PanelInstance;
 
 /**
@@ -28,10 +28,10 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
     public void invoke(Object object, mxEventObject event) {
         Object   cell     = this.panel.getGraph().getSelectionCell();
         String   id       = this.panel.getIdentifiers().get(cell);
-        Artefact artefact = this.panel.getInstance().getArtefact(id);
-        if (artefact != null) {
-            artefact.dx(((Double) event.getProperty("dx")).intValue());
-            artefact.dy(((Double) event.getProperty("dy")).intValue());
+        Artifact artifact = this.panel.getInstance().getArtifact(id);
+        if (artifact != null) {
+            artifact.dx(((Double) event.getProperty("dx")).intValue());
+            artifact.dy(((Double) event.getProperty("dy")).intValue());
             this.panel.getViewMenu().setSave(false);
         }
     }

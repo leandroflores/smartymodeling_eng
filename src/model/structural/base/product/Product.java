@@ -244,6 +244,6 @@ public class Product implements Exportable {
     
     @Override
     public String toString() {
-        return this.id + " - " + this.name + " (" + this.version + ")";
+        return this.name + " (" + this.version + ")";
     }
 }

@@ -112,7 +112,7 @@ public abstract class Diagram implements Exportable {
      * @param id Diagram Id.
      */
     public void setId(String id) {
-        this.id = id;
+        this.id = (this.id == null) ? id : this.id;
     }
 
     /**
@@ -882,6 +882,6 @@ public abstract class Diagram implements Exportable {
     
     @Override
     public String toString() {
-        return this.id + " - " + this.name + "(" + this.type + ")";
+        return this.name + " (" + this.type + ")";
     }
 }

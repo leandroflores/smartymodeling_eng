@@ -12,7 +12,7 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.association.Association;
 import model.structural.base.evaluation.Metric;
-import model.structural.base.product.Artefact;
+import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.base.traceability.Traceability;
@@ -39,7 +39,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     }
     
     /**
-     * Method responsible for returning Image Icon.
+     * Method responsible for returning the Image Icon.
      * @param  name Image Name.
      * @return Image Icon.
      */
@@ -48,7 +48,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     }
     
     /**
-     * Method responsible for defining Project Icon.
+     * Method responsible for setting the Project Icon.
      * @param project Project.
      */
     public void setProjectIcon(Project project) {
@@ -58,7 +58,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     }
     
     /**
-     * Method responsible for defining Diagram Icon.
+     * Method responsible for setting the Diagram Icon.
      * @param diagram Diagrama.
      */
     public void setDiagramIcon(Diagram diagram) {
@@ -68,7 +68,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     }
     
     /**
-     * Method responsible for defining Element Icon.
+     * Method responsible for setting the Element Icon.
      * @param element Element.
      */
     public void setElementIcon(Element element) {
@@ -78,7 +78,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     }
     
     /**
-     * Method responsible for defining AttributeUML Icon.
+     * Method responsible for setting the Attribute UML Icon.
      * @param attribute Attribute UML.
      */
     public void setAttributeIcon(AttributeUML attribute) {
@@ -88,7 +88,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     }
     
     /**
-     * Method responsible for defining MethodUML Icon.
+     * Method responsible for setting the Method UML Icon.
      * @param method Method UML.
      */
     public void setMethodIcon(MethodUML method) {
@@ -98,7 +98,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     }
     
     /**
-     * Method responsible for defining Association.
+     * Method responsible for setting the Association.
      * @param association Association.
      */
     public void setAssociationIcon(Association association) {
@@ -108,7 +108,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     }
     
     /**
-     * Method responsible for defining Variability.
+     * Method responsible for setting the Variability.
      * @param variability Variability.
      */
     public void setVariabilityIcon(Variability variability) {
@@ -118,7 +118,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     }
     
     /**
-     * Method responsible for defining Traceability.
+     * Method responsible for setting the Traceability.
      * @param traceability Traceability.
      */
     public void setTraceabilityIcon(Traceability traceability) {
@@ -128,7 +128,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     }
     
     /**
-     * Method responsible for defining Metric.
+     * Method responsible for setting the Metric.
      * @param metric Metric.
      */
     public void setMetricIcon(Metric metric) {
@@ -138,7 +138,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     }
     
     /**
-     * Method responsible for defining the Product.
+     * Method responsible for setting the Product.
      * @param product Product.
      */
     public void setProductIcon(Product product) {
@@ -148,7 +148,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     }
     
     /**
-     * Method responsible for defining the Instance.
+     * Method responsible for setting the Instance.
      * @param instance Instance.
      */
     public void setInstanceIcon(Instance instance) {
@@ -158,13 +158,13 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     }
     
     /**
-     * Method responsible for defining the Artefact.
-     * @param artefact Artefact.
+     * Method responsible for setting the Artifact.
+     * @param artifact Artifact.
      */
-    public void setArtefactIcon(Artefact artefact) {
-        this.setText(artefact.getElement().getName());
-        this.setToolTipText(artefact.getElement().getName());
-        this.setIcon(new ImageIcon(artefact.getIcon()));
+    public void setArtifactIcon(Artifact artifact) {
+        this.setText(artifact.getElement().getName());
+        this.setToolTipText(artifact.getElement().getName());
+        this.setIcon(new ImageIcon(artifact.getIcon()));
     }
     
     @Override
@@ -193,8 +193,8 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
             this.setProductIcon((Product) object);
         else if (object instanceof Instance)
             this.setInstanceIcon((Instance) object);
-        else if (object instanceof Artefact)
-            this.setArtefactIcon((Artefact) object);
+        else if (object instanceof Artifact)
+            this.setArtifactIcon((Artifact) object);
         return this;
     }
     
@@ -215,7 +215,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     }
     
     /**
-     * Method responsible for defining Diagram Tree.
+     * Method responsible for setting the Diagram Tree.
      * @param tree Diagram Tree.
      */
     public void setTree(JTree tree) {

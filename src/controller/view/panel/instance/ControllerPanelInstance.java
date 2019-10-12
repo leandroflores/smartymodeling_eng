@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import model.structural.base.product.Artefact;
+import model.structural.base.product.Artifact;
 import view.panel.instance.PanelInstance;
 
 /**
@@ -67,24 +67,24 @@ public class ControllerPanelInstance extends ControllerPanel implements MouseLis
     
     
     /**
-     * Method responsible for moving the Element on Diagram.
+     * Method responsible for moving the Element on Instance.
      * @param event Key Event.
      */
     public void move(KeyEvent event) {
         mxCell   cell     = (mxCell) this.panelInstance.getGraph().getSelectionCell();
         String   id       = this.panelInstance.getIdentifiers().get(cell);
-        Artefact artefact = this.panelInstance.getInstance().getArtefact(id);
-        if (artefact != null) {
+        Artifact artifact = this.panelInstance.getInstance().getArtifact(id);
+        if (artifact != null) {
             if (event.getKeyCode() == KeyEvent.VK_UP)
-                artefact.dy(-10);
+                artifact.dy(-10);
             if (event.getKeyCode() == KeyEvent.VK_DOWN)
-                artefact.dy(10);
+                artifact.dy(10);
             if (event.getKeyCode() == KeyEvent.VK_LEFT)
-                artefact.dx(-10);
+                artifact.dx(-10);
             if (event.getKeyCode() == KeyEvent.VK_RIGHT)
-                artefact.dx(10);
+                artifact.dx(10);
             this.panelInstance.updateInstance();
-            this.panelInstance.getGraph().setSelectionCell(this.panelInstance.getObjects().get(artefact.getId()));
+            this.panelInstance.getGraph().setSelectionCell(this.panelInstance.getObjects().get(artifact.getId()));
         }
     }
 }

@@ -4,7 +4,7 @@ import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import com.mxgraph.util.mxRectangle;
-import model.structural.base.product.Artefact;
+import model.structural.base.product.Artifact;
 import view.panel.instance.PanelInstance;
 
 /**
@@ -31,10 +31,10 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
     public void invoke(Object object, mxEventObject event) {
         Object   cell     = this.panel.getGraph().getSelectionCell();
         String   id       = this.panel.getIdentifiers().get(cell);
-        Artefact artefact = this.panel.getInstance().getArtefact(id);
-        if (artefact != null) {
+        Artifact artifact = this.panel.getInstance().getArtifact(id);
+        if (artifact != null) {
             mxRectangle coordinates = this.panel.getGraph().getCellGeometry(cell);
-                            artefact.setSize(new Double(coordinates.getHeight()).intValue(), new Double(coordinates.getWidth()).intValue());
+                            artifact.setSize(new Double(coordinates.getHeight()).intValue(), new Double(coordinates.getWidth()).intValue());
             this.panel.getViewMenu().setSave(false);
             this.panel.updateInstance();
         }

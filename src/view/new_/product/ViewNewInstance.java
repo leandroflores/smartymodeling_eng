@@ -1,17 +1,16 @@
 package view.new_.product;
 
+import controller.view.new_.product.ControllerViewNewInstance;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
-import model.structural.base.product.Artefact;
 import model.structural.base.product.Instance;
 import model.structural.base.variability.Variability;
-import view.edit.panel.base.product.PanelBaseArtefacts;
+import view.edit.panel.base.product.PanelBaseArtifacts;
 import view.edit.panel.base.product.PanelBaseInstance;
 import view.edit.panel.base.product.PanelBaseOptional;
 import view.edit.panel.base.product.PanelBaseVarPoints;
@@ -32,7 +31,7 @@ public final class ViewNewInstance extends ViewNew {
     private PanelBaseInstance  panelBaseInstance;
     private PanelBaseOptional  panelBaseOptional;
     private PanelBaseVarPoints panelBaseVarPoints;
-    private PanelBaseArtefacts panelBaseArtefacts;
+    private PanelBaseArtifacts panelBaseArtifacts;
     private HashMap<String, Integer> elements;
     
     /**
@@ -41,19 +40,19 @@ public final class ViewNewInstance extends ViewNew {
      */
     public ViewNewInstance(ViewMenu view) {
         super(view);
-//        this.controller = new ControllerViewNewProduct_Final(this);
-        this.title      = "New Instance";
         this.instance   = new Instance();
+        this.controller = new ControllerViewNewInstance(this);
+        this.title      = "New Instance";
         this.initComponents();
     }
     
     @Override
     public void initComponents() {
-        this.setSize(650, 570);
+        this.setSize(575, 520);
         this.addHeader();
         this.addComponents();
         this.addFooter();
-//        this.setValues();
+        this.addPanelBaseInstance();
     }
 
     @Override
@@ -68,7 +67,6 @@ public final class ViewNewInstance extends ViewNew {
     private void addTabbedPane() {
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.setPreferredSize(new Dimension(500, 400));
-            this.addPanelBaseInstance();
         this.add(this.tabbedPane);
     }
     
@@ -79,6 +77,7 @@ public final class ViewNewInstance extends ViewNew {
         this.panelBaseInstance = new PanelBaseInstance(this, this.instance);
         this.tabbedPane.removeAll();
         this.tabbedPane.add("Instance", this.panelBaseInstance);
+        this.getInsertButton().setEnabled(false);
     }
     
     /**
@@ -91,6 +90,7 @@ public final class ViewNewInstance extends ViewNew {
         this.tabbedPane.add("Optional", this.panelBaseOptional);
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(1));
         this.tabbedPane.setEnabledAt(0, false);
+        this.getInsertButton().setEnabled(false);
     }
 
     /**
@@ -110,6 +110,7 @@ public final class ViewNewInstance extends ViewNew {
         this.tabbedPane.add("Variation Points", this.panelBaseVarPoints);
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(2));
         this.tabbedPane.setEnabledAt(1, false);
+        this.getInsertButton().setEnabled(false);
     }
     
     /**
@@ -122,22 +123,24 @@ public final class ViewNewInstance extends ViewNew {
     }
     
     /**
-     * Method responsible for adding the Panel Base Artefacts.
+     * Method responsible for adding the Panel Base Artifacts.
      */
-    public void addPanelBaseArtefacts() {
-        this.panelBaseArtefacts = new PanelBaseArtefacts(this);
-        this.tabbedPane.add("Artefacts", this.panelBaseArtefacts);
+    public void addPanelBaseArtifacts() {
+        this.panelBaseArtifacts = new PanelBaseArtifacts(this);
+        this.tabbedPane.add("Artifacts", this.panelBaseArtifacts);
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(3));
         this.tabbedPane.setEnabledAt(2, false);
+        this.getInsertButton().setEnabled(true);        
     }
     
     /**
-     * Method responsible for removing the Panel Base Artefacts.
+     * Method responsible for removing the Panel Base Artifacts.
      */
-    public void removePanelBaseArtefacts() {
+    public void removePanelBaseArtifacts() {
         this.tabbedPane.getComponent(2).setEnabled(true);
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(2));
         this.tabbedPane.remove(3);
+        this.getInsertButton().setEnabled(false);
     }
     
     /**
@@ -180,26 +183,11 @@ public final class ViewNewInstance extends ViewNew {
     }
     
     /**
-     * Method responsible for updating the Instance Elements.
+     * Method responsible for returning the Controller.
+     * @return Controller.
      */
-    public void updateInstance() {
-        for (Map.Entry<String, Integer> artefact : this.elements.entrySet()) {
-            if (artefact.getValue() > 0)
-                this.instance.addArtefact(new Artefact(this.instance.getDiagram().getElement(artefact.getKey())));
-        }
-    }
-    
-    /**
-     * Method responsible for adding the New Instance.
-     */
-    public void addNewInstance() {
-        if (this.instance.getProduct() != null) {
-            this.updateInstance();
-            this.instance.update();
-            this.instance.getProduct().addInstance(this.instance);
-            this.view.showInstance(this.instance);
-            this.dispose();
-        }
+    public ControllerViewNewInstance getController() {
+        return (ControllerViewNewInstance) this.controller;
     }
     
     /**
@@ -224,6 +212,30 @@ public final class ViewNewInstance extends ViewNew {
      */
     public PanelBaseInstance getPanelBaseInstance() {
         return this.panelBaseInstance;
+    }
+
+    /**
+     * Method responsible for returning the Panel Base Optional.
+     * @return Panel Base Optional.
+     */
+    public PanelBaseOptional getPanelBaseOptional() {
+        return this.panelBaseOptional;
+    }
+
+    /**
+     * Method responsible for returning the Panel Base Var Points.
+     * @return Panel Base Var Points.
+     */
+    public PanelBaseVarPoints getPanelBaseVarPoints() {
+        return this.panelBaseVarPoints;
+    }
+
+    /**
+     * Method responsible for returning the Panel Base Artifats.
+     * @return Panel Base Artifats.
+     */
+    public PanelBaseArtifacts getPanelBaseArtifacts() {
+        return this.panelBaseArtifacts;
     }
 
     /**

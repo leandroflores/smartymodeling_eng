@@ -59,7 +59,8 @@ public abstract class ControllerViewModal extends Controller {
      * @return JComboBox checked.
      */
     protected boolean check(JComboBox comboBox, String message) {
-        if (comboBox.getSelectedIndex() == 0) {
+        Object selected = comboBox.getSelectedItem();
+        if (selected == null) {
             new ViewError(this.viewModal, message).setVisible(true);
             comboBox.requestFocus();
             return false;
