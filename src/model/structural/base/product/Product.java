@@ -107,8 +107,6 @@ public class Product implements Exportable {
         this.description = description;
     }
     
-    
-    
     /**
      * Method responsible for returning if Product is Empty.
      * @return Product is Empty.
@@ -123,6 +121,16 @@ public class Product implements Exportable {
      */
     public HashMap<String, Instance> getInstances() {
         return this.instances;
+    }
+    
+    /**
+     * Method responsible for updating the Instances.
+     */
+    public void updateInstances() {
+        for (Instance instance : this.getInstancesList()) {
+            if (instance.isEmpty())
+                this.removeInstance(instance);
+        }
     }
     
     /**
@@ -157,10 +165,31 @@ public class Product implements Exportable {
     }
     
     /**
-     * Method responsible for removing a Instance by Diagram.
+     * Method responsible for removing a Instance.
+     * @param instance Instance.
+     */
+    public void removeInstance(Instance instance) {
+        this.instances.remove(instance.getId());
+    }
+    
+    /**
+     * Method responsible for returning if a Product contains a Element.
+     * @param  element Element.
+     * @return Product contains a Element.
+     */
+    public boolean contains(Element element) {
+        for (Instance instance : this.getInstancesList()) {
+            if (instance.contains(element))
+                return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Method responsible for removing the Instances by Diagram.
      * @param diagram Diagram.
      */
-    public void removeInstance(Diagram diagram) {
+    public void remove(Diagram diagram) {
         for (Instance instance : this.getInstancesList()) {
             if (instance.getDiagram().equals(diagram))
                 this.removeInstance(instance);
@@ -168,11 +197,21 @@ public class Product implements Exportable {
     }
     
     /**
-     * Method responsible for removing a Instance.
-     * @param instance Instance.
+     * Method responsible for removing the Artefacts by Element.
+     * @param element Element.
      */
-    public void removeInstance(Instance instance) {
-        this.instances.remove(instance.getId());
+    public void remove(Element element) {
+        for (Instance instance : this.getInstancesList())
+            instance.remove(element);
+    }
+    
+    /**
+     * Method responsible for removing the Artefacts by Association.
+     * @param association Association.
+     */
+    public void remove(Association association) {
+        for (Instance instance : this.getInstancesList())
+            instance.remove(association);
     }
     
     /**
@@ -192,37 +231,6 @@ public class Product implements Exportable {
      */
     public void setInstances(HashMap<String, Instance> instances) {
         this.instances = instances;
-    }
-    
-    /**
-     * Method responsible for returning if a Product contains a Element.
-     * @param  element Element.
-     * @return Product contains a Element.
-     */
-    public boolean contains(Element element) {
-        for (Instance instance : this.getInstancesList()) {
-            if (instance.contains(element))
-                return true;
-        }
-        return false;
-    }
-    
-    /**
-     * Method responsible for removing the Artefacts by Element.
-     * @param element Element.
-     */
-    public void remove(Element element) {
-        for (Instance instance : this.getInstancesList())
-            instance.remove(element);
-    }
-    
-    /**
-     * Method responsible for removing the Artefacts by Association.
-     * @param association Association.
-     */
-    public void remove(Association association) {
-        for (Instance instance : this.getInstancesList())
-            instance.remove(association);
     }
     
     /**

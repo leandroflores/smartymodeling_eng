@@ -817,7 +817,7 @@ public class Project implements Exportable {
      */
     public void removeInstances(Diagram diagram) {
         for (Product product : this.getProductsList())
-            product.removeInstance(diagram);
+            product.remove(diagram);
     }
     
     /**

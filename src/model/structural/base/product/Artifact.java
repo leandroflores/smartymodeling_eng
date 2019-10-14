@@ -18,11 +18,12 @@ import model.structural.base.interfaces.Modelable;
  * @see    model.structural.base.interfaces.Modelable
  */
 public class Artifact implements Exportable, Modelable {
-    private String  id;
-    private Element element;
-    private Point   position;
-    private Point   global;
-    private Point   size;
+    private String   id;
+    private Instance instance;
+    private Element  element;
+    private Point    position;
+    private Point    global;
+    private Point    size;
     
     /**
      * Default constructor method of Class.
@@ -81,6 +82,22 @@ public class Artifact implements Exportable, Modelable {
         this.id = (this.id == null) ? id : this.id;
     }
 
+    /**
+     * Method responsible for returning the Artifact Instance.
+     * @return Artifact Instance.
+     */
+    public Instance getInstance() {
+        return this.instance;
+    }
+
+    /**
+     * Method responsible for setting the Artifact Instance.
+     * @param instance Artifact Instance.
+     */
+    public void setInstance(Instance instance) {
+        this.instance = instance;
+    }
+    
     /**
      * Method responsible for returning the Artifact Element.
      * @return Artifact Element.

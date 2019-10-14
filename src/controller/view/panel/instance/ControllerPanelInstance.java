@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import model.structural.base.association.Association;
 import model.structural.base.product.Artifact;
+import view.delete.product.ViewDeleteArtifact;
 import view.panel.instance.PanelInstance;
 
 /**
@@ -38,6 +40,10 @@ public class ControllerPanelInstance extends ControllerPanel implements MouseLis
     @Override
     public void keyPressed(KeyEvent event) {
         switch (event.getKeyCode()) {
+            case DELETE:
+                this.delete();
+                this.panelInstance.getViewMenu().setSave(false);
+                break;
             case KeyEvent.VK_DOWN:
             case KeyEvent.VK_UP:
             case KeyEvent.VK_LEFT:
@@ -85,6 +91,24 @@ public class ControllerPanelInstance extends ControllerPanel implements MouseLis
                 artifact.dx(10);
             this.panelInstance.updateInstance();
             this.panelInstance.getGraph().setSelectionCell(this.panelInstance.getObjects().get(artifact.getId()));
+        }
+    }
+    
+    /**
+     * Method responsible for deleting the Element.
+     */
+    public void delete() {
+        if (this.panelInstance.getGraph() != null) {
+            mxCell      cell        = (mxCell) this.panelInstance.getGraph().getSelectionCell();
+            String      id          = this.panelInstance.getIdentifiers().get(cell);
+            Artifact    artifact    = this.panelInstance.getInstance().getArtifact(id);
+            Association association = this.panelInstance.getInstance().getAssociations().get(id);
+            if (artifact != null)
+                new ViewDeleteArtifact(this.panelInstance.getViewMenu().getPanelModeling(), artifact).setVisible(true);
+            else if (association != null)
+                this.panelInstance.getInstance().remove(association);
+            this.panelInstance.updateInstance();
+            this.panelInstance.getViewMenu().update();
         }
     }
 }

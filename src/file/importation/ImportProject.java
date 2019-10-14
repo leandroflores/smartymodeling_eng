@@ -274,6 +274,7 @@ public class ImportProject {
         for (int i = 0; i < artifacts.getLength(); i++) {
             Element  node     = (Element) artifacts.item(i);
             Artifact artifact = new Artifact(node, true);
+                     artifact.setInstance(instance);
                      artifact.setElement((model.structural.base.Element) instance.getDiagram().getElement(node.getAttribute("element")));
             instance.addArtifact(artifact);
         }

@@ -119,8 +119,12 @@ public final class PanelModeling extends Panel {
      */
     public void updateInstancePanels() {
         for (Component component : this.panelTabbed.getComponents()) {
-            if (component instanceof PanelInstance)
-                ((PanelInstance) component).updateInstance();
+            if (component instanceof PanelInstance) {
+                if (((PanelInstance) component).getInstance().isEmpty())
+                    this.removeInstance(((PanelInstance) component).getInstance());
+                else
+                    ((PanelInstance) component).updateInstance();
+            }
         }
     }
     
