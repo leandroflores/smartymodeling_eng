@@ -56,7 +56,7 @@ public class Product implements Exportable {
      * @param id Product Id.
      */
     public void setId(String id) {
-        this.id = id;
+        this.id = ((this.id == null) || (this.id.trim().equals(""))) ? id : this.id;
     }
    
     /**

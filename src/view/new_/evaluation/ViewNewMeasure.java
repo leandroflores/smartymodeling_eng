@@ -1,16 +1,12 @@
 package view.new_.evaluation;
 
-import controller.view.new_.evaluation.ControllerViewNewMetric;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
-import model.structural.base.evaluation.Metric;
 import view.edit.panel.base.evaluation.PanelBaseEvaluation;
 import view.edit.panel.base.evaluation.PanelBaseMeasure;
-import view.edit.panel.base.evaluation.PanelBaseMetric;
-import view.edit.panel.base.evaluation.PanelBaseOperation;
 import view.new_.ViewNew;
 import view.structural.ViewMenu;
 

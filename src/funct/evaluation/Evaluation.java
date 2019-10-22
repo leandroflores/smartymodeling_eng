@@ -4,23 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import model.structural.base.Diagram;
+import model.structural.base.Project;
 
 /**
  * <p>Class of Functions <b>Evaluation</b>.</p>
  * <p>Class responsible for operations involving <b>Evaluation</b> and <b>Measures</b>.</p>
  * @author Leandro
  * @since  02/09/2019
+ * @see    model.structural.base.Project
  */
 public abstract class Evaluation {
-    private final Diagram diagram;
+    private final Project project;
     
     /**
      * Default constructor method of Class.
-     * @param diagram Diagram.
+     * @param project Project.
      */
-    public Evaluation(Diagram diagram) {
-        this.diagram = diagram;
+    public Evaluation(Project project) {
+        this.project = project;
     }
     
     /**

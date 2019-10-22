@@ -257,6 +257,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
         if (this.viewMenu.getProject() != null) {
             SequenceDiagram diagram = new SequenceDiagram(this.viewMenu.getProject());
             this.viewMenu.getProject().addDiagram(diagram);
+            
             this.viewMenu.showDiagram(diagram);
         }
         this.viewMenu.update();

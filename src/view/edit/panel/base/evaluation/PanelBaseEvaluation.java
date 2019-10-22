@@ -3,6 +3,7 @@ package view.edit.panel.base.evaluation;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
+import model.controller.structural.base.ControllerProject;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
 import view.Panel;
@@ -50,6 +51,17 @@ public final class PanelBaseEvaluation extends Panel {
     protected void addComponents() {
         this.add(this.createLabel("Operation*: "));
         this.add(this.createTextFieldNoEditable("operationTextField", "", 15));
+        
+        this.add(this.createLabel("Target: "));
+        this.add(this.createComboBox("targetComboBox", this.getTargets(), 15));
+    }
+    
+    /**
+     * Method responsible for returning the Targets Array.
+     * @return Targets Array.
+     */
+    private Object[] getTargets() {
+        return new ControllerProject(this.project).getDiagrams(this.measure.getMetric().getTarget());
     }
     
     /**
@@ -84,8 +96,6 @@ public final class PanelBaseEvaluation extends Panel {
     public Measure getMeasure() {
         return this.measure;
     }
-    
-    
     
     /**
      * Method responsible for returning the Operation Text Field.

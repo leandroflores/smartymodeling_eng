@@ -79,7 +79,7 @@ public class Artifact implements Exportable, Modelable {
      * @param id Artifact Id.
      */
     public void setId(String id) {
-        this.id = (this.id == null) ? id : this.id;
+        this.id = ((this.id == null) || (this.id.trim().equals(""))) ? id : this.id;
     }
 
     /**

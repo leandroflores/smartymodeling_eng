@@ -6,21 +6,21 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 
 /**
- * <p>Class of Metric <b>EvaluateElement</b>.</p>
- * <p>Class responsible por extract the Metrics of <b>Element</b>.</p>
+ * <p>Class of Metric <b>EvaluationElement</b>.</p>
+ * <p>Class responsible por <b>Evaluate</b> the <b>Elements</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  02/09/2019
  * @see    model.structural.base.Diagram
  * @see    model.structural.base.Element
  */
-public class EvaluateElement {
+public class EvaluationElement {
     private final Diagram diagram;
     
     /**
      * Default constructor method of Class.
      * @param diagram Diagram.
      */
-    public EvaluateElement(Diagram diagram) {
+    public EvaluationElement(Diagram diagram) {
         this.diagram = diagram;
     }
     

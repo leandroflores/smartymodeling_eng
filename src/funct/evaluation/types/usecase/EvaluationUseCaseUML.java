@@ -1,33 +1,33 @@
 package funct.evaluation.types.usecase;
 
-import funct.evaluation.base.EvaluateElement;
+import funct.evaluation.base.EvaluationElement;
 import java.util.List;
 import model.structural.diagram.UseCaseDiagram;
-import model.structural.diagram.usecase.base.ActorUML;
+import model.structural.diagram.usecase.base.UseCaseUML;
 
 /**
- * <p>Class of Metric <b>EvaluateActorUML</b>.</p>
- * <p>Class responsible por <b>Evaluate</b> the <b>Actors UML</b>.</p>
+ * <p>Class of Metric <b>EvaluationUseCaseUML</b>.</p>
+ * <p>Class responsible por <b>Evaluate</b> the <b>Use Cases UML</b>.</p>
  * @author Leandro
  * @since  02/09/2019
- * @see    funct.evaluation.base.EvaluateElement
+ * @see    funct.evaluation.base.EvaluationElement
  * @see    model.structural.diagram.UseCaseDiagram
- * @see    model.structural.diagram.usecase.base.ActorUML
+ * @see    model.structural.diagram.usecase.base.UseCaseUML
  */
-public class EvaluateActorUML extends EvaluateElement {
+public class EvaluationUseCaseUML extends EvaluationElement {
     private final UseCaseDiagram diagram;
     
     /**
      * Default constructor method of Class.
      * @param diagram Use Case Diagram.
      */
-    public EvaluateActorUML(UseCaseDiagram diagram) {
+    public EvaluationUseCaseUML(UseCaseDiagram diagram) {
         super(diagram);
         this.diagram = diagram;
     }
     
     @Override
-    public List<ActorUML> filter(Object[] parameters) {
+    public List<UseCaseUML> filter(Object[] parameters) {
            List filter = this.diagram.getActorsList();
                 filter = this.filterNames(filter, (List<String>) parameters[1]);
                 filter = this.filterStereotypes(filter, (List<String>) parameters[2]);

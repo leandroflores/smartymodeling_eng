@@ -1,5 +1,6 @@
 package model.controller.structural.base;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
@@ -33,6 +34,20 @@ public class ControllerProject {
         for (int i = 0; i < list.size(); i++)
                 array[i] = list.get(i);
         return  array;
+    }
+    
+    /**
+     * Method responsible for returning the Diagrams Array by Type.
+     * @param  type Diagram Type.
+     * @return Diagrams Array.
+     */
+    public Object[] getDiagrams(String type) {
+        List<Diagram> filter = new ArrayList<>();
+        for (Diagram diagram : this.project.getDiagramsList()) {
+            if (diagram.getType().equals(type))
+                filter.add(diagram);
+        }
+        return filter.toArray();
     }
     
     /**

@@ -1,8 +1,8 @@
 package funct.evaluation.types;
 
 import funct.evaluation.Evaluation;
-import funct.evaluation.types.usecase.EvaluateActorUML;
-import funct.evaluation.types.usecase.EvaluateUseCaseUML;
+import funct.evaluation.types.usecase.EvaluationActorUML;
+import funct.evaluation.types.usecase.EvaluationUseCaseUML;
 import model.structural.diagram.UseCaseDiagram;
 
 /**
@@ -11,24 +11,24 @@ import model.structural.diagram.UseCaseDiagram;
  * @author Leandro
  * @since  02/09/2019
  * @see    funct.evaluation.Evaluation
- * @see    funct.evaluation.types.usecase.EvaluateActorUML
- * @see    funct.evaluation.types.usecase.EvaluateUseCaseUML
+ * @see    funct.evaluation.types.usecase.EvaluationActorUML
+ * @see    funct.evaluation.types.usecase.EvaluationUseCaseUML
  * @see    model.structural.diagram.UseCaseDiagram
  */
 public class EvaluationUseCaseDiagram extends Evaluation {
     private final UseCaseDiagram   diagram;
-    private final EvaluateActorUML   metricActorUML;
-    private final EvaluateUseCaseUML metricUseCaseUML;
+    private final EvaluationActorUML   metricActorUML;
+    private final EvaluationUseCaseUML metricUseCaseUML;
     
     /**
      * Default constructor method of Class.
      * @param diagram Use Case Diagram.
      */
     public EvaluationUseCaseDiagram(UseCaseDiagram diagram) {
-        super(diagram);
+        super(diagram.getProject());
         this.diagram          = diagram;
-        this.metricActorUML   = new EvaluateActorUML(diagram);
-        this.metricUseCaseUML = new EvaluateUseCaseUML(diagram);
+        this.metricActorUML   = new EvaluationActorUML(diagram);
+        this.metricUseCaseUML = new EvaluationUseCaseUML(diagram);
     }
     
     @Override
