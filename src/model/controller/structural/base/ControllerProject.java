@@ -37,6 +37,19 @@ public class ControllerProject {
     }
     
     /**
+     * Method responsible for returning the Targets Array by Type.
+     * @param  type Target Type.
+     * @return Targets Array.
+     */
+    public Object[] getTargets(String type) {
+        Object[] diagrams   = this.getDiagrams(type);
+        Object[] targets    = new Object[diagrams.length + 1];
+                 targets[0] = "Project";
+        System.arraycopy(diagrams, 0, targets, 1, diagrams.length);
+        return   targets;
+    }
+    
+    /**
      * Method responsible for returning the Diagrams Array by Type.
      * @param  type Diagram Type.
      * @return Diagrams Array.

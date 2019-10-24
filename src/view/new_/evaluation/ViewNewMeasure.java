@@ -7,6 +7,7 @@ import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
 import view.edit.panel.base.evaluation.PanelBaseEvaluation;
 import view.edit.panel.base.evaluation.PanelBaseMeasure;
+import view.edit.panel.base.evaluation.PanelBaseTarget;
 import view.new_.ViewNew;
 import view.structural.ViewMenu;
 
@@ -23,6 +24,7 @@ public final class ViewNewMeasure extends ViewNew {
     private final Project project;
     private final Measure measure;
     private PanelBaseMeasure    panelBaseMeasure;
+    private PanelBaseTarget     panelBaseTarget;
     private PanelBaseEvaluation panelBaseEvaluation;
     
     /**
@@ -53,6 +55,7 @@ public final class ViewNewMeasure extends ViewNew {
         this.tabbedPane.setPreferredSize(new Dimension(550, 325));
         
         this.addPanelBaseMeasure();
+        this.addPanelBaseTarget();
         this.addPanelBaseEvaluation();
         
         this.add(this.tabbedPane);
@@ -65,9 +68,19 @@ public final class ViewNewMeasure extends ViewNew {
      */
     private void addPanelBaseMeasure() {
         this.panelBaseMeasure = new PanelBaseMeasure(this.getViewMenu(), this.measure);
-        this.createScrollPane("scrollPanelBaseMeasure", this.panelBaseMeasure);
+        this.createScrollPane("scrollPanelBaseMeasure",  this.panelBaseMeasure);
         this.getScrollPanelBaseMeasure().setViewportView(this.panelBaseMeasure);
         this.tabbedPane.add("Measure", this.getScrollPanelBaseMeasure());
+    }
+    
+    /**
+     * Method responsible for adding the Panel Base Target.
+     */
+    private void addPanelBaseTarget() {
+        this.panelBaseTarget = new PanelBaseTarget(this.getViewMenu(), this.measure);
+        this.createScrollPane("scrollPanelBaseTarget",  this.panelBaseTarget);
+        this.getScrollPanelBaseTarget().setViewportView(this.panelBaseTarget);
+        this.tabbedPane.add("Target", this.getScrollPanelBaseTarget());
     }
     
     /**
@@ -110,6 +123,22 @@ public final class ViewNewMeasure extends ViewNew {
      */
     public JScrollPane getScrollPanelBaseMeasure() {
         return this.scrollPanes.get("scrollPanelBaseMeasure");
+    }
+    
+    /**
+     * Method responsible for returning the Panel Base Target.
+     * @return Panel Base Target.
+     */
+    public PanelBaseTarget getPanelBaseTarget() {
+        return this.panelBaseTarget;
+    }
+    
+    /**
+     * Method responsible for returning the Scroll Panel Target.
+     * @return Scroll Panel Target.
+     */
+    public JScrollPane getScrollPanelBaseTarget() {
+        return this.scrollPanes.get("scrollPanelBaseTarget");
     }
     
     /**

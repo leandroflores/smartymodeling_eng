@@ -1,6 +1,6 @@
 package funct.evaluation.types;
 
-import funct.evaluation.Evaluation;
+import funct.evaluation.base.EvaluationDiagram;
 import funct.evaluation.types.usecase.EvaluationActorUML;
 import funct.evaluation.types.usecase.EvaluationUseCaseUML;
 import model.structural.diagram.UseCaseDiagram;
@@ -10,14 +10,14 @@ import model.structural.diagram.UseCaseDiagram;
  * <p>Class responsible por <b>Evaluate</b> of <b>Use Case Diagram</b>.</p>
  * @author Leandro
  * @since  02/09/2019
- * @see    funct.evaluation.Evaluation
+ * @see    funct.evaluation.base.EvaluationDiagram
  * @see    funct.evaluation.types.usecase.EvaluationActorUML
  * @see    funct.evaluation.types.usecase.EvaluationUseCaseUML
  * @see    model.structural.diagram.UseCaseDiagram
  */
-public class EvaluationUseCaseDiagram extends Evaluation {
-    private final UseCaseDiagram   diagram;
-    private final EvaluationActorUML   metricActorUML;
+public class EvaluationUseCaseDiagram extends EvaluationDiagram {
+    private final UseCaseDiagram diagram;
+    private final EvaluationActorUML metricActorUML;
     private final EvaluationUseCaseUML metricUseCaseUML;
     
     /**
@@ -25,7 +25,7 @@ public class EvaluationUseCaseDiagram extends Evaluation {
      * @param diagram Use Case Diagram.
      */
     public EvaluationUseCaseDiagram(UseCaseDiagram diagram) {
-        super(diagram.getProject());
+        super(diagram);
         this.diagram          = diagram;
         this.metricActorUML   = new EvaluationActorUML(diagram);
         this.metricUseCaseUML = new EvaluationUseCaseUML(diagram);
@@ -84,10 +84,7 @@ public class EvaluationUseCaseDiagram extends Evaluation {
         return this.metricUseCaseUML.getMetricValue(parameters);
     }
     
-    /**
-     * Method responsible for returning the Diagram Values.
-     * @return Diagram Values.
-     */
+    @Override
     public String[] getValues() {
         String[] values    = new String[2];
                  values[0] = Integer.toString(this.diagram.getActorsList().size());

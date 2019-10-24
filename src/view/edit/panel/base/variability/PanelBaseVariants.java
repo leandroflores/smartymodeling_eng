@@ -118,8 +118,8 @@ public final class PanelBaseVariants extends Panel {
     public void updateVariantsList() {
         this.getVariantsList().removeAll();
         DefaultListModel model = new DefaultListModel();
-        for (int i = 0; i <  this.variability.getVariants().size(); i++)
-            model.addElement(this.variability.getVariants().get(i));
+        for (Element element :  this.variability.getVariants())
+            model.addElement(element);
         this.getVariantsList().setModel(model);
     }
     

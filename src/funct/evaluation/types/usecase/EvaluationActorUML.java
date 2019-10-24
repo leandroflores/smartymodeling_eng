@@ -29,9 +29,9 @@ public class EvaluationActorUML extends EvaluationElement {
     @Override
     public List<ActorUML> filter(Object[] parameters) {
            List filter = this.diagram.getActorsList();
-                filter = this.filterNames(filter, (List<String>) parameters[1]);
-                filter = this.filterStereotypes(filter, (List<String>) parameters[2]);
-                filter = this.filterMandatory(filter, (Boolean) parameters[3]);
+                filter = this.filterNames(filter, (List<String>) parameters[0]);
+//                filter = this.filterStereotypes(filter, (List<String>) parameters[1]);
+                filter = this.filterMandatory(filter, (Boolean) parameters[1]);
         return  filter;
     }
 }
