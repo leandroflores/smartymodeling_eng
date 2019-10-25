@@ -5,9 +5,11 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
+import model.structural.base.association.Association;
 import model.structural.base.product.Instance;
 import model.structural.base.variability.Variability;
 import view.edit.panel.base.product.PanelBaseArtifacts;
@@ -180,6 +182,39 @@ public final class ViewNewInstance extends ViewNew {
      */
     public void add(Element element) {
         this.elements.put(element.getId(), this.elements.get(element.getId()) + 1);
+    }
+    
+    /**
+     * Method responsible for returning the Elements Size.
+     * @return Elements Size.
+     */
+    public Integer getElementsSize() {
+        Integer count = 0;
+        for (Map.Entry<String, Integer> element : this.elements.entrySet())
+               count += (element.getValue() > 0) ? 1 : 0;
+        return count;
+    }
+    
+    /**
+     * Method responsible for returning if the Instance contains a Association.
+     * @param  association Association.
+     * @return Instance contains Association.
+     */
+    private boolean contains(Association association) {
+        if (this.elements.get(association.getSource().getId()) > 0)
+            return true;
+        return this.elements.get(association.getTarget().getId()) > 0;
+    }
+    
+    /**
+     * Method responsible for returning the Associations Size.
+     * @return Associations Size.
+     */
+    public Integer getAssociationsSize() {
+        Integer count = 0;
+        for (Association association : this.getDiagram().getAssociationsList())
+                count += this.contains(association) ? 1 : 0;
+        return  count;
     }
     
     /**

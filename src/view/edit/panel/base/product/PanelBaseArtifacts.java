@@ -3,7 +3,6 @@ package view.edit.panel.base.product;
 import controller.view.edit.panel.base.product.ControllerPanelBaseArtifacts;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
-import javax.swing.JButton;
 import javax.swing.JTextField;
 import model.structural.base.product.Instance;
 import view.Panel;
@@ -62,9 +61,7 @@ public class PanelBaseArtifacts extends Panel {
         this.add(this.createTextFieldNoEditable("associationsTextField", "", 10), this.getConstraints(4, 1, 2, 3));
     }
     
-    /**
-     * Method responsible for adding the Panel Footer.
-     */
+    @Override
     public void addFooter() {
         this.add(this.createButton("backButton", "  Back  ", "Back", "back.png"), this.getConstraints(3, 1, 0, 4));
         this.add(this.createButton("nextButton", "  Next  ", "Next", "next.png"), this.getConstraints(3, 1, 3, 4));
@@ -77,11 +74,9 @@ public class PanelBaseArtifacts extends Panel {
      * Method responsible for setting the Values.
      */
     public void setValues() {
-        this.viewNew.getController().newInstance();
-        
         this.getNameTextField().setText(this.viewNew.getInstance().getName());
-        this.getElementsTextField().setText(Integer.toString(this.viewNew.getInstance().getArtifactsList().size()));
-        this.getAssociationsTextField().setText(Integer.toString(this.viewNew.getInstance().getAssociationsList().size()));
+        this.getElementsTextField().setText(Integer.toString(this.viewNew.getElementsSize()));
+        this.getAssociationsTextField().setText(Integer.toString(this.viewNew.getAssociationsSize()));
         
         this.getNameTextField().requestFocus();
     }
@@ -132,21 +127,5 @@ public class PanelBaseArtifacts extends Panel {
      */
     public JTextField getAssociationsTextField() {
         return this.textFields.get("associationsTextField");
-    }
-    
-    /**
-     * Method responsible for returning the Back Button.
-     * @return Back Button.
-     */
-    public JButton getBackButton() {
-        return this.buttons.get("backButton");
-    }
-    
-    /**
-     * Method responsible for returning the Next Button.
-     * @return Next Button.
-     */
-    public JButton getNextButton() {
-        return this.buttons.get("nextButton");
     }
 }

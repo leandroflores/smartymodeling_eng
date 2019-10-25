@@ -3,7 +3,6 @@ package view.edit.panel.base.product;
 import controller.view.edit.panel.base.product.ControllerPanelBaseInstance;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.base.product.Instance;
@@ -85,17 +84,6 @@ public final class PanelBaseInstance extends Panel {
     }
     
     /**
-     * Method responsible for adding the Panel Footer.
-     */
-    public void addFooter() {
-        this.add(this.createButton("backButton", "  Back  ", "Back", "back.png"));
-        this.add(this.createButton("nextButton", "  Next  ", "Next", "next.png"));
-        
-        this.getBackButton().setPreferredSize(new Dimension(150, 30));
-        this.getNextButton().setPreferredSize(new Dimension(150, 30));
-    }
-    
-    /**
      * Method responsible for returning the View New Instance.
      * @return View New Instance.
      */
@@ -133,21 +121,5 @@ public final class PanelBaseInstance extends Panel {
      */
     public JTextField getNameTextField() {
         return this.textFields.get("nameTextField");
-    }
-    
-    /**
-     * Method responsible for returning the Back Button.
-     * @return Back Button.
-     */
-    public JButton getBackButton() {
-        return this.buttons.get("backButton");
-    }
-    
-    /**
-     * Method responsible for returning the Next Button.
-     * @return Next Button.
-     */
-    public JButton getNextButton() {
-        return this.buttons.get("nextButton");
     }
 }

@@ -17,8 +17,8 @@ import model.structural.diagram.UseCaseDiagram;
  */
 public class EvaluationUseCaseDiagram extends EvaluationDiagram {
     private final UseCaseDiagram diagram;
-    private final EvaluationActorUML metricActorUML;
-    private final EvaluationUseCaseUML metricUseCaseUML;
+    private final EvaluationActorUML evaluationActorUML;
+    private final EvaluationUseCaseUML evaluationUseCaseUML;
     
     /**
      * Default constructor method of Class.
@@ -26,17 +26,17 @@ public class EvaluationUseCaseDiagram extends EvaluationDiagram {
      */
     public EvaluationUseCaseDiagram(UseCaseDiagram diagram) {
         super(diagram);
-        this.diagram          = diagram;
-        this.metricActorUML   = new EvaluationActorUML(diagram);
-        this.metricUseCaseUML = new EvaluationUseCaseUML(diagram);
+        this.diagram              = diagram;
+        this.evaluationActorUML   = new EvaluationActorUML(diagram);
+        this.evaluationUseCaseUML = new EvaluationUseCaseUML(diagram);
     }
     
     @Override
     public Double getClauseValue(String keyword, String filter) {
-        if (keyword.equalsIgnoreCase("actor"))
-            return this.metricActorUML.getMetricValue(this.getActorFilters(filter));
-        else if (keyword.equalsIgnoreCase("usecase"))
-            return this.metricUseCaseUML.getMetricValue(this.getUseCaseFilters(filter));
+        if (keyword.toLowerCase().equals("actor"))
+            return this.getActorMetric(this.getActorFilters(filter));
+        else if (keyword.toLowerCase().equals("usecase"))
+            return this.getUseCaseMetric(this.getUseCaseFilters(filter));
         return null;
     }
     
@@ -72,7 +72,7 @@ public class EvaluationUseCaseDiagram extends EvaluationDiagram {
      * @return Actor Metric Value.
      */
     public Double getActorMetric(Object[] parameters) {
-        return this.metricActorUML.getMetricValue(parameters);
+        return this.evaluationActorUML.getMetricValue(parameters);
     }
     
     /**
@@ -81,7 +81,7 @@ public class EvaluationUseCaseDiagram extends EvaluationDiagram {
      * @return Use Case Metric Value.
      */
     public Double getUseCaseMetric(Object[] parameters) {
-        return this.metricUseCaseUML.getMetricValue(parameters);
+        return this.evaluationUseCaseUML.getMetricValue(parameters);
     }
     
     @Override

@@ -9,7 +9,7 @@ import model.controller.structural.base.ControllerProject;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
 import view.Panel;
-import view.structural.ViewMenu;
+import view.new_.evaluation.ViewNewMeasure;
 
 /**
  * <p>Class of View <b>PanelBaseEvalutaion</b>.</p> 
@@ -21,22 +21,23 @@ import view.structural.ViewMenu;
  * @see    view.Panel
  */
 public final class PanelBaseTarget extends Panel {
-    private final ViewMenu viewMenu;
+    private final ViewNewMeasure viewNew;
     private final Project project;
     private final Measure measure;
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param viewNew View New Measure.
      * @param measure Measure.
      */
-    public PanelBaseTarget(ViewMenu viewMenu, Measure measure) {
-        this.viewMenu   = viewMenu;
-        this.project    = this.viewMenu.getProject();
+    public PanelBaseTarget(ViewNewMeasure viewNew, Measure measure) {
+        this.viewNew   = viewNew;
+        this.project    = this.viewNew.getProject();
         this.measure    = measure;
         this.controller = new ControllerPanelBaseTarget(this);
         this.setSettings();
         this.addComponents();
+        this.addFooter();
         this.setValues();
     }
     
@@ -80,11 +81,11 @@ public final class PanelBaseTarget extends Panel {
     }
     
     /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
+     * Method responsible for returning the View New Measure.
+     * @return View New Measure.
      */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
+    public ViewNewMeasure getViewNewMeasure() {
+        return this.viewNew;
     }
     
     /**

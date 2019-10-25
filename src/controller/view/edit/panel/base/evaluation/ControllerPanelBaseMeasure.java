@@ -4,7 +4,6 @@ import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import view.edit.panel.base.evaluation.PanelBaseMeasure;
-import view.edit.panel.base.evaluation.PanelBaseMetric;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseMeasure</b>.</p>
@@ -57,7 +56,7 @@ public class ControllerPanelBaseMeasure extends ControllerPanel {
         this.panelBaseMeasure.getMeasure().setName(this.panelBaseMeasure.getNameTextField().getText().trim());
         this.panelBaseMeasure.getMeasure().setDate(this.panelBaseMeasure.getDateTextField().getText().trim());
         this.panelBaseMeasure.setMetric();
-        this.panelBaseMeasure.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseMeasure.getViewMenu().setSave(false);
+        this.panelBaseMeasure.getViewNewMeasure().getViewMenu().getPanelProject().getPanelTree().updateUI();
+        this.panelBaseMeasure.getViewNewMeasure().getViewMenu().setSave(false);
     }
 }

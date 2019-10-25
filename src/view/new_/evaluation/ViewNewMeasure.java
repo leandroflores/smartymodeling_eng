@@ -43,7 +43,7 @@ public final class ViewNewMeasure extends ViewNew {
     
     @Override
     public void initComponents() {
-        this.setSize(600, 445);
+        this.setSize(600, 520);
         this.addHeader();
         this.addComponents();
         this.addFooter();
@@ -51,33 +51,36 @@ public final class ViewNewMeasure extends ViewNew {
     
     @Override
     public void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 325));
-        
-        this.addPanelBaseMeasure();
-        this.addPanelBaseTarget();
-        this.addPanelBaseEvaluation();
-        
-        this.add(this.tabbedPane);
-        
+        this.addTabbedPane();
         this.addLines(1);
+    }
+    
+    /**
+     * Method responsible for adding the Tabbed Pane.
+     */
+    private void addTabbedPane() {
+        this.tabbedPane = new JTabbedPane();
+        this.tabbedPane.setPreferredSize(new Dimension(500, 400));
+        this.add(this.tabbedPane);
     }
     
     /**
      * Method responsible for adding the Panel Base Measure.
      */
     private void addPanelBaseMeasure() {
-        this.panelBaseMeasure = new PanelBaseMeasure(this.getViewMenu(), this.measure);
+        this.panelBaseMeasure = new PanelBaseMeasure(this, this.measure);
+        this.tabbedPane.removeAll();
         this.createScrollPane("scrollPanelBaseMeasure",  this.panelBaseMeasure);
         this.getScrollPanelBaseMeasure().setViewportView(this.panelBaseMeasure);
         this.tabbedPane.add("Measure", this.getScrollPanelBaseMeasure());
+        this.getInsertButton().setEnabled(false);
     }
     
     /**
      * Method responsible for adding the Panel Base Target.
      */
     private void addPanelBaseTarget() {
-        this.panelBaseTarget = new PanelBaseTarget(this.getViewMenu(), this.measure);
+        this.panelBaseTarget = new PanelBaseTarget(this, this.measure);
         this.createScrollPane("scrollPanelBaseTarget",  this.panelBaseTarget);
         this.getScrollPanelBaseTarget().setViewportView(this.panelBaseTarget);
         this.tabbedPane.add("Target", this.getScrollPanelBaseTarget());

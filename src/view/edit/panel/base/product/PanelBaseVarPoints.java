@@ -4,7 +4,7 @@ import controller.view.edit.panel.base.product.ControllerPanelBaseVarPoints;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.List;
-import javax.swing.JButton;
+import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -60,6 +60,7 @@ public class PanelBaseVarPoints extends Panel {
         this.createScrollPane("variabilitiesScrollPane");
         this.getVariabilitiesScrollPane().setViewportView(this.createVariabilitiesPanel());
         this.getVariabilitiesScrollPane().setPreferredSize(new Dimension(500, 200));
+//        this.getVariabilitiesScrollPane().setLayout(new FlowLayout(FlowLayout.LEFT));
         this.add(this.getVariabilitiesScrollPane());
         this.addLines(1);
     }
@@ -70,6 +71,7 @@ public class PanelBaseVarPoints extends Panel {
      */
     private JPanel createVariabilitiesPanel() {
         JPanel panel = new JPanel();
+               panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         for (Variability variability : this.viewNew.getInstance().getDiagram().getVariabilitiesList())
                this.addVariability(panel, variability);
         return panel;
@@ -81,13 +83,15 @@ public class PanelBaseVarPoints extends Panel {
      * @param variability Variability.
      */
     private void addVariability(JPanel panel, Variability variability) {
-        panel.add(this.createVariabilityCheckBox(variability));
-        panel.add(this.createLabel(variability.getName() + ": "));
+        JPanel newPanel = new JPanel();
+               newPanel.add(this.createVariabilityCheckBox(variability));
+               newPanel.add(this.createLabel(variability.getName() + ": "));
+               panel.add(newPanel);
         if (variability.getConstraint().toLowerCase().trim().equals("inclusive"))
             this.addInclusiveVariability(panel, variability);
         else
             this.addExclusiveVariability(panel, variability);
-        panel.add(this.createLabel("", 500));
+//        panel.add(this.createLabel("", 500));
     }
     
     /**
@@ -159,17 +163,6 @@ public class PanelBaseVarPoints extends Panel {
     }
     
     /**
-     * Method responsible for adding the Panel Footer.
-     */
-    public void addFooter() {
-        this.add(this.createButton("backButton", "  Back  ", "Back", "back.png"));
-        this.add(this.createButton("nextButton", "  Next  ", "Next", "next.png"));
-        
-        this.getBackButton().setPreferredSize(new Dimension(150, 30));
-        this.getNextButton().setPreferredSize(new Dimension(150, 30));
-    }
-    
-    /**
      * Method responsible for returning the View New Instance.
      * @return View New Instance.
      */
@@ -219,21 +212,5 @@ public class PanelBaseVarPoints extends Panel {
      */
     public JScrollPane getVariabilitiesScrollPane() {
         return this.scrollPanes.get("variabilitiesScrollPane");
-    }
-    
-    /**
-     * Method responsible for returning the Back Button.
-     * @return Back Button.
-     */
-    public JButton getBackButton() {
-        return this.buttons.get("backButton");
-    }
-    
-    /**
-     * Method responsible for returning the Next Button.
-     * @return Next Button.
-     */
-    public JButton getNextButton() {
-        return this.buttons.get("nextButton");
     }
 }

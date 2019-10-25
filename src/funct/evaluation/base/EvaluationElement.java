@@ -30,6 +30,8 @@ public class EvaluationElement {
      * @return Metric Value.
      */
     public Double getMetricValue(Object[] parameters) {
+        List filter = this.filter(parameters);
+        System.out.println("Filter = " + filter);
         return Double.parseDouble(Integer.toString(this.filter(parameters).size()));
     }
     

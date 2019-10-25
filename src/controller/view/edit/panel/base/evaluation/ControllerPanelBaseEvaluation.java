@@ -5,8 +5,6 @@ import funct.evaluation.Evaluation;
 import funct.evaluation.types.EvaluationUseCaseDiagram;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.script.ScriptException;
 import model.structural.base.Diagram;
 import model.structural.base.evaluation.Metric;
@@ -51,9 +49,6 @@ public class ControllerPanelBaseEvaluation extends ControllerPanel {
     private void evaluate() {
         Object target = this.panelBaseEvaluation.getTargetComboBox().getSelectedItem();
         Metric metric = this.panelBaseEvaluation.getMeasure().getMetric();
-        System.out.println("");
-        System.out.println("Target: " + target);
-        System.out.println("Metric: " + metric);
         if (target instanceof Diagram) {
             try {
                 this.evaluateDiagram((Diagram) target, metric);
@@ -61,16 +56,15 @@ public class ControllerPanelBaseEvaluation extends ControllerPanel {
                 System.out.println(exception);
             }
         }
-        System.out.println("");
     }
     
     private void evaluateDiagram(Diagram diagram, Metric metric) throws ScriptException {
-        System.out.println("Operation: " + metric.getOperation());
         Evaluation evaluation;
         if (diagram instanceof UseCaseDiagram) {
             evaluation = new EvaluationUseCaseDiagram((UseCaseDiagram) diagram);
             System.out.println("");
             System.out.println(evaluation.getExpression(metric.getOperation()));
+            System.out.println(evaluation.getFinalValue(metric.getOperation()));
         }
     }
     

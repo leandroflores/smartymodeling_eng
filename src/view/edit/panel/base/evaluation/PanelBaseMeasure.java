@@ -10,7 +10,7 @@ import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
 import view.Panel;
-import view.structural.ViewMenu;
+import view.new_.evaluation.ViewNewMeasure;
 
 /**
  * <p>Class of View <b>PanelBaseMeasure</b>.</p> 
@@ -22,22 +22,23 @@ import view.structural.ViewMenu;
  * @see    view.Panel
  */
 public final class PanelBaseMeasure extends Panel {
-    private final ViewMenu viewMenu;
+    private final ViewNewMeasure viewNew;
     private final Project project;
     private final Measure measure;
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param viewNew View New Measure.
      * @param measure Measure.
      */
-    public PanelBaseMeasure(ViewMenu viewMenu, Measure measure) {
-        this.viewMenu   = viewMenu;
-        this.project    = this.viewMenu.getProject();
+    public PanelBaseMeasure(ViewNewMeasure viewNew, Measure measure) {
+        this.viewNew    = viewNew;
+        this.project    = this.viewNew.getViewMenu().getProject();
         this.measure    = measure;
         this.controller = new ControllerPanelBaseMeasure(this);
         this.setSettings();
         this.addComponents();
+        this.addFooter();
         this.setValues();
     }
     
@@ -59,7 +60,15 @@ public final class PanelBaseMeasure extends Panel {
         this.add(this.createTextField("dateTextField", "", 10));
         
         this.add(this.createLabel("Metric*: "));
-        this.add(this.createComboBox("metricComboBox", new ControllerMetric(this.project).getMetrics(), 15, this.getSelectedItem()));
+        this.add(this.createComboBox("metricComboBox", this.getMetrics(), 15, this.getSelectedItem()));
+    }
+    
+    /**
+     * Method responsible for returning the Metrics.
+     * @return Metrics.
+     */
+    private Object[] getMetrics() {
+        return new ControllerMetric(this.project).getMetrics();
     }
     
     /**
@@ -89,11 +98,11 @@ public final class PanelBaseMeasure extends Panel {
     }
     
     /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
+     * Method responsible for returning the View New Measure.
+     * @return View New Measure.
      */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
+    public ViewNewMeasure getViewNewMeasure() {
+        return this.viewNew;
     }
     
     /**
