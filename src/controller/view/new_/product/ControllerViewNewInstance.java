@@ -39,7 +39,7 @@ public class ControllerViewNewInstance extends ControllerViewNew {
      * @return Product is selected.
      */
     public boolean checkProduct() {
-        return this.check(this.viewNewInstance.getPanelBaseInstance().getProductComboBox(), "Select a Project!");
+        return this.check(this.viewNewInstance.getPanelBaseNewInstance().getProductComboBox(), "Select a Project!");
     }
     
     /**
@@ -47,7 +47,7 @@ public class ControllerViewNewInstance extends ControllerViewNew {
      * @return Diagram is selected.
      */
     public boolean checkDiagram() {
-        return this.check(this.viewNewInstance.getPanelBaseInstance().getDiagramComboBox(), "Select a Diagram!");
+        return this.check(this.viewNewInstance.getPanelBaseNewInstance().getDiagramComboBox(), "Select a Diagram!");
     }
     
     /**

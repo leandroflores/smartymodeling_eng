@@ -1,8 +1,10 @@
 package view.edit.panel.base.product;
 
 import controller.view.edit.panel.base.product.ControllerPanelBaseVarPoints;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
@@ -59,8 +61,7 @@ public class PanelBaseVarPoints extends Panel {
     protected void addComponents() {
         this.createScrollPane("variabilitiesScrollPane");
         this.getVariabilitiesScrollPane().setViewportView(this.createVariabilitiesPanel());
-        this.getVariabilitiesScrollPane().setPreferredSize(new Dimension(500, 200));
-//        this.getVariabilitiesScrollPane().setLayout(new FlowLayout(FlowLayout.LEFT));
+        this.getVariabilitiesScrollPane().setPreferredSize(new Dimension(500, 250));
         this.add(this.getVariabilitiesScrollPane());
         this.addLines(1);
     }
@@ -72,6 +73,7 @@ public class PanelBaseVarPoints extends Panel {
     private JPanel createVariabilitiesPanel() {
         JPanel panel = new JPanel();
                panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+               panel.setAlignmentX(Component.LEFT_ALIGNMENT);
         for (Variability variability : this.viewNew.getInstance().getDiagram().getVariabilitiesList())
                this.addVariability(panel, variability);
         return panel;
@@ -84,14 +86,24 @@ public class PanelBaseVarPoints extends Panel {
      */
     private void addVariability(JPanel panel, Variability variability) {
         JPanel newPanel = new JPanel();
+               newPanel.setLayout(new BoxLayout(newPanel, BoxLayout.Y_AXIS));
+               newPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
                newPanel.add(this.createVariabilityCheckBox(variability));
-               newPanel.add(this.createLabel(variability.getName() + ": "));
+                   this.addVariabilityPanel(newPanel, variability);
+               newPanel.add(this.createLabel(" "));
                panel.add(newPanel);
+    }
+    
+    /**
+     * Method responsible for adding the Variability Panel.
+     * @param panel New Panel.
+     * @param variability Variability.
+     */
+    private void addVariabilityPanel(JPanel panel, Variability variability) {
         if (variability.getConstraint().toLowerCase().trim().equals("inclusive"))
             this.addInclusiveVariability(panel, variability);
         else
             this.addExclusiveVariability(panel, variability);
-//        panel.add(this.createLabel("", 500));
     }
     
     /**
@@ -104,6 +116,9 @@ public class PanelBaseVarPoints extends Panel {
                   checkBox.setSelected(this.viewNew.isVariationPoint(variability.getVariationPoint()));
                   checkBox.setEnabled(false);
                   checkBox.setName(variability.getId());
+                  checkBox.setText(variability.getName() + ": ");
+                  checkBox.setFont(new Font("Arial", Font.BOLD, 15));
+                  checkBox.setAlignmentX(Component.LEFT_ALIGNMENT);
         return    checkBox;
     }
     
@@ -117,6 +132,7 @@ public class PanelBaseVarPoints extends Panel {
             JCheckBox checkBoxVariant = this.createVariantCheckBox(variability, variant);
                       panel.add(checkBoxVariant);
         }
+        panel.add(this.createLabel(" "));
     }
     
     /**
@@ -126,6 +142,7 @@ public class PanelBaseVarPoints extends Panel {
      */
     private void addExclusiveVariability(JPanel panel, Variability variability) {
         panel.add(this.createVariabilityComboBox(variability));
+        panel.add(this.createLabel(" "));
     }
     
     /**
@@ -150,6 +167,8 @@ public class PanelBaseVarPoints extends Panel {
     public JComboBox createVariabilityComboBox(Variability variability) {
         JComboBox comboBox = this.createComboBox("comboBox" + variability.getId(), variability.getVariants().toArray(), 200);
                   comboBox.setName(variability.getId());
+                  comboBox.setMaximumSize(new Dimension(450, 30));
+                  comboBox.setMinimumSize(new Dimension(450, 30));
         return    comboBox;
     }
     

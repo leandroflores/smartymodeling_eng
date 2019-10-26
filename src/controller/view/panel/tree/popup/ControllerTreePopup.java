@@ -11,6 +11,7 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.association.Association;
 import model.structural.base.evaluation.Metric;
+import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.base.traceability.Traceability;
@@ -138,6 +139,10 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
                 this.showPanelEditMetric((Metric) node.getUserObject());
             else if (node.getUserObject() instanceof Product)
                 this.showPanelEditProduct((Product) node.getUserObject());
+            else if (node.getUserObject() instanceof Instance)
+                this.showPanelEditInstance((Instance) node.getUserObject());
+            else if (node.getUserObject() instanceof Artifact)
+                this.showPanelEditArtifact((Artifact) node.getUserObject());
             else if (node.getUserObject() instanceof Element)
                 this.showPanelEdit(diagram, (Element) node.getUserObject());
             else if (node.getUserObject() instanceof Association)
@@ -176,6 +181,22 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      */
     private void showPanelEditProduct(Product product) {
         this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditProduct(product);
+    }
+    
+    /**
+     * Method responsible for showing the Panel Edit Instance.
+     * @param instance Instance.
+     */
+    private void showPanelEditInstance(Instance instance) {
+        this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditInstance(instance);
+    }
+    
+    /**
+     * Method responsible for showing the Panel Edit Artifact.
+     * @param artifact Artifact.
+     */
+    private void showPanelEditArtifact(Artifact artifact) {
+        this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditArtifact(artifact);
     }
     
     /**

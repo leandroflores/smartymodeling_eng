@@ -10,6 +10,8 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.association.Association;
 import model.structural.base.evaluation.Metric;
+import model.structural.base.product.Artifact;
+import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
@@ -44,6 +46,8 @@ import view.panel.edit.base.classes.PanelEditMethodUML;
 import view.panel.edit.base.classes.PanelEditPackageUML;
 import view.panel.edit.base.component.PanelEditComponentUML;
 import view.panel.edit.base.evaluation.PanelEditMetric;
+import view.panel.edit.base.product.PanelEditArtifact;
+import view.panel.edit.base.product.PanelEditInstance;
 import view.panel.edit.base.product.PanelEditProduct;
 import view.panel.edit.base.sequence.PanelEditInstanceUML;
 import view.panel.edit.base.sequence.PanelEditLifelineUML;
@@ -264,6 +268,24 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditProduct(Product product) {
         this.panelEdit = new PanelEditProduct(this.viewMenu, product);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Instance.
+     * @param instance Instance.
+     */
+    public void initPanelEditInstance(Instance instance) {
+        this.panelEdit = new PanelEditInstance(this.viewMenu, instance);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Artifact.
+     * @param artifact Artifact.
+     */
+    public void initPanelEditArtifact(Artifact artifact) {
+        this.panelEdit = new PanelEditArtifact(this.viewMenu, artifact);
         this.updatePanelEdit();
     }
     

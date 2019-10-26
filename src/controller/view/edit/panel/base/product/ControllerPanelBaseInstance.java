@@ -3,15 +3,13 @@ package controller.view.edit.panel.base.product;
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import model.structural.base.Diagram;
-import model.structural.base.product.Product;
 import view.edit.panel.base.product.PanelBaseInstance;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseInstance</b>.</p>
  * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseInstance</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  07/10/2019
+ * @since  25/10/2019
  * @see    controller.view.ControllerPanel
  * @see    model.structural.base.product.Instance
  * @see    view.edit.panel.base.product.PanelBaseInstance
@@ -31,10 +29,6 @@ public class ControllerPanelBaseInstance extends ControllerPanel {
     @Override
     public void actionPerformed(ActionEvent event) {
         this.update();
-        if (this.panelBaseInstance.getBackButton().equals(event.getSource()))
-            this.panelBaseInstance.getViewNewInstance().dispose();
-        else if (this.panelBaseInstance.getNextButton().equals(event.getSource()))
-            this.next();
     }
     
     @Override
@@ -56,20 +50,12 @@ public class ControllerPanelBaseInstance extends ControllerPanel {
     }
     
     /**
-     * Method responsible for going to Next Panel.
-     */
-    public void next() {
-        this.update();
-        this.panelBaseInstance.getViewNewInstance().addPanelBaseOptional();
-    }
-    
-    /**
      * Method responsible for setting the Instance Values.
      */
     private void update() {
-        this.panelBaseInstance.getInstance().setProduct((Product) this.panelBaseInstance.getProductComboBox().getSelectedItem());
-        this.panelBaseInstance.getInstance().setDiagram((Diagram) this.panelBaseInstance.getDiagramComboBox().getSelectedItem());
         this.panelBaseInstance.getInstance().setName(this.panelBaseInstance.getNameTextField().getText().trim());
-        this.panelBaseInstance.getViewNewInstance().getViewMenu().setSave(false);
+        this.panelBaseInstance.getViewMenu().getPanelProject().getPanelTree().updateUI();
+        this.panelBaseInstance.getViewMenu().getPanelModeling().updateInstance(this.panelBaseInstance.getInstance());
+        this.panelBaseInstance.getViewMenu().setSave(false);
     }
 }

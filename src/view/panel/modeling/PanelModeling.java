@@ -231,6 +231,17 @@ public final class PanelModeling extends Panel {
     }
     
     /**
+     * Method responsible for updating a Instance.
+     * @param instance Instance.
+     */
+    public void updateInstance(Instance instance) {
+        if (this.tabs.get(instance.getCompleteId()) != null) {
+            this.removeInstance(instance);
+            this.addInstance(instance);
+        }
+    }
+    
+    /**
      * Method responsible for setting the Zoom.
      * @param zoom Zoom Value.
      */

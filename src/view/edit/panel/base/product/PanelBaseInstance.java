@@ -1,13 +1,11 @@
 package view.edit.panel.base.product;
 
 import controller.view.edit.panel.base.product.ControllerPanelBaseInstance;
-import java.awt.Dimension;
 import java.awt.GridLayout;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.base.product.Instance;
 import view.Panel;
-import view.new_.product.ViewNewInstance;
+import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseInstance</b>.</p> 
@@ -19,21 +17,20 @@ import view.new_.product.ViewNewInstance;
  * @see    view.Panel
  */
 public final class PanelBaseInstance extends Panel {
-    private final ViewNewInstance viewNew;
+    private final ViewMenu viewMenu;
     private final Instance instance;
     
     /**
      * Default constructor method of Class.
-     * @param view View New Instance.
+     * @param view View Menu.
      * @param instance Instance.
      */
-    public PanelBaseInstance(ViewNewInstance view, Instance instance) {
-        this.viewNew    = view;
+    public PanelBaseInstance(ViewMenu view, Instance instance) {
+        this.viewMenu   = view;
         this.instance   = instance;
         this.controller = new ControllerPanelBaseInstance(this);
         this.setSettings();
         this.addComponents();
-        this.addFooter();
         this.setValues();
     }
     
@@ -41,18 +38,16 @@ public final class PanelBaseInstance extends Panel {
      * Method responsible for defining the Settings.
      */
     private void setSettings() {
-        this.setLayout(new GridLayout(4, 2));
+        this.setLayout(new GridLayout(3, 2));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Product*: "));
-        this.add(this.createComboBox("productComboBox", this.viewNew.getViewMenu().getProject().getProductsList().toArray(), 15));
-        this.getProductComboBox().setPreferredSize(new Dimension(325, 30));
+        this.add(this.createLabel("Product: "));
+        this.add(this.createTextFieldNoEditable("productTextField", "", 15));
         
-        this.add(this.createLabel("Diagram*: "));
-        this.add(this.createComboBox("diagramComboBox", this.viewNew.getViewMenu().getProject().getDiagramsList().toArray(), 15));
-        this.getDiagramComboBox().setPreferredSize(new Dimension(325, 30));
+        this.add(this.createLabel("Diagram: "));
+        this.add(this.createTextFieldNoEditable("diagramTextField", "", 15));
         
         this.add(this.createLabel("Name*: "));
         this.add(this.createTextField("nameTextField", "", 15));
@@ -62,33 +57,17 @@ public final class PanelBaseInstance extends Panel {
      * Method responsible for setting the Instance Values.
      */
     public void setValues() {
-        this.setProduct();
-        this.setDiagram();
+        this.getProductTextField().setText(this.instance.getProduct().getName());
+        this.getDiagramTextField().setText(this.instance.getDiagram().getName());
         this.getNameTextField().setText(this.instance.getName());
     }
     
     /**
-     * Method responsible for setting the Instance Product.
+     * Method responsible for returning the View Menu.
+     * @return View Menu.
      */
-    private void setProduct() {
-        if (this.instance.getProduct() != null)
-            this.getProductComboBox().setSelectedItem(this.instance.getProduct());
-    }
-    
-    /**
-     * Method responsible for setting the Instance Diagram.
-     */
-    private void setDiagram() {
-        if (this.instance.getDiagram() != null)
-            this.getDiagramComboBox().setSelectedItem(this.instance.getDiagram());
-    }
-    
-    /**
-     * Method responsible for returning the View New Instance.
-     * @return View New Instance.
-     */
-    public ViewNewInstance getViewNewInstance() {
-        return this.viewNew;
+    public ViewMenu getViewMenu() {
+        return this.viewMenu;
     }
     
     /**
@@ -100,19 +79,19 @@ public final class PanelBaseInstance extends Panel {
     }
     
     /**
-     * Method responsible for returning the Product Combo Box.
-     * @return Product Combo Box.
+     * Method responsible for returning the Product Text Field.
+     * @return Product Text Field.
      */
-    public JComboBox getProductComboBox() {
-        return this.comboBoxes.get("productComboBox");
+    public JTextField getProductTextField() {
+        return this.textFields.get("productTextField");
     }
     
     /**
-     * Method responsible for returning the Diagram Combo Box.
-     * @return Diagram Combo Box.
+     * Method responsible for returning the Diagram Text Field.
+     * @return Diagram Text Field.
      */
-    public JComboBox getDiagramComboBox() {
-        return this.comboBoxes.get("diagramComboBox");
+    public JTextField getDiagramTextField() {
+        return this.textFields.get("diagramTextField");
     }
     
     /**

@@ -13,7 +13,7 @@ import model.structural.base.association.Association;
 import model.structural.base.product.Instance;
 import model.structural.base.variability.Variability;
 import view.edit.panel.base.product.PanelBaseArtifacts;
-import view.edit.panel.base.product.PanelBaseInstance;
+import view.edit.panel.base.product.PanelBaseNewInstance;
 import view.edit.panel.base.product.PanelBaseOptional;
 import view.edit.panel.base.product.PanelBaseVarPoints;
 import view.new_.ViewNew;
@@ -30,10 +30,10 @@ import view.structural.ViewMenu;
  */
 public final class ViewNewInstance extends ViewNew {
     private final Instance instance;
-    private PanelBaseInstance  panelBaseInstance;
-    private PanelBaseOptional  panelBaseOptional;
-    private PanelBaseVarPoints panelBaseVarPoints;
-    private PanelBaseArtifacts panelBaseArtifacts;
+    private PanelBaseNewInstance panelBaseNewInstance;
+    private PanelBaseOptional    panelBaseOptional;
+    private PanelBaseVarPoints   panelBaseVarPoints;
+    private PanelBaseArtifacts   panelBaseArtifacts;
     private HashMap<String, Integer> elements;
     
     /**
@@ -54,7 +54,7 @@ public final class ViewNewInstance extends ViewNew {
         this.addHeader();
         this.addComponents();
         this.addFooter();
-        this.addPanelBaseInstance();
+        this.addPanelBaseNewInstance();
     }
 
     @Override
@@ -73,12 +73,12 @@ public final class ViewNewInstance extends ViewNew {
     }
     
     /**
-     * Method responsible for adding the Panel Base Instance.
+     * Method responsible for adding the Panel Base New Instance.
      */
-    public void addPanelBaseInstance() {
-        this.panelBaseInstance = new PanelBaseInstance(this, this.instance);
+    public void addPanelBaseNewInstance() {
+        this.panelBaseNewInstance = new PanelBaseNewInstance(this, this.instance);
         this.tabbedPane.removeAll();
-        this.tabbedPane.add("Instance", this.panelBaseInstance);
+        this.tabbedPane.add("Instance", this.panelBaseNewInstance);
         this.getInsertButton().setEnabled(false);
     }
     
@@ -242,11 +242,11 @@ public final class ViewNewInstance extends ViewNew {
     }
     
     /**
-     * Method responsible for returning the Panel Base Instance.
-     * @return Panel Base Instance.
+     * Method responsible for returning the Panel Base New Instance.
+     * @return Panel Base New Instance.
      */
-    public PanelBaseInstance getPanelBaseInstance() {
-        return this.panelBaseInstance;
+    public PanelBaseNewInstance getPanelBaseNewInstance() {
+        return this.panelBaseNewInstance;
     }
 
     /**
