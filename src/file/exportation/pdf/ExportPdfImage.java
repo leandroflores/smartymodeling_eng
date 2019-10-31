@@ -98,6 +98,7 @@ public class ExportPdfImage {
      * @throws DocumentException 
      */
     public void export() throws FileNotFoundException, DocumentException, IOException {
+        //https://itextpdf.com/en/resources/examples/itext-5-legacy/adding-image-existing-file
         this.standard.rotate();
         OutputStream stream   = new FileOutputStream(this.path);
         Document     document = new Document(this.standard, 10, 10, 10, 10);

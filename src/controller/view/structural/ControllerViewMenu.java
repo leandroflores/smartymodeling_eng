@@ -5,6 +5,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import controller.view.ControllerView;
 import file.exportation.ExportProject;
+import file.exportation.pdf.ExportImage;
 import file.exportation.pdf.ExportPdfImage;
 import file.importation.ImportProject;
 import java.awt.Dimension;
@@ -360,12 +361,14 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      */
     public void exportImage() throws DocumentException, BadElementException, MalformedURLException {
         if (this.viewMenu.getFileChooserImage().showSaveDialog(this.viewMenu) != 1) {
-            String        path  = this.viewMenu.getFileChooserImage().getSelectedFile().getAbsolutePath();
-            BufferedImage image = this.viewMenu.getPanelModeling().getImage();
-            if (image != null) {
+            String        path     = this.viewMenu.getFileChooserImage().getSelectedFile().getAbsolutePath();
+            BufferedImage original = this.viewMenu.getPanelModeling().getImage();
+            BufferedImage image;
+            if (original != null) {
                 try {
-                    path = (path.toLowerCase().endsWith(".png")) ? path : path + ".png";
-                    ImageIO.write(image, "PNG", new File(path));
+                    path  = (path.toLowerCase().endsWith(".png")) ? path : path + ".png";
+                    image = new ExportImage(path, original).getPNGImage();
+                        ImageIO.write(image, "PNG", new File(path));
                     new ViewMessage(this.viewMenu, "Image exported Successfully!").setVisible(true);
                 } catch (IOException exception) {
                     new ViewError(this.viewMenu, "Error to export Image!").setVisible(true);
