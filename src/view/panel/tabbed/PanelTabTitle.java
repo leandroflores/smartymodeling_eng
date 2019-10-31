@@ -9,12 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import model.structural.base.Diagram;
 import model.structural.base.product.Instance;
-import model.structural.base.product.test.Product_Final;
 import view.Panel;
 import view.panel.diagram.PanelDiagram;
 import view.panel.instance.PanelInstance;
 import view.panel.modeling.PanelModeling;
-import view.panel.product.PanelProduct;
 
 /**
  * 
@@ -94,16 +92,6 @@ public final class PanelTabTitle extends Panel {
     public Instance getInstance() {
         if (this.getComponent() instanceof PanelInstance)
             return ((PanelInstance) this.getComponent()).getInstance();
-        return null;
-    }
-    
-    /**
-     * Method responsible for returning the Product_Final.
-     * @return Product_Final.
-     */
-    public Product_Final getProduct() {
-        if (this.getComponent() instanceof PanelProduct)
-            return ((PanelProduct) this.getComponent()).getProduct();
         return null;
     }
     

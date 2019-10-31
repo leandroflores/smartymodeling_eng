@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import model.structural.base.Diagram;
 import model.structural.base.product.Instance;
-import model.structural.base.product.test.Product_Final;
 import view.panel.tabbed.PanelTabTitle;
 
 /**
@@ -54,14 +53,6 @@ public class ControllerPanelTabTitle extends ControllerPanel {
     }
     
     /**
-     * Method responsible for returning the Product_Final.
-     * @return Product_Final.
-     */
-    private Product_Final getProduct() {
-        return this.panel.getPanelModeling().getPanelProduct().getProduct();
-    }
-    
-    /**
      * Method responsible for closing the Tab.
      */
     private void closeTab() {
@@ -69,7 +60,5 @@ public class ControllerPanelTabTitle extends ControllerPanel {
             this.panel.getPanelModeling().removeDiagram(this.panel.getDiagram());
         else if (this.panel.getInstance() != null)
             this.panel.getPanelModeling().removeInstance(this.panel.getInstance());
-        else if (this.panel.getProduct() != null)
-            this.panel.getPanelModeling().removeProduct(this.panel.getProduct());
     }
 }

@@ -1,8 +1,11 @@
 package controller.view.panel.main;
 
+import com.itextpdf.text.DocumentException;
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.net.MalformedURLException;
+import view.message.ViewError;
 import view.panel.main.PanelMain;
 import view.system.ViewSystemInformation;
 
@@ -43,9 +46,20 @@ public class ControllerPanelMain extends ControllerPanel {
         else if (this.panelMain.getZoomOutButton().equals(event.getSource()))
             this.panelMain.getViewMenu().zoomOut();
         else if (this.panelMain.getExportImageButton().equals(event.getSource()))
-            this.panelMain.getViewMenu().getController().exportImage();
+            this.exportImage();
         else if (this.panelMain.getVersionButton().equals(event.getSource()))
             new ViewSystemInformation(this.panelMain.getViewMenu()).setVisible(true);
+    }
+    
+    /**
+     * Method responsible for exporting the Image.
+     */
+    public void exportImage() {
+        try {
+            this.panelMain.getViewMenu().getController().exportImage();
+        } catch (DocumentException | MalformedURLException exception) {
+            new ViewError(this.panelMain.getViewMenu(), "Error to Export Image!").setVisible(true);
+        }
     }
 
     @Override

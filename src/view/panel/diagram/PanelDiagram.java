@@ -4,6 +4,7 @@ import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
+import com.mxgraph.util.mxUtils;
 import com.mxgraph.view.mxGraph;
 import controller.view.panel.diagram.ControllerPanelDiagram;
 import java.awt.Color;

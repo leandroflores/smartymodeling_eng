@@ -26,7 +26,6 @@ import view.panel.instance.types.PanelClassInstance;
 import view.panel.instance.types.PanelComponentInstance;
 import view.panel.instance.types.PanelUseCaseInstance;
 import view.panel.logo.PanelLogo;
-import view.panel.product.PanelProduct;
 import view.panel.tabbed.PanelTabbed;
 import view.structural.ViewMenu;
 
@@ -91,15 +90,6 @@ public final class PanelModeling extends Panel {
      */
     public void addInstance(Instance instance) {
         this.addTab(instance.getCompleteId(), instance.getName(), this.createPanelInstance(instance));
-    }
-    
-    /**
-     * Method responsible for adding a Product_Final.
-     * @param product Product_Final. 
-     */
-    public void addProduct(Product_Final product) {
-        PanelProduct component = this.createPanelProduct(product);
-        this.addTab(product.getId(), product.getName(), component);
     }
     
     /**
@@ -175,15 +165,6 @@ public final class PanelModeling extends Panel {
     }
     
     /**
-     * Method responsible for returning a New Product_Final Panel.
-     * @param  product Product_Final.
-     * @return New Product_Final Panel.
-     */
-    private PanelProduct createPanelProduct(Product_Final product) {
-        return new PanelProduct(this.viewMenu, product);
-    }
-    
-    /**
      * Method responsible for removing a Diagram from Panel Modeling.
      * @param diagram Diagram.
      */
@@ -250,8 +231,6 @@ public final class PanelModeling extends Panel {
             this.getPanelDiagram().setZoom(zoom);
         else if (this.getPanelInstance() != null)
             this.getPanelInstance().setZoom(zoom);
-        else if (this.getPanelProduct() != null)
-            this.getPanelProduct().setZoom(zoom);
     }
     
     /**
@@ -259,13 +238,11 @@ public final class PanelModeling extends Panel {
      * @return Image.
      */
     public BufferedImage getImage() {
-        Color color = new Color(0, 0, 0, 200);
+        Color color = new Color(0.925f, 0.925f, 0.925f, 1.00f);
         if (this.getPanelDiagram() != null)
-            return mxCellRenderer.createBufferedImage(this.getPanelDiagram().getGraph(), null, 1, Color.WHITE, true, null);
+            return mxCellRenderer.createBufferedImage(this.getPanelDiagram().getGraph(),  null, 10, color, true, null);
         else if (this.getPanelInstance() != null)
-            return mxCellRenderer.createBufferedImage(this.getPanelInstance().getGraph(), null, 1, Color.WHITE, true, null);
-        else if (this.getPanelProduct()  != null)
-            return mxCellRenderer.createBufferedImage(this.getPanelProduct().getGraph(), null, 1, Color.WHITE, true, null);
+            return mxCellRenderer.createBufferedImage(this.getPanelInstance().getGraph(), null, 10, color, true, null);
         return null;
     }
     
@@ -298,17 +275,6 @@ public final class PanelModeling extends Panel {
         Component component = this.panelTabbed.getSelectedComponent();
         if (component instanceof PanelInstance)
             return (PanelInstance) component;
-        return null;
-    }
-    
-    /**
-     * Method responsible for returning Panel Product_Final.
-     * @return Panel Product_Final.
-     */
-    public PanelProduct getPanelProduct() {
-        Component component = this.panelTabbed.getSelectedComponent();
-        if (component instanceof PanelProduct)
-            return (PanelProduct) component;
         return null;
     }
     

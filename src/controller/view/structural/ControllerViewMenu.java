@@ -1,7 +1,11 @@
 package controller.view.structural;
 
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
 import controller.view.ControllerView;
 import file.exportation.ExportProject;
+import file.exportation.pdf.ExportPdfImage;
 import file.importation.ImportProject;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -11,6 +15,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import javax.imageio.ImageIO;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
@@ -335,9 +340,25 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     }
     
     /**
-     * Method responsible for exporting the Image.
+     * Method responsible for exporting the Pdf Image.
+     * @param path Path.
+     * @param image
+     * @throws BadElementException
+     * @throws IOException
+     * @throws DocumentException 
      */
-    public void exportImage() {
+    public void exportPdfImage(String path, Image image) throws BadElementException, IOException, DocumentException  {
+        ExportPdfImage export = new ExportPdfImage(image, path);
+                       export.export();
+    }
+    
+    /**
+     * Method responsible for exporting the Image.
+     * @throws com.itextpdf.text.DocumentException
+     * @throws com.itextpdf.text.BadElementException
+     * @throws java.net.MalformedURLException
+     */
+    public void exportImage() throws DocumentException, BadElementException, MalformedURLException {
         if (this.viewMenu.getFileChooserImage().showSaveDialog(this.viewMenu) != 1) {
             String        path  = this.viewMenu.getFileChooserImage().getSelectedFile().getAbsolutePath();
             BufferedImage image = this.viewMenu.getPanelModeling().getImage();
@@ -352,7 +373,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             }
         }
     }
-
+    
     /**
      * Method responsible for resizing the Panel Project.
      */
