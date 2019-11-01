@@ -4,7 +4,6 @@ import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
-import com.mxgraph.util.mxUtils;
 import com.mxgraph.view.mxGraph;
 import controller.view.panel.diagram.ControllerPanelDiagram;
 import java.awt.Color;
@@ -155,9 +154,9 @@ public abstract class PanelDiagram extends Panel {
      * Method responsible for cleaning the Diagram.
      */
     public void clearDiagram() {
-//        this.graph.removeCellsFromParent();
-//        this.graph.removeCells();
-//        this.graph.removeCells(this.graph.getChildVertices(this.graph.getDefaultParent()));
+        this.graph.removeCellsFromParent();
+        this.graph.removeCells();
+        this.graph.removeCells(this.graph.getChildVertices(this.graph.getDefaultParent()));
         this.graph.removeCells(this.graph.getChildCells(this.graph.getDefaultParent(), true, true));
     }
     

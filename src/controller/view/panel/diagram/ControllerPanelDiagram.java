@@ -130,10 +130,8 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
             String  id      = this.panelDiagram.getIdentifiers().get(cell);
             Element element = this.panelDiagram.getDiagram().getElement(id);
             if (element != null)
-//                new ViewEditarElemento(this.painelDiagrama.getViewMenu().getPanelModeling(), elemento).setVisible(true);
-//                  this.painelDiagrama.getComponente().scrollCellToVisible(cell, true);
                   this.panelDiagram.getComponent().startEditingAtCell(cell);
-//            this.painelDiagrama.getViewMenu().update();
+//            this.panelDiagram.getViewMenu().update();
             this.panelDiagram.setClick();
         }
     }

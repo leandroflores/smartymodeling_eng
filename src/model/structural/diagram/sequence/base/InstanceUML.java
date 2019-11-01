@@ -39,6 +39,14 @@ public class InstanceUML extends Element {
     }
 
     /**
+     * Method responsible for updating the Name.
+     */
+    public void updateName() {
+        if (this.name.trim().equals(""))
+            this.name = (this.classUML == null) ? "instance" : this.classUML.getName().toLowerCase().trim();
+    }
+    
+    /**
      * Method responsible for returning the Class UML.
      * @return Class UML.
      */
@@ -51,8 +59,9 @@ public class InstanceUML extends Element {
      * @param classUML Class UML.
      */
     public void setClassUML(ClassUML classUML) {
-        this.classUML =  classUML;
-        this.name     = (classUML == null) ? "instance" : classUML.getName().toLowerCase().trim();
+        if (classUML != null)
+            this.classUML =  classUML;
+        this.updateName();
     }
     
     /**

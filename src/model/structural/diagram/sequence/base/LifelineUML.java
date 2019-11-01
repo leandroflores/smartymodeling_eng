@@ -38,6 +38,14 @@ public class LifelineUML extends Element {
     }
 
     /**
+     * Method responsible for updating the Name.
+     */
+    public void updateName() {
+        if (this.name.trim().equals(""))
+            this.name = (this.actor == null) ? "lifeline" : this.actor.getName().toLowerCase().trim();
+    }
+    
+    /**
      * Method responsible for returning the Actor UML.
      * @return Actor UML.
      */
@@ -50,8 +58,9 @@ public class LifelineUML extends Element {
      * @param actor Actor UML.
      */
     public void setActor(ActorUML actor) {
-        this.actor =  actor;
-        this.name  = (actor == null) ? "lifeline" : actor.getName().toLowerCase().trim();
+        if (actor != null)
+            this.actor =  actor;
+        this.updateName();
     }
 
     /**

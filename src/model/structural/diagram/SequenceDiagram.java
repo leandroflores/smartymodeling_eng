@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
@@ -85,7 +84,7 @@ public final class SequenceDiagram extends Diagram {
     public void resetLifeline(Element element) {
         if (element instanceof ActorUML) {
             for (LifelineUML lifeline : this.getLifelinesList()) {
-                if (lifeline.getActor().equals(element))
+                if ((lifeline.getActor() != null) && (lifeline.getActor().equals(element)))
                     lifeline.setActor(null);
             }
         }
@@ -136,7 +135,7 @@ public final class SequenceDiagram extends Diagram {
     public void resetInstance(Element element) {
         if (element instanceof ClassUML) {
             for (InstanceUML instance : this.getInstancesList()) {
-                if (instance.getClassUML().equals(element))
+                if ((instance.getClassUML() != null) && (instance.getClassUML().equals(element)))
                     instance.setClassUML(null);
             }
         }
@@ -191,8 +190,8 @@ public final class SequenceDiagram extends Diagram {
      * @param message Message UML.
      */
     public void removeMessage(MessageUML message) {
-        this.removeAssociation(message);
-        this.associations.remove(message.getId());
+        super.removeAssociation(message);
+        this.messages.remove(message.getId());
         this.updateSequence();
     }
     
@@ -204,17 +203,12 @@ public final class SequenceDiagram extends Diagram {
         this.removeAssociation(element, this.messages);
     }
     
-    /**
-     * Method responsible for removing the Association by Element.
-     * @param element Element.
-     * @param map Associations Map.
-     */
-    private void removeAssociation(Element element, Map<String, Association> map) {
-        for (Association association : map.values()) {
-            if (association.getSource().equals(element)
-             || association.getTarget().equals(element))
-                this.removeAssociation(association);
-        }
+    @Override
+    public void removeAssociation(Association association) {
+        if (association instanceof MessageUML)
+            this.removeMessage((MessageUML) association);
+        else
+            super.removeAssociation(association);
     }
     
     /**

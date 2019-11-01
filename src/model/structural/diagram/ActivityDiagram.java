@@ -3,7 +3,6 @@ package model.structural.diagram;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
@@ -248,8 +247,8 @@ public final class ActivityDiagram extends Diagram {
      * @param flow Flow UML.
      */
     public void removeFlow(FlowUML flow) {
-        this.removeAssociation(flow);
-        this.associations.remove(flow.getId());
+        super.removeAssociation(flow);
+        this.flows.remove(flow.getId());
     }
     
     /**
@@ -260,17 +259,12 @@ public final class ActivityDiagram extends Diagram {
         this.removeAssociation(element, this.flows);
     }
     
-    /**
-     * Method responsible for removing the Association by Element.
-     * @param element Element.
-     * @param map Associations Map.
-     */
-    private void removeAssociation(Element element, Map<String, Association> map) {
-        for (Association association : map.values()) {
-            if (association.getSource().equals(element)
-             || association.getTarget().equals(element))
-                this.removeAssociation(association);
-        }
+    @Override
+    public void removeAssociation(Association association) {
+        if (association instanceof FlowUML)
+            this.removeFlow((FlowUML) association);
+        else
+            super.removeAssociation(association);
     }
     
     @Override

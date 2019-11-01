@@ -145,7 +145,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private String getName(String signature, String symbol) {
         if (signature.contains(symbol))
-            return signature.substring(1, signature.trim().indexOf(symbol)).trim();
+            return signature.substring(0, signature.trim().indexOf(symbol)).trim();
         return "";
     }
     

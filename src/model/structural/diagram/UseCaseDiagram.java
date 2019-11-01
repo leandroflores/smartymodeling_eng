@@ -3,7 +3,6 @@ package model.structural.diagram;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import model.structural.base.association.Association;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
@@ -153,8 +152,8 @@ public final class UseCaseDiagram extends Diagram {
      * @param realizationUML Realization UML.
      */
     public void removeRealization(RealizationUML realizationUML) {
-        this.removeAssociation(realizationUML);
-        this.associations.remove(realizationUML.getId());
+        super.removeAssociation(realizationUML);
+        this.realizationsUML.remove(realizationUML.getId());
     }
     
     /**
@@ -173,7 +172,7 @@ public final class UseCaseDiagram extends Diagram {
      * @param extendUML Extend UML.
      */
     public void removeExtend(ExtendUML extendUML) {
-        this.removeAssociation(extendUML);
+        super.removeAssociation(extendUML);
         this.extendsUML.remove(extendUML.getId());
     }
     
@@ -193,7 +192,7 @@ public final class UseCaseDiagram extends Diagram {
      * @param includeUML Include UML.
      */
     public void removeInclude(IncludeUML includeUML) {
-        this.removeAssociation(includeUML);
+        super.removeAssociation(includeUML);
         this.includesUML.remove(includeUML.getId());
     }
     
@@ -207,16 +206,16 @@ public final class UseCaseDiagram extends Diagram {
         this.removeAssociation(element, this.includesUML);
     }
     
-    /**
-     * Method responsible for removing a Association by Element.
-     * @param element Element.
-     * @param map Associations Map.
-     */
-    private void removeAssociation(Element element, Map<String, Association> map) {
-        for (Association association : map.values()) {
-            if (association.contains(element))
-                this.removeAssociation(association);
-        }
+    @Override
+    public void removeAssociation(Association association) {
+        if (association instanceof RealizationUML)
+            this.removeRealization((RealizationUML) association);
+        else if (association instanceof ExtendUML)
+            this.removeExtend((ExtendUML) association);
+        else if (association instanceof IncludeUML)
+            this.removeInclude((IncludeUML) association);
+        else
+            super.removeAssociation(association);
     }
     
     @Override

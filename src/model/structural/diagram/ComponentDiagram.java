@@ -3,7 +3,6 @@ package model.structural.diagram;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
@@ -147,8 +146,8 @@ public final class ComponentDiagram extends Diagram {
      * @param comunicationUML Comunication UML.
      */
     public void removeComunication(ComunicationUML comunicationUML) {
-        this.removeAssociation(comunicationUML);
-        this.associations.remove(comunicationUML.getId());
+        super.removeAssociation(comunicationUML);
+        this.comunications.remove(comunicationUML.getId());
     }
     
     /**
@@ -159,16 +158,12 @@ public final class ComponentDiagram extends Diagram {
         this.removeAssociation(element, this.comunications);
     }
     
-    /**
-     * Method responsible for removing the Association by Element.
-     * @param element Element.
-     * @param map Associations Map.
-     */
-    private void removeAssociation(Element element, Map<String, Association> map) {
-        for (Association association : map.values()) {
-            if (association.contains(element))
-                this.removeAssociation(association);
-        }
+    @Override
+    public void removeAssociation(Association association) {
+        if (association instanceof ComunicationUML)
+            this.removeComunication((ComunicationUML) association);
+        else
+            super.removeAssociation(association);
     }
     
     @Override

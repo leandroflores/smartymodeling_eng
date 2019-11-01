@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import model.structural.base.association.Dependency;
 import model.structural.base.association.Link;
 import model.structural.base.interfaces.Exportable;
@@ -513,6 +514,18 @@ public abstract class Diagram implements Exportable {
      */
     private void removeAssociation(Element element) {
         for (Association association : this.getAssociationsList()) {
+            if (association.contains(element))
+                this.removeAssociation(association);
+        }
+    }
+    
+    /**
+     * Method responsible for removing a Association by Element.
+     * @param element Element.
+     * @param map Associations Map.
+     */
+    protected void removeAssociation(Element element, Map<String, Association> map) {
+        for (Association association : new ArrayList<>(map.values())) {
             if (association.contains(element))
                 this.removeAssociation(association);
         }
