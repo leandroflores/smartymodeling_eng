@@ -28,7 +28,7 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
     }
     
     @Override
-    public void invoke(Object object, mxEventObject evento) {
+    public void invoke(Object object, mxEventObject event) {
         Object  cell    = this.panel.getGraph().getSelectionCell();
         String  id      = this.panel.getIdentifiers().get(cell);
         Element element = this.panel.getDiagram().getElement(id);

@@ -58,6 +58,64 @@ public final class SequenceDiagram extends Diagram {
     }
     
     /**
+     * Method responsible for returning the Min Height.
+     * @return Min Height.
+     */
+    public Integer getMinHeigth() {
+        return 100 + (this.messages.size() * 30);
+    }
+    
+    /**
+     * Method responsible for returning the Max Height.
+     * @return Max Height.
+     */
+    public Integer getMaxHeight() {
+        return Math.max(this.getMaxLifelinesHeight(), this.getMaxInstancesHeight());
+    }
+    
+    /**
+     * Method responsible for returning the Y Default.
+     * @return Y Default.
+     */
+    public Integer getYDefault() {
+        if (!this.lifelines.isEmpty())
+            return this.getLifelinesList().get(0).getY();
+        else if (!this.instances.isEmpty())
+            return this.getInstancesList().get(0).getY();
+        return 20;
+    }
+    
+    /**
+     * Method responsible for returning the Height Default.
+     * @return Height Default.
+     */
+    public Integer getHeightDefault() {
+        if (!this.lifelines.isEmpty())
+            return this.getLifelinesList().get(0).getHeight();
+        else if (!this.instances.isEmpty())
+            return this.getInstancesList().get(0).getHeight();
+        return 20;
+    }
+    
+    /**
+     * Method responsible for updating the Height.
+     * @param heigth Height.
+     */
+    public void updateHeight(Integer heigth) {
+        this.updateLifelinesHeight(heigth);
+        this.updateInstancesHeight(heigth);
+    }
+    
+    /**
+     * Method responsible for updating the Y.
+     * @param y Y Coordinate.
+     */
+    public void updateY(Integer y) {
+        this.updateLifelinesY(y);
+        this.updateInstancesY(y);
+    }
+    
+    /**
      * Method responsible for returning the Next Lifeline Id.
      * @return Next Lifeline Id.
      */
@@ -98,6 +156,35 @@ public final class SequenceDiagram extends Diagram {
         this.removeAssociations(lifeline);
         this.removeElement(lifeline);
         this.lifelines.remove(lifeline.getId());
+    }
+    
+    /**
+     * Method responsible for returning the Max Lifelines Height.
+     * @return Max Lifelines Height.
+     */
+    public Integer getMaxLifelinesHeight() {
+        Integer max = Math.max(350, this.getMinHeigth());
+        for (LifelineUML lifeline : this.getLifelinesList())
+                max = Math.max(lifeline.getHeight(), max);
+        return  max;
+    }
+    
+    /**
+     * Method responsible for updating the Lifelines Height.
+     * @param height Height.
+     */
+    public void updateLifelinesHeight(Integer height) {
+        for (LifelineUML lifeline : this.getLifelinesList())
+            lifeline.setHeight(height);
+    }
+    
+    /**
+     * Method responsible for updating the Lifelines Y.
+     * @param y Y Coordinate.
+     */
+    public void updateLifelinesY(Integer y) {
+        for (LifelineUML lifeline : this.getLifelinesList())
+            lifeline.getPosition().y = y;
     }
     
     /**
@@ -149,6 +236,35 @@ public final class SequenceDiagram extends Diagram {
         this.removeAssociations(instance);
         this.removeElement(instance);
         this.instances.remove(instance.getId());
+    }
+    
+    /**
+     * Method responsible for returning the Max Instances Height.
+     * @return Max Instances Height.
+     */
+    public Integer getMaxInstancesHeight() {
+        Integer max = Math.max(350, this.getMinHeigth());
+        for (InstanceUML instance : this.getInstancesList())
+                max = Math.max(instance.getHeight(), max);
+        return  max;
+    }
+    
+    /**
+     * Method responsible for updating the Instances Height.
+     * @param height Height.
+     */
+    public void updateInstancesHeight(Integer height) {
+        for (InstanceUML instance : this.getInstancesList())
+            instance.setHeight(height);
+    }
+    
+    /**
+     * Method responsible for updating the Instances Y.
+     * @param y Y Coordinate.
+     */
+    public void updateInstancesY(Integer y) {
+        for (InstanceUML instance : this.getInstancesList())
+            instance.getPosition().y = y;
     }
     
     /**

@@ -1,8 +1,11 @@
 package controller.view.panel.diagram.types;
 
+import com.mxgraph.model.mxCell;
 import controller.view.panel.diagram.ControllerPanelDiagram;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import model.structural.base.Element;
 import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
 import view.panel.diagram.types.PanelSequenceDiagram;
@@ -61,14 +64,15 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
         this.panelDiagram.getInstanceButton().setBackground(this.getFocusColor());
         this.panelDiagram.setOperation("Instance");
     }
-
+    
     /**
      * Method responsible for adding a New Lifeline.
      * @param event Mouse Event.
      */
     public void addLifeline(MouseEvent event) {
         LifelineUML lifeline = new LifelineUML();
-                    lifeline.setPosition(event.getX(), 20);
+                    lifeline.setPosition(event.getX(), this.panelDiagram.getDiagram().getYDefault());
+                    lifeline.setHeight(this.panelDiagram.getDiagram().getHeightDefault());
         this.panelDiagram.getDiagram().addLifeline(lifeline);
                     lifeline.setDefaultName();
         this.panelDiagram.updateDiagram();
@@ -81,10 +85,31 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
      */
     public void addInstance(MouseEvent event) {
         InstanceUML instance = new InstanceUML();
-                    instance.setPosition(event.getX(), 20);
+                    instance.setPosition(event.getX(), this.panelDiagram.getDiagram().getYDefault());
+                    instance.setHeight(this.panelDiagram.getDiagram().getHeightDefault());
         this.panelDiagram.getDiagram().addInstance(instance);
                     instance.setDefaultName();
         this.panelDiagram.updateDiagram();
         this.panelDiagram.getViewMenu().update();
+    }
+    
+    @Override
+    public void move(KeyEvent event) {
+        mxCell  cell    = (mxCell) this.panelDiagram.getGraph().getSelectionCell();
+        String  id      = this.panelDiagram.getIdentifiers().get(cell);
+        Element element = this.panelDiagram.getDiagram().getElement(id);
+        if (element != null) {
+            if (event.getKeyCode() == KeyEvent.VK_UP)
+                element.dy(-10);
+            if (event.getKeyCode() == KeyEvent.VK_DOWN)
+                element.dy(10);
+            if (event.getKeyCode() == KeyEvent.VK_LEFT)
+                element.dx(-10);
+            if (event.getKeyCode() == KeyEvent.VK_RIGHT)
+                element.dx(10);
+            this.panelDiagram.getDiagram().updateY(element.getY());
+            this.panelDiagram.updateDiagram();
+            this.panelDiagram.getGraph().setSelectionCell(this.panelDiagram.getObjects().get(element.getId()));
+        }
     }
 }

@@ -69,10 +69,13 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
     private void resize(LifelineUML lifelineUML, Object cell) {
         Integer height = new Double(this.panel.getGraph().getCellGeometry(cell).getHeight()).intValue();
         Integer width  = new Double(this.panel.getGraph().getCellGeometry(cell).getWidth()).intValue();
-            lifelineUML.setHeight(height >  350 ? height : 350);
+        if (height > this.panel.getDiagram().getMinHeigth()) {
+            lifelineUML.setHeight(height);
             lifelineUML.setWidth( width  >  lifelineUML.getNameSize() ?  width :  lifelineUML.getNameSize());
+            this.panel.getDiagram().updateHeight(height);
+            this.panel.updateDiagram();
+        }
         this.panel.getViewMenu().setSave(false);
-        this.panel.updateDiagram();
     }
     
     /**
@@ -83,9 +86,12 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
     private void resize(InstanceUML instanceUML, Object cell) {
         Integer height = new Double(this.panel.getGraph().getCellGeometry(cell).getHeight()).intValue();
         Integer width  = new Double(this.panel.getGraph().getCellGeometry(cell).getWidth()).intValue();
-            instanceUML.setHeight(height >  350 ? height : 350);
+        if (height > this.panel.getDiagram().getMinHeigth()) {
+            instanceUML.setHeight(height);
             instanceUML.setWidth( width  >  instanceUML.getNameSize() ?  width :  instanceUML.getNameSize());
+            this.panel.getDiagram().updateHeight(height);
+            this.panel.updateDiagram();
+        }
         this.panel.getViewMenu().setSave(false);
-        this.panel.updateDiagram();
     }
 }

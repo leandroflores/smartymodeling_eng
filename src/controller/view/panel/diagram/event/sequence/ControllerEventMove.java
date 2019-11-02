@@ -49,6 +49,9 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      */
     private void moveElement(Element element, mxEventObject event) {
         element.dx(((Double) event.getProperty("dx")).intValue());
+        element.dy(((Double) event.getProperty("dy")).intValue());
+        this.panel.getDiagram().updateY(element.getY());
         this.panel.getViewMenu().setSave(false); 
+        this.panel.updateDiagram();
    }
 }

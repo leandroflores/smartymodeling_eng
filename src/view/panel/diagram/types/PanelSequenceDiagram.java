@@ -7,6 +7,7 @@ import controller.view.panel.diagram.association.types.ControllerEventAssociatio
 import controller.view.panel.diagram.event.sequence.ControllerEventChange;
 import controller.view.panel.diagram.event.sequence.ControllerEventEdit;
 import controller.view.panel.diagram.event.sequence.ControllerEventMove;
+import controller.view.panel.diagram.event.sequence.ControllerEventResize;
 import controller.view.panel.diagram.types.ControllerPanelSequenceDiagram;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -106,10 +107,10 @@ public final class PanelSequenceDiagram extends PanelDiagram {
             
             mxCell vertex   = (mxCell) this.graph.insertVertex(this.parent, lifeline.getId(), "", lifeline.getPosition().x, lifeline.getPosition().y, lifeline.getSize().x, lifeline.getSize().y, lifeline.getStyleLabel());
                    vertex.setConnectable(true);
-            this.addNameCell(vertex, lifeline);
-            this.addEndPointCell(vertex, lifeline);
-            this.addLineCell(vertex, lifeline);
-            this.graph.insertVertex(vertex, null, "", 5, 10, 20, 20, "styleImageActor");
+                this.addNameCell(vertex, lifeline);
+                this.addEndPointCell(vertex, lifeline);
+                this.addLineCell(vertex, lifeline);
+                this.graph.insertVertex(vertex, null, "", 5, 10, 20, 20, "styleImageActor");
 
             this.identifiers.put(vertex, lifeline.getId());
             this.objects.put(lifeline.getId(), vertex);
@@ -120,6 +121,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      * Method responsible for adding the Diagram Instances.
      */
     private void addInstances() {
+        this.graph.getStylesheet().putCellStyle("styleImageClass", this.getImageClassStyle());
         for (InstanceUML instance : this.diagram.getInstancesList()) {
             this.graph.getStylesheet().putCellStyle(instance.getStyleLabel(), instance.getStyle());
             
@@ -128,6 +130,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
             this.addNameCell(vertex, instance);
             this.addEndPointCell(vertex, instance);
             this.addLineCell(vertex, instance);
+            this.graph.insertVertex(vertex, null, "", 5, 10, 20, 20, "styleImageClass");
 
             this.identifiers.put(vertex, instance.getId());
             this.objects.put(instance.getId(), vertex);
@@ -141,7 +144,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      */
     private void addNameCell(mxCell parent, Element element) {
         this.graph.getStylesheet().putCellStyle("nameStyle", this.getNameStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, element.getId() + "(name)", this.getSignature(element), 0, 0, element.getWidth(), 50, "nameStyle");
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, element.getId() + "(name)", this.getSignature(element), 2, 0, element.getWidth() - 4, 50, "nameStyle");
                cell.setConnectable(false);
                cell.setId(element.getId() + "(name)");
         this.identifiers.put(cell.getId(), element.getId());
@@ -178,8 +181,8 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      */
     private void addEndPointCell(mxCell parent, Element element) {
         this.graph.getStylesheet().putCellStyle("endPointStyle", this.getEndPointStyle());
-        Integer x   = element.getWidth() / 2;
-        Integer y   = element.getHeight();
+        Integer x   = element.getWidth()  / 2;
+        Integer y   = element.getHeight() - 10;
         mxCell cell = (mxCell) this.graph.insertVertex(parent, element.getId() + "(point)", "", x, y, 10, 10, "endPointStyle");
                cell.setConnectable(false);
                cell.setId(element.getId() + "(point)");
@@ -195,6 +198,20 @@ public final class PanelSequenceDiagram extends PanelDiagram {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_IMAGE);
                style.put(mxConstants.STYLE_IMAGE, "/images/diagram/usecase/actor.png");
+               style.put(mxConstants.STYLE_MOVABLE,   0);
+               style.put(mxConstants.STYLE_EDITABLE,  0);
+               style.put(mxConstants.STYLE_RESIZABLE, 0);
+        return style;
+    }
+    
+    /**
+     * Method responsible for returning the Image Class Style.
+     * @return Image Class Style.
+     */
+    private Map getImageClassStyle() {
+        Map    style = new HashMap<>();
+               style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_IMAGE);
+               style.put(mxConstants.STYLE_IMAGE, "/images/diagram/classes/class.png");
                style.put(mxConstants.STYLE_MOVABLE,   0);
                style.put(mxConstants.STYLE_EDITABLE,  0);
                style.put(mxConstants.STYLE_RESIZABLE, 0);
@@ -244,7 +261,8 @@ public final class PanelSequenceDiagram extends PanelDiagram {
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
                style.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_BOTTOM);
                style.put(mxConstants.STYLE_FONTSIZE, "15");
-               style.put(mxConstants.STYLE_EDITABLE, "0");
+               style.put(mxConstants.STYLE_EDITABLE,  "0");
+               style.put(mxConstants.STYLE_RESIZABLE, "0");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_FILLCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#FFFFFF");
@@ -254,14 +272,14 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     @Override
     public void addAssociations() {
         for (MessageUML message : this.diagram.getMessageList())
-            this.addPoints(message);
+            this.addMessage(message);
     }
     
     /**
      * Method responsible for adding the Message Points.
      * @param message Message UML.
      */
-    private void addPoints(MessageUML message) {
+    private void addMessage(MessageUML message) {
         this.graph.getStylesheet().putCellStyle(message.getStyleLabel(), message.getStyle());
         Object source = this.addPoint(message, message.getSource());
         Object target = this.addPoint(message, message.getTarget());
@@ -333,7 +351,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
         this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
         this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
         this.component.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventMove(this));
-//        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
+        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
      }
     
     @Override
