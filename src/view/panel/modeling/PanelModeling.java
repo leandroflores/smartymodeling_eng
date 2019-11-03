@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import model.structural.base.Diagram;
 import model.structural.base.product.Instance;
-import model.structural.base.product.test.Product_Final;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.ComponentDiagram;
@@ -184,18 +183,6 @@ public final class PanelModeling extends Panel {
         if (this.tabs.get(instance.getCompleteId()) != null) {
             this.panelTabbed.remove(this.tabs.get(instance.getCompleteId()));
             this.tabs.remove(instance.getCompleteId());
-            this.updateUI();
-        }
-    }
-    
-    /**
-     * Method responsible for removing a Product_Final from Panel Modeling.
-     * @param product Product_Final.
-     */
-    public void removeProduct(Product_Final product) {
-        if (this.tabs.get(product.getId()) != null) {
-            this.panelTabbed.remove(this.tabs.get(product.getId()));
-            this.tabs.remove(product.getId());
             this.updateUI();
         }
     }

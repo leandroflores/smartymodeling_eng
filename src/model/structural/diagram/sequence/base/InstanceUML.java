@@ -37,13 +37,43 @@ public class InstanceUML extends Element {
         this.type     = "instance";
         this.classUML = null;
     }
+    
+    @Override
+    public void setName(String name) {
+        super.setName(name);
+        this.setMinWidth();
+    }
 
     /**
      * Method responsible for updating the Name.
      */
     public void updateName() {
         if (this.name.trim().equals(""))
-            this.name = (this.classUML == null) ? "instance" : this.classUML.getName().toLowerCase().trim();
+            this.setName((this.classUML == null) ? "instance" : this.classUML.getName().toLowerCase().trim());
+    }
+    
+    /**
+     * Method responsible for returning the Signature Size.
+     * @return Signature Size.
+     */
+    public Integer getSignatureSize() {
+        return 10 * this.getSignature().length();
+    }
+    
+    /**
+     * Method responsible for returning the Min Width.
+     * @return Min Width.
+     */
+    public Integer getMinWidth() {
+        return Math.max(200, this.getSignatureSize());
+    }
+    
+    /**
+     * Method responsible for setting the Min Width.
+     */
+    public void setMinWidth() {
+        Integer width = this.getMinWidth();
+        this.setWidth(width  >  this.getWidth() ?  width : this.getWidth());
     }
     
     /**
@@ -82,14 +112,6 @@ public class InstanceUML extends Element {
         return "";
     }
 
-    /**
-     * Method responsible for returning the Name Size.
-     * @return Name Size.
-     */
-    public Integer getNameSize() {
-        return 10 * this.name.length();
-    }
-    
     @Override
     public String getIcon() {
         return "src/images/icons/diagram/sequence/instance.png";

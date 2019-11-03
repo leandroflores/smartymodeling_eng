@@ -101,11 +101,11 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      * Method responsible for adding the Diagram Lifelines.
      */
     private void addLifelines() {
-        this.graph.getStylesheet().putCellStyle("styleImageActor", this.getImageActorStyle());
+        this.graph.getStylesheet().putCellStyle("styleImageActor", this.getImageStyle("usecase/actor.png"));
         for (LifelineUML lifeline : this.diagram.getLifelinesList()) {
             this.graph.getStylesheet().putCellStyle(lifeline.getStyleLabel(), lifeline.getStyle());
             
-            mxCell vertex   = (mxCell) this.graph.insertVertex(this.parent, lifeline.getId(), "", lifeline.getPosition().x, lifeline.getPosition().y, lifeline.getSize().x, lifeline.getSize().y, lifeline.getStyleLabel());
+            mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, lifeline.getId(), "", lifeline.getPosition().x, lifeline.getPosition().y, lifeline.getSize().x, lifeline.getSize().y, lifeline.getStyleLabel());
                    vertex.setConnectable(true);
                 this.addNameCell(vertex, lifeline);
                 this.addEndPointCell(vertex, lifeline);
@@ -121,11 +121,11 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      * Method responsible for adding the Diagram Instances.
      */
     private void addInstances() {
-        this.graph.getStylesheet().putCellStyle("styleImageClass", this.getImageClassStyle());
+        this.graph.getStylesheet().putCellStyle("styleImageClass", this.getImageStyle("classes/class.png"));
         for (InstanceUML instance : this.diagram.getInstancesList()) {
             this.graph.getStylesheet().putCellStyle(instance.getStyleLabel(), instance.getStyle());
             
-            mxCell vertex   = (mxCell) this.graph.insertVertex(this.parent, instance.getId(), "", instance.getPosition().x, instance.getPosition().y, instance.getSize().x, instance.getSize().y, instance.getStyleLabel());
+            mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, instance.getId(), "", instance.getPosition().x, instance.getPosition().y, instance.getSize().x, instance.getSize().y, instance.getStyleLabel());
                    vertex.setConnectable(true);
             this.addNameCell(vertex, instance);
             this.addEndPointCell(vertex, instance);
@@ -169,9 +169,11 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      */
     private void addLineCell(mxCell parent, Element element) {
         this.graph.getStylesheet().putCellStyle("lineStyle", this.getLineStyle());
-        Object edge = this.graph.insertEdge(this.parent, element.getId(), "", this.objects.get(element.getId() + "(name)"), this.objects.get(element.getId() + "(point)"), "lineStyle");
-        mxCell cell = (mxCell) edge;
-        this.identifiers.put(edge, element.getId());
+        Object source  = this.objects.get(element.getId() + "(name)");
+        Object target  = this.objects.get(element.getId() + "(point)");
+        Object newEdge = this.graph.insertEdge(this.parent, element.getId(), "", source, target, "lineStyle");
+        mxCell newCell = (mxCell) newEdge;
+        this.identifiers.put(newEdge, element.getId());
     }
     
     /**
@@ -191,27 +193,14 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     }
     
     /**
-     * Method responsible for returning the Image Actor Style.
-     * @return Image Actor Style.
+     * Method responsible for returning the Image Style.
+     * @param  path Image Path (images/diagram/).
+     * @return Image Style.
      */
-    private Map getImageActorStyle() {
+    private Map getImageStyle(String path) {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_IMAGE);
-               style.put(mxConstants.STYLE_IMAGE, "/images/diagram/usecase/actor.png");
-               style.put(mxConstants.STYLE_MOVABLE,   0);
-               style.put(mxConstants.STYLE_EDITABLE,  0);
-               style.put(mxConstants.STYLE_RESIZABLE, 0);
-        return style;
-    }
-    
-    /**
-     * Method responsible for returning the Image Class Style.
-     * @return Image Class Style.
-     */
-    private Map getImageClassStyle() {
-        Map    style = new HashMap<>();
-               style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_IMAGE);
-               style.put(mxConstants.STYLE_IMAGE, "/images/diagram/classes/class.png");
+               style.put(mxConstants.STYLE_IMAGE, "/images/diagram/" + path);
                style.put(mxConstants.STYLE_MOVABLE,   0);
                style.put(mxConstants.STYLE_EDITABLE,  0);
                style.put(mxConstants.STYLE_RESIZABLE, 0);

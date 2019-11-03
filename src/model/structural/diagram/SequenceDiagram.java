@@ -94,7 +94,7 @@ public final class SequenceDiagram extends Diagram {
             return this.getLifelinesList().get(0).getHeight();
         else if (!this.instances.isEmpty())
             return this.getInstancesList().get(0).getHeight();
-        return 20;
+        return 350;
     }
     
     /**
@@ -284,6 +284,7 @@ public final class SequenceDiagram extends Diagram {
         if (this.messages.get(message.getId()) == null) {
             this.messages.put(message.getId(), message);
             this.addAssociation(message);
+            this.updateHeight(this.getMinHeigth());
             this.updateSequence();
         }
     }

@@ -36,13 +36,43 @@ public class LifelineUML extends Element {
         super(element, true);
         this.type = "lifeline";
     }
+    
+    @Override
+    public void setName(String name) {
+        super.setName(name);
+        this.setMinWidth();
+    }
 
     /**
      * Method responsible for updating the Name.
      */
     public void updateName() {
         if (this.name.trim().equals(""))
-            this.name = (this.actor == null) ? "lifeline" : this.actor.getName().toLowerCase().trim();
+            this.setName((this.actor == null) ? "lifeline" : this.actor.getName().toLowerCase().trim());
+    }
+    
+    /**
+     * Method responsible for returning the Signature Size.
+     * @return Signature Size.
+     */
+    public Integer getSignatureSize() {
+        return 10 * this.getSignature().length();
+    }
+    
+    /**
+     * Method responsible for returning the Min Width.
+     * @return Min Width.
+     */
+    public Integer getMinWidth() {
+        return Math.max(200, this.getSignatureSize());
+    }
+    
+    /**
+     * Method responsible for setting the Min Width.
+     */
+    public void setMinWidth() {
+        Integer width = this.getMinWidth();
+        this.setWidth(width  >  this.getWidth() ?  width : this.getWidth());
     }
     
     /**
