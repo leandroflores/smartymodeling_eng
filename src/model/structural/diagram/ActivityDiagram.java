@@ -252,6 +252,17 @@ public final class ActivityDiagram extends Diagram {
     }
     
     /**
+     * Method responsible for returning the Flows List.
+     * @return Flows List.
+     */
+    public List<FlowUML> getFlowsList() {
+        ArrayList<FlowUML> list = new ArrayList<>();
+        for (Association association : this.flows.values())
+               list.add((FlowUML) association);
+        return list;
+    }
+    
+    /**
      * Method responsible for removing the Associations by Element.
      * @param element Element.
      */

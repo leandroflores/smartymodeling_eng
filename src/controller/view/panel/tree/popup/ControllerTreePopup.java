@@ -223,7 +223,9 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      * @param association Association.
      */
     private void showPanelEdit(Diagram diagram, Association association) {
-        if (diagram instanceof SequenceDiagram)
+        if (diagram instanceof ActivityDiagram)
+            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditAssociation((ActivityDiagram) diagram, association);
+        else if (diagram instanceof SequenceDiagram)
             this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditAssociation((SequenceDiagram) diagram, association);
     }
     

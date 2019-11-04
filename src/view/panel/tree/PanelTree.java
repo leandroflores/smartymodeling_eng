@@ -15,7 +15,9 @@ import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
+import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.SequenceDiagram;
+import model.structural.diagram.activity.base.association.FlowUML;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
@@ -239,10 +241,30 @@ public final class PanelTree extends Panel {
      * @param node Diagram Node.
      */
     private void addAssociations(Diagram diagram, DefaultMutableTreeNode node) {
-        if (diagram.getType().equalsIgnoreCase("Sequence")) {
-            for (MessageUML message : ((SequenceDiagram) diagram).getMessageList())
+        if (diagram.getType().equalsIgnoreCase("Activity"))
+            this.addAssociations((ActivityDiagram) diagram, node);
+        else if (diagram.getType().equalsIgnoreCase("Sequence"))
+            this.addAssociations((SequenceDiagram) diagram, node);
+    }
+    
+    /**
+     * Method responsible for adding the Associations.
+     * @param diagram Activity Diagram.
+     * @param node Diagram Node.
+     */
+    private void addAssociations(ActivityDiagram diagram, DefaultMutableTreeNode node) {
+        for (FlowUML flow : diagram.getFlowsList())
+                node.add(new DefaultMutableTreeNode(flow));
+    }
+    
+    /**
+     * Method responsible for adding the Associations.
+     * @param diagram Sequence Diagram.
+     * @param node Diagram Node.
+     */
+    private void addAssociations(SequenceDiagram diagram, DefaultMutableTreeNode node) {
+        for (MessageUML message : diagram.getMessageList())
                 node.add(new DefaultMutableTreeNode(message));
-        }
     }
     
     /**

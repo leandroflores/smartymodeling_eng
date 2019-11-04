@@ -22,6 +22,7 @@ import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import model.structural.diagram.activity.base.ActivityUML;
 import model.structural.diagram.activity.base.DecisionUML;
+import model.structural.diagram.activity.base.association.FlowUML;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.ClassUML;
 import model.structural.diagram.classes.base.InterfaceUML;
@@ -39,6 +40,7 @@ import view.panel.edit.base.PanelEditDiagram;
 import view.panel.edit.base.PanelEditProject;
 import view.panel.edit.base.activity.PanelEditActivityUML;
 import view.panel.edit.base.activity.PanelEditDecisionUML;
+import view.panel.edit.base.activity.PanelEditFlowUML;
 import view.panel.edit.base.classes.PanelEditAttributeUML;
 import view.panel.edit.base.classes.PanelEditClassUML;
 import view.panel.edit.base.classes.PanelEditInterfaceUML;
@@ -220,6 +222,17 @@ public final class PanelProject extends Panel {
             this.panelEdit = new PanelEditLifelineUML(this.viewMenu, diagram, (LifelineUML) element);
         else if (element instanceof InstanceUML)
             this.panelEdit = new PanelEditInstanceUML(this.viewMenu, diagram, (InstanceUML) element);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Association.
+     * @param diagram Activity Diagram.
+     * @param association Association.
+     */
+    public void initPanelEditAssociation(ActivityDiagram diagram, Association association) {
+        if (association instanceof FlowUML)
+            this.panelEdit = new PanelEditFlowUML(this.viewMenu, diagram, (FlowUML) association);
         this.updatePanelEdit();
     }
     
