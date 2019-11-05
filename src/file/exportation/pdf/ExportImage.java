@@ -11,16 +11,13 @@ import java.io.IOException;
  * @since  31/10/2019
  */
 public class ExportImage {
-    private final String path;
     private final BufferedImage image;
     
     /**
      * Default constructor method of Class.
-     * @param path Image Path.
      * @param image Buffered Image.
      */
-    public ExportImage(String path, BufferedImage image) {
-        this.path  = path;
+    public ExportImage(BufferedImage image) {
         this.image = image;
     }
     
@@ -30,17 +27,17 @@ public class ExportImage {
      * @throws IOException Exception.
      */
     public BufferedImage getPNGImage() throws IOException {
-        return this.getPngImage(this.image, Color.WHITE);
+        return this.getPNGImage(this.image, Color.WHITE);
     }
     
     /**
-     * 
-     * @param image
-     * @param color
-     * @return
-     * @throws IOException 
+     * Method responsible for returning the PNG Image.
+     * @param  image Original Image.
+     * @param  color Image Color.
+     * @return New PNG Image.
+     * @throws IOException IO Exception.
      */
-    private BufferedImage getPngImage(BufferedImage image, Color color) throws IOException {
+    private BufferedImage getPNGImage(BufferedImage image, Color color) throws IOException {
         BufferedImage newImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB); 
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {
@@ -48,7 +45,7 @@ public class ExportImage {
                 int alpha = (color.getRGB() == pixel) ? 0 : 255;
                 newImage.setRGB(x, y, (alpha & 0x0ff) << 24 
                                     | ((pixel >> 16) &0xff) << 16 
-                                    | ((pixel >> 8) &0xff)  << 8 
+                                    | ((pixel >> 8)  &0xff) <<  8 
                                     | ((pixel) &0xff));
             }
         }

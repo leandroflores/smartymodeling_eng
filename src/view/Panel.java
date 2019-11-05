@@ -493,10 +493,22 @@ public abstract class Panel extends JPanel {
      * @param  id JFileChooser Id.
      * @return New JFileChooser.
      */
-    public JFileChooser createFileChooserArquivo(String id) {
+    public JFileChooser createFileChooser(String id) {
         JFileChooser fileChooser = new JFileChooser();
                      fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                      fileChooser.setFileFilter(new FileNameExtensionFilter("SMARTY", "smty", "smty"));
+                     this.fileChoosers.put(id, fileChooser);
+        return       fileChooser;
+    }
+    
+    /**
+     * Metodo responsavel por retornar um New  Directory JFileChooser.
+     * @param  id JFileChooser Id.
+     * @return New Directory JFileChooser.
+     */
+    public JFileChooser createDirectoryChooser(String id) {
+        JFileChooser fileChooser = new JFileChooser();
+                     fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                      this.fileChoosers.put(id, fileChooser);
         return       fileChooser;
     }

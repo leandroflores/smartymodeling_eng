@@ -367,12 +367,14 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             if (original != null) {
                 try {
                     path  = (path.toLowerCase().endsWith(".png")) ? path : path + ".png";
-                    image = new ExportImage(path, original).getPNGImage();
+                    image = new ExportImage(original).getPNGImage();
                         ImageIO.write(image, "PNG", new File(path));
                     new ViewMessage(this.viewMenu, "Image exported Successfully!").setVisible(true);
                 } catch (IOException exception) {
                     new ViewError(this.viewMenu, "Error to export Image!").setVisible(true);
                 }
+            }else {
+                new ViewError(this.viewMenu, "Open a Diagram or Instance Panel!").setVisible(true);
             }
         }
     }

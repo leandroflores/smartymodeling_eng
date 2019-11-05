@@ -90,12 +90,14 @@ public final class ViewMenu extends View implements Operation {
         this.createDiagramMenu();
         this.createProductLineMenu();
         this.createEvaluationMenu();
+        this.createExportMenu();
         this.createSystemMenu();
         
         this.menuBar.add(this.getFileMenu());
         this.menuBar.add(this.getMenuDiagram());
         this.menuBar.add(this.getMenuProductLine());
         this.menuBar.add(this.getMenuEvaluation());
+        this.menuBar.add(this.getMenuExport());
         this.menuBar.add(this.getMenuSystem());
         
         this.setJMenuBar(this.menuBar);
@@ -174,7 +176,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for creating Evaluation Menu.
+     * Method responsible for creating the Evaluation Menu.
      */
     private void createEvaluationMenu() {
         this.createMenu("menuEvaluation", "Evaluation");
@@ -184,6 +186,19 @@ public final class ViewMenu extends View implements Operation {
         
         this.getMenuEvaluation().add(this.getMenuItemEvaluationMetric());
         this.getMenuEvaluation().add(this.getMenuItemEvaluationMeasure());
+    }
+    
+    /**
+     * Method responsible for creating the Export Menu.
+     */
+    private void createExportMenu() {
+        this.createMenu("menuExport", "Export");
+        
+        this.createMenuItem("menuItemExportDiagram", "Export Diagram",  "export/diagram.png");
+        this.createMenuItem("menuItemExportProduct", "Export Product",  "export/product.png");
+        
+        this.getMenuExport().add(this.getMenuItemExportDiagram());
+        this.getMenuExport().add(this.getMenuItemExportProduct());
     }
     
     /**
@@ -345,8 +360,12 @@ public final class ViewMenu extends View implements Operation {
         this.getMenuItemSequenceDiagram().setEnabled(flag);
         
         this.getMenuItemEditProfile().setEnabled(flag);
+        this.getMenuItemNewProduct().setEnabled(flag);
         this.getMenuItemInstantiateProduct().setEnabled(flag);
         this.getMenuItemNewTraceability().setEnabled(flag);
+        
+        this.getMenuItemExportDiagram().setEnabled(flag);
+        this.getMenuItemExportProduct().setEnabled(flag);
         
         this.getMenuItemEvaluationMetric().setEnabled(flag);
         this.getMenuItemEvaluationMeasure().setEnabled(flag);
@@ -651,6 +670,30 @@ public final class ViewMenu extends View implements Operation {
      */
     public JMenuItem getMenuItemEvaluationMeasure() {
         return this.menuItens.get("menuItemEvaluationMeasure");
+    }
+    
+    /**
+     * Method responsible for returning the Menu Export.
+     * @return Menu Export.
+     */
+    public JMenu getMenuExport() {
+        return this.menus.get("menuExport");
+    }
+    
+    /**
+     * Method responsible for returning the Menu Item Export Diagram.
+     * @return Menu Item Export Diagram.
+     */
+    public JMenuItem getMenuItemExportDiagram() {
+        return this.menuItens.get("menuItemExportDiagram");
+    }
+    
+    /**
+     * Method responsible for returning the Menu Item Export Product.
+     * @return Menu Item Export Product.
+     */
+    public JMenuItem getMenuItemExportProduct() {
+        return this.menuItens.get("menuItemExportProduct");
     }
     
     /**
