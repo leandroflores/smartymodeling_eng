@@ -28,6 +28,7 @@ import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import org.xml.sax.SAXException;
 import view.edit.ViewEditProfile;
+import view.export.ViewExportProduct;
 import view.message.ViewError;
 import view.message.ViewMessage;
 import view.message.ViewSave;
@@ -93,6 +94,10 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             this.newMetric();
         else if (this.viewMenu.getMenuItemEvaluationMeasure().equals(event.getSource()))
             this.newMeasure();
+        else if (this.viewMenu.getMenuItemExportDiagram().equals(event.getSource()))
+            this.exportDiagram();
+        else if (this.viewMenu.getMenuItemExportProduct().equals(event.getSource()))
+            this.exportProduct();
         else if (this.viewMenu.getMenuItemSystemInformation().equals(event.getSource()))
             new ViewSystemInformation(this.viewMenu).setVisible(true);
         else if (this.viewMenu.getMenuItemSystemExit().equals(event.getSource()))
@@ -302,12 +307,8 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * Method responsible for instantiating a New Product.
      */
     private void instantiateNewProduct() {
-        new ViewNewInstance(this.viewMenu).setVisible(true);
-//        if (this.viewMenu.getPanelModeling().getPanelDiagram() != null) {
-//            new ViewNewProduct_Final(this.viewMenu, this.viewMenu.getPanelModeling().getPanelDiagram().getDiagram()).setVisible(true);
-//        }else {
-//            new ViewMessage(this.viewMenu, "Open a Diagram to instantiate a new Product!").setVisible(true);
-//        }
+        if (this.viewMenu.getProject() != null)
+            new ViewNewInstance(this.viewMenu).setVisible(true);
     }
     
     /**
@@ -317,6 +318,8 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
         if (this.viewMenu.getProject() != null) {
             if (!this.viewMenu.getProject().getDiagrams().isEmpty())
                 new ViewNewTraceability(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+            else
+                new ViewMessage(this.viewMenu, "Project without Elements!").setVisible(true);
         }
     }
     
@@ -337,6 +340,30 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
                 new ViewNewMeasure(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
             else
                 new ViewError(this.viewMenu, "Metrics List is void!").setVisible(true);
+        }
+    }
+    
+    /**
+     * Method responsible for exporting a Diagram.
+     */
+    private void exportDiagram() {
+        if (this.viewMenu.getProject() != null) {
+//            if (!this.viewMenu.getProject().getDiagrams().isEmpty())
+//                new ViewNewTraceability(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+//            else
+//                new ViewMessage(this.viewMenu, "Project without Diagrams!").setVisible(true);
+        }
+    }
+    
+    /**
+     * Method responsible for exporting a Product.
+     */
+    private void exportProduct() {
+        if (this.viewMenu.getProject() != null) {
+            if (!this.viewMenu.getProject().getProductsList().isEmpty())
+                new ViewExportProduct(this.viewMenu).setVisible(true);
+            else
+                new ViewMessage(this.viewMenu, "Project without Products!").setVisible(true);
         }
     }
     

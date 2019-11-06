@@ -1,5 +1,6 @@
 package controller.view.export;
 
+import file.exportation.product.ExportProduct;
 import model.structural.base.product.Product;
 import view.export.ViewExportProduct;
 
@@ -25,15 +26,17 @@ public class ControllerViewExportProduct extends ControllerViewExport {
     
     @Override
     public boolean check() {
-        return this.viewExportProduct.getPanelExportProduct().getController().check();
+        return this.check(this.viewExportProduct.getPanelExportProduct().getDirectoryTextField(), "Select a Directory!");
     }
 
     @Override
     public void export() {
         String  path    = this.viewExportProduct.getPanelExportProduct().getDirectoryTextField().getText().trim();
-        Product product = this.viewExportProduct.getProduct();
+        Product product = this.viewExportProduct.getPanelExportProduct().getProduct();
         System.out.println("Path: " + path);
         System.out.println("Prod: " + product);
         System.out.println("");
+        new ExportProduct(path, product).export();
+        this.viewExportProduct.dispose();
     }
 }

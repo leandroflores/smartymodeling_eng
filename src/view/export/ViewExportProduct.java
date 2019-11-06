@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.product.Product;
-import view.panel.export.base.PanelBaseExportProduct;
+import view.panel.export.PanelExportProduct;
 import view.structural.ViewMenu;
 
 /**
@@ -19,7 +19,7 @@ import view.structural.ViewMenu;
  */
 public final class ViewExportProduct extends ViewExport {
     private Product product;
-    private PanelBaseExportProduct panelExportProduct;
+    private PanelExportProduct panelExportProduct;
     
     /**
      * Default constructor method of Class.
@@ -34,7 +34,7 @@ public final class ViewExportProduct extends ViewExport {
     
     @Override
     public void initComponents() {
-        this.setSize(600, 320);
+        this.setSize(600, 420);
         this.addHeader();
         this.addComponents();
         this.addFooter();
@@ -43,7 +43,7 @@ public final class ViewExportProduct extends ViewExport {
     @Override
     public void addComponents() {
         this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 200));
+        this.tabbedPane.setPreferredSize(new Dimension(550, 300));
         
         this.addPanelExportProduct();
         
@@ -56,7 +56,7 @@ public final class ViewExportProduct extends ViewExport {
      * Method responsible for adding the Panel Export Product.
      */
     private void addPanelExportProduct() {
-        this.panelExportProduct = new PanelBaseExportProduct(this.getViewMenu());
+        this.panelExportProduct = new PanelExportProduct(this.getViewMenu());
         this.createScrollPane("scrollPanelExportProduct",  this.panelExportProduct);
         this.getScrollPanelExportProduct().setViewportView(this.panelExportProduct);
         this.tabbedPane.add("Export Product", this.getScrollPanelExportProduct());
@@ -82,7 +82,7 @@ public final class ViewExportProduct extends ViewExport {
      * Method responsible for returning the Panel Export Product.
      * @return Panel Export Product.
      */
-    public PanelBaseExportProduct getPanelExportProduct() {
+    public PanelExportProduct getPanelExportProduct() {
         return this.panelExportProduct;
     }
     

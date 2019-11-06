@@ -28,7 +28,7 @@ public abstract class ViewExport extends ViewModal {
     
     @Override
     public void addFooter() {
-        this.add(this.createButton("exportButton", "  Save  ", "save"));
+        this.add(this.createButton("exportButton", " Export ", "export"));
         this.add(this.createButton("cancelButton", " Cancel ", "cancel"));
     }
     

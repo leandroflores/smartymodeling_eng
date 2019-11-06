@@ -4,9 +4,11 @@ import com.mxgraph.util.mxCellRenderer;
 import file.exportation.pdf.ExportImage;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import model.structural.base.product.Instance;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
@@ -44,7 +46,10 @@ public class ExportInstance {
      */
     public void export() {
         try {
+            String newPath = this.path + "\\" + this.instance.getId() + ".png";
+            System.out.println("New Path: " + newPath);
             BufferedImage pngImage = new ExportImage(this.getImage()).getPNGImage();
+            ImageIO.write(pngImage, "PNG", new File(newPath));
 //        new PanelDiagram
         } catch (IOException ex) {
             Logger.getLogger(ExportInstance.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,7 +63,7 @@ public class ExportInstance {
     private BufferedImage getImage() {
         PanelInstance panel = this.getPanelInstance();
                       panel.updateInstance();
-        return mxCellRenderer.createBufferedImage(panel.getGraph(),  null, 10, Color.WHITE, true, null);
+        return mxCellRenderer.createBufferedImage(panel.getGraph(),  null, 5, Color.WHITE, true, null);
     }
     
     /**

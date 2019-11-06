@@ -169,6 +169,11 @@ public final class ViewMenu extends View implements Operation {
         this.createMenuItem("menuItemInstantiateProduct", "Instantiate Product", "system/information.png");
         this.createMenuItem("menuItemNewTraceability",    "New Traceability",    "product_line/traceability.png");
         
+        this.getMenuItemEditProfile().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
+        this.getMenuItemNewProduct().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK));
+        this.getMenuItemInstantiateProduct().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK));
+        this.getMenuItemNewTraceability().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK));
+        
         this.getMenuProductLine().add(this.getMenuItemEditProfile());
         this.getMenuProductLine().add(this.getMenuItemNewProduct());
         this.getMenuProductLine().add(this.getMenuItemInstantiateProduct());
@@ -211,9 +216,9 @@ public final class ViewMenu extends View implements Operation {
         this.createMenuItem("menuItemSystemSite",        "Site",        "system/site.png");
         this.createMenuItem("menuItemSystemExit",        "Exit",        "system/exit.png");
         
-        this.getMenuItemSystemInformation().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK));
+        this.getMenuItemSystemInformation().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_MASK));
         this.getMenuItemSystemSite().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_MASK));
-        this.getMenuItemSystemExit().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_MASK));
+        this.getMenuItemSystemExit().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK));
         
         this.getMenuSystem().add(this.getMenuItemSystemInformation());
         this.getMenuSystem().add(this.getMenuItemSystemSite());

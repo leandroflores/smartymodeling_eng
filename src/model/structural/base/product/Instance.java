@@ -309,6 +309,14 @@ public class Instance implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Abstract.
+     * @return Abstract.
+     */
+    public String getAbstract() {
+        return this.name + " (" + this.diagram.getType() + ")";
+    }
+    
+    /**
      * Method responsible for returning the Instance Icon.
      * @return Instance Icon.
      */
