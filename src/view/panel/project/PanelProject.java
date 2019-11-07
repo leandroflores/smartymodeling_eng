@@ -156,6 +156,24 @@ public final class PanelProject extends Panel {
     
     /**
      * Method responsible for initializing the Panel Edit Element.
+     * @param diagram Diagram.
+     * @param element Element.
+     */
+    public void initPanelEditElement(Diagram diagram, Element element) {
+        if (diagram instanceof ActivityDiagram)
+            this.initPanelEditElement((ActivityDiagram)  diagram, element);
+        else if (diagram instanceof ClassDiagram)
+            this.initPanelEditElement((ClassDiagram)     diagram, element);
+        else if (diagram instanceof ComponentDiagram)
+            this.initPanelEditElement((ComponentDiagram) diagram, element);
+        else if (diagram instanceof SequenceDiagram)
+            this.initPanelEditElement((SequenceDiagram)  diagram, element);
+        else if (diagram instanceof UseCaseDiagram)
+            this.initPanelEditElement((UseCaseDiagram)   diagram, element);
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Element.
      * @param diagram Activity Diagram.
      * @param element Element.
      */
@@ -223,6 +241,18 @@ public final class PanelProject extends Panel {
         else if (element instanceof InstanceUML)
             this.panelEdit = new PanelEditInstanceUML(this.viewMenu, diagram, (InstanceUML) element);
         this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Association.
+     * @param diagram
+     * @param association 
+     */
+    public void initPanelEditAssociation(Diagram diagram, Association association) {
+        if (diagram instanceof ActivityDiagram)
+            this.initPanelEditAssociation((ActivityDiagram) diagram, association);
+        else if (diagram instanceof SequenceDiagram)
+            this.initPanelEditAssociation((SequenceDiagram) diagram, association);
     }
     
     /**

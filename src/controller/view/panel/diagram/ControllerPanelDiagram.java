@@ -72,10 +72,15 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
     }
     
     @Override
-    public void mouseClicked(MouseEvent event) {}
+    public void mouseClicked(MouseEvent event) {
+//        System.out.println("Clicked");
+    }
     
     @Override
-    public void mousePressed(MouseEvent event) {}
+    public void mousePressed(MouseEvent event) {
+        System.out.println("Pressed");
+        System.out.println(this.panelDiagram.getGraph().getSelectionCell());
+    }
 
     @Override
     public void mouseReleased(MouseEvent event) {}

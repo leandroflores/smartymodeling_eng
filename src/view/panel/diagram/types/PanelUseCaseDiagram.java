@@ -6,7 +6,9 @@ import controller.view.panel.diagram.association.types.ControllerEventAssociatio
 import controller.view.panel.diagram.event.ControllerEventChange;
 import controller.view.panel.diagram.event.ControllerEventEdit;
 import controller.view.panel.diagram.event.ControllerEventMove;
+import controller.view.panel.diagram.event.ControllerEventPoints;
 import controller.view.panel.diagram.event.ControllerEventResize;
+import controller.view.panel.diagram.event.ControllerEventSelect;
 import controller.view.panel.diagram.types.ControllerPanelUseCaseDiagram;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
@@ -114,6 +116,8 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
         this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
         this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
         this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
+        this.component.getGraph().getSelectionModel().addListener(mxEvent.CHANGE, new ControllerEventSelect(this));
+        this.component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
      }
     
     /**

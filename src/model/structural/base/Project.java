@@ -1074,7 +1074,7 @@ public class Project implements Exportable {
     public List<Link> getLinksByElement(Element element) {
         List<Link> filter = new ArrayList<>();
         for (Link link : this.getLinksList()) {
-            if (link.getElement().equals(element))
+            if (link.getElement().getId().equals(element.getId()))
                    filter.add(link);
         }
         return     filter;

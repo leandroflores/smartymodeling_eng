@@ -1,9 +1,12 @@
 package controller.view.panel.diagram.event.classes;
 
 import com.mxgraph.model.mxCell;
+import com.mxgraph.model.mxGeometry;
+import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
+import model.structural.base.association.Association;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
@@ -28,11 +31,14 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
     }
     
     @Override
-    public void invoke(Object object, mxEventObject evento) {
+    public void invoke(Object object, mxEventObject event) {
+//        System.out.println("A");
         if (this.panel.getGraph().getSelectionCell() != null) {
             if (this.panel.getGraph().getSelectionCell() instanceof mxCell) {
                 mxCell cell = (mxCell) this.panel.getGraph().getSelectionCell();
                 String id   = this.panel.getIdentifiers().get(cell);
+//                System.out.println("Cell: " + cell);
+//                System.out.println("Id:   " + id);
                 this.select(cell, id);
             }
         }
@@ -48,6 +54,8 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
             this.newAttribute(cell, (Entity) this.panel.getDiagram().getElement(id));
         else if (cell.getId().endsWith("(newMethod)"))
             this.newMethod(cell, (Entity) this.panel.getDiagram().getElement(id));
+        else if (this.panel.getDiagram().getAssociation(id) != null)
+            this.updatePoints(this.panel.getDiagram().getAssociation(id), cell);
 //        else if (this.panel.getIdentifiers().get(cell) != null)
 //            this.updateEditPanel(cell);
     }
@@ -89,6 +97,18 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
         this.panel.getViewMenu().setSave(false);
     }
     
+    /**
+     * Method responsible for updating the Association Points.
+     * @param association 
+     */
+    private void updatePoints(Association association, mxCell edge) {
+//        System.out.println("Test");
+//        System.out.println(this.panel.getGraph().getSelectionCell());
+//        System.out.println(this.panel.getGraph().getSelectionCell());
+        mxGeometry geometry = ((mxGraphModel) (this.panel.getGraph().getModel())).getGeometry(edge);
+//            System.out.println(geometry.getPoints());
+    }
+     
     /**
      * Method responsible for updating the Edit Panel.
      * @param cell Graph Cell.

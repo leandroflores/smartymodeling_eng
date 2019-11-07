@@ -1,6 +1,7 @@
 package file.exportation.product;
 
 import java.io.File;
+import java.io.IOException;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 
@@ -27,8 +28,9 @@ public class ExportProduct {
     
     /**
      * Method responsible for exporting the Product.
+     * @throws java.io.IOException
      */
-    public void export() {
+    public void export() throws IOException {
         this.createDirectory();
         this.exportInstances();
     }
@@ -38,17 +40,14 @@ public class ExportProduct {
      */
     private void createDirectory() {
         String folder = this.path + "\\" + this.product.getName();
-        System.out.println("Folder: " + folder);
-        File   file   = new File(folder);
-        boolean mkdir = file.mkdir();
-        System.out.println(mkdir);
+               new File(folder).mkdir();
     }
     
     /**
      * Method responsible for exporting the Instances.
      */
-    private void exportInstances() {
+    private void exportInstances() throws IOException {
         for (Instance instance : this.product.getInstancesList())
-            new ExportInstance(this.path, instance).export();
+            new ExportInstance(this.path + "\\" + this.product.getName(), instance).export();
     }
 }

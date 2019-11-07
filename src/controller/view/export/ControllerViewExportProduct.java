@@ -1,8 +1,10 @@
 package controller.view.export;
 
 import file.exportation.product.ExportProduct;
+import java.io.IOException;
 import model.structural.base.product.Product;
 import view.export.ViewExportProduct;
+import view.message.ViewError;
 
 /**
  * <p>Class of Controller <b>ControllerViewExportProduct</b>.</p>
@@ -33,10 +35,11 @@ public class ControllerViewExportProduct extends ControllerViewExport {
     public void export() {
         String  path    = this.viewExportProduct.getPanelExportProduct().getDirectoryTextField().getText().trim();
         Product product = this.viewExportProduct.getPanelExportProduct().getProduct();
-        System.out.println("Path: " + path);
-        System.out.println("Prod: " + product);
-        System.out.println("");
-        new ExportProduct(path, product).export();
+        try {
+            new ExportProduct(path, product).export();
+        } catch (IOException ex) {
+            new ViewError(this.viewExportProduct, "Error to Export the Product!").setVisible(true);
+        }
         this.viewExportProduct.dispose();
     }
 }

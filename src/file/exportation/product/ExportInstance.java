@@ -6,8 +6,6 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import model.structural.base.product.Instance;
 import model.structural.diagram.ActivityDiagram;
@@ -43,17 +41,13 @@ public class ExportInstance {
     
     /**
      * Method responsible for Export the Instance.
+     * @throws java.io.IOException Exception to Create Image.
      */
-    public void export() {
-        try {
-            String newPath = this.path + "\\" + this.instance.getId() + ".png";
-            System.out.println("New Path: " + newPath);
-            BufferedImage pngImage = new ExportImage(this.getImage()).getPNGImage();
-            ImageIO.write(pngImage, "PNG", new File(newPath));
-//        new PanelDiagram
-        } catch (IOException ex) {
-            Logger.getLogger(ExportInstance.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void export() throws IOException {
+        String newPath = this.path + "\\" + this.instance.getId() + ".png";
+        BufferedImage pngImage = new ExportImage(this.getImage()).getPNGImage();
+        ImageIO.write(pngImage, "PNG", new File(newPath));
+
     }
     
     /**

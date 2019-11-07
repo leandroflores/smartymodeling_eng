@@ -73,7 +73,8 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
             attribute.setVisibility(this.getVisibility(signature));
             attribute.setName(this.getName(signature, ":"));
             attribute.setTypeUML(this.getType(signature, true));
-            this.panel.getViewMenu().getPanelModeling().updateDiagram(this.panel.getDiagram());
+            this.panel.updateDiagram();
+            this.panel.getViewMenu().update();
             this.panel.getViewMenu().setSave(false);
         }
     }
@@ -102,7 +103,8 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
             method.setName(this.getName(signature, "("));
             method.setParameters(this.getParameters(signature));
             method.setReturn(this.getType(signature, false));
-            this.panel.getViewMenu().getPanelModeling().updateDiagram(this.panel.getDiagram());
+            this.panel.updateDiagram();
+            this.panel.getViewMenu().update();
             this.panel.getViewMenu().setSave(false);
         }
     }
@@ -130,7 +132,8 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
         mxCell cell = (mxCell) object;
         if (cell.getValue().toString().equals("") == false) {
             element.setName(cell.getValue().toString());
-            this.panel.getViewMenu().getPanelModeling().getViewMenu().update();
+            this.panel.updateDiagram();
+            this.panel.getViewMenu().update();
             this.panel.getViewMenu().setSave(false);
         }
     }
@@ -230,7 +233,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private TypeUML getType(String signature, boolean object) {
         if (signature.contains(":"))
-            return this.panel.getDiagram().getProject().getTypeByName(signature.substring(signature.trim().indexOf(":") + 1).trim());
+            return this.panel.getDiagram().getProject().getTypeByName(signature.substring(signature.trim().lastIndexOf(":") + 1).trim());
         return object ? this.panel.getDiagram().getObjectType() : this.panel.getDiagram().getVoidType();
     }
     
