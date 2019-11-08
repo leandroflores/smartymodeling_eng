@@ -68,8 +68,9 @@ public class IncludeUML extends Association {
     public Map getStyle() {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_DASHED,   "1");
-               style.put(mxConstants.STYLE_MOVABLE,  "0");
                style.put(mxConstants.STYLE_EDITABLE, "0");
+               style.put(mxConstants.STYLE_ENDSIZE,  "15");
+               style.put(mxConstants.STYLE_FONTSIZE, "15");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_ENDARROW,   mxConstants.ARROW_OPEN);

@@ -80,10 +80,11 @@ public class RealizationUML extends Association {
     
     @Override
     public String export() {
-        String export  = "    <" + this.type;
+        String export  = "    <"  + this.type;
                export += " actor=\""   + this.source.getId() + "\"";
-               export += " useCase=\"" + this.target.getId() + "\"";
-               export += "/>\n";
+               export += " useCase=\"" + this.target.getId() + "\">\n";
+               export += super.exportPoints();
+               export += "    </" + this.type + ">\n";
         return export;
     }
     

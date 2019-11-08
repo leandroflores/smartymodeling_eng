@@ -1,6 +1,8 @@
 package file.importation.diagram;
 
+import com.mxgraph.util.mxPoint;
 import model.structural.base.Diagram;
+import model.structural.base.association.Association;
 import model.structural.base.association.Dependency;
 import model.structural.base.association.Generalization;
 import model.structural.base.variability.Mutex;
@@ -61,6 +63,27 @@ public abstract class ImportDiagram {
     }
     
     /**
+     * Method responsible for adding the Association Points.
+     * @param node W3C Element.
+     * @param association Association.
+     */
+    protected void addPoints(Element node, Association association) {
+        NodeList points = node.getElementsByTagName("point");
+        for (int i = 0; i < points.getLength(); i++)
+            association.addPoint(this.getPoint((Element) points.item(i)));
+    }
+    
+    /**
+     * Method responsible for returning the Point by W3C Element.
+     * @param  node W3C Element.
+     * @return Point.
+     */
+    protected mxPoint getPoint(Element node) {
+        return new mxPoint(Double.parseDouble(node.getAttribute("x").trim()), 
+                           Double.parseDouble(node.getAttribute("y").trim()));
+    }
+    
+    /**
      * Method responsible for adding Mutex.
      */
     protected void addMutex() {
@@ -68,6 +91,7 @@ public abstract class ImportDiagram {
         for (int i = 0; i < list.getLength(); i++) {
             Element current = (Element) list.item(i);
             Mutex   mutex   = new Mutex(this.diagram.getElement(current.getAttribute("source")), this.diagram.getElement(current.getAttribute("target")));
+                    this.addPoints(current, mutex);
             this.diagram.addAssociation(mutex);
         }
     }
@@ -80,6 +104,7 @@ public abstract class ImportDiagram {
         for (int i = 0; i < list.getLength(); i++) {
             Element  current  = (Element) list.item(i);
             Requires requires = new Requires(this.diagram.getElement(current.getAttribute("source")), this.diagram.getElement(current.getAttribute("target")));
+                     this.addPoints(current, requires);
             this.diagram.addAssociation(requires);
         }
     }
@@ -92,6 +117,7 @@ public abstract class ImportDiagram {
         for (int i = 0; i < list.getLength(); i++) {
             Element        current        = (Element) list.item(i);
             Generalization generalization = new Generalization(this.diagram.getElement(current.getAttribute("source")), this.diagram.getElement(current.getAttribute("target")));
+                           this.addPoints(current, generalization);
             this.diagram.addAssociation(generalization);
         }
     }
@@ -104,6 +130,7 @@ public abstract class ImportDiagram {
         for (int i = 0; i < list.getLength(); i++) {
             Element    current    = (Element) list.item(i);
             Dependency dependency = new Dependency(this.diagram.getElement(current.getAttribute("source")), this.diagram.getElement(current.getAttribute("target")));
+                       this.addPoints(current, dependency);
             this.diagram.addAssociation(dependency);
         }
     }

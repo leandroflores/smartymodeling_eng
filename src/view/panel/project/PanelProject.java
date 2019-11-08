@@ -36,6 +36,7 @@ import model.structural.diagram.usecase.base.ActorUML;
 import model.structural.diagram.usecase.base.UseCaseUML;
 import view.Panel;
 import view.panel.edit.PanelEdit;
+import view.panel.edit.base.PanelEditAssociation;
 import view.panel.edit.base.PanelEditDiagram;
 import view.panel.edit.base.PanelEditProject;
 import view.panel.edit.base.activity.PanelEditActivityUML;
@@ -253,6 +254,10 @@ public final class PanelProject extends Panel {
             this.initPanelEditAssociation((ActivityDiagram) diagram, association);
         else if (diagram instanceof SequenceDiagram)
             this.initPanelEditAssociation((SequenceDiagram) diagram, association);
+        else {
+            this.panelEdit = new PanelEditAssociation(this.viewMenu, diagram, association);
+            this.updatePanelEdit();
+        }
     }
     
     /**

@@ -74,6 +74,7 @@ public class ImportUseCaseDiagram extends ImportDiagram {
             ActorUML       actor       = (ActorUML)   this.diagram.getElement(current.getAttribute("actor"));
             UseCaseUML     useCase     = (UseCaseUML) this.diagram.getElement(current.getAttribute("useCase"));
             RealizationUML realization = new RealizationUML(actor, useCase);
+                           super.addPoints(current, realization);
             this.useCaseDiagram.addRealization(realization);
         }
     }
@@ -88,6 +89,7 @@ public class ImportUseCaseDiagram extends ImportDiagram {
             UseCaseUML source  = (UseCaseUML) this.diagram.getElement(current.getAttribute("source"));
             UseCaseUML target  = (UseCaseUML) this.diagram.getElement(current.getAttribute("target"));
             ExtendUML  extend  = new ExtendUML(source, target);
+                       super.addPoints(current, extend);
             this.useCaseDiagram.addExtend(extend);
         }
     }
@@ -102,6 +104,7 @@ public class ImportUseCaseDiagram extends ImportDiagram {
             UseCaseUML source  = (UseCaseUML) this.diagram.getElement(current.getAttribute("source"));
             UseCaseUML target  = (UseCaseUML) this.diagram.getElement(current.getAttribute("target"));
             IncludeUML include = new IncludeUML(source, target);
+                       super.addPoints(current, include);
             this.useCaseDiagram.addInclude(include);
         }
     }

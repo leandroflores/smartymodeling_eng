@@ -2,6 +2,8 @@ package view.panel.diagram;
 
 import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.model.mxCell;
+import com.mxgraph.model.mxGeometry;
+import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.view.mxGraph;
@@ -191,9 +193,17 @@ public abstract class PanelDiagram extends Panel {
         for (int i = 0; i < this.diagram.getAssociationsList().size(); i++) {
             Association association = this.diagram.getAssociationsList().get(i);
             this.graph.getStylesheet().putCellStyle(association.getStyleLabel(), association.getStyle());
-            Object     edge         = this.graph.insertEdge(this.parent, null, association.getTitle(), this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
-            mxCell     cell         = (mxCell) edge;
+            mxCell     edge     = (mxCell) this.graph.insertEdge(this.parent, null, association.getTitle(), this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
+            mxGeometry geometry = ((mxGraphModel) (this.graph.getModel())).getGeometry(edge);
+                       geometry.setPoints(association.getPoints());
+                       ((mxGraphModel) (this.graph.getModel())).setGeometry(edge, geometry);
+            System.out.println("");
+            System.out.println("Add Associations");
+            System.out.println("Geometry Points: " + geometry.getPoints());
+            System.out.println("Associat Points: " + association.getPoints());
+            System.out.println("");
             this.identifiers.put(edge, association.getId());
+            this.objects.put(association.getId(), edge);
         }
     }
     
