@@ -28,6 +28,7 @@ import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import org.xml.sax.SAXException;
 import view.edit.ViewEditProfile;
+import view.export.ViewExportDiagram;
 import view.export.ViewExportProduct;
 import view.message.ViewError;
 import view.message.ViewMessage;
@@ -256,6 +257,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
         if (this.viewMenu.getProject() != null) {
             ComponentDiagram diagram = new ComponentDiagram(this.viewMenu.getProject());
             this.viewMenu.getProject().addDiagram(diagram);
+                             diagram.setDefaultName();
             this.viewMenu.showDiagram(diagram);
         }
         this.viewMenu.update();
@@ -268,7 +270,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
         if (this.viewMenu.getProject() != null) {
             SequenceDiagram diagram = new SequenceDiagram(this.viewMenu.getProject());
             this.viewMenu.getProject().addDiagram(diagram);
-            
+                            diagram.setDefaultName();
             this.viewMenu.showDiagram(diagram);
         }
         this.viewMenu.update();
@@ -348,10 +350,10 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      */
     private void exportDiagram() {
         if (this.viewMenu.getProject() != null) {
-//            if (!this.viewMenu.getProject().getDiagrams().isEmpty())
-//                new ViewNewTraceability(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
-//            else
-//                new ViewMessage(this.viewMenu, "Project without Diagrams!").setVisible(true);
+            if (!this.viewMenu.getProject().getDiagrams().isEmpty())
+                new ViewExportDiagram(this.viewMenu).setVisible(true);
+            else
+                new ViewMessage(this.viewMenu, "Project without Diagrams!").setVisible(true);
         }
     }
     

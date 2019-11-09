@@ -81,6 +81,7 @@ public class RealizationUML extends Association {
     @Override
     public String export() {
         String export  = "    <"  + this.type;
+               export += " id=\""      + this.id             + "\"";
                export += " actor=\""   + this.source.getId() + "\"";
                export += " useCase=\"" + this.target.getId() + "\">\n";
                export += super.exportPoints();

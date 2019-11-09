@@ -17,6 +17,7 @@ import model.structural.base.interfaces.Modelable;
  * @see    model.structural.base.interfaces.Modelable
  */
 public abstract class Association implements Exportable, Modelable {
+    protected String  id;
     protected Element source;
     protected Element target;
     protected String  type;
@@ -34,7 +35,15 @@ public abstract class Association implements Exportable, Modelable {
      * @return Association Id.
      */
     public String getId() {
-        return this.type.toUpperCase().trim() + "#" + this.source.getId() + "-" + this.target.getId();
+        return this.id;
+    }
+
+    /**
+     * Method responsible for defining the Association Id.
+     * @param id Association Id.
+     */
+    public void setId(String id) {
+        this.id = ((this.id == null) || (this.id.trim().equals(""))) ? id : this.id;
     }
     
     /**
@@ -183,11 +192,12 @@ public abstract class Association implements Exportable, Modelable {
     @Override
     public String export() {
         String export  = "    <"      + this.type;
+               export += " id=\""     + this.id             + "\"";
                export += " source=\"" + this.source.getId() + "\"";
                export += " target=\"" + this.target.getId() + "\"";
-               export += ">";
+               export += ">\n";
                export += this.exportPoints();
-               export += "    </" + this.type + ">";
+               export += "    </" + this.type + ">\n";
         return export;
     }
     

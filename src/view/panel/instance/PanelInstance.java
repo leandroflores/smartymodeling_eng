@@ -14,9 +14,9 @@ import java.awt.Dimension;
 import java.util.Map;
 import javax.swing.JScrollPane;
 import model.structural.base.Element;
-import model.structural.base.association.Association;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
+import model.structural.base.product.Relationship;
 import view.Panel;
 import view.structural.ViewMenu;
 
@@ -140,7 +140,7 @@ public abstract class PanelInstance extends Panel {
         this.identifiers = new HashMap<>();
         
         this.addArtifacts();
-        this.addAssociations();
+        this.addRelationships();
     }
     
     /**
@@ -171,14 +171,14 @@ public abstract class PanelInstance extends Panel {
     }
     
     /**
-     * Method responsible for adding Instance Associations.
+     * Method responsible for adding the Instance Relationships.
      */
-    public void addAssociations() {
-        for (Association association : this.instance.getAssociationsList()) {
-            this.graph.getStylesheet().putCellStyle(association.getStyleLabel(), association.getStyle());
-            Object edge = this.graph.insertEdge(this.parent, null, association.getTitle(), this.objects.get(this.getId(association.getSource())), this.objects.get(this.getId(association.getTarget())), association.getStyleLabel());
+    public void addRelationships() {
+        for (Relationship relationship : this.instance.getRelationshipsList()) {
+            this.graph.getStylesheet().putCellStyle(relationship.getStyleLabel(), relationship.getStyle());
+            Object edge = this.graph.insertEdge(this.parent, null, relationship.getTitle(), this.objects.get(this.getId(relationship.getAssociation().getSource())), this.objects.get(this.getId(relationship.getAssociation().getTarget())), relationship.getStyleLabel());
             mxCell cell = (mxCell) edge;
-            this.identifiers.put(edge, association.getId());
+            this.identifiers.put(edge, relationship.getId());
         }
     }
     

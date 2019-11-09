@@ -7,6 +7,7 @@ import javax.swing.BoxLayout;
 import model.structural.base.association.Association;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
+import model.structural.base.product.Relationship;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.association.AssociationUML;
@@ -94,7 +95,7 @@ public final class PanelClassInstance extends PanelInstance {
      * @param parent Parent Vertex.
      */
     private void addPackages(Artifact artifact, Object parent) {
-        for (PackageUML current : ((PackageUML) artifact.getElement()).getPackagesList())
+        for (PackageUML current : ((PackageUML) artifact.getElement()).getPackagesList()) 
             this.addPackage(parent, artifact);
     }
     
@@ -290,38 +291,46 @@ public final class PanelClassInstance extends PanelInstance {
     }
     
     @Override
-    public void addAssociations() {
-        List<Association>   associations = this.diagram.getAssociationsList();
-        for (int i = 0; i < associations.size(); i++) {
-            Association association = associations.get(i);
-            this.graph.getStylesheet().putCellStyle(association.getStyleLabel(), association.getStyle());
-            this.addNormalAssociation(association);
-            if (association instanceof AssociationUML)
-                this.addAssociationUML((AssociationUML) association); 
+    public void addRelationships() {
+        List<Relationship> relationships = this.instance.getRelationshipsList();
+        System.out.println("Relationships: " + relationships);
+        for (int i = 0; i < relationships.size(); i++) {
+            Relationship current = relationships.get(i);
+            this.graph.getStylesheet().putCellStyle(current.getStyleLabel(), current.getStyle());
+            this.addNormalRelationship(current);
+            if (current.getAssociation() instanceof AssociationUML)
+                this.addDirectedRelationship(current); 
         }
     }
     
     /**
      * Method responsible for adding the Normal Association.
-     * @param association Association.
+     * @param relationship Association.
      */
-    private void addNormalAssociation(Association association) {
-        mxCell edge = (mxCell) this.graph.insertEdge(this.parent, association.getId(), association.getTitle(), this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
-        this.identifiers.put(edge, association.getId());
+    private void addNormalRelationship(Relationship relationship) {
+//        System.out.println(this.instance.getArtifact(relationship.get));
+//        System.out.println("Objects: " + this.objects);
+//        System.out.println("Source.: " + this.objects.get(relationship.getSource().getId()));
+//        System.out.println("Target.: " + this.objects.get(relationship.getSource().getId()));
+        Object edge = this.graph.insertEdge(this.parent, null, relationship.getTitle(), this.objects.get(this.getId(relationship.getAssociation().getSource())), this.objects.get(this.getId(relationship.getAssociation().getTarget())), relationship.getStyleLabel());
+//        mxCell edge = (mxCell) this.graph.insertEdge(this.parent, relationship.getId(), relationship.getTitle(), this.objects.get(relationship.getSource().getId()), this.objects.get(relationship.getTarget().getId()), relationship.getStyleLabel());
+//        System.out.println("Edge: " + edge);
+        this.identifiers.put(edge, relationship.getId());
     }
     
     /**
-     * Method responsible for adding the Association UML.
-     * @param associationUML Association UML.
+     * Method responsible for adding the Directed Relationship.
+     * @param relationship Relationship.
      */
-    private void addAssociationUML(AssociationUML associationUML) {
-        this.graph.getStylesheet().putCellStyle(associationUML.getCardinalityLabel(), associationUML.getCardinalityStyle());
-        mxCell source = (mxCell) this.graph.insertVertex(this.parent, associationUML.getId() + "(source)", associationUML.getSourceLabel(), associationUML.getSourceX(), associationUML.getSourceY(), 30, 20, associationUML.getCardinalityLabel());
-               source.setConnectable(false);
-        mxCell target = (mxCell) this.graph.insertVertex(this.parent, associationUML.getId() + "(target)", associationUML.getTargetLabel(), associationUML.getTargetX(), associationUML.getTargetY(), 30, 20, associationUML.getCardinalityLabel());
-               target.setConnectable(false);
-        this.identifiers.put(source, associationUML.getId() + "(source)");
-        this.identifiers.put(target, associationUML.getId() + "(target)");
+    private void addDirectedRelationship(Relationship relationship) {
+//        AssociationUML association
+//        this.graph.getStylesheet().putCellStyle(relationship.getAssociation().getCardinalityLabel(), relationship.getCardinalityStyle());
+//        mxCell source = (mxCell) this.graph.insertVertex(this.parent, relationship.getId() + "(source)", relationship.getSourceLabel(), relationship.getSourceX(), relationship.getSourceY(), 30, 20, relationship.getCardinalityLabel());
+//               source.setConnectable(false);
+//        mxCell target = (mxCell) this.graph.insertVertex(this.parent, relationship.getId() + "(target)", relationship.getTargetLabel(), relationship.getTargetX(), relationship.getTargetY(), 30, 20, relationship.getCardinalityLabel());
+//               target.setConnectable(false);
+//        this.identifiers.put(source, relationship.getId() + "(source)");
+//        this.identifiers.put(target, relationship.getId() + "(target)");
     }
     
     /**

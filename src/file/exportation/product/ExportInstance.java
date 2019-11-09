@@ -67,9 +67,9 @@ public class ExportInstance {
     private PanelInstance getPanelInstance() {
         if (this.instance.getDiagram().getType().equals("Activity"))
             return new PanelActivityInstance(null,  this.instance, (ActivityDiagram)  this.instance.getDiagram());
-        if (this.instance.getDiagram().getType().equals("Class"))
+        else if (this.instance.getDiagram().getType().equals("Class"))
             return new PanelClassInstance(null,     this.instance,   (ClassDiagram)   this.instance.getDiagram());
-        if (this.instance.getDiagram().getType().equals("Component"))
+        else if (this.instance.getDiagram().getType().equals("Component"))
             return new PanelComponentInstance(null, this.instance, (ComponentDiagram) this.instance.getDiagram());
         return new PanelUseCaseInstance(null, this.instance, (UseCaseDiagram) this.instance.getDiagram());
     }

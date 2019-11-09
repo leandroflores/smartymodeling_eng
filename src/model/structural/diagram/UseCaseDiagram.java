@@ -60,19 +60,11 @@ public final class UseCaseDiagram extends Diagram {
     }
     
     /**
-     * Method responsible for returning Next Actor Id.
-     * @return Next Actor Id.
-     */
-    private String nextActorId() {
-        return this.nextId("ACTOR#");
-    }
-    
-    /**
      * Method responsible for adding a Actor UML.
      * @param actorUML Actor UML.
      */
     public void addActor(ActorUML actorUML) {
-        actorUML.setId(this.nextActorId());
+        actorUML.setId(this.nextId(actorUML));
         if (this.actorsUML.get(actorUML.getId()) == null) {
             this.actorsUML.put(actorUML.getId(), actorUML);
             this.addElement(actorUML);
@@ -99,19 +91,11 @@ public final class UseCaseDiagram extends Diagram {
     }
     
     /**
-     * Method responsible for returning Next Use Case Id.
-     * @return Next Use Case Id.
-     */
-    private String nextUseCaseId() {
-        return this.nextId("USE-CASE#");
-    }
-    
-    /**
      * Method responsible for adding a Use Case UML.
      * @param useCaseUML Use Case UML.
      */
     public void addUseCase(UseCaseUML useCaseUML) {
-        useCaseUML.setId(this.nextUseCaseId());
+        useCaseUML.setId(this.nextId(useCaseUML));
         if (this.useCasesUML.get(useCaseUML.getId()) == null) {
             this.useCasesUML.put(useCaseUML.getId(), useCaseUML);
             this.addElement(useCaseUML);
@@ -141,6 +125,7 @@ public final class UseCaseDiagram extends Diagram {
      * @param realizationUML Realization UML.
      */
     public void addRealization(RealizationUML realizationUML) {
+        realizationUML.setId(this.nextId(realizationUML));
         if (this.realizationsUML.get(realizationUML.getId()) == null) {
             this.realizationsUML.put(realizationUML.getId(), realizationUML);
             this.addAssociation(realizationUML);
@@ -161,6 +146,7 @@ public final class UseCaseDiagram extends Diagram {
      * @param extendUML Extend UML.
      */
     public void addExtend(ExtendUML extendUML) {
+        extendUML.setId(this.nextId(extendUML));
         if (this.extendsUML.get(extendUML.getId()) == null) {
             this.extendsUML.put(extendUML.getId(), extendUML);
             this.addAssociation(extendUML);
@@ -181,6 +167,7 @@ public final class UseCaseDiagram extends Diagram {
      * @param includeUML Include UML.
      */
     public void addInclude(IncludeUML includeUML) {
+        includeUML.setId(this.nextId(includeUML));
         if (this.includesUML.get(includeUML.getId()) == null) {
             this.includesUML.put(includeUML.getId(), includeUML);
             this.addAssociation(includeUML);

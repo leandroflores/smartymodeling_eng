@@ -146,13 +146,11 @@ public class Product implements Exportable {
      * @return Next Instance Id.
      */
     public String nextInstanceId() {
-        Integer index  = 1;
-        String  nextId = "INSTANCE#" + index;
-        while (this.instances.get(nextId) != null) {
-            index += 1;
-            nextId = "INSTANCE#" + index;
-        }
-        return nextId;
+        Integer index  = this.instances.size();
+        String  nextId = "INSTANCE#" + ++index;
+        while (this.instances.get(nextId) != null)
+                nextId = "INSTANCE#" + ++index;
+        return  nextId;
     }
     
     /**
@@ -161,6 +159,7 @@ public class Product implements Exportable {
      */
     public void addInstance(Instance instance) {
         instance.setId(this.nextInstanceId());
+        instance.setProduct(this);
         this.instances.put(instance.getId(), instance);
     }
     
@@ -206,7 +205,7 @@ public class Product implements Exportable {
     }
     
     /**
-     * Method responsible for removing the Artefacts by Association.
+     * Method responsible for removing the Relationships by Association.
      * @param association Association.
      */
     public void remove(Association association) {

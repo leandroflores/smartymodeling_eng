@@ -249,6 +249,15 @@ public abstract class Diagram implements Exportable {
     }
     
     /**
+     * Method responsible for returning a New Element Id.
+     * @param  element Element.
+     * @return New Element Id.
+     */
+    protected String nextId(Element element) {
+        return this.nextId(element.getType().toUpperCase().trim() + "#");
+    }
+    
+    /**
      * Method responsible for adding a Element.
      * @param element Element.
      */
@@ -321,6 +330,15 @@ public abstract class Diagram implements Exportable {
     }
     
     /**
+     * Method responsible for returning a New Association Id.
+     * @param  association Association.
+     * @return New Association Id.
+     */
+    protected String nextId(Association association) {
+        return this.nextId(association.getType().toUpperCase().trim() + "#");
+    }
+    
+    /**
      * Method responsible for returning Associations HashMap.
      * @return Associations HashMap.
      */
@@ -358,6 +376,7 @@ public abstract class Diagram implements Exportable {
      * @param requires Requires.
      */
     public void addRequires(Requires requires) {
+        requires.setId(this.nextId(requires));
         if (this.associations.containsKey(requires.getId()) == false)
             this.addAssociation(requires);
     }
@@ -392,6 +411,7 @@ public abstract class Diagram implements Exportable {
      * @param mutex Mutex.
      */
     public void addMutex(Mutex mutex) {
+        mutex.setId(this.nextId(mutex));
         if (this.associations.containsKey(mutex.getId()) == false)
             this.addAssociation(mutex);
     }
@@ -426,6 +446,7 @@ public abstract class Diagram implements Exportable {
      * @param generalization Generalization.
      */
     public void addGeneralization(Generalization generalization) {
+        generalization.setId(this.nextId(generalization));
         if (this.associations.containsKey(generalization.getId()) == false)
             this.addAssociation(generalization);
     }
@@ -451,6 +472,7 @@ public abstract class Diagram implements Exportable {
      * @param dependency Dependency.
      */
     public void addDependency(Dependency dependency) {
+        dependency.setId(this.nextId(dependency));
         if (this.associations.containsKey(dependency.getId()) == false)
             this.addAssociation(dependency);
     }

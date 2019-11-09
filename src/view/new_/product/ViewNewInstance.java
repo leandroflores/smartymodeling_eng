@@ -102,6 +102,7 @@ public final class ViewNewInstance extends ViewNew {
         this.tabbedPane.getComponent(0).setEnabled(true);
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(0));
         this.tabbedPane.remove(1);
+        this.resetElements();
     }
     
     /**
@@ -122,6 +123,7 @@ public final class ViewNewInstance extends ViewNew {
         this.tabbedPane.getComponent(1).setEnabled(true);
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(1));
         this.tabbedPane.remove(2);
+        this.resetElements();
     }
     
     /**
@@ -132,7 +134,7 @@ public final class ViewNewInstance extends ViewNew {
         this.tabbedPane.add("Artifacts", this.panelBaseArtifacts);
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(3));
         this.tabbedPane.setEnabledAt(2, false);
-        this.getInsertButton().setEnabled(true);        
+        this.getInsertButton().setEnabled(true);
     }
     
     /**
@@ -143,6 +145,7 @@ public final class ViewNewInstance extends ViewNew {
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(2));
         this.tabbedPane.remove(3);
         this.getInsertButton().setEnabled(false);
+        this.resetVariants();
     }
     
     /**
@@ -177,6 +180,17 @@ public final class ViewNewInstance extends ViewNew {
     }
     
     /**
+     * Method responsible for reset Variants.
+     */
+    private void resetVariants() {
+        List<Element> filter = this.instance.getDiagram().filterOptionalElements();
+        for (Map.Entry<String, Integer> element : this.elements.entrySet()) {
+            if (!filter.contains(this.instance.getDiagram().getElement(element.getKey())))
+                element.setValue(0);
+        }
+    }
+    
+    /**
      * Method responsible for adding a Element.
      * @param element Element.
      */
@@ -201,9 +215,8 @@ public final class ViewNewInstance extends ViewNew {
      * @return Instance contains Association.
      */
     private boolean contains(Association association) {
-        if (this.elements.get(association.getSource().getId()) > 0)
-            return true;
-        return this.elements.get(association.getTarget().getId()) > 0;
+        return    (this.elements.get(association.getSource().getId()) > 0)
+               && (this.elements.get(association.getTarget().getId()) > 0);
     }
     
     /**
@@ -211,7 +224,7 @@ public final class ViewNewInstance extends ViewNew {
      * @return Associations Size.
      */
     public Integer getAssociationsSize() {
-        Integer count = 0;
+        Integer count  = 0;
         for (Association association : this.getDiagram().getAssociationsList())
                 count += this.contains(association) ? 1 : 0;
         return  count;

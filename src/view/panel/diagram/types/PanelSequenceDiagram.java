@@ -4,6 +4,8 @@ import com.mxgraph.model.mxCell;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationSequence;
+import controller.view.panel.diagram.event.ControllerEventFocus;
+import controller.view.panel.diagram.event.ControllerEventPoints;
 import controller.view.panel.diagram.event.sequence.ControllerEventChange;
 import controller.view.panel.diagram.event.sequence.ControllerEventEdit;
 import controller.view.panel.diagram.event.sequence.ControllerEventMove;
@@ -341,6 +343,9 @@ public final class PanelSequenceDiagram extends PanelDiagram {
         this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
         this.component.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventMove(this));
         this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
+        
+        this.component.getGraphControl().addMouseListener(new ControllerEventFocus(this));
+        this.component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
      }
     
     @Override

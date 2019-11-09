@@ -91,6 +91,7 @@ public abstract class ImportDiagram {
         for (int i = 0; i < list.getLength(); i++) {
             Element current = (Element) list.item(i);
             Mutex   mutex   = new Mutex(this.diagram.getElement(current.getAttribute("source")), this.diagram.getElement(current.getAttribute("target")));
+                    mutex.setId(current.getAttribute("id"));
                     this.addPoints(current, mutex);
             this.diagram.addAssociation(mutex);
         }
@@ -104,6 +105,7 @@ public abstract class ImportDiagram {
         for (int i = 0; i < list.getLength(); i++) {
             Element  current  = (Element) list.item(i);
             Requires requires = new Requires(this.diagram.getElement(current.getAttribute("source")), this.diagram.getElement(current.getAttribute("target")));
+                     requires.setId(current.getAttribute("id"));
                      this.addPoints(current, requires);
             this.diagram.addAssociation(requires);
         }
@@ -117,6 +119,7 @@ public abstract class ImportDiagram {
         for (int i = 0; i < list.getLength(); i++) {
             Element        current        = (Element) list.item(i);
             Generalization generalization = new Generalization(this.diagram.getElement(current.getAttribute("source")), this.diagram.getElement(current.getAttribute("target")));
+                           generalization.setId(current.getAttribute("id"));
                            this.addPoints(current, generalization);
             this.diagram.addAssociation(generalization);
         }
@@ -130,6 +133,7 @@ public abstract class ImportDiagram {
         for (int i = 0; i < list.getLength(); i++) {
             Element    current    = (Element) list.item(i);
             Dependency dependency = new Dependency(this.diagram.getElement(current.getAttribute("source")), this.diagram.getElement(current.getAttribute("target")));
+                       dependency.setId(current.getAttribute("id"));
                        this.addPoints(current, dependency);
             this.diagram.addAssociation(dependency);
         }

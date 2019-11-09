@@ -9,6 +9,8 @@ import model.structural.base.association.Association;
 import model.structural.base.interfaces.Exportable;
 import model.structural.base.variability.Mutex;
 import model.structural.base.variability.Requires;
+import model.structural.diagram.ClassDiagram;
+import model.structural.diagram.classes.base.PackageUML;
 
 /**
  * <p>Class of Model <b>Instance</b>.</p>
@@ -23,16 +25,16 @@ public class Instance implements Exportable {
     private Product product;
     private Diagram diagram;
     private HashMap artifacts;
-    private HashMap associations;
+    private HashMap relationships;
     
     /**
      * Default constructor method of Class.
      */
     public Instance() {
-        this.product      = null;
-        this.diagram      = null;
-        this.artifacts    = new HashMap<>();
-        this.associations = new HashMap<>();
+        this.product       = null;
+        this.diagram       = null;
+        this.artifacts     = new HashMap<>();
+        this.relationships = new HashMap<>();
     }
     
     /**
@@ -146,13 +148,11 @@ public class Instance implements Exportable {
      * @return Next Artifact Id.
      */
     public String nextArtefactId() {
-        Integer index  = 1;
+        Integer index  = this.artifacts.size() + 1;
         String  nextId = "ARTIFACT#" + index;
-        while (this.artifacts.get(nextId) != null) {
-            index += 1;
-            nextId = "ARTIFACT#" + index;
-        }
-        return nextId;
+        while (this.artifacts.get(nextId) != null)
+                nextId = "ARTIFACT#" + ++index;
+        return  nextId;
     }
     
     /**
@@ -161,6 +161,7 @@ public class Instance implements Exportable {
      */
     public void addArtifact(Artifact artifact) {
         artifact.setId(this.nextArtefactId());
+        artifact.setInstance(this);
         this.artifacts.put(artifact.getId(), artifact);
     }
     
@@ -204,7 +205,7 @@ public class Instance implements Exportable {
      * @param  artifact Artifact.
      */
     public void removeArtifact(Artifact artifact) {
-        this.removeAssociations(artifact);
+        this.removeRelationships(artifact);
         this.artifacts.remove(artifact.getId());
     }
     
@@ -212,8 +213,8 @@ public class Instance implements Exportable {
      * Method responsible for reseting the Instance.
      */
     public void reset() {
-        this.artifacts    = new HashMap();
-        this.associations = new HashMap();
+        this.artifacts     = new HashMap();
+        this.relationships = new HashMap();
     }
     
     /**
@@ -236,75 +237,120 @@ public class Instance implements Exportable {
     }
     
     /**
-     * Method responsible for returning the Instance Associations.
-     * @return Instance Associations.
+     * Method responsible for returning the Instance Relationships.
+     * @return Instance Relationships.
      */
-    public HashMap<String, Association> getAssociations() {
-        return this.associations;
+    public HashMap<String, Relationship> getRelationships() {
+        return this.relationships;
     }
     
     /**
-     * Method responsible for returning the Associations List.
-     * @return Associations List.
+     * Method responsible for returning the Next Relationship Id.
+     * @return Next Relationship Id.
      */
-    public List<Association> getAssociationsList() {
-        return new ArrayList<>(this.associations.values());
+    public String nextRelationshipId() {
+        Integer index  = this.relationships.size() + 1;
+        String  nextId = "RELATIONSHIP#" + index;
+        while (this.relationships.get(nextId) != null)
+                nextId = "RELATIONSHIP#" + ++index;
+        return  nextId;
     }
     
     /**
-     * Method responsible for removing the Association by Artifact.
-     * @param artefact Artifact.
+     * Method responsible for adding a Relationship.
+     * @param relationship Relationship.
      */
-    public void removeAssociations(Artifact artefact) {
-        for (Association association : this.getAssociationsList()) {
-            if (association.contains(artefact.getElement()))
-                this.associations.remove(association.getId());
+    public void addRelationship(Relationship relationship) {
+        relationship.setId(this.nextRelationshipId());
+        relationship.setInstance(this);
+        if (this.relationships.get(relationship.getId()) == null)
+            this.relationships.put(relationship.getId(), relationship);
+    }
+    
+    /**
+     * Method responsible for returning the Relationships List.
+     * @return Relationships List.
+     */
+    public List<Relationship> getRelationshipsList() {
+        return new ArrayList<>(this.relationships.values());
+    }
+    
+    /**
+     * Method responsible for removing the Relationships by Association.
+     * @param association Association.
+     */
+    public void remove(Association association) {
+        for (Relationship relationship : this.getRelationshipsList()) {
+            if (relationship.getAssociation().equals(association))
+                this.removeRelationship(relationship);
         }
     }
     
     /**
-     * Method responsible for removing a Association.
-     * @param  association Association.
+     * Method responsible for removing the Relationship by Artifact.
+     * @param artefact Artifact.
      */
-    public void remove(Association association) {
-        this.associations.remove(association.getId());
+    public void removeRelationships(Artifact artefact) {
+        for (Relationship relationship : this.getRelationshipsList()) {
+            if (relationship.getAssociation().contains(artefact.getElement()))
+                this.removeRelationship(relationship);
+        }
     }
     
     /**
-     * Method responsible for setting the Artifact Associations.
-     * @param associations Artifact Associations.
+     * Method responsible for removing a Relationship.
+     * @param  relationship Relationship.
      */
-    public void setAssociations(HashMap<String, Association> associations) {
-        this.associations = (HashMap) associations.clone();
+    public void removeRelationship(Relationship relationship) {
+        this.relationships.remove(relationship.getId());
     }
     
     /**
-     * Method responsible for updating the Artifact Artifacts and Associations.
+     * Method responsible for setting the Instance Relationships.
+     * @param relationships Instance Relationships.
+     */
+    public void setRelationships(HashMap<String, Relationship> relationships) {
+        this.relationships = (HashMap) relationships.clone();
+    }
+    
+    /**
+     * Method responsible for updating the Instance Artifacts and Relationships.
      */
     public void update() {
-        this.addAssociations();
-        this.removeAssociations();
+        this.addPackages();
+        this.addRelationships();
+        this.removeRelationships();
     }
     
     /**
-     * Method responsible for adding the Instance Associations.
+     * Method responsible for adding the Packages from a Class Diagram.
      */
-    public void addAssociations() {
+    private void addPackages() {
+        if (this.diagram instanceof ClassDiagram) {
+            for (PackageUML packageUML : ((ClassDiagram) this.diagram).getPackagesList())
+                this.addArtifact(new Artifact(packageUML));
+        }
+    }
+    
+    /**
+     * Method responsible for adding the Instance Relationships.
+     */
+    public void addRelationships() {
         for (Association association : this.diagram.getAssociationsList()) {
             if ((this.contains(association.getSource()))
              && (this.contains(association.getTarget())))
-                    this.associations.put(association.getId(), association);
+                    this.addRelationship(new Relationship(this, association));
         }
     }
     
     /**
-     * Method responsible for removing the Mutex and Requires Associations.
+     * Method responsible for removing the Mutex and Requires Relationships.
      */
-    private void removeAssociations() {
-        for (Association association : this.getAssociationsList()) {
-            if (association instanceof Requires
-             || association instanceof Mutex)
-                this.associations.remove(association.getId());
+    private void removeRelationships() {
+        for (Relationship relationship : this.getRelationshipsList()) {
+            if (relationship.getAssociation() instanceof Requires
+             || relationship.getAssociation() instanceof Mutex)
+                this.removeRelationship(relationship);
         }
     }
     
@@ -336,13 +382,13 @@ public class Instance implements Exportable {
     }
     
     /**
-     * Method responsible for exporting the Associations.
-     * @return Associations.
+     * Method responsible for exporting the Relationships.
+     * @return Relationships.
      */
-    private String exportAssociations() {
+    private String exportRelationships() {
         String export  = "";
-        for (Association association : this.getAssociationsList())
-               export += "        <association id=\"" + association.getId() + "\"/>\n";
+        for (Relationship relationship : this.getRelationshipsList())
+               export +=  relationship.export();
         return export;
     }
         
@@ -350,7 +396,7 @@ public class Instance implements Exportable {
     public String export() {
         String export  = "      <instance id=\"" + this.id + "\" name=\"" + this.name + "\"" + " diagram=\"" + this.diagram.getId() + "\">\n";
                export += this.exportArtifacts();
-               export += this.exportAssociations();
+               export += this.exportRelationships();
                export += "      </instance>\n";
         return export;
     }

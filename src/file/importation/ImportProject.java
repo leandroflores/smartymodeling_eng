@@ -1,5 +1,6 @@
 package file.importation;
 
+import com.mxgraph.util.mxPoint;
 import file.importation.diagram.types.ImportActivityDiagram;
 import file.importation.diagram.types.ImportClassDiagram;
 import file.importation.diagram.types.ImportComponentDiagram;
@@ -23,6 +24,7 @@ import model.structural.base.evaluation.Metric;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
+import model.structural.base.product.Relationship;
 import model.structural.base.traceability.Traceability;
 import model.structural.diagram.classes.base.TypeUML;
 import org.w3c.dom.Document;
@@ -259,7 +261,7 @@ public class ImportProject {
                      instance.setProduct(product);
                      instance.setDiagram((Diagram) this.project.getDiagrams().get(node.getAttribute("diagram")));
                      this.addArtifacts(instance, node);
-                     this.addAssociations(instance, node);
+                     this.addRelationships(instance, node);
             product.addInstance(instance);
         }
     }
@@ -281,17 +283,42 @@ public class ImportProject {
     }
     
     /**
-     * Method responsible for adding the Instance Associations.
+     * Method responsible for adding the Instance Relationships.
      * @param instance Instance.
      * @param current W3C Element.
      */
-    private void addAssociations(Instance instance, Element current) {
-        NodeList list = current.getElementsByTagName("association");
+    private void addRelationships(Instance instance, Element current) {
+        NodeList list = current.getElementsByTagName("relationship");
         for (int i = 0; i < list.getLength(); i++) {
-            Element     node        = (Element) list.item(i);
-            Association association = (Association) instance.getDiagram().getAssociation(node.getAttribute("id"));
-            instance.getAssociations().put(association.getId(), association);
+            Element      node         = (Element) list.item(i);
+            Association  association  = (Association) instance.getDiagram().getAssociation(node.getAttribute("association"));
+            Relationship relationship = new Relationship(node);
+                         relationship.setInstance(instance);
+                         relationship.setAssociation(association);
+                         this.addPoints(node, relationship);
+            instance.addRelationship(relationship);
         }
+    }
+    
+    /**
+     * Method responsible for adding the Relationship Points.
+     * @param node W3C Element.
+     * @param relationship Relationship.
+     */
+    protected void addPoints(Element node, Relationship relationship) {
+        NodeList points = node.getElementsByTagName("point");
+        for (int i = 0; i < points.getLength(); i++)
+            relationship.addPoint(this.getPoint((Element) points.item(i)));
+    }
+    
+    /**
+     * Method responsible for returning the Point by W3C Element.
+     * @param  node W3C Element.
+     * @return Point.
+     */
+    protected mxPoint getPoint(Element node) {
+        return new mxPoint(Double.parseDouble(node.getAttribute("x").trim()), 
+                           Double.parseDouble(node.getAttribute("y").trim()));
     }
     
     /**

@@ -117,12 +117,10 @@ public class Project implements Exportable {
      * @return Next Id.
      */
     public String nextId(String label) {
-        Integer index   = 1;
-        String  nextId  = label + index;
-        while (this.objects.get(nextId) != null) {
-                index  += 1;
-                nextId  = label + index;
-        }
+        Integer index  = this.objects.size() + 1;
+        String  nextId = label + index;
+        while (this.objects.get(nextId) != null)
+                nextId = label + ++index;
         return  nextId;
     }
     
@@ -184,23 +182,23 @@ public class Project implements Exportable {
 
     /**
      * Method responsible for defining the Project Version.
-     * @param version Project Version..
+     * @param version Project Version.
      */
     public void setVersion(String version) {
         this.version = version;
     }
     
     /**
-     * Metodo responsavel por retornar o Profile do Project.
-     * @return Profile do Project.
+     * Method responsible for returning the Profile Project.
+     * @return Profile Project.
      */
     public Profile getProfile() {
         return this.profile;
     }
     
     /**
-     * Metodo responsavel por definir o Profile do Project.
-     * @param profile Profile do Project.
+     * Method responsible for setting the Profile Project.
+     * @param profile Profile Project.
      */
     public void setProfile(Profile profile) {
         this.profile = profile;
@@ -270,13 +268,11 @@ public class Project implements Exportable {
      * @return Next Diagram Id.
      */
     public String nextDiagramId() {
-        Integer index  = 1;
+        Integer index  = this.diagrams.size() + 1;
         String  nextId = "DIAGRAM#" + index;
-        while (this.diagrams.get(nextId) != null) {
-            index += 1;
-            nextId = "DIAGRAM#" + index;
-        }
-        return nextId;
+        while (this.diagrams.get(nextId) != null)
+                nextId = "DIAGRAM#" + ++index;
+        return  nextId;
     }
     
     /**
@@ -390,13 +386,11 @@ public class Project implements Exportable {
      * @return Next Type Id.
      */
     public String nextTypeId() {
-        Integer index  = 1;
+        Integer index  = this.types.size() + 1;
         String  nextId = "TYPE#" + index;
-        while (this.types.get(nextId) != null) {
-            index += 1;
-            nextId = "TYPE#" + index;
-        }
-        return nextId;
+        while (this.types.get(nextId) != null)
+                nextId = "TYPE#" + ++index;
+        return  nextId;
     }
     
     /**
@@ -593,13 +587,11 @@ public class Project implements Exportable {
      * @return Next Variability Id.
      */
     public String nextVariabilityId() {
-        Integer index  = 1;
+        Integer index  = this.variabilities.size() + 1;
         String  nextId = "VARIABILITY#" + index;
-        while (this.variabilities.get(nextId) != null) {
-            index += 1;
-            nextId = "VARIABILITY#" + index;
-        }
-        return nextId;
+        while (this.variabilities.get(nextId) != null)
+                nextId = "VARIABILITY#" + ++index;
+        return  nextId;
     }
     
     /**
@@ -646,13 +638,11 @@ public class Project implements Exportable {
      * @return Next Traceability Id.
      */
     public String nextTraceabilityId() {
-        Integer index  = 1;
+        Integer index  = this.traceabilities.size() + 1;
         String  nextId = "TRACEABILITY#" + index;
-        while (this.traceabilities.get(nextId) != null) {
-            index += 1;
-            nextId = "TRACEABILITY#" + index;
-        }
-        return nextId;
+        while (this.traceabilities.get(nextId) != null)
+                nextId = "TRACEABILITY#" + ++index;
+        return  nextId;
     }
     
     /**
@@ -716,13 +706,11 @@ public class Project implements Exportable {
      * @return Next Metric Id.
      */
     public String nextMetricId() {
-        Integer index  = 1;
+        Integer index  = this.metrics.size() + 1;
         String  nextId = "METRIC#" + index;
-        while (this.metrics.get(nextId) != null) {
-            index += 1;
-            nextId = "METRIC#" + index;
-        }
-        return nextId;
+        while (this.metrics.get(nextId) != null)
+                nextId = "METRIC#" + ++index;
+        return  nextId;
     }
     
     /**
@@ -775,13 +763,11 @@ public class Project implements Exportable {
      * @return Next Product Id.
      */
     public String nextProductId() {
-        Integer index  = 1;
+        Integer index  = this.products.size() + 1;
         String  nextId = "PRODUCT#" + index;
-        while (this.products.get(nextId) != null) {
-            index += 1;
-            nextId = "PRODUCT#" + index;
-        }
-        return nextId;
+        while (this.products.get(nextId) != null)
+                nextId = "PRODUCT#" + ++index;
+        return  nextId;
     }
     
     /**
@@ -919,13 +905,11 @@ public class Project implements Exportable {
      * @return Next Stereotype Id.
      */
     public String nextStereotypeId() {
-        Integer index  = 1;
+        Integer index  = this.stereotypes.size() + 1;
         String  nextId = "STEREOTYPE#" + index;
-        while (this.stereotypes.get(nextId) != null) {
-            index += 1;
-            nextId = "STEREOTYPE#" + index;
-        }
-        return nextId;
+        while (this.stereotypes.get(nextId) != null)
+                nextId = "STEREOTYPE#" + ++index;
+        return  nextId;
     }
     
     /**
@@ -1063,7 +1047,7 @@ public class Project implements Exportable {
      * @return Link by Element and Stereotype.
      */
     public Link getLink(Element element, Stereotype stereotype) {
-        return (Link) links.get("LINK#" + element.getId() + "-" + stereotype.getId());
+        return (Link) this.links.get("LINK#" + element.getId() + "-" + stereotype.getId());
     }
     
     /**

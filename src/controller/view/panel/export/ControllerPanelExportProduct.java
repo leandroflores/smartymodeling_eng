@@ -1,6 +1,5 @@
 package controller.view.panel.export;
 
-import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import model.structural.base.product.Product;
@@ -11,10 +10,11 @@ import view.panel.export.PanelExportProduct;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelExportProduct</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  05/11/2019
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.export.ControllerPanelExport
+ * @see    model.structural.base.product.Product
  * @see    view.panel.export.PanelExportProduct
  */
-public class ControllerPanelExportProduct extends ControllerPanel {
+public class ControllerPanelExportProduct extends ControllerPanelExport {
     private final PanelExportProduct panelExportProduct;
 
     /**
@@ -28,25 +28,13 @@ public class ControllerPanelExportProduct extends ControllerPanel {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.panelExportProduct.getSearchDirectoryButton().equals(event.getSource()))
-            this.updateDirectoryPath();
-        else if (this.panelExportProduct.getProductComboBox().equals(event.getSource()))
+        super.actionPerformed(event);
+        if (this.panelExportProduct.getProductComboBox().equals(event.getSource()))
             this.updateProduct();
     }
 
     @Override
     public void keyPressed(KeyEvent event) {}
-    
-    /**
-     * Method responsible for updating the Directory Path.
-     */
-    private void updateDirectoryPath() {
-        if (this.panelExportProduct.getSearchDirectoryChooser().showSaveDialog(this.panelExportProduct.getViewMenu()) != 1) {
-            String path = this.panelExportProduct.getSearchDirectoryChooser().getSelectedFile().getAbsolutePath();
-            if (!path.equals(""))
-                this.panelExportProduct.getDirectoryTextField().setText(path);
-        }
-    }
     
     /**
      * Method responsible for updating the Product.

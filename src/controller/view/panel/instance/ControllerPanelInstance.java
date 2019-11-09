@@ -6,8 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import model.structural.base.association.Association;
 import model.structural.base.product.Artifact;
+import model.structural.base.product.Relationship;
 import view.delete.product.ViewDeleteArtifact;
 import view.panel.instance.PanelInstance;
 
@@ -99,14 +99,14 @@ public class ControllerPanelInstance extends ControllerPanel implements MouseLis
      */
     public void delete() {
         if (this.panelInstance.getGraph() != null) {
-            mxCell      cell        = (mxCell) this.panelInstance.getGraph().getSelectionCell();
-            String      id          = this.panelInstance.getIdentifiers().get(cell);
-            Artifact    artifact    = this.panelInstance.getInstance().getArtifact(id);
-            Association association = this.panelInstance.getInstance().getAssociations().get(id);
+            mxCell       cell         = (mxCell) this.panelInstance.getGraph().getSelectionCell();
+            String       id           = this.panelInstance.getIdentifiers().get(cell);
+            Artifact     artifact     = this.panelInstance.getInstance().getArtifact(id);
+            Relationship relationship = this.panelInstance.getInstance().getRelationships().get(id);
             if (artifact != null)
                 new ViewDeleteArtifact(this.panelInstance.getViewMenu().getPanelModeling(), artifact).setVisible(true);
-            else if (association != null)
-                this.panelInstance.getInstance().remove(association);
+            else if (relationship != null)
+                this.panelInstance.getInstance().removeRelationship(relationship);
             this.panelInstance.updateInstance();
             this.panelInstance.getViewMenu().update();
         }
