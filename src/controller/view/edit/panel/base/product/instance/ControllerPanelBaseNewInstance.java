@@ -1,11 +1,11 @@
-package controller.view.edit.panel.base.product;
+package controller.view.edit.panel.base.product.instance;
 
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import model.structural.base.Diagram;
 import model.structural.base.product.Product;
-import view.edit.panel.base.product.PanelBaseNewInstance;
+import view.edit.panel.base.product.instance.PanelBaseNewInstance;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseNewInstance</b>.</p>
@@ -14,7 +14,7 @@ import view.edit.panel.base.product.PanelBaseNewInstance;
  * @since  07/10/2019
  * @see    controller.view.ControllerPanel
  * @see    model.structural.base.product.Instance
- * @see    view.edit.panel.base.product.PanelBaseNewInstance
+ * @see    view.edit.panel.base.product.instance.PanelBaseNewInstance
  */
 public class ControllerPanelBaseNewInstance extends ControllerPanel {
     private final PanelBaseNewInstance panelBaseNewInstance;

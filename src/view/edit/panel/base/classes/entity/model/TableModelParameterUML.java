@@ -1,4 +1,4 @@
-package view.edit.panel.base.classs.entity.model;
+package view.edit.panel.base.classes.entity.model;
 
 /**
  * <p>Class of View <b>TableModelParameterUML</b>.</p>

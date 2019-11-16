@@ -1,4 +1,4 @@
-package view.edit.panel.base.classs.entity;
+package view.edit.panel.base.classes.entity;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;

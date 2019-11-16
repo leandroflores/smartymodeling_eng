@@ -1,6 +1,6 @@
-package view.edit.panel.base.product;
+package view.edit.panel.base.product.instance;
 
-import controller.view.edit.panel.base.product.ControllerPanelBaseVarPoints;
+import controller.view.edit.panel.base.product.instance.ControllerPanelBaseVarPoints;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;

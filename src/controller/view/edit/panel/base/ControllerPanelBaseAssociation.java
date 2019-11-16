@@ -4,7 +4,6 @@ import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import view.edit.panel.base.PanelBaseAssociation;
-import view.edit.panel.base.PanelBaseDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseAssociation</b>.</p>

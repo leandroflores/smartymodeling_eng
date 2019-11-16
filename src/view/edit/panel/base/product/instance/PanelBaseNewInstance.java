@@ -1,6 +1,6 @@
-package view.edit.panel.base.product;
+package view.edit.panel.base.product.instance;
 
-import controller.view.edit.panel.base.product.ControllerPanelBaseNewInstance;
+import controller.view.edit.panel.base.product.instance.ControllerPanelBaseNewInstance;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JComboBox;
@@ -14,7 +14,7 @@ import view.new_.product.ViewNewInstance;
  * <p>Class responsible for defining a Panel for showing the <b>New Instance Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  07/10/2019
- * @see    controller.view.edit.panel.base.product.ControllerPanelBaseNewInstance
+ * @see    controller.view.edit.panel.base.product.instance.ControllerPanelBaseNewInstance
  * @see    model.structural.base.product.Instance
  * @see    view.Panel
  */

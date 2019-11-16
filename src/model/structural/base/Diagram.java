@@ -357,6 +357,20 @@ public abstract class Diagram implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Associations List by Type.
+     * @param  type Association Type.
+     * @return Associations List.
+     */
+    public List getAssociations(String type) {
+        List    filter = new ArrayList<>();
+        for (Association association : this.getAssociationsList()) {
+            if (association.getType().equalsIgnoreCase(type))
+                filter.add(association);
+        }
+        return  filter;
+    }
+    
+    /**
      * Method responsible for returning Association Comparator.
      * @return Association Comparator.
      */

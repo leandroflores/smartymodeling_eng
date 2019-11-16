@@ -45,6 +45,8 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
             Element element = this.panel.getDiagram().getElement(id);
                     element.setGlobalX(this.getGlobalX(element) + (int) (double) event.getProperty("dx"));
                     element.setGlobalY(this.getGlobalY(element) + (int) (double) event.getProperty("dy"));
+                    this.panel.getDiagram().dx(element, ((Double) event.getProperty("dx")).intValue());
+                    this.panel.getDiagram().dy(element, ((Double) event.getProperty("dy")).intValue());
         }
         else if (id != null) {
             this.moveCardinality(id, event);

@@ -409,6 +409,32 @@ public final class ClassDiagram extends Diagram {
     }
     
     /**
+     * Method responsible for Shift X for Cardinalities.
+     * @param element Element.
+     * @param distance Shift Distance.
+     */
+    public void dx(Element element, Integer distance) {
+        List<AssociationUML> filter = this.getAssociations("association");
+        for (AssociationUML association : filter) {
+            association.dxSource(association.isSource(element) ? distance : 0);
+            association.dxTarget(association.isTarget(element) ? distance : 0);
+        }
+    }
+    
+    /**
+     * Method responsible for Shift Y for Cardinalities.
+     * @param element Element.
+     * @param distance Shift Distance.
+     */
+    public void dy(Element element, Integer distance) {
+        List<AssociationUML> filter = this.getAssociations("association");
+        for (AssociationUML association : filter) {
+            association.dySource(association.isSource(element) ? distance : 0);
+            association.dyTarget(association.isTarget(element) ? distance : 0);
+        }
+    }
+    
+    /**
      * Method responsible for returning the References to export.
      * @return References to export.
      */

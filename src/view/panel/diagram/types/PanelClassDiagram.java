@@ -5,8 +5,8 @@ import com.mxgraph.model.mxGeometry;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
-import com.mxgraph.util.mxPoint;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationClass;
+import controller.view.panel.diagram.event.ControllerEventFocus;
 import controller.view.panel.diagram.event.classes.ControllerEventChange;
 import controller.view.panel.diagram.event.classes.ControllerEventEdit;
 import controller.view.panel.diagram.event.classes.ControllerEventGroup;
@@ -16,7 +16,6 @@ import controller.view.panel.diagram.event.classes.ControllerEventSelect;
 import controller.view.panel.diagram.types.ControllerPanelClassDiagram;
 import java.awt.FlowLayout;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -362,8 +361,9 @@ public final class PanelClassDiagram extends PanelDiagram {
             mxCell       cell      = (mxCell) this.graph.insertVertex(parent, attribute.getId(), attribute.getCompleteSignature(), 5, entity.getAttributesPosition() + (i * 16) + 6, entity.getWidth() - 10, 15, attribute.getStyleLabel());
                          cell.setConnectable(false);
                          cell.setId(attribute.getId());
-            this.identifiers.put(cell,         attribute.getId());
-            this.identifiers.put(cell.getId(), attribute.getId());
+            this.identifiers.put(cell,          attribute.getId());
+            this.identifiers.put(cell.getId(),  attribute.getId());
+            this.objects.put(attribute.getId(), cell);
         }
     }
     
@@ -394,6 +394,7 @@ public final class PanelClassDiagram extends PanelDiagram {
                       cell.setId(method.getId());
             this.identifiers.put(cell,         method.getId());
             this.identifiers.put(cell.getId(), method.getId());
+            this.objects.put(method.getId(),   cell);
         }
     }
     
@@ -414,19 +415,12 @@ public final class PanelClassDiagram extends PanelDiagram {
      * @param association Association.
      */
     private void addNormalAssociation(Association association) {
-        List<mxPoint> points = new ArrayList<>();
-                      points.add(new mxPoint(50, 50));
-//                      points.add(new mxPoint(0, 0));
         mxCell     edge     = (mxCell) this.graph.insertEdge(this.parent, association.getId(), association.getTitle(), this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
         mxGeometry geometry = ((mxGraphModel) (this.graph.getModel())).getGeometry(edge);
-//        System.out.println("Alt. Bou.: " + geometry.getAlternateBounds());
-//        System.out.println("Old Geo 1: " + geometry.getPoint());
-//        System.out.println("Old Geo 2: " + geometry.getPoints());
-                   geometry.setPoints(points);
+                   geometry.setPoints(association.getPoints());
         ((mxGraphModel) (this.graph.getModel())).setGeometry(edge, geometry);
-//        System.out.println("New Geo 1: " + geometry.getPoint());
-//        System.out.println("New Geo 2: " + geometry.getPoints());
         this.identifiers.put(edge, association.getId());
+        this.objects.put(association.getId(), edge);
     }
     
     /**
@@ -540,6 +534,7 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.component.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventGroup(this));
         
         this.component.addMouseListener((MouseListener) this.controller);
+        this.component.getGraphControl().addMouseListener(new ControllerEventFocus(this));
     }
     
     @Override

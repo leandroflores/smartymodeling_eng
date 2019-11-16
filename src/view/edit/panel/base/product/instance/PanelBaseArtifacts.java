@@ -1,6 +1,6 @@
-package view.edit.panel.base.product;
+package view.edit.panel.base.product.instance;
 
-import controller.view.edit.panel.base.product.ControllerPanelBaseArtifacts;
+import controller.view.edit.panel.base.product.instance.ControllerPanelBaseArtifacts;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.JTextField;
@@ -13,7 +13,7 @@ import view.new_.product.ViewNewInstance;
  * <p>Class responsible for defining a Panel for showing the <b>Artefacts Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  09/10/2019
- * @see    controller.view.edit.panel.base.product.ControllerPanelBaseArtifacts
+ * @see    controller.view.edit.panel.base.product.instance.ControllerPanelBaseArtifacts
  * @see    model.structural.base.product.Instance
  * @see    view.Panel
  */

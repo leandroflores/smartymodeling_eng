@@ -1,4 +1,4 @@
-package controller.view.edit.classs;
+package controller.view.edit.classes;
 
 import controller.view.edit.ControllerViewEdit;
 import view.edit.classs.ViewEditMethod;

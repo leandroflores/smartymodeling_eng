@@ -1,9 +1,9 @@
-package controller.view.edit.panel.base.product;
+package controller.view.edit.panel.base.product.instance;
 
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import view.edit.panel.base.product.PanelBaseArtifacts;
+import view.edit.panel.base.product.instance.PanelBaseArtifacts;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseArtifacts</b>.</p>
@@ -12,7 +12,7 @@ import view.edit.panel.base.product.PanelBaseArtifacts;
  * @since  09/10/2019
  * @see    controller.view.ControllerPanel
  * @see    model.structural.base.product.Instance
- * @see    view.edit.panel.base.product.PanelBaseArtifacts
+ * @see    view.edit.panel.base.product.instance.PanelBaseArtifacts
  */
 public class ControllerPanelBaseArtifacts extends ControllerPanel {
     private final PanelBaseArtifacts panelBaseArtifacts;

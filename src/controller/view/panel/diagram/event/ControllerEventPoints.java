@@ -1,13 +1,10 @@
 package controller.view.panel.diagram.event;
 
-import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.util.mxPoint;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 import model.structural.base.association.Association;
 import view.panel.diagram.PanelDiagram;
 
@@ -31,13 +28,12 @@ public class ControllerEventPoints extends MouseAdapter {
     
     @Override
     public void mouseClicked(MouseEvent event) {
-        System.out.println("Event Points: " + event.getClickCount());
         Association association = this.getAssociation(event);
         mxPoint     point       = new mxPoint(event.getX(), event.getY());
         if (association != null) {
-//            if (event.getClickCount() == 1)
-//                this.updatePoint(association);
-            if (event.getClickCount() == 2)
+            if (event.getClickCount() == 1)
+                this.updatePoint(association);
+            else if (event.getClickCount() == 2)
                 this.addPoint(association, point);
             else if (event.getButton() == 3)
                 this.removePoint(association, point);
@@ -61,9 +57,8 @@ public class ControllerEventPoints extends MouseAdapter {
      * @param point Point.
      */
     private void updatePoint(Association association) {
-        System.out.println("Single Click - ");
         mxGeometry geometry = ((mxGraphModel) (this.panel.getGraph().getModel())).getGeometry(this.panel.getObjects().get(association.getId()));
-        System.out.println("Points: " +  geometry.getPoints());
+        System.out.println(association.getId() + " " +  geometry.getPoints());
                    association.setPoints(geometry.getPoints());
         System.out.println("");
     }
@@ -74,14 +69,10 @@ public class ControllerEventPoints extends MouseAdapter {
      * @param point Point.
      */
     private void addPoint(Association association, mxPoint point) {
-        System.out.println("Double Click ");
         association.addPoint(point);
         this.panel.updateDiagram();
-        this.panel.getViewMenu().update();
-        this.panel.getViewMenu().setSave(false);
-//        this.panel.updateDiagram();
 //        this.panel.getViewMenu().getPanelModeling().updateUI();
-//        this.panel.getViewMenu().setSave(false);
+        this.panel.getViewMenu().setSave(false);
     }
     
     /**
@@ -90,46 +81,12 @@ public class ControllerEventPoints extends MouseAdapter {
      * @param point Point.
      */
     private void removePoint(Association association, mxPoint point) {
-        System.out.println("Left Click ");
         mxPoint nearest = association.getNearestPoint(point);
         if (nearest != null) {
-            System.out.println("Nearest: " + nearest);
             association.removePoint(nearest);
             this.panel.updateDiagram();
-            this.panel.getViewMenu().getPanelModeling().updateUI();
+//        this.panel.getViewMenu().getPanelModeling().updateUI();
             this.panel.getViewMenu().setSave(false);
         }
-    } 
-    
-    private void updatePoints(mxCell edge, Association association, MouseEvent event) {
-        if (event.getClickCount() == 2) {
-            System.out.println("doubleClicked");
-            mxPoint    point    = new mxPoint(event.getX(), event.getY());
-            mxGeometry geometry = ((mxGraphModel) (this.panel.getGraph().getModel())).getGeometry(edge);
-                       this.updatePoints(geometry, point);
-                       ((mxGraphModel) (this.panel.getGraph().getModel())).setGeometry(edge, geometry);
-                       System.out.println("Points: " + geometry.getPoints());
-        }else if (event.getButton() == MouseEvent.BUTTON3) {
-            mxPoint    point    = new mxPoint(event.getX(), event.getY());
-            System.out.println("leftClicked: " + point);
-            mxGeometry geometry = ((mxGraphModel) (this.panel.getGraph().getModel())).getGeometry(edge);
-                       geometry.getPoints().remove(point);
-                ((mxGraphModel) (this.panel.getGraph().getModel())).setGeometry(edge, geometry);
-                       System.out.println("Points: " + geometry.getPoints());
-        }
-    }
-    
-    private void updatePoints(mxGeometry geometry, mxPoint point) {
-        List<mxPoint> points = this.getPoints(point);
-        if (geometry.getPoints() == null)
-            geometry.setPoints(points);
-        else
-            geometry.getPoints().addAll(points);
-    }
-    
-    private List<mxPoint> getPoints(mxPoint point) {
-        List<mxPoint> points = new ArrayList<>();
-                      points.add(point);
-        return        points;
     }
 }

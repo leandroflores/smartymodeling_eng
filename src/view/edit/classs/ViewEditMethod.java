@@ -1,13 +1,13 @@
 package view.edit.classs;
 
-import controller.view.edit.classs.ControllerViewEditMethod;
+import controller.view.edit.classes.ControllerViewEditMethod;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.MethodUML;
 import view.edit.ViewEdit;
-import view.edit.panel.base.classs.PanelBaseMethodUML;
+import view.edit.panel.base.classes.PanelBaseMethodUML;
 import view.edit.panel.stereotype.PanelStereotype;
 import view.panel.modeling.PanelModeling;
 
@@ -16,7 +16,7 @@ import view.panel.modeling.PanelModeling;
  * <p>Class responsible for defining the <b>Method Edit View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  06/06/2019
- * @see    controller.view.edit.classs.ControllerViewEditMethod
+ * @see    controller.view.edit.classes.ControllerViewEditMethod
  * @see    model.structural.diagram.classes.base.MethodUML
  * @see    view.edit.ViewEdit
  */

@@ -12,10 +12,10 @@ import model.structural.base.Element;
 import model.structural.base.association.Association;
 import model.structural.base.product.Instance;
 import model.structural.base.variability.Variability;
-import view.edit.panel.base.product.PanelBaseArtifacts;
-import view.edit.panel.base.product.PanelBaseNewInstance;
-import view.edit.panel.base.product.PanelBaseOptional;
-import view.edit.panel.base.product.PanelBaseVarPoints;
+import view.edit.panel.base.product.instance.PanelBaseArtifacts;
+import view.edit.panel.base.product.instance.PanelBaseNewInstance;
+import view.edit.panel.base.product.instance.PanelBaseOptional;
+import view.edit.panel.base.product.instance.PanelBaseVarPoints;
 import view.new_.ViewNew;
 import view.structural.ViewMenu;
 

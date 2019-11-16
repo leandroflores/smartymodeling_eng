@@ -2,11 +2,15 @@ package view.panel.instance;
 
 import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.model.mxCell;
+import com.mxgraph.model.mxGeometry;
+import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.view.mxGraph;
 import controller.view.panel.instance.ControllerPanelInstance;
+import controller.view.panel.instance.event.ControllerEventFocus;
 import controller.view.panel.instance.event.ControllerEventMove;
+import controller.view.panel.instance.event.ControllerEventPoints;
 import controller.view.panel.instance.event.ControllerEventResize;
 import java.awt.Color;
 import java.util.HashMap;
@@ -56,6 +60,8 @@ public abstract class PanelInstance extends Panel {
     public void addControllers() {
         this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
         this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
+        this.component.getGraphControl().addMouseListener(new ControllerEventFocus(this));
+        this.component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
     }
     
     /**
@@ -138,6 +144,7 @@ public abstract class PanelInstance extends Panel {
     public void updateInstance() {
         this.clearInstance();
         this.identifiers = new HashMap<>();
+        this.objects     = new HashMap<>();
         
         this.addArtifacts();
         this.addRelationships();
@@ -176,9 +183,12 @@ public abstract class PanelInstance extends Panel {
     public void addRelationships() {
         for (Relationship relationship : this.instance.getRelationshipsList()) {
             this.graph.getStylesheet().putCellStyle(relationship.getStyleLabel(), relationship.getStyle());
-            Object edge = this.graph.insertEdge(this.parent, null, relationship.getTitle(), this.objects.get(this.getId(relationship.getAssociation().getSource())), this.objects.get(this.getId(relationship.getAssociation().getTarget())), relationship.getStyleLabel());
-            mxCell cell = (mxCell) edge;
+            mxCell     edge     = (mxCell) this.graph.insertEdge(this.parent, null, relationship.getTitle(), this.objects.get(this.getId(relationship.getAssociation().getSource())), this.objects.get(this.getId(relationship.getAssociation().getTarget())), relationship.getStyleLabel());
+            mxGeometry geometry = ((mxGraphModel) (this.graph.getModel())).getGeometry(edge);
+                       geometry.setPoints(relationship.getPoints());
+                       ((mxGraphModel) (this.graph.getModel())).setGeometry(edge, geometry);           
             this.identifiers.put(edge, relationship.getId());
+            this.objects.put(relationship.getId(), edge);
         }
     }
     

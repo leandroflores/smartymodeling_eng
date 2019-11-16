@@ -1,4 +1,4 @@
-package view.edit.panel.base.classs;
+package view.edit.panel.base.classes;
 
 import controller.view.edit.panel.base.classes.ControllerPanelBaseMethodUML;
 import java.awt.Dimension;

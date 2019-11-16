@@ -1,6 +1,6 @@
-package view.edit.panel.base.product;
+package view.edit.panel.base.product.instance;
 
-import controller.view.edit.panel.base.product.ControllerPanelBaseOptional;
+import controller.view.edit.panel.base.product.instance.ControllerPanelBaseOptional;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -16,7 +16,7 @@ import view.new_.product.ViewNewInstance;
  * <p>Class responsible for defining the for showing the <b>Optional Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  08/10/2019
- * @see    controller.view.edit.panel.base.product.ControllerPanelBaseOptional
+ * @see    controller.view.edit.panel.base.product.instance.ControllerPanelBaseOptional
  * @see    model.structural.base.product.Instance
  * @see    view.Panel
  */

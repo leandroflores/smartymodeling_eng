@@ -5,7 +5,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.ClassUML;
-import view.edit.panel.base.classs.PanelBaseClassUML;
+import view.edit.panel.base.classes.PanelBaseClassUML;
 import view.panel.edit.base.PanelEditElement;
 import view.structural.ViewMenu;
 

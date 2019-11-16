@@ -362,8 +362,9 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private Integer getValue(String value) {
         try {
-            Integer.parseInt(value);
-        }catch (NumberFormatException exception) {}
-        return Integer.MAX_VALUE;
+            return Integer.parseInt(value);
+        }catch (NumberFormatException exception) {
+            return Integer.MAX_VALUE;
+        }
     }
 }

@@ -136,14 +136,6 @@ public class Instance implements Exportable {
     }
     
     /**
-     * Method responsible for returning if Instance is Empty.
-     * @return Instance is Empty.
-     */
-    public boolean isEmpty() {
-        return this.getArtifactsList().isEmpty();
-    }
-    
-    /**
      * Method responsible for returning the Next Artifact Id.
      * @return Next Artifact Id.
      */
@@ -210,25 +202,6 @@ public class Instance implements Exportable {
     }
     
     /**
-     * Method responsible for reseting the Instance.
-     */
-    public void reset() {
-        this.artifacts     = new HashMap();
-        this.relationships = new HashMap();
-    }
-    
-    /**
-     * Method responsible for removing a Artifact by Element.
-     * @param element Element.
-     */
-    public void remove(Element element) {
-        for (Artifact artifact : this.getArtifactsList()) {
-            if (artifact.getElement().equals(element))
-                this.removeArtifact(artifact);
-        }
-    }
-    
-    /**
      * Method responsible for setting the Instance Artifacts.
      * @param artifacts Instance Artifacts.
      */
@@ -268,11 +241,76 @@ public class Instance implements Exportable {
     }
     
     /**
+     * Method responsible for returning a Relationship by Id.
+     * @param  id Relationship Id.
+     * @return Relationship found.
+     */
+    public Relationship getRelationship(String id) {
+        return (Relationship) this.relationships.get(id);
+    }
+    
+    /**
+     * Method responsible for returning the Relationship by Association.
+     * @param  association Association.
+     * @return Relationship found.
+     */
+    public Relationship getRelationship(Association association) {
+        for (Relationship relationship : this.getRelationshipsList()) {
+            if (relationship.getAssociation().equals(association))
+                return relationship;
+        }
+        return null;
+    }
+    
+    /**
      * Method responsible for returning the Relationships List.
      * @return Relationships List.
      */
     public List<Relationship> getRelationshipsList() {
         return new ArrayList<>(this.relationships.values());
+    }
+    
+    /**
+     * Method responsible for removing a Relationship.
+     * @param  relationship Relationship.
+     */
+    public void removeRelationship(Relationship relationship) {
+        this.relationships.remove(relationship.getId());
+    }
+    
+    /**
+     * Method responsible for setting the Instance Relationships.
+     * @param relationships Instance Relationships.
+     */
+    public void setRelationships(HashMap<String, Relationship> relationships) {
+        this.relationships = (HashMap) relationships.clone();
+    }
+    
+    /**
+     * Method responsible for returning if Instance is Empty.
+     * @return Instance is Empty.
+     */
+    public boolean isEmpty() {
+        return this.getArtifactsList().isEmpty();
+    }
+    
+    /**
+     * Method responsible for reseting the Instance.
+     */
+    public void reset() {
+        this.artifacts     = new HashMap();
+        this.relationships = new HashMap();
+    }
+    
+    /**
+     * Method responsible for removing a Artifact by Element.
+     * @param element Element.
+     */
+    public void remove(Element element) {
+        for (Artifact artifact : this.getArtifactsList()) {
+            if (artifact.getElement().equals(element))
+                this.removeArtifact(artifact);
+        }
     }
     
     /**
@@ -295,22 +333,6 @@ public class Instance implements Exportable {
             if (relationship.getAssociation().contains(artefact.getElement()))
                 this.removeRelationship(relationship);
         }
-    }
-    
-    /**
-     * Method responsible for removing a Relationship.
-     * @param  relationship Relationship.
-     */
-    public void removeRelationship(Relationship relationship) {
-        this.relationships.remove(relationship.getId());
-    }
-    
-    /**
-     * Method responsible for setting the Instance Relationships.
-     * @param relationships Instance Relationships.
-     */
-    public void setRelationships(HashMap<String, Relationship> relationships) {
-        this.relationships = (HashMap) relationships.clone();
     }
     
     /**

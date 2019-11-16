@@ -166,6 +166,8 @@ public abstract class PanelDiagram extends Panel {
     public void updateDiagram() {
         this.clearDiagram();
         this.identifiers = new HashMap<>();
+        this.objects     = new HashMap<>();
+        
         this.setClick();
         
         this.addElements();
@@ -197,11 +199,6 @@ public abstract class PanelDiagram extends Panel {
             mxGeometry geometry = ((mxGraphModel) (this.graph.getModel())).getGeometry(edge);
                        geometry.setPoints(association.getPoints());
                        ((mxGraphModel) (this.graph.getModel())).setGeometry(edge, geometry);
-            System.out.println("");
-            System.out.println("Add Associations");
-            System.out.println("Geometry Points: " + geometry.getPoints());
-            System.out.println("Associat Points: " + association.getPoints());
-            System.out.println("");
             this.identifiers.put(edge, association.getId());
             this.objects.put(association.getId(), edge);
         }

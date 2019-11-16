@@ -13,6 +13,7 @@ import model.structural.base.evaluation.Metric;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
+import model.structural.base.product.Relationship;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ActivityDiagram;
@@ -28,6 +29,7 @@ import model.structural.diagram.classes.base.ClassUML;
 import model.structural.diagram.classes.base.InterfaceUML;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.PackageUML;
+import model.structural.diagram.classes.base.association.AssociationUML;
 import model.structural.diagram.component.base.ComponentUML;
 import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
@@ -47,11 +49,13 @@ import view.panel.edit.base.classes.PanelEditClassUML;
 import view.panel.edit.base.classes.PanelEditInterfaceUML;
 import view.panel.edit.base.classes.PanelEditMethodUML;
 import view.panel.edit.base.classes.PanelEditPackageUML;
+import view.panel.edit.base.classes.association.PanelEditAssociationUML;
 import view.panel.edit.base.component.PanelEditComponentUML;
 import view.panel.edit.base.evaluation.PanelEditMetric;
 import view.panel.edit.base.product.PanelEditArtifact;
 import view.panel.edit.base.product.PanelEditInstance;
 import view.panel.edit.base.product.PanelEditProduct;
+import view.panel.edit.base.product.PanelEditRelationship;
 import view.panel.edit.base.sequence.PanelEditInstanceUML;
 import view.panel.edit.base.sequence.PanelEditLifelineUML;
 import view.panel.edit.base.sequence.PanelEditMessageUML;
@@ -252,6 +256,8 @@ public final class PanelProject extends Panel {
     public void initPanelEditAssociation(Diagram diagram, Association association) {
         if (diagram instanceof ActivityDiagram)
             this.initPanelEditAssociation((ActivityDiagram) diagram, association);
+        else if (diagram instanceof ClassDiagram)
+            this.initPanelEditAssociation((ClassDiagram)    diagram, association);
         else if (diagram instanceof SequenceDiagram)
             this.initPanelEditAssociation((SequenceDiagram) diagram, association);
         else {
@@ -268,6 +274,19 @@ public final class PanelProject extends Panel {
     public void initPanelEditAssociation(ActivityDiagram diagram, Association association) {
         if (association instanceof FlowUML)
             this.panelEdit = new PanelEditFlowUML(this.viewMenu, diagram, (FlowUML) association);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Association.
+     * @param diagram Class Diagram.
+     * @param association Association.
+     */
+    public void initPanelEditAssociation(ClassDiagram diagram, Association association) {
+        if (association instanceof AssociationUML)
+            this.panelEdit = new PanelEditAssociationUML(this.viewMenu, diagram, (AssociationUML) association);
+        else 
+            this.panelEdit = new PanelEditAssociation(this.viewMenu, diagram, association);
         this.updatePanelEdit();
     }
     
@@ -334,6 +353,15 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditArtifact(Artifact artifact) {
         this.panelEdit = new PanelEditArtifact(this.viewMenu, artifact);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Relationship.
+     * @param relationship Relationship.
+     */
+    public void initPanelRelationship(Relationship relationship) {
+        this.panelEdit = new PanelEditRelationship(this.viewMenu, relationship);
         this.updatePanelEdit();
     }
     

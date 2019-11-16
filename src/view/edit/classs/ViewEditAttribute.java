@@ -1,13 +1,13 @@
 package view.edit.classs;
 
-import controller.view.edit.classs.ControllerViewEditAttribute;
+import controller.view.edit.classes.ControllerViewEditAttribute;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.AttributeUML;
 import view.edit.ViewEdit;
-import view.edit.panel.base.classs.PanelBaseAttributeUML;
+import view.edit.panel.base.classes.PanelBaseAttributeUML;
 import view.edit.panel.stereotype.PanelStereotype;
 import view.panel.modeling.PanelModeling;
 
@@ -16,7 +16,7 @@ import view.panel.modeling.PanelModeling;
  * <p>Class responsible for defining the <b>Attribute Edit View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  05/06/2019
- * @see    controller.view.edit.classs.ControllerViewEditAttribute
+ * @see    controller.view.edit.classes.ControllerViewEditAttribute
  * @see    model.structural.diagram.classes.base.AttributeUML
  * @see    view.edit.ViewEdit
  */
