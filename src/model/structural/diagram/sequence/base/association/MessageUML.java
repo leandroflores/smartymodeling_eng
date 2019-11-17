@@ -3,7 +3,6 @@ package model.structural.diagram.sequence.base.association;
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
 import model.structural.diagram.classes.base.MethodUML;
@@ -176,31 +175,16 @@ public class MessageUML extends Association {
     }
     
     @Override
-    public int hashCode() {
-        int    hash = 3;
-               hash = 19 * hash + Objects.hashCode(this.source);
-               hash = 19 * hash + Objects.hashCode(this.target);
-        return hash;
-    }
-    
-    @Override
-    public boolean equals(Object object) {
-        if (object instanceof MessageUML == false)
-            return false;
-        return this.source.equals(((MessageUML) object).getSource())
-            && this.target.equals(((MessageUML) object).getTarget());
-    }
-    
-    @Override
-    public String export() {
+    protected String exportHeader() {
         String export  = "    <"        + this.type;
+               export += " id=\""       + this.id.trim()       + "\"";
                export += " source=\""   + this.source.getId()  + "\"";
                export += " target=\""   + this.target.getId()  + "\"";
                export += " name=\""     + this.name.trim()     + "\"";
                export += " category=\"" + this.category.trim() + "\"";
                export += " sequence=\"" + this.sequence        + "\"";
                export += " method=\""   + this.getMethodId()   + "\"";
-               export += "/>\n";
+               export += ">\n";
         return export;
     }
     

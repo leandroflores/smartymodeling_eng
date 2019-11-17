@@ -3,6 +3,7 @@ package model.structural.base.association;
 import com.mxgraph.util.mxPoint;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import model.structural.base.Element;
 import model.structural.base.interfaces.Exportable;
 import model.structural.base.interfaces.Modelable;
@@ -16,7 +17,7 @@ import model.structural.base.interfaces.Modelable;
  * @see    model.structural.base.interfaces.Exportable
  * @see    model.structural.base.interfaces.Modelable
  */
-public abstract class Association implements Exportable, Modelable {
+public abstract class Association implements Modelable, Exportable {
     protected String  id;
     protected Element source;
     protected Element target;
@@ -171,6 +172,23 @@ public abstract class Association implements Exportable, Modelable {
     }
 
     /**
+     * Method responsible for setting the Default Points.
+     */
+    public void setDefaultPoints() {
+        this.points = new ArrayList();
+        if (this.source.equals(this.target))
+            this.setLoopPoints();
+    }
+    
+    /**
+     * Method responsible for setting the Loop Points.
+     */
+    public void setLoopPoints() {
+        this.points.add(new mxPoint(this.source.getGlobalX() + this.source.getWidth() + 150, this.source.getGlobalY() + 20));
+        this.points.add(new mxPoint(this.source.getGlobalX() + this.source.getWidth() + 150, this.source.getGlobalY() + 70));
+    }
+    
+    /**
      * Method responsible for setting the Association Points.
      * @param points Association Points.
      */
@@ -189,16 +207,56 @@ public abstract class Association implements Exportable, Modelable {
         return export;
     }
     
+    /**
+     * Method responsible for exporting the Association Header.
+     * @return Association Header.
+     */
+    protected String exportHeader() {
+        String header  = "    <"      + this.type;
+               header += " id=\""     + this.id             + "\"";
+               header += " source=\"" + this.source.getId() + "\"";
+               header += " target=\"" + this.target.getId() + "\"";
+               header += ">\n";
+        return header;
+    }
+    
+    /**
+     * Method responsible for exporting the Association Body.
+     * @return Association Body.
+     */
+    protected String exportBody() {
+        return this.exportPoints();
+    }
+    
+    /**
+     * Method responsible for exporting the Association Footer.
+     * @return Association Footer.
+     */
+    protected String exportFooter() {
+        return "    </" + this.type + ">\n";
+    }
+    
     @Override
     public String export() {
-        String export  = "    <"      + this.type;
-               export += " id=\""     + this.id             + "\"";
-               export += " source=\"" + this.source.getId() + "\"";
-               export += " target=\"" + this.target.getId() + "\"";
-               export += ">\n";
-               export += this.exportPoints();
-               export += "    </" + this.type + ">\n";
+        String export  = this.exportHeader();
+               export += this.exportBody();
+               export += this.exportFooter();
         return export;
+    }
+    
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Association == false)
+            return false;
+        return Objects.equals(this.id, ((Element) object).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        int    hash = 3;
+               hash = 41 * hash + Objects.hashCode(this.id);
+               hash = 41 * hash + Objects.hashCode(this.type);
+        return hash;
     }
     
     @Override

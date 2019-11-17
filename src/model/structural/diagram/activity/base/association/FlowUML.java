@@ -3,7 +3,6 @@ package model.structural.diagram.activity.base.association;
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
 
@@ -139,35 +138,15 @@ public class FlowUML extends Association {
     }
     
     @Override
-    public int hashCode() {
-        int    hash = 3;
-               hash = 19 * hash + Objects.hashCode(this.source);
-               hash = 19 * hash + Objects.hashCode(this.target);
-        return hash;
-    }
-    
-    @Override
-    public boolean equals(Object objeto) {
-        if (objeto instanceof FlowUML == false)
-            return false;
-        return this.source.equals(( (FlowUML) objeto).getSource())
-            && this.target.equals(((FlowUML) objeto).getTarget());
-    }
-    
-    @Override
-    public String export() {
+    protected String exportHeader() {
         String export  = "    <"      + this.type;
+               export += " id=\""     + this.id.trim()      + "\"";
                export += " source=\"" + this.source.getId() + "\"";
                export += " target=\"" + this.target.getId() + "\"";
                export += " guard=\""  + this.getGuard()     + "\"";
                export += " action=\"" + this.getAction()    + "\"";
                export += " weight=\"" + this.getWeight()    + "\"";
-               export += "/>\n";
+               export += ">\n";
         return export;
-    }
-    
-    @Override
-    public String toString() {
-        return "Flow (" + super.toString() + ")";
     }
 }

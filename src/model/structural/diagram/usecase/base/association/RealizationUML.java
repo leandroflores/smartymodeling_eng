@@ -3,7 +3,6 @@ package model.structural.diagram.usecase.base.association;
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import model.structural.base.association.Association;
 import model.structural.diagram.usecase.base.ActorUML;
 import model.structural.diagram.usecase.base.UseCaseUML;
@@ -79,29 +78,11 @@ public class RealizationUML extends Association {
     }
     
     @Override
-    public String export() {
-        String export  = "    <"  + this.type;
+    protected String exportHeader() {
+        String export  = "    <"       + this.type;
                export += " id=\""      + this.id             + "\"";
                export += " actor=\""   + this.source.getId() + "\"";
                export += " useCase=\"" + this.target.getId() + "\">\n";
-               export += super.exportPoints();
-               export += "    </" + this.type + ">\n";
         return export;
-    }
-    
-    @Override
-    public int hashCode() {
-        int    hash = 3;
-               hash = 19 * hash + Objects.hashCode(this.source);
-               hash = 19 * hash + Objects.hashCode(this.target);
-        return hash;
-    }
-    
-    @Override
-    public boolean equals(Object object) {
-        if (object instanceof RealizationUML == false)
-            return false;
-        return this.source.equals(((RealizationUML) object).getSource())
-            && this.target.equals(((RealizationUML) object).getTarget());
     }
 }

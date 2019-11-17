@@ -3,7 +3,6 @@ package model.structural.base.association;
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import model.structural.base.Element;
 
 /**
@@ -49,21 +48,5 @@ public class Generalization extends Association {
                style.put(mxConstants.STYLE_ENDARROW,   mxConstants.ARROW_BLOCK);
                style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);
         return style;
-    }
-    
-    @Override
-    public int hashCode() {
-        int    hash = 3;
-               hash = 19 * hash + Objects.hashCode(this.source);
-               hash = 19 * hash + Objects.hashCode(this.target);
-        return hash;
-    }
-    
-    @Override
-    public boolean equals(Object object) {
-        if (object instanceof Generalization == false)
-            return false;
-        return this.source.equals(((Generalization) object).getSource())
-            && this.target.equals(((Generalization) object).getTarget());
     }
 }

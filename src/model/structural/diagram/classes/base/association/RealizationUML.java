@@ -3,7 +3,6 @@ package model.structural.diagram.classes.base.association;
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import model.structural.base.association.Association;
 import model.structural.diagram.classes.base.ClassUML;
 import model.structural.diagram.classes.base.InterfaceUML;
@@ -67,15 +66,6 @@ public class RealizationUML extends Association {
     }
     
     @Override
-    public String export() {
-        String export  = "    <" + this.type;
-               export += " class=\""     + this.source.getId() + "\"";
-               export += " interface=\"" + this.target.getId() + "\"";
-               export += "/>\n";
-        return export;
-    }
-    
-    @Override
     public Map getStyle() {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_DASHED,   "1");
@@ -89,18 +79,12 @@ public class RealizationUML extends Association {
     }
     
     @Override
-    public int hashCode() {
-        int    hash = 3;
-               hash = 19 * hash + Objects.hashCode(this.source);
-               hash = 19 * hash + Objects.hashCode(this.target);
-        return hash;
-    }
-    
-    @Override
-    public boolean equals(Object object) {
-        if (object instanceof RealizationUML == false)
-            return false;
-        return this.source.equals(((RealizationUML) object).getSource())
-            && this.target.equals(((RealizationUML) object).getTarget());
+    protected String exportHeader() {
+        String export  = "    <" + this.type;
+               export += " id=\""        + this.id.trim()      + "\"";
+               export += " class=\""     + this.source.getId() + "\"";
+               export += " interface=\"" + this.target.getId() + "\"";
+               export += ">\n";
+        return export;
     }
 }

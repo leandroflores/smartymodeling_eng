@@ -3,7 +3,6 @@ package model.structural.diagram.usecase.base.association;
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import model.structural.base.association.Association;
 import model.structural.diagram.usecase.base.UseCaseUML;
 
@@ -77,21 +76,5 @@ public class ExtendUML extends Association {
                style.put(mxConstants.STYLE_ENDARROW,   mxConstants.ARROW_OPEN);
                style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);
         return style;
-    }
-    
-    @Override
-    public int hashCode() {
-        int    hash = 3;
-               hash = 19 * hash + Objects.hashCode(this.source);
-               hash = 19 * hash + Objects.hashCode(this.target);
-        return hash;
-    }
-    
-    @Override
-    public boolean equals(Object object) {
-        if (object instanceof ExtendUML == false)
-            return false;
-        return this.source.equals(((ExtendUML) object).getSource())
-            && this.target.equals(((ExtendUML) object).getTarget());
     }
 }

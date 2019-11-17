@@ -61,8 +61,7 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
      * @return Association checked.
      */
     protected boolean check(Element source, Element target) {
-        return source != null 
-            && target != null;
+        return (source != null && target != null);
     }
     
     /**
@@ -108,7 +107,8 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
      * @param association Association.
      */
     protected void addRequires(mxCell association) {
-        this.diagram.addRequires(new Requires(this.getSource(association), this.getTarget(association)));
+        if (this.distinct(this.getSource(association), this.getTarget(association)))
+            this.diagram.addRequires(new Requires(this.getSource(association), this.getTarget(association)));
     }
     
     /**
@@ -116,7 +116,8 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
      * @param association Association.
      */
     protected void addMutex(mxCell association) {
-        this.diagram.addMutex(new Mutex(this.getSource(association), this.getTarget(association)));
+        if (this.distinct(this.getSource(association), this.getTarget(association)))
+            this.diagram.addMutex(new Mutex(this.getSource(association), this.getTarget(association)));
     }
     
     /**
@@ -124,7 +125,8 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
      * @param association Association.
      */
     protected void addDependency(mxCell association) {
-        this.diagram.addDependency(new Dependency(this.getSource(association), this.getTarget(association)));
+        if (this.distinct(this.getSource(association), this.getTarget(association)))
+            this.diagram.addDependency(new Dependency(this.getSource(association), this.getTarget(association)));
     }
     
     /**
@@ -145,7 +147,7 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
     private Generalization createGeneralization(mxCell association) {
         Element source = this.getSource(association);
         Element target = this.getTarget(association);
-        if (this.equalClass(source, target))
+        if (this.equalClass(source, target) && this.distinct(source, target))
             return new Generalization(source, target);
         return null;
     }

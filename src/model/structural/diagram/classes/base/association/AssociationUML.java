@@ -4,7 +4,6 @@ import com.mxgraph.util.mxConstants;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import model.structural.base.association.Association;
 import model.structural.diagram.classes.Entity;
 import org.w3c.dom.Element;
@@ -74,18 +73,22 @@ public class AssociationUML extends Association {
         this.direction = direction;
         this.setDefault();
     }
-    
-    @Override
-    public String getId() {
+
+    /**
+     * Method responsible for returning the Complete Id.
+     * @return Complete Id.
+     */
+    public String getCompleteId() {
         return this.category.toUpperCase().trim() + "#" + this.source.getId() + "-" + this.target.getId();
     }
-
+    
     /**
      * Method responsible for setting the Default Parameters.
      */
     private void setDefault() {
         this.setDefaultSource();
         this.setDefaultTarget();
+        this.setDefaultPoints();
     }
     
     @Override
@@ -333,20 +336,6 @@ public class AssociationUML extends Association {
     }
     
     /**
-     * Method responsible for returning the Source.
-     * @return Source.
-     */
-    public String exportSource() {
-        String export  = " source=\""     + this.source.getId() + "\"";
-               export += " sourceName=\"" + this.sourceName     + "\"";
-               export += " sourceMin=\""  + this.sourceMin      + "\"";
-               export += " sourceMax=\""  + this.sourceMax      + "\"";
-               export += " sourceX=\""    + this.getSourceX()   + "\"";
-               export += " sourceY=\""    + this.getSourceY()   + "\"";
-        return export;
-    }
-    
-    /**
      * Method responsible for setting the Target by W3C Element.
      * @param element W3C Element.
      */
@@ -517,20 +506,6 @@ public class AssociationUML extends Association {
     }
     
     /**
-     * Method responsible for returning the Target.
-     * @return Target.
-     */
-    public String exportTarget() {
-        String export  = " target=\""     + this.target.getId() + "\"";
-               export += " targetName=\"" + this.targetName     + "\"";
-               export += " targetMin=\""  + this.targetMin      + "\"";
-               export += " targetMax=\""  + this.targetMax      + "\"";
-               export += " targetX=\""    + this.getTargetX()   + "\"";
-               export += " targetY=\""    + this.getTargetY()   + "\"";
-        return export;
-    }
-    
-    /**
      * Method responsible for calculating Position Shift X.
      * @param position Position.
      * @param distance Distance.
@@ -578,28 +553,6 @@ public class AssociationUML extends Association {
         return (this.direction) ? mxConstants.ARROW_OPEN : mxConstants.ARROW_SPACING;
     }
     
-    @Override
-    public String getTitle() {
-        return this.name;
-    }
-    
-    @Override
-    public String getStyleLabel() {
-        return "styleAssociationUML" + this.getId();
-    }
-    
-    @Override
-    public String export() {
-        String export  = "    <"         + this.type;
-               export += " name=\""      + this.name.trim()     + "\"";
-               export += " category=\""  + this.category.trim() + "\"";
-               export += " direction=\"" + this.direction       + "\"";
-               export += this.exportSource();
-               export += this.exportTarget();
-               export += "/>\n";
-        return export;
-    }
-    
     /**
      * Method responsible for returning the Cardinality Style Label.
      * @return Cardinality Style Label.
@@ -628,11 +581,21 @@ public class AssociationUML extends Association {
     }
     
     @Override
+    public String getTitle() {
+        return this.name;
+    }
+    
+    @Override
+    public String getStyleLabel() {
+        return "styleAssociationUML" + this.getId();
+    }
+    
+    @Override
     public Map getStyle() {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_DASHED,    "0");
                style.put(mxConstants.STYLE_MOVABLE,   "0");
-               style.put(mxConstants.STYLE_EDITABLE,  "1");
+               style.put(mxConstants.STYLE_EDITABLE,  "0");
                style.put(mxConstants.STYLE_FONTCOLOR, "#000000");
                style.put(mxConstants.STYLE_STARTSIZE, "15");
                style.put(mxConstants.STYLE_ENDSIZE,   "15");
@@ -643,19 +606,44 @@ public class AssociationUML extends Association {
         return style;
     }
     
-    @Override
-    public int hashCode() {
-        int    hash = 3;
-               hash = 19 * hash + Objects.hashCode(this.source);
-               hash = 19 * hash + Objects.hashCode(this.target);
-        return hash;
+    /**
+     * Method responsible for exporting the Association Source.
+     * @return Association Source.
+     */
+    public String exportSource() {
+        String export  = " source=\""     + this.source.getId() + "\"";
+               export += " sourceName=\"" + this.sourceName     + "\"";
+               export += " sourceMin=\""  + this.sourceMin      + "\"";
+               export += " sourceMax=\""  + this.sourceMax      + "\"";
+               export += " sourceX=\""    + this.getSourceX()   + "\"";
+               export += " sourceY=\""    + this.getSourceY()   + "\"";
+        return export;
+    }
+    
+    /**
+     * Method responsible for returning the Target.
+     * @return Target.
+     */
+    public String exportTarget() {
+        String export  = " target=\""     + this.target.getId() + "\"";
+               export += " targetName=\"" + this.targetName     + "\"";
+               export += " targetMin=\""  + this.targetMin      + "\"";
+               export += " targetMax=\""  + this.targetMax      + "\"";
+               export += " targetX=\""    + this.getTargetX()   + "\"";
+               export += " targetY=\""    + this.getTargetY()   + "\"";
+        return export;
     }
     
     @Override
-    public boolean equals(Object objeto) {
-        if (objeto instanceof AssociationUML == false)
-            return false;
-        return this.source.equals(((AssociationUML) objeto).getSource())
-            && this.target.equals(((AssociationUML) objeto).getTarget());
+    protected String exportHeader() {
+        String export  = "    <"         + this.type;
+               export += " id=\""        + this.id.trim()       + "\"";
+               export += " name=\""      + this.name.trim()     + "\"";
+               export += " category=\""  + this.category.trim() + "\"";
+               export += " direction=\"" + this.direction       + "\"";
+               export += this.exportSource();
+               export += this.exportTarget();
+               export += ">\n";
+        return export;
     }
 }

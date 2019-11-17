@@ -128,7 +128,7 @@ public abstract class PanelDiagram extends Panel {
         
         this.graph.setAllowDanglingEdges(false);
         this.graph.setAllowNegativeCoordinates(false);
-        this.graph.setAllowLoops(false);
+        this.graph.setAllowLoops(true);
         this.graph.setSplitEnabled(false);
         this.setStyle();
         

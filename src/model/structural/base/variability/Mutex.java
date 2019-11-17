@@ -3,7 +3,6 @@ package model.structural.base.variability;
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import model.structural.base.association.Association;
 import model.structural.base.Element;
 
@@ -49,21 +48,5 @@ public class Mutex extends Association {
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_OPEN);
         return style;
-    }
-    
-    @Override
-    public int hashCode() {
-        int    hash = 3;
-               hash = 19 * hash + Objects.hashCode(this.source);
-               hash = 19 * hash + Objects.hashCode(this.target);
-        return hash;
-    }
-    
-    @Override
-    public boolean equals(Object object) {
-        if (object instanceof Mutex == false)
-            return false;
-        return this.source.equals(((Mutex) object).getSource())
-            && this.target.equals(((Mutex) object).getTarget());
     }
 }

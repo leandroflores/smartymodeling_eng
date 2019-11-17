@@ -346,6 +346,7 @@ public final class ClassDiagram extends Diagram {
      * @param realization Realization UML.
      */
     public void addRealizationUML(RealizationUML realization) {
+        realization.setId(this.nextId(realization));
         if (this.realizationsUML.get(realization.getId()) == null) {
             this.realizationsUML.put(realization.getId(), realization);
             this.addAssociation(realization);
@@ -366,6 +367,7 @@ public final class ClassDiagram extends Diagram {
      * @param association Association UML.
      */
     public void addAssociationUML(AssociationUML association) {
+        association.setId(this.nextId(association));
         if (this.associationsUML.get(association .getId()) == null) {
             this.associationsUML.put(association .getId(), association);
             this.addAssociation(association);

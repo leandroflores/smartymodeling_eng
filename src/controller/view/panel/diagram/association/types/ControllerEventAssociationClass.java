@@ -38,7 +38,7 @@ public class ControllerEventAssociationClass extends ControllerEventAssociation 
     public void addAssociation(mxCell association) {
         Element source = this.getSource(association);
         Element target = this.getTarget(association);
-        if (this.check(source, target) && this.distinct(source, target))
+        if (this.check(source, target))
             this.createAssociation(association);
     }
     

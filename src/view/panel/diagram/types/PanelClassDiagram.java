@@ -7,6 +7,7 @@ import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationClass;
 import controller.view.panel.diagram.event.ControllerEventFocus;
+import controller.view.panel.diagram.event.ControllerEventPoints;
 import controller.view.panel.diagram.event.classes.ControllerEventChange;
 import controller.view.panel.diagram.event.classes.ControllerEventEdit;
 import controller.view.panel.diagram.event.classes.ControllerEventGroup;
@@ -535,6 +536,7 @@ public final class PanelClassDiagram extends PanelDiagram {
         
         this.component.addMouseListener((MouseListener) this.controller);
         this.component.getGraphControl().addMouseListener(new ControllerEventFocus(this));
+        this.component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
     }
     
     @Override

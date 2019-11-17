@@ -3,7 +3,6 @@ package model.structural.diagram.component.base.association;
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import model.structural.base.association.Association;
 import model.structural.diagram.component.base.ComponentUML;
 import model.structural.diagram.component.base.InterfaceUML;
@@ -108,16 +107,6 @@ public class ComunicationUML extends Association {
     }
     
     @Override
-    public String export() {
-        String export  = "    <"         + this.type;
-               export += " component=\"" + this.source.getId()  + "\"";
-               export += " interface=\"" + this.target.getId()  + "\"";
-               export += " category=\""  + this.category.trim() + "\"";
-               export += "/>\n";
-        return export;
-    }
-    
-    @Override
     public Map getStyle() {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_DASHED,   "0");
@@ -131,18 +120,13 @@ public class ComunicationUML extends Association {
     }
     
     @Override
-    public int hashCode() {
-        int    hash = 3;
-               hash = 19 * hash + Objects.hashCode(this.source);
-               hash = 19 * hash + Objects.hashCode(this.target);
-        return hash;
-    }
-    
-    @Override
-    public boolean equals(Object objeto) {
-        if (objeto instanceof ComunicationUML == false)
-            return false;
-        return this.source.equals(((ComunicationUML) objeto).getSource())
-            && this.target.equals(((ComunicationUML) objeto).getTarget());
+    protected String exportHeader() {
+        String export  = "    <"         + this.type;
+               export += " id=\""        + this.id.trim()       + "\"";
+               export += " component=\"" + this.source.getId()  + "\"";
+               export += " interface=\"" + this.target.getId()  + "\"";
+               export += " category=\""  + this.category.trim() + "\"";
+               export += ">\n";
+        return export;
     }
 }
