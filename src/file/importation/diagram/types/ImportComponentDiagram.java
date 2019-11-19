@@ -70,6 +70,8 @@ public class ImportComponentDiagram extends ImportDiagram {
             ComunicationUML comunication = new ComunicationUML((ComponentUML) this.diagram.getElement(current.getAttribute("component")),
                                                                   (InterfaceUML) this.diagram.getElement(current.getAttribute("interface")),
                                                                   current.getAttribute("category"));
+                            comunication.setId(current.getAttribute("id"));
+                            super.addPoints(current, comunication);
             this.componentDiagram.addComunication(comunication);
         }
     }

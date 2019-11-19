@@ -32,6 +32,15 @@ public abstract class Association implements Modelable, Exportable {
     }
     
     /**
+     * Alternative constructor method of Class.
+     * @param element W3C Element.
+     */
+    public Association(org.w3c.dom.Element element) {
+        this();
+        this.id = element.getAttribute("id");
+    }
+    
+    /**
      * Method responsible for returning the Association Id.
      * @return Association Id.
      */

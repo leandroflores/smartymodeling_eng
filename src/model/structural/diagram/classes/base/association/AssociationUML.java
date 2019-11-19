@@ -53,8 +53,6 @@ public class AssociationUML extends Association {
         this.name      = element.getAttribute("name");
         this.category  = element.getAttribute("category");
         this.direction = element.getAttribute("direction").contains("true");
-        this.setSource(element);
-        this.setTarget(element);
     }
     
     /**
@@ -169,7 +167,7 @@ public class AssociationUML extends Association {
      * Method responsible for setting the Source by W3C Element.
      * @param element W3C Element.
      */
-    private void setSource(Element element) {
+    public void setSource(Element element) {
         this.setSourceName(element.getAttribute("sourceName"));
         this.setSourceMin(element);
         this.setSourceMax(element);
@@ -339,7 +337,7 @@ public class AssociationUML extends Association {
      * Method responsible for setting the Target by W3C Element.
      * @param element W3C Element.
      */
-    private void setTarget(Element element) {
+    public void setTarget(Element element) {
         this.setTargetName(element.getAttribute("targetName"));
         this.setTargetMin(element);
         this.setTargetMax(element);
@@ -611,12 +609,13 @@ public class AssociationUML extends Association {
      * @return Association Source.
      */
     public String exportSource() {
-        String export  = " source=\""     + this.source.getId() + "\"";
+        String export  = "      <source";
+               export += " entity=\""     + this.source.getId() + "\"";
                export += " sourceName=\"" + this.sourceName     + "\"";
                export += " sourceMin=\""  + this.sourceMin      + "\"";
                export += " sourceMax=\""  + this.sourceMax      + "\"";
                export += " sourceX=\""    + this.getSourceX()   + "\"";
-               export += " sourceY=\""    + this.getSourceY()   + "\"";
+               export += " sourceY=\""    + this.getSourceY()   + "\"/>\n";
         return export;
     }
     
@@ -625,12 +624,13 @@ public class AssociationUML extends Association {
      * @return Target.
      */
     public String exportTarget() {
-        String export  = " target=\""     + this.target.getId() + "\"";
+        String export  = "      <target";
+               export += " entity=\""     + this.target.getId() + "\"";
                export += " targetName=\"" + this.targetName     + "\"";
                export += " targetMin=\""  + this.targetMin      + "\"";
                export += " targetMax=\""  + this.targetMax      + "\"";
                export += " targetX=\""    + this.getTargetX()   + "\"";
-               export += " targetY=\""    + this.getTargetY()   + "\"";
+               export += " targetY=\""    + this.getTargetY()   + "\"/>\n";
         return export;
     }
     
@@ -641,9 +641,9 @@ public class AssociationUML extends Association {
                export += " name=\""      + this.name.trim()     + "\"";
                export += " category=\""  + this.category.trim() + "\"";
                export += " direction=\"" + this.direction       + "\"";
+               export += ">\n";
                export += this.exportSource();
                export += this.exportTarget();
-               export += ">\n";
         return export;
     }
 }

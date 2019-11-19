@@ -100,10 +100,13 @@ public class ImportActivityDiagram extends ImportDiagram {
         NodeList flows = this.element.getElementsByTagName("flow");
         for (int i = 0; i < flows.getLength(); i++) {
             Element current = (Element) flows.item(i);
-            FlowUML flow    = new FlowUML(this.diagram.getElement(current.getAttribute("source")), this.diagram.getElement(current.getAttribute("target")));
+            FlowUML flow    = new FlowUML(this.diagram.getElement(current.getAttribute("source")), 
+                                          this.diagram.getElement(current.getAttribute("target")));
+                    flow.setId(current.getAttribute("id"));
                     flow.setGuard(current.getAttribute("guard"));
                     flow.setAction(current.getAttribute("action"));
                     flow.setWeight(current.getAttribute("weight"));
+                    super.addPoints(current, flow);
             this.activityDiagram.addFlow(flow);
         }
     }

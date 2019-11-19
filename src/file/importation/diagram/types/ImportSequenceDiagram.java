@@ -83,10 +83,13 @@ public class ImportSequenceDiagram extends ImportDiagram {
         for (int i = 0; i < messages.getLength(); i++) {
             Element    current = (Element)   messages.item(i);
             MethodUML  method  = (MethodUML) this.project.objects.get(current.getAttribute("method"));
-            MessageUML message = new MessageUML(this.diagram.getElement(current.getAttribute("source")), this.diagram.getElement(current.getAttribute("target")));
+            MessageUML message = new MessageUML(this.diagram.getElement(current.getAttribute("source")), 
+                                                this.diagram.getElement(current.getAttribute("target")));
+                       message.setId(current.getAttribute("id"));
                        message.setCategory(current.getAttribute("category"));
                        message.setMethod(method);
                        message.setSequence(Integer.parseInt(current.getAttribute("sequence")));
+                       super.addPoints(current, message);
             this.sequenceDiagram.addMessage(message);
         }
     }

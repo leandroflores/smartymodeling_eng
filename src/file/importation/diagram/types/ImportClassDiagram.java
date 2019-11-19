@@ -182,6 +182,8 @@ public class ImportClassDiagram extends ImportDiagram {
             ClassUML       classUML       = (ClassUML)    this.diagram.getElement(current.getAttribute("class"));
             InterfaceUML   interfaceUML   = (InterfaceUML) this.diagram.getElement(current.getAttribute("interface"));
             RealizationUML realizationUML = new RealizationUML(classUML, interfaceUML);
+                           realizationUML.setId(current.getAttribute("id"));
+                           super.addPoints(current, realizationUML);
             this.classDiagram.addRealizationUML(realizationUML);
         }
     }
@@ -189,15 +191,39 @@ public class ImportClassDiagram extends ImportDiagram {
     /**
      * Method responsible for importing the Associations.
      */
-    protected void importAssociations() {
+    private void importAssociations() {
         NodeList associations = this.element.getElementsByTagName("association");
         for (int i = 0; i < associations.getLength(); i++) {
             Element        current        = (Element) associations.item(i);
             AssociationUML associationUML = new AssociationUML(current);
-                           associationUML.setSource(this.diagram.getElement(current.getAttribute("source")));
-                           associationUML.setTarget(this.diagram.getElement(current.getAttribute("target")));
+                           associationUML.setId(current.getAttribute("id"));
+                           this.setSource(current, associationUML);
+                           this.setTarget(current, associationUML);
+                           super.addPoints(current, associationUML);
             this.classDiagram.addAssociationUML(associationUML);
         }
+    }
+    
+    /**
+     * Method responsible for setting the Source Association.
+     * @param node W3C Element.
+     * @param associationUML Association UML.
+     */
+    private void setSource(Element node, AssociationUML associationUML) {
+        Element item = (Element) node.getElementsByTagName("source").item(0);
+                associationUML.setSource(item);
+                associationUML.setSource(this.diagram.getElement(item.getAttribute("entity")));
+    }
+    
+    /**
+     * Method responsible for setting the Target Association.
+     * @param node W3C Element.
+     * @param associationUML Association UML.
+     */
+    private void setTarget(Element node, AssociationUML associationUML) {
+        Element item = (Element) node.getElementsByTagName("target").item(0);
+                associationUML.setTarget(item);
+                associationUML.setTarget(this.diagram.getElement(item.getAttribute("entity")));
     }
     
     /**
