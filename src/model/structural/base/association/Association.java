@@ -257,7 +257,7 @@ public abstract class Association implements Modelable, Exportable {
     public boolean equals(Object object) {
         if (object instanceof Association == false)
             return false;
-        return Objects.equals(this.id, ((Element) object).getId());
+        return Objects.equals(this.id, ((Association) object).getId());
     }
 
     @Override
