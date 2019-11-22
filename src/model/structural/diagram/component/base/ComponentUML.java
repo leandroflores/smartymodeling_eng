@@ -36,7 +36,7 @@ public class ComponentUML extends Element {
     
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/component/component.png";
+        return super.getFolder() + "component/component.png";
     }
     
     @Override

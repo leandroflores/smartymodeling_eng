@@ -55,19 +55,11 @@ public final class ComponentDiagram extends Diagram {
     }
     
     /**
-     * Method responsible for returning the next Component Id.
-     * @return Next Component Id.
-     */
-    private String nextComponentId() {
-        return this.nextId("COMPONENT#");
-    }
-    
-    /**
      * Method responsible for adding a Component UML.
      * @param componentUML Component UML.
      */
     public void addComponent(ComponentUML componentUML) {
-        componentUML.setId(this.nextComponentId());
+        componentUML.setId(this.nextId(componentUML));
         if (this.components.get(componentUML.getId()) == null) {
             this.components.put(componentUML.getId(), componentUML);
             this.addElement(componentUML);
@@ -93,19 +85,11 @@ public final class ComponentDiagram extends Diagram {
     }
     
     /**
-     * Method responsible for returning the next Interface Id.
-     * @return Next Interface Id.
-     */
-    private String nextInterfaceId() {
-        return this.nextId("INTERFACE#");
-    }
-    
-    /**
      * Method responsible for adding a Interface UML.
      * @param interfaceUML Interface UML.
      */
     public void addInterface(InterfaceUML interfaceUML) {
-        interfaceUML.setId(this.nextInterfaceId());
+        interfaceUML.setId(this.nextId(interfaceUML));
         if (this.interfaces.get(interfaceUML.getId()) == null) {
             this.interfaces.put(interfaceUML.getId(), interfaceUML);
             this.addElement(interfaceUML);
@@ -135,6 +119,7 @@ public final class ComponentDiagram extends Diagram {
      * @param comunicationUML Comunication UML.
      */
     public void addComunication(ComunicationUML comunicationUML) {
+        comunicationUML.setId(this.nextId(comunicationUML));
         if (this.comunications.get(comunicationUML.getId()) == null) {
             this.comunications.put(comunicationUML.getId(), comunicationUML);
             this.addAssociation(comunicationUML);
@@ -168,7 +153,7 @@ public final class ComponentDiagram extends Diagram {
     
     @Override
     public String getIcon() {
-        return "diagram/component";
+        return super.getFolder() + "component.png";
     }
     
     @Override

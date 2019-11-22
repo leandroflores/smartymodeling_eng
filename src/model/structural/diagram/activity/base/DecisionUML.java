@@ -41,7 +41,7 @@ public class DecisionUML extends Element {
     
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/activity/decision.png";
+        return super.getFolder() + "activity/decision.png";
     }
     
     @Override

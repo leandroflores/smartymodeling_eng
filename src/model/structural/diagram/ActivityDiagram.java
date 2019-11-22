@@ -66,19 +66,11 @@ public final class ActivityDiagram extends Diagram {
     }
     
     /**
-     * Method responsible for returning the next Activity Id.
-     * @return Next Activity Id.
-     */
-    private String nextActivityId() {
-        return this.nextId("ACTIVITY#");
-    }
-    
-    /**
      * Method responsible for adding a Activity UML.
      * @param activity Activity UML.
      */
     public void addActivity(ActivityUML activity) {
-        activity.setId(this.nextActivityId());
+        activity.setId(this.nextId(activity));
         if (this.activities.get(activity.getId()) == null) {
             this.activities.put(activity.getId(), activity);
             this.addElement(activity);
@@ -104,19 +96,11 @@ public final class ActivityDiagram extends Diagram {
     }
     
     /**
-     * Method responsible for returning the next Decision Id.
-     * @return Next Decision Id
-     */
-    private String nextDecisionId() {
-        return this.nextId("DECISION#");
-    }
-    
-    /**
      * Method responsible for adding a Decision UML.
      * @param decision Decision UML.
      */
     public void addDecision(DecisionUML decision) {
-        decision.setId(this.nextDecisionId());
+        decision.setId(this.nextId(decision));
         if (this.decisions.get(decision.getId()) == null) {
             this.decisions.put(decision.getId(), decision);
             this.addElement(decision);
@@ -142,19 +126,11 @@ public final class ActivityDiagram extends Diagram {
     }
     
     /**
-     * Method responsible for returning the next Initial Id.
-     * @return next Initial Id.
-     */
-    private String nextInitialId() {
-        return this.nextId("INITIAL#");
-    }
-    
-    /**
      * Method responsible for adding a Initial UML.
      * @param initial Initial UML.
      */
     public void addInitial(InitialUML initial) {
-        initial.setId(this.nextInitialId());
+        initial.setId(this.nextId(initial));
         if (this.initials.get(initial.getId()) == null) {
             this.initials.put(initial.getId(), initial);
             this.addElement(initial);
@@ -172,19 +148,11 @@ public final class ActivityDiagram extends Diagram {
     }
     
     /**
-     * Method responsible for returning the next Final Id.
-     * @return Next Final Id.
-     */
-    private String nextFinalId() {
-        return this.nextId("FINAL#");
-    }
-    
-    /**
      * Method responsible for adding a Final UML.
      * @param final_ Final UML.
      */
     public void addFinal(FinalUML final_) {
-        final_.setId(this.nextFinalId());
+        final_.setId(this.nextId(final_));
         if (this.finals.get(final_.getId()) == null) {
             this.finals.put(final_.getId(), final_);
             this.addElement(final_);
@@ -202,19 +170,11 @@ public final class ActivityDiagram extends Diagram {
     }
     
     /**
-     * Method responsible for returning the next Join Id.
-     * @return Next Join Id.
-     */
-    private String nextJoinId() {
-        return this.nextId("JOIN#");
-    }
-    
-    /**
      * Method responsible for adding a Join UML.
      * @param join Join UML.
      */
     public void addJoin(JoinUML join) {
-        join.setId(this.nextJoinId());
+        join.setId(this.nextId(join));
         if (this.joins.get(join.getId()) == null) {
             this.joins.put(join.getId(), join);
             this.addElement(join);
@@ -236,6 +196,7 @@ public final class ActivityDiagram extends Diagram {
      * @param flow Flow UML.
      */
     public void addFlow(FlowUML flow) {
+        flow.setId(this.nextId(flow));
         if (this.flows.get(flow.getId()) == null) {
             this.flows.put(flow.getId(), flow);
             this.addAssociation(flow);
@@ -290,7 +251,7 @@ public final class ActivityDiagram extends Diagram {
     
     @Override
     public String getIcon() {
-        return "diagram/activity";
+        return super.getFolder() + "activity.png";
     }
 
     @Override

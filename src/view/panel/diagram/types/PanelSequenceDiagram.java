@@ -1,6 +1,8 @@
 package view.panel.diagram.types;
 
 import com.mxgraph.model.mxCell;
+import com.mxgraph.model.mxGeometry;
+import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationSequence;
@@ -185,7 +187,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      */
     private void addEndPointCell(mxCell parent, Element element) {
         this.graph.getStylesheet().putCellStyle("endPointStyle", this.getEndPointStyle());
-        Integer x   = element.getWidth()  / 2;
+        Integer x   = (element.getWidth()  / 2) - 5;
         Integer y   = element.getHeight() - 10;
         mxCell cell = (mxCell) this.graph.insertVertex(parent, element.getId() + "(point)", "", x, y, 10, 10, "endPointStyle");
                cell.setConnectable(false);
@@ -272,11 +274,15 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      */
     private void addMessage(MessageUML message) {
         this.graph.getStylesheet().putCellStyle(message.getStyleLabel(), message.getStyle());
-        Object source = this.addPoint(message, message.getSource());
-        Object target = this.addPoint(message, message.getTarget());
-        Object edge   = this.graph.insertEdge(this.parent, message.getId(), message.getTitle(), source, target, message.getStyleLabel());
-        mxCell cell   = (mxCell) edge;
-        this.identifiers.put(cell, message.getId());
+        Object     source   = this.addPoint(message, message.getSource());
+        Object     target   = this.addPoint(message, message.getTarget());
+        mxCell     edge     = (mxCell) this.graph.insertEdge(this.parent, message.getId(), message.getTitle(), source, target, message.getStyleLabel());
+        mxGeometry geometry = ((mxGraphModel) (this.graph.getModel())).getGeometry(edge);
+                   geometry.setPoints(message.getPoints());
+        ((mxGraphModel) (this.graph.getModel())).setGeometry(edge, geometry);
+
+        this.identifiers.put(edge, message.getId());
+        this.objects.put(message.getId(), edge);
     }
      
     /**

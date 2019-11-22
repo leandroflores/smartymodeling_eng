@@ -389,7 +389,7 @@ public class Instance implements Exportable {
      * @return Instance Icon.
      */
     public String getIcon() {
-        return "src/images/icons/product/instance.png";
+        return "icons/product/instance.png";
     }
         
     /**

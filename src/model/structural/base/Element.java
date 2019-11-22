@@ -386,6 +386,14 @@ public abstract class Element implements Exportable, Modelable {
     }
     
     /**
+     * Method responsibel for returning the Image Default Folder.
+     * @return Image Default Folder.
+     */
+    protected String getFolder() {
+        return "icons/diagram/";
+    }
+    
+    /**
      * Method responsible for returning the Element Icon.
      * @return Element Icon.
      */

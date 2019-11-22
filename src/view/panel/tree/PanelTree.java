@@ -138,7 +138,6 @@ public final class PanelTree extends Panel {
     private DefaultMutableTreeNode getNode(Diagram diagram) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(diagram);
                this.addElements(diagram, node);
-               this.addAssociations(diagram, node);
                this.addVariabilities(diagram, node);
         return node;
     }
@@ -233,38 +232,6 @@ public final class PanelTree extends Panel {
     private void addMethodsUML(Entity entity, DefaultMutableTreeNode node) {
         for (int i = 0; i < entity.getMethodsList().size(); i++)
             node.add(new DefaultMutableTreeNode(entity.getMethodsList().get(i)));
-    }
-    
-    /**
-     * Method responsible for adding Association Nodes.
-     * @param diagram Diagram.
-     * @param node Diagram Node.
-     */
-    private void addAssociations(Diagram diagram, DefaultMutableTreeNode node) {
-        if (diagram.getType().equalsIgnoreCase("Activity"))
-            this.addAssociations((ActivityDiagram) diagram, node);
-        else if (diagram.getType().equalsIgnoreCase("Sequence"))
-            this.addAssociations((SequenceDiagram) diagram, node);
-    }
-    
-    /**
-     * Method responsible for adding the Associations.
-     * @param diagram Activity Diagram.
-     * @param node Diagram Node.
-     */
-    private void addAssociations(ActivityDiagram diagram, DefaultMutableTreeNode node) {
-        for (FlowUML flow : diagram.getFlowsList())
-                node.add(new DefaultMutableTreeNode(flow));
-    }
-    
-    /**
-     * Method responsible for adding the Associations.
-     * @param diagram Sequence Diagram.
-     * @param node Diagram Node.
-     */
-    private void addAssociations(SequenceDiagram diagram, DefaultMutableTreeNode node) {
-        for (MessageUML message : diagram.getMessageList())
-                node.add(new DefaultMutableTreeNode(message));
     }
     
     /**

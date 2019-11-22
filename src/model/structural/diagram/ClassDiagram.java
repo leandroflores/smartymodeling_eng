@@ -476,7 +476,7 @@ public final class ClassDiagram extends Diagram {
     
     @Override
     public String getIcon() {
-        return "diagram/class";
+        return super.getFolder() + "class.png";
     }
     
     @Override

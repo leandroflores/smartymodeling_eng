@@ -41,7 +41,7 @@ public class InitialUML extends Element {
     
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/activity/initial.png";
+        return super.getFolder() + "activity/initial.png";
     }
     
     @Override

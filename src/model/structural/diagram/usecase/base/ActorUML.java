@@ -36,7 +36,7 @@ public class ActorUML extends Element {
 
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/usecase/actor.png";
+        return super.getFolder() + "usecase/actor.png";
     }
     
     @Override

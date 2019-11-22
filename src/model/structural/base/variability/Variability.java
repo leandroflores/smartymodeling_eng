@@ -247,7 +247,7 @@ public class Variability implements Exportable {
      * @return Variability Icon.
      */
     public String getIcon() {
-        return "src/images/icons/variability/variability.png";
+        return "icons/variability/variability.png";
     }
     
     /**

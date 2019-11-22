@@ -27,6 +27,7 @@ public class MessageUML extends Association {
      * @param target Element.
      */
     public MessageUML(Element source, Element target) {
+        super();
         this.source   = source;
         this.target   = target;
         this.type     = "message";
@@ -41,6 +42,7 @@ public class MessageUML extends Association {
      * @param category Category.
      */
     public MessageUML(Element source, Element target, String category) {
+        super();
         this.source   = source;
         this.target   = target;
         this.type     = "message";
@@ -117,7 +119,7 @@ public class MessageUML extends Association {
      */
     public void setMethod(MethodUML method) {
         this.method =  method;
-        this.name   = (method == null) ? ".operation" : method.getShortSignature();
+        this.name   = (method == null) ? ".operation" : "." + method.getShortSignature();
     }
     
     /**
@@ -127,7 +129,7 @@ public class MessageUML extends Association {
     private String getSignature() {
         if (this.method == null)
             return ". operation()";
-        return method.getShortSignature();
+        return ". " + method.getShortSignature();
     }
     
     @Override

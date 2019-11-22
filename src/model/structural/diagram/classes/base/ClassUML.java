@@ -39,7 +39,6 @@ public class ClassUML extends Entity {
         this.type      = "class";
         this.abstract_ = element.getAttribute("abstract").equals("true");
         this.final_    = element.getAttribute("final").equals("true");
-//        super.updateSize();
     }
 
     /**
@@ -78,7 +77,7 @@ public class ClassUML extends Entity {
     
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/classes/class.png";
+        return super.getFolder() + "classes/class.png";
     }
     
     @Override

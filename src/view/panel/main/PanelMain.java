@@ -46,7 +46,7 @@ public final class PanelMain extends Panel {
      * @return Image Path.
      */
     private String getPath(String url) {
-        return "/main/" + url + ".png";
+        return "main/" + url + ".png";
     }
     
     /**

@@ -156,7 +156,7 @@ public class Traceability implements Exportable {
      * @return Traceability Icon.
      */
     public String getIcon() {
-        return "src/images/icons/traceability/traceability.png";
+        return "icons/traceability/traceability.png";
     }
     
     /**

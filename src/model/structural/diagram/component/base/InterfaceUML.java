@@ -36,7 +36,7 @@ public class InterfaceUML extends Element {
     
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/component/interface.png";
+        return super.getFolder() + "component/interface.png";
     }
     
     @Override

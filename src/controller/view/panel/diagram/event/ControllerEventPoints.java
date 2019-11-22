@@ -31,9 +31,10 @@ public class ControllerEventPoints extends MouseAdapter {
         Association association = this.getAssociation(event);
         mxPoint     point       = new mxPoint(event.getX(), event.getY());
         if (association != null) {
-            if (event.getClickCount() == 1)
-                this.updatePoint(association);
-            else if (event.getClickCount() == 2)
+//            if (event.getClickCount() == 1)
+//                this.updatePoint(association);
+//            else 
+            if (event.getClickCount() == 2)
                 this.addPoint(association, point);
             else if (event.getButton() == 3)
                 this.removePoint(association, point);
@@ -57,10 +58,11 @@ public class ControllerEventPoints extends MouseAdapter {
      * @param point Point.
      */
     private void updatePoint(Association association) {
+        System.out.println(association.getId());
         mxGeometry geometry = ((mxGraphModel) (this.panel.getGraph().getModel())).getGeometry(this.panel.getObjects().get(association.getId()));
         System.out.println(association.getId() + " " +  geometry.getPoints());
                    association.setPoints(geometry.getPoints());
-        System.out.println("");
+//        System.out.println("");
     }
     
     /**
@@ -83,9 +85,10 @@ public class ControllerEventPoints extends MouseAdapter {
     private void removePoint(Association association, mxPoint point) {
         mxPoint nearest = association.getNearestPoint(point);
         if (nearest != null) {
+            System.out.println(association);
             association.removePoint(nearest);
             this.panel.updateDiagram();
-//        this.panel.getViewMenu().getPanelModeling().updateUI();
+            this.panel.getViewMenu().getPanelModeling().updateUI();
             this.panel.getViewMenu().setSave(false);
         }
     }

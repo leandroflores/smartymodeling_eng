@@ -230,7 +230,7 @@ public class AttributeUML extends Element {
     
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/classes/attribute.png";
+        return super.getFolder() + "classes/attribute.png";
     }
     
     @Override

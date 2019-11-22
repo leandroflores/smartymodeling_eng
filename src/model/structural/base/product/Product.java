@@ -237,7 +237,7 @@ public class Product implements Exportable {
      * @return Product Icon.
      */
     public String getIcon() {
-        return "src/images/icons/product/product.png";
+        return "icons/product/product.png";
     }
     
     @Override

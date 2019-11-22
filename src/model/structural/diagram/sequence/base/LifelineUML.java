@@ -121,7 +121,7 @@ public class LifelineUML extends Element {
     
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/sequence/lifeline.png";
+        return super.getFolder() + "sequence/lifeline.png";
     }
     
     @Override

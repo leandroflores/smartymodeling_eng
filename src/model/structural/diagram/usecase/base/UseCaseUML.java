@@ -36,7 +36,7 @@ public class UseCaseUML extends Element {
 
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/usecase/use-case.png";
+        return super.getFolder() + "usecase/use-case.png";
     }
     
     @Override

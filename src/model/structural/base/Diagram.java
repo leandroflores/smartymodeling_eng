@@ -73,6 +73,14 @@ public abstract class Diagram implements Exportable {
     public abstract void init();
     
     /**
+     * Method responsibel for returning the Image Default Folder.
+     * @return Image Default Folder.
+     */
+    protected String getFolder() {
+        return "icons/diagram/";
+    }
+    
+    /**
      * Method responsible for returning Diagram Icon Path.
      * @return Diagram Icon Path.
      */

@@ -10,7 +10,6 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
-import model.structural.base.association.Association;
 import model.structural.base.evaluation.Metric;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
@@ -40,11 +39,11 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     
     /**
      * Method responsible for returning the Image Icon.
-     * @param  name Image Name.
+     * @param  path Image Path.
      * @return Image Icon.
      */
-    protected ImageIcon getImage(String name) {
-        return new ImageIcon("src/images/icons/" + name + ".png");
+    protected ImageIcon getImage(String path) {
+        return new FunctView().createImage(path);
     }
     
     /**
@@ -54,7 +53,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     public void setProjectIcon(Project project) {
         this.setText(project.getName());
         this.setToolTipText(project.getName());
-        this.setIcon(this.getImage("project"));
+        this.setIcon(this.getImage(project.getIcon()));
     }
     
     /**
@@ -74,7 +73,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     public void setElementIcon(Element element) {
         this.setText(element.getName());
         this.setToolTipText(element.getName());
-        this.setIcon(new ImageIcon(element.getIcon()));
+        this.setIcon(this.getImage(element.getIcon()));
     }
     
     /**
@@ -84,7 +83,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     public void setAttributeIcon(AttributeUML attribute) {
         this.setText(attribute.getName());
         this.setToolTipText(attribute.getName());
-        this.setIcon(new ImageIcon(attribute.getIcon()));
+        this.setIcon(this.getImage(attribute.getIcon()));
     }
     
     /**
@@ -94,17 +93,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     public void setMethodIcon(MethodUML method) {
         this.setText(method.getName());
         this.setToolTipText(method.getName());
-        this.setIcon(new ImageIcon(method.getIcon()));
-    }
-    
-    /**
-     * Method responsible for setting the Association.
-     * @param association Association.
-     */
-    public void setAssociationIcon(Association association) {
-        this.setText(association.toString());
-        this.setToolTipText(association.toString());
-        this.setIcon(this.getImage("association"));
+        this.setIcon(this.getImage(method.getIcon()));
     }
     
     /**
@@ -114,7 +103,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     public void setVariabilityIcon(Variability variability) {
         this.setText(variability.getName());
         this.setToolTipText(variability.getName());
-        this.setIcon(new ImageIcon(variability.getIcon()));
+        this.setIcon(this.getImage(variability.getIcon()));
     }
     
     /**
@@ -124,7 +113,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     public void setTraceabilityIcon(Traceability traceability) {
         this.setText(traceability.getName());
         this.setToolTipText(traceability.getName());
-        this.setIcon(new ImageIcon(traceability.getIcon()));
+        this.setIcon(this.getImage(traceability.getIcon()));
     }
     
     /**
@@ -134,7 +123,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     public void setMetricIcon(Metric metric) {
         this.setText(metric.getName());
         this.setToolTipText(metric.getName());
-        this.setIcon(new ImageIcon(metric.getIcon()));
+        this.setIcon(this.getImage(metric.getIcon()));
     }
     
     /**
@@ -144,7 +133,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     public void setProductIcon(Product product) {
         this.setText(product.getName());
         this.setToolTipText(product.getName());
-        this.setIcon(new ImageIcon(product.getIcon()));
+        this.setIcon(this.getImage(product.getIcon()));
     }
     
     /**
@@ -154,7 +143,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     public void setInstanceIcon(Instance instance) {
         this.setText(instance.getName());
         this.setToolTipText(instance.getName());
-        this.setIcon(new ImageIcon(instance.getIcon()));
+        this.setIcon(this.getImage(instance.getIcon()));
     }
     
     /**
@@ -164,7 +153,7 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     public void setArtifactIcon(Artifact artifact) {
         this.setText(artifact.getElement().getName());
         this.setToolTipText(artifact.getElement().getName());
-        this.setIcon(new ImageIcon(artifact.getIcon()));
+        this.setIcon(this.getImage(artifact.getIcon()));
     }
     
     @Override
@@ -181,8 +170,6 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
             this.setAttributeIcon((AttributeUML) object);
         else if (object instanceof MethodUML)
             this.setMethodIcon((MethodUML) object);
-        else if (object instanceof Association)
-            this.setAssociationIcon((Association) object);
         else if (object instanceof Variability)
             this.setVariabilityIcon((Variability) object);
         else if (object instanceof Traceability)

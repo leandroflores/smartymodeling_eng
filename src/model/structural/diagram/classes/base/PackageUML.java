@@ -69,7 +69,6 @@ public class PackageUML extends Element {
      * Method responsible for updating the Parent Size.
      */
     public void updateParentSize() {
-//        System.out.println("Current: " + this + " - Parent: " + this.parent);
         if ((this.parent != null) && (!this.parent.equals(this)))
              this.parent.updateSize();
     }
@@ -382,7 +381,7 @@ public class PackageUML extends Element {
     
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/classes/package.png";
+        return super.getFolder() + "classes/package.png";
     }
     
     @Override

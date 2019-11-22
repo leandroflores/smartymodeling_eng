@@ -118,6 +118,7 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
         this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
         this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
         this.component.getGraph().getSelectionModel().addListener(mxEvent.CHANGE, new ControllerEventSelect(this));
+        
         this.component.getGraphControl().addMouseListener(new ControllerEventFocus(this));
         this.component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
      }

@@ -116,19 +116,11 @@ public final class SequenceDiagram extends Diagram {
     }
     
     /**
-     * Method responsible for returning the Next Lifeline Id.
-     * @return Next Lifeline Id.
-     */
-    private String nextLifelineId() {
-        return this.nextId("LIFELINE#");
-    }
-    
-    /**
      * Method responsible for adding a Lifeline UML.
      * @param lifeline Lifeline UML.
      */
     public void addLifeline(LifelineUML lifeline) {
-        lifeline.setId(this.nextLifelineId());
+        lifeline.setId(this.nextId(lifeline));
         if (this.lifelines.get(lifeline.getId()) == null) {
             this.lifelines.put(lifeline.getId(), lifeline);
             this.addElement(lifeline);
@@ -196,19 +188,11 @@ public final class SequenceDiagram extends Diagram {
     }
     
     /**
-     * Method responsible for returning the Next Instance Id.
-     * @return Next Instance Id.
-     */
-    private String nextInstanceId() {
-        return this.nextId("INSTANCE#");
-    }
-    
-    /**
      * Method responsible for adding a Instance UML.
      * @param instance Instance UML.
      */
     public void addInstance(InstanceUML instance) {
-        instance.setId(this.nextInstanceId());
+        instance.setId(this.nextId(instance));
         if (this.instances.get(instance.getId()) == null) {
             this.instances.put(instance.getId(), instance);
             this.addElement(instance);
@@ -280,6 +264,7 @@ public final class SequenceDiagram extends Diagram {
      * @param message Message UML.
      */
     public void addMessage(MessageUML message) {
+        message.setId(this.nextId(message));
         message.setSequence(this.nextSequence());
         if (this.messages.get(message.getId()) == null) {
             this.messages.put(message.getId(), message);
@@ -375,7 +360,7 @@ public final class SequenceDiagram extends Diagram {
     
     @Override
     public String getIcon() {
-        return "diagram/sequence";
+        return super.getFolder() + "sequence.png";
     }
 
     @Override

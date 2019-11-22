@@ -1,6 +1,7 @@
 package funct;
 
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
@@ -23,7 +24,7 @@ public class FunctView {
      * @return  New ImageIcon.
      */
     public ImageIcon createImage(String imageURL) {
-         return new ImageIcon(getClass().getResource(FOLDER + imageURL));
+        return new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource(FOLDER + imageURL)));
     }
     
     /**

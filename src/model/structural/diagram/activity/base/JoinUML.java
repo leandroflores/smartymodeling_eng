@@ -41,7 +41,7 @@ public class JoinUML extends Element {
 
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/activity/join.png";
+        return super.getFolder() + "activity/join.png";
     }
     
     @Override

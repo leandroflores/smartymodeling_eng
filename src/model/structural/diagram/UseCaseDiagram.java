@@ -207,7 +207,7 @@ public final class UseCaseDiagram extends Diagram {
     
     @Override
     public String getIcon() {
-        return "diagram/use-case";
+        return super.getFolder() + "use-case.png";
     }
     
     @Override

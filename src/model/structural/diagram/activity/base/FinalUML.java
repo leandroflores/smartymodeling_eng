@@ -41,7 +41,7 @@ public class FinalUML extends Element {
 
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/activity/final.png";
+        return super.getFolder() + "activity/final.png";
     }
     
     @Override

@@ -114,7 +114,7 @@ public class InstanceUML extends Element {
 
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/sequence/instance.png";
+        return super.getFolder() + "sequence/instance.png";
     }
     
     @Override

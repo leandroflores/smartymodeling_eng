@@ -1144,6 +1144,14 @@ public class Project implements Exportable {
         return export  + "  </links>\n";
     }
     
+    /**
+     * Method responsible for returning the Project Icon.
+     * @return Project Icon.
+     */
+    public String getIcon() {
+        return "icons/project.png";
+    }
+    
     @Override
     public String export() {
         String export  = "<project id=\"" + this.id + "\" name=\"" + this.name + "\" version=\"" + this.version + "\">\n";

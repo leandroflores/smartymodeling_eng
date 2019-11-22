@@ -31,7 +31,6 @@ public class InterfaceUML extends Entity {
     public InterfaceUML(Element element) {
         super(element);
         this.type = "interface";
-//        super.updateSize();
     }
     
     @Override
@@ -49,7 +48,7 @@ public class InterfaceUML extends Entity {
     
     @Override
     public String getIcon() {
-        return "src/images/icons/diagram/classes/interface.png";
+        return super.getFolder() + "classes/interface.png";
     }
     
     @Override
