@@ -8,6 +8,7 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.view.mxGraph;
 import controller.view.panel.diagram.ControllerPanelDiagram;
+import funct.FunctView;
 import java.awt.Color;
 import java.util.HashMap;
 import java.awt.Dimension;
@@ -227,7 +228,7 @@ public abstract class PanelDiagram extends Panel {
      * @return Association Image.
      */
     protected ImageIcon getAssociationImage(String url) {
-        return new ImageIcon("src/images/icons/associations/" + url + ".png");
+        return new FunctView().createImage("icons/associations/" + url + ".png");
     }
     
     /**

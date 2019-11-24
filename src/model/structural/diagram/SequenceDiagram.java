@@ -62,7 +62,7 @@ public final class SequenceDiagram extends Diagram {
      * @return Min Height.
      */
     public Integer getMinHeigth() {
-        return 100 + (this.messages.size() * 30);
+        return Math.max(250, 100 + (this.messages.size() * 30));
     }
     
     /**
