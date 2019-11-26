@@ -33,19 +33,15 @@ public class ImportComponentDiagram extends ImportDiagram {
     }
     
     @Override
-    public Diagram importDiagram() {
-                this.addComponents();
-                this.addInterfaces();
-                this.addComunications();
-               super.importRelationships();
-               super.importVariabilities();
-        return  this.diagram;
+    protected void importElements() {
+        this.importComponents();
+        this.importInterfaces();
     }
     
     /**
      * Method responsible for importing the Components.
      */
-    private void addComponents() {
+    private void importComponents() {
         NodeList components = this.element.getElementsByTagName("component");
         for (int i = 0; i < components.getLength(); i++)
             this.componentDiagram.addComponent(new ComponentUML((Element) components.item(i)));
@@ -54,22 +50,27 @@ public class ImportComponentDiagram extends ImportDiagram {
     /**
      * Method responsible for importing the Interfaces.
      */
-    private void addInterfaces() {
+    private void importInterfaces() {
         NodeList interfaces = this.element.getElementsByTagName("interface");
         for (int i = 0; i < interfaces.getLength(); i++)
             this.componentDiagram.addInterface(new InterfaceUML((Element) interfaces.item(i)));
     }
     
+    @Override
+    protected void importAssociations() {
+        this.importComunications();
+    }
+    
     /**
      * Method responsible for importing the Comunications.
      */
-    private void addComunications() {
+    private void importComunications() {
         NodeList comunications = this.element.getElementsByTagName("comunication");
         for (int i = 0; i < comunications.getLength(); i++) {
             Element         current      = (Element) comunications.item(i);
             ComunicationUML comunication = new ComunicationUML((ComponentUML) this.diagram.getElement(current.getAttribute("component")),
-                                                                  (InterfaceUML) this.diagram.getElement(current.getAttribute("interface")),
-                                                                  current.getAttribute("category"));
+                                                               (InterfaceUML) this.diagram.getElement(current.getAttribute("interface")),
+                                                               current.getAttribute("category"));
                             comunication.setId(current.getAttribute("id"));
                             super.addPoints(current, comunication);
             this.componentDiagram.addComunication(comunication);

@@ -42,16 +42,10 @@ public class ImportClassDiagram extends ImportDiagram {
     }
     
     @Override
-    public Diagram importDiagram() {
-                this.importPackages();
-                this.importClasses();
-                this.importInterfaces();
-                this.importRealizations();
-                this.importAssociations();
-                this.importReferences();
-               super.importRelationships();
-               super.importVariabilities();
-        return  this.diagram;
+    protected void importElements() {
+        this.importPackages();
+        this.importClasses();
+        this.importInterfaces();
     }
     
     /**
@@ -188,10 +182,17 @@ public class ImportClassDiagram extends ImportDiagram {
         }
     }
     
+    @Override
+    protected void importAssociations() {
+        this.importRealizations();
+        this.importAssociationsUML();
+        this.importReferences();
+    }
+    
     /**
      * Method responsible for importing the Associations.
      */
-    private void importAssociations() {
+    private void importAssociationsUML() {
         NodeList associations = this.element.getElementsByTagName("association");
         for (int i = 0; i < associations.getLength(); i++) {
             Element        current        = (Element) associations.item(i);

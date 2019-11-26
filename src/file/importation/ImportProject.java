@@ -179,19 +179,19 @@ public class ImportProject {
     private void importDiagram(Element element, int index) throws XPathExpressionException {
         switch (index) {
             case 0:
-                this.project.addDiagram(new ImportActivityDiagram(this.project, element).importDiagram());
+                this.project.addDiagram(new ImportActivityDiagram(this.project, element).getDiagram());
                 break;
             case 1:
-                this.project.addDiagram(new ImportClassDiagram(this.project, element).importDiagram());
+                this.project.addDiagram(new ImportClassDiagram(this.project, element).getDiagram());
                 break;
             case 2:
-                this.project.addDiagram(new ImportComponentDiagram(this.project, element).importDiagram());
+                this.project.addDiagram(new ImportComponentDiagram(this.project, element).getDiagram());
                 break;
             case 3:
-                this.project.addDiagram(new ImportUseCaseDiagram(this.project, element).importDiagram());
+                this.project.addDiagram(new ImportUseCaseDiagram(this.project, element).getDiagram());
                 break;
             case 4:
-                this.project.addDiagram(new ImportSequenceDiagram(this.project, element).importDiagram());
+                this.project.addDiagram(new ImportSequenceDiagram(this.project, element).getDiagram());
                 break;
             default:
                 break;

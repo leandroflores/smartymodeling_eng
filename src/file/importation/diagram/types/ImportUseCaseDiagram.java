@@ -35,15 +35,9 @@ public class ImportUseCaseDiagram extends ImportDiagram {
     }
     
     @Override
-    public Diagram importDiagram() {
-                this.importActors();
-                this.importUseCases();
-                this.importRealizations();
-                this.importExtends();
-                this.importIncludes();
-               super.importRelationships();
-               super.importVariabilities();
-        return  this.diagram;
+    protected void importElements() {
+        this.importActors();
+        this.importUseCases();
     }
     
     /**
@@ -62,6 +56,13 @@ public class ImportUseCaseDiagram extends ImportDiagram {
         NodeList useCases = this.element.getElementsByTagName("useCase");
         for (int i = 0; i < useCases.getLength(); i++)
             this.useCaseDiagram.addUseCase(new UseCaseUML((Element) useCases.item(i)));
+    }
+    
+    @Override
+    protected void importAssociations() {
+        this.importRealizations();
+        this.importExtends();
+        this.importIncludes();
     }
     
     /**

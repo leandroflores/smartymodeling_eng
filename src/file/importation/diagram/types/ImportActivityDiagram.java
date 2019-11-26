@@ -36,16 +36,12 @@ public class ImportActivityDiagram extends ImportDiagram {
     }
     
     @Override
-    public Diagram importDiagram() {
-                this.importActivities();
-                this.importDecisions();
-                this.importInitials();
-                this.importFinals();
-                this.importJoins();
-                this.importFlows();
-               super.importRelationships();
-               super.importVariabilities();
-        return  this.diagram;
+    protected void importElements() {
+        this.importActivities();
+        this.importDecisions();
+        this.importInitials();
+        this.importFinals();
+        this.importJoins();
     }
     
     /**
@@ -91,6 +87,11 @@ public class ImportActivityDiagram extends ImportDiagram {
         NodeList joins  = this.element.getElementsByTagName("join");
         for (int i = 0; i < joins.getLength(); i++)
             this.activityDiagram.addJoin(new JoinUML((Element) joins.item(i)));
+    }
+    
+    @Override
+    protected void importAssociations() {
+        this.importFlows();
     }
     
     /**

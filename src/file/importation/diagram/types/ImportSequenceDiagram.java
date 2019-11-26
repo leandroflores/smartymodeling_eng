@@ -38,13 +38,9 @@ public class ImportSequenceDiagram extends ImportDiagram {
     }
     
     @Override
-    public Diagram importDiagram() {
-                this.importLifelines();
-                this.importInstances();
-                this.importMessages();
-               super.importRelationships();
-               super.importVariabilities();
-        return  this.diagram;
+    protected void importElements() {
+        this.importLifelines();
+        this.importInstances();
     }
     
     /**
@@ -73,6 +69,11 @@ public class ImportSequenceDiagram extends ImportDiagram {
                         instance.setClassUML(classUML);
             this.sequenceDiagram.addInstance(instance);
         }
+    }
+    
+    @Override
+    protected void importAssociations() {
+        this.importMessages();
     }
     
     /**

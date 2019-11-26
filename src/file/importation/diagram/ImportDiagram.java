@@ -24,10 +24,26 @@ public abstract class ImportDiagram {
     protected Element element;
     
     /**
-     * Method responsible for imporing the Diagram.
-     * @return Diagram.
+     * Method responsible for returning the Imported Diagram.
+     * @return Imported Diagram.
      */
-    public abstract Diagram importDiagram();
+    public Diagram getDiagram() {
+               this.importElements();
+               this.importAssociations();
+               this.importRelationships();
+               this.importVariabilities();
+        return this.diagram;
+    }
+    
+    /**
+     * Method responsible for importing the Diagram Elements.
+     */
+    protected abstract void importElements();
+    
+    /**
+     * Method responsible for importing the Diagram Associations.
+     */
+    protected abstract void importAssociations();
     
     /**
      * Method responsible for importing the Variabilities.
