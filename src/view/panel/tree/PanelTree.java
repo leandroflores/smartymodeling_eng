@@ -2,9 +2,11 @@ package view.panel.tree;
 
 import controller.view.panel.tree.popup.ControllerTreePopup;
 import java.awt.FlowLayout;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeSelectionModel;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
@@ -35,6 +37,7 @@ import view.structural.ViewMenu;
 public final class PanelTree extends Panel {
     private final ViewMenu viewMenu;
     private final Project  project;
+    private final HashMap  nodes;
     private TreePopup treePopup;
     private JTree tree;
     
@@ -45,6 +48,7 @@ public final class PanelTree extends Panel {
     public PanelTree(ViewMenu viewMenu) {
         this.viewMenu = viewMenu;
         this.project  = this.viewMenu.getProject();
+        this.nodes    = new HashMap();
         this.addComponents();
     }
     
@@ -52,18 +56,18 @@ public final class PanelTree extends Panel {
     public void addComponents() {
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
         
-        DefaultMutableTreeNode raiz = new DefaultMutableTreeNode(this.project);
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode(this.project);
         
-        this.tree      = new JTree(raiz);
+        this.tree      = new JTree(root);
         this.treePopup = new TreePopup(this);
         this.tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         this.tree.addMouseListener(new ControllerTreePopup(this.treePopup));
         this.tree.addKeyListener(new ControllerTreePopup(this.treePopup));
         this.tree.setCellRenderer(new TreeRenderer(this.tree));
-        this.addDiagrams(raiz);
-        this.addTraceabilities(raiz);
-        this.addMetrics(raiz);
-        this.addProducts(raiz);
+        this.addDiagrams(root);
+        this.addTraceabilities(root);
+        this.addMetrics(root);
+        this.addProducts(root);
 //        this.expandTree();
         this.add(this.tree);
     }
@@ -250,7 +254,18 @@ public final class PanelTree extends Panel {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(variability);
                this.addVariationPoint(variability, node);
                this.addVariants(variability, node);
+               this.nodes.put(variability, node);
         return node;
+    }
+    
+    public void updateNode(Variability variability) {
+        if (this.nodes.get(variability) != null) {
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.nodes.get(variability);
+                                   node.removeAllChildren();
+            this.addVariationPoint(variability, node);
+            this.addVariants(variability, node);
+            ((DefaultTreeModel) this.tree.getModel()).reload(node);
+        }
     }
     
     /**

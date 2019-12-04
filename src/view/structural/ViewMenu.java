@@ -67,9 +67,6 @@ public final class ViewMenu extends View implements Operation {
         this.setTitle(ViewStyle.SYSTEM + "Menu");
         this.addKeyListener(this.controller);
         this.setLayout(new BorderLayout(2, 4));
-//        this.setExtendedState();
-//        this.setLayout(new BorderLayout());
-//        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addMenu();
         this.createFileChooser("fileChooserProject");
         this.createImageChooser("fileChooserImage");
@@ -112,6 +109,7 @@ public final class ViewMenu extends View implements Operation {
         this.createMenuItem("menuItemNewProject",   "New Project",   "file/new.png");
         this.createMenuItem("menuItemOpenProject",  "Open Project",  "file/open.png");
         this.createMenuItem("menuItemSaveProject",  "Save Project",  "file/save.png");
+        this.createMenuItem("menuItemSaveAs",       "Save As",       "file/save.png");
         this.createMenuItem("menuItemCloseProject", "Close Project", "file/close.png");
         this.createMenuItem("menuItemExitSystem",   "Exit",          "file/exit.png");
         
@@ -125,7 +123,9 @@ public final class ViewMenu extends View implements Operation {
         this.getFileMenu().addSeparator();
         this.getFileMenu().add(this.getMenuItemOpenProject());
         this.getFileMenu().add(this.getMenuItemSaveProject());
+        this.getFileMenu().add(this.getMenuItemSaveAs());
         this.getMenuItemSaveProject().setEnabled(false);
+        this.getMenuItemSaveAs().setEnabled(false);
         this.getFileMenu().addSeparator();
         this.getFileMenu().add(this.getMenuItemCloseProject());
         this.getMenuItemCloseProject().setEnabled(false);
@@ -387,6 +387,7 @@ public final class ViewMenu extends View implements Operation {
             this.getPanelMain().getRedoButton().setEnabled(false);
         }else {
             this.getMenuItemSaveProject().setEnabled(true);
+            this.getMenuItemSaveAs().setEnabled(true);
             this.getPanelMain().getSaveProjectButton().setEnabled(true);
         }
     }
@@ -547,6 +548,14 @@ public final class ViewMenu extends View implements Operation {
      */
     public JMenuItem getMenuItemSaveProject() {
         return this.menuItens.get("menuItemSaveProject");
+    }
+    
+    /**
+     * Method responsible for returning Menu Item Save As.
+     * @return Menu Item Save As.
+     */
+    public JMenuItem getMenuItemSaveAs() {
+        return this.menuItens.get("menuItemSaveAs");
     }
     
     /**

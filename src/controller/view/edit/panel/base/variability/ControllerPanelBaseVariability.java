@@ -60,6 +60,7 @@ public class ControllerPanelBaseVariability extends ControllerPanel {
         this.panelBaseVariability.setVariationPoint();
         this.panelBaseVariability.getVariability().setBindingTime((String) this.panelBaseVariability.getBindingTimeComboBox().getSelectedItem());
         this.panelBaseVariability.getVariability().setAllowsBindingVar(this.panelBaseVariability.getAllowsAddingVarCheckBox().isSelected());
+        this.panelBaseVariability.getViewMenu().getPanelProject().getPanelTree().updateNode(this.panelBaseVariability.getVariability());
         this.panelBaseVariability.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseVariability.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseVariability.getDiagram());
         this.panelBaseVariability.getViewMenu().setSave(false);

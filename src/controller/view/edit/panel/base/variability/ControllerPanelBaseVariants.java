@@ -57,6 +57,7 @@ public class ControllerPanelBaseVariants extends ControllerPanel {
         this.panelBaseVariants.getVariability().setMaximum(Integer.parseInt(this.panelBaseVariants.getMaximumTextField().getText().trim()));
         this.panelBaseVariants.getDiagram().updateElementsStereotype();
         this.panelBaseVariants.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseVariants.getDiagram());
+        this.panelBaseVariants.getViewMenu().getPanelProject().getPanelTree().updateNode(this.panelBaseVariants.getVariability());
         this.panelBaseVariants.getViewMenu().getPanelProject().getPanelTree().updateUI(); 
         this.panelBaseVariants.getViewMenu().setSave(false);
     }
