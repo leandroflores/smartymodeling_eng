@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -297,6 +298,7 @@ public abstract class View extends JFrame {
      * @return New JFileChooser.
      */
     public JFileChooser createFileChooser(String id) {
+        UIManager.put("FileChooser.cancelButtonText", "Cancel");
         JFileChooser fileChooser = new JFileChooser();
                      fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                      fileChooser.setFileFilter(new FileNameExtensionFilter("SMARTY", "smty", "smty"));

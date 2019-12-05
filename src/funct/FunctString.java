@@ -15,6 +15,26 @@ import java.util.List;
 public class FunctString {
     
     /**
+     * Method responsible for returning the New String.
+     * @param  string Input String.
+     * @return New String.
+     */
+    public String getString(String string) {
+        return string.replaceAll("<", "")
+                     .replaceAll(">", "")
+                     .replaceAll("#", "")
+                     .replaceAll("\\+", "")
+                     .replaceAll("-", "")
+                     .replaceAll("\\*", "")
+                     .replaceAll("/", "")
+                     .replaceAll("\\.", "")
+                     .replaceAll("%", "")
+                     .replaceAll("$", "")
+                     .replaceAll("!", "")
+                     .replaceAll("\\?", "").trim();
+    }
+    
+    /**
      * Method responsible for returning a String containing a specifical Character.
      * @param  character Character.
      * @param  size String size.

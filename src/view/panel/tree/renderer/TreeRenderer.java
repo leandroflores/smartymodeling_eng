@@ -76,6 +76,26 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
         this.setIcon(this.getImage(element.getIcon()));
     }
     
+    public void setElementIcon(Element element, DefaultMutableTreeNode parent) {
+        this.setText(element.getName());
+        this.setToolTipText(element.getName());
+        this.setIcon(this.getImage(this.getIconPath(element, parent.getUserObject())));
+    }
+    
+    /**
+     * Method responsible for returning the Icon Path.
+     * @param  element Element.
+     * @param  object Parent Object.
+     * @return Icon Path.
+     */
+    private String getIconPath(Element element, Object object) {
+        if (object != null) {
+            if (object instanceof Variability)
+                return ((Variability) object).getIcon(element);
+        }
+        return element.getIcon();
+    }
+    
     /**
      * Method responsible for setting the Attribute UML Icon.
      * @param attribute Attribute UML.
@@ -158,14 +178,16 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
     
     @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
-        Component component = super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
-        Object    object    = ((DefaultMutableTreeNode) value).getUserObject();
+        super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
+        DefaultMutableTreeNode node   = (DefaultMutableTreeNode) value;
+        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
+        Object object = node.getUserObject();
         if (object instanceof Project)
             this.setProjectIcon((Project) object);
         else if (object instanceof Diagram)
             this.setDiagramIcon((Diagram) object);
         else if (object instanceof Element)
-            this.setElementIcon((Element) object);
+            this.setElementIcon((Element) object, parent);
         else if (object instanceof AttributeUML)
             this.setAttributeIcon((AttributeUML) object);
         else if (object instanceof MethodUML)

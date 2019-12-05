@@ -73,8 +73,6 @@ public final class ViewMenu extends View implements Operation {
         
         this.addPanelMain();
         this.addPanelProject();
-//        this.initPanelTree();
-//        this.initPanelModeling();
     }
     
     /**

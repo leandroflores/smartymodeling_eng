@@ -105,6 +105,7 @@ public final class PanelMain extends Panel {
      */
     public void setNoProject() {
         this.viewMenu.getMenuItemSaveProject().setEnabled(false);
+        this.viewMenu.getMenuItemSaveAs().setEnabled(false);
         this.viewMenu.getMenuItemCloseProject().setEnabled(false);
         
         this.getSaveProjectButton().setEnabled(false);

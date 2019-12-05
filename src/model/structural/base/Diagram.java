@@ -137,7 +137,8 @@ public abstract class Diagram implements Exportable {
      * @param name Diagram Name.
      */
     public void setName(String name) {
-        this.name = name;
+        String string = new FunctString().getString(name);
+        this.name     = string.isEmpty() ? this.name : string;
     }
     
     /**

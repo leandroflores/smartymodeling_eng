@@ -243,11 +243,24 @@ public class Variability implements Exportable {
     }
     
     /**
-     * Method responsible for returning Variability Icon.
+     * Method responsible for returning the Variability Icon.
      * @return Variability Icon.
      */
     public String getIcon() {
         return "icons/variability/variability.png";
+    }
+    
+    /**
+     * Method responsible for returning the Element Icon in a Variability.
+     * @param  element Element.
+     * @return Element Icon in a Variability.
+     */
+    public String getIcon(Element element) {
+        if (this.getVariants().contains(element) && this.getConstraint().equalsIgnoreCase("inclusive"))
+            return "icons/variability/inclusive.png";
+        if (this.getVariants().contains(element) && this.getConstraint().equalsIgnoreCase("exclusive"))
+            return "icons/variability/exclusive.png";
+        return element.getIcon();
     }
     
     /**

@@ -1,5 +1,6 @@
 package view.panel.edit.base.variability;
 
+import controller.view.panel.edit.base.variability.ControllerTabbedPane;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -42,6 +43,7 @@ public final class PanelEditVariability extends PanelEdit {
     @Override
     protected void addComponents() {
         this.tabbedPane = new JTabbedPane();
+        this.tabbedPane.addChangeListener(new ControllerTabbedPane(this.tabbedPane));
         this.tabbedPane.setPreferredSize(new Dimension(100, 100));
         
         this.addPanelBaseVariability();

@@ -69,6 +69,8 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             this.openProject();
         else if (this.viewMenu.getMenuItemSaveProject().equals(event.getSource()))
             this.saveProject();
+        else if (this.viewMenu.getMenuItemSaveAs().equals(event.getSource()))
+            this.saveProjectAs();
         else if (this.viewMenu.getMenuItemCloseProject().equals(event.getSource()))
             this.closeProject();
         else if (this.viewMenu.getMenuItemExitSystem().equals(event.getSource()))
@@ -145,6 +147,10 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * Method responsible for opening a Project.
      */
     public void openProject() {
+        this.viewMenu.getFileChooserProject().setDialogTitle("Open a Project");
+        this.viewMenu.getFileChooserProject().setApproveButtonText("Open");
+        this.viewMenu.getFileChooserProject().setApproveButtonToolTipText("Open a Project");
+        this.viewMenu.getFileChooserProject().setToolTipText("Open");
         if (this.viewMenu.getFileChooserProject().showSaveDialog(this.viewMenu) != 1) {
             String path = this.viewMenu.getFileChooserProject().getSelectedFile().getAbsolutePath();
             try {
@@ -162,11 +168,26 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * Method responsible for Saving a Project.
      */
     public void saveProject() {
+        this.viewMenu.getFileChooserProject().setDialogTitle("Save Project");
+        this.viewMenu.getFileChooserProject().setApproveButtonText("Save");
+        this.viewMenu.getFileChooserProject().setApproveButtonToolTipText("Save Project");
+        this.viewMenu.getFileChooserProject().setToolTipText("Save");
         String path = this.viewMenu.getProject().getPath();
         if (this.viewMenu.getProject().getPath().equals("New_Project.smty"))
             this.viewMenu.getProject().setPath(this.getPath());
         this.viewMenu.setTitle();
         this.exportProject();
+    }
+    
+    /**
+     * Method responsible for Saving As a Project.
+     */
+    public void saveProjectAs() {
+        this.viewMenu.getFileChooserProject().setDialogTitle("Save Project As");
+        this.viewMenu.getFileChooserProject().setApproveButtonText("Save");
+        this.viewMenu.getFileChooserProject().setApproveButtonToolTipText("Save Project As");
+        this.viewMenu.getFileChooserProject().setToolTipText("Save");
+        this.viewMenu.getProject().setPath(this.getPath());
     }
     
     /**

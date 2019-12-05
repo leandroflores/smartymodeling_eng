@@ -153,7 +153,8 @@ public class Project implements Exportable {
      * @param name Project Name.
      */
     public void setName(String name) {
-        this.name = name;
+        String string = new FunctString().getString(name);
+        this.name     = string.isEmpty() ? this.name : string;
     }
 
     /**
