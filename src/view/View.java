@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.io.File;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -301,9 +303,30 @@ public abstract class View extends JFrame {
         UIManager.put("FileChooser.cancelButtonText", "Cancel");
         JFileChooser fileChooser = new JFileChooser();
                      fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                     fileChooser.setFileFilter(new FileNameExtensionFilter("SMARTY", "smty", "smty"));
+//                     fileChooser.setFileFilter(new FileNameExtensionFilter("SMARTY", "smty", "smty"));
+                     fileChooser.setFileFilter(this.getFileFilter());
                      this.fileChoosers.put(id, fileChooser);
         return       fileChooser;
+    }
+    
+    /**
+     * Method responsible for returning the SMarty File Filter.
+     * @return SMarty File Filter.
+     */
+    private FileFilter getFileFilter() {
+        return new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                if (file.isDirectory())
+                    return false;
+                return file.getName().toLowerCase().trim().endsWith(".smty");
+            }
+
+            @Override
+            public String getDescription() {
+                return "SMarty File (*.smty)";
+            }
+        };
     }
     
     /**
