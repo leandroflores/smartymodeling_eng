@@ -58,10 +58,8 @@ public class ControllerEventPoints extends MouseAdapter {
      */
     private void updatePoint(Relationship relationship) {
         mxGeometry geometry = ((mxGraphModel) (this.panel.getGraph().getModel())).getGeometry(this.panel.getObjects().get(relationship.getId()));
-                   relationship.setPoints(geometry.getPoints());           
-        System.out.println("Update Points: " + relationship.getId() + " " + relationship.getPoints());
+                   relationship.setPoints(geometry.getPoints());
         this.panel.getViewMenu().setSave(false);
-        System.out.println("");
     }
     
     /**

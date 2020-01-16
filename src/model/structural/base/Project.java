@@ -665,6 +665,20 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Traceabilities by Element.
+     * @param  element Element.
+     * @return Traceabilities found.
+     */
+    public List<Traceability> getTraceabilities(Element element) {
+        List   filter = new ArrayList<>();
+        for (Traceability traceability : this.getTraceabilitiesList()) {
+            if (traceability.contains(element))
+               filter.add(traceability);
+        }
+        return filter;
+    }
+    
+    /**
      * Method responsible for removing a Traceability.
      * @param traceability Traceability.
      */

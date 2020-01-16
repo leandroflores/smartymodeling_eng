@@ -164,7 +164,7 @@ public final class ViewMenu extends View implements Operation {
         
         this.createMenuItem("menuItemEditProfile",        "Edit Profile",        "system/information.png");
         this.createMenuItem("menuItemNewProduct",         "New Product",         "product_line/product.png");
-        this.createMenuItem("menuItemInstantiateProduct", "Instantiate Product", "system/information.png");
+        this.createMenuItem("menuItemInstantiateProduct", "Instantiate Diagram", "system/information.png");
         this.createMenuItem("menuItemNewTraceability",    "New Traceability",    "product_line/traceability.png");
         
         this.getMenuItemEditProfile().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));

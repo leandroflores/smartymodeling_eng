@@ -4,6 +4,7 @@ import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import view.edit.panel.base.product.instance.PanelBaseArtifacts;
+import view.message.ViewError;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseArtifacts</b>.</p>
@@ -38,10 +39,25 @@ public class ControllerPanelBaseArtifacts extends ControllerPanel {
     public void keyPressed(KeyEvent event) {}
     
     /**
+     * Method responsible for checking the Name.
+     * @return Name checked.
+     */
+    private boolean checkName() {
+        if (this.check(this.panelBaseArtifacts.getNameTextField().getText()) == false) {
+            new ViewError(this.panelBaseArtifacts.getViewNewInstance(), "Name is required!").setVisible(true);
+            this.panelBaseArtifacts.getNameTextField().requestFocus();
+            return false;
+        }
+        return true;
+    }
+    
+    /**
      * Method responsible for creating a New Instance.
      */
     public void newInstance() {
-        this.panelBaseArtifacts.getInstance().setName(this.panelBaseArtifacts.getNameTextField().getText().trim());
-        this.panelBaseArtifacts.getViewNewInstance().getController().insert();
+        if (this.checkName()) {
+            this.panelBaseArtifacts.getInstance().setName(this.panelBaseArtifacts.getNameTextField().getText().trim());
+            this.panelBaseArtifacts.getViewNewInstance().getController().insert();
+        }
     }
 }

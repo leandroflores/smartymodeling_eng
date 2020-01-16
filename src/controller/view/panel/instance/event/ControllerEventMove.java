@@ -7,6 +7,7 @@ import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Relationship;
+import model.structural.diagram.classes.base.association.AssociationUML;
 import view.panel.instance.PanelInstance;
 
 /**
@@ -36,7 +37,7 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
         else if (this.panel.getInstance().getRelationship(id) != null)
             this.move(this.panel.getInstance().getRelationship(id));
         else
-            System.out.println("Cell: " + cell);
+            this.move(id, event);
     }
     
     /**
@@ -57,6 +58,45 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
     private void move(Relationship relationship) {
         mxGeometry geometry = ((mxGraphModel) (this.panel.getGraph().getModel())).getGeometry(this.panel.getObjects().get(relationship.getId()));
                    relationship.setPoints(geometry.getPoints());
+        this.panel.getViewMenu().setSave(false);
+    }
+    
+    /**
+     * Method responsible for moving a Cardinality Relationship.
+     * @param id Relationship Id.
+     * @param event Graph Event.
+     */
+    private void move(String id, mxEventObject event) {
+        System.out.println("Id..: " + id);
+        Relationship relationship = this.panel.getInstance().getRelationship(id.substring(0, id.indexOf("(")));
+        System.out.println("Rel.: " + relationship);
+        if ((relationship != null) && (relationship.getAssociation() instanceof AssociationUML)) {
+            if (id.endsWith("(source)"))
+                this.moveSourceCardinality(relationship, event);
+            else if (id.endsWith("(target)"))
+                this.moveTargetCardinality(relationship, event);
+        }
+    }
+    
+    /**
+     * Method responsible for changing the Source Cardinality.
+     * @param relationship Relationship.
+     * @param event Graph Event.
+     */
+    private void moveSourceCardinality(Relationship relationship, mxEventObject event) {
+        relationship.dxSource(((Double) event.getProperty("dx")).intValue());
+        relationship.dySource(((Double) event.getProperty("dy")).intValue());
+        this.panel.getViewMenu().setSave(false);
+    }
+    
+    /**
+     * Method responsible for changing the Target Cardinality.
+     * @param relationship Relationship.
+     * @param event Graph Event.
+     */
+    private void moveTargetCardinality(Relationship relationship, mxEventObject event) {
+        relationship.dxTarget(((Double) event.getProperty("dx")).intValue());
+        relationship.dyTarget(((Double) event.getProperty("dy")).intValue());
         this.panel.getViewMenu().setSave(false);
     }
 }

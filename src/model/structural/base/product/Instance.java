@@ -1,5 +1,6 @@
 package model.structural.base.product;
 
+import funct.FunctString;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -84,7 +85,8 @@ public class Instance implements Exportable {
      * @param name Instance Name.
      */
     public void setName(String name) {
-        this.name = name;
+        String string = new FunctString().getString(name);
+        this.name     = string.isEmpty() ? this.name : string;
     }
 
     /**

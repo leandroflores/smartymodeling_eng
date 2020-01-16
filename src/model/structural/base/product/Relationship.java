@@ -2,6 +2,7 @@ package model.structural.base.product;
 
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxPoint;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.Objects;
 import model.structural.base.association.Association;
 import model.structural.base.interfaces.Exportable;
 import model.structural.base.interfaces.Modelable;
+import model.structural.diagram.classes.base.association.AssociationUML;
+import org.w3c.dom.Element;
 
 /**
  * <p>Class of Model <b>Relationship</b>.</p>
@@ -23,6 +26,8 @@ public class Relationship implements Exportable, Modelable {
     private String id;
     private Instance instance;
     private Association association;
+    private Point sourcePos;
+    private Point targetPos;
     private List<mxPoint> points;
     
     /**
@@ -30,6 +35,8 @@ public class Relationship implements Exportable, Modelable {
      */
     public Relationship() {
         this.association  = null;
+        this.sourcePos    = new Point(0, 0);
+        this.targetPos    = new Point(0, 0);
         this.points       = new ArrayList<>();
     }
     
@@ -41,6 +48,7 @@ public class Relationship implements Exportable, Modelable {
     public Relationship(Instance instance, Association association) {
         this.instance     = instance;
         this.association  = association;
+        this.updatePositions(association);
         this.points       = new ArrayList<>(association.getPoints());
     }
     
@@ -50,7 +58,25 @@ public class Relationship implements Exportable, Modelable {
      */
     public Relationship(org.w3c.dom.Element element) {
         this.id     = element.getAttribute("id");
+        this.setSourcePosition(element);
+        this.setTargetPosition(element);
         this.points = new ArrayList<>();
+    }
+    
+    /**
+     * Method responsible for updating the Positions.
+     * @param association Association.
+     */
+    private void updatePositions(Association association) {
+        if (association instanceof AssociationUML) {
+            this.setSourcePosition(new Point(((AssociationUML) association).getSourceX(), 
+                                             ((AssociationUML) association).getSourceY()));
+            this.setTargetPosition(new Point(((AssociationUML) association).getTargetX(), 
+                                             ((AssociationUML) association).getTargetY()));
+        }else {
+            this.sourcePos = new Point(0, 0);
+            this.targetPos = new Point(0, 0);
+        }
     }
     
     /**
@@ -94,11 +120,190 @@ public class Relationship implements Exportable, Modelable {
     }
 
     /**
+     * Method responsible for updating the Positions.
+     */
+    public void updatePositions() {
+        if (this.association instanceof AssociationUML) {
+            if ((this.getSourceX().equals(0) && (this.getSourceY().equals(0))))
+                this.setSourcePosition(new Point(((AssociationUML) this.association).getSourcePosition()));
+            if ((this.getTargetX().equals(0) && (this.getTargetY().equals(0))))
+                this.setTargetPosition(new Point(((AssociationUML) this.association).getTargetPosition()));
+        }
+    }
+    
+    /**
      * Method responsible for defining the Relationship Association.
      * @param association Relationship Association.
      */
     public void setAssociation(Association association) {
         this.association = association;
+        this.updatePositions();
+    }
+    
+    /**
+     * Method responsible for returning the Source Position.
+     * @return Source Position.
+     */
+    public Point getSourcePosition() {
+        return this.sourcePos;
+    }
+
+    /**
+     * Method responsible for returning the Source X Position.
+     * @return Source X Position.
+     */
+    public Integer getSourceX() {
+        return this.sourcePos.x;
+    }
+    
+    /**
+     * Method responsible for calculating Position Shift Source X.
+     * @param distance Distance.
+     */
+    public void dxSource(Integer distance) {
+        this.dx(this.sourcePos, distance);
+    }
+    
+    /**
+     * Method responsible for returning the Source Y Position.
+     * @return Source Y Position.
+     */
+    public Integer getSourceY() {
+        return this.sourcePos.y;
+    }
+    
+    /**
+     * Method responsible for calculating Position Shift Source Y.
+     * @param distance Distance.
+     */
+    public void dySource(Integer distance) {
+        this.dy(this.sourcePos, distance);
+    }
+    
+    /**
+     * Method responsible for defining the Source Position Point.
+     * @param  element W3C Element.
+     */
+    private void setSourcePosition(Element element) {
+        Double x = 0.0d;
+        Double y = 0.0d;
+        try {
+            x = Double.parseDouble(element.getAttribute("sourceX"));
+            y = Double.parseDouble(element.getAttribute("sourceY"));
+        }catch (NumberFormatException exception) {}
+        this.setSourcePosition(new Point(x.intValue(), y.intValue()));
+    }
+    
+    /**
+     * Method responsible for defining the Source Position.
+     * @param x X Position.
+     * @param y Y Position.
+     */
+    public void setSourcePosition(Integer x, Integer y) {
+        this.sourcePos = new Point(x, y);
+    }
+    
+    /**
+     * Method responsible for defining the Source Position.
+     * @param sourcePosition Source Position.
+     */
+    public void setSourcePosition(Point sourcePosition) {
+        this.sourcePos = sourcePosition;
+    }
+    
+    /**
+     * Method responsible for calculating Position Shift X.
+     * @param position Position.
+     * @param distance Distance.
+     */
+    public void dx(Point position, Integer distance) {
+        if (position.x + distance < 0)
+            position.x  = 0;
+        else
+            position.x += distance;
+    }
+    
+    /**
+     * Method responsible for returning the Target Position.
+     * @return Target Position.
+     */
+    public Point getTargetPosition() {
+        return this.targetPos;
+    }
+
+    /**
+     * Method responsible for returning the Target X Position.
+     * @return Target X Position.
+     */
+    public Integer getTargetX() {
+        return this.targetPos.x;
+    }
+    
+    /**
+     * Method responsible for calculating Position Shift Target X.
+     * @param distance Distance.
+     */
+    public void dxTarget(Integer distance) {
+        this.dx(this.targetPos, distance);
+    }
+    
+    /**
+     * Method responsible for returning the Target Y Position.
+     * @return Target Y Position.
+     */
+    public Integer getTargetY() {
+        return this.targetPos.y;
+    }
+    
+    /**
+     * Method responsible for calculating Position Shift Target Y.
+     * @param distance Distance.
+     */
+    public void dyTarget(Integer distance) {
+        this.dy(this.targetPos, distance);
+    }
+    
+    /**
+     * Method responsible for defining the Target Position Point.
+     * @param  element W3C Element.
+     */
+    private void setTargetPosition(org.w3c.dom.Element element) {
+        Double x = 0.0d;
+        Double y = 0.0d;
+        try {
+            x = Double.parseDouble(element.getAttribute("targetX"));
+            y = Double.parseDouble(element.getAttribute("targetY"));
+        }catch (NumberFormatException exception) {}
+        this.setTargetPosition(new Point(x.intValue(), y.intValue()));
+    }
+    
+    /**
+     * Method responsible for defining the Target Position.
+     * @param x X Position.
+     * @param y Y Position.
+     */
+    public void setTargetPosition(Integer x, Integer y) {
+        this.targetPos = new Point(x, y);
+    }
+    
+    /**
+     * Method responsible for defining the Target Position.
+     * @param targetPosition Target Position.
+     */
+    public void setTargetPosition(Point targetPosition) {
+        this.targetPos = targetPosition;
+    }
+    
+    /**
+     * Method responsible for calculating Position Shift Y.
+     * @param position Position.
+     * @param distance Distance.
+     */
+    public void dy(Point position, Integer distance) {
+        if (position.y + distance < 0)
+            position.y  = 0;
+        else
+            position.y += distance;
     }
     
     /**
@@ -198,6 +403,10 @@ public class Relationship implements Exportable, Modelable {
         String export  = "        <relationship ";
                export += " id=\""          + this.id                  + "\"";
                export += " association=\"" + this.association.getId() + "\"";
+               export += " sourceX=\""     + this.sourcePos.getX()    + "\"";
+               export += " sourceY=\""     + this.sourcePos.getY()    + "\"";
+               export += " targetX=\""     + this.targetPos.getX()    + "\"";
+               export += " targetY=\""     + this.targetPos.getY()    + "\"";
                export += ">\n";
                export += this.exportPoints();
                export += "        </relationship>\n";

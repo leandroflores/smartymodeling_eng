@@ -54,10 +54,10 @@ public class PanelBaseArtifacts extends Panel {
         this.add(this.createLabel("Name*: "), this.getConstraints(2, 1, 0, 1));
         this.add(this.createTextField("nameTextField", this.viewNew.getInstance().getName(), 10), this.getConstraints(4, 1, 2, 1));
         
-        this.add(this.createLabel("Elements: "), this.getConstraints(2, 1, 0, 2));
+        this.add(this.createLabel("Artifacts: "), this.getConstraints(2, 1, 0, 2));
         this.add(this.createTextFieldNoEditable("elementsTextField", "", 10), this.getConstraints(4, 1, 2, 2));
         
-        this.add(this.createLabel("Associations: "), this.getConstraints(2, 1, 0, 3));
+        this.add(this.createLabel("Relationships: "), this.getConstraints(2, 1, 0, 3));
         this.add(this.createTextFieldNoEditable("associationsTextField", "", 10), this.getConstraints(4, 1, 2, 3));
     }
     

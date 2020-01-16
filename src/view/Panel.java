@@ -413,7 +413,7 @@ public abstract class Panel extends JPanel {
     private DefaultTableModel createTableModel() {
         return new DefaultTableModel() {
                    @Override
-                   public boolean isCellEditable(int row, int col){   
+                   public boolean isCellEditable(int row, int col) {   
                         return true;
                    }};
     }

@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import model.structural.base.Diagram;
 import model.structural.base.product.Product;
 import view.edit.panel.base.product.instance.PanelBaseNewInstance;
+import view.message.ViewError;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseNewInstance</b>.</p>
@@ -48,19 +49,48 @@ public class ControllerPanelBaseNewInstance extends ControllerPanel {
     }
 
     /**
-     * Method responsible for checking the Instance.
-     * @return Instance checked.
+     * Method responsible for checking the Product.
+     * @return Product checked.
+     */
+    private boolean checkProduct() {
+        if (this.panelBaseNewInstance.getProductComboBox().getSelectedItem() == null) {
+            new ViewError(this.panelBaseNewInstance.getViewNewInstance(), "Select a Product!").setVisible(true);
+            this.panelBaseNewInstance.getProductComboBox().requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Method responsible for checking the Diagram.
+     * @return Diagram checked.
+     */
+    private boolean checkDiagram() {
+        if (this.panelBaseNewInstance.getDiagramComboBox().getSelectedItem() == null) {
+            new ViewError(this.panelBaseNewInstance.getViewNewInstance(), "Select a Diagram!").setVisible(true);
+            this.panelBaseNewInstance.getDiagramComboBox().requestFocus();
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Method responsible for checking the Parameters.
+     * @return Parameters checked.
      */
     private boolean check() {
-        return this.check(this.panelBaseNewInstance.getNameTextField().getText());
+        return this.checkProduct()
+            && this.checkDiagram();
     }
     
     /**
      * Method responsible for going to Next Panel.
      */
     public void next() {
-        this.update();
-        this.panelBaseNewInstance.getViewNewInstance().addPanelBaseOptional();
+        if (this.check()) {
+            this.update();
+            this.panelBaseNewInstance.getViewNewInstance().addPanelBaseOptional();
+        }
     }
     
     /**

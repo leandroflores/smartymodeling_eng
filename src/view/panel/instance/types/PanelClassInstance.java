@@ -1,10 +1,11 @@
 package view.panel.instance.types;
 
 import com.mxgraph.model.mxCell;
+import com.mxgraph.model.mxGeometry;
+import com.mxgraph.model.mxGraphModel;
 import controller.view.panel.instance.ControllerPanelInstance;
 import java.util.List;
 import javax.swing.BoxLayout;
-import model.structural.base.association.Association;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Relationship;
@@ -106,12 +107,12 @@ public final class PanelClassInstance extends PanelInstance {
      */
     private void addEntities(Artifact artifact, Object parent) {
         for (Entity entity : ((PackageUML) artifact.getElement()).getEntitiesList()) {
-            Artifact entityArtefact = this.instance.getArtifact(entity);
-            if (entityArtefact != null) {
+            Artifact current = this.instance.getArtifact(entity);
+            if (current != null) {
                 if (entity instanceof ClassUML)
-                    this.addClass(parent, entityArtefact);
+                    this.addClass(parent, current);
                 else if (entity instanceof InterfaceUML)
-                    this.addInterface(parent, entityArtefact);
+                    this.addInterface(parent, current);
             }
         }
     }
@@ -292,14 +293,11 @@ public final class PanelClassInstance extends PanelInstance {
     
     @Override
     public void addRelationships() {
-        List<Relationship> relationships = this.instance.getRelationshipsList();
-        System.out.println("Relationships: " + relationships);
-        for (int i = 0; i < relationships.size(); i++) {
-            Relationship current = relationships.get(i);
-            this.graph.getStylesheet().putCellStyle(current.getStyleLabel(), current.getStyle());
-            this.addNormalRelationship(current);
-            if (current.getAssociation() instanceof AssociationUML)
-                this.addDirectedRelationship(current); 
+        for (Relationship relationship : this.instance.getRelationshipsList()) {
+            this.graph.getStylesheet().putCellStyle(relationship.getStyleLabel(), relationship.getStyle());
+            this.addNormalRelationship(relationship);
+            if (relationship.getAssociation() instanceof AssociationUML)
+                this.addDirectedRelationship(relationship); 
         }
     }
     
@@ -308,14 +306,12 @@ public final class PanelClassInstance extends PanelInstance {
      * @param relationship Association.
      */
     private void addNormalRelationship(Relationship relationship) {
-//        System.out.println(this.instance.getArtifact(relationship.get));
-//        System.out.println("Objects: " + this.objects);
-//        System.out.println("Source.: " + this.objects.get(relationship.getSource().getId()));
-//        System.out.println("Target.: " + this.objects.get(relationship.getSource().getId()));
-        Object edge = this.graph.insertEdge(this.parent, null, relationship.getTitle(), this.objects.get(this.getId(relationship.getAssociation().getSource())), this.objects.get(this.getId(relationship.getAssociation().getTarget())), relationship.getStyleLabel());
-//        mxCell edge = (mxCell) this.graph.insertEdge(this.parent, relationship.getId(), relationship.getTitle(), this.objects.get(relationship.getSource().getId()), this.objects.get(relationship.getTarget().getId()), relationship.getStyleLabel());
-//        System.out.println("Edge: " + edge);
+        mxCell     edge     = (mxCell) this.graph.insertEdge(this.parent, relationship.getId(), relationship.getTitle(), this.objects.get(this.getId(relationship.getAssociation().getSource())), this.objects.get(this.getId(relationship.getAssociation().getTarget())), relationship.getStyleLabel());
+        mxGeometry geometry = ((mxGraphModel) (this.graph.getModel())).getGeometry(edge);
+                   geometry.setPoints(relationship.getPoints());
+        ((mxGraphModel) (this.graph.getModel())).setGeometry(edge, geometry);
         this.identifiers.put(edge, relationship.getId());
+        this.objects.put(relationship.getId(), edge);
     }
     
     /**
@@ -323,14 +319,14 @@ public final class PanelClassInstance extends PanelInstance {
      * @param relationship Relationship.
      */
     private void addDirectedRelationship(Relationship relationship) {
-//        AssociationUML association
-//        this.graph.getStylesheet().putCellStyle(relationship.getAssociation().getCardinalityLabel(), relationship.getCardinalityStyle());
-//        mxCell source = (mxCell) this.graph.insertVertex(this.parent, relationship.getId() + "(source)", relationship.getSourceLabel(), relationship.getSourceX(), relationship.getSourceY(), 30, 20, relationship.getCardinalityLabel());
-//               source.setConnectable(false);
-//        mxCell target = (mxCell) this.graph.insertVertex(this.parent, relationship.getId() + "(target)", relationship.getTargetLabel(), relationship.getTargetX(), relationship.getTargetY(), 30, 20, relationship.getCardinalityLabel());
-//               target.setConnectable(false);
-//        this.identifiers.put(source, relationship.getId() + "(source)");
-//        this.identifiers.put(target, relationship.getId() + "(target)");
+        AssociationUML associationUML = (AssociationUML) relationship.getAssociation();
+        this.graph.getStylesheet().putCellStyle(associationUML.getCardinalityLabel(), associationUML.getCardinalityStyle());
+        mxCell source = (mxCell) this.graph.insertVertex(this.parent, associationUML.getId() + "(source)", associationUML.getSourceLabel(), associationUML.getSourceX(), associationUML.getSourceY(), 30, 20, associationUML.getCardinalityLabel());
+               source.setConnectable(false);
+        mxCell target = (mxCell) this.graph.insertVertex(this.parent, associationUML.getId() + "(target)", associationUML.getTargetLabel(), associationUML.getTargetX(), associationUML.getTargetY(), 30, 20, associationUML.getCardinalityLabel());
+               target.setConnectable(false);
+        this.identifiers.put(source, relationship.getId() + "(source)");
+        this.identifiers.put(target, relationship.getId() + "(target)");
     }
     
     /**
