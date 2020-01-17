@@ -509,10 +509,7 @@ public class AssociationUML extends Association {
      * @param distance Distance.
      */
     public void dx(Point position, Integer distance) {
-        if (position.x + distance < 0)
-            position.x  = 0;
-        else
-            position.x += distance;
+        position.x = (position.x + distance < 0) ? 0 : position.x + distance;
     }
     
     /**
@@ -521,10 +518,7 @@ public class AssociationUML extends Association {
      * @param distance Distance.
      */
     public void dy(Point position, Integer distance) {
-        if (position.y + distance < 0)
-            position.y  = 0;
-        else
-            position.y += distance;
+        position.y = (position.y + distance < 0) ? 0 : position.y + distance;
     }
     
     /**

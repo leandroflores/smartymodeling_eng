@@ -13,7 +13,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining a Panel for showing the <b>Profile Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  21/07/2019
- * @see    controller.view.edit.panel.base.
+ * @see    controller.view.edit.panel.base.ControllerPanelBaseProfile
  * @see    model.structural.base.Profile
  * @see    view.Panel
  */

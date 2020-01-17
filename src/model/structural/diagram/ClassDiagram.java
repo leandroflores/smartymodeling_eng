@@ -249,9 +249,8 @@ public final class ClassDiagram extends Diagram {
      * @param newType New Type.
      */
     private void changeInterfaceTypes(TypeUML oldType, TypeUML newType) {
-        List<InterfaceUML>  list = this.getInterfacesList();
-        for (int i = 0; i < list.size(); i++)
-            list.get(i).changeType(oldType, newType);
+        for (InterfaceUML interfaceUML : this.getInterfacesList())
+           interfaceUML.changeType(oldType, newType);
     }
     
     /**

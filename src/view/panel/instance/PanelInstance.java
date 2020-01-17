@@ -5,6 +5,7 @@ import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.view.mxGraph;
 import controller.view.panel.instance.ControllerPanelInstance;
@@ -190,6 +191,17 @@ public abstract class PanelInstance extends Panel {
             this.identifiers.put(edge, relationship.getId());
             this.objects.put(relationship.getId(), edge);
         }
+    }
+    
+    /**
+     * Method responsible for returning the Final Style.
+     * @param  style Original Style.
+     * @return Final Style (No Editable)
+     */
+    protected Map getStyle(Map style) {
+        HashMap newStyle = new HashMap(style);
+                newStyle.put(mxConstants.STYLE_EDITABLE, "0");
+        return  newStyle;
     }
     
     /**

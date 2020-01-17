@@ -48,6 +48,8 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
     private void move(Artifact artifact, mxEventObject event) {
         artifact.dx(((Double) event.getProperty("dx")).intValue());
         artifact.dy(((Double) event.getProperty("dy")).intValue());
+        this.panel.getInstance().dx(artifact.getElement(), ((Double) event.getProperty("dx")).intValue());
+        this.panel.getInstance().dy(artifact.getElement(), ((Double) event.getProperty("dy")).intValue());
         this.panel.getViewMenu().setSave(false);
     }
     
@@ -67,9 +69,7 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      * @param event Graph Event.
      */
     private void move(String id, mxEventObject event) {
-        System.out.println("Id..: " + id);
         Relationship relationship = this.panel.getInstance().getRelationship(id.substring(0, id.indexOf("(")));
-        System.out.println("Rel.: " + relationship);
         if ((relationship != null) && (relationship.getAssociation() instanceof AssociationUML)) {
             if (id.endsWith("(source)"))
                 this.moveSourceCardinality(relationship, event);

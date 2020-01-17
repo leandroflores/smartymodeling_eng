@@ -141,7 +141,7 @@ public class Instance implements Exportable {
      * Method responsible for returning the Next Artifact Id.
      * @return Next Artifact Id.
      */
-    public String nextArtefactId() {
+    public String nextArtifactId() {
         Integer index  = this.artifacts.size() + 1;
         String  nextId = "ARTIFACT#" + index;
         while (this.artifacts.get(nextId) != null)
@@ -154,7 +154,7 @@ public class Instance implements Exportable {
      * @param artifact Artifact.
      */
     public void addArtifact(Artifact artifact) {
-        artifact.setId(this.nextArtefactId());
+        artifact.setId(this.nextArtifactId());
         artifact.setInstance(this);
         this.artifacts.put(artifact.getId(), artifact);
     }
@@ -201,6 +201,32 @@ public class Instance implements Exportable {
     public void removeArtifact(Artifact artifact) {
         this.removeRelationships(artifact);
         this.artifacts.remove(artifact.getId());
+    }
+    
+    /**
+     * Method responsible for Shift X for Cardinalities.
+     * @param element Element.
+     * @param distance Shift Distance.
+     */
+    public void dx(Element element, Integer distance) {
+        List<Relationship> filter = this.getAssociations("association");
+        for (Relationship relationship : filter) {
+            relationship.dxSource(relationship.getAssociation().isSource(element) ? distance : 0);
+            relationship.dxTarget(relationship.getAssociation().isTarget(element) ? distance : 0);
+        }
+    }
+    
+    /**
+     * Method responsible for Shift Y for Cardinalities.
+     * @param element Element.
+     * @param distance Shift Distance.
+     */
+    public void dy(Element element, Integer distance) {
+        List<Relationship> filter = this.getAssociations("association");
+        for (Relationship relationship : filter) {
+            relationship.dySource(relationship.getAssociation().isSource(element) ? distance : 0);
+            relationship.dyTarget(relationship.getAssociation().isTarget(element) ? distance : 0);
+        }
     }
     
     /**
@@ -414,6 +440,20 @@ public class Instance implements Exportable {
         for (Relationship relationship : this.getRelationshipsList())
                export +=  relationship.export();
         return export;
+    }
+    
+    /**
+     * Method responsible for returning the Associations List by Type.
+     * @param  type Association Type.
+     * @return Associations List.
+     */
+    public List getAssociations(String type) {
+        List    filter = new ArrayList<>();
+        for (Relationship relationship : this.getRelationshipsList()) {
+            if (relationship.getAssociation().getType().equalsIgnoreCase(type))
+                filter.add(relationship);
+        }
+        return  filter;
     }
         
     @Override
