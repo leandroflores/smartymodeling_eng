@@ -82,7 +82,7 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
      */
     public TypeUML(Entity entity) {
         this.id        = entity.getId();
-        this.path      = "";
+        this.path      = entity.getFullPath();
         this.name      = entity.getName();
         this.primitive = false;
         this.standard  = false;

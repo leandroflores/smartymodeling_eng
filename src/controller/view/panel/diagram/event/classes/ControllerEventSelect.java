@@ -6,6 +6,7 @@ import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
+import model.structural.base.Stereotype;
 import model.structural.base.association.Association;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.AttributeUML;
@@ -32,13 +33,10 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
     
     @Override
     public void invoke(Object object, mxEventObject event) {
-//        System.out.println("A");
         if (this.panel.getGraph().getSelectionCell() != null) {
             if (this.panel.getGraph().getSelectionCell() instanceof mxCell) {
                 mxCell cell = (mxCell) this.panel.getGraph().getSelectionCell();
                 String id   = this.panel.getIdentifiers().get(cell);
-//                System.out.println("Cell: " + cell);
-//                System.out.println("Id:   " + id);
                 this.select(cell, id);
             }
         }
@@ -50,7 +48,9 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
      * @param id Element Id.
      */
     private void select(mxCell cell, String id) {
-        if (cell.getId().endsWith("(newAttribute)"))
+        if (this.panel.getDiagram().getProject().getStereotype(id) != null)
+            this.updateEditPanel(this.panel.getDiagram().getProject().getStereotype(id));
+        else if (cell.getId().endsWith("(newAttribute)"))
             this.newAttribute(cell, (Entity) this.panel.getDiagram().getElement(id));
         else if (cell.getId().endsWith("(newMethod)"))
             this.newMethod(cell, (Entity) this.panel.getDiagram().getElement(id));
@@ -58,6 +58,14 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
             this.updatePoints(this.panel.getDiagram().getAssociation(id), cell);
 //        else if (this.panel.getIdentifiers().get(cell) != null)
 //            this.updateEditPanel(cell);
+    }
+    
+    /**
+     * Method responsible for updating the Edit Panel Stereotype.
+     * @param stereotype Edit Panel Stereotype.
+     */
+    private void updateEditPanel(Stereotype stereotype) {
+        this.panel.getViewMenu().getPanelProject().initPanelEditStereotype(stereotype);
     }
     
     /**
@@ -102,11 +110,9 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
      * @param association 
      */
     private void updatePoints(Association association, mxCell edge) {
-//        System.out.println("Test");
-//        System.out.println(this.panel.getGraph().getSelectionCell());
-//        System.out.println(this.panel.getGraph().getSelectionCell());
         mxGeometry geometry = ((mxGraphModel) (this.panel.getGraph().getModel())).getGeometry(edge);
-//            System.out.println(geometry.getPoints());
+                   association.setPoints(geometry.getPoints());
+        this.panel.getViewMenu().setSave(false);
     }
      
     /**

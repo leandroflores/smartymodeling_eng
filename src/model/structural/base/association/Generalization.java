@@ -26,6 +26,24 @@ public class Generalization extends Association {
         this.type   = "generalization";
     }
 
+    /**
+     * Method responsible for returning the Generalization Source.
+     * @param  element Element.
+     * @return Generalization Source.
+     */
+    public Element getSource(Element element) {
+        return this.target.equals(element) ? this.source : null;
+    }
+    
+    /**
+     * Method responsible for returning the Generalization Target.
+     * @param  element Element.
+     * @return Generalization Target.
+     */
+    public Element getTarget(Element element) {
+        return this.source.equals(element) ? this.target : null;
+    }
+    
     @Override
     public String getTitle() {
         return "";

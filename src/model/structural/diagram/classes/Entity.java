@@ -6,16 +6,20 @@ import com.mxgraph.util.mxConstants;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import model.structural.base.Element;
 import model.structural.base.Stereotype;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.classes.base.TypeUML;
+import model.structural.diagram.classes.base.association.AssociationUML;
 
 /**
  * <p>Class of Model <b>Entity</b>.</p>
@@ -23,13 +27,14 @@ import model.structural.diagram.classes.base.TypeUML;
  * @author Leandro
  * @since  20/05/2019
  * @see    model.structural.base.Element
+ * @see    model.structural.diagram.classes.Encodable
  */
-public abstract class Entity extends Element {
-    private ClassDiagram diagram;
-    private PackageUML packageUML;
-    private TypeUML    typeUML;
-    private final LinkedHashMap attributes;
-    private final LinkedHashMap methods;
+public abstract class Entity extends Element implements Encodable {
+    protected ClassDiagram diagram;
+    protected PackageUML packageUML;
+    protected TypeUML    typeUML;
+    protected final LinkedHashMap attributes;
+    protected final LinkedHashMap methods;
     
     /**
      * Default constructor method of Class.
@@ -548,7 +553,143 @@ public abstract class Entity extends Element {
     }
     
     /**
-     * Method responsible for exporting Header.
+     * Method responsible for returning the Entity Super.
+     * @return Entity Super.
+     */
+    public Entity getSuper() {
+        Element element  = this.diagram.getSuper(this);
+        return  element != null ? (Entity) element : null;
+    }
+    
+    /**
+     * Method responsible for returning the Package Code.
+     * @return Package Code.
+     */
+    protected String getPackageCode() {
+        String code = this.packageUML != null ? this.packageUML.getPath() : "";
+        if (this.packageUML == null)
+            return "\n\n";
+        return "package " + code.substring(code.indexOf(".") + 1) + ";\n\n";
+    }
+    
+    /**
+     * Method responsible for returning the Imports Code.
+     * @return Imports Code.
+     */
+    protected String getImportsCode() {
+        String code  = "";
+        for (String string : this.getImportations())
+               code += "import " + string + ";\n";
+        return code + "\n";
+    }
+    
+    /**
+     * Method responsible for returning the Importation List.
+     * @return Importation List.
+     */
+    protected List<String> getImportations() {
+        Set<String>  set  = new HashSet<>();
+//                     this.addSuperPackage(set);
+//                     this.addRealizationsPackages(set);
+//                     this.addAttributesPackages(set);
+//                     set.remove("");
+        List<String> list = new ArrayList<>(set);
+        Collections.sort(list);
+        return list;
+    }
+    
+    /**
+     * Method responsible for adding the Super Package.
+     * @param set Packages Set.
+     */
+    private void addSuperPackage(Set<String> set) {
+        Entity  super_ = this.getSuper();
+        String  path   = super_ != null ? this.setPath(super_.getFullPath()) : "";
+        set.add(path);
+    }
+    
+    /**
+     * Method responsible for adding the Attributes Packages.
+     * @param set Packages Set.
+     */
+    protected void addAttributesPackages(Set<String> set) {
+        for (AttributeUML attribute : this.getAttributesList())
+            set.add(this.setPath(attribute.getTypeUML().getSignature()));
+    }
+    
+    /**
+     * Method responsible for adding the Method Packages.
+     * @param set Packages Set.
+     */
+    protected void addMethodPackages(Set<String> set) {
+        for (MethodUML method : this.getMethodsList()) {
+            set.add(this.setPath(method.getReturn().getSignature()));
+            method.addParametersPackages(set);
+        }
+    }
+    
+    /**
+     * Method responsible for returning the Signature Code.
+     * @return Signature Code.
+     */
+    public abstract String getSignatureCode();
+    
+    /**
+     * Method responsible for returning the Extends Code.
+     * @return Extends Code.
+     */
+    protected String getExtendsCode() {
+        Entity entity  = this.getSuper();
+        return entity != null ? "extends " + entity.getName() + " " : "";
+    }
+    
+    /**
+     * Method responsible for returning the Attributes Code.
+     * @return Attributes Code.
+     */
+    protected String getAttributesCode() {
+        String code  = "";
+        for (AttributeUML attribute : this.getAttributesList())
+               code += attribute.exportCode() + "\n";
+        return code;
+    }
+    
+    /**
+     * Method responsible for returning the Associations Code.
+     * @return Associations Code.
+     */
+    protected String getAssociationsCode() {
+        String code  = "";
+        for (Object object : this.diagram.getTargetAssociations("association", this))
+               code += ((AssociationUML) object).exportCode() + "\n";
+        return code;
+    }
+    
+    /**
+     * Method responsible for returning the Methods Code.
+     * @return Methods Code.
+     */
+    protected String getMethodsCode() {
+        String code  = "";
+        for (MethodUML method : this.getMethodsList())
+               code += method.exportCode() + "\n";
+        return code;
+    }
+    
+    @Override
+    public String exportCode() {
+        String export  = this.getPackageCode();
+//               export += this.getImportsCode();
+               export += this.getSignatureCode()    + "{\n";
+               export += this.getAttributesCode();
+               export += this.getAssociationsCode() + "\n";
+               export += this.getMethodsCode()      + "\n";
+               export += "}";
+        return export;
+    }
+    
+    /**
+     * Method responsible for exporting the Header.
      * @return Header.
      */
     public abstract String exportHeader();
@@ -599,5 +740,29 @@ public abstract class Entity extends Element {
                + this.exportAttributes()
                + this.exportMethods()
                + this.exportFooter();
+    }
+    
+    /**
+     * Method responsible for returning the Full Path.
+     * @return Full Path.
+     */
+    public String getFullPath() {
+        return (this.packageUML != null ? this.packageUML.getPath() + "." : "") + this.name;
+    }
+    
+    /**
+     * Method responsible for returning the Import Path.
+     * @param  path Original Path.
+     * @return Import Path.
+     */
+    protected String setPath(String path) {
+        if ((path.equals("")) || (path.contains(".") == false))
+            return "";
+        return path.startsWith(".") ? path.substring(path.indexOf(".") + 1) : path;
+    }
+    
+    @Override
+    public String toString() {
+        return this.getFullPath();
     }
 }

@@ -57,6 +57,13 @@ public class InterfaceUML extends Entity {
     }
     
     @Override
+    public String getSignatureCode() {
+        String signature  = "public interface " + this.name + " ";
+               signature += this.getExtendsCode();
+        return signature;
+    }
+    
+    @Override
     public String exportHeader() {
         String export  = "    <"         + this.type;
                export += " id=\""        + this.id                      + "\"";

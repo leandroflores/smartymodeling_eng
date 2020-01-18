@@ -990,6 +990,15 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for returning a Stereotype by Id.
+     * @param  id Stereotype Id.
+     * @return Stereotype found.
+     */
+    public Stereotype getStereotype(String id) {
+        return (Stereotype) this.stereotypes.get(id);
+    }
+    
+    /**
      * Method responsible for returning the Stereotype by Name.
      * @param  name Stereotype Name.
      * @return Stereotype found.

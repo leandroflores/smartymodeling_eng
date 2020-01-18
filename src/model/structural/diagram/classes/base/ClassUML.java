@@ -2,6 +2,7 @@ package model.structural.diagram.classes.base;
 
 import com.mxgraph.util.mxConstants;
 import java.util.Map;
+import java.util.Set;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.Entity;
 import org.w3c.dom.Element;
@@ -90,6 +91,35 @@ public class ClassUML extends Entity {
         Map    style = super.getNameStyle();
                style.put(mxConstants.STYLE_FONTSTYLE, this.abstract_ ? 3 : 1);
         return style;
+    }
+    
+    @Override
+    public String getSignatureCode() {
+        String signature  = "public class " + this.name + " ";
+               signature += this.getExtendsCode();
+               signature += this.getImplementsCode();
+        return signature;
+    }
+    
+    /**
+     * Method responsible for returning the Implements Code.
+     * @return Implements Code.
+     */
+    public String getImplementsCode() {
+        String  names  = "";
+        for (InterfaceUML interfaceUML : this.diagram.getRealizations(this))
+                names +=  interfaceUML.getName() + ", ";
+        String  code   = names.contains(", ") ? names.substring(0, names.lastIndexOf(",")) : "";
+        return !code.isEmpty() ? "implements " + code + " " : "";
+    }
+    
+    /**
+     * Method responsible for adding the Realizations Packages.
+     * @param set Packages Set.
+     */
+    protected void addRealizationsPackages(Set<String> set) {
+        for (InterfaceUML interfaceUML : this.diagram.getRealizations(this))
+            set.add(this.setPath(interfaceUML.getFullPath()));
     }
     
     @Override

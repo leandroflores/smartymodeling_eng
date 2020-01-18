@@ -1,6 +1,7 @@
 package model.structural.diagram.classes.base;
 
 import model.structural.base.interfaces.Exportable;
+import model.structural.diagram.classes.Encodable;
 import org.w3c.dom.Element;
 
 /**
@@ -9,9 +10,10 @@ import org.w3c.dom.Element;
  * @author Leandro
  * @since  20/05/2019
  * @see    model.structural.base.interfaces.Exportable
+ * @see    model.structural.diagram.classes.Encodable
  * @see    model.structural.diagram.classes.base.TypeUML
  */
-public class ParameterUML implements Exportable {
+public class ParameterUML implements Exportable, Encodable {
     private TypeUML type;
     private String  name;
     
@@ -96,11 +98,8 @@ public class ParameterUML implements Exportable {
         return new Object[] {this.name, this.type};
     }
     
-    /**
-     * Method responsible for printing Parameter UML.
-     * @return Parameter UML.
-     */
-    public String print() {
+    @Override
+    public String exportCode() {
         return this.type.getName() + " " + this.name;
     }
 

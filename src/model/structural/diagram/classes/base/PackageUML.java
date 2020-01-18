@@ -448,6 +448,18 @@ public class PackageUML extends Element {
         return style;
     }
     
+    /**
+     * Method responsible for returning the Package Path.
+     * @return Package Path.
+     */
+    public String getPath() {
+        if (this.parent == null)
+            return this.name;
+        if (this.parent.getParent() == null)
+            return this.parent.getName() + "." + this.name;
+        return this.parent.getPath() + "." + this.name;
+    }
+    
     @Override
     public String toString() {
         return this.name;

@@ -8,6 +8,7 @@ import javax.swing.JSplitPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.base.Stereotype;
 import model.structural.base.association.Association;
 import model.structural.base.evaluation.Metric;
 import model.structural.base.product.Artifact;
@@ -41,6 +42,7 @@ import view.panel.edit.PanelEdit;
 import view.panel.edit.base.PanelEditAssociation;
 import view.panel.edit.base.PanelEditDiagram;
 import view.panel.edit.base.PanelEditProject;
+import view.panel.edit.base.PanelEditStereotype;
 import view.panel.edit.base.activity.PanelEditActivityUML;
 import view.panel.edit.base.activity.PanelEditDecisionUML;
 import view.panel.edit.base.activity.PanelEditFlowUML;
@@ -308,6 +310,15 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditVariability(Diagram diagram, Variability variability) {
         this.panelEdit = new PanelEditVariability(this.viewMenu, diagram, variability);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Stereotype.
+     * @param stereotype Stereotype.
+     */
+    public void initPanelEditStereotype(Stereotype stereotype) {
+        this.panelEdit = new PanelEditStereotype(this.viewMenu, stereotype);
         this.updatePanelEdit();
     }
     

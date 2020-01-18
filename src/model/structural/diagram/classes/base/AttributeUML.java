@@ -4,6 +4,7 @@ import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
 import model.structural.base.Element;
+import model.structural.diagram.classes.Encodable;
 import model.structural.diagram.classes.Entity;
 
 /**
@@ -12,8 +13,9 @@ import model.structural.diagram.classes.Entity;
  * @author Leandro
  * @since  20/05/2019
  * @see    model.structural.base.Element
+ * @see    model.structural.diagram.classes.Encodable
  */
-public class AttributeUML extends Element {
+public class AttributeUML extends Element implements Encodable {
     private Entity  entity;
     private TypeUML typeUML;
     private String  visibility;
@@ -153,17 +155,14 @@ public class AttributeUML extends Element {
         this.final_ = final_;
     }
     
-    /**
-     * Method responsible for printing Attribute Data.
-     * @return Attribute Data.
-     */
-    public String print() {
-        String attribute  = this.printVisibility();
-               attribute += (this.static_)  ? " static" : "";
-               attribute += (this.final_)   ? " final"  : "";
-               attribute += " " + this.printTypeUML();
-               attribute += " " + this.name;
-        return attribute;
+    @Override
+    public String exportCode() {
+        String code  = this.printVisibility();
+               code += (this.static_)  ? " static" : "";
+               code += (this.final_)   ? " final"  : "";
+               code += " " + this.printTypeUML();
+               code += " " + this.name;
+        return code;
     }
     
     /**

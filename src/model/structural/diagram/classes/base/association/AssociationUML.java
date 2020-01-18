@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 import model.structural.base.association.Association;
+import model.structural.diagram.classes.Encodable;
 import model.structural.diagram.classes.Entity;
 import org.w3c.dom.Element;
 
@@ -14,9 +15,10 @@ import org.w3c.dom.Element;
  * @author Leandro
  * @since  03/06/2019
  * @see    model.structural.base.association.Association
+ * @see    model.structural.diagram.classes.Encodable
  * @see    model.structural.diagram.classes.Entity
  */
-public class AssociationUML extends Association {
+public class AssociationUML extends Association implements Encodable {
     private String  name;
     private String  category;
     private boolean direction;
@@ -596,6 +598,22 @@ public class AssociationUML extends Association {
                style.put(mxConstants.STYLE_STROKECOLOR, this.getStrokeColor());
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_CONNECTOR);
         return style;
+    }
+    
+    /**
+     * Method responsible for returning the Cardinality Code.
+     * @return Cardinality Code.
+     */
+    private String getCardinalityCode() {
+        return this.targetMax == 1 ? this.target.getName() : "List<" + this.target.getName() + ">";
+    }
+    
+    @Override
+    public String exportCode() {
+        String code  = "private ";
+               code += this.getCardinalityCode() + " ";
+               code += this.targetName + ";";
+        return code;
     }
     
     /**

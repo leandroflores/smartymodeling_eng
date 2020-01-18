@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import model.structural.base.Element;
+import model.structural.diagram.classes.Encodable;
 import model.structural.diagram.classes.Entity;
 
 /**
@@ -15,10 +17,11 @@ import model.structural.diagram.classes.Entity;
  * @author Leandro
  * @since  20/05/2019
  * @see    model.structural.base.Element
+ * @see    model.structural.diagram.classes.Encodable
  * @see    model.structural.diagram.classes.base.ParameterUML
  * @see    model.structural.diagram.classes.base.TypeUML
  */
-public class MethodUML extends Element {
+public class MethodUML extends Element implements Encodable {
     private Entity  entity;
     private TypeUML return_;
     private String  visibility;
@@ -278,18 +281,24 @@ public class MethodUML extends Element {
         if (this.parameters.isEmpty())   
             return "()";
         if (this.parameters.size() == 1)
-            return "(" + this.parameters.get(0).print() + ")";
-        String toReturn = "(" + this.parameters.get(0).print();
+            return "(" + this.parameters.get(0).exportCode() + ")";
+        String toReturn = "(" + this.parameters.get(0).exportCode();
         for (int i = 1; i < this.parameters.size(); ++i)
-               toReturn += ", " + this.parameters.get(i).print();
+               toReturn += ", " + this.parameters.get(i).exportCode();
         return toReturn + ")";
     }
     
     /**
-     * Method responsible for printing the Method UML.
-     * @return Method UML.
+     * Method responsible for adding the Parameters Packages.
+     * @param set Packages Set.
      */
-    public String print() {
+    public void addParametersPackages(Set<String> set) {
+        for (ParameterUML parameter : this.getParameters())
+            set.add(parameter.getType().getSignature());
+    }
+    
+    @Override
+    public String exportCode() {
         String metodo  =  "    ";
                metodo +=  this.visibility;
                metodo += (this.static_)   ? " static"   : "";

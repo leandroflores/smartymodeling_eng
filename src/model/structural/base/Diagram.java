@@ -380,6 +380,36 @@ public abstract class Diagram implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Associations by Type and Target.
+     * @param  type Type Association.
+     * @param  target Target Association.
+     * @return Associations List.
+     */
+    public List getSourceAssociations(String type, Element target) {
+        List    filter = new ArrayList<>();
+        for (Association association : this.getAssociationsList()) {
+            if (association.getType().equalsIgnoreCase(type) && association.isTarget(target))
+                filter.add(association);
+        }
+        return  filter;
+    }
+    
+    /**
+     * Method responsible for returning the Associations by Type and Source.
+     * @param  type Type Association.
+     * @param  source Source Association.
+     * @return Associations List.
+     */
+    public List getTargetAssociations(String type, Element source) {
+        List    filter = new ArrayList<>();
+        for (Association association : this.getAssociationsList()) {
+            if (association.getType().equalsIgnoreCase(type) && association.isSource(source))
+                filter.add(association);
+        }
+        return  filter;
+    }
+    
+    /**
      * Method responsible for returning Association Comparator.
      * @return Association Comparator.
      */
@@ -480,6 +510,19 @@ public abstract class Diagram implements Exportable {
      */
     public void removeGeneralization(Generalization generalization) {
         this.removeAssociation(generalization);
+    }
+    
+    /**
+     * Method responsible for returning the Super Generalization from a Element.
+     * @param  element Element.
+     * @return Super Element.
+     */
+    public Element getSuper(Element element) {
+        for (Generalization generalization : this.getGeneralizationsList()) {
+            if (generalization.getSource(element) != null)
+                return generalization.getSource(element);
+        }
+        return null;
     }
     
     /**

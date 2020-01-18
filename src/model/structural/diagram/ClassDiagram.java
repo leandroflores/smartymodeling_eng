@@ -353,6 +353,15 @@ public final class ClassDiagram extends Diagram {
     }
     
     /**
+     * Method responsible for returning the Realizations of a Class.
+     * @param  entity Class UML.
+     * @return Realizations List.
+     */
+    public List<InterfaceUML> getRealizations(ClassUML entity) {
+        return this.getTargetAssociations("realization", entity);
+    }
+    
+    /**
      * Method responsible for removing a Realization UML.
      * @param realization Realization UML.
      */

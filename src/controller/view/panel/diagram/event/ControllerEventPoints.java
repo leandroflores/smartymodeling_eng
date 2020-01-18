@@ -85,7 +85,6 @@ public class ControllerEventPoints extends MouseAdapter {
     private void removePoint(Association association, mxPoint point) {
         mxPoint nearest = association.getNearestPoint(point);
         if (nearest != null) {
-            System.out.println(association);
             association.removePoint(nearest);
             this.panel.updateDiagram();
             this.panel.getViewMenu().getPanelModeling().updateUI();

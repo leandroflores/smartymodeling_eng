@@ -1,8 +1,12 @@
 package controller.view.panel.diagram.event;
 
+import com.mxgraph.model.mxCell;
+import com.mxgraph.model.mxGeometry;
+import com.mxgraph.model.mxGraphModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import model.structural.base.Element;
+import model.structural.base.Stereotype;
 import model.structural.base.association.Association;
 import view.panel.diagram.PanelDiagram;
 
@@ -38,6 +42,16 @@ public class ControllerEventFocus extends MouseAdapter {
     
     /**
      * Method responsible for updating the Panel Edit.
+     * @param stereotype Stereotype.
+     */
+    private void updatePanelEdit(Stereotype stereotype) {
+        this.panel.getViewMenu().getPanelProject().initPanelEditStereotype(stereotype);
+        this.panel.getViewMenu().getPanelProject().updatePanelEdit();
+        this.panel.getGraph().setSelectionCell(this.panel.getObjects().get(stereotype.getId()));
+    }
+    
+    /**
+     * Method responsible for updating the Panel Edit.
      * @param element Element selected.
      */
     private void updatePanelEdit(Element element) {
@@ -51,8 +65,13 @@ public class ControllerEventFocus extends MouseAdapter {
      * @param association Association selected.
      */
     private void updatePanelEdit(Association association) {
+        mxCell     edge     = (mxCell) this.panel.getObjects().get(association.getId());
+        mxGeometry geometry = ((mxGraphModel) (this.panel.getGraph().getModel())).getGeometry(edge);
+                   geometry.setPoints(association.getPoints());
+                   edge.setGeometry(geometry);
         this.panel.getViewMenu().getPanelProject().initPanelEditAssociation(this.panel.getDiagram(), association);
         this.panel.getViewMenu().getPanelProject().updatePanelEdit();
         this.panel.getGraph().setSelectionCell(this.panel.getObjects().get(association.getId()));
+        System.out.println("");
     }
 }
