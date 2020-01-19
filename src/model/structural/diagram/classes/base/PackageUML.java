@@ -460,6 +460,14 @@ public class PackageUML extends Element {
         return this.parent.getPath() + "." + this.name;
     }
     
+    /**
+     * Method responsible for returning the Folder Path.
+     * @return Folder Path.
+     */
+    public String getFolderPath() {
+        return this.getPath().replace(".", "\\");
+    }
+    
     @Override
     public String toString() {
         return this.name;

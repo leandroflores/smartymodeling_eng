@@ -271,6 +271,17 @@ public final class ClassDiagram extends Diagram {
     }
     
     /**
+     * Method responsible for returning the Entities List.
+     * @return Entities List.
+     */
+    public List<Entity> getEntitiesList() {
+        List   entities = new ArrayList<>();
+               entities.addAll(this.getClassList());
+               entities.addAll(this.getInterfacesList());
+        return entities;
+    }
+    
+    /**
      * Method responsible for returning the next Attribute Id.
      * @return Next Attribute Id.
      */
