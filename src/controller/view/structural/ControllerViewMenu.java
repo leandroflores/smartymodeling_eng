@@ -30,6 +30,7 @@ import org.xml.sax.SAXException;
 import view.edit.ViewEditProfile;
 import view.export.ViewExportDiagram;
 import view.export.ViewExportProduct;
+import view.export.code.ViewExportDiagramCode;
 import view.message.ViewError;
 import view.message.ViewMessage;
 import view.message.ViewSave;
@@ -101,6 +102,8 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             this.exportDiagram();
         else if (this.viewMenu.getMenuItemExportProduct().equals(event.getSource()))
             this.exportProduct();
+        else if (this.viewMenu.getMenuItemExportDiagramCode().equals(event.getSource()))
+            this.exportDiagramCode();
         else if (this.viewMenu.getMenuItemSystemInformation().equals(event.getSource()))
             new ViewSystemInformation(this.viewMenu).setVisible(true);
         else if (this.viewMenu.getMenuItemSystemExit().equals(event.getSource()))
@@ -387,6 +390,30 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
                 new ViewExportProduct(this.viewMenu).setVisible(true);
             else
                 new ViewMessage(this.viewMenu, "Project without Products!").setVisible(true);
+        }
+    }
+    
+    /**
+     * Method responsible for exporting the Diagram Code.
+     */
+    private void exportDiagramCode() {
+        if (this.viewMenu.getProject() != null) {
+            if (!this.viewMenu.getProject().getDiagrams("class").isEmpty())
+                new ViewExportDiagramCode(this.viewMenu).setVisible(true);
+            else
+                new ViewMessage(this.viewMenu, "Project without Class Diagrams!").setVisible(true);
+        }
+    }
+    
+    /**
+     * Method responsible for exporting the Instance Code.
+     */
+    private void exportInstanceCode() {
+        if (this.viewMenu.getProject() != null) {
+            if (!this.viewMenu.getProject().getInstances("class").isEmpty())
+                new ViewExportDiagramCode(this.viewMenu).setVisible(true);
+            else
+                new ViewMessage(this.viewMenu, "Project without Class Instances!").setVisible(true);
         }
     }
     

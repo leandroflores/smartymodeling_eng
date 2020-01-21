@@ -385,7 +385,7 @@ public abstract class Diagram implements Exportable {
      * @param  target Target Association.
      * @return Associations List.
      */
-    public List getSourceAssociations(String type, Element target) {
+    public List<Association> getSourceAssociations(String type, Element target) {
         List    filter = new ArrayList<>();
         for (Association association : this.getAssociationsList()) {
             if (association.getType().equalsIgnoreCase(type) && association.isTarget(target))
@@ -400,7 +400,7 @@ public abstract class Diagram implements Exportable {
      * @param  source Source Association.
      * @return Associations List.
      */
-    public List getTargetAssociations(String type, Element source) {
+    public List<Association> getTargetAssociations(String type, Element source) {
         List    filter = new ArrayList<>();
         for (Association association : this.getAssociationsList()) {
             if (association.getType().equalsIgnoreCase(type) && association.isSource(source))

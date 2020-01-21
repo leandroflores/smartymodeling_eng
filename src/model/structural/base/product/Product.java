@@ -136,6 +136,20 @@ public class Product implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Instances List by Diagram Type.
+     * @param  type Diagram Type.
+     * @return Instances List found.
+     */
+    public List<Instance> getInstances(String type) {
+        List   list = new ArrayList();
+        for (Instance instance : this.getInstancesList()) {
+            if (instance.getDiagram().getType().equalsIgnoreCase(type))
+               list.add(instance);
+        }
+        return list;
+    }
+    
+    /**
      * Method responsible for returning the Instances List.
      * @return Instances List.
      */

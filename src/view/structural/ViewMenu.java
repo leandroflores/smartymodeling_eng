@@ -197,11 +197,16 @@ public final class ViewMenu extends View implements Operation {
     private void createExportMenu() {
         this.createMenu("menuExport", "Export");
         
-        this.createMenuItem("menuItemExportDiagram", "Export Diagram",  "export/diagram.png");
-        this.createMenuItem("menuItemExportProduct", "Export Product",  "export/product.png");
+        this.createMenuItem("menuItemExportDiagram",     "Export Diagram",       "export/diagram.png");
+        this.createMenuItem("menuItemExportProduct",      "Export Product",       "export/product.png");
+        this.createMenuItem("menuItemExportDiagramCode",  "Export Diagram Code",  "export/code-diagram.png");
+        this.createMenuItem("menuItemExportInstanceCode", "Export Instance Code", "export/code-instance.png");
         
         this.getMenuExport().add(this.getMenuItemExportDiagram());
         this.getMenuExport().add(this.getMenuItemExportProduct());
+        this.getMenuExport().addSeparator();
+        this.getMenuExport().add(this.getMenuItemExportDiagramCode());
+        this.getMenuExport().add(this.getMenuItemExportInstanceCode());
     }
     
     /**
@@ -369,6 +374,8 @@ public final class ViewMenu extends View implements Operation {
         
         this.getMenuItemExportDiagram().setEnabled(flag);
         this.getMenuItemExportProduct().setEnabled(flag);
+        this.getMenuItemExportDiagramCode().setEnabled(flag);
+        this.getMenuItemExportInstanceCode().setEnabled(flag);
         
         this.getMenuItemEvaluationMetric().setEnabled(flag);
         this.getMenuItemEvaluationMeasure().setEnabled(flag);
@@ -706,6 +713,22 @@ public final class ViewMenu extends View implements Operation {
      */
     public JMenuItem getMenuItemExportProduct() {
         return this.menuItens.get("menuItemExportProduct");
+    }
+    
+    /**
+     * Method responsible for returning the Menu Item Export Diagram Code.
+     * @return Menu Item Export Diagram Code.
+     */
+    public JMenuItem getMenuItemExportDiagramCode() {
+        return this.menuItens.get("menuItemExportDiagramCode");
+    }
+    
+    /**
+     * Method responsible for returning the Menu Item Export Instance Code.
+     * @return Menu Item Export Instance Code.
+     */
+    public JMenuItem getMenuItemExportInstanceCode() {
+        return this.menuItens.get("menuItemExportInstanceCode");
     }
     
     /**

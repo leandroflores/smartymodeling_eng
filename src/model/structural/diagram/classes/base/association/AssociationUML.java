@@ -608,11 +608,38 @@ public class AssociationUML extends Association implements Encodable {
         return this.targetMax == 1 ? this.target.getName() : "List<" + this.target.getName() + ">";
     }
     
+    /**
+     * Method responsible for returning the Target Name Code.
+     * @return Target Name Code.
+     */
+    private String getTargetNameCode() {
+        if (this.targetName.trim().isEmpty())
+            return this.targetMax == 1 ? this.getName().toLowerCase() : this.targetName.toLowerCase() + "s";
+        return this.targetName;
+    }
+    
+    /**
+     * Method responsible for returning the Source Code.
+     * @return Source Code.
+     */
+    public String getSourceCode() {
+        String code = this.exportCode();
+        return code;
+    }
+    
+    /**
+     * Method responsible for returning the Source Cardinality Code.
+     * @return Source Cardinality Code.
+     */
+    private String getSourceCardinalityCode() {
+        return this.targetMax == 1 ? this.target.getName() : "List<" + this.target.getName() + ">";
+    }
+    
     @Override
     public String exportCode() {
         String code  = "private ";
                code += this.getCardinalityCode() + " ";
-               code += this.targetName + ";";
+//               code += this.getTargetNameCode() + ";";
         return code;
     }
     

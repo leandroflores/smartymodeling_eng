@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Set;
 import model.structural.base.Element;
 import model.structural.base.Stereotype;
+import model.structural.base.association.Association;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.classes.base.TypeUML;
@@ -650,7 +651,7 @@ public abstract class Entity extends Element implements Encodable {
     protected String getAttributesCode() {
         String code  = "";
         for (AttributeUML attribute : this.getAttributesList())
-               code += attribute.exportCode() + "\n";
+               code += "    " + attribute.exportCode() + ";\n";
         return code;
     }
     
@@ -659,9 +660,31 @@ public abstract class Entity extends Element implements Encodable {
      * @return Associations Code.
      */
     protected String getAssociationsCode() {
+        return this.getAssociationsSourceCode()
+             + this.getAssociationsTargetCode();
+    }
+    
+    /**
+     * Method responsible for returning the Associations Source Code.
+     * @return Associations Source Code.
+     */
+    protected String getAssociationsSourceCode() {
         String code  = "";
-        for (Object object : this.diagram.getTargetAssociations("association", this))
-               code += ((AssociationUML) object).exportCode() + "\n";
+        for (Association association : this.diagram.getTargetAssociations("association", this))
+               code += "    " + ((AssociationUML) association).exportCode() + "\n";
+        return code;
+    }
+    
+    /**
+     * Method responsible for returning the Associations Target Code.
+     * @return Associations Target Code.
+     */
+    protected String getAssociationsTargetCode() {
+        String code  = "";
+        for (Association association : this.diagram.getSourceAssociations("association", this)) {
+            if (((AssociationUML) association).isTarget(this) && !((AssociationUML) association).isDirection())
+               code += "    " + ((AssociationUML) association).exportCode() + "\n";
+        }
         return code;
     }
     
@@ -672,7 +695,7 @@ public abstract class Entity extends Element implements Encodable {
     protected String getMethodsCode() {
         String code  = "";
         for (MethodUML method : this.getMethodsList())
-               code += method.exportCode() + "\n";
+               code += "    " + method.exportCode() + "\n";
         return code;
     }
     

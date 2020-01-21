@@ -282,10 +282,10 @@ public class MethodUML extends Element implements Encodable {
             return "()";
         if (this.parameters.size() == 1)
             return "(" + this.parameters.get(0).exportCode() + ")";
-        String toReturn = "(" + this.parameters.get(0).exportCode();
-        for (int i = 1; i < this.parameters.size(); ++i)
-               toReturn += ", " + this.parameters.get(i).exportCode();
-        return toReturn + ")";
+        String code  = "(" + this.parameters.get(0).exportCode();
+        for (int  i  = 1; i < this.parameters.size(); ++i)
+               code += ", " + this.parameters.get(i).exportCode();
+        return code + ")";
     }
     
     /**
@@ -299,23 +299,38 @@ public class MethodUML extends Element implements Encodable {
     
     @Override
     public String exportCode() {
-        String metodo  =  "    ";
-               metodo +=  this.visibility;
-               metodo += (this.static_)   ? " static"   : "";
-               metodo += (this.abstract_) ? " abstract" : "";
-               metodo += (this.final_)    ? " final"    : "";
-               metodo += " " + this.printReturn();
-               metodo += " " + this.name;
-               metodo += this.printParameters();
-               metodo += (this.abstract_) ? ";\n" : " {" + this.printReturn();
-        return metodo;
+        String code  =  this.visibility;
+               code += (this.static_)   ? " static"   : "";
+               code += (this.abstract_) ? " abstract" : "";
+               code += (this.final_)    ? " final"    : "";
+               code += " " + this.getReturnCode();
+               code += " " + this.name;
+               code += this.getParametersCode();
+               code += (this.abstract_) ? ";\n" : " {" + this.getDefaultBodyCode();
+        return code;
     }
     
     /**
-     * Method responsible for returning Return Method.
-     * @return Return Method.
+     * Method responsible for returning the Return Code.
+     * @return Return Code.
      */
-    private String printReturn() {
+    private String getReturnCode() {
+        return this.constructor ? "" : this.return_.getName();
+    }
+    
+    /**
+     * Method responsible for returning the Parameters Code.
+     * @return Parameters Code.
+     */
+    private String getParametersCode() {
+        return this.printParameters();
+    }
+    
+    /**
+     * Method responsible for returning the Default Body Code.
+     * @return Default Body Code.
+     */
+    private String getDefaultBodyCode() {
         if (this.constructor)
             return "}\n";
         if (this.return_.getName().equals("void"))
@@ -392,14 +407,14 @@ public class MethodUML extends Element implements Encodable {
      * @return Method Description.
      */
     public String getDescription() {
-        return this.getVisibilitySymbol() + " " + this.name + this.printParameters() + this.Return();
+        return this.getVisibilitySymbol() + " " + this.name + this.printParameters() + this.getReturnSignature();
     }
     
     /**
-     * Method responsible for exporting Return.
-     * @return Return.
+     * Method responsible for returning the Return Signature.
+     * @return Return Signature.
      */
-    private String Return() {
+    private String getReturnSignature() {
         if (this.constructor)
             return "";
         if (this.return_ == null)

@@ -368,7 +368,7 @@ public final class ClassDiagram extends Diagram {
      * @param  entity Class UML.
      * @return Realizations List.
      */
-    public List<InterfaceUML> getRealizations(ClassUML entity) {
+    public List<Association> getRealizations(ClassUML entity) {
         return this.getTargetAssociations("realization", entity);
     }
     

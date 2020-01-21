@@ -13,6 +13,7 @@ import java.util.Objects;
 import model.structural.base.association.Link;
 import model.structural.base.evaluation.Metric;
 import model.structural.base.interfaces.Exportable;
+import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.base.traceability.Traceability;
 import model.structural.diagram.classes.base.TypeUML;
@@ -810,6 +811,18 @@ public class Project implements Exportable {
     public void removeProduct(Element element) {
         for (Product product : this.getProductsList()) 
             this.remove(product, element);
+    }
+    
+    /**
+     * Method responsible for returning the Instances by Diagram Type.
+     * @param  type Diagram Type.
+     * @return Instances List by Diagram Type.
+     */
+    public List<Instance> getInstances(String type) {
+        List   list = new ArrayList<>();
+        for (Product product : this.getProductsList())
+               list.addAll(product.getInstances(type));
+        return list;
     }
     
     /**

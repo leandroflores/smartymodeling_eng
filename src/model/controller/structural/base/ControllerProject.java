@@ -58,7 +58,7 @@ public class ControllerProject {
     public Object[] getDiagrams(String type) {
         List<Diagram> filter = new ArrayList<>();
         for (Diagram diagram : this.project.getDiagramsList()) {
-            if (diagram.getType().equals(type))
+            if (diagram.getType().equalsIgnoreCase(type))
                 filter.add(diagram);
         }
         return filter.toArray();

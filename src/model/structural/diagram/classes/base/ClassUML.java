@@ -3,8 +3,10 @@ package model.structural.diagram.classes.base;
 import com.mxgraph.util.mxConstants;
 import java.util.Map;
 import java.util.Set;
+import model.structural.base.association.Association;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.Entity;
+import model.structural.diagram.classes.base.association.AssociationUML;
 import org.w3c.dom.Element;
 
 /**
@@ -107,9 +109,9 @@ public class ClassUML extends Entity {
      */
     public String getImplementsCode() {
         String  names  = "";
-        for (InterfaceUML interfaceUML : this.diagram.getRealizations(this))
-                names +=  interfaceUML.getName() + ", ";
-        String  code   = names.contains(", ") ? names.substring(0, names.lastIndexOf(",")) : "";
+        for (Association asssociation : this.diagram.getRealizations(this))
+                names +=    ((AssociationUML) asssociation).getTarget().getName() + ", ";
+        String  code   =    names.contains(", ") ? names.substring(0, names.lastIndexOf(",")) : "";
         return !code.isEmpty() ? "implements " + code + " " : "";
     }
     
@@ -118,8 +120,8 @@ public class ClassUML extends Entity {
      * @param set Packages Set.
      */
     protected void addRealizationsPackages(Set<String> set) {
-        for (InterfaceUML interfaceUML : this.diagram.getRealizations(this))
-            set.add(this.setPath(interfaceUML.getFullPath()));
+        for (Association association : this.diagram.getRealizations(this))
+            set.add(this.setPath(((AssociationUML) association).getTarget().getFullPath()));
     }
     
     @Override
