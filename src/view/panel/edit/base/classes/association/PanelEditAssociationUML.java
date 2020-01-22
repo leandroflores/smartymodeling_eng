@@ -57,7 +57,7 @@ public final class PanelEditAssociationUML extends PanelEdit {
      * Method responsible for adding the Panel Base Association UML.
      */
     protected void addPanelBaseAssociationUML() {
-        this.panelBaseAssociationUML  = new PanelBaseAssociationUML(this.viewMenu, this.diagram, this.associationUML);
+        this.panelBaseAssociationUML  = new PanelBaseAssociationUML(this, this.diagram, this.associationUML);
         this.createScrollPane("scrollPanelBaseAssociationUML",  this.panelBaseAssociationUML);
         this.getScrollPanelBaseAssociationUML().setViewportView(this.panelBaseAssociationUML);
         this.tabbedPane.add("Association", this.getScrollPanelBaseAssociationUML());

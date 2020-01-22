@@ -671,7 +671,7 @@ public abstract class Entity extends Element implements Encodable {
     protected String getAssociationsSourceCode() {
         String code  = "";
         for (Association association : this.diagram.getTargetAssociations("association", this))
-               code += "    " + ((AssociationUML) association).exportCode() + "\n";
+               code += "    " + ((AssociationUML) association).getSourceCode() + "\n";
         return code;
     }
     
@@ -683,7 +683,7 @@ public abstract class Entity extends Element implements Encodable {
         String code  = "";
         for (Association association : this.diagram.getSourceAssociations("association", this)) {
             if (((AssociationUML) association).isTarget(this) && !((AssociationUML) association).isDirection())
-               code += "    " + ((AssociationUML) association).exportCode() + "\n";
+               code += "    " + ((AssociationUML) association).getTargetCode() + "\n";
         }
         return code;
     }
@@ -702,13 +702,12 @@ public abstract class Entity extends Element implements Encodable {
     @Override
     public String exportCode() {
         String export  = this.getPackageCode();
-//               export += this.getImportsCode();
+               export += this.getImportsCode();
                export += this.getSignatureCode()    + "{\n";
                export += this.getAttributesCode();
                export += this.getAssociationsCode() + "\n";
-               export += this.getMethodsCode()      + "\n";
-               export += "}";
-        return export;
+               export += this.getMethodsCode();
+        return export + "}";
     }
     
     /**

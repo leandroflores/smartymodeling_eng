@@ -110,8 +110,8 @@ public class ClassUML extends Entity {
     public String getImplementsCode() {
         String  names  = "";
         for (Association asssociation : this.diagram.getRealizations(this))
-                names +=    ((AssociationUML) asssociation).getTarget().getName() + ", ";
-        String  code   =    names.contains(", ") ? names.substring(0, names.lastIndexOf(",")) : "";
+                names += asssociation.getTarget().getName() + ", ";
+        String  code   = names.contains(", ") ? names.substring(0, names.lastIndexOf(",")) : "";
         return !code.isEmpty() ? "implements " + code + " " : "";
     }
     

@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.association.AssociationUML;
 import view.Panel;
+import view.panel.edit.base.classes.association.PanelEditAssociationUML;
 import view.structural.ViewMenu;
 
 /**
@@ -21,17 +22,19 @@ import view.structural.ViewMenu;
  */
 public final class PanelBaseAssociationUML extends Panel {
     private final ViewMenu viewMenu;
+    private final PanelEditAssociationUML panelEdit;
     private final ClassDiagram diagram;
     private final AssociationUML associationUML;
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param panelEdit View Edit Association UML.
      * @param diagram Class Diagram.
      * @param associationUML Association UML.
      */
-    public PanelBaseAssociationUML(ViewMenu viewMenu, ClassDiagram diagram, AssociationUML associationUML) {
-        this.viewMenu       = viewMenu;
+    public PanelBaseAssociationUML(PanelEditAssociationUML panelEdit, ClassDiagram diagram, AssociationUML associationUML) {
+        this.viewMenu       = panelEdit.getViewMenu();
+        this.panelEdit      = panelEdit;
         this.diagram        = diagram;
         this.associationUML = associationUML;
         this.controller     = new ControllerPanelBaseAssociationUML(this);
@@ -65,6 +68,13 @@ public final class PanelBaseAssociationUML extends Panel {
         
         this.add(this.createLabel("Directed: ", 120));
         this.add(this.createCheckBox("directedCheckBox", "Yes", this.associationUML.isDirection()));
+    }
+    
+    /**
+     * Method responsible for updating the Panel Base Target.
+     */
+    public void updatePanelBaseTarget() {
+        this.panelEdit.getPanelBaseTarget().updateEnabled();
     }
     
     /**

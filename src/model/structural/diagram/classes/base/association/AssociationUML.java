@@ -5,7 +5,6 @@ import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 import model.structural.base.association.Association;
-import model.structural.diagram.classes.Encodable;
 import model.structural.diagram.classes.Entity;
 import org.w3c.dom.Element;
 
@@ -15,10 +14,9 @@ import org.w3c.dom.Element;
  * @author Leandro
  * @since  03/06/2019
  * @see    model.structural.base.association.Association
- * @see    model.structural.diagram.classes.Encodable
  * @see    model.structural.diagram.classes.Entity
  */
-public class AssociationUML extends Association implements Encodable {
+public class AssociationUML extends Association {
     private String  name;
     private String  category;
     private boolean direction;
@@ -174,6 +172,14 @@ public class AssociationUML extends Association implements Encodable {
         this.setSourceMin(element);
         this.setSourceMax(element);
         this.setSourcePosition(element);
+    }
+    
+    /**
+     * Method responsible for returning the Default Source Name.
+     * @return Default Source Name.
+     */
+    public String getDefaultSourceName() {
+        return this.target.getName().toLowerCase() + (this.targetMax == 1 ? "" : "s");
     }
     
     /**
@@ -344,6 +350,14 @@ public class AssociationUML extends Association implements Encodable {
         this.setTargetMin(element);
         this.setTargetMax(element);
         this.setTargetPosition(element);
+    }
+    
+    /**
+     * Method responsible for returning the Default Target Name.
+     * @return Default Target Name.
+     */
+    public String getDefaultTargetName() {
+        return this.source.getName().toLowerCase() + (this.sourceMax == 1 ? "" : "s");
     }
     
     /**
@@ -601,29 +615,13 @@ public class AssociationUML extends Association implements Encodable {
     }
     
     /**
-     * Method responsible for returning the Cardinality Code.
-     * @return Cardinality Code.
-     */
-    private String getCardinalityCode() {
-        return this.targetMax == 1 ? this.target.getName() : "List<" + this.target.getName() + ">";
-    }
-    
-    /**
-     * Method responsible for returning the Target Name Code.
-     * @return Target Name Code.
-     */
-    private String getTargetNameCode() {
-        if (this.targetName.trim().isEmpty())
-            return this.targetMax == 1 ? this.getName().toLowerCase() : this.targetName.toLowerCase() + "s";
-        return this.targetName;
-    }
-    
-    /**
      * Method responsible for returning the Source Code.
      * @return Source Code.
      */
     public String getSourceCode() {
-        String code = this.exportCode();
+        String code  = "private ";
+               code += this.getSourceCardinalityCode() + " ";
+               code += this.getSourceNameCode()        + ";";
         return code;
     }
     
@@ -635,12 +633,39 @@ public class AssociationUML extends Association implements Encodable {
         return this.targetMax == 1 ? this.target.getName() : "List<" + this.target.getName() + ">";
     }
     
-    @Override
-    public String exportCode() {
+    /**
+     * Method responsible for returning the Source Name Code.
+     * @return Source Name Code.
+     */
+    private String getSourceNameCode() {
+        return this.targetName.trim().isEmpty() ? this.getDefaultSourceName() : this.targetName;
+    }
+    
+    /**
+     * Method responsible for returning the Target Code.
+     * @return Target Code.
+     */
+    public String getTargetCode() {
         String code  = "private ";
-               code += this.getCardinalityCode() + " ";
-//               code += this.getTargetNameCode() + ";";
+               code += this.getTargetCardinalityCode() + " ";
+               code += this.getTargetNameCode()        + ";";
         return code;
+    }
+    
+    /**
+     * Method responsible for returning the Target Cardinality Code.
+     * @return Target Cardinality Code.
+     */
+    private String getTargetCardinalityCode() {
+        return this.sourceMax == 1 ? this.source.getName() : "List<" + this.source.getName() + ">";
+    }
+    
+    /**
+     * Method responsible for returning the Target Name Code.
+     * @return Target Name Code.
+     */
+    private String getTargetNameCode() {
+        return this.sourceName.trim().isEmpty() ? this.getDefaultTargetName() : this.sourceName;
     }
     
     /**

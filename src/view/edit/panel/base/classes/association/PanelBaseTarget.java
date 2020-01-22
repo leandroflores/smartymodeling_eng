@@ -55,11 +55,19 @@ public final class PanelBaseTarget extends Panel {
         
         this.add(this.createLabel("Name: ", 120));
         this.add(this.createTextField("nameTextField", "", 20));
-        this.getNameTextField().setEnabled(this.associationUML.isDirection());
+        this.getNameTextField().setEnabled(!this.associationUML.isDirection());
         
         this.add(this.createLabel("Cardinality: ", 120));
         this.add(this.createTextField("cardinalityTextField", "", 20));
-        this.getCardinalityTextField().setEnabled(this.associationUML.isDirection());
+        this.getCardinalityTextField().setEnabled(!this.associationUML.isDirection());
+    }
+    
+    /**
+     * Method responsible for updating the Enabled.
+     */
+    public void updateEnabled() {
+        this.getNameTextField().setEnabled(!this.associationUML.isDirection());
+        this.getCardinalityTextField().setEnabled(!this.associationUML.isDirection());
     }
     
     /**
