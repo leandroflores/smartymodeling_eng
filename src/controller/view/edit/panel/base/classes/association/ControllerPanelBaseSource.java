@@ -45,6 +45,14 @@ public class ControllerPanelBaseSource extends ControllerPanel {
     }
     
     /**
+     * Method responsible for updating the Source Name.
+     */
+    private void updateName() {
+        if (!this.associationUML.isDirection())
+            this.panelBaseSource.getAssociationUML().setSourceName(this.panelBaseSource.getNameTextField().getText().trim());
+    }
+    
+    /**
      * Method responsible for updating the Source Cardinality.
      * @return Source Cardinality.
      */
@@ -60,7 +68,8 @@ public class ControllerPanelBaseSource extends ControllerPanel {
      * Method responsible for setting the Source Association Values.
      */
     private void update() {
-        this.panelBaseSource.getAssociationUML().setSourceName(this.panelBaseSource.getNameTextField().getText().trim());
+        this.panelBaseSource.getAssociationUML().setSourceVisibility(this.panelBaseSource.getVisibilityComboBox().getSelectedItem().toString().trim());
+        this.updateName();
         this.updateCardinality();
         this.panelBaseSource.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseSource.getViewMenu().getPanelModeling().updateModelingPanel();

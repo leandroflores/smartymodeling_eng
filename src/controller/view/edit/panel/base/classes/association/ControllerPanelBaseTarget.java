@@ -60,6 +60,7 @@ public class ControllerPanelBaseTarget extends ControllerPanel {
      * Method responsible for setting the Target Association Values.
      */
     private void update() {
+        this.panelBaseTarget.getAssociationUML().setTargetVisibility(this.panelBaseTarget.getVisibilityComboBox().getSelectedItem().toString().trim());
         this.panelBaseTarget.getAssociationUML().setTargetName(this.panelBaseTarget.getNameTextField().getText().trim());
         this.updateCardinality();
         this.panelBaseTarget.getViewMenu().getPanelProject().getPanelTree().updateUI();

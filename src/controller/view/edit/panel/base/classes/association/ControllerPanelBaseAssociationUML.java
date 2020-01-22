@@ -47,7 +47,7 @@ public class ControllerPanelBaseAssociationUML extends ControllerPanel {
     private void update() {
         this.panelBaseAssociationUML.getAssociationUML().setName(this.panelBaseAssociationUML.getNameTextField().getText().trim());
         this.panelBaseAssociationUML.getAssociationUML().setDirection(this.panelBaseAssociationUML.getDirectedCheckBox().isSelected());
-        this.panelBaseAssociationUML.updatePanelBaseTarget();
+        this.panelBaseAssociationUML.updatePanelBaseSource();
         this.panelBaseAssociationUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseAssociationUML.getViewMenu().getPanelModeling().updateModelingPanel();
         this.panelBaseAssociationUML.getViewMenu().setSave(false);

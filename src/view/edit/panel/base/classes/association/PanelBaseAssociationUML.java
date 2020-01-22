@@ -71,10 +71,10 @@ public final class PanelBaseAssociationUML extends Panel {
     }
     
     /**
-     * Method responsible for updating the Panel Base Target.
+     * Method responsible for updating the Panel Base Source.
      */
-    public void updatePanelBaseTarget() {
-        this.panelEdit.getPanelBaseTarget().updateEnabled();
+    public void updatePanelBaseSource() {
+        this.panelEdit.getPanelBaseSource().updateValues();
     }
     
     /**

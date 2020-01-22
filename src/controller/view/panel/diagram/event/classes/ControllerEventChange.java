@@ -6,6 +6,7 @@ import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
 import model.structural.diagram.classes.base.AttributeUML;
@@ -50,7 +51,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private void change(Object object, String id) {
         if (this.panel.getDiagram().getAssociation(id)  != null)
-            this.changeAssociation(object, this.panel.getDiagram().getAssociation(id));
+            this.changeNameAssociation(object, this.panel.getDiagram().getAssociation(id));
         else if (this.panel.getDiagram().getElement(id) instanceof AttributeUML)
             this.changeAttribute(object, (AttributeUML) this.panel.getDiagram().getElement(id));
         else if (this.panel.getDiagram().getElement(id) instanceof MethodUML)
@@ -58,7 +59,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
         else if (this.panel.getDiagram().getElement(id) != null)
             this.changeElement(object,   (Element)      this.panel.getDiagram().getElement(id));
         else if (id != null)
-            this.changeCardinality(object, id);
+            this.changeAssociation(object, id);
     }
     
     /**
@@ -143,7 +144,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @param object Graph Object.
      * @param association Association.
      */
-    private void changeAssociation(Object object, Association association) {
+    private void changeNameAssociation(Object object, Association association) {
         mxCell cell = (mxCell) object;
         if (association instanceof AssociationUML)
             ((AssociationUML) association).setName(cell.getValue().toString().trim());
@@ -154,36 +155,86 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @param object Graph Object.
      * @param id Association Id.
      */
-    private void changeCardinality(Object object, String id) {
-        mxCell cell = (mxCell) object;
-        if (id.endsWith("(source)"))
-            this.changeSourceCardinality(object, id, cell);
-        else if (id.endsWith("(target)"))
-            this.changeTargetCardinality(object, id, cell);
+    private void changeAssociation(Object object, String id) {
+        Association association = this.getAssociation(id);
+        if (association != null) {
+            if (id.endsWith("(source)"))
+                this.changeSourceAssociation((AssociationUML) association, (mxCell) object);
+            else if (id.endsWith("(target)"))
+                this.changeTargetAssociation((AssociationUML) association, (mxCell) object);
+        }
     }
     
     /**
-     * Method responsible for changing the Source Cardinality.
-     * @param object Graph Object.
-     * @param id Association Id.
-     * @param cell Graph Cell.
+     * Method responsible for returning the Association UML by Id.
+     * @param  id Cell Id.
+     * @return Association UML.
      */
-    private void changeSourceCardinality(Object object, String id, mxCell cell) {
-        AssociationUML associationUML = (AssociationUML) this.panel.getDiagram().getAssociation(id.substring(0, id.indexOf("(")));
-                       associationUML.setSourceMin(this.getMin(cell.getValue().toString().trim()));
-                       associationUML.setSourceMax(this.getMax(cell.getValue().toString().trim()));
+    private Association getAssociation(String id) {
+        String newId = id.contains("(") ? id.substring(0, id.indexOf("(")) : "";
+        return this.panel.getDiagram().getAssociation(newId);
     }
     
     /**
-     * Method responsible for changing the Target Cardinality.
-     * @param object Graph Object.
-     * @param id Association Id.
+     * Method responsible for changing the Source Association.
+     * @param association Association UML.
      * @param cell Graph Cell.
      */
-    private void changeTargetCardinality(Object object, String id, mxCell cell) {
-        AssociationUML associationUML = (AssociationUML) this.panel.getDiagram().getAssociation(id.substring(0, id.indexOf("(")));
-                       associationUML.setTargetMin(this.getMin(cell.getValue().toString().trim()));
-                       associationUML.setTargetMax(this.getMax(cell.getValue().toString().trim()));
+    private void changeSourceAssociation(AssociationUML association, mxCell cell) {
+        String cardinality = this.getCardinality(cell.getValue().toString().trim());
+        String signature   = this.getSignature(cell.getValue().toString().trim());
+               association.setSourceMin(this.getMin(cardinality, association.getSourceMin()));
+               association.setSourceMax(this.getMax(cardinality, association.getSourceMax()));
+               association.setSourceName(signature);
+        this.panel.getViewMenu().getPanelProject().updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for changing the Target Association.
+     * @param association Association UML.
+     * @param cell Graph Cell.
+     */
+    private void changeTargetAssociation(AssociationUML association, mxCell cell) {
+        String cardinality = this.getCardinality(cell.getValue().toString().trim());
+        String signature   = this.getSignature(cell.getValue().toString().trim());
+               association.setTargetMin(this.getMin(cardinality, association.getTargetMin()));
+               association.setTargetMax(this.getMax(cardinality, association.getTargetMax()));
+               association.setTargetName(signature);
+        System.out.println("Update: " + association.getTargetName());
+        this.panel.getViewMenu().getPanelProject().getPanelEdit().updateUI();
+    }
+    
+    /**
+     * Method responsible for returning the Cardinality.
+     * @param  value Cell Value.
+     * @return Cardinality.
+     */
+    private String getCardinality(String value) {
+        if (value.contains("("))
+            return value.substring(0, value.indexOf("(") - 1).trim();
+        return value.trim();
+    }
+    
+    /**
+     * Method responsible for returning the Signature.
+     * @param  value Cell Value.
+     * @return Signature.
+     */
+    private String getSignature(String value) {
+        if (this.checkSignature(value))
+            return value.substring(value.indexOf("(") + 1, value.indexOf(")")).trim();
+        return "";
+    }
+    
+    /**
+     * Method responsible for checking the Value Signature.
+     * @param  value Cell Value.
+     * @return Signature checked.
+     */
+    private boolean checkSignature(String value) {
+        return value.contains("(")
+            && value.contains(")")
+            && value.indexOf("(") < value.indexOf(")");
     }
     
     /**
@@ -332,27 +383,33 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     /**
      * Method responsible for returning the Min by String Value.
      * @param  value String Value.
+     * @param  backup Backup Min Value.
      * @return Min parsed.
      */
-    private Integer getMin(String value) {
+    private Integer getMin(String value, Integer backup) {
         if (value.equals("*"))
             return 0;
-        if (value.contains(".."))
+        if (Pattern.matches("\\d+..\\d+", value))
             return Integer.parseInt(value.substring(0, value.indexOf(".")));
-        return Integer.parseInt(value);
+        if (Pattern.matches("\\d+", value))
+            return Integer.parseInt(value);
+        return backup;
     }
     
     /**
      * Method responsible for returning the Max by String Value.
      * @param  value String Value.
+     * @param  backup Backup Min Value.
      * @return Max parsed.
      */
-    private Integer getMax(String value) {
+    private Integer getMax(String value, Integer backup) {
         if (value.equals("*"))
             return Integer.MAX_VALUE;
-        if (value.contains(".."))
+        if (Pattern.matches("\\d+..\\d+", value))
             return this.getValue(value.substring(value.lastIndexOf(".") + 1));
-        return Integer.parseInt(value);
+        if (Pattern.matches("\\d+", value))
+            return Integer.parseInt(value);
+        return backup;
     }
     
     /**

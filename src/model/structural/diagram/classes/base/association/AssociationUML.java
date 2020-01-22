@@ -20,10 +20,12 @@ public class AssociationUML extends Association {
     private String  name;
     private String  category;
     private boolean direction;
+    private String  sourceVisibility;
     private String  sourceName;
     private Integer sourceMin;
     private Integer sourceMax;
     private Point   sourcePos;
+    private String  targetVisibility;
     private String  targetName;
     private Integer targetMin;
     private Integer targetMax;
@@ -168,10 +170,27 @@ public class AssociationUML extends Association {
      * @param element W3C Element.
      */
     public void setSource(Element element) {
+        this.setSourceVisibility(element.getAttribute("sourceVisibility"));
         this.setSourceName(element.getAttribute("sourceName"));
         this.setSourceMin(element);
         this.setSourceMax(element);
         this.setSourcePosition(element);
+    }
+    
+    /**
+     * Method responsible for returning the Source Visibility.
+     * @return Source Visibility.
+     */
+    public String getSourceVisibility() {
+        return this.sourceVisibility;
+    }
+
+    /**
+     * Method responsible for setting the Source Visibility.
+     * @param sourceVisibility Source Visibility.
+     */
+    public void setSourceVisibility(String sourceVisibility) {
+        this.sourceVisibility = sourceVisibility;
     }
     
     /**
@@ -323,10 +342,11 @@ public class AssociationUML extends Association {
      * Method responsible for setting the Default Source.
      */
     public void setDefaultSource() {
-        this.sourceName = "";
-        this.sourceMin  = 1;
-        this.sourceMax  = 1;
-        this.sourcePos  = new Point(this.source.getXCenter(), this.source.getYCenter());
+        this.sourceVisibility = "private";
+        this.sourceName       = "";
+        this.sourceMin        = 1;
+        this.sourceMax        = 1;
+        this.sourcePos        = new Point(this.source.getXCenter(), this.source.getYCenter());
     }
     
     /**
@@ -334,6 +354,15 @@ public class AssociationUML extends Association {
      * @return Source Label.
      */
     public String getSourceLabel() {
+        return this.getCardinalitySourceLabel() 
+             + this.getNameSourceLabel();
+    }
+    
+    /**
+     * Method responsible for returning the Cardinality Source Label.
+     * @return Cardinality Source Label.
+     */
+    public String getCardinalitySourceLabel() {
         if (this.sourceMin.equals(0) && this.sourceMax.equals(Integer.MAX_VALUE))
             return "*";
         if (this.sourceMin.equals(this.sourceMax))
@@ -342,14 +371,41 @@ public class AssociationUML extends Association {
     }
     
     /**
+     * Method responsible for returning the Name Source Label.
+     * @return Name Source Label.
+     */
+    public String getNameSourceLabel() {
+        if (this.sourceName.equals(""))
+            return this.sourceName;
+        return " (" + this.sourceName + ")";
+    }
+    
+    /**
      * Method responsible for setting the Target by W3C Element.
      * @param element W3C Element.
      */
     public void setTarget(Element element) {
+        this.setTargetVisibility(element.getAttribute("targetVisibility"));
         this.setTargetName(element.getAttribute("targetName"));
         this.setTargetMin(element);
         this.setTargetMax(element);
         this.setTargetPosition(element);
+    }
+    
+    /**
+     * Method responsible for returning the Target Visibility.
+     * @return Target Visibility.
+     */
+    public String getTargetVisibility() {
+        return this.targetVisibility;
+    }
+
+    /**
+     * Method responsible for setting the Target Visibility.
+     * @param targetVisibility Target Visibility.
+     */
+    public void setTargetVisibility(String targetVisibility) {
+        this.targetVisibility = targetVisibility;
     }
     
     /**
@@ -501,10 +557,11 @@ public class AssociationUML extends Association {
      * Method responsible for setting the Default Target.
      */
     public void setDefaultTarget() {
-        this.targetName = "";
-        this.targetMin  = 1;
-        this.targetMax  = 1;
-        this.targetPos  = new Point(this.target.getXCenter(), this.target.getYCenter());
+        this.targetVisibility = "private";
+        this.targetName       = "";
+        this.targetMin        = 1;
+        this.targetMax        = 1;
+        this.targetPos        = new Point(this.target.getXCenter(), this.target.getYCenter());
     }
     
     /**
@@ -512,11 +569,30 @@ public class AssociationUML extends Association {
      * @return Target Label.
      */
     public String getTargetLabel() {
+        return this.getCardinalityTargetLabel() 
+             + this.getNameTargetLabel();
+    }
+    
+    /**
+     * Method responsible for returning the Cardinality Target Label.
+     * @return Cardinality Target Label.
+     */
+    public String getCardinalityTargetLabel() {
         if (this.targetMin.equals(0) && this.targetMax.equals(Integer.MAX_VALUE))
             return "*";
         if (this.targetMin.equals(this.targetMax))
             return Integer.toString(this.targetMin);
         return this.targetMin + ".." + (this.targetMax.equals(Integer.MAX_VALUE) ? "*" : this.targetMax);
+    }
+    
+    /**
+     * Method responsible for returning the Target Source Label.
+     * @return Name Target Label.
+     */
+    public String getNameTargetLabel() {
+        if (this.targetName.equals(""))
+            return this.targetName;
+        return " (" + this.targetName + ")";
     }
     
     /**
@@ -674,12 +750,13 @@ public class AssociationUML extends Association {
      */
     public String exportSource() {
         String export  = "      <source";
-               export += " entity=\""     + this.source.getId() + "\"";
-               export += " sourceName=\"" + this.sourceName     + "\"";
-               export += " sourceMin=\""  + this.sourceMin      + "\"";
-               export += " sourceMax=\""  + this.sourceMax      + "\"";
-               export += " sourceX=\""    + this.getSourceX()   + "\"";
-               export += " sourceY=\""    + this.getSourceY()   + "\"/>\n";
+               export += " entity=\""           + this.source.getId()   + "\"";
+               export += " sourceVisibility=\"" + this.sourceVisibility + "\"";
+               export += " sourceName=\""       + this.sourceName       + "\"";
+               export += " sourceMin=\""        + this.sourceMin        + "\"";
+               export += " sourceMax=\""        + this.sourceMax        + "\"";
+               export += " sourceX=\""          + this.getSourceX()     + "\"";
+               export += " sourceY=\""          + this.getSourceY()     + "\"/>\n";
         return export;
     }
     
@@ -689,12 +766,13 @@ public class AssociationUML extends Association {
      */
     public String exportTarget() {
         String export  = "      <target";
-               export += " entity=\""     + this.target.getId() + "\"";
-               export += " targetName=\"" + this.targetName     + "\"";
-               export += " targetMin=\""  + this.targetMin      + "\"";
-               export += " targetMax=\""  + this.targetMax      + "\"";
-               export += " targetX=\""    + this.getTargetX()   + "\"";
-               export += " targetY=\""    + this.getTargetY()   + "\"/>\n";
+               export += " entity=\""           + this.target.getId()   + "\"";
+               export += " targetVisibility=\"" + this.targetVisibility + "\"";
+               export += " targetName=\""       + this.targetName       + "\"";
+               export += " targetMin=\""        + this.targetMin        + "\"";
+               export += " targetMax=\""        + this.targetMax        + "\"";
+               export += " targetX=\""          + this.getTargetX()     + "\"";
+               export += " targetY=\""          + this.getTargetY()     + "\"/>\n";
         return export;
     }
     

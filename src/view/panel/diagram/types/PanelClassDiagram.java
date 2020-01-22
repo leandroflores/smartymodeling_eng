@@ -430,11 +430,29 @@ public final class PanelClassDiagram extends PanelDiagram {
      */
     private void addAssociationUML(AssociationUML associationUML) {
         this.graph.getStylesheet().putCellStyle(associationUML.getCardinalityLabel(), associationUML.getCardinalityStyle());
-        mxCell source = (mxCell) this.graph.insertVertex(this.parent, associationUML.getId() + "(source)", associationUML.getSourceLabel(), associationUML.getSourceX(), associationUML.getSourceY(), 30, 20, associationUML.getCardinalityLabel());
-               source.setConnectable(false);
+        this.addSourceLabel(associationUML);
+        this.addTargetLabel(associationUML);
+    }
+    
+    /**
+     * Method responsible for adding the Source Label.
+     * @param associationUML Association UML.
+     */
+    private void addSourceLabel(AssociationUML associationUML) {
+        if (associationUML.isDirection() == false) {
+            mxCell source = (mxCell) this.graph.insertVertex(this.parent, associationUML.getId() + "(source)", associationUML.getSourceLabel(), associationUML.getSourceX(), associationUML.getSourceY(), 30, 20, associationUML.getCardinalityLabel());
+                   source.setConnectable(false);
+            this.identifiers.put(source, associationUML.getId() + "(source)");
+        }
+    }
+    
+    /**
+     * Method responsible for adding the Target Label.
+     * @param associationUML Association UML. 
+     */
+    public void addTargetLabel(AssociationUML associationUML) {
         mxCell target = (mxCell) this.graph.insertVertex(this.parent, associationUML.getId() + "(target)", associationUML.getTargetLabel(), associationUML.getTargetX(), associationUML.getTargetY(), 30, 20, associationUML.getCardinalityLabel());
                target.setConnectable(false);
-        this.identifiers.put(source, associationUML.getId() + "(source)");
         this.identifiers.put(target, associationUML.getId() + "(target)");
     }
     

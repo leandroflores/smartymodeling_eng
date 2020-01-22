@@ -3,6 +3,7 @@ package view.edit.panel.base.classes.association;
 import controller.view.edit.panel.base.classes.association.ControllerPanelBaseSource;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.association.AssociationUML;
@@ -43,7 +44,7 @@ public final class PanelBaseSource extends Panel {
      * Method responsible for defining the Settings.
      */
     private void setSettings() {
-        this.setLayout(new GridLayout(3, 2));
+        this.setLayout(new GridLayout(4, 2));
         this.setPreferredSize(new Dimension(50, 50));
         this.setSize(new Dimension(50, 50));
     }
@@ -53,11 +54,34 @@ public final class PanelBaseSource extends Panel {
         this.add(this.createLabel("Source: ", 120));
         this.add(this.createTextFieldNoEditable("sourceTextField", "", 20));
         
+        this.add(this.createLabel("Visibility: ", 120));
+        this.add(this.createComboBox("visibilityComboBox", this.diagram.getVisibilities(), 30, this.associationUML.getSourceVisibility()));
+        this.getVisibilityComboBox().setEnabled(!this.associationUML.isDirection());
+        
         this.add(this.createLabel("Name: ", 120));
-        this.add(this.createTextField("nameTextField", "", 20));
+        this.add(this.createTextField("nameTextField", this.associationUML.getSourceName(), 20));
+        this.getNameTextField().setEnabled(!this.associationUML.isDirection());
         
         this.add(this.createLabel("Cardinality: ", 120));
         this.add(this.createTextField("cardinalityTextField", "", 20));
+        this.getCardinalityTextField().setEnabled(!this.associationUML.isDirection());
+    }
+    
+     /**
+     * Method responsible for updating the Target Values.
+     */
+    public void updateValues() {
+        this.updateEnabled();
+        this.setValues();
+    }
+    
+    /**
+     * Method responsible for updating the Elements Enabled.
+     */
+    private void updateEnabled() {
+        this.getVisibilityComboBox().setEnabled(!this.associationUML.isDirection());
+        this.getNameTextField().setEnabled(!this.associationUML.isDirection());
+        this.getCardinalityTextField().setEnabled(!this.associationUML.isDirection());
     }
     
     /**
@@ -65,8 +89,9 @@ public final class PanelBaseSource extends Panel {
      */
     public void setValues() {
         this.getSourceTextField().setText(this.associationUML.getSource().getName());
-        this.getNameTextField().setText(this.associationUML.getSourceName());
-        this.getCardinalityTextField().setText(this.associationUML.getSourceLabel());
+        this.getVisibilityComboBox().setSelectedItem(this.associationUML.getSourceVisibility());
+        this.getNameTextField().setText(this.associationUML.isDirection() ? "" : this.associationUML.getSourceName());
+        this.getCardinalityTextField().setText(this.associationUML.isDirection() ? "" : this.associationUML.getSourceLabel());
     }
     
     /**
@@ -99,6 +124,14 @@ public final class PanelBaseSource extends Panel {
      */
     public JTextField getSourceTextField() {
         return this.textFields.get("sourceTextField");
+    }
+    
+    /**
+     * Method responsible for returning the Visibility Combo Box.
+     * @return Visibility Combo Box.
+     */
+    public JComboBox getVisibilityComboBox() {
+        return this.comboBoxes.get("visibilityComboBox");
     }
     
     /**

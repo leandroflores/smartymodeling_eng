@@ -72,6 +72,5 @@ public class ControllerEventFocus extends MouseAdapter {
         this.panel.getViewMenu().getPanelProject().initPanelEditAssociation(this.panel.getDiagram(), association);
         this.panel.getViewMenu().getPanelProject().updatePanelEdit();
         this.panel.getGraph().setSelectionCell(this.panel.getObjects().get(association.getId()));
-        System.out.println("");
     }
 }
