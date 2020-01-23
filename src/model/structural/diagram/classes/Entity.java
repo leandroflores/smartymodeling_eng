@@ -3,11 +3,14 @@ package model.structural.diagram.classes;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.AttributeUML;
 import com.mxgraph.util.mxConstants;
+import funct.FunctDate;
+import funct.FunctString;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -18,6 +21,7 @@ import model.structural.base.Element;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Association;
 import model.structural.diagram.ClassDiagram;
+import model.structural.diagram.classes.base.ClassUML;
 import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.classes.base.TypeUML;
 import model.structural.diagram.classes.base.association.AssociationUML;
@@ -569,7 +573,7 @@ public abstract class Entity extends Element implements Encodable {
     protected String getPackageCode() {
         String code = this.packageUML != null ? this.packageUML.getPath() : "";
         if (this.packageUML == null)
-            return "\n\n";
+            return "";
         return "package " + code.substring(code.indexOf(".") + 1) + ";\n\n";
     }
     
@@ -589,14 +593,38 @@ public abstract class Entity extends Element implements Encodable {
      * @return Importation List.
      */
     protected List<String> getImportations() {
-        Set<String>  set  = new HashSet<>();
-//                     this.addSuperPackage(set);
-//                     this.addRealizationsPackages(set);
-//                     this.addAttributesPackages(set);
-//                     set.remove("");
-        List<String> list = new ArrayList<>(set);
+        Set<String> set  = new HashSet<>();
+                    this.addSuperPackage(set);
+                    this.addInterfacesPackages(set);
+                    this.addAttributesPackages(set);
+                    this.addAssociationsPackages(set);
+                    this.addMethodsPackages(set);
+        return      this.getImportationsList(set);
+    }
+    
+    /**
+     * Method responsible for returning the Importation List.
+     * @param  set Packages Set.
+     * @return Importations List.
+     */
+    private List<String> getImportationsList(Set<String> set) {
+        List<String> list = this.filterImportations(set);
         Collections.sort(list);
         return list;
+    }
+    
+    /**
+     * Method responsible for filtering the Checked Importations.
+     * @param  set Packages Set.
+     * @return Checked Importations.
+     */
+    private List<String> filterImportations(Set<String> set) {
+        List<String> filter = new ArrayList<>();
+        for (String  string : new ArrayList<>(set)) {
+            if ((!string.equals("")) && (string.contains(".")))
+                filter.add(string);
+        }
+        return filter;
     }
     
     /**
@@ -610,6 +638,15 @@ public abstract class Entity extends Element implements Encodable {
     }
     
     /**
+     * Method responsible for adding the Interfaces Packages.
+     * @param set Packages Set.
+     */
+    private void addInterfacesPackages(Set<String> set) {
+        if (this instanceof ClassUML)
+            ((ClassUML) this).addInterfacesPackages(set);
+    }
+    
+    /**
      * Method responsible for adding the Attributes Packages.
      * @param set Packages Set.
      */
@@ -619,14 +656,59 @@ public abstract class Entity extends Element implements Encodable {
     }
     
     /**
+     * Method responsible for adding the Associations Packages.
+     * @param set Packages Set.
+     */
+    protected void addAssociationsPackages(Set<String> set) {
+        this.addSourceAssociationsPackages(set);
+        this.addTargetAssociationsPackages(set);
+    }
+    
+    /**
+     * Method responsible for adding the Source Associations Packages.
+     * @param set Packages Set.
+     */
+    protected void addSourceAssociationsPackages(Set<String> set) {
+        for (Association association : this.diagram.getTargetAssociations("association", this))
+            set.add(((AssociationUML) association).getSource().getFullPath());
+    }
+    
+    /**
+     * Method responsible for adding the Target Associations Packages.
+     * @param set Packages Set.
+     */
+    protected void addTargetAssociationsPackages(Set<String> set) {
+        for (Association association : this.diagram.getSourceAssociations("association", this)) {
+            if (!((AssociationUML) association).isDirection())
+                set.add(((AssociationUML) association).getTarget().getFullPath());
+        }
+    }
+    
+    /**
      * Method responsible for adding the Method Packages.
      * @param set Packages Set.
      */
-    protected void addMethodPackages(Set<String> set) {
+    protected void addMethodsPackages(Set<String> set) {
         for (MethodUML method : this.getMethodsList()) {
             set.add(this.setPath(method.getReturn().getSignature()));
             method.addParametersPackages(set);
         }
+    }
+    
+    /**
+     * Method responsible for returning the Java Doc.
+     * @return Java Doc.
+     */
+    private String getJavaDocCode() {
+        String entity = new FunctString().getInitUpperCase(this.type);
+        String date   = new FunctDate().getFormattedDate("MM-dd-yyyy", new Date());
+        String code  = "/**\n";
+               code += " * <p>" + entity + " <b>" + this.name + "</b>.</p>\n";
+               code += " * <p>Source code of <b>" + entity + "</b> automatically generated by <b>SMartyModeling</b>.</p>\n";
+               code += " * @author SMartyAnalyzer\n";
+               code += " * @since  " + date + "\n";
+               code += " */\n";
+        return code;
     }
     
     /**
@@ -651,7 +733,7 @@ public abstract class Entity extends Element implements Encodable {
     protected String getAttributesCode() {
         String code  = "";
         for (AttributeUML attribute : this.getAttributesList())
-               code += "    " + attribute.exportCode() + ";\n";
+               code += "    " + attribute.exportCode() + "\n";
         return code;
     }
     
@@ -703,6 +785,7 @@ public abstract class Entity extends Element implements Encodable {
     public String exportCode() {
         String export  = this.getPackageCode();
                export += this.getImportsCode();
+               export += this.getJavaDocCode();
                export += this.getSignatureCode()    + "{\n";
                export += this.getAttributesCode();
                export += this.getAssociationsCode() + "\n";

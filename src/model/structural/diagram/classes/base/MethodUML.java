@@ -338,18 +338,18 @@ public class MethodUML extends Element implements Encodable {
         if (this.return_.getName().equals("int"))
             return "\n        return 0;\n    }\n";
         if (this.return_.getName().equals("Integer"))
-            return "\n    return 0;\n    }\n";
+            return "\n        return 0;\n    }\n";
         if (this.return_.getName().equals("Long"))
-            return "    return 0L;\n    }\n";
+            return "\n        return 0L;\n    }\n";
         if (this.return_.getName().equals("long"))
-            return "    return 0L;\n    }\n";
+            return "\n        return 0L;\n    }\n";
         if (this.return_.getName().equals("String"))
-            return "    return \"\";\n    }\n";
+            return "\n        return \"\";\n    }\n";
         if (this.return_.getName().equals("char"))
-            return "    return '';\n    }\n";
+            return "\n        return ' ';\n    }\n";
         if (this.return_.getName().equals("boolean"))
-            return "    return true;\n    }\n";
-        return "\n    return null;\n    }\n";
+            return "\n        return true;\n    }\n";
+        return "\n        return null;\n    }\n";
     }
     
     /**

@@ -182,10 +182,12 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     private void changeSourceAssociation(AssociationUML association, mxCell cell) {
         String value       = cell.getValue().toString().trim();
         String cardinality = this.getCardinality(value);
-        String signature   = this.getSignature(value, association.getTargetName());
+        String signature   = this.getSignature(value, "");
                association.setSourceMin(this.getMin(cardinality, association.getSourceMin()));
                association.setSourceMax(this.getMax(cardinality, association.getSourceMax()));
-               association.setSourceName(signature);
+               association.setSourceMax(this.getMax(cardinality, association.getSourceMax()));
+               association.setSourceVisibility(this.getVisibility(signature, association.getSourceVisibility()));
+               association.setSourceName(this.getAssociationName(signature, association.getSourceName()));
         this.panel.getViewMenu().getPanelProject().updatePanelEdit();
     }
     
@@ -195,11 +197,13 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @param cell Graph Cell.
      */
     private void changeTargetAssociation(AssociationUML association, mxCell cell) {
-        String cardinality = this.getCardinality(cell.getValue().toString().trim());
-        String signature   = this.getSignature(cell.getValue().toString().trim(), association.getTargetName());
+        String value       = cell.getValue().toString().trim();
+        String cardinality = this.getCardinality(value);
+        String signature   = this.getSignature(value, "");
                association.setTargetMin(this.getMin(cardinality, association.getTargetMin()));
                association.setTargetMax(this.getMax(cardinality, association.getTargetMax()));
-               association.setTargetName(signature);
+               association.setTargetVisibility(this.getVisibility(signature, association.getTargetVisibility()));
+               association.setTargetName(this.getAssociationName(signature, association.getTargetName()));
         this.panel.getViewMenu().getPanelProject().getPanelEdit().updateUI();
     }
     
@@ -235,6 +239,10 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
         return value.contains("(")
             && value.contains(")")
             && value.indexOf("(") < value.indexOf(")");
+    }
+    
+    private boolean checkAssociation(String value) {
+        return this.checkVisibility(value);
     }
     
     /**
@@ -409,6 +417,30 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
             return this.getValue(value.substring(value.lastIndexOf(".") + 1));
         if (value.matches("\\d+"))
             return Integer.parseInt(value);
+        return backup;
+    }
+    
+    /**
+     * Method responsible for returning the Visibility by String Value.
+     * @param  value String Value.
+     * @param  backup Backup Value.
+     * @return Visibility parsed.
+     */
+    private String getVisibility(String value, String backup) {
+        if (this.checkAssociation(value))
+            return this.getVisibility(value);
+        return backup;
+    }
+    
+    /**
+     * Method responsible for returning the Association Name by String Value.
+     * @param  value String Value.
+     * @param  backup Backup Value.
+     * @return Association Name parsed. 
+     */
+    private String getAssociationName(String value, String backup) {
+        if (this.checkAssociation(value))
+            return value.substring(1).trim();
         return backup;
     }
     

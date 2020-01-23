@@ -161,7 +161,7 @@ public class AttributeUML extends Element implements Encodable {
                code += (this.static_)  ? " static" : "";
                code += (this.final_)   ? " final"  : "";
                code += " " + this.printTypeUML();
-               code += " " + this.name;
+               code += " " + this.name + ";";
         return code;
     }
     

@@ -173,7 +173,9 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
      * @return Type Signature.
      */
     public String getSignature() {
-        return this.path + "." + this.name;
+        if (this.primitive)
+            return "";
+        return this.path.equals("") ? "" : this.path + "." + this.name;
     }
     
     @Override

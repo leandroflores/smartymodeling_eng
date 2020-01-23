@@ -7,6 +7,7 @@ import model.structural.base.association.Association;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.association.AssociationUML;
+import model.structural.diagram.classes.base.association.RealizationUML;
 import org.w3c.dom.Element;
 
 /**
@@ -101,6 +102,15 @@ public class ClassUML extends Entity {
                signature += this.getExtendsCode();
                signature += this.getImplementsCode();
         return signature;
+    }
+    
+    /**
+     * Method responsible for adding the Interfaces Packages.
+     * @param set Packages Set.
+     */
+    public void addInterfacesPackages(Set<String> set) {
+        for (Association asssociation : this.diagram.getRealizations(this))
+            set.add(this.setPath(((RealizationUML) asssociation).getTarget().getFullPath()));
     }
     
     /**

@@ -90,6 +90,17 @@ public class FunctDate {
         return "";
     }
     
+    /**
+     * Method responsible for returning a String by Format and Date.
+     * @param  format Format.
+     * @param  date Date.
+     * @return String with a Date in a Format.
+     */
+    public String getFormattedDate(String format, Date date) {
+        if (date != null)
+            return new SimpleDateFormat(format).format(date);
+        return "";
+    }
     
     /**
      * Method responsible for returning a String with a Date in "dd/MM/yy" format.

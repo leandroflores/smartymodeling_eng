@@ -377,7 +377,16 @@ public class AssociationUML extends Association {
     public String getNameSourceLabel() {
         if (this.sourceName.equals(""))
             return this.sourceName;
-        return " (" + this.sourceName + ")";
+        return " (" + this.getSourceSignature() + ")";
+    }
+    
+    /**
+     * Method responsible for returning the Source Signature.
+     * @return Source Signature.
+     */
+    public String getSourceSignature() {
+        return this.getVisibilitySymbol(this.sourceVisibility) 
+               + " " + this.sourceName;
     }
     
     /**
@@ -592,7 +601,31 @@ public class AssociationUML extends Association {
     public String getNameTargetLabel() {
         if (this.targetName.equals(""))
             return this.targetName;
-        return " (" + this.targetName + ")";
+        return " (" + this.getTargetSignature() + ")";
+    }
+    
+    /**
+     * Method responsible for returning the Target Signature.
+     * @return Target Signature.
+     */
+    public String getTargetSignature() {
+        return this.getVisibilitySymbol(this.targetVisibility) 
+               + " " + this.targetName;
+    }
+    
+    /**
+     * Method responsible for returning the Visibility Symbol.
+     * @param  visibility Visibility.
+     * @return Visibility Symbol.
+     */
+    private String getVisibilitySymbol(String visibility) {
+        if (visibility.trim().equalsIgnoreCase("public"))
+            return "+";
+        if (visibility.trim().equalsIgnoreCase("protected"))
+            return "#";
+        if (visibility.trim().equalsIgnoreCase("default"))
+            return "~";
+        return "-";
     }
     
     /**
@@ -695,7 +728,7 @@ public class AssociationUML extends Association {
      * @return Source Code.
      */
     public String getSourceCode() {
-        String code  = "private ";
+        String code  = this.getSourceVisibility()      + " ";
                code += this.getSourceCardinalityCode() + " ";
                code += this.getSourceNameCode()        + ";";
         return code;
@@ -722,7 +755,7 @@ public class AssociationUML extends Association {
      * @return Target Code.
      */
     public String getTargetCode() {
-        String code  = "private ";
+        String code  = this.getTargetVisibility()      + " ";
                code += this.getTargetCardinalityCode() + " ";
                code += this.getTargetNameCode()        + ";";
         return code;
