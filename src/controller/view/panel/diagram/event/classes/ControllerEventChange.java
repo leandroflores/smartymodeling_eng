@@ -6,7 +6,6 @@ import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
 import model.structural.diagram.classes.base.AttributeUML;
@@ -181,8 +180,9 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @param cell Graph Cell.
      */
     private void changeSourceAssociation(AssociationUML association, mxCell cell) {
-        String cardinality = this.getCardinality(cell.getValue().toString().trim());
-        String signature   = this.getSignature(cell.getValue().toString().trim());
+        String value       = cell.getValue().toString().trim();
+        String cardinality = this.getCardinality(value);
+        String signature   = this.getSignature(value, association.getTargetName());
                association.setSourceMin(this.getMin(cardinality, association.getSourceMin()));
                association.setSourceMax(this.getMax(cardinality, association.getSourceMax()));
                association.setSourceName(signature);
@@ -196,11 +196,10 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private void changeTargetAssociation(AssociationUML association, mxCell cell) {
         String cardinality = this.getCardinality(cell.getValue().toString().trim());
-        String signature   = this.getSignature(cell.getValue().toString().trim());
+        String signature   = this.getSignature(cell.getValue().toString().trim(), association.getTargetName());
                association.setTargetMin(this.getMin(cardinality, association.getTargetMin()));
                association.setTargetMax(this.getMax(cardinality, association.getTargetMax()));
                association.setTargetName(signature);
-        System.out.println("Update: " + association.getTargetName());
         this.panel.getViewMenu().getPanelProject().getPanelEdit().updateUI();
     }
     
@@ -218,12 +217,13 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     /**
      * Method responsible for returning the Signature.
      * @param  value Cell Value.
+     * @param  backup Backup Value.
      * @return Signature.
      */
-    private String getSignature(String value) {
+    private String getSignature(String value, String backup) {
         if (this.checkSignature(value))
             return value.substring(value.indexOf("(") + 1, value.indexOf(")")).trim();
-        return "";
+        return backup;
     }
     
     /**
@@ -389,9 +389,9 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     private Integer getMin(String value, Integer backup) {
         if (value.equals("*"))
             return 0;
-        if (Pattern.matches("\\d+..\\d+", value))
+        if (value.matches("\\d+..\\d+"))
             return Integer.parseInt(value.substring(0, value.indexOf(".")));
-        if (Pattern.matches("\\d+", value))
+        if (value.matches("\\d+"))
             return Integer.parseInt(value);
         return backup;
     }
@@ -405,9 +405,9 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     private Integer getMax(String value, Integer backup) {
         if (value.equals("*"))
             return Integer.MAX_VALUE;
-        if (Pattern.matches("\\d+..\\d+", value))
+        if (value.matches("\\d+..\\d+"))
             return this.getValue(value.substring(value.lastIndexOf(".") + 1));
-        if (Pattern.matches("\\d+", value))
+        if (value.matches("\\d+"))
             return Integer.parseInt(value);
         return backup;
     }

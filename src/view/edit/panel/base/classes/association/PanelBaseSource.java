@@ -88,10 +88,10 @@ public final class PanelBaseSource extends Panel {
      * Method responsible for setting the Source Association Values.
      */
     public void setValues() {
+        this.getNameTextField().setText(this.associationUML.isDirection() ? "" : this.associationUML.getSourceName());
         this.getSourceTextField().setText(this.associationUML.getSource().getName());
         this.getVisibilityComboBox().setSelectedItem(this.associationUML.getSourceVisibility());
-        this.getNameTextField().setText(this.associationUML.isDirection() ? "" : this.associationUML.getSourceName());
-        this.getCardinalityTextField().setText(this.associationUML.isDirection() ? "" : this.associationUML.getSourceLabel());
+        this.getCardinalityTextField().setText(this.associationUML.isDirection() ? "" : this.associationUML.getCardinalitySourceLabel());
     }
     
     /**

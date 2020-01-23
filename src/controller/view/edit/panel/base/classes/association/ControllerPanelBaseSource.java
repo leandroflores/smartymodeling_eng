@@ -48,8 +48,9 @@ public class ControllerPanelBaseSource extends ControllerPanel {
      * Method responsible for updating the Source Name.
      */
     private void updateName() {
-        if (!this.associationUML.isDirection())
+        if (!this.associationUML.isDirection()) {
             this.panelBaseSource.getAssociationUML().setSourceName(this.panelBaseSource.getNameTextField().getText().trim());
+        }
     }
     
     /**

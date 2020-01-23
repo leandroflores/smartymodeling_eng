@@ -67,7 +67,6 @@ public final class PanelEditAssociationUML extends PanelEdit {
      * Method responsible for adding the Panel Base Source.
      */
     protected void addPanelBaseSource() {
-        System.out.println("Panel Source " + this.associationUML.getSourceLabel());
         this.panelBaseSource = new PanelBaseSource(this.viewMenu, this.diagram, this.associationUML);
         this.createScrollPane("scrollPanelBaseSource",  this.panelBaseSource);
         this.getScrollPanelBaseSource().setViewportView(this.panelBaseSource);
@@ -78,7 +77,6 @@ public final class PanelEditAssociationUML extends PanelEdit {
      * Method responsible for adding the Panel Base Target.
      */
     protected void addPanelBaseTarget() {
-        System.out.println("Panel Target " + this.associationUML.getTargetLabel());
         this.panelBaseTarget = new PanelBaseTarget(this.viewMenu, this.diagram, this.associationUML);
         this.createScrollPane("scrollPanelBaseTarget",  this.panelBaseTarget);
         this.getScrollPanelBaseTarget().setViewportView(this.panelBaseTarget);

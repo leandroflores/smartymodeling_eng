@@ -70,9 +70,8 @@ public final class PanelBaseTarget extends Panel {
     public void setValues() {
         this.getTargetTextField().setText(this.associationUML.getTarget().getName());
         this.getVisibilityComboBox().setSelectedItem(this.associationUML.getTargetVisibility());
-        System.out.println("Target Name: " + this.associationUML.getTargetName());
         this.getNameTextField().setText(this.associationUML.getTargetName());
-        this.getCardinalityTextField().setText(this.associationUML.getTargetLabel());
+        this.getCardinalityTextField().setText(this.associationUML.getCardinalityTargetLabel());
     }
     
     /**
