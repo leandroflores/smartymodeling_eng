@@ -36,6 +36,15 @@ public abstract class ControllerViewEdit extends ControllerViewModal {
      */
     public abstract void save();
     
+    /**
+     * Method responsible for closing the View Edit.
+     */
+    protected void close() {
+        this.viewEdit.getViewMenu().setSave(false);
+        this.viewEdit.getViewMenu().update();
+        this.viewEdit.dispose();
+    }
+    
     @Override
     public void actionPerformed(ActionEvent event) {
         if (this.viewEdit.getSaveButton().equals(event.getSource())) {

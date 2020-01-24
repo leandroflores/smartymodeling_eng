@@ -65,7 +65,6 @@ public class ControllerViewNewMetric extends ControllerViewNew {
     public void insert() {
         Metric metric = this.viewNewMetric.getMetric();
         this.viewNewMetric.getProject().addMetric(metric);
-        this.viewNewMetric.getViewMenu().update();
-        this.viewNewMetric.dispose();
+        this.close();
     }
 }

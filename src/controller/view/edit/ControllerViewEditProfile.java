@@ -30,7 +30,6 @@ public class ControllerViewEditProfile extends ControllerViewEdit {
     @Override
     public void save() {
         this.viewEditProfile.getViewMenu().getPanelModeling().updateModelingPanel();
-        this.viewEditProfile.getViewMenu().update();
-        this.viewEditProfile.dispose();
+        this.close();
     }
 }

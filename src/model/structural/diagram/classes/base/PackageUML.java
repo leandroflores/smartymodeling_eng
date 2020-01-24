@@ -176,6 +176,8 @@ public class PackageUML extends Element {
         this.updateSize();
     }
     
+    
+    
     /**
      * Method responsible for moving X.
      * @param distance Distance.

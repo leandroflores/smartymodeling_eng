@@ -300,13 +300,13 @@ public class MethodUML extends Element implements Encodable {
     @Override
     public String exportCode() {
         String code  =  this.visibility;
-               code += (this.static_)   ? " static"   : "";
-               code += (this.abstract_) ? " abstract" : "";
-               code += (this.final_)    ? " final"    : "";
-               code += " " + this.getReturnCode();
+               code +=  this.static_     ? " static"            : "";
+               code +=  this.abstract_   ? " abstract"          : "";
+               code +=  this.final_      ? " final"             : "";
+               code += !this.constructor ? this.getReturnCode() : "";
                code += " " + this.name;
-               code += this.getParametersCode();
-               code += (this.abstract_) ? ";\n" : " {" + this.getDefaultBodyCode();
+               code +=  this.getParametersCode();
+               code +=  this.abstract_   ? ";\n" : " {" + this.getDefaultBodyCode();
         return code;
     }
     
@@ -315,7 +315,7 @@ public class MethodUML extends Element implements Encodable {
      * @return Return Code.
      */
     private String getReturnCode() {
-        return this.constructor ? "" : this.return_.getName();
+        return " " + this.return_.getName();
     }
     
     /**

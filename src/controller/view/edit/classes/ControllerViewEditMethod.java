@@ -30,7 +30,6 @@ public class ControllerViewEditMethod extends ControllerViewEdit  {
 
     @Override
     public void save() {
-        this.viewEditMethod.getViewMenu().update();
-        this.viewEditMethod.dispose();
+        this.close();
     }
 }

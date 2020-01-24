@@ -57,7 +57,6 @@ public class ControllerViewNewProduct extends ControllerViewNew {
     public void insert() {
         Product product = this.viewNewProduct.getProduct();
         this.viewNewProduct.getProject().addProduct(product);
-        this.viewNewProduct.getViewMenu().update();
-        this.viewNewProduct.dispose();
+        this.close();
     }
 }

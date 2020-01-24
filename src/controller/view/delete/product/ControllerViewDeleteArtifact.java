@@ -32,7 +32,6 @@ public class ControllerViewDeleteArtifact extends ControllerViewDelete {
         this.viewDeleteArtifact.getInstance().removeArtifact(this.artifact);
         this.viewDeleteArtifact.getInstance().getProduct().updateInstances();
         this.viewDeleteArtifact.getPanelModeling().updateInstancePanels();
-        this.viewDeleteArtifact.getPanelModeling().getViewMenu().update();
-        this.viewDeleteArtifact.dispose();
+        this.close();
     }
 }

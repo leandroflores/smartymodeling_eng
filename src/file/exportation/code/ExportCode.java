@@ -43,6 +43,16 @@ public abstract class ExportCode {
     }
     
     /**
+     * Method responsible for creating the Folder to Export.
+     * @param packageUML Package UML.
+     * @throws IOException Exception to create the Folder.
+     */
+    protected void createPackage(PackageUML packageUML) throws IOException {
+        this.file = new File(this.path + "\\" + packageUML.getFolderPath());
+        this.file.mkdir();
+    }
+    
+    /**
      * Method responsible for exporting the Element.
      * @param path Path to Export.
      * @param element Element to Export.
@@ -62,6 +72,8 @@ public abstract class ExportCode {
      * @throws IOException Exception to Export Package.
      */
     protected void export(String path, PackageUML packageUML) throws IOException {
+        this.createPackage(packageUML);
+        
         for (PackageUML subPackage : packageUML.getPackagesList())
             this.export(path + "\\" + packageUML.getFolderPath(), subPackage);
         

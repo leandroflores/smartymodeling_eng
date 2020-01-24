@@ -38,8 +38,6 @@ public class ControllerViewEditDiagram extends ControllerViewEdit {
     @Override
     public void save() {
         this.viewEditDiagram.getDiagram().setName(this.viewEditDiagram.getPanelBaseDiagram().getNameTextField().getText());
-        this.viewEditDiagram.getViewMenu().getPanelModeling().updateDiagram(this.viewEditDiagram.getDiagram());
-        this.viewEditDiagram.getViewMenu().update();
-        this.viewEditDiagram.dispose();
+        this.close();
     }
 }

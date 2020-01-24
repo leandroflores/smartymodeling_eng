@@ -40,7 +40,6 @@ public class ControllerViewDeleteProduct extends ControllerViewDelete {
     public void delete() {
         this.removeInstances();
         this.viewDeleteProduct.getProject().removeProduct(this.product);
-        this.viewDeleteProduct.getPanelModeling().getViewMenu().update();
-        this.viewDeleteProduct.dispose();
+        this.close();
     }
 }

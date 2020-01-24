@@ -31,7 +31,6 @@ public class ControllerViewDeleteVariability extends ControllerViewDelete {
     public void delete() {
         this.viewDeleteVariability.getDiagram().removeVariability(this.variability);
         this.viewDeleteVariability.getDiagram().updateElementsStereotype();
-        this.viewDeleteVariability.getPanelModeling().getViewMenu().update();
-        this.viewDeleteVariability.dispose();
+        this.close();
     }
 }

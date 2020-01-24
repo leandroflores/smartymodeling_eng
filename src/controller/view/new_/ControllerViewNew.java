@@ -36,6 +36,15 @@ public abstract class ControllerViewNew extends ControllerViewModal {
      */
     public abstract void insert();
     
+    /**
+     * Method responsible for closing the View New.
+     */
+    protected void close() {
+        this.viewNew.getViewMenu().setSave(false);
+        this.viewNew.getViewMenu().update();
+        this.viewNew.dispose();
+    }
+    
     @Override
     public void actionPerformed(ActionEvent event) {
         if (this.viewNew.getInsertButton().equals(event.getSource())) {

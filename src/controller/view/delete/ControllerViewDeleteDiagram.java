@@ -30,7 +30,6 @@ public class ControllerViewDeleteDiagram extends ControllerViewDelete {
     public void delete() {
         this.viewDeleteDiagram.getPanelModeling().getViewMenu().getProject().removeDiagram(this.diagram);
         this.viewDeleteDiagram.getPanelModeling().removeDiagram(this.diagram);
-        this.viewDeleteDiagram.getPanelModeling().getViewMenu().update();
-        this.viewDeleteDiagram.dispose();
+        this.close();
     }
 }

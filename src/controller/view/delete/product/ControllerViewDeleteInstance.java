@@ -31,7 +31,6 @@ public class ControllerViewDeleteInstance extends ControllerViewDelete {
     public void delete() {
         this.viewDeleteInstance.getProduct().removeInstance(this.instance);
         this.viewDeleteInstance.getPanelModeling().removeInstance(this.instance);
-        this.viewDeleteInstance.getPanelModeling().getViewMenu().update();
-        this.viewDeleteInstance.dispose();
+        this.close();
     }
 }

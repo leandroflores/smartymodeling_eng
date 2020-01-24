@@ -30,7 +30,6 @@ public class ControllerViewDeleteTraceability extends ControllerViewDelete {
     @Override
     public void delete() {
         this.viewDeleteTraceability.getProject().removeTraceability(this.traceability);
-        this.viewDeleteTraceability.getPanelModeling().getViewMenu().update();
-        this.viewDeleteTraceability.dispose();
+        this.close();
     }
 }

@@ -105,7 +105,6 @@ public class ControllerViewNewInstance extends ControllerViewNew {
         Instance instance = this.newInstance();
                  instance.getProduct().addInstance(instance);
         this.viewNewInstance.getViewMenu().showInstance(instance);
-        this.viewNewInstance.getViewMenu().update();
-        this.viewNewInstance.dispose();
+        this.close();
     }
 }

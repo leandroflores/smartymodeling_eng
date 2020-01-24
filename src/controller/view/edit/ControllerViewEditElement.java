@@ -40,7 +40,6 @@ public class ControllerViewEditElement extends ControllerViewEdit  {
         this.viewEditElement.getElement().setName(this.viewEditElement.getPanelBaseElement().getNameTextField().getText());
         this.viewEditElement.getElement().setMandatory(this.viewEditElement.getPanelBaseElement().getMandatoryCheckBox().isSelected());
         this.viewEditElement.getDiagram().updateStereotype(this.viewEditElement.getElement());
-        this.viewEditElement.getViewMenu().update();
-        this.viewEditElement.dispose();
+        this.close();
     }
 }

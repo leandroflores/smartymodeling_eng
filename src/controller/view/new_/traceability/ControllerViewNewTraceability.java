@@ -70,7 +70,6 @@ public class ControllerViewNewTraceability extends ControllerViewNew {
     public void insert() {
         Traceability traceability = this.viewNewTraceability.getTraceability();
         this.viewNewTraceability.getProject().addTraceability(traceability);
-        this.viewNewTraceability.getViewMenu().update();
-        this.viewNewTraceability.dispose();
+        this.close();
     }
 }

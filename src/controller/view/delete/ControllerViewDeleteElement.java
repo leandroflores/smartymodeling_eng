@@ -50,8 +50,7 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
     @Override
     public void delete() {
         this.delete(this.viewDeleteElement.getPanelModeling().getPanelDiagram().getDiagram());
-        this.viewDeleteElement.getPanelModeling().getViewMenu().update();
-        this.viewDeleteElement.dispose();
+        this.close();
     }
     
     /**

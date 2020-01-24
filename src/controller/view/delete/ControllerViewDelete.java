@@ -30,6 +30,15 @@ public abstract class ControllerViewDelete extends ControllerViewModal {
      */
     public abstract void delete();
     
+    /**
+     * Method responsible for closing the View Delete.
+     */
+    protected void close() {
+        this.viewDelete.getPanelModeling().getViewMenu().setSave(false);
+        this.viewDelete.getPanelModeling().getViewMenu().update();
+        this.viewDelete.dispose();
+    }
+    
     @Override
     public void actionPerformed(ActionEvent event) {
         if (this.viewDelete.getYesButton().equals(event.getSource()))
