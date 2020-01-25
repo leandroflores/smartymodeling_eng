@@ -1,7 +1,6 @@
 package controller.view.panel.diagram.types;
 
 import com.mxgraph.model.mxCell;
-import com.mxgraph.model.mxGraphModel;
 import controller.view.panel.diagram.ControllerPanelDiagram;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -119,9 +118,11 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
      * @param packageUML Package UML.
      */
     private void setParent(PackageUML parent, PackageUML packageUML) {
-        if (parent != null) {
-            packageUML.setPosition((packageUML.getX() - parent.getX()), (packageUML.getY() - parent.getY()));
-            packageUML.setParent(packageUML);
+        if ((parent != null) && (!parent.equals(packageUML))) {
+            Integer x = packageUML.getGlobalX() - parent.getGlobalX();
+            Integer y = packageUML.getGlobalY() - parent.getGlobalY();
+            packageUML.setPosition(x, y);
+            packageUML.setParent(parent);
             parent.addPackage(packageUML);
             parent.updateSize();
         }
@@ -134,10 +135,12 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
      */
     private void setParent(PackageUML parent, Entity entity) {
         if (parent != null) {
-            entity.setPosition((entity.getX() - parent.getX()), (entity.getY() - parent.getY()));
+            Integer x = entity.getGlobalX() - parent.getGlobalX();
+            Integer y = entity.getGlobalY() - parent.getGlobalY();
+            entity.setPosition(x, y);
             entity.setPackageUML(parent);
             parent.addEntity(entity);
-//            parent.updateSize();
+            parent.updateSize();
         }
     }
     
@@ -148,6 +151,7 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
     public void addPackage(MouseEvent event) {
         PackageUML packageUML = new PackageUML(this.panelDiagram.getDiagram());
                    packageUML.setPosition(event.getX(), event.getY());
+                   packageUML.setGlobalPosition(event.getX(), event.getY());
         this.panelDiagram.getDiagram().addPackage(packageUML);
                    packageUML.setDefaultName();
         this.setParent(this.getParent(event), packageUML);
@@ -162,6 +166,7 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
     public void addClass(MouseEvent event) {
         ClassUML classUML = new ClassUML(this.panelDiagram.getDiagram());
                  classUML.setPosition(event.getX(), event.getY());
+                 classUML.setGlobalPosition(event.getX(), event.getY());
         this.panelDiagram.getDiagram().addClass(classUML);
                  classUML.setDefaultName();
         this.setParent(this.getParent(event), classUML);
@@ -190,11 +195,7 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
             String id   = this.panelDiagram.getIdentifiers().get(cell);
             if (id != null)
                 this.edit(cell, id);
-//            else if (celula.getId().endsWith("(nome)"))
-//                this.painelDiagrama.getComponente().startEditingAtCell(celula);
         }
-//        this.painelDiagrama.atualizarDiagrama();
-//        this.painelDiagrama.getViewMenu().update();
     }
     
     /**
@@ -203,26 +204,24 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
      * @param id Element Id.
      */
     private void edit(mxCell cell, String id) {
+        System.out.println("Cell: " + cell.getId());
         if (this.panelDiagram.getDiagram().getElement(id) instanceof AttributeUML)
             new ViewEditAttribute(this.panelDiagram.getViewMenu().getPanelModeling(), this.panelDiagram.getDiagram(), (AttributeUML) this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
-//            this.panelDiagram.getComponent().startEditingAtCell(cell);
         else if (this.panelDiagram.getDiagram().getElement(id) instanceof MethodUML)
-            new ViewEditMethod(this.panelDiagram.getViewMenu().getPanelModeling(),    this.panelDiagram.getDiagram(), (MethodUML)  this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
-//            this.panelDiagram.getComponent().startEditingAtCell(cell);
+            new ViewEditMethod(this.panelDiagram.getViewMenu().getPanelModeling(),    this.panelDiagram.getDiagram(), (MethodUML) this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
         else if (this.panelDiagram.getDiagram().getElement(id) != null)
             new ViewEditElement(this.panelDiagram.getViewMenu().getPanelModeling(),   this.panelDiagram.getDiagram(), this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
-//            this.editElement(this.panelDiagram.getDiagram().getElement(id));
+        else if (cell.getId().endsWith("(name)"))
+            this.editElement(cell);
     }
     
     /**
      * Method responsible for editing the Element.
-     * @param element Element.
+     * @param cell Element Cell.
      */
-    private void editElement(Element element) {
-        String       id    = element.getId() + "(name)";
-        mxGraphModel model = (mxGraphModel) this.panelDiagram.getGraph().getModel();
-        mxCell       cell  = (mxCell) model.getCell(id);
+    private void editElement(mxCell cell) {
         this.panelDiagram.getComponent().startEditingAtCell(cell);
+        this.update();
     }
     
     @Override
@@ -233,9 +232,6 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
             if (id != null)
                 this.delete(id);
         }
-        this.panelDiagram.updateDiagram();
-        this.panelDiagram.getViewMenu().update();
-        this.panelDiagram.getViewMenu().setSave(false);
     }
     
     /**
@@ -243,13 +239,23 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
      * @param id Element Id.
      */
     private void delete(String id) {
-        if (this.panelDiagram.getDiagram().getElement(id)      instanceof AttributeUML)
+        if (this.panelDiagram.getDiagram().getAssociation(id) != null)
+            this.panelDiagram.getDiagram().removeAssociation(this.panelDiagram.getDiagram().getAssociation(id));
+        else if (this.panelDiagram.getDiagram().getElement(id) instanceof AttributeUML)
             this.panelDiagram.getDiagram().removeAttribute((AttributeUML) this.panelDiagram.getDiagram().getElement(id));
         else if (this.panelDiagram.getDiagram().getElement(id) instanceof MethodUML)
             this.panelDiagram.getDiagram().removeMethod((MethodUML) this.panelDiagram.getDiagram().getElement(id));
         else if (this.panelDiagram.getDiagram().getElement(id) != null)
             new ViewDeleteElement(this.panelDiagram.getViewMenu().getPanelModeling(), this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
-        else if (this.panelDiagram.getDiagram().getAssociation(id) != null)
-            this.panelDiagram.getDiagram().removeAssociation(this.panelDiagram.getDiagram().getAssociation(id));
+        this.update();
+    }
+    
+    /**
+     * Method responsible for updating the Panel Diagram.
+     */
+    private void update() {
+        this.panelDiagram.updateDiagram();
+        this.panelDiagram.getViewMenu().update();
+        this.panelDiagram.getViewMenu().setSave(false);
     }
 }

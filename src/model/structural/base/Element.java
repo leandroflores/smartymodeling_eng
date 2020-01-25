@@ -53,6 +53,7 @@ public abstract class Element implements Exportable, Modelable {
     public Element(org.w3c.dom.Element element, boolean position) {
         this(element);
         this.setPosition(element);
+        this.setGlobalPosition(element);
         this.setSize(element);
     }
     
@@ -230,15 +231,38 @@ public abstract class Element implements Exportable, Modelable {
      * Method responsible for returning the Element Global Position.
      * @return Element Global Position.
      */
-    public Point getGlobal() {
+    public Point getGlobalPosition() {
         return this.global;
+    }
+    
+    /**
+     * Method responsible for defining the Global Position Point.
+     * @param  element W3C Element.
+     */
+    private void setGlobalPosition(org.w3c.dom.Element element) {
+        Double x = 0.0d;
+        Double y = 0.0d;
+        try {
+            x = Double.parseDouble(element.getAttribute("globalX"));
+            y = Double.parseDouble(element.getAttribute("globalY"));
+        }catch (NumberFormatException exception) {}
+        this.setGlobalPosition(new Point(x.intValue(), y.intValue()));
+    }
+    
+    /**
+     * Method responsible for defining the Element Global Position.
+     * @param x X Position.
+     * @param y Y Position.
+     */
+    public void setGlobalPosition(Integer x, Integer y) {
+        this.global = new Point(x, y);
     }
     
     /**
      * Method responsible for setting the Element Global Position.
      * @param global Element Global Position.
      */
-    public void setGlobal(Point global) {
+    public void setGlobalPosition(Point global) {
         this.global = global;
     }
     
@@ -248,6 +272,17 @@ public abstract class Element implements Exportable, Modelable {
      */
     public Integer getGlobalX() {
         return this.global.x;
+    }
+    
+    /**
+     * Method responsible for calculating Global Position Shift X.
+     * @param distance Distance.
+     */
+    public void dxGlobal(Integer distance) {
+        if (this.getGlobalX() + distance < 0)
+            this.global.x  = 0;
+        else
+            this.global.x += distance;
     }
     
     /**
@@ -264,6 +299,17 @@ public abstract class Element implements Exportable, Modelable {
      */
     public Integer getGlobalY() {
         return this.global.y;
+    }
+    
+    /**
+     * Method responsible for calculating Global Position Shift Y.
+     * @param distance Distance.
+     */
+    public void dyGlobal(Integer distance) {
+        if (this.getGlobalY() + distance < 0)
+            this.global.y  = 0;
+        else
+            this.global.y += distance;
     }
     
     /**
@@ -391,13 +437,15 @@ public abstract class Element implements Exportable, Modelable {
     @Override
     public String export() {
         String export  = "    <"         + this.type;
-               export += " id=\""        + this.id          + "\"";
-               export += " name=\""      + this.name        + "\"";
-               export += " mandatory=\"" + this.mandatory   + "\"";
-               export += " x=\""         + this.getX()      + "\"";
-               export += " y=\""         + this.getY()      + "\"";
-               export += " height=\""    + this.getHeight() + "\"";
-               export += " width=\""     + this.getWidth()  + "\"";
+               export += " id=\""        + this.id           + "\"";
+               export += " name=\""      + this.name         + "\"";
+               export += " mandatory=\"" + this.mandatory    + "\"";
+               export += " x=\""         + this.getX()       + "\"";
+               export += " y=\""         + this.getY()       + "\"";
+               export += " globalX=\""   + this.getGlobalX() + "\"";
+               export += " globalY=\""   + this.getGlobalY() + "\"";
+               export += " height=\""    + this.getHeight()  + "\"";
+               export += " width=\""     + this.getWidth()   + "\"";
                export += "/>\n";
         return export;
     }

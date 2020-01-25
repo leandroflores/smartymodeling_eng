@@ -69,8 +69,8 @@ public final class ViewEditElement extends ViewEdit {
      * Method responsible for adding the Panel Base Element.
      */
     private void addPanelBaseElement() {
-        this.panelBaseElement = new PanelBaseElement(this.panelBaseElement.getViewMenu(), diagram, element);
-        this.createScrollPane("scrollPanelBaseElement", this.panelBaseElement);
+        this.panelBaseElement = new PanelBaseElement(this.getViewMenu(), this.diagram, this.element);
+        this.createScrollPane("scrollPanelBaseElement",  this.panelBaseElement);
         this.getScrollPanelBaseElement().setViewportView(this.panelBaseElement);
         this.tabbedPane.add("Element", this.getScrollPanelBaseElement());
     }

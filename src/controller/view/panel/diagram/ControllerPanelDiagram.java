@@ -127,36 +127,48 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
     }
     
     /**
-     * Method responsible for editing the Element.
+     * Method responsible for editing the Cell Selected.
      */
     public void edit() {
-        if (this.panelDiagram.getGraph()!= null) {
-            mxCell  cell    = (mxCell) this.panelDiagram.getGraph().getSelectionCell();
-            String  id      = this.panelDiagram.getIdentifiers().get(cell);
-            Element element = this.panelDiagram.getDiagram().getElement(id);
-            if (element != null)
+        if (this.panelDiagram.getGraph() != null) {
+            mxCell cell = (mxCell) this.panelDiagram.getGraph().getSelectionCell();
+            String id   = this.panelDiagram.getIdentifiers().get(cell);
+            if (this.panelDiagram.getDiagram().getElement(id) != null)
                   this.panelDiagram.getComponent().startEditingAtCell(cell);
-//            this.panelDiagram.getViewMenu().update();
             this.panelDiagram.setClick();
         }
     }
     
     /**
-     * Method responsible for deleting the Element.
+     * Method responsible for deleting the Cell Selected.
      */
     public void delete() {
         if (this.panelDiagram.getGraph() != null) {
-            mxCell      cell        = (mxCell) this.panelDiagram.getGraph().getSelectionCell();
-            String      id          = this.panelDiagram.getIdentifiers().get(cell);
-            Element     element     = this.panelDiagram.getDiagram().getElement(id);
-            Association association = this.panelDiagram.getDiagram().getAssociation(id);
-            if (element != null)
-                new ViewDeleteElement(this.panelDiagram.getViewMenu().getPanelModeling(), element).setVisible(true);
-            else if (association != null)
-                this.panelDiagram.getDiagram().removeAssociation(association);
-            this.panelDiagram.updateDiagram();
-            this.panelDiagram.getViewMenu().update();
+            mxCell cell = (mxCell) this.panelDiagram.getGraph().getSelectionCell();
+            String id   = this.panelDiagram.getIdentifiers().get(cell);
+            if (this.panelDiagram.getDiagram().getElement(id) != null)
+                this.delete(this.panelDiagram.getDiagram().getElement(id));
+            else if (this.panelDiagram.getDiagram().getAssociation(id) != null)
+                this.delete(this.panelDiagram.getDiagram().getAssociation(id));
         }
+    }
+    
+    /**
+     * Method responsible for removing a Element.
+     * @param element Element.
+     */
+    private void delete(Element element) {
+        new ViewDeleteElement(this.panelDiagram.getViewMenu().getPanelModeling(), element).setVisible(true);
+        this.panelDiagram.updateDiagram();
+    }
+    
+    /**
+     * Method responsible for removing a Association.
+     * @param association Association.
+     */
+    private void delete(Association association) {
+        this.panelDiagram.getDiagram().removeAssociation(association);
+        this.panelDiagram.updateDiagram();
     }
     
     /**

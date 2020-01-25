@@ -456,6 +456,42 @@ public abstract class Entity extends Element implements Encodable {
             }
         };
     }
+    
+    /**
+     * Method responsible for updating the Global X.
+     * @param distance Distance.
+     */
+    public void updateGlobalX(Integer distance) {
+        this.setGlobalX(this.getAbsoluteX() + distance);
+    }
+    
+    /**
+     * Method responsible for returning the Absolute X.
+     * @return Absolute X.
+     */
+    public Integer getAbsoluteX() {
+        if (this.packageUML == null)
+            return this.getX();
+        return this.getX() + this.packageUML.getAbsoluteX();
+    }
+    
+    /**
+     * Method responsible for updating the Global Y.
+     * @param distance Distance.
+     */
+    public void updateGlobalY(Integer distance) {
+        this.setGlobalY(this.getAbsoluteY() + distance);
+    }
+    
+    /**
+     * Method responsible for returning the Absolute Y.
+     * @return Absolute Y.
+     */
+    public Integer getAbsoluteY() {
+        if (this.packageUML == null)
+            return this.getY();
+        return this.getY() + this.packageUML.getAbsoluteY();
+    }
 
     @Override
     public Map getStyle() {

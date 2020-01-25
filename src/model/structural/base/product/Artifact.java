@@ -42,7 +42,7 @@ public class Artifact implements Exportable, Modelable {
     public Artifact(Element element) {
         this.element  = element;
         this.position = new Point(element.getPosition());
-        this.global   = new Point(element.getGlobal());
+        this.global   = new Point(element.getGlobalPosition());
         this.size     = new Point(element.getSize());
     }
     

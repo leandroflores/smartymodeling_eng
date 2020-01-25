@@ -131,8 +131,8 @@ public class PackageUML extends Element {
      * @return Min Width.
      */
     public Integer getMinWidth() {
-        Integer minPackages = this.getPackagesMinWidth();
-        Integer minEntities = this.getEntitiesMinWidth();
+        Integer minPackages = this.getPackagesMinWidth() + 10;
+        Integer minEntities = this.getEntitiesMinWidth() + 10;
         return  minPackages > minEntities ? minPackages : minEntities;
     }
     
@@ -175,8 +175,6 @@ public class PackageUML extends Element {
         super.dx(distance);
         this.updateSize();
     }
-    
-    
     
     /**
      * Method responsible for moving X.
@@ -379,6 +377,54 @@ public class PackageUML extends Element {
      */
     public void setEntities(HashMap entities) {
         this.entities = entities;
+    }
+    
+    /**
+     * Method responsible for updating the Global X.
+     * @param distance Distance.
+     */
+    public void updateGlobalX(Integer distance) {
+        this.setGlobalX(this.getAbsoluteX() + distance);
+    }
+    
+    /**
+     * Method responsible for updating the Packages Global Positions.
+     * @param x X Value.
+     * @param y Y Value.
+     */
+    public void updatePackages(Integer x, Integer y) {
+        for (PackageUML packageUML : this.getPackagesList()) {
+            packageUML.dxGlobal(x);
+            packageUML.dyGlobal(x);
+        }
+    }
+    
+    /**
+     * Method responsible for returning the Absolute X.
+     * @return Absolute X.
+     */
+    public Integer getAbsoluteX() {
+        if (this.parent == null)
+            return this.getX();
+        return this.getX() + this.parent.getAbsoluteX();
+    }
+    
+    /**
+     * Method responsible for updating the Global Y.
+     * @param distance Distance.
+     */
+    public void updateGlobalY(Integer distance) {
+        this.setGlobalY(this.getAbsoluteY() + distance);
+    }
+    
+    /**
+     * Method responsible for returning the Absolute Y.
+     * @return Absolute Y.
+     */
+    public Integer getAbsoluteY() {
+        if (this.parent == null)
+            return this.getY();
+        return this.getY() + this.parent.getAbsoluteY();
     }
     
     @Override

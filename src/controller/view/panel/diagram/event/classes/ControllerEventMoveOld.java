@@ -10,20 +10,20 @@ import model.structural.diagram.classes.base.association.AssociationUML;
 import view.panel.diagram.types.PanelClassDiagram;
 
 /**
- * <p>Class of Controller <b>ControllerEventMove</b>.</p>
+ * <p>Class of Controller <b>ControllerEventMoveOld</b>.</p>
  * <p>Class responsible for defining the <b>Controller</b> for <b>Moving Events</b> on Class Diagram Panel of SMartyModeling.</p>
  * @author Leandro
  * @since  03/06/2019
  * @see    view.panel.diagram.types.PanelClassDiagram
  */
-public class ControllerEventMove extends mxEventSource implements mxIEventListener {
+public class ControllerEventMoveOld extends mxEventSource implements mxIEventListener {
     private final PanelClassDiagram panel;
 
     /**
      * Default constructor method of Class.
      * @param panel Panel Class Diagram.
      */
-    public ControllerEventMove(PanelClassDiagram panel) {
+    public ControllerEventMoveOld(PanelClassDiagram panel) {
         this.panel = panel;
     }
     
@@ -41,10 +41,48 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      * @param event Event.
      */
     private void move(String id, mxEventObject event) {
-        if (this.panel.getDiagram().getElement(id) != null) 
-            this.move(this.panel.getDiagram().getElement(id), event);
-        else if (id != null)
+        if (this.panel.getDiagram().getElement(id) != null) {
+            Element element = this.panel.getDiagram().getElement(id);
+                    element.setGlobalX(this.getGlobalX(element) + (int) (double) event.getProperty("dx"));
+                    element.setGlobalY(this.getGlobalY(element) + (int) (double) event.getProperty("dy"));
+                    this.panel.getDiagram().dx(element, ((Double) event.getProperty("dx")).intValue());
+                    this.panel.getDiagram().dy(element, ((Double) event.getProperty("dy")).intValue());
+        }
+        else if (id != null) {
             this.moveCardinality(id, event);
+        }
+//        if (this.panel.getDiagram().getElement(id) != null)
+//            this.moveElement(this.panel.getDiagram().getElement(id), event);
+//        else if (id != null)
+//            this.moveCardinality(id, event);
+    }
+    
+    public int getGlobalX(Element element) {
+        if (element instanceof PackageUML) {
+            if (((PackageUML) element).getParent() == null)
+                return element.getX();
+            else
+                return element.getX() + this.getGlobalX(((PackageUML) element).getParent());
+        }else {
+            if (((Entity) element).getPackageUML() == null)
+                return element.getX();
+            else
+                return element.getX() + this.getGlobalX(((Entity) element).getPackageUML());
+        }
+    }
+    
+    public int getGlobalY(Element element) {
+        if (element instanceof PackageUML) {
+            if (((PackageUML) element).getParent() == null)
+                return element.getY();
+            else
+                return element.getY() + this.getGlobalY(((PackageUML) element).getParent());
+        }else {
+            if (((Entity) element).getPackageUML() == null)
+                return element.getY();
+            else
+                return element.getY() + this.getGlobalY(((Entity) element).getPackageUML());
+        }
     }
     
     /**
@@ -52,37 +90,10 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      * @param element Element.
      * @param event Event.
      */
-    private void move(Element element, mxEventObject event) {
-        if (element instanceof PackageUML)
-            this.move((PackageUML) element, event);
-        else if (element instanceof Entity)
-            this.move((Entity) element, event);
-    }
-    
-    /**
-     * Method responsible for moving the Package UML.
-     * @param packageUML Package UML.
-     * @param event Object Event.
-     */
-    private void move(PackageUML packageUML, mxEventObject event) {
-        Integer dx = this.getX(event);
-        Integer dy = this.getY(event);
-                packageUML.updateGlobalX(dx);
-                packageUML.updateGlobalY(dy);
-    }
-    
-    /**
-     * Method responsible for moving the Entity.
-     * @param entity Entity.
-     * @param event Object Event.
-     */
-    private void move(Entity entity, mxEventObject event) {
-        Integer dx = this.getX(event);
-        Integer dy = this.getY(event);
-                entity.updateGlobalX(dx);
-                entity.updateGlobalY(dy);
-                this.panel.getDiagram().dx(entity, dx);
-                this.panel.getDiagram().dy(entity, dy);
+    private void moveElement(Element element, mxEventObject event) {
+        element.dx(((Double) event.getProperty("dx")).intValue());
+        element.dy(((Double) event.getProperty("dy")).intValue());
+        this.panel.getViewMenu().setSave(false);
     }
     
     /**
@@ -104,8 +115,8 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      */
     private void moveSourceCardinality(String id, mxEventObject event) {
         AssociationUML associationUML = (AssociationUML) this.panel.getDiagram().getAssociation(id.substring(0, id.indexOf("(")));
-                       associationUML.dxSource(this.getX(event));
-                       associationUML.dySource(this.getY(event));
+                       associationUML.dxSource(((Double) event.getProperty("dx")).intValue());
+                       associationUML.dySource(((Double) event.getProperty("dy")).intValue());
         this.panel.getViewMenu().setSave(false);
     }
     
@@ -116,26 +127,8 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      */
     private void moveTargetCardinality(String id, mxEventObject event) {
         AssociationUML associationUML = (AssociationUML) this.panel.getDiagram().getAssociation(id.substring(0, id.indexOf("(")));
-                       associationUML.dxTarget(this.getX(event));
-                       associationUML.dyTarget(this.getY(event));
+                       associationUML.dxTarget(((Double) event.getProperty("dx")).intValue());
+                       associationUML.dyTarget(((Double) event.getProperty("dy")).intValue());
         this.panel.getViewMenu().setSave(false);               
-    }
-    
-    /**
-     * Method responsible for returning the X Value.
-     * @param  event Object Event.
-     * @return X Value.
-     */
-    private Integer getX(mxEventObject event) {
-        return ((Double) event.getProperty("dx")).intValue();
-    }
-    
-    /**
-     * Method responsible for returning the Y Value.
-     * @param  event Object Event.
-     * @return Y Value.
-     */
-    private Integer getY(mxEventObject event) {
-        return ((Double) event.getProperty("dy")).intValue();
     }
 }

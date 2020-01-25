@@ -126,6 +126,11 @@ public final class PanelClassDiagram extends PanelDiagram {
         }
     }
     
+    /**
+     * Method responsible for adding a Package UML.
+     * @param parent Parent Package.
+     * @param packageUML Packagem UML.
+     */
     private void addPackage(Object parent, PackageUML packageUML) {
         this.graph.getStylesheet().putCellStyle(packageUML.getStyleLabel(), packageUML.getStyle());
         mxCell   vertex  = (mxCell) this.graph.insertVertex(parent, packageUML.getId(), "", packageUML.getPosition().x, packageUML.getPosition().y, packageUML.getSize().x, packageUML.getSize().y, packageUML.getStyleLabel());
