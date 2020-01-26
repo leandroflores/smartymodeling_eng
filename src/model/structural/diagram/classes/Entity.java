@@ -152,6 +152,14 @@ public abstract class Entity extends Element implements Encodable {
         this.setMinWidth();
     }
 
+    /**
+     * Method responsible for updating the Y Position.
+     */
+    private void updateYPosition() {
+        if (this.packageUML != null)
+            this.position.y = Math.max(15, this.position.y);
+    }
+    
     @Override
     public void dx(Integer distance) {
         super.dx(distance);
@@ -161,6 +169,7 @@ public abstract class Entity extends Element implements Encodable {
     @Override
     public void dy(Integer distance) {
         super.dy(distance);
+        this.updateYPosition();
         this.updatePackageSize();
     }
     
@@ -481,6 +490,7 @@ public abstract class Entity extends Element implements Encodable {
      */
     public void updateGlobalY(Integer distance) {
         this.setGlobalY(this.getAbsoluteY() + distance);
+        this.updateYPosition();
     }
     
     /**
@@ -607,10 +617,9 @@ public abstract class Entity extends Element implements Encodable {
      * @return Package Code.
      */
     protected String getPackageCode() {
-        String code = this.packageUML != null ? this.packageUML.getPath() : "";
         if (this.packageUML == null)
             return "";
-        return "package " + code.substring(code.indexOf(".") + 1) + ";\n\n";
+        return "package " + this.packageUML.getPath() + ";\n\n";
     }
     
     /**

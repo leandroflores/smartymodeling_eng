@@ -519,8 +519,8 @@ public abstract class Diagram implements Exportable {
      */
     public Element getSuper(Element element) {
         for (Generalization generalization : this.getGeneralizationsList()) {
-            if (generalization.getSource(element) != null)
-                return generalization.getSource(element);
+            if (generalization.isSource(element))
+                return generalization.getTarget(element);
         }
         return null;
     }

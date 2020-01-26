@@ -392,10 +392,34 @@ public class PackageUML extends Element {
      * @param x X Value.
      * @param y Y Value.
      */
-    public void updatePackages(Integer x, Integer y) {
+    public void updateGlobal(Integer x, Integer y) {
+        this.updateGlobalPackages(x, y);
+        this.updateGlobalEntities(x, y);
+    }
+    
+    /**
+     * Method responsible for updating the Packages Global Positions.
+     * @param x X Value.
+     * @param y Y Value.
+     */
+    private void updateGlobalPackages(Integer x, Integer y) {
         for (PackageUML packageUML : this.getPackagesList()) {
+            packageUML.updateGlobal(x, y);
+            this.updateGlobalEntities(x, y);
             packageUML.dxGlobal(x);
-            packageUML.dyGlobal(x);
+            packageUML.dyGlobal(y);
+        }
+    }
+    
+    /**
+     * Method responsible for updating the Entities Global Positions.
+     * @param x X Value.
+     * @param y Y Value.
+     */
+    private void updateGlobalEntities(Integer x, Integer y) {
+        for (Entity entity : this.getEntitiesList()) {
+            entity.dxGlobal(x);
+            entity.dyGlobal(y);
         }
     }
     

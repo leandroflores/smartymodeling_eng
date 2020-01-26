@@ -17,6 +17,7 @@ import model.structural.diagram.classes.base.PackageUML;
  */
 public abstract class ExportCode {
     protected String path;
+    protected String folder;
     protected File   file;
     
     /**
@@ -75,10 +76,10 @@ public abstract class ExportCode {
         this.createPackage(packageUML);
         
         for (PackageUML subPackage : packageUML.getPackagesList())
-            this.export(path + "\\" + packageUML.getFolderPath(), subPackage);
+            this.export(this.folder + "\\" + packageUML.getFolderPath(), subPackage);
         
         for (Entity entity : packageUML.getEntitiesList())
-            this.export(path + "\\" + packageUML.getFolderPath(), entity);
+            this.export(this.folder + "\\" + packageUML.getFolderPath(), entity);
     }
     
     /**

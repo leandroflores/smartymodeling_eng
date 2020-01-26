@@ -66,13 +66,15 @@ public class InterfaceUML extends Entity {
     @Override
     public String exportHeader() {
         String export  = "    <"         + this.type;
-               export += " id=\""        + this.id                      + "\"";
-               export += " name=\""      + this.name                    + "\"";
-               export += " mandatory=\"" + this.mandatory               + "\"";
-               export += " x=\""         + this.getX()                  + "\"";
-               export += " y=\""         + this.getY()                  + "\"";
-               export += " height=\""    + this.getHeight()             + "\"";
-               export += " width=\""     + this.getWidth()              + "\"";
+               export += " id=\""        + this.id           + "\"";
+               export += " name=\""      + this.name         + "\"";
+               export += " mandatory=\"" + this.mandatory    + "\"";
+               export += " x=\""         + this.getX()       + "\"";
+               export += " y=\""         + this.getY()       + "\"";
+               export += " globalX=\""   + this.getGlobalX() + "\"";
+               export += " globalY=\""   + this.getGlobalY() + "\"";
+               export += " height=\""    + this.getHeight()  + "\"";
+               export += " width=\""     + this.getWidth()   + "\"";
                export += this.exportParent();
                export += ">\n";
         return export;

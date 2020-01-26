@@ -69,6 +69,7 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
         Integer dy = this.getY(event);
                 packageUML.updateGlobalX(dx);
                 packageUML.updateGlobalY(dy);
+                packageUML.updateGlobal(dx, dy);
     }
     
     /**

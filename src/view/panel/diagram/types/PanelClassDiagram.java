@@ -133,8 +133,8 @@ public final class PanelClassDiagram extends PanelDiagram {
      */
     private void addPackage(Object parent, PackageUML packageUML) {
         this.graph.getStylesheet().putCellStyle(packageUML.getStyleLabel(), packageUML.getStyle());
-        mxCell   vertex  = (mxCell) this.graph.insertVertex(parent, packageUML.getId(), "", packageUML.getPosition().x, packageUML.getPosition().y, packageUML.getSize().x, packageUML.getSize().y, packageUML.getStyleLabel());
-                 vertex.setConnectable(false);
+        mxCell vertex  = (mxCell) this.graph.insertVertex(parent, packageUML.getId(), "", packageUML.getPosition().x, packageUML.getPosition().y, packageUML.getSize().x, packageUML.getSize().y, packageUML.getStyleLabel());
+               vertex.setConnectable(false);
         this.insert(vertex, packageUML);
             this.addPackages(packageUML, vertex);
             this.addEntities(packageUML, vertex);
@@ -148,9 +148,8 @@ public final class PanelClassDiagram extends PanelDiagram {
      * @param parent Parent Vertex.
      */
     private void addPackages(PackageUML packageUML, Object parent) {
-        for (PackageUML current : packageUML.getPackagesList()) {
+        for (PackageUML current : packageUML.getPackagesList())
             this.addPackage(parent, current);
-        }
     }
     
     /**
@@ -224,8 +223,8 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.graph.getStylesheet().putCellStyle("packageHeader", packageUML.getPackageStyle());
         this.graph.getStylesheet().putCellStyle("packageName",   packageUML.getNameStyle());
         
-        mxCell head = (mxCell) this.graph.insertVertex(vertex, packageUML.getId() + "(name)",                    "",  0,  0, packageUML.getWidth() * 0.3,                          15, "packageHeader");
-        mxCell body = (mxCell) this.graph.insertVertex(vertex, packageUML.getId() + "(body)",                    "",  0, 15, packageUML.getWidth(),       packageUML.getHeight() - 15, "packageHeader");
+        mxCell head = (mxCell) this.graph.insertVertex(vertex, packageUML.getId() + "(name)", "",  0,  0, packageUML.getWidth() * 0.3,                          15, "packageHeader");
+        mxCell body = (mxCell) this.graph.insertVertex(vertex, packageUML.getId() + "(body)", "",  0, 15, packageUML.getWidth(),       packageUML.getHeight() - 15, "packageHeader");
                this.addStereotypeCells(body, packageUML);
                this.addNameCell(body, packageUML);
 

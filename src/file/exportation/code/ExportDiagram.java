@@ -24,6 +24,7 @@ public class ExportDiagram extends ExportCode {
     public ExportDiagram(String path, ClassDiagram diagram) {
         super(path);
         this.path    = path + "\\" + diagram.getName();
+        this.folder  = path + "\\" + diagram.getName();
         this.diagram = diagram;
     }
     

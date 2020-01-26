@@ -105,10 +105,38 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
      */
     private PackageUML getParent(MouseEvent event) {
         Object  cell    = this.panelDiagram.getComponent().getCellAt(event.getX(), event.getY());
-        String  id      = this.panelDiagram.getIdentifiers().get(cell);
+        String  id      = this.getId(cell);
         Element element = this.panelDiagram.getDiagram().getElement(id);
-        if ((element != null) && (element instanceof PackageUML))
+        return  this.getParent(element);
+    }
+    
+    /**
+     * Method responsible for returning the Cell Id.
+     * @param  cell Cell Object.
+     * @return Cell Id.
+     */
+    private String getId(Object cell) {
+        if ((cell != null) && (cell instanceof mxCell)) {
+            String id = ((mxCell) cell).getId();
+            return id.contains("(") ? id.substring(0, id.indexOf("(")) : id;
+        }
+        return "";
+    }
+    
+    /**
+     * Method responsible for returning the Package Parent.
+     * @param  element Origin Element. 
+     * @return Package Parent.
+     */
+    private PackageUML getParent(Element element) {
+        if (element instanceof PackageUML)
             return (PackageUML) element;
+        else if (element instanceof Entity)
+            return ((Entity) element).getPackageUML();
+        else if (element instanceof AttributeUML)
+            return ((AttributeUML) element).getEntity().getPackageUML();
+        else if (element instanceof MethodUML)
+            return ((MethodUML) element).getEntity().getPackageUML();
         return null;
     }
     
@@ -181,6 +209,7 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
     public void addInterface(MouseEvent event) {
         InterfaceUML interfaceUML = new InterfaceUML(this.panelDiagram.getDiagram());
                      interfaceUML.setPosition(event.getX(), event.getY());
+                     interfaceUML.setGlobalPosition(event.getX(), event.getY());
         this.panelDiagram.getDiagram().addInterface(interfaceUML);
                      interfaceUML.setDefaultName();
         this.setParent(this.getParent(event), interfaceUML);
@@ -204,7 +233,6 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
      * @param id Element Id.
      */
     private void edit(mxCell cell, String id) {
-        System.out.println("Cell: " + cell.getId());
         if (this.panelDiagram.getDiagram().getElement(id) instanceof AttributeUML)
             new ViewEditAttribute(this.panelDiagram.getViewMenu().getPanelModeling(), this.panelDiagram.getDiagram(), (AttributeUML) this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
         else if (this.panelDiagram.getDiagram().getElement(id) instanceof MethodUML)

@@ -115,6 +115,15 @@ public final class ClassDiagram extends Diagram {
     }
     
     /**
+     * Method responsible for reseting a Entity from your Package.
+     * @param entity Entity.
+     */
+    public void resetPackage(Entity entity) {
+        if (entity.getPackageUML() != null)
+            entity.getPackageUML().removeEntity(entity);
+    }
+    
+    /**
      * Method responsible for updating the Parent Packages.
      * @param packageUML Package UML.
      */
@@ -186,6 +195,7 @@ public final class ClassDiagram extends Diagram {
         this.removeMethods(class_);
         this.removeAssociations(class_);
         this.removeElement(class_);
+        this.resetPackage(class_);
         this.classUML.remove(class_.getId());
     }
     
@@ -240,6 +250,7 @@ public final class ClassDiagram extends Diagram {
         this.removeMethods(interface_);
         this.removeAssociations(interface_);
         this.removeElement(interface_);
+        this.resetPackage(interface_);
         this.interfacesUML.remove(interface_.getId());
     }
     
