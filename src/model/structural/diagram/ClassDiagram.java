@@ -375,12 +375,23 @@ public final class ClassDiagram extends Diagram {
     }
     
     /**
-     * Method responsible for returning the Realizations of a Class.
-     * @param  entity Class UML.
+     * Method responsible for returning the Realizations of a Entity.
+     * @param  entity Entity.
      * @return Realizations List.
      */
-    public List<Association> getRealizations(ClassUML entity) {
-        return this.getTargetAssociations("realization", entity);
+    public List<Association> getRealizations(Entity entity) {
+        if (entity.isClass())
+            return this.getRealizations((ClassUML) entity);
+        return new ArrayList<>();
+    }
+    
+    /**
+     * Method responsible for returning the Realizations of a Class.
+     * @param  class_ Class UML.
+     * @return Realizations List.
+     */
+    public List<Association> getRealizations(ClassUML class_) {
+        return this.getTargetAssociations("realization", class_);
     }
     
     /**

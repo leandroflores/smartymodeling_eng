@@ -1,12 +1,14 @@
 package model.structural.diagram.classes.base;
 
 import com.mxgraph.util.mxConstants;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import model.structural.base.association.Association;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.Entity;
-import model.structural.diagram.classes.base.association.AssociationUML;
 import model.structural.diagram.classes.base.association.RealizationUML;
 import org.w3c.dom.Element;
 
@@ -105,12 +107,23 @@ public class ClassUML extends Entity {
     }
     
     /**
+     * Method responsible for returning the Realizations List.
+     * @return Realizations List.
+     */
+    public List<InterfaceUML> getRealizations() {
+        List   interfaces = new ArrayList<>();
+        for (Association association : this.diagram.getRealizations(this))
+               interfaces.add(((RealizationUML) association).getTarget());
+        return interfaces;
+    }
+    
+    /**
      * Method responsible for adding the Interfaces Packages.
      * @param set Packages Set.
      */
     public void addInterfacesPackages(Set<String> set) {
-        for (Association asssociation : this.diagram.getRealizations(this))
-            set.add(this.setPath(((RealizationUML) asssociation).getTarget().getFullPath()));
+        for (InterfaceUML interface_ : this.getRealizations())
+            set.add(this.setPath(interface_.getFullPath()));
     }
     
     /**
@@ -118,10 +131,10 @@ public class ClassUML extends Entity {
      * @return Implements Code.
      */
     public String getImplementsCode() {
-        String  names  = "";
-        for (Association asssociation : this.diagram.getRealizations(this))
-                names += asssociation.getTarget().getName() + ", ";
-        String  code   = names.contains(", ") ? names.substring(0, names.lastIndexOf(",")) : "";
+        String  names  =  "";
+        for (InterfaceUML interface_ : this.getRealizations())
+                names +=  interface_.getName() + ", ";
+        String  code   =  names.contains(", ") ? names.substring(0, names.lastIndexOf(",")) : "";
         return !code.isEmpty() ? "implements " + code + " " : "";
     }
     
@@ -130,8 +143,28 @@ public class ClassUML extends Entity {
      * @param set Packages Set.
      */
     protected void addRealizationsPackages(Set<String> set) {
-        for (Association association : this.diagram.getRealizations(this))
-            set.add(this.setPath(((AssociationUML) association).getTarget().getFullPath()));
+        for (InterfaceUML interface_ : this.getRealizations())
+            set.add(this.setPath(interface_.getFullPath()));
+    }
+    
+    /**
+     * Method responsible for returning the Implements Methods Set.
+     * @return Implements Methods Set.
+     */
+    public Set<MethodUML> getImplementsMethods() {
+        Set    set = new HashSet();
+        for (InterfaceUML  interfaceUML_ : this.getRealizations())
+               set.addAll(interfaceUML_.getMethodsList());
+        return set;
+    }
+    
+    public Set<MethodUML> getAllMethods() {
+        Set    set = new HashSet(this.getMethodsList());
+        if (!this.isAbstract()) {
+               set.addAll(this.getInheritedMethods());
+               set.addAll(this.getImplementsMethods());
+        }
+        return set;
     }
     
     @Override

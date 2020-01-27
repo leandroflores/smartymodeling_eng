@@ -3,12 +3,14 @@ package controller.view.panel.diagram.association;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
+import java.util.List;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.association.Dependency;
 import model.structural.base.association.Generalization;
 import model.structural.base.variability.Mutex;
 import model.structural.base.variability.Requires;
+import view.message.ViewError;
 import view.panel.diagram.PanelDiagram;
 
 /**
@@ -130,12 +132,41 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
     }
     
     /**
+     * Method responsible for checking if the Source is Unique.
+     * @param  generalization New Generalization.
+     * @return Source is Unique.
+     */
+    protected boolean checkSource(Generalization generalization) {
+        Element super_ = this.diagram.getSuper(generalization.getSource());
+        if (super_ != null) {
+            String message = generalization.getSource().getName() + " is already has a generalization with " + super_.getName() + "!";
+            new ViewError(this.panel.getViewMenu(), message).setVisible(true);
+            return false;
+        }
+        return true;
+    }
+   
+    /**
+     * Method responsible for checking Recursive Generalization.
+     * @param  generalization New Generalization.
+     * @return Generalization is Not Recursive.
+     */
+    protected boolean checkRecursive(Generalization generalization) {
+        List<Element> supers = this.diagram.getSupers(generalization.getTarget());
+        if (supers.contains(generalization.getSource())) {
+            new ViewError(this.panel.getViewMenu(), "Recursive generalization is not allowed!").setVisible(true);
+            return false;
+        }
+        return true;
+    }
+    
+    /**
      * Method responsible for adding a Generalization.
      * @param association Association.
      */
     protected void addGeneralization(mxCell association) {
         Generalization generalization = this.createGeneralization(association);
-        if (generalization != null)
+        if (generalization != null && this.checkSource(generalization) && this.checkRecursive(generalization))
             this.diagram.addGeneralization(generalization);
     }
     

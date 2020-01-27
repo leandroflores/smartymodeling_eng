@@ -1,7 +1,5 @@
 package model.structural.diagram.classes;
 
-import model.structural.diagram.classes.base.MethodUML;
-import model.structural.diagram.classes.base.AttributeUML;
 import com.mxgraph.util.mxConstants;
 import funct.FunctDate;
 import funct.FunctString;
@@ -21,7 +19,10 @@ import model.structural.base.Element;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Association;
 import model.structural.diagram.ClassDiagram;
+import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.ClassUML;
+import model.structural.diagram.classes.base.InterfaceUML;
+import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.classes.base.TypeUML;
 import model.structural.diagram.classes.base.association.AssociationUML;
@@ -36,8 +37,8 @@ import model.structural.diagram.classes.base.association.AssociationUML;
  */
 public abstract class Entity extends Element implements Encodable {
     protected ClassDiagram diagram;
-    protected PackageUML packageUML;
-    protected TypeUML    typeUML;
+    protected PackageUML   packageUML;
+    protected TypeUML      typeUML;
     protected final LinkedHashMap attributes;
     protected final LinkedHashMap methods;
     
@@ -63,6 +64,22 @@ public abstract class Entity extends Element implements Encodable {
         this.packageUML = null;
         this.attributes = new LinkedHashMap();
         this.methods    = new LinkedHashMap();
+    }
+    
+    /**
+     * Method responsible for returning if the Entity is a Class UML.
+     * @return Entity is a Class UML.
+     */
+    public boolean isClass() {
+        return this instanceof ClassUML;
+    }
+    
+    /**
+     * Method responsible for returning if the Entity is a Interface UML.
+     * @return Entity is a Interface UML.
+     */
+    public boolean isInterface() {
+        return this instanceof InterfaceUML;
     }
     
     /**
@@ -380,6 +397,44 @@ public abstract class Entity extends Element implements Encodable {
     }
     
     /**
+     * Method responsible for returning the Inherited Methods Set.
+     * @return Inherited Methods Set.
+     */
+    public Set<MethodUML> getInheritedMethods() {
+        Set    set = new HashSet<>();
+        if (this.getSuper() != null)
+            set.addAll(this.getSuper().getInheritedMethods());
+               set.addAll(this.getVisibleMethods());
+        return set;
+    }
+    
+    /**
+     * Method responsible for returning the Visible Methods List.
+     * @return Visible Methods List.
+     */
+    public List<MethodUML> getVisibleMethods() {
+        List   list = new ArrayList<>();
+               list.addAll(this.getMethods("public"));
+               list.addAll(this.getMethods("protected"));
+               list.addAll(this.getMethods("default"));
+        return list;
+    }
+    
+    /**
+     * Method responsible for returning the Methods List by Visibility.
+     * @param  visibility Method Visibility.
+     * @return Methods List filtered.
+     */
+    public List<MethodUML> getMethods(String visibility) {
+        List   list = new ArrayList<>();
+        for (MethodUML method : this.getMethodsList()) {
+            if (method.getVisibility().trim().equalsIgnoreCase(visibility.trim()))
+               list.add(method);
+        }
+        return list;
+    }
+    
+    /**
      * Method responsible for returning Methods List.
      * @return Methods List.
      */
@@ -666,7 +721,7 @@ public abstract class Entity extends Element implements Encodable {
     private List<String> filterImportations(Set<String> set) {
         List<String> filter = new ArrayList<>();
         for (String  string : new ArrayList<>(set)) {
-            if ((!string.equals("")) && (string.contains(".")))
+            if ((!string.equals("")) && (string.contains(".")) && (!string.startsWith(this.getPackagePath())))
                 filter.add(string);
         }
         return filter;
@@ -890,6 +945,23 @@ public abstract class Entity extends Element implements Encodable {
                + this.exportAttributes()
                + this.exportMethods()
                + this.exportFooter();
+    }
+    
+    /**
+     * Method responsible for returning if is in the Same Package of a Entity.
+     * @param  entity Entity.
+     * @return Same Package.
+     */
+    public boolean samePackage(Entity entity) {
+        return this.getPackagePath().equals(entity.getPackagePath());
+    }
+    
+    /**
+     * Method responsible for returning the Package Path.
+     * @return Package Path.
+     */
+    public String getPackagePath() {
+        return this.packageUML == null ? this.name : this.packageUML.getPath();
     }
     
     /**

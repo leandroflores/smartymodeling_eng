@@ -526,6 +526,21 @@ public abstract class Diagram implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Supers List of a Element.
+     * @param  element Element.
+     * @return Supers List.
+     */
+    public List<Element> getSupers(Element element) {
+        List    list    = new ArrayList<>();
+        Element super_  = this.getSuper(element);
+        while  (super_ != null) {
+                list.add(super_);
+                super_  = this.getSuper(super_);
+        }    
+        return  list;
+    }
+    
+    /**
      * Method responsible for returning Generalization List.
      * @return Generalization List.
      */

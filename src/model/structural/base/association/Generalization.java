@@ -1,7 +1,9 @@
 package model.structural.base.association;
 
 import com.mxgraph.util.mxConstants;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import model.structural.base.Element;
 
