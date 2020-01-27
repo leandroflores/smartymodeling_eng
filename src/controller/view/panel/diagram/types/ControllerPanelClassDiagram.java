@@ -55,16 +55,16 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
     }
     
     @Override
-    public void mousePressed(MouseEvent evento) {
+    public void mousePressed(MouseEvent event) {
         switch (this.panelDiagram.getOperation()) {
             case "Package":
-                this.addPackage(evento);
+                this.addPackage(event);
                 break;
             case "Class":
-                this.addClass(evento);
+                this.addClass(event);
                 break;
             case "Interface":
-                this.addInterface(evento);
+                this.addInterface(event);
                 break;
             default:
                 break;

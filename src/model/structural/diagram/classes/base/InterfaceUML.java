@@ -1,5 +1,7 @@
 package model.structural.diagram.classes.base;
 
+import java.util.HashSet;
+import java.util.Set;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.Entity;
 import org.w3c.dom.Element;
@@ -31,6 +33,24 @@ public class InterfaceUML extends Entity {
     public InterfaceUML(Element element) {
         super(element);
         this.type = "interface";
+    }
+    
+    @Override
+    public Set<MethodUML> getAllMethods() {
+        Set    set = new HashSet();
+               set.addAll(this.getMethodsList());
+               set.addAll(this.getInheritedMethods());
+        return set;
+    }
+    
+    @Override
+    public Set<MethodUML> getExportableMethods() {
+        return new HashSet<>(this.getMethodsList());
+    }
+    
+    @Override
+    public Set<MethodUML> getImplementsMethods() {
+        return new HashSet<>();
     }
     
     @Override

@@ -1,7 +1,6 @@
 package file.importation.diagram.types;
 
 import file.importation.diagram.ImportDiagram;
-import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.classes.base.ClassUML;

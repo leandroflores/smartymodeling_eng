@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
+import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.MethodUML;
 
 /**
@@ -23,8 +24,8 @@ public class MessageUML extends Association {
     
     /**
      * Default constructor method of Class.
-     * @param source Element.
-     * @param target Element.
+     * @param source Source Element.
+     * @param target Target Element.
      */
     public MessageUML(Element source, Element target) {
         super();
@@ -37,8 +38,8 @@ public class MessageUML extends Association {
     
     /**
      * Default constructor method of Class.
-     * @param source Element.
-     * @param target Element.
+     * @param source Entity.
+     * @param target Entity.
      * @param category Category.
      */
     public MessageUML(Element source, Element target, String category) {

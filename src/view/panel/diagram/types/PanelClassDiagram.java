@@ -322,8 +322,8 @@ public final class PanelClassDiagram extends PanelDiagram {
      * @param entity Entity.
      */
     private void addNameCell(mxCell parent, Entity entity) {
-        this.graph.getStylesheet().putCellStyle("nameStyle", entity.getNameStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(name)", entity.getName(), 5, entity.getNamePosition(), entity.getWidth() - 10, 25, "nameStyle");
+        this.graph.getStylesheet().putCellStyle("nameStyle" + entity.getId(), entity.getNameStyle());
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(name)", entity.getName(), 5, entity.getNamePosition(), entity.getWidth() - 10, 25, "nameStyle" + entity.getId());
                cell.setConnectable(false);
                cell.setId(entity.getId() + "(name)");
         this.identifiers.put(cell.getId(), entity.getId());

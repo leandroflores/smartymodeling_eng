@@ -1,7 +1,5 @@
 package controller.view.panel.diagram.event;
 
-import com.mxgraph.model.mxGeometry;
-import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.util.mxPoint;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -31,9 +29,6 @@ public class ControllerEventPoints extends MouseAdapter {
         Association association = this.getAssociation(event);
         mxPoint     point       = new mxPoint(event.getX(), event.getY());
         if (association != null) {
-//            if (event.getClickCount() == 1)
-//                this.updatePoint(association);
-//            else 
             if (event.getClickCount() == 2)
                 this.addPoint(association, point);
             else if (event.getButton() == 3)
@@ -50,19 +45,6 @@ public class ControllerEventPoints extends MouseAdapter {
         Object object = this.panel.getComponent().getCellAt(event.getX(), event.getY());
         String id     = this.panel.getIdentifiers().get(object);
         return this.panel.getDiagram().getAssociation(id);
-    }
-    
-    /**
-     * Method responsible for updating a Point Position.
-     * @param association Association.
-     * @param point Point.
-     */
-    private void updatePoint(Association association) {
-        System.out.println(association.getId());
-        mxGeometry geometry = ((mxGraphModel) (this.panel.getGraph().getModel())).getGeometry(this.panel.getObjects().get(association.getId()));
-        System.out.println(association.getId() + " " +  geometry.getPoints());
-                   association.setPoints(geometry.getPoints());
-//        System.out.println("");
     }
     
     /**

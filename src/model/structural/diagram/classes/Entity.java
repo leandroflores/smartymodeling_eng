@@ -397,6 +397,24 @@ public abstract class Entity extends Element implements Encodable {
     }
     
     /**
+     * Method responsible for returning the Set of All Methods of a Entity.
+     * @return All Methods Set.
+     */
+    public abstract Set<MethodUML> getAllMethods();
+    
+    /**
+     * Method responsible for returning the Set of Exportable Methods of a Entity.
+     * @return Exportable Methods Set.
+     */
+    public abstract Set<MethodUML> getExportableMethods();
+    
+    /**
+     * Method responsible for returning the Set of Implements Methods of a Entity.
+     * @return Implements Methods Set.
+     */
+    public abstract Set<MethodUML> getImplementsMethods();
+    
+    /**
      * Method responsible for returning the Inherited Methods Set.
      * @return Inherited Methods Set.
      */
@@ -405,6 +423,20 @@ public abstract class Entity extends Element implements Encodable {
         if (this.getSuper() != null)
             set.addAll(this.getSuper().getInheritedMethods());
                set.addAll(this.getVisibleMethods());
+               set.addAll(this.getImplementsMethods());
+        return set;
+    }
+    
+    /**
+     * Method responsible for returning the Abstract Inherited Methods Set.
+     * @return Abstract Inherited Methods Set.
+     */
+    public Set<MethodUML> getAbstractInheritedMethods() {
+        Set    set = new HashSet<>();
+        for (MethodUML method : this.getInheritedMethods()) {
+            if (method.isAbstract())
+               set.add(method);
+        }
         return set;
     }
     
@@ -883,6 +915,10 @@ public abstract class Entity extends Element implements Encodable {
     
     @Override
     public String exportCode() {
+        System.out.println("Entity..: " + this.name);
+        System.out.println("All Meth: " + this.getAllMethods());
+        System.out.println("Exp Meth: " + this.getExportableMethods());
+        System.out.println("");
         String export  = this.getPackageCode();
                export += this.getImportsCode();
                export += this.getJavaDocCode();

@@ -100,7 +100,10 @@ public class ClassUML extends Entity {
     
     @Override
     public String getSignatureCode() {
-        String signature  = "public class " + this.name + " ";
+        String signature  = "public ";
+               signature += this.abstract_ ? "abstract " : "";
+               signature += "class ";
+               signature += this.name + " ";
                signature += this.getExtendsCode();
                signature += this.getImplementsCode();
         return signature;
@@ -147,23 +150,29 @@ public class ClassUML extends Entity {
             set.add(this.setPath(interface_.getFullPath()));
     }
     
-    /**
-     * Method responsible for returning the Implements Methods Set.
-     * @return Implements Methods Set.
-     */
+    @Override
     public Set<MethodUML> getImplementsMethods() {
         Set    set = new HashSet();
         for (InterfaceUML  interfaceUML_ : this.getRealizations())
-               set.addAll(interfaceUML_.getMethodsList());
+               set.addAll(interfaceUML_.getAllMethods());
         return set;
     }
     
+    @Override
     public Set<MethodUML> getAllMethods() {
-        Set    set = new HashSet(this.getMethodsList());
-        if (!this.isAbstract()) {
+        Set    set = new HashSet();
+               set.addAll(this.getMethodsList());
                set.addAll(this.getInheritedMethods());
                set.addAll(this.getImplementsMethods());
-        }
+        return set;
+    }
+    
+    @Override
+    public Set<MethodUML> getExportableMethods() {
+        Set    set = new HashSet();
+               set.addAll(this.getMethodsList());
+               set.addAll(this.getAbstractInheritedMethods());
+               set.addAll(this.getImplementsMethods());
         return set;
     }
     

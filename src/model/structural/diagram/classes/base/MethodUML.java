@@ -75,10 +75,17 @@ public class MethodUML extends Element implements Encodable {
     }
     
     @Override
+    public String getName() {
+        return this.constructor ? this.entity.getName() : this.name;
+    }
+    
+    @Override
     public void setName(String name) {
-        super.setName(name);
-        this.name = this.name.trim();
-        this.entity.setMinWidth();
+        if (!this.constructor) {
+            super.setName(name);
+            this.name = this.name.trim();
+            this.entity.setMinWidth();
+        }
     }
     
     /**
@@ -219,7 +226,25 @@ public class MethodUML extends Element implements Encodable {
      * @param abstract_ Method Abstract Flag.
      */
     public void setAbstract(boolean abstract_) {
-        this.abstract_ = abstract_;
+        this.abstract_  = abstract_;
+        this.updateVisibility();
+        this.updateAbstractClass();
+    }
+    
+    /**
+     * Method responsible for updating the Visibility.
+     */
+    private void updateVisibility() {
+        if (this.abstract_ && this.visibility.equalsIgnoreCase("private"))
+            this.setVisibility("public");
+    }
+    
+    /**
+     * Method responsible for updating the Abstract Class.
+     */
+    private void updateAbstractClass() {
+        if (this.entity.isClass() && this.abstract_)
+           ((ClassUML) this.entity).setAbstract(this.abstract_);
     }
     
     /**
@@ -304,7 +329,7 @@ public class MethodUML extends Element implements Encodable {
                code +=  this.abstract_   ? " abstract"          : "";
                code +=  this.final_      ? " final"             : "";
                code += !this.constructor ? this.getReturnCode() : "";
-               code += " " + this.name;
+               code +=  this.getNameCode();
                code +=  this.getParametersCode();
                code +=  this.abstract_   ? ";\n" : " {" + this.getDefaultBodyCode();
         return code;
@@ -316,6 +341,14 @@ public class MethodUML extends Element implements Encodable {
      */
     private String getReturnCode() {
         return " " + this.return_.getName();
+    }
+    
+    /**
+     * Method responsible for returning the Name Code.
+     * @return Name Code.
+     */
+    public String getNameCode() {
+        return " " + this.getName();
     }
     
     /**
@@ -500,7 +533,7 @@ public class MethodUML extends Element implements Encodable {
      * @return Method Parameters.
      */
     private String exportParameters() {
-        String export = "";
+        String export  = "";
         for (int i = 0; i < this.parameters.size(); i++)
                export += this.parameters.get(i).export();
         return export;

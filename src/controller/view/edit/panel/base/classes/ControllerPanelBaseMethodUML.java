@@ -56,7 +56,7 @@ public class ControllerPanelBaseMethodUML extends ControllerPanel {
      */
     private void actionConstructor() {
         this.panelBaseMethodUML.getNameTextField().setEnabled(!this.panelBaseMethodUML.getConstructorCheckBox().isSelected());
-        this.panelBaseMethodUML.getNameTextField().setText(this.panelBaseMethodUML.getConstructorCheckBox().isSelected() ? this.panelBaseMethodUML.getMethodUML().getEntity().getName(): this.panelBaseMethodUML.getMethodUML().getName());
+        this.panelBaseMethodUML.getNameTextField().setText(this.panelBaseMethodUML.getMethodUML().getName().trim());
         this.panelBaseMethodUML.getReturnComboBox().setEnabled(!this.panelBaseMethodUML.getConstructorCheckBox().isSelected());
         this.panelBaseMethodUML.getAbstractCheckBox().setEnabled(!this.panelBaseMethodUML.getConstructorCheckBox().isSelected());
         this.panelBaseMethodUML.getAbstractCheckBox().setSelected(this.panelBaseMethodUML.getConstructorCheckBox().isSelected() ? false : this.panelBaseMethodUML.getAbstractCheckBox().isSelected());

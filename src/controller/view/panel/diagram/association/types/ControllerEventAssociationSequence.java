@@ -4,6 +4,7 @@ import com.mxgraph.model.mxCell;
 import controller.view.panel.diagram.association.ControllerEventAssociation;
 import model.structural.base.Element;
 import model.structural.diagram.SequenceDiagram;
+import model.structural.diagram.classes.Entity;
 import model.structural.diagram.sequence.base.association.MessageUML;
 import view.panel.diagram.types.PanelSequenceDiagram;
 

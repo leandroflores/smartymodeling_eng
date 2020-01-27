@@ -1,6 +1,8 @@
 package controller.view.panel.diagram;
 
 import com.mxgraph.model.mxCell;
+import com.mxgraph.model.mxGeometry;
+import com.mxgraph.model.mxGraphModel;
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -83,7 +85,34 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
     }
 
     @Override
-    public void mouseReleased(MouseEvent event) {}
+    public void mouseReleased(MouseEvent event) {
+        if (this.panelDiagram.getOperation().equalsIgnoreCase("Click"))
+            this.update(event);
+    }
+    
+    /**
+     * Method responsible for updating the Association Points.
+     * @param event Mouse Event.
+     */
+    public void update(MouseEvent event) {
+        if (this.panelDiagram.getGraph().getSelectionCell() != null) {
+            mxCell cell = (mxCell) this.panelDiagram.getGraph().getSelectionCell();
+            String id   = this.panelDiagram.getIdentifiers().get(cell);
+            if (this.panelDiagram.getDiagram().getAssociation(id) != null)
+                this.updatePoints(this.panelDiagram.getDiagram().getAssociation(id), cell);
+        }
+    }
+    
+    /**
+     * Method responsible for updating the Association Points from a Selected Cell.
+     * @param association Association.
+     * @param cell Selected Cell.
+     */
+    private void updatePoints(Association association, mxCell cell) {
+        mxGeometry geometry = ((mxGraphModel) (this.panelDiagram.getGraph().getModel())).getGeometry(cell);
+                   association.setPoints(geometry.getPoints());
+        this.panelDiagram.getViewMenu().setSave(false);
+    }
 
     @Override
     public void mouseEntered(MouseEvent event) {}

@@ -31,7 +31,8 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
     public void invoke(Object object, mxEventObject event) {
         Object cell = this.panel.getGraph().getSelectionCell();
         String id   = this.panel.getIdentifiers().get(cell);
-        this.move(id, event);
+        if (cell != null)
+            this.move(id, event);
     }
     
     /**

@@ -86,7 +86,7 @@ public final class PanelBaseMessageUML extends Panel {
      */
     private List<MethodUML> getMethodsList(InstanceUML instance) {
         if (instance.getClassUML() != null)
-            return ((InstanceUML) this.messageUML.getTarget()).getClassUML().getMethodsList();
+            return (List<MethodUML>) ((InstanceUML) this.messageUML.getTarget()).getClassUML().getAllMethods();
         return new ArrayList<>();
     }
     
