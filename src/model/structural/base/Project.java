@@ -56,7 +56,7 @@ public class Project implements Exportable {
         this.path    = "New_Project.smty";
         this.version = "2.0";
         this.init();
-        this.loadPrimitiveTypes();
+        this.loadDefaultTypes();
         this.loadSMartyStereotypes();
     }
     
@@ -455,18 +455,33 @@ public class Project implements Exportable {
     }
     
     /**
-     * Method responsible for adding Primitive Types.
+     * Method responsible for loading the Default Types.
+     */
+    private void loadDefaultTypes() {
+        this.loadPrimitiveTypes();
+        this.loadJavaLangTypes();
+        this.loadJavaUtilTypes();
+    }
+    
+    /**
+     * Method responsible for loading the Primitive Types.
      */
     private void loadPrimitiveTypes() {
-        this.addDefaultType(new TypeUML("TYPE#1",  "", "boolean", true));
-        this.addDefaultType(new TypeUML("TYPE#2",  "", "byte",    true));
-        this.addDefaultType(new TypeUML("TYPE#3",  "", "char",    true));
-        this.addDefaultType(new TypeUML("TYPE#4",  "", "double",  true));
-        this.addDefaultType(new TypeUML("TYPE#5",  "", "float",   true));
-        this.addDefaultType(new TypeUML("TYPE#6",  "", "int",     true));
-        this.addDefaultType(new TypeUML("TYPE#7",  "", "long",    true));
-        this.addDefaultType(new TypeUML("TYPE#8",  "", "short",   true));
-        this.addDefaultType(new TypeUML("TYPE#9",  "", "void",    true));
+        this.addDefaultType(new TypeUML("TYPE#1",  "", "boolean", "false", true));
+        this.addDefaultType(new TypeUML("TYPE#2",  "", "byte",    "'0'",   true));
+        this.addDefaultType(new TypeUML("TYPE#3",  "", "char",    "' '",   true));
+        this.addDefaultType(new TypeUML("TYPE#4",  "", "double",  "0.0d",  true));
+        this.addDefaultType(new TypeUML("TYPE#5",  "", "float",   "0.0f",  true));
+        this.addDefaultType(new TypeUML("TYPE#6",  "", "int",     "0",     true));
+        this.addDefaultType(new TypeUML("TYPE#7",  "", "long",    "0.0l",  true));
+        this.addDefaultType(new TypeUML("TYPE#8",  "", "short",   "0",     true));
+        this.addDefaultType(new TypeUML("TYPE#9",  "", "void",    "",      true));
+    }
+    
+    /**
+     * Method responsible for loading the Java Lang Types.
+     */
+    private void loadJavaLangTypes() {
         this.addDefaultType(new TypeUML("TYPE#10", "java.lang", "Boolean",       false));
         this.addDefaultType(new TypeUML("TYPE#11", "java.lang", "Byte",          false));
         this.addDefaultType(new TypeUML("TYPE#12", "java.lang", "Character",     false));
@@ -486,6 +501,12 @@ public class Project implements Exportable {
         this.addDefaultType(new TypeUML("TYPE#26", "java.lang", "StringBuilder", false));
         this.addDefaultType(new TypeUML("TYPE#27", "java.lang", "Thread",        false));
         this.addDefaultType(new TypeUML("TYPE#28", "java.lang", "Void",          false));
+    }
+    
+    /**
+     * Method responsible for loading the Java Util Types.
+     */
+    private void loadJavaUtilTypes() {
         this.addDefaultType(new TypeUML("TYPE#29", "java.util", "Arrays",        false));
         this.addDefaultType(new TypeUML("TYPE#30", "java.util", "Collections",   false));
         this.addDefaultType(new TypeUML("TYPE#31", "java.util", "Date",          false));
@@ -498,17 +519,17 @@ public class Project implements Exportable {
         this.addDefaultType(new TypeUML("TYPE#38", "java.util", "LinkedHashMap", false));
         this.addDefaultType(new TypeUML("TYPE#39", "java.util", "LinkedHashSet", false));
         this.addDefaultType(new TypeUML("TYPE#40", "java.util", "LinkedList",    false));
-        this.addDefaultType(new TypeUML("TYPE#41", "java.util", "List",    false));
-        this.addDefaultType(new TypeUML("TYPE#42", "java.util", "Map",     false));
-        this.addDefaultType(new TypeUML("TYPE#43", "java.util", "Queue",   false));
-        this.addDefaultType(new TypeUML("TYPE#44", "java.util", "Random",  false));
-        this.addDefaultType(new TypeUML("TYPE#45", "java.util", "Scanner", false));
-        this.addDefaultType(new TypeUML("TYPE#46", "java.util", "Set",     false));
-        this.addDefaultType(new TypeUML("TYPE#47", "java.util", "Stack",   false));
-        this.addDefaultType(new TypeUML("TYPE#48", "java.util", "Timer",   false));
-        this.addDefaultType(new TypeUML("TYPE#49", "java.util", "TreeMap", false));
-        this.addDefaultType(new TypeUML("TYPE#50", "java.util", "TreeSet", false));
-        this.addDefaultType(new TypeUML("TYPE#51", "java.util", "Vector",  false));
+        this.addDefaultType(new TypeUML("TYPE#41", "java.util", "List",          false));
+        this.addDefaultType(new TypeUML("TYPE#42", "java.util", "Map",           false));
+        this.addDefaultType(new TypeUML("TYPE#43", "java.util", "Queue",         false));
+        this.addDefaultType(new TypeUML("TYPE#44", "java.util", "Random",        false));
+        this.addDefaultType(new TypeUML("TYPE#45", "java.util", "Scanner",       false));
+        this.addDefaultType(new TypeUML("TYPE#46", "java.util", "Set",           false));
+        this.addDefaultType(new TypeUML("TYPE#47", "java.util", "Stack",         false));
+        this.addDefaultType(new TypeUML("TYPE#48", "java.util", "Timer",         false));
+        this.addDefaultType(new TypeUML("TYPE#49", "java.util", "TreeMap",       false));
+        this.addDefaultType(new TypeUML("TYPE#50", "java.util", "TreeSet",       false));
+        this.addDefaultType(new TypeUML("TYPE#51", "java.util", "Vector",        false));
     }
     
     /**

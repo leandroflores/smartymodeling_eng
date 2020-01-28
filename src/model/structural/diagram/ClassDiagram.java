@@ -452,6 +452,14 @@ public final class ClassDiagram extends Diagram {
     }
     
     /**
+     * Method responsible for returning the Abstract Visibilities Array.
+     * @return Abstract Visibilities Array.
+     */
+    public String[] getAbstractVisibilites() {
+        return new String[] {"default", "public"};
+    }
+    
+    /**
      * Method responsible for Shift X for Cardinalities.
      * @param element Element.
      * @param distance Shift Distance.

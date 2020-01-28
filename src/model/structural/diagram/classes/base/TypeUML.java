@@ -15,6 +15,7 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
     private String  id;
     private String  path;
     private String  name;
+    private String  value;
     private boolean primitive;
     private boolean standard;
     
@@ -24,29 +25,7 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
     public TypeUML() {
         this.primitive = false;
         this.standard  = false;
-    }
-    
-    /**
-     * Alternative constructor method of Class.
-     * @param name Type Name.
-     */
-    public TypeUML(String name) {
-        this.path      = "";
-        this.name      = name;
-        this.primitive = true;
-        this.standard  = true;
-    }
-    
-    /**
-     * Alternative constructor method of Class.
-     * @param path Type Path.
-     * @param name Type Name.
-     */
-    public TypeUML(String path, String name) {
-        this.path      = path;
-        this.name      = name;
-        this.primitive = false;
-        this.standard  = true;
+        this.value     = "null";
     }
     
     /**
@@ -60,8 +39,22 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
         this.id        = id;
         this.path      = path;
         this.name      = name;
+        this.value     = "null";
         this.primitive = primitive;
         this.standard  = true;
+    }
+    
+    /**
+     * Alternative constructor method of Class.
+     * @param id Type Id.
+     * @param path Type Path.
+     * @param name Type Name.
+     * @param value Type Value.
+     * @param primitive Type Primitive. 
+     */
+    public TypeUML(String id, String path, String name, String value, boolean primitive) {
+        this(id, path, name, primitive);
+        this.value = value;
     }
     
     /**
@@ -72,6 +65,7 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
         this.id        = element.getAttribute("id");
         this.path      = element.getAttribute("path");
         this.name      = element.getAttribute("name");
+        this.value     = element.getAttribute("value");
         this.primitive = element.getAttribute("primitive").trim().toLowerCase().equals("true");
         this.standard  = element.getAttribute("standard").trim().toLowerCase().equals("true");
     }
@@ -81,11 +75,10 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
      * @param entity Entity.
      */
     public TypeUML(Entity entity) {
-        this.id        = entity.getId();
-        this.path      = entity.getFullPath();
-        this.name      = entity.getName();
-        this.primitive = false;
-        this.standard  = false;
+        this();
+        this.id   = entity.getId();
+        this.path = entity.getFullPath();
+        this.name = entity.getName();
     }
 
     /**
@@ -178,12 +171,29 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
         return this.path.equals("") ? "" : this.path + "." + this.name;
     }
     
+    /**
+     * Method responsible for returning if Type is Void.
+     * @return Type is Void.
+     */
+    public boolean isVoid() {
+        return this.getName().trim().equalsIgnoreCase("void");
+    }
+    
+    /**
+     * Method responsible for returning the Body Code.
+     * @return Body Code.
+     */
+    public String getBodyCode() {
+        return "return " + this.value + ";";
+    }
+    
     @Override
     public String export() {
         String export  = "    <type ";
                export += "id=\""        + this.id        + "\" ";
                export += "path=\""      + this.path      + "\" ";
                export += "name=\""      + this.name      + "\" ";
+               export += "value=\""     + this.value     + "\" ";
                export += "primitive=\"" + this.primitive + "\" ";
                export += "standard=\""  + this.standard  + "\"/>\n";
         return export;

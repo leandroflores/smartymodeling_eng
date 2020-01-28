@@ -284,14 +284,14 @@ public class MethodUML extends Element implements Encodable {
     }
     
     /**
-     * Method responsible for returning Parameters.
+     * Method responsible for returning the Parameters.
      * @return Parameters.
      */
-    private String parameters() {
+    private String printParameters() {
         if (this.parameters.isEmpty())   
             return "()";
         if (this.parameters.size() == 1)
-            return "(" + this.parameters.get(0).getTitle()+ ")";
+            return "(" + this.parameters.get(0).getTitle() + ")";
         String toReturn  = "(" + this.parameters.get(0).getTitle();
         for (int i = 1; i < this.parameters.size(); ++i)
                toReturn += ", " + this.parameters.get(i).getTitle();
@@ -299,18 +299,18 @@ public class MethodUML extends Element implements Encodable {
     }
     
     /**
-     * Method responsible for printing Parameters.
-     * @return Parameters.
+     * Method responsible for returning the Parameters Code.
+     * @return Parameters Code.
      */
-    private String printParameters() {
+    private String getParametersCode() {
         if (this.parameters.isEmpty())   
             return "()";
         if (this.parameters.size() == 1)
             return "(" + this.parameters.get(0).exportCode() + ")";
-        String code  = "(" + this.parameters.get(0).exportCode();
+        String code  = "("  + this.parameters.get(0).exportCode();
         for (int  i  = 1; i < this.parameters.size(); ++i)
                code += ", " + this.parameters.get(i).exportCode();
-        return code + ")";
+        return code +  ")";
     }
     
     /**
@@ -324,14 +324,47 @@ public class MethodUML extends Element implements Encodable {
     
     @Override
     public String exportCode() {
-        String code  =  this.visibility;
-               code +=  this.static_     ? " static"            : "";
-               code +=  this.abstract_   ? " abstract"          : "";
-               code +=  this.final_      ? " final"             : "";
+        String code  =  this.getSignatureCode();
                code += !this.constructor ? this.getReturnCode() : "";
                code +=  this.getNameCode();
                code +=  this.getParametersCode();
                code +=  this.abstract_   ? ";\n" : " {" + this.getDefaultBodyCode();
+        return code;
+    }
+    
+    /**
+     * Method responsible for returning the Default Code.
+     * @return Default Code.
+     */
+    public String exportDefaultCode() {
+        String code  = this.getDefaultSignatureCode();
+               code += this.getReturnCode();
+               code += " "   + this.name;
+               code += this.getParametersCode();
+               code += "{\n" + this.getBodyCode();
+        return code;
+    }
+    
+    /**
+     * Method responsible for returning the Signature Code.
+     * @return Signature Code.
+     */
+    public String getSignatureCode() {
+        String code  = this.visibility;
+               code += this.static_   ? " static"   : "";
+               code += this.abstract_ ? " abstract" : "";
+               code += this.final_    ? " final"    : "";
+        return code;
+    }
+    
+    /**
+     * Method responsible for returning the Default Signature Code.
+     * @return Default Signature Code.
+     */
+    public String getDefaultSignatureCode() {
+        String code  = this.visibility;
+               code += this.static_ ? " static" : "";
+               code += this.final_  ? " final"  : "";
         return code;
     }
     
@@ -352,37 +385,23 @@ public class MethodUML extends Element implements Encodable {
     }
     
     /**
-     * Method responsible for returning the Parameters Code.
-     * @return Parameters Code.
-     */
-    private String getParametersCode() {
-        return this.printParameters();
-    }
-    
-    /**
      * Method responsible for returning the Default Body Code.
      * @return Default Body Code.
      */
     private String getDefaultBodyCode() {
         if (this.constructor)
             return "}\n";
-        if (this.return_.getName().equals("void"))
+        if (this.return_.isVoid())
             return "\n    }\n";
-        if (this.return_.getName().equals("int"))
-            return "\n        return 0;\n    }\n";
-        if (this.return_.getName().equals("Integer"))
-            return "\n        return 0;\n    }\n";
-        if (this.return_.getName().equals("Long"))
-            return "\n        return 0L;\n    }\n";
-        if (this.return_.getName().equals("long"))
-            return "\n        return 0L;\n    }\n";
-        if (this.return_.getName().equals("String"))
-            return "\n        return \"\";\n    }\n";
-        if (this.return_.getName().equals("char"))
-            return "\n        return ' ';\n    }\n";
-        if (this.return_.getName().equals("boolean"))
-            return "\n        return true;\n    }\n";
-        return "\n        return null;\n    }\n";
+        return this.getBodyCode();
+    }
+    
+    /**
+     * Method responsible for returning the Body Code.
+     * @return Body Code.
+     */
+    private String getBodyCode() {
+        return "\n        " + this.return_.getBodyCode() + "\n    }\n";
     }
     
     /**
@@ -398,7 +417,7 @@ public class MethodUML extends Element implements Encodable {
      * @return Short Signature.
      */
     public String getShortSignature() {
-        return this.name + this.parameters();
+        return this.name + this.printParameters();
     }
     
     /**
@@ -440,7 +459,7 @@ public class MethodUML extends Element implements Encodable {
      * @return Method Description.
      */
     public String getDescription() {
-        return this.getVisibilitySymbol() + " " + this.name + this.printParameters() + this.getReturnSignature();
+        return this.getVisibilitySymbol() + " " + this.name + this.getParametersCode() + this.getReturnSignature();
     }
     
     /**
