@@ -16,9 +16,11 @@ public class Profile implements Exportable {
     private Stereotype variationPoint;
     private Stereotype inclusive;
     private Stereotype exclusive;
+    private Stereotype requires;
+    private Stereotype mutex;
     
     /**
-     * Method responsible for returning Mandatory Stereotype.
+     * Method responsible for returning the Mandatory Stereotype.
      * @return Mandatory Stereotype.
      */
     public Stereotype getMandatory() {
@@ -26,7 +28,7 @@ public class Profile implements Exportable {
     }
 
     /**
-     * Method responsible for setting Mandatory Stereotype.
+     * Method responsible for setting the Mandatory Stereotype.
      * @param mandatory Mandatory Stereotype.
      */
     public void setMandatory(Stereotype mandatory) {
@@ -34,7 +36,7 @@ public class Profile implements Exportable {
     }
 
     /**
-     * Method responsible for returning Optional Stereotype.
+     * Method responsible for returning the Optional Stereotype.
      * @return Optional Stereotype.
      */
     public Stereotype getOptional() {
@@ -42,7 +44,7 @@ public class Profile implements Exportable {
     }
 
     /**
-     * Method responsible for setting Optional Stereotype.
+     * Method responsible for setting the Optional Stereotype.
      * @param optional Optional Stereotype.
      */
     public void setOptional(Stereotype optional) {
@@ -50,7 +52,7 @@ public class Profile implements Exportable {
     }
 
     /**
-     * Method responsible for returning Variation Point Stereotype.
+     * Method responsible for returning the Variation Point Stereotype.
      * @return Variation Point Stereotype.
      */
     public Stereotype getVariationPoint() {
@@ -58,7 +60,7 @@ public class Profile implements Exportable {
     }
     
     /**
-     * Method responsible for setting Variation Point Stereotype.
+     * Method responsible for setting the Variation Point Stereotype.
      * @param variationPoint Variation Point Stereotype.
      */
     public void setVariationPoint(Stereotype variationPoint) {
@@ -66,7 +68,7 @@ public class Profile implements Exportable {
     }
 
     /**
-     * Method responsible for returning Inclusive Stereotype.
+     * Method responsible for returning the Inclusive Stereotype.
      * @return Inclusive Stereotype.
      */
     public Stereotype getInclusive() {
@@ -74,7 +76,7 @@ public class Profile implements Exportable {
     }
     
     /**
-     * Method responsible for setting Inclusive Stereotype.
+     * Method responsible for setting the Inclusive Stereotype.
      * @param inclusive Inclusive Stereotype.
      */
     public void setInclusive(Stereotype inclusive) {
@@ -82,7 +84,7 @@ public class Profile implements Exportable {
     }
 
     /**
-     * Method responsible for returning Exclusive Stereotype.
+     * Method responsible for returning the Exclusive Stereotype.
      * @return Exclusive Stereotype.
      */
     public Stereotype getExclusive() {
@@ -90,11 +92,43 @@ public class Profile implements Exportable {
     }
     
     /**
-     * Method responsible for setting Exclusive Stereotype.
+     * Method responsible for setting the Exclusive Stereotype.
      * @param exclusive Exclusive Stereotype.
      */
     public void setExclusive(Stereotype exclusive) {
         this.exclusive = exclusive;
+    }
+
+    /**
+     * Method responsible for returning the Requires Stereotype.
+     * @return Requires Stereotype.
+     */
+    public Stereotype getRequires() {
+        return this.requires;
+    }
+
+    /**
+     * Method responsible for setting the Requires Stereotype.
+     * @param requires Requires Stereotype.
+     */
+    public void setRequires(Stereotype requires) {
+        this.requires = requires;
+    }
+
+    /**
+     * Method responsible for returning the Mutex Stereotype.
+     * @return Mutex Stereotype.
+     */
+    public Stereotype getMutex() {
+        return this.mutex;
+    }
+
+    /**
+     * Method responsible for setting the Mutex Stereotype.
+     * @param mutex Mutex Stereotype.
+     */
+    public void setMutex(Stereotype mutex) {
+        this.mutex = mutex;
     }
 
     @Override
@@ -105,6 +139,8 @@ public class Profile implements Exportable {
                export += " variationPoint=\"" + this.variationPoint.getId() + "\"";
                export += " inclusive=\""      + this.inclusive.getId()      + "\"";
                export += " exclusive=\""      + this.exclusive.getId()      + "\"";
+               export += " requires=\""       + this.requires.getId()       + "\"";
+               export += " mutex=\""          + this.mutex.getId()          + "\"";
                export += "/>\n";
         return export;
     }
@@ -116,6 +152,8 @@ public class Profile implements Exportable {
                profile += "Variation Point = " + this.variationPoint + "\n";
                profile += "Inclusive       = " + this.inclusive      + "\n";
                profile += "Exclusive       = " + this.exclusive      + "\n";
+               profile += "Requires        = " + this.requires       + "\n";
+               profile += "Mutex           = " + this.mutex          + "\n";
         return profile;
     }
 }

@@ -56,7 +56,7 @@ public final class PanelStereotype extends Panel {
     @Override
     protected void addComponents() {
         this.add(this.createLabel("New: "), this.getConstraints(1, 1, 0, 0));
-        this.add(this.createTextField("stereotypeTextField", "", 16), this.getConstraints(2, 1, 1, 0));
+        this.add(this.createTextField("stereotypeTextField", "", 10), this.getConstraints(2, 1, 1, 0));
         this.add(this.createButton("newStereotypeButton", "New Stereotype"), this.getConstraints(2, 1, 3, 0));
       
         this.add(this.createComboBox("stereotypeComboBox", this.getValues(), 100), this.getConstraints(3, 1, 0, 1));
@@ -65,6 +65,7 @@ public final class PanelStereotype extends Panel {
         
         this.createList("stereotypesList");
         this.add(this.getStereotypesScrollPane(), this.getConstraints(5, 10, 0, 2));
+        this.getStereotypesScrollPane().setMinimumSize(new Dimension(150, 150));
     }
     
     /**

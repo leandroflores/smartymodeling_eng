@@ -35,8 +35,31 @@ public abstract class ExportCode {
     public abstract void export() throws IOException;
     
     /**
+     * Method responsible for deleting the Folder to Export.
+     * @throws IOException Exception to Delete the Folder.
+     */
+    protected void deleteFolder() throws IOException {
+        this.file = new File(this.path);
+        this.deleteFolder(this.file);
+    }
+    
+    /**
+     * Method responsible for deleting a Folder.
+     * @param file File Folder;
+     */
+    private void deleteFolder(File file) {
+        if (file.listFiles() != null) {
+            for (File current : file.listFiles()) {
+                this.deleteFolder(current);
+                file.delete();
+            }
+        }
+        file.delete();
+    }
+    
+    /**
      * Method responsible for creating the Folder to Export.
-     * @throws IOException Exception to create the Folder.
+     * @throws IOException Exception to Create the Folder.
      */
     protected void createFolder() throws IOException {
         this.file = new File(this.path);

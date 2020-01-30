@@ -37,7 +37,7 @@ public final class ViewEditAttribute extends ViewEdit {
         this.diagram    = diagram;
         this.attribute  = attribute;
         this.controller = new ControllerViewEditAttribute(this);
-        this.title      = "Edit Attribute";
+        this.title      = "Edit Attribute Data";
         this.initComponents();
     }
     

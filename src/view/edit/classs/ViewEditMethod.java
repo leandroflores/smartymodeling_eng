@@ -37,7 +37,7 @@ public final class ViewEditMethod extends ViewEdit {
         this.diagram    = diagram;
         this.method     = method;
         this.controller = new ControllerViewEditMethod(this);
-        this.title      = "Edit Method";
+        this.title      = "Edit Method Data";
         this.initComponents();
     }
     

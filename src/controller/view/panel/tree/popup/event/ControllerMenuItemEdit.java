@@ -13,6 +13,7 @@ import model.structural.diagram.classes.base.MethodUML;
 import view.edit.ViewEditDiagram;
 import view.edit.ViewEditElement;
 import view.edit.ViewEditProject;
+import view.edit.base.variability.ViewEditVariability;
 import view.edit.classs.ViewEditAttribute;
 import view.edit.classs.ViewEditMethod;
 import view.panel.tree.popup.TreePopup;
@@ -60,9 +61,9 @@ public class ControllerMenuItemEdit implements ActionListener {
         else if (object instanceof MethodUML)
             new ViewEditMethod(this.popup.getPanelTree().getViewMenu().getPanelModeling(),    this.getClassDiagram(node), (MethodUML) object).setVisible(true);
         else if (object instanceof Element)
-            new ViewEditElement(this.popup.getPanelTree().getViewMenu().getPanelModeling(),   this.getDiagram(node), (Element) object).setVisible(true);
-//        else if (object instanceof Variabilidade)
-//            this.editarVariabilidade(object, node);
+            new ViewEditElement(this.popup.getPanelTree().getViewMenu().getPanelModeling(),   this.getParentDiagram(node), (Element) object).setVisible(true);
+        else if (object instanceof Variability)
+            new ViewEditVariability(this.popup.getPanelTree().getViewMenu().getPanelModeling(),   this.getParentDiagram(node), (Variability) object).setVisible(true);
     }
     
     /**
@@ -86,6 +87,18 @@ public class ControllerMenuItemEdit implements ActionListener {
         while ((parent != null) && !(parent.getUserObject() instanceof ClassDiagram))
             parent = (DefaultMutableTreeNode) parent.getParent();
         return parent == null ? null : (ClassDiagram) parent.getUserObject();
+    }
+    
+    /**
+     * Method responsible for returning the Diagram from Element Node.
+     * @param  node JTree Node.
+     * @return Diagram.
+     */
+    private Diagram getParentDiagram(DefaultMutableTreeNode node) {
+        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
+        while ((parent != null) && !(parent.getUserObject() instanceof Diagram))
+            parent = (DefaultMutableTreeNode) parent.getParent();
+        return parent == null ? null : (Diagram) parent.getUserObject();
     }
     
     /**

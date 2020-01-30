@@ -48,6 +48,7 @@ public final class PanelBaseVariability extends Panel {
      */
     private void setSettings() {
         this.setLayout(new GridLayout(5, 2));
+        this.setMinimumSize(new Dimension(150, 150));
         this.setPreferredSize(new Dimension(50, 50));
         this.setSize(new Dimension(50, 50));
     }

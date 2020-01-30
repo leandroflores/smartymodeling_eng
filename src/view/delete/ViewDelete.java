@@ -72,7 +72,7 @@ public abstract class ViewDelete extends ViewModal {
     @Override
     public void addFooter() {
         this.add(this.createButton("yesButton", "   Yes   ", "yes"));
-        this.add(this.createButton("notButton", "   Not   ", "not"));
+        this.add(this.createButton("notButton", "   No    ", "not"));
     }
     
     /**

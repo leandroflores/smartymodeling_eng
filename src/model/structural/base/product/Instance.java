@@ -25,6 +25,7 @@ public class Instance implements Exportable {
     private String  name;
     private Product product;
     private Diagram diagram;
+    private HashMap folders;
     private HashMap artifacts;
     private HashMap relationships;
     
@@ -34,6 +35,7 @@ public class Instance implements Exportable {
     public Instance() {
         this.product       = null;
         this.diagram       = null;
+        this.folders       = new HashMap<>();
         this.artifacts     = new HashMap<>();
         this.relationships = new HashMap<>();
     }

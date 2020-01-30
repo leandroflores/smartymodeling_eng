@@ -18,12 +18,12 @@ import model.structural.base.interfaces.Modelable;
  * @see    model.structural.base.interfaces.Modelable
  */
 public class Artifact implements Exportable, Modelable {
-    private String   id;
-    private Instance instance;
-    private Element  element;
-    private Point    position;
-    private Point    global;
-    private Point    size;
+    protected String   id;
+    protected Instance instance;
+    protected Element  element;
+    protected Point    position;
+    protected Point    global;
+    protected Point    size;
     
     /**
      * Default constructor method of Class.

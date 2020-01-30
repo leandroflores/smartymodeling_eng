@@ -5,6 +5,7 @@ import java.util.List;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.base.Stereotype;
+import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 
 /**
@@ -86,17 +87,5 @@ public class ControllerProject {
         for (int i = 0; i < list.size(); i++)
                  array[i] = list.get(i);
         return   array;
-    }
-    
-    /**
-     * Method responsible for returning the Products Array.
-     * @return Products Array.
-     */
-    public Product[] getProducts() {
-        List<Product> list = this.project.getProductsList();
-        Product[] products = new Product[list.size()];
-        for (int i = 0; i < list.size(); i++)
-                  products[i] = list.get(i);
-        return    products;
     }
 }

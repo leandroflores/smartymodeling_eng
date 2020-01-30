@@ -68,7 +68,7 @@ public final class ViewNewVariability extends ViewNew {
      */
     private void addPanelBaseVariability() {
         this.panelBaseVariability = new PanelBaseVariability(this.getViewMenu(), this.diagram, this.variability);
-        this.createScrollPane("scrollPanelBaseVariability", this.panelBaseVariability);
+        this.createScrollPane("scrollPanelBaseVariability",  this.panelBaseVariability);
         this.getScrollPanelBaseVariability().setViewportView(this.panelBaseVariability);
         this.tabbedPane.add("Variability", this.getScrollPanelBaseVariability());
     }

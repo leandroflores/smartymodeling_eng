@@ -10,7 +10,7 @@ import model.structural.base.association.Association;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.association.RealizationUML;
-import org.w3c.dom.Element;
+import model.structural.base.Element;
 
 /**
  * <p>Class of Model <b>ClassUML</b>.</p>
@@ -40,7 +40,7 @@ public class ClassUML extends Entity {
      * Alternative constructor method of Class.
      * @param element W3C Element.
      */
-    public ClassUML(Element element) {
+    public ClassUML(org.w3c.dom.Element element) {
         super(element);
         this.type      = "class";
         this.abstract_ = element.getAttribute("abstract").equals("true");
@@ -79,6 +79,17 @@ public class ClassUML extends Entity {
     public void setFinal(boolean final_) {
         this.final_    = final_;
         this.abstract_ = this.final_ ? false : this.abstract_;
+    }
+    
+    @Override
+    public boolean isFirstConcrete() {
+        if (this.abstract_)
+            return false;
+        for (Element element : this.diagram.getSupers(this)) {
+            if (!((ClassUML) element).isAbstract())
+                return false;
+        }
+        return true;
     }
     
     @Override

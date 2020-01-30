@@ -38,7 +38,7 @@ public final class ViewEditElement extends ViewEdit {
         this.element    = element;
         this.diagram    = diagram;
         this.controller = new ControllerViewEditElement(this);
-        this.title      = "Edit Element";
+        this.title      = "Edit Element Data";
         this.initComponents();
     }
     

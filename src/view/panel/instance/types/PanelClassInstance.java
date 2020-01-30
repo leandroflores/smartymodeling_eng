@@ -97,8 +97,10 @@ public final class PanelClassInstance extends PanelInstance {
      * @param parent Parent Vertex.
      */
     private void addPackages(Artifact artifact, Object parent) {
-        for (PackageUML current : ((PackageUML) artifact.getElement()).getPackagesList()) 
-            this.addPackage(parent, artifact);
+        for (PackageUML current : ((PackageUML) artifact.getElement()).getPackagesList()) {
+            if (this.instance.contains(current))
+                this.addPackage(parent, artifact);
+        }
     }
     
     /**
@@ -109,7 +111,7 @@ public final class PanelClassInstance extends PanelInstance {
     private void addEntities(Artifact artifact, Object parent) {
         for (Entity entity : ((PackageUML) artifact.getElement()).getEntitiesList()) {
             Artifact current = this.instance.getArtifact(entity);
-            if (current != null) {
+            if ((current != null) && (this.instance.contains(entity))) {
                 if (entity instanceof ClassUML)
                     this.addClass(parent, current);
                 else if (entity instanceof InterfaceUML)

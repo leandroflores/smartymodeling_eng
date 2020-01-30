@@ -29,13 +29,13 @@ public final class ViewEditProfile extends ViewEdit {
         super(panel);
         this.profile    = profile;
         this.controller = new ControllerViewEditProfile(this);
-        this.title      = "Edit Profile";
+        this.title      = "Edit Profile Data";
         this.initComponents();
     }
     
     @Override
     public void initComponents() {
-        this.setSize(600, 320);
+        this.setSize(600, 350);
         this.addHeader();
         this.addComponents();
         this.addFooter();
@@ -45,7 +45,7 @@ public final class ViewEditProfile extends ViewEdit {
     @Override
     public void addComponents() {
         this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 200));
+        this.tabbedPane.setPreferredSize(new Dimension(550, 225));
         
         this.addPanelBaseProfile();
         

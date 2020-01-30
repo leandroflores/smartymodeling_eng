@@ -34,7 +34,7 @@ public final class ViewSave extends ViewModal {
 
     @Override
     public void initComponents() {
-        this.setTitle(ViewStyle.SYSTEM + "Confirmation");
+        this.setTitle(ViewStyle.SYSTEM + "Message");
         this.setSize(600, 190);
         this.addHeader();
         this.addComponents();
@@ -58,7 +58,7 @@ public final class ViewSave extends ViewModal {
     public void addFooter() {
         this.add(this.createButton("buttonYes",  "  Yes   ", "yes"));
         this.add(this.createButton("buttonNo",   "   No   ", "not"));
-        this.add(this.createButton("buttonBack", "  Back  ", "back"));
+        this.add(this.createButton("buttonBack", " Cancel ", "back"));
     }
     
     /**

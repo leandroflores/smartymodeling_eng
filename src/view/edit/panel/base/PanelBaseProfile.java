@@ -39,9 +39,9 @@ public final class PanelBaseProfile extends Panel {
      * Method responsible for defining the Settings.
      */
     private void setSettings() {
-        this.setLayout(new GridLayout(5, 2));
-        this.setPreferredSize(new Dimension(50, 50));
-        this.setSize(new Dimension(50, 50));
+        this.setLayout(new GridLayout(7, 2));
+        this.setPreferredSize(new Dimension(50, 70));
+        this.setSize(new Dimension(50, 70));
     }
     
     @Override
@@ -60,6 +60,12 @@ public final class PanelBaseProfile extends Panel {
         
         this.add(this.createLabel("Exclusive*: "));
         this.add(this.createTextField("exclusiveTextField", "", 20));
+        
+        this.add(this.createLabel("Requires*: "));
+        this.add(this.createTextField("requiresTextField", "", 20));
+        
+        this.add(this.createLabel("Mutex*: "));
+        this.add(this.createTextField("mutexTextField", "", 20));
     }
     
     /**
@@ -71,6 +77,8 @@ public final class PanelBaseProfile extends Panel {
         this.getVarPointTextField().setText(this.profile.getVariationPoint().getName());
         this.getInclusiveTextField().setText(this.profile.getInclusive().getName());
         this.getExclusiveTextField().setText(this.profile.getExclusive().getName());
+        this.getRequiresTextField().setText(this.profile.getRequires().getName());
+        this.getMutexTextField().setText(this.profile.getMutex().getName());
     }
     
     /**
@@ -127,5 +135,21 @@ public final class PanelBaseProfile extends Panel {
      */
     public JTextField getExclusiveTextField() {
         return this.textFields.get("exclusiveTextField");
+    }
+    
+    /**
+     * Method responsible for returning the Requires Text Field.
+     * @return Requires Text Field.
+     */
+    public JTextField getRequiresTextField() {
+        return this.textFields.get("requiresTextField");
+    }
+    
+    /**
+     * Method responsible for returning the Mutex Text Field.
+     * @return Mutex Text Field.
+     */
+    public JTextField getMutexTextField() {
+        return this.textFields.get("mutexTextField");
     }
 }

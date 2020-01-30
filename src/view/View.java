@@ -300,7 +300,8 @@ public abstract class View extends JFrame {
      * @return New JFileChooser.
      */
     public JFileChooser createFileChooser(String id) {
-        UIManager.put("FileChooser.cancelButtonText", "Cancel");
+        UIManager.put("FileChooser.cancelButtonText",  "Cancel");
+        UIManager.put("FileChooser.approveButtonText", "Open");
         JFileChooser fileChooser = new JFileChooser();
                      fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 //                     fileChooser.setFileFilter(new FileNameExtensionFilter("SMARTY", "smty", "smty"));

@@ -195,14 +195,28 @@ public abstract class PanelDiagram extends Panel {
     public void addAssociations() {
         for (int i = 0; i < this.diagram.getAssociationsList().size(); i++) {
             Association association = this.diagram.getAssociationsList().get(i);
+            String      title       = this.getTitle(association);
             this.graph.getStylesheet().putCellStyle(association.getStyleLabel(), association.getStyle());
-            mxCell     edge     = (mxCell) this.graph.insertEdge(this.parent, null, association.getTitle(), this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
+            mxCell     edge     = (mxCell) this.graph.insertEdge(this.parent, null, title, this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
             mxGeometry geometry = ((mxGraphModel) (this.graph.getModel())).getGeometry(edge);
                        geometry.setPoints(association.getPoints());
                        ((mxGraphModel) (this.graph.getModel())).setGeometry(edge, geometry);
             this.identifiers.put(edge, association.getId());
             this.objects.put(association.getId(), edge);
         }
+    }
+    
+    /**
+     * Method responsible for returning the Association Title.
+     * @param  association Association.
+     * @return Association Title.
+     */
+    private String getTitle(Association association) {
+        if (association.getType().equalsIgnoreCase("requires"))
+            return this.diagram.getProject().getProfile().getRequires().getName();
+        if (association.getType().equalsIgnoreCase("mutex"))
+            return this.diagram.getProject().getProfile().getMutex().getName();
+        return association.getTitle();
     }
     
     /**

@@ -73,7 +73,7 @@ public final class ViewConfirmation extends ViewModal {
     public void addFooter() {
         this.add(this.createButton("buttonYes",  "   Yes  ", "yes"));
         this.add(this.createButton("buttonNo",   "   No   ", "not"));
-        this.add(this.createButton("buttonBack", "  Back  ", "back"));
+        this.add(this.createButton("buttonBack", " Cancel ", "back"));
     }
     
     /**

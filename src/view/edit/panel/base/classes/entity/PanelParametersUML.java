@@ -56,6 +56,7 @@ public final class PanelParametersUML extends Panel {
         this.add(this.createButton("downButton",   "Down"));
     }
     
+    
     private void addTable() {
         this.createTable("parametersTable");
         this.addColumns("parametersTable", new String[]{"Name", "Type"});

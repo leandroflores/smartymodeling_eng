@@ -32,14 +32,12 @@ public class ControllerPanelBaseProject extends ControllerPanel {
     
     @Override
     public void keyPressed(KeyEvent event) {
-        if (this.panelBaseProject.getNameTextField().equals(event.getSource()))
-            this.update();
+        this.update();
     }
     
     @Override
     public void keyReleased(KeyEvent event) {
-        if (this.panelBaseProject.getNameTextField().equals(event.getSource()))
-            this.update();
+        this.update();
     }
 
     /**
@@ -47,7 +45,8 @@ public class ControllerPanelBaseProject extends ControllerPanel {
      * @return Project checked.
      */
     private boolean check() {
-        return this.check(this.panelBaseProject.getNameTextField().getText());
+        return this.check(this.panelBaseProject.getNameTextField().getText())
+            && this.check(this.panelBaseProject.getVersionTextField().getText());
     }
     
     /**
@@ -55,6 +54,7 @@ public class ControllerPanelBaseProject extends ControllerPanel {
      */
     private void update() {
         this.panelBaseProject.getProject().setName(this.panelBaseProject.getNameTextField().getText().trim());
+        this.panelBaseProject.getProject().setVersion(this.panelBaseProject.getVersionTextField().getText().trim());
         this.panelBaseProject.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseProject.getViewMenu().getPanelModeling().updateUI();
         this.panelBaseProject.getViewMenu().setSave(false);

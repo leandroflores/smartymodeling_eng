@@ -31,6 +31,7 @@ import view.edit.ViewEditProfile;
 import view.export.ViewExportDiagram;
 import view.export.ViewExportProduct;
 import view.export.code.ViewExportDiagramCode;
+import view.export.code.ViewExportInstanceCode;
 import view.message.ViewError;
 import view.message.ViewMessage;
 import view.message.ViewSave;
@@ -104,9 +105,11 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             this.exportProduct();
         else if (this.viewMenu.getMenuItemExportDiagramCode().equals(event.getSource()))
             this.exportDiagramCode();
-        else if (this.viewMenu.getMenuItemSystemInformation().equals(event.getSource()))
+        else if (this.viewMenu.getMenuItemExportInstanceCode().equals(event.getSource()))
+            this.exportInstanceCode();
+        else if (this.viewMenu.getMenuItemAboutInformation().equals(event.getSource()))
             new ViewSystemInformation(this.viewMenu).setVisible(true);
-        else if (this.viewMenu.getMenuItemSystemExit().equals(event.getSource()))
+        else if (this.viewMenu.getMenuItemAboutExit().equals(event.getSource()))
             this.exit();
     }
     
@@ -150,12 +153,12 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * Method responsible for opening a Project.
      */
     public void openProject() {
-        this.viewMenu.getFileChooserProject().setDialogTitle("Open a Project");
-        this.viewMenu.getFileChooserProject().setApproveButtonText("Open");
-        this.viewMenu.getFileChooserProject().setApproveButtonToolTipText("Open a Project");
-        this.viewMenu.getFileChooserProject().setToolTipText("Open");
-        if (this.viewMenu.getFileChooserProject().showSaveDialog(this.viewMenu) != 1) {
-            String path = this.viewMenu.getFileChooserProject().getSelectedFile().getAbsolutePath();
+        this.viewMenu.getFileChooserSaveProject().setDialogTitle("Open a Project");
+        this.viewMenu.getFileChooserSaveProject().setApproveButtonText("Open");
+        this.viewMenu.getFileChooserSaveProject().setApproveButtonToolTipText("Open a Project");
+        this.viewMenu.getFileChooserSaveProject().setToolTipText("Open");
+        if (this.viewMenu.getFileChooserSaveProject().showSaveDialog(this.viewMenu) != 1) {
+            String path = this.viewMenu.getFileChooserSaveProject().getSelectedFile().getAbsolutePath();
             try {
                 this.viewMenu.setProject(new ImportProject(path).getProject());
                 this.viewMenu.update();
@@ -171,10 +174,10 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * Method responsible for Saving a Project.
      */
     public void saveProject() {
-        this.viewMenu.getFileChooserProject().setDialogTitle("Save Project");
-        this.viewMenu.getFileChooserProject().setApproveButtonText("Save");
-        this.viewMenu.getFileChooserProject().setApproveButtonToolTipText("Save Project");
-        this.viewMenu.getFileChooserProject().setToolTipText("Save");
+        this.viewMenu.getFileChooserSaveProject().setDialogTitle("Save Project");
+        this.viewMenu.getFileChooserSaveProject().setApproveButtonText("Save");
+        this.viewMenu.getFileChooserSaveProject().setApproveButtonToolTipText("Save Project");
+        this.viewMenu.getFileChooserSaveProject().setToolTipText("Save");
         String path = this.viewMenu.getProject().getPath();
         if (this.viewMenu.getProject().getPath().equals("New_Project.smty"))
             this.viewMenu.getProject().setPath(this.getPath());
@@ -186,10 +189,10 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * Method responsible for Saving As a Project.
      */
     public void saveProjectAs() {
-        this.viewMenu.getFileChooserProject().setDialogTitle("Save Project As");
-        this.viewMenu.getFileChooserProject().setApproveButtonText("Save");
-        this.viewMenu.getFileChooserProject().setApproveButtonToolTipText("Save Project As");
-        this.viewMenu.getFileChooserProject().setToolTipText("Save");
+        this.viewMenu.getFileChooserSaveProject().setDialogTitle("Save Project As");
+        this.viewMenu.getFileChooserSaveProject().setApproveButtonText("Save As");
+        this.viewMenu.getFileChooserSaveProject().setApproveButtonToolTipText("Save Project As");
+        this.viewMenu.getFileChooserSaveProject().setToolTipText("Save");
         this.viewMenu.getProject().setPath(this.getPath());
     }
     
@@ -199,20 +202,20 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      */
     public String getPath() {
         String path = "New_Project.smty";
-        if (this.viewMenu.getFileChooserProject().showSaveDialog(this.viewMenu) != 1) {
-            path = this.viewMenu.getFileChooserProject().getSelectedFile().getAbsolutePath();
+        if (this.viewMenu.getFileChooserSaveProject().showSaveDialog(this.viewMenu) != 1) {
+            path = this.viewMenu.getFileChooserSaveProject().getSelectedFile().getAbsolutePath();
             path = (path.toLowerCase().endsWith(".smty")) ? path : path + ".smty";
         }
         return path;
     }
     
     /**
-     * Method responsible for exporting Project.
+     * Method responsible for exporting the Project.
      */
     public void exportProject() {
         try {
-            if (this.viewMenu.getFileChooserProject().getSelectedFile() != null) {
-                new ExportProject(this.viewMenu.getProject(), this.viewMenu.getFileChooserProject().getSelectedFile().getAbsolutePath()).export();
+            if (this.viewMenu.getFileChooserSaveProject().getSelectedFile() != null) {
+                new ExportProject(this.viewMenu.getProject(), this.viewMenu.getProject().getPath()).export();
                 this.viewMenu.setSave(true);
             }
         }catch (IOException exception) {
@@ -345,7 +348,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             if (!this.viewMenu.getProject().getDiagrams().isEmpty())
                 new ViewNewTraceability(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
             else
-                new ViewMessage(this.viewMenu, "Project without Elements!").setVisible(true);
+                new ViewMessage(this.viewMenu, "Project with no Elements!").setVisible(true);
         }
     }
     
@@ -377,7 +380,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             if (!this.viewMenu.getProject().getDiagrams().isEmpty())
                 new ViewExportDiagram(this.viewMenu).setVisible(true);
             else
-                new ViewMessage(this.viewMenu, "Project without Diagrams!").setVisible(true);
+                new ViewMessage(this.viewMenu, "Project with no Diagrams!").setVisible(true);
         }
     }
     
@@ -389,7 +392,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             if (!this.viewMenu.getProject().getProductsList().isEmpty())
                 new ViewExportProduct(this.viewMenu).setVisible(true);
             else
-                new ViewMessage(this.viewMenu, "Project without Products!").setVisible(true);
+                new ViewMessage(this.viewMenu, "Project with no Products!").setVisible(true);
         }
     }
     
@@ -401,7 +404,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             if (!this.viewMenu.getProject().getDiagrams("class").isEmpty())
                 new ViewExportDiagramCode(this.viewMenu).setVisible(true);
             else
-                new ViewMessage(this.viewMenu, "Project without Class Diagrams!").setVisible(true);
+                new ViewMessage(this.viewMenu, "Project with no Class Diagrams!").setVisible(true);
         }
     }
     
@@ -411,9 +414,9 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     private void exportInstanceCode() {
         if (this.viewMenu.getProject() != null) {
             if (!this.viewMenu.getProject().getInstances("class").isEmpty())
-                new ViewExportDiagramCode(this.viewMenu).setVisible(true);
+                new ViewExportInstanceCode(this.viewMenu).setVisible(true);
             else
-                new ViewMessage(this.viewMenu, "Project without Class Instances!").setVisible(true);
+                new ViewMessage(this.viewMenu, "Project with no Class Instances!").setVisible(true);
         }
     }
     

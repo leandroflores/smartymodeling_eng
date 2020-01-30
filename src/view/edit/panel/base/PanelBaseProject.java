@@ -45,23 +45,23 @@ public final class PanelBaseProject extends Panel {
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Version: "));
-        this.add(this.createTextFieldNoEditable("versionTextField", this.project.getVersion(), 5));
+        this.add(this.createLabel("Name*: "));
+        this.add(this.createTextField("nameTextField", this.project.getName(), 5));
         
         this.add(this.createLabel("Path: "));
         this.add(this.createTextFieldNoEditable("pathTextField", this.project.getPath(), 5));
         
-        this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.project.getName(), 5));
+        this.add(this.createLabel("Version: "));
+        this.add(this.createTextField("versionTextField", this.project.getVersion(), 5));
     }
     
     /**
      * Method responsible for setting the Project Values.
      */
     public void setValues() {
-        this.getVersionTextField().setText(this.project.getVersion());
-        this.getPathTextField().setText(this.project.getPath());
         this.getNameTextField().setText(this.project.getName());
+        this.getPathTextField().setText(this.project.getPath());
+        this.getVersionTextField().setText(this.project.getVersion());
     }
     
     /**
@@ -81,11 +81,11 @@ public final class PanelBaseProject extends Panel {
     }
     
     /**
-     * Method responsible for returning the Version Text Field.
-     * @return Version Text Field.
+     * Method responsible for returning the Name Text Field.
+     * @return Name Text Field.
      */
-    public JTextField getVersionTextField() {
-        return this.textFields.get("versionTextField");
+    public JTextField getNameTextField() {
+        return this.textFields.get("nameTextField");
     }
     
     /**
@@ -97,10 +97,10 @@ public final class PanelBaseProject extends Panel {
     }
     
     /**
-     * Method responsible for returning the Name Text Field.
-     * @return Name Text Field.
+     * Method responsible for returning the Version Text Field.
+     * @return Version Text Field.
      */
-    public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+    public JTextField getVersionTextField() {
+        return this.textFields.get("versionTextField");
     }
 }

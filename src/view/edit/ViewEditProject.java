@@ -29,7 +29,7 @@ public final class ViewEditProject extends ViewEdit {
         super(panel);
         this.project    = project;
         this.controller = new ControllerViewEditProject(this);
-        this.title      = "Edit Project";
+        this.title      = "Edit Project Data";
         this.initComponents();
     }
     

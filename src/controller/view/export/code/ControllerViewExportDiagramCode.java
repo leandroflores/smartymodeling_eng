@@ -14,6 +14,7 @@ import view.message.ViewError;
  * @author Leandro
  * @since  19/01/2020
  * @see    controller.view.export.ControllerViewExport
+ * @see    file.exportation.code.ExportDiagram
  * @see    model.structural.base.Diagram
  * @see    view.export.code.ViewExportDiagramCode
  */

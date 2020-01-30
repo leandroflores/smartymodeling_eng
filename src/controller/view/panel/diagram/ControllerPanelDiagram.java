@@ -74,15 +74,10 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
     }
     
     @Override
-    public void mouseClicked(MouseEvent event) {
-//        System.out.println("Clicked");
-    }
+    public void mouseClicked(MouseEvent event) {}
     
     @Override
-    public void mousePressed(MouseEvent event) {
-        System.out.println("Pressed");
-        System.out.println(this.panelDiagram.getGraph().getSelectionCell());
-    }
+    public void mousePressed(MouseEvent event) {}
 
     @Override
     public void mouseReleased(MouseEvent event) {
@@ -100,6 +95,7 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
             String id   = this.panelDiagram.getIdentifiers().get(cell);
             if (this.panelDiagram.getDiagram().getAssociation(id) != null)
                 this.updatePoints(this.panelDiagram.getDiagram().getAssociation(id), cell);
+            this.panelDiagram.updateUI();
         }
     }
     

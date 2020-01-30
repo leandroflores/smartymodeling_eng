@@ -36,6 +36,11 @@ public class InterfaceUML extends Entity {
     }
     
     @Override
+    public boolean isFirstConcrete() {
+        return false;
+    }
+    
+    @Override
     public Set<MethodUML> getAllMethods() {
         Set    set = new HashSet();
                set.addAll(this.getMethodsList());

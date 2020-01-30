@@ -1,6 +1,8 @@
 package controller.view.panel.instance;
 
 import com.mxgraph.model.mxCell;
+import com.mxgraph.model.mxGeometry;
+import com.mxgraph.model.mxGraphModel;
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -63,7 +65,33 @@ public class ControllerPanelInstance extends ControllerPanel implements MouseLis
     public void mousePressed(MouseEvent event) {}
 
     @Override
-    public void mouseReleased(MouseEvent event) {}
+    public void mouseReleased(MouseEvent event) {
+        this.update(event);
+    }
+    
+    /**
+     * Method responsible for updating the Relationship Points.
+     * @param event Mouse Event.
+     */
+    public void update(MouseEvent event) {
+        if (this.panelInstance.getGraph().getSelectionCell() != null) {
+            mxCell cell = (mxCell) this.panelInstance.getGraph().getSelectionCell();
+            String id   = this.panelInstance.getIdentifiers().get(cell);
+            if (this.panelInstance.getInstance().getRelationship(id) != null)
+                this.updatePoints(this.panelInstance.getInstance().getRelationship(id), cell);
+        }
+    }
+    
+    /**
+     * Method responsible for updating the Relationship Points from a Selected Cell.
+     * @param relationship Relationship.
+     * @param cell Selected Cell.
+     */
+    private void updatePoints(Relationship relationship, mxCell cell) {
+        mxGeometry geometry = ((mxGraphModel) (this.panelInstance.getGraph().getModel())).getGeometry(cell);
+                   relationship.setPoints(geometry.getPoints());
+        this.panelInstance.getViewMenu().setSave(false);
+    }
 
     @Override
     public void mouseEntered(MouseEvent event) {}
@@ -99,16 +127,30 @@ public class ControllerPanelInstance extends ControllerPanel implements MouseLis
      */
     public void delete() {
         if (this.panelInstance.getGraph() != null) {
-            mxCell       cell         = (mxCell) this.panelInstance.getGraph().getSelectionCell();
-            String       id           = this.panelInstance.getIdentifiers().get(cell);
-            Artifact     artifact     = this.panelInstance.getInstance().getArtifact(id);
-            Relationship relationship = this.panelInstance.getInstance().getRelationships().get(id);
-            if (artifact != null)
-                new ViewDeleteArtifact(this.panelInstance.getViewMenu().getPanelModeling(), artifact).setVisible(true);
-            else if (relationship != null)
-                this.panelInstance.getInstance().removeRelationship(relationship);
-            this.panelInstance.updateInstance();
-            this.panelInstance.getViewMenu().update();
+            mxCell cell = (mxCell) this.panelInstance.getGraph().getSelectionCell();
+            String id   = this.panelInstance.getIdentifiers().get(cell);
+            if (this.panelInstance.getInstance().getArtifact("id") != null)
+                this.delete(this.panelInstance.getInstance().getArtifact("id"));
+            else if (this.panelInstance.getInstance().getRelationship("id") != null)
+                this.delete(this.panelInstance.getInstance().getRelationship("id"));
         }
+    }
+    
+    /**
+     * Method responsible for removing a Artifact.
+     * @param artifact Artifact.
+     */
+    private void delete(Artifact artifact) {
+        new ViewDeleteArtifact(this.panelInstance.getViewMenu().getPanelModeling(), artifact).setVisible(true);
+        this.panelInstance.updateInstance();
+    }
+    
+    /**
+     * Method responsible for removing a Relationship.
+     * @param relationship Relationship.
+     */
+    private void delete(Relationship relationship) {
+        this.panelInstance.getInstance().removeRelationship(relationship);
+        this.panelInstance.updateInstance();
     }
 }

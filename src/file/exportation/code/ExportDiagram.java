@@ -30,6 +30,7 @@ public class ExportDiagram extends ExportCode {
     
     @Override
     public void export() throws IOException {
+        this.deleteFolder();
         this.createFolder();
         this.exportDiagram();
     }

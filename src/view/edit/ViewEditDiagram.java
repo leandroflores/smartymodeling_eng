@@ -29,7 +29,7 @@ public final class ViewEditDiagram extends ViewEdit {
         super(panel);
         this.diagram    = diagram;
         this.controller = new ControllerViewEditDiagram(this);
-        this.title      = "Edit Diagram";
+        this.title      = "Edit Diagram Data";
         this.initComponents();
     }
     

@@ -41,7 +41,7 @@ public abstract class ViewNew extends ViewModal {
     @Override
     public void addFooter() {
         this.add(this.createButton("insertButton", " Insert ", "insert"));
-        this.add(this.createButton("backButton",   "  Back  ", "back"));
+        this.add(this.createButton("backButton",   " Cancel ", "back"));
     }
     
     /**

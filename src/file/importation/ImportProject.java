@@ -152,6 +152,8 @@ public class ImportProject {
                 profile.setVariationPoint((Stereotype) this.project.getStereotypes().get(element.getAttribute("variationPoint")));
                 profile.setInclusive((Stereotype) this.project.getStereotypes().get(element.getAttribute("inclusive")));
                 profile.setExclusive((Stereotype) this.project.getStereotypes().get(element.getAttribute("exclusive")));
+                profile.setRequires((Stereotype) this.project.getStereotypes().get(element.getAttribute("requires")));
+                profile.setMutex((Stereotype) this.project.getStereotypes().get(element.getAttribute("mutex")));
         this.project.setProfile(profile);
     }
     

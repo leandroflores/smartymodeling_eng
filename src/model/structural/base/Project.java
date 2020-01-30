@@ -54,7 +54,7 @@ public class Project implements Exportable {
         this.id      = new FunctString().md5(new FunctDate().getFormattedDate(new Date()));
         this.name    = "Project0";
         this.path    = "New_Project.smty";
-        this.version = "2.0";
+        this.version = "1.0";
         this.init();
         this.loadDefaultTypes();
         this.loadSMartyStereotypes();
@@ -101,6 +101,8 @@ public class Project implements Exportable {
                 defaultProfile.setVariationPoint((Stereotype) this.stereotypes.get("STEREOTYPE#3"));
                 defaultProfile.setInclusive((Stereotype) this.stereotypes.get("STEREOTYPE#4"));
                 defaultProfile.setExclusive((Stereotype) this.stereotypes.get("STEREOTYPE#5"));
+                defaultProfile.setRequires((Stereotype) this.stereotypes.get("STEREOTYPE#6"));
+                defaultProfile.setMutex((Stereotype) this.stereotypes.get("STEREOTYPE#7"));
         return  defaultProfile;
     }
     

@@ -52,19 +52,19 @@ public final class PanelBaseVariants extends Panel {
      */
     private void setSettings() {
         this.setLayout(new GridBagLayout());
-        this.setPreferredSize(new Dimension(200, 300));
-        this.setSize(new Dimension(200, 300));
+        this.setMinimumSize(new Dimension(150, 150));
+//        this.setSize(new Dimension(200, 300));
     }
     
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Constraint: "), this.getConstraints(1, 1, 0, 0));
-        this.add(this.createComboBox("constraintComboBox", ControllerVariability.TYPES, 150), this.getConstraints(2, 1, 1, 0));
+        this.add(this.createComboBox("constraintComboBox", ControllerVariability.TYPES, 100), this.getConstraints(2, 1, 1, 0));
         this.add(this.createTextFieldNoEditable("minimumTextField", "0", 3), this.getConstraints(1, 1, 3, 0));
         this.add(this.createTextFieldNoEditable("maximumTextField", "0", 3), this.getConstraints(1, 1, 4, 0));        
         
         this.add(this.createLabel("Variant: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("variantComboBox", new ControllerDiagram(this.diagram).getDefaultElements(), 250), this.getConstraints(2, 1, 1, 1));
+        this.add(this.createComboBox("variantComboBox", new ControllerDiagram(this.diagram).getDefaultElements(), 175), this.getConstraints(2, 1, 1, 1));
         this.add(this.createButton("addVariantButton", "", "add.png"), this.getConstraints(1, 1, 3, 1));
         this.add(this.createButton("delVariantButton", "", "not.png"), this.getConstraints(1, 1, 4, 1));
         

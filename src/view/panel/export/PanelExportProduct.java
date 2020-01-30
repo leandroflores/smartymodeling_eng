@@ -5,7 +5,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
-import model.controller.structural.base.ControllerProject;
+import model.controller.structural.base.product.ControllerProduct;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import view.structural.ViewMenu;
@@ -40,7 +40,7 @@ public final class PanelExportProduct extends PanelExport {
         super.addDirectoryField();
         
         this.add(this.createLabel("Product: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("productComboBox", new ControllerProject(this.project).getProducts(), 250), this.getConstraints(4, 1, 1, 1));
+        this.add(this.createComboBox("productComboBox", new ControllerProduct(this.project).getProducts(), 250), this.getConstraints(4, 1, 1, 1));
         this.setProduct((Product) this.getProductComboBox().getSelectedItem());
         
         this.createList("instancesList");

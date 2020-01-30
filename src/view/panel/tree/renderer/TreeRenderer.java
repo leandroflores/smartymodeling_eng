@@ -1,6 +1,7 @@
 package view.panel.tree.renderer;
 
 import funct.FunctView;
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -51,9 +52,10 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
      * @param project Project.
      */
     public void setProjectIcon(Project project) {
-        this.setText(project.getName());
+        this.setText("<html><b>" + project.getName() + "</b></html>");
         this.setToolTipText(project.getName());
         this.setIcon(this.getImage(project.getIcon()));
+        this.setForeground(new Color(13, 57 ,115));
     }
     
     /**
@@ -121,9 +123,10 @@ public class TreeRenderer extends DefaultTreeCellRenderer {
      * @param variability Variability.
      */
     public void setVariabilityIcon(Variability variability) {
-        this.setText(variability.getName());
+        this.setText("<html><b>" + variability.getName() + "</b></html>");
         this.setToolTipText(variability.getName());
         this.setIcon(this.getImage(variability.getIcon()));
+        this.setForeground(new Color(13, 57 ,115));
     }
     
     /**

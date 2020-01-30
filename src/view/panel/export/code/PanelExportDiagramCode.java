@@ -14,7 +14,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining a Panel for showing the <b>Diagram Code Export</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  19/01/2020
- * @see    controller.view.panel.export.
+ * @see    controller.view.panel.export.code.ControllerPanelExportDiagramCode
  * @see    model.structural.base.Diagram
  * @see    view.panel.export.PanelExport
  */

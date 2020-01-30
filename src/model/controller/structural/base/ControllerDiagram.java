@@ -42,10 +42,23 @@ public class ControllerDiagram {
      * @return Default Elements Array.
      */
     public String[] getDefaultElements() {
-        List<Element> elements = this.diagram.getDefaultElementsList();
-        String[]      array    = new String[elements.size()];
-        for (int i = 0; i < elements.size(); i++)
-                    array[i] = elements.get(i).getAbstract();
+        List<Element> list  = this.diagram.getDefaultElementsList();
+        String[]      array = new String[list.size()];
+        for (int i = 0; i < list.size(); i++)
+                    array[i] = list.get(i).toString();
+        Arrays.sort(array);
+        return      array;
+    }
+    
+    /**
+     * Method responsible for returning the Default Elements Array.
+     * @return Default Elements Array.
+     */
+    public Element[] getAllElements() {
+        List<Element> list  = this.diagram.getDefaultElementsList();
+        Element[]     array = new Element[list.size()];
+        for (int i = 0; i < list.size(); i++)
+                    array[i] = list.get(i);
         Arrays.sort(array);
         return      array;
     }

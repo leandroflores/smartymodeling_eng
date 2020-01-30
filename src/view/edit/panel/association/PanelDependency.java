@@ -36,7 +36,8 @@ public final class PanelDependency extends Panel {
      */
     private void setSettings() {
         this.setLayout(new GridLayout(2, 0));
-        this.setPreferredSize(new Dimension(300, 100));
+        this.setMinimumSize(new Dimension(150, 150));
+        this.setPreferredSize(new Dimension(150, 150));
     }
     
     @Override

@@ -57,6 +57,8 @@ public class ControllerPanelBaseProfile extends ControllerPanel {
         this.panelBaseProfile.getProfile().getVariationPoint().setName(this.panelBaseProfile.getVarPointTextField().getText());
         this.panelBaseProfile.getProfile().getInclusive().setName(this.panelBaseProfile.getInclusiveTextField().getText());
         this.panelBaseProfile.getProfile().getExclusive().setName(this.panelBaseProfile.getExclusiveTextField().getText());
+        this.panelBaseProfile.getProfile().getRequires().setName(this.panelBaseProfile.getRequiresTextField().getText());
+        this.panelBaseProfile.getProfile().getMutex().setName(this.panelBaseProfile.getMutexTextField().getText());
     }
     
     /**

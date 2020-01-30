@@ -428,13 +428,19 @@ public abstract class Entity extends Element implements Encodable {
     }
     
     /**
+     * Method responsible for returning if the Entity is the First Concrete Class.
+     * @return Entity is First Concrete.
+     */
+    public abstract boolean isFirstConcrete();
+    
+    /**
      * Method responsible for returning the Abstract Inherited Methods Set.
      * @return Abstract Inherited Methods Set.
      */
     public Set<MethodUML> getAbstractInheritedMethods() {
         Set    set = new HashSet<>();
         for (MethodUML method : this.getInheritedMethods()) {
-            if (method.isAbstract())
+            if (this.isFirstConcrete() && method.isAbstract())
                set.add(method);
         }
         return set;
