@@ -1,13 +1,12 @@
 package file.importation.diagram.types;
 
 import file.importation.diagram.ImportDiagram;
-import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.diagram.UseCaseDiagram;
 import model.structural.diagram.usecase.base.ActorUML;
 import model.structural.diagram.usecase.base.association.ExtendUML;
 import model.structural.diagram.usecase.base.association.IncludeUML;
-import model.structural.diagram.usecase.base.association.RealizationUML;
+import model.structural.diagram.usecase.base.association.CommunicationUML;
 import model.structural.diagram.usecase.base.UseCaseUML;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -60,24 +59,24 @@ public class ImportUseCaseDiagram extends ImportDiagram {
     
     @Override
     protected void importAssociations() {
-        this.importRealizations();
+        this.importCommunications();
         this.importExtends();
         this.importIncludes();
     }
     
     /**
-     * Method responsible for importing Realizations.
+     * Method responsible for importing the Communications.
      */
-    private void importRealizations() {
-        NodeList realizations = this.element.getElementsByTagName("realization");
-        for (int i = 0; i < realizations.getLength(); i++) {
-            Element        current     = (Element) realizations.item(i);
-            ActorUML       actor       = (ActorUML)   this.diagram.getElement(current.getAttribute("actor"));
-            UseCaseUML     useCase     = (UseCaseUML) this.diagram.getElement(current.getAttribute("useCase"));
-            RealizationUML realization = new RealizationUML(actor, useCase);
-                           realization.setId(current.getAttribute("id"));
-                           super.addPoints(current, realization);
-            this.useCaseDiagram.addRealization(realization);
+    private void importCommunications() {
+        NodeList communications = this.element.getElementsByTagName("communication");
+        for (int i = 0; i < communications.getLength(); i++) {
+            Element          current       = (Element) communications.item(i);
+            ActorUML         actor         = (ActorUML)   this.diagram.getElement(current.getAttribute("actor"));
+            UseCaseUML       useCase       = (UseCaseUML) this.diagram.getElement(current.getAttribute("useCase"));
+            CommunicationUML communication = new CommunicationUML(actor, useCase);
+                             communication.setId(current.getAttribute("id"));
+                           super.addPoints(current, communication);
+            this.useCaseDiagram.addCommunication(communication);
         }
     }
     

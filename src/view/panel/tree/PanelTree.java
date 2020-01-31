@@ -54,22 +54,22 @@ public final class PanelTree extends Panel {
     @Override
     public void addComponents() {
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
-        
-//        DefaultMutableTreeNode root = new DefaultMutableTreeNode(this.project);
-        DefaultMutableTreeNode root = this.getProjectNode();
-        
-        this.tree      = new JTree(root);
+        this.addControllers(this.getProjectNode());
+//        this.expandTree();
+        this.add(this.tree);
+    }
+    
+    /**
+     * Method responsible for adding the Tree Controllers.
+     * @param node Project Node.
+     */
+    private void addControllers(DefaultMutableTreeNode node) {
+        this.tree      = new JTree(node);
         this.treePopup = new TreePopup(this);
         this.tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         this.tree.addMouseListener(new ControllerTreePopup(this.treePopup));
         this.tree.addKeyListener(new ControllerTreePopup(this.treePopup));
         this.tree.setCellRenderer(new TreeRenderer(this.tree));
-//        this.addDiagrams(root);
-//        this.addTraceabilities(root);
-//        this.addMetrics(root);
-//        this.addProducts(root);
-//        this.expandTree();
-        this.add(this.tree);
     }
     
     /**
@@ -98,8 +98,7 @@ public final class PanelTree extends Panel {
      * Method responsible for updating the Project Node.
      */
     public void updateProjectNode() {
-        if (this.nodes.get(this.project) != null)
-            ((DefaultTreeModel) this.tree.getModel()).reload((DefaultMutableTreeNode) this.nodes.get(this.project));
+        this.getTreeModel().reload(this.getNodeTree(this.project));
     }
     
     /**
@@ -170,8 +169,7 @@ public final class PanelTree extends Panel {
      * @param diagram Diagram. 
      */
     public void updateNode(Diagram diagram) {
-        if (this.nodes.get(diagram) != null)
-            ((DefaultTreeModel) this.tree.getModel()).reload((DefaultMutableTreeNode) this.nodes.get(diagram));
+        this.getTreeModel().reload(this.getNodeTree(diagram));
     }
     
     /**
@@ -229,8 +227,45 @@ public final class PanelTree extends Panel {
      * @param element Element. 
      */
     public void updateNode(Element element) {
-        if (this.nodes.get(element) != null)
-            ((DefaultTreeModel) this.tree.getModel()).reload((DefaultMutableTreeNode) this.nodes.get(element));
+        if (this.getNodeTree(element) != null) {
+            this.getTreeModel().reload(this.getNodeTree(element));
+            this.updateVariability(element);
+        }
+    }
+    
+    /**
+     * Method responsible for updating the Variability by Element Node.
+     * @param element Element.
+     */
+    public void updateVariability(Element element) {
+        DefaultMutableTreeNode node   = this.getNodeTree(element);
+        DefaultMutableTreeNode parent = this.getParent(node);
+        if (parent != null && parent.getUserObject() != null) {
+            if (parent.getUserObject() instanceof Diagram) {
+                this.updateVariationPoints((Diagram) parent.getUserObject(), element);
+                this.updateVariants((Diagram) parent.getUserObject(), element);
+            }
+        }
+    }
+    
+    /**
+     * Method responsible for updating the Variation Points Nodes.
+     * @param diagram Diagram.
+     * @param element Element.
+     */
+    private void updateVariationPoints(Diagram diagram, Element element) {
+        for (Variability variability : diagram.getVariationPoints(element))
+            this.updateNode(variability);
+    }
+    
+    /**
+     * Method responsible for updating the Variants Nodes.
+     * @param diagram Diagram.
+     * @param element Element.
+     */
+    private void updateVariants(Diagram diagram, Element element) {
+        for (Variability variability : diagram.filterVariants(element, ""))
+            this.updateNode(variability);
     }
     
     /**
@@ -332,12 +367,12 @@ public final class PanelTree extends Panel {
      * @param variability 
      */
     public void updateNode(Variability variability) {
-        if (this.nodes.get(variability) != null) {
-            DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.nodes.get(variability);
+        if (this.getNodeTree(variability) != null) {
+            DefaultMutableTreeNode node = this.getNodeTree(variability);
                                    node.removeAllChildren();
             this.addVariationPoint(variability, node);
             this.addVariants(variability, node);
-            ((DefaultTreeModel) this.tree.getModel()).reload(node);
+            this.getTreeModel().reload(node);
         }
     }
     
@@ -424,11 +459,41 @@ public final class PanelTree extends Panel {
     }
     
     /**
+     * Method responsible for returning the Parent Node.
+     * @param  node Node.
+     * @return Parent Node.
+     */
+    private DefaultMutableTreeNode getParent(DefaultMutableTreeNode node) {
+        if (node.getParent() != null)
+            return (DefaultMutableTreeNode) node.getParent();
+        return null;
+    }
+    
+    /**
+     * Method responsible for returning the Object Node.
+     * @param  object Object.
+     * @return Object Node.
+     */
+    public DefaultMutableTreeNode getNodeTree(Object object) {
+        if (this.nodes.get(object) != null)
+            return (DefaultMutableTreeNode) this.nodes.get(object);
+        return null;
+    }
+    
+    /**
      * Method responsible for returning the View Menu.
      * @return View Menu.
      */
     public ViewMenu getViewMenu() {
         return this.viewMenu;
+    }
+    
+    /**
+     * Method responsible for returning the Tree.
+     * @return Tree Model.
+     */
+    public DefaultTreeModel getTreeModel() {
+        return (DefaultTreeModel) this.tree.getModel();
     }
     
     /**

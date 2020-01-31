@@ -7,7 +7,7 @@ import model.structural.diagram.UseCaseDiagram;
 import model.structural.diagram.usecase.base.ActorUML;
 import model.structural.diagram.usecase.base.association.ExtendUML;
 import model.structural.diagram.usecase.base.association.IncludeUML;
-import model.structural.diagram.usecase.base.association.RealizationUML;
+import model.structural.diagram.usecase.base.association.CommunicationUML;
 import model.structural.diagram.usecase.base.UseCaseUML;
 import view.panel.diagram.types.PanelUseCaseDiagram;
 
@@ -76,9 +76,9 @@ public class ControllerEventAssociationUseCase extends ControllerEventAssociatio
      * @param association Association.
      */
     private void addRealizationUML(mxCell association) {
-        RealizationUML realizationUML = this.createRealizationUML(association);
+        CommunicationUML realizationUML = this.createRealizationUML(association);
         if (realizationUML != null)
-            this.diagram.addRealization(realizationUML);
+            this.diagram.addCommunication(realizationUML);
     }
     
     /**
@@ -86,11 +86,11 @@ public class ControllerEventAssociationUseCase extends ControllerEventAssociatio
      * @param  association Association.
      * @return Realization UML.
      */
-    private RealizationUML createRealizationUML(mxCell association) {
+    private CommunicationUML createRealizationUML(mxCell association) {
         Element source = this.getSource(association);
         Element target = this.getTarget(association);
         try {
-            return new RealizationUML((ActorUML) source, (UseCaseUML) target);
+            return new CommunicationUML((ActorUML) source, (UseCaseUML) target);
         }catch (ClassCastException exception) {
             return this.createRealizationUML(source, target);
         }
@@ -102,9 +102,9 @@ public class ControllerEventAssociationUseCase extends ControllerEventAssociatio
      * @param  target Actor UML
      * @return Realization UML.
      */
-    private RealizationUML createRealizationUML(Element source, Element target) {
+    private CommunicationUML createRealizationUML(Element source, Element target) {
         try {
-            return new RealizationUML((ActorUML) target, (UseCaseUML) source);
+            return new CommunicationUML((ActorUML) target, (UseCaseUML) source);
         }catch (ClassCastException exception) {
             return null;
         }

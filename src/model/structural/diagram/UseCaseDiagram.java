@@ -10,7 +10,7 @@ import model.structural.base.Project;
 import model.structural.diagram.usecase.base.ActorUML;
 import model.structural.diagram.usecase.base.association.ExtendUML;
 import model.structural.diagram.usecase.base.association.IncludeUML;
-import model.structural.diagram.usecase.base.association.RealizationUML;
+import model.structural.diagram.usecase.base.association.CommunicationUML;
 import model.structural.diagram.usecase.base.UseCaseUML;
 
 /**
@@ -26,7 +26,7 @@ import model.structural.diagram.usecase.base.UseCaseUML;
 public final class UseCaseDiagram extends Diagram {
     private HashMap<String, ActorUML>    actorsUML;
     private HashMap<String, UseCaseUML>  useCasesUML;
-    private HashMap<String, Association> realizationsUML;
+    private HashMap<String, Association> communicationsUML;
     private HashMap<String, Association> extendsUML;
     private HashMap<String, Association> includesUML;
     
@@ -51,12 +51,12 @@ public final class UseCaseDiagram extends Diagram {
     
     @Override
     public void init() {
-        this.type            = "UseCase";
-        this.actorsUML       = new HashMap<>();
-        this.useCasesUML     = new HashMap<>();
-        this.realizationsUML = new HashMap<>();
-        this.extendsUML      = new HashMap<>();
-        this.includesUML     = new HashMap<>();
+        this.type              = "UseCase";
+        this.actorsUML         = new HashMap<>();
+        this.useCasesUML       = new HashMap<>();
+        this.communicationsUML = new HashMap<>();
+        this.extendsUML        = new HashMap<>();
+        this.includesUML       = new HashMap<>();
     }
     
     /**
@@ -121,24 +121,24 @@ public final class UseCaseDiagram extends Diagram {
     }
     
     /**
-     * Method responsible for adding a Realization UML.
-     * @param realizationUML Realization UML.
+     * Method responsible for adding a Communication UML.
+     * @param communicationUML Communication UML.
      */
-    public void addRealization(RealizationUML realizationUML) {
-        realizationUML.setId(this.nextId(realizationUML));
-        if (this.realizationsUML.get(realizationUML.getId()) == null) {
-            this.realizationsUML.put(realizationUML.getId(), realizationUML);
-            this.addAssociation(realizationUML);
+    public void addCommunication(CommunicationUML communicationUML) {
+        communicationUML.setId(this.nextId(communicationUML));
+        if (this.communicationsUML.get(communicationUML.getId()) == null) {
+            this.communicationsUML.put(communicationUML.getId(), communicationUML);
+            this.addAssociation(communicationUML);
         }
     }
     
     /**
-     * Method responsible for removing a Realization UML.
-     * @param realizationUML Realization UML.
+     * Method responsible for removing a Communication UML.
+     * @param communicationUML Communication UML.
      */
-    public void removeRealization(RealizationUML realizationUML) {
-        super.removeAssociation(realizationUML);
-        this.realizationsUML.remove(realizationUML.getId());
+    public void removeCommunication(CommunicationUML communicationUML) {
+        super.removeAssociation(communicationUML);
+        this.communicationsUML.remove(communicationUML.getId());
     }
     
     /**
@@ -188,15 +188,15 @@ public final class UseCaseDiagram extends Diagram {
      * @param element Element.
      */
     private void removeAssociations(Element element) {
-        this.removeAssociation(element, this.realizationsUML);
+        this.removeAssociation(element, this.communicationsUML);
         this.removeAssociation(element, this.extendsUML);
         this.removeAssociation(element, this.includesUML);
     }
     
     @Override
     public void removeAssociation(Association association) {
-        if (association instanceof RealizationUML)
-            this.removeRealization((RealizationUML) association);
+        if (association instanceof CommunicationUML)
+            this.removeCommunication((CommunicationUML) association);
         else if (association instanceof ExtendUML)
             this.removeExtend((ExtendUML) association);
         else if (association instanceof IncludeUML)

@@ -63,12 +63,14 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     @Override
     public void mouseClicked(MouseEvent event) {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanelTree().getTree().getLastSelectedPathComponent();
-        if (!SwingUtilities.isLeftMouseButton(event))
-            this.showPopup(node, event);
-        else if (event.getClickCount() == 1)
-            this.showPanelEdit(node);
-        else if (event.getClickCount() == 2)
-            this.showPanel(node);
+        if (node != null) {
+            if (!SwingUtilities.isLeftMouseButton(event))
+                this.showPopup(node, event);
+            else if (event.getClickCount() == 1)
+                this.showPanelEdit(node);
+            else if (event.getClickCount() == 2)
+                this.showPanel(node);
+        }
     }
     
     @Override

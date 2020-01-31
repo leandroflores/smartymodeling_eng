@@ -8,7 +8,7 @@ import model.structural.diagram.usecase.base.ActorUML;
 import model.structural.diagram.usecase.base.UseCaseUML;
 
 /**
- * <p>Class of Model <b>RealizationUML</b>.</p>
+ * <p>Class of Model <b>CommunicationUML</b>.</p>
  * <p>Class responsible for representing <b>Use Case Realization UML</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  22/05/2019
@@ -16,17 +16,17 @@ import model.structural.diagram.usecase.base.UseCaseUML;
  * @see    model.structural.diagram.usecase.base.ActorUML
  * @see    model.structural.diagram.usecase.base.UseCaseUML
  */
-public class RealizationUML extends Association {
+public class CommunicationUML extends Association {
     
     /**
      * Default constructor method of Class.
      * @param actor Actor UML.
      * @param useCase Use Case UML.
      */
-    public RealizationUML(ActorUML actor, UseCaseUML useCase) {
+    public CommunicationUML(ActorUML actor, UseCaseUML useCase) {
         this.source = actor;
         this.target = useCase;
-        this.type   = "realization";
+        this.type   = "communication";
     }
 
     @Override
@@ -62,7 +62,7 @@ public class RealizationUML extends Association {
     
     @Override
     public String getStyleLabel() {
-        return "styleRealization";
+        return "styleCommunication";
     }
     
     @Override
