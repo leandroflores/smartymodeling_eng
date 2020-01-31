@@ -50,8 +50,9 @@ public class ControllerPanelBaseMethodAbsUML extends ControllerPanel {
         this.panelBaseMethodAbsUML.getMethodUML().setVisibility(this.panelBaseMethodAbsUML.getVisibilityComboBox().getSelectedItem().toString());
         this.panelBaseMethodAbsUML.getMethodUML().setName(this.panelBaseMethodAbsUML.getNameTextField().getText().trim());
         this.panelBaseMethodAbsUML.getMethodUML().setReturn((TypeUML) this.panelBaseMethodAbsUML.getReturnComboBox().getSelectedItem());
-        this.panelBaseMethodAbsUML.getViewMenu().setSave(false);
+        this.panelBaseMethodAbsUML.getViewMenu().getPanelProject().getPanelTree().updateNode(this.panelBaseMethodAbsUML.getMethodUML());
         this.panelBaseMethodAbsUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseMethodAbsUML.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseMethodAbsUML.getDiagram());
+        this.panelBaseMethodAbsUML.getViewMenu().setSave(false);
     }
 }

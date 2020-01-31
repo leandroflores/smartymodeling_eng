@@ -19,7 +19,6 @@ public class Variability implements Exportable {
     private Element variationPoint;
     private String  constraint;
     private String  bindingTime;
-    private boolean allowsBindingVar;
     private Integer minimum;
     private Integer maximum;
     private List<Element> variants;
@@ -43,7 +42,6 @@ public class Variability implements Exportable {
         this.name             = element.getAttribute("name");
         this.constraint       = element.getAttribute("constraint");
         this.bindingTime      = element.getAttribute("bindingTime");
-        this.allowsBindingVar = element.getAttribute("allowsBindingVar").contains("true");
         this.minimum          = Integer.parseInt(element.getAttribute("min"));
         this.maximum          = Integer.parseInt(element.getAttribute("max"));
         this.variants         = new ArrayList<>();
@@ -130,22 +128,6 @@ public class Variability implements Exportable {
     }
 
     /**
-     * Method responsible for returning the Variability Allows Binding Var.
-     * @return Variability Allows Binding Var.
-     */
-    public boolean isAllowsBindingVar() {
-        return this.allowsBindingVar;
-    }
-
-    /**
-     * Method responsible for defining the Variability Allows Binding Var.
-     * @param allowsBindingVar Variability Allows Binding Var.
-     */
-    public void setAllowsBindingVar(boolean allowsBindingVar) {
-        this.allowsBindingVar = allowsBindingVar;
-    }
-
-    /**
      * Method responsible for returning the Variability Minimum.
      * @return Variability Minimum.
      */
@@ -194,8 +176,8 @@ public class Variability implements Exportable {
             return "{" + this.variants.get(0).getName() + "}";
         String toReturn  = "{" + this.variants.get(0) + ", \n";
         for (int i = 1; i < this.variants.size() - 1; i++)
-               toReturn += this.variants.get(i).getName() + ", \n";
-        toReturn += this.variants.get(this.variants.size() - 1).getName() + "}";
+            toReturn += this.variants.get(i).getName() + ", \n";
+               toReturn += this.variants.get(this.variants.size() - 1).getName() + "}";
         return toReturn;
     }
     
@@ -264,7 +246,15 @@ public class Variability implements Exportable {
     }
     
     /**
-     * Method responsible for exporting Variants String.
+     * Method responsible for exporting the Variation Point String.
+     * @return Variation Point String.
+     */
+    private String exportVariationPoint() {
+        return " variationPoint=\"" + this.variationPoint.getId() + "\"";
+    }
+    
+    /**
+     * Method responsible for exporting the Variants String.
      * @return Variants String.
      */
     private String exportVariants() {
@@ -277,14 +267,13 @@ public class Variability implements Exportable {
     @Override
     public String export() {
         String export  = "    <variability";
-               export += " id=\""               + this.id                     + "\"";
-               export += " name=\""             + this.name                   + "\"";
-               export += " variationPoint=\""   + this.variationPoint.getId() + "\"";
-               export += " constraint=\""       + this.constraint             + "\"";
-               export += " bindingTime=\""      + this.bindingTime            + "\"";
-               export += " allowsBindingVar=\"" + this.allowsBindingVar       + "\"";
-               export += " min=\""              + this.minimum                + "\"";
-               export += " max=\""              + this.maximum                + "\"";
+               export += " id=\""          + this.id          + "\"";
+               export += " name=\""        + this.name        + "\"";
+               export += this.exportVariationPoint();
+               export += " constraint=\""  + this.constraint  + "\"";
+               export += " bindingTime=\"" + this.bindingTime + "\"";
+               export += " min=\""         + this.minimum     + "\"";
+               export += " max=\""         + this.maximum     + "\"";
                export += ">\n";
                export += this.exportVariants();
                export += "    </variability>\n";

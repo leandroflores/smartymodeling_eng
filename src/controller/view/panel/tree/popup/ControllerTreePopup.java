@@ -125,7 +125,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      * @param node JTree Node.
      */
     private void showPanelEdit(DefaultMutableTreeNode node) {
-        if (node.getUserObject() != null) {
+        if (node != null && node.getUserObject() != null) {
             Diagram diagram = this.getDiagram(node);
             if (node.getUserObject() instanceof Project)
                 this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditProject();

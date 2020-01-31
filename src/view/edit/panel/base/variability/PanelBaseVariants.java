@@ -128,9 +128,10 @@ public final class PanelBaseVariants extends Panel {
      * @return Variant Element.
      */
     public Element getVariant() {
-        String item = this.getVariantComboBox().getSelectedItem().toString();
-        String id   = item.substring(item.indexOf("[") + 1, item.indexOf("]")).trim();
-        return this.diagram.getElement(id);
+//        String item = this.getVariantComboBox().getSelectedItem().toString();
+//        String id   = item.substring(item.indexOf("[") + 1, item.indexOf("]")).trim();
+//        return this.diagram.getElement(id);
+        return (Element) this.getVariantComboBox().getSelectedItem();
     }
     
     /**

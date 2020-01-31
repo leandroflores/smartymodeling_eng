@@ -3,12 +3,12 @@ package view.edit.panel.base.variability;
 import controller.view.edit.panel.base.variability.ControllerPanelBaseVariability;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.controller.structural.base.ControllerDiagram;
 import model.controller.structural.base.variability.ControllerVariability;
 import model.structural.base.Diagram;
+import model.structural.base.Element;
 import model.structural.base.variability.Variability;
 import view.Panel;
 import view.structural.ViewMenu;
@@ -63,9 +63,6 @@ public final class PanelBaseVariability extends Panel {
 
         this.add(this.createLabel("Binding Time*: "));
         this.add(this.createComboBox("bindingTimeComboBox", ControllerVariability.BINDINGS, 15));
-        
-        this.add(this.createLabel("Allows Binding Var: "));
-        this.add(this.createCheckBox("allowsAddingVarCheckBox", "", true));
     }
     
     /**
@@ -85,16 +82,14 @@ public final class PanelBaseVariability extends Panel {
         this.getNameTextField().setText(this.variability.getName());
         this.setVariationPoint();
         this.getBindingTimeComboBox().setSelectedItem(this.variability.getBindingTime());
-        this.getAllowsAddingVarCheckBox().setSelected(this.variability.isAllowsBindingVar());
     }
     
     /**
      * Method responsible for setting the Variation Point.
      */
     public void setVariationPoint() {
-        String item = this.getVariationPointComboBox().getSelectedItem().toString();
-        String id   = item.substring(item.indexOf("[") + 1, item.indexOf("]")).trim();
-        this.variability.setVariationPoint(this.diagram.getElement(id));
+        Element element = (Element) this.getVariationPointComboBox().getSelectedItem();
+        this.variability.setVariationPoint(element);
         this.setVariantes();
         this.diagram.updateElementsStereotype();
     }
@@ -153,13 +148,5 @@ public final class PanelBaseVariability extends Panel {
      */
     public JComboBox getBindingTimeComboBox() {
         return this.comboBoxes.get("bindingTimeComboBox");
-    }
-    
-    /**
-     * Method responsible for returning the Allows Adding Var Check Box.
-     * @return Allows Adding Var Check Box.
-     */
-    public JCheckBox getAllowsAddingVarCheckBox() {
-        return this.checkBoxes.get("allowsAddingVarCheckBox");
     }
 }

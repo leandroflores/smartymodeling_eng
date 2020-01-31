@@ -52,8 +52,9 @@ public class ControllerPanelBaseAttributeUML extends ControllerPanel {
         this.panelBaseAttributeUML.getAttributeUML().setTypeUML((TypeUML) this.panelBaseAttributeUML.getTypeComboBox().getSelectedItem());
         this.panelBaseAttributeUML.getAttributeUML().setStatic(this.panelBaseAttributeUML.getStaticCheckBox().isSelected());
         this.panelBaseAttributeUML.getAttributeUML().setFinal(this.panelBaseAttributeUML.getFinalCheckBox().isSelected());
-        this.panelBaseAttributeUML.getViewMenu().setSave(false);
+        this.panelBaseAttributeUML.getViewMenu().getPanelProject().getPanelTree().updateNode(this.panelBaseAttributeUML.getAttributeUML());
         this.panelBaseAttributeUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseAttributeUML.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseAttributeUML.getDiagram());
+        this.panelBaseAttributeUML.getViewMenu().setSave(false);
     }
 }

@@ -405,9 +405,7 @@ public final class PanelClassDiagram extends PanelDiagram {
     
     @Override
     public void addAssociations() {
-        List<Association>   associations = this.diagram.getAssociationsList();
-        for (int i = 0; i < associations.size(); i++) {
-            Association association = associations.get(i);
+        for (Association association : this.diagram.getAssociationsList()) {
             this.graph.getStylesheet().putCellStyle(association.getStyleLabel(), association.getStyle());
             this.addNormalAssociation(association);
             if (association instanceof AssociationUML)

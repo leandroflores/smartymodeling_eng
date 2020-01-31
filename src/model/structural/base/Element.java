@@ -467,6 +467,6 @@ public abstract class Element implements Exportable, Modelable {
     
     @Override
     public String toString() {
-        return this.name;
+        return new FunctString().getInitUpperCase(this.type) + ": " + this.name;
     }
 }
