@@ -87,6 +87,12 @@ public abstract class Diagram implements Exportable {
     public abstract String getIcon();
     
     /**
+     * Method responsible for returning the Instance Icon Path.
+     * @return Instance Icon Path.
+     */
+    public abstract String getInstanceIcon();
+    
+    /**
      * Method responsible for returning Diagram Clone.
      * @return Diagram Clone.
      */

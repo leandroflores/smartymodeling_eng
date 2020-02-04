@@ -157,6 +157,11 @@ public final class ComponentDiagram extends Diagram {
     }
     
     @Override
+    public String getInstanceIcon() {
+        return "icons/product/instance/instance-component.png";
+    }
+    
+    @Override
     public ComponentDiagram getClone() {
         try {
             ComponentDiagram diagram = (ComponentDiagram) super.clone();

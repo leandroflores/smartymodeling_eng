@@ -66,8 +66,11 @@ public class ControllerEventAssociationSequence extends ControllerEventAssociati
      */
     private void addMessageUML(mxCell association) {
         MessageUML messageUML = this.createMessageUML(association);
-        if (messageUML != null)
+        if (messageUML != null) {
+            System.out.println("Messag: " + messageUML);
             this.diagram.addMessage(messageUML);
+            System.out.println("");
+        }
     }
     
     /**
@@ -78,6 +81,8 @@ public class ControllerEventAssociationSequence extends ControllerEventAssociati
     private MessageUML createMessageUML(mxCell association) {
         Element source = this.getSource(association);
         Element target = this.getTarget(association);
+        System.out.println("Source: " + source);
+        System.out.println("Target: " + target);
         try {
             return new MessageUML(source, target, this.getCategory());
         }catch (ClassCastException exception) {

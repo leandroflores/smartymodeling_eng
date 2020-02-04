@@ -211,6 +211,11 @@ public final class UseCaseDiagram extends Diagram {
     }
     
     @Override
+    public String getInstanceIcon() {
+        return "icons/product/instance/instance-use-case.png";
+    }
+    
+    @Override
     public UseCaseDiagram getClone() {
         try {
             UseCaseDiagram diagram = (UseCaseDiagram) super.clone();

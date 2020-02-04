@@ -458,7 +458,7 @@ public class Instance implements Exportable {
      * @return Instance Icon.
      */
     public String getIcon() {
-        return "icons/product/instance.png";
+        return this.diagram.getInstanceIcon();
     }
     
     /**
@@ -508,6 +508,6 @@ public class Instance implements Exportable {
     
     @Override
     public String toString() {
-        return this.id + " - " + this.name;
+        return this.name + " (" + this.diagram.getType() + ")";
     }
 }

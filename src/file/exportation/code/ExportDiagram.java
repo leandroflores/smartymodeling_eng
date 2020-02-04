@@ -28,6 +28,19 @@ public class ExportDiagram extends ExportCode {
         this.diagram = diagram;
     }
     
+    /**
+     * Alternative constructor method of Class.
+     * @param path Path to Export.
+     * @param name Folder Name to Export.
+     * @param diagram Diagram to Export.
+     */
+    public ExportDiagram(String path, String name, ClassDiagram diagram) {
+        super(path);
+        this.path    = path + "\\" + name;
+        this.folder  = path + "\\" + name;
+        this.diagram = diagram;
+    }
+    
     @Override
     public void export() throws IOException {
         this.deleteFolder();

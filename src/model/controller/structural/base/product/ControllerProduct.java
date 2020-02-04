@@ -44,7 +44,7 @@ public class ControllerProduct {
         List<Instance> list  = this.project.getInstances(type);
         Instance[] instances = new Instance[list.size()];
         for (int i = 0; i < list.size(); i++)
-               instances[i] = list.get(i);
+               instances[i]  = list.get(i);
         return instances;
     }
 }

@@ -49,18 +49,28 @@ public class ControllerViewExportInstanceCode extends ControllerViewExport {
         return true;
     }
     
+    /**
+     * Method responsible for checking the Name.
+     * @return Name is checked.
+     */
+    private boolean checkName() {
+        return this.check(this.viewExportInstanceCode.getPanelExportInstanceCode().getNameTextField(), "Name is required!");
+    }
+    
     @Override
     public boolean check() {
         return this.checkDirectory()
-            && this.checkInstance();
+            && this.checkInstance()
+            && this.checkName();
     }
 
     @Override
     public void export() {
         String   path     = this.viewExportInstanceCode.getPanelExportInstanceCode().getDirectoryTextField().getText().trim();
         Instance instance = this.viewExportInstanceCode.getPanelExportInstanceCode().getInstance();
+        String   name     = this.viewExportInstanceCode.getPanelExportInstanceCode().getNameTextField().getText().trim();
         try {
-            new ExportInstance(path, instance).export();
+            new ExportInstance(path, name, instance).export();
         } catch (IOException exception) {
             new ViewError(this.viewExportInstanceCode, "Error to Export the Code Instance!").setVisible(true);
         }

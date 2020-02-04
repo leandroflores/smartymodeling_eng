@@ -43,7 +43,6 @@ public class ExportEntity {
      * @throws IOException Exception to create File.
      */
     private void createFile() throws IOException {
-        System.out.println("Path: " + this.path + "\\" + this.entity.getName() + ".java");
         this.fileWriter  = new FileWriter(this.path + "\\" + this.entity.getName() + ".java");
         this.printWriter = new PrintWriter(this.fileWriter);
     }

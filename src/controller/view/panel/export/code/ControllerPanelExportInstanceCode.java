@@ -31,17 +31,25 @@ public class ControllerPanelExportInstanceCode extends ControllerPanelExport {
     public void actionPerformed(ActionEvent event) {
         super.actionPerformed(event);
         if (this.panelExportInstanceCode.getInstanceComboBox().equals(event.getSource()))
-            this.updateInstance();
+            this.update();
     }
 
     @Override
     public void keyPressed(KeyEvent event) {}
     
     /**
+     * Method responsible for returning the Selected Instance.
+     * @return Selected Instance.
+     */
+    private Instance getSelectedInstance() {
+        return (Instance) this.panelExportInstanceCode.getInstanceComboBox().getSelectedItem();
+    }
+    
+    /**
      * Method responsible for updating the Instance.
      */
-    private void updateInstance() {
-        if (this.panelExportInstanceCode.getInstanceComboBox().getSelectedItem() != null)
-            this.panelExportInstanceCode.setInstance((Instance) this.panelExportInstanceCode.getInstanceComboBox().getSelectedItem());
+    public void update() {
+        this.panelExportInstanceCode.getNameTextField().setText(this.getSelectedInstance().getName());
+        this.panelExportInstanceCode.setInstance((Instance) this.panelExportInstanceCode.getInstanceComboBox().getSelectedItem());
     }
 }

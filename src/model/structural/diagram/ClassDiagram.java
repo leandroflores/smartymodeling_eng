@@ -529,6 +529,11 @@ public final class ClassDiagram extends Diagram {
     }
     
     @Override
+    public String getInstanceIcon() {
+        return "icons/product/instance/instance-class.png";
+    }
+    
+    @Override
     public ClassDiagram getClone() {
         try {
             ClassDiagram diagram = (ClassDiagram) super.clone();

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
-import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.MethodUML;
 
 /**
@@ -56,6 +55,14 @@ public class MessageUML extends Association {
     @Override
     public String getId() {
         return super.getId() + "(" + this.sequence + ")";
+    }
+    
+    /**
+     * Method responsible for returning if the Message is a Loop.
+     * @return Message is a Loop.
+     */
+    public boolean isLoop() {
+        return this.source.equals(this.target);
     }
     
     /**

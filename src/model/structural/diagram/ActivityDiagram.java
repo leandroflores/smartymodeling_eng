@@ -255,6 +255,11 @@ public final class ActivityDiagram extends Diagram {
     }
 
     @Override
+    public String getInstanceIcon() {
+        return "icons/product/instance/instance-activity.png";
+    }
+    
+    @Override
     public Diagram getClone() {
         try {
             ActivityDiagram diagram = (ActivityDiagram) super.clone();

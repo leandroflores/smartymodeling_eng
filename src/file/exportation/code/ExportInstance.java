@@ -25,7 +25,20 @@ public class ExportInstance extends ExportCode {
     public ExportInstance(String path, Instance instance) {
         super(path);
         this.path     = path + "\\" + instance.getName();
-        System.out.println("Path: " + this.path);
+        this.folder   = path + "\\" + instance.getName();
+        this.instance = instance;
+    }
+    
+    /**
+     * Alternative constructor method of Class.
+     * @param path Path to Export.
+     * @param name Folder Name to Export.
+     * @param instance Instance to Export.
+     */
+    public ExportInstance(String path, String name, Instance instance) {
+        super(path);
+        this.path     = path + "\\" + name;
+        this.folder   = path + "\\" + name;
         this.instance = instance;
     }
     

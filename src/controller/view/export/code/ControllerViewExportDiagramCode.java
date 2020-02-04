@@ -50,18 +50,28 @@ public class ControllerViewExportDiagramCode extends ControllerViewExport {
         return true;
     }
     
+    /**
+     * Method responsible for checking the Name.
+     * @return Name is checked.
+     */
+    private boolean checkName() {
+        return this.check(this.viewExportDiagramCode.getPanelExportDiagramCode().getNameTextField(), "Name is required!");
+    }
+    
     @Override
     public boolean check() {
         return this.checkDirectory()
-            && this.checkDiagram();
+            && this.checkDiagram()
+            && this.checkName();
     }
 
     @Override
     public void export() {
         String  path    = this.viewExportDiagramCode.getPanelExportDiagramCode().getDirectoryTextField().getText().trim();
         Diagram diagram = this.viewExportDiagramCode.getPanelExportDiagramCode().getDiagram();
+        String  name    = this.viewExportDiagramCode.getPanelExportDiagramCode().getNameTextField().getText().trim();
         try {
-            new ExportDiagram(path, (ClassDiagram) diagram).export();
+            new ExportDiagram(path, name, (ClassDiagram) diagram).export();
         } catch (IOException exception) {
             new ViewError(this.viewExportDiagramCode, "Error to Export the Code Diagram!").setVisible(true);
         }

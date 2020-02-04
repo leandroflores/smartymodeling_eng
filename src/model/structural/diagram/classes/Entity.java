@@ -921,10 +921,6 @@ public abstract class Entity extends Element implements Encodable {
     
     @Override
     public String exportCode() {
-        System.out.println("Entity..: " + this.name);
-        System.out.println("All Meth: " + this.getAllMethods());
-        System.out.println("Exp Meth: " + this.getExportableMethods());
-        System.out.println("");
         String export  = this.getPackageCode();
                export += this.getImportsCode();
                export += this.getJavaDocCode();

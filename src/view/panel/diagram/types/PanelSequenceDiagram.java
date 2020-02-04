@@ -264,8 +264,12 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     
     @Override
     public void addAssociations() {
-        for (MessageUML message : this.diagram.getMessageList())
-            this.addMessage(message);
+        for (MessageUML message : this.diagram.getMessageList()) {
+            if (message.isLoop())
+                this.addSelfMessage(message);
+            else
+                this.addMessage(message);
+        }
     }
     
     /**
@@ -280,11 +284,27 @@ public final class PanelSequenceDiagram extends PanelDiagram {
         mxGeometry geometry = ((mxGraphModel) (this.graph.getModel())).getGeometry(edge);
                    geometry.setPoints(message.getPoints());
         ((mxGraphModel) (this.graph.getModel())).setGeometry(edge, geometry);
-
         this.identifiers.put(edge, message.getId());
         this.objects.put(message.getId(), edge);
     }
      
+    /**
+     * Method responsible for adding the Self Message Points.
+     * @param message Message UML.
+     */
+    private void addSelfMessage(MessageUML message) {
+        this.graph.getStylesheet().putCellStyle(message.getStyleLabel(), message.getStyle());
+        Object     source   = this.addPoint(message, message.getSource());
+        Object     target   = this.addSelfPoint(message, message.getTarget());
+        Object     object   = this.objects.get(message.getSource().getId());
+        mxCell     edge     = (mxCell) this.graph.insertEdge(object, message.getId(), message.getTitle(), source, target, message.getStyleLabel());
+        mxGeometry geometry = ((mxGraphModel) (this.graph.getModel())).getGeometry(edge);
+                   geometry.setPoints(message.getPoints());
+        ((mxGraphModel) (this.graph.getModel())).setGeometry(edge, geometry);
+        this.identifiers.put(edge, message.getId());
+        this.objects.put(message.getId(), edge);
+    }
+    
     /**
      * Method responsible for returning the Point Cell.
      * @param  message Message UML.
@@ -294,7 +314,22 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     private mxCell addPoint(MessageUML message, Element element) {
         this.getDefaultEdgeStyle().put("pointStyle", this.getPointStyle());
         Integer x = element.getWidth() / 2;
-        Integer y = 50 + (message.getSequence() * 25);
+        Integer y = 50 + (message.getSequence() * 35);
+        mxCell cell = (mxCell) this.graph.insertVertex(this.objects.get(element.getId()), null, "", x, y, 5, 5, "pointStyle");
+               cell.setConnectable(false);
+        return cell;
+    }
+    
+    /**
+     * Method responsible for returning the Self Point Cell.
+     * @param  message Message UML.
+     * @param  element Element.
+     * @return Self Point Cell.
+     */
+    private mxCell addSelfPoint(MessageUML message, Element element) {
+        this.getDefaultEdgeStyle().put("pointStyle", this.getPointStyle());
+        Integer x = element.getWidth() / 2;
+        Integer y = 50 + (message.getSequence() * 35) + 10;
         mxCell cell = (mxCell) this.graph.insertVertex(this.objects.get(element.getId()), null, "", x, y, 5, 5, "pointStyle");
                cell.setConnectable(false);
         return cell;

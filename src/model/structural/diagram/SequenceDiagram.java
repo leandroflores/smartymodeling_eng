@@ -364,6 +364,11 @@ public final class SequenceDiagram extends Diagram {
     }
 
     @Override
+    public String getInstanceIcon() {
+        return "icons/product/instance/instance-sequence.png";
+    }
+    
+    @Override
     public Diagram getClone() {
         try {
             SequenceDiagram diagram = (SequenceDiagram) super.clone();

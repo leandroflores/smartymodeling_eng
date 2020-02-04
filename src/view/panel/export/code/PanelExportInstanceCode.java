@@ -1,6 +1,5 @@
 package view.panel.export.code;
 
-import controller.view.panel.export.ControllerPanelExportDiagram;
 import controller.view.panel.export.code.ControllerPanelExportInstanceCode;
 import javax.swing.JComboBox;
 import model.controller.structural.base.product.ControllerProduct;
@@ -30,6 +29,7 @@ public final class PanelExportInstanceCode extends PanelExport {
         this.controller = new ControllerPanelExportInstanceCode(this);
         this.setSettings();
         this.addComponents();
+        this.getController().update();
     }
     
     @Override
@@ -37,16 +37,18 @@ public final class PanelExportInstanceCode extends PanelExport {
         super.addDirectoryField();
         
         this.add(this.createLabel("Instance*: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("instanceComboBox", new ControllerProduct(this.project).getInstances("class"), 250), this.getConstraints(4, 1, 1, 1));
+        this.add(this.createComboBox("instanceComboBox", new ControllerProduct(this.project).getInstances("class"), 250), this.getConstraints(5, 1, 1, 1));
         this.setInstance((Instance) this.getInstanceComboBox().getSelectedItem());
+        
+        super.addNameTextField();
     }
     
     /**
      * Method responsible for returning the Controller.
      * @return Controller.
      */
-    public ControllerPanelExportDiagram getController() {
-        return (ControllerPanelExportDiagram) this.controller;
+    public ControllerPanelExportInstanceCode getController() {
+        return (ControllerPanelExportInstanceCode) this.controller;
     }
     
     /**

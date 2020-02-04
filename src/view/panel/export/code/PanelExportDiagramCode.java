@@ -1,6 +1,5 @@
 package view.panel.export.code;
 
-import controller.view.panel.export.ControllerPanelExportDiagram;
 import controller.view.panel.export.code.ControllerPanelExportDiagramCode;
 import javax.swing.JComboBox;
 import model.controller.structural.base.ControllerProject;
@@ -31,6 +30,7 @@ public final class PanelExportDiagramCode extends PanelExport {
         this.controller = new ControllerPanelExportDiagramCode(this);
         this.setSettings();
         this.addComponents();
+        this.getController().update();
     }
     
     @Override
@@ -38,16 +38,18 @@ public final class PanelExportDiagramCode extends PanelExport {
         super.addDirectoryField();
         
         this.add(this.createLabel("Diagram*: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("diagramComboBox", new ControllerProject(this.project).getDiagrams("class"), 250), this.getConstraints(4, 1, 1, 1));
+        this.add(this.createComboBox("diagramComboBox", new ControllerProject(this.project).getDiagrams("class"), 250), this.getConstraints(5, 1, 1, 1));
         this.setDiagram((Diagram) this.getDiagramComboBox().getSelectedItem());
+        
+        super.addNameTextField();
     }
     
     /**
      * Method responsible for returning the Controller.
      * @return Controller.
      */
-    public ControllerPanelExportDiagram getController() {
-        return (ControllerPanelExportDiagram) this.controller;
+    public ControllerPanelExportDiagramCode getController() {
+        return (ControllerPanelExportDiagramCode) this.controller;
     }
     
     /**

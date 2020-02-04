@@ -47,9 +47,17 @@ public abstract class PanelExport extends Panel {
      */
     protected void addDirectoryField() {
         this.add(this.createLabel("Directory*: "), this.getConstraints(1, 1, 0, 0));
-        this.add(this.createTextFieldNoEditable("directoryTextField", "", 15), this.getConstraints(3, 1, 1, 0));
-        this.add(this.createButton("searchDirectoryButton", "", "Search Directory", "search.png"), this.getConstraints(1, 1, 4, 0));
+        this.add(this.createTextFieldNoEditable("directoryTextField", "", 15), this.getConstraints(4, 1, 1, 0));
+        this.add(this.createButton("searchDirectoryButton", "", "Search Directory", "search.png"), this.getConstraints(1, 1, 5, 0));
         this.createDirectoryChooser("searchDirectoryChooser");
+    }
+    
+    /**
+     * Method responsible for adding the Name Text Field.
+     */
+    protected void addNameTextField() {
+        this.add(this.createLabel("Name*: "), this.getConstraints(1, 1, 0, 2));
+        this.add(this.createTextField("nameTextField", "", 15), this.getConstraints(5, 1, 1, 2));
     }
     
     /**
@@ -90,5 +98,13 @@ public abstract class PanelExport extends Panel {
      */
     public JFileChooser getSearchDirectoryChooser() {
         return this.fileChoosers.get("searchDirectoryChooser");
+    }
+    
+    /**
+     * Method responsible for returning the Name Text Field.
+     * @return Name Text Field.
+     */
+    public JTextField getNameTextField() {
+        return this.textFields.get("nameTextField");
     }
 }

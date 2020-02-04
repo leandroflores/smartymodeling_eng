@@ -31,17 +31,25 @@ public class ControllerPanelExportDiagramCode extends ControllerPanelExport {
     public void actionPerformed(ActionEvent event) {
         super.actionPerformed(event);
         if (this.panelExportDiagramCode.getDiagramComboBox().equals(event.getSource()))
-            this.updateDiagram();
+            this.update();
     }
 
     @Override
     public void keyPressed(KeyEvent event) {}
     
     /**
+     * Method responsible for returning the Selected Diagram.
+     * @return Selected Diagram.
+     */
+    private Diagram getSelectedDiagram() {
+        return (Diagram) this.panelExportDiagramCode.getDiagramComboBox().getSelectedItem();
+    }
+    
+    /**
      * Method responsible for updating the Diagram.
      */
-    private void updateDiagram() {
-        if (this.panelExportDiagramCode.getDiagramComboBox().getSelectedItem() != null)
-            this.panelExportDiagramCode.setDiagram((Diagram) this.panelExportDiagramCode.getDiagramComboBox().getSelectedItem());
+    public void update() {
+        this.panelExportDiagramCode.getNameTextField().setText(this.getSelectedDiagram().getName());
+        this.panelExportDiagramCode.setDiagram(this.getSelectedDiagram());
     }
 }
