@@ -8,6 +8,8 @@ import java.util.Objects;
 import model.structural.base.Element;
 import model.structural.base.interfaces.Exportable;
 import model.structural.base.interfaces.Modelable;
+import model.structural.diagram.classes.Entity;
+import model.structural.diagram.classes.base.PackageUML;
 
 /**
  * <p>Class of Model <b>Artifact</b>.</p>
@@ -106,6 +108,22 @@ public class Artifact implements Exportable, Modelable {
         return this.element;
     }
 
+    /**
+     * Method responsible for returning if the Artifact is a Package.
+     * @return Artifact is a Package.
+     */
+    public boolean isPackage() {
+        return this.element instanceof PackageUML;
+    }
+    
+    /**
+     * Method responsible for returning if the Artifact is a Entity.
+     * @return Artifact is a Entity.
+     */
+    public boolean isEntity() {
+        return this.element instanceof Entity;
+    }
+    
     /**
      * Method responsible for defining the Artifact Element.
      * @param element Artifact Element.

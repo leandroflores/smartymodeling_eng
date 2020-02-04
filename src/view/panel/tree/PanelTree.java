@@ -454,8 +454,49 @@ public final class PanelTree extends Panel {
      * @param node Instance Node.
      */
     private void addArtifacts(Instance instance, DefaultMutableTreeNode node) {
-        for (Artifact artifact : instance.getArtifactsList())
-            node.add(new DefaultMutableTreeNode(artifact));
+        for (Artifact artifact : instance.getTreeArtifactsList())
+            node.add(this.getNode(instance, artifact));
+    }
+    
+    /**
+     * Method responsible for returning the Artifact Node.
+     * @param  instance Instance.
+     * @param  artifact Artifact.
+     * @return Artifact Node.
+     */
+    private DefaultMutableTreeNode getNode(Instance instance, Artifact artifact) {
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(artifact);
+        if (artifact.isPackage()) {
+            this.addEntities(instance, artifact, node);
+            this.addPackages(instance, artifact, node);
+        }
+        return node;
+    }
+    
+    /**
+     * Method responsible for adding the Artifact Nodes.
+     * @param instance Instance.
+     * @param artifact Artifact.
+     * @param node Artifact Node.
+     */
+    private void addEntities(Instance instance, Artifact artifact, DefaultMutableTreeNode node) {
+        for (Entity current : ((PackageUML) artifact.getElement()).getEntitiesList()) {
+            if (instance.contains(current))
+                node.add(this.getNode(instance, instance.getArtifact(current)));
+        }
+    }
+    
+    /**
+     * Method responsible for adding the Artifacts Nodes.
+     * @param instance Instance.
+     * @param artifact Artifact.
+     * @param node Artifact Node.
+     */
+    private void addPackages(Instance instance, Artifact artifact, DefaultMutableTreeNode node) {
+        for (PackageUML current : ((PackageUML) artifact.getElement()).getPackagesList()) {
+            if (instance.contains(current))
+                node.add(this.getNode(instance, instance.getArtifact(current)));
+        }
     }
     
     /**

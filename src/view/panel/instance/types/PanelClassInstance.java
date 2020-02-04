@@ -98,8 +98,9 @@ public final class PanelClassInstance extends PanelInstance {
      */
     private void addPackages(Artifact artifact, Object parent) {
         for (PackageUML current : ((PackageUML) artifact.getElement()).getPackagesList()) {
-            if (this.instance.contains(current))
-                this.addPackage(parent, artifact);
+            Artifact subpackage = this.instance.getArtifact(current);
+            if (subpackage != null)
+                this.addPackage(parent, subpackage);
         }
     }
     
@@ -111,7 +112,7 @@ public final class PanelClassInstance extends PanelInstance {
     private void addEntities(Artifact artifact, Object parent) {
         for (Entity entity : ((PackageUML) artifact.getElement()).getEntitiesList()) {
             Artifact current = this.instance.getArtifact(entity);
-            if ((current != null) && (this.instance.contains(entity))) {
+            if (current != null) {
                 if (entity instanceof ClassUML)
                     this.addClass(parent, current);
                 else if (entity instanceof InterfaceUML)
@@ -198,8 +199,8 @@ public final class PanelClassInstance extends PanelInstance {
      * @param packageUML Package UML.
      */
     private void addNameCell(mxCell parent, PackageUML packageUML) {
-        this.graph.getStylesheet().putCellStyle("nameStyle", packageUML.getNameStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, packageUML.getId() + "(name)", packageUML.getName(), 5, packageUML.getNamePosition(), packageUML.getWidth() - 10, 25, "nameStyle");
+        this.graph.getStylesheet().putCellStyle("nameStyle" + packageUML.getId(), packageUML.getNameStyle());
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, packageUML.getId() + "(name)", packageUML.getName(), 5, packageUML.getNamePosition(), packageUML.getWidth() - 10, 25, "nameStyle" + packageUML.getId());
                cell.setConnectable(false);
                cell.setId(packageUML.getId() + "(name)");
         this.identifiers.put(cell.getId(), packageUML.getId());
@@ -260,8 +261,8 @@ public final class PanelClassInstance extends PanelInstance {
      * @param entity Entity.
      */
     private void addNameCell(mxCell parent, Entity entity) {
-        this.graph.getStylesheet().putCellStyle("nameStyle", this.getStyle(entity.getNameStyle()));
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(name)", entity.getName(), 5, entity.getNamePosition(), entity.getWidth() - 10, 25, "nameStyle");
+        this.graph.getStylesheet().putCellStyle("nameStyle" + entity.getId(), this.getStyle(entity.getNameStyle()));
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(name)", entity.getName(), 5, entity.getNamePosition(), entity.getWidth() - 10, 25, "nameStyle" + entity.getId());
                cell.setConnectable(false);
                cell.setId(entity.getId() + "(name)");
         this.identifiers.put(cell.getId(), entity.getId());

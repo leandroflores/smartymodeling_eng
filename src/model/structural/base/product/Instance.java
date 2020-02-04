@@ -10,7 +10,9 @@ import model.structural.base.association.Association;
 import model.structural.base.interfaces.Exportable;
 import model.structural.base.variability.Mutex;
 import model.structural.base.variability.Requires;
+import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
+import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.PackageUML;
 
 /**
@@ -25,7 +27,6 @@ public class Instance implements Exportable {
     private String  name;
     private Product product;
     private Diagram diagram;
-    private HashMap folders;
     private HashMap artifacts;
     private HashMap relationships;
     
@@ -35,7 +36,6 @@ public class Instance implements Exportable {
     public Instance() {
         this.product       = null;
         this.diagram       = null;
-        this.folders       = new HashMap<>();
         this.artifacts     = new HashMap<>();
         this.relationships = new HashMap<>();
     }
@@ -122,7 +122,7 @@ public class Instance implements Exportable {
     public void setDiagram(Diagram diagram) {
         this.diagram = diagram;
     }
-    
+
     /**
      * Method responsible for returning the Instance Artifacts.
      * @return Instance Artifacts.
@@ -181,6 +181,16 @@ public class Instance implements Exportable {
                 return artifact;
         }
         return null;
+    }
+    
+    /**
+     * Method responsible for removing the Artifact by Element.
+     * @param element Element.
+     */
+    public void remove(Element element) {
+        Artifact artifact = this.getArtifact(element);
+        if (artifact != null)
+            this.removeArtifact(artifact);
     }
     
     /**
@@ -333,17 +343,6 @@ public class Instance implements Exportable {
     }
     
     /**
-     * Method responsible for removing a Artifact by Element.
-     * @param element Element.
-     */
-    public void remove(Element element) {
-        for (Artifact artifact : this.getArtifactsList()) {
-            if (artifact.getElement().equals(element))
-                this.removeArtifact(artifact);
-        }
-    }
-    
-    /**
      * Method responsible for removing the Relationships by Association.
      * @param association Association.
      */
@@ -415,13 +414,53 @@ public class Instance implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Tree Artifacts List.
+     * @return Tree Artifacts List.
+     */
+    public List<Artifact> getTreeArtifactsList() {
+        if (this.diagram instanceof ClassDiagram)
+            return this.getClassArtifactsList();
+        if (this.diagram instanceof ActivityDiagram)
+            return this.getActivityArtifactsList();
+        return this.getArtifactsList();
+    }
+    
+    /**
+     * Method responsible for returning the Artifacts List of a Class Diagram.
+     * @return Artifacts List of a Class Diagram.
+     */
+    public List<Artifact> getClassArtifactsList() {
+        List<Artifact> filter  = new ArrayList<>();
+        for (Artifact  artifact : this.getArtifactsList()) {
+            if (artifact.isPackage()  && ((PackageUML) artifact.getElement()).getParent() == null)
+                filter.add(artifact);
+            if (artifact.isEntity()   && ((Entity) artifact.getElement()).getPackageUML() == null)
+                filter.add(artifact);
+        }
+        return  filter;
+    }
+    
+    /**
+     * Method responsible for returning the Artifacts List of a Activity Diagram.
+     * @return Artifacts List of a Activity Diagram.
+     */
+    public List<Artifact> getActivityArtifactsList() {
+        List<Artifact> filter  = new ArrayList<>();
+        for (Artifact  artifact : this.getArtifactsList()) {
+            if (artifact.getElement().getType().equalsIgnoreCase("activity"))
+                filter.add(artifact);
+        }
+        return  filter;
+    }
+    
+    /**
      * Method responsible for returning the Instance Icon.
      * @return Instance Icon.
      */
     public String getIcon() {
         return "icons/product/instance.png";
     }
-        
+    
     /**
      * Method responsible for exporting the Artifacts.
      * @return Artifacts.
