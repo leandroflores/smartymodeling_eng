@@ -5,6 +5,7 @@ import com.mxgraph.model.mxGeometry;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
+import com.mxgraph.util.mxPoint;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationSequence;
 import controller.view.panel.diagram.event.ControllerEventFocus;
 import controller.view.panel.diagram.event.ControllerEventPoints;
@@ -329,7 +330,8 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     private mxCell addSelfPoint(MessageUML message, Element element) {
         this.getDefaultEdgeStyle().put("pointStyle", this.getPointStyle());
         Integer x = element.getWidth() / 2;
-        Integer y = 50 + (message.getSequence() * 35) + 10;
+        Integer y = 50 + (message.getSequence() * 35) + 25;
+        message.addDefaultPoint(new mxPoint(x + 50, y - 25), new mxPoint(x + 50, y));
         mxCell cell = (mxCell) this.graph.insertVertex(this.objects.get(element.getId()), null, "", x, y, 5, 5, "pointStyle");
                cell.setConnectable(false);
         return cell;

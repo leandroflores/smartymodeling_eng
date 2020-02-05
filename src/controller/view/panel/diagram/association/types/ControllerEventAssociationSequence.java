@@ -4,7 +4,6 @@ import com.mxgraph.model.mxCell;
 import controller.view.panel.diagram.association.ControllerEventAssociation;
 import model.structural.base.Element;
 import model.structural.diagram.SequenceDiagram;
-import model.structural.diagram.classes.Entity;
 import model.structural.diagram.sequence.base.association.MessageUML;
 import view.panel.diagram.types.PanelSequenceDiagram;
 
@@ -35,7 +34,7 @@ public class ControllerEventAssociationSequence extends ControllerEventAssociati
     public void addAssociation(mxCell association) {
         Element source = this.getSource(association);
         Element target = this.getTarget(association);
-        if (this.check(source, target) && this.distinct(source, target))
+        if (this.check(source, target))
             this.createAssociation(association);
     } 
     
@@ -66,11 +65,8 @@ public class ControllerEventAssociationSequence extends ControllerEventAssociati
      */
     private void addMessageUML(mxCell association) {
         MessageUML messageUML = this.createMessageUML(association);
-        if (messageUML != null) {
-            System.out.println("Messag: " + messageUML);
+        if (messageUML != null)
             this.diagram.addMessage(messageUML);
-            System.out.println("");
-        }
     }
     
     /**
@@ -81,8 +77,6 @@ public class ControllerEventAssociationSequence extends ControllerEventAssociati
     private MessageUML createMessageUML(mxCell association) {
         Element source = this.getSource(association);
         Element target = this.getTarget(association);
-        System.out.println("Source: " + source);
-        System.out.println("Target: " + target);
         try {
             return new MessageUML(source, target, this.getCategory());
         }catch (ClassCastException exception) {

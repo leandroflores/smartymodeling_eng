@@ -133,6 +133,18 @@ public abstract class Association implements Modelable, Exportable {
     }
     
     /**
+     * Method responsible for adding the Default Points in a Self Message.
+     * @param pointA Point A.
+     * @param pointB Point B.
+     */
+    public void addDefaultPoint(mxPoint pointA, mxPoint pointB) {
+        if (this.points.isEmpty()) {
+            this.addPoint(pointA);
+            this.addPoint(pointB);
+        }
+    }
+    
+    /**
      * Method responsible for adding a New Point to Association.
      * @param point New Point.
      */

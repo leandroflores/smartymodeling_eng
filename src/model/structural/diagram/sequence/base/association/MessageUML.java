@@ -200,6 +200,6 @@ public class MessageUML extends Association {
     
     @Override
     public String toString() {
-        return this.name;
+        return this.sequence + " - " + this.name;
     }
 }
