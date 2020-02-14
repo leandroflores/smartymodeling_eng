@@ -30,6 +30,7 @@ import model.structural.diagram.usecase.base.ActorUML;
  * <p>Class responsible for representing <b>Project</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  20/05/2019
+ * @see    model.structural.base.interfaces.Exportable
  */
 public class Project implements Exportable {
     private String  id;
@@ -517,7 +518,7 @@ public class Project implements Exportable {
         this.addDefaultType(new TypeUML("TYPE#34", "java.util", "EventListener", false));
         this.addDefaultType(new TypeUML("TYPE#35", "java.util", "HashMap",       false));
         this.addDefaultType(new TypeUML("TYPE#36", "java.util", "HashSet",       false));
-        this.addDefaultType(new TypeUML("TYPE#37", "java.util", "Hashtable",     false));
+        this.addDefaultType(new TypeUML("TYPE#37", "java.util", "HashTable",     false));
         this.addDefaultType(new TypeUML("TYPE#38", "java.util", "LinkedHashMap", false));
         this.addDefaultType(new TypeUML("TYPE#39", "java.util", "LinkedHashSet", false));
         this.addDefaultType(new TypeUML("TYPE#40", "java.util", "LinkedList",    false));
