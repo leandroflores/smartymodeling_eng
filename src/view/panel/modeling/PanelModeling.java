@@ -228,9 +228,9 @@ public final class PanelModeling extends Panel {
 //        Color color = new Color(0.925f, 0.925f, 0.925f, 1.00f);
         Color color = Color.WHITE;
         if (this.getPanelDiagram() != null)
-            return mxCellRenderer.createBufferedImage(this.getPanelDiagram().getGraph(),  null, 10, color, true, null);
+            return mxCellRenderer.createBufferedImage(this.getPanelDiagram().getGraph(),  null, 1, color, true, null);
         else if (this.getPanelInstance() != null)
-            return mxCellRenderer.createBufferedImage(this.getPanelInstance().getGraph(), null, 10, color, true, null);
+            return mxCellRenderer.createBufferedImage(this.getPanelInstance().getGraph(), null, 1, color, true, null);
         return null;
     }
     

@@ -58,8 +58,8 @@ public class ExportDiagram {
      */
     private BufferedImage getImage() {
         PanelDiagram panel = this.getPanelDiagram();
-                      panel.updateDiagram();
-        return mxCellRenderer.createBufferedImage(panel.getGraph(),  null, 5, Color.WHITE, true, null);
+                     panel.updateDiagram();
+        return mxCellRenderer.createBufferedImage(panel.getGraph(),  null, 1, Color.WHITE, true, null);
     }
     
     /**

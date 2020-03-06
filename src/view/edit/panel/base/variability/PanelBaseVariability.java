@@ -71,7 +71,7 @@ public final class PanelBaseVariability extends Panel {
      */
     private Object getSelectedItem() {
         if (this.variability.getVariationPoint() != null)
-            return this.variability.getVariationPoint().getAbstract();
+            return this.variability.getVariationPoint();
         return "";
     }
     

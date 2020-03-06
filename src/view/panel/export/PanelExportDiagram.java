@@ -1,8 +1,6 @@
 package view.panel.export;
 
 import controller.view.panel.export.ControllerPanelExportDiagram;
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
 import javax.swing.JComboBox;
 import model.controller.structural.base.ControllerProject;
 import model.structural.base.Diagram;

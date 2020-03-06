@@ -57,7 +57,7 @@ public class ExportInstance {
     private BufferedImage getImage() {
         PanelInstance panel = this.getPanelInstance();
                       panel.updateInstance();
-        return mxCellRenderer.createBufferedImage(panel.getGraph(),  null, 5, Color.WHITE, true, null);
+        return mxCellRenderer.createBufferedImage(panel.getGraph(),  null, 1, Color.WHITE, true, null);
     }
     
     /**
