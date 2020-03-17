@@ -62,7 +62,7 @@ public final class SequenceDiagram extends Diagram {
      * @return Min Height.
      */
     public Integer getMinHeigth() {
-        return Math.max(250, 100 + (this.messages.size() * 30));
+        return Math.max(250, 140 + (this.messages.size() * 30));
     }
     
     /**
@@ -275,6 +275,26 @@ public final class SequenceDiagram extends Diagram {
     }
     
     /**
+     * Method responsible for changing the Message Names.
+     * @param method Method changed.
+     */
+    public void changeNames(MethodUML method) {
+        for (MessageUML message : this.getMessageList())
+            message.changeName(method);
+    }
+    
+    /**
+     * Method responsible for updating the Next Messages.
+     * @param message Message to be removed.
+     */
+    public void updateNextMessages(MessageUML message) {
+        for (MessageUML current : this.getMessageList()) {
+            if (current.getSequence() > message.getSequence())
+                current.dy(-40);
+        }
+    }
+    
+    /**
      * Method responsible for reseting the Message by Element.
      * @param element Element.
      */
@@ -293,6 +313,7 @@ public final class SequenceDiagram extends Diagram {
      */
     public void removeMessage(MessageUML message) {
         super.removeAssociation(message);
+        this.updateNextMessages(message);
         this.messages.remove(message.getId());
         this.updateSequence();
     }
@@ -327,7 +348,7 @@ public final class SequenceDiagram extends Diagram {
     public void updateSequence() {
         List<MessageUML> list = this.getMessageList();
         for (int i = 0; i < list.size(); i++)
-            list.get(i).setSequence(i + 1);
+            list.get(i).changeSequence(i + 1);
     }
     
     /**
@@ -335,12 +356,9 @@ public final class SequenceDiagram extends Diagram {
      * @return Message List.
      */
     public List<MessageUML> getMessageList() {
-        ArrayList<MessageUML>  message = new ArrayList<>();
-        ArrayList<Association> list    = new ArrayList<>(this.messages.values());
-        for (Association association : list)
-            message.add((MessageUML) association);
-               message.sort(this.getMessageComparator());
-        return message;
+        ArrayList list = new ArrayList<>(this.messages.values());
+                  list.sort(this.getMessageComparator());
+        return    list;
     }
     
     /**
@@ -351,9 +369,7 @@ public final class SequenceDiagram extends Diagram {
         return new Comparator<MessageUML>() {
             @Override
             public int compare(MessageUML messageA, MessageUML messageB) {
-                if (messageA.getSequence() <= messageB.getSequence())
-                    return -1;
-                return 1;
+                return messageA.getSequence().compareTo(messageB.getSequence());
             }
         };
     }

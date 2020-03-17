@@ -61,6 +61,9 @@ public final class PanelSequenceInstance extends PanelInstance {
         }
     }
     
+    /**
+     * Method responsible for loading the Default Styles.
+     */
     private void loadDefaultStyles() {
         this.graph.getStylesheet().putCellStyle("styleImageActor", this.getImageStyle("usecase/actor.png"));
         this.graph.getStylesheet().putCellStyle("styleImageClass", this.getImageStyle("classes/class.png"));

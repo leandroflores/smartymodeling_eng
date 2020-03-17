@@ -202,6 +202,39 @@ public abstract class Association implements Modelable, Exportable {
     }
     
     /**
+     * Method responsible for calculating Position Shift X.
+     * @param distance Distance.
+     */
+    public void dx(Integer distance) {
+        if (this.points != null) {
+            for (mxPoint point : this.getPoints())
+                point.setX(this.getValue(new Double(point.getX()).intValue(), distance));
+        }
+    }
+    
+    /**
+     * Method responsible for calculating Position Shift Y.
+     * @param distance Distance.
+     */
+    public void dy(Integer distance) {
+        if (this.points != null) {
+            for (mxPoint point : this.getPoints())
+                point.setY(this.getValue(new Double(point.getY()).intValue(), distance));
+        }
+    }
+    
+    /**
+     * Method responsibla for returning the New Coordinate Value.
+     * @param  old Old Value.
+     * @param  distance Distance.
+     * @return New Coordinate Value.
+     */
+    private Integer getValue(Integer old, Integer distance) {
+        Integer value = old + distance;
+        return  value > 0 ? value : 0;
+    }
+    
+    /**
      * Method responsible for setting the Loop Points.
      */
     public void setLoopPoints() {

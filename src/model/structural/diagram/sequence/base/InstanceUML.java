@@ -24,7 +24,7 @@ public class InstanceUML extends Element {
         this.name      = "Instance";
         this.type      = "instance";
         this.mandatory = true;
-        this.size      = new Point(200, 350);
+        this.size      = new Point(200, 380);
         this.classUML  = null;
     }
     

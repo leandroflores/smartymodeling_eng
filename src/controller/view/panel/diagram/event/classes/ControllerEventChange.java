@@ -104,6 +104,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
             method.setParameters(this.getParameters(signature));
             method.setReturn(this.getType(signature, false));
             this.panel.updateDiagram();
+            this.panel.getViewMenu().getProject().changeNames(method);
             this.panel.getViewMenu().update();
             this.panel.getViewMenu().setSave(false);
         }

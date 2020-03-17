@@ -1,6 +1,7 @@
 package model.structural.diagram.sequence.base.association;
 
 import com.mxgraph.util.mxConstants;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import model.structural.base.Element;
@@ -15,7 +16,7 @@ import model.structural.diagram.classes.base.MethodUML;
  * @see    model.structural.base.association.Association
  * @see    model.structural.diagram.sequence.base.LifelineUML
  */
-public class MessageUML extends Association {
+public class MessageUML extends Association implements Comparator<MessageUML> {
     private String    category;
     private String    name;
     private Integer   sequence;
@@ -51,11 +52,6 @@ public class MessageUML extends Association {
         this.sequence = 0;
         this.method   = null;
     }
-
-    @Override
-    public String getId() {
-        return super.getId() + "(" + this.sequence + ")";
-    }
     
     /**
      * Method responsible for returning if the Message is a Loop.
@@ -90,6 +86,15 @@ public class MessageUML extends Association {
     }
 
     /**
+     * Method responsible for changing the Name by Method.  
+    * @param method Method.
+     */
+    public void changeName(MethodUML method) {
+        if ((this.method != null) && (this.method.equals(method)))
+            this.name = "." + method.getShortSignature();
+    }
+    
+    /**
      * Method responsible for setting the Name.
      * @param name Name.
      */
@@ -104,15 +109,28 @@ public class MessageUML extends Association {
     public Integer getSequence() {
         return this.sequence;
     }
-
+    
     /**
      * Method responsible for setting the Sequence.
      * @param sequence Sequence.
      */
     public void setSequence(Integer sequence) {
+        this.sequence = this.sequence.equals(0) ? sequence : this.sequence;
+    }
+    
+    /**
+     * Method responsible for changing the Sequence.
+     * @param sequence Sequence.
+     */
+    public void changeSequence(Integer sequence) {
         this.sequence = sequence;
     }
 
+    @Override
+    public int compare(MessageUML message1, MessageUML message2) {
+        return message1.getSequence().compareTo(message2.getSequence());
+    }
+    
     /**
      * Method responsible for returning the Method UML.
      * @return Method UML.
@@ -200,6 +218,6 @@ public class MessageUML extends Association {
     
     @Override
     public String toString() {
-        return this.sequence + " - " + this.name;
+        return this.sequence + " - " + this.name + " (" + this.id + ")";
     }
 }

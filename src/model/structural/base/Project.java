@@ -1195,6 +1195,15 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for changing the Message Names on Sequence Diagram.
+     * @param method Method UML.
+     */
+    public void changeNames(MethodUML method) {
+        for (Object diagram : this.getDiagrams("sequence"))
+            ((SequenceDiagram) diagram).changeNames(method);
+    }
+    
+    /**
      * Method responsible for exporting the Links.
      * @return Links.
      */

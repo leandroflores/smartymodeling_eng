@@ -49,6 +49,8 @@ public class ControllerPanelBaseInstanceUML extends ControllerPanel {
     private void update() {
         this.panelBaseInstanceUML.getInstanceUML().setName(this.panelBaseInstanceUML.getNameTextField().getText().trim());
         this.panelBaseInstanceUML.getInstanceUML().setClassUML((ClassUML) this.panelBaseInstanceUML.getClassComboBox().getSelectedItem());
+        this.panelBaseInstanceUML.getInstanceUML().setMandatory(this.panelBaseInstanceUML.getMandatoryCheckBox().isSelected());
+        this.panelBaseInstanceUML.getDiagram().updateStereotype(this.panelBaseInstanceUML.getInstanceUML());
         this.panelBaseInstanceUML.getViewMenu().setSave(false);
         this.panelBaseInstanceUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseInstanceUML.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseInstanceUML.getDiagram());

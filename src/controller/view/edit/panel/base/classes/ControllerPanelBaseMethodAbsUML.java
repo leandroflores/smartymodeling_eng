@@ -52,6 +52,7 @@ public class ControllerPanelBaseMethodAbsUML extends ControllerPanel {
         this.panelBaseMethodAbsUML.getMethodUML().setReturn((TypeUML) this.panelBaseMethodAbsUML.getReturnComboBox().getSelectedItem());
         this.panelBaseMethodAbsUML.getViewMenu().getPanelProject().getPanelTree().updateNode(this.panelBaseMethodAbsUML.getMethodUML());
         this.panelBaseMethodAbsUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
+        this.panelBaseMethodAbsUML.getViewMenu().getProject().changeNames(this.panelBaseMethodAbsUML.getMethodUML());
         this.panelBaseMethodAbsUML.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseMethodAbsUML.getDiagram());
         this.panelBaseMethodAbsUML.getViewMenu().setSave(false);
     }

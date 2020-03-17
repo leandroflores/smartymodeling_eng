@@ -114,6 +114,7 @@ public class ControllerPanelBaseMethodUML extends ControllerPanel {
         this.panelBaseMethodUML.getMethodUML().setFinal(this.panelBaseMethodUML.getFinalCheckBox().isSelected());
         this.panelBaseMethodUML.getViewMenu().getPanelProject().getPanelTree().updateNode(this.panelBaseMethodUML.getMethodUML());
         this.panelBaseMethodUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
+        this.panelBaseMethodUML.getViewMenu().getProject().changeNames(this.panelBaseMethodUML.getMethodUML());
         this.panelBaseMethodUML.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseMethodUML.getDiagram());
         this.panelBaseMethodUML.getViewMenu().setSave(false);
     }

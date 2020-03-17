@@ -49,6 +49,8 @@ public class ControllerPanelBaseLifelineUML extends ControllerPanel {
     private void update() {
         this.panelBaseLifelineUML.getLifelineUML().setName(this.panelBaseLifelineUML.getNameTextField().getText().trim());
         this.panelBaseLifelineUML.getLifelineUML().setActor((ActorUML) this.panelBaseLifelineUML.getActorComboBox().getSelectedItem());
+        this.panelBaseLifelineUML.getLifelineUML().setMandatory(this.panelBaseLifelineUML.getMandatoryCheckBox().isSelected());
+        this.panelBaseLifelineUML.getDiagram().updateStereotype(this.panelBaseLifelineUML.getLifelineUML());
         this.panelBaseLifelineUML.getViewMenu().setSave(false);
         this.panelBaseLifelineUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseLifelineUML.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseLifelineUML.getDiagram());
