@@ -23,6 +23,7 @@ import view.panel.instance.PanelInstance;
 import view.panel.instance.types.PanelActivityInstance;
 import view.panel.instance.types.PanelClassInstance;
 import view.panel.instance.types.PanelComponentInstance;
+import view.panel.instance.types.PanelSequenceInstance;
 import view.panel.instance.types.PanelUseCaseInstance;
 import view.panel.logo.PanelLogo;
 import view.panel.tabbed.PanelTabbed;
@@ -153,8 +154,8 @@ public final class PanelModeling extends Panel {
                 return new PanelClassInstance(this.viewMenu, instance, (ClassDiagram) instance.getDiagram());
             case "Component":
                 return new PanelComponentInstance(this.viewMenu, instance, (ComponentDiagram) instance.getDiagram());
-//            case "Sequence":
-//                return new PanelSequenceInstance(this.viewMenu, instance, (SequenceDiagram) instance.getDiagram());
+            case "Sequence":
+                return new PanelSequenceInstance(this.viewMenu, instance, (SequenceDiagram) instance.getDiagram());
             case "UseCase":
                 return new PanelUseCaseInstance(this.viewMenu, instance, (UseCaseDiagram) instance.getDiagram());
             default:

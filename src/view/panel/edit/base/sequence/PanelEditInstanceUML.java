@@ -42,7 +42,6 @@ public final class PanelEditInstanceUML extends PanelEditElement {
         this.tabbedPane.setPreferredSize(new Dimension(100, 100));
         
         this.addPanelBaseInstanceUML();
-//        this.addPanelStereotype();
         this.addPanelDependency();
         
         this.add(this.tabbedPane);

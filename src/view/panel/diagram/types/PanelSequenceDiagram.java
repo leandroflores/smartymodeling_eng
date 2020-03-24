@@ -101,7 +101,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     @Override
     public void addElements() {
         this.loadStyles();
-         for (Element element : this.diagram.getElementsList()) {
+        for (Element element : this.diagram.getElementsList()) {
             this.graph.getStylesheet().putCellStyle(element.getStyleLabel(), element.getStyle());
             
             mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, element.getId(), "", element.getPosition().x, element.getPosition().y, element.getSize().x, element.getSize().y, element.getStyleLabel());
@@ -113,8 +113,6 @@ public final class PanelSequenceDiagram extends PanelDiagram {
             this.identifiers.put(vertex, element.getId());
             this.objects.put(element.getId(), vertex);
         }
-//        this.addLifelines();
-//        this.addInstances();
     }
     
     /**
@@ -135,7 +133,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      * @param element 
      */
     private void addHeaderCell(mxCell parent, Element element) {
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, element.getId() + "(header)", "", 2, 0, element.getWidth() - 4, 80, "headerStyle");
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, element.getId() + "(header)", "", 2, 0, element.getWidth() - 4, 90, "headerStyle");
                cell.setConnectable(false);
                cell.setId(element.getId() + "(header)");
             this.addStereotypeCells(cell, element);
@@ -153,7 +151,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      */
     private void addIconCell(mxCell parent, Element element) {
         String style = element.getType().equals("instance") ? "styleClassIcon" : "styleActorIcon";
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, null, "", 2, 2, 20, 20, style);
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, null, "", 2, 22, 20, 20, style);
                cell.setConnectable(false);
     }
     
@@ -181,7 +179,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      * @param element Element.
      */
     private void addNameCell(mxCell parent, Element element) {
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, element.getId() + "(name)", this.getSignature(element), 5, 58, element.getWidth() - 10, 20, "nameStyle");
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, element.getId() + "(name)", this.getSignature(element), 4, 68, element.getWidth() - 10, 20, "nameStyle");
                cell.setConnectable(false);
                cell.setId(element.getId() + "(name)");
         this.identifiers.put(cell.getId(), element.getId());
@@ -206,7 +204,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      */
     private void addStartPointCell(mxCell parent, Element element) {
         Integer x   = (element.getWidth()  / 2);
-        Integer y   =  79;
+        Integer y   =  89;
         mxCell cell = (mxCell) this.graph.insertVertex(parent, element.getId() + "(start)", "", x, y, 1, 1, "startPointStyle");
                cell.setConnectable(false);
                cell.setId(element.getId() + "(start)");
@@ -325,14 +323,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      */
     public Map getEndPointStyle() {
         Map    style = new HashMap<>(this.getStartPointStyle());
-//               style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
-//               style.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_BOTTOM);
                style.put(mxConstants.STYLE_FONTSIZE, "15");
-//               style.put(mxConstants.STYLE_EDITABLE,  "0");
-//               style.put(mxConstants.STYLE_RESIZABLE, "0");
-//               style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-//               style.put(mxConstants.STYLE_FILLCOLOR,   "#000000");
-//               style.put(mxConstants.STYLE_STROKECOLOR, "#FFFFFF");
         return style;
     }
     

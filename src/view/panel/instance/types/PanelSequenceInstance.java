@@ -61,14 +61,10 @@ public final class PanelSequenceInstance extends PanelInstance {
         }
     }
     
-    /**
-     * Method responsible for loading the Default Styles.
-     */
-    private void loadDefaultStyles() {
-        this.graph.getStylesheet().putCellStyle("styleImageActor", this.getImageStyle("usecase/actor.png"));
-        this.graph.getStylesheet().putCellStyle("styleImageClass", this.getImageStyle("classes/class.png"));
-        this.graph.getStylesheet().putCellStyle("nameStyle", this.getNameStyle());
-        this.graph.getStylesheet().putCellStyle("lineStyle", this.getLineStyle());
+    @Override
+    public void addRelationships() {
+        System.out.println("List: " + this.instance.getRelationshipsList());
+        System.out.println("");
     }
     
     /**
@@ -77,12 +73,12 @@ public final class PanelSequenceInstance extends PanelInstance {
      */
     private void addLifeline(Artifact artifact) {
         LifelineUML lifelineUML = (LifelineUML) artifact.getElement();
-        this.graph.getStylesheet().putCellStyle(lifelineUML.getStyleLabel(), lifelineUML.getStyle());
+        this.graph.getStylesheet().putCellStyle(artifact.getStyleLabel(), artifact.getStyle());
                 
-        mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, lifelineUML.getId(), "", lifelineUML.getPosition().x, lifelineUML.getPosition().y, lifelineUML.getSize().x, lifelineUML.getSize().y, lifelineUML.getStyleLabel());
+        mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
                vertex.setConnectable(true);
         this.addNameCell(vertex, artifact);
-        this.addEndPointCell(vertex, lifelineUML);
+        this.addEndPointCell(vertex, artifact);
         this.addLineCell(vertex, artifact);
         this.graph.insertVertex(vertex, null, "", 5, 10, 20, 20, "styleImageActor");
 
@@ -96,12 +92,12 @@ public final class PanelSequenceInstance extends PanelInstance {
      */
     private void addInstance(Artifact artifact) {
         InstanceUML instanceUML = (InstanceUML) artifact.getElement();
-        this.graph.getStylesheet().putCellStyle(instanceUML.getStyleLabel(), instanceUML.getStyle());
+        this.graph.getStylesheet().putCellStyle(artifact.getStyleLabel(), artifact.getStyle());
             
-        mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, instanceUML.getId(), "", instanceUML.getPosition().x, instanceUML.getPosition().y, instanceUML.getSize().x, instanceUML.getSize().y, instanceUML.getStyleLabel());
+        mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
                vertex.setConnectable(true);
         this.addNameCell(vertex, artifact);
-        this.addEndPointCell(vertex, instanceUML);
+        this.addEndPointCell(vertex, artifact);
         this.addLineCell(vertex, artifact);
         this.graph.insertVertex(vertex, null, "", 5, 10, 20, 20, "styleImageClass");
 
@@ -119,7 +115,7 @@ public final class PanelSequenceInstance extends PanelInstance {
                cell.setConnectable(false);
                cell.setId(artifact.getId() + "(name)");
         this.identifiers.put(cell.getId(), artifact.getId());
-        this.objects.put(artifact.getId() + "(name)", cell);
+        this.objects.put(artifact.getId()  + "(name)", cell);
     }
     
     /**
@@ -149,17 +145,27 @@ public final class PanelSequenceInstance extends PanelInstance {
     /**
      * Method responsible for adding the End Point Cell.
      * @param parent Parent Cell.
-     * @param element Element.
+     * @param artifact Artifact.
      */
-    private void addEndPointCell(mxCell parent, Element element) {
+    private void addEndPointCell(mxCell parent, Artifact artifact) {
         this.graph.getStylesheet().putCellStyle("endPointStyle", this.getEndPointStyle());
-        Integer x   = (element.getWidth()  / 2) - 5;
-        Integer y   = element.getHeight() - 10;
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, element.getId() + "(point)", "", x, y, 10, 10, "endPointStyle");
+        Integer x   = (artifact.getWidth()  / 2) - 5;
+        Integer y   = artifact.getHeight() - 10;
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, artifact.getId() + "(point)", "", x, y, 10, 10, "endPointStyle");
                cell.setConnectable(false);
-               cell.setId(element.getId() + "(point)");
-        this.identifiers.put(cell.getId(), element.getId());
-        this.objects.put(element.getId() + "(point)", cell);
+               cell.setId(artifact.getId() + "(point)");
+        this.identifiers.put(cell.getId(), artifact.getId());
+        this.objects.put(artifact.getId() + "(point)", cell);
+    }
+    
+    /**
+     * Method responsible for loading the Default Styles.
+     */
+    private void loadDefaultStyles() {
+        this.graph.getStylesheet().putCellStyle("styleImageActor", this.getImageStyle("usecase/actor.png"));
+        this.graph.getStylesheet().putCellStyle("styleImageClass", this.getImageStyle("classes/class.png"));
+        this.graph.getStylesheet().putCellStyle("nameStyle", this.getNameStyle());
+        this.graph.getStylesheet().putCellStyle("lineStyle", this.getLineStyle());
     }
     
     /**
@@ -206,8 +212,8 @@ public final class PanelSequenceInstance extends PanelInstance {
                style.put(mxConstants.STYLE_EDITABLE, "0");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
-               style.put(mxConstants.STYLE_ENDARROW,   mxConstants.ARROW_SPACING);
-               style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);
+               style.put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_SPACING);
+               style.put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
         return style;
     }
     

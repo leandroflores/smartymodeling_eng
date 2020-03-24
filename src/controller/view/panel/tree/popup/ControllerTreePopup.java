@@ -231,10 +231,14 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
             this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditAssociation((SequenceDiagram) diagram, association);
     }
     
+    /**
+     * Method responsible for showing the Panel.
+     * @param node Object Node.
+     */
     private void showPanel(DefaultMutableTreeNode node) {
         if (node.getUserObject() instanceof Diagram) 
             this.treePopup.getPanelTree().getViewMenu().showDiagram( (Diagram)  node.getUserObject());
-        else if (node.getUserObject() instanceof Instance) 
+        else if (node.getUserObject() instanceof Instance)
             this.treePopup.getPanelTree().getViewMenu().showInstance((Instance) node.getUserObject());
     }
     

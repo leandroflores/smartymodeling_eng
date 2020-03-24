@@ -36,7 +36,7 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
             this.move(this.panel.getInstance().getArtifact(id), event);
         else if (this.panel.getInstance().getRelationship(id) != null)
             this.move(this.panel.getInstance().getRelationship(id));
-        else
+        else if (id != null)
             this.move(id, event);
     }
     
