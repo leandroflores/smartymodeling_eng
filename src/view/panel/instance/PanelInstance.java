@@ -160,6 +160,7 @@ public abstract class PanelInstance extends Panel {
             this.graph.getStylesheet().putCellStyle(artifact.getStyleLabel(), artifact.getStyle());
             String  title   = element.getName();
             mxCell  cell    = (mxCell) this.graph.insertVertex(this.parent, null, title, artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
+                    cell.setConnectable(false);
             this.identifiers.put(cell, artifact.getId());
             this.objects.put(artifact.getId(), cell);
         }

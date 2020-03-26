@@ -1,7 +1,10 @@
 package view.panel.instance.types;
 
 import com.mxgraph.model.mxCell;
+import com.mxgraph.model.mxGeometry;
+import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.util.mxConstants;
+import com.mxgraph.util.mxPoint;
 import controller.view.panel.instance.ControllerPanelInstance;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,9 +12,11 @@ import javax.swing.BoxLayout;
 import model.structural.base.Element;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
+import model.structural.base.product.Relationship;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
+import model.structural.diagram.sequence.base.association.MessageUML;
 import view.panel.instance.PanelInstance;
 import view.structural.ViewMenu;
 
@@ -63,8 +68,13 @@ public final class PanelSequenceInstance extends PanelInstance {
     
     @Override
     public void addRelationships() {
-        System.out.println("List: " + this.instance.getRelationshipsList());
-        System.out.println("");
+        for (Relationship relationship : this.instance.getRelationshipsList()) {
+            MessageUML message = (MessageUML) relationship.getAssociation();
+            if (message.isLoop())
+                this.addLoopMessage(relationship);
+            else
+                this.addMessage(relationship);
+        }
     }
     
     /**
@@ -76,7 +86,7 @@ public final class PanelSequenceInstance extends PanelInstance {
         this.graph.getStylesheet().putCellStyle(artifact.getStyleLabel(), artifact.getStyle());
                 
         mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
-               vertex.setConnectable(true);
+               vertex.setConnectable(false);
         this.addNameCell(vertex, artifact);
         this.addEndPointCell(vertex, artifact);
         this.addLineCell(vertex, artifact);
@@ -95,7 +105,7 @@ public final class PanelSequenceInstance extends PanelInstance {
         this.graph.getStylesheet().putCellStyle(artifact.getStyleLabel(), artifact.getStyle());
             
         mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
-               vertex.setConnectable(true);
+               vertex.setConnectable(false);
         this.addNameCell(vertex, artifact);
         this.addEndPointCell(vertex, artifact);
         this.addLineCell(vertex, artifact);
@@ -156,6 +166,72 @@ public final class PanelSequenceInstance extends PanelInstance {
                cell.setId(artifact.getId() + "(point)");
         this.identifiers.put(cell.getId(), artifact.getId());
         this.objects.put(artifact.getId() + "(point)", cell);
+    }
+    
+    /**
+     * Method responsible for adding the Relationship Points.
+     * @param relationship Relationship.
+     */
+    private void addMessage(Relationship relationship) {
+        this.graph.getStylesheet().putCellStyle(relationship.getStyleLabel(), relationship.getStyle());
+        MessageUML message  = (MessageUML)  relationship.getAssociation();
+        Object     source   = this.addPoint(message, this.instance.getArtifact(message.getSource()));
+        Object     target   = this.addPoint(message, this.instance.getArtifact(message.getTarget()));
+        mxCell     edge     = (mxCell) this.graph.insertEdge(this.parent, relationship.getId(), relationship.getTitle(), source, target, relationship.getStyleLabel());
+        mxGeometry geometry = ((mxGraphModel) (this.graph.getModel())).getGeometry(edge);
+                   geometry.setPoints(relationship.getPoints());
+        ((mxGraphModel) (this.graph.getModel())).setGeometry(edge, geometry);
+        this.identifiers.put(edge, relationship.getId());
+        this.objects.put(relationship.getId(), edge);
+    }
+     
+    /**
+     * Method responsible for adding the Loop Relationship Points.
+     * @param relationship Relationship.
+     */
+    private void addLoopMessage(Relationship relationship) {
+        this.graph.getStylesheet().putCellStyle(relationship.getStyleLabel(), relationship.getStyle());
+        MessageUML message  = (MessageUML) relationship.getAssociation();
+        Object     source   = this.addPoint(message, this.instance.getArtifact(message.getSource()));
+        Object     target   = this.addSelfPoint(message, this.instance.getArtifact(message.getTarget()));
+        Object     object   = this.objects.get(message.getSource().getId());
+        mxCell     edge     = (mxCell) this.graph.insertEdge(object, relationship.getId(), relationship.getTitle(), source, target, relationship.getStyleLabel());
+        mxGeometry geometry = ((mxGraphModel) (this.graph.getModel())).getGeometry(edge);
+                   geometry.setPoints(relationship.getPoints());
+        ((mxGraphModel) (this.graph.getModel())).setGeometry(edge, geometry);
+        this.identifiers.put(edge, relationship.getId());
+        this.objects.put(relationship.getId(), edge);
+    }
+    
+    /**
+     * Method responsible for returning the Point Cell.
+     * @param  message Message UML.
+     * @param  artifact Element.
+     * @return Point Cell.
+     */
+    private mxCell addPoint(MessageUML message, Artifact artifact) {
+        this.getDefaultEdgeStyle().put("pointStyle", this.getPointStyle());
+        Integer x = artifact.getWidth() / 2;
+        Integer y = 80 + (message.getSequence() * 35);
+        mxCell cell = (mxCell) this.graph.insertVertex(this.objects.get(artifact.getId()), null, "", x, y, 5, 5, "pointStyle");
+               cell.setConnectable(false);
+        return cell;
+    }
+    
+    /**
+     * Method responsible for returning the Self Point Cell.
+     * @param  message Message UML.
+     * @param  artifact Artifact.
+     * @return Self Point Cell.
+     */
+    private mxCell addSelfPoint(MessageUML message, Artifact artifact) {
+        this.getDefaultEdgeStyle().put("pointStyle", this.getPointStyle());
+        Integer x = artifact.getWidth() / 2;
+        Integer y = 80 + (message.getSequence() * 35) + 25;
+        message.addDefaultPoint(new mxPoint(x + 80, y - 25), new mxPoint(x + 80, y));
+        mxCell cell = (mxCell) this.graph.insertVertex(this.objects.get(artifact.getId()), null, "", x, y, 5, 5, "pointStyle");
+               cell.setConnectable(false);
+        return cell;
     }
     
     /**
@@ -231,6 +307,16 @@ public final class PanelSequenceInstance extends PanelInstance {
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_FILLCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#FFFFFF");
+        return style;
+    }
+    
+    /**
+     * Method responsible for returning the Point Style.
+     * @return Point Style.
+     */
+    private Map getPointStyle() {
+        Map    style = this.getEndPointStyle();
+               style.put(mxConstants.STYLE_FILLCOLOR, "#FFFFFF");
         return style;
     }
     

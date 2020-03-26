@@ -54,6 +54,7 @@ public class ControllerPanelBaseLifelineUML extends ControllerPanel {
         this.panelBaseLifelineUML.getViewMenu().getPanelProject().getPanelTree().updateNode(this.panelBaseLifelineUML.getLifelineUML());
         this.panelBaseLifelineUML.getViewMenu().setSave(false);
         this.panelBaseLifelineUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
+        this.panelBaseLifelineUML.getViewMenu().getPanelModeling().updateModelingPanel();
         this.panelBaseLifelineUML.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseLifelineUML.getDiagram());
     }
 }
