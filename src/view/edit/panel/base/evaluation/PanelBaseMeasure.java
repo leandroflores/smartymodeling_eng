@@ -46,7 +46,7 @@ public final class PanelBaseMeasure extends Panel {
      * Method responsible for defining the Settings.
      */
     private void setSettings() {
-        this.setLayout(new GridLayout(6, 1));
+        this.setLayout(new GridLayout(4, 2));
         this.setPreferredSize(new Dimension(50, 50));
         this.setSize(new Dimension(50, 50));
     }

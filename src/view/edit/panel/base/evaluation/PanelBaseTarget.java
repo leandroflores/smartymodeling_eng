@@ -2,7 +2,7 @@ package view.edit.panel.base.evaluation;
 
 import controller.view.edit.panel.base.evaluation.ControllerPanelBaseTarget;
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.controller.structural.base.ControllerProject;
@@ -45,24 +45,24 @@ public final class PanelBaseTarget extends Panel {
      * Method responsible for defining the Settings.
      */
     private void setSettings() {
-        this.setLayout(new GridBagLayout());
+        this.setLayout(new GridLayout(5, 2));
         this.setPreferredSize(new Dimension(200, 300));
         this.setSize(new Dimension(200, 300));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Target: "), this.getConstraints(1, 1, 0, 0));
-        this.add(this.createComboBox("targetComboBox", this.getTargets(), 15), this.getConstraints(4, 1, 1, 0));
+        this.add(this.createLabel("Target: "));
+        this.add(this.createComboBox("targetComboBox", this.getTargets(), 15));
         
-        this.add(this.createLabel("Elements: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createTextFieldNoEditable("elementsTextField", "", 15), this.getConstraints(4, 1, 1, 1));
+        this.add(this.createLabel("Elements: "));
+        this.add(this.createTextFieldNoEditable("elementsTextField", "", 15));
         
-        this.add(this.createLabel("Associations: "), this.getConstraints(1, 1, 0, 2));
-        this.add(this.createTextFieldNoEditable("associationsTextField", "", 15), this.getConstraints(4, 1, 1, 2));
+        this.add(this.createLabel("Associations: "));
+        this.add(this.createTextFieldNoEditable("associationsTextField", "", 15));
         
-        this.add(this.createLabel("Variabilities: "), this.getConstraints(1, 1, 0, 3));
-        this.add(this.createTextFieldNoEditable("variabilitiesTextField", "", 15), this.getConstraints(4, 1, 1, 3));
+        this.add(this.createLabel("Variabilities: "));
+        this.add(this.createTextFieldNoEditable("variabilitiesTextField", "", 15));
     }
     
     /**
@@ -77,7 +77,7 @@ public final class PanelBaseTarget extends Panel {
      * Method responsible for setting the Target Values.
      */
     public void setValues() {
-        
+        this.getController().updateValues();
     }
     
     /**
@@ -86,6 +86,14 @@ public final class PanelBaseTarget extends Panel {
      */
     public ViewNewMeasure getViewNewMeasure() {
         return this.viewNew;
+    }
+    
+    /**
+     * Method responsible for returning the Panel Controller.
+     * @return Panel Controller.
+     */
+    public ControllerPanelBaseTarget getController() {
+        return (ControllerPanelBaseTarget) this.controller;
     }
     
     /**

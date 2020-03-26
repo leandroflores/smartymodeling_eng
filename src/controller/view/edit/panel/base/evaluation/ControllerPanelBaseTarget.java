@@ -30,6 +30,10 @@ public class ControllerPanelBaseTarget extends ControllerPanel {
     @Override
     public void actionPerformed(ActionEvent event) {
         this.updateValues();
+        if (this.panelBaseTarget.getBackButton().equals(event.getSource()))
+            this.panelBaseTarget.getViewNewMeasure().removePanelBaseTarget();
+        else if (this.panelBaseTarget.getNextButton().equals(event.getSource()))
+            this.next();
     }
     
     @Override
@@ -51,6 +55,13 @@ public class ControllerPanelBaseTarget extends ControllerPanel {
             this.update(this.panelBaseTarget.getProject());
         else if (target instanceof Diagram)
             this.update((Diagram) target);
+    }
+    
+    /**
+     * Method responsible for going to Next Panel.
+     */
+    public void next() {
+        this.panelBaseTarget.getViewNewMeasure().addPanelBaseEvaluation();
     }
     
     /**

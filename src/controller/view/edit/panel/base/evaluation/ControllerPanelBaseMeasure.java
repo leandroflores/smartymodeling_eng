@@ -4,6 +4,7 @@ import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import view.edit.panel.base.evaluation.PanelBaseMeasure;
+import view.message.ViewError;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseMeasure</b>.</p>
@@ -28,6 +29,10 @@ public class ControllerPanelBaseMeasure extends ControllerPanel {
     @Override
     public void actionPerformed(ActionEvent event) {
         this.update();
+        if (this.panelBaseMeasure.getBackButton().equals(event.getSource()))
+            this.panelBaseMeasure.getViewNewMeasure().dispose();
+        else if (this.panelBaseMeasure.getNextButton().equals(event.getSource()))
+            this.next();
     }
     
     @Override
@@ -41,12 +46,48 @@ public class ControllerPanelBaseMeasure extends ControllerPanel {
     }
 
     /**
+     * Method responsible for checking the Measure Name.
+     * @return Measure Name is checked.
+     */
+    private boolean checkName() {
+        if (!this.check(this.panelBaseMeasure.getNameTextField().getText())) {
+            new ViewError(this.panelBaseMeasure.getViewNewMeasure(), "Name is required!").setVisible(true);
+            this.panelBaseMeasure.getNameTextField().requestFocus();
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Method responsible for checking the Measure Date.
+     * @return Measure Date is checked.
+     */
+    private boolean checkDate() {
+        if (!this.checkDate(this.panelBaseMeasure.getDateTextField().getText())) {
+            new ViewError(this.panelBaseMeasure.getViewNewMeasure(), "Type a Date (DD/MM/YYYY)!").setVisible(true);
+            this.panelBaseMeasure.getDateTextField().requestFocus();
+            return false;
+        }
+        return true;
+    }
+    
+    /**
      * Method responsible for checking the Measure.
      * @return Measure checked.
      */
     private boolean check() {
-        return this.check(this.panelBaseMeasure.getNameTextField().getText())
-            && this.checkDate(this.panelBaseMeasure.getDateTextField().getText());
+        return this.checkName()
+            && this.checkDate();
+    }
+    
+    /**
+     * Method responsible for going to Next Panel.
+     */
+    public void next() {
+        if (this.check()) {
+            this.update();
+            this.panelBaseMeasure.getViewNewMeasure().addPanelBaseTarget();
+        }
     }
     
     /**

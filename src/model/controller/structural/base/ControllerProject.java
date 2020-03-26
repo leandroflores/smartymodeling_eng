@@ -5,8 +5,6 @@ import java.util.List;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.base.Stereotype;
-import model.structural.base.product.Instance;
-import model.structural.base.product.Product;
 
 /**
  * <p>Class of Controller <b>ControllerProject</b>.</p>
@@ -63,6 +61,30 @@ public class ControllerProject {
                 filter.add(diagram);
         }
         return filter.toArray();
+    }
+    
+    /**
+     * Method responsible for returning the Elements Array.
+     * @return Elements Array.
+     */
+    public Object[] getElements() {
+        return this.project.getElements().toArray();
+    }
+    
+    /**
+     * Method responsible for returning the Associations Array.
+     * @return Associations Array.
+     */
+    public Object[] getAssociations() {
+        return this.project.getAssociations().toArray();
+    }
+    
+    /**
+     * Method responsible for returning the Variabilities Array.
+     * @return Variabilities Array.
+     */
+    public Object[] getVariabilities() {
+        return this.project.getVariabilitiesList().toArray();
     }
     
     /**

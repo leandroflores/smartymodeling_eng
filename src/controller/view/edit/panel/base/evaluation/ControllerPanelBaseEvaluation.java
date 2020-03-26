@@ -34,6 +34,10 @@ public class ControllerPanelBaseEvaluation extends ControllerPanel {
     @Override
     public void actionPerformed(ActionEvent event) {
         this.update();
+        if (this.panelBaseEvaluation.getBackButton().equals(event.getSource()))
+            this.panelBaseEvaluation.getViewNewMeasure().removePanelBaseEvaluation();
+        else if (this.panelBaseEvaluation.getNextButton().equals(event.getSource()))
+            this.panelBaseEvaluation.getViewNewMeasure().getController().insert();
     }
     
     @Override

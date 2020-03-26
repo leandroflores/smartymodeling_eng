@@ -1,5 +1,6 @@
 package view.new_.evaluation;
 
+import controller.view.new_.evaluation.ControllerViewNewMeasure;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -47,6 +48,7 @@ public final class ViewNewMeasure extends ViewNew {
         this.addHeader();
         this.addComponents();
         this.addFooter();
+        this.addPanelBaseMeasure();
     }
     
     @Override
@@ -67,7 +69,7 @@ public final class ViewNewMeasure extends ViewNew {
     /**
      * Method responsible for adding the Panel Base Measure.
      */
-    private void addPanelBaseMeasure() {
+    public void addPanelBaseMeasure() {
         this.panelBaseMeasure = new PanelBaseMeasure(this, this.measure);
         this.tabbedPane.removeAll();
         this.createScrollPane("scrollPanelBaseMeasure",  this.panelBaseMeasure);
@@ -79,21 +81,46 @@ public final class ViewNewMeasure extends ViewNew {
     /**
      * Method responsible for adding the Panel Base Target.
      */
-    private void addPanelBaseTarget() {
+    public void addPanelBaseTarget() {
         this.panelBaseTarget = new PanelBaseTarget(this, this.measure);
         this.createScrollPane("scrollPanelBaseTarget",  this.panelBaseTarget);
         this.getScrollPanelBaseTarget().setViewportView(this.panelBaseTarget);
         this.tabbedPane.add("Target", this.getScrollPanelBaseTarget());
+        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(1));
+        this.tabbedPane.setEnabledAt(0, false);
+        this.getInsertButton().setEnabled(false);
+    }
+    
+    /**
+     * Method responsible for removing the Panel Base Target.
+     */
+    public void removePanelBaseTarget() {
+        this.tabbedPane.getComponent(0).setEnabled(true);
+        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(0));
+        this.tabbedPane.remove(1);
     }
     
     /**
      * Method responsible for adding the Panel Base Evaluation.
      */
-    private void addPanelBaseEvaluation() {
-        this.panelBaseEvaluation  = new PanelBaseEvaluation(this.getViewMenu(), this.measure);
+    public void addPanelBaseEvaluation() {
+        this.panelBaseEvaluation  = new PanelBaseEvaluation(this, this.measure);
         this.createScrollPane("scrollPanelEvaluation",  this.panelBaseEvaluation);
         this.getScrollPanelEvaluation().setViewportView(this.panelBaseEvaluation);
         this.tabbedPane.add("Evaluation", this.getScrollPanelEvaluation());
+        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(2));
+        this.tabbedPane.setEnabledAt(1, false);
+        this.getInsertButton().setEnabled(true);
+    }
+    
+    /**
+     * Method responsible for removing the Panel Base Evaluation.
+     */
+    public void removePanelBaseEvaluation() {
+        this.tabbedPane.getComponent(1).setEnabled(true);
+        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(1));
+        this.tabbedPane.remove(2);
+        this.getInsertButton().setEnabled(false);
     }
     
     /**
@@ -102,6 +129,14 @@ public final class ViewNewMeasure extends ViewNew {
      */
     public Project getProject() {
         return this.project;
+    }
+    
+    /**
+     * Method responsible for returning the Controller.
+     * @return Controller.
+     */
+    public ControllerViewNewMeasure getController() {
+        return (ControllerViewNewMeasure) this.controller;
     }
     
     /**

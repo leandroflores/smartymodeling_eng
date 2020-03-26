@@ -141,6 +141,6 @@ public class Measure implements Exportable {
     
     @Override
     public String toString() {
-        return this.id + " - " + this.name;
+        return this.id + " - " + this.name + " = " + this.value;
     }
 }

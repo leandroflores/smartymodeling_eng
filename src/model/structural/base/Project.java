@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 import model.structural.base.association.Link;
+import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
 import model.structural.base.interfaces.Exportable;
 import model.structural.base.product.Instance;
@@ -43,6 +44,7 @@ public class Project implements Exportable {
     public  HashMap variabilities;
     public  HashMap traceabilities;
     public  HashMap metrics;
+    public  HashMap measures;
     public  HashMap products;
     public  HashMap stereotypes;
     public  HashMap links;
@@ -83,6 +85,7 @@ public class Project implements Exportable {
         this.variabilities  = new LinkedHashMap();
         this.traceabilities = new LinkedHashMap();
         this.metrics        = new LinkedHashMap();
+        this.measures       = new LinkedHashMap();
         this.products       = new LinkedHashMap();
         this.stereotypes    = new LinkedHashMap();
         this.links          = new LinkedHashMap();
@@ -799,6 +802,63 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Next Measure Id.
+     * @return Next Measure Id.
+     */
+    public String nextMeasureId() {
+        Integer index  = this.measures.size() + 1;
+        String  nextId = "MEASURE#" + index;
+        while (this.measures.get(nextId) != null)
+                nextId = "MEASURE#" + ++index;
+        return  nextId;
+    }
+    
+    /**
+     * Method responsible for adding a Measure.
+     * @param measure Measure.
+     */
+    public void addMeasure(Measure measure) {
+        measure.setId(this.nextMeasureId());
+        this.measures.put(measure.getId(), measure);
+    }
+    
+    /**
+     * Method responsible for returning a Measure by Id.
+     * @param  id Measure Id.
+     * @return Measure found.
+     */
+    public Measure getMeasure(String id) {
+        return (Measure) this.measures.get(id);
+    }
+    
+    /**
+     * Method responsible for removing a Measure.
+     * @param measure Measure.
+     */
+    public void removeMeasure(Measure measure) {
+        this.measures.remove(measure.getId());
+    }
+    
+    /**
+     * Method responsible for returning Measures List.
+     * @return Measures List.
+     */
+    public List<Measure> getMeasuresList() {
+        return new ArrayList<>(this.measures.values());
+    }
+    
+    /**
+     * Method responsible for exporting the Measures.
+     * @return Measures.
+     */
+    private String exportMeasures() {
+        String export  = "";
+        for (Measure measure : this.getMeasuresList())
+               export += measure.export();
+        return export;
+    }
+    
+    /**
      * Method responsible for returning the Next Product Id.
      * @return Next Product Id.
      */
@@ -1231,6 +1291,7 @@ public class Project implements Exportable {
                export += this.exportDiagrams();
                export += this.exportTraceabilities();
                export += this.exportMetrics();
+               export += this.exportMeasures();
                export += this.exportLinks();
                export += this.exportProducts();
                export += "</project>";

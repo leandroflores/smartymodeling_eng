@@ -144,6 +144,15 @@ public abstract class ControllerViewModal extends Controller {
     }
     
     /**
+     * Method responsible for returning the Double of JTextComponent.
+     * @param  textComponent JTextComponent.
+     * @return Double of JTextComponent.
+     */
+    protected Double getDouble(JTextComponent textComponent) {
+        return Double.parseDouble(textComponent.getText().trim());
+    }
+    
+    /**
      * Method responsible for returning the Value of JComboBox.
      * @param  comboBox JComboBox.
      * @return Value of JComboBox.

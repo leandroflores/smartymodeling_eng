@@ -11,6 +11,7 @@ import model.controller.structural.base.ControllerProject;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
 import view.Panel;
+import view.new_.evaluation.ViewNewMeasure;
 import view.structural.ViewMenu;
 
 /**
@@ -23,22 +24,25 @@ import view.structural.ViewMenu;
  * @see    view.Panel
  */
 public final class PanelBaseEvaluation extends Panel {
+    private final ViewNewMeasure viewNew;
     private final ViewMenu viewMenu;
     private final Project project;
     private final Measure measure;
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param viewNew View New Measure.
      * @param measure Measure.
      */
-    public PanelBaseEvaluation(ViewMenu viewMenu, Measure measure) {
-        this.viewMenu   = viewMenu;
+    public PanelBaseEvaluation(ViewNewMeasure viewNew, Measure measure) {
+        this.viewNew    = viewNew;
+        this.viewMenu   = viewNew.getViewMenu();
         this.project    = this.viewMenu.getProject();
         this.measure    = measure;
         this.controller = new ControllerPanelBaseEvaluation(this);
         this.setSettings();
         this.addComponents();
+        this.addFooter();
         this.setValues();
     }
     
@@ -54,16 +58,16 @@ public final class PanelBaseEvaluation extends Panel {
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Operation*: "), this.getConstraints(1, 1, 0, 0));
-        this.add(this.createTextFieldNoEditable("operationTextField", "", 15), this.getConstraints(4, 1, 1, 0));
+        this.add(this.createTextFieldNoEditable("operationTextField", "", 15), this.getConstraints(5, 1, 1, 0));
         
         this.add(this.createLabel("Target: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("targetComboBox", this.getTargets(), 15), this.getConstraints(4, 1, 1, 1));
+        this.add(this.createComboBox("targetComboBox", this.getTargets(), 15), this.getConstraints(5, 1, 1, 1));
         
         this.add(this.createLabel("Value: "), this.getConstraints(1, 1, 0, 2));
-        this.add(this.createTextFieldNoEditable("valueTextField", "", 15), this.getConstraints(4, 1, 1, 2));
+        this.add(this.createTextFieldNoEditable("valueTextField", "", 15), this.getConstraints(5, 1, 1, 2));
         
         this.createList("detailsList");
-        this.add(this.getDetailsScrollPane(), this.getConstraints(5, 10, 0, 3));
+        this.add(this.getDetailsScrollPane(), this.getConstraints(6, 1, 0, 3));
     }
     
     /**
@@ -82,6 +86,22 @@ public final class PanelBaseEvaluation extends Panel {
         this.getOperationTextField().setText(this.measure.getMetric().getOperation());
     }
     
+    @Override
+    public void addFooter() {
+        this.add(this.createButton("backButton", "  Back  ", "Back", "back.png"), this.getConstraints(3, 1, 0, 4));
+        this.add(this.createButton("nextButton", "  Next  ", "Next", "next.png"), this.getConstraints(3, 1, 3, 4));
+        
+        this.getBackButton().setPreferredSize(new Dimension(200, 30));
+        this.getNextButton().setPreferredSize(new Dimension(200, 30));
+    }
+    
+    /**
+     * Method responsible for returning the View New Measure.
+     * @return View New Measure.
+     */
+    public ViewNewMeasure getViewNewMeasure() {
+        return this.viewNew;
+    }
     
     /**
      * Method responsible for returning the View Menu.
