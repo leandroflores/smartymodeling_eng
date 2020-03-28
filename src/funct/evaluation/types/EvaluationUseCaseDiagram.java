@@ -6,8 +6,8 @@ import funct.evaluation.types.usecase.EvaluationUseCaseUML;
 import model.structural.diagram.UseCaseDiagram;
 
 /**
- * <p>Class of Metric <b>EvaluationUseCaseDiagram</b>.</p>
- * <p>Class responsible por <b>Evaluate</b> of <b>Use Case Diagram</b>.</p>
+ * <p>Class of Evaluation <b>EvaluationUseCaseDiagram</b>.</p>
+ * <p>Class responsible for <b>Evaluate</b> the <b>Use Case Diagram</b>.</p>
  * @author Leandro
  * @since  02/09/2019
  * @see    funct.evaluation.base.EvaluationDiagram
@@ -17,7 +17,7 @@ import model.structural.diagram.UseCaseDiagram;
  */
 public class EvaluationUseCaseDiagram extends EvaluationDiagram {
     private final UseCaseDiagram diagram;
-    private final EvaluationActorUML evaluationActorUML;
+    private final EvaluationActorUML   evaluationActorUML;
     private final EvaluationUseCaseUML evaluationUseCaseUML;
     
     /**
@@ -34,36 +34,10 @@ public class EvaluationUseCaseDiagram extends EvaluationDiagram {
     @Override
     public Double getClauseValue(String keyword, String filter) {
         if (keyword.toLowerCase().equals("actor"))
-            return this.getActorMetric(this.getActorFilters(filter));
+            return this.getActorMetric(this.getDefaultFilters(filter));
         else if (keyword.toLowerCase().equals("usecase"))
-            return this.getUseCaseMetric(this.getUseCaseFilters(filter));
+            return this.getUseCaseMetric(this.getDefaultFilters(filter));
         return null;
-    }
-    
-    /**
-     * Method responsible for returning the Actor Filters.
-     * @param  filter Clause Filter.
-     * @return Actor Filters.
-     */
-    private Object[] getActorFilters(String filter) {
-        Object[] filters    = new Object[2];
-                 filters[0] = this.getNames(filter);
-                     filter = this.clearNames(filter);
-                 filters[1] = this.getMandatory(filter);
-        return   filters;
-    }
-    
-    /**
-     * Method responsible for returning the Use Case Filters.
-     * @param  filter Clause Filter.
-     * @return Use Case Filters.
-     */
-    private Object[] getUseCaseFilters(String filter) {
-        Object[] filters    = new Object[2];
-                 filters[0] = this.getNames(filter);
-                     filter = this.clearNames(filter);
-                 filters[1] = this.getMandatory(filter);
-        return   filters;
     }
     
     /**
@@ -72,6 +46,7 @@ public class EvaluationUseCaseDiagram extends EvaluationDiagram {
      * @return Actor Metric Value.
      */
     public Double getActorMetric(Object[] parameters) {
+               this.addObjects(this.evaluationActorUML.filter(parameters));
         return this.evaluationActorUML.getMetricValue(parameters);
     }
     
@@ -81,6 +56,7 @@ public class EvaluationUseCaseDiagram extends EvaluationDiagram {
      * @return Use Case Metric Value.
      */
     public Double getUseCaseMetric(Object[] parameters) {
+               this.addObjects(this.evaluationUseCaseUML.filter(parameters));
         return this.evaluationUseCaseUML.getMetricValue(parameters);
     }
     

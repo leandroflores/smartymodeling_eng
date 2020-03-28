@@ -37,7 +37,7 @@ public final class ViewNewMeasure extends ViewNew {
         super(view);
         this.project    = project;
         this.measure    = new Measure();
-//        this.controller = new ControllerViewNewMetric(this);
+        this.controller = new ControllerViewNewMeasure(this);
         this.title      = "New Measure";
         this.initComponents();
     }

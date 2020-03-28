@@ -102,7 +102,7 @@ public final class PanelComponentDiagram extends PanelDiagram {
      */
     private void addComponentsUML() {
         this.graph.getStylesheet().putCellStyle("styleImageComponent", this.getImageComponentStyle());
-        for (ComponentUML componentUML : this.diagram.getComponents()) {
+        for (ComponentUML componentUML : this.diagram.getComponentsList()) {
             this.graph.getStylesheet().putCellStyle(componentUML.getStyleLabel(), componentUML.getStyle());
             String title  = this.diagram.getStereotypes(componentUML, "\n") + componentUML.getName();
             mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, componentUML.getId(), title, componentUML.getPosition().x, componentUML.getPosition().y, componentUML.getSize().x, componentUML.getSize().y, componentUML.getStyleLabel());
@@ -117,7 +117,7 @@ public final class PanelComponentDiagram extends PanelDiagram {
      * Method responsible for adding the Diagram Interfaces.
      */
     private void addInterfacesUML() {
-        for (InterfaceUML interfaceUML : this.diagram.getInterfaces()) {
+        for (InterfaceUML interfaceUML : this.diagram.getInterfacesList()) {
             this.graph.getStylesheet().putCellStyle(interfaceUML.getStyleLabel(), interfaceUML.getStyle());
             String title  = this.diagram.getStereotypes(interfaceUML, "\n") + interfaceUML.getName();
             mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, interfaceUML.getId(), title, interfaceUML.getPosition().x, interfaceUML.getPosition().y, interfaceUML.getSize().x, interfaceUML.getSize().y, interfaceUML.getStyleLabel());

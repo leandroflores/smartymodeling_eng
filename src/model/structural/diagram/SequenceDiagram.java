@@ -1,5 +1,6 @@
 package model.structural.diagram;
 
+import funct.evaluation.types.EvaluationSequenceDiagram;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -396,6 +397,11 @@ public final class SequenceDiagram extends Diagram {
             System.out.println("Error");
             return null;
         }
+    }
+    
+    @Override
+    public EvaluationSequenceDiagram getEvaluation() {
+        return new EvaluationSequenceDiagram(this);
     }
     
     @Override

@@ -1,5 +1,6 @@
 package model.structural.diagram;
 
+import funct.evaluation.types.EvaluationUseCaseDiagram;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -227,6 +228,11 @@ public final class UseCaseDiagram extends Diagram {
             System.out.println("Error");
             return null;
         }
+    }
+    
+    @Override
+    public EvaluationUseCaseDiagram getEvaluation() {
+        return new EvaluationUseCaseDiagram(this);
     }
     
     @Override

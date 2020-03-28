@@ -8,9 +8,10 @@ import model.structural.base.interfaces.Exportable;
  * <p>Class responsible for representing the <b>Measure</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  02/09/2019
+ * @see    model.structural.base.evaluation.Metric
  * @see    model.structural.base.interfaces.Exportable
  */
-public class Measure implements Exportable {
+public final class Measure implements Exportable {
     private String id;
     private String name;
     private String date;
@@ -37,7 +38,7 @@ public class Measure implements Exportable {
         this.name   = element.getAttribute("name");
         this.date   = new FunctDate().getCurrentFormattedDate();
         this.metric = null;
-        this.value  = 0.0d;
+        this.setValue(element);
     }
     
     /**
@@ -112,6 +113,18 @@ public class Measure implements Exportable {
         return this.value;
     }
 
+    /**
+     * Method responsible for setting the Value by W3C Element.
+     * @param  element W3C Element.
+     */
+    public void setValue(org.w3c.dom.Element element) {
+        try {
+            this.value = Double.parseDouble(element.getAttribute("valor").trim());
+        }catch (NumberFormatException exception) {
+            this.value = 0.0d;
+        }
+    }
+    
     /**
      * Method responsible for setting the Measure Value.
      * @param value Measure Value.

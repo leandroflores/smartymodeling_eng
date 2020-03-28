@@ -14,6 +14,8 @@ import model.structural.diagram.classes.Entity;
  * @since  20/05/2019
  * @see    model.structural.base.Element
  * @see    model.structural.diagram.classes.Encodable
+ * @see    model.structural.diagram.classes.Entity
+ * @see    model.structural.diagram.classes.base.TypeUML
  */
 public class AttributeUML extends Element implements Encodable {
     private Entity  entity;
@@ -138,12 +140,9 @@ public class AttributeUML extends Element implements Encodable {
     public void setStatic(boolean static_) {
         this.static_ = static_;
     }
-
-    /**
-     * Method responsible for returning Final Flag.
-     * @return Final Flag.
-     */
-    public boolean isFinal() {
+    
+    @Override
+    public Boolean isFinal() {
         return this.final_;
     }
 

@@ -123,18 +123,6 @@ public abstract class Element implements Exportable, Modelable {
     }
 
     /**
-     * Method responsible for returning the Element Default Flag.
-     * @return Element Default Flag.
-     */
-    public boolean isDefault() {
-        return !this.getType().toLowerCase().trim().equals("attribute")
-            && !this.getType().toLowerCase().trim().equals("method")
-            && !this.getType().toLowerCase().trim().equals("package")
-            && !this.getType().toLowerCase().trim().equals("initial")
-            && !this.getType().toLowerCase().trim().equals("final");
-    }
-    
-    /**
      * Method responsible for returning Stereotype Flag.
      * @return Stereotype Flag.
      */
@@ -148,6 +136,34 @@ public abstract class Element implements Exportable, Modelable {
      */
     public void setMandatory(boolean mandatory) {
         this.mandatory = mandatory;
+    }
+    
+    /**
+     * Method responsible for returning the Abstract Flag.
+     * @return Abstract Flag.
+     */
+    public Boolean isAbstract() {
+        return false;
+    }
+    
+    /**
+     * Method responsible for returning the Final Flag.
+     * @return Final Flag.
+     */
+    public Boolean isFinal() {
+        return false;
+    }
+    
+    /**
+     * Method responsible for returning the Element Default Flag.
+     * @return Element Default Flag.
+     */
+    public boolean isDefault() {
+        return !this.getType().toLowerCase().trim().equals("attribute")
+            && !this.getType().toLowerCase().trim().equals("method")
+            && !this.getType().toLowerCase().trim().equals("package")
+            && !this.getType().toLowerCase().trim().equals("initial")
+            && !this.getType().toLowerCase().trim().equals("final");
     }
     
     /**

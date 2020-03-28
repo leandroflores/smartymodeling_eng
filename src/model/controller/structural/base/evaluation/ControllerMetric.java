@@ -12,7 +12,7 @@ import model.structural.base.evaluation.Metric;
  * @see    model.structural.base.evaluation.Metric
  */
 public class ControllerMetric {
-    public static final String[] TARGETS  = {"Project", "Diagram", "Product Line", "Activity", "Class", "Component", "Sequence", "UseCase", "Variability"};
+    public static final String[] TARGETS  = {"Project", "Activity", "Class", "Component", "Sequence", "UseCase", "Product Line", "Variability"};
     private final Project project;
     
     /**

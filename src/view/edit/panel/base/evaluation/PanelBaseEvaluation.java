@@ -3,11 +3,14 @@ package view.edit.panel.base.evaluation;
 import controller.view.edit.panel.base.evaluation.ControllerPanelBaseEvaluation;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import model.controller.structural.base.ControllerProject;
+import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
 import view.Panel;
@@ -75,15 +78,27 @@ public final class PanelBaseEvaluation extends Panel {
      * @return Targets Array.
      */
     private Object[] getTargets() {
-        return new ControllerProject(this.project).getDiagrams(this.measure.getMetric().getTarget());
+        return new ControllerProject(this.project).getTargets(this.measure.getMetric().getTarget());
     }
     
     /**
      * Method responsible for setting the Operation Values.
      */
     public void setValues() {
-//        this.setMetric();
         this.getOperationTextField().setText(this.measure.getMetric().getOperation());
+        this.getTargetComboBox().setSelectedIndex(0);
+    }
+    
+    /**
+     * Method responsible for updating the Details List.
+     * @param list Objects List.
+     */
+    public void updateDetailsList(List<Object> list) {
+        this.getDetailsList().removeAll();
+        DefaultListModel model = new DefaultListModel();
+        for (Object object :  list)
+            model.addElement(object);
+        this.getDetailsList().setModel(model);
     }
     
     @Override

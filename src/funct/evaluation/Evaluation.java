@@ -7,7 +7,7 @@ import javax.script.ScriptException;
 import model.structural.base.Project;
 
 /**
- * <p>Class of Functions <b>Evaluation</b>.</p>
+ * <p>Class of Evaluation <b>Evaluation</b>.</p>
  * <p>Class responsible for operations involving <b>Evaluation</b> and <b>Measures</b>.</p>
  * @author Leandro
  * @since  02/09/2019
@@ -35,9 +35,9 @@ public abstract class Evaluation {
             if (this.checkCharacter(expression.charAt(i))) {
                 toReturn += expression.charAt(i);
             }else {
-                String valor = expression.substring(i, expression.indexOf(")", i) + 1);
-                   toReturn += this.getClauseValue(valor);
-                          i  = expression.indexOf(")", i);
+                String valor  = expression.substring(i, expression.indexOf(")", i) + 1);
+                   toReturn  += this.getClauseValue(valor);
+                          i   = expression.indexOf(")", i);
             }
         }
         return toReturn;
@@ -114,16 +114,27 @@ public abstract class Evaluation {
     }
     
     /**
+     * Method responsible for cheking the Token.
+     * @param  filter String Filter.
+     * @param  start Start Delimiter.
+     * @param  end End Delimiter.
+     * @return Token is checked.
+     */
+    private boolean checkToken(String filter, String start, String end) {
+        return filter.contains(start)
+            && filter.contains(end)
+            && filter.indexOf(start) < filter.indexOf(end);
+    }
+    
+    /**
      * Method responsible for clearing the Name.
      * @param  filter Clause Filter.
      * @return New Filter.
      */
     protected String clearNames(String filter) {
-        if (!filter.contains("[") || (!filter.contains("]")))
-            return filter;
-        if (filter.indexOf("[") > filter.indexOf("]"))
-            return filter;
-        return filter.substring(0, filter.indexOf("[")) + filter.substring(filter.indexOf("]") + 1);
+        if (this.checkToken(filter, "[", "]"))
+            return filter.substring(0, filter.indexOf("[")) + filter.substring(filter.indexOf("]") + 1);
+        return filter;
     }
     
     /**
@@ -132,14 +143,37 @@ public abstract class Evaluation {
      * @return Names List.
      */
     protected List<String> getNames(String filter) {
-        if (!filter.contains("[") || (!filter.contains("]")))
+        if (!this.checkToken(filter, "[", "]"))
             return new ArrayList<>();
-        if (filter.indexOf("[") > filter.indexOf("]"))
-            return new ArrayList<>();
-        List<String> toReturn = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         for (String nome : filter.substring(filter.indexOf("[") + 1, filter.indexOf("]")).split(","))
-               toReturn.add(nome.trim());
-        return toReturn;
+               list.add(nome.trim());
+        return list;
+    }
+    
+    /**
+     * Method responsible for clearing the Stereotypes.
+     * @param  filter Clause Filter.
+     * @return New Filter.
+     */
+    protected String clearStereotypes(String filter) {
+        if (this.checkToken(filter, "<", ">"))
+            return filter.substring(0, filter.indexOf("<")) + filter.substring(filter.indexOf(">") + 1);
+        return filter;
+    }
+    
+    /**
+     * Method responsible for returning the Stereotypes List.
+     * @param  filter Clause Filter.
+     * @return Stereotypes List.
+     */
+    protected List<String> getStereotypes(String filter) {
+        if (!this.checkToken(filter, "<", ">"))
+            return new ArrayList<>();
+        List<String> list = new ArrayList<>();
+        for (String nome : filter.substring(filter.indexOf("<") + 1, filter.indexOf(">")).split(","))
+               list.add(nome.trim());
+        return list;
     }
     
     /**
@@ -152,12 +186,12 @@ public abstract class Evaluation {
             return "public";
         if (filter.toUpperCase().contains("PROTECTED"))
             return "protected";
+        if (filter.toUpperCase().contains("PRIVATE"))
+            return "private";
         if (filter.toUpperCase().contains("DEFAULT"))
             return "default";
         if (filter.toUpperCase().contains("PACKAGE"))
             return "default";
-        if (filter.toUpperCase().contains("PRIVATE"))
-            return "private";
         return "";
     }
     
@@ -187,6 +221,19 @@ public abstract class Evaluation {
         if (filter.toUpperCase().contains("FINAL"))
             return true;
         if (filter.toUpperCase().contains("LEAF"))
+            return true;
+        return null;
+    }
+    
+    /**
+     * Method responsible for returning the Filter Abstract Flag.
+     * @param  filter Clause Filter.
+     * @return Filter Abstract Flag.
+     */
+    protected Boolean getAbstract(String filter) {
+        if (filter.toUpperCase().contains("NO-ABSTRACT"))
+            return false;
+        if (filter.toUpperCase().contains("ABSTRACT"))
             return true;
         return null;
     }

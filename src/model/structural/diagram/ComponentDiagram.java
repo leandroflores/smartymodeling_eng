@@ -1,5 +1,6 @@
 package model.structural.diagram;
 
+import funct.evaluation.types.EvaluationComponentDiagram;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,7 +81,7 @@ public final class ComponentDiagram extends Diagram {
      * Method responsible for returning the Components List.
      * @return Components List.
      */
-    public List<ComponentUML> getComponents() {
+    public List<ComponentUML> getComponentsList() {
         return new ArrayList<>(this.components.values());
     }
     
@@ -110,7 +111,7 @@ public final class ComponentDiagram extends Diagram {
      * Method responsible for returning the Interfaces List.
      * @return Interfaces List.
      */
-    public List<InterfaceUML> getInterfaces() {
+    public List<InterfaceUML> getInterfacesList() {
         return new ArrayList<>(this.interfaces.values());
     }
     
@@ -173,6 +174,11 @@ public final class ComponentDiagram extends Diagram {
             System.out.println("Error");
             return null;
         }
+    }
+    
+    @Override
+    public EvaluationComponentDiagram getEvaluation() {
+        return new EvaluationComponentDiagram(this);
     }
     
     @Override

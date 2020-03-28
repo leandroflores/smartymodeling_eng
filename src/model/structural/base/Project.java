@@ -1290,10 +1290,10 @@ public class Project implements Exportable {
                export += this.profile.export();
                export += this.exportDiagrams();
                export += this.exportTraceabilities();
-               export += this.exportMetrics();
-               export += this.exportMeasures();
                export += this.exportLinks();
                export += this.exportProducts();
+               export += this.exportMetrics();
+               export += this.exportMeasures();
                export += "</project>";
         return export;
     }

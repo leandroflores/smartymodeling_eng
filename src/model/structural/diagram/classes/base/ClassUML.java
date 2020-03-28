@@ -47,11 +47,8 @@ public class ClassUML extends Entity {
         this.final_    = element.getAttribute("final").equals("true");
     }
 
-    /**
-     * Method responsible for returning the Abstract Flag.
-     * @return Abstract Flag.
-     */
-    public boolean isAbstract() {
+    @Override
+    public Boolean isAbstract() {
         return this.abstract_;
     }
 
@@ -64,11 +61,8 @@ public class ClassUML extends Entity {
         this.final_     = this.abstract_ ? false : this.final_;
     }
 
-    /**
-     * Method responsible for returning the Final Flag.
-     * @return Final Flag.
-     */
-    public boolean isFinal() {
+    @Override
+    public Boolean isFinal() {
         return this.final_;
     }
 

@@ -1,7 +1,7 @@
 package controller.view.edit.panel.base.evaluation;
 
 import controller.view.ControllerPanel;
-import funct.evaluation.Evaluation;
+import funct.evaluation.base.EvaluationDiagram;
 import funct.evaluation.types.EvaluationUseCaseDiagram;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -63,13 +63,10 @@ public class ControllerPanelBaseEvaluation extends ControllerPanel {
     }
     
     private void evaluateDiagram(Diagram diagram, Metric metric) throws ScriptException {
-        Evaluation evaluation;
-        if (diagram instanceof UseCaseDiagram) {
-            evaluation = new EvaluationUseCaseDiagram((UseCaseDiagram) diagram);
-            System.out.println("");
-            System.out.println(evaluation.getExpression(metric.getOperation()));
-            System.out.println(evaluation.getFinalValue(metric.getOperation()));
-        }
+        EvaluationDiagram evaluation = diagram.getEvaluation();
+        Double value = evaluation.getFinalValue(metric.getOperation());
+        this.panelBaseEvaluation.getValueTextField().setText(Double.toString(value));
+        this.panelBaseEvaluation.updateDetailsList(evaluation.getObjects());
     }
     
     /**

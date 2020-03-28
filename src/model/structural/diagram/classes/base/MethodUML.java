@@ -197,11 +197,8 @@ public class MethodUML extends Element implements Encodable {
         this.static_ = static_;
     }
     
-    /**
-     * Method responsible for returning Method Final Flag.
-     * @return Method Final Flag.
-     */
-    public boolean isFinal() {
+    @Override
+    public Boolean isFinal() {
         return this.final_;
     }
     
@@ -213,11 +210,8 @@ public class MethodUML extends Element implements Encodable {
         this.final_ = final_;
     }
 
-    /**
-     * Method responsible for returning Method Abstract Flag.
-     * @return Method Abstract Flag.
-     */
-    public boolean isAbstract() {
+    @Override
+    public Boolean isAbstract() {
         return this.abstract_;
     }
     

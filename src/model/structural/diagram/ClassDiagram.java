@@ -1,5 +1,6 @@
 package model.structural.diagram;
 
+import funct.evaluation.types.EvaluationClassDiagram;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,13 +32,13 @@ import model.structural.diagram.classes.base.TypeUML;
  * @see    model.structural.diagram.classes.base.PackageUML
  */
 public final class ClassDiagram extends Diagram {
-    private HashMap<String, PackageUML>   packagesUML;
-    private HashMap<String, ClassUML>     classUML;
-    private HashMap<String, InterfaceUML> interfacesUML;
-    private HashMap<String, AttributeUML> attributesUML;
-    private HashMap<String, MethodUML>    methodsUML;
-    private HashMap<String, Association>  associationsUML;
-    private HashMap<String, Association>  realizationsUML;
+    private HashMap<String, PackageUML>   packages;
+    private HashMap<String, ClassUML>     classes;
+    private HashMap<String, InterfaceUML> interfaces;
+    private HashMap<String, AttributeUML> attributes;
+    private HashMap<String, MethodUML>    methods;
+    private HashMap<String, Association>  associations_;
+    private HashMap<String, Association>  realizations;
     
     /**
      * Default constructor method of Class.
@@ -60,14 +61,14 @@ public final class ClassDiagram extends Diagram {
     
     @Override
     public void init() {
-        this.type            = "Class";
-        this.packagesUML     = new HashMap<>();
-        this.classUML        = new HashMap<>();
-        this.interfacesUML   = new HashMap<>();
-        this.attributesUML   = new HashMap<>();
-        this.methodsUML      = new HashMap<>();
-        this.associationsUML = new HashMap<>();
-        this.realizationsUML = new HashMap<>();
+        this.type          = "Class";
+        this.packages      = new HashMap<>();
+        this.classes       = new HashMap<>();
+        this.interfaces    = new HashMap<>();
+        this.attributes    = new HashMap<>();
+        this.methods       = new HashMap<>();
+        this.associations_ = new HashMap<>();
+        this.realizations  = new HashMap<>();
     }
     
     /**
@@ -94,8 +95,8 @@ public final class ClassDiagram extends Diagram {
      */
     public void addPackage(PackageUML package_) {
         package_.setId(this.nextPackageId());
-        if (this.packagesUML.get(package_.getId()) == null) {
-            this.packagesUML.put(package_.getId(), package_);
+        if (this.packages.get(package_.getId()) == null) {
+            this.packages.put(package_.getId(), package_);
             this.addElement(package_);
             package_.setDiagram(this);
         }
@@ -111,7 +112,7 @@ public final class ClassDiagram extends Diagram {
         this.removeEntities(packageUML);
         this.removeAssociations(packageUML);
         this.removeElement(packageUML);
-        this.packagesUML.remove(packageUML.getId());
+        this.packages.remove(packageUML.getId());
     }
     
     /**
@@ -159,7 +160,7 @@ public final class ClassDiagram extends Diagram {
      * @return Packages List.
      */
     public List<PackageUML> getPackagesList() {
-        return new ArrayList<>(this.packagesUML.values());
+        return new ArrayList<>(this.packages.values());
     }
     
     /**
@@ -176,8 +177,8 @@ public final class ClassDiagram extends Diagram {
      */
     public void addClass(ClassUML class_) {
         class_.setId(this.nextClassId());
-        if (this.classUML.get(class_.getId()) == null) {
-            this.classUML.put(class_.getId(), class_);
+        if (this.classes.get(class_.getId()) == null) {
+            this.classes.put(class_.getId(), class_);
             this.addElement(class_);
             this.project.addEntityType(class_);
             class_.setDiagram(this);
@@ -196,7 +197,7 @@ public final class ClassDiagram extends Diagram {
         this.removeAssociations(class_);
         this.removeElement(class_);
         this.resetPackage(class_);
-        this.classUML.remove(class_.getId());
+        this.classes.remove(class_.getId());
     }
     
     /**
@@ -205,17 +206,17 @@ public final class ClassDiagram extends Diagram {
      * @param newType New Type.
      */
     private void changeClassTypes(TypeUML oldType, TypeUML newType) {
-        List<ClassUML> list = this.getClassList();
+        List<ClassUML> list = this.getClassesList();
         for (int i = 0; i < list.size(); i++)
             list.get(i).changeType(oldType, newType);
     }
     
     /**
-     * Method responsible for returning the Class List.
-     * @return Class List.
+     * Method responsible for returning the Classes List.
+     * @return Classes List.
      */
-    public List<ClassUML> getClassList() {
-        return new ArrayList<>(this.classUML.values());
+    public List<ClassUML> getClassesList() {
+        return new ArrayList<>(this.classes.values());
     }
     
     /**
@@ -232,8 +233,8 @@ public final class ClassDiagram extends Diagram {
      */
     public void addInterface(InterfaceUML interface_) {
         interface_.setId(this.nextInterfaceId());
-        if (this.interfacesUML.get(interface_.getId()) == null) {
-            this.interfacesUML.put(interface_.getId(), interface_);
+        if (this.interfaces.get(interface_.getId()) == null) {
+            this.interfaces.put(interface_.getId(), interface_);
             this.addElement(interface_);
             this.project.addEntityType(interface_);
             interface_.setDiagram(this);
@@ -251,7 +252,7 @@ public final class ClassDiagram extends Diagram {
         this.removeAssociations(interface_);
         this.removeElement(interface_);
         this.resetPackage(interface_);
-        this.interfacesUML.remove(interface_.getId());
+        this.interfaces.remove(interface_.getId());
     }
     
     /**
@@ -269,7 +270,7 @@ public final class ClassDiagram extends Diagram {
      * @return Interfaces List.
      */
     public List<InterfaceUML> getInterfacesList() {
-        return new ArrayList<>(this.interfacesUML.values());
+        return new ArrayList<>(this.interfaces.values());
     }
     
     /**
@@ -287,7 +288,7 @@ public final class ClassDiagram extends Diagram {
      */
     public List<Entity> getEntitiesList() {
         List   entities = new ArrayList<>();
-               entities.addAll(this.getClassList());
+               entities.addAll(this.getClassesList());
                entities.addAll(this.getInterfacesList());
         return entities;
     }
@@ -306,8 +307,8 @@ public final class ClassDiagram extends Diagram {
      */
     public void addAttribute(AttributeUML attribute) {
         attribute.setId(this.nextAttributeId());
-        if (this.attributesUML.get(attribute.getId()) == null) {
-            this.attributesUML.put(attribute.getId(), attribute);
+        if (this.attributes.get(attribute.getId()) == null) {
+            this.attributes.put(attribute.getId(), attribute);
             this.addElement(attribute);
         }
     }
@@ -319,7 +320,7 @@ public final class ClassDiagram extends Diagram {
     public void removeAttribute(AttributeUML attribute) {
         attribute.getEntity().removeAttribute(attribute);
         this.removeElement(attribute);
-        this.attributesUML.remove(attribute.getId());
+        this.attributes.remove(attribute.getId());
     }
     
     /**
@@ -345,8 +346,8 @@ public final class ClassDiagram extends Diagram {
      */
     public void addMethod(MethodUML method) {
         method.setId(this.nextMethodId());
-        if (this.methodsUML.get(method.getId()) == null) {
-            this.methodsUML.put(method.getId(), method);
+        if (this.methods.get(method.getId()) == null) {
+            this.methods.put(method.getId(), method);
             this.addElement(method);
         }
     }
@@ -359,7 +360,7 @@ public final class ClassDiagram extends Diagram {
         method.getEntity().removeMethod(method);
         this.project.reset(method);
         this.removeElement(method);
-        this.methodsUML.remove(method.getId());
+        this.methods.remove(method.getId());
     }
     
     /**
@@ -368,8 +369,8 @@ public final class ClassDiagram extends Diagram {
      */
     public void addRealizationUML(RealizationUML realization) {
         realization.setId(this.nextId(realization));
-        if (this.realizationsUML.get(realization.getId()) == null) {
-            this.realizationsUML.put(realization.getId(), realization);
+        if (this.realizations.get(realization.getId()) == null) {
+            this.realizations.put(realization.getId(), realization);
             this.addAssociation(realization);
         }
     }
@@ -400,7 +401,7 @@ public final class ClassDiagram extends Diagram {
      */
     public void removeRealizationUML(RealizationUML realization) {
         super.removeAssociation(realization);
-        this.realizationsUML.remove(realization.getId());
+        this.realizations.remove(realization.getId());
     }
     
     /**
@@ -409,8 +410,8 @@ public final class ClassDiagram extends Diagram {
      */
     public void addAssociationUML(AssociationUML association) {
         association.setId(this.nextId(association));
-        if (this.associationsUML.get(association .getId()) == null) {
-            this.associationsUML.put(association .getId(), association);
+        if (this.associations_.get(association .getId()) == null) {
+            this.associations_.put(association .getId(), association);
             this.addAssociation(association);
         }
     }
@@ -421,7 +422,7 @@ public final class ClassDiagram extends Diagram {
      */
     public void removeAssociationUML(AssociationUML association) {
         super.removeAssociation(association);
-        this.associationsUML.remove(association.getId());
+        this.associations_.remove(association.getId());
     }
     
     /**
@@ -429,8 +430,8 @@ public final class ClassDiagram extends Diagram {
      * @param element Element.
      */
     private void removeAssociations(Element element) {
-        this.removeAssociation(element, this.associationsUML);
-        this.removeAssociation(element, this.realizationsUML);
+        this.removeAssociation(element, this.associations_);
+        this.removeAssociation(element, this.realizations);
     }
     
     @Override
@@ -501,9 +502,9 @@ public final class ClassDiagram extends Diagram {
     @Override
     public String export() {
         String export  = "  <diagram id=\"" + this.id + "\" name=\"" + this.name + "\" type=\"" + this.type + "\">\n";
-               export += this.export((List<Element>) this.getList(this.packagesUML));
-               export += this.export((List<Element>) this.getList(this.classUML));
-               export += this.export((List<Element>) this.getList(this.interfacesUML));
+               export += this.export((List<Element>) this.getList(this.packages));
+               export += this.export((List<Element>) this.getList(this.classes));
+               export += this.export((List<Element>) this.getList(this.interfaces));
                export += this.exportAssociations();
                export += this.exportReferences();
                export += this.exportVariabilities();
@@ -538,13 +539,18 @@ public final class ClassDiagram extends Diagram {
         try {
             ClassDiagram diagram = (ClassDiagram) super.clone();
                          diagram.setElements(new HashMap<>(this.elements));
-                         diagram.setAssociations(new HashMap<>(this.associationsUML));
+                         diagram.setAssociations(new HashMap<>(this.associations_));
                          diagram.setVariabilities(new HashMap<>(this.variabilities));
             return       diagram;
         } catch (CloneNotSupportedException exception) {
             System.out.println("Error");
             return null;
         }
+    }
+    
+    @Override
+    public EvaluationClassDiagram getEvaluation() {
+        return new EvaluationClassDiagram(this);
     }
     
     @Override

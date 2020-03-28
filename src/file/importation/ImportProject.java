@@ -20,6 +20,7 @@ import model.structural.base.Project;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Association;
 import model.structural.base.association.Link;
+import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
@@ -87,7 +88,7 @@ public class ImportProject {
      * @throws IOException
      * @throws ParserConfigurationException
      * @throws SAXException
-     * @throws XPathExpressionException 
+     * @throws javax.xml.xpath.XPathExpressionException 
      */
     public Project getProject() throws IOException, ParserConfigurationException, SAXException, XPathExpressionException {
         this.init();
@@ -102,9 +103,10 @@ public class ImportProject {
         this.importProfile();
         this.importDiagrams();
         this.importTraceabilities();
-        this.importMetrics();
-        this.importProducts();
         this.importLinks();
+        this.importProducts();
+        this.importMetrics();
+        this.importMeasures();
         
                this.project.updateStereotypes();
         return this.project;
@@ -112,7 +114,7 @@ public class ImportProject {
     
     /**
      * Method responsible for importing Project Types.
-     * @throws XPathExpressionException
+     * throws XPathExpressionException XPath Exception.
      */
     private void importTypes() throws XPathExpressionException {
         this.expression = "/project/types/type";
@@ -126,7 +128,7 @@ public class ImportProject {
     
     /**
      * Method responsible for importing Project Stereotypes.
-     * @throws XPathExpressionException
+     * throws XPathExpressionException XPath Exception.
      */
     private void importStereotypes() throws XPathExpressionException {
         this.expression = "/project/stereotypes/stereotype";
@@ -140,7 +142,7 @@ public class ImportProject {
     
     /**
      * Method responsible for importing Project Profile.
-     * @throws XPathExpressionException
+     * throws XPathExpressionException XPath Exception.
      */
     private void importProfile() throws XPathExpressionException {
         this.expression = "/project/profile";
@@ -159,7 +161,7 @@ public class ImportProject {
     
     /**
      * Method responsible for importing Project Diagrams.
-     * @throws XPathExpressionException 
+     * throws XPathExpressionException XPath Exception. 
      */
     private void importDiagrams() throws XPathExpressionException {
         String[] types = {"Activity", "Class", "Component", "UseCase", "Sequence"};
@@ -176,7 +178,7 @@ public class ImportProject {
      * Method responsible for importing Project Diagram.
      * @param element W3C Element.
      * @param index Diagram Index.
-     * @throws XPathExpressionException
+     * throws XPathExpressionException XPath Exception.
      */
     private void importDiagram(Element element, int index) throws XPathExpressionException {
         switch (index) {
@@ -202,7 +204,7 @@ public class ImportProject {
     
     /**
      * Method responsible for importing Project Traceabilities.
-     * @throws XPathExpressionException 
+     * throws XPathExpressionException XPath Exception.
      */
     private void importTraceabilities() throws XPathExpressionException {
         this.expression = "/project/traceability";
@@ -219,24 +221,23 @@ public class ImportProject {
     }
     
     /**
-     * Method responsible for importing Project Metrics.
-     * @throws XPathExpressionException 
+     * Method responsible for importing Project Links.
+     * throws XPathExpressionException XPath Exception.
      */
-    private void importMetrics() throws XPathExpressionException {
-        this.expression = "/project/metric";
+    private void importLinks() throws XPathExpressionException {
+        this.expression = "/project/links/link";
         this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
         for (int i = 0; i < this.nodeList.getLength(); i++) {
             Element current = (Element) this.nodeList.item(i);
-            Metric  metric  = new Metric(current);
-                    metric.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
-                    metric.setOperation(current.getElementsByTagName("operation").item(0).getTextContent());
-            this.project.addMetric(metric);
+            Link    link    = new Link((model.structural.base.Element) this.project.objects.get(current.getAttribute("element")), 
+                                                          (Stereotype) this.project.getStereotypes().get(current.getAttribute("stereotype")));
+            this.project.addLink(link);
         }
     }
     
     /**
      * Method responsible for importing Project Products.
-     * @throws XPathExpressionException 
+     * throws XPathExpressionException XPath Exception. 
      */
     private void importProducts() throws XPathExpressionException {
         this.expression = "/project/products/product";
@@ -324,17 +325,33 @@ public class ImportProject {
     }
     
     /**
-     * Method responsible for importing Project Links.
-     * @throws XPathExpressionException
+     * Method responsible for importing Project Metrics.
+     * throws XPathExpressionException XPath Exception. 
      */
-    private void importLinks() throws XPathExpressionException {
-        this.expression = "/project/links/link";
+    private void importMetrics() throws XPathExpressionException {
+        this.expression = "/project/metric";
         this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
         for (int i = 0; i < this.nodeList.getLength(); i++) {
             Element current = (Element) this.nodeList.item(i);
-            Link    link    = new Link((model.structural.base.Element) this.project.objects.get(current.getAttribute("element")), 
-                                                          (Stereotype) this.project.getStereotypes().get(current.getAttribute("stereotype")));
-            this.project.addLink(link);
+            Metric  metric  = new Metric(current);
+                    metric.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
+                    metric.setOperation(current.getElementsByTagName("operation").item(0).getTextContent());
+            this.project.addMetric(metric);
+        }
+    }
+    
+    /**
+     * Method responsible for importing Project Measures.
+     * throws XPathExpressionException XPath Exception. 
+     */
+    private void importMeasures() throws XPathExpressionException {
+        this.expression = "/project/measure";
+        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
+        for (int i = 0; i < this.nodeList.getLength(); i++) {
+            Element current = (Element) this.nodeList.item(i);
+            Measure measure = new Measure(current);
+                    measure.setMetric(this.project.getMetric(current.getAttribute("metric")));
+            this.project.addMeasure(measure);
         }
     }
 }

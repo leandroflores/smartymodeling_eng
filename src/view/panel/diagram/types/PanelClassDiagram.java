@@ -170,7 +170,7 @@ public final class PanelClassDiagram extends PanelDiagram {
      * Method responsible for adding the Diagram Classes.
      */
     private void addClasses() {
-        for (ClassUML classUML : this.diagram.getClassList()) {
+        for (ClassUML classUML : this.diagram.getClassesList()) {
             if (classUML.getPackageUML() == null)
                 this.addClass(this.parent, classUML);
         }

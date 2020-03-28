@@ -6,7 +6,7 @@ import model.structural.diagram.UseCaseDiagram;
 import model.structural.diagram.usecase.base.UseCaseUML;
 
 /**
- * <p>Class of Metric <b>EvaluationUseCaseUML</b>.</p>
+ * <p>Class of Evaluation <b>EvaluationUseCaseUML</b>.</p>
  * <p>Class responsible por <b>Evaluate</b> the <b>Use Cases UML</b>.</p>
  * @author Leandro
  * @since  02/09/2019
@@ -30,8 +30,8 @@ public class EvaluationUseCaseUML extends EvaluationElement {
     public List<UseCaseUML> filter(Object[] parameters) {
            List filter = this.diagram.getUseCasesList();
                 filter = this.filterNames(filter, (List<String>) parameters[0]);
-//                filter = this.filterStereotypes(filter, (List<String>) parameters[1]);
-                filter = this.filterMandatory(filter, (Boolean) parameters[1]);
+                filter = this.filterStereotypes(filter, (List<String>) parameters[1]);
+                filter = this.filterMandatory(filter, (Boolean) parameters[2]);
         return  filter;
     }
 }

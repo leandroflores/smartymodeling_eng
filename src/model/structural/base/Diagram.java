@@ -3,6 +3,7 @@ package model.structural.base;
 import model.structural.base.association.Association;
 import model.structural.base.association.Generalization;
 import funct.FunctString;
+import funct.evaluation.base.EvaluationDiagram;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -943,6 +944,12 @@ public abstract class Diagram implements Exportable {
     protected List getList(HashMap hash) {
         return new ArrayList<>(hash.values());
     }
+    
+    /**
+     * Method responsible for returning the Diagram Evaluation Class.
+     * @return Diagram Evaluation Class.
+     */
+    public abstract EvaluationDiagram getEvaluation();
     
     /**
      * Method responsible for returning Elements to export.

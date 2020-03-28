@@ -6,8 +6,8 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 
 /**
- * <p>Class of Metric <b>EvaluationElement</b>.</p>
- * <p>Class responsible por <b>Evaluate</b> the <b>Elements</b> of SMartyModeling.</p>
+ * <p>Class of Evaluation <b>EvaluationElement</b>.</p>
+ * <p>Class responsible for <b>Evaluate</b> the <b>Elements</b>.</p>
  * @author Leandro
  * @since  02/09/2019
  * @see    model.structural.base.Diagram
@@ -30,8 +30,6 @@ public class EvaluationElement {
      * @return Metric Value.
      */
     public Double getMetricValue(Object[] parameters) {
-        List filter = this.filter(parameters);
-        System.out.println("Filter = " + filter);
         return Double.parseDouble(Integer.toString(this.filter(parameters).size()));
     }
     
@@ -102,6 +100,40 @@ public class EvaluationElement {
             return elements;
         for (Object object : elements) {
             if (mandatory == ((Element) object).isMandatory())
+                filter.add((Element) object);
+        }
+        return filter;
+    }
+    
+    /**
+     * Method responsible for filtering the Elements by Abstract Flag.
+     * @param  elements  Elements List.
+     * @param  abstract_ Abstract Flag.
+     * @return Elements filtered.
+     */
+    protected List<Element> filterAbstract(List elements, Boolean abstract_) {
+        List<Element> filter = new ArrayList<>();
+        if (abstract_ == null)
+            return elements;
+        for (Object object : elements) {
+            if (abstract_.equals(((Element) object).isAbstract()))
+                filter.add((Element) object);
+        }
+        return filter;
+    }
+    
+    /**
+     * Method responsible for filtering the Elements by Final Flag.
+     * @param  elements Elements List.
+     * @param  final_ Final Flag.
+     * @return Elements filtered.
+     */
+    protected List<Element> filterFinal(List elements, Boolean final_) {
+        List<Element> filter = new ArrayList<>();
+        if (final_ == null)
+            return elements;
+        for (Object object : elements) {
+            if (final_.equals(((Element) object).isFinal()))
                 filter.add((Element) object);
         }
         return filter;
