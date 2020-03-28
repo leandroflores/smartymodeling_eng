@@ -109,10 +109,7 @@ public class AttributeUML extends Element implements Encodable {
             this.typeUML = newType;
     }
 
-    /**
-     * Method responsible for returning Visibility.
-     * @return Visibility.
-     */
+    @Override
     public String getVisibility() {
         return this.visibility;
     }
@@ -125,11 +122,8 @@ public class AttributeUML extends Element implements Encodable {
         this.visibility = visibility;
     }
 
-    /**
-     * Method responsible for returning Static Flag.
-     * @return Static Flag.
-     */
-    public boolean isStatic() {
+    @Override
+    public Boolean isStatic() {
         return this.static_;
     }
 
@@ -152,6 +146,11 @@ public class AttributeUML extends Element implements Encodable {
      */
     public void setFinal(boolean final_) {
         this.final_ = final_;
+    }
+    
+    @Override
+    public Boolean isAbstract() {
+        return false;
     }
     
     @Override

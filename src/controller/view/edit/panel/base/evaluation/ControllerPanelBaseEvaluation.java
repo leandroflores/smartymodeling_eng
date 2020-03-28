@@ -2,14 +2,13 @@ package controller.view.edit.panel.base.evaluation;
 
 import controller.view.ControllerPanel;
 import funct.evaluation.base.EvaluationDiagram;
-import funct.evaluation.types.EvaluationUseCaseDiagram;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.script.ScriptException;
 import model.structural.base.Diagram;
 import model.structural.base.evaluation.Metric;
-import model.structural.diagram.UseCaseDiagram;
 import view.edit.panel.base.evaluation.PanelBaseEvaluation;
+import view.message.ViewError;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseEvaluation</b>.</p>
@@ -55,18 +54,23 @@ public class ControllerPanelBaseEvaluation extends ControllerPanel {
         Metric metric = this.panelBaseEvaluation.getMeasure().getMetric();
         if (target instanceof Diagram) {
             try {
-                this.evaluateDiagram((Diagram) target, metric);
+                this.evaluate(((Diagram) target).getEvaluation(), metric);
             } catch (ScriptException exception) {
-                System.out.println(exception);
+                new ViewError(this.panelBaseEvaluation.getViewNewMeasure(), "Error to Apply Metric!").setVisible(true);
             }
         }
     }
     
-    private void evaluateDiagram(Diagram diagram, Metric metric) throws ScriptException {
-        EvaluationDiagram evaluation = diagram.getEvaluation();
+    /**
+     * Method responsible for evaluate the Diagram by a Metric.
+     * @param  evaluation Evaluation Diagram.
+     * @param  metric Metric.
+     * @throws ScriptException 
+     */
+    private void evaluate(EvaluationDiagram evaluation, Metric metric) throws ScriptException {
         Double value = evaluation.getFinalValue(metric.getOperation());
         this.panelBaseEvaluation.getValueTextField().setText(Double.toString(value));
-        this.panelBaseEvaluation.updateDetailsList(evaluation.getObjects());
+        this.panelBaseEvaluation.updateDetails(evaluation.getObjects());
     }
     
     /**

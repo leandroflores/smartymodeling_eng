@@ -15,6 +15,7 @@ import model.structural.base.Project;
  */
 public abstract class Evaluation {
     private final Project project;
+    protected List<Object> objects;
     
     /**
      * Default constructor method of Class.
@@ -22,6 +23,15 @@ public abstract class Evaluation {
      */
     public Evaluation(Project project) {
         this.project = project;
+    }
+    
+    /**
+     * Method responsible for adding the Objects List.
+     * @param list Objects List.
+     */
+    protected void addObjects(List list) {
+        this.objects.addAll(new ArrayList<>(list));
+        this.objects.add("\n");
     }
     
     /**
@@ -269,5 +279,28 @@ public abstract class Evaluation {
      */
     public Double getFinalValue(String expression) throws ScriptException {
         return this.getValue(this.getExpression(expression));
+    }
+    
+    /**
+     * Method responsible for returning the Default Filters.
+     * @param  filter Clause Filter.
+     * @return Default Filters.
+     */
+    protected Object[] getDefaultFilters(String filter) {
+        Object[] filters    = new Object[3];
+                 filters[0] = this.getNames(filter);
+                     filter = this.clearNames(filter);
+                 filters[1] = this.getStereotypes(filter);
+                     filter = this.clearStereotypes(filter);
+                 filters[2] = this.getMandatory(filter);
+        return   filters;
+    }
+    
+    /**
+     * Method responsible for returning the Objects List.
+     * @return Objects List.
+     */
+    public List<Object> getObjects() {
+        return this.objects;
     }
 }

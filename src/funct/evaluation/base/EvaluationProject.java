@@ -3,6 +3,7 @@ package funct.evaluation.base;
 import funct.evaluation.Evaluation;
 import java.util.ArrayList;
 import model.structural.base.Diagram;
+import model.structural.base.Project;
 
 /**
  * <p>Class of Evaluation <b>EvaluationDiagram</b>.</p>
@@ -12,22 +13,24 @@ import model.structural.base.Diagram;
  * @see    funct.evaluation.Evaluation
  * @see    model.structural.base.Diagram
  */
-public abstract class EvaluationDiagram extends Evaluation {
-    private final Diagram  diagram;
+public class EvaluationProject extends Evaluation {
+    private final Project project;
     
     /**
      * Default constructor method of Class.
-     * @param diagram Diagram.
+     * @param project Project.
      */
-    public EvaluationDiagram(Diagram diagram) {
-        super(diagram.getProject());
-        this.diagram = diagram;
+    public EvaluationProject(Project project) {
+        super(project);
+        this.project = project;
         this.objects = new ArrayList<>();
     }
-    
-    /**
-     * Method responsible for returning the Diagram Values.
-     * @return Diagram Values.
-     */
-    public abstract Object[] getValues();
+
+    @Override
+    protected Double getClauseValue(String keyword, String filter) {
+        System.out.println("KeyWord: " + keyword);
+        System.out.println("Filter.: " + filter);
+        System.out.println("");
+        return 0.0d;
+    }
 }

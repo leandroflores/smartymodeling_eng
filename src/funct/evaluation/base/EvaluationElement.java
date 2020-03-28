@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
+import model.structural.diagram.classes.Encodable;
 
 /**
  * <p>Class of Evaluation <b>EvaluationElement</b>.</p>
@@ -13,7 +14,7 @@ import model.structural.base.Element;
  * @see    model.structural.base.Diagram
  * @see    model.structural.base.Element
  */
-public class EvaluationElement {
+public abstract class EvaluationElement {
     private final Diagram diagram;
     
     /**
@@ -106,35 +107,69 @@ public class EvaluationElement {
     }
     
     /**
-     * Method responsible for filtering the Elements by Abstract Flag.
-     * @param  elements  Elements List.
+     * Method responsible for filtering the Objects by Abstract Flag.
+     * @param  objects  Objects List.
      * @param  abstract_ Abstract Flag.
-     * @return Elements filtered.
+     * @return Objects filtered.
      */
-    protected List<Element> filterAbstract(List elements, Boolean abstract_) {
-        List<Element> filter = new ArrayList<>();
+    protected List<Encodable> filterAbstract(List objects, Boolean abstract_) {
+        List<Encodable> filter = new ArrayList<>();
         if (abstract_ == null)
-            return elements;
-        for (Object object : elements) {
-            if (abstract_.equals(((Element) object).isAbstract()))
-                filter.add((Element) object);
+            return objects;
+        for (Object object : objects) {
+            if (abstract_.equals(((Encodable) object).isAbstract()))
+                filter.add((Encodable) object);
         }
         return filter;
     }
     
     /**
-     * Method responsible for filtering the Elements by Final Flag.
-     * @param  elements Elements List.
+     * Method responsible for filtering the Objects by Final Flag.
+     * @param  objects Objects List.
      * @param  final_ Final Flag.
-     * @return Elements filtered.
+     * @return Objects filtered.
      */
-    protected List<Element> filterFinal(List elements, Boolean final_) {
-        List<Element> filter = new ArrayList<>();
+    protected List<Encodable> filterFinal(List objects, Boolean final_) {
+        List<Encodable> filter = new ArrayList<>();
         if (final_ == null)
-            return elements;
-        for (Object object : elements) {
-            if (final_.equals(((Element) object).isFinal()))
-                filter.add((Element) object);
+            return objects;
+        for (Object object : objects) {
+            if (final_.equals(((Encodable) object).isFinal()))
+                filter.add((Encodable) object);
+        }
+        return filter;
+    }
+    
+    /**
+     * Method responsible for filtering the Objects by Static Flag.
+     * @param  objects Objects List.
+     * @param  static_ Static Flag.
+     * @return Objects filtered.
+     */
+    protected List<Encodable> filterStatic(List objects, Boolean static_) {
+        List<Encodable> filter = new ArrayList<>();
+        if (static_ == null)
+            return objects;
+        for (Object object : objects) {
+            if (static_.equals(((Encodable) object).isFinal()))
+                filter.add((Encodable) object);
+        }
+        return filter;
+    }
+    
+    /**
+     * Method responsible for filtering the Objects by Visibility.
+     * @param  objects Objects List.
+     * @param visibility Visibility.
+     * @return Objects filtered.
+     */
+    protected List<Encodable> filterVisibility(List objects, String visibility) {
+        List<Encodable> filter = new ArrayList<>();
+        if (visibility.equalsIgnoreCase(""))
+            return objects;
+        for (Object object : objects) {
+            if (visibility.equals(((Encodable) object).getVisibility()))
+                filter.add((Encodable) object);
         }
         return filter;
     }

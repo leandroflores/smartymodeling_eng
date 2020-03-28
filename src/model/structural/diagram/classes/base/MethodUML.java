@@ -149,10 +149,7 @@ public class MethodUML extends Element implements Encodable {
             this.return_ = newType;
     }
     
-    /**
-     * Method responsible for returning Method Visibility.
-     * @return Method Visibility.
-     */
+    @Override
     public String getVisibility() {
         return this.visibility;
     }
@@ -181,11 +178,8 @@ public class MethodUML extends Element implements Encodable {
         this.constructor = constructor;
     }
     
-    /**
-     * Method responsible for returning Method Static Flag.
-     * @return Method Static Flag.
-     */
-    public boolean isStatic() {
+    @Override
+    public Boolean isStatic() {
         return this.static_;
     }
 

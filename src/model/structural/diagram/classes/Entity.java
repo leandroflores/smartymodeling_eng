@@ -82,6 +82,26 @@ public abstract class Entity extends Element implements Encodable {
         return this instanceof InterfaceUML;
     }
     
+    @Override
+    public Boolean isAbstract() {
+        return false;
+    }
+
+    @Override
+    public Boolean isFinal() {
+        return false;
+    }
+    
+    @Override
+    public Boolean isStatic() {
+        return false;
+    }
+    
+    @Override
+    public String getVisibility() {
+        return "public";
+    }
+    
     /**
      * Method responsible for updating the Entity Size.
      */

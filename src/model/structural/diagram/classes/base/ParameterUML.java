@@ -40,6 +40,26 @@ public class ParameterUML implements Exportable, Encodable {
         this.name = element.getAttribute("name");
     }
 
+    @Override
+    public Boolean isAbstract() {
+        return false;
+    }
+
+    @Override
+    public Boolean isFinal() {
+        return false;
+    }
+    
+    @Override
+    public Boolean isStatic() {
+        return false;
+    }
+    
+    @Override
+    public String getVisibility() {
+        return "";
+    }
+    
     /**
      * Method responsible for returning Parameter Type UML.
      * @return Parameter Type UML.

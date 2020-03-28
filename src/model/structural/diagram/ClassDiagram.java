@@ -324,6 +324,14 @@ public final class ClassDiagram extends Diagram {
     }
     
     /**
+     * Method responsible for returning the Attributes List.
+     * @return Attributes List.
+     */
+    public List<AttributeUML> getAttributesList() {
+        return new ArrayList<>(this.attributes.values());
+    }
+    
+    /**
      * Method responsible for removing the Methods from a Entity.
      * @param entity Entity.
      */
@@ -361,6 +369,14 @@ public final class ClassDiagram extends Diagram {
         this.project.reset(method);
         this.removeElement(method);
         this.methods.remove(method.getId());
+    }
+    
+    /**
+     * Method responsible for returning the Methods List.
+     * @return Methods List.
+     */
+    public List<MethodUML> getMethodsList() {
+        return new ArrayList<>(this.methods.values());
     }
     
     /**

@@ -139,22 +139,6 @@ public abstract class Element implements Exportable, Modelable {
     }
     
     /**
-     * Method responsible for returning the Abstract Flag.
-     * @return Abstract Flag.
-     */
-    public Boolean isAbstract() {
-        return false;
-    }
-    
-    /**
-     * Method responsible for returning the Final Flag.
-     * @return Final Flag.
-     */
-    public Boolean isFinal() {
-        return false;
-    }
-    
-    /**
      * Method responsible for returning the Element Default Flag.
      * @return Element Default Flag.
      */

@@ -10,7 +10,6 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import model.controller.structural.base.ControllerProject;
-import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
 import view.Panel;
@@ -86,14 +85,22 @@ public final class PanelBaseEvaluation extends Panel {
      */
     public void setValues() {
         this.getOperationTextField().setText(this.measure.getMetric().getOperation());
-        this.getTargetComboBox().setSelectedIndex(0);
+        this.updateTarget();
     }
     
     /**
-     * Method responsible for updating the Details List.
+     * Method responsible for updating the Target.
+     */
+    public void updateTarget() {
+        Object target = this.viewNew.getPanelBaseTarget().getTargetComboBox().getSelectedItem();
+        this.getTargetComboBox().setSelectedItem(target);
+    }
+    
+    /**
+     * Method responsible for updating the Details.
      * @param list Objects List.
      */
-    public void updateDetailsList(List<Object> list) {
+    public void updateDetails(List<Object> list) {
         this.getDetailsList().removeAll();
         DefaultListModel model = new DefaultListModel();
         for (Object object :  list)
