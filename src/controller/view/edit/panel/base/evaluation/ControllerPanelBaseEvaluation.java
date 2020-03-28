@@ -2,10 +2,12 @@ package controller.view.edit.panel.base.evaluation;
 
 import controller.view.ControllerPanel;
 import funct.evaluation.base.EvaluationDiagram;
+import funct.evaluation.base.EvaluationProject;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.script.ScriptException;
 import model.structural.base.Diagram;
+import model.structural.base.Project;
 import model.structural.base.evaluation.Metric;
 import view.edit.panel.base.evaluation.PanelBaseEvaluation;
 import view.message.ViewError;
@@ -52,13 +54,27 @@ public class ControllerPanelBaseEvaluation extends ControllerPanel {
     private void evaluate() {
         Object target = this.panelBaseEvaluation.getTargetComboBox().getSelectedItem();
         Metric metric = this.panelBaseEvaluation.getMeasure().getMetric();
-        if (target instanceof Diagram) {
-            try {
+        try {
+            if (target.toString().equalsIgnoreCase("Project"))
+                this.evaluate(this.panelBaseEvaluation.getProject().getEvaluation(), metric);
+            else if (target instanceof Diagram)
                 this.evaluate(((Diagram) target).getEvaluation(), metric);
-            } catch (ScriptException exception) {
-                new ViewError(this.panelBaseEvaluation.getViewNewMeasure(), "Error to Apply Metric!").setVisible(true);
-            }
+        }catch (ScriptException exception) {
+            new ViewError(this.panelBaseEvaluation.getViewNewMeasure(), "Error to Apply Metric!").setVisible(true);
         }
+    }
+    
+    /**
+     * Method responsible for evaluate the Project by a Metric.
+     * @param  evaluation Evaluation Project.
+     * @param  metric Metric.
+     * @throws ScriptException 
+     */
+    private void evaluate(EvaluationProject evaluation, Metric metric) throws ScriptException {
+        System.out.println("AA");
+        Double value = evaluation.getFinalValue(metric.getOperation());
+        this.panelBaseEvaluation.getValueTextField().setText(Double.toString(value));
+        this.panelBaseEvaluation.updateDetails(evaluation.getObjects());
     }
     
     /**

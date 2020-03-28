@@ -154,6 +154,6 @@ public class Metric implements Exportable {
     
     @Override
     public String toString() {
-        return this.name + " (" + this.label + ")";
+        return this.name;
     }
 }

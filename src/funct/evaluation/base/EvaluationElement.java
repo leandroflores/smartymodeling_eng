@@ -14,7 +14,7 @@ import model.structural.diagram.classes.Encodable;
  * @see    model.structural.base.Diagram
  * @see    model.structural.base.Element
  */
-public abstract class EvaluationElement {
+public class EvaluationElement {
     private final Diagram diagram;
     
     /**

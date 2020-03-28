@@ -297,6 +297,25 @@ public abstract class Evaluation {
     }
     
     /**
+     * Method responsible for returning the Attribute Filters.
+     * @param  filter Clause Filter.
+     * @return Attribute Filters.
+     */
+    protected Object[] getDetailFilters(String filter) {
+        Object[] filters    = new Object[7];
+                 filters[0] = this.getNames(filter);
+                     filter = this.clearNames(filter);
+                 filters[1] = this.getStereotypes(filter);
+                     filter = this.clearStereotypes(filter);
+                 filters[2] = this.getMandatory(filter);
+                 filters[3] = this.getAbstract(filter);
+                 filters[4] = this.getFinal(filter);
+                 filters[5] = this.getStatic(filter);
+                 filters[6] = this.getVisibility(filter);
+        return   filters;
+    }
+    
+    /**
      * Method responsible for returning the Objects List.
      * @return Objects List.
      */

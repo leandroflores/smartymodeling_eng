@@ -3,6 +3,7 @@ package model.structural.base;
 import model.structural.base.association.Association;
 import funct.FunctDate;
 import funct.FunctString;
+import funct.evaluation.base.EvaluationProject;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -357,6 +358,20 @@ public class Project implements Exportable {
         for (Element element : this.getElements()) {
             if (element.getType().equalsIgnoreCase(type))
                 list.add(element);
+        }
+        return list;
+    }
+    
+    /**
+     * Method responsible for returning the Associations by Type.
+     * @param  type Association Type.
+     * @return Associations List.
+     */
+    public List getAssociations(String type) {
+        List list = new ArrayList<>();
+        for (Association association : this.getAssociations()) {
+            if (association.getType().equalsIgnoreCase(type))
+                list.add(association);
         }
         return list;
     }
@@ -1280,6 +1295,14 @@ public class Project implements Exportable {
      */
     public String getIcon() {
         return "icons/project.png";
+    }
+    
+    /**
+     * Method responsible for returning the Project Evaluation.
+     * @return Project Evaluation.
+     */
+    public EvaluationProject getEvaluation() {
+        return new EvaluationProject(this);
     }
     
     @Override
