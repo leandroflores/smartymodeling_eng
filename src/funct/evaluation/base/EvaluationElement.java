@@ -1,5 +1,6 @@
 package funct.evaluation.base;
 
+import funct.evaluation.Evaluation;
 import java.util.ArrayList;
 import java.util.List;
 import model.structural.base.Diagram;
@@ -14,7 +15,7 @@ import model.structural.diagram.classes.Encodable;
  * @see    model.structural.base.Diagram
  * @see    model.structural.base.Element
  */
-public class EvaluationElement {
+public class EvaluationElement extends Evaluation {
     private final Diagram diagram;
     
     /**
@@ -22,7 +23,16 @@ public class EvaluationElement {
      * @param diagram Diagram.
      */
     public EvaluationElement(Diagram diagram) {
+        super(diagram.getProject());
         this.diagram = diagram;
+    }
+    
+    @Override
+    protected Double getClauseValue(String keyword, String filter) {
+        System.out.println("Keyword: " + keyword);
+        System.out.println("Filter.: " + filter);
+        System.out.println("");
+        return 0.0d;
     }
     
     /**
@@ -37,12 +47,13 @@ public class EvaluationElement {
     /**
      * Method responsible for filtering the Elements by Parameters.
      * @param  parameters Parameters List.
-     * @return Actors UML filtered.
+     * @return Elements filtered.
      */
     public List filter(Object[] parameters) {
            List filter = this.diagram.getElementsList();
                 filter = this.filterNames(filter, (List<String>) parameters[1]);
                 filter = this.filterStereotypes(filter, (List<String>) parameters[2]);
+                filter = this.filterMandatory(filter, (Boolean) parameters[3]);
         return  filter;
     }
     

@@ -31,10 +31,13 @@ public class EvaluationProject extends Evaluation {
 
     @Override
     protected Double getClauseValue(String keyword, String filter) {
-        System.out.println("KeyWord: " + keyword);
-        System.out.println("Filter.: " + filter);
-        System.out.println("");
-        return 0.0d;
+        if (this.isElement(keyword))
+            System.out.println("Evaluation Element");
+        else if (this.isAssociation(keyword))
+            System.out.println("Evaluation Association");
+        else if (this.isProductLine(keyword))
+            System.out.println("Evaluation Product Line");
+        return 1.0d;
     }
     
     /**
@@ -64,6 +67,16 @@ public class EvaluationProject extends Evaluation {
                           "comunication",
                           "flow",
                           "message"};
+        return Arrays.asList(array).contains(keyword.toLowerCase());
+    }
+    
+    /**
+     * Method responsible for checking if the Keyword is a Product Line.
+     * @param  keyword Clause Keyword.
+     * @return Keyword is a Product Line.
+     */
+    protected boolean isProductLine(String keyword) {
+        String[] array = {"product", "instance", "artifact"};
         return Arrays.asList(array).contains(keyword.toLowerCase());
     }
     

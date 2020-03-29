@@ -37,6 +37,16 @@ public class ControllerProject {
     }
     
     /**
+     * Method responsible for returning the Targets Array.
+     * @return Targets Array.
+     */
+    public Object[] getTargets() {
+        Object[] targets    = new Object[1];
+                 targets[0] = "Project";
+        return   targets;
+    }
+    
+    /**
      * Method responsible for returning the Targets Array by Type.
      * @param  type Target Type.
      * @return Targets Array.

@@ -17,7 +17,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>New Measure View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  03/09/2019
- * @see    controller.view.new_.evaluation.
+ * @see    controller.view.new_.evaluation.ControllerViewNewMeasure
  * @see    model.structural.base.evaluation.Measure
  * @see    view.new_.ViewNew
  */

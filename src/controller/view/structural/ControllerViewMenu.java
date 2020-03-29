@@ -40,6 +40,7 @@ import view.new_.evaluation.ViewNewMetric;
 import view.new_.product.ViewNewInstance;
 import view.new_.product.ViewNewProduct;
 import view.new_.traceability.ViewNewTraceability;
+import view.query.ViewQueryEvaluation;
 import view.structural.ViewMenu;
 import view.system.ViewSystemInformation;
 
@@ -99,6 +100,8 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             this.newMetric();
         else if (this.viewMenu.getMenuItemEvaluationMeasure().equals(event.getSource()))
             this.newMeasure();
+        else if (this.viewMenu.getMenuItemQueryEvaluation().equals(event.getSource()))
+            this.queryMeasure();
         else if (this.viewMenu.getMenuItemExportDiagram().equals(event.getSource()))
             this.exportDiagram();
         else if (this.viewMenu.getMenuItemExportProduct().equals(event.getSource()))
@@ -370,6 +373,13 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             else
                 new ViewError(this.viewMenu, "Metrics List is void!").setVisible(true);
         }
+    }
+    
+    /**
+     * Method responsible for Query a Measure.
+     */
+    private void queryMeasure() {
+        new ViewQueryEvaluation(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
     }
     
     /**

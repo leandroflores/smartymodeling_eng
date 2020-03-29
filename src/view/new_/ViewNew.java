@@ -11,6 +11,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>New View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  04/07/2019
+ * @see    controller.view.new_.ControllerViewNew
  * @see    view.ViewModal
  */
 public abstract class ViewNew extends ViewModal {
@@ -30,7 +31,7 @@ public abstract class ViewNew extends ViewModal {
     
     /**
      * Alternative constructor method of Class.
-     * @param panel Painel de Modelagem.
+     * @param panel Panel Modeling.
      */
     public ViewNew(PanelModeling panel) {
         super(panel.getViewMenu());

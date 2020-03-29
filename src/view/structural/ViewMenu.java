@@ -185,11 +185,14 @@ public final class ViewMenu extends View implements Operation {
     private void createEvaluationMenu() {
         this.createMenu("menuEvaluation", "Evaluation");
         
-        this.createMenuItem("menuItemEvaluationMetric",  "New Metric",  "evaluation/metric.png");
-        this.createMenuItem("menuItemEvaluationMeasure", "New Measure", "evaluation/measure.png");
+        this.createMenuItem("menuItemEvaluationMetric",  "New Metric",       "evaluation/metric.png");
+        this.createMenuItem("menuItemEvaluationMeasure", "New Measure",      "evaluation/measure.png");
+        this.createMenuItem("menuItemQueryEvaluation",   "Query Evaluation", "evaluation/query.png");
         
         this.getMenuEvaluation().add(this.getMenuItemEvaluationMetric());
         this.getMenuEvaluation().add(this.getMenuItemEvaluationMeasure());
+        this.getMenuEvaluation().addSeparator();
+        this.getMenuEvaluation().add(this.getMenuItemQueryEvaluation());
     }
     
     /**
@@ -380,6 +383,7 @@ public final class ViewMenu extends View implements Operation {
         
         this.getMenuItemEvaluationMetric().setEnabled(flag);
         this.getMenuItemEvaluationMeasure().setEnabled(flag);
+        this.getMenuItemQueryEvaluation().setEnabled(flag);
     }
     
     /**
@@ -698,6 +702,14 @@ public final class ViewMenu extends View implements Operation {
      */
     public JMenuItem getMenuItemEvaluationMeasure() {
         return this.menuItens.get("menuItemEvaluationMeasure");
+    }
+    
+    /**
+     * Method responsible for returning the Menu Item Query Evaluation.
+     * @return Menu Item Query Evaluation.
+     */
+    public JMenuItem getMenuItemQueryEvaluation() {
+        return this.menuItens.get("menuItemQueryEvaluation");
     }
     
     /**
