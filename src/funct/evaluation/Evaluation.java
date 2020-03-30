@@ -14,7 +14,7 @@ import model.structural.base.Project;
  * @see    model.structural.base.Project
  */
 public abstract class Evaluation {
-    private final Project project;
+    protected final Project project;
     protected List<Object> objects;
     
     /**
@@ -41,13 +41,15 @@ public abstract class Evaluation {
      */
     public String getExpression(String expression) {
         String toReturn = "";
-        for (int i = 0; i < expression.length(); i++) {
-            if (this.checkCharacter(expression.charAt(i))) {
-                toReturn += expression.charAt(i);
-            }else {
-                String valor  = expression.substring(i, expression.indexOf(")", i) + 1);
-                   toReturn  += this.getClauseValue(valor);
-                          i   = expression.indexOf(")", i);
+        if (this.checkToken(expression, "(", ")")) {
+            for (int i = 0; i < expression.length(); i++) {
+                if (this.checkCharacter(expression.charAt(i))) {
+                    toReturn += expression.charAt(i);
+                }else {
+                    String valor  = expression.substring(i, expression.indexOf(")", i) + 1);
+                       toReturn  += this.getClauseValue(valor);
+                              i   = expression.indexOf(")", i);
+                }
             }
         }
         return toReturn;
@@ -126,63 +128,43 @@ public abstract class Evaluation {
     /**
      * Method responsible for cheking the Token.
      * @param  filter String Filter.
-     * @param  start Start Delimiter.
+     * @param  begin Begin Delimiter.
      * @param  end End Delimiter.
      * @return Token is checked.
      */
-    private boolean checkToken(String filter, String start, String end) {
-        return filter.contains(start)
+    private boolean checkToken(String filter, String begin, String end) {
+        return filter.contains(begin)
             && filter.contains(end)
-            && filter.indexOf(start) < filter.indexOf(end);
+            && filter.indexOf(begin) < filter.indexOf(end);
     }
     
     /**
-     * Method responsible for clearing the Name.
-     * @param  filter Clause Filter.
+     * Method responsible for clearing the Token of a Filter.
+     * @param  filter String Filter.
+     * @param  begin Begin Delimiter.
+     * @param  end End Delimiter.
      * @return New Filter.
      */
-    protected String clearNames(String filter) {
-        if (this.checkToken(filter, "[", "]"))
-            return filter.substring(0, filter.indexOf("[")) + filter.substring(filter.indexOf("]") + 1);
+    protected String clearToken(String filter, String begin, String end) {
+        if (this.checkToken(filter, begin, end))
+            return filter.substring(0, filter.indexOf(begin)) + filter.substring(filter.indexOf(end) + 1);
         return filter;
     }
     
     /**
-     * Method responsible for returning the Names List.
-     * @param  filter Clause Filter.
-     * @return Names List.
+     * Method responsible for returning the Parameters List.
+     * @param  filter String Filter.
+     * @param  begin Begin Delimiter.
+     * @param  end End Delimiter.
+     * @return Parameters List.
      */
-    protected List<String> getNames(String filter) {
-        if (!this.checkToken(filter, "[", "]"))
+    protected List<String> getParameters(String filter, String begin, String end) {
+        if (!this.checkToken(filter, begin, end))
             return new ArrayList<>();
-        List<String> list = new ArrayList<>();
-        for (String nome : filter.substring(filter.indexOf("[") + 1, filter.indexOf("]")).split(","))
+        List   list = new ArrayList<>();
+        for (String nome : filter.substring(filter.indexOf(begin) + 1, filter.indexOf(end)).split(","))
                list.add(nome.trim());
-        return list;
-    }
-    
-    /**
-     * Method responsible for clearing the Stereotypes.
-     * @param  filter Clause Filter.
-     * @return New Filter.
-     */
-    protected String clearStereotypes(String filter) {
-        if (this.checkToken(filter, "<", ">"))
-            return filter.substring(0, filter.indexOf("<")) + filter.substring(filter.indexOf(">") + 1);
-        return filter;
-    }
-    
-    /**
-     * Method responsible for returning the Stereotypes List.
-     * @param  filter Clause Filter.
-     * @return Stereotypes List.
-     */
-    protected List<String> getStereotypes(String filter) {
-        if (!this.checkToken(filter, "<", ">"))
-            return new ArrayList<>();
-        List<String> list = new ArrayList<>();
-        for (String nome : filter.substring(filter.indexOf("<") + 1, filter.indexOf(">")).split(","))
-               list.add(nome.trim());
+        this.clearToken(filter, begin, end);
         return list;
     }
     
@@ -287,12 +269,11 @@ public abstract class Evaluation {
      * @return Default Filters.
      */
     protected Object[] getDefaultFilters(String filter) {
-        Object[] filters    = new Object[3];
-                 filters[0] = this.getNames(filter);
-                     filter = this.clearNames(filter);
-                 filters[1] = this.getStereotypes(filter);
-                     filter = this.clearStereotypes(filter);
-                 filters[2] = this.getMandatory(filter);
+        Object[] filters    = new Object[4];
+                 filters[0] = this.getParameters(filter, "[", "]");
+                 filters[1] = this.getParameters(filter, "<", ">");
+                 filters[2] = this.getParameters(filter, "{", "}");
+                 filters[3] = this.getMandatory(filter);
         return   filters;
     }
     
@@ -302,16 +283,28 @@ public abstract class Evaluation {
      * @return Attribute Filters.
      */
     protected Object[] getDetailFilters(String filter) {
-        Object[] filters    = new Object[7];
-                 filters[0] = this.getNames(filter);
-                     filter = this.clearNames(filter);
-                 filters[1] = this.getStereotypes(filter);
-                     filter = this.clearStereotypes(filter);
-                 filters[2] = this.getMandatory(filter);
-                 filters[3] = this.getAbstract(filter);
-                 filters[4] = this.getFinal(filter);
-                 filters[5] = this.getStatic(filter);
-                 filters[6] = this.getVisibility(filter);
+        Object[] filters    = new Object[8];
+                 filters[0] = this.getParameters(filter, "[", "]");
+                 filters[1] = this.getParameters(filter, "<", ">");
+                 filters[2] = this.getParameters(filter, "{", "}");
+                 filters[3] = this.getMandatory(filter);
+                 filters[4] = this.getAbstract(filter);
+                 filters[5] = this.getFinal(filter);
+                 filters[6] = this.getStatic(filter);
+                 filters[7] = this.getVisibility(filter);
+        return   filters;
+    }
+    
+    /**
+     * Method responsible for returning the Association Filters.
+     * @param  filter Clause Filter.
+     * @return Association Filters.
+     */
+    protected Object[] getAssociationFilters(String filter) {
+        Object[] filters    = new Object[3];
+                 filters[0] = this.getParameters(filter, "[", "]");
+                 filters[1] = this.getParameters(filter, "<", ">");
+                 filters[2] = this.getParameters(filter, "{", "}");
         return   filters;
     }
     

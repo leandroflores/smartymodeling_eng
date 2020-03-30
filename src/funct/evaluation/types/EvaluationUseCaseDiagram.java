@@ -1,6 +1,7 @@
 package funct.evaluation.types;
 
 import funct.evaluation.base.EvaluationDiagram;
+import funct.evaluation.base.EvaluationElement;
 import funct.evaluation.types.usecase.EvaluationActorUML;
 import funct.evaluation.types.usecase.EvaluationUseCaseUML;
 import model.structural.diagram.UseCaseDiagram;
@@ -17,8 +18,6 @@ import model.structural.diagram.UseCaseDiagram;
  */
 public class EvaluationUseCaseDiagram extends EvaluationDiagram {
     private final UseCaseDiagram diagram;
-    private final EvaluationActorUML   evaluationActorUML;
-    private final EvaluationUseCaseUML evaluationUseCaseUML;
     
     /**
      * Default constructor method of Class.
@@ -26,9 +25,7 @@ public class EvaluationUseCaseDiagram extends EvaluationDiagram {
      */
     public EvaluationUseCaseDiagram(UseCaseDiagram diagram) {
         super(diagram);
-        this.diagram              = diagram;
-        this.evaluationActorUML   = new EvaluationActorUML(diagram);
-        this.evaluationUseCaseUML = new EvaluationUseCaseUML(diagram);
+        this.diagram = diagram;
     }
     
     @Override
@@ -46,8 +43,9 @@ public class EvaluationUseCaseDiagram extends EvaluationDiagram {
      * @return Actor Metric Value.
      */
     public Double getActorMetric(Object[] parameters) {
-               this.addObjects(this.evaluationActorUML.filter(parameters));
-        return this.evaluationActorUML.getMetricValue(parameters);
+        EvaluationActorUML evaluation = new EvaluationActorUML(this.diagram);
+               this.addObjects(evaluation.filter(parameters));
+        return evaluation.getMetricValue(parameters);
     }
     
     /**
@@ -56,8 +54,9 @@ public class EvaluationUseCaseDiagram extends EvaluationDiagram {
      * @return Use Case Metric Value.
      */
     public Double getUseCaseMetric(Object[] parameters) {
-               this.addObjects(this.evaluationUseCaseUML.filter(parameters));
-        return this.evaluationUseCaseUML.getMetricValue(parameters);
+        EvaluationElement evaluation = new EvaluationUseCaseUML(this.diagram);
+               this.addObjects(evaluation.filter(parameters));
+        return evaluation.getMetricValue(parameters);
     }
     
     @Override

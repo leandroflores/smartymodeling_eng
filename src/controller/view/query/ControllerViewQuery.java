@@ -26,9 +26,9 @@ public abstract class ControllerViewQuery extends ControllerViewModal {
     }
     
     /**
-     * Abstract Method responsible for Apply the Operation.
+     * Abstract Method responsible for Refresh the View Query.
      */
-    public abstract void apply();
+    public abstract void refresh();
     
     /**
      * Abstract Method responsible for Clear the View Query.
@@ -44,8 +44,8 @@ public abstract class ControllerViewQuery extends ControllerViewModal {
     
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.viewQuery.getApplyButton().equals(event.getSource()))
-            this.apply();
+        if (this.viewQuery.getRefreshButton().equals(event.getSource()))
+            this.refresh();
         else if (this.viewQuery.getClearButton().equals(event.getSource()))
             this.clear();
         else if (this.viewQuery.getCancelButton().equals(event.getSource()))
@@ -57,7 +57,7 @@ public abstract class ControllerViewQuery extends ControllerViewModal {
         super.keyPressed(event);
         switch (event.getKeyCode()) {
             case F1:
-                this.apply();
+                this.refresh();
                 break;
             case F2:
                 this.clear();

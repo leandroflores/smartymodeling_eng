@@ -78,7 +78,7 @@ public class ControllerProject {
      * @return Elements Array.
      */
     public Object[] getElements() {
-        return this.project.getElements().toArray();
+        return this.project.getElementsList().toArray();
     }
     
     /**
@@ -86,7 +86,7 @@ public class ControllerProject {
      * @return Associations Array.
      */
     public Object[] getAssociations() {
-        return this.project.getAssociations().toArray();
+        return this.project.getAssociationsList().toArray();
     }
     
     /**

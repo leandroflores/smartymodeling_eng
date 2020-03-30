@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
+import model.structural.base.Project;
 import model.structural.diagram.classes.Encodable;
 
 /**
@@ -20,6 +21,15 @@ public class EvaluationElement extends Evaluation {
     
     /**
      * Default constructor method of Class.
+     * @param project Project.
+     */
+    public EvaluationElement(Project project) {
+        super(project);
+        this.diagram = null;
+    }
+    
+    /**
+     * Alternative constructor method of Class.
      * @param diagram Diagram.
      */
     public EvaluationElement(Diagram diagram) {

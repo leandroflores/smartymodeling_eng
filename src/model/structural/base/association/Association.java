@@ -66,12 +66,30 @@ public abstract class Association implements Modelable, Exportable {
     }
     
     /**
+     * Method responsible for checking if a String Name is Source.
+     * @param  name String Name.
+     * @return String Name is Source.
+     */
+    public boolean isSource(String name) {
+        return this.source.getName().equalsIgnoreCase(name);
+    }
+    
+    /**
      * Method responsible for checking if a Element is Target.
      * @param  element Element.
      * @return Element is Target.
      */
     public boolean isTarget(Element element) {
         return this.target.equals(element);
+    }
+    
+    /**
+     * Method responsible for checking if a String Name is Target.
+     * @param  name String Name.
+     * @return String Name is Target.
+     */
+    public boolean isTarget(String name) {
+        return this.target.getName().equalsIgnoreCase(name);
     }
     
     /**
@@ -82,6 +100,16 @@ public abstract class Association implements Modelable, Exportable {
     public boolean contains(Element element) {
         return    this.isSource(element)
                || this.isTarget(element);
+    }
+    
+    /**
+     * Method responsible for checking if a String Name is part of Association.
+     * @param  name String Name.
+     * @return String Name is part of Association.
+     */
+    public boolean contains(String name) {
+        return    this.isSource(name)
+               || this.isTarget(name);
     }
             
     /**

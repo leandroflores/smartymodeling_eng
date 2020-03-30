@@ -1,9 +1,11 @@
 package view.edit.panel.base.evaluation;
 
+import controller.view.edit.panel.base.evaluation.ControllerPanelQueryEvaluation;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
@@ -18,8 +20,9 @@ import view.query.ViewQueryEvaluation;
  * <p>Class responsible for defining a Panel for showing the <b>Evalutaion Query Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  28/03/2020
- * @see    controller.view.edit.panel.base.evaluation.
+ * @see    controller.view.edit.panel.base.evaluation.ControllerPanelBaseEvaluation
  * @see    view.Panel
+ * @see    view.query.ViewQueryEvaluation
  */
 public final class PanelQueryEvaluation extends Panel {
     private final ViewQueryEvaluation viewQuery;
@@ -32,7 +35,7 @@ public final class PanelQueryEvaluation extends Panel {
     public PanelQueryEvaluation(ViewQueryEvaluation viewQuery) {
         this.viewQuery  = viewQuery;
         this.project    = viewQuery.getProject();
-//        this.controller = new ControllerPanelBaseEvaluation(this);
+        this.controller = new ControllerPanelQueryEvaluation(this);
         this.setSettings();
         this.addComponents();
     }
@@ -52,7 +55,8 @@ public final class PanelQueryEvaluation extends Panel {
         this.add(this.createComboBox("targetComboBox", this.getTargets(), 15), this.getConstraints(5, 1, 1, 0));
         
         this.add(this.createLabel("Operation*: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createTextField("operationTextField", "", 15), this.getConstraints(5, 1, 1, 1));
+        this.add(this.createTextField("operationTextField", "", 15), this.getConstraints(4, 1, 1, 1));
+        this.add(this.createButton("applyButton", "", "apply.png"), this.getConstraints(1, 1, 5, 1));
         
         this.add(this.createLabel("Value: "), this.getConstraints(1, 1, 0, 2));
         this.add(this.createTextFieldNoEditable("valueTextField", "", 15), this.getConstraints(5, 1, 1, 2));
@@ -123,6 +127,14 @@ public final class PanelQueryEvaluation extends Panel {
      */
     public JTextField getOperationTextField() {
         return this.textFields.get("operationTextField");
+    }
+    
+    /**
+     * Method responsible for returning the Apply Button.
+     * @return Apply Button.
+     */
+    public JButton getApplyButton() {
+        return this.buttons.get("applyButton");
     }
     
     /**

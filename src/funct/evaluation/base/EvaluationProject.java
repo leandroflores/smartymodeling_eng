@@ -3,10 +3,7 @@ package funct.evaluation.base;
 import funct.evaluation.Evaluation;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import model.structural.base.Element;
 import model.structural.base.Project;
-import model.structural.base.association.Association;
 
 /**
  * <p>Class of Evaluation <b>EvaluationDiagram</b>.</p>
@@ -17,7 +14,6 @@ import model.structural.base.association.Association;
  * @see    model.structural.base.Diagram
  */
 public class EvaluationProject extends Evaluation {
-    private final Project project;
     
     /**
      * Default constructor method of Class.
@@ -25,16 +21,15 @@ public class EvaluationProject extends Evaluation {
      */
     public EvaluationProject(Project project) {
         super(project);
-        this.project = project;
         this.objects = new ArrayList<>();
     }
 
     @Override
     protected Double getClauseValue(String keyword, String filter) {
         if (this.isElement(keyword))
-            System.out.println("Evaluation Element");
+            this.getElementMetric(this.getDefaultFilters(filter));
         else if (this.isAssociation(keyword))
-            System.out.println("Evaluation Association");
+            this.evaluateAssociation(keyword, filter);
         else if (this.isProductLine(keyword))
             System.out.println("Evaluation Product Line");
         return 1.0d;
@@ -46,7 +41,7 @@ public class EvaluationProject extends Evaluation {
      * @return Keyword is a Element.
      */
     protected boolean isElement(String keyword) {
-        String[] array = {"element", 
+        String[] array = {"elements", 
                           "actor", "usecase", 
                           "package", "class", "interface", "attribute", "method",
                           "component",
@@ -61,8 +56,8 @@ public class EvaluationProject extends Evaluation {
      * @return Keyword is a Association.
      */
     protected boolean isAssociation(String keyword) {
-        String[] array = {"association", "dependency", "generalization", 
-                          "communication", 
+        String[] array = {"associations", "dependency", "generalization", 
+                          "communication", "extend", "include",
                           "association", "realization",
                           "comunication",
                           "flow",
@@ -81,24 +76,25 @@ public class EvaluationProject extends Evaluation {
     }
     
     /**
-     * Method responsible for returning the Elements List by Keyword.
-     * @param  keyword Clause Keyword.
-     * @return Elements List found.
+     * Method responsible for returning the Element Metric Value.
+     * @param  parameters Parameters List.
+     * @return Element Metric Value.
      */
-    protected List<Element> getElements(String keyword) {
-        return keyword.equalsIgnoreCase("element") ?
-                this.project.getElements() : 
-                this.project.getElements(keyword);
+    public Double getElementMetric(Object[] parameters) {
+        EvaluationElement evaluation = new EvaluationElement(this.project);
+               this.addObjects(evaluation.filter(parameters));
+        return evaluation.getMetricValue(parameters);
     }
     
     /**
-     * Method responsible for returning the Associations List by Keyword.
+     * Method responsible for evaluate the Association.
      * @param  keyword Clause Keyword.
-     * @return Associations List found.
+     * @param  filter Clause Filter.
+     * @return Evaluation Value.
      */
-    protected List<Association> getAssociations(String keyword) {
-        return keyword.equalsIgnoreCase("association") ?
-                this.project.getAssociations(): 
-                this.project.getAssociations(keyword);
+    public Double evaluateAssociation(String keyword, String filter) {
+        EvaluationAssociation evaluation = new EvaluationAssociation(this.project, keyword);
+//               this.addObjects(evaluation.filter(this.getAssociationFilters(filter)));
+        return evaluation.getEvaluationValue(this.getAssociationFilters(filter));
     }
 }

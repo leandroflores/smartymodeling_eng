@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.script.ScriptException;
 import model.structural.base.Diagram;
-import model.structural.base.Project;
 import model.structural.base.evaluation.Metric;
 import view.edit.panel.base.evaluation.PanelBaseEvaluation;
 import view.message.ViewError;

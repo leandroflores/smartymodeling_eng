@@ -29,7 +29,7 @@ public class ControllerViewQueryEvaluation extends ControllerViewQuery {
     }
     
     @Override
-    public void apply() {
+    public void refresh() {
         System.out.println("Apply");
         System.out.println("");
     }

@@ -217,7 +217,7 @@ public class Project implements Exportable {
      * Method responsible for returning the Elements List.
      * @return Elements List.
      */
-    public List<Element> getElements() {
+    public List<Element> getElementsList() {
         List<Element> elements = new ArrayList<>();
         for (Object object : this.objects.values()) {
             if (object instanceof Element)
@@ -230,7 +230,7 @@ public class Project implements Exportable {
      * Method responsible for returning the Associations List.
      * @return Associations List.
      */
-    public List<Association> getAssociations() {
+    public List<Association> getAssociationsList() {
         List<Association> associations = new ArrayList<>();
         for (Object object : this.objects.values()) {
             if (object instanceof Association)
@@ -355,7 +355,7 @@ public class Project implements Exportable {
      */
     public List getElements(String type) {
         List list = new ArrayList<>();
-        for (Element element : this.getElements()) {
+        for (Element element : this.getElementsList()) {
             if (element.getType().equalsIgnoreCase(type))
                 list.add(element);
         }
@@ -369,7 +369,7 @@ public class Project implements Exportable {
      */
     public List getAssociations(String type) {
         List list = new ArrayList<>();
-        for (Association association : this.getAssociations()) {
+        for (Association association : this.getAssociationsList()) {
             if (association.getType().equalsIgnoreCase(type))
                 list.add(association);
         }

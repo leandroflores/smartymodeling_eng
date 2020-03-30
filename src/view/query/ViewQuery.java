@@ -11,6 +11,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Query View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  28/03/2019
+ * @see    controller.view.query.ControllerViewQuery
  * @see    view.ViewModal
  */
 public abstract class ViewQuery extends ViewModal {
@@ -40,9 +41,9 @@ public abstract class ViewQuery extends ViewModal {
     
     @Override
     public void addFooter() {
-        this.add(this.createButton("applyButton",  " Apply  ", "apply"));
-        this.add(this.createButton("clearButton",  " Clear  ", "clear"));
-        this.add(this.createButton("cancelButton", " Cancel ", "back"));
+        this.add(this.createButton("refreshButton", " Refresh ", "refresh"));
+        this.add(this.createButton("clearButton",   "  Clear  ", "clear"));
+        this.add(this.createButton("cancelButton",  "  Cancel ", "back"));
     }
     
     /**
@@ -54,11 +55,11 @@ public abstract class ViewQuery extends ViewModal {
     }
     
     /**
-     * Method responsible for returning the Apply Button.
-     * @return Apply Button.
+     * Method responsible for returning the Refresh Button.
+     * @return Refresh Button.
      */
-    public JButton getApplyButton() {
-        return this.buttons.get("applyButton");
+    public JButton getRefreshButton() {
+        return this.buttons.get("refreshButton");
     }
     
     /**

@@ -69,8 +69,8 @@ public class ControllerPanelBaseTarget extends ControllerPanel {
      * @param project Project.
      */
     private void update(Project project) {
-        this.panelBaseTarget.getElementsTextField().setText(Integer.toString(project.getElements().size()));
-        this.panelBaseTarget.getAssociationsTextField().setText(Integer.toString(project.getAssociations().size()));
+        this.panelBaseTarget.getElementsTextField().setText(Integer.toString(project.getElementsList().size()));
+        this.panelBaseTarget.getAssociationsTextField().setText(Integer.toString(project.getAssociationsList().size()));
         this.panelBaseTarget.getVariabilitiesTextField().setText(Integer.toString(project.getVariabilitiesList().size()));
     }
     
