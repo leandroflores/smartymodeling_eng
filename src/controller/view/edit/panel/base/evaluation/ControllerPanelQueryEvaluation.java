@@ -1,10 +1,13 @@
 package controller.view.edit.panel.base.evaluation;
 
 import controller.view.ControllerPanel;
+import funct.evaluation.base.EvaluationDiagram;
 import funct.evaluation.base.EvaluationProject;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.script.ScriptException;
+import model.structural.base.Diagram;
+import model.structural.base.Project;
 import view.edit.panel.base.evaluation.PanelQueryEvaluation;
 import view.message.ViewError;
 
@@ -38,6 +41,22 @@ public class ControllerPanelQueryEvaluation extends ControllerPanel {
     public void keyPressed(KeyEvent event) {}
     
     /**
+     * Method responsible for returning the Project.
+     * @return Project.
+     */
+    private Project getProject() {
+        return this.panelQueryEvaluation.getProject();
+    }
+    
+    /**
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
+     */
+    private Diagram getDiagram() {
+        return (Diagram) this.panelQueryEvaluation.getTargetComboBox().getSelectedItem();
+    }
+    
+    /**
      * Method responsible for Updating the Panel.
      */
     public void update() {
@@ -48,9 +67,9 @@ public class ControllerPanelQueryEvaluation extends ControllerPanel {
         System.out.println("");
         try {
             if (target.toString().equalsIgnoreCase("Project"))
-                this.evaluate(this.panelQueryEvaluation.getProject().getEvaluation(), operation);
-//            else if (target instanceof Diagram)
-//                this.evaluate(((Diagram) target).getEvaluation(), metric);
+                this.evaluate(this.getProject().getEvaluation(), operation);
+            else if (target instanceof Diagram)
+                this.evaluate(this.getDiagram().getEvaluation(), operation);
         }catch (ScriptException exception) {
             new ViewError(this.panelQueryEvaluation.getViewQueryEvaluation(), "Error to Apply Metric!").setVisible(true);
             this.panelQueryEvaluation.getOperationTextField().requestFocus();
@@ -67,6 +86,18 @@ public class ControllerPanelQueryEvaluation extends ControllerPanel {
      * @throws ScriptException 
      */
     private void evaluate(EvaluationProject evaluation, String operation) throws ScriptException {
+        Double value = evaluation.getFinalValue(operation);
+        this.panelQueryEvaluation.getValueTextField().setText(Double.toString(value));
+        this.panelQueryEvaluation.updateDetails(evaluation.getObjects());
+    }
+    
+    /**
+     * Method responsible for evaluate the Diagram by Operation.
+     * @param  evaluation Evaluation Diagram.
+     * @param  operation Operation.
+     * @throws ScriptException 
+     */
+    private void evaluate(EvaluationDiagram evaluation, String operation) throws ScriptException {
         Double value = evaluation.getFinalValue(operation);
         this.panelQueryEvaluation.getValueTextField().setText(Double.toString(value));
         this.panelQueryEvaluation.updateDetails(evaluation.getObjects());

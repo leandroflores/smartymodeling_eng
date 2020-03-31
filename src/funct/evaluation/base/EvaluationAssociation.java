@@ -12,8 +12,10 @@ import model.structural.base.association.Association;
  * <p>Class responsible for <b>Evaluate</b> the <b>Associations</b>.</p>
  * @author Leandro
  * @since  30/03/2020
+ * @see    funct.evaluation.Evaluation
  * @see    model.structural.base.Diagram
- * @see    model.structural.base.Element
+ * @see    model.structural.base.Project
+ * @see    model.structural.base.association.Association
  */
 public class EvaluationAssociation extends Evaluation {
     private final Diagram diagram;
@@ -43,41 +45,23 @@ public class EvaluationAssociation extends Evaluation {
     
     @Override
     protected Double getClauseValue(String keyword, String filter) {
-        System.out.println("Keyword: " + keyword);
-        System.out.println("Filter.: " + filter);
-        System.out.println("");
-        
-        return -50.0d;
-    }
-    
-    /**
-     * Method responsible for returning the Evaluation Value.
-     * @param  parameters Metric Parameters.
-     * @return Evaluation Value.
-     */
-    public Double getEvaluationValue(Object[] parameters) {
-        List   list = this.filter(parameters);
+        List   list = this.filter(this.getAssociationFilters(filter));
         String size = Integer.toString(list.size());
         return Double.parseDouble(size);
     }
     
     /**
-     * Method responsible for filtering the Elements by Parameters.
+     * Method responsible for filtering the Associations by Parameters.
      * @param  parameters Parameters List.
-     * @return Elements filtered.
+     * @return Associations filtered.
      */
     public List filter(Object[] parameters) {
-           List filter = this.getInitialList();
+           List filter = this.filterContext();
            System.out.println("List 0: " + filter);
            System.out.println("Size 0: " + filter.size());
                 filter = this.filterSource(filter, (List<String>) parameters[0]);
-           System.out.println("List 1: " + filter);
-           System.out.println("Size 1: " + filter.size());
                 filter = this.filterTarget(filter, (List<String>) parameters[1]);
-           System.out.println("List 2: " + filter);
-           System.out.println("Size 2: " + filter.size());
-//                filter = this.filterStereotypes(filter, (List<String>) parameters[2]);
-//                filter = this.filterMandatory(filter, (Boolean) parameters[3]);
+                filter = this.filterContains(filter, (List<String>) parameters[1]);
            System.out.println("");
         return  filter;
     }
@@ -113,10 +97,10 @@ public class EvaluationAssociation extends Evaluation {
     }
     
     /**
-     * Method responsible for returning the Initial List.
-     * @return Initial List.
+     * Method responsible for filtering the Associations List.
+     * @return Context List.
      */
-    protected List<Association> getInitialList() {
+    protected List<Association> filterContext() {
         return this.allTypes() ?
                this.getAssociationsList() :
                this.filterType(this.getAssociationsList());
@@ -137,7 +121,7 @@ public class EvaluationAssociation extends Evaluation {
     }
     
     /**
-     * Method responsible for returning the Associations List by Source List.
+     * Method responsible for returning the Associations List by Source.
      * @param  list Associations List.
      * @param  names Source List.
      * @return Associations filtered.
@@ -147,7 +131,7 @@ public class EvaluationAssociation extends Evaluation {
     }
     
     /**
-     * Method responsible for returning the Associations List by Source List.
+     * Method responsible for returning the Associations List by Source.
      * @param  list Associations List.
      * @param  names Names List.
      * @return Associations filtered.
@@ -162,7 +146,7 @@ public class EvaluationAssociation extends Evaluation {
     }
     
     /**
-     * Method responsible for returning the Associations List by Target List.
+     * Method responsible for returning the Associations List by Target.
      * @param  list Associations List.
      * @param  names Target List.
      * @return Associations filtered.
@@ -172,7 +156,7 @@ public class EvaluationAssociation extends Evaluation {
     }
     
     /**
-     * Method responsible for returning the Associations List by Target List.
+     * Method responsible for returning the Associations List by Target.
      * @param  list Associations List.
      * @param  names Names List.
      * @return Associations filtered.
@@ -187,21 +171,28 @@ public class EvaluationAssociation extends Evaluation {
     }
     
     /**
-     * Method responsible for filtering the Associations by Contains.
+     * Method responsible for returning the Associations List by Contains.
+     * @param  list Associations List.
+     * @param  names Contains List.
+     * @return Associations filtered.
+     */
+    protected List<Association> filterContains(List<Association> list, List<String> names) {
+        return this.isVoid(names) ? list : this.getContains(list, names);
+    }
+    
+    /**
+     * Method responsible for returning the Associations List by Contains.
      * @param  list Associations List.
      * @param  names Names List.
      * @return Associations filtered.
      */
-    protected List<Association> filterContains(List<Association> list, List<String> names) {
+    protected List<Association> getContains(List<Association> list, List<String> names) {
         List filter = new ArrayList<>();
-        if (this.isVoid(names))
-            return list;
         for (Association association : list) {
-            for (String name : names) {
-                if (association.contains(name))
-                    filter.add(association);
-            }
+            if (names.contains(association.getSource().getName())
+             || names.contains(association.getTarget().getName()))
+                filter.add(association);
         }
-        return filter;
+        return  filter;
     }
 }

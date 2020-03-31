@@ -1,7 +1,6 @@
 package funct.evaluation.base;
 
 import funct.evaluation.Evaluation;
-import java.util.ArrayList;
 import model.structural.base.Diagram;
 
 /**
@@ -12,8 +11,8 @@ import model.structural.base.Diagram;
  * @see    funct.evaluation.Evaluation
  * @see    model.structural.base.Diagram
  */
-public abstract class EvaluationDiagram extends Evaluation {
-    private final Diagram  diagram;
+public class EvaluationDiagram extends Evaluation {
+    private final Diagram diagram;
     
     /**
      * Default constructor method of Class.
@@ -22,12 +21,16 @@ public abstract class EvaluationDiagram extends Evaluation {
     public EvaluationDiagram(Diagram diagram) {
         super(diagram.getProject());
         this.diagram = diagram;
-        this.objects = new ArrayList<>();
     }
-    
-    /**
-     * Method responsible for returning the Diagram Values.
-     * @return Diagram Values.
-     */
-    public abstract Object[] getValues();
+
+    @Override
+    protected Double getClauseValue(String keyword, String filter) {
+        if (this.isElement(keyword))
+            return new EvaluationElement(this.diagram, keyword).getClauseValue(keyword, filter);
+        else if (this.isAssociation(keyword))
+            return new EvaluationAssociation(this.diagram, keyword).getClauseValue(keyword, filter);
+        else if (this.isProductLine(keyword))
+            System.out.println("Evaluation Product Line");
+        return 0.0d;
+    }
 }

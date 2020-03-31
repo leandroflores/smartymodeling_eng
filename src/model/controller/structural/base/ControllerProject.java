@@ -41,8 +41,10 @@ public class ControllerProject {
      * @return Targets Array.
      */
     public Object[] getTargets() {
-        Object[] targets    = new Object[1];
+        Object[] diagrams   = this.getDiagrams();
+        Object[] targets    = new Object[diagrams.length + 1];
                  targets[0] = "Project";
+        System.arraycopy(diagrams, 0, targets, 1, diagrams.length);
         return   targets;
     }
     

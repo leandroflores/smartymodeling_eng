@@ -70,7 +70,6 @@ public class ControllerPanelBaseEvaluation extends ControllerPanel {
      * @throws ScriptException 
      */
     private void evaluate(EvaluationProject evaluation, Metric metric) throws ScriptException {
-        System.out.println("AA");
         Double value = evaluation.getFinalValue(metric.getOperation());
         this.panelBaseEvaluation.getValueTextField().setText(Double.toString(value));
         this.panelBaseEvaluation.updateDetails(evaluation.getObjects());

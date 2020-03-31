@@ -6,52 +6,48 @@ import java.util.List;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
-import model.structural.diagram.classes.Encodable;
 
 /**
  * <p>Class of Evaluation <b>EvaluationElement</b>.</p>
  * <p>Class responsible for <b>Evaluate</b> the <b>Elements</b>.</p>
  * @author Leandro
- * @since  02/09/2019
+ * @since  30/03/2020
+ * @see    funct.evaluation.Evaluation
  * @see    model.structural.base.Diagram
  * @see    model.structural.base.Element
+ * @see    model.structural.base.Project
  */
 public class EvaluationElement extends Evaluation {
     private final Diagram diagram;
+    private final String  type;
     
     /**
      * Default constructor method of Class.
      * @param project Project.
+     * @param type Element Type.
      */
-    public EvaluationElement(Project project) {
+    public EvaluationElement(Project project, String type) {
         super(project);
         this.diagram = null;
+        this.type    = type;
     }
     
     /**
      * Alternative constructor method of Class.
      * @param diagram Diagram.
+     * @param type Element Type.
      */
-    public EvaluationElement(Diagram diagram) {
+    public EvaluationElement(Diagram diagram, String type) {
         super(diagram.getProject());
         this.diagram = diagram;
+        this.type    = type;
     }
     
     @Override
     protected Double getClauseValue(String keyword, String filter) {
-        System.out.println("Keyword: " + keyword);
-        System.out.println("Filter.: " + filter);
-        System.out.println("");
-        return 0.0d;
-    }
-    
-    /**
-     * Method responsible for returning the Metric Value.
-     * @param  parameters Metric Parameters.
-     * @return Metric Value.
-     */
-    public Double getMetricValue(Object[] parameters) {
-        return Double.parseDouble(Integer.toString(this.filter(parameters).size()));
+        List   list = this.filter(this.getAssociationFilters(filter));
+        String size = Integer.toString(list.size());
+        return Double.parseDouble(size);
     }
     
     /**
@@ -60,10 +56,12 @@ public class EvaluationElement extends Evaluation {
      * @return Elements filtered.
      */
     public List filter(Object[] parameters) {
-           List filter = this.diagram.getElementsList();
-                filter = this.filterNames(filter, (List<String>) parameters[1]);
-                filter = this.filterStereotypes(filter, (List<String>) parameters[2]);
-                filter = this.filterMandatory(filter, (Boolean) parameters[3]);
+           List filter = this.filterContext();
+           System.out.println("List 0: " + filter);
+           System.out.println("Size 0: " + filter.size());
+//                filter = this.filterSource(filter, (List<String>) parameters[0]);
+//                filter = this.filterTarget(filter, (List<String>) parameters[1]);
+           System.out.println("");
         return  filter;
     }
     
@@ -73,124 +71,51 @@ public class EvaluationElement extends Evaluation {
      * @return List is Void.
      */
     protected boolean isVoid(List<String> list) {
-        return (list == null) || (list.isEmpty()) || (list.get(0).trim().equals("*"));
+        return list == null   
+            || list.isEmpty()  
+            || list.get(0).trim().equalsIgnoreCase("*");
     }
     
     /**
-     * Method responsible for filtering the Elements by Name.
-     * @param  elements Elements List.
-     * @param  names Names List.
-     * @return Elements filtered.
+     * Method responsible for returning if Flag is for All Types.
+     * @return Flag is for All Types.
      */
-    protected List<Element> filterNames(List elements, List<String> names) {
-        List<Element> filter = new ArrayList<>();
-        if (this.isVoid(names))
-            return elements;
-        for (Object object : elements) {
-            if (names.contains(((Element) object).getName()))
-                filter.add((Element) object);
-        }
-        return filter;
+    protected boolean allTypes() {
+        return this.type.equalsIgnoreCase("") 
+            || this.type.equalsIgnoreCase("element")
+            || this.type.equalsIgnoreCase("elements");
     }
     
     /**
-     * Method responsible for filtering the Elements by Stereotypes.
-     * @param  elements Elements List.
-     * @param  stereotypes Stereotypes List.
-     * @return Elements filtered.
+     * Method responsible for returning the Elements List by Context.
+     * @return Elements List by Context.
      */
-    protected List<Element> filterStereotypes(List elements, List<String> stereotypes) {
-        List<Element> filter = new ArrayList<>();
-        if (this.isVoid(stereotypes))
-            return elements;
-        for (Object object : elements) {
-            if (stereotypes.contains(this.diagram.getStereotypes((Element) object, "|")))
-                filter.add((Element) object);
-        }
-        return filter;
+    protected List<Element> getElementsList() {
+        return this.diagram != null ?
+               this.diagram.getElementsList() : 
+               this.project.getElementsList();
     }
     
     /**
-     * Method responsible for filtering the Elements by Mandatory Flag.
-     * @param  elements Elements List.
-     * @param  mandatory Mandatory Flag.
-     * @return Elements filtered.
+     * Method responsible for filtering the Elements List.
+     * @return Context List.
      */
-    protected List<Element> filterMandatory(List elements, Boolean mandatory) {
-        List<Element> filter = new ArrayList<>();
-        if (mandatory == null)
-            return elements;
-        for (Object object : elements) {
-            if (mandatory == ((Element) object).isMandatory())
-                filter.add((Element) object);
-        }
-        return filter;
+    protected List<Element> filterContext() {
+        return this.allTypes() ?
+               this.getElementsList() :
+               this.filterType(this.getElementsList());
     }
     
     /**
-     * Method responsible for filtering the Objects by Abstract Flag.
-     * @param  objects  Objects List.
-     * @param  abstract_ Abstract Flag.
-     * @return Objects filtered.
+     * Method responsible for filtering the Elements by Type.
+     * @param  list Elements List.
+     * @return Elements filtered by Type
      */
-    protected List<Encodable> filterAbstract(List objects, Boolean abstract_) {
-        List<Encodable> filter = new ArrayList<>();
-        if (abstract_ == null)
-            return objects;
-        for (Object object : objects) {
-            if (abstract_.equals(((Encodable) object).isAbstract()))
-                filter.add((Encodable) object);
-        }
-        return filter;
-    }
-    
-    /**
-     * Method responsible for filtering the Objects by Final Flag.
-     * @param  objects Objects List.
-     * @param  final_ Final Flag.
-     * @return Objects filtered.
-     */
-    protected List<Encodable> filterFinal(List objects, Boolean final_) {
-        List<Encodable> filter = new ArrayList<>();
-        if (final_ == null)
-            return objects;
-        for (Object object : objects) {
-            if (final_.equals(((Encodable) object).isFinal()))
-                filter.add((Encodable) object);
-        }
-        return filter;
-    }
-    
-    /**
-     * Method responsible for filtering the Objects by Static Flag.
-     * @param  objects Objects List.
-     * @param  static_ Static Flag.
-     * @return Objects filtered.
-     */
-    protected List<Encodable> filterStatic(List objects, Boolean static_) {
-        List<Encodable> filter = new ArrayList<>();
-        if (static_ == null)
-            return objects;
-        for (Object object : objects) {
-            if (static_.equals(((Encodable) object).isFinal()))
-                filter.add((Encodable) object);
-        }
-        return filter;
-    }
-    
-    /**
-     * Method responsible for filtering the Objects by Visibility.
-     * @param  objects Objects List.
-     * @param visibility Visibility.
-     * @return Objects filtered.
-     */
-    protected List<Encodable> filterVisibility(List objects, String visibility) {
-        List<Encodable> filter = new ArrayList<>();
-        if (visibility.equalsIgnoreCase(""))
-            return objects;
-        for (Object object : objects) {
-            if (visibility.equals(((Encodable) object).getVisibility()))
-                filter.add((Encodable) object);
+    protected List<Element> filterType(List<Element> list) {
+        List filter = new ArrayList<>();
+        for (Element element : list) {
+            if (element.getType().equalsIgnoreCase(this.type))
+               filter.add(element);
         }
         return filter;
     }

@@ -1,6 +1,5 @@
 package model.structural.diagram;
 
-import funct.evaluation.types.EvaluationClassDiagram;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -562,11 +561,6 @@ public final class ClassDiagram extends Diagram {
             System.out.println("Error");
             return null;
         }
-    }
-    
-    @Override
-    public EvaluationClassDiagram getEvaluation() {
-        return new EvaluationClassDiagram(this);
     }
     
     @Override

@@ -1,6 +1,7 @@
 package funct.evaluation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -23,6 +24,7 @@ public abstract class Evaluation {
      */
     public Evaluation(Project project) {
         this.project = project;
+        this.objects = new ArrayList<>();
     }
     
     /**
@@ -32,6 +34,46 @@ public abstract class Evaluation {
     protected void addObjects(List list) {
         this.objects.addAll(new ArrayList<>(list));
         this.objects.add("\n");
+    }
+    
+    /**
+     * Method responsible for checking if the Keyword is a Element.
+     * @param  keyword Clause Keyword.
+     * @return Keyword is a Element.
+     */
+    protected boolean isElement(String keyword) {
+        String[] array = {"elements", 
+                          "actor", "usecase", 
+                          "package", "class", "interface", "attribute", "method",
+                          "component",
+                          "activity", "decision",
+                          "lifeline", "instance"};
+        return Arrays.asList(array).contains(keyword.toLowerCase());
+    }
+    
+    /**
+     * Method responsible for checking if the Keyword is a Association.
+     * @param  keyword Clause Keyword.
+     * @return Keyword is a Association.
+     */
+    protected boolean isAssociation(String keyword) {
+        String[] array = {"associations", "dependency", "generalization", 
+                          "communication", "extend", "include",
+                          "association", "realization",
+                          "comunication",
+                          "flow",
+                          "message"};
+        return Arrays.asList(array).contains(keyword.toLowerCase());
+    }
+    
+    /**
+     * Method responsible for checking if the Keyword is a Product Line.
+     * @param  keyword Clause Keyword.
+     * @return Keyword is a Product Line.
+     */
+    protected boolean isProductLine(String keyword) {
+        String[] array = {"product", "instance", "artifact"};
+        return Arrays.asList(array).contains(keyword.toLowerCase());
     }
     
     /**
@@ -264,25 +306,26 @@ public abstract class Evaluation {
     }
     
     /**
-     * Method responsible for returning the Default Filters.
+     * Method responsible for returning the Element Filters.
      * @param  filter Clause Filter.
-     * @return Default Filters.
+     * @return Element Filters.
      */
-    protected Object[] getDefaultFilters(String filter) {
-        Object[] filters    = new Object[4];
+    protected Object[] getElementFilters(String filter) {
+        Object[] filters    = new Object[3];
                  filters[0] = this.getParameters(filter, "[", "]");
                  filters[1] = this.getParameters(filter, "<", ">");
                  filters[2] = this.getParameters(filter, "{", "}");
-                 filters[3] = this.getMandatory(filter);
+                 filters[3] = this.getParameters(filter, "{", "}");
+                 filters[4] = this.getMandatory(filter);
         return   filters;
     }
     
     /**
-     * Method responsible for returning the Attribute Filters.
+     * Method responsible for returning the Encodable Filters.
      * @param  filter Clause Filter.
-     * @return Attribute Filters.
+     * @return Encodable Filters.
      */
-    protected Object[] getDetailFilters(String filter) {
+    protected Object[] getEncodableFilters(String filter) {
         Object[] filters    = new Object[8];
                  filters[0] = this.getParameters(filter, "[", "]");
                  filters[1] = this.getParameters(filter, "<", ">");
