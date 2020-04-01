@@ -57,7 +57,7 @@ public class EvaluationVariability extends Evaluation {
      */
     public List filter(Object[] parameters) {
            List filter = this.filterContext();
-                filter = this.filterVariationPoints(filter, (List<String>) parameters[0]);
+                filter = this.filterVariationPoint(filter, (List<String>) parameters[0]);
                 filter = this.filterVariants(filter, (List<String>) parameters[1]);
                 filter = this.filterConstraint(filter, (String) parameters[3]);
         return  filter;
@@ -92,59 +92,59 @@ public class EvaluationVariability extends Evaluation {
     }
     
     /**
-     * Method responsible for returning the Variabilities List by Variation Points.
+     * Method responsible for filtering the Variabilities by Variation Points List.
      * @param  list Variabilities List.
-     * @param  names Variation Point List.
+     * @param  varPoints Variation Points List.
      * @return Variabilities filtered by Variation Points.
      */
-    protected List<Variability> filterVariationPoints(List<Variability> list, List<String> names) {
-        return this.isVoid(names) ? list : this.getVariationPoints(list, names);
+    protected List<Variability> filterVariationPoint(List<Variability> list, List<String> varPoints) {
+        return this.isVoid(varPoints) ? list : this.selectVariationPoints(list, varPoints);
     }
     
     /**
-     * Method responsible for returning the Variabilities List by Variation Points.
+     * Method responsible for selecting the Variabilities by Variation Points List.
      * @param  list Variabilities List.
-     * @param  names Names List.
-     * @return Variabilities filtered by Variation Points.
+     * @param  varPoints Variation Points List.
+     * @return Variabilities selected by Variation Points.
      */
-    protected List<Variability> getVariationPoints(List<Variability> list, List<String> names) {
+    protected List<Variability> selectVariationPoints(List<Variability> list, List<String> varPoints) {
         List filter = new ArrayList<>();
         for (Variability variability : list) {
-            if (names.contains(variability.getVariationPoint().getName()))
+            if (varPoints.contains(variability.getVariationPoint().getName()))
                 filter.add(variability);
         }
         return  filter;
     }
     
     /**
-     * Method responsible for returning the Variabilities List by Variants.
+     * Method responsible for filtering the Variabilities by Variants List.
      * @param  list Variabilities List.
-     * @param  names Variants List.
+     * @param  variants Variants List.
      * @return Variabilities filtered by Variants.
      */
-    protected List<Variability> filterVariants(List<Variability> list, List<String> names) {
-        return this.isVoid(names) ? list : this.getVariants(list, names);
+    protected List<Variability> filterVariants(List<Variability> list, List<String> variants) {
+        return this.isVoid(variants) ? list : this.selectVariants(list, variants);
     }
     
     /**
-     * Method responsible for returning the Variabilities List by Variants.
+     * Method responsible for selecting the Variabilities by Variants List.
      * @param  list Variabilities List.
-     * @param  names Variants List.
-     * @return Variabilities filtered by Variants.
+     * @param  variants Variants List.
+     * @return Variabilities selected by Variants.
      */
-    protected List<Variability> getVariants(List<Variability> list, List<String> names) {
-        List filter = new ArrayList<>();
+    protected List<Variability> selectVariants(List<Variability> list, List<String> variants) {
+        List   filter = new ArrayList<>();
         for (Variability variability : list) {
-            for (String variant : names) {
+            for (String variant : variants) {
                 if (variability.isVariant(variant))
                     filter.add(variability);
             }
         }
-        return  filter;
+        return filter;
     }
     
     /**
-     * Method responsible for returning the Variabilities List by Constraint.
+     * Method responsible for filtering the Variabilities by Constraint.
      * @param  list Variabilities List.
      * @param  constraint Constraint.
      * @return Variabilities filtered by Constraint.

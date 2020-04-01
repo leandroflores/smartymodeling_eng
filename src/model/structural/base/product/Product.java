@@ -158,6 +158,17 @@ public class Product implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Artifacts List.
+     * @return Artifacts List.
+     */
+    public List<Artifact> getArtifactsList() {
+        List   list = new ArrayList<>();
+        for (Instance instance : this.getInstancesList())
+               list.addAll(instance.getArtifactsList());
+        return list;
+    }
+    
+    /**
      * Method responsible for returning the Next Instance Id.
      * @return Next Instance Id.
      */

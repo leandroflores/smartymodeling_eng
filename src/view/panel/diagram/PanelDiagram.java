@@ -262,7 +262,7 @@ public abstract class PanelDiagram extends Panel {
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "0");
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_BLOCK);
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#8B008B");
     }
     
     /**

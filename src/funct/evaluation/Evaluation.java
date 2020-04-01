@@ -371,6 +371,18 @@ public abstract class Evaluation {
     }
     
     /**
+     * Method responsible for returning the Artifact Filters.
+     * @param  filter Clause Filter.
+     * @return Artifact Filters.
+     */
+    protected Object[] getArtifactFilters(String filter) {
+        Object[] filters    = new Object[2];
+                 filters[0] = this.getParameters(filter, "{", "}");
+                 filters[1] = this.getParameters(filter, "[", "]");
+        return   filters;
+    }
+    
+    /**
      * Method responsible for returning the Variability Filters.
      * @param  filter Clause Filter.
      * @return Variability Filters.
