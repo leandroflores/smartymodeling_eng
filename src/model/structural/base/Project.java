@@ -15,6 +15,7 @@ import model.structural.base.association.Link;
 import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
 import model.structural.base.interfaces.Exportable;
+import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.base.traceability.Traceability;
@@ -794,6 +795,7 @@ public class Project implements Exportable {
      * @param metric Metric.
      */
     public void removeMetric(Metric metric) {
+        this.removeMeasures(metric);
         this.metrics.remove(metric.getId());
     }
     
@@ -844,6 +846,29 @@ public class Project implements Exportable {
      */
     public Measure getMeasure(String id) {
         return (Measure) this.measures.get(id);
+    }
+    
+    /**
+     * Method responsible for returning the Measures by Metric.
+     * @param  metric Metric.
+     * @return Measures by Metric.
+     */
+    public List<Measure> getMeasuresByMetric(Metric metric) {
+        List<Measure> filter = new ArrayList<>();
+        for (Measure measure : this.getMeasuresList()) {
+           if (measure.getMetric().equals(metric))
+               filter.add(measure);
+        }
+        return filter;
+    }
+    
+    /**
+     * Method responsible for removing the Measures by Metric.
+     * @param metric Metric.
+     */
+    public void removeMeasures(Metric metric) {
+        for (Measure measure : this.getMeasuresByMetric(metric))
+            this.removeMeasure(measure);
     }
     
     /**
@@ -910,6 +935,17 @@ public class Project implements Exportable {
     public void removeProduct(Element element) {
         for (Product product : this.getProductsList()) 
             this.remove(product, element);
+    }
+    
+    /**
+     * Method responsible for returning the Instances List.
+     * @return Instances List.
+     */
+    public List<Instance> getInstancesList() {
+        List   list = new ArrayList<>();
+        for (Product product : this.getProductsList())
+               list.addAll(product.getInstancesList());
+        return list;
     }
     
     /**
@@ -980,6 +1016,17 @@ public class Project implements Exportable {
         for (Product product : this.getProductsList())
                export += product.export();
         return export  + "  </products>\n";
+    }
+    
+    /**
+     * Method responsible for returning the Artifacts List.
+     * @return Artifacts List.
+     */
+    public List<Artifact> getArtifactsList() {
+        List   list = new ArrayList<>();
+        for (Instance instance : this.getInstancesList())
+               list.addAll(instance.getArtifactsList());
+        return list;
     }
     
     /**
@@ -1184,6 +1231,18 @@ public class Project implements Exportable {
      */
     public Link getLink(Element element, Stereotype stereotype) {
         return (Link) this.links.get("LINK#" + element.getId() + "-" + stereotype.getId());
+    }
+    
+    /**
+     * Method responsible for returning the Stereotypes String by Element.
+     * @param  element Element.
+     * @return Stereotypes String.
+     */
+    public String getStereotypesString(Element element) {
+        String string  = "";
+        for (Link link : this.getLinksByElement(element))
+               string += link.getStereotype().getName() + " ";
+        return string;
     }
     
     /**

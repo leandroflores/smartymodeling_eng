@@ -200,6 +200,19 @@ public class Variability implements Exportable {
     }
     
     /**
+     * Method responsible for checking if an Element is Variant.
+     * @param  element Element Name.
+     * @return Element is Variant.
+     */
+    public boolean isVariant(String element) {
+        for (Element variant : this.variants) {
+            if (variant.getName().equalsIgnoreCase(element))
+                return true;
+        }
+        return false;
+    }
+    
+    /**
      * Method responsible for removing a Variant.
      * @param variant Variant.
      */

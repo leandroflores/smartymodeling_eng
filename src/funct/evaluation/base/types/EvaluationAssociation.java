@@ -1,4 +1,4 @@
-package funct.evaluation.base;
+package funct.evaluation.base.types;
 
 import funct.evaluation.Evaluation;
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class EvaluationAssociation extends Evaluation {
     }
     
     @Override
-    protected Double getClauseValue(String keyword, String filter) {
+    public Double getClauseValue(String keyword, String filter) {
         List   list = this.filter(this.getAssociationFilters(filter));
         String size = Integer.toString(list.size());
         return Double.parseDouble(size);
@@ -57,24 +57,10 @@ public class EvaluationAssociation extends Evaluation {
      */
     public List filter(Object[] parameters) {
            List filter = this.filterContext();
-           System.out.println("List 0: " + filter);
-           System.out.println("Size 0: " + filter.size());
                 filter = this.filterSource(filter, (List<String>) parameters[0]);
                 filter = this.filterTarget(filter, (List<String>) parameters[1]);
-                filter = this.filterContains(filter, (List<String>) parameters[1]);
-           System.out.println("");
+                filter = this.filterContains(filter, (List<String>) parameters[2]);
         return  filter;
-    }
-    
-    /**
-     * Method responsible for returning if List is Void.
-     * @param  list List.
-     * @return List is Void.
-     */
-    protected boolean isVoid(List<String> list) {
-        return list == null   
-            || list.isEmpty()  
-            || list.get(0).trim().equalsIgnoreCase("*");
     }
     
     /**
@@ -90,20 +76,20 @@ public class EvaluationAssociation extends Evaluation {
      * Method responsible for returning the Associations List by Context.
      * @return Associations List by Context.
      */
-    protected List<Association> getAssociationsList() {
+    protected List<Association> getAssociations() {
         return this.diagram != null ?
                this.diagram.getAssociationsList() : 
                this.project.getAssociationsList();
     }
     
     /**
-     * Method responsible for filtering the Associations List.
-     * @return Context List.
+     * Method responsible for filtering the Associations Context.
+     * @return Associations Context.
      */
     protected List<Association> filterContext() {
         return this.allTypes() ?
-               this.getAssociationsList() :
-               this.filterType(this.getAssociationsList());
+               this.getAssociations() :
+               this.filterType(this.getAssociations());
     }
     
     /**

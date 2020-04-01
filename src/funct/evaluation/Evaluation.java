@@ -42,7 +42,7 @@ public abstract class Evaluation {
      * @return Keyword is a Element.
      */
     protected boolean isElement(String keyword) {
-        String[] array = {"elements", 
+        String[] array = {"element", "elements", 
                           "actor", "usecase", 
                           "package", "class", "interface", "attribute", "method",
                           "component",
@@ -67,13 +67,34 @@ public abstract class Evaluation {
     }
     
     /**
+     * Method responsible for checking if the Keyword is a Variability.
+     * @param  keyword Clause Keyword.
+     * @return Keyword is a Product Line.
+     */
+    protected boolean isVariability(String keyword) {
+        String[] array = {"variability", "variabilities"};
+        return Arrays.asList(array).contains(keyword.toLowerCase());
+    }
+    
+    /**
      * Method responsible for checking if the Keyword is a Product Line.
      * @param  keyword Clause Keyword.
      * @return Keyword is a Product Line.
      */
-    protected boolean isProductLine(String keyword) {
+    protected boolean isProduct(String keyword) {
         String[] array = {"product", "instance", "artifact"};
         return Arrays.asList(array).contains(keyword.toLowerCase());
+    }
+    
+    /**
+     * Method responsible for returning if List is Void.
+     * @param  list List.
+     * @return List is Void.
+     */
+    protected boolean isVoid(List<String> list) {
+        return list == null   
+            || list.isEmpty()  
+            || list.get(0).trim().equalsIgnoreCase("*");
     }
     
     /**
@@ -230,6 +251,19 @@ public abstract class Evaluation {
     }
     
     /**
+     * Method responsible for returning the Filter Constraint.
+     * @param  filter Clause Filter.
+     * @return Filter Constraint.
+     */
+    protected String getConstraint(String filter) {
+        if (filter.toUpperCase().contains("INCLUSIVE"))
+            return "inclusive";
+        if (filter.toUpperCase().contains("EXCLUSIVE"))
+            return "exclusive";
+        return "";
+    }
+    
+    /**
      * Method responsible for returning the Filter Mandatory Flag.
      * @param  filter Clause Filter.
      * @return Filter Mandatory Flag.
@@ -311,21 +345,6 @@ public abstract class Evaluation {
      * @return Element Filters.
      */
     protected Object[] getElementFilters(String filter) {
-        Object[] filters    = new Object[3];
-                 filters[0] = this.getParameters(filter, "[", "]");
-                 filters[1] = this.getParameters(filter, "<", ">");
-                 filters[2] = this.getParameters(filter, "{", "}");
-                 filters[3] = this.getParameters(filter, "{", "}");
-                 filters[4] = this.getMandatory(filter);
-        return   filters;
-    }
-    
-    /**
-     * Method responsible for returning the Encodable Filters.
-     * @param  filter Clause Filter.
-     * @return Encodable Filters.
-     */
-    protected Object[] getEncodableFilters(String filter) {
         Object[] filters    = new Object[8];
                  filters[0] = this.getParameters(filter, "[", "]");
                  filters[1] = this.getParameters(filter, "<", ">");
@@ -348,6 +367,20 @@ public abstract class Evaluation {
                  filters[0] = this.getParameters(filter, "[", "]");
                  filters[1] = this.getParameters(filter, "<", ">");
                  filters[2] = this.getParameters(filter, "{", "}");
+        return   filters;
+    }
+    
+    /**
+     * Method responsible for returning the Variability Filters.
+     * @param  filter Clause Filter.
+     * @return Variability Filters.
+     */
+    protected Object[] getVariabilityFilters(String filter) {
+        Object[] filters    = new Object[3];
+                 filters[0] = this.getParameters(filter, "[", "]");
+                 filters[1] = this.getParameters(filter, "{", "}");
+                 filters[2] = this.getParameters(filter, "<", ">");
+                 filters[3] = this.getConstraint(filter);
         return   filters;
     }
     

@@ -1,5 +1,7 @@
 package funct.evaluation.base;
 
+import funct.evaluation.base.types.EvaluationElement;
+import funct.evaluation.base.types.EvaluationAssociation;
 import funct.evaluation.Evaluation;
 import model.structural.base.Project;
 
@@ -27,7 +29,7 @@ public class EvaluationProject extends Evaluation {
             return new EvaluationElement(this.project, keyword).getClauseValue(keyword, filter);
         else if (this.isAssociation(keyword))
             return new EvaluationAssociation(this.project, keyword).getClauseValue(keyword, filter);
-        else if (this.isProductLine(keyword))
+        else if (this.isProduct(keyword))
             System.out.println("Evaluation Product Line");
         return 0.0d;
     }

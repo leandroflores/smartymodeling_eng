@@ -9,6 +9,7 @@ import java.util.Map;
 import model.structural.base.Element;
 import model.structural.base.Stereotype;
 import model.structural.diagram.ClassDiagram;
+import model.structural.diagram.classes.Encodable;
 import model.structural.diagram.classes.Entity;
 
 /**
@@ -21,8 +22,8 @@ import model.structural.diagram.classes.Entity;
 public class PackageUML extends Element {
     private ClassDiagram diagram;
     private PackageUML parent;
-    private HashMap    packages;
-    private HashMap    entities;
+    private HashMap packages;
+    private HashMap entities;
     
     /**
      * Default constructor method of Class.
