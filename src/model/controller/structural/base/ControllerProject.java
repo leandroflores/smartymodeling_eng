@@ -37,14 +37,26 @@ public class ControllerProject {
     }
     
     /**
-     * Method responsible for returning the Targets Array.
-     * @return Targets Array.
+     * Method responsible for returning the Project Targets Array.
+     * @return Project Targets Array.
      */
-    public Object[] getTargets() {
+    public Object[] getProjectTargets() {
         Object[] diagrams   = this.getDiagrams();
         Object[] targets    = new Object[diagrams.length + 1];
                  targets[0] = "Project";
         System.arraycopy(diagrams, 0, targets, 1, diagrams.length);
+        return   targets;
+    }
+    
+    /**
+     * Method responsible for returning the Product Targets Array.
+     * @return Product Targets Array.
+     */
+    public Object[] getProductTargets() {
+        Object[] products   = this.getProducts();
+        Object[] targets    = new Object[products.length + 1];
+                 targets[0] = "Project";
+        System.arraycopy(products, 0, targets, 1, products.length);
         return   targets;
     }
     
@@ -73,6 +85,14 @@ public class ControllerProject {
                 filter.add(diagram);
         }
         return filter.toArray();
+    }
+    
+    /**
+     * Method responsible for returning the Products Array.
+     * @return Products Array.
+     */
+    public Object[] getProducts() {
+        return this.project.getProductsList().toArray();
     }
     
     /**

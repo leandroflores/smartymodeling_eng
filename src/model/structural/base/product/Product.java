@@ -1,6 +1,7 @@
 package model.structural.base.product;
 
 import funct.FunctString;
+import funct.evaluation.base.EvaluationProduct;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

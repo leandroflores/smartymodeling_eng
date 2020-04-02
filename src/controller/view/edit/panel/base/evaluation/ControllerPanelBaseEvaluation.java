@@ -1,12 +1,14 @@
 package controller.view.edit.panel.base.evaluation;
 
 import controller.view.ControllerPanel;
+import funct.evaluation.Evaluation;
 import funct.evaluation.base.EvaluationDiagram;
 import funct.evaluation.base.EvaluationProject;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.script.ScriptException;
 import model.structural.base.Diagram;
+import model.structural.base.Project;
 import model.structural.base.evaluation.Metric;
 import view.edit.panel.base.evaluation.PanelBaseEvaluation;
 import view.message.ViewError;
@@ -33,7 +35,7 @@ public class ControllerPanelBaseEvaluation extends ControllerPanel {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        this.update();
+        this.evaluate();
         if (this.panelBaseEvaluation.getBackButton().equals(event.getSource()))
             this.panelBaseEvaluation.getViewNewMeasure().removePanelBaseEvaluation();
         else if (this.panelBaseEvaluation.getNextButton().equals(event.getSource()))
@@ -41,23 +43,38 @@ public class ControllerPanelBaseEvaluation extends ControllerPanel {
     }
     
     @Override
-    public void keyPressed(KeyEvent event) {
-        this.update();
-    }
+    public void keyPressed(KeyEvent event) {}
     
     @Override
-    public void keyReleased(KeyEvent event) {
-        this.update();
+    public void keyReleased(KeyEvent event) {}
+    
+    /**
+     * Method responsible for returning the Project.
+     * @return Project.
+     */
+    private Project getProject() {
+        return this.panelBaseEvaluation.getProject();
     }
     
-    private void evaluate() {
+    /**
+     * Method responsible for returning the Diagram selected.
+     * @return Diagram selected.
+     */
+    private Diagram getDiagram() {
+        return (Diagram) this.panelBaseEvaluation.getTargetComboBox().getSelectedItem();
+    }
+    
+    /**
+     * Method responsible for Evaluate the Target by Operation.
+     */
+    public void evaluate() {
         Object target = this.panelBaseEvaluation.getTargetComboBox().getSelectedItem();
         Metric metric = this.panelBaseEvaluation.getMeasure().getMetric();
         try {
             if (target.toString().equalsIgnoreCase("Project"))
-                this.evaluate(this.panelBaseEvaluation.getProject().getEvaluation(), metric);
+                this.evaluate(this.getProject(), metric);
             else if (target instanceof Diagram)
-                this.evaluate(((Diagram) target).getEvaluation(), metric);
+                this.evaluate(this.getDiagram(), metric);
         }catch (ScriptException exception) {
             new ViewError(this.panelBaseEvaluation.getViewNewMeasure(), "Error to Apply Metric!").setVisible(true);
         }
@@ -65,35 +82,27 @@ public class ControllerPanelBaseEvaluation extends ControllerPanel {
     
     /**
      * Method responsible for evaluate the Project by a Metric.
-     * @param  evaluation Evaluation Project.
+     * @param  project Project.
      * @param  metric Metric.
-     * @throws ScriptException 
+     * @throws ScriptException Exception to Evaluate the Project.
      */
-    private void evaluate(EvaluationProject evaluation, Metric metric) throws ScriptException {
-        Double value = evaluation.getFinalValue(metric.getOperation());
-        this.panelBaseEvaluation.getValueTextField().setText(Double.toString(value));
+    public void evaluate(Project project, Metric metric) throws ScriptException {
+        Evaluation evaluation = new EvaluationProject(project);
+        Double     finalValue = evaluation.getFinalValue(metric.getOperation());
+        this.panelBaseEvaluation.getValueTextField().setText(Double.toString(finalValue));
         this.panelBaseEvaluation.updateDetails(evaluation.getObjects());
     }
     
     /**
      * Method responsible for evaluate the Diagram by a Metric.
-     * @param  evaluation Evaluation Diagram.
+     * @param  diagram Diagram.
      * @param  metric Metric.
-     * @throws ScriptException 
+     * @throws ScriptException Exception to Evaluate the Diagram.
      */
-    private void evaluate(EvaluationDiagram evaluation, Metric metric) throws ScriptException {
-        Double value = evaluation.getFinalValue(metric.getOperation());
-        this.panelBaseEvaluation.getValueTextField().setText(Double.toString(value));
+    public void evaluate(Diagram diagram, Metric metric) throws ScriptException {
+        Evaluation evaluation = new EvaluationDiagram(diagram);
+        Double     finalValue = evaluation.getFinalValue(metric.getOperation());
+        this.panelBaseEvaluation.getValueTextField().setText(Double.toString(finalValue));
         this.panelBaseEvaluation.updateDetails(evaluation.getObjects());
-    }
-    
-    /**
-     * Method responsible for setting the Evaluation Values.
-     */
-    private void update() {
-        this.evaluate();
-//        this.panelBaseEvaluation.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseEvaluation.getDiagram());
-        this.panelBaseEvaluation.getViewMenu().getPanelProject().getPanelTree().updateUI(); 
-        this.panelBaseEvaluation.getViewMenu().setSave(false);
     }
 }

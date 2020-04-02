@@ -187,12 +187,17 @@ public final class ViewMenu extends View implements Operation {
         
         this.createMenuItem("menuItemEvaluationMetric",  "New Metric",       "evaluation/metric.png");
         this.createMenuItem("menuItemEvaluationMeasure", "New Measure",      "evaluation/measure.png");
-        this.createMenuItem("menuItemQueryEvaluation",   "Query Evaluation", "evaluation/query.png");
+        
+        this.createMenuItem("menuItemEvaluationProject", "Evaluate Project", "evaluation/query.png");
+        this.createMenuItem("menuItemEvaluationDiagram", "Evaluate Diagram", "evaluation/query.png");
+        this.createMenuItem("menuItemEvaluationProduct", "Evaluate Product", "evaluation/query.png");
         
         this.getMenuEvaluation().add(this.getMenuItemEvaluationMetric());
         this.getMenuEvaluation().add(this.getMenuItemEvaluationMeasure());
         this.getMenuEvaluation().addSeparator();
-        this.getMenuEvaluation().add(this.getMenuItemQueryEvaluation());
+        this.getMenuEvaluation().add(this.getMenuItemEvaluationProject());
+        this.getMenuEvaluation().add(this.getMenuItemEvaluationDiagram());
+        this.getMenuEvaluation().add(this.getMenuItemEvaluationProduct());
     }
     
     /**
@@ -383,7 +388,7 @@ public final class ViewMenu extends View implements Operation {
         
         this.getMenuItemEvaluationMetric().setEnabled(flag);
         this.getMenuItemEvaluationMeasure().setEnabled(flag);
-        this.getMenuItemQueryEvaluation().setEnabled(flag);
+        this.getMenuItemEvaluationProject().setEnabled(flag);
     }
     
     /**
@@ -705,11 +710,27 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning the Menu Item Query Evaluation.
-     * @return Menu Item Query Evaluation.
+     * Method responsible for returning the Menu Item Evaluation Project.
+     * @return Menu Item Evaluation Project.
      */
-    public JMenuItem getMenuItemQueryEvaluation() {
-        return this.menuItens.get("menuItemQueryEvaluation");
+    public JMenuItem getMenuItemEvaluationProject() {
+        return this.menuItens.get("menuItemEvaluationProject");
+    }
+    
+    /**
+     * Method responsible for returning the Menu Item Evaluation Diagram.
+     * @return Menu Item Evaluation Diagram.
+     */
+    public JMenuItem getMenuItemEvaluationDiagram() {
+        return this.menuItens.get("menuItemEvaluationDiagram");
+    }
+    
+    /**
+     * Method responsible for returning the Menu Item Evaluation Product.
+     * @return Menu Item Evaluation Product.
+     */
+    public JMenuItem getMenuItemEvaluationProduct() {
+        return this.menuItens.get("menuItemEvaluationProduct");
     }
     
     /**

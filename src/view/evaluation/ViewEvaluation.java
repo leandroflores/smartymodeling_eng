@@ -1,42 +1,47 @@
-package view.query;
+package view.evaluation;
 
+import controller.view.evaluation.ControllerViewEvaluation;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
+import model.structural.base.Project;
 import view.ViewModal;
 import view.panel.modeling.PanelModeling;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>ViewQuery</b>.</p>
- * <p>Class responsible for defining the <b>Query View</b> of SMartyModeling.</p>
+ * <p>Class of View <b>ViewEvaluation</b>.</p>
+ * <p>Class responsible for defining the <b>Evaluation View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  28/03/2019
- * @see    controller.view.query.ControllerViewQuery
+ * @see    controller.view.evaluation.ControllerViewEvaluation
  * @see    view.ViewModal
  */
-public abstract class ViewQuery extends ViewModal {
+public abstract class ViewEvaluation extends ViewModal {
     protected final ViewMenu view;
     protected final PanelModeling panel;
+    protected final Project project;
     protected JTabbedPane tabbedPane;
     
     /**
      * Default constructor method of Class.
      * @param view View Menu.
      */
-    public ViewQuery(ViewMenu view) {
+    public ViewEvaluation(ViewMenu view) {
         super(view);
-        this.view  = view;
-        this.panel = null;
+        this.view    = view;
+        this.panel   = null;
+        this.project = view.getProject();
     }
     
     /**
      * Alternative constructor method of Class.
      * @param panel Panel Modeling.
      */
-    public ViewQuery(PanelModeling panel) {
+    public ViewEvaluation(PanelModeling panel) {
         super(panel.getViewMenu());
-        this.view  = panel.getViewMenu();
-        this.panel = panel;
+        this.view    = panel.getViewMenu();
+        this.panel   = panel;
+        this.project = panel.getViewMenu().getProject();
     }
     
     @Override
@@ -52,6 +57,22 @@ public abstract class ViewQuery extends ViewModal {
      */
     public ViewMenu getViewMenu() {
         return this.view;
+    }
+    
+    /**
+     * Method responsible for returning the Project.
+     * @return Project.
+     */
+    public Project getProject() {
+        return this.project;
+    }
+    
+    /**
+     * Method responsible for returning the Controller.
+     * @return Controller.
+     */
+    public ControllerViewEvaluation getController() {
+        return (ControllerViewEvaluation) this.controller;
     }
     
     /**

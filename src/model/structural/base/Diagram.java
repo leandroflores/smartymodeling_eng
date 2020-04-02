@@ -946,14 +946,6 @@ public abstract class Diagram implements Exportable {
     }
     
     /**
-     * Method responsible for returning the Diagram Evaluation Class.
-     * @return Diagram Evaluation Class.
-     */
-    public EvaluationDiagram getEvaluation() {
-        return new EvaluationDiagram(this);
-    }
-    
-    /**
      * Method responsible for returning Elements to export.
      * @param  elements Elements List.
      * @return Elements to Export.

@@ -28,6 +28,8 @@ import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import org.xml.sax.SAXException;
 import view.edit.ViewEditProfile;
+import view.evaluation.ViewEvaluationDiagram;
+import view.evaluation.ViewEvaluationProduct;
 import view.export.ViewExportDiagram;
 import view.export.ViewExportProduct;
 import view.export.code.ViewExportDiagramCode;
@@ -40,7 +42,7 @@ import view.new_.evaluation.ViewNewMetric;
 import view.new_.product.ViewNewInstance;
 import view.new_.product.ViewNewProduct;
 import view.new_.traceability.ViewNewTraceability;
-import view.query.ViewQueryEvaluation;
+import view.evaluation.ViewEvaluationProject;
 import view.structural.ViewMenu;
 import view.system.ViewSystemInformation;
 
@@ -100,8 +102,12 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             this.newMetric();
         else if (this.viewMenu.getMenuItemEvaluationMeasure().equals(event.getSource()))
             this.newMeasure();
-        else if (this.viewMenu.getMenuItemQueryEvaluation().equals(event.getSource()))
-            this.queryMeasure();
+        else if (this.viewMenu.getMenuItemEvaluationProject().equals(event.getSource()))
+            this.evaluateProject();
+        else if (this.viewMenu.getMenuItemEvaluationDiagram().equals(event.getSource()))
+            this.evaluateDiagram();
+        else if (this.viewMenu.getMenuItemEvaluationProduct().equals(event.getSource()))
+            this.evaluateProduct();
         else if (this.viewMenu.getMenuItemExportDiagram().equals(event.getSource()))
             this.exportDiagram();
         else if (this.viewMenu.getMenuItemExportProduct().equals(event.getSource()))
@@ -376,10 +382,35 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     }
     
     /**
-     * Method responsible for Query a Measure.
+     * Method responsible for Evaluate Project.
      */
-    private void queryMeasure() {
-        new ViewQueryEvaluation(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+    private void evaluateProject() {
+        if (this.viewMenu.getProject() != null)
+            new ViewEvaluationProject(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+    }
+    
+    /**
+     * Method responsible for Evaluate Diagrams.
+     */
+    private void evaluateDiagram() {
+        if (this.viewMenu.getProject() != null) {
+            if (this.viewMenu.getProject().getDiagramsList().isEmpty() == false)
+                new ViewEvaluationDiagram(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+            else
+                new ViewError(this.viewMenu, "Diagrams List is void!").setVisible(true);
+        }
+    }
+    
+    /**
+     * Method responsible for Evaluate Products.
+     */
+    private void evaluateProduct() {
+        if (this.viewMenu.getProject() != null) {
+            if (this.viewMenu.getProject().getProductsList().isEmpty() == false)
+                new ViewEvaluationProduct(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+            else
+                new ViewError(this.viewMenu, "Product List is void!").setVisible(true);
+        }
     }
     
     /**

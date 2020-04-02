@@ -1,6 +1,6 @@
-package view.edit.panel.base.evaluation;
+package view.panel.evaluation;
 
-import controller.view.edit.panel.base.evaluation.ControllerPanelQueryEvaluation;
+import controller.view.panel.evaluation.ControllerPanelEvaluation;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.util.List;
@@ -10,40 +10,36 @@ import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import model.controller.structural.base.ControllerProject;
 import model.structural.base.Project;
 import view.Panel;
-import view.query.ViewQueryEvaluation;
+import view.evaluation.ViewEvaluation;
 
 /**
- * <p>Class of View <b>PanelQueryEvalutaion</b>.</p> 
- * <p>Class responsible for defining a Panel for showing the <b>Evalutaion Query Panel</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelEvaluation</b>.</p> 
+ * <p>Class responsible for defining a Panel for showing the <b>Panel Evaluation</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  28/03/2020
- * @see    controller.view.edit.panel.base.evaluation.ControllerPanelBaseEvaluation
+ * @since  01/04/2020
+ * @see    controller.view.edit.panel.base.evaluation.
  * @see    view.Panel
- * @see    view.query.ViewQueryEvaluation
+ * @see    view.evaluation.ViewEvaluation
  */
-public final class PanelQueryEvaluation extends Panel {
-    private final ViewQueryEvaluation viewQuery;
-    private final Project project;
+public abstract class PanelEvaluation extends Panel {
+    protected final Project project;
+    protected final ViewEvaluation viewEvaluation;
     
     /**
      * Default constructor method of Class.
-     * @param viewQuery View Query Evaluation.
+     * @param viewEvaluation View Evaluation.
      */
-    public PanelQueryEvaluation(ViewQueryEvaluation viewQuery) {
-        this.viewQuery  = viewQuery;
-        this.project    = viewQuery.getProject();
-        this.controller = new ControllerPanelQueryEvaluation(this);
-        this.setSettings();
-        this.addComponents();
+    public PanelEvaluation(ViewEvaluation viewEvaluation) {
+        this.project        = viewEvaluation.getViewMenu().getProject();
+        this.viewEvaluation = viewEvaluation;
     }
     
     /**
      * Method responsible for defining the Settings.
      */
-    private void setSettings() {
+    protected void setSettings() {
         this.setLayout(new GridBagLayout());
         this.setPreferredSize(new Dimension(200, 300));
         this.setSize(new Dimension(200, 300));
@@ -69,9 +65,7 @@ public final class PanelQueryEvaluation extends Panel {
      * Method responsible for returning the Targets Array.
      * @return Targets Array.
      */
-    private Object[] getTargets() {
-        return new ControllerProject(this.project).getTargets();
-    }
+    protected abstract Object[] getTargets();
     
     /**
      * Method responsible for clearing the Panel.
@@ -98,11 +92,19 @@ public final class PanelQueryEvaluation extends Panel {
     }
     
     /**
-     * Method responsible for returning the View Query Evaluation.
-     * @return View Query Evaluation.
+     * Method responsible for returning the View Evaluation.
+     * @return View Evaluation.
      */
-    public ViewQueryEvaluation getViewQueryEvaluation() {
-        return this.viewQuery;
+    public ViewEvaluation getViewEvaluation() {
+        return this.viewEvaluation;
+    }
+    
+    /**
+     * Method responsible for returning the Controller.
+     * @return Controller.
+     */
+    public ControllerPanelEvaluation getController() {
+        return (ControllerPanelEvaluation) this.controller;
     }
     
     /**
