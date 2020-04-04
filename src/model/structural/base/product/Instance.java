@@ -496,6 +496,14 @@ public class Instance implements Exportable {
         }
         return  filter;
     }
+    
+    /**
+     * Method responsible for returning the Instance Summary.
+     * @return Instance Summary.
+     */
+    public String getSummary() {
+        return "Instance: " + this.getName() + " (" + this.diagram.getName() + ")";
+    }
         
     @Override
     public String export() {

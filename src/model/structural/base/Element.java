@@ -434,6 +434,14 @@ public abstract class Element implements Exportable, Modelable {
      */
     public abstract String getIcon();
     
+    /**
+     * Method responsible for returning the Element Summary.
+     * @return Element Summary.
+     */
+    public String getSummary() {
+        return new FunctString().getInitUpperCase(this.type) + ": " + this.name;
+    }
+    
     @Override
     public String export() {
         String export  = "    <"         + this.type;
@@ -467,6 +475,6 @@ public abstract class Element implements Exportable, Modelable {
     
     @Override
     public String toString() {
-        return new FunctString().getInitUpperCase(this.type) + ": " + this.name;
+        return this.getSummary();
     }
 }

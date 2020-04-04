@@ -1,6 +1,7 @@
 package model.structural.base.association;
 
 import com.mxgraph.util.mxPoint;
+import funct.FunctString;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -276,6 +277,14 @@ public abstract class Association implements Modelable, Exportable {
      */
     public void setPoints(List<mxPoint> points) {
         this.points = (points != null) ? points : new ArrayList();
+    }
+    
+    /**
+     * Method responsible for returning the Association Summary.
+     * @return Association Summary.
+     */
+    public String getSummary() {
+        return new FunctString().getInitUpperCase(this.type) + ": " + this.source.getName() + " - " + this.target.getName();
     }
     
     /**

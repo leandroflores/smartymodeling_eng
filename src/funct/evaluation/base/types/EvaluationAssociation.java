@@ -60,6 +60,7 @@ public class EvaluationAssociation extends Evaluation {
                 filter = this.filterSource(filter, (List<String>) parameters[0]);
                 filter = this.filterTarget(filter, (List<String>) parameters[1]);
                 filter = this.filterContains(filter, (List<String>) parameters[2]);
+                this.addObjects(this.getList(filter));
         return  filter;
     }
     
@@ -180,5 +181,17 @@ public class EvaluationAssociation extends Evaluation {
                 filter.add(association);
         }
         return  filter;
+    }
+    
+    /**
+     * Method responsible for returning the Summary List of Associations List.
+     * @param  filter Associations List.
+     * @return Summary List.
+     */
+    private List getList(List<Association> filter) {
+        List   list = new ArrayList();
+        for (Association association : filter)
+               list.add(association.getSummary());
+        return list;
     }
 }

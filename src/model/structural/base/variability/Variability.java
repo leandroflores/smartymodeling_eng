@@ -259,6 +259,14 @@ public class Variability implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Variability Summary.
+     * @return Variability Summary.
+     */
+    public String getSummary() {
+        return "Variability: " + this.getName();
+    }
+    
+    /**
      * Method responsible for exporting the Variation Point String.
      * @return Variation Point String.
      */

@@ -65,6 +65,7 @@ public class EvaluationElement extends Evaluation {
                 filter = this.filterFinal(filter,  (Boolean) parameters[5]);
                 filter = this.filterStatic(filter, (Boolean) parameters[6]);
                 filter = this.filterVisibility(filter, (String) parameters[7]);
+                this.addObjects(this.getList(filter));
         return  filter;
     }
     
@@ -297,5 +298,17 @@ public class EvaluationElement extends Evaluation {
         if (element instanceof Encodable)
             return visibility.equalsIgnoreCase(((Encodable) element).getVisibility());
         return true;
+    }
+    
+    /**
+     * Method responsible for returning the Summary List of Elements List.
+     * @param  filter Elements List.
+     * @return Summary List.
+     */
+    private List getList(List<Element> filter) {
+        List   list = new ArrayList();
+        for (Element element : filter)
+               list.add(element.getSummary());
+        return list;
     }
 }

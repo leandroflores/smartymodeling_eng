@@ -358,6 +358,14 @@ public class Artifact implements Exportable, Modelable {
     }
     
     /**
+     * Method responsible for returning the Artifact Summary.
+     * @return Artifact Summary.
+     */
+    public String getSummary() {
+        return "Artifact: " + this.element.getName();
+    }
+    
+    /**
      * Method responsible for returning the Artifact Icon.
      * @return Artifact Icon.
      */

@@ -55,6 +55,7 @@ public class EvaluationInstance extends Evaluation {
            List filter = this.filterContext();
                 filter = this.filterType(filter, (List<String>) parameters[0]);
                 filter = this.filterName(filter, (List<String>) parameters[1]);
+                this.addObjects(this.getList(filter));
         return  filter;
     }
     
@@ -116,5 +117,17 @@ public class EvaluationInstance extends Evaluation {
                 filter.add(artifact);
         }
         return  filter;
+    }
+    
+    /**
+     * Method responsible for returning the Summary List of Instances List.
+     * @param  filter Instances List.
+     * @return Summary List.
+     */
+    private List getList(List<Instance> filter) {
+        List   list = new ArrayList();
+        for (Instance instance : filter)
+               list.add(instance.getSummary());
+        return list;
     }
 }

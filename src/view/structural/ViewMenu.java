@@ -185,12 +185,12 @@ public final class ViewMenu extends View implements Operation {
     private void createEvaluationMenu() {
         this.createMenu("menuEvaluation", "Evaluation");
         
-        this.createMenuItem("menuItemEvaluationMetric",  "New Metric",       "evaluation/metric.png");
-        this.createMenuItem("menuItemEvaluationMeasure", "New Measure",      "evaluation/measure.png");
+        this.createMenuItem("menuItemEvaluationMetric",  "New Metric",  "evaluation/metric.png");
+        this.createMenuItem("menuItemEvaluationMeasure", "New Measure", "evaluation/measure.png");
         
-        this.createMenuItem("menuItemEvaluationProject", "Evaluate Project", "evaluation/query.png");
-        this.createMenuItem("menuItemEvaluationDiagram", "Evaluate Diagram", "evaluation/query.png");
-        this.createMenuItem("menuItemEvaluationProduct", "Evaluate Product", "evaluation/query.png");
+        this.createMenuItem("menuItemEvaluationProject", "Evaluate Project", "evaluation/project.png");
+        this.createMenuItem("menuItemEvaluationDiagram", "Evaluate Diagram", "evaluation/diagram.png");
+        this.createMenuItem("menuItemEvaluationProduct", "Evaluate Product", "evaluation/product.png");
         
         this.getMenuEvaluation().add(this.getMenuItemEvaluationMetric());
         this.getMenuEvaluation().add(this.getMenuItemEvaluationMeasure());

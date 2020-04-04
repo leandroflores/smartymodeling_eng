@@ -40,7 +40,15 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
     }
     
     @Override
-    public void keyPressed(KeyEvent event) {}
+    public void keyPressed(KeyEvent event) {
+        switch (event.getKeyCode()) {
+            case ENTER:
+                this.update();
+                break;
+            default:
+                break;
+        }       
+    }
     
     /**
      * Method responsible for returning the Project.
@@ -54,8 +62,8 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
      * Method responsible for returning the Diagram selected.
      * @return Diagram selected.
      */
-    protected Product getDiagram() {
-        return (Product) this.panelEvaluation.getTargetComboBox().getSelectedItem();
+    protected Diagram getDiagram() {
+        return (Diagram) this.panelEvaluation.getTargetComboBox().getSelectedItem();
     }
     
     /**

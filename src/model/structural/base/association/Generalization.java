@@ -60,7 +60,7 @@ public class Generalization extends Association {
                style.put(mxConstants.STYLE_DASHED,   "0");
                style.put(mxConstants.STYLE_EDITABLE, "0");
                style.put(mxConstants.STYLE_STARTSIZE, "15");
-               style.put(mxConstants.STYLE_ENDSIZE,   "20");
+               style.put(mxConstants.STYLE_ENDSIZE,   "15");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_ENDARROW,   mxConstants.ARROW_BLOCK);
                style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);

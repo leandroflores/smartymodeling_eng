@@ -60,6 +60,7 @@ public class EvaluationVariability extends Evaluation {
                 filter = this.filterVariationPoint(filter, (List<String>) parameters[0]);
                 filter = this.filterVariants(filter, (List<String>) parameters[1]);
                 filter = this.filterConstraint(filter, (String) parameters[3]);
+                this.addObjects(this.getList(filter));
         return  filter;
     }
     
@@ -158,5 +159,17 @@ public class EvaluationVariability extends Evaluation {
                 filter.add(variability);
         }
         return filter;
+    }
+    
+    /**
+     * Method responsible for returning the Summary List of Variabilities List.
+     * @param  filter Variabilities List.
+     * @return Summary List.
+     */
+    private List getList(List<Variability> filter) {
+        List   list = new ArrayList();
+        for (Variability variability : filter)
+               list.add(variability.getSummary());
+        return list;
     }
 }
