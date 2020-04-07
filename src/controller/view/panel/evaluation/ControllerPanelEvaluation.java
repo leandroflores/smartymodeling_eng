@@ -11,6 +11,7 @@ import javax.script.ScriptException;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.base.product.Product;
+import view.message.ViewError;
 import view.panel.evaluation.PanelEvaluation;
 
 /**
@@ -47,7 +48,7 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
                 break;
             default:
                 break;
-        }       
+        }
     }
     
     /**
@@ -75,6 +76,19 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
     }
     
     /**
+     * Method responsible for checking the Operation.
+     * @return Operation is checked.
+     */
+    protected boolean check() {
+        if (!this.check(this.panelEvaluation.getOperationTextField().getText())) {
+            new ViewError(this.panelEvaluation.getViewEvaluation(), "Type a Operation!").setVisible(true);
+            this.panelEvaluation.getOperationTextField().requestFocus();
+            return false;
+        }
+        return true;
+    }
+    
+    /**
      * Method responsible for Updating the Panel.
      */
     public abstract void update();
@@ -86,10 +100,13 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
      * @throws ScriptException Exception to Apply Operation on Project.
      */
     protected void evaluate(Project project, String operation) throws ScriptException {
+        System.out.println("AAA");
         Evaluation evaluation = new EvaluationProject(project);
         Double     finalValue = evaluation.getFinalValue(operation);
         this.panelEvaluation.getValueTextField().setText(Double.toString(finalValue));
+        System.out.println("List: " + evaluation.getObjects());
         this.panelEvaluation.updateDetails(evaluation.getObjects());
+        System.out.println("");
     }
     
     /**

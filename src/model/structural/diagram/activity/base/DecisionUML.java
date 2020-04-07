@@ -57,8 +57,8 @@ public class DecisionUML extends Element {
                style.put(mxConstants.STYLE_FONTSIZE, "15");
                style.put(mxConstants.STYLE_EDITABLE, "0");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-               style.put(mxConstants.STYLE_FILLCOLOR,   "#9999ff");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+               style.put(mxConstants.STYLE_FILLCOLOR,   mxConstants.NONE);
         return style;
     }
 }

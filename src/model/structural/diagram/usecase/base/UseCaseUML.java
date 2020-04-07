@@ -50,7 +50,7 @@ public class UseCaseUML extends Element {
                style.put(mxConstants.STYLE_FONTSIZE, "15");
                style.put(mxConstants.STYLE_EDITABLE, "1");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-               style.put(mxConstants.STYLE_FILLCOLOR,   "#B4D34C");
+               style.put(mxConstants.STYLE_FILLCOLOR,   mxConstants.NONE);
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
                style.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_CENTER);

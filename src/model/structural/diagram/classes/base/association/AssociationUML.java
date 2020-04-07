@@ -647,19 +647,19 @@ public class AssociationUML extends Association {
     }
     
     /**
-     * Method responsible for returning the Stroke Color.
-     * @return Stroke Color.
-     */
-    private String getStrokeColor() {
-        return (this.category.toLowerCase().trim().equals("aggregation")) ? "#A9A9A9" : "#000000";
-    }
-    
-    /**
      * Method responsible for returning the Start Arrow.
      * @return Start Arrow.
      */
     private Object getStartArrow() {
         return (this.category.toLowerCase().trim().equals("normal")) ? mxConstants.ARROW_SPACING : mxConstants.ARROW_DIAMOND;
+    }
+    
+    /**
+     * Method responsible for returning the Start Fill.
+     * @return Start Fill.
+     */
+    private Object getStartFill() {
+        return (this.category.equalsIgnoreCase("aggregation")) ? "0" : "1";
     }
     
     /**
@@ -689,9 +689,9 @@ public class AssociationUML extends Association {
                style.put(mxConstants.STYLE_FOLDABLE,  "0");
                style.put(mxConstants.STYLE_FONTSIZE,  "10");
                style.put(mxConstants.STYLE_RESIZABLE, "0");
-               style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-               style.put(mxConstants.STYLE_FILLCOLOR,   "#EEEEEE");
-               style.put(mxConstants.STYLE_STROKECOLOR, "#EEEEEE");
+               style.put(mxConstants.STYLE_FONTCOLOR, "#000000");
+               style.put(mxConstants.STYLE_FILLCOLOR,   mxConstants.NONE);
+               style.put(mxConstants.STYLE_STROKECOLOR, mxConstants.NONE);
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
                style.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_SHADOW);
         return style;
@@ -711,14 +711,15 @@ public class AssociationUML extends Association {
     public Map getStyle() {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_DASHED,    "0");
-               style.put(mxConstants.STYLE_MOVABLE,   "0");
-               style.put(mxConstants.STYLE_EDITABLE,  "0");
-               style.put(mxConstants.STYLE_FONTCOLOR, "#000000");
                style.put(mxConstants.STYLE_STARTSIZE, "15");
                style.put(mxConstants.STYLE_ENDSIZE,   "15");
+               style.put(mxConstants.STYLE_EDITABLE,  "0");
+               style.put(mxConstants.STYLE_MOVABLE,   "0");
+               style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+               style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_ENDARROW,    this.getEndArrow());
                style.put(mxConstants.STYLE_STARTARROW,  this.getStartArrow());
-               style.put(mxConstants.STYLE_STROKECOLOR, this.getStrokeColor());
+               style.put(mxConstants.STYLE_STARTFILL,   this.getStartFill());
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_CONNECTOR);
         return style;
     }

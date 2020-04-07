@@ -9,7 +9,6 @@ import java.util.Map;
 import model.structural.base.Element;
 import model.structural.base.Stereotype;
 import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.classes.Encodable;
 import model.structural.diagram.classes.Entity;
 
 /**
@@ -462,23 +461,13 @@ public class PackageUML extends Element {
         return "stylePackageUML" + this.id;
     }
     
-    /**
-     * Method responsible for returning the Fill Color Code.
-     * @return Fill Color Code.
-     */
-    private String getFillColor() {
-        if (this.parent == null)
-            return "#EEEEEE";
-        return "#9999FF";
-    }
-    
     @Override
     public Map getStyle() {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_EDITABLE, "0");
                style.put(mxConstants.STYLE_FOLDABLE, "0");
-               style.put(mxConstants.STYLE_FILLCOLOR,   this.getFillColor());
-               style.put(mxConstants.STYLE_STROKECOLOR, this.getFillColor());
+               style.put(mxConstants.STYLE_FILLCOLOR,   mxConstants.NONE);
+               style.put(mxConstants.STYLE_STROKECOLOR, mxConstants.NONE);
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
                style.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_CENTER);
         return style;
@@ -492,11 +481,11 @@ public class PackageUML extends Element {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_MOVABLE,   "0");
                style.put(mxConstants.STYLE_FOLDABLE,  "0");
-               style.put(mxConstants.STYLE_DASH_PATTERN,  "0");
                style.put(mxConstants.STYLE_EDITABLE,  "0");
                style.put(mxConstants.STYLE_RESIZABLE, "0");
-               style.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
-               style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+               style.put(mxConstants.STYLE_DASH_PATTERN, "0");
+               style.put(mxConstants.STYLE_FILLCOLOR,    mxConstants.NONE);
+               style.put(mxConstants.STYLE_STROKECOLOR,  "#000000");
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
         return style;
     }
@@ -510,12 +499,12 @@ public class PackageUML extends Element {
                style.put(mxConstants.STYLE_MOVABLE,   "0");
                style.put(mxConstants.STYLE_EDITABLE,  "1");
                style.put(mxConstants.STYLE_FOLDABLE,  "0");
-               style.put(mxConstants.STYLE_DASH_PATTERN,  "0");
                style.put(mxConstants.STYLE_FONTSIZE,  "15");
                style.put(mxConstants.STYLE_RESIZABLE, "0");
-               style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-               style.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
-               style.put(mxConstants.STYLE_STROKECOLOR, "#9999FF");
+               style.put(mxConstants.STYLE_FONTCOLOR, "#000000");
+               style.put(mxConstants.STYLE_DASH_PATTERN, "0");
+               style.put(mxConstants.STYLE_FILLCOLOR,    mxConstants.NONE);
+               style.put(mxConstants.STYLE_STROKECOLOR,  mxConstants.NONE);
                style.put(mxConstants.STYLE_SHAPE,     mxConstants.SHAPE_RECTANGLE);
                style.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_BOLD);
         return style;

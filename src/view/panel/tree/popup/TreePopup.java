@@ -8,24 +8,24 @@ import java.awt.Font;
 import java.util.HashMap;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import view.panel.tree.PanelTree;
+import view.panel.tree.PanelTreeUML;
 
 /**
  * <p>Class of View <b>TreePopup</b>.</p>
  * <p>Class responsible for defining the <b>Tree Popup</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  27/05/2019
- * @see    view.panel.tree.PanelTree
+ * @see    view.panel.tree.PanelTreeUML
  */
 public final class TreePopup extends JPopupMenu {
-    protected PanelTree panelTree;
+    protected PanelTreeUML panelTree;
     private final HashMap<String, JMenuItem> items;
     
     /**
      * Default constructor method of Class.
      * @param panel Panel Tree.
      */
-    public TreePopup(PanelTree panel) {
+    public TreePopup(PanelTreeUML panel) {
         this.panelTree = panel;
         this.items     = new HashMap<>();
         this.initComponents();
@@ -63,7 +63,7 @@ public final class TreePopup extends JPopupMenu {
      * Method responsible for returning Panel Tree.
      * @return Panel Tree.
      */
-    public PanelTree getPanelTree() {
+    public PanelTreeUML getPanelTree() {
         return this.panelTree;
     }
     

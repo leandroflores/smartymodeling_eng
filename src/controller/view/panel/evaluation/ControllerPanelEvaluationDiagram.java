@@ -25,8 +25,12 @@ public class ControllerPanelEvaluationDiagram extends ControllerPanelEvaluation 
     @Override
     public void update() {
         try {
-            this.evaluate(this.getDiagram(), this.panelEvaluation.getOperationTextField().getText().trim());
+            if (this.check())
+                this.evaluate(this.getDiagram(), this.panelEvaluation.getOperationTextField().getText().trim());
         }catch (ScriptException exception) {
+            new ViewError(this.panelEvaluation.getViewEvaluation(), "Error to Apply Operation!").setVisible(true);
+            this.panelEvaluation.getOperationTextField().requestFocus();
+        }catch (Exception exception) {
             new ViewError(this.panelEvaluation.getViewEvaluation(), "Error to Apply Operation!").setVisible(true);
             this.panelEvaluation.getOperationTextField().requestFocus();
         }

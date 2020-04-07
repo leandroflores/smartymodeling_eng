@@ -223,7 +223,8 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      */
     public void exportProject() {
         try {
-            if (this.viewMenu.getFileChooserSaveProject().getSelectedFile() != null) {
+//            if (this.viewMenu.getFileChooserSaveProject().getSelectedFile() != null) {
+            if (!this.viewMenu.getProject().getPath().equalsIgnoreCase("New_Project.smty")) {
                 new ExportProject(this.viewMenu.getProject(), this.viewMenu.getProject().getPath()).export();
                 this.viewMenu.setSave(true);
             }

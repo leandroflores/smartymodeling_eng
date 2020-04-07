@@ -620,7 +620,9 @@ public abstract class Entity extends Element implements Encodable {
     public Map getStyle() {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
-               style.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
+//               style.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
+//               style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+               style.put(mxConstants.STYLE_FILLCOLOR,   mxConstants.NONE);
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_EDITABLE, "0");
                style.put(mxConstants.STYLE_FOLDABLE, "0");
@@ -635,8 +637,10 @@ public abstract class Entity extends Element implements Encodable {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-               style.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
-               style.put(mxConstants.STYLE_STROKECOLOR, "#9999FF");
+//               style.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
+//               style.put(mxConstants.STYLE_STROKECOLOR, "#9999FF");
+               style.put(mxConstants.STYLE_FILLCOLOR,   mxConstants.NONE);
+               style.put(mxConstants.STYLE_STROKECOLOR, mxConstants.NONE);
                style.put(mxConstants.STYLE_EDITABLE,  "0");
                style.put(mxConstants.STYLE_RESIZABLE, "0");
                style.put(mxConstants.STYLE_MOVABLE,   "0");
@@ -654,8 +658,10 @@ public abstract class Entity extends Element implements Encodable {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-               style.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
-               style.put(mxConstants.STYLE_STROKECOLOR, "#9999FF");
+//               style.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
+//               style.put(mxConstants.STYLE_STROKECOLOR, "#9999FF");
+               style.put(mxConstants.STYLE_FILLCOLOR,   mxConstants.NONE);
+               style.put(mxConstants.STYLE_STROKECOLOR, mxConstants.NONE);
                style.put(mxConstants.STYLE_EDITABLE,  "1");
                style.put(mxConstants.STYLE_RESIZABLE, "0");
                style.put(mxConstants.STYLE_MOVABLE,   "0");

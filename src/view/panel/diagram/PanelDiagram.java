@@ -212,10 +212,10 @@ public abstract class PanelDiagram extends Panel {
      * @return Association Title.
      */
     private String getTitle(Association association) {
-        if (association.getType().equalsIgnoreCase("requires"))
-            return this.diagram.getProject().getProfile().getRequires().getName();
-        if (association.getType().equalsIgnoreCase("mutex"))
-            return this.diagram.getProject().getProfile().getMutex().getName();
+//        if (association.getType().equalsIgnoreCase("requires"))
+//            return this.diagram.getProject().getProfile().getRequires().getName();
+//        if (association.getType().equalsIgnoreCase("mutex"))
+//            return this.diagram.getProject().getProfile().getMutex().getName();
         return association.getTitle();
     }
     
@@ -260,9 +260,10 @@ public abstract class PanelDiagram extends Panel {
      */
     public void setGeneralizationStyle() {
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "0");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDFILL,     "0");
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_BLOCK);
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#8B008B");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
     }
     
     /**

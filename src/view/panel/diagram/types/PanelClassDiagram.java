@@ -518,7 +518,8 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    direction ? mxConstants.ARROW_OPEN : mxConstants.ARROW_SPACING);
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTSIZE,   "15");
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_DIAMOND);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#A9A9A9");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTFILL,   "0");
     }
     
     /**
@@ -531,6 +532,7 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTSIZE,   "15");
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_DIAMOND);
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTFILL,   "1");
     }
     
     /**
@@ -542,6 +544,7 @@ public final class PanelClassDiagram extends PanelDiagram {
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_BLOCK);
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTFILL,   "0");
     }
     
     @Override

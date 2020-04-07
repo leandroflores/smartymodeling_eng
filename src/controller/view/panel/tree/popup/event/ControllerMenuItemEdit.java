@@ -74,7 +74,7 @@ public class ControllerMenuItemEdit implements ActionListener {
     private void editVariability(Object object, DefaultMutableTreeNode node) {
         Diagram     diagram     = this.getDiagram((DefaultMutableTreeNode) node.getParent());
         Variability variability = (Variability) object;
-//        new ViewEditarVariabilidade(this.popup.getPainelProjeto().getViewMenu().getPainelModelagem(), diagram, variability).setVisible(true);
+        new ViewEditVariability(this.popup.getPanelTree().getViewMenu().getPanelModeling(), diagram, variability).setVisible(true);
     }
     
     /**

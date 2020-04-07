@@ -49,9 +49,9 @@ public class InterfaceUML extends Element {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
                style.put(mxConstants.STYLE_FONTSIZE, "15");
-               style.put(mxConstants.STYLE_FONTCOLOR, "#000000");
-               style.put(mxConstants.STYLE_FILLCOLOR, "#9999ff");
+               style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+               style.put(mxConstants.STYLE_FILLCOLOR,   mxConstants.NONE);
                style.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_BOTTOM);
         return style;
     }

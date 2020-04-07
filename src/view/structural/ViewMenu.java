@@ -1,12 +1,16 @@
 package view.structural;
 
 import controller.view.structural.ControllerViewMenu;
+import file.importation.ImportProject;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ComponentListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -15,9 +19,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneConstants;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.base.product.Instance;
+import org.xml.sax.SAXException;
 import view.interfaces.Operation;
 import view.View;
 import view.ViewStyle;
@@ -281,12 +288,11 @@ public final class ViewMenu extends View implements Operation {
         this.initPanelProject();
         this.initPanelModeling();
         
-        this.getScrollPanelProject().setMinimumSize(new Dimension(200, 100));
-        this.getScrollPanelProject().setPreferredSize(new Dimension(250, 100));
+        this.getScrollPanelProject().setMinimumSize(new Dimension(300, 150));
+        this.getScrollPanelProject().setPreferredSize(new Dimension(300, 150));
 //        this.getScrollPanelModeling().setMinimumSize(new Dimension(400, 100));
         
-        this.getScrollPanelModeling().setPreferredSize(new Dimension((int) (this.getWidth() * 0.7), this.getHeight() - 100));
-//        this.getScrollPanelModeling().setPreferredSize(new Dimension(500, 100));
+        this.getScrollPanelModeling().setPreferredSize(new Dimension((int) (this.getWidth() * 0.7) - 10, this.getHeight() - 100));
        
         this.mainSplitPane = this.createSplitPane(true);
         this.mainSplitPane.setLeftComponent(this.getScrollPanelProject());
@@ -877,4 +883,29 @@ public final class ViewMenu extends View implements Operation {
     public static void main(String[] args) {
         new ViewMenu().setVisible(true);
     }
+    
+    /**
+     * Alternative Main Method of SMartyModeling.
+     * @param args 
+     */
+//    public static void main(String[] args) {
+//        try {
+//        String   path     = args[0].trim();
+////        String   path     = "C:\\Users\\Leandro\\Documents\\AA.smty";
+//        Project  project_ = new ImportProject(path).getProject(); 
+////            System.out.println("Project: " + project_.getElementsList());
+//        ViewMenu view     = new ViewMenu();
+//                 view.setProject(project_);
+//                 view.update();
+//                 view.getPanelModeling().clear();
+////                 view.getFileChooserSaveProject().setSe
+////                 this.viewMenu.getFileChooserSaveProject().getSelectedFile()
+////                 this.viewMenu.getPanelModeling().clear();
+//                 view.setVisible(true);
+////                 view.getController().openProject();
+////        new ViewMenu().setVisible(true);
+//        } catch (IOException | ParserConfigurationException | SAXException | XPathExpressionException ex) {
+//            Logger.getLogger(ViewMenu.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 }

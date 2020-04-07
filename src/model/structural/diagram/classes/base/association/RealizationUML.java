@@ -71,6 +71,7 @@ public class RealizationUML extends Association {
                style.put(mxConstants.STYLE_DASHED,   "1");
                style.put(mxConstants.STYLE_ENDSIZE,  "10");
                style.put(mxConstants.STYLE_EDITABLE, "0");
+               style.put(mxConstants.STYLE_ENDFILL,  "0");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_ENDARROW,   mxConstants.ARROW_BLOCK);

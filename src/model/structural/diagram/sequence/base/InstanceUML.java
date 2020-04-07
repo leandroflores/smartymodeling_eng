@@ -127,11 +127,10 @@ public class InstanceUML extends Element {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_FONTSIZE, "15");
                style.put(mxConstants.STYLE_EDITABLE, "1");
-               style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-               style.put(mxConstants.STYLE_FILLCOLOR,   "#E6E6FA");
-               style.put(mxConstants.STYLE_STROKECOLOR, "#E6E6FA");
-               style.put(mxConstants.STYLE_EDITABLE, "1");
                style.put(mxConstants.STYLE_FOLDABLE, "0");
+               style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
+               style.put(mxConstants.STYLE_STROKECOLOR, mxConstants.NONE);
+               style.put(mxConstants.STYLE_FILLCOLOR,   mxConstants.NONE);
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
                style.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_CENTER);
         return style;

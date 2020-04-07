@@ -104,6 +104,8 @@ public abstract class Evaluation {
      */
     public String getExpression(String expression) {
         String toReturn = "";
+        System.out.println(expression);
+        System.out.println(this.checkToken(expression, "(", ")"));
         if (this.checkToken(expression, "(", ")")) {
             for (int i = 0; i < expression.length(); i++) {
                 if (this.checkCharacter(expression.charAt(i))) {

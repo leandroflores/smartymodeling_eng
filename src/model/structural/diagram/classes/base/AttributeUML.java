@@ -242,19 +242,21 @@ public class AttributeUML extends Element implements Encodable {
     
     @Override
     public Map getStyle() {
-        Map    estilo = new HashMap<>();
-               estilo.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
-               estilo.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_LEFT);
-               estilo.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-               estilo.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
-               estilo.put(mxConstants.STYLE_STROKECOLOR, "#9999FF");
-               estilo.put(mxConstants.STYLE_FONTSTYLE, this.static_ ? 1 : 4);
-               estilo.put(mxConstants.STYLE_EDITABLE,  "1");
-               estilo.put(mxConstants.STYLE_FONTSIZE,  "12");
-               estilo.put(mxConstants.STYLE_RESIZABLE, "0");
-               estilo.put(mxConstants.STYLE_MOVABLE,   "0");
-               estilo.put(mxConstants.STYLE_FOLDABLE,  "0");
-        return estilo;
+        Map    style = new HashMap<>();
+               style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
+               style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_LEFT);
+               style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
+//               style.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
+               style.put(mxConstants.STYLE_FILLCOLOR,   mxConstants.NONE);
+//               style.put(mxConstants.STYLE_STROKECOLOR, "#9999FF");
+               style.put(mxConstants.STYLE_STROKECOLOR,mxConstants.NONE);
+               style.put(mxConstants.STYLE_FONTSTYLE, this.static_ ? 1 : mxConstants.FONT_UNDERLINE);
+               style.put(mxConstants.STYLE_EDITABLE,  "1");
+               style.put(mxConstants.STYLE_FONTSIZE,  "12");
+               style.put(mxConstants.STYLE_RESIZABLE, "0");
+               style.put(mxConstants.STYLE_MOVABLE,   "0");
+               style.put(mxConstants.STYLE_FOLDABLE,  "0");
+        return style;
     }
     
     /**

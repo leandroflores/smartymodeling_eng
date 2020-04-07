@@ -483,8 +483,8 @@ public class MethodUML extends Element implements Encodable {
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
                style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_LEFT);
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-               style.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
-               style.put(mxConstants.STYLE_STROKECOLOR, "#9999FF");
+               style.put(mxConstants.STYLE_FILLCOLOR,   mxConstants.NONE);
+               style.put(mxConstants.STYLE_STROKECOLOR, mxConstants.NONE);
                style.put(mxConstants.STYLE_FONTSTYLE, this.getFontCode());
                style.put(mxConstants.STYLE_EDITABLE,  "1");
                style.put(mxConstants.STYLE_FONTSIZE,  "12");

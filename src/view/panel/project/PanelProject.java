@@ -98,8 +98,8 @@ public final class PanelProject extends Panel {
      */
     private void initComponents() {
         this.setLayout(new GridBagLayout());
-        this.setPreferredSize(new Dimension(240, 250));
-        this.setMinimumSize(new Dimension(240, 220));
+        this.setPreferredSize(new Dimension(275, 250));
+        this.setMinimumSize(new Dimension(275, 250));
     }
     
     @Override
@@ -129,8 +129,8 @@ public final class PanelProject extends Panel {
         this.panelTree = new PanelTree(this.viewMenu);
         this.createScrollPane("scrollPanelTree");
         this.getScrollPanelTree().setViewportView(this.panelTree);
-        this.getScrollPanelTree().setMinimumSize(new Dimension(200, 250));
-        this.getScrollPanelTree().setPreferredSize(new Dimension(200, 300));
+        this.getScrollPanelTree().setMinimumSize(new Dimension(250, 275));
+        this.getScrollPanelTree().setPreferredSize(new Dimension(250, 275));
     }
     
     /**
