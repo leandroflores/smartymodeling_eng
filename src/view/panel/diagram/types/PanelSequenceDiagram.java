@@ -270,7 +270,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
                style.put(mxConstants.STYLE_FONTSIZE,  "15");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
-               style.put(mxConstants.STYLE_FILLCOLOR,   "#9999FF");
+               style.put(mxConstants.STYLE_FILLCOLOR, mxConstants.NONE);
                style.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_BOLD);
         return style;
     }
@@ -281,7 +281,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      */
     public Map getNameStyle() {
         Map    style = new HashMap<>(this.getHeaderStyle());
-               style.put(mxConstants.STYLE_STROKECOLOR, "#9999FF");
+               style.put(mxConstants.STYLE_STROKECOLOR, mxConstants.NONE);
         return style;
     }
     

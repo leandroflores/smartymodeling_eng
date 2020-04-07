@@ -34,6 +34,15 @@ public class UseCaseUML extends Element {
         this.type = "useCase";
     }
 
+    
+    @Override
+    public void setDefaultName() {
+        if ((this.id != null) && (this.id.contains("#")))
+            this.setName("Use Case " + this.id.substring(this.id.indexOf("#") + 1));
+        else
+            this.setName("Use Case");
+    }
+    
     @Override
     public String getIcon() {
         return super.getFolder() + "usecase/use-case.png";

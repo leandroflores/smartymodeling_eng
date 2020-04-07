@@ -22,7 +22,7 @@ public class InterfaceUML extends Element {
         this.name      = "Interface";
         this.type      = "interface";
         this.mandatory = true;
-        this.size      = new Point(40, 40);
+        this.size      = new Point(30, 30);
     }
     
     /**

@@ -111,6 +111,7 @@ public abstract class PanelInstance extends Panel {
         this.graph.setAllowLoops(false);
         this.graph.setSplitEnabled(false);
         this.graph.setConnectableEdges(false);
+        this.graph.setConnectableEdges(false);
         
         this.component = new mxGraphComponent(this.graph);
         

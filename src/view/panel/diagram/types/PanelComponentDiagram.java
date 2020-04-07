@@ -119,7 +119,7 @@ public final class PanelComponentDiagram extends PanelDiagram {
     private void addInterfacesUML() {
         for (InterfaceUML interfaceUML : this.diagram.getInterfacesList()) {
             this.graph.getStylesheet().putCellStyle(interfaceUML.getStyleLabel(), interfaceUML.getStyle());
-            String title  = this.diagram.getStereotypes(interfaceUML, "\n") + interfaceUML.getName();
+            String title  = interfaceUML.getName();
             mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, interfaceUML.getId(), title, interfaceUML.getPosition().x, interfaceUML.getPosition().y, interfaceUML.getSize().x, interfaceUML.getSize().y, interfaceUML.getStyleLabel());
                    vertex.setConnectable(true);
             this.identifiers.put(vertex, interfaceUML.getId());

@@ -3,7 +3,6 @@ package model.structural.base;
 import model.structural.base.association.Association;
 import model.structural.base.association.Generalization;
 import funct.FunctString;
-import funct.evaluation.base.EvaluationDiagram;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -793,7 +792,8 @@ public abstract class Diagram implements Exportable {
         boolean varPoint  = this.updateVariationPointStereotype(element);
         boolean inclusive = this.updateInclusiveStereotype(element);
         boolean exclusive = this.updateExclusiveStereotype(element);
-        if (!varPoint && !inclusive && !exclusive)
+//        if (!varPoint && !inclusive && !exclusive)
+        if (!inclusive && !exclusive)
             this.updateDefaultStereotype(element);
     }
     
