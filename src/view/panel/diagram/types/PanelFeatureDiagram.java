@@ -1,6 +1,5 @@
 package view.panel.diagram.types;
 
-import com.mxgraph.model.mxCell;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationFeature;
@@ -9,8 +8,8 @@ import controller.view.panel.diagram.event.ControllerEventEdit;
 import controller.view.panel.diagram.event.ControllerEventMove;
 import controller.view.panel.diagram.event.ControllerEventFocus;
 import controller.view.panel.diagram.event.ControllerEventPoints;
-import controller.view.panel.diagram.event.ControllerEventResize;
 import controller.view.panel.diagram.event.ControllerEventSelect;
+import controller.view.panel.diagram.event.feature.ControllerEventResize;
 import controller.view.panel.diagram.types.ControllerPanelFeatureDiagram;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
@@ -53,6 +52,7 @@ public final class PanelFeatureDiagram extends PanelDiagram {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.addOperationsPanel();
         this.addModelingPanel();
+        this.graph.setAllowLoops(false);
         this.addControllers();
     }
     
@@ -74,10 +74,10 @@ public final class PanelFeatureDiagram extends PanelDiagram {
     @Override
     public Object[] getAssociationItems() {
         Object[] items  = {
-                 this.getAssociationImage("component/mandatory"),
-                 this.getAssociationImage("component/optional"),
-                 this.getAssociationImage("component/inclusive"),
-                 this.getAssociationImage("component/exclusive")};
+                 this.getAssociationImage("feature/mandatory"),
+                 this.getAssociationImage("feature/optional"),
+                 this.getAssociationImage("feature/inclusive"),
+                 this.getAssociationImage("feature/exclusive")};
         return   items;
     }
     
@@ -88,69 +88,55 @@ public final class PanelFeatureDiagram extends PanelDiagram {
     }
     
     @Override
+    protected String getTitle(Element element) {
+        return element.getName();
+    }
+    
+    @Override
     public void setStyle() {
         switch (this.getType()) {
             case 0:
-                this.setRealizationStyle();
+                this.setConnectionStyle(true, true);
                 break;
             case 1:
+                this.setConnectionStyle(true, false);
+                break;
             case 2:
-            case 4:
-            case 5:
-                this.setExtendStyle();
+                this.setConnectionStyle(false, false);
                 break;
             case 3:
-                this.setGeneralizationStyle();
+                this.setConnectionStyle(false, true);
                 break;
             default:
-                this.setDependencyStyle();
                 break;
         }
     }
-
-    @Override
-    public void addElements() {
-        for (int i = 0; i < this.diagram.getElementsList().size(); i++) {
-            Element element = this.diagram.getElementsList().get(i);
-            this.graph.getStylesheet().putCellStyle(element.getStyleLabel(), element.getStyle());
-            String  title   = element.getName();
-            mxCell  cell    = (mxCell) this.graph.insertVertex(this.parent, null, title, element.getPosition().x, element.getPosition().y, element.getSize().x, element.getSize().y, element.getStyleLabel());
-            this.identifiers.put(cell, element.getId());
-            this.objects.put(element.getId(), cell);
-        }
+    
+    /**
+     * Method responsible for setting the Connection Style.
+     * @param oval Oval Flag.
+     * @param fill Fill Flag.
+     */
+    private void setConnectionStyle(boolean oval, boolean fill) {
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "0");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_FONTCOLOR,   "#000000");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW, oval ? mxConstants.ARROW_OVAL : mxConstants.ARROW_BLOCK);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDFILL,  fill ? "1" : "0");
     }
     
     @Override
      public void addControllers() {
         this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationFeature(this));
         this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
-        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
+        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));;
         this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
         this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
         this.component.getGraph().getSelectionModel().addListener(mxEvent.CHANGE, new ControllerEventSelect(this));
         this.component.getGraphControl().addMouseListener(new ControllerEventFocus(this));
         this.component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
      }
-    
-    /**
-     * Method responsible for setting Realization Style.
-     */
-    private void setRealizationStyle() {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "0");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
-    }
-    
-    /**
-     * Method responsible for setting Extend Style.
-     */
-    private void setExtendStyle() {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "1");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_OPEN);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
-    }
     
     @Override
     public FeatureDiagram getDiagram() {

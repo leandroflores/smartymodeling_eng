@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.util.HashMap;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import view.panel.tree.PanelTree;
 import view.panel.tree.PanelTreeUML;
 
 /**
@@ -18,14 +19,14 @@ import view.panel.tree.PanelTreeUML;
  * @see    view.panel.tree.PanelTreeUML
  */
 public final class TreePopup extends JPopupMenu {
-    protected PanelTreeUML panelTree;
+    protected PanelTree panelTree;
     private final HashMap<String, JMenuItem> items;
     
     /**
      * Default constructor method of Class.
      * @param panel Panel Tree.
      */
-    public TreePopup(PanelTreeUML panel) {
+    public TreePopup(PanelTree panel) {
         this.panelTree = panel;
         this.items     = new HashMap<>();
         this.initComponents();
@@ -63,7 +64,7 @@ public final class TreePopup extends JPopupMenu {
      * Method responsible for returning Panel Tree.
      * @return Panel Tree.
      */
-    public PanelTreeUML getPanelTree() {
+    public PanelTree getPanelTree() {
         return this.panelTree;
     }
     

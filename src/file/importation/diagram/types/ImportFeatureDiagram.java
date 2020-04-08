@@ -56,11 +56,11 @@ public class ImportFeatureDiagram extends ImportDiagram {
         NodeList connections = this.element.getElementsByTagName("connection");
         for (int i = 0; i < connections.getLength(); i++) {
             Element    current    = (Element) connections.item(i);
-            Feature    source     = (Feature)   this.diagram.getElement(current.getAttribute("source"));
+            Feature    source     = (Feature) this.diagram.getElement(current.getAttribute("source"));
             Feature    target     = (Feature) this.diagram.getElement(current.getAttribute("target"));
-            Connection connection = new Connection(source, target);
-                       connection.setId(current.getAttribute("id"));
-                       connection.setCategory(current.getAttribute("category"));
+            Connection connection = new Connection(current);
+                       connection.setSource(source);
+                       connection.setTarget(target);
                        super.addPoints(current, connection);
             this.featureDiagram.addConnection(connection);
         }

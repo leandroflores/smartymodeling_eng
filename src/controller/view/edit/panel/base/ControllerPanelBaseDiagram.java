@@ -55,6 +55,7 @@ public class ControllerPanelBaseDiagram extends ControllerPanel {
      */
     private void update() {
         this.panelBaseDiagram.getDiagram().setName(this.panelBaseDiagram.getNameTextField().getText().trim());
+        this.panelBaseDiagram.getViewMenu().getPanelProject().getPanelTree().getPanelTreeFeature().updateNode(this.panelBaseDiagram.getDiagram());
         this.panelBaseDiagram.getViewMenu().getPanelProject().getPanelTree().getPanelTreeUML().updateNode(this.panelBaseDiagram.getDiagram());
         this.panelBaseDiagram.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseDiagram.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseDiagram.getDiagram());

@@ -37,6 +37,7 @@ public class AssociationUML extends Association {
      * @param target Target Entity.
      */
     public AssociationUML(Entity source, Entity target) {
+        super();
         this.source    = source;
         this.target    = target;
         this.type      = "association";
@@ -51,6 +52,7 @@ public class AssociationUML extends Association {
      * @param element W3C Element.
      */
     public AssociationUML(Element element) {
+        super(element);
         this.type      = "association";
         this.name      = element.getAttribute("name");
         this.category  = element.getAttribute("category");
@@ -65,6 +67,7 @@ public class AssociationUML extends Association {
      * @param direction Association Direction Flag.
      */
     public AssociationUML(Entity source, Entity target, String category, boolean direction) {
+        super();
         this.source    = source;
         this.target    = target;
         this.type      = "association";

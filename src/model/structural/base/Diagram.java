@@ -315,13 +315,13 @@ public abstract class Diagram implements Exportable {
     
     /**
      * Method responsible for returning a Associations List By Class.
-     * @param  classs Association Class.
+     * @param  class_ Association Class.
      * @return Associations List.
      */
-    private List filterAssociations(Class classs) {
+    private List filterAssociations(Class class_) {
         List    list = new ArrayList();
         for (Association association : this.getAssociationsList()) {
-            if (association.getClass().equals(classs))
+            if (association.getClass().equals(class_))
                 list.add(association);
         }
         return  list;
@@ -330,14 +330,14 @@ public abstract class Diagram implements Exportable {
     /**
      * Method responsible for returning a Associations List By Element and Class.
      * @param  element Element.
-     * @param  classs Association Class.
+     * @param  class_ Association Class.
      * @return Associations List.
      */
-    public List filterAssociations(Element element, Class classs) {
+    public List filterAssociations(Element element, Class class_) {
         List<Association> list   = this.getAssociationsList();
         List<Association> filter = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getClass().equals(classs)
+            if (list.get(i).getClass().equals(class_)
             &&  list.get(i).contains(element))
                 filter.add(list.get(i));
         }
@@ -383,6 +383,18 @@ public abstract class Diagram implements Exportable {
                 filter.add(association);
         }
         return  filter;
+    }
+    
+    /**
+     * Method responsible for creating a New Associations Map.
+     * @param  array Associations Array.
+     * @return New Associations Map.
+     */
+    protected Map<String, Association> createMap(Object[] array) {
+        HashMap map = new HashMap<>();
+        for (Object object : array)
+                map.put(((Association) object).getId(), (Association) object);
+        return  map;
     }
     
     /**

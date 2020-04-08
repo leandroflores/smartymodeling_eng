@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import model.structural.base.association.Association;
 import model.structural.diagram.feature.base.Feature;
+import org.w3c.dom.Element;
 
 /**
  * <p>Class of Model <b>Connection</b>.</p>
@@ -19,15 +20,28 @@ public class Connection extends Association {
     
     /**
      * Default constructor method of Class.
-     * @param source Feature.
-     * @param target Feature.
+     * @param source Connection Source.
+     * @param target Connection Target.
+     * @param category Connection Category.
      */
-    public Connection(Feature source, Feature target) {
-        this.source = source;
-        this.target = target;
-        this.type   = "feature";
+    public Connection(Feature source, Feature target, String category) {
+        super();
+        this.source   = source;
+        this.target   = target;
+        this.category = category;
+        this.type     = "connection";
     }
 
+    /**
+     * Alternative constructor method of Class.
+     * @param element W3C Element.
+     */
+    public Connection(Element element) {
+        super(element);
+        this.type     = "connection";
+        this.category = element.getAttribute("category");
+    }
+    
     @Override
     public Feature getSource() {
         return (Feature) this.source;
@@ -72,12 +86,33 @@ public class Connection extends Association {
 
     @Override
     public String getTitle() {
-        return this.getCategory();
+        return "";
     }
     
     @Override
     public String getStyleLabel() {
-        return "styleFeature";
+        return "styleConnection" + this.id;
+    }
+    
+    /**
+     * Method responsible for returning the Connection End Arrow.
+     * @return Connection End Arrow.
+     */
+    private Object getEndArrow() {
+        return (this.category.equalsIgnoreCase("mandatory") 
+             || this.category.equalsIgnoreCase("optional")) ?
+                mxConstants.ARROW_OVAL :
+                mxConstants.ARROW_BLOCK;
+    }
+    
+    /**
+     * Method responsible for returning the Connection End Fill.
+     * @return Connection End Fill.
+     */
+    private Object getEndFill() {
+        return (this.category.equalsIgnoreCase("mandatory") 
+             || this.category.equalsIgnoreCase("exclusive")) ?
+                "1" : "0";
     }
     
     @Override
@@ -89,9 +124,21 @@ public class Connection extends Association {
                style.put(mxConstants.STYLE_FONTSIZE, "15");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
-               style.put(mxConstants.STYLE_ENDARROW,   mxConstants.ARROW_OPEN);
                style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);
+               style.put(mxConstants.STYLE_ENDARROW,   this.getEndArrow());
+               style.put(mxConstants.STYLE_ENDFILL,    this.getEndFill());
                style.put(mxConstants.STYLE_SHAPE,      mxConstants.SHAPE_CONNECTOR);
         return style;
+    }
+    
+    @Override
+    protected String exportHeader() {
+        String header  = "    <"        + this.type;
+               header += " id=\""       + this.id              + "\"";
+               header += " source=\""   + this.source.getId()  + "\"";
+               header += " target=\""   + this.target.getId()  + "\"";
+               header += " category=\"" + this.category.trim() + "\"";
+               header += ">\n";
+        return header;
     }
 }

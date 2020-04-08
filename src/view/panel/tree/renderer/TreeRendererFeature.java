@@ -14,20 +14,20 @@ import model.structural.base.Project;
 import model.structural.base.variability.Variability;
 
 /**
- * <p>Class of View <b>TreeRendererFeatures</b>.</p>
+ * <p>Class of View <b>TreeRendererFeature</b>.</p>
  * <p>Class responsible for defining the <b>Features Tree Renderer</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  06/04/2020
  * @see    javax.swing.tree.DefaultTreeCellRenderer
  */
-public class TreeRendererFeatures extends DefaultTreeCellRenderer {
+public class TreeRendererFeature extends DefaultTreeCellRenderer {
     protected JTree tree;
     
     /**
      * Default constructor method of Class.
      * @param tree Tree.
      */
-    public TreeRendererFeatures(JTree tree) {
+    public TreeRendererFeature(JTree tree) {
         this.tree = tree;
     }
     
@@ -96,18 +96,7 @@ public class TreeRendererFeatures extends DefaultTreeCellRenderer {
         return element.getIcon();
     }
     
-    /**
-     * Method responsible for setting the Variability.
-     * @param variability Variability.
-     */
-    public void setVariabilityIcon(Variability variability) {
-        this.setText("<html><b>" + variability.getName() + "</b></html>");
-        this.setToolTipText(variability.getName());
-        this.setIcon(this.getImage(variability.getIcon()));
-        this.setForeground(new Color(13, 57 ,115));
-    }
-    
-    @Override
+   @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
         super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
         DefaultMutableTreeNode node   = (DefaultMutableTreeNode) value;
@@ -119,8 +108,6 @@ public class TreeRendererFeatures extends DefaultTreeCellRenderer {
             this.setDiagramIcon((Diagram) object);
         else if (object instanceof Element)
             this.setElementIcon((Element) object, parent);
-        else if (object instanceof Variability)
-            this.setVariabilityIcon((Variability) object);
         return this;
     }
     

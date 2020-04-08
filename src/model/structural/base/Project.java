@@ -249,20 +249,49 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Feature Diagrams List.
+     * @return Feature Diagrams List.
+     */
+    public List<Diagram> getFeatureDiagramsList() {
+        List   list = this.getDiagrams("Feature");
+               list.sort(this.getDiagramComparator());
+        return list;
+    }
+    
+    /**
+     * Method responsible for returning the UML Diagrams List.
+     * @return UML Diagrams List.
+     */
+    public List<Diagram> getUMLDiagramsList() {
+        ArrayList list = new ArrayList<>(this.diagrams.values());
+                  list.sort(this.getDiagramComparator());
+                  list.removeAll(this.getFeatureDiagramsList());
+        return    list;
+    }
+    
+    /**
      * Method responsible for returning the Diagrams List.
      * @return Diagrams List.
      */
     public List<Diagram> getDiagramsList() {
         ArrayList list = new ArrayList<>(this.diagrams.values());
-                  list.sort(new Comparator<Diagram>() {
-                      @Override
-                      public int compare(Diagram diagramA, Diagram diagramB) {
-                          if (diagramA.getType().equals(diagramB.getType()))
-                              return diagramA.getName().compareTo(diagramB.getName());
-                          return diagramA.getType().compareTo(diagramB.getType());
-                      }
-                  });
+                  list.sort(this.getDiagramComparator());
         return    list;
+    }
+    
+    /**
+     * Method responsible for returning the Diagram Comparator.
+     * @return Diagram Comparator.
+     */
+    private Comparator<Diagram> getDiagramComparator() {
+        return 
+            new Comparator<Diagram>() {
+                @Override
+                public int compare(Diagram diagramA, Diagram diagramB) {
+                    if (diagramA.getType().equals(diagramB.getType()))
+                        return diagramA.getName().compareTo(diagramB.getName());
+                    return diagramA.getType().compareTo(diagramB.getType());
+            }};
     }
     
     /**
@@ -316,12 +345,23 @@ public class Project implements Exportable {
     }
     
     /**
-     * Method responsible for exporting the Diagrams.
-     * @return Diagrams.
+     * Method responsible for exporting the Feature Diagrams.
+     * @return Feature Diagrams.
      */
-    private String exportDiagrams() {
+    private String exportFeatureDiagrams() {
         String export  = "";
-        for (Diagram diagram : this.getDiagramsList())
+        for (Diagram diagram : this.getFeatureDiagramsList())
+               export += diagram.export();
+        return export;
+    }
+    
+    /**
+     * Method responsible for exporting the UML Diagrams.
+     * @return UML Diagrams.
+     */
+    private String exportUMLDiagrams() {
+        String export  = "";
+        for (Diagram diagram : this.getUMLDiagramsList())
                export += diagram.export();
         return export;
     }
@@ -1370,7 +1410,8 @@ public class Project implements Exportable {
                export += this.exportTypes();
                export += this.exportStereotypes();
                export += this.profile.export();
-               export += this.exportDiagrams();
+               export += this.exportFeatureDiagrams();
+               export += this.exportUMLDiagrams();
                export += this.exportTraceabilities();
                export += this.exportLinks();
                export += this.exportProducts();

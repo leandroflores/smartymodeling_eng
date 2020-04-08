@@ -6,6 +6,7 @@ import model.structural.base.Element;
 import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.feature.base.Feature;
 import model.structural.diagram.feature.base.association.Connection;
+import view.message.ViewError;
 import view.panel.diagram.types.PanelFeatureDiagram;
 
 /**
@@ -35,14 +36,33 @@ public class ControllerEventAssociationFeature extends ControllerEventAssociatio
     public void addAssociation(mxCell association) {
         Element source = this.getSource(association);
         Element target = this.getTarget(association);
-        if (this.check(source, target) && this.distinct(source, target))
+        if (this.check(source, target) 
+         && this.distinct(source, target) 
+         && this.isVoid(source, target))
             this.createAssociation(association);
+    }
+    
+    /**
+     * 
+     * @param source
+     * @param target
+     * @return 
+     */
+    private boolean isVoid(Element source, Element target) {
+        if (this.panelDiagram.getDiagram().existsConnection(source, target)) {
+            new ViewError(this.panelDiagram.getViewMenu(), "Connection already exists!").setVisible(true);
+            return false;
+        }
+        return true;
     }
     
     @Override
     public void createAssociation(mxCell association) {
         switch (this.panelDiagram.getType()) {
             case 0:
+            case 1:
+            case 2:
+            case 3:
                 this.addConnection(association);
                 break;
             default:
@@ -54,7 +74,7 @@ public class ControllerEventAssociationFeature extends ControllerEventAssociatio
      * @param association Association.
      */
     private void addConnection(mxCell association) {
-        Connection connection = this.createRelationshipUML(association);
+        Connection connection = this.createConnection(association);
         if (connection != null)
             this.diagram.addConnection(connection);
     }
@@ -64,9 +84,29 @@ public class ControllerEventAssociationFeature extends ControllerEventAssociatio
      * @param  association Association.
      * @return Connection.
      */
-    private Connection createRelationshipUML(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
-        return new Connection((Feature) source, (Feature) target);
+    private Connection createConnection(mxCell association) {
+        Element source   = this.getSource(association);
+        Element target   = this.getTarget(association);
+        String  category = this.getCategory();
+        return new Connection((Feature) source, (Feature) target, category);
+    }
+    
+    /**
+     * Method responsible for returning the Connection Category.
+     * @return Connection Category.
+     */
+    private String getCategory() {
+        switch (this.panelDiagram.getType()) {
+            case 0:
+                return "mandatory";
+            case 1:
+                return "optional";
+            case 2:
+                return "inclusive";
+            case 3:
+                return "exclusive";
+            default:
+                return "mandatory";
+        }
     }
 }

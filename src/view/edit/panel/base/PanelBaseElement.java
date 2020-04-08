@@ -54,7 +54,7 @@ public final class PanelBaseElement extends Panel {
         this.add(this.createLabel("Name*: ", 120));
         this.add(this.createTextField("nameTextField", "", 20));
         
-        this.add(this.createLabel("Mandatory: ", 120));
+        this.add(this.createLabel("mandatoryLabel", "Mandatory: ", 120));
         this.add(this.createCheckBox("mandatoryCheckBox", "", this.element.isMandatory()));
     }
     
@@ -64,6 +64,14 @@ public final class PanelBaseElement extends Panel {
     public void setValues() {
         this.getNameTextField().setText(this.element.getName());
         this.getMandatoryCheckBox().setSelected(this.element.isMandatory());
+    }
+    
+    /**
+     * Method responsible for Hide the Mandatory Fields.
+     */
+    public void hideMandatory() {
+        this.labels.get("mandatoryLabel").setVisible(false);
+        this.getMandatoryCheckBox().setVisible(false);
     }
     
     /**

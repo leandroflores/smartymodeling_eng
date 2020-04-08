@@ -1,7 +1,6 @@
 package file.importation.diagram.types;
 
 import file.importation.diagram.ImportDiagram;
-import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.Entity;
@@ -197,7 +196,6 @@ public class ImportClassDiagram extends ImportDiagram {
         for (int i = 0; i < associations.getLength(); i++) {
             Element        current        = (Element) associations.item(i);
             AssociationUML associationUML = new AssociationUML(current);
-                           associationUML.setId(current.getAttribute("id"));
                            this.setSource(current, associationUML);
                            this.setTarget(current, associationUML);
                            super.addPoints(current, associationUML);

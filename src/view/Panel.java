@@ -42,6 +42,7 @@ public abstract class Panel extends JPanel {
     protected Controller controller;
     
     protected HashMap<String, JList> lists;
+    protected HashMap<String, JLabel> labels;
     protected HashMap<String, JButton> buttons;
     protected HashMap<String, JComboBox> comboBoxes;
     protected HashMap<String, JCheckBox> checkBoxes;
@@ -68,6 +69,7 @@ public abstract class Panel extends JPanel {
      */
     private void init() {
         this.lists        = new HashMap<>();
+        this.labels       = new HashMap<>();
         this.buttons      = new HashMap<>();
         this.textFields   = new HashMap<>();
         this.textAreas    = new HashMap<>();
@@ -139,6 +141,19 @@ public abstract class Panel extends JPanel {
         JLabel label = new JLabel(title);
                label.addKeyListener(this.controller);
                label.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
+        return label;
+    }
+    
+    /**
+     * Method responsible for returning a new JLabel.
+     * @param  id JLabel Id.
+     * @param  title JLabel Title.
+     * @param  size JLabel Size.
+     * @return New JLabel.
+     */
+    protected JLabel createLabel(String id, String title, int size) {
+        JLabel label = this.createLabel(title, size);
+               this.labels.put(id, label);
         return label;
     }
     

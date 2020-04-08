@@ -37,11 +37,11 @@ public class ControllerPanelUseCaseDiagram extends ControllerPanelDiagram {
     }
     
     @Override
-    public void mousePressed(MouseEvent evento) {
+    public void mousePressed(MouseEvent event) {
         if (this.panelDiagram.getOperation().equals("Actor"))
-            this.addActor(evento);
+            this.addActor(event);
         else if (this.panelDiagram.getOperation().equals("UseCase"))
-            this.addUseCase(evento);
+            this.addUseCase(event);
     }
     
     /**

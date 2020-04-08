@@ -19,6 +19,7 @@ import model.structural.base.variability.Variability;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.ComponentDiagram;
+import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import model.structural.diagram.classes.base.AttributeUML;
@@ -104,7 +105,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     }
 
     @Override
-    public void keyReleased(KeyEvent evento) {
+    public void keyReleased(KeyEvent event) {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanelTree().getTree().getLastSelectedPathComponent();
         this.showPanelEdit(node);
     }
@@ -207,7 +208,9 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      * @param element Element.
      */
     private void showPanelEdit(Diagram diagram, Element element) {
-        if (diagram instanceof ActivityDiagram)
+        if (diagram instanceof FeatureDiagram)
+            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((FeatureDiagram) diagram, element);
+        else if (diagram instanceof ActivityDiagram)
             this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((ActivityDiagram) diagram, element);
         else if (diagram instanceof ClassDiagram)
             this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((ClassDiagram) diagram, element);

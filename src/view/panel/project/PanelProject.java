@@ -20,6 +20,7 @@ import model.structural.base.variability.Variability;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.ComponentDiagram;
+import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import model.structural.diagram.activity.base.ActivityUML;
@@ -32,6 +33,7 @@ import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.classes.base.association.AssociationUML;
 import model.structural.diagram.component.base.ComponentUML;
+import model.structural.diagram.feature.base.Feature;
 import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
 import model.structural.diagram.sequence.base.association.MessageUML;
@@ -54,6 +56,7 @@ import view.panel.edit.base.classes.PanelEditPackageUML;
 import view.panel.edit.base.classes.association.PanelEditAssociationUML;
 import view.panel.edit.base.component.PanelEditComponentUML;
 import view.panel.edit.base.evaluation.PanelEditMetric;
+import view.panel.edit.base.feature.PanelEditFeature;
 import view.panel.edit.base.product.PanelEditArtifact;
 import view.panel.edit.base.product.PanelEditInstance;
 import view.panel.edit.base.product.PanelEditProduct;
@@ -65,7 +68,7 @@ import view.panel.edit.base.traceability.PanelEditTraceability;
 import view.panel.edit.base.usecase.PanelEditActorUML;
 import view.panel.edit.base.usecase.PanelEditUseCaseUML;
 import view.panel.edit.base.variability.PanelEditVariability;
-import view.panel.tree.PanelTree;
+import view.panel.project.tree.PanelProjectTree;
 import view.structural.ViewMenu;
 
 /**
@@ -79,7 +82,7 @@ public final class PanelProject extends Panel {
     private final ViewMenu viewMenu;
     private final Project  project;
     private JSplitPane splitPane;
-    private PanelTree  panelTree;
+    private PanelProjectTree  panelTree;
     private PanelEdit  panelEdit;
     
     /**
@@ -126,7 +129,7 @@ public final class PanelProject extends Panel {
      * Method responsible for initializing the Panel Tree.
      */
     public void initPanelTree() {
-        this.panelTree = new PanelTree(this.viewMenu);
+        this.panelTree = new PanelProjectTree(this.viewMenu);
         this.createScrollPane("scrollPanelTree");
         this.getScrollPanelTree().setViewportView(this.panelTree);
         this.getScrollPanelTree().setMinimumSize(new Dimension(250, 275));
@@ -167,7 +170,9 @@ public final class PanelProject extends Panel {
      * @param element Element.
      */
     public void initPanelEditElement(Diagram diagram, Element element) {
-        if (diagram instanceof ActivityDiagram)
+        if (diagram instanceof FeatureDiagram)
+            this.initPanelEditElement((FeatureDiagram)   diagram, element);
+        else if (diagram instanceof ActivityDiagram)
             this.initPanelEditElement((ActivityDiagram)  diagram, element);
         else if (diagram instanceof ClassDiagram)
             this.initPanelEditElement((ClassDiagram)     diagram, element);
@@ -177,6 +182,17 @@ public final class PanelProject extends Panel {
             this.initPanelEditElement((SequenceDiagram)  diagram, element);
         else if (diagram instanceof UseCaseDiagram)
             this.initPanelEditElement((UseCaseDiagram)   diagram, element);
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Element.
+     * @param diagram Feature Diagram.
+     * @param element Element.
+     */
+    public void initPanelEditElement(FeatureDiagram diagram, Element element) {
+        if (element instanceof Feature)
+            this.panelEdit = new PanelEditFeature(this.viewMenu, diagram, (Feature) element);
+        this.updatePanelEdit();
     }
     
     /**
@@ -402,7 +418,7 @@ public final class PanelProject extends Panel {
      * Method responsible for returning the Panel Tree.
      * @return Panel Tree.
      */
-    public PanelTree getPanelTree() {
+    public PanelProjectTree getPanelTree() {
         return this.panelTree;
     }
     

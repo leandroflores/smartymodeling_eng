@@ -35,6 +35,36 @@ public class Feature extends Element {
     }
 
     @Override
+    public void setName(String name) {
+        super.setName(name);
+        this.setMinWidth();
+    }
+    
+    /**
+     * Method responsible for returning the Min Size.
+     * @return Min Size.
+     */
+    public Integer getMinWidth() {
+        return Math.max(30, this.name.length() * 10 + 50);
+    }
+    
+    /**
+     * Method responsible for returning the Min Height.
+     * @return Min Height.
+     */
+    public Integer getMinHeight() {
+        return 30;
+    }
+    
+    /**
+     * Method responsible for setting the Min Width.
+     */
+    public void setMinWidth() {
+        Integer width = this.getMinWidth();
+        this.setWidth(width > this.getWidth() ? width : this.getWidth());
+    }
+    
+    @Override
     public String getIcon() {
         return super.getFolder() + "feature/feature.png";
     }

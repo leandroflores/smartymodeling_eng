@@ -18,10 +18,11 @@ import model.structural.diagram.feature.base.association.Connection;
  * @see    model.structural.base.association.Association
  * @see    model.structural.base.Diagram
  * @see    model.structural.diagram.feature.base.Feature
+ * @see    model.structural.diagram.feature.base.association.Connection
  */
 public final class FeatureDiagram extends Diagram {
     private HashMap<String, Feature> features;
-    private HashMap<String, Association> connections;
+    private HashMap<String, Connection> connections;
     
     /**
      * Default constructor method of Class.
@@ -72,6 +73,15 @@ public final class FeatureDiagram extends Diagram {
     }
     
     /**
+     * Method responsible for returning if a Feature is Root.
+     * @param  feature Feature.
+     * @return Feature is Root.
+     */
+    public boolean isRoot(Feature feature) {
+        return this.getTargetAssociations("connection", feature).isEmpty();
+    }
+    
+    /**
      * Method responsible for returning Features List.
      * @return Features List.
      */
@@ -101,19 +111,40 @@ public final class FeatureDiagram extends Diagram {
     }
     
     /**
+     * Method responsible for returning if Exists a Connection between Source and Target.
+     * @param  source Connection Source.
+     * @param  target Connection Target.
+     * @return Connection Exists.
+     */
+    public boolean existsConnection(Element source, Element target) {
+        for (Connection connection : this.getConnectionsList()) {
+            if (connection.isSource(source) && connection.isTarget(target))
+                return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Method responsible for returning the Connections List.
+     * @return Connections List.
+     */
+    public List<Connection> getConnectionsList() {
+        return new ArrayList(this.connections.values());
+    }
+    
+    /**
      * Method responsible for removing Connections by Element.
      * @param element Element.
      */
     private void removeAssociations(Element element) {
-        this.removeAssociation(element, this.connections);
+        this.removeAssociation(element, this.createMap(this.connections.values().toArray()));
     }
     
     @Override
     public void removeAssociation(Association association) {
         if (association instanceof Connection)
             this.removeConnection((Connection) association);
-        else
-            super.removeAssociation(association);
+        super.removeAssociation(association);
     }
     
     @Override

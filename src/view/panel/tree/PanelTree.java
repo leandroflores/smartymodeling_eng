@@ -1,133 +1,178 @@
 package view.panel.tree;
 
-import java.awt.Dimension;
+import controller.view.panel.tree.popup.ControllerTreePopup;
 import java.awt.FlowLayout;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
+import java.util.HashMap;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeSelectionModel;
+import model.structural.base.Diagram;
+import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.diagram.classes.base.AttributeUML;
+import model.structural.diagram.classes.base.MethodUML;
 import view.Panel;
+import view.panel.tree.popup.TreePopup;
+import view.panel.tree.renderer.TreeRendererUML;
 import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelTree</b>.</p>
- * <p>Class responsible for defining the <b>Project Tree Panel</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  27/05/2019
  * @see    model.structural.base.Project
  * @see    view.Panel
  */
-public final class PanelTree extends Panel {
-    private final ViewMenu viewMenu;
-    private final Project  project;
-    private JTabbedPane tabbedPane;
-    
-    private PanelTreeUML panelTree1;
-    private PanelTreeUML panelTree2;
-    private PanelTreeUML panelTree3;
+public abstract class PanelTree extends Panel {
+    protected final ViewMenu viewMenu;
+    protected final Project  project;
+    protected final HashMap  nodes;
+    protected TreePopup treePopup;
+    protected JTree tree;
     
     /**
      * Default constructor method of Class.
      * @param viewMenu View Menu.
      */
     public PanelTree(ViewMenu viewMenu) {
-        this.viewMenu   = viewMenu;
-        this.project    = this.viewMenu.getProject();
-        this.addComponents();
+        this.viewMenu = viewMenu;
+        this.project  = this.viewMenu.getProject();
+        this.nodes    = new HashMap();
     }
     
     @Override
     public void addComponents() {
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
-        this.initTabbedPane();
-//            this.addPanelTreeRequirements();
-//            this.addPanelTreeFeatures();
-            this.addPanelTreeUML();
-        this.add(this.tabbedPane);
+        this.addControllers(this.getProjectNode());
+//        this.expandTree();
+        this.add(this.tree);
     }
     
     /**
-     * Method responsible for initializing the Tabbed Pane.
+     * Method responsible for adding the Tree Controllers.
+     * @param node Project Node.
      */
-    protected void initTabbedPane() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(275, 260));
+    protected void addControllers(DefaultMutableTreeNode node) {
+        this.tree      = new JTree(node);
+        this.treePopup = new TreePopup(this);
+        this.tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        this.tree.addMouseListener(new ControllerTreePopup(this.treePopup));
+        this.tree.addKeyListener(new ControllerTreePopup(this.treePopup));
+        this.tree.setCellRenderer(new TreeRendererUML(this.tree));
     }
     
     /**
-     * Method responsible for adding the Panel Requirements.
+     * Method responsible for expanding Tree.
      */
-    protected void addPanelTreeRequirements() {
-        this.panelTree1  = new PanelTreeUML(this.viewMenu);
-        this.createScrollPane("scrollPanelTreeReq",  this.panelTree1);
-        this.getScrollPanelTreeReq().setViewportView(this.panelTree1);
-        this.tabbedPane.add("Req", this.getScrollPanelTreeReq());
+    private void expandTree() {
+        for (int i = 0; i < this.tree.getRowCount(); i++)
+            this.tree.expandRow(i);
     }
     
     /**
-     * Method responsible for adding the Panel Features.
+     * Method responsible for returning the Project Node.
+     * @return Project Node.
      */
-    protected void addPanelTreeFeatures() {
-        this.panelTree2  = new PanelTreeUML(this.viewMenu);
-        this.createScrollPane("scrollPanelTreeFeat",  this.panelTree2);
-        this.getScrollPanelTreeFeat().setViewportView(this.panelTree2);
-        this.tabbedPane.add("Feat", this.getScrollPanelTreeFeat());
+    protected abstract DefaultMutableTreeNode getProjectNode();
+    
+    /**
+     * Method responsible for updating the Project Node.
+     */
+    public void updateProjectNode() {
+        this.getTreeModel().reload(this.getNodeTree(this.project));
     }
     
     /**
-     * Method responsible for adding the Panel Tree UML.
+     * Method responsible for updating the Diagram Node.
+     * @param diagram Diagram. 
      */
-    protected void addPanelTreeUML() {
-        this.panelTree3  = new PanelTreeUML(this.viewMenu);
-        this.createScrollPane("scrollPanelTreeUML",  this.panelTree3);
-        this.getScrollPanelTreeUML().setViewportView(this.panelTree3);
-        this.tabbedPane.add("UML", this.getScrollPanelTreeUML());
+    public void updateNode(Diagram diagram) {
+        this.getTreeModel().reload(this.getNodeTree(diagram));
     }
     
     /**
-     * Method responsible for returning the Scroll Panel Tree Requirements.
-     * @return Scroll Panel Tree Requirements.
+     * Method responsible for adding the Element Node in your Parent Node.
+     * @param element Element.
+     * @param node Element Node.
+     * @param parent Parent Node.
      */
-    public JScrollPane getScrollPanelTreeReq() {
-        return this.scrollPanes.get("scrollPanelTreeReq");
+    protected void addElement(Element element, DefaultMutableTreeNode node, DefaultMutableTreeNode parent) {
+        if (node != null) {
+            parent.add(node);
+            this.nodes.put(element, node);
+        }
     }
     
     /**
-     * Method responsible for returning the Panel Tree Requirements.
-     * @return Panel Tree Requirements.
+     * Method responsible for checking the Element is not Method or Attribute.
+     * @param  element Element.
+     * @return Element is not a Method or Attribute.
      */
-    public PanelTreeUML getPanelTreeRequirements() {
-        return this.panelTree1;
+    private boolean checkElement(Element element) {
+        return  (element instanceof AttributeUML == false)
+             && (element instanceof MethodUML    == false);
     }
     
     /**
-     * Method responsible for returning the Scroll Panel Tree Features.
-     * @return Scroll Panel Tree Features.
+     * Method responsible for returning the Element Node.
+     * @param  element Element.
+     * @return Element Node.
      */
-    public JScrollPane getScrollPanelTreeFeat() {
-        return this.scrollPanes.get("scrollPanelTreeFeat");
+    protected DefaultMutableTreeNode getNode(Element element) {
+       return new DefaultMutableTreeNode(element);
     }
     
     /**
-     * Method responsible for returning the Panel Tree Features.
-     * @return Panel Tree Features.
+     * Method responsible for updating the Element Node.
+     * @param element Element. 
      */
-    public PanelTreeUML getPanelTreeFeatures() {
-        return this.panelTree2;
+    public abstract void updateNode(Element element);
+    
+    /**
+     * Method responsible for returning the Parent Node.
+     * @param  node Node.
+     * @return Parent Node.
+     */
+    protected DefaultMutableTreeNode getParent(DefaultMutableTreeNode node) {
+        if (node.getParent() != null)
+            return (DefaultMutableTreeNode) node.getParent();
+        return null;
     }
     
     /**
-     * Method responsible for returning the Scroll Panel Tree UML.
-     * @return Scroll Panel Tree UML.
+     * Method responsible for returning the Object Node.
+     * @param  object Object.
+     * @return Object Node.
      */
-    public JScrollPane getScrollPanelTreeUML() {
-        return this.scrollPanes.get("scrollPanelTreeUML");
+    public DefaultMutableTreeNode getNodeTree(Object object) {
+        if (this.nodes.get(object) != null)
+            return (DefaultMutableTreeNode) this.nodes.get(object);
+        return null;
     }
     
     /**
-     * Method responsible for returning the Panel Tree UML.
-     * @return Panel Tree UML.
+     * Method responsible for returning the View Menu.
+     * @return View Menu.
      */
-    public PanelTreeUML getPanelTreeUML() {
-        return this.panelTree3;
+    public ViewMenu getViewMenu() {
+        return this.viewMenu;
+    }
+    
+    /**
+     * Method responsible for returning the Tree.
+     * @return Tree Model.
+     */
+    public DefaultTreeModel getTreeModel() {
+        return (DefaultTreeModel) this.tree.getModel();
+    }
+    
+    /**
+     * Method responsible for returning the Tree.
+     * @return Tree.
+     */
+    public JTree getTree() {
+        return this.tree;
     }
 }

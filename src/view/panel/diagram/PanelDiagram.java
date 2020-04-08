@@ -183,11 +183,21 @@ public abstract class PanelDiagram extends Panel {
         for (int i = 0; i < this.diagram.getElementsList().size(); i++) {
             Element element = this.diagram.getElementsList().get(i);
             this.graph.getStylesheet().putCellStyle(element.getStyleLabel(), element.getStyle());
-            String  title   = this.diagram.getStereotypes(element, "\n") + element.getName();
+            String  title   = this.getTitle(element);
             mxCell  cell    = (mxCell) this.graph.insertVertex(this.parent, null, title, element.getPosition().x, element.getPosition().y, element.getSize().x, element.getSize().y, element.getStyleLabel());
+                    cell.setId(element.getId());
             this.identifiers.put(cell, element.getId());
             this.objects.put(element.getId(), cell);
         }
+    }
+    
+    /**
+     * Method responsible for returning the Element Title.
+     * @param  element Element.
+     * @return Element Title.
+     */
+    protected String getTitle(Element element) {
+        return this.diagram.getStereotypes(element, "\n") + element.getName();
     }
     
     /**
@@ -213,10 +223,6 @@ public abstract class PanelDiagram extends Panel {
      * @return Association Title.
      */
     private String getTitle(Association association) {
-//        if (association.getType().equalsIgnoreCase("requires"))
-//            return this.diagram.getProject().getProfile().getRequires().getName();
-//        if (association.getType().equalsIgnoreCase("mutex"))
-//            return this.diagram.getProject().getProfile().getMutex().getName();
         return association.getTitle();
     }
     
