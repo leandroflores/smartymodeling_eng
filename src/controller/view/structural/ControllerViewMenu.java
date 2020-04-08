@@ -24,6 +24,7 @@ import model.structural.base.Project;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.ComponentDiagram;
+import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import org.xml.sax.SAXException;
@@ -80,6 +81,8 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             this.closeProject();
         else if (this.viewMenu.getMenuItemExitSystem().equals(event.getSource()))
             this.exit();
+        else if (this.viewMenu.getMenuItemFeatureDiagram().equals(event.getSource()))
+            this.newFeatureDiagram();
         else if (this.viewMenu.getMenuItemActivityDiagram().equals(event.getSource()))
             this.newActivityDiagram();
         else if (this.viewMenu.getMenuItemClassDiagram().equals(event.getSource()))
@@ -262,6 +265,19 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     }
     
     /**
+     * Method responsible for creating a New Feature Diagram.
+     */
+    private void newFeatureDiagram() {
+        if (this.viewMenu.getProject() != null) {
+            FeatureDiagram diagram = new FeatureDiagram(this.viewMenu.getProject());
+            this.viewMenu.getProject().addDiagram(diagram);
+                           diagram.setDefaultName();
+            this.viewMenu.showDiagram(diagram);
+        }
+        this.viewMenu.update();
+    }
+    
+    /**
      * Method responsible for creating a New Activity Diagram.
      */
     private void newActivityDiagram() {
@@ -304,13 +320,25 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * Method responsible for creating a New Sequence Diagram.
      */
     private void newSequenceDiagram() {
-        if (this.viewMenu.getProject() != null) {
+        if (this.checkNewSequenceDiagram()) {
             SequenceDiagram diagram = new SequenceDiagram(this.viewMenu.getProject());
             this.viewMenu.getProject().addDiagram(diagram);
                             diagram.setDefaultName();
             this.viewMenu.showDiagram(diagram);
+            this.viewMenu.update();
+        }else {
+            new ViewError(this.viewMenu, "Project without Actors or Classes!").setVisible(true);
         }
-        this.viewMenu.update();
+    }
+    
+    /**
+     * Method responsible for checking for a New Sequence Diagram.
+     * @return New Sequence Diagram is able.
+     */
+    private boolean checkNewSequenceDiagram() {
+        return  this.viewMenu.getProject() != null
+            && !this.viewMenu.getProject().getElements("actor").isEmpty()
+            && !this.viewMenu.getProject().getElements("class").isEmpty();
     }
     
     /**

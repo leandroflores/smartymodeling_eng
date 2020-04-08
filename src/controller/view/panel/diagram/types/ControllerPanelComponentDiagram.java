@@ -43,11 +43,11 @@ public class ControllerPanelComponentDiagram extends ControllerPanelDiagram {
     }
     
     @Override
-    public void mousePressed(MouseEvent evento) {
+    public void mousePressed(MouseEvent event) {
         if (this.panelDiagram.getOperation().equals("Component"))
-            this.addComponent(evento);
+            this.addComponent(event);
         else if (this.panelDiagram.getOperation().equals("Interface"))
-            this.addInterface(evento);
+            this.addInterface(event);
     }
     
     /**
@@ -76,6 +76,7 @@ public class ControllerPanelComponentDiagram extends ControllerPanelDiagram {
         ComponentUML componentUML = new ComponentUML();
                      componentUML.setPosition(event.getX(), event.getY());
         this.panelDiagram.getDiagram().addComponent(componentUML);
+                     componentUML.setDefaultName();
         this.panelDiagram.updateDiagram();
         this.panelDiagram.getViewMenu().update();
     }

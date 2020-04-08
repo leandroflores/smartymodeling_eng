@@ -83,13 +83,15 @@ public final class ViewMenu extends View implements Operation {
         this.menuBar = new JMenuBar();
         
         this.createFileMenu();
+        this.createFeatureMenu();
         this.createDiagramMenu();
         this.createProductLineMenu();
         this.createEvaluationMenu();
         this.createExportMenu();
         this.createAboutMenu();
         
-        this.menuBar.add(this.getFileMenu());
+        this.menuBar.add(this.getMenuFile());
+        this.menuBar.add(this.getMenuFeature());
         this.menuBar.add(this.getMenuDiagram());
         this.menuBar.add(this.getMenuProductLine());
         this.menuBar.add(this.getMenuEvaluation());
@@ -115,21 +117,34 @@ public final class ViewMenu extends View implements Operation {
         this.getMenuItemNewProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
         this.getMenuItemOpenProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
         this.getMenuItemSaveProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
-        this.getMenuItemCloseProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
+//        this.getMenuItemCloseProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
         this.getMenuItemExitSystem().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
         
-        this.getFileMenu().add(this.getMenuItemNewProject());
-        this.getFileMenu().addSeparator();
-        this.getFileMenu().add(this.getMenuItemOpenProject());
-        this.getFileMenu().add(this.getMenuItemSaveProject());
-        this.getFileMenu().add(this.getMenuItemSaveAs());
+        this.getMenuFile().add(this.getMenuItemNewProject());
+        this.getMenuFile().addSeparator();
+        this.getMenuFile().add(this.getMenuItemOpenProject());
+        this.getMenuFile().add(this.getMenuItemSaveProject());
+        this.getMenuFile().add(this.getMenuItemSaveAs());
         this.getMenuItemSaveProject().setEnabled(false);
         this.getMenuItemSaveAs().setEnabled(false);
-        this.getFileMenu().addSeparator();
-        this.getFileMenu().add(this.getMenuItemCloseProject());
+        this.getMenuFile().addSeparator();
+        this.getMenuFile().add(this.getMenuItemCloseProject());
         this.getMenuItemCloseProject().setEnabled(false);
-        this.getFileMenu().addSeparator();
-        this.getFileMenu().add(this.getMenuItemExitSystem());
+        this.getMenuFile().addSeparator();
+        this.getMenuFile().add(this.getMenuItemExitSystem());
+    }
+    
+    /**
+     * Method responsible for creating Feature Menu.
+     */
+    private void createFeatureMenu() {
+        this.createMenu("menuFeature", "Features");
+        
+        this.createMenuItem("menuItemFeatureDiagram", "Feature Diagram", "diagram/feature.png");
+        
+        this.getMenuItemFeatureDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
+        
+        this.getMenuFeature().add(this.getMenuItemFeatureDiagram());
     }
     
     /**
@@ -369,6 +384,8 @@ public final class ViewMenu extends View implements Operation {
      * @param flag Enable Flag.
      */
     private void setDiagramMenuItems(boolean flag) {
+        this.getMenuItemFeatureDiagram().setEnabled(flag);
+        
         this.getMenuItemActivityDiagram().setEnabled(flag);
         this.getMenuItemUseCaseDiagram().setEnabled(flag);
         this.getMenuItemClassDiagram().setEnabled(flag);
@@ -388,6 +405,8 @@ public final class ViewMenu extends View implements Operation {
         this.getMenuItemEvaluationMetric().setEnabled(flag);
         this.getMenuItemEvaluationMeasure().setEnabled(flag);
         this.getMenuItemEvaluationProject().setEnabled(flag);
+        this.getMenuItemEvaluationDiagram().setEnabled(flag);
+        this.getMenuItemEvaluationProduct().setEnabled(flag);
     }
     
     /**
@@ -541,10 +560,10 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning File Menu.
-     * @return File Menu.
+     * Method responsible for returning Menu File.
+     * @return Menu File.
      */
-    public JMenu getFileMenu() {
+    public JMenu getMenuFile() {
         return this.menus.get("menuFile");
     }
     
@@ -594,6 +613,22 @@ public final class ViewMenu extends View implements Operation {
      */
     public JMenuItem getMenuItemExitSystem() {
         return this.menuItens.get("menuItemExitSystem");
+    }
+    
+    /**
+     * Method responsible for returning Menu Feature.
+     * @return Menu Feature.
+     */
+    public JMenu getMenuFeature(){
+        return this.menus.get("menuFeature");
+    }
+    
+    /**
+     * Method responsible for returning Menu Item Feature Diagram.
+     * @return Menu Item Feature Diagram.
+     */
+    public JMenuItem getMenuItemFeatureDiagram() {
+        return this.menuItens.get("menuItemFeatureDiagram");
     }
     
     /**

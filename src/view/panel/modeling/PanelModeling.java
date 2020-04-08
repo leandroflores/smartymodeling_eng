@@ -10,6 +10,7 @@ import model.structural.base.product.Instance;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.ComponentDiagram;
+import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import view.Panel;
@@ -17,6 +18,7 @@ import view.panel.diagram.PanelDiagram;
 import view.panel.diagram.types.PanelActivityDiagram;
 import view.panel.diagram.types.PanelClassDiagram;
 import view.panel.diagram.types.PanelComponentDiagram;
+import view.panel.diagram.types.PanelFeatureDiagram;
 import view.panel.diagram.types.PanelSequenceDiagram;
 import view.panel.diagram.types.PanelUseCaseDiagram;
 import view.panel.instance.PanelInstance;
@@ -125,6 +127,8 @@ public final class PanelModeling extends Panel {
      */
     private PanelDiagram createPanelDiagram(Diagram diagram) {
         switch (diagram.getType()) {
+            case "Feature":
+                return new PanelFeatureDiagram(this.viewMenu,   (FeatureDiagram) diagram);
             case "Activity":
                 return new PanelActivityDiagram(this.viewMenu,  (ActivityDiagram) diagram);
             case "Class":

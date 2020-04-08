@@ -140,7 +140,8 @@ public abstract class PanelDiagram extends Panel {
         this.graph.setDisconnectOnMove(false);
         this.graph.setCellsDisconnectable(false);
         
-        this.component.setPageBackgroundColor(Color.WHITE);
+        this.component.getViewport().setOpaque(true);
+        this.component.getViewport().setBackground(Color.WHITE);
         this.component.setPreferredSize(new Dimension(1075, 500));
         this.component.setEnterStopsCellEditing(true);
         this.component.refresh();
