@@ -31,6 +31,6 @@ public final class PanelLogo extends Panel {
     protected void addComponents() {
         this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.add(new JLabel(new FunctView().createImage("logo-eng.png")));
-        this.setPreferredSize(new Dimension(1075, 570));
+        this.setPreferredSize(new Dimension(1000, 500));
     }
 }

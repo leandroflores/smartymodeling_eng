@@ -82,6 +82,19 @@ public final class FeatureDiagram extends Diagram {
     }
     
     /**
+     * Method responsible for returning the Roots List.
+     * @return Roots List.
+     */
+    public List<Feature> getRootsList() {
+        List   roots = new ArrayList<>();
+        for (Feature feature : this.getFeaturesList()) {
+            if (this.isRoot(feature))
+               roots.add(feature);
+        }
+        return roots;
+    }
+    
+    /**
      * Method responsible for returning Features List.
      * @return Features List.
      */
@@ -108,20 +121,6 @@ public final class FeatureDiagram extends Diagram {
     public void removeConnection(Connection connection) {
         super.removeAssociation(connection);
         this.connections.remove(connection.getId());
-    }
-    
-    /**
-     * Method responsible for returning if Exists a Connection between Source and Target.
-     * @param  source Connection Source.
-     * @param  target Connection Target.
-     * @return Connection Exists.
-     */
-    public boolean existsConnection(Element source, Element target) {
-        for (Connection connection : this.getConnectionsList()) {
-            if (connection.isSource(source) && connection.isTarget(target))
-                return true;
-        }
-        return false;
     }
     
     /**

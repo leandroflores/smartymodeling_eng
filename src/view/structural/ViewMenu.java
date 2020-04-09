@@ -298,10 +298,9 @@ public final class ViewMenu extends View implements Operation {
         
         this.getScrollPanelProject().setMinimumSize(new Dimension(300, 150));
         this.getScrollPanelProject().setPreferredSize(new Dimension(300, 150));
-//        this.getScrollPanelModeling().setMinimumSize(new Dimension(400, 100));
+        this.getScrollPanelModeling().setPreferredSize(new Dimension((int) (this.getWidth() - 350), this.getHeight() - 100));
+//        this.getScrollPanelModeling().setPreferredSize(new Dimension((int) (this.getWidth() * 0.7) - 10, this.getHeight() - 100));
         
-        this.getScrollPanelModeling().setPreferredSize(new Dimension((int) (this.getWidth() * 0.7) - 10, this.getHeight() - 100));
-       
         this.mainSplitPane = this.createSplitPane(true);
         this.mainSplitPane.setLeftComponent(this.getScrollPanelProject());
         this.mainSplitPane.setRightComponent(this.getScrollPanelModeling());

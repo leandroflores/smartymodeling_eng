@@ -2,6 +2,7 @@ package controller.view.panel.diagram.association.types;
 
 import com.mxgraph.model.mxCell;
 import controller.view.panel.diagram.association.ControllerEventAssociation;
+import java.util.List;
 import model.structural.base.Element;
 import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.feature.base.Feature;
@@ -36,24 +37,33 @@ public class ControllerEventAssociationFeature extends ControllerEventAssociatio
     public void addAssociation(mxCell association) {
         Element source = this.getSource(association);
         Element target = this.getTarget(association);
-        if (this.check(source, target) 
-         && this.distinct(source, target) 
-         && this.isVoid(source, target))
+        if (this.check(source, target) && this.distinct(source, target) 
+         && this.containsRoot(target)  && this.isValid(target))
             this.createAssociation(association);
     }
     
     /**
-     * 
-     * @param source
-     * @param target
-     * @return 
+     * Method responsible for returning if Feature is Valid to Connection.
+     * @param  feature Feature Target.
+     * @return Feature is Valid to Connection.
      */
-    private boolean isVoid(Element source, Element target) {
-        if (this.panelDiagram.getDiagram().existsConnection(source, target)) {
-            new ViewError(this.panelDiagram.getViewMenu(), "Connection already exists!").setVisible(true);
+    private boolean isValid(Element feature) {
+        if (!this.panelDiagram.getDiagram().getSourceAssociations("connection", feature).isEmpty()) {
+            new ViewError(this.panelDiagram.getViewMenu(), "Feature is already Connection Target!").setVisible(true);
             return false;
         }
         return true;
+    }
+    
+    /**
+     * Method responsible for returning if Diagram contains Feature Root.
+     * @param  feature Target Feature.
+     * @return Diagram contains Feature Root.
+     */
+    private boolean containsRoot(Element feature) {
+        List<Feature> roots = this.diagram.getRootsList();
+        return  roots.size() >  1
+            || (roots.size() == 1 && !roots.get(0).equals(feature));
     }
     
     @Override

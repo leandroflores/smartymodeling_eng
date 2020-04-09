@@ -27,7 +27,7 @@ public class ComunicationUML extends Association {
     public ComunicationUML(ComponentUML componentUML, InterfaceUML interfaceUML) {
         this.source   = componentUML;
         this.target   = interfaceUML;
-        this.category = "provided";
+        this.category = "provide";
         this.type     = "comunication";
     }
     
@@ -97,25 +97,33 @@ public class ComunicationUML extends Association {
     }
     
     /**
-     * Method responsible for returning the End Arrow Style.
-     * @return End Arrow Style.
+     * Method responsible for returning the Dashed.
+     * @return Dashed.
      */
-    private Object getEndArrowStyle() {
-        if (this.category.toLowerCase().trim().equals("provided"))
-            return mxConstants.ARROW_SPACING;
-        return mxConstants.ARROW_OVAL;
+    private Object getDashed() {
+        return this.category.equalsIgnoreCase("provide") ? "0" : "1";
+    }
+    
+    /**
+     * Method responsible for returning the End Arrow.
+     * @return End Arrow.
+     */
+    private Object getEndArrow() {
+        return this.category.equalsIgnoreCase("provide") ?  
+               mxConstants.ARROW_SPACING : mxConstants.ARROW_OPEN;
     }
     
     @Override
     public Map getStyle() {
         Map    style = new HashMap<>();
-               style.put(mxConstants.STYLE_DASHED,   "0");
+               style.put(mxConstants.STYLE_DASHED,   this.getDashed());
                style.put(mxConstants.STYLE_MOVABLE,  "0");
                style.put(mxConstants.STYLE_EDITABLE, "0");
-               style.put(mxConstants.STYLE_ENDARROW,   this.getEndArrowStyle());
-               style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);
+               style.put(mxConstants.STYLE_ENDSIZE,  "15");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+               style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);
+               style.put(mxConstants.STYLE_ENDARROW,   this.getEndArrow());
         return style;
     }
     

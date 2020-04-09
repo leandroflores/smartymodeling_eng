@@ -5,6 +5,7 @@ import model.structural.base.Element;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.ComponentDiagram;
+import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import model.structural.diagram.activity.base.ActivityUML;
@@ -18,6 +19,7 @@ import model.structural.diagram.classes.base.InterfaceUML;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.component.base.ComponentUML;
+import model.structural.diagram.feature.base.Feature;
 import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
 import model.structural.diagram.usecase.base.ActorUML;
@@ -58,7 +60,9 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
      * @param diagram Diagram.
      */
     private void delete(Diagram diagram) {
-        if (diagram instanceof ActivityDiagram)
+        if (diagram instanceof FeatureDiagram)
+            this.deleteElement((FeatureDiagram) diagram);
+        else if (diagram instanceof ActivityDiagram)
             this.deleteElement((ActivityDiagram) diagram);
         else if (diagram instanceof ClassDiagram)
             this.deleteElement((ClassDiagram) diagram);
@@ -68,6 +72,15 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
             this.deleteElement((UseCaseDiagram) diagram);
         else if (diagram instanceof SequenceDiagram)
             this.deleteElement((SequenceDiagram) diagram);
+    }
+    
+    /**
+     * Method responsible for deleting a Element from a Feature Diagram.
+     * @param diagram Feature Diagram.
+     */
+    private void deleteElement(FeatureDiagram diagram) {
+        if (this.element instanceof Feature)
+            diagram.removeFeature((Feature) this.element);
     }
     
     /**

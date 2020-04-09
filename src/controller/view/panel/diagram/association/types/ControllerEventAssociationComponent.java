@@ -105,8 +105,9 @@ public class ControllerEventAssociationComponent extends ControllerEventAssociat
      * @return Comunication Category.
      */
     private String getCategory() {
+        System.out.println("Type: " + this.panelDiagram.getType());
         if (this.panelDiagram.getAssociationComboBox().getSelectedIndex() == 0)
-            return "provided";
-        return "required";
+            return "provide";
+        return "require";
     }
 }

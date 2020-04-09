@@ -119,7 +119,7 @@ public final class PanelComponentDiagram extends PanelDiagram {
     private void addInterfacesUML() {
         for (InterfaceUML interfaceUML : this.diagram.getInterfacesList()) {
             this.graph.getStylesheet().putCellStyle(interfaceUML.getStyleLabel(), interfaceUML.getStyle());
-            String title  = interfaceUML.getName();
+            String title  = super.getTitle(interfaceUML);
             mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, interfaceUML.getId(), title, interfaceUML.getPosition().x, interfaceUML.getPosition().y, interfaceUML.getSize().x, interfaceUML.getSize().y, interfaceUML.getStyleLabel());
                    vertex.setConnectable(true);
             this.identifiers.put(vertex, interfaceUML.getId());
@@ -166,19 +166,22 @@ public final class PanelComponentDiagram extends PanelDiagram {
      */
     private void setProvideStyle() {
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED, "0");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_FONTCOLOR,   "#000000");
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_SPACING);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
     }
     
     /**
      * Method responsible for setting the Require Style.
      */
     private void setRequireStyle() {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED, "1");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_OPEN);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,  "1");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDSIZE, "15");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_FONTCOLOR,   "#000000");
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,   mxConstants.ARROW_OPEN);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);
     }
     
     @Override

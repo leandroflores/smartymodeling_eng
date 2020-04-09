@@ -142,7 +142,7 @@ public abstract class PanelDiagram extends Panel {
         
         this.component.getViewport().setOpaque(true);
         this.component.getViewport().setBackground(Color.WHITE);
-        this.component.setPreferredSize(new Dimension(1075, 500));
+        this.component.setPreferredSize(new Dimension(1000, 500));
         this.component.setEnterStopsCellEditing(true);
         this.component.refresh();
      
