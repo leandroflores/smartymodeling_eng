@@ -22,7 +22,7 @@ public final class PanelProjectTree extends Panel {
     private final ViewMenu viewMenu;
     private final Project  project;
     private JTabbedPane tabbedPane;
-    
+    private Integer index;
     private PanelTreeFeature panelTreeFeat;
     private PanelTreeUML     panelTreeUML;
     
@@ -31,8 +31,9 @@ public final class PanelProjectTree extends Panel {
      * @param viewMenu View Menu.
      */
     public PanelProjectTree(ViewMenu viewMenu) {
-        this.viewMenu   = viewMenu;
-        this.project    = this.viewMenu.getProject();
+        this.viewMenu = viewMenu;
+        this.project  = this.viewMenu.getProject();
+        this.index    = 0;
         this.addComponents();
     }
     
@@ -42,6 +43,7 @@ public final class PanelProjectTree extends Panel {
         this.initTabbedPane();
             this.addPanelTreeFeatures();
             this.addPanelTreeUML();
+//        this.tabbedPane.setPreferredSize(new Dimension(550, 200));
         this.add(this.tabbedPane);
     }
     
@@ -71,6 +73,22 @@ public final class PanelProjectTree extends Panel {
         this.createScrollPane("scrollPanelTreeUML",  this.panelTreeUML);
         this.getScrollPanelTreeUML().setViewportView(this.panelTreeUML);
         this.tabbedPane.add("UML", this.getScrollPanelTreeUML());
+    }
+
+    /**
+     * Method responsible for returning the Index Panel.
+     * @return Index Panel.
+     */
+    public Integer getIndex() {
+        return this.index;
+    }
+
+    /**
+     * Method responsible for setting the Index Panel.
+     * @param index Index Panel.
+     */
+    public void setIndex(Integer index) {
+        this.index = index;
     }
     
     /**

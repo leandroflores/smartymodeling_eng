@@ -51,7 +51,7 @@ public final class PanelEditFeature extends PanelEditElement {
      */
     private void addPanelBaseElement() {
         this.panelBaseElement = new PanelBaseElement(this.viewMenu, this.diagram, this.feature);
-        this.panelBaseElement.hideMandatory();
+        this.panelBaseElement.getMandatoryLabel().setText("Abstract: ");
         this.createScrollPane("scrollPanelBaseElement",  this.panelBaseElement);
         this.getScrollPanelBaseElement().setViewportView(this.panelBaseElement);
         this.tabbedPane.add("Feature", this.getScrollPanelBaseElement());

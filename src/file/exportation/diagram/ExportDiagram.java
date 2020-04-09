@@ -11,12 +11,14 @@ import model.structural.base.Diagram;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.ComponentDiagram;
+import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import view.panel.diagram.PanelDiagram;
 import view.panel.diagram.types.PanelActivityDiagram;
 import view.panel.diagram.types.PanelClassDiagram;
 import view.panel.diagram.types.PanelComponentDiagram;
+import view.panel.diagram.types.PanelFeatureDiagram;
 import view.panel.diagram.types.PanelSequenceDiagram;
 import view.panel.diagram.types.PanelUseCaseDiagram;
 
@@ -67,8 +69,10 @@ public class ExportDiagram {
      * @return Panel Diagram.
      */
     private PanelDiagram getPanelDiagram() {
-        if (this.diagram.getType().equals("Activity"))
-            return new PanelActivityDiagram(null,  (ActivityDiagram)  this.diagram);
+        if (this.diagram.getType().equals("Feature"))
+            return new PanelFeatureDiagram(null, (FeatureDiagram)  this.diagram);
+        else if (this.diagram.getType().equals("Activity"))
+            return new PanelActivityDiagram(null, (ActivityDiagram)  this.diagram);
         else if (this.diagram.getType().equals("Class"))
             return new PanelClassDiagram(null, (ClassDiagram) this.diagram);
         else if (this.diagram.getType().equals("Component"))

@@ -124,6 +124,7 @@ public final class PanelFeatureDiagram extends PanelDiagram {
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW, oval ? mxConstants.ARROW_OVAL : mxConstants.ARROW_BLOCK);
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDFILL,  fill ? "1" : "0");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDSIZE,  oval ? "10" : "15");
     }
     
     @Override

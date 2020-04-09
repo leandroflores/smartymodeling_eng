@@ -83,7 +83,6 @@ public final class ViewMenu extends View implements Operation {
         this.menuBar = new JMenuBar();
         
         this.createFileMenu();
-        this.createFeatureMenu();
         this.createDiagramMenu();
         this.createProductLineMenu();
         this.createEvaluationMenu();
@@ -91,7 +90,6 @@ public final class ViewMenu extends View implements Operation {
         this.createAboutMenu();
         
         this.menuBar.add(this.getMenuFile());
-        this.menuBar.add(this.getMenuFeature());
         this.menuBar.add(this.getMenuDiagram());
         this.menuBar.add(this.getMenuProductLine());
         this.menuBar.add(this.getMenuEvaluation());
@@ -135,41 +133,32 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for creating Feature Menu.
-     */
-    private void createFeatureMenu() {
-        this.createMenu("menuFeature", "Features");
-        
-        this.createMenuItem("menuItemFeatureDiagram", "Feature Diagram", "diagram/feature.png");
-        
-        this.getMenuItemFeatureDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
-        
-        this.getMenuFeature().add(this.getMenuItemFeatureDiagram());
-    }
-    
-    /**
      * Method responsible for creating Diagram Menu.
      */
     private void createDiagramMenu() {
         this.createMenu("menuDiagram", "New Diagram");
         
-        this.createMenuItem("menuItemActivityDiagram",  "Activity Diagram",  "diagram/activity.png");
+        this.createMenuItem("menuItemFeatureDiagram",   "Feature Diagram",   "diagram/feature.png");
+        this.createMenuItem("menuItemUseCaseDiagram",   "Use Case Diagram",  "diagram/use-case.png");
         this.createMenuItem("menuItemClassDiagram",     "Class Diagram",     "diagram/class.png");
         this.createMenuItem("menuItemComponentDiagram", "Component Diagram", "diagram/component.png");
         this.createMenuItem("menuItemSequenceDiagram",  "Sequence Diagram",  "diagram/sequence.png");
-        this.createMenuItem("menuItemUseCaseDiagram",   "Use Case Diagram",  "diagram/use-case.png");
+        this.createMenuItem("menuItemActivityDiagram",  "Activity Diagram",  "diagram/activity.png");
         
-        this.getMenuItemActivityDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
+        this.getMenuItemFeatureDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
+        this.getMenuItemUseCaseDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_MASK));
         this.getMenuItemClassDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
         this.getMenuItemComponentDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK));
         this.getMenuItemSequenceDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
-        this.getMenuItemUseCaseDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_MASK));
+        this.getMenuItemActivityDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
         
-        this.getMenuDiagram().add(this.getMenuItemActivityDiagram());
+        this.getMenuDiagram().add(this.getMenuItemFeatureDiagram());
+        this.getMenuDiagram().addSeparator();
+        this.getMenuDiagram().add(this.getMenuItemUseCaseDiagram());
         this.getMenuDiagram().add(this.getMenuItemClassDiagram());
         this.getMenuDiagram().add(this.getMenuItemComponentDiagram());
         this.getMenuDiagram().add(this.getMenuItemSequenceDiagram());
-        this.getMenuDiagram().add(this.getMenuItemUseCaseDiagram());
+        this.getMenuDiagram().add(this.getMenuItemActivityDiagram());
     }
     
     /**
@@ -615,11 +604,11 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Feature.
-     * @return Menu Feature.
+     * Method responsible for returning Menu Diagram.
+     * @return Menu Diagram.
      */
-    public JMenu getMenuFeature(){
-        return this.menus.get("menuFeature");
+    public JMenu getMenuDiagram() {
+        return this.menus.get("menuDiagram");
     }
     
     /**
@@ -631,19 +620,11 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Diagram.
-     * @return Menu Diagram.
+     * Method responsible for returning Menu Item Use Case Diagram.
+     * @return Menu Item Use Case Diagram.
      */
-    public JMenu getMenuDiagram() {
-        return this.menus.get("menuDiagram");
-    }
-    
-    /**
-     * Method responsible for returning Menu Item Activity Diagram.
-     * @return Menu Item Activity Diagram.
-     */
-    public JMenuItem getMenuItemActivityDiagram() {
-        return this.menuItens.get("menuItemActivityDiagram");
+    public JMenuItem getMenuItemUseCaseDiagram() {
+        return this.menuItens.get("menuItemUseCaseDiagram");
     }
     
     /**
@@ -671,11 +652,11 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item Use Case Diagram.
-     * @return Menu Item Use Case Diagram.
+     * Method responsible for returning Menu Item Activity Diagram.
+     * @return Menu Item Activity Diagram.
      */
-    public JMenuItem getMenuItemUseCaseDiagram() {
-        return this.menuItens.get("menuItemUseCaseDiagram");
+    public JMenuItem getMenuItemActivityDiagram() {
+        return this.menuItens.get("menuItemActivityDiagram");
     }
     
     /**

@@ -89,19 +89,6 @@ public final class PanelActivityDiagram extends PanelDiagram {
         this.getFinalButton().setBackground(this.getDefaultColor());
     }
     
-//    @Override
-//    public void addElements() {
-//        
-//        for (int i = 0; i < this.diagram.getElementsList().size(); i++) {
-//            Elemento elemento = this.diagram.getListaElementos().get(i);
-//            this.grafo.getStylesheet().putCellStyle(elemento.getRotuloEstilo(), elemento.getEstilo());
-//            String   titulo   = this.diagram.getEstereotipos(elemento) + elemento.getNome();
-//            mxCell   vertice  = (mxCell) this.grafo.insertVertex(this.parent, null, titulo, elemento.getPosicao().x, elemento.getPosicao().y, elemento.getTamanho().x, elemento.getTamanho().y, elemento.getRotuloEstilo());
-//            this.objetos.put(vertice, elemento.getId());
-//            this.entidades.put(elemento.getId(), vertice);
-//        }
-//    }
-    
     @Override
     public void setStyle() {
         switch (this.getType()) {
@@ -123,10 +110,12 @@ public final class PanelActivityDiagram extends PanelDiagram {
      * Method responsible for setting the Flow Style.
      */
     private void setFlowStyle() {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED, "0");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,  "0");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDSIZE, "15");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_FONTCOLOR,   "#000000");
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_OPEN);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
     }
     
     @Override

@@ -95,6 +95,16 @@ public class Connection extends Association {
     }
     
     /**
+     * Method responsible for returning the Connection End Size.
+     * @return Connection End Size.
+     */
+    private Object getEndSize() {
+        return (this.category.equalsIgnoreCase("mandatory") 
+             || this.category.equalsIgnoreCase("optional")) ?
+                "10" : "20";
+    }
+    
+    /**
      * Method responsible for returning the Connection End Arrow.
      * @return Connection End Arrow.
      */
@@ -120,8 +130,7 @@ public class Connection extends Association {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_DASHED,   "0");
                style.put(mxConstants.STYLE_EDITABLE, "0");
-               style.put(mxConstants.STYLE_ENDSIZE,  "15");
-               style.put(mxConstants.STYLE_FONTSIZE, "15");
+               style.put(mxConstants.STYLE_ENDSIZE,  this.getEndSize());
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);

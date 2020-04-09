@@ -129,6 +129,7 @@ public class FlowUML extends Association {
                style.put(mxConstants.STYLE_DASHED,   "0");
                style.put(mxConstants.STYLE_MOVABLE,  "0");
                style.put(mxConstants.STYLE_EDITABLE, "1");
+               style.put(mxConstants.STYLE_ENDSIZE,  "15");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_SHAPE,      mxConstants.SHAPE_CONNECTOR);

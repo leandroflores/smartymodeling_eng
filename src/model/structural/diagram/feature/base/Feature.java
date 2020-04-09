@@ -21,7 +21,7 @@ public class Feature extends Element {
     public Feature() {
         this.name      = "Feature";
         this.type      = "feature";
-        this.mandatory = true;
+        this.mandatory = false;
         this.size      = new Point(200, 50);
     }
     
@@ -33,7 +33,7 @@ public class Feature extends Element {
         super(element, true);
         this.type = "feature";
     }
-
+    
     @Override
     public void setName(String name) {
         super.setName(name);
@@ -71,7 +71,7 @@ public class Feature extends Element {
     
     @Override
     public String getStyleLabel() {
-        return "styleFeature";
+        return "styleFeature" + this.id;
     }
     
     @Override
@@ -81,6 +81,7 @@ public class Feature extends Element {
                style.put(mxConstants.STYLE_EDITABLE, "1");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+               style.put(mxConstants.STYLE_FONTSTYLE,   this.mandatory ? mxConstants.FONT_ITALIC : "0");
                style.put(mxConstants.STYLE_FILLCOLOR,   mxConstants.NONE);
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
                style.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_CENTER);

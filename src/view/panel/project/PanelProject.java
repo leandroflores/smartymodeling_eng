@@ -82,8 +82,8 @@ public final class PanelProject extends Panel {
     private final ViewMenu viewMenu;
     private final Project  project;
     private JSplitPane splitPane;
-    private PanelProjectTree  panelTree;
-    private PanelEdit  panelEdit;
+    private PanelProjectTree panelTree;
+    private PanelEdit panelEdit;
     
     /**
      * Default constructor method of Class.
