@@ -331,6 +331,7 @@ public abstract class Panel extends JPanel {
     protected JButton createButton(String id, String title, String focusTitle, String url) {
         JButton button = this.createButton(id, title, url);
                 button.setToolTipText(focusTitle);
+//                button.setPreferredSize(new Dimension(60, 25));
         return  button;
     }
     

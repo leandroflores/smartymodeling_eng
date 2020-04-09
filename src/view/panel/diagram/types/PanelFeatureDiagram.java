@@ -11,8 +11,12 @@ import controller.view.panel.diagram.event.ControllerEventPoints;
 import controller.view.panel.diagram.event.ControllerEventSelect;
 import controller.view.panel.diagram.event.feature.ControllerEventResize;
 import controller.view.panel.diagram.types.ControllerPanelFeatureDiagram;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import model.structural.base.Element;
@@ -49,7 +53,8 @@ public final class PanelFeatureDiagram extends PanelDiagram {
     
     @Override
     public void addComponents() {
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+//        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new GridBagLayout());
         this.addOperationsPanel();
         this.addModelingPanel();
         this.graph.setAllowLoops(false);
@@ -60,13 +65,15 @@ public final class PanelFeatureDiagram extends PanelDiagram {
     public void addOperationsPanel() {
         JPanel  panel = new JPanel();
                 panel.setLayout(new FlowLayout(FlowLayout.LEFT));
+                panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+                panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 panel.add(this.createButton("clickButton",       "", "Select",      "click.png"));
                 panel.add(this.createButton("featureButton",     "", "New Feature", "diagram/activity/activity.png"));
                 panel.add(this.createButton("variabilityButton", "", "",            "variability.png"));
                 panel.add(this.createButton("editButton",        "", "Edit",        "edit.png"));
                 panel.add(this.createButton("deleteButton",      "", "Delete",      "delete.png"));
                 panel.add(this.createComboBox("associationComboBox", this.getAssociationItems(), 50));
-       this.add(panel);
+       this.add(panel, this.setPageStart(new GridBagConstraints()));
        this.getVariabilityButton().setVisible(false);
        this.getClickButton().setBackground(this.getFocusColor());
     }

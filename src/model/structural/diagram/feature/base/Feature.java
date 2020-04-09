@@ -22,7 +22,7 @@ public class Feature extends Element {
         this.name      = "Feature";
         this.type      = "feature";
         this.mandatory = false;
-        this.size      = new Point(200, 50);
+        this.size      = new Point(150, 50);
     }
     
     /**
@@ -45,7 +45,7 @@ public class Feature extends Element {
      * @return Min Size.
      */
     public Integer getMinWidth() {
-        return Math.max(30, this.name.length() * 10 + 50);
+        return Math.max(40, this.name.length() * 10 + 50);
     }
     
     /**

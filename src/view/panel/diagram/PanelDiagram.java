@@ -12,6 +12,8 @@ import funct.FunctView;
 import java.awt.Color;
 import java.util.HashMap;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +23,7 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
 import view.Panel;
+import view.panel.operation.PanelOperation;
 import view.structural.ViewMenu;
 
 /**
@@ -60,9 +63,12 @@ public abstract class PanelDiagram extends Panel {
      */
     protected void initComponents() {
         this.setOperation("Click");
+        this.setLayout(new GridBagLayout());
 //        this.setLayout(new GridLayout(2, 0));
         this.type = 0;
     }
+    
+//    public abstract PanelOperation getPanelOperation();
     
     /**
      * Method responsible for adding Operations Panel on View.
@@ -142,6 +148,7 @@ public abstract class PanelDiagram extends Panel {
         
         this.component.getViewport().setOpaque(true);
         this.component.getViewport().setBackground(Color.WHITE);
+//        this.component.setMinimumSize(new Dimension(1000, 500));
         this.component.setPreferredSize(new Dimension(1000, 500));
         this.component.setEnterStopsCellEditing(true);
         this.component.refresh();
@@ -151,7 +158,8 @@ public abstract class PanelDiagram extends Panel {
         
         this.createScrollPane("scrollPaneDiagram");
         this.getScrollPaneDiagram().setViewportView(this.component);
-        this.add(this.getScrollPaneDiagram());
+        this.add(this.getScrollPaneDiagram(), this.setPageBody(new GridBagConstraints()));
+//        this.add(this.getScrollPaneDiagram(), this.getConstraints(1, 1, 0, 1));
     }
     
     /**
@@ -280,6 +288,38 @@ public abstract class PanelDiagram extends Panel {
     public void setZoom(Double zoom) {
         this.zoom = zoom;
         this.graph.getView().setScale(this.zoom);
+    }
+    
+    /**
+     * Method responsible for setting the Page Start Constraints.
+     * @param  constraints New Constraints.
+     * @return Page Start Constraints.
+     */
+    protected GridBagConstraints setPageStart(GridBagConstraints constraints) {
+               constraints.anchor  = GridBagConstraints.PAGE_START;
+               constraints.fill    = GridBagConstraints.HORIZONTAL;
+               constraints.gridx   = 0;
+               constraints.gridy   = 0;
+               constraints.weighty = 1.0;
+               constraints.weightx = 1.0;
+        return constraints;
+    }
+    
+    /**
+     * Method responsible for setting the Page Body Constraints.
+     * @param  constraints New Constraints.
+     * @return Page Body Constraints.
+     */
+    protected GridBagConstraints setPageBody(GridBagConstraints constraints) {
+               constraints.anchor     = GridBagConstraints.NORTH;
+               constraints.fill       = GridBagConstraints.BOTH;
+               constraints.gridx      = 0;
+               constraints.gridy      = 1;
+               constraints.gridheight = GridBagConstraints.RELATIVE;
+               constraints.gridwidth  = GridBagConstraints.RELATIVE;
+               constraints.weighty    = 10.0;
+               constraints.weightx    = 1.0;
+        return constraints;       
     }
     
     /**

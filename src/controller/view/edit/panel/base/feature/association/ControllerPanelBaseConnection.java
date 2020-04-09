@@ -3,7 +3,6 @@ package controller.view.edit.panel.base.feature.association;
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import view.edit.panel.base.classes.association.PanelBaseAssociationUML;
 import view.edit.panel.base.feature.association.PanelBaseConnection;
 
 /**
@@ -46,7 +45,7 @@ public class ControllerPanelBaseConnection extends ControllerPanel {
      * Method responsible for setting the Association UML Values.
      */
     private void update() {
-//        this.panelBaseConnection.getConnection().setCategory(this.panelBaseConnection.getDirectedCheckBox().isSelected());
+        this.panelBaseConnection.getConnection().setCategory(this.panelBaseConnection.getCategoryComboBox().getSelectedItem().toString());
         this.panelBaseConnection.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseConnection.getViewMenu().getPanelModeling().updateModelingPanel();
         this.panelBaseConnection.getViewMenu().setSave(false);

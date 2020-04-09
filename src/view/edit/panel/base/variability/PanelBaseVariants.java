@@ -53,7 +53,6 @@ public final class PanelBaseVariants extends Panel {
     private void setSettings() {
         this.setLayout(new GridBagLayout());
         this.setMinimumSize(new Dimension(150, 150));
-//        this.setSize(new Dimension(200, 300));
     }
     
     @Override

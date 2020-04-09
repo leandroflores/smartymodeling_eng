@@ -3,6 +3,7 @@ package view.edit.panel.base.feature.association;
 import controller.view.edit.panel.base.feature.association.ControllerPanelBaseConnection;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.feature.base.association.Connection;
@@ -60,7 +61,12 @@ public final class PanelBaseConnection extends Panel {
         this.add(this.createTextFieldNoEditable("targetTextField", "", 20));
         
         this.add(this.createLabel("Category: ", 120));
-        this.add(this.createTextFieldNoEditable("categoryTextField", "", 20));
+        this.add(this.createComboBox("categoryComboBox", this.getCategories(), 20, this.connection.getCategory()));
+//        this.add(this.createTextFieldNoEditable("categoryTextField", "", 20));
+    }
+    
+    private String[] getCategories() {
+        return new String[]{"mandatory", "optional", "inclusive", "exclusive"};
     }
     
     /**
@@ -69,7 +75,7 @@ public final class PanelBaseConnection extends Panel {
     public void setValues() {
         this.getSourceTextField().setText(this.connection.getSource().getName());
         this.getTargetTextField().setText(this.connection.getTarget().getName());
-        this.getCategoryTextField().setText(this.connection.getCategory());
+        this.getCategoryComboBox().setSelectedItem(this.connection.getCategory());
     }
     
     /**
@@ -113,10 +119,10 @@ public final class PanelBaseConnection extends Panel {
     }
     
     /**
-     * Method responsible for returning the Category Text Field.
-     * @return Category Text Field.
+     * Method responsible for returning the Category Combo Box.
+     * @return Category Combo Box.
      */
-    public JTextField getCategoryTextField() {
-        return this.textFields.get("categoryTextField");
+    public JComboBox getCategoryComboBox() {
+        return this.comboBoxes.get("categoryComboBox");
     }
 }

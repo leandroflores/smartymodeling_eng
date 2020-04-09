@@ -34,6 +34,7 @@ import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.classes.base.association.AssociationUML;
 import model.structural.diagram.component.base.ComponentUML;
 import model.structural.diagram.feature.base.Feature;
+import model.structural.diagram.feature.base.association.Connection;
 import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
 import model.structural.diagram.sequence.base.association.MessageUML;
@@ -57,6 +58,7 @@ import view.panel.edit.base.classes.association.PanelEditAssociationUML;
 import view.panel.edit.base.component.PanelEditComponentUML;
 import view.panel.edit.base.evaluation.PanelEditMetric;
 import view.panel.edit.base.feature.PanelEditFeature;
+import view.panel.edit.base.feature.association.PanelEditConnection;
 import view.panel.edit.base.product.PanelEditArtifact;
 import view.panel.edit.base.product.PanelEditInstance;
 import view.panel.edit.base.product.PanelEditProduct;
@@ -272,7 +274,9 @@ public final class PanelProject extends Panel {
      * @param association 
      */
     public void initPanelEditAssociation(Diagram diagram, Association association) {
-        if (diagram instanceof ActivityDiagram)
+        if (diagram instanceof FeatureDiagram)
+            this.initPanelEditAssociation((FeatureDiagram) diagram, association);
+        else if (diagram instanceof ActivityDiagram)
             this.initPanelEditAssociation((ActivityDiagram) diagram, association);
         else if (diagram instanceof ClassDiagram)
             this.initPanelEditAssociation((ClassDiagram)    diagram, association);
@@ -282,6 +286,17 @@ public final class PanelProject extends Panel {
             this.panelEdit = new PanelEditAssociation(this.viewMenu, diagram, association);
             this.updatePanelEdit();
         }
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Association.
+     * @param diagram Feature Diagram.
+     * @param association Association.
+     */
+    public void initPanelEditAssociation(FeatureDiagram diagram, Association association) {
+        if (association instanceof Connection)
+            this.panelEdit = new PanelEditConnection(this.viewMenu, diagram, (Connection) association);
+        this.updatePanelEdit();
     }
     
     /**

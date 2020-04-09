@@ -27,8 +27,8 @@ public final class PanelMain extends Panel {
         this.viewMenu   = viewMenu;
         this.controller = new ControllerPanelMain(this);
         this.setLayout(new GridLayout(0, 18));
-        this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
-        this.setMinimumSize(new Dimension(0, 50));
+        this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 35));
+        this.setMinimumSize(new Dimension(0, 35));
         this.addComponents();
     }
     

@@ -1,7 +1,7 @@
 package view.panel.project.tree;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Project;
@@ -39,11 +39,10 @@ public final class PanelProjectTree extends Panel {
     
     @Override
     public void addComponents() {
-        this.setLayout(new FlowLayout(FlowLayout.LEFT));
+        this.setLayout(new GridLayout(1, 1));
         this.initTabbedPane();
             this.addPanelTreeFeatures();
             this.addPanelTreeUML();
-//        this.tabbedPane.setPreferredSize(new Dimension(550, 200));
         this.add(this.tabbedPane);
     }
     

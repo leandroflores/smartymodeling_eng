@@ -260,8 +260,8 @@ public final class ViewMenu extends View implements Operation {
 
         this.panelMain = new PanelMain(this);
         this.createScrollPane("scrollPanelMain");
-        this.getScrollPanelMain().setMinimumSize(new Dimension(200, 50));
-        this.getScrollPanelMain().setPreferredSize(new Dimension(200, 50));
+        this.getScrollPanelMain().setMinimumSize(new Dimension(200, 35));
+        this.getScrollPanelMain().setPreferredSize(new Dimension(200, 35));
         this.getScrollPanelMain().setViewportView(this.panelMain);
         this.getContentPane().add(this.getScrollPanelMain(), BorderLayout.NORTH);
     }
