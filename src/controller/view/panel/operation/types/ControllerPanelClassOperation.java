@@ -26,38 +26,11 @@ public class ControllerPanelClassOperation extends ControllerPanelOperation {
     public void actionPerformed(ActionEvent event) {
         super.actionPerformed(event);
         if (this.getPanelOperation().getPackageButton().equals(event.getSource()))
-            this.setAddPackage();
+            this.setOperation(this.getPanelOperation().getPackageButton(), "Package");
         else if (this.getPanelOperation().getClassButton().equals(event.getSource()))
-            this.setAddClass();
+            this.setOperation(this.getPanelOperation().getClassButton(), "Class");
         else if (this.getPanelOperation().getInterfaceButton().equals(event.getSource()))
-            this.setAddInterface();
-    }
-    
-    /**
-     * Method responsible for setting the Add Package Operation.
-     */
-    public void setAddPackage() {
-        this.getPanelOperation().resetBackground();
-        this.getPanelOperation().getPackageButton().setBackground(this.getFocusColor());
-        this.getPanelDiagram().setOperation("Package");
-    }
-    
-    /**
-     * Method responsible for setting the Add Class Operation.
-     */
-    public void setAddClass() {
-        this.getPanelOperation().resetBackground();
-        this.getPanelOperation().getClassButton().setBackground(this.getFocusColor());
-        this.getPanelDiagram().setOperation("Class");
-    }
-    
-    /**
-     * Method responsible for setting the Add Interface Operation.
-     */
-    public void setAddInterface() {
-        this.getPanelOperation().resetBackground();
-        this.getPanelOperation().getInterfaceButton().setBackground(this.getFocusColor());
-        this.getPanelDiagram().setOperation("Interface");
+            this.setOperation(this.getPanelOperation().getInterfaceButton(), "Interface");
     }
     
     @Override

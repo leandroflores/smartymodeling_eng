@@ -26,27 +26,9 @@ public class ControllerPanelUseCaseOperation extends ControllerPanelOperation {
     public void actionPerformed(ActionEvent event) {
         super.actionPerformed(event);
         if (this.getPanelOperation().getActorButton().equals(event.getSource()))
-            this.setAddActor();
+            this.setOperation(this.getPanelOperation().getActorButton(),   "Actor");
         else if (this.getPanelOperation().getUseCaseButton().equals(event.getSource()))
-            this.setAddUseCase();
-    }
-    
-    /**
-     * Method responsible for setting the Add Actor Operation.
-     */
-    public void setAddActor() {
-        this.getPanelOperation().resetBackground();
-        this.getPanelOperation().getActorButton().setBackground(this.getFocusColor());
-        this.getPanelDiagram().setOperation("Actor");
-    }
-    
-    /**
-     * Method responsible for setting the Add Use Case Operation.
-     */
-    public void setAddUseCase() {
-        this.getPanelOperation().resetBackground();
-        this.getPanelOperation().getUseCaseButton().setBackground(this.getFocusColor());
-        this.getPanelDiagram().setOperation("UseCase");
+            this.setOperation(this.getPanelOperation().getUseCaseButton(), "UseCase");
     }
 
     @Override

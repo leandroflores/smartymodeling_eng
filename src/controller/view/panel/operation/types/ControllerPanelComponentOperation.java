@@ -26,27 +26,9 @@ public class ControllerPanelComponentOperation extends ControllerPanelOperation 
     public void actionPerformed(ActionEvent event) {
         super.actionPerformed(event);
         if (this.getPanelOperation().getComponentButton().equals(event.getSource()))
-            this.setAddComponent();
+            this.setOperation(this.getPanelOperation().getComponentButton(), "Component");
         else if (this.getPanelOperation().getInterfaceButton().equals(event.getSource()))
-            this.setAddInterface();
-    }
-    
-    /**
-     * Method responsible for setting the Add Component Operation.
-     */
-    public void setAddComponent() {
-        this.getPanelOperation().resetBackground();
-        this.getPanelOperation().getComponentButton().setBackground(this.getFocusColor());
-        this.getPanelDiagram().setOperation("Component");
-    }
-    
-    /**
-     * Method responsible for setting the Add Interface Operation.
-     */
-    public void setAddInterface() {
-        this.getPanelOperation().resetBackground();
-        this.getPanelOperation().getInterfaceButton().setBackground(this.getFocusColor());
-        this.getPanelDiagram().setOperation("Interface");
+            this.setOperation(this.getPanelOperation().getInterfaceButton(), "Interface");
     }
 
     @Override

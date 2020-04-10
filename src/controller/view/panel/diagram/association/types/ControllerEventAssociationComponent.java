@@ -106,7 +106,7 @@ public class ControllerEventAssociationComponent extends ControllerEventAssociat
      */
     private String getCategory() {
         System.out.println("Type: " + this.panelDiagram.getType());
-        if (this.panelDiagram.getAssociationComboBox().getSelectedIndex() == 0)
+        if (this.panelDiagram.getPanelOperation().getAssociationComboBox().getSelectedIndex() == 0)
             return "provide";
         return "require";
     }

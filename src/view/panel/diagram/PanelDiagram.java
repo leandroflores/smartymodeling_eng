@@ -379,6 +379,26 @@ public abstract class PanelDiagram extends Panel {
     }
     
     /**
+     * Method responsible for returning the Selected Association.
+     * @return Selected Association.
+     */
+    public Association getSelectedAssociation() {
+        mxCell cell = (mxCell) this.graph.getSelectionCell();
+        String id   = this.getIdentifiers().get(cell);
+        return this.getDiagram().getAssociation(id);
+    }
+    
+    /**
+     * Method responsible for returning the Selected Element.
+     * @return Selected Element.
+     */
+    public Element getSelectedElement() {
+        mxCell cell = (mxCell) this.graph.getSelectionCell();
+        String id   = this.getIdentifiers().get(cell);
+        return this.getDiagram().getElement(id);
+    }
+    
+    /**
      * Method responsible for returning the Identifiers HashMap.
      * @return Identifiers HashMap.
      */

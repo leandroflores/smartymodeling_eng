@@ -4,6 +4,7 @@ import com.mxgraph.model.mxCell;
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import javax.swing.JButton;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
 import view.delete.ViewDeleteElement;
@@ -48,6 +49,17 @@ public abstract class ControllerPanelOperation extends ControllerPanel {
 
     @Override
     public void keyPressed(KeyEvent event) {}
+    
+    /**
+     * Method responsible for setting the Diagram Panel Operation.
+     * @param button Button Pressed.
+     * @param operation Button Operation.
+     */
+    protected void setOperation(JButton button, String operation) {
+        this.getPanelOperation().resetBackground();
+        button.setBackground(this.getFocusColor());
+        this.getPanelDiagram().setOperation(operation);
+    }
     
     /**
      * Method responsible for adding a New Variability.

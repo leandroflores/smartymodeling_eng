@@ -89,7 +89,7 @@ public class ControllerEventAssociationSequence extends ControllerEventAssociati
      * @return Message Category.
      */
     private String getCategory() {
-        if (this.panelDiagram.getAssociationComboBox().getSelectedIndex() == 0)
+        if (this.panelDiagram.getPanelOperation().getAssociationComboBox().getSelectedIndex() == 0)
             return "asynchronous";
         return "synchronous";
     }

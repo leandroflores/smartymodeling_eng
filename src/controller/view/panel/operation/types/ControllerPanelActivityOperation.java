@@ -26,51 +26,15 @@ public class ControllerPanelActivityOperation extends ControllerPanelOperation {
     public void actionPerformed(ActionEvent event) {
         super.actionPerformed(event);
         if (this.getPanelOperation().getInitialButton().equals(event.getSource()))
-            this.setAddInitial();
+            this.setOperation(this.getPanelOperation().getInitialButton(),  "Initial");
         else if (this.getPanelOperation().getActivityButton().equals(event.getSource()))
-            this.setAddActivity();
+            this.setOperation(this.getPanelOperation().getActivityButton(), "Activity");
         else if (this.getPanelOperation().getDecisionButton().equals(event.getSource()))
-            this.setAddDecision();
+            this.setOperation(this.getPanelOperation().getDecisionButton(), "Decision");
         else if (this.getPanelOperation().getFinalButton().equals(event.getSource()))
-            this.setAddFinal();
+            this.setOperation(this.getPanelOperation().getFinalButton(),    "Final");
     }
-    
-    /**
-     * Method responsible for setting the Add Initial Operation.
-     */
-    public void setAddInitial() {
-        this.getPanelOperation().resetBackground();
-        this.getPanelOperation().getInitialButton().setBackground(this.getFocusColor());
-        this.getPanelDiagram().setOperation("Initial");
-    }
-    
-    /**
-     * Method responsible for setting the Add Activity Operation.
-     */
-    public void setAddActivity() {
-        this.getPanelOperation().resetBackground();
-        this.getPanelOperation().getActivityButton().setBackground(this.getFocusColor());
-        this.getPanelDiagram().setOperation("Activity");
-    }
-    
-    /**
-     * Method responsible for setting the Add Decision Operation.
-     */
-    public void setAddDecision() {
-        this.getPanelOperation().resetBackground();
-        this.getPanelOperation().getDecisionButton().setBackground(this.getFocusColor());
-        this.getPanelDiagram().setOperation("Decision");
-    }
-    
-    /**
-     * Method responsible for setting the Add Final Operation.
-     */
-    public void setAddFinal() {
-        this.getPanelOperation().resetBackground();
-        this.getPanelOperation().getFinalButton().setBackground(this.getFocusColor());
-        this.getPanelDiagram().setOperation("Final");
-    }
-    
+
     @Override
     protected PanelActivityOperation getPanelOperation() {
         return (PanelActivityOperation) this.panel;

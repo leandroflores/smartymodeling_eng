@@ -26,16 +26,7 @@ public class ControllerPanelFeatureOperation extends ControllerPanelOperation {
     public void actionPerformed(ActionEvent event) {
         super.actionPerformed(event);
         if (this.getPanelOperation().getFeatureButton().equals(event.getSource()))
-            this.setAddFeature();
-    }
-    
-    /**
-     * Method responsible for setting the Add Feature Operation.
-     */
-    public void setAddFeature() {
-        this.getPanelOperation().resetBackground();
-        this.getPanelOperation().getFeatureButton().setBackground(this.getFocusColor());
-        this.getPanelDiagram().setOperation("Feature");
+            this.setOperation(this.getPanelOperation().getFeatureButton(), "Feature");
     }
     
     @Override

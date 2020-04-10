@@ -53,14 +53,14 @@ public final class PanelComponentDiagram extends PanelDiagram {
     
     @Override
     public void addElements() {
-        this.addComponentsUML();
-        this.addInterfacesUML();
+        this.addComponents_();
+        this.addInterfaces();
     }
     
     /**
      * Method responsible for adding the Diagram Components.
      */
-    private void addComponentsUML() {
+    private void addComponents_() {
         this.addStyle("styleImageComponent", this.getImageComponentStyle());
         for (ComponentUML component_ : this.getDiagram().getComponentsList()) {
             this.addStyle(component_.getStyleLabel(), component_.getStyle());
@@ -75,7 +75,7 @@ public final class PanelComponentDiagram extends PanelDiagram {
     /**
      * Method responsible for adding the Diagram Interfaces.
      */
-    private void addInterfacesUML() {
+    private void addInterfaces() {
         for (InterfaceUML interface_ : this.getDiagram().getInterfacesList()) {
             this.addStyle(interface_.getStyleLabel(), interface_.getStyle());
             String title = this.getTitle(interface_);
