@@ -46,6 +46,6 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
     private void select(mxCell cell, String id) {
 //        System.out.println("Id..: " + id);
 //        System.out.println("Cell: " + cell);
-//        System.out.println("Cell: " + cell.getId());
+//        System.out.println("Cell: " + cell.getIdentifier());
     }
 }

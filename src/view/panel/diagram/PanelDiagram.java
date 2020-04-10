@@ -232,6 +232,15 @@ public abstract class PanelDiagram extends Panel {
     }
     
     /**
+     * Method responsible for returning the Identifier by Object.
+     * @param  object Object.
+     * @return Identifier by Object.
+     */
+    public String getIdentifier(Object object) {
+        return this.getIdentifiers().get(object);
+    }
+    
+    /**
      * Method responsible for adding the Diagram Associations.
      */
     public void addAssociations() {

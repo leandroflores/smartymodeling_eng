@@ -193,6 +193,15 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
     }
     
     /**
+     * Method responsible for updating the Panel Diagram.
+     */
+    protected void update() {
+        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().getViewMenu().update();
+        this.getPanelDiagram().getViewMenu().setSave(false);
+    }
+    
+    /**
      * Method responsible for returning the Panel Diagram.
      * @return Panel Diagram.
      */

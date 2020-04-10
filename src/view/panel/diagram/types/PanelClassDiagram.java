@@ -17,7 +17,6 @@ import controller.view.panel.diagram.event.classes.ControllerEventSelect;
 import controller.view.panel.diagram.types.ControllerPanelClassDiagram;
 import java.awt.GridBagConstraints;
 import java.awt.event.MouseListener;
-import java.util.List;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Association;
 import model.structural.diagram.ClassDiagram;
@@ -201,7 +200,7 @@ public final class PanelClassDiagram extends PanelDiagram {
                    index += 1; 
             this.addIdentifier(cell, stereotype.getId());
             this.addIdentifier(cell.getId(), package_.getId());
-//            this.identifiers.put(cell.getId(), package_.getId());
+//            this.identifiers.put(cell.getIdentifier(), package_.getIdentifier());
         }
     }
     
@@ -318,7 +317,7 @@ public final class PanelClassDiagram extends PanelDiagram {
                    cell.setId(attribute.getId());
                    index += 1; 
             this.addElement(attribute, cell);
-            this.addIdentifier(cell.getId(), entity.getId());
+            this.addIdentifier(cell.getId(), attribute.getId());
         }
     }
     
@@ -328,10 +327,10 @@ public final class PanelClassDiagram extends PanelDiagram {
      * @param entity Entity.
      */
     private void addNewMethodCell(mxCell parent, Entity entity) {
-        this.graph.getStylesheet().putCellStyle("newMethodStyle", entity.getNewMethodStyle());
+        this.addStyle("newMethodStyle", entity.getNewMethodStyle());
         mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(newMethod)", "", 5, entity.getMethodsPosition() + 5, 10, 5, "newMethodStyle");
                cell.setConnectable(false);
-        this.identifiers.put(cell, entity.getId());
+        this.addIdentifier(cell, entity.getId());
     }
     
     /**
@@ -340,72 +339,71 @@ public final class PanelClassDiagram extends PanelDiagram {
      * @param entity Entity.
      */
     private void addMethodsCells(mxCell parent, Entity entity) {
-        List<MethodUML>     methods = entity.getMethodsList();
-        for (int i = 0; i < methods.size(); i++) {
-            MethodUML method = methods.get(i);
-            this.graph.getStylesheet().putCellStyle(method.getStyleLabel(), method.getStyle());
-            mxCell    cell   = (mxCell) this.graph.insertVertex(parent, method.getId(), method.getCompleteSignature(), 5, entity.getMethodsPosition() + 10 + (i * 16), entity.getWidth() - 10, 15, method.getStyleLabel());
-                      cell.setConnectable(false);
-                      cell.setId(method.getId());
-            this.identifiers.put(cell,         method.getId());
-            this.identifiers.put(cell.getId(), method.getId());
-            this.objects.put(method.getId(),   cell);
+        Integer index = 0;
+        for (MethodUML method : entity.getMethodsList()) {
+            this.addStyle(method.getStyleLabel(), method.getStyle());
+            mxCell cell   = (mxCell) this.graph.insertVertex(parent, method.getId(), method.getCompleteSignature(), 5, entity.getMethodsPosition() + 10 + (index * 16), entity.getWidth() - 10, 15, method.getStyleLabel());
+                   cell.setConnectable(false);
+                   cell.setId(method.getId());
+                   index += 1; 
+            this.addElement(method, cell);
+            this.addIdentifier(cell.getId(), method.getId());
         }
     }
     
     @Override
     public void addAssociations() {
-        for (Association association : this.diagram.getAssociationsList()) {
-            this.graph.getStylesheet().putCellStyle(association.getStyleLabel(), association.getStyle());
-            this.addNormalAssociation(association);
-            if (association instanceof AssociationUML)
-                this.addAssociationUML((AssociationUML) association); 
+        for (Association association : this.getDiagram().getAssociationsList())
+            this.addAssociation(association);
+    }
+    
+    /**
+     * Method responsible for adding the Association.
+     * @param association Association.
+     */
+    private void addAssociation(Association association) {
+        this.addStyle(association.getStyleLabel(), association.getStyle());
+        mxCell     edge     = (mxCell) this.graph.insertEdge(this.parent, association.getId(), association.getTitle(), this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
+        mxGeometry geometry = ((mxGraphModel) (this.graph.getModel())).getGeometry(edge);
+                   geometry.setPoints(association.getPoints());
+        this.getModel().setGeometry(edge, geometry);
+        this.addAssociation(association, edge);
+        this.addCardinality(association);
+    }
+    
+    /**
+     * Method responsible for adding the Cardinality.
+     * @param association Association.
+     */
+    private void addCardinality(Association association) {
+        if (association instanceof AssociationUML) {
+            this.addStyle(((AssociationUML) association).getCardinalityLabel(), 
+                          ((AssociationUML) association).getCardinalityStyle());
+            this.addSourceLabel((AssociationUML) association);
+            this.addTargetLabel((AssociationUML) association);
         }
     }
     
     /**
-     * Method responsible for adding the Normal Association.
-     * @param association Association.
-     */
-    private void addNormalAssociation(Association association) {
-        mxCell     edge     = (mxCell) this.graph.insertEdge(this.parent, association.getId(), association.getTitle(), this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
-        mxGeometry geometry = ((mxGraphModel) (this.graph.getModel())).getGeometry(edge);
-                   geometry.setPoints(association.getPoints());
-        ((mxGraphModel) (this.graph.getModel())).setGeometry(edge, geometry);
-        this.identifiers.put(edge, association.getId());
-        this.objects.put(association.getId(), edge);
-    }
-    
-    /**
-     * Method responsible for adding the Association UML.
-     * @param associationUML Association UML.
-     */
-    private void addAssociationUML(AssociationUML associationUML) {
-        this.graph.getStylesheet().putCellStyle(associationUML.getCardinalityLabel(), associationUML.getCardinalityStyle());
-        this.addSourceLabel(associationUML);
-        this.addTargetLabel(associationUML);
-    }
-    
-    /**
      * Method responsible for adding the Source Label.
-     * @param associationUML Association UML.
+     * @param association Association UML.
      */
-    private void addSourceLabel(AssociationUML associationUML) {
-        if (associationUML.isDirection() == false) {
-            mxCell source = (mxCell) this.graph.insertVertex(this.parent, associationUML.getId() + "(source)", associationUML.getSourceLabel(), associationUML.getSourceX(), associationUML.getSourceY(), 30, 20, associationUML.getCardinalityLabel());
+    private void addSourceLabel(AssociationUML association) {
+        if (!association.isDirection()) {
+            mxCell source = (mxCell) this.graph.insertVertex(this.parent, association.getId() + "(source)", association.getSourceLabel(), association.getSourceX(), association.getSourceY(), 30, 20, association.getCardinalityLabel());
                    source.setConnectable(false);
-            this.identifiers.put(source, associationUML.getId() + "(source)");
+            this.addIdentifier(source, association.getId() + "(source)");
         }
     }
     
     /**
      * Method responsible for adding the Target Label.
-     * @param associationUML Association UML. 
+     * @param association Association UML. 
      */
-    public void addTargetLabel(AssociationUML associationUML) {
-        mxCell target = (mxCell) this.graph.insertVertex(this.parent, associationUML.getId() + "(target)", associationUML.getTargetLabel(), associationUML.getTargetX(), associationUML.getTargetY(), 30, 20, associationUML.getCardinalityLabel());
+    public void addTargetLabel(AssociationUML association) {
+        mxCell target = (mxCell) this.graph.insertVertex(this.parent, association.getId() + "(target)", association.getTargetLabel(), association.getTargetX(), association.getTargetY(), 30, 20, association.getCardinalityLabel());
                target.setConnectable(false);
-        this.identifiers.put(target, associationUML.getId() + "(target)");
+        this.addIdentifier(target, association.getId() + "(target)");
     }
     
     @Override
@@ -453,10 +451,11 @@ public final class PanelClassDiagram extends PanelDiagram {
      * @param direction Direction Flag.
      */
     private void setAssociationStyle(boolean direction) {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "0");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    direction ? mxConstants.ARROW_OPEN : mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED, "0");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_FONTCOLOR,   "#000000");
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    direction ? mxConstants.ARROW_OPEN : mxConstants.ARROW_SPACING);
     }
     
     /**
@@ -464,12 +463,13 @@ public final class PanelClassDiagram extends PanelDiagram {
      * @param direction Direction Flag.
      */
     private void setAggregationStyle(boolean direction) {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "0");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    direction ? mxConstants.ARROW_OPEN : mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTSIZE,   "15");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_DIAMOND);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,    "0");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTSIZE, "15");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTFILL, "0");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_FONTCOLOR,   "#000000");
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTFILL,   "0");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_DIAMOND);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    direction ? mxConstants.ARROW_OPEN : mxConstants.ARROW_SPACING);
     }
     
     /**
@@ -477,24 +477,26 @@ public final class PanelClassDiagram extends PanelDiagram {
      * @param direction Direction Flag.
      */
     private void setCompositionStyle(boolean direction) {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "0");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    direction ? mxConstants.ARROW_OPEN : mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTSIZE,   "15");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_DIAMOND);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,    "0");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTFILL, "1");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTSIZE, "15");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_FONTCOLOR,   "#000000");
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTFILL,   "1");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_DIAMOND);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    direction ? mxConstants.ARROW_OPEN : mxConstants.ARROW_SPACING);
     }
     
     /**
      * Method responsible for setting the Realization Style.
      */
     private void setRealizationStyle() {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "1");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDSIZE,     "10");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_BLOCK);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,    "1");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDSIZE,   "10");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTFILL, "0");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_FONTCOLOR,   "#000000");
         this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTFILL,   "0");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_BLOCK);
     }
     
     @Override
