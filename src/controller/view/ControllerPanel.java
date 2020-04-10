@@ -15,7 +15,7 @@ import view.Panel;
  * @see    view.Panel
  */
 public abstract class ControllerPanel extends Controller {
-    private final Panel panel;
+    protected final Panel panel;
     
     /**
      * Default constructor method of Class.

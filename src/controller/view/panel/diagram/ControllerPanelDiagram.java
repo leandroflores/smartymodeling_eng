@@ -2,7 +2,6 @@ package controller.view.panel.diagram;
 
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
-import com.mxgraph.model.mxGraphModel;
 import controller.view.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -24,7 +23,6 @@ import view.panel.diagram.PanelDiagram;
  * @see    view.panel.diagram.PanelDiagram
  */
 public abstract class ControllerPanelDiagram extends ControllerPanel implements MouseListener {
-    private final PanelDiagram panelDiagram;
 
     /**
      * Default constructor method of Class.
@@ -32,47 +30,34 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
      */
     public ControllerPanelDiagram(PanelDiagram panel) {
         super(panel);
-        this.panelDiagram = panel;
     }
 
     @Override
-    public void actionPerformed(ActionEvent event) {
-        if (this.panelDiagram.getClickButton().equals(event.getSource()))
-            this.panelDiagram.updateDiagram();
-        else if (this.panelDiagram.getVariabilityButton().equals(event.getSource()))
-            this.addVariability();
-        else if (this.panelDiagram.getEditButton().equals(event.getSource()))
-            this.edit();
-        else if (this.panelDiagram.getDeleteButton().equals(event.getSource()))
-            this.delete();
-        else if (this.panelDiagram.getAssociationComboBox().equals(event.getSource()))
-            this.panelDiagram.setType(this.panelDiagram.getAssociationComboBox().getSelectedIndex());
-        this.panelDiagram.getViewMenu().setSave(false);
-    }
+    public void actionPerformed(ActionEvent event) {}
     
     @Override
     public void keyPressed(KeyEvent event) {
         switch (event.getKeyCode()) {
-            case DELETE:
-                this.delete();
-                this.panelDiagram.getViewMenu().setSave(false);
-                break;
             case F2:
                 this.edit();
-                this.panelDiagram.getViewMenu().setSave(false);
+                this.getPanelDiagram().getViewMenu().setSave(false);
+                break;
+            case DELETE:
+                this.delete();
+                this.getPanelDiagram().getViewMenu().setSave(false);
                 break;
             case KeyEvent.VK_DOWN:
             case KeyEvent.VK_UP:
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_RIGHT:
                 this.move(event);
-                this.panelDiagram.getViewMenu().setSave(false);
+                this.getPanelDiagram().getViewMenu().setSave(false);
                 break;
             default:
                 break;
         }
     }
-    
+
     @Override
     public void mouseClicked(MouseEvent event) {}
     
@@ -81,7 +66,7 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
 
     @Override
     public void mouseReleased(MouseEvent event) {
-        if (this.panelDiagram.getOperation().equalsIgnoreCase("Click"))
+        if (this.getPanelDiagram().getOperation().equalsIgnoreCase("Click"))
             this.update(event);
     }
     
@@ -90,24 +75,24 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
      * @param event Mouse Event.
      */
     public void update(MouseEvent event) {
-        if (this.panelDiagram.getGraph().getSelectionCell() != null) {
-            mxCell cell = (mxCell) this.panelDiagram.getGraph().getSelectionCell();
-            String id   = this.panelDiagram.getIdentifiers().get(cell);
-            if (this.panelDiagram.getDiagram().getAssociation(id) != null)
-                this.updatePoints(this.panelDiagram.getDiagram().getAssociation(id), cell);
-            this.panelDiagram.updateUI();
+        if (this.getPanelDiagram().getGraph().getSelectionCell() != null) {
+            mxCell cell = (mxCell) this.getPanelDiagram().getGraph().getSelectionCell();
+            String id   = this.getPanelDiagram().getIdentifiers().get(cell);
+            if (this.getPanelDiagram().getDiagram().getAssociation(id) != null)
+                this.updatePoints(this.getPanelDiagram().getDiagram().getAssociation(id), cell);
         }
     }
     
     /**
-     * Method responsible for updating the Association Points from a Selected Cell.
+     * Method responsible for updating the Association Points of a Selected Cell.
      * @param association Association.
      * @param cell Selected Cell.
      */
     private void updatePoints(Association association, mxCell cell) {
-        mxGeometry geometry = ((mxGraphModel) (this.panelDiagram.getGraph().getModel())).getGeometry(cell);
+        mxGeometry geometry = this.getPanelDiagram().getModel().getGeometry(cell);
                    association.setPoints(geometry.getPoints());
-        this.panelDiagram.getViewMenu().setSave(false);
+        this.getPanelDiagram().getViewMenu().setSave(false);
+        this.getPanelDiagram().updateUI();
     }
 
     @Override
@@ -117,102 +102,101 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
     public void mouseExited(MouseEvent event) {}
     
     /**
-     * Method responsible for defining the Add Variability Operation.
+     * Method responsible for adding a New Variability.
      */
     public void addVariability() {
-        this.panelDiagram.resetBackground();
-        this.panelDiagram.getClickButton().setBackground(this.getDefaultColor());
-        this.panelDiagram.setOperation("Click");
-        if (this.panelDiagram.getDiagram().getElementsList().isEmpty() == false) {
-            new ViewNewVariability(this.panelDiagram.getViewMenu().getPanelModeling(), this.panelDiagram.getDiagram()).setVisible(true);
-            this.panelDiagram.getViewMenu().setSave(false);
-        }
+//        this.getPanelOperation().resetBackground();
+//        this.getPanelOperation().getClickButton().setBackground(this.getDefaultColor());
+        this.getPanelDiagram().setOperation("Click");
+        if (!this.getPanelDiagram().getDiagram().getElementsList().isEmpty())
+            new ViewNewVariability(this.getPanelDiagram().getViewMenu().getPanelModeling(), this.getPanelDiagram().getDiagram()).setVisible(true);
     }
     
     /**
-     * Method responsible for moving the Element on Diagram.
-     * @param event Key Event.
-     */
-    public void move(KeyEvent event) {
-        mxCell  cell    = (mxCell) this.panelDiagram.getGraph().getSelectionCell();
-        String  id      = this.panelDiagram.getIdentifiers().get(cell);
-        Element element = this.panelDiagram.getDiagram().getElement(id);
-        if (element != null) {
-            if (event.getKeyCode() == KeyEvent.VK_UP)
-                element.dy(-10);
-            if (event.getKeyCode() == KeyEvent.VK_DOWN)
-                element.dy(10);
-            if (event.getKeyCode() == KeyEvent.VK_LEFT)
-                element.dx(-10);
-            if (event.getKeyCode() == KeyEvent.VK_RIGHT)
-                element.dx(10);
-            this.panelDiagram.updateDiagram();
-            this.panelDiagram.getGraph().setSelectionCell(this.panelDiagram.getObjects().get(element.getId()));
-        }
-    }
-    
-    /**
-     * Method responsible for editing the Cell Selected.
+     * Method responsible for Editing the Cell Selected.
      */
     public void edit() {
-        if (this.panelDiagram.getGraph() != null) {
-            mxCell cell = (mxCell) this.panelDiagram.getGraph().getSelectionCell();
-            String id   = this.panelDiagram.getIdentifiers().get(cell);
-            if (this.panelDiagram.getDiagram().getElement(id) != null)
-                  this.panelDiagram.getComponent().startEditingAtCell(cell);
-            this.panelDiagram.setClick();
-        }
+        mxCell cell = (mxCell) this.getPanelDiagram().getGraph().getSelectionCell();
+        String id   = this.getPanelDiagram().getIdentifiers().get(cell);
+        if (this.getPanelDiagram().getDiagram().getElement(id) != null)
+            this.getPanelDiagram().getComponent().startEditingAtCell(cell);
+        this.getPanelDiagram().setClick();
     }
     
     /**
-     * Method responsible for deleting the Cell Selected.
+     * Method responsible for Deleting the Cell Selected.
      */
     public void delete() {
-        if (this.panelDiagram.getGraph() != null) {
-            mxCell cell = (mxCell) this.panelDiagram.getGraph().getSelectionCell();
-            String id   = this.panelDiagram.getIdentifiers().get(cell);
-            if (this.panelDiagram.getDiagram().getElement(id) != null)
-                this.delete(this.panelDiagram.getDiagram().getElement(id));
-            else if (this.panelDiagram.getDiagram().getAssociation(id) != null)
-                this.delete(this.panelDiagram.getDiagram().getAssociation(id));
-        }
+        mxCell cell = (mxCell) this.getPanelDiagram().getGraph().getSelectionCell();
+        String id   = this.getPanelDiagram().getIdentifiers().get(cell);
+        if (this.getPanelDiagram().getDiagram().getElement(id) != null)
+            this.delete(this.getPanelDiagram().getDiagram().getElement(id));
+        else if (this.getPanelDiagram().getDiagram().getAssociation(id) != null)
+            this.delete(this.getPanelDiagram().getDiagram().getAssociation(id));
     }
     
     /**
-     * Method responsible for removing a Element.
+     * Method responsible for Deleting a Element.
      * @param element Element.
      */
     private void delete(Element element) {
-        new ViewDeleteElement(this.panelDiagram.getViewMenu().getPanelModeling(), element).setVisible(true);
-        this.panelDiagram.updateDiagram();
+        new ViewDeleteElement(this.getPanelDiagram().getViewMenu().getPanelModeling(), element).setVisible(true);
+        this.getPanelDiagram().updateDiagram();
     }
     
     /**
-     * Method responsible for removing a Association.
+     * Method responsible for Deleting a Association.
      * @param association Association.
      */
     private void delete(Association association) {
-        this.panelDiagram.getDiagram().removeAssociation(association);
-        this.panelDiagram.updateDiagram();
+        this.getPanelDiagram().getDiagram().removeAssociation(association);
+        this.getPanelDiagram().updateDiagram();
     }
     
     /**
-     * Method responsible for returning Element.
-     * @return Element.
+     * Method responsible for Moving by Key Event.
+     * @param event Key Event.
      */
-    private Element getElement() {
-        Object objeto = this.panelDiagram.getComponent().getGraph().getSelectionCell();
-        if (objeto != null)
-            return this.getElement(this.panelDiagram.getIdentifiers().get(objeto));
-        return null;
+    public void move(KeyEvent event) {
+        mxCell  cell    = (mxCell) this.getPanelDiagram().getGraph().getSelectionCell();
+        String  id      = this.getPanelDiagram().getIdentifiers().get(cell);
+        Element element = this.getPanelDiagram().getDiagram().getElement(id);
+        if (element != null) {
+            this.move(element, event);
+            this.getPanelDiagram().updateDiagram();
+            this.getPanelDiagram().getGraph().setSelectionCell(this.getPanelDiagram().getObjects().get(element.getId()));
+        }
     }
     
     /**
-     * Method responsible for returning Diagram Element.
-     * @param  id Element Id.
-     * @return Diagram Element.
+     *  Method responsible for Moving a Element by Key Event.
+     * @param element Selected Element.
+     * @param event Key Event.
      */
-    private Element getElement(String id) {
-        return this.panelDiagram.getDiagram().getElement(id);
+    protected void move(Element element, KeyEvent event) {
+        switch (event.getKeyCode()) {
+            case UP:
+                element.dy(-10);
+                break;
+            case DOWN:
+                element.dy(10);
+                break;
+            case LEFT:
+                element.dx(-10);
+                break;
+            case RIGHT:
+                element.dx(10);
+                break;
+            default:
+                break;
+        }
+    }
+    
+    /**
+     * Method responsible for returning the Panel Diagram.
+     * @return Panel Diagram.
+     */
+    protected PanelDiagram getPanelDiagram() {
+        return (PanelDiagram) this.panel;
     }
 }

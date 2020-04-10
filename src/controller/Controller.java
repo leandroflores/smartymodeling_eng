@@ -30,6 +30,10 @@ public abstract class Controller implements ActionListener, KeyListener {
     protected static final int   F10    = KeyEvent.VK_F10;
     protected static final int   F11    = KeyEvent.VK_F11;
     protected static final int   F12    = KeyEvent.VK_F12;
+    protected static final int   DOWN   = KeyEvent.VK_DOWN;
+    protected static final int   LEFT   = KeyEvent.VK_LEFT;
+    protected static final int   RIGHT  = KeyEvent.VK_RIGHT;
+    protected static final int   UP     = KeyEvent.VK_UP;
     
     /**
      * Abstract Method responsible for actions.

@@ -52,7 +52,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
         super(view, diagram);
         this.diagram    = diagram;
         this.controller = new ControllerPanelSequenceDiagram(this);
-        this.initComponents();
+        this.setDefaultProperties();
         this.addComponents();
         this.getClickButton().setBackground(this.getFocusColor());
     }

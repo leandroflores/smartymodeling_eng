@@ -1,7 +1,6 @@
 package controller.view.panel.diagram.types;
 
 import controller.view.panel.diagram.ControllerPanelDiagram;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import model.structural.diagram.usecase.base.ActorUML;
 import model.structural.diagram.usecase.base.UseCaseUML;
@@ -16,7 +15,6 @@ import view.panel.diagram.types.PanelUseCaseDiagram;
  * @see    view.panel.diagram.types.PanelUseCaseDiagram
  */
 public class ControllerPanelUseCaseDiagram extends ControllerPanelDiagram {
-    private final PanelUseCaseDiagram panelDiagram;
 
     /**
      * Default constructor method of Class.
@@ -24,55 +22,27 @@ public class ControllerPanelUseCaseDiagram extends ControllerPanelDiagram {
      */
     public ControllerPanelUseCaseDiagram(PanelUseCaseDiagram panel) {
         super(panel);
-        this.panelDiagram = panel;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent event) {
-        super.actionPerformed(event);
-        if (this.panelDiagram.getActorButton().equals(event.getSource()))
-            this.setAddActor();
-        else if (this.panelDiagram.getUseCaseButton().equals(event.getSource()))
-            this.setAddUseCase();
     }
     
     @Override
     public void mousePressed(MouseEvent event) {
-        if (this.panelDiagram.getOperation().equals("Actor"))
+        if (this.getPanelDiagram().getOperation().equals("Actor"))
             this.addActor(event);
-        else if (this.panelDiagram.getOperation().equals("UseCase"))
+        else if (this.getPanelDiagram().getOperation().equals("UseCase"))
             this.addUseCase(event);
     }
     
     /**
-     * Method responsible for defining Add Actor Operation.
-     */
-    public void setAddActor() {
-        this.panelDiagram.resetBackground();
-        this.panelDiagram.getActorButton().setBackground(this.getFocusColor());
-        this.panelDiagram.setOperation("Actor");
-    }
-    
-    /**
-     * Method responsible for defining Add Use Case Operation.
-     */
-    public void setAddUseCase() {
-        this.panelDiagram.resetBackground();
-        this.panelDiagram.getUseCaseButton().setBackground(this.getFocusColor());
-        this.panelDiagram.setOperation("UseCase");
-    }
-
-    /**
-     * Method responsible for adding a new Actor.
+     * Method responsible for adding a New Actor.
      * @param event Mouse Event.
      */
     public void addActor(MouseEvent event) {
         ActorUML actor = new ActorUML();
                  actor.setPosition(event.getX(), event.getY());
-        this.panelDiagram.getDiagram().addActor(actor);
+        this.getPanelDiagram().getDiagram().addActor(actor);
                  actor.setDefaultName();
-        this.panelDiagram.updateDiagram();
-        this.panelDiagram.getViewMenu().update();
+        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().getViewMenu().update();
     }
     
     /**
@@ -82,9 +52,14 @@ public class ControllerPanelUseCaseDiagram extends ControllerPanelDiagram {
     public void addUseCase(MouseEvent event) {
         UseCaseUML useCase = new UseCaseUML();
                    useCase.setPosition(event.getX(), event.getY());
-        this.panelDiagram.getDiagram().addUseCase(useCase);
+        this.getPanelDiagram().getDiagram().addUseCase(useCase);
                    useCase.setDefaultName();
-        this.panelDiagram.updateDiagram();
-        this.panelDiagram.getViewMenu().update();
+        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().getViewMenu().update();
+    }
+    
+    @Override
+    protected PanelUseCaseDiagram getPanelDiagram() {
+        return (PanelUseCaseDiagram) this.panel;
     }
 }

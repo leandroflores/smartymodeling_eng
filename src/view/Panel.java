@@ -548,6 +548,54 @@ public abstract class Panel extends JPanel {
     }
     
     /**
+     * Method responsible for returning the Start Constraint.
+     * @return Start Constraint.
+     */
+    protected GridBagConstraints getStartConstraint() {
+        return this.setStartConstraint(new GridBagConstraints());
+    }
+    
+    /**
+     * Method responsible for setting the Start Constraint.
+     * @param  constraint Grid Bag Constraint.
+     * @return New Start Constraint.
+     */
+    protected GridBagConstraints setStartConstraint(GridBagConstraints constraint) {
+               constraint.anchor  = GridBagConstraints.PAGE_START;
+               constraint.fill    = GridBagConstraints.HORIZONTAL;
+               constraint.gridx   = 0;
+               constraint.gridy   = 0;
+               constraint.weighty = 1.0;
+               constraint.weightx = 1.0;
+        return constraint;
+    }
+    
+    /**
+     * Method responsible for returning the Body Constraint.
+     * @return Body Constraint.
+     */
+    protected GridBagConstraints getBodyConstraint() {
+        return this.setBodyConstraint(new GridBagConstraints());
+    }
+    
+    /**
+     * Method responsible for setting the Body Constraint.
+     * @param  constraint Grid Bag Constraint.
+     * @return New Body Constraint.
+     */
+    protected GridBagConstraints setBodyConstraint(GridBagConstraints constraint) {
+               constraint.anchor     = GridBagConstraints.NORTH;
+               constraint.fill       = GridBagConstraints.BOTH;
+               constraint.gridx      = 0;
+               constraint.gridy      = 1;
+               constraint.gridheight = GridBagConstraints.RELATIVE;
+               constraint.gridwidth  = GridBagConstraints.RELATIVE;
+               constraint.weighty    = 10.0;
+               constraint.weightx    = 1.0;
+        return constraint;       
+    }
+    
+    /**
      * Method responsible for adding the Panel Footer.
      */
     public void addFooter() {

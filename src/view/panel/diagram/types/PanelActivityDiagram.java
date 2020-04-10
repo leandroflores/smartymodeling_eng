@@ -10,13 +10,10 @@ import controller.view.panel.diagram.event.ControllerEventPoints;
 import controller.view.panel.diagram.event.ControllerEventResize;
 import controller.view.panel.diagram.event.activity.ControllerEventChange;
 import controller.view.panel.diagram.types.ControllerPanelActivityDiagram;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JSeparator;
+import java.awt.GridBagConstraints;
 import model.structural.diagram.ActivityDiagram;
 import view.panel.diagram.PanelDiagram;
+import view.panel.operation.types.PanelActivityOperation;
 import view.structural.ViewMenu;
 
 /**
@@ -29,7 +26,6 @@ import view.structural.ViewMenu;
  * @see    view.panel.diagram.PanelDiagram
  */
 public final class PanelActivityDiagram extends PanelDiagram {
-    private final ActivityDiagram diagram;
 
     /**
      * Default constructor method of Class.
@@ -38,55 +34,16 @@ public final class PanelActivityDiagram extends PanelDiagram {
      */
     public PanelActivityDiagram(ViewMenu view, ActivityDiagram diagram) {
         super(view, diagram);
-        this.diagram    = diagram;
         this.controller = new ControllerPanelActivityDiagram(this);
-        this.initComponents();
+        this.setDefaultProperties();
         this.addComponents();
-        this.getClickButton().setBackground(this.getFocusColor());
-    }
-    
-    @Override
-    public void addComponents() {
-        this.addOperationsPanel();
-        this.addModelingPanel();
-        this.addControllers();
+        this.setClick();
     }
     
     @Override
     public void addOperationsPanel() {
-        JPanel  panel = new JPanel();
-                panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-                panel.add(this.createButton("clickButton",       "", "Select",          "click.png"));
-                panel.add(this.createButton("initialButton",     "", "New Initial",     "diagram/activity/initial.png"));
-                panel.add(this.createButton("activityButton",    "", "New Activity",    "diagram/activity/activity.png"));
-                panel.add(this.createButton("decisionButton",    "", "New Decision",    "diagram/activity/decision.png"));
-                panel.add(this.createButton("finalButton",       "", "New Final",       "diagram/activity/final.png"));
-                panel.add(this.createButton("variabilityButton", "", "New Variability", "variability.png"));
-                panel.add(this.createButton("editButton",        "", "Edit",            "edit.png"));
-                panel.add(this.createButton("deleteButton",      "", "Delete",          "delete.png"));
-                panel.add(this.createComboBox("associationComboBox", this.getAssociationItems(), 50));
-       this.add(panel, BorderLayout.PAGE_START);
-       this.add(new JSeparator(), BorderLayout.PAGE_END);
-       this.getClickButton().setBackground(this.getFocusColor());
-    }
-    
-    @Override
-    public Object[] getAssociationItems() {
-        Object[] items  = {
-            this.getAssociationImage("activity/flow"),
-            this.getAssociationImage("dependency"),
-            this.getAssociationImage("requires"),
-            this.getAssociationImage("mutex")};
-        return   items;
-    }
-    
-    @Override
-    public void resetBackground() {
-        this.getClickButton().setBackground(this.getDefaultColor());
-        this.getInitialButton().setBackground(this.getDefaultColor());
-        this.getActivityButton().setBackground(this.getDefaultColor());
-        this.getDecisionButton().setBackground(this.getDefaultColor());
-        this.getFinalButton().setBackground(this.getDefaultColor());
+        this.panel = new PanelActivityOperation(this);
+        this.add(this.panel, this.setStartConstraint(new GridBagConstraints()));
     }
     
     @Override
@@ -119,7 +76,7 @@ public final class PanelActivityDiagram extends PanelDiagram {
     }
     
     @Override
-     public void addControllers() {
+    public void addControllers() {
         this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationActivity(this));
         this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
         this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
@@ -128,42 +85,15 @@ public final class PanelActivityDiagram extends PanelDiagram {
         
         this.component.getGraphControl().addMouseListener(new ControllerEventFocus(this));
         this.component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
-     }
+    }
     
     @Override
     public ActivityDiagram getDiagram() {
-        return this.diagram;
+        return (ActivityDiagram) this.diagram;
     }
     
-    /**
-     * Method responsible for returning the Initial Button.
-     * @return Initial Button.
-     */
-    public JButton getInitialButton() {
-        return this.buttons.get("initialButton");
-    }
-    
-    /**
-     * Method responsible for returning the Activity Button.
-     * @return Activity Button.
-     */
-    public JButton getActivityButton() {
-        return this.buttons.get("activityButton");
-    }
-    
-    /**
-     * Method responsible for returning the Decision Button.
-     * @return Decision Button.
-     */
-    public JButton getDecisionButton() {
-        return this.buttons.get("decisionButton");
-    }
-    
-    /**
-     * Method responsible for returning the Final Button.
-     * @return Final Button.
-     */
-    public JButton getFinalButton() {
-        return this.buttons.get("finalButton");
+    @Override
+    public PanelActivityOperation getPanelOperation() {
+        return (PanelActivityOperation) this.panel;
     }
 }

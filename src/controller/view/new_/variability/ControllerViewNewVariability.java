@@ -91,6 +91,7 @@ public class ControllerViewNewVariability extends ControllerViewNew implements C
         this.viewNewVariability.getDiagram().addVariability(variability);
         this.viewNewVariability.getDiagram().updateElementsStereotype();
         this.viewNewVariability.getViewMenu().getPanelModeling().updateDiagram(this.viewNewVariability.getDiagram());
+        this.viewNewVariability.getViewMenu().setSave(false);
         this.close();
     }
 }

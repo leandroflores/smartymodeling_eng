@@ -1,5 +1,6 @@
 package view.panel.operation.types;
 
+import controller.view.panel.operation.types.ControllerPanelUseCaseOperation;
 import javax.swing.JButton;
 import view.panel.diagram.types.PanelUseCaseDiagram;
 import view.panel.operation.PanelOperation;
@@ -9,6 +10,7 @@ import view.panel.operation.PanelOperation;
  * <p>Class responsible for defining a Panel for <b>Use Case Operation Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  09/04/2019
+ * @see    controller.view.panel.operation.types.ControllerPanelUseCaseOperation
  * @see    view.panel.operation.PanelOperation
  * @see    view.panel.diagram.types.PanelUseCaseDiagram
  */
@@ -20,6 +22,7 @@ public final class PanelUseCaseOperation extends PanelOperation {
      */
     public PanelUseCaseOperation(PanelUseCaseDiagram panel) {
         super(panel);
+        this.controller = new ControllerPanelUseCaseOperation(this);
         this.setDefaultProperties();
         this.addComponents();
     }

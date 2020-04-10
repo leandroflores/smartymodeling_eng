@@ -11,21 +11,15 @@ import controller.view.panel.diagram.event.ControllerEventPoints;
 import controller.view.panel.diagram.event.ControllerEventSelect;
 import controller.view.panel.diagram.event.feature.ControllerEventResize;
 import controller.view.panel.diagram.types.ControllerPanelFeatureDiagram;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JPanel;
 import model.structural.base.Element;
 import model.structural.diagram.FeatureDiagram;
 import view.panel.diagram.PanelDiagram;
+import view.panel.operation.types.PanelFeatureOperation;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelUseCaseDiagram</b>.</p>
+ * <p>Class of View <b>PanelFeatureDiagram</b>.</p>
  * <p>Class responsible for defining the <b>Feature Diagram Panel</b> of SMartyModeling.</p>
  * @author Henrique
  * @since  11/02/2020
@@ -35,7 +29,6 @@ import view.structural.ViewMenu;
  * @see    view.panel.diagram.PanelDiagram
  */
 public final class PanelFeatureDiagram extends PanelDiagram {
-    private final FeatureDiagram diagram;
 
     /**
      * Default constructor method of Class.
@@ -44,54 +37,23 @@ public final class PanelFeatureDiagram extends PanelDiagram {
      */
     public PanelFeatureDiagram(ViewMenu view, FeatureDiagram diagram) {
         super(view, diagram);
-        this.diagram    = diagram;
         this.controller = new ControllerPanelFeatureDiagram(this);
-        this.initComponents();
+        this.setDefaultProperties();
         this.addComponents();
-        this.getClickButton().setBackground(this.getFocusColor());
+        this.setClick();
     }
     
     @Override
     public void addComponents() {
-//        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setLayout(new GridBagLayout());
-        this.addOperationsPanel();
-        this.addModelingPanel();
+        super.addComponents();
         this.graph.setAllowLoops(false);
-        this.addControllers();
     }
     
     @Override
     public void addOperationsPanel() {
-        JPanel  panel = new JPanel();
-                panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-                panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
-                panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                panel.add(this.createButton("clickButton",       "", "Select",      "click.png"));
-                panel.add(this.createButton("featureButton",     "", "New Feature", "diagram/activity/activity.png"));
-                panel.add(this.createButton("variabilityButton", "", "",            "variability.png"));
-                panel.add(this.createButton("editButton",        "", "Edit",        "edit.png"));
-                panel.add(this.createButton("deleteButton",      "", "Delete",      "delete.png"));
-                panel.add(this.createComboBox("associationComboBox", this.getAssociationItems(), 50));
-       this.add(panel, this.setPageStart(new GridBagConstraints()));
-       this.getVariabilityButton().setVisible(false);
-       this.getClickButton().setBackground(this.getFocusColor());
-    }
-    
-    @Override
-    public Object[] getAssociationItems() {
-        Object[] items  = {
-                 this.getAssociationImage("feature/mandatory"),
-                 this.getAssociationImage("feature/optional"),
-                 this.getAssociationImage("feature/inclusive"),
-                 this.getAssociationImage("feature/exclusive")};
-        return   items;
-    }
-    
-    @Override
-    public void resetBackground() {
-        this.getClickButton().setBackground(this.getDefaultColor());
-        this.getFeatureButton().setBackground(this.getDefaultColor());
+        this.panel = new PanelFeatureOperation(this);
+        this.add(this.panel, this.setStartConstraint(new GridBagConstraints()));
+        this.panel.getVariabilityButton().setVisible(false);
     }
     
     @Override
@@ -148,14 +110,11 @@ public final class PanelFeatureDiagram extends PanelDiagram {
     
     @Override
     public FeatureDiagram getDiagram() {
-        return this.diagram;
+        return (FeatureDiagram) this.diagram;
     }
 
-    /**
-     * Method responsible for returning the Feature Button.
-     * @return Feature Button.
-     */
-    public JButton getFeatureButton() {
-        return this.buttons.get("featureButton");
+    @Override
+    public PanelFeatureOperation getPanelOperation() {
+        return (PanelFeatureOperation) this.panel;
     }
 }

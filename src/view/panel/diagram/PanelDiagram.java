@@ -1,5 +1,6 @@
 package view.panel.diagram;
 
+import com.mxgraph.layout.mxGraphLayout;
 import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
@@ -8,16 +9,11 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.view.mxGraph;
 import controller.view.panel.diagram.ControllerPanelDiagram;
-import funct.FunctView;
 import java.awt.Color;
 import java.util.HashMap;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Map;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
@@ -36,16 +32,21 @@ import view.structural.ViewMenu;
  * @see    view.Panel
  */
 public abstract class PanelDiagram extends Panel {
-    private final ViewMenu viewMenu;
-    private final Diagram diagram;
+    protected final ViewMenu viewMenu;
+    protected final Diagram diagram;
+    
     protected String  operation;
     protected Integer type;
     protected Double  zoom;
+    protected HashMap identifiers;
+    protected HashMap objects;
+    
+    protected PanelOperation panel;
+    
     protected Object  parent;
     protected mxGraph graph;
+    protected mxGraphLayout layout;
     protected mxGraphComponent component;
-    protected HashMap<Object, String> identifiers;
-    protected HashMap<String, Object> objects;
     
     /**
      * Default constructor method of Class.
@@ -59,35 +60,28 @@ public abstract class PanelDiagram extends Panel {
     }
     
     /**
-     * Method responsible for initializing the Components.
+     * Method responsible for setting the Default Properties.
      */
-    protected void initComponents() {
+    protected void setDefaultProperties() {
         this.setOperation("Click");
         this.setLayout(new GridBagLayout());
-//        this.setLayout(new GridLayout(2, 0));
         this.type = 0;
     }
     
-//    public abstract PanelOperation getPanelOperation();
+    @Override
+    protected void addComponents() {
+        this.addOperationsPanel();
+        this.addModelingPanel();
+        this.addControllers();
+    }
     
     /**
      * Method responsible for adding Operations Panel on View.
      */
-    public abstract void addOperationsPanel(); 
+    public abstract void addOperationsPanel();
     
     /**
-     * Method responsible for returning Association Items.
-     * @return Association Items.
-     */
-    public abstract Object[] getAssociationItems();
-    
-    /**
-     * Method responsible for reseting Background of Operations Panel.
-     */
-    public abstract void resetBackground();
-    
-    /**
-     * Method responsible for defining Style.
+     * Method responsible for setting the Style.
      */
     public abstract void setStyle();
     
@@ -96,7 +90,11 @@ public abstract class PanelDiagram extends Panel {
      */
     public abstract void addControllers();
     
-    private mxGraph createMxGraph() {
+    /**
+     * Method responsible for creating a New mxGraph.
+     * @return New mxGraph.
+     */
+    private mxGraph createmxGraph() {
         return new mxGraph() {
             @Override
             public boolean isValidDropTarget(Object cell, Object[] cells) {
@@ -122,7 +120,7 @@ public abstract class PanelDiagram extends Panel {
      * Method responsible for adding Modeling Panel.
      */
     public void addModelingPanel() {
-        this.graph       = this.createMxGraph();
+        this.graph       = this.createmxGraph();
         this.parent      = this.graph.getDefaultParent();
         this.zoom        = 1.0d;
         this.identifiers = new HashMap<>();
@@ -149,17 +147,16 @@ public abstract class PanelDiagram extends Panel {
         this.component.getViewport().setOpaque(true);
         this.component.getViewport().setBackground(Color.WHITE);
 //        this.component.setMinimumSize(new Dimension(1000, 500));
-        this.component.setPreferredSize(new Dimension(1000, 500));
+//        this.component.setPreferredSize(new Dimension(1000, 500));
         this.component.setEnterStopsCellEditing(true);
         this.component.refresh();
      
-        mxParallelEdgeLayout layout = new mxParallelEdgeLayout(this.graph);
-                             layout.execute(this.graph.getDefaultParent());
+        this.layout = new mxParallelEdgeLayout(this.graph);
+        this.layout.execute(this.graph.getDefaultParent());
         
         this.createScrollPane("scrollPaneDiagram");
         this.getScrollPaneDiagram().setViewportView(this.component);
-        this.add(this.getScrollPaneDiagram(), this.setPageBody(new GridBagConstraints()));
-//        this.add(this.getScrollPaneDiagram(), this.getConstraints(1, 1, 0, 1));
+        this.add(this.getScrollPaneDiagram(), this.setBodyConstraint(new GridBagConstraints()));
     }
     
     /**
@@ -185,17 +182,24 @@ public abstract class PanelDiagram extends Panel {
     }
     
     /**
-     * Method responsible for adding Diagram Elements.
+     * Method responsible for setting Click Operation.
+     */
+    public void setClick() {
+        this.getPanelOperation().resetBackground();
+        this.setOperation("Click");
+        this.getPanelOperation().getClickButton().setBackground(this.getFocusColor());
+    }
+    
+    /**
+     * Method responsible for adding the Diagram Elements.
      */
     public void addElements() {
-        for (int i = 0; i < this.diagram.getElementsList().size(); i++) {
-            Element element = this.diagram.getElementsList().get(i);
-            this.graph.getStylesheet().putCellStyle(element.getStyleLabel(), element.getStyle());
+        for (Element element : this.diagram.getElementsList()) {
+            this.addStyle(element.getStyleLabel(), element.getStyle());
             String  title   = this.getTitle(element);
-            mxCell  cell    = (mxCell) this.graph.insertVertex(this.parent, null, title, element.getPosition().x, element.getPosition().y, element.getSize().x, element.getSize().y, element.getStyleLabel());
+            mxCell  cell    = (mxCell) this.graph.insertVertex(this.parent, element.getId(), title, element.getPosition().x, element.getPosition().y, element.getSize().x, element.getSize().y, element.getStyleLabel());
                     cell.setId(element.getId());
-            this.identifiers.put(cell, element.getId());
-            this.objects.put(element.getId(), cell);
+            this.addElement(element, cell);
         }
     }
     
@@ -209,19 +213,36 @@ public abstract class PanelDiagram extends Panel {
     }
     
     /**
-     * Method responsible for adding Diagram Associations.
+     * Method responsible for adding a Element.
+     * @param element Element.
+     * @param cell mxCell.
+     */
+    protected void addElement(Element element, mxCell cell) {
+        this.identifiers.put(cell, element.getId());
+        this.objects.put(element.getId(), cell);
+    }
+    
+    /**
+     * Method responsible for adding a Identifier.
+     * @param object Object Key.
+     * @param id Identifier.
+     */
+    protected void addIdentifier(Object object, String id) {
+        this.identifiers.put(object, id);
+    }
+    
+    /**
+     * Method responsible for adding the Diagram Associations.
      */
     public void addAssociations() {
-        for (int i = 0; i < this.diagram.getAssociationsList().size(); i++) {
-            Association association = this.diagram.getAssociationsList().get(i);
-            String      title       = this.getTitle(association);
-            this.graph.getStylesheet().putCellStyle(association.getStyleLabel(), association.getStyle());
-            mxCell     edge     = (mxCell) this.graph.insertEdge(this.parent, null, title, this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
-            mxGeometry geometry = ((mxGraphModel) (this.graph.getModel())).getGeometry(edge);
+        for (Association association : this.diagram.getAssociationsList()) {
+            this.addStyle(association.getStyleLabel(), association.getStyle());
+            String     title    = this.getTitle(association);
+            mxCell     edge     = (mxCell) this.graph.insertEdge(this.parent, association.getId(), title, this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
+            mxGeometry geometry = this.getModel().getGeometry(edge);
                        geometry.setPoints(association.getPoints());
-                       ((mxGraphModel) (this.graph.getModel())).setGeometry(edge, geometry);
-            this.identifiers.put(edge, association.getId());
-            this.objects.put(association.getId(), edge);
+                       this.getModel().setGeometry(edge, geometry);
+            this.addAssociation(association, edge);
         }
     }
     
@@ -235,16 +256,47 @@ public abstract class PanelDiagram extends Panel {
     }
     
     /**
-     * Method responsible for setting Click Operation.
+     * Method responsible for adding a Association.
+     * @param association Association.
+     * @param cell mxCell.
      */
-    public void setClick() {
-        this.resetBackground();
-        this.setOperation("Click");
-        this.getClickButton().setBackground(this.getFocusColor());
+    protected void addAssociation(Association association, mxCell cell) {
+        this.identifiers.put(cell, association.getId());
+        this.objects.put(association.getId(), cell);
     }
     
     /**
-     * Method responsible for returning Default Edge Style.
+     * Method responsible for setting the Dependency Style.
+     */
+    public void setDependencyStyle() {
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED, "1");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_OPEN);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
+    }
+    
+    /**
+     * Method responsible for setting the Generalization Style.
+     */
+    public void setGeneralizationStyle() {
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,  "0");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDFILL, "0");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_BLOCK);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
+    }
+    
+    /**
+     * Method responsible for adding a Graph Style.
+     * @param id Style Id.
+     * @param properties Style Properties.
+     */
+    protected void addStyle(String id, Map properties) {
+        this.graph.getStylesheet().putCellStyle(id, properties);
+    }
+    
+    /**
+     * Method responsible for returning the Default Edge Style.
      * @return Default Edge Style.
      */
     protected Map<String, Object> getDefaultEdgeStyle() {
@@ -252,82 +304,11 @@ public abstract class PanelDiagram extends Panel {
     }
     
     /**
-     * Method responsible for returning Image by URL.
-     * @param  url URL Image.
-     * @return Association Image.
+     * Method responsible for returning View Menu.
+     * @return View Menu.
      */
-    protected ImageIcon getAssociationImage(String url) {
-        return new FunctView().createImage("icons/associations/" + url + ".png");
-    }
-    
-    /**
-     * Method responsible for setting Dependency Style.
-     */
-    public void setDependencyStyle() {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "1");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_OPEN);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
-    }
-    
-    /**
-     * Method responsible for setting Generalization Style.
-     */
-    public void setGeneralizationStyle() {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "0");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDFILL,     "0");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_BLOCK);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
-    }
-    
-    /**
-     * Method responsible for defining Panel Zoom.
-     * @param zoom Zoom Value.
-     */
-    public void setZoom(Double zoom) {
-        this.zoom = zoom;
-        this.graph.getView().setScale(this.zoom);
-    }
-    
-    /**
-     * Method responsible for setting the Page Start Constraints.
-     * @param  constraints New Constraints.
-     * @return Page Start Constraints.
-     */
-    protected GridBagConstraints setPageStart(GridBagConstraints constraints) {
-               constraints.anchor  = GridBagConstraints.PAGE_START;
-               constraints.fill    = GridBagConstraints.HORIZONTAL;
-               constraints.gridx   = 0;
-               constraints.gridy   = 0;
-               constraints.weighty = 1.0;
-               constraints.weightx = 1.0;
-        return constraints;
-    }
-    
-    /**
-     * Method responsible for setting the Page Body Constraints.
-     * @param  constraints New Constraints.
-     * @return Page Body Constraints.
-     */
-    protected GridBagConstraints setPageBody(GridBagConstraints constraints) {
-               constraints.anchor     = GridBagConstraints.NORTH;
-               constraints.fill       = GridBagConstraints.BOTH;
-               constraints.gridx      = 0;
-               constraints.gridy      = 1;
-               constraints.gridheight = GridBagConstraints.RELATIVE;
-               constraints.gridwidth  = GridBagConstraints.RELATIVE;
-               constraints.weighty    = 10.0;
-               constraints.weightx    = 1.0;
-        return constraints;       
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Pane Diagram.
-     * @return Scroll Pane Diagram.
-     */
-    public JScrollPane getScrollPaneDiagram() {
-        return this.scrollPanes.get("scrollPaneDiagram");
+    public ViewMenu getViewMenu() {
+        return this.viewMenu;
     }
     
     /**
@@ -337,7 +318,7 @@ public abstract class PanelDiagram extends Panel {
     public Diagram getDiagram() {
         return this.diagram;
     }
-
+    
     /**
      * Method responsible for returning the Operation.
      * @return Operation.
@@ -372,21 +353,22 @@ public abstract class PanelDiagram extends Panel {
     }
 
     /**
-     * Method responsible for returning the Graph.
-     * @return Graph.
+     * Method responsible for returning the Panel Zoom.
+     * @return Panel Zoom.
      */
-    public mxGraph getGraph() {
-        return this.graph;
+    public Double getZoom() {
+        return this.zoom;
     }
-
+    
     /**
-     * Method responsible for returning the Graph Component.
-     * @return Graph Component.
+     * Method responsible for setting the Panel Zoom.
+     * @param zoom Zoom Value.
      */
-    public mxGraphComponent getComponent() {
-        return this.component;
+    public void setZoom(Double zoom) {
+        this.zoom = zoom;
+        this.graph.getView().setScale(this.zoom);
     }
-
+    
     /**
      * Method responsible for returning the Identifiers HashMap.
      * @return Identifiers HashMap.
@@ -404,50 +386,48 @@ public abstract class PanelDiagram extends Panel {
     }
     
     /**
-     * Method responsible for returning Click Button.
-     * @return Click Button.
+     * Method responsible for returning the Panel Operation.
+     * @return Panel Operation.
      */
-    public JButton getClickButton() {
-        return this.buttons.get("clickButton");
+    public abstract PanelOperation getPanelOperation();
+    
+    /**
+     * Method responsible for returning the Graph.
+     * @return Graph.
+     */
+    public mxGraph getGraph() {
+        return this.graph;
+    }
+
+    /**
+     * Method responsible for returning the Graph Layout.
+     * @return Graph Layout.
+     */
+    public mxGraphLayout getGraphLayout() {
+        return this.layout;
     }
     
     /**
-     * Method responsible for returning Variability Button.
-     * @return Variability Button.
+     * Method responsible for returning the Graph Model.
+     * @return Graph Model.
      */
-    public JButton getVariabilityButton() {
-        return this.buttons.get("variabilityButton");
+    public mxGraphModel getModel() {
+        return (mxGraphModel) this.graph.getModel();
     }
     
     /**
-     * Method responsible for returning Edit Button.
-     * @return Edit Button.
+     * Method responsible for returning the Graph Component.
+     * @return Graph Component.
      */
-    public JButton getEditButton() {
-        return this.buttons.get("editButton");
+    public mxGraphComponent getComponent() {
+        return this.component;
     }
-    
+
     /**
-     * Method responsible for returning Delete Button.
-     * @return Delete Button.
+     * Method responsible for returning the Scroll Pane Diagram.
+     * @return Scroll Pane Diagram.
      */
-    public JButton getDeleteButton() {
-        return this.buttons.get("deleteButton");
-    }
-    
-    /**
-     * Method responsible for returning Association ComboBox.
-     * @return Association ComboBox.
-     */
-    public JComboBox getAssociationComboBox() {
-        return this.comboBoxes.get("associationComboBox");
-    }
-    
-    /**
-     * Method responsible for returning View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
+    public JScrollPane getScrollPaneDiagram() {
+        return this.scrollPanes.get("scrollPaneDiagram");
     }
 }

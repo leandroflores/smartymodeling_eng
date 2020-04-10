@@ -1,7 +1,6 @@
 package controller.view.panel.diagram.types;
 
 import controller.view.panel.diagram.ControllerPanelDiagram;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import model.structural.diagram.feature.base.Feature;
 import view.panel.diagram.types.PanelFeatureDiagram;
@@ -15,7 +14,6 @@ import view.panel.diagram.types.PanelFeatureDiagram;
  * @see    view.panel.diagram.types.PanelFeatureDiagram
  */
 public class ControllerPanelFeatureDiagram extends ControllerPanelDiagram {
-    private final PanelFeatureDiagram panelDiagram;
 
     /**
      * Default constructor method of Class.
@@ -23,41 +21,29 @@ public class ControllerPanelFeatureDiagram extends ControllerPanelDiagram {
      */
     public ControllerPanelFeatureDiagram(PanelFeatureDiagram panel) {
         super(panel);
-        this.panelDiagram = panel;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent event) {
-        super.actionPerformed(event);
-        if (this.panelDiagram.getFeatureButton().equals(event.getSource()))
-            this.setAddFeature();
     }
     
     @Override
     public void mousePressed(MouseEvent event) {
-        if (this.panelDiagram.getOperation().equals("Feature"))
+        if (this.getPanelDiagram().getOperation().equals("Feature"))
             this.addFeature(event);
-    }
-    
-    /**
-     * Method responsible for defining Add Feature Operation.
-     */
-    public void setAddFeature() {
-        this.panelDiagram.resetBackground();
-        this.panelDiagram.getFeatureButton().setBackground(this.getFocusColor());
-        this.panelDiagram.setOperation("Feature");
     }
 
     /**
-     * Method responsible for adding a new Feature.
+     * Method responsible for adding a New Feature.
      * @param event Mouse Event.
      */
     public void addFeature(MouseEvent event) {
         Feature feature = new Feature();
                 feature.setPosition(event.getX(), event.getY());
-        this.panelDiagram.getDiagram().addFeature(feature);
+        this.getPanelDiagram().getDiagram().addFeature(feature);
                 feature.setDefaultName();
-        this.panelDiagram.updateDiagram();
-        this.panelDiagram.getViewMenu().update();
+        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().getViewMenu().update();
+    }
+    
+    @Override
+    protected PanelFeatureDiagram getPanelDiagram() {
+        return (PanelFeatureDiagram) this.panel;
     }
 }

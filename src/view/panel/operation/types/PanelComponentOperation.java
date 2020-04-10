@@ -1,5 +1,6 @@
 package view.panel.operation.types;
 
+import controller.view.panel.operation.types.ControllerPanelComponentOperation;
 import javax.swing.JButton;
 import view.panel.diagram.types.PanelComponentDiagram;
 import view.panel.operation.PanelOperation;
@@ -9,8 +10,9 @@ import view.panel.operation.PanelOperation;
  * <p>Class responsible for defining a Panel for <b>Component Operation</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  09/04/2019
- * @see    view.panel.operation.PanelOperation
+ * @see    controller.view.panel.operation.types.ControllerPanelComponentOperation
  * @see    view.panel.diagram.types.PanelComponentDiagram
+ * @see    view.panel.operation.PanelOperation
  */
 public final class PanelComponentOperation extends PanelOperation {
     
@@ -20,6 +22,7 @@ public final class PanelComponentOperation extends PanelOperation {
      */
     public PanelComponentOperation(PanelComponentDiagram panel) {
         super(panel);
+        this.controller = new ControllerPanelComponentOperation(this);
         this.setDefaultProperties();
         this.addComponents();
     }

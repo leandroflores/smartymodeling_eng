@@ -11,12 +11,10 @@ import controller.view.panel.diagram.event.ControllerEventPoints;
 import controller.view.panel.diagram.event.ControllerEventResize;
 import controller.view.panel.diagram.event.ControllerEventSelect;
 import controller.view.panel.diagram.types.ControllerPanelUseCaseDiagram;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import java.awt.GridBagConstraints;
 import model.structural.diagram.UseCaseDiagram;
 import view.panel.diagram.PanelDiagram;
+import view.panel.operation.types.PanelUseCaseOperation;
 import view.structural.ViewMenu;
 
 /**
@@ -30,7 +28,6 @@ import view.structural.ViewMenu;
  * @see    view.panel.diagram.PanelDiagram
  */
 public final class PanelUseCaseDiagram extends PanelDiagram {
-    private final UseCaseDiagram diagram;
 
     /**
      * Default constructor method of Class.
@@ -39,54 +36,16 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
      */
     public PanelUseCaseDiagram(ViewMenu view, UseCaseDiagram diagram) {
         super(view, diagram);
-        this.diagram    = diagram;
         this.controller = new ControllerPanelUseCaseDiagram(this);
-        this.initComponents();
+        this.setDefaultProperties();
         this.addComponents();
-        this.getClickButton().setBackground(this.getFocusColor());
-    }
-    
-    @Override
-    public void addComponents() {
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.addOperationsPanel();
-        this.addModelingPanel();
-        this.addControllers();
+        this.setClick();
     }
     
     @Override
     public void addOperationsPanel() {
-        JPanel  panel = new JPanel();
-                panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-                panel.add(this.createButton("clickButton",       "", "Select",          "click.png"));
-                panel.add(this.createButton("actorButton",       "", "New Actor",       "diagram/usecase/actor.png"));
-                panel.add(this.createButton("useCaseButton",     "", "New Use Case",    "diagram/usecase/use-case.png"));
-                panel.add(this.createButton("variabilityButton", "", "New Variability", "variability.png"));
-                panel.add(this.createButton("editButton",        "", "Edit",            "edit.png"));
-                panel.add(this.createButton("deleteButton",      "", "Delete",          "delete.png"));
-                panel.add(this.createComboBox("associationComboBox", this.getAssociationItems(), 50));
-       this.add(panel);
-       this.getClickButton().setBackground(this.getFocusColor());
-    }
-    
-    @Override
-    public Object[] getAssociationItems() {
-        Object[] items  = {
-                 this.getAssociationImage("association"),
-                 this.getAssociationImage("usecase/extend"),
-                 this.getAssociationImage("usecase/include"),
-                 this.getAssociationImage("generalization"),
-                 this.getAssociationImage("requires"),
-                 this.getAssociationImage("mutex"),
-                 this.getAssociationImage("dependency")};
-        return   items;
-    }
-    
-    @Override
-    public void resetBackground() {
-        this.getClickButton().setBackground(this.getDefaultColor());
-        this.getActorButton().setBackground(this.getDefaultColor());
-        this.getUseCaseButton().setBackground(this.getDefaultColor());
+        this.panel = new PanelUseCaseOperation(this);
+        this.add(this.panel, this.setStartConstraint(new GridBagConstraints()));
     }
     
     @Override
@@ -110,6 +69,26 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
         }
     }
     
+    /**
+     * Method responsible for setting Realization Style.
+     */
+    private void setRealizationStyle() {
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "0");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_SPACING);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
+    }
+    
+    /**
+     * Method responsible for setting Extend Style.
+     */
+    private void setExtendStyle() {
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "1");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_OPEN);
+        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
+    }
+    
     @Override
      public void addControllers() {
         this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationUseCase(this));
@@ -123,44 +102,13 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
         this.component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
      }
     
-    /**
-     * Method responsible for setting Realization Style.
-     */
-    private void setRealizationStyle() {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "0");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
-    }
-    
-    /**
-     * Method responsible for setting Extend Style.
-     */
-    private void setExtendStyle() {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "1");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_OPEN);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
+    @Override
+    public UseCaseDiagram getDiagram() {
+        return (UseCaseDiagram) this.diagram;
     }
     
     @Override
-    public UseCaseDiagram getDiagram() {
-        return this.diagram;
-    }
-    
-    /**
-     * Method responsible for returning the Actor Button.
-     * @return Actor Button.
-     */
-    public JButton getActorButton() {
-        return this.buttons.get("actorButton");
-    }
-    
-    /**
-     * Method responsible for returning the Use Case Button.
-     * @return Use Case Button.
-     */
-    public JButton getUseCaseButton() {
-        return this.buttons.get("useCaseButton");
+    public PanelUseCaseOperation getPanelOperation() {
+        return (PanelUseCaseOperation) this.panel;
     }
 }
