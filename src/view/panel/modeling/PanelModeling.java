@@ -153,15 +153,15 @@ public final class PanelModeling extends Panel {
     private PanelInstance createPanelInstance(Instance instance) {
         switch (instance.getDiagram().getType()) {
             case "Activity":
-                return new PanelActivityInstance(this.viewMenu, instance, (ActivityDiagram) instance.getDiagram());
+                return new PanelActivityInstance(this.viewMenu, instance);
             case "Class":
-                return new PanelClassInstance(this.viewMenu, instance, (ClassDiagram) instance.getDiagram());
+                return new PanelClassInstance(this.viewMenu, instance);
             case "Component":
-                return new PanelComponentInstance(this.viewMenu, instance, (ComponentDiagram) instance.getDiagram());
+                return new PanelComponentInstance(this.viewMenu, instance);
             case "Sequence":
                 return new PanelSequenceInstance(this.viewMenu, instance, (SequenceDiagram) instance.getDiagram());
             case "UseCase":
-                return new PanelUseCaseInstance(this.viewMenu, instance, (UseCaseDiagram) instance.getDiagram());
+                return new PanelUseCaseInstance(this.viewMenu, instance);
             default:
                 break;
         }

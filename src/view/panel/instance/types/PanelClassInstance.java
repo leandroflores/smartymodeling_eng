@@ -5,7 +5,6 @@ import com.mxgraph.model.mxGeometry;
 import com.mxgraph.model.mxGraphModel;
 import controller.view.panel.instance.ControllerPanelInstance;
 import java.util.List;
-import javax.swing.BoxLayout;
 import model.structural.base.Stereotype;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
@@ -25,42 +24,32 @@ import view.structural.ViewMenu;
  * <p>Class of View <b>PanelClassInstance</b>.</p>
  * <p>Class responsible for defining the <b>Class Instance Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  07/10/2019
+ * @since  2019-10-07
  * @see    controller.view.panel.instance.ControllerPanelInstance
- * @see    controller.view.panel.instance.event.ControllerEventMove
- * @see    controller.view.panel.instance.event.ControllerEventResize
- * @see    model.structural.diagram.ClassDiagram
  * @see    model.structural.base.product.Instance
  * @see    view.panel.instance.PanelInstance
  */
 public final class PanelClassInstance extends PanelInstance {
-    private final ClassDiagram diagram;
 
     /**
      * Default constructor method of Class.
      * @param view View Menu.
-     * @param instance Instance.
-     * @param diagram Class Diagram.
+     * @param instance Class Instance.
      */
-    public PanelClassInstance(ViewMenu view, Instance instance, ClassDiagram diagram) {
+    public PanelClassInstance(ViewMenu view, Instance instance) {
         super(view, instance);
-        this.diagram    = diagram;
         this.controller = new ControllerPanelInstance(this);
+        this.setDefaultProperties();
         this.addComponents();
     }
     
     @Override
-    public void addComponents() {
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.addInstancePanel();
-        this.addControllers();
-    }
-    
-    @Override
     public void addArtifacts() {
-        this.addPackages();
-        this.addClasses();
-        this.addInterfaces();
+        for (Artifact artifact : this.instance.getArtifactsList())
+            System.out.println("Artifact: " + artifact.toString());
+//        this.addPackages();
+//        this.addClasses();
+//        this.addInterfaces();
     }
     
     /**
@@ -227,7 +216,7 @@ public final class PanelClassInstance extends PanelInstance {
      * @param entity Entity.
      */
     private void addStereotypeCells(mxCell parent, Entity entity) {
-        List<Stereotype>    stereotypes = this.diagram.getStereotypesList(entity);
+        List<Stereotype>    stereotypes = this.getDiagram().getStereotypesList(entity);
         for (int i = 0; i < stereotypes.size(); i++) {
             Stereotype stereotype = stereotypes.get(i);
             if (stereotype.isPrimitive() == false) {
@@ -354,11 +343,8 @@ public final class PanelClassInstance extends PanelInstance {
         this.identifiers.put(target, relationship.getId() + "(target)");
     }
     
-    /**
-     * Method responsible for returning the Class Diagram.
-     * @return Class Diagram.
-     */
+    @Override
     public ClassDiagram getDiagram() {
-        return this.diagram;
+        return (ClassDiagram) this.instance.getDiagram();
     }
 }

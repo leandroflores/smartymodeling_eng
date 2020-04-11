@@ -51,7 +51,7 @@ public final class PanelSequenceInstance extends PanelInstance {
     @Override
     public void addComponents() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.addInstancePanel();
+        this.addModelingPanel();
         this.addControllers();
     }
     

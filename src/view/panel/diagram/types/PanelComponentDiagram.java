@@ -12,8 +12,8 @@ import controller.view.panel.diagram.event.ControllerEventPoints;
 import controller.view.panel.diagram.event.ControllerEventResize;
 import controller.view.panel.diagram.types.ControllerPanelComponentDiagram;
 import java.awt.GridBagConstraints;
-import java.util.HashMap;
 import java.util.Map;
+import model.controller.style.StyleComponent;
 import model.structural.diagram.ComponentDiagram;
 import model.structural.diagram.component.base.ComponentUML;
 import model.structural.diagram.component.base.InterfaceUML;
@@ -90,13 +90,7 @@ public final class PanelComponentDiagram extends PanelDiagram {
      * @return Image Component Style.
      */
     private Map getImageComponentStyle() {
-        Map    style = new HashMap<>();
-               style.put(mxConstants.STYLE_MOVABLE,   0);
-               style.put(mxConstants.STYLE_EDITABLE,  0);
-               style.put(mxConstants.STYLE_RESIZABLE, 0);
-               style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_IMAGE);
-               style.put(mxConstants.STYLE_IMAGE, "/images/diagram/component/component.png");
-        return style;
+        return new StyleComponent().getImageComponentStyle();
     }
     
     @Override

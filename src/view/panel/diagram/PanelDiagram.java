@@ -94,7 +94,7 @@ public abstract class PanelDiagram extends Panel {
      * Method responsible for creating a New mxGraph.
      * @return New mxGraph.
      */
-    private mxGraph createmxGraph() {
+    private mxGraph createMxGraph() {
         return new mxGraph() {
             @Override
             public boolean isValidDropTarget(Object cell, Object[] cells) {
@@ -117,14 +117,26 @@ public abstract class PanelDiagram extends Panel {
     }
     
     /**
-     * Method responsible for adding Modeling Panel.
+     * Method responsible for adding the Modeling Panel.
      */
     public void addModelingPanel() {
-        this.graph       = this.createmxGraph();
-        this.parent      = this.graph.getDefaultParent();
         this.zoom        = 1.0d;
         this.identifiers = new HashMap<>();
         this.objects     = new HashMap<>();
+            this.initGraph();
+            this.initGraphComponent();
+            this.initGraphLayout();
+            this.addGraphPanel();
+        this.component.refresh();
+        this.setStyle();
+    }
+    
+    /**
+     * Method responsible for initializing the Graph.
+     */
+    protected void initGraph() {
+        this.graph  = this.createMxGraph();
+        this.parent = this.graph.getDefaultParent();
         
         this.graph.getModel().beginUpdate();
             this.updateDiagram();
@@ -135,25 +147,34 @@ public abstract class PanelDiagram extends Panel {
         this.graph.setAllowNegativeCoordinates(false);
         this.graph.setAllowLoops(true);
         this.graph.setSplitEnabled(false);
-        this.setStyle();
-        
-        this.component = new mxGraphComponent(this.graph);        
-        
-        this.component.getGraphControl().addMouseListener((ControllerPanelDiagram) this.controller);
-        this.component.getGraphControl().getGraphContainer().addKeyListener((ControllerPanelDiagram) controller);
         this.graph.setDisconnectOnMove(false);
         this.graph.setCellsDisconnectable(false);
-        
+    }
+    
+    /**
+     * Method responsible for initializing the Graph Component.
+     */
+    protected void initGraphComponent() {
+        this.component = new mxGraphComponent(this.graph);
+        this.component.setEnterStopsCellEditing(true); 
+        this.component.getGraphControl().addMouseListener((ControllerPanelDiagram) this.controller);
+        this.component.getGraphControl().getGraphContainer().addKeyListener((ControllerPanelDiagram) this.controller);
         this.component.getViewport().setOpaque(true);
         this.component.getViewport().setBackground(Color.WHITE);
-//        this.component.setMinimumSize(new Dimension(1000, 500));
-//        this.component.setPreferredSize(new Dimension(1000, 500));
-        this.component.setEnterStopsCellEditing(true);
-        this.component.refresh();
-     
+    }
+    
+    /**
+     * Method responsible for initializing the Graph Layout.
+     */
+    protected void initGraphLayout() {
         this.layout = new mxParallelEdgeLayout(this.graph);
         this.layout.execute(this.graph.getDefaultParent());
-        
+    }
+    
+    /**
+     * Method responsible for adding the Graph Panel.
+     */
+    protected void addGraphPanel() {
         this.createScrollPane("scrollPaneDiagram");
         this.getScrollPaneDiagram().setViewportView(this.component);
         this.add(this.getScrollPaneDiagram(), this.setBodyConstraint(new GridBagConstraints()));
@@ -163,7 +184,6 @@ public abstract class PanelDiagram extends Panel {
      * Method responsible for cleaning the Diagram.
      */
     public void clearDiagram() {
-//        this.graph.removeCells(this.graph.getChildCells(this.graph.getDefaultParent(), true, true));
         this.graph.removeCells(this.graph.getChildCells(this.parent, true, true));
     }
     

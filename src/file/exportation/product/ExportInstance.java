@@ -8,10 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import model.structural.base.product.Instance;
-import model.structural.diagram.ActivityDiagram;
-import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.ComponentDiagram;
-import model.structural.diagram.UseCaseDiagram;
 import view.panel.instance.PanelInstance;
 import view.panel.instance.types.PanelActivityInstance;
 import view.panel.instance.types.PanelClassInstance;
@@ -66,11 +62,11 @@ public class ExportInstance {
      */
     private PanelInstance getPanelInstance() {
         if (this.instance.getDiagram().getType().equals("Activity"))
-            return new PanelActivityInstance(null,  this.instance, (ActivityDiagram)  this.instance.getDiagram());
+            return new PanelActivityInstance(null,  this.instance);
         else if (this.instance.getDiagram().getType().equals("Class"))
-            return new PanelClassInstance(null,     this.instance,   (ClassDiagram)   this.instance.getDiagram());
+            return new PanelClassInstance(null, this.instance);
         else if (this.instance.getDiagram().getType().equals("Component"))
-            return new PanelComponentInstance(null, this.instance, (ComponentDiagram) this.instance.getDiagram());
-        return new PanelUseCaseInstance(null, this.instance, (UseCaseDiagram) this.instance.getDiagram());
+            return new PanelComponentInstance(null, this.instance);
+        return new PanelUseCaseInstance(null, this.instance);
     }
 }
