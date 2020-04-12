@@ -46,9 +46,8 @@ public final class PanelComponentDiagram extends PanelDiagram {
     }
     
     @Override
-    public void addOperationsPanel() {
+    public void initOperationsPanel() {
         this.panel = new PanelComponentOperation(this);
-        this.add(this.panel, this.setStartConstraint(new GridBagConstraints()));
     }
     
     @Override

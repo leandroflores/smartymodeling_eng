@@ -4,6 +4,7 @@ import com.mxgraph.model.mxCell;
 import controller.view.panel.instance.ControllerPanelInstance;
 import java.util.Map;
 import model.controller.style.StyleComponent;
+import model.structural.base.Element;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.diagram.ComponentDiagram;
@@ -34,6 +35,14 @@ public final class PanelComponentInstance extends PanelInstance {
         this.addComponents();
     }
     
+    @Override
+    protected void addArtifact(Artifact artifact, Element element) {
+        if (element instanceof ComponentUML)
+            this.addArtifact(artifact, (ComponentUML) element);
+        else
+            super.addArtifact(artifact, element);
+    }
+    
     /**
      * Method responsible for adding the Component UML of a Artifact.
      * @param artifact Artifact.
@@ -46,7 +55,7 @@ public final class PanelComponentInstance extends PanelInstance {
         mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, artifact.getId(), title, artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
                vertex.setConnectable(false);
                this.graph.insertVertex(vertex, null, "", 10, 10, 20, 20, "imageComponentStyle");
-        this.addArtifact(artifact, vertex);
+        this.addArtifactCell(artifact, vertex);
     }
     
     /**

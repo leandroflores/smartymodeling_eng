@@ -84,7 +84,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     public void mouseExited(MouseEvent event) {}
 
     @Override
-    public void keyTyped(KeyEvent evento) {}
+    public void keyTyped(KeyEvent event) {}
 
     @Override
     public void keyPressed(KeyEvent event) {

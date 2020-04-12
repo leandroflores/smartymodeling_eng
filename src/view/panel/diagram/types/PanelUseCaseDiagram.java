@@ -43,9 +43,8 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
     }
     
     @Override
-    public void addOperationsPanel() {
+    public void initOperationsPanel() {
         this.panel = new PanelUseCaseOperation(this);
-        this.add(this.panel, this.setStartConstraint(new GridBagConstraints()));
     }
     
     @Override

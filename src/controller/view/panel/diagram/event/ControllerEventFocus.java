@@ -32,7 +32,7 @@ public class ControllerEventFocus extends MouseAdapter {
         if (this.panel.getDiagram().getElement(id) != null)
             this.updatePanelEdit(this.panel.getDiagram().getElement(id)); 
         else if (this.panel.getDiagram().getAssociation(id) != null)
-                this.updatePanelEdit(this.panel.getDiagram().getAssociation(id));
+            this.updatePanelEdit(this.panel.getDiagram().getAssociation(id));
         this.panel.updateUI();
     }
     

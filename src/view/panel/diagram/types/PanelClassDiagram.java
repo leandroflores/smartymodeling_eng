@@ -15,7 +15,6 @@ import controller.view.panel.diagram.event.classes.ControllerEventMove;
 import controller.view.panel.diagram.event.classes.ControllerEventResize;
 import controller.view.panel.diagram.event.classes.ControllerEventSelect;
 import controller.view.panel.diagram.types.ControllerPanelClassDiagram;
-import java.awt.GridBagConstraints;
 import java.awt.event.MouseListener;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Association;
@@ -56,9 +55,8 @@ public final class PanelClassDiagram extends PanelDiagram {
     }
     
     @Override
-    public void addOperationsPanel() {
+    public void initOperationsPanel() {
         this.panel = new PanelClassOperation(this);
-        this.add(this.panel, this.setStartConstraint(new GridBagConstraints()));
     }
     
     @Override

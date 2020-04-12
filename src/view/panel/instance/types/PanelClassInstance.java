@@ -1,11 +1,9 @@
 package view.panel.instance.types;
 
 import com.mxgraph.model.mxCell;
-import com.mxgraph.model.mxGeometry;
-import com.mxgraph.model.mxGraphModel;
 import controller.view.panel.instance.ControllerPanelInstance;
-import java.util.List;
-import model.structural.base.Stereotype;
+import model.structural.base.Element;
+import model.structural.base.association.Association;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Relationship;
@@ -44,24 +42,23 @@ public final class PanelClassInstance extends PanelInstance {
     }
     
     @Override
-    public void addArtifacts() {
-        for (Artifact artifact : this.instance.getArtifactsList())
-            System.out.println("Artifact: " + artifact.toString());
-//        this.addPackages();
-//        this.addClasses();
-//        this.addInterfaces();
+    protected void addArtifact(Artifact artifact, Element element) {
+        if (element instanceof PackageUML)
+            this.addArtifact(artifact, (PackageUML) element);
+        else if (element instanceof ClassUML)
+            this.addArtifact(artifact, (ClassUML) element);
+        else if (element instanceof InterfaceUML)
+            this.addArtifact(artifact, (InterfaceUML) element);
     }
     
     /**
-     * Method responsible for adding the Instance Packages.
+     * Method responsible for adding the Package UML of a Artifact.
+     * @param artifact Artifact.
+     * @param package_ Package UML.
      */
-    private void addPackages() {
-        for (Artifact artifact : this.instance.getArtifactsList()) {
-            if (artifact.getElement() instanceof PackageUML) {
-                if (((PackageUML) artifact.getElement()).getParent() == null)
-                    this.addPackage(this.parent, artifact);
-            }
-        }
+    protected void addArtifact(Artifact artifact, PackageUML package_) {
+        if (package_.getParent() == null)
+            this.addPackage(this.parent, artifact);
     }
     
     /**
@@ -70,23 +67,22 @@ public final class PanelClassInstance extends PanelInstance {
      * @param artifact Artifact.
      */
     private void addPackage(Object parent, Artifact artifact) {
-        this.graph.getStylesheet().putCellStyle(artifact.getStyleLabel(), artifact.getStyle());
-        mxCell   vertex  = (mxCell) this.graph.insertVertex(parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
-                 vertex.setConnectable(false);
-        this.insert(vertex, artifact);
-            this.addPackages(artifact, vertex);
-            this.addEntities(artifact, vertex);
-        this.identifiers.put(vertex, artifact.getId());
-        this.objects.put(artifact.getId(), vertex);
+        this.addStyle(artifact.getStyleLabel(), artifact.getStyle());
+        mxCell cell  = (mxCell) this.graph.insertVertex(parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
+               cell.setConnectable(false);
+        this.insert(cell, artifact);
+        this.addPackages((PackageUML) artifact.getElement(), cell);
+        this.addEntities((PackageUML) artifact.getElement(), cell);
+        this.addArtifactCell(artifact, cell);
     }
     
     /**
      * Method responsible for adding the Package Childs.
-     * @param artifact Artifact.
+     * @param package_ Artifact.
      * @param parent Parent Vertex.
      */
-    private void addPackages(Artifact artifact, Object parent) {
-        for (PackageUML current : ((PackageUML) artifact.getElement()).getPackagesList()) {
+    private void addPackages(PackageUML package_, Object parent) {
+        for (PackageUML current : package_.getPackagesList()) {
             Artifact subpackage = this.instance.getArtifact(current);
             if (subpackage != null)
                 this.addPackage(parent, subpackage);
@@ -95,31 +91,29 @@ public final class PanelClassInstance extends PanelInstance {
     
     /**
      * Method responsible for adding the Package Entities.
-     * @param artifact Artifact.
+     * @param package_ Package UML.
      * @param parent Parent Vertex.
      */
-    private void addEntities(Artifact artifact, Object parent) {
-        for (Entity entity : ((PackageUML) artifact.getElement()).getEntitiesList()) {
-            Artifact current = this.instance.getArtifact(entity);
-            if (current != null) {
+    private void addEntities(PackageUML package_, Object parent) {
+        for (Entity entity : package_.getEntitiesList()) {
+            Artifact artifact = this.getInstance().getArtifact(entity);
+            if (artifact != null) {
                 if (entity instanceof ClassUML)
-                    this.addClass(parent, current);
+                    this.addClass(parent, artifact);
                 else if (entity instanceof InterfaceUML)
-                    this.addInterface(parent, current);
+                    this.addInterface(parent, artifact);
             }
         }
     }
     
     /**
-     * Method responsible for adding the Instance Classes.
+     * Method responsible for adding the Class UML of a Artifact.
+     * @param artifact Artifact.
+     * @param class_ Class UML.
      */
-    private void addClasses() {
-        for (Artifact artifact : this.instance.getArtifactsList()) {
-            if (artifact.getElement() instanceof ClassUML) {                
-                if (((ClassUML) artifact.getElement()).getPackageUML() == null)
-                    this.addClass(this.parent, artifact);
-            }
-        }
+    protected void addArtifact(Artifact artifact, ClassUML class_) {
+        if (class_.getPackageUML() == null)
+            this.addClass(this.parent, artifact);
     }
     
     /**
@@ -128,24 +122,21 @@ public final class PanelClassInstance extends PanelInstance {
      * @param artifact Artifact.
      */
     private void addClass(Object parent, Artifact artifact) {
-        this.graph.getStylesheet().putCellStyle(artifact.getStyleLabel(), artifact.getStyle());
-        mxCell vertex = (mxCell) this.graph.insertVertex(parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
-               vertex.setConnectable(false);
-        this.insert(vertex, (Entity) artifact.getElement());
-        this.identifiers.put(vertex, artifact.getId());
-        this.objects.put(artifact.getId(), vertex);
+        this.addStyle(artifact.getStyleLabel(), artifact.getStyle());
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
+               cell.setConnectable(false);
+        this.insert(cell, artifact, (Entity) artifact.getElement());
+        this.addArtifactCell(artifact, cell);
     }
     
     /**
-     * Method responsible for adding the Instance Interfaces.
+     * Method responsible for adding the Interface UML of a Artifact.
+     * @param artifact Artifact.
+     * @param interface_ Interface UML.
      */
-    private void addInterfaces() {
-        for (Artifact artifact : this.instance.getArtifactsList()) {
-            if (artifact.getElement() instanceof InterfaceUML) {
-                if (((InterfaceUML) artifact.getElement()).getPackageUML() == null)
-                    this.addInterface(this.parent, artifact);
-            }
-        }
+    protected void addArtifact(Artifact artifact, InterfaceUML interface_) {
+        if (interface_.getPackageUML() == null)
+            this.addInterface(this.parent, artifact);
     }
     
     /**
@@ -154,12 +145,11 @@ public final class PanelClassInstance extends PanelInstance {
      * @param artifact Artifact.
      */
     private void addInterface(Object parent, Artifact artifact) {
-        this.graph.getStylesheet().putCellStyle(artifact.getStyleLabel(), artifact.getStyle());
-        mxCell vertex = (mxCell) this.graph.insertVertex(parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
-               vertex.setConnectable(false);
-        this.insert(vertex, (Entity) artifact.getElement());
-        this.identifiers.put(vertex, artifact.getId());
-        this.objects.put(artifact.getId(), vertex);
+        this.addStyle(artifact.getStyleLabel(), artifact.getStyle());
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
+               cell.setConnectable(false);
+        this.insert(cell, artifact, (Entity) artifact.getElement());
+        this.addArtifactCell(artifact, cell);
     }
     
     /**
@@ -168,18 +158,17 @@ public final class PanelClassInstance extends PanelInstance {
      * @param artifact Artifact.
      */
     private void insert(mxCell vertex, Artifact artifact) {
-        PackageUML packageUML = (PackageUML) artifact.getElement();
-        this.graph.getStylesheet().putCellStyle("packageHeader", packageUML.getPackageStyle());
-        this.graph.getStylesheet().putCellStyle("packageName",   packageUML.getNameStyle());
+        PackageUML package_ = (PackageUML) artifact.getElement();
+        this.addStyle("packageHeader", package_.getPackageStyle());
+        this.addStyle("packageName",   package_.getNameStyle());
         
-        mxCell head = (mxCell) this.graph.insertVertex(vertex, artifact.getId() + "(name)",                    "",  0,  0, packageUML.getWidth() * 0.3,                          15, "packageHeader");
-        mxCell body = (mxCell) this.graph.insertVertex(vertex, artifact.getId() + "(body)",                    "",  0, 15, packageUML.getWidth(),       packageUML.getHeight() - 15, "packageHeader");
-                    this.addNameCell(body, packageUML);
+        mxCell head = (mxCell) this.graph.insertVertex(vertex, artifact.getId() + "(name)", "",  0,  0, artifact.getWidth() * 0.3,                        15, "packageHeader");
+        mxCell body = (mxCell) this.graph.insertVertex(vertex, artifact.getId() + "(body)", "",  0, 15, artifact.getWidth(),       artifact.getHeight() - 15, "packageHeader");
+                    this.addNameCell(body, package_);
                head.setConnectable(false);
                body.setConnectable(false);
-        
-        this.identifiers.put(head, packageUML.getId());
-        this.identifiers.put(body, packageUML.getId());
+        this.addIdentifier(head, artifact.getId());
+        this.addIdentifier(body, artifact.getId());
     }
     
     /**
@@ -188,159 +177,162 @@ public final class PanelClassInstance extends PanelInstance {
      * @param packageUML Package UML.
      */
     private void addNameCell(mxCell parent, PackageUML packageUML) {
-        this.graph.getStylesheet().putCellStyle("nameStyle" + packageUML.getId(), packageUML.getNameStyle());
+        this.addStyle("nameStyle" + packageUML.getId(), packageUML.getNameStyle());
         mxCell cell = (mxCell) this.graph.insertVertex(parent, packageUML.getId() + "(name)", packageUML.getName(), 5, packageUML.getNamePosition(), packageUML.getWidth() - 10, 25, "nameStyle" + packageUML.getId());
                cell.setConnectable(false);
-               cell.setId(packageUML.getId() + "(name)");
-        this.identifiers.put(cell.getId(), packageUML.getId());
+        this.addIdentifier(cell.getId(), packageUML.getId());
     }
     
     /**
      * Method responsible for inserting a Entity Cell.
      * @param vertex Parent Vertex.
+     * @param artifact Artifact.
      * @param entity Entity.
      */
-    private void insert(mxCell vertex, Entity entity) {
-        this.addStereotypeCells(vertex, entity);
-        this.addInterfaceStereotypeCell(vertex, entity);
-        this.addNameCell(vertex, entity);
-        this.addLineCell(vertex, entity.getNamePosition() + 27, entity);
-        this.addAttributesCells(vertex, entity);
-        this.addLineCell(vertex, entity.getMethodsPosition(), entity);
-        this.addMethodsCells(vertex, entity);
+    private void insert(mxCell vertex, Artifact artifact, Entity entity) {
+        this.addInterfaceStereotypeCell(vertex, artifact, entity);
+        this.addNameCell(vertex, artifact, entity);
+        this.addLineCell(vertex, artifact, entity, this.getFirstLinePosition(entity));
+        this.addAttributesCells(vertex, artifact, entity);
+        this.addLineCell(vertex, artifact, entity, this.getSecondLinePosition(entity));
+        this.addMethodsCells(vertex, artifact, entity);
     }
     
     /**
-     * Method responsible for adding the Stereotype Cells.
-     * @param parent Parent Cell.
-     * @param entity Entity.
+     * Method responsible for returning the First Line Position.
+     * @param  entity Entity.
+     * @return First Line Position.
      */
-    private void addStereotypeCells(mxCell parent, Entity entity) {
-        List<Stereotype>    stereotypes = this.getDiagram().getStereotypesList(entity);
-        for (int i = 0; i < stereotypes.size(); i++) {
-            Stereotype stereotype = stereotypes.get(i);
-            if (stereotype.isPrimitive() == false) {
-                this.graph.getStylesheet().putCellStyle("stereotypeStyle", stereotype.getStyle()); 
-                mxCell     cell       = (mxCell) this.graph.insertVertex(parent, "LINK#" + entity.getId() + "-" + stereotype.getId(), stereotype.toString(), 5, (i * 21) + 5, entity.getWidth() - 10, 20, "stereotypeStyle");
-                           cell.setConnectable(false);
-                           cell.setId(stereotype.getId());
-                this.identifiers.put(cell,         stereotype.getId());
-                this.identifiers.put(cell.getId(), stereotype.getId());
-            }
-        }
+    private Integer getFirstLinePosition(Entity entity) {
+        return entity.isInterface() ? 55 : 35;
+    }
+    
+    /**
+     * Method responsible for returning the Second Line Position.
+     * @param  entity Entity.
+     * @return Second Line Position.
+     */
+    private Integer getSecondLinePosition(Entity entity) {
+        return this.getFirstLinePosition(entity) + 5
+             + entity.getAttributesList().size() * 16 
+             + 5;
     }
 
     /**
      * Method responsible for adding the Interface Stereotype Cell.
      * @param parent Parent Cell.
+     * @param artifact Artifact.
      * @param entity Entity.
      */
-    private void addInterfaceStereotypeCell(mxCell parent, Entity entity) {
-        if (entity instanceof InterfaceUML) {
-            this.graph.getStylesheet().putCellStyle("stereotypeStyle",  entity.getStereotypeStyle());
-            mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(interface)", "<<interface>>", 5, entity.getInterfacePosition(), entity.getWidth() - 10, 20, "stereotypeStyle");
+    private void addInterfaceStereotypeCell(mxCell parent, Artifact artifact, Entity entity) {
+        if (entity.isInterface()) {
+            this.addStyle("stereotypeStyle", entity.getStereotypeStyle());
+            mxCell cell = (mxCell) this.graph.insertVertex(parent, artifact.getId(), "<<interface>>", 5, 5, artifact.getWidth() - 10, 20, "stereotypeStyle");
                    cell.setConnectable(false);
-            this.identifiers.put(cell, entity.getId());
+            this.addIdentifier(cell, artifact.getId());
         }
     }
     
     /**
      * Method responsible for adding the Name Cell.
      * @param parent Parent Cell.
+     * @param artifact Artifact.
      * @param entity Entity.
      */
-    private void addNameCell(mxCell parent, Entity entity) {
-        this.graph.getStylesheet().putCellStyle("nameStyle" + entity.getId(), this.getStyle(entity.getNameStyle()));
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, entity.getId() + "(name)", entity.getName(), 5, entity.getNamePosition(), entity.getWidth() - 10, 25, "nameStyle" + entity.getId());
+    private void addNameCell(mxCell parent, Artifact artifact, Entity entity) {
+        this.addStyle("nameStyle" + artifact.getId(), this.getStyle(entity.getNameStyle()));
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, artifact.getId() + "(name)", entity.getName(), 5, entity.isInterface() ? 25 : 5, artifact.getWidth() - 10, 25, "nameStyle" + artifact.getId());
                cell.setConnectable(false);
-               cell.setId(entity.getId() + "(name)");
-        this.identifiers.put(cell.getId(), entity.getId());
+        this.addIdentifier(cell.getId(), entity.getId());
     }
     
     /**
      * Method responsible for adding the Line Cell.
      * @param parent Parent Cell.
+     * @param artifact Artifact.
      * @param entity Entity.
+     * @param position Position.
      */
-    private void addLineCell(mxCell parent, Integer y, Entity entity) {
-        this.graph.getStylesheet().putCellStyle("lineStyle", entity.getLineStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, null, "", 0, y, entity.getWidth(), 1, "lineStyle");
+    private void addLineCell(mxCell parent, Artifact artifact, Entity entity, Integer position) {
+        this.addStyle("lineStyle", entity.getLineStyle());
+        mxCell cell = (mxCell) this.graph.insertVertex(parent, null, "", 0, position, artifact.getWidth(), 1, "lineStyle");
                cell.setConnectable(false);
-        this.identifiers.put(cell, entity.getId());
+        this.addIdentifier(cell, entity.getId());
     }
     
     /**
      * Method responsible for adding the Attributes Cells.
      * @param parent Parent Cell.
+     * @param artifact Artifact.
      * @param entity Entity.
      */
-    private void addAttributesCells(mxCell parent, Entity entity) {
-        List<AttributeUML>  attributes = entity.getAttributesList();
-        for (int i = 0; i < attributes.size(); i++) {
-            AttributeUML attribute = attributes.get(i);
-            this.graph.getStylesheet().putCellStyle(attribute.getStyleLabel(), this.getStyle(attribute.getStyle()));
-            mxCell       cell      = (mxCell) this.graph.insertVertex(parent, attribute.getId(), attribute.getCompleteSignature(), 5, entity.getAttributesPosition() + (i * 16) + 6, entity.getWidth() - 10, 15, attribute.getStyleLabel());
-                         cell.setConnectable(false);
-                         cell.setId(attribute.getId());
-            this.identifiers.put(cell,         attribute.getId());
-            this.identifiers.put(cell.getId(), attribute.getId());
+    private void addAttributesCells(mxCell parent, Artifact artifact, Entity entity) {
+        Integer index = 0;
+        for (AttributeUML attribute : entity.getAttributesList()) {
+            this.addStyle(attribute.getStyleLabel(), attribute.getStyle());
+            Integer position = this.getFirstLinePosition(entity) + (index * 16) + 5;
+            mxCell  vertex   = (mxCell) this.graph.insertVertex(parent, attribute.getId(), attribute.getCompleteSignature(), 5, position, artifact.getWidth() - 10, 15, attribute.getStyleLabel());
+                    vertex.setConnectable(false);
+                    index   += 1; 
         }
     }
     
     /**
      * Method responsible for adding the Methods Cells.
      * @param parent Parent Cell.
+     * @param artifact Artifact.
      * @param entity Entity.
      */
-    private void addMethodsCells(mxCell parent, Entity entity) {
-        List<MethodUML>     methods = entity.getMethodsList();
-        for (int i = 0; i < methods.size(); i++) {
-            MethodUML method = methods.get(i);
-            this.graph.getStylesheet().putCellStyle(method.getStyleLabel(), this.getStyle(method.getStyle()));
-            mxCell    cell   = (mxCell) this.graph.insertVertex(parent, method.getId(), method.getCompleteSignature(), 5, entity.getMethodsPosition() + 10 + (i * 16), entity.getWidth() - 10, 15, method.getStyleLabel());
-                      cell.setConnectable(false);
-                      cell.setId(method.getId());
-            this.identifiers.put(cell,         method.getId());
-            this.identifiers.put(cell.getId(), method.getId());
+    private void addMethodsCells(mxCell parent, Artifact artifact, Entity entity) {
+        Integer index = 0;
+        for (MethodUML method : entity.getMethodsList()) {
+            this.addStyle(method.getStyleLabel(), method.getStyle());
+            Integer position = this.getSecondLinePosition(entity) + (index * 16) + 5;
+            mxCell  vertex   = (mxCell) this.graph.insertVertex(parent, method.getId(), method.getCompleteSignature(), 5, position, artifact.getWidth() - 10, 15, method.getStyleLabel());
+                    vertex.setConnectable(false);
+                    index   += 1; 
         }
     }
     
     @Override
-    public void addRelationships() {
-        for (Relationship relationship : this.instance.getRelationshipsList()) {
-            this.graph.getStylesheet().putCellStyle(relationship.getStyleLabel(), relationship.getStyle());
-            this.addNormalRelationship(relationship);
-            if (relationship.getAssociation() instanceof AssociationUML)
-                this.addDirectedRelationship(relationship); 
+    protected void addRelationship(Relationship relationship, Association association) {
+        super.addRelationship(relationship, association);
+        this.addCardinality(association);
+    }
+    
+    /**
+     * Method responsible for adding the Cardinality.
+     * @param association Association.
+     */
+    private void addCardinality(Association association) {
+        if (association instanceof AssociationUML) {
+            this.addStyle(((AssociationUML) association).getCardinalityLabel(), 
+                          ((AssociationUML) association).getCardinalityStyle());
+            this.addSourceLabel((AssociationUML) association);
+            this.addTargetLabel((AssociationUML) association);
         }
     }
     
     /**
-     * Method responsible for adding the Normal Association.
-     * @param relationship Association.
+     * Method responsible for adding the Source Label.
+     * @param association Association UML.
      */
-    private void addNormalRelationship(Relationship relationship) {
-        mxCell     edge     = (mxCell) this.graph.insertEdge(this.parent, relationship.getId(), relationship.getTitle(), this.objects.get(this.getId(relationship.getAssociation().getSource())), this.objects.get(this.getId(relationship.getAssociation().getTarget())), relationship.getStyleLabel());
-        mxGeometry geometry = ((mxGraphModel) (this.graph.getModel())).getGeometry(edge);
-                   geometry.setPoints(relationship.getPoints());
-        ((mxGraphModel) (this.graph.getModel())).setGeometry(edge, geometry);
-        this.identifiers.put(edge, relationship.getId());
-        this.objects.put(relationship.getId(), edge);
+    private void addSourceLabel(AssociationUML association) {
+        if (!association.isDirection()) {
+            mxCell source = (mxCell) this.graph.insertVertex(this.parent, association.getId() + "(source)", association.getSourceLabel(), association.getSourceX(), association.getSourceY(), 30, 20, association.getCardinalityLabel());
+                   source.setConnectable(false);
+            this.addIdentifier(source, association.getId() + "(source)");
+        }
     }
     
     /**
-     * Method responsible for adding the Directed Relationship.
-     * @param relationship Relationship.
+     * Method responsible for adding the Target Label.
+     * @param association Association UML. 
      */
-    private void addDirectedRelationship(Relationship relationship) {
-        AssociationUML associationUML = (AssociationUML) relationship.getAssociation();
-        this.graph.getStylesheet().putCellStyle(associationUML.getCardinalityLabel(), this.getStyle(associationUML.getCardinalityStyle()));
-        mxCell source = (mxCell) this.graph.insertVertex(this.parent, relationship.getId() + "(source)", associationUML.getSourceLabel(), relationship.getSourceX(), relationship.getSourceY(), 30, 20, associationUML.getCardinalityLabel());
-               source.setConnectable(false);
-        mxCell target = (mxCell) this.graph.insertVertex(this.parent, relationship.getId() + "(target)", associationUML.getTargetLabel(), relationship.getTargetX(), relationship.getTargetY(), 30, 20, associationUML.getCardinalityLabel());
+    public void addTargetLabel(AssociationUML association) {
+        mxCell target = (mxCell) this.graph.insertVertex(this.parent, association.getId() + "(target)", association.getTargetLabel(), association.getTargetX(), association.getTargetY(), 30, 20, association.getCardinalityLabel());
                target.setConnectable(false);
-        this.identifiers.put(source, relationship.getId() + "(source)");
-        this.identifiers.put(target, relationship.getId() + "(target)");
+        this.addIdentifier(target, association.getId() + "(target)");
     }
     
     @Override

@@ -9,7 +9,6 @@ import java.util.HashMap;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import view.panel.tree.PanelTree;
-import view.panel.tree.PanelTreeUML;
 
 /**
  * <p>Class of View <b>TreePopup</b>.</p>

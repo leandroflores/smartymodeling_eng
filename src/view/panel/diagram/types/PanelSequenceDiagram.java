@@ -51,9 +51,8 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     }
     
     @Override
-    public void addOperationsPanel() {
+    public void initOperationsPanel() {
         this.panel = new PanelSequenceOperation(this);
-        this.add(this.panel, this.setStartConstraint(new GridBagConstraints()));
     }
     
     @Override

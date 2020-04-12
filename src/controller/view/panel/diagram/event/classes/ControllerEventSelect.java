@@ -56,8 +56,6 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
             this.newMethod(cell, (Entity) this.panel.getDiagram().getElement(id));
         else if (this.panel.getDiagram().getAssociation(id) != null)
             this.updatePoints(this.panel.getDiagram().getAssociation(id), cell);
-//        else if (this.panel.getIdentifiers().get(cell) != null)
-//            this.updateEditPanel(cell);
     }
     
     /**

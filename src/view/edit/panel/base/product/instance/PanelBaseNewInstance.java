@@ -51,7 +51,7 @@ public final class PanelBaseNewInstance extends Panel {
         this.getProductComboBox().setPreferredSize(new Dimension(325, 30));
         
         this.add(this.createLabel("Diagram*: "));
-        this.add(this.createComboBox("diagramComboBox", this.viewNew.getViewMenu().getProject().getDiagramsList().toArray(), 15));
+        this.add(this.createComboBox("diagramComboBox", this.viewNew.getViewMenu().getProject().getUMLDiagramsList().toArray(), 15));
         this.getDiagramComboBox().setPreferredSize(new Dimension(325, 30));
         
         this.add(this.createLabel("Name*: "));

@@ -38,7 +38,7 @@ public final class PanelBaseMethodUML extends Panel {
         this.controller = new ControllerPanelBaseMethodUML(this);
         this.setSettings();
         this.addComponents();
-        this.setValues();
+//        this.setValues();
     }
     
     /**

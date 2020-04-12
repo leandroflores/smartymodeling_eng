@@ -38,7 +38,7 @@ public final class PanelBaseAttributeUML extends Panel {
         this.controller   = new ControllerPanelBaseAttributeUML(this);
         this.setSettings();
         this.addComponents();
-        this.setValues();
+//        this.setValues();
     }
     
     /**

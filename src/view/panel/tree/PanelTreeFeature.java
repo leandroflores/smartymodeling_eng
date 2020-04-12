@@ -3,6 +3,7 @@ package view.panel.tree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
+import model.structural.base.Project;
 import view.structural.ViewMenu;
 
 /**
@@ -30,6 +31,18 @@ public final class PanelTreeFeature extends PanelTree {
                this.addDiagrams(node);
                this.nodes.put(this.project, node);
         return node;
+    }
+    
+    /**
+     * Method responsible for updating the Panel Tree.
+     */
+    public void update() {
+        DefaultMutableTreeNode node = super.getNodeTree(this.project);
+        if (node != null) {
+            node.removeAllChildren();
+            this.addDiagrams(node);
+            this.getTreeModel().reload(node);
+        }
     }
     
     /**
@@ -64,7 +77,17 @@ public final class PanelTreeFeature extends PanelTree {
         for (Element  element : diagram.getTreeElementsList())
             this.addElement(element, this.getNode(element), node);
     }
-
+    
+    @Override
+    public void updateNode(Diagram diagram) {
+        DefaultMutableTreeNode node = super.getNodeTree(diagram);
+        if (node != null) {
+            node.removeAllChildren();            
+            this.addElements(diagram, node);
+            this.getTreeModel().reload(node);
+        }
+    }
+    
     @Override
     public void updateNode(Element element) {
         if (this.getNodeTree(element) != null)

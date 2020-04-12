@@ -21,6 +21,7 @@ import java.util.Map;
 import javax.swing.JScrollPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
+import model.structural.base.association.Association;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Relationship;
@@ -122,7 +123,7 @@ public abstract class PanelInstance extends Panel {
             this.initGraphLayout();
             this.addGraphPanel();
         
-        this.component.refresh();
+//        this.component.refresh();
     }
     
     /**
@@ -197,7 +198,7 @@ public abstract class PanelInstance extends Panel {
      * Method responsible for adding the Instance Artifacts.
      */
     public void addArtifacts() {
-        for (Artifact artifact : this.instance.getArtifactsList())
+        for (Artifact artifact : this.getInstance().getArtifactsList())
             this.addArtifact(artifact, artifact.getElement());
     }
     
@@ -211,7 +212,7 @@ public abstract class PanelInstance extends Panel {
         String title = element.getName();
         mxCell cell  = (mxCell) this.graph.insertVertex(this.parent, artifact.getId(), title, artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
                cell.setConnectable(false);
-        this.addArtifact(artifact, cell);
+        this.addArtifactCell(artifact, cell);
     }
     
     /**
@@ -219,7 +220,7 @@ public abstract class PanelInstance extends Panel {
      * @param artifact Artifact.
      * @param cell mxCell.
      */
-    protected void addArtifact(Artifact artifact, mxCell cell) {
+    protected void addArtifactCell(Artifact artifact, mxCell cell) {
         this.identifiers.put(cell, artifact.getId());
         this.objects.put(artifact.getId(), cell);
     }
@@ -250,15 +251,23 @@ public abstract class PanelInstance extends Panel {
      * Method responsible for adding the Instance Relationships.
      */
     public void addRelationships() {
-        for (Relationship relationship : this.instance.getRelationshipsList()) {
-            this.addStyle(relationship.getStyleLabel(), relationship.getStyle());
-            String     title    = this.getTitle(relationship);
-            mxCell     edge     = (mxCell) this.graph.insertEdge(this.parent, relationship.getId(), title, this.objects.get(this.getId(relationship.getAssociation().getSource())), this.objects.get(this.getId(relationship.getAssociation().getTarget())), relationship.getStyleLabel());
-            mxGeometry geometry = this.getModel().getGeometry(edge);
-                       geometry.setPoints(relationship.getPoints());
-                       this.getModel().setGeometry(edge, geometry);
-            this.addRelationship(relationship, edge);
-        }
+        for (Relationship relationship : this.instance.getRelationshipsList()) 
+            this.addRelationship(relationship, relationship.getAssociation());
+    }
+    
+    /**
+     * Method responsible for adding the Relationship Edge.
+     * @param relationship Relationship.
+     * @param association Association.
+     */
+    protected void addRelationship(Relationship relationship, Association association) {
+        this.addStyle(relationship.getStyleLabel(), relationship.getStyle());
+        String     title    = this.getTitle(relationship);
+        mxCell     edge     = (mxCell) this.graph.insertEdge(this.parent, relationship.getId(), title, this.objects.get(this.getId(relationship.getAssociation().getSource())), this.objects.get(this.getId(relationship.getAssociation().getTarget())), relationship.getStyleLabel());
+        mxGeometry geometry = this.getModel().getGeometry(edge);
+                   geometry.setPoints(relationship.getPoints());
+                   this.getModel().setGeometry(edge, geometry);
+        this.addRelationshipCell(relationship, edge);
     }
     
     /**
@@ -275,7 +284,7 @@ public abstract class PanelInstance extends Panel {
      * @param relationship Relationship.
      * @param cell mxCell.
      */
-    protected void addRelationship(Relationship relationship, mxCell cell) {
+    protected void addRelationshipCell(Relationship relationship, mxCell cell) {
         this.identifiers.put(cell, relationship.getId());
         this.objects.put(relationship.getId(), cell);
     }

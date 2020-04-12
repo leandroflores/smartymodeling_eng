@@ -139,8 +139,8 @@ public class Profile implements Exportable {
                export += " variationPoint=\"" + this.variationPoint.getId() + "\"";
                export += " inclusive=\""      + this.inclusive.getId()      + "\"";
                export += " exclusive=\""      + this.exclusive.getId()      + "\"";
-               export += " requires=\""       + this.requires.getId()       + "\"";
-               export += " mutex=\""          + this.mutex.getId()          + "\"";
+//               export += " requires=\""       + this.requires.getId()       + "\"";
+//               export += " mutex=\""          + this.mutex.getId()          + "\"";
                export += "/>\n";
         return export;
     }

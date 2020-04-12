@@ -10,8 +10,8 @@ import com.mxgraph.util.mxConstants;
 import com.mxgraph.view.mxGraph;
 import controller.view.panel.diagram.ControllerPanelDiagram;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.HashMap;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Map;
 import javax.swing.JScrollPane;
@@ -37,7 +37,6 @@ public abstract class PanelDiagram extends Panel {
     
     protected String  operation;
     protected Integer type;
-    protected Double  zoom;
     protected HashMap identifiers;
     protected HashMap objects;
     
@@ -70,15 +69,15 @@ public abstract class PanelDiagram extends Panel {
     
     @Override
     protected void addComponents() {
-        this.addOperationsPanel();
+        this.initOperationsPanel();
         this.addModelingPanel();
         this.addControllers();
     }
     
     /**
-     * Method responsible for adding Operations Panel on View.
+     * Method responsible for initializing the Operations Panel.
      */
-    public abstract void addOperationsPanel();
+    public abstract void initOperationsPanel();
     
     /**
      * Method responsible for setting the Style.
@@ -120,7 +119,6 @@ public abstract class PanelDiagram extends Panel {
      * Method responsible for adding the Modeling Panel.
      */
     public void addModelingPanel() {
-        this.zoom        = 1.0d;
         this.identifiers = new HashMap<>();
         this.objects     = new HashMap<>();
             this.initGraph();
@@ -177,7 +175,11 @@ public abstract class PanelDiagram extends Panel {
     protected void addGraphPanel() {
         this.createScrollPane("scrollPaneDiagram");
         this.getScrollPaneDiagram().setViewportView(this.component);
-        this.add(this.getScrollPaneDiagram(), this.setBodyConstraint(new GridBagConstraints()));
+//        this.getScrollPaneDiagram().setPreferredSize(new Dimension(1000, 300));
+        this.getScrollPaneDiagram().setMinimumSize(new Dimension(500, 400));
+        this.getScrollPaneDiagram().setPreferredSize(new Dimension(1000, 300));
+        this.add(this.getPanelOperation(), this.getStartConstraint());
+        this.add(this.getScrollPaneDiagram(), this.getBodyConstraint());
     }
     
     /**
@@ -380,22 +382,13 @@ public abstract class PanelDiagram extends Panel {
         this.type = type;
         this.setStyle();
     }
-
-    /**
-     * Method responsible for returning the Panel Zoom.
-     * @return Panel Zoom.
-     */
-    public Double getZoom() {
-        return this.zoom;
-    }
     
     /**
      * Method responsible for setting the Panel Zoom.
      * @param zoom Zoom Value.
      */
     public void setZoom(Double zoom) {
-        this.zoom = zoom;
-        this.graph.getView().setScale(this.zoom);
+        this.graph.getView().setScale(zoom);
     }
     
     /**

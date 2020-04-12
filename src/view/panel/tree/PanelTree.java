@@ -128,7 +128,10 @@ public abstract class PanelTree extends Panel {
      * Method responsible for updating the Element Node.
      * @param element Element. 
      */
-    public abstract void updateNode(Element element);
+    public void updateNode(Element element) {
+        if (this.getNodeTree(element) != null)
+            this.getTreeModel().reload(this.getNodeTree(element));
+    }
     
     /**
      * Method responsible for returning the Parent Node.

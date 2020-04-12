@@ -94,4 +94,12 @@ public abstract class ControllerPanel extends Controller {
             return Integer.MAX_VALUE;
         }
     }
+    
+    /**
+     * Method responsible for returning the Panel.
+     * @return Panel.
+     */
+    public Panel getPanel() {
+        return this.panel;
+    }
 }

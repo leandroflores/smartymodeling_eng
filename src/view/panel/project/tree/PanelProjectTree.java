@@ -1,9 +1,12 @@
 package view.panel.project.tree;
 
+import controller.view.panel.project.tree.ControllerPanelProjectTree;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.MouseListener;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import model.structural.base.Element;
 import model.structural.base.Project;
 import view.Panel;
 import view.panel.tree.PanelTreeFeature;
@@ -21,8 +24,8 @@ import view.structural.ViewMenu;
 public final class PanelProjectTree extends Panel {
     private final ViewMenu viewMenu;
     private final Project  project;
-    private JTabbedPane tabbedPane;
     private Integer index;
+    private JTabbedPane tabbedPane;
     private PanelTreeFeature panelTreeFeat;
     private PanelTreeUML     panelTreeUML;
     
@@ -31,9 +34,10 @@ public final class PanelProjectTree extends Panel {
      * @param viewMenu View Menu.
      */
     public PanelProjectTree(ViewMenu viewMenu) {
-        this.viewMenu = viewMenu;
-        this.project  = this.viewMenu.getProject();
-        this.index    = 0;
+        this.viewMenu   = viewMenu;
+        this.project    = this.viewMenu.getProject();
+        this.controller = new ControllerPanelProjectTree(this);
+        this.index      = 0;
         this.addComponents();
     }
     
@@ -41,7 +45,7 @@ public final class PanelProjectTree extends Panel {
     public void addComponents() {
         this.setLayout(new GridLayout(1, 1));
         this.initTabbedPane();
-            this.addPanelTreeFeatures();
+//            this.addPanelTreeFeature();
             this.addPanelTreeUML();
         this.add(this.tabbedPane);
     }
@@ -51,13 +55,14 @@ public final class PanelProjectTree extends Panel {
      */
     protected void initTabbedPane() {
         this.tabbedPane = new JTabbedPane();
+        this.tabbedPane.addMouseListener((MouseListener) this.controller);
         this.tabbedPane.setPreferredSize(new Dimension(275, 260));
     }
     
     /**
-     * Method responsible for adding the Panel Features.
+     * Method responsible for adding the Panel Feature.
      */
-    protected void addPanelTreeFeatures() {
+    protected void addPanelTreeFeature() {
         this.panelTreeFeat = new PanelTreeFeature(this.viewMenu);
         this.createScrollPane("scrollPanelTreeFeat",  this.panelTreeFeat);
         this.getScrollPanelTreeFeat().setViewportView(this.panelTreeFeat);
@@ -73,6 +78,14 @@ public final class PanelProjectTree extends Panel {
         this.getScrollPanelTreeUML().setViewportView(this.panelTreeUML);
         this.tabbedPane.add("UML", this.getScrollPanelTreeUML());
     }
+    
+    
+    public void updateNode(Element element) {
+        if (this.panelTreeFeat != null)
+            this.panelTreeFeat.updateNode(element);
+        if (this.panelTreeUML  != null)
+            this.panelTreeUML.updateNode(element);
+    }
 
     /**
      * Method responsible for returning the Index Panel.
@@ -83,11 +96,20 @@ public final class PanelProjectTree extends Panel {
     }
 
     /**
-     * Method responsible for setting the Index Panel.
+     * Method responsible for returning the Index Panel.
      * @param index Index Panel.
      */
     public void setIndex(Integer index) {
         this.index = index;
+        System.out.println("Index: " + index);
+    }
+
+    /**
+     * Method responsible for returning the Tabbed Pane.
+     * @return Tabbed Pane.
+     */
+    public JTabbedPane getTabbedPane() {
+        return this.tabbedPane;
     }
     
     /**

@@ -11,7 +11,6 @@ import controller.view.panel.diagram.event.ControllerEventPoints;
 import controller.view.panel.diagram.event.ControllerEventSelect;
 import controller.view.panel.diagram.event.feature.ControllerEventResize;
 import controller.view.panel.diagram.types.ControllerPanelFeatureDiagram;
-import java.awt.GridBagConstraints;
 import model.structural.base.Element;
 import model.structural.diagram.FeatureDiagram;
 import view.panel.diagram.PanelDiagram;
@@ -50,10 +49,8 @@ public final class PanelFeatureDiagram extends PanelDiagram {
     }
     
     @Override
-    public void addOperationsPanel() {
+    public void initOperationsPanel() {
         this.panel = new PanelFeatureOperation(this);
-        this.add(this.panel, this.setStartConstraint(new GridBagConstraints()));
-        this.panel.getVariabilityButton().setVisible(false);
     }
     
     @Override
