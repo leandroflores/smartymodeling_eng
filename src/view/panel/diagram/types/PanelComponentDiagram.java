@@ -11,12 +11,10 @@ import controller.view.panel.diagram.event.ControllerEventMove;
 import controller.view.panel.diagram.event.ControllerEventPoints;
 import controller.view.panel.diagram.event.ControllerEventResize;
 import controller.view.panel.diagram.types.ControllerPanelComponentDiagram;
-import java.awt.GridBagConstraints;
-import java.util.Map;
-import model.controller.style.StyleComponent;
+import style.element.StyleComponent;
+import model.structural.base.Element;
 import model.structural.diagram.ComponentDiagram;
 import model.structural.diagram.component.base.ComponentUML;
-import model.structural.diagram.component.base.InterfaceUML;
 import view.panel.diagram.PanelDiagram;
 import view.panel.operation.types.PanelComponentOperation;
 import view.structural.ViewMenu;
@@ -46,50 +44,34 @@ public final class PanelComponentDiagram extends PanelDiagram {
     }
     
     @Override
-    public void initOperationsPanel() {
+    public void initPanelOperation() {
         this.panel = new PanelComponentOperation(this);
     }
     
     @Override
-    public void addElements() {
-        this.addComponents_();
-        this.addInterfaces();
+    protected void addElement(Element element) {
+        if (element instanceof ComponentUML)
+            this.addComponent((ComponentUML) element);
+        else 
+            super.addElement(element);
     }
     
     /**
-     * Method responsible for adding the Diagram Components.
+     *  Method responsible for adding the Component UML Cell.
+     * @param component Component UML.
      */
-    private void addComponents_() {
-        this.addStyle("styleImageComponent", this.getImageComponentStyle());
-        for (ComponentUML component_ : this.getDiagram().getComponentsList()) {
-            this.addStyle(component_.getStyleLabel(), component_.getStyle());
-            String title  = this.getTitle(component_);
-            mxCell cell = (mxCell) this.graph.insertVertex(this.parent, component_.getId(), title, component_.getPosition().x, component_.getPosition().y, component_.getSize().x, component_.getSize().y, component_.getStyleLabel());
+    protected void addComponent(ComponentUML component) {
+        this.addStyle(component.getStyleLabel(), component.getStyle());
+            String title = this.getTitle(component);
+            mxCell cell  = (mxCell) this.getGraph().insertVertex(this.parent, component.getId(), title, component.getPosition().x, component.getPosition().y, component.getSize().x, component.getSize().y, component.getStyleLabel());
                    cell.setConnectable(true);
-            this.graph.insertVertex(cell, null, "", 10, 10, 20, 20, "styleImageComponent");
-            this.addElement(component_, cell);
-        }
+            this.getGraph().insertVertex(cell, component.getId(), "", 10, 10, 20, 20, "styleImageComponent");
+            this.addElementCell(component, cell);
     }
     
-    /**
-     * Method responsible for adding the Diagram Interfaces.
-     */
-    private void addInterfaces() {
-        for (InterfaceUML interface_ : this.getDiagram().getInterfacesList()) {
-            this.addStyle(interface_.getStyleLabel(), interface_.getStyle());
-            String title = this.getTitle(interface_);
-            mxCell cell  = (mxCell) this.graph.insertVertex(this.parent, interface_.getId(), title, interface_.getPosition().x, interface_.getPosition().y, interface_.getSize().x, interface_.getSize().y, interface_.getStyleLabel());
-                   cell.setConnectable(true);
-            this.addElement(interface_, cell);
-        }
-    }
-    
-    /**
-     * Method responsible for returning the Image Component Style.
-     * @return Image Component Style.
-     */
-    private Map getImageComponentStyle() {
-        return new StyleComponent().getImageComponentStyle();
+    @Override
+    protected void loadDefaultStyles() {
+        this.addStyle("styleImageComponent", new StyleComponent().getImageComponentStyle());
     }
     
     @Override

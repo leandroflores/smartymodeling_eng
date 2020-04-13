@@ -116,7 +116,7 @@ public class ControllerEventGroup extends mxEventSource implements mxIEventListe
             ((PackageUML) element).resetParent();
         this.panel.getViewMenu().setSave(false);
         this.panel.getViewMenu().update();
-        this.panel.updateDiagram();
+        this.panel.updateGraph();
     }
     
     /**
@@ -130,7 +130,7 @@ public class ControllerEventGroup extends mxEventSource implements mxIEventListe
             this.updateParent(parent, (PackageUML) element);
         this.panel.getViewMenu().setSave(false);
         this.panel.getViewMenu().update();
-        this.panel.updateDiagram();
+        this.panel.updateGraph();
     }
     
     /**

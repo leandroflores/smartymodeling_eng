@@ -436,9 +436,11 @@ public final class ViewMenu extends View implements Operation {
      */
     public void updatePanelTree() {
         if (this.project != null) {
+            int index = this.panelProject.getPanelTree().getTabbedPane().getSelectedIndex();
             this.panelProject = new PanelProject(this);
             this.getScrollPanelProject().setViewportView(this.panelProject);
             this.unlockDiagramas();
+            this.panelProject.getPanelTree().getTabbedPane().setSelectedIndex(index);
         }else {
             this.getScrollPanelProject().setViewportView(this.createLabel(""));
             this.lockDiagramas();

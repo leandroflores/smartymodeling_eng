@@ -141,7 +141,7 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
      */
     private void delete(Element element) {
         new ViewDeleteElement(this.getPanelDiagram().getViewMenu().getPanelModeling(), element).setVisible(true);
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
     }
     
     /**
@@ -150,7 +150,7 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
      */
     private void delete(Association association) {
         this.getPanelDiagram().getDiagram().removeAssociation(association);
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
     }
     
     /**
@@ -163,7 +163,7 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
         Element element = this.getPanelDiagram().getDiagram().getElement(id);
         if (element != null) {
             this.move(element, event);
-            this.getPanelDiagram().updateDiagram();
+            this.getPanelDiagram().updateGraph();
             this.getPanelDiagram().getGraph().setSelectionCell(this.getPanelDiagram().getObjects().get(element.getId()));
         }
     }
@@ -196,7 +196,7 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
      * Method responsible for updating the Panel Diagram.
      */
     protected void update() {
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().update();
         this.getPanelDiagram().getViewMenu().setSave(false);
     }

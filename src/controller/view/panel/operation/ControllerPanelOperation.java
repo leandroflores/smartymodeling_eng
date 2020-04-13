@@ -34,7 +34,7 @@ public abstract class ControllerPanelOperation extends ControllerPanel {
     public void actionPerformed(ActionEvent event) {
         if (event != null) {
             if (this.getPanelOperation().getClickButton().equals(event.getSource()))
-                this.getPanelDiagram().updateDiagram();
+                this.getPanelDiagram().updateGraph();
             else if (this.getPanelOperation().getVariabilityButton().equals(event.getSource()))
                 this.addVariability();
             else if (this.getPanelOperation().getEditButton().equals(event.getSource()))
@@ -101,7 +101,7 @@ public abstract class ControllerPanelOperation extends ControllerPanel {
      */
     private void delete(Element element) {
         new ViewDeleteElement(this.getPanelDiagram().getViewMenu().getPanelModeling(), element).setVisible(true);
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
     }
     
     /**
@@ -110,7 +110,7 @@ public abstract class ControllerPanelOperation extends ControllerPanel {
      */
     private void delete(Association association) {
         this.getPanelDiagram().getDiagram().removeAssociation(association);
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
     }
     
     /**

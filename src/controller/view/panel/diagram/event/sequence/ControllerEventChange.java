@@ -38,7 +38,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
         String id   = this.getId(cell);
             this.change(cell, id);
         this.panel.getViewMenu().getPanelModeling().updateInstancePanels();
-        this.panel.updateDiagram();
+        this.panel.updateGraph();
         this.panel.getViewMenu().getPanelProject().updateUI();
     }
     

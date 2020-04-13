@@ -36,7 +36,7 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
             mxRectangle coordinates = this.panel.getGraph().getCellGeometry(cell);
                             artifact.setSize(new Double(coordinates.getHeight()).intValue(), new Double(coordinates.getWidth()).intValue());
             this.panel.getViewMenu().setSave(false);
-            this.panel.updateInstance();
+            this.panel.updateGraph();
         }
     }
 }

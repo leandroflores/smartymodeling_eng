@@ -52,6 +52,6 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
         element.dy(((Double) event.getProperty("dy")).intValue());
         this.panel.getDiagram().updateY(element.getY());
         this.panel.getViewMenu().setSave(false); 
-        this.panel.updateDiagram();
+        this.panel.updateGraph();
    }
 }

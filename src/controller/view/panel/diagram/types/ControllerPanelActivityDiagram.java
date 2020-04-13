@@ -54,7 +54,7 @@ public class ControllerPanelActivityDiagram extends ControllerPanelDiagram {
         InitialUML initial = new InitialUML();
                    initial.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addInitial(initial);
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().update();
     }
     
@@ -66,7 +66,7 @@ public class ControllerPanelActivityDiagram extends ControllerPanelDiagram {
         ActivityUML activity = new ActivityUML();
                     activity.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addActivity(activity);
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().update();
     }
     
@@ -78,7 +78,7 @@ public class ControllerPanelActivityDiagram extends ControllerPanelDiagram {
         DecisionUML decision = new DecisionUML();
                     decision.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addDecision(decision);
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().update();
     }
     
@@ -90,7 +90,7 @@ public class ControllerPanelActivityDiagram extends ControllerPanelDiagram {
         FinalUML final_ = new FinalUML();
                  final_.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addFinal(final_);
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().update();
     }
     

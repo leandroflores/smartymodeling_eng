@@ -59,6 +59,6 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
                 feature.setHeight(height > feature.getMinHeight() ? height : feature.getMinHeight());
                 feature.setWidth( width  > feature.getMinWidth()  ?  width : feature.getMinWidth());
         this.panel.getViewMenu().setSave(false);
-        this.panel.updateDiagram();
+        this.panel.updateGraph();
     }
 }

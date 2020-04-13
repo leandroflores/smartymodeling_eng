@@ -41,7 +41,7 @@ public class ControllerPanelComponentDiagram extends ControllerPanelDiagram {
                      component.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addComponent(component);
                      component.setDefaultName();
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().update();
     }
     
@@ -54,7 +54,7 @@ public class ControllerPanelComponentDiagram extends ControllerPanelDiagram {
                      interface_.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addInterface(interface_);
                      interface_.setDefaultName();
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().update();
     }
     

@@ -72,9 +72,9 @@ public class IncludeUML extends Association {
                style.put(mxConstants.STYLE_FONTSIZE, "15");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+               style.put(mxConstants.STYLE_SHAPE,      mxConstants.SHAPE_CONNECTOR);
                style.put(mxConstants.STYLE_ENDARROW,   mxConstants.ARROW_OPEN);
                style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);
-               style.put(mxConstants.STYLE_SHAPE,      mxConstants.SHAPE_CONNECTOR);
         return style;
     }
 }

@@ -73,7 +73,7 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
                 entity.setWidth( width  >  entity.getMinWidth() ?  width :  entity.getMinWidth());
                 entity.updatePackageSize();
         this.panel.getViewMenu().setSave(false);
-        this.panel.updateDiagram();
+        this.panel.updateGraph();
     }
     
     /**
@@ -88,6 +88,6 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
                 packageUML.setWidth( width  > packageUML.getMinWidth()  ?  width : packageUML.getMinWidth());
                 packageUML.updateParentSize();
         this.panel.getViewMenu().setSave(false);
-        this.panel.updateDiagram();
+        this.panel.updateGraph();
     }
 }

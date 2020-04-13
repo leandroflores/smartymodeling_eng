@@ -117,7 +117,7 @@ public class ControllerPanelInstance extends ControllerPanel implements MouseLis
                 artifact.dx(-10);
             if (event.getKeyCode() == KeyEvent.VK_RIGHT)
                 artifact.dx(10);
-            this.panelInstance.updateInstance();
+            this.panelInstance.updateGraph();
             this.panelInstance.getGraph().setSelectionCell(this.panelInstance.getObjects().get(artifact.getId()));
         }
     }
@@ -142,7 +142,7 @@ public class ControllerPanelInstance extends ControllerPanel implements MouseLis
      */
     private void delete(Artifact artifact) {
         new ViewDeleteArtifact(this.panelInstance.getViewMenu().getPanelModeling(), artifact).setVisible(true);
-        this.panelInstance.updateInstance();
+        this.panelInstance.updateGraph();
     }
     
     /**
@@ -151,6 +151,6 @@ public class ControllerPanelInstance extends ControllerPanel implements MouseLis
      */
     private void delete(Relationship relationship) {
         this.panelInstance.getInstance().removeRelationship(relationship);
-        this.panelInstance.updateInstance();
+        this.panelInstance.updateGraph();
     }
 }

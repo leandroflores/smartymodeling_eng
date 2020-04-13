@@ -1,6 +1,5 @@
 package view.panel.diagram.types;
 
-import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationUseCase;
 import controller.view.panel.diagram.event.ControllerEventChange;
@@ -11,7 +10,6 @@ import controller.view.panel.diagram.event.ControllerEventPoints;
 import controller.view.panel.diagram.event.ControllerEventResize;
 import controller.view.panel.diagram.event.ControllerEventSelect;
 import controller.view.panel.diagram.types.ControllerPanelUseCaseDiagram;
-import java.awt.GridBagConstraints;
 import model.structural.diagram.UseCaseDiagram;
 import view.panel.diagram.PanelDiagram;
 import view.panel.operation.types.PanelUseCaseOperation;
@@ -43,7 +41,7 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
     }
     
     @Override
-    public void initOperationsPanel() {
+    public void initPanelOperation() {
         this.panel = new PanelUseCaseOperation(this);
     }
     
@@ -51,13 +49,7 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
     public void setStyle() {
         switch (this.getType()) {
             case 0:
-                this.setRealizationStyle();
-                break;
-            case 1:
-            case 2:
-            case 4:
-            case 5:
-                this.setExtendStyle();
+                this.setDefaultStyle();
                 break;
             case 3:
                 this.setGeneralizationStyle();
@@ -66,26 +58,6 @@ public final class PanelUseCaseDiagram extends PanelDiagram {
                 this.setDependencyStyle();
                 break;
         }
-    }
-    
-    /**
-     * Method responsible for setting Realization Style.
-     */
-    private void setRealizationStyle() {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "0");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
-    }
-    
-    /**
-     * Method responsible for setting Extend Style.
-     */
-    private void setExtendStyle() {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "1");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_OPEN);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
     }
     
     @Override

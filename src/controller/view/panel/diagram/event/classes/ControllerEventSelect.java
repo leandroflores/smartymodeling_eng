@@ -79,7 +79,7 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
                      entity.addAttribute(attribute);
                      attribute.setDefaultName();
                      entity.updateSize();
-        this.panel.updateDiagram();
+        this.panel.updateGraph();
         this.panel.getViewMenu().update();
         this.panel.getViewMenu().setSave(false);
     }
@@ -98,7 +98,7 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
                   this.panel.getDiagram().addMethod(method);
                   method.setDefaultName();
                   entity.updateSize();
-        this.panel.updateDiagram();
+        this.panel.updateGraph();
         this.panel.getViewMenu().update();
         this.panel.getViewMenu().setSave(false);
     }

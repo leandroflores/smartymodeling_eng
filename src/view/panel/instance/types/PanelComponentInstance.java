@@ -3,7 +3,7 @@ package view.panel.instance.types;
 import com.mxgraph.model.mxCell;
 import controller.view.panel.instance.ControllerPanelInstance;
 import java.util.Map;
-import model.controller.style.StyleComponent;
+import style.element.StyleComponent;
 import model.structural.base.Element;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;

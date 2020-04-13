@@ -44,7 +44,7 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
                     lifeline.setHeight(this.getPanelDiagram().getDiagram().getHeightDefault());
         this.getPanelDiagram().getDiagram().addLifeline(lifeline);
                     lifeline.setDefaultName();
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().update();
     }
     
@@ -58,7 +58,7 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
                     instance.setHeight(this.getPanelDiagram().getDiagram().getHeightDefault());
         this.getPanelDiagram().getDiagram().addInstance(instance);
                     instance.setDefaultName();
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().update();
     }
     
@@ -68,7 +68,7 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
         if (element != null) {
             super.move(element, event);
             this.getPanelDiagram().getDiagram().updateY(element.getY());
-            this.getPanelDiagram().updateDiagram();
+            this.getPanelDiagram().updateGraph();
             this.getPanelDiagram().getGraph().setSelectionCell(this.getPanelDiagram().getObjects().get(element.getId()));
         }
     }

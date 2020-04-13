@@ -3,7 +3,6 @@ package view.panel.tree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
-import model.structural.base.Project;
 import view.structural.ViewMenu;
 
 /**

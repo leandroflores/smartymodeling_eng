@@ -69,7 +69,7 @@ public class ControllerEventPoints extends MouseAdapter {
      */
     private void addPoint(Relationship relationship, mxPoint point) {
         relationship.addPoint(point);
-        this.panel.updateInstance();
+        this.panel.updateGraph();
         this.panel.getViewMenu().update();
         this.panel.getViewMenu().setSave(false);
     }
@@ -83,7 +83,7 @@ public class ControllerEventPoints extends MouseAdapter {
         mxPoint nearest = relationship.getNearestPoint(point);
         if (nearest != null) {
             relationship.removePoint(nearest);
-            this.panel.updateInstance();
+            this.panel.updateGraph();
             this.panel.getViewMenu().update();
             this.panel.getViewMenu().setSave(false);
         }

@@ -41,7 +41,7 @@ public class ControllerPanelUseCaseDiagram extends ControllerPanelDiagram {
                  actor.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addActor(actor);
                  actor.setDefaultName();
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().update();
     }
     
@@ -54,7 +54,7 @@ public class ControllerPanelUseCaseDiagram extends ControllerPanelDiagram {
                    useCase.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addUseCase(useCase);
                    useCase.setDefaultName();
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().update();
     }
     

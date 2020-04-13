@@ -1,20 +1,14 @@
 package view.panel.instance;
 
-import com.mxgraph.layout.mxGraphLayout;
-import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
-import com.mxgraph.model.mxGraphModel;
-import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
-import com.mxgraph.view.mxGraph;
 import controller.view.panel.instance.ControllerPanelInstance;
 import controller.view.panel.instance.event.ControllerEventFocus;
 import controller.view.panel.instance.event.ControllerEventMove;
 import controller.view.panel.instance.event.ControllerEventPoints;
 import controller.view.panel.instance.event.ControllerEventResize;
-import java.awt.Color;
 import java.util.HashMap;
 import java.awt.GridLayout;
 import java.util.Map;
@@ -25,30 +19,23 @@ import model.structural.base.association.Association;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Relationship;
-import view.Panel;
+import view.panel.PanelGraph;
 import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelInstance</b>.</p>
  * <p>Class responsible for defining the <b>Instance Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  06/10/2019
+ * @since  2019-10-06
  * @see    controller.view.panel.instance.ControllerPanelInstance
  * @see    model.structural.base.product.Instance
- * @see    view.Panel
+ * @see    view.panel.PanelGraph
  */
-public abstract class PanelInstance extends Panel {
+public abstract class PanelInstance extends PanelGraph {
     protected final ViewMenu viewMenu;
     protected final Instance instance;
-    
-    protected Double  zoom;
     protected HashMap identifiers;
     protected HashMap objects;
-    
-    protected Object  parent;
-    protected mxGraph graph;
-    protected mxGraphLayout layout;
-    protected mxGraphComponent component;
     
     /**
      * Default constructor method of Class.
@@ -85,36 +72,9 @@ public abstract class PanelInstance extends Panel {
     }
     
     /**
-     * Method responsible for creating a New mxGraph.
-     * @return New mxGraph.
-     */
-    private mxGraph createMxGraph() {
-        return new mxGraph() {
-            @Override
-            public boolean isValidDropTarget(Object cell, Object[] cells) {
-                return      isCellsMovable() 
-                        && !isCellLocked(cell) 
-                        && this.isValidParent(cell, cells);
-            }
-            
-            public boolean isValidParent(Object cell, Object[] cells) {
-                for (Object object : cells) {
-                    if (((mxCell) object).getId().equals(((mxCell) cell).getId()))
-                        return false;
-                }
-                
-                if  (((mxCell) cell).getParent() == null)
-                    return true;
-                return this.isValidParent(((mxCell) cell).getParent(), cells);
-            }
-        };
-    }
-    
-    /**
-     * Method responsible for adding the Instance Panel.
+     * Method responsible for adding the Modeling Panel.
      */
     public void addModelingPanel() {
-        this.zoom        = 1.0d;
         this.identifiers = new HashMap<>();
         this.objects     = new HashMap<>();
         
@@ -126,44 +86,18 @@ public abstract class PanelInstance extends Panel {
 //        this.component.refresh();
     }
     
-    /**
-     * Method responsible for initializing the Graph.
-     */
+    
+    @Override
     protected void initGraph() {
-        this.graph  = this.createMxGraph();
-        this.parent = this.graph.getDefaultParent();
-        
-        this.graph.getModel().beginUpdate();
-            this.updateInstance();
-        this.graph.getModel().endUpdate();
-        this.graph.refresh();
-        
-        this.graph.setAllowDanglingEdges(false);
-        this.graph.setAllowNegativeCoordinates(false);
+        super.initGraph();
         this.graph.setAllowLoops(false);
-        this.graph.setSplitEnabled(false);
-        this.graph.setDisconnectOnMove(false);
-        this.graph.setCellsDisconnectable(false);
     }
     
-    /**
-     * Method responsible for initializing the Graph Component.
-     */
+    @Override
     protected void initGraphComponent() {
-        this.component = new mxGraphComponent(this.graph);
-        this.component.setEnterStopsCellEditing(true); 
+        super.initGraphComponent();
         this.component.getGraphControl().addMouseListener((ControllerPanelInstance) this.controller);
         this.component.getGraphControl().getGraphContainer().addKeyListener((ControllerPanelInstance) this.controller);
-        this.component.getViewport().setOpaque(true);
-        this.component.getViewport().setBackground(Color.WHITE);
-    }
-    
-    /**
-     * Method responsible for initializing the Graph Layout.
-     */
-    protected void initGraphLayout() {
-        this.layout = new mxParallelEdgeLayout(this.graph);
-        this.layout.execute(this.graph.getDefaultParent());
     }
     
     /**
@@ -175,18 +109,9 @@ public abstract class PanelInstance extends Panel {
         this.add(this.getScrollPaneInstance());
     }
     
-    /**
-     * Method responsible for cleaning the Instance.
-     */
-    public void clearInstance() {
-        this.graph.removeCells(this.graph.getChildCells(this.graph.getDefaultParent(), true, true));
-    }
-    
-    /**
-     * Method responsible for updating the Instance.
-     */
-    public void updateInstance() {
-        this.clearInstance();
+    @Override
+    public void updateGraph() {
+        this.clearGraph();
         this.identifiers = new HashMap<>();
         this.objects     = new HashMap<>();
         
@@ -262,12 +187,21 @@ public abstract class PanelInstance extends Panel {
      */
     protected void addRelationship(Relationship relationship, Association association) {
         this.addStyle(relationship.getStyleLabel(), relationship.getStyle());
-        String     title    = this.getTitle(relationship);
-        mxCell     edge     = (mxCell) this.graph.insertEdge(this.parent, relationship.getId(), title, this.objects.get(this.getId(relationship.getAssociation().getSource())), this.objects.get(this.getId(relationship.getAssociation().getTarget())), relationship.getStyleLabel());
+        String title = this.getTitle(relationship);
+        mxCell edge  = (mxCell) this.graph.insertEdge(this.parent, relationship.getId(), title, this.objects.get(this.getId(relationship.getAssociation().getSource())), this.objects.get(this.getId(relationship.getAssociation().getTarget())), relationship.getStyleLabel());
+        this.updatePoints(relationship, edge);
+        this.addRelationshipCell(relationship, edge);
+    }
+    
+    /**
+     * Method responsible for updating the Relationship Points.
+     * @param relationship Relationship.
+     * @param edge Edge Cell.
+     */
+    public void updatePoints(Relationship relationship, mxCell edge) {
         mxGeometry geometry = this.getModel().getGeometry(edge);
                    geometry.setPoints(relationship.getPoints());
-                   this.getModel().setGeometry(edge, geometry);
-        this.addRelationshipCell(relationship, edge);
+        this.getModel().setGeometry(edge, geometry);
     }
     
     /**
@@ -301,23 +235,6 @@ public abstract class PanelInstance extends Panel {
     }
     
     /**
-     * Method responsible for adding a Graph Style.
-     * @param id Style Id.
-     * @param properties Style Properties.
-     */
-    protected void addStyle(String id, Map properties) {
-        this.graph.getStylesheet().putCellStyle(id, properties);
-    }
-    
-    /**
-     * Method responsible for returning the Default Edge Style.
-     * @return Default Edge Style.
-     */
-    protected Map<String, Object> getDefaultEdgeStyle() {
-        return this.getGraph().getStylesheet().getStyles().get("defaultEdge");
-    }
-    
-    /**
      * Method responsible for returning View Menu.
      * @return View Menu.
      */
@@ -339,23 +256,6 @@ public abstract class PanelInstance extends Panel {
      */
     public Diagram getDiagram() {
         return this.instance.getDiagram();
-    }
-    
-    /**
-     * Method responsible for returning the Panel Zoom.
-     * @return Panel Zoom.
-     */
-    public Double getZoom() {
-        return this.zoom;
-    }
-    
-    /**
-     * Method responsible for setting the Panel Zoom.
-     * @param zoom Zoom Value.
-     */
-    public void setZoom(Double zoom) {
-        this.zoom = zoom;
-        this.graph.getView().setScale(this.zoom);
     }
     
     /**
@@ -392,38 +292,6 @@ public abstract class PanelInstance extends Panel {
      */
     public HashMap<String, Object> getObjects() {
         return this.objects;
-    }
-    
-    /**
-     * Method responsible for returning the Graph.
-     * @return Graph.
-     */
-    public mxGraph getGraph() {
-        return this.graph;
-    }
-
-    /**
-     * Method responsible for returning the Graph Layout.
-     * @return Graph Layout.
-     */
-    public mxGraphLayout getGraphLayout() {
-        return this.layout;
-    }
-    
-    /**
-     * Method responsible for returning the Graph Model.
-     * @return Graph Model.
-     */
-    public mxGraphModel getModel() {
-        return (mxGraphModel) this.graph.getModel();
-    }
-    
-    /**
-     * Method responsible for returning the Graph Component.
-     * @return Graph Component.
-     */
-    public mxGraphComponent getComponent() {
-        return this.component;
     }
     
     /**

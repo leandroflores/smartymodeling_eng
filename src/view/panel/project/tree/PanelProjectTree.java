@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.MouseListener;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import view.Panel;
@@ -45,7 +46,7 @@ public final class PanelProjectTree extends Panel {
     public void addComponents() {
         this.setLayout(new GridLayout(1, 1));
         this.initTabbedPane();
-//            this.addPanelTreeFeature();
+            this.addPanelTreeFeature();
             this.addPanelTreeUML();
         this.add(this.tabbedPane);
     }
@@ -80,6 +81,31 @@ public final class PanelProjectTree extends Panel {
     }
     
     
+    /**
+     * Method responsible for updating the Project Node.
+     */
+    public void updateProjectNode() {
+        if (this.panelTreeFeat != null)
+            this.panelTreeFeat.updateProjectNode();
+        if (this.panelTreeUML  != null)
+            this.panelTreeUML.updateProjectNode();
+    }
+    
+    /**
+     * Method responsible for updating the Diagram Node.
+     * @param diagram Diagram.
+     */
+    public void updateNode(Diagram diagram) {
+        if (this.panelTreeFeat != null)
+            this.panelTreeFeat.updateNode(diagram);
+        if (this.panelTreeUML  != null)
+            this.panelTreeUML.updateNode(diagram);
+    }
+    
+    /**
+     * Method responsible for updating the Element Node.
+     * @param element Element.
+     */
     public void updateNode(Element element) {
         if (this.panelTreeFeat != null)
             this.panelTreeFeat.updateNode(element);

@@ -60,7 +60,7 @@ public class ExportDiagram {
      */
     private BufferedImage getImage() {
         PanelDiagram panel = this.getPanelDiagram();
-                     panel.updateDiagram();
+                     panel.updateGraph();
         return mxCellRenderer.createBufferedImage(panel.getGraph(),  null, 1, Color.WHITE, true, null);
     }
     

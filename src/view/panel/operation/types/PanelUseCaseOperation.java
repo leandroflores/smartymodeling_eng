@@ -35,7 +35,7 @@ public final class PanelUseCaseOperation extends PanelOperation {
     
     @Override
     public Object[] getAssociationsIcons() {
-        Object[] icons = {this.getAssociationImage("association"),
+        Object[] icons = {this.getAssociationImage("usecase/communication"),
                           this.getAssociationImage("usecase/extend"),
                           this.getAssociationImage("usecase/include"),
                           this.getAssociationImage("generalization"),

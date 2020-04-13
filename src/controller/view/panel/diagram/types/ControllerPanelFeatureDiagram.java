@@ -38,8 +38,8 @@ public class ControllerPanelFeatureDiagram extends ControllerPanelDiagram {
                 feature.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addFeature(feature);
                 feature.setDefaultName();
-        this.getPanelDiagram().updateDiagram();
-        this.getPanelDiagram().getViewMenu().getPanelProject().getPanelTree().getPanelTreeFeature().update();
+        this.getPanelDiagram().updateGraph();
+        this.getPanelDiagram().getViewMenu().getPanelProject().getPanelTree().updateProjectNode();
 //        this.panelBaseVariants.getViewMenu().getPanelProject().getPanelTree().getPanelTreeUML().updateNode(this.panelBaseVariants.getVariability());
 //        this.getPanelDiagram().getViewMenu().update();
     }

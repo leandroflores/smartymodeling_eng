@@ -1,6 +1,5 @@
 package view.panel.diagram.types;
 
-import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationActivity;
 import controller.view.panel.diagram.event.ControllerEventEdit;
@@ -10,8 +9,8 @@ import controller.view.panel.diagram.event.ControllerEventPoints;
 import controller.view.panel.diagram.event.ControllerEventResize;
 import controller.view.panel.diagram.event.activity.ControllerEventChange;
 import controller.view.panel.diagram.types.ControllerPanelActivityDiagram;
-import java.awt.GridBagConstraints;
 import model.structural.diagram.ActivityDiagram;
+import style.association.types.StyleActivityAssociation;
 import view.panel.diagram.PanelDiagram;
 import view.panel.operation.types.PanelActivityOperation;
 import view.structural.ViewMenu;
@@ -41,37 +40,25 @@ public final class PanelActivityDiagram extends PanelDiagram {
     }
     
     @Override
-    public void initOperationsPanel() {
+    public void initPanelOperation() {
         this.panel = new PanelActivityOperation(this);
+    }
+    
+    @Override
+    public void initStyleAssociation() {
+        this.style = new StyleActivityAssociation();
     }
     
     @Override
     public void setStyle() {
         switch (this.getType()) {
             case 0:
-                this.setFlowStyle();
-                break;
-            case 1:
-            case 2:
-            case 3:
-                this.setDependencyStyle();
+                this.getStyle().setFlowStyle(this.getDefaultEdgeStyle());
                 break;
             default:
-                this.setFlowStyle();    
+                this.setDependencyStyle();
                 break;
         }
-    }
-    
-    /**
-     * Method responsible for setting the Flow Style.
-     */
-    private void setFlowStyle() {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,  "0");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDSIZE, "15");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_OPEN);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
     }
     
     @Override
@@ -94,5 +81,10 @@ public final class PanelActivityDiagram extends PanelDiagram {
     @Override
     public PanelActivityOperation getPanelOperation() {
         return (PanelActivityOperation) this.panel;
+    }
+    
+    @Override
+    public StyleActivityAssociation getStyle() {
+        return (StyleActivityAssociation) this.style;
     }
 }

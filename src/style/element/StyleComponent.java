@@ -1,4 +1,4 @@
-package model.controller.style;
+package style.element;
 
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;

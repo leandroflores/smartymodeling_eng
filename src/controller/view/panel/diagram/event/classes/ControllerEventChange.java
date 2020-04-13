@@ -38,7 +38,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
         Object cell = this.panel.getGraph().getSelectionCell();
         String id   = this.getId(cell);
             this.change(cell, id);
-        this.panel.updateDiagram();
+        this.panel.updateGraph();
         this.panel.getViewMenu().getPanelModeling().updateInstancePanels();
         this.panel.getViewMenu().getPanelProject().updateUI();
     }
@@ -73,7 +73,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
             attribute.setVisibility(this.getVisibility(signature));
             attribute.setName(this.getName(signature, ":"));
             attribute.setTypeUML(this.getType(signature, true));
-            this.panel.updateDiagram();
+            this.panel.updateGraph();
             this.panel.getViewMenu().update();
             this.panel.getViewMenu().setSave(false);
         }
@@ -103,7 +103,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
             method.setName(this.getName(signature, "("));
             method.setParameters(this.getParameters(signature));
             method.setReturn(this.getType(signature, false));
-            this.panel.updateDiagram();
+            this.panel.updateGraph();
             this.panel.getViewMenu().getProject().changeNames(method);
             this.panel.getViewMenu().update();
             this.panel.getViewMenu().setSave(false);
@@ -133,7 +133,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
         mxCell cell = (mxCell) object;
         if (cell.getValue().toString().equals("") == false) {
             element.setName(cell.getValue().toString());
-            this.panel.updateDiagram();
+            this.panel.updateGraph();
             this.panel.getViewMenu().update();
             this.panel.getViewMenu().setSave(false);
         }

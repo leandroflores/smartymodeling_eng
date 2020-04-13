@@ -135,7 +135,7 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
         this.getPanelDiagram().getDiagram().addPackage(package_);
                    package_.setDefaultName();
         this.setParent(this.getParent(event), package_);
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().update();
     }
     
@@ -150,7 +150,7 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
         this.getPanelDiagram().getDiagram().addClass(class_);
                  class_.setDefaultName();
         this.setParent(this.getParent(event), class_);
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().update();
     }
     
@@ -165,7 +165,7 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
         this.getPanelDiagram().getDiagram().addInterface(interface_);
                      interface_.setDefaultName();
         this.setParent(this.getParent(event), interface_);
-        this.getPanelDiagram().updateDiagram();
+        this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().update();
     }
     

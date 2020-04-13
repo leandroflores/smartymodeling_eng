@@ -1,6 +1,5 @@
 package view.panel.diagram.types;
 
-import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationFeature;
 import controller.view.panel.diagram.event.ControllerEventChange;
@@ -13,6 +12,7 @@ import controller.view.panel.diagram.event.feature.ControllerEventResize;
 import controller.view.panel.diagram.types.ControllerPanelFeatureDiagram;
 import model.structural.base.Element;
 import model.structural.diagram.FeatureDiagram;
+import style.association.types.StyleFeatureAssociation;
 import view.panel.diagram.PanelDiagram;
 import view.panel.operation.types.PanelFeatureOperation;
 import view.structural.ViewMenu;
@@ -49,8 +49,13 @@ public final class PanelFeatureDiagram extends PanelDiagram {
     }
     
     @Override
-    public void initOperationsPanel() {
+    public void initPanelOperation() {
         this.panel = new PanelFeatureOperation(this);
+    }
+    
+    @Override
+    public void initStyleAssociation() {
+        this.style = new StyleFeatureAssociation();
     }
     
     @Override
@@ -62,35 +67,18 @@ public final class PanelFeatureDiagram extends PanelDiagram {
     public void setStyle() {
         switch (this.getType()) {
             case 0:
-                this.setConnectionStyle(true, true);
+                this.getStyle().setConnectionStyle(this.getDefaultEdgeStyle(), true, true);
                 break;
             case 1:
-                this.setConnectionStyle(true, false);
+                this.getStyle().setConnectionStyle(this.getDefaultEdgeStyle(), true, false);
                 break;
             case 2:
-                this.setConnectionStyle(false, false);
-                break;
-            case 3:
-                this.setConnectionStyle(false, true);
+                this.getStyle().setConnectionStyle(this.getDefaultEdgeStyle(), false, false);
                 break;
             default:
+                this.getStyle().setConnectionStyle(this.getDefaultEdgeStyle(), false, true);
                 break;
         }
-    }
-    
-    /**
-     * Method responsible for setting the Connection Style.
-     * @param oval Oval Flag.
-     * @param fill Fill Flag.
-     */
-    private void setConnectionStyle(boolean oval, boolean fill) {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,      "0");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW, oval ? mxConstants.ARROW_OVAL : mxConstants.ARROW_BLOCK);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDFILL,  fill ? "1" : "0");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDSIZE,  oval ? "10" : "15");
     }
     
     @Override
@@ -112,6 +100,11 @@ public final class PanelFeatureDiagram extends PanelDiagram {
 
     @Override
     public PanelFeatureOperation getPanelOperation() {
-        return (PanelFeatureOperation) this.panel;
+        return (PanelFeatureOperation)  this.panel;
+    }
+    
+    @Override
+    public StyleFeatureAssociation getStyle() {
+        return (StyleFeatureAssociation) this.style;
     }
 }

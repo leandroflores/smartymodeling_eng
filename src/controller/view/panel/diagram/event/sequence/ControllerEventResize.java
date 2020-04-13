@@ -73,7 +73,7 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
             lifelineUML.setHeight(height);
             lifelineUML.setWidth( width  >  lifelineUML.getNameSize() ?  width :  lifelineUML.getNameSize());
             this.panel.getDiagram().updateHeight(height);
-            this.panel.updateDiagram();
+            this.panel.updateGraph();
         }
         this.panel.getViewMenu().setSave(false);
     }
@@ -90,7 +90,7 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
             instanceUML.setHeight(height);
             instanceUML.setWidth( width  >  instanceUML.getSignatureSize() ?  width :  instanceUML.getSignatureSize());
             this.panel.getDiagram().updateHeight(height);
-            this.panel.updateDiagram();
+            this.panel.updateGraph();
         }
         this.panel.getViewMenu().setSave(false);
     }

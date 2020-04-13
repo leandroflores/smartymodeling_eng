@@ -100,9 +100,9 @@ public final class PanelModeling extends Panel {
     public void updateModelingPanel() {
         for (Component component : this.panelTabbed.getComponents()) {
             if (component instanceof PanelDiagram)
-                ((PanelDiagram)  component).updateDiagram();
+                ((PanelDiagram)  component).updateGraph();
             else if (component instanceof PanelInstance)
-                ((PanelInstance) component).updateInstance();
+                ((PanelInstance) component).updateGraph();
         }
     }
     
@@ -115,7 +115,7 @@ public final class PanelModeling extends Panel {
                 if (((PanelInstance) component).getInstance().isEmpty())
                     this.removeInstance(((PanelInstance) component).getInstance());
                 else
-                    ((PanelInstance) component).updateInstance();
+                    ((PanelInstance) component).updateGraph();
             }
         }
     }
@@ -153,15 +153,15 @@ public final class PanelModeling extends Panel {
     private PanelInstance createPanelInstance(Instance instance) {
         switch (instance.getDiagram().getType()) {
             case "Activity":
-                return new PanelActivityInstance(this.viewMenu, instance);
+                return new PanelActivityInstance(this.viewMenu,  instance);
             case "Class":
-                return new PanelClassInstance(this.viewMenu, instance);
+                return new PanelClassInstance(this.viewMenu,     instance);
             case "Component":
                 return new PanelComponentInstance(this.viewMenu, instance);
             case "Sequence":
-                return new PanelSequenceInstance(this.viewMenu, instance, (SequenceDiagram) instance.getDiagram());
+                return new PanelSequenceInstance(this.viewMenu,  instance);
             case "UseCase":
-                return new PanelUseCaseInstance(this.viewMenu, instance);
+                return new PanelUseCaseInstance(this.viewMenu,   instance);
             default:
                 break;
         }
@@ -197,29 +197,19 @@ public final class PanelModeling extends Panel {
      * @param diagram Diagram.
      */
     public void updateDiagram(Diagram diagram) {
-//        System.out.println(" --------------- ");
-//        System.out.println("Update Diagram: " + diagram);
         if (this.tabs.get(diagram.getId()) != null) {
             PanelDiagram panel = this.getPanelDiagram(diagram);
-            Double  old_zoom   = panel.getGraph().getView().getScale();
+            Double  zoom       = panel.getGraph().getView().getScale();
             Integer horizontal = panel.getScrollPaneDiagram().getHorizontalScrollBar().getValue();
             Integer vertical   = panel.getScrollPaneDiagram().getVerticalScrollBar().getValue();
-            
-            
-//            System.out.println("Zoom: " + zoom);
-//            System.out.println("Hor.: " + horizontal);
-//            System.out.println("Ver.: " + vertical);
-//            System.out.println("");
             
             this.removeDiagram(diagram);
             this.addDiagram(diagram);
             
-                panel = this.getPanelDiagram(diagram);
-            panel.getGraph().getView().setScale(old_zoom);
+            panel = this.getPanelDiagram(diagram);
+            panel.getGraph().getView().setScale(zoom);
             panel.getScrollPaneDiagram().getHorizontalScrollBar().setValue(horizontal);
             panel.getScrollPaneDiagram().getVerticalScrollBar().setValue(vertical);
-//            ((PanelDiagram) this.tabs.get(diagram.getId())).getScrollPaneDiagram().getHorizontalScrollBar().setValue(horizontal);
-//            ((PanelDiagram) this.tabs.get(diagram.getId())).getScrollPaneDiagram().getVerticalScrollBar().setValue(vertical);
         }
     }
     
@@ -230,13 +220,13 @@ public final class PanelModeling extends Panel {
     public void updateInstance(Instance instance) {
         if (this.tabs.get(instance.getCompleteId()) != null) {
             PanelInstance panel = this.getPanelInstance(instance);
-            Double  old_zoom    = panel.getGraph().getView().getScale();
+            Double  zoom        = panel.getGraph().getView().getScale();
             Integer horizontal  = panel.getScrollPaneInstance().getHorizontalScrollBar().getValue();
             Integer vertical    = panel.getScrollPaneInstance().getVerticalScrollBar().getValue();
                 this.removeInstance(instance);
                 this.addInstance(instance);
             panel = this.getPanelInstance(instance);
-            panel.getGraph().getView().setScale(old_zoom);
+            panel.getGraph().getView().setScale(zoom);
             panel.getScrollPaneInstance().getHorizontalScrollBar().setValue(horizontal);
             panel.getScrollPaneInstance().getVerticalScrollBar().setValue(vertical);
         }

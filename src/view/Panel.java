@@ -565,8 +565,8 @@ public abstract class Panel extends JPanel {
                constraint.fill    = GridBagConstraints.HORIZONTAL;
                constraint.gridx   = 0;
                constraint.gridy   = 0;
-               constraint.weighty = 1.0;
                constraint.weightx = 1.0;
+               constraint.weighty = 0.25;
         return constraint;
     }
     
@@ -584,14 +584,14 @@ public abstract class Panel extends JPanel {
      * @return New Body Constraint.
      */
     protected GridBagConstraints setBodyConstraint(GridBagConstraints constraint) {
-               constraint.anchor     = GridBagConstraints.NORTH;
+               constraint.anchor     = GridBagConstraints.FIRST_LINE_START;
                constraint.fill       = GridBagConstraints.BOTH;
                constraint.gridx      = 0;
                constraint.gridy      = 1;
+               constraint.weightx    = 1.0;
+               constraint.weighty    = 11.75;
                constraint.gridheight = GridBagConstraints.RELATIVE;
                constraint.gridwidth  = GridBagConstraints.RELATIVE;
-               constraint.weighty    = 10.0;
-               constraint.weightx    = 1.0;
         return constraint;       
     }
     

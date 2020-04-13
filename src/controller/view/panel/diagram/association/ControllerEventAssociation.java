@@ -40,7 +40,7 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
         if (element != null) {
             mxCell association = (mxCell) element;
             this.addAssociation(association);
-            this.panel.updateDiagram();
+            this.panel.updateGraph();
         }
     }
     

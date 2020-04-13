@@ -36,7 +36,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
             element.setName(vertex.getValue().toString());
             this.panel.getViewMenu().getPanelModeling().updateInstancePanels();
         }
-        this.panel.updateDiagram();
+        this.panel.updateGraph();
         this.panel.getViewMenu().update();
         this.panel.getViewMenu().setSave(false);
     }

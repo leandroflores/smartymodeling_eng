@@ -6,6 +6,7 @@ import java.util.HashMap;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
@@ -89,7 +90,14 @@ public abstract class PanelTree extends Panel {
      * @param diagram Diagram. 
      */
     public void updateNode(Diagram diagram) {
-        this.getTreeModel().reload(this.getNodeTree(diagram));
+        DefaultMutableTreeNode node = this.getNodeTree(diagram);
+        if (node != null) {
+            boolean expanded = this.tree.isExpanded(new TreePath(node.getPath()));
+            node = this.getNodeTree(diagram);
+            this.getTreeModel().reload(node);
+            if (expanded)
+                this.tree.expandPath(new TreePath(node.getPath()));
+        }
     }
     
     /**
