@@ -67,16 +67,16 @@ public final class PanelFeatureDiagram extends PanelDiagram {
     public void setStyle() {
         switch (this.getType()) {
             case 0:
-                this.getStyle().setConnectionStyle(this.getDefaultEdgeStyle(), true, true);
+                this.getStyle().setConnectionStyle(this.getEdgeStyle(), true, true);
                 break;
             case 1:
-                this.getStyle().setConnectionStyle(this.getDefaultEdgeStyle(), true, false);
+                this.getStyle().setConnectionStyle(this.getEdgeStyle(), true, false);
                 break;
             case 2:
-                this.getStyle().setConnectionStyle(this.getDefaultEdgeStyle(), false, false);
+                this.getStyle().setConnectionStyle(this.getEdgeStyle(), false, false);
                 break;
             default:
-                this.getStyle().setConnectionStyle(this.getDefaultEdgeStyle(), false, true);
+                this.getStyle().setConnectionStyle(this.getEdgeStyle(), false, true);
                 break;
         }
     }

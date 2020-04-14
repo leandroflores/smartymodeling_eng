@@ -33,7 +33,7 @@ public class ControllerPanelBaseAssociationUML extends ControllerPanel {
     
     @Override
     public void keyPressed(KeyEvent event) {
-        this.update();
+//        this.update();
     }
     
     @Override
@@ -49,7 +49,10 @@ public class ControllerPanelBaseAssociationUML extends ControllerPanel {
         this.panelBaseAssociationUML.getAssociationUML().setDirection(this.panelBaseAssociationUML.getDirectedCheckBox().isSelected());
         this.panelBaseAssociationUML.updatePanelBaseSource();
         this.panelBaseAssociationUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseAssociationUML.getViewMenu().getPanelModeling().updateModelingPanel();
+//        this.panelBaseAssociationUML.getViewMenu().getPanelModeling().updateModelingPanels();
+        this.panelBaseAssociationUML.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseAssociationUML.getDiagram());
+        this.panelBaseAssociationUML.getViewMenu().getPanelModeling().setSelected(this.panelBaseAssociationUML.getDiagram(), this.panelBaseAssociationUML.getAssociationUML().getId());
+        this.panelBaseAssociationUML.getViewMenu().getPanelModeling().updateInstancePanels();
         this.panelBaseAssociationUML.getViewMenu().setSave(false);
     }
 }

@@ -47,7 +47,7 @@ public class ControllerPanelBaseConnection extends ControllerPanel {
     private void update() {
         this.panelBaseConnection.getConnection().setCategory(this.panelBaseConnection.getCategoryComboBox().getSelectedItem().toString());
         this.panelBaseConnection.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseConnection.getViewMenu().getPanelModeling().updateModelingPanel();
+        this.panelBaseConnection.getViewMenu().getPanelModeling().updateModelingPanels();
         this.panelBaseConnection.getViewMenu().setSave(false);
     }
 }

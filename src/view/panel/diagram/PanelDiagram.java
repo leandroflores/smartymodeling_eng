@@ -139,11 +139,6 @@ public abstract class PanelDiagram extends PanelGraph {
     }
     
     /**
-     * Method responsible for adding the Default Styles.
-     */
-    protected void loadDefaultStyles() {}
-    
-    /**
      * Method responsible for adding the Diagram Elements.
      */
     public void addElements() {
@@ -180,6 +175,16 @@ public abstract class PanelDiagram extends PanelGraph {
     protected void addElementCell(Element element, mxCell cell) {
         this.identifiers.put(cell, element.getId());
         this.objects.put(element.getId(), cell);
+    }
+    
+    /**
+     * Method responsible for selecting a Cell by Id.
+     * @param id Cell Id.
+     */
+    public void setSelected(String id) {
+        mxCell cell = (mxCell) this.objects.get(id);
+        if (cell != null)
+            this.getGraph().setSelectionCell(cell);
     }
     
     /**
@@ -274,21 +279,21 @@ public abstract class PanelDiagram extends PanelGraph {
      * Method responsible for setting the Default Style.
      */
     public void setDefaultStyle() {
-        this.getStyle().setDefaultStyle(this.getDefaultEdgeStyle());
+        this.getStyle().setDefaultStyle(this.getEdgeStyle());
     }
     
     /**
      * Method responsible for setting the Dependency Style.
      */
     public void setDependencyStyle() {
-        this.getStyle().setDependencyStyle(this.getDefaultEdgeStyle());
+        this.getStyle().setDependencyStyle(this.getEdgeStyle());
     }
     
     /**
      * Method responsible for setting the Generalization Style.
      */
     public void setGeneralizationStyle() {
-        this.getStyle().setGeneralizationStyle(this.getDefaultEdgeStyle());
+        this.getStyle().setGeneralizationStyle(this.getEdgeStyle());
     }
     
     /**

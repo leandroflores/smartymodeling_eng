@@ -1,4 +1,4 @@
-package view.panel.tree;
+package view.panel.tree.old;
 
 import controller.view.panel.tree.popup.ControllerTreePopup;
 import java.awt.FlowLayout;
@@ -15,7 +15,7 @@ import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
 import view.Panel;
 import view.panel.tree.popup.TreePopup;
-import view.panel.tree.renderer.TreeRendererUML;
+import view.panel.tree.renderer.old.TreeRendererUML;
 import view.structural.ViewMenu;
 
 /**

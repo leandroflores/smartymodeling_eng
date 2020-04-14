@@ -32,8 +32,8 @@ public class ControllerPanelBaseElement extends ControllerPanel {
     
     @Override
     public void keyPressed(KeyEvent event) {
-        if (this.panelBaseElement.getNameTextField().equals(event.getSource()))
-            this.update();
+//        if (this.panelBaseElement.getNameTextField().equals(event.getSource()))
+//            this.update();
     }
     
     @Override
@@ -58,10 +58,9 @@ public class ControllerPanelBaseElement extends ControllerPanel {
         this.panelBaseElement.getElement().setMandatory(this.panelBaseElement.getMandatoryCheckBox().isSelected());
         this.panelBaseElement.getDiagram().updateStereotype(this.panelBaseElement.getElement());
         this.panelBaseElement.getViewMenu().getPanelProject().getPanelTree().updateNode(this.panelBaseElement.getElement());
-        this.panelBaseElement.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseElement.getViewMenu().getPanelModeling().updateModelingPanel();
         this.panelBaseElement.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseElement.getDiagram());
-        this.panelBaseElement.getViewMenu().getPanelModeling().updateUI();
+        this.panelBaseElement.getViewMenu().getPanelModeling().setSelected(this.panelBaseElement.getDiagram(), this.panelBaseElement.getElement().getId());
+        this.panelBaseElement.getViewMenu().getPanelModeling().updateInstancePanels();
         this.panelBaseElement.getViewMenu().setSave(false);
     }
 }

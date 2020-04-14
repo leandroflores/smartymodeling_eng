@@ -15,8 +15,12 @@ import view.panel.instance.PanelInstance;
 import view.panel.modeling.PanelModeling;
 
 /**
- * 
+ * <p>Class of View <b>PanelTabTitle</b>.</p>
+ * <p>Class responsible for defining the <b>Tab Title Panel</b> of SMartyModeling.</p>
  * @author Leandro
+ * @since  2019-05-27
+ * @see    controller.view.panel.tabbed.ControllerPanelTabTitle
+ * @see    view.Panel
  */
 public final class PanelTabTitle extends Panel {
     private final PanelModeling panel;

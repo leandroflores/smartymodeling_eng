@@ -1,6 +1,5 @@
 package view.panel.project.tree;
 
-import controller.view.panel.project.tree.ControllerPanelProjectTree;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseListener;
@@ -10,8 +9,8 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import view.Panel;
-import view.panel.tree.PanelTreeFeature;
-import view.panel.tree.PanelTreeUML;
+import view.panel.tree.old.PanelTreeFeature;
+import view.panel.tree.old.PanelTreeUML;
 import view.structural.ViewMenu;
 
 /**
@@ -25,7 +24,6 @@ import view.structural.ViewMenu;
 public final class PanelProjectTree extends Panel {
     private final ViewMenu viewMenu;
     private final Project  project;
-    private Integer index;
     private JTabbedPane tabbedPane;
     private PanelTreeFeature panelTreeFeat;
     private PanelTreeUML     panelTreeUML;
@@ -35,10 +33,8 @@ public final class PanelProjectTree extends Panel {
      * @param viewMenu View Menu.
      */
     public PanelProjectTree(ViewMenu viewMenu) {
-        this.viewMenu   = viewMenu;
-        this.project    = this.viewMenu.getProject();
-        this.controller = new ControllerPanelProjectTree(this);
-        this.index      = 0;
+        this.viewMenu = viewMenu;
+        this.project  = this.viewMenu.getProject();
         this.addComponents();
     }
     
@@ -111,23 +107,6 @@ public final class PanelProjectTree extends Panel {
             this.panelTreeFeat.updateNode(element);
         if (this.panelTreeUML  != null)
             this.panelTreeUML.updateNode(element);
-    }
-
-    /**
-     * Method responsible for returning the Index Panel.
-     * @return Index Panel.
-     */
-    public Integer getIndex() {
-        return this.index;
-    }
-
-    /**
-     * Method responsible for returning the Index Panel.
-     * @param index Index Panel.
-     */
-    public void setIndex(Integer index) {
-        this.index = index;
-        System.out.println("Index: " + index);
     }
 
     /**

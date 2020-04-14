@@ -31,6 +31,11 @@ public abstract class PanelGraph extends Panel {
     }
     
     /**
+     * Method responsible for loading the Default Styles.
+     */
+    protected void loadDefaultStyles() {}
+    
+    /**
      * Method responsible for updating the Graph.
      */
     public abstract void updateGraph();
@@ -112,7 +117,7 @@ public abstract class PanelGraph extends Panel {
      * Method responsible for returning the Default Edge Style.
      * @return Default Edge Style.
      */
-    protected Map<String, Object> getDefaultEdgeStyle() {
+    protected Map<String, Object> getEdgeStyle() {
         return this.getGraph().getStylesheet().getStyles().get("defaultEdge");
     }
     

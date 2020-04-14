@@ -73,7 +73,7 @@ public class ControllerPanelBaseSource extends ControllerPanel {
         this.updateName();
         this.updateCardinality();
         this.panelBaseSource.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseSource.getViewMenu().getPanelModeling().updateModelingPanel();
+        this.panelBaseSource.getViewMenu().getPanelModeling().updateModelingPanels();
         this.panelBaseSource.getViewMenu().setSave(false);
     }
 }

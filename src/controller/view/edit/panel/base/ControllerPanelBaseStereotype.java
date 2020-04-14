@@ -57,7 +57,7 @@ public class ControllerPanelBaseStereotype extends ControllerPanel {
     private void update() {
         this.panelBaseStereotype.getStereotype().setName(this.panelBaseStereotype.getNameTextField().getText().trim());
         this.panelBaseStereotype.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseStereotype.getViewMenu().getPanelModeling().updateModelingPanel();
+        this.panelBaseStereotype.getViewMenu().getPanelModeling().updateModelingPanels();
         this.panelBaseStereotype.getViewMenu().setSave(false);
     }
 }

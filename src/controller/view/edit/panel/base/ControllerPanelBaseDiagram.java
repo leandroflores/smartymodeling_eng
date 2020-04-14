@@ -57,7 +57,7 @@ public class ControllerPanelBaseDiagram extends ControllerPanel {
         this.panelBaseDiagram.getDiagram().setName(this.panelBaseDiagram.getNameTextField().getText().trim());
         this.panelBaseDiagram.getViewMenu().getPanelProject().getPanelTree().updateNode(this.panelBaseDiagram.getDiagram());
         this.panelBaseDiagram.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseDiagram.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseDiagram.getDiagram());
+        this.panelBaseDiagram.getViewMenu().getPanelModeling().updateTab(this.panelBaseDiagram.getDiagram());
         this.panelBaseDiagram.getViewMenu().setSave(false);
     }
 }

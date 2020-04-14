@@ -127,16 +127,16 @@ public final class PanelSequenceInstance extends PanelInstance {
         this.objects.put(artifact.getId() + "(point)", cell);
     }
     
-    /**
-     * Method responsible for loading the Default Styles.
-     */
-    private void loadDefaultStyles() {
-        StyleSequence style = new StyleSequence();
-        this.getGraph().getStylesheet().putCellStyle("styleImageActor", style.getImageStyle("usecase/actor.png"));
-        this.getGraph().getStylesheet().putCellStyle("styleImageClass", style.getImageStyle("classes/class.png"));
-        this.getGraph().getStylesheet().putCellStyle("nameStyle", style.getNameStyle());
-        this.getGraph().getStylesheet().putCellStyle("lineStyle", style.getLineStyle());
-        this.getGraph().getStylesheet().putCellStyle("endPointStyle", style.getEndPointStyle());
+    @Override
+    protected void loadDefaultStyles() {
+        StyleSequence newStyle = new StyleSequence();
+        this.addStyle("actorIconStyle", newStyle.getImageStyle("usecase/actor.png"));
+        this.addStyle("classIconStyle", newStyle.getImageStyle("classes/class.png"));
+        this.addStyle("headerStyle",    newStyle.getHeaderStyle());
+        this.addStyle("nameStyle",      newStyle.getNameStyle());
+        this.addStyle("lineStyle",      newStyle.getLineStyle());
+        this.addStyle("pointStyle",     newStyle.getPointStyle());
+        this.addStyle("endPointStyle",  newStyle.getEndPointStyle());
     }
     
     @Override

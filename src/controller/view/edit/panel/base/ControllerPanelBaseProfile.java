@@ -67,7 +67,7 @@ public class ControllerPanelBaseProfile extends ControllerPanel {
     private void update() {
         this.updateProfile();
         this.panelBaseProfile.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseProfile.getViewMenu().getPanelModeling().updateModelingPanel();
+        this.panelBaseProfile.getViewMenu().getPanelModeling().updateModelingPanels();
         this.panelBaseProfile.getViewMenu().setSave(false);
     }
 }

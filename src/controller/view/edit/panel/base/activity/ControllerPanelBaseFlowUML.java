@@ -32,7 +32,7 @@ public class ControllerPanelBaseFlowUML extends ControllerPanel {
     
     @Override
     public void keyPressed(KeyEvent event) {
-        this.update();
+//        this.update();
     }
     
     @Override
@@ -50,5 +50,7 @@ public class ControllerPanelBaseFlowUML extends ControllerPanel {
         this.panelBaseFlowUML.getViewMenu().setSave(false);
         this.panelBaseFlowUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseFlowUML.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseFlowUML.getDiagram());
+        this.panelBaseFlowUML.getViewMenu().getPanelModeling().setSelected(this.panelBaseFlowUML.getDiagram(), this.panelBaseFlowUML.getFlowUML().getId());
+        this.panelBaseFlowUML.getViewMenu().getPanelModeling().updateInstancePanels();
     }
 }

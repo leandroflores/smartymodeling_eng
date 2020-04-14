@@ -55,7 +55,7 @@ public class ControllerPanelBaseInstance extends ControllerPanel {
     private void update() {
         this.panelBaseInstance.getInstance().setName(this.panelBaseInstance.getNameTextField().getText().trim());
         this.panelBaseInstance.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseInstance.getViewMenu().getPanelModeling().updateInstance(this.panelBaseInstance.getInstance());
+        this.panelBaseInstance.getViewMenu().getPanelModeling().updateTab(this.panelBaseInstance.getInstance());
         this.panelBaseInstance.getViewMenu().setSave(false);
     }
 }

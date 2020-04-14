@@ -33,8 +33,8 @@ public class ControllerPanelBaseAttributeUML extends ControllerPanel {
     
     @Override
     public void keyPressed(KeyEvent event) {
-        if (this.panelBaseAttributeUML.getNameTextField().equals(event.getSource()))
-            this.update();
+//        if (this.panelBaseAttributeUML.getNameTextField().equals(event.getSource()))
+//            this.update();
     }
     
     @Override

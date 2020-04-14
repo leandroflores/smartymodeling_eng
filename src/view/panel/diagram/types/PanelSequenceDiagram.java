@@ -1,7 +1,6 @@
 package view.panel.diagram.types;
 
 import com.mxgraph.model.mxCell;
-import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import com.mxgraph.util.mxPoint;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationSequence;
@@ -20,6 +19,7 @@ import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
 import model.structural.diagram.sequence.base.association.MessageUML;
+import style.association.types.StyleSequenceAssociation;
 import view.panel.diagram.PanelDiagram;
 import view.panel.operation.types.PanelSequenceOperation;
 import view.structural.ViewMenu;
@@ -51,6 +51,11 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     @Override
     public void initPanelOperation() {
         this.panel = new PanelSequenceOperation(this);
+    }
+    
+    @Override
+    public void initStyleAssociation() {
+        this.style = new StyleSequenceAssociation();
     }
     
     @Override
@@ -87,8 +92,8 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      * @param element Element.
      */
     private void addIconCell(mxCell parent, Element element) {
-        String style = element.getType().equals("instance") ? "classIconStyle" : "actorIconStyle";
-        mxCell cell  = (mxCell) this.getGraph().insertVertex(parent, null, "", 2, 22, 20, 20, style);
+        String styleId = element.getType().equals("instance") ? "classIconStyle" : "actorIconStyle";
+        mxCell cell    = (mxCell) this.getGraph().insertVertex(parent, null, "", 2, 22, 20, 20, styleId);
                cell.setConnectable(false);
     }
     
@@ -180,6 +185,8 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     protected void addAssociation(Association association) {
         if (association instanceof MessageUML)
             this.addAssociation((MessageUML) association);
+        else 
+            super.addAssociation(association);
     }
     
     /**
@@ -264,10 +271,10 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     public void setStyle() {
         switch (this.getType()) {
             case 0:
-                this.setMessageStyle(true);
+                this.getStyle().setMessageStyle(this.getEdgeStyle(), true);
                 break;
             case 1:
-                this.setMessageStyle(false);
+                this.getStyle().setMessageStyle(this.getEdgeStyle(), false);
                 break;
             case 2:
             case 3:
@@ -277,19 +284,6 @@ public final class PanelSequenceDiagram extends PanelDiagram {
             default:
                 break;
         }
-    }
-    
-    /**
-     * Method responsible for setting the Message Style.
-     * @param flag Flag.
-     */
-    private void setMessageStyle(boolean flag) {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED, "0");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_FILLCOLOR,   "#FFFFFF");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    flag ?  mxConstants.ARROW_OPEN : mxConstants.ARROW_BLOCK);
     }
     
     @Override
@@ -312,5 +306,10 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     @Override
     public PanelSequenceOperation getPanelOperation() {
         return (PanelSequenceOperation) this.panel;
+    }
+    
+    @Override
+    public StyleSequenceAssociation getStyle() {
+        return (StyleSequenceAssociation) this.style;
     }
 }

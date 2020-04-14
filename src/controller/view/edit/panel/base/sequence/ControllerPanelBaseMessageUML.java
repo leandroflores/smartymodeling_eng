@@ -51,7 +51,7 @@ public class ControllerPanelBaseMessageUML extends ControllerPanel {
         this.panelBaseMessageUML.getMessageUML().setMethod((MethodUML) this.panelBaseMessageUML.getMethodComboBox().getSelectedItem());
         this.panelBaseMessageUML.getViewMenu().setSave(false);
         this.panelBaseMessageUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseMessageUML.getViewMenu().getPanelModeling().updateModelingPanel();
+        this.panelBaseMessageUML.getViewMenu().getPanelModeling().updateModelingPanels();
         this.panelBaseMessageUML.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseMessageUML.getDiagram());
     }
 }

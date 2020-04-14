@@ -2,7 +2,6 @@ package view.panel.instance.types;
 
 import com.mxgraph.model.mxCell;
 import controller.view.panel.instance.ControllerPanelInstance;
-import java.util.Map;
 import style.element.StyleComponent;
 import model.structural.base.Element;
 import model.structural.base.product.Artifact;
@@ -49,7 +48,6 @@ public final class PanelComponentInstance extends PanelInstance {
      * @param component Component UML.
      */
     protected void addArtifact(Artifact artifact, ComponentUML component) {
-        this.addStyle("imageComponentStyle", this.getImageComponentStyle());
         this.addStyle(artifact.getStyleLabel(), artifact.getStyle());
         String title  = component.getName();
         mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, artifact.getId(), title, artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
@@ -58,12 +56,9 @@ public final class PanelComponentInstance extends PanelInstance {
         this.addArtifactCell(artifact, vertex);
     }
     
-    /**
-     * Method responsible for returning the Image Component Style.
-     * @return Image Component Style.
-     */
-    private Map getImageComponentStyle() {
-        return new StyleComponent().getImageComponentStyle();
+    @Override
+    protected void loadDefaultStyles() {
+        this.addStyle("styleImageComponent", new StyleComponent().getImageComponentStyle());
     }
     
     @Override

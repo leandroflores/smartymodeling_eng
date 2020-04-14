@@ -402,28 +402,28 @@ public final class PanelClassDiagram extends PanelDiagram {
     public void setStyle() {
         switch (this.getType()) {
             case 0:
-                this.getStyle().setAssociationStyle(this.getDefaultEdgeStyle(), false);
+                this.getStyle().setAssociationStyle(this.getEdgeStyle(), false);
                 break;
             case 1:
-                this.getStyle().setAssociationStyle(this.getDefaultEdgeStyle(), true);
+                this.getStyle().setAssociationStyle(this.getEdgeStyle(), true);
                 break;
             case 2:
-                this.getStyle().setAggregationStyle(this.getDefaultEdgeStyle(), false);
+                this.getStyle().setAggregationStyle(this.getEdgeStyle(), false);
                 break;
             case 3:
-                this.getStyle().setAggregationStyle(this.getDefaultEdgeStyle(), true);
+                this.getStyle().setAggregationStyle(this.getEdgeStyle(), true);
                 break;
             case 4:
-                this.getStyle().setCompositionStyle(this.getDefaultEdgeStyle(), false);
+                this.getStyle().setCompositionStyle(this.getEdgeStyle(), false);
                 break;
             case 5:
-                this.getStyle().setCompositionStyle(this.getDefaultEdgeStyle(), true);
+                this.getStyle().setCompositionStyle(this.getEdgeStyle(), true);
                 break;
             case 6:
                 this.setGeneralizationStyle();
                 break;
             case 7:
-                this.getStyle().setRealizationStyle(this.getDefaultEdgeStyle());
+                this.getStyle().setRealizationStyle(this.getEdgeStyle());
                 break;
             case 8:
             case 9:
@@ -431,7 +431,7 @@ public final class PanelClassDiagram extends PanelDiagram {
                 this.setDependencyStyle();
                 break;
             default:
-                this.getStyle().setAssociationStyle(this.getDefaultEdgeStyle(), false);   
+                this.getStyle().setAssociationStyle(this.getEdgeStyle(), false);   
                 break;
         }
     }

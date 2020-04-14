@@ -53,7 +53,7 @@ public final class PanelActivityDiagram extends PanelDiagram {
     public void setStyle() {
         switch (this.getType()) {
             case 0:
-                this.getStyle().setFlowStyle(this.getDefaultEdgeStyle());
+                this.getStyle().setFlowStyle(this.getEdgeStyle());
                 break;
             default:
                 this.setDependencyStyle();

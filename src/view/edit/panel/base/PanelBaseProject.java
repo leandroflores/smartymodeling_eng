@@ -31,7 +31,7 @@ public final class PanelBaseProject extends Panel {
         this.controller = new ControllerPanelBaseProject(this);
         this.setSettings();
         this.addComponents();
-        this.setValues();
+//        this.setValues();
     }
     
     /**

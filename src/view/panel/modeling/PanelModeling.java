@@ -14,6 +14,7 @@ import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import view.Panel;
+import view.panel.PanelGraph;
 import view.panel.diagram.PanelDiagram;
 import view.panel.diagram.types.PanelActivityDiagram;
 import view.panel.diagram.types.PanelClassDiagram;
@@ -42,7 +43,7 @@ import view.structural.ViewMenu;
 public final class PanelModeling extends Panel {
     private final ViewMenu viewMenu;
     private PanelTabbed panelTabbed;
-    private HashMap<String, Component> tabs;
+    private HashMap<String, Component> panels;
     
     /**
      * Default constructor method of Class.
@@ -51,7 +52,7 @@ public final class PanelModeling extends Panel {
     public PanelModeling(ViewMenu view) {
         super();
         this.viewMenu = view;
-        this.tabs     = new HashMap<>();
+        this.panels   = new HashMap<>();
         this.addComponents();
         this.clear();
     }
@@ -69,10 +70,10 @@ public final class PanelModeling extends Panel {
      * @param component Tab Component.
      */
     private void addTab(String id, String title, Component component) {
-        Component get = this.tabs.get(id);
+        Component get = this.panels.get(id);
         if (get == null) {
-            this.panelTabbed.addTab(title, component);
-            this.tabs.put(id, component);
+            this.panelTabbed.addTab(title, null, component, id);
+            this.panels.put(id, component);
             get = component;
         }
         this.panelTabbed.setSelectedComponent(get);
@@ -83,47 +84,13 @@ public final class PanelModeling extends Panel {
      * @param diagram Diagram.
      */
     public void addDiagram(Diagram diagram) {
-        this.addTab(diagram.getId(),  diagram.getName(), this.createPanelDiagram(diagram));
+        this.addTab(diagram.getId(), diagram.getName(), this.createPanelDiagram(diagram));
     }
     
     /**
-     * Method responsible for adding a Instance.
-     * @param instance Instance.
-     */
-    public void addInstance(Instance instance) {
-        this.addTab(instance.getCompleteId(), instance.getName(), this.createPanelInstance(instance));
-    }
-    
-    /**
-     * Method responsible for updating the Modeling Panel.
-     */
-    public void updateModelingPanel() {
-        for (Component component : this.panelTabbed.getComponents()) {
-            if (component instanceof PanelDiagram)
-                ((PanelDiagram)  component).updateGraph();
-            else if (component instanceof PanelInstance)
-                ((PanelInstance) component).updateGraph();
-        }
-    }
-    
-    /**
-     * Method responsible for updating the Instance Panels.
-     */
-    public void updateInstancePanels() {
-        for (Component component : this.panelTabbed.getComponents()) {
-            if (component instanceof PanelInstance) {
-                if (((PanelInstance) component).getInstance().isEmpty())
-                    this.removeInstance(((PanelInstance) component).getInstance());
-                else
-                    ((PanelInstance) component).updateGraph();
-            }
-        }
-    }
-    
-    /**
-     * Method responsible for returning a new Diagrams Panel.
+     * Method responsible for returning a New Panel Diagram.
      * @param  diagram Diagram.
-     * @return New Diagram Panel.
+     * @return New Panel Diagram.
      */
     private PanelDiagram createPanelDiagram(Diagram diagram) {
         switch (diagram.getType()) {
@@ -143,6 +110,69 @@ public final class PanelModeling extends Panel {
                 break;
         }
         return null;
+    }
+    
+    /**
+     * Method responsible for updating a Diagram.
+     * @param diagram Diagram.
+     */
+    public void updateDiagram(Diagram diagram) {
+        if (this.panels.get(diagram.getId()) != null) {
+            PanelDiagram panel = this.getPanelDiagram(diagram);
+                         panel.updateGraph();
+            this.panelTabbed.updateUI();
+            this.updateUI();
+        }
+    }
+    
+    /**
+     * Method responsible for setting selected the Cell.
+     * @param diagram Diagram.
+     * @param id Object Id.
+     */
+    public void setSelected(Diagram diagram, String id) {
+        if (this.getPanelDiagram(diagram) != null)
+            this.getPanelDiagram(diagram).setSelected(id);
+    }
+    
+    /**
+     * Method responsible for updating a Diagram Tab.
+     * @param diagram Diagram.
+     */
+    public void updateTab(Diagram diagram) {
+        if (this.panels.get(diagram.getId()) != null) {
+            this.panelTabbed.updateTab(diagram);
+        }
+    }
+    
+    /**
+     * Method responsible for removing a Diagram from Panel Modeling.
+     * @param diagram Diagram.
+     */
+    public void removeDiagram(Diagram diagram) {
+        if (this.panels.get(diagram.getId()) != null) {
+            this.panelTabbed.remove(diagram.getId(), this.panels.get(diagram.getId()));
+            this.panels.remove(diagram.getId());
+            this.updateUI();
+        }
+    }
+    
+    /**
+     * Method responsible for updating the Modeling Panels.
+     */
+    public void updateModelingPanels() {
+        for (Component component : this.panelTabbed.getComponents()) {
+            if (component instanceof PanelGraph)
+                ((PanelGraph) component).updateGraph();
+        }
+    }
+    
+    /**
+     * Method responsible for adding a Instance.
+     * @param instance Instance.
+     */
+    public void addInstance(Instance instance) {
+        this.addTab(instance.getCompleteId(), instance.getName(), this.createPanelInstance(instance));
     }
     
     /**
@@ -169,14 +199,25 @@ public final class PanelModeling extends Panel {
     }
     
     /**
-     * Method responsible for removing a Diagram from Panel Modeling.
-     * @param diagram Diagram.
+     * Method responsible for updating a Instance.
+     * @param instance Instance.
      */
-    public void removeDiagram(Diagram diagram) {
-        if (this.tabs.get(diagram.getId()) != null) {
-            this.panelTabbed.remove(this.tabs.get(diagram.getId()));
-            this.tabs.remove(diagram.getId());
+    public void updateInstance(Instance instance) {
+        if (this.panels.get(instance.getCompleteId()) != null) {
+            PanelInstance panel = this.getPanelInstance(instance);
+                          panel.updateGraph();
+            this.panelTabbed.setTitleAt(this.getIndex(panel), "Test");
             this.updateUI();
+        }
+    }
+    
+    /**
+     * Method responsible for updating a Instance Tab.
+     * @param instance Instance.
+     */
+    public void updateTab(Instance instance) {
+        if (this.panels.get(instance.getCompleteId()) != null) {
+            this.panelTabbed.updateTab(instance);
         }
     }
     
@@ -185,50 +226,24 @@ public final class PanelModeling extends Panel {
      * @param instance Instance.
      */
     public void removeInstance(Instance instance) {
-        if (this.tabs.get(instance.getCompleteId()) != null) {
-            this.panelTabbed.remove(this.tabs.get(instance.getCompleteId()));
-            this.tabs.remove(instance.getCompleteId());
+        if (this.panels.get(instance.getCompleteId()) != null) {
+            this.panelTabbed.remove(instance.getCompleteId(), this.panels.get(instance.getCompleteId()));
+            this.panels.remove(instance.getCompleteId());
             this.updateUI();
         }
     }
     
     /**
-     * Method responsible for updating a Diagram.
-     * @param diagram Diagram.
+     * Method responsible for updating the Instance Panels.
      */
-    public void updateDiagram(Diagram diagram) {
-        if (this.tabs.get(diagram.getId()) != null) {
-            PanelDiagram panel = this.getPanelDiagram(diagram);
-            Double  zoom       = panel.getGraph().getView().getScale();
-            Integer horizontal = panel.getScrollPaneDiagram().getHorizontalScrollBar().getValue();
-            Integer vertical   = panel.getScrollPaneDiagram().getVerticalScrollBar().getValue();
-            
-            this.removeDiagram(diagram);
-            this.addDiagram(diagram);
-            
-            panel = this.getPanelDiagram(diagram);
-            panel.getGraph().getView().setScale(zoom);
-            panel.getScrollPaneDiagram().getHorizontalScrollBar().setValue(horizontal);
-            panel.getScrollPaneDiagram().getVerticalScrollBar().setValue(vertical);
-        }
-    }
-    
-    /**
-     * Method responsible for updating a Instance.
-     * @param instance Instance.
-     */
-    public void updateInstance(Instance instance) {
-        if (this.tabs.get(instance.getCompleteId()) != null) {
-            PanelInstance panel = this.getPanelInstance(instance);
-            Double  zoom        = panel.getGraph().getView().getScale();
-            Integer horizontal  = panel.getScrollPaneInstance().getHorizontalScrollBar().getValue();
-            Integer vertical    = panel.getScrollPaneInstance().getVerticalScrollBar().getValue();
-                this.removeInstance(instance);
-                this.addInstance(instance);
-            panel = this.getPanelInstance(instance);
-            panel.getGraph().getView().setScale(zoom);
-            panel.getScrollPaneInstance().getHorizontalScrollBar().setValue(horizontal);
-            panel.getScrollPaneInstance().getVerticalScrollBar().setValue(vertical);
+    public void updateInstancePanels() {
+        for (Component component : this.panelTabbed.getComponents()) {
+            if (component instanceof PanelInstance) {
+                if (((PanelInstance) component).getInstance().isEmpty())
+                    this.removeInstance(((PanelInstance) component).getInstance());
+                else
+                    ((PanelInstance) component).updateGraph();
+            }
         }
     }
     
@@ -261,10 +276,23 @@ public final class PanelModeling extends Panel {
      * Method responsible for clearing the Diagrams.
      */
     public void clear() {
-        this.tabs = new HashMap<>();
+        this.panels = new HashMap<>();
         this.panelTabbed.removeAll();
         if (this.viewMenu.getProject() == null)
             this.addTab("Start", "Start", new PanelLogo(this.viewMenu));
+    }
+    
+    /**
+     * Method responsible for returning the Component Index.
+     * @param  component Component.
+     * @return Component Index.
+     */
+    public Integer getIndex(Component component) {
+        for (int i = 0; i < this.panelTabbed.getComponents().length; i++) {
+            if (this.panelTabbed.getComponents()[i].equals(component))
+                return i - 1;
+        }
+        return -1;
     }
     
     /**
@@ -273,7 +301,7 @@ public final class PanelModeling extends Panel {
      * @return Panel Diagram.
      */
     public PanelDiagram getPanelDiagram(Diagram diagram) {
-        return (PanelDiagram) this.tabs.get(diagram.getId());
+        return (PanelDiagram) this.panels.get(diagram.getId());
     }
     
     /**
@@ -293,7 +321,7 @@ public final class PanelModeling extends Panel {
      * @return Panel Instance.
      */
     public PanelInstance getPanelInstance(Instance instance) {
-        return (PanelInstance) this.tabs.get(instance.getCompleteId());
+        return (PanelInstance) this.panels.get(instance.getCompleteId());
     }
     
     /**

@@ -8,14 +8,14 @@ import java.awt.Font;
 import java.util.HashMap;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import view.panel.tree.PanelTree;
+import view.panel.tree.old.PanelTree;
 
 /**
  * <p>Class of View <b>TreePopup</b>.</p>
  * <p>Class responsible for defining the <b>Tree Popup</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  27/05/2019
- * @see    view.panel.tree.PanelTreeUML
+ * @see    view.panel.tree.old.PanelTreeUML
  */
 public final class TreePopup extends JPopupMenu {
     protected PanelTree panelTree;

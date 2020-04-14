@@ -64,7 +64,7 @@ public class ControllerPanelBaseTarget extends ControllerPanel {
         this.panelBaseTarget.getAssociationUML().setTargetName(this.panelBaseTarget.getNameTextField().getText().trim());
         this.updateCardinality();
         this.panelBaseTarget.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseTarget.getViewMenu().getPanelModeling().updateModelingPanel();
+        this.panelBaseTarget.getViewMenu().getPanelModeling().updateModelingPanels();
         this.panelBaseTarget.getViewMenu().setSave(false);
     }
 }

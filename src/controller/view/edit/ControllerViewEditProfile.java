@@ -29,7 +29,7 @@ public class ControllerViewEditProfile extends ControllerViewEdit {
 
     @Override
     public void save() {
-        this.viewEditProfile.getViewMenu().getPanelModeling().updateModelingPanel();
+        this.viewEditProfile.getViewMenu().getPanelModeling().updateModelingPanels();
         this.close();
     }
 }

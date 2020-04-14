@@ -74,8 +74,8 @@ public class ControllerPanelBaseClassUML extends ControllerPanel {
         this.panelBaseClassUML.getViewMenu().setSave(false);
         this.panelBaseClassUML.getViewMenu().getPanelProject().getPanelTree().getPanelTreeUML().updateNode(this.panelBaseClassUML.getClassUML());
         this.panelBaseClassUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseClassUML.getViewMenu().getPanelModeling().updateModelingPanel();
         this.panelBaseClassUML.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseClassUML.getDiagram());
-        this.panelBaseClassUML.getViewMenu().getPanelModeling().updateUI();
+        this.panelBaseClassUML.getViewMenu().getPanelModeling().updateInstancePanels();
+//        this.panelBaseClassUML.getViewMenu().getPanelModeling().updateUI();
     }
 }

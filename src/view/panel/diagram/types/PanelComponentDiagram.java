@@ -1,7 +1,6 @@
 package view.panel.diagram.types;
 
 import com.mxgraph.model.mxCell;
-import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxEvent;
 import controller.view.panel.diagram.association.types.ControllerEventAssociationComponent;
 import controller.view.panel.diagram.event.ControllerEventChange;
@@ -15,6 +14,7 @@ import style.element.StyleComponent;
 import model.structural.base.Element;
 import model.structural.diagram.ComponentDiagram;
 import model.structural.diagram.component.base.ComponentUML;
+import style.association.types.StyleComponentAssociation;
 import view.panel.diagram.PanelDiagram;
 import view.panel.operation.types.PanelComponentOperation;
 import view.structural.ViewMenu;
@@ -49,6 +49,11 @@ public final class PanelComponentDiagram extends PanelDiagram {
     }
     
     @Override
+    public void initStyleAssociation() {
+        this.style = new StyleComponentAssociation();
+    }
+    
+    @Override
     protected void addElement(Element element) {
         if (element instanceof ComponentUML)
             this.addComponent((ComponentUML) element);
@@ -78,10 +83,10 @@ public final class PanelComponentDiagram extends PanelDiagram {
     public void setStyle() {
         switch (this.getType()) {
             case 0:
-                this.setProvideStyle();
+                this.getStyle().setProvideStyle(this.getEdgeStyle());
                 break;
             case 1:
-                this.setRequireStyle();
+                this.getStyle().setRequireStyle(this.getEdgeStyle());
                 break;
             case 2:
             case 3:
@@ -89,32 +94,9 @@ public final class PanelComponentDiagram extends PanelDiagram {
                 this.setDependencyStyle();
                 break;
             default:
-                this.setProvideStyle();    
+                this.getStyle().setProvideStyle(this.getEdgeStyle());
                 break;
         }
-    }
-    
-    /**
-     * Method responsible for setting the Provide Style.
-     */
-    private void setProvideStyle() {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED, "0");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,    mxConstants.ARROW_SPACING);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW,  mxConstants.ARROW_SPACING);
-    }
-    
-    /**
-     * Method responsible for setting the Require Style.
-     */
-    private void setRequireStyle() {
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_DASHED,  "1");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDSIZE, "15");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STROKECOLOR, "#000000");
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_ENDARROW,   mxConstants.ARROW_OPEN);
-        this.getDefaultEdgeStyle().put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);
     }
     
     @Override
@@ -137,5 +119,10 @@ public final class PanelComponentDiagram extends PanelDiagram {
     @Override
     public PanelComponentOperation getPanelOperation() {
         return (PanelComponentOperation) this.panel;
+    }
+    
+    @Override
+    public StyleComponentAssociation getStyle() {
+        return (StyleComponentAssociation) this.style;
     }
 }

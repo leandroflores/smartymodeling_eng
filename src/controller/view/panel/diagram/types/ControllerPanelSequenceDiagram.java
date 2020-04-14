@@ -4,8 +4,10 @@ import controller.view.panel.diagram.ControllerPanelDiagram;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import model.structural.base.Element;
+import model.structural.diagram.classes.base.ClassUML;
 import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
+import model.structural.diagram.usecase.base.ActorUML;
 import view.panel.diagram.types.PanelSequenceDiagram;
 
 /**
@@ -27,11 +29,11 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
     }
     
     @Override
-    public void mousePressed(MouseEvent evento) {
+    public void mousePressed(MouseEvent event) {
         if (this.getPanelDiagram().getOperation().equals("Lifeline"))
-            this.addLifeline(evento);
+            this.addLifeline(event);
         else if (this.getPanelDiagram().getOperation().equals("Instance"))
-            this.addInstance(evento);
+            this.addInstance(event);
     }
     
     /**
@@ -44,8 +46,17 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
                     lifeline.setHeight(this.getPanelDiagram().getDiagram().getHeightDefault());
         this.getPanelDiagram().getDiagram().addLifeline(lifeline);
                     lifeline.setDefaultName();
+                    lifeline.setActor(this.getDefaultActor());
         this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().update();
+    }
+    
+    /**
+     * Method responsible for returning the Default Actor.
+     * @return Default Actor.
+     */
+    private ActorUML getDefaultActor() {
+        return (ActorUML) this.getPanelDiagram().getViewMenu().getProject().getElements("actor").get(0);
     }
     
     /**
@@ -58,8 +69,17 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
                     instance.setHeight(this.getPanelDiagram().getDiagram().getHeightDefault());
         this.getPanelDiagram().getDiagram().addInstance(instance);
                     instance.setDefaultName();
+                    instance.setClassUML(this.getDefaultClass());
         this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().update();
+    }
+    
+    /**
+     * Method responsible for returning the Default Class.
+     * @return Default Class.
+     */
+    private ClassUML getDefaultClass() {
+        return (ClassUML) this.getPanelDiagram().getViewMenu().getProject().getElements("class").get(0);
     }
     
     @Override
