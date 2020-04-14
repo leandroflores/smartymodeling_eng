@@ -70,7 +70,7 @@ import view.panel.edit.base.traceability.PanelEditTraceability;
 import view.panel.edit.base.usecase.PanelEditActorUML;
 import view.panel.edit.base.usecase.PanelEditUseCaseUML;
 import view.panel.edit.base.variability.PanelEditVariability;
-import view.panel.project.tree.PanelProjectTree;
+import view.panel.project.tree.PanelTree;
 import view.structural.ViewMenu;
 
 /**
@@ -84,7 +84,7 @@ public final class PanelProject extends Panel {
     private final ViewMenu viewMenu;
     private final Project  project;
     private JSplitPane splitPane;
-    private PanelProjectTree panelTree;
+    private PanelTree panelTree;
     private PanelEdit panelEdit;
     
     /**
@@ -131,7 +131,7 @@ public final class PanelProject extends Panel {
      * Method responsible for initializing the Panel Tree.
      */
     public void initPanelTree() {
-        this.panelTree = new PanelProjectTree(this.viewMenu);
+        this.panelTree = new PanelTree(this.viewMenu);
         this.createScrollPane("scrollPanelTree");
         this.getScrollPanelTree().setViewportView(this.panelTree);
         this.getScrollPanelTree().setMinimumSize(new Dimension(250, 275));
@@ -433,7 +433,7 @@ public final class PanelProject extends Panel {
      * Method responsible for returning the Panel Tree.
      * @return Panel Tree.
      */
-    public PanelProjectTree getPanelTree() {
+    public PanelTree getPanelTree() {
         return this.panelTree;
     }
     

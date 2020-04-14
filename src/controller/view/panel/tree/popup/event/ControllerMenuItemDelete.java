@@ -40,7 +40,7 @@ public class ControllerMenuItemDelete implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.popup.getPanelTree().getTree().getLastSelectedPathComponent();
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.popup.getPanel().getTree().getLastSelectedPathComponent();
         if (node != null) {
             Object object = node.getUserObject();
             this.action(object, node);
@@ -54,19 +54,19 @@ public class ControllerMenuItemDelete implements ActionListener {
      */
     private void action(Object object, DefaultMutableTreeNode node) {
         if (object instanceof Diagram)
-            new ViewDeleteDiagram(this.popup.getPanelTree().getViewMenu().getPanelModeling(), ((Diagram) object)).setVisible(true);
+            new ViewDeleteDiagram(this.popup.getPanel().getViewMenu().getPanelModeling(), ((Diagram) object)).setVisible(true);
         else if (object instanceof Element)
-            new ViewDeleteElement(this.popup.getPanelTree().getViewMenu().getPanelModeling(), ((Element) object)).setVisible(true);
+            new ViewDeleteElement(this.popup.getPanel().getViewMenu().getPanelModeling(), ((Element) object)).setVisible(true);
         else if (object instanceof Variability)
-            new ViewDeleteVariability(this.popup.getPanelTree().getViewMenu().getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
+            new ViewDeleteVariability(this.popup.getPanel().getViewMenu().getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
         else if (object instanceof Traceability)
-            new ViewDeleteTraceability(this.popup.getPanelTree().getViewMenu().getPanelModeling(), (Traceability) object).setVisible(true);
+            new ViewDeleteTraceability(this.popup.getPanel().getViewMenu().getPanelModeling(), (Traceability) object).setVisible(true);
         else if (object instanceof Product)
-            new ViewDeleteProduct(this.popup.getPanelTree().getViewMenu().getPanelModeling(),  (Product) object).setVisible(true);
+            new ViewDeleteProduct(this.popup.getPanel().getViewMenu().getPanelModeling(),  (Product) object).setVisible(true);
         else if (object instanceof Instance)
-            new ViewDeleteInstance(this.popup.getPanelTree().getViewMenu().getPanelModeling(), (Instance) object).setVisible(true);
+            new ViewDeleteInstance(this.popup.getPanel().getViewMenu().getPanelModeling(), (Instance) object).setVisible(true);
         else if (object instanceof Artifact)
-            new ViewDeleteArtifact(this.popup.getPanelTree().getViewMenu().getPanelModeling(), (Artifact) object).setVisible(true);
+            new ViewDeleteArtifact(this.popup.getPanel().getViewMenu().getPanelModeling(), (Artifact) object).setVisible(true);
     }
     
     /**
@@ -77,7 +77,7 @@ public class ControllerMenuItemDelete implements ActionListener {
     private Diagram getDiagram(DefaultMutableTreeNode node) {
         DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
         while ((parent != null) && !(parent.getUserObject() instanceof Diagram))
-            parent = (DefaultMutableTreeNode) parent.getParent();
+               parent = (DefaultMutableTreeNode) parent.getParent();
         return parent == null ? null : (Diagram) parent.getUserObject();
     }
 }

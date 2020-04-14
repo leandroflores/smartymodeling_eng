@@ -56,14 +56,14 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     
     @Override
     public void mouseReleased(MouseEvent event) {
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanelTree().getTree().getLastSelectedPathComponent();
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanel().getTree().getLastSelectedPathComponent();
 //        System.out.println("Released: " + node.getUserObject());
 //        System.out.println("");
     }
 
     @Override
     public void mouseClicked(MouseEvent event) {
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanelTree().getTree().getLastSelectedPathComponent();
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanel().getTree().getLastSelectedPathComponent();
         if (node != null) {
             if (!SwingUtilities.isLeftMouseButton(event))
                 this.showPopup(node, event);
@@ -88,7 +88,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent event) {
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanelTree().getTree().getLastSelectedPathComponent();
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanel().getTree().getLastSelectedPathComponent();
         switch (event.getKeyCode()) {
             case KeyEvent.VK_ENTER:
                 this.showPanel(node);
@@ -106,7 +106,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
 
     @Override
     public void keyReleased(KeyEvent event) {
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanelTree().getTree().getLastSelectedPathComponent();
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanel().getTree().getLastSelectedPathComponent();
         this.showPanelEdit(node);
     }
     
@@ -117,9 +117,9 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      */
     private void showPopup(DefaultMutableTreeNode node, MouseEvent event) {
         if (node.getUserObject() instanceof Project)
-            this.treePopup.getMenuItemDelete().setVisible(false);
+            this.treePopup.getDeleteMenuItem().setVisible(false);
         else
-            this.treePopup.getMenuItemDelete().setVisible(true);
+            this.treePopup.getDeleteMenuItem().setVisible(true);
         this.treePopup.show(event.getComponent(), event.getX(), event.getY());
     }
 
@@ -131,9 +131,9 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
         if (node != null && node.getUserObject() != null) {
             Diagram diagram = this.getDiagram(node);
             if (node.getUserObject() instanceof Project)
-                this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditProject();
+                this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
             else if (node.getUserObject() instanceof Diagram)
-                this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) node.getUserObject());
+                this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) node.getUserObject());
             else if (node.getUserObject() instanceof Variability)
                 this.showPanelEditVariability(diagram, (Variability) node.getUserObject());
             else if (node.getUserObject() instanceof Traceability)
@@ -159,7 +159,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      * @param variability Variability.
      */
     private void showPanelEditVariability(Diagram diagram, Variability variability) {
-        this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditVariability(diagram, variability);
+        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, variability);
     }
     
     /**
@@ -167,7 +167,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      * @param traceability Traceability.
      */
     private void showPanelEditTraceability(Traceability traceability) {
-        this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditTraceability(traceability);
+        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditTraceability(traceability);
     }
     
     /**
@@ -175,7 +175,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      * @param metric Metric.
      */
     private void showPanelEditMetric(Metric metric) {
-        this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditMetric(metric);
+        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditMetric(metric);
     }
     
     /**
@@ -183,7 +183,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      * @param product Product.
      */
     private void showPanelEditProduct(Product product) {
-        this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditProduct(product);
+        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditProduct(product);
     }
     
     /**
@@ -191,7 +191,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      * @param instance Instance.
      */
     private void showPanelEditInstance(Instance instance) {
-        this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditInstance(instance);
+        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditInstance(instance);
     }
     
     /**
@@ -199,7 +199,7 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      * @param artifact Artifact.
      */
     private void showPanelEditArtifact(Artifact artifact) {
-        this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditArtifact(artifact);
+        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditArtifact(artifact);
     }
     
     /**
@@ -209,17 +209,17 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      */
     private void showPanelEdit(Diagram diagram, Element element) {
         if (diagram instanceof FeatureDiagram)
-            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((FeatureDiagram) diagram, element);
+            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((FeatureDiagram) diagram, element);
         else if (diagram instanceof ActivityDiagram)
-            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((ActivityDiagram) diagram, element);
+            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((ActivityDiagram) diagram, element);
         else if (diagram instanceof ClassDiagram)
-            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((ClassDiagram) diagram, element);
+            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((ClassDiagram) diagram, element);
         else if (diagram instanceof ComponentDiagram)
-            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((ComponentDiagram) diagram, element);
+            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((ComponentDiagram) diagram, element);
         else if (diagram instanceof UseCaseDiagram)
-            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((UseCaseDiagram)  diagram, element);
+            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((UseCaseDiagram)  diagram, element);
         else if (diagram instanceof SequenceDiagram)
-            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditElement((SequenceDiagram) diagram, element);
+            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((SequenceDiagram) diagram, element);
     }
     
     /**
@@ -229,9 +229,9 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      */
     private void showPanelEdit(Diagram diagram, Association association) {
         if (diagram instanceof ActivityDiagram)
-            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditAssociation((ActivityDiagram) diagram, association);
+            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditAssociation((ActivityDiagram) diagram, association);
         else if (diagram instanceof SequenceDiagram)
-            this.treePopup.getPanelTree().getViewMenu().getPanelProject().initPanelEditAssociation((SequenceDiagram) diagram, association);
+            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditAssociation((SequenceDiagram) diagram, association);
     }
     
     /**
@@ -240,9 +240,9 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      */
     private void showPanel(DefaultMutableTreeNode node) {
         if (node.getUserObject() instanceof Diagram) 
-            this.treePopup.getPanelTree().getViewMenu().showDiagram( (Diagram)  node.getUserObject());
+            this.treePopup.getPanel().getViewMenu().showDiagram( (Diagram)  node.getUserObject());
         else if (node.getUserObject() instanceof Instance)
-            this.treePopup.getPanelTree().getViewMenu().showInstance((Instance) node.getUserObject());
+            this.treePopup.getPanel().getViewMenu().showInstance((Instance) node.getUserObject());
     }
     
     /**
@@ -252,11 +252,11 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      */
     private void delete(Object object, DefaultMutableTreeNode node) {
         if (object instanceof Diagram)
-            new ViewDeleteDiagram(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), (Diagram) object).setVisible(true);
+            new ViewDeleteDiagram(this.treePopup.getPanel().getViewMenu().getPanelModeling(), (Diagram) object).setVisible(true);
         else if (object instanceof Element)
-            new ViewDeleteElement(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), (Element) object).setVisible(true);
+            new ViewDeleteElement(this.treePopup.getPanel().getViewMenu().getPanelModeling(), (Element) object).setVisible(true);
         else if (object instanceof Variability)
-            new ViewDeleteVariability(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
+            new ViewDeleteVariability(this.treePopup.getPanel().getViewMenu().getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
     }
     
     /**
@@ -266,17 +266,17 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      */
     private void edit(Object object, DefaultMutableTreeNode node) {
         if (object instanceof Project)
-            new ViewEditProject(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((Project) object)).setVisible(true);
+            new ViewEditProject(this.treePopup.getPanel().getViewMenu().getPanelModeling(), ((Project) object)).setVisible(true);
         else if (object instanceof Diagram)
-            new ViewEditDiagram(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((Diagram) object)).setVisible(true);
+            new ViewEditDiagram(this.treePopup.getPanel().getViewMenu().getPanelModeling(), ((Diagram) object)).setVisible(true);
         else if (object instanceof Variability)
             this.editVariability(object, node);
         else if (object instanceof AttributeUML)
-            new ViewEditAttribute(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((ClassDiagram) this.getDiagram(node)), ((AttributeUML) object)).setVisible(true);
+            new ViewEditAttribute(this.treePopup.getPanel().getViewMenu().getPanelModeling(), ((ClassDiagram) this.getDiagram(node)), ((AttributeUML) object)).setVisible(true);
         else if (object instanceof MethodUML)
-            new ViewEditMethod(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), ((ClassDiagram) this.getDiagram(node)), ((MethodUML) object)).setVisible(true);
+            new ViewEditMethod(this.treePopup.getPanel().getViewMenu().getPanelModeling(), ((ClassDiagram) this.getDiagram(node)), ((MethodUML) object)).setVisible(true);
         else if (object instanceof Element)
-            new ViewEditElement(this.treePopup.getPanelTree().getViewMenu().getPanelModeling(), this.getDiagram(node), ((Element) object)).setVisible(true);
+            new ViewEditElement(this.treePopup.getPanel().getViewMenu().getPanelModeling(), this.getDiagram(node), ((Element) object)).setVisible(true);
     }
     
     /**

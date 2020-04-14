@@ -1,4 +1,4 @@
-package view.panel.tree.popup;
+package view.panel.z.tree.popup.old;
 
 import controller.view.panel.tree.popup.event.ControllerMenuItemDelete;
 import controller.view.panel.tree.popup.event.ControllerMenuItemEdit;
@@ -7,7 +7,7 @@ import java.awt.Font;
 import java.util.HashMap;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import view.panel.tree.PanelTree;
+import view.panel.z.old.PanelTree;
 
 /**
  * <p>Class of View <b>TreePopup</b>.</p>
@@ -36,9 +36,9 @@ public final class TreePopup extends JPopupMenu {
      */
     protected void addComponents() {
         this.add(this.createMenuItem("editMenuItem",    "Edit",    "edit.png"));
-        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
+//        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
         this.add(this.createMenuItem("deleteMenuItem",  "Delete",  "delete.png"));
-        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
+//        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
 //        this.add(this.createMenuItem("detailsMenuItem", "Details", "details.png"));
 //        this.getDetailsMenuItem().addActionListener(new ControllerMenuItemDetails(this));
     }

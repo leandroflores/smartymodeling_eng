@@ -1,4 +1,4 @@
-package view.panel.tree.old;
+package view.panel.tree;
 
 import controller.view.panel.tree.popup.ControllerTreePopup;
 import java.awt.FlowLayout;
@@ -15,14 +15,13 @@ import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
 import view.Panel;
 import view.panel.tree.popup.TreePopup;
-import view.panel.tree.renderer.old.TreeRendererUML;
 import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelTree</b>.</p>
  * <p>Class responsible for defining the <b>Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  27/05/2019
+ * @since  2019-05-27
  * @see    model.structural.base.Project
  * @see    view.Panel
  */
@@ -30,7 +29,7 @@ public abstract class PanelTree extends Panel {
     protected final ViewMenu viewMenu;
     protected final Project  project;
     protected final HashMap  nodes;
-    protected TreePopup treePopup;
+    protected TreePopup popup;
     protected JTree tree;
     
     /**
@@ -46,43 +45,48 @@ public abstract class PanelTree extends Panel {
     @Override
     public void addComponents() {
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
-        this.addControllers(this.getProjectNode());
-//        this.expandTree();
+        this.initTree();
+        this.addControllers();
         this.add(this.tree);
     }
     
     /**
-     * Method responsible for adding the Tree Controllers.
-     * @param node Project Node.
+     * Method responsible for initializing the Tree.
      */
-    protected void addControllers(DefaultMutableTreeNode node) {
-        this.tree      = new JTree(node);
-        this.treePopup = new TreePopup(this);
-        this.tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        this.tree.addMouseListener(new ControllerTreePopup(this.treePopup));
-        this.tree.addKeyListener(new ControllerTreePopup(this.treePopup));
-        this.tree.setCellRenderer(new TreeRendererUML(this.tree));
+    protected void initTree() {
+        this.tree  = new JTree(this.createNode(this.getProject()));
+        this.popup = new TreePopup(this);
     }
     
     /**
-     * Method responsible for expanding Tree.
+     * Method responsible for adding the Tree Controllers.
      */
-    private void expandTree() {
+    protected void addControllers() {
+        this.tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        this.tree.addMouseListener(new ControllerTreePopup(this.popup));
+        this.tree.addKeyListener(new ControllerTreePopup(this.popup));
+    }
+    
+    /**
+     * Method responsible for expanding the Tree.
+     */
+    protected void expandTree() {
         for (int i = 0; i < this.tree.getRowCount(); i++)
             this.tree.expandRow(i);
     }
     
     /**
-     * Method responsible for returning the Project Node.
-     * @return Project Node.
+     * Method responsible for returning a New Project Node.
+     * @param  project Project.
+     * @return New Project Node.
      */
-    protected abstract DefaultMutableTreeNode getProjectNode();
+    protected abstract DefaultMutableTreeNode createNode(Project project);
     
     /**
-     * Method responsible for updating the Project Node.
+     * Method responsible for updating the Tree.
      */
-    public void updateProjectNode() {
-        this.getTreeModel().reload(this.getNodeTree(this.project));
+    public void updateTree() {
+        this.getTreeModel().reload(this.getNode(this.project));
     }
     
     /**
@@ -90,10 +94,10 @@ public abstract class PanelTree extends Panel {
      * @param diagram Diagram. 
      */
     public void updateNode(Diagram diagram) {
-        DefaultMutableTreeNode node = this.getNodeTree(diagram);
+        DefaultMutableTreeNode node = this.getNode(diagram);
         if (node != null) {
             boolean expanded = this.tree.isExpanded(new TreePath(node.getPath()));
-            node = this.getNodeTree(diagram);
+            node = this.getNode(diagram);
             this.getTreeModel().reload(node);
             if (expanded)
                 this.tree.expandPath(new TreePath(node.getPath()));
@@ -109,7 +113,7 @@ public abstract class PanelTree extends Panel {
     protected void addElement(Element element, DefaultMutableTreeNode node, DefaultMutableTreeNode parent) {
         if (node != null) {
             parent.add(node);
-            this.nodes.put(element, node);
+            this.addNode(element, node);
         }
     }
     
@@ -118,17 +122,17 @@ public abstract class PanelTree extends Panel {
      * @param  element Element.
      * @return Element is not a Method or Attribute.
      */
-    private boolean checkElement(Element element) {
+    private boolean checkElement2(Element element) {
         return  (element instanceof AttributeUML == false)
              && (element instanceof MethodUML    == false);
     }
     
     /**
-     * Method responsible for returning the Element Node.
+     * Method responsible for returning a New Element Node.
      * @param  element Element.
-     * @return Element Node.
+     * @return New Element Node.
      */
-    protected DefaultMutableTreeNode getNode(Element element) {
+    protected DefaultMutableTreeNode createNode(Element element) {
        return new DefaultMutableTreeNode(element);
     }
     
@@ -137,8 +141,19 @@ public abstract class PanelTree extends Panel {
      * @param element Element. 
      */
     public void updateNode(Element element) {
-        if (this.getNodeTree(element) != null)
-            this.getTreeModel().reload(this.getNodeTree(element));
+        if (this.createNode(element) != null)
+            this.getTreeModel().reload(this.createNode(element));
+    }
+    
+    /**
+     * Method responsible for returning the Object Node.
+     * @param  object Object.
+     * @return Object Node.
+     */
+    public DefaultMutableTreeNode getNode(Object object) {
+        if (this.nodes.get(object) != null)
+            return (DefaultMutableTreeNode) this.nodes.get(object);
+        return null;
     }
     
     /**
@@ -153,17 +168,6 @@ public abstract class PanelTree extends Panel {
     }
     
     /**
-     * Method responsible for returning the Object Node.
-     * @param  object Object.
-     * @return Object Node.
-     */
-    public DefaultMutableTreeNode getNodeTree(Object object) {
-        if (this.nodes.get(object) != null)
-            return (DefaultMutableTreeNode) this.nodes.get(object);
-        return null;
-    }
-    
-    /**
      * Method responsible for returning the View Menu.
      * @return View Menu.
      */
@@ -172,11 +176,20 @@ public abstract class PanelTree extends Panel {
     }
     
     /**
-     * Method responsible for returning the Tree.
-     * @return Tree Model.
+     * Method responsible for returning the Project.
+     * @return Project.
      */
-    public DefaultTreeModel getTreeModel() {
-        return (DefaultTreeModel) this.tree.getModel();
+    public Project getProject() {
+        return this.viewMenu.getProject();
+    }
+    
+    /**
+     * Method responsible for adding a Node Object.
+     * @param object Object.
+     * @param node Object Node.
+     */
+    public void addNode(Object object, DefaultMutableTreeNode node) {
+        this.nodes.put(object, node);
     }
     
     /**
@@ -185,5 +198,13 @@ public abstract class PanelTree extends Panel {
      */
     public JTree getTree() {
         return this.tree;
+    }
+    
+    /**
+     * Method responsible for returning the Tree.
+     * @return Tree Model.
+     */
+    public DefaultTreeModel getTreeModel() {
+        return (DefaultTreeModel) this.tree.getModel();
     }
 }

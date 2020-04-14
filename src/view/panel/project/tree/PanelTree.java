@@ -2,37 +2,39 @@ package view.panel.project.tree;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.MouseListener;
+import java.util.HashMap;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import view.Panel;
-import view.panel.tree.old.PanelTreeFeature;
-import view.panel.tree.old.PanelTreeUML;
+import view.panel.tree.PanelTreeDiagram;
+import view.panel.z.old.PanelTreeFeature;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelProjectTree</b>.</p>
+ * <p>Class of View <b>PanelTree</b>.</p>
  * <p>Class responsible for defining the <b>Project Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  27/05/2019
+ * @since  2019-05-27
  * @see    model.structural.base.Project
  * @see    view.Panel
  */
-public final class PanelProjectTree extends Panel {
+public final class PanelTree extends Panel {
     private final ViewMenu viewMenu;
     private final Project  project;
     private JTabbedPane tabbedPane;
-    private PanelTreeFeature panelTreeFeat;
-    private PanelTreeUML     panelTreeUML;
+    private HashMap panels;
+    
+    private PanelTreeFeature panelTreeFeature;
+    private PanelTreeDiagram panelTreeDiagram;
     
     /**
      * Default constructor method of Class.
      * @param viewMenu View Menu.
      */
-    public PanelProjectTree(ViewMenu viewMenu) {
+    public PanelTree(ViewMenu viewMenu) {
         this.viewMenu = viewMenu;
         this.project  = this.viewMenu.getProject();
         this.addComponents();
@@ -43,7 +45,7 @@ public final class PanelProjectTree extends Panel {
         this.setLayout(new GridLayout(1, 1));
         this.initTabbedPane();
             this.addPanelTreeFeature();
-            this.addPanelTreeUML();
+            this.addPanelTreeDiagram();
         this.add(this.tabbedPane);
     }
     
@@ -52,7 +54,6 @@ public final class PanelProjectTree extends Panel {
      */
     protected void initTabbedPane() {
         this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.addMouseListener((MouseListener) this.controller);
         this.tabbedPane.setPreferredSize(new Dimension(275, 260));
     }
     
@@ -60,19 +61,19 @@ public final class PanelProjectTree extends Panel {
      * Method responsible for adding the Panel Feature.
      */
     protected void addPanelTreeFeature() {
-        this.panelTreeFeat = new PanelTreeFeature(this.viewMenu);
-        this.createScrollPane("scrollPanelTreeFeat",  this.panelTreeFeat);
-        this.getScrollPanelTreeFeat().setViewportView(this.panelTreeFeat);
+        this.panelTreeFeature = new PanelTreeFeature(this.viewMenu);
+        this.createScrollPane("scrollPanelTreeFeat",  this.panelTreeFeature);
+        this.getScrollPanelTreeFeat().setViewportView(this.panelTreeFeature);
         this.tabbedPane.add("Feat", this.getScrollPanelTreeFeat());
     }
     
     /**
-     * Method responsible for adding the Panel Tree UML.
+     * Method responsible for adding the Panel Tree Diagram.
      */
-    protected void addPanelTreeUML() {
-        this.panelTreeUML  = new PanelTreeUML(this.viewMenu);
-        this.createScrollPane("scrollPanelTreeUML",  this.panelTreeUML);
-        this.getScrollPanelTreeUML().setViewportView(this.panelTreeUML);
+    protected void addPanelTreeDiagram() {
+        this.panelTreeDiagram  = new PanelTreeDiagram(this.viewMenu);
+        this.createScrollPane("scrollPanelTreeUML",  this.panelTreeDiagram);
+        this.getScrollPanelTreeUML().setViewportView(this.panelTreeDiagram);
         this.tabbedPane.add("UML", this.getScrollPanelTreeUML());
     }
     
@@ -81,10 +82,10 @@ public final class PanelProjectTree extends Panel {
      * Method responsible for updating the Project Node.
      */
     public void updateProjectNode() {
-        if (this.panelTreeFeat != null)
-            this.panelTreeFeat.updateProjectNode();
-        if (this.panelTreeUML  != null)
-            this.panelTreeUML.updateProjectNode();
+//        if (this.panelTreeFeature != null)
+//            this.panelTreeFeature.updateProjectNode();
+//        if (this.panelTreeDiagram  != null)
+//            this.panelTreeDiagram.updateProjectNode();
     }
     
     /**
@@ -92,10 +93,10 @@ public final class PanelProjectTree extends Panel {
      * @param diagram Diagram.
      */
     public void updateNode(Diagram diagram) {
-        if (this.panelTreeFeat != null)
-            this.panelTreeFeat.updateNode(diagram);
-        if (this.panelTreeUML  != null)
-            this.panelTreeUML.updateNode(diagram);
+//        if (this.panelTreeFeature != null)
+//            this.panelTreeFeature.updateNode(diagram);
+//        if (this.panelTreeDiagram  != null)
+//            this.panelTreeDiagram.updateNode(diagram);
     }
     
     /**
@@ -103,10 +104,10 @@ public final class PanelProjectTree extends Panel {
      * @param element Element.
      */
     public void updateNode(Element element) {
-        if (this.panelTreeFeat != null)
-            this.panelTreeFeat.updateNode(element);
-        if (this.panelTreeUML  != null)
-            this.panelTreeUML.updateNode(element);
+//        if (this.panelTreeFeature != null)
+//            this.panelTreeFeature.updateNode(element);
+//        if (this.panelTreeDiagram  != null)
+//            this.panelTreeDiagram.updateNode(element);
     }
 
     /**
@@ -130,7 +131,7 @@ public final class PanelProjectTree extends Panel {
      * @return Panel Tree Feature.
      */
     public PanelTreeFeature getPanelTreeFeature() {
-        return this.panelTreeFeat;
+        return this.panelTreeFeature;
     }
     
     /**
@@ -142,10 +143,10 @@ public final class PanelProjectTree extends Panel {
     }
     
     /**
-     * Method responsible for returning the Panel Tree UML.
-     * @return Panel Tree UML.
+     * Method responsible for returning the Panel Tree Diagram.
+     * @return Panel Tree Diagram.
      */
-    public PanelTreeUML getPanelTreeUML() {
-        return this.panelTreeUML;
+    public PanelTreeDiagram getPanelTreeDiagram() {
+        return this.panelTreeDiagram;
     }
 }

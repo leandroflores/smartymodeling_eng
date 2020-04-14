@@ -39,7 +39,7 @@ public class ControllerMenuItemEdit implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.popup.getPanelTree().getTree().getLastSelectedPathComponent();
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.popup.getPanel().getTree().getLastSelectedPathComponent();
         if (node != null) {
             Object object = node.getUserObject();
             this.action(object, node);
@@ -53,17 +53,17 @@ public class ControllerMenuItemEdit implements ActionListener {
      */
     private void action(Object object, DefaultMutableTreeNode node) {
         if (object instanceof Project)
-            new ViewEditProject(this.popup.getPanelTree().getViewMenu().getPanelModeling(), (Project) object).setVisible(true);
+            new ViewEditProject(this.popup.getPanel().getViewMenu().getPanelModeling(), (Project) object).setVisible(true);
         else if (object instanceof Diagram)
-            new ViewEditDiagram(this.popup.getPanelTree().getViewMenu().getPanelModeling(), (Diagram) object).setVisible(true);
+            new ViewEditDiagram(this.popup.getPanel().getViewMenu().getPanelModeling(), (Diagram) object).setVisible(true);
         else if (object instanceof AttributeUML)
-            new ViewEditAttribute(this.popup.getPanelTree().getViewMenu().getPanelModeling(), this.getClassDiagram(node), (AttributeUML) object).setVisible(true);
+            new ViewEditAttribute(this.popup.getPanel().getViewMenu().getPanelModeling(), this.getClassDiagram(node), (AttributeUML) object).setVisible(true);
         else if (object instanceof MethodUML)
-            new ViewEditMethod(this.popup.getPanelTree().getViewMenu().getPanelModeling(),    this.getClassDiagram(node), (MethodUML) object).setVisible(true);
+            new ViewEditMethod(this.popup.getPanel().getViewMenu().getPanelModeling(),    this.getClassDiagram(node), (MethodUML) object).setVisible(true);
         else if (object instanceof Element)
-            new ViewEditElement(this.popup.getPanelTree().getViewMenu().getPanelModeling(),   this.getParentDiagram(node), (Element) object).setVisible(true);
+            new ViewEditElement(this.popup.getPanel().getViewMenu().getPanelModeling(),   this.getParentDiagram(node), (Element) object).setVisible(true);
         else if (object instanceof Variability)
-            new ViewEditVariability(this.popup.getPanelTree().getViewMenu().getPanelModeling(),   this.getParentDiagram(node), (Variability) object).setVisible(true);
+            new ViewEditVariability(this.popup.getPanel().getViewMenu().getPanelModeling(),   this.getParentDiagram(node), (Variability) object).setVisible(true);
     }
     
     /**
@@ -74,7 +74,7 @@ public class ControllerMenuItemEdit implements ActionListener {
     private void editVariability(Object object, DefaultMutableTreeNode node) {
         Diagram     diagram     = this.getDiagram((DefaultMutableTreeNode) node.getParent());
         Variability variability = (Variability) object;
-        new ViewEditVariability(this.popup.getPanelTree().getViewMenu().getPanelModeling(), diagram, variability).setVisible(true);
+        new ViewEditVariability(this.popup.getPanel().getViewMenu().getPanelModeling(), diagram, variability).setVisible(true);
     }
     
     /**

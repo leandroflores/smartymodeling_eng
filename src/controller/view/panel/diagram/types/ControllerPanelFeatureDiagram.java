@@ -40,7 +40,7 @@ public class ControllerPanelFeatureDiagram extends ControllerPanelDiagram {
                 feature.setDefaultName();
         this.getPanelDiagram().updateGraph();
         this.getPanelDiagram().getViewMenu().getPanelProject().getPanelTree().updateProjectNode();
-//        this.panelBaseVariants.getViewMenu().getPanelProject().getPanelTree().getPanelTreeUML().updateNode(this.panelBaseVariants.getVariability());
+//        this.panelBaseVariants.getViewMenu().getPanelProject().getPanelTree().getPanelTreeDiagram().updateNode(this.panelBaseVariants.getVariability());
 //        this.getPanelDiagram().getViewMenu().update();
     }
     

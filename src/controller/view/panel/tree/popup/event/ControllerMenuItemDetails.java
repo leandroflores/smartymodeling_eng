@@ -27,7 +27,7 @@ public class ControllerMenuItemDetails implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.popup.getPanelTree().getTree().getLastSelectedPathComponent();
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.popup.getPanel().getTree().getLastSelectedPathComponent();
         if (node != null) {
             Object object = node.getUserObject();
             this.action(object, node);

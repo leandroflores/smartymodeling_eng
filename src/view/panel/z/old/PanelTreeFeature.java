@@ -1,4 +1,4 @@
-package view.panel.tree.old;
+package view.panel.z.old;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
