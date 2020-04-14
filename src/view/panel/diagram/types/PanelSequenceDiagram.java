@@ -77,7 +77,6 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     private void addHeaderCell(mxCell parent, Element element) {
         mxCell cell = (mxCell) this.getGraph().insertVertex(parent, element.getId() + "(header)", "", 2, 0, element.getWidth() - 4, 90, "headerStyle");
                cell.setConnectable(false);
-               cell.setId(element.getId() + "(header)");
             this.addStereotypeCells(cell, element);
             this.addIconCell(cell, element);
             this.addNameCell(cell, element);
@@ -92,8 +91,8 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      * @param element Element.
      */
     private void addIconCell(mxCell parent, Element element) {
-        String styleId = element.getType().equals("instance") ? "classIconStyle" : "actorIconStyle";
-        mxCell cell    = (mxCell) this.getGraph().insertVertex(parent, null, "", 2, 22, 20, 20, styleId);
+        String style_ = element.getType().equals("instance") ? "classIconStyle" : "actorIconStyle";
+        mxCell cell   = (mxCell) this.getGraph().insertVertex(parent, null, "", 2, 22, 20, 20, style_);
                cell.setConnectable(false);
     }
     

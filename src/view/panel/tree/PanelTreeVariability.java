@@ -46,7 +46,7 @@ public final class PanelTreeVariability extends PanelTree {
      * @param node Project Node.
      */
     protected void addDiagrams(DefaultMutableTreeNode node) {
-        for (Diagram diagram : this.project.getUMLDiagramsList())
+        for (Diagram diagram : this.getProject().getVariabilityDiagramsList())
             node.add(this.createNode(diagram));
     }
     

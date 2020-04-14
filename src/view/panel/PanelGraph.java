@@ -18,10 +18,18 @@ import view.Panel;
  * @see    view.Panel
  */
 public abstract class PanelGraph extends Panel {
+    protected Double  zoom;
     protected Object  parent;
     protected mxGraph graph;
     protected mxGraphLayout layout;
     protected mxGraphComponent component;
+    
+    /**
+     * Default constructor of Class.
+     */
+    public PanelGraph() {
+        this.zoom = 1.0d;
+    }
     
     /**
      * Method responsible for cleaning the Graph.
@@ -123,9 +131,18 @@ public abstract class PanelGraph extends Panel {
     
     /**
      * Method responsible for setting the Panel Zoom.
+     * @return Panel Zoom.
+     */
+    public Double getZoom() {
+        return this.zoom;
+    }
+    
+    /**
+     * Method responsible for setting the Panel Zoom.
      * @param zoom Zoom Value.
      */
     public void setZoom(Double zoom) {
+        this.zoom = zoom;
         this.graph.getView().setScale(zoom);
     }
     

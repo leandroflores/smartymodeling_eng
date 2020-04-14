@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+import java.util.Map;
 import model.structural.base.Diagram;
 import model.structural.base.product.Instance;
 import model.structural.diagram.ActivityDiagram;
@@ -43,7 +44,7 @@ import view.structural.ViewMenu;
 public final class PanelModeling extends Panel {
     private final ViewMenu viewMenu;
     private PanelTabbed panelTabbed;
-    private HashMap<String, Component> panels;
+    private HashMap panels;
     
     /**
      * Default constructor method of Class.
@@ -70,7 +71,7 @@ public final class PanelModeling extends Panel {
      * @param component Tab Component.
      */
     private void addTab(String id, String title, Component component) {
-        Component get = this.panels.get(id);
+        Component get = this.getPanels().get(id);
         if (get == null) {
             this.panelTabbed.addTab(title, null, component, id);
             this.panels.put(id, component);
@@ -120,6 +121,7 @@ public final class PanelModeling extends Panel {
         if (this.panels.get(diagram.getId()) != null) {
             PanelDiagram panel = this.getPanelDiagram(diagram);
                          panel.updateGraph();
+            this.getViewMenu().setZoom(panel.getZoom());
             this.panelTabbed.updateUI();
             this.updateUI();
         }
@@ -131,7 +133,7 @@ public final class PanelModeling extends Panel {
      * @param id Object Id.
      */
     public void setSelected(Diagram diagram, String id) {
-        if (this.getPanelDiagram(diagram) != null)
+        if (this.getPanelDiagram(diagram) != null) 
             this.getPanelDiagram(diagram).setSelected(id);
     }
     
@@ -140,7 +142,7 @@ public final class PanelModeling extends Panel {
      * @param diagram Diagram.
      */
     public void updateTab(Diagram diagram) {
-        if (this.panels.get(diagram.getId()) != null) {
+        if (this.getPanels().get(diagram.getId()) != null) {
             this.panelTabbed.updateTab(diagram);
         }
     }
@@ -151,7 +153,7 @@ public final class PanelModeling extends Panel {
      */
     public void removeDiagram(Diagram diagram) {
         if (this.panels.get(diagram.getId()) != null) {
-            this.panelTabbed.remove(diagram.getId(), this.panels.get(diagram.getId()));
+            this.panelTabbed.remove(diagram.getId(), this.getPanels().get(diagram.getId()));
             this.panels.remove(diagram.getId());
             this.updateUI();
         }
@@ -227,7 +229,7 @@ public final class PanelModeling extends Panel {
      */
     public void removeInstance(Instance instance) {
         if (this.panels.get(instance.getCompleteId()) != null) {
-            this.panelTabbed.remove(instance.getCompleteId(), this.panels.get(instance.getCompleteId()));
+            this.panelTabbed.remove(instance.getCompleteId(), this.getPanels().get(instance.getCompleteId()));
             this.panels.remove(instance.getCompleteId());
             this.updateUI();
         }
@@ -336,6 +338,14 @@ public final class PanelModeling extends Panel {
     }
     
     /**
+     * Method responsible for returning the View Menu.
+     * @return View Menu.
+     */
+    public ViewMenu getViewMenu() {
+        return this.viewMenu;
+    }
+    
+    /**
      * Method responsible for returning the Panel Tabbed.
      * @return Panel Tabbed.
      */
@@ -344,10 +354,10 @@ public final class PanelModeling extends Panel {
     }
     
     /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
+     * Method responsible for returning the Map Panels.
+     * @return Map Panels.
      */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
+    public Map<String, Component> getPanels() {
+        return this.panels;
     }
 }

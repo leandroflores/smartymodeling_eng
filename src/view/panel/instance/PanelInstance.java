@@ -77,13 +77,12 @@ public abstract class PanelInstance extends PanelGraph {
     public void addModelingPanel() {
         this.identifiers = new HashMap<>();
         this.objects     = new HashMap<>();
-        
-            this.initGraph();
+            super.initGraph();
+            this.loadDefaultStyles();
             this.initGraphComponent();
-            this.initGraphLayout();
+            super.initGraphLayout();
             this.addGraphPanel();
-        
-//        this.component.refresh();
+        this.component.refresh();
     }
     
     

@@ -310,7 +310,6 @@ public final class ViewMenu extends View implements Operation {
     private void initPanelProject() {
         this.panelProject = new PanelProject(this);
         this.createScrollPane("scrollPanelProject");
-//        this.
         this.getScrollPanelProject().setViewportView(this.panelProject);
     }
     
@@ -436,7 +435,7 @@ public final class ViewMenu extends View implements Operation {
      */
     public void updatePanelTree() {
         if (this.project != null) {
-            int index = this.panelProject.getPanelTree().getTabbedPane().getSelectedIndex();
+            Integer index     = this.getTabIndex();
             this.panelProject = new PanelProject(this);
             this.getScrollPanelProject().setViewportView(this.panelProject);
             this.unlockDiagramas();
@@ -445,6 +444,15 @@ public final class ViewMenu extends View implements Operation {
             this.getScrollPanelProject().setViewportView(this.createLabel(""));
             this.lockDiagramas();
         }
+    }
+    
+    /**
+     * Method responsible for returning the Tab Index.
+     * @return Tab Index.
+     */
+    public Integer getTabIndex() {
+        Integer index = this.panelProject.getPanelTree().getTabbedPane().getSelectedIndex();
+        return  index < 0 ? 0 : index;
     }
     
     /**
@@ -498,6 +506,14 @@ public final class ViewMenu extends View implements Operation {
         this.zoom  = (this.zoom <= 0.20) ? 0.20 : this.zoom;
         this.resetZoom();
         this.panelModeling.setZoom(this.zoom);
+    }
+    
+    /**
+     * Method responsible for setting the Zoom Value.
+     * @param zoom Zoom Value.
+     */
+    public void setZoom(Double zoom) {
+        this.zoom = zoom;
     }
     
     @Override

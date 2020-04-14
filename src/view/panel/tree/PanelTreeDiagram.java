@@ -50,7 +50,7 @@ public final class PanelTreeDiagram extends PanelTree {
      * @param node Project Node.
      */
     protected void addDiagrams(DefaultMutableTreeNode node) {
-        for (Diagram diagram : this.project.getUMLDiagramsList())
+        for (Diagram diagram : this.getProject().getUMLDiagramsList())
             node.add(this.createNode(diagram));
     }
     
@@ -90,8 +90,8 @@ public final class PanelTreeDiagram extends PanelTree {
             else if (element instanceof Entity)
                 new_ = this.createNode((Entity) element);
             else if (!this.isLeaf(element))
-                new_ = this.getNode(element);
-            this.addElement(element, new_, node);
+                new_ = this.createNode(element);
+            super.addElement(element, new_, node);
         }
     }
     

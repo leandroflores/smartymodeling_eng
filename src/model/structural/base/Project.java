@@ -270,6 +270,19 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Diagrams with Variability.
+     * @return Diagrams with Variability List.
+     */
+    public List<Diagram> getVariabilityDiagramsList() {
+        List   list = new ArrayList<>();
+        for (Diagram diagram : this.getUMLDiagramsList()) {
+            if (!diagram.getVariabilities().isEmpty())
+               list.add(diagram);
+        }
+        return list;
+    }
+    
+    /**
      * Method responsible for returning the Diagrams List.
      * @return Diagrams List.
      */

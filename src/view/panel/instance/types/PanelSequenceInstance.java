@@ -35,12 +35,24 @@ public final class PanelSequenceInstance extends PanelInstance {
         this.loadDefaultStyles();
     }
     
+//    @Override
+//    protected void addArtifact(Artifact artifact, Element element) {
+//        if (element instanceof LifelineUML)
+//            this.addArtifact(artifact, (LifelineUML) element);
+//        else if (element instanceof InstanceUML)
+//            this.addArtifact(artifact, (InstanceUML) element);
+//    }
+    
     @Override
     protected void addArtifact(Artifact artifact, Element element) {
-        if (element instanceof LifelineUML)
-            this.addArtifact(artifact, (LifelineUML) element);
-        else if (element instanceof InstanceUML)
-            this.addArtifact(artifact, (InstanceUML) element);
+        this.addStyle(artifact.getStyleLabel(), artifact.getStyle());
+        mxCell cell = (mxCell) this.getGraph().insertVertex(this.parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
+               cell.setConnectable(false);
+        this.addNameCell(cell, artifact);
+        this.addIconCell(cell, artifact);
+        this.addEndPointCell(cell, artifact);
+        this.addLineCell(cell, artifact);
+        super.addArtifactCell(artifact, cell);
     }
     
     /**
@@ -69,10 +81,22 @@ public final class PanelSequenceInstance extends PanelInstance {
         mxCell cell = (mxCell) this.graph.insertVertex(this.parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
                cell.setConnectable(false);
         this.addNameCell(cell, artifact);
+        this.addIconCell(cell, artifact);
         this.addEndPointCell(cell, artifact);
         this.addLineCell(cell, artifact);
         this.graph.insertVertex(cell, null, "", 5, 10, 20, 20, "styleImageClass");
         this.addArtifactCell(artifact, cell);
+    }
+    
+    /**
+     * Method responsible for adding the Icon Cell of a Artifact.
+     * @param parent Parent Cell.
+     * @param artifact Artifact.
+     */
+    private void addIconCell(mxCell parent, Artifact artifact) {
+        String style_ = artifact.getElement().getType().equals("instance") ? "classIconStyle" : "actorIconStyle";
+        mxCell cell   = (mxCell) this.getGraph().insertVertex(parent, null, "", 2, 12, 20, 20, style_);
+               cell.setConnectable(false);
     }
     
     /**
@@ -132,8 +156,8 @@ public final class PanelSequenceInstance extends PanelInstance {
         StyleSequence newStyle = new StyleSequence();
         this.addStyle("actorIconStyle", newStyle.getImageStyle("usecase/actor.png"));
         this.addStyle("classIconStyle", newStyle.getImageStyle("classes/class.png"));
-        this.addStyle("headerStyle",    newStyle.getHeaderStyle());
-        this.addStyle("nameStyle",      newStyle.getNameStyle());
+//        this.addStyle("headerStyle",    newStyle.getHeaderStyle());
+        this.addStyle("nameStyle",      newStyle.getInstanceStyle());
         this.addStyle("lineStyle",      newStyle.getLineStyle());
         this.addStyle("pointStyle",     newStyle.getPointStyle());
         this.addStyle("endPointStyle",  newStyle.getEndPointStyle());

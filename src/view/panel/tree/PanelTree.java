@@ -11,8 +11,6 @@ import javax.swing.tree.TreeSelectionModel;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
-import model.structural.diagram.classes.base.AttributeUML;
-import model.structural.diagram.classes.base.MethodUML;
 import view.Panel;
 import view.panel.tree.popup.TreePopup;
 import view.structural.ViewMenu;
@@ -38,7 +36,7 @@ public abstract class PanelTree extends Panel {
      */
     public PanelTree(ViewMenu viewMenu) {
         this.viewMenu = viewMenu;
-        this.project  = this.viewMenu.getProject();
+        this.project  = viewMenu.getProject();
         this.nodes    = new HashMap();
     }
     
@@ -118,16 +116,6 @@ public abstract class PanelTree extends Panel {
     }
     
     /**
-     * Method responsible for checking the Element is not Method or Attribute.
-     * @param  element Element.
-     * @return Element is not a Method or Attribute.
-     */
-    private boolean checkElement2(Element element) {
-        return  (element instanceof AttributeUML == false)
-             && (element instanceof MethodUML    == false);
-    }
-    
-    /**
      * Method responsible for returning a New Element Node.
      * @param  element Element.
      * @return New Element Node.
@@ -180,7 +168,7 @@ public abstract class PanelTree extends Panel {
      * @return Project.
      */
     public Project getProject() {
-        return this.viewMenu.getProject();
+        return this.project;
     }
     
     /**

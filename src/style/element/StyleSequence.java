@@ -67,6 +67,16 @@ public class StyleSequence {
     }
     
     /**
+     * Method responsible for returning the Instance Style.
+     * @return Instance Style.
+     */
+    public Map getInstanceStyle() {
+        Map    style = this.getNameStyle();
+               style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+        return style;
+    }
+    
+    /**
      * Method responsible for returning Line Style.
      * @return Line Style.
      */

@@ -10,7 +10,9 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import view.Panel;
 import view.panel.tree.PanelTreeDiagram;
-import view.panel.z.old.PanelTreeFeature;
+import view.panel.tree.PanelTreeFeature;
+import view.panel.tree.PanelTreeProduct;
+import view.panel.tree.PanelTreeVariability;
 import view.structural.ViewMenu;
 
 /**
@@ -29,6 +31,9 @@ public final class PanelTree extends Panel {
     
     private PanelTreeFeature panelTreeFeature;
     private PanelTreeDiagram panelTreeDiagram;
+    private PanelTreeProduct panelTreeProduct;
+    private PanelTreeVariability panelTreeVariability;
+    
     
     /**
      * Default constructor method of Class.
@@ -44,8 +49,7 @@ public final class PanelTree extends Panel {
     public void addComponents() {
         this.setLayout(new GridLayout(1, 1));
         this.initTabbedPane();
-            this.addPanelTreeFeature();
-            this.addPanelTreeDiagram();
+        this.addProjectPanels();
         this.add(this.tabbedPane);
     }
     
@@ -58,25 +62,56 @@ public final class PanelTree extends Panel {
     }
     
     /**
+     * Method responsible for adding the Project Panels.
+     */
+    protected void addProjectPanels() {
+        if (this.project != null) {
+            this.addPanelTreeFeature();
+            this.addPanelTreeDiagram();
+            this.addPanelTreeVariability();
+            this.addPanelTreeProduct();
+        }
+    }
+    
+    /**
      * Method responsible for adding the Panel Feature.
      */
     protected void addPanelTreeFeature() {
         this.panelTreeFeature = new PanelTreeFeature(this.viewMenu);
-        this.createScrollPane("scrollPanelTreeFeat",  this.panelTreeFeature);
-        this.getScrollPanelTreeFeat().setViewportView(this.panelTreeFeature);
-        this.tabbedPane.add("Feat", this.getScrollPanelTreeFeat());
+        this.createScrollPane("scrollPanelTreeFeature",  this.panelTreeFeature);
+        this.getScrollPanelTreeFeature().setViewportView(this.panelTreeFeature);
+        this.tabbedPane.add("Feat", this.getScrollPanelTreeFeature());
     }
     
     /**
      * Method responsible for adding the Panel Tree Diagram.
      */
     protected void addPanelTreeDiagram() {
-        this.panelTreeDiagram  = new PanelTreeDiagram(this.viewMenu);
-        this.createScrollPane("scrollPanelTreeUML",  this.panelTreeDiagram);
-        this.getScrollPanelTreeUML().setViewportView(this.panelTreeDiagram);
-        this.tabbedPane.add("UML", this.getScrollPanelTreeUML());
+        this.panelTreeDiagram = new PanelTreeDiagram(this.viewMenu);
+        this.createScrollPane("scrollPanelTreeDiagram",  this.panelTreeDiagram);
+        this.getScrollPanelTreeDiagram().setViewportView(this.panelTreeDiagram);
+        this.tabbedPane.add("UML", this.getScrollPanelTreeDiagram());
     }
     
+    /**
+     * Method responsible for adding the Panel Tree Variability.
+     */
+    protected void addPanelTreeVariability() {
+        this.panelTreeVariability = new PanelTreeVariability(this.viewMenu);
+        this.createScrollPane("scrollPanelTreeVariability",  this.panelTreeVariability);
+        this.getScrollPanelTreeVariability().setViewportView(this.panelTreeVariability);
+        this.tabbedPane.add("Variability", this.getScrollPanelTreeVariability());
+    }
+    
+    /**
+     * Method responsible for adding the Panel Tree Product.
+     */
+    protected void addPanelTreeProduct() {
+        this.panelTreeProduct = new PanelTreeProduct(this.viewMenu);
+        this.createScrollPane("scrollPanelTreeProduct",  this.panelTreeProduct);
+        this.getScrollPanelTreeProduct().setViewportView(this.panelTreeProduct);
+        this.tabbedPane.add("Product", this.getScrollPanelTreeProduct());
+    }
     
     /**
      * Method responsible for updating the Project Node.
@@ -119,11 +154,11 @@ public final class PanelTree extends Panel {
     }
     
     /**
-     * Method responsible for returning the Scroll Panel Tree Features.
-     * @return Scroll Panel Tree Features.
+     * Method responsible for returning the Scroll Panel Tree Feature.
+     * @return Scroll Panel Tree Feature.
      */
-    public JScrollPane getScrollPanelTreeFeat() {
-        return this.scrollPanes.get("scrollPanelTreeFeat");
+    public JScrollPane getScrollPanelTreeFeature() {
+        return this.scrollPanes.get("scrollPanelTreeFeature");
     }
     
     /**
@@ -135,11 +170,11 @@ public final class PanelTree extends Panel {
     }
     
     /**
-     * Method responsible for returning the Scroll Panel Tree UML.
-     * @return Scroll Panel Tree UML.
+     * Method responsible for returning the Scroll Panel Tree Diagram.
+     * @return Scroll Panel Tree Diagram.
      */
-    public JScrollPane getScrollPanelTreeUML() {
-        return this.scrollPanes.get("scrollPanelTreeUML");
+    public JScrollPane getScrollPanelTreeDiagram() {
+        return this.scrollPanes.get("scrollPanelTreeDiagram");
     }
     
     /**
@@ -148,5 +183,37 @@ public final class PanelTree extends Panel {
      */
     public PanelTreeDiagram getPanelTreeDiagram() {
         return this.panelTreeDiagram;
+    }
+    
+    /**
+     * Method responsible for returning the Scroll Panel Tree Variability.
+     * @return Scroll Panel Tree Variability.
+     */
+    public JScrollPane getScrollPanelTreeVariability() {
+        return this.scrollPanes.get("scrollPanelTreeVariability");
+    }
+    
+    /**
+     * Method responsible for returning the Panel Tree Variability.
+     * @return Panel Tree Variability.
+     */
+    public PanelTreeVariability getPanelTreeVariability() {
+        return this.panelTreeVariability;
+    }
+    
+    /**
+     * Method responsible for returning the Scroll Panel Tree Product.
+     * @return Scroll Panel Tree Product.
+     */
+    public JScrollPane getScrollPanelTreeProduct() {
+        return this.scrollPanes.get("scrollPanelTreeProduct");
+    }
+    
+    /**
+     * Method responsible for returning the Panel Tree Product.
+     * @return Panel Tree Product.
+     */
+    public PanelTreeProduct getPanelTreeProduct() {
+        return this.panelTreeProduct;
     }
 }
