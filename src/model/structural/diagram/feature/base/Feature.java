@@ -14,6 +14,7 @@ import model.structural.base.Element;
  * @see    model.structural.base.Element
  */
 public class Feature extends Element {
+    private boolean abstract_;
     
     /**
      * Default constructor method of Class.
@@ -22,6 +23,7 @@ public class Feature extends Element {
         this.name      = "Feature";
         this.type      = "feature";
         this.mandatory = false;
+        this.abstract_ = false;
         this.size      = new Point(150, 50);
     }
     
@@ -31,7 +33,8 @@ public class Feature extends Element {
      */
     public Feature(org.w3c.dom.Element element) {
         super(element, true);
-        this.type = "feature";
+        this.abstract_ = element.getAttribute("abstract").equals("true");
+        this.type      = "feature";
     }
     
     @Override
@@ -64,6 +67,22 @@ public class Feature extends Element {
         this.setWidth(width > this.getWidth() ? width : this.getWidth());
     }
     
+    /**
+     * Method responsible for returning the Abstract Flag.
+     * @return Abstract Flag.
+     */
+    public boolean isAbstract() {
+        return this.abstract_;
+    }
+
+    /**
+     * Method responsible for setting the Abstract Flag.
+     * @param abstract_ Abstract Flag.
+     */
+    public void setAbstract(boolean abstract_) {
+        this.abstract_ = abstract_;
+    }
+    
     @Override
     public String getIcon() {
         return super.getFolder() + "feature/feature.png";
@@ -81,11 +100,28 @@ public class Feature extends Element {
                style.put(mxConstants.STYLE_EDITABLE, "1");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
-               style.put(mxConstants.STYLE_FONTSTYLE,   this.mandatory ? mxConstants.FONT_ITALIC : "0");
+               style.put(mxConstants.STYLE_FONTSTYLE,   this.abstract_ ? mxConstants.FONT_ITALIC : "0");
                style.put(mxConstants.STYLE_FILLCOLOR,   mxConstants.NONE);
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
                style.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_CENTER);
         return style;
+    }
+    
+    @Override
+    public String export() {
+        String export  = "    <"         + this.type;
+               export += " id=\""        + this.id           + "\"";
+               export += " name=\""      + this.name         + "\"";
+               export += " mandatory=\"" + this.mandatory    + "\"";
+               export += " abstract=\""  + this.abstract_    + "\"";
+               export += " x=\""         + this.getX()       + "\"";
+               export += " y=\""         + this.getY()       + "\"";
+               export += " globalX=\""   + this.getGlobalX() + "\"";
+               export += " globalY=\""   + this.getGlobalY() + "\"";
+               export += " height=\""    + this.getHeight()  + "\"";
+               export += " width=\""     + this.getWidth()   + "\"";
+               export += "/>\n";
+        return export;
     }
     
     @Override

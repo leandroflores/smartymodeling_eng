@@ -27,6 +27,7 @@ import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.base.product.Relationship;
+import model.structural.base.requirement.Requirement;
 import model.structural.base.traceability.Traceability;
 import model.structural.diagram.classes.base.TypeUML;
 import org.w3c.dom.Document;
@@ -99,18 +100,34 @@ public class ImportProject {
         this.root       = (Element) this.nodeList.item(0);
         this.project    = new Project(this.path, this.root);
         
-        this.importTypes();
-        this.importStereotypes();
-        this.importProfile();
-        this.importDiagrams();
-        this.importTraceabilities();
-        this.importLinks();
-        this.importProducts();
-        this.importMetrics();
-        this.importMeasures();
+            this.importRequirements();
+            this.importTypes();
+            this.importStereotypes();
+            this.importProfile();
+            this.importDiagrams();
+            this.importTraceabilities();
+            this.importLinks();
+            this.importProducts();
+            this.importMetrics();
+            this.importMeasures();
         
                this.project.updateStereotypes();
         return this.project;
+    }
+    
+    /**
+     * Method responsible for importing Project Requirements.
+     * throws XPathExpressionException XPath Exception.
+     */
+    private void importRequirements() throws XPathExpressionException {
+        this.expression = "/project/requirement";
+        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
+        for (int i = 0; i < this.nodeList.getLength(); i++) {
+            Element     current     = (Element) this.nodeList.item(i);
+            Requirement requirement = new Requirement(current);
+                        requirement.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
+            this.project.addRequirement(requirement);
+        }
     }
     
     /**

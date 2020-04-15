@@ -68,14 +68,6 @@ public final class PanelBaseElement extends Panel {
     }
     
     /**
-     * Method responsible for Hide the Mandatory Fields.
-     */
-    public void hideMandatory() {
-        this.getMandatoryLabel().setVisible(false);
-        this.getMandatoryCheckBox().setVisible(false);
-    }
-    
-    /**
      * Method responsible for returning the View Menu.
      * @return View Menu.
      */

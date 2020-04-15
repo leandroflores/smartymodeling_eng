@@ -395,7 +395,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      */
     private void newMetric() {
         if (this.viewMenu.getProject() != null)
-            new ViewNewMetric(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+            new ViewNewMetric(this.viewMenu).setVisible(true);
     }
     
     /**

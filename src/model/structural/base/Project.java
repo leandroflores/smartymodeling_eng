@@ -18,6 +18,7 @@ import model.structural.base.interfaces.Exportable;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
+import model.structural.base.requirement.Requirement;
 import model.structural.base.traceability.Traceability;
 import model.structural.diagram.classes.base.TypeUML;
 import model.structural.base.variability.Variability;
@@ -41,6 +42,7 @@ public class Project implements Exportable {
     private String  path;
     private String  version;
     private Profile profile;
+    private HashMap requirements;
     private HashMap diagrams;
     public  HashMap types;
     public  HashMap variabilities;
@@ -82,6 +84,7 @@ public class Project implements Exportable {
      * Method responsible for initializing HashMaps.
      */
     private void init() {
+        this.requirements   = new LinkedHashMap();
         this.diagrams       = new LinkedHashMap();
         this.types          = new LinkedHashMap();
         this.variabilities  = new LinkedHashMap();
@@ -238,6 +241,63 @@ public class Project implements Exportable {
                 associations.add((Association) object);
         }
         return associations;
+    }
+    
+    /**
+     * Method responsible for returning the Next Requirement Id.
+     * @return Next Requirement Id.
+     */
+    public String nextRequirementId() {
+        Integer index  = this.requirements.size() + 1;
+        String  nextId = "REQUIREMENT#" + index;
+        while (this.requirements.get(nextId) != null)
+                nextId = "REQUIREMENT#" + ++index;
+        return  nextId;
+    }
+    
+    /**
+     * Method responsible for adding a Requirement.
+     * @param requirement Requirement.
+     */
+    public void addRequirement(Requirement requirement) {
+        requirement.setId(this.nextRequirementId());
+        this.requirements.put(requirement.getId(), requirement);
+    }
+    
+    /**
+     * Method responsible for returning a Requirement by Id.
+     * @param  id Requirement Id.
+     * @return Requirement found.
+     */
+    public Requirement getRequirement(String id) {
+        return (Requirement) this.requirements.get(id);
+    }
+    
+    /**
+     * Method responsible for removing a Requirement.
+     * @param requirement Requirement.
+     */
+    public void removeRequirement(Requirement requirement) {
+        this.requirements.remove(requirement.getId());
+    }
+    
+    /**
+     * Method responsible for returning Requirements List.
+     * @return Requirements List.
+     */
+    public List<Requirement> getRequirementsList() {
+        return new ArrayList<>(this.requirements.values());
+    }
+    
+    /**
+     * Method responsible for exporting the Requirements.
+     * @return Requirements.
+     */
+    private String exportRequirements() {
+        String export  = "";
+        for (Requirement requirement : this.getRequirementsList())
+               export += requirement.export();
+        return export;
     }
     
     /**
@@ -1420,6 +1480,7 @@ public class Project implements Exportable {
     @Override
     public String export() {
         String export  = "<project id=\"" + this.id + "\" name=\"" + this.name + "\" version=\"" + this.version + "\">\n";
+               export += this.exportRequirements();
                export += this.exportTypes();
                export += this.exportStereotypes();
                export += this.profile.export();

@@ -12,7 +12,7 @@ import view.new_.ViewNew;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>ViewEditTraceability</b>.</p>
+ * <p>Class of View <b>ViewNewTraceability</b>.</p>
  * <p>Class responsible for defining the <b>New Traceability View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  22/07/2019

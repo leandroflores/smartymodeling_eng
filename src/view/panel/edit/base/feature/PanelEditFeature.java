@@ -5,7 +5,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.feature.base.Feature;
-import view.edit.panel.base.PanelBaseElement;
+import view.edit.panel.base.feature.PanelBaseFeature;
 import view.panel.edit.base.PanelEditElement;
 import view.structural.ViewMenu;
 
@@ -20,7 +20,7 @@ import view.structural.ViewMenu;
 public final class PanelEditFeature extends PanelEditElement {
     private final FeatureDiagram diagram;
     private final Feature feature;
-    private PanelBaseElement panelBaseElement;
+    private PanelBaseFeature panelBaseFeature;
     
     /**
      * Default constructor method of Class.
@@ -50,11 +50,10 @@ public final class PanelEditFeature extends PanelEditElement {
      * Method responsible for adding the Panel Base Element.
      */
     private void addPanelBaseElement() {
-        this.panelBaseElement = new PanelBaseElement(this.viewMenu, this.diagram, this.feature);
-        this.panelBaseElement.getMandatoryLabel().setText("Abstract: ");
-        this.createScrollPane("scrollPanelBaseElement",  this.panelBaseElement);
-        this.getScrollPanelBaseElement().setViewportView(this.panelBaseElement);
-        this.tabbedPane.add("Feature", this.getScrollPanelBaseElement());
+        this.panelBaseFeature = new PanelBaseFeature(this.viewMenu, this.diagram, this.feature);
+        this.createScrollPane("scrollPanelBaseFeature",  this.panelBaseFeature);
+        this.getScrollPanelBaseFeature().setViewportView(this.panelBaseFeature);
+        this.tabbedPane.add("Feature", this.getScrollPanelBaseFeature());
     }
     
     /**
@@ -74,18 +73,18 @@ public final class PanelEditFeature extends PanelEditElement {
     }
     
     /**
-     * Method responsible for returning the Scroll Panel Base Element.
-     * @return Scroll Panel Base Element.
+     * Method responsible for returning the Scroll Panel Base Feature.
+     * @return Scroll Panel Base Feature.
      */
-    public JScrollPane getScrollPanelBaseElement() {
-        return this.scrollPanes.get("scrollPanelBaseElement");
+    public JScrollPane getScrollPanelBaseFeature() {
+        return this.scrollPanes.get("scrollPanelBaseFeature");
     }
 
     /**
-     * Method responsible for returning the Panel Base Element.
-     * @return Panel Base Element.
+     * Method responsible for returning the Panel Base Feature.
+     * @return Panel Base Feature.
      */
-    public PanelBaseElement getPanelBaseElement() {
-        return this.panelBaseElement;
+    public PanelBaseFeature getPanelBaseFeature() {
+        return this.panelBaseFeature;
     }
 }

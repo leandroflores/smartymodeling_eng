@@ -13,7 +13,7 @@ import view.new_.ViewNew;
 import view.panel.modeling.PanelModeling;
 
 /**
- * <p>Class of View <b>ViewEditVariability</b>.</p>
+ * <p>Class of View <b>ViewNewVariability</b>.</p>
  * <p>Class responsible for defining the <b>New Variability View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  04/07/2019

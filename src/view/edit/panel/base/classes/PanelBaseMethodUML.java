@@ -26,7 +26,7 @@ public final class PanelBaseMethodUML extends Panel {
     private final MethodUML methodUML;
     
     /**
-     * Default constructor methodUML of Class.
+     * Default constructor method of Class.
      * @param viewMenu View Menu.
      * @param diagram Class Diagram.
      * @param method Method UML.

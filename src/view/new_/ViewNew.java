@@ -2,6 +2,7 @@ package view.new_;
 
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
+import model.structural.base.Project;
 import view.ViewModal;
 import view.panel.modeling.PanelModeling;
 import view.structural.ViewMenu;
@@ -16,6 +17,7 @@ import view.structural.ViewMenu;
  */
 public abstract class ViewNew extends ViewModal {
     protected final ViewMenu view;
+    protected final Project  project;
     protected final PanelModeling panel;
     protected JTabbedPane tabbedPane;
     
@@ -25,8 +27,9 @@ public abstract class ViewNew extends ViewModal {
      */
     public ViewNew(ViewMenu view) {
         super(view);
-        this.view  = view;
-        this.panel = null;
+        this.view    = view;
+        this.project = view.getProject();
+        this.panel   = null;
     }
     
     /**
@@ -35,8 +38,9 @@ public abstract class ViewNew extends ViewModal {
      */
     public ViewNew(PanelModeling panel) {
         super(panel.getViewMenu());
-        this.view  = panel.getViewMenu();
-        this.panel = panel;
+        this.view    = panel.getViewMenu();
+        this.project = panel.getViewMenu().getProject();
+        this.panel   = panel;
     }
     
     @Override
@@ -51,6 +55,14 @@ public abstract class ViewNew extends ViewModal {
      */
     public ViewMenu getViewMenu() {
         return this.view;
+    }
+    
+    /**
+     * Method responsible for returning the Project.
+     * @return Project.
+     */
+    public Project getProject() {
+        return this.project;
     }
     
     /**

@@ -126,11 +126,9 @@ public final class PanelTreeVariability extends PanelTree {
         if (this.getNode(element) != null) {
             DefaultMutableTreeNode node   = this.getNode(element);
             DefaultMutableTreeNode parent = this.getParentNode(node);
-            if (parent != null && parent.getUserObject() != null) {
-                if (parent.getUserObject() instanceof Diagram) {
-                    this.updateVariationPoints((Diagram) parent.getUserObject(), element);
-                    this.updateVariants((Diagram) parent.getUserObject(), element);
-                }
+            if (parent != null && parent.getUserObject() != null && parent.getUserObject() instanceof Diagram) {
+                this.updateVariationPoints((Diagram) parent.getUserObject(), element);
+                this.updateVariants((Diagram) parent.getUserObject(), element);
             }
         }
     }

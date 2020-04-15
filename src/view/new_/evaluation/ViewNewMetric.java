@@ -20,8 +20,7 @@ import view.structural.ViewMenu;
  * @see    model.structural.base.evaluation.Metric
  * @see    view.new_.ViewNew
  */
-public final class ViewNewMetric extends ViewNew { 
-    private final Project project;
+public final class ViewNewMetric extends ViewNew {
     private final Metric  metric;
     private PanelBaseMetric panelBaseMetric;
     private PanelBaseOperation panelBaseOperation;
@@ -29,11 +28,9 @@ public final class ViewNewMetric extends ViewNew {
     /**
      * Default constructor method of Class.
      * @param view View Menu.
-     * @param project Project.
      */
-    public ViewNewMetric(ViewMenu view, Project project) {
+    public ViewNewMetric(ViewMenu view) {
         super(view);
-        this.project    = project;
         this.metric     = new Metric();
         this.controller = new ControllerViewNewMetric(this);
         this.title      = "New Metric";
@@ -79,14 +76,6 @@ public final class ViewNewMetric extends ViewNew {
         this.createScrollPane("scrollPanelOperation",  this.panelBaseOperation);
         this.getScrollPanelOperation().setViewportView(this.panelBaseOperation);
         this.tabbedPane.add("Operation", this.getScrollPanelOperation());
-    }
-    
-    /**
-     * Method responsible for returning the Project.
-     * @return Project.
-     */
-    public Project getProject() {
-        return this.project;
     }
     
     /**
