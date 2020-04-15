@@ -74,6 +74,13 @@ public abstract class PanelTree extends Panel {
     }
     
     /**
+     * Method responsible for updating the Tree.
+     */
+    public void updateTree() {
+        this.getTreeModel().reload(this.createNode(this.project));
+    }
+    
+    /**
      * Method responsible for returning a New Project Node.
      * @param  project Project.
      * @return New Project Node.
@@ -81,10 +88,11 @@ public abstract class PanelTree extends Panel {
     protected abstract DefaultMutableTreeNode createNode(Project project);
     
     /**
-     * Method responsible for updating the Tree.
+     * Method responsible for updating the Node Project.
+     * @param project Project.
      */
-    public void updateTree() {
-        this.getTreeModel().reload(this.getNode(this.project));
+    public void updateNode(Project project) {
+        this.getTreeModel().reload(this.getNode(project));
     }
     
     /**
@@ -92,14 +100,12 @@ public abstract class PanelTree extends Panel {
      * @param diagram Diagram. 
      */
     public void updateNode(Diagram diagram) {
-        DefaultMutableTreeNode node = this.getNode(diagram);
-        if (node != null) {
-            boolean expanded = this.tree.isExpanded(new TreePath(node.getPath()));
-            node = this.getNode(diagram);
-            this.getTreeModel().reload(node);
-            if (expanded)
-                this.tree.expandPath(new TreePath(node.getPath()));
-        }
+        if (this.getNode(diagram) != null)
+            this.getTreeModel().reload(this.getNode(diagram));
+//            boolean expanded = this.isExpanded(node);
+//            if (expanded)
+//                this.tree.expandPath(new TreePath(node.getPath()));
+//        }
     }
     
     /**
@@ -129,8 +135,8 @@ public abstract class PanelTree extends Panel {
      * @param element Element. 
      */
     public void updateNode(Element element) {
-        if (this.createNode(element) != null)
-            this.getTreeModel().reload(this.createNode(element));
+        if (this.getNode(element) != null)
+            this.getTreeModel().reload(this.getNode(element));
     }
     
     /**
@@ -149,10 +155,28 @@ public abstract class PanelTree extends Panel {
      * @param  node Node.
      * @return Parent Node.
      */
-    protected DefaultMutableTreeNode getParent(DefaultMutableTreeNode node) {
+    protected DefaultMutableTreeNode getParentNode(DefaultMutableTreeNode node) {
         if (node.getParent() != null)
             return (DefaultMutableTreeNode) node.getParent();
         return null;
+    }
+    
+    /**
+     * Method responsible for returning if the Node is Expanded.
+     * @param  node Node.
+     * @return Node is Expanded.
+     */
+    protected boolean isExpanded(DefaultMutableTreeNode node) {
+        return this.tree.isExpanded(new TreePath(node.getPath()));
+    }
+    
+    /**
+     * Method responsible for adding a Node Object.
+     * @param object Object.
+     * @param node Object Node.
+     */
+    public void addNode(Object object, DefaultMutableTreeNode node) {
+        this.nodes.put(object, node);
     }
     
     /**
@@ -169,15 +193,6 @@ public abstract class PanelTree extends Panel {
      */
     public Project getProject() {
         return this.project;
-    }
-    
-    /**
-     * Method responsible for adding a Node Object.
-     * @param object Object.
-     * @param node Object Node.
-     */
-    public void addNode(Object object, DefaultMutableTreeNode node) {
-        this.nodes.put(object, node);
     }
     
     /**

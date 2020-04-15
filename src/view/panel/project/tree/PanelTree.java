@@ -10,6 +10,7 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import view.Panel;
 import view.panel.tree.PanelTreeDiagram;
+import view.panel.tree.PanelTreeEvaluation;
 import view.panel.tree.PanelTreeFeature;
 import view.panel.tree.PanelTreeProduct;
 import view.panel.tree.PanelTreeVariability;
@@ -32,6 +33,7 @@ public final class PanelTree extends Panel {
     private PanelTreeFeature panelTreeFeature;
     private PanelTreeDiagram panelTreeDiagram;
     private PanelTreeProduct panelTreeProduct;
+    private PanelTreeEvaluation  panelTreeEvaluation;
     private PanelTreeVariability panelTreeVariability;
     
     
@@ -70,6 +72,7 @@ public final class PanelTree extends Panel {
             this.addPanelTreeDiagram();
             this.addPanelTreeVariability();
             this.addPanelTreeProduct();
+            this.addPanelTreeEvaluation();
         }
     }
     
@@ -114,13 +117,25 @@ public final class PanelTree extends Panel {
     }
     
     /**
-     * Method responsible for updating the Project Node.
+     * Method responsible for adding the Panel Tree Evaluation.
      */
-    public void updateProjectNode() {
-//        if (this.panelTreeFeature != null)
-//            this.panelTreeFeature.updateProjectNode();
-//        if (this.panelTreeDiagram  != null)
-//            this.panelTreeDiagram.updateProjectNode();
+    protected void addPanelTreeEvaluation() {
+        this.panelTreeEvaluation = new PanelTreeEvaluation(this.viewMenu);
+        this.createScrollPane("scrollPanelTreeEvaluation",  this.panelTreeEvaluation);
+        this.getScrollPanelTreeEvaluation().setViewportView(this.panelTreeEvaluation);
+        this.tabbedPane.add("Evaluation", this.getScrollPanelTreeEvaluation());
+    }
+    
+    /**
+     * Method responsible for updating the Project Node.
+     * @param project Project.
+     */
+    public void updateNode(Project project) {
+        this.panelTreeFeature.updateNode(project);
+        this.panelTreeDiagram.updateNode(project);
+        this.panelTreeVariability.updateNode(project);
+        this.panelTreeProduct.updateNode(project);
+        this.panelTreeEvaluation.updateNode(project);
     }
     
     /**
@@ -128,10 +143,12 @@ public final class PanelTree extends Panel {
      * @param diagram Diagram.
      */
     public void updateNode(Diagram diagram) {
-//        if (this.panelTreeFeature != null)
-//            this.panelTreeFeature.updateNode(diagram);
-//        if (this.panelTreeDiagram  != null)
-//            this.panelTreeDiagram.updateNode(diagram);
+        if (diagram.getType().equalsIgnoreCase("Feature")) {
+            this.panelTreeFeature.updateNode(diagram);
+        }else {
+            this.panelTreeDiagram.updateNode(diagram);
+            this.panelTreeVariability.updateNode(diagram);
+        }
     }
     
     /**
@@ -139,10 +156,13 @@ public final class PanelTree extends Panel {
      * @param element Element.
      */
     public void updateNode(Element element) {
-//        if (this.panelTreeFeature != null)
-//            this.panelTreeFeature.updateNode(element);
-//        if (this.panelTreeDiagram  != null)
-//            this.panelTreeDiagram.updateNode(element);
+        this.panelTreeFeature.updateNode(element);
+        this.panelTreeDiagram.updateNode(element);
+        this.panelTreeVariability.updateNode(element);
+        this.panelTreeProduct.updateNode(element);
+        
+        this.panelTreeDiagram.updateVariability(element);
+        this.panelTreeVariability.updateVariability(element);
     }
 
     /**
@@ -215,5 +235,21 @@ public final class PanelTree extends Panel {
      */
     public PanelTreeProduct getPanelTreeProduct() {
         return this.panelTreeProduct;
+    }
+    
+    /**
+     * Method responsible for returning the Scroll Panel Tree Evaluation.
+     * @return Scroll Panel Tree Evaluation.
+     */
+    public JScrollPane getScrollPanelTreeEvaluation() {
+        return this.scrollPanes.get("scrollPanelTreeEvaluation");
+    }
+    
+    /**
+     * Method responsible for returning the Panel Tree Evaluation.
+     * @return Panel Tree Evaluation.
+     */
+    public PanelTreeEvaluation getPanelTreeEvaluation() {
+        return this.panelTreeEvaluation;
     }
 }

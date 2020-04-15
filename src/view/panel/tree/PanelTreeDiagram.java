@@ -104,7 +104,6 @@ public final class PanelTreeDiagram extends PanelTree {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(package_);
             this.addEntities(package_, node);
             this.addPackages(package_, node);
-            super.addNode(package_, node);
         return node;
     }
     
@@ -206,5 +205,54 @@ public final class PanelTreeDiagram extends PanelTree {
     private void addVariants(Variability variability, DefaultMutableTreeNode node) {
         for (Element variant : variability.getVariants())
             node.add(new DefaultMutableTreeNode(variant));
+    }
+    
+    /**
+     * Method responsible for updating the Variability Node.
+     * @param variability 
+     */
+    public void updateNode(Variability variability) {
+        if (this.getNode(variability) != null) {
+            DefaultMutableTreeNode node = this.getNode(variability);
+                                   node.removeAllChildren();
+            this.addVariationPoint(variability, node);
+            this.addVariants(variability, node);
+            this.getTreeModel().reload(node);
+        }
+    }
+    
+    /**
+     * Method responsible for updating the Variability by Element Node.
+     * @param element Element.
+     */
+    public void updateVariability(Element element) {
+        DefaultMutableTreeNode node   = this.getNode(element);
+        DefaultMutableTreeNode parent = this.getParentNode(node);
+        if (parent != null && parent.getUserObject() != null) {
+            if (parent.getUserObject() instanceof Diagram) {
+                this.updateVariationPoints((Diagram) parent.getUserObject(), element);
+                this.updateVariants((Diagram) parent.getUserObject(), element);
+            }
+        }
+    }
+    
+    /**
+     * Method responsible for updating the Variation Points Nodes.
+     * @param diagram Diagram.
+     * @param element Element.
+     */
+    private void updateVariationPoints(Diagram diagram, Element element) {
+        for (Variability variability : diagram.getVariationPoints(element))
+            this.updateNode(variability);
+    }
+    
+    /**
+     * Method responsible for updating the Variants Nodes.
+     * @param diagram Diagram.
+     * @param element Element.
+     */
+    private void updateVariants(Diagram diagram, Element element) {
+        for (Variability variability : diagram.filterVariants(element, ""))
+            this.updateNode(variability);
     }
 }

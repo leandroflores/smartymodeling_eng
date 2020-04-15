@@ -32,7 +32,7 @@ public class ControllerPanelBaseProject extends ControllerPanel {
     
     @Override
     public void keyPressed(KeyEvent event) {
-        this.update();
+//        this.update();
     }
     
     @Override
@@ -55,9 +55,9 @@ public class ControllerPanelBaseProject extends ControllerPanel {
     private void update() {
         this.panelBaseProject.getProject().setName(this.panelBaseProject.getNameTextField().getText().trim());
         this.panelBaseProject.getProject().setVersion(this.panelBaseProject.getVersionTextField().getText().trim());
-        this.panelBaseProject.getViewMenu().getPanelProject().getPanelTree().updateProjectNode();
-        this.panelBaseProject.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseProject.getViewMenu().getPanelModeling().updateUI();
+        this.panelBaseProject.getViewMenu().getPanelProject().getPanelTree().updateNode(this.panelBaseProject.getProject());
+//        this.panelBaseProject.getViewMenu().getPanelProject().getPanelTree().updateUI();
+//        this.panelBaseProject.getViewMenu().getPanelModeling().updateUI();
         this.panelBaseProject.getViewMenu().setSave(false);
     }
 }
