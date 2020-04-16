@@ -43,10 +43,11 @@ public abstract class Panel extends JPanel {
     private HashMap comboBoxes;
     private HashMap fileChoosers;
     private HashMap lists;
+    private HashMap panels;
     private HashMap scrollPanes;
     private HashMap tables;
-    private HashMap tableModels;
     private HashMap tableColums;
+    private HashMap tableModels;
     private HashMap textAreas;
     private HashMap textFields;
     
@@ -64,16 +65,16 @@ public abstract class Panel extends JPanel {
      */
     private void init() {
         this.buttons      = new HashMap<>();
-        this.lists        = new HashMap<>();
-        this.comboBoxes   = new HashMap<>();
         this.checkBoxes   = new HashMap<>();
+        this.comboBoxes   = new HashMap<>();
         this.fileChoosers = new HashMap<>();
+        this.lists        = new HashMap<>();
+        this.panels       = new HashMap<>();
         this.scrollPanes  = new HashMap<>();
         this.tables       = new HashMap<>();
-        this.tableModels  = new HashMap<>();
         this.tableColums  = new HashMap<>();
+        this.tableModels  = new HashMap<>();
         this.textAreas    = new HashMap<>();
-        
         this.textFields   = new HashMap<>();
     }
     
@@ -340,6 +341,32 @@ public abstract class Panel extends JPanel {
     }
     
     /**
+     * Method responsible for adding a Panel.
+     * @param id Panel Id.
+     * @param panel Panel.
+     */
+    protected void addPanel(String id, Panel panel) {
+        this.panels.put(id, panel);
+    }
+    
+    /**
+     * Method responsible for returning a Panel by Id.
+     * @param  id Panel Id.
+     * @return Panel found.
+     */
+    protected Panel getPanel(String id) {
+        return (Panel) this.panels.get(id);
+    }
+    
+    /**
+     * Method responsible for removing a Panel.
+     * @param id Panel Id.
+     */
+    protected void removePanel(String id) {
+        this.panels.remove(id);
+    }
+    
+    /**
      * Method responsible for returning a New Scroll Pane.
      * @param  id Scroll Pane Id.
      * @return New Scroll Pane.
@@ -594,17 +621,17 @@ public abstract class Panel extends JPanel {
     }
     
     /**
-     * Method responsible for returning the Start Constraint.
-     * @return Start Constraint.
+     * Method responsible for returning the New Start Constraint.
+     * @return New Start Constraint.
      */
-    protected GridBagConstraints getStartConstraint() {
+    protected GridBagConstraints createStartConstraint() {
         return this.setStartConstraint(new GridBagConstraints());
     }
     
     /**
      * Method responsible for setting the Start Constraint.
      * @param  constraint Grid Bag Constraint.
-     * @return New Start Constraint.
+     * @return Start Constraint.
      */
     protected GridBagConstraints setStartConstraint(GridBagConstraints constraint) {
                constraint.anchor  = GridBagConstraints.PAGE_START;
@@ -617,17 +644,17 @@ public abstract class Panel extends JPanel {
     }
     
     /**
-     * Method responsible for returning the Body Constraint.
-     * @return Body Constraint.
+     * Method responsible for returning the New Body Constraint.
+     * @return New Body Constraint.
      */
-    protected GridBagConstraints getBodyConstraint() {
+    protected GridBagConstraints createBodyConstraint() {
         return this.setBodyConstraint(new GridBagConstraints());
     }
     
     /**
      * Method responsible for setting the Body Constraint.
      * @param  constraint Grid Bag Constraint.
-     * @return New Body Constraint.
+     * @return Body Constraint.
      */
     protected GridBagConstraints setBodyConstraint(GridBagConstraints constraint) {
                constraint.anchor     = GridBagConstraints.FIRST_LINE_START;

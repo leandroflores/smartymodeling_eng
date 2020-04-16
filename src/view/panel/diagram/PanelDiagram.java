@@ -122,8 +122,8 @@ public abstract class PanelDiagram extends PanelGraph {
         this.createScrollPane("scrollPaneDiagram");
         this.getScrollPaneDiagram().setViewportView(this.component);
         this.getScrollPaneDiagram().setPreferredSize(new Dimension(100, 100));
-        this.add(this.getPanelOperation(), this.getStartConstraint());
-        this.add(this.getScrollPaneDiagram(), this.getBodyConstraint());
+        this.add(this.getPanelOperation(), this.createStartConstraint());
+        this.add(this.getScrollPaneDiagram(), this.createBodyConstraint());
     }
     
     @Override
