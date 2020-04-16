@@ -95,7 +95,7 @@ public final class PanelBaseFeature extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -103,6 +103,6 @@ public final class PanelBaseFeature extends Panel {
      * @return Abstract Check Box.
      */
     public JCheckBox getAbstractCheckBox() {
-        return this.checkBoxes.get("abstractCheckBox");
+        return this.getCheckBox("abstractCheckBox");
     }
 }

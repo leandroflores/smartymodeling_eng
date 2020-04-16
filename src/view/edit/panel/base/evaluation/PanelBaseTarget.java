@@ -117,7 +117,7 @@ public final class PanelBaseTarget extends Panel {
      * @return Target Combo Box.
      */
     public JComboBox getTargetComboBox() {
-        return this.comboBoxes.get("targetComboBox");
+        return this.getComboBox("targetComboBox");
     }
     
     /**
@@ -125,7 +125,7 @@ public final class PanelBaseTarget extends Panel {
      * @return Elements Text Field.
      */
     public JTextField getElementsTextField() {
-        return this.textFields.get("elementsTextField");
+        return this.getTextField("elementsTextField");
     }
     
     /**
@@ -133,7 +133,7 @@ public final class PanelBaseTarget extends Panel {
      * @return Associations Text Field.
      */
     public JTextField getAssociationsTextField() {
-        return this.textFields.get("associationsTextField");
+        return this.getTextField("associationsTextField");
     }
     
     /**
@@ -141,6 +141,6 @@ public final class PanelBaseTarget extends Panel {
      * @return Variabilities Text Field.
      */
     public JTextField getVariabilitiesTextField() {
-        return this.textFields.get("variabilitiesTextField");
+        return this.getTextField("variabilitiesTextField");
     }
 }

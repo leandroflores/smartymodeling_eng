@@ -47,18 +47,18 @@ public abstract class PanelEvaluation extends Panel {
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Target*: "), this.getConstraints(1, 1, 0, 0));
-        this.add(this.createComboBox("targetComboBox", this.getTargets(), 15), this.getConstraints(5, 1, 1, 0));
+        this.add(this.createLabel("Target*: "), this.createConstraints(1, 1, 0, 0));
+        this.add(this.createComboBox("targetComboBox", this.getTargets(), 15), this.createConstraints(5, 1, 1, 0));
         
-        this.add(this.createLabel("Operation*: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createTextField("operationTextField", "", 15), this.getConstraints(4, 1, 1, 1));
-        this.add(this.createButton("applyButton", "", "apply.png"), this.getConstraints(1, 1, 5, 1));
+        this.add(this.createLabel("Operation*: "), this.createConstraints(1, 1, 0, 1));
+        this.add(this.createTextField("operationTextField", "", 15), this.createConstraints(4, 1, 1, 1));
+        this.add(this.createButton("applyButton", "", "apply.png"), this.createConstraints(1, 1, 5, 1));
         
-        this.add(this.createLabel("Value: "), this.getConstraints(1, 1, 0, 2));
-        this.add(this.createTextFieldNoEditable("valueTextField", "", 15), this.getConstraints(5, 1, 1, 2));
+        this.add(this.createLabel("Value: "), this.createConstraints(1, 1, 0, 2));
+        this.add(this.createTextFieldNoEditable("valueTextField", "", 15), this.createConstraints(5, 1, 1, 2));
         
         this.createList("detailsList");
-        this.add(this.getDetailsScrollPane(), this.getConstraints(6, 1, 0, 3));
+        this.add(this.getDetailsScrollPane(), this.createConstraints(6, 1, 0, 3));
     }
     
     /**
@@ -120,7 +120,7 @@ public abstract class PanelEvaluation extends Panel {
      * @return Target Combo Box.
      */
     public JComboBox getTargetComboBox() {
-        return this.comboBoxes.get("targetComboBox");
+        return this.getComboBox("targetComboBox");
     }
     
     /**
@@ -128,7 +128,7 @@ public abstract class PanelEvaluation extends Panel {
      * @return Operation Text Field.
      */
     public JTextField getOperationTextField() {
-        return this.textFields.get("operationTextField");
+        return this.getTextField("operationTextField");
     }
     
     /**
@@ -136,7 +136,7 @@ public abstract class PanelEvaluation extends Panel {
      * @return Apply Button.
      */
     public JButton getApplyButton() {
-        return this.buttons.get("applyButton");
+        return this.getButton("applyButton");
     }
     
     /**
@@ -144,7 +144,7 @@ public abstract class PanelEvaluation extends Panel {
      * @return Value Text Field.
      */
     public JTextField getValueTextField() {
-        return this.textFields.get("valueTextField");
+        return this.getTextField("valueTextField");
     }
     
     /**
@@ -152,7 +152,7 @@ public abstract class PanelEvaluation extends Panel {
      * @return Details List.
      */
     public JList getDetailsList() {
-        return this.lists.get("detailsList");
+        return this.getList("detailsList");
     }
     
     /**
@@ -160,6 +160,6 @@ public abstract class PanelEvaluation extends Panel {
      * @return Details Scroll Pane.
      */
     public JScrollPane getDetailsScrollPane() {
-        return this.scrollPanes.get("detailsList");
+        return this.getScrollPane("detailsList");
     }
 }

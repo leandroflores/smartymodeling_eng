@@ -157,7 +157,7 @@ public final class PanelBaseMessageUML extends Panel {
      * @return Source Text Field.
      */
     public JTextField getSourceTextField() {
-        return this.textFields.get("sourceTextField");
+        return this.getTextField("sourceTextField");
     }
     
     /**
@@ -165,7 +165,7 @@ public final class PanelBaseMessageUML extends Panel {
      * @return Target Text Field.
      */
     public JTextField getTargetTextField() {
-        return this.textFields.get("targetTextField");
+        return this.getTextField("targetTextField");
     }
     
     /**
@@ -173,7 +173,7 @@ public final class PanelBaseMessageUML extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -181,6 +181,6 @@ public final class PanelBaseMessageUML extends Panel {
      * @return Method Combo Box.
      */
     public JComboBox getMethodComboBox() {
-        return this.comboBoxes.get("methodComboBox");
+        return this.getComboBox("methodComboBox");
     }
 }

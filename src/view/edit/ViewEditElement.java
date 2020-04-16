@@ -124,7 +124,7 @@ public final class ViewEditElement extends ViewEdit {
      * @return Scroll Panel Base Element.
      */
     public JScrollPane getScrollPanelBaseElement() {
-        return this.scrollPanes.get("scrollPanelBaseElement");
+        return this.getScrollPane("scrollPanelBaseElement");
     }
     
     /**
@@ -140,7 +140,7 @@ public final class ViewEditElement extends ViewEdit {
      * @return Scroll Panel Stereotype.
      */
     public JScrollPane getScrollPanelStereotype() {
-        return this.scrollPanes.get("scrollPanelStereotype");
+        return this.getScrollPane("scrollPanelStereotype");
     }
     
     /**
@@ -156,7 +156,7 @@ public final class ViewEditElement extends ViewEdit {
      * @return Scroll Panel Dependency.
      */
     public JScrollPane getScrollPanelDependency() {
-        return this.scrollPanes.get("scrollPanelDependency");
+        return this.getScrollPane("scrollPanelDependency");
     }
     
     /**

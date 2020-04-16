@@ -4,9 +4,9 @@ import java.awt.Font;
 
 /**
  * <p>Class of View <b>ViewStyle</b>.</p> 
- * <p>Class responsible for defining the <b>Components Style</b> for the <b>Views</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Properties Style</b> for the <b>Views</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  18/05/2019
+ * @since  2019-05-18
  * @see    java.awt.Font
  */
 public class ViewStyle {

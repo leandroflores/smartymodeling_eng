@@ -77,8 +77,8 @@ public final class PanelBaseProfile extends Panel {
         this.getVarPointTextField().setText(this.profile.getVariationPoint().getName());
         this.getInclusiveTextField().setText(this.profile.getInclusive().getName());
         this.getExclusiveTextField().setText(this.profile.getExclusive().getName());
-        this.getRequiresTextField().setText(this.profile.getRequires().getName());
-        this.getMutexTextField().setText(this.profile.getMutex().getName());
+//        this.getRequiresTextField().setText(this.profile.getRequires().getName());
+//        this.getMutexTextField().setText(this.profile.getMutex().getName());
     }
     
     /**
@@ -102,7 +102,7 @@ public final class PanelBaseProfile extends Panel {
      * @return Mandatory Text Field.
      */
     public JTextField getMandatoryTextField() {
-        return this.textFields.get("mandatoryTextField");
+        return this.getTextField("mandatoryTextField");
     }
     
     /**
@@ -110,7 +110,7 @@ public final class PanelBaseProfile extends Panel {
      * @return Optional Text Field.
      */
     public JTextField getOptionalTextField() {
-        return this.textFields.get("optionalTextField");
+        return this.getTextField("optionalTextField");
     }
     
     /**
@@ -118,7 +118,7 @@ public final class PanelBaseProfile extends Panel {
      * @return Variation Point Text Field.
      */
     public JTextField getVarPointTextField() {
-        return this.textFields.get("varPointTextField");
+        return this.getTextField("varPointTextField");
     }
     
     /**
@@ -126,7 +126,7 @@ public final class PanelBaseProfile extends Panel {
      * @return Inclusive Text Field.
      */
     public JTextField getInclusiveTextField() {
-        return this.textFields.get("inclusiveTextField");
+        return this.getTextField("inclusiveTextField");
     }
     
     /**
@@ -134,7 +134,7 @@ public final class PanelBaseProfile extends Panel {
      * @return Exclusive Text Field.
      */
     public JTextField getExclusiveTextField() {
-        return this.textFields.get("exclusiveTextField");
+        return this.getTextField("exclusiveTextField");
     }
     
     /**
@@ -142,7 +142,7 @@ public final class PanelBaseProfile extends Panel {
      * @return Requires Text Field.
      */
     public JTextField getRequiresTextField() {
-        return this.textFields.get("requiresTextField");
+        return this.getTextField("requiresTextField");
     }
     
     /**
@@ -150,6 +150,6 @@ public final class PanelBaseProfile extends Panel {
      * @return Mutex Text Field.
      */
     public JTextField getMutexTextField() {
-        return this.textFields.get("mutexTextField");
+        return this.getTextField("mutexTextField");
     }
 }

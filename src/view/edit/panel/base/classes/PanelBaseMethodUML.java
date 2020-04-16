@@ -118,7 +118,7 @@ public final class PanelBaseMethodUML extends Panel {
      * @return Visibility Combo Box.
      */
     public JComboBox getVisibilityComboBox() {
-        return this.comboBoxes.get("visibilityComboBox");
+        return this.getComboBox("visibilityComboBox");
     }
     
     /**
@@ -126,7 +126,7 @@ public final class PanelBaseMethodUML extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -134,7 +134,7 @@ public final class PanelBaseMethodUML extends Panel {
      * @return Constructor Check Box.
      */
     public JCheckBox getConstructorCheckBox() {
-        return this.checkBoxes.get("constructorCheckBox");
+        return this.getCheckBox("constructorCheckBox");
     }
     
     /**
@@ -142,7 +142,7 @@ public final class PanelBaseMethodUML extends Panel {
      * @return Return Combo Box.
      */
     public JComboBox getReturnComboBox() {
-        return this.comboBoxes.get("returnComboBox");
+        return this.getComboBox("returnComboBox");
     }
     
     /**
@@ -150,7 +150,7 @@ public final class PanelBaseMethodUML extends Panel {
      * @return Abstract Check Box.
      */
     public JCheckBox getAbstractCheckBox() {
-        return this.checkBoxes.get("abstractCheckBox");
+        return this.getCheckBox("abstractCheckBox");
     }
     
     /**
@@ -158,7 +158,7 @@ public final class PanelBaseMethodUML extends Panel {
      * @return Static Check Box.
      */
     public JCheckBox getStaticCheckBox() {
-        return this.checkBoxes.get("staticCheckBox");
+        return this.getCheckBox("staticCheckBox");
     }
     
     /**
@@ -166,6 +166,6 @@ public final class PanelBaseMethodUML extends Panel {
      * @return Final Check Box.
      */
     public JCheckBox getFinalCheckBox() {
-        return this.checkBoxes.get("finalCheckBox");
+        return this.getCheckBox("finalCheckBox");
     }
 }

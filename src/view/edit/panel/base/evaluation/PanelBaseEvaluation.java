@@ -59,17 +59,17 @@ public final class PanelBaseEvaluation extends Panel {
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Operation*: "), this.getConstraints(1, 1, 0, 0));
-        this.add(this.createTextFieldNoEditable("operationTextField", "", 15), this.getConstraints(5, 1, 1, 0));
+        this.add(this.createLabel("Operation*: "), this.createConstraints(1, 1, 0, 0));
+        this.add(this.createTextFieldNoEditable("operationTextField", "", 15), this.createConstraints(5, 1, 1, 0));
         
-        this.add(this.createLabel("Target: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("targetComboBox", this.getTargets(), 15), this.getConstraints(5, 1, 1, 1));
+        this.add(this.createLabel("Target: "), this.createConstraints(1, 1, 0, 1));
+        this.add(this.createComboBox("targetComboBox", this.getTargets(), 15), this.createConstraints(5, 1, 1, 1));
         
-        this.add(this.createLabel("Value: "), this.getConstraints(1, 1, 0, 2));
-        this.add(this.createTextFieldNoEditable("valueTextField", "", 15), this.getConstraints(5, 1, 1, 2));
+        this.add(this.createLabel("Value: "), this.createConstraints(1, 1, 0, 2));
+        this.add(this.createTextFieldNoEditable("valueTextField", "", 15), this.createConstraints(5, 1, 1, 2));
         
         this.createList("detailsList");
-        this.add(this.getDetailsScrollPane(), this.getConstraints(6, 1, 0, 3));
+        this.add(this.getDetailsScrollPane(), this.createConstraints(6, 1, 0, 3));
     }
     
     /**
@@ -110,8 +110,8 @@ public final class PanelBaseEvaluation extends Panel {
     
     @Override
     public void addFooter() {
-        this.add(this.createButton("backButton", "  Back  ", "Back", "back.png"), this.getConstraints(3, 1, 0, 4));
-        this.add(this.createButton("nextButton", "  Next  ", "Next", "next.png"), this.getConstraints(3, 1, 3, 4));
+        this.add(this.createButton("backButton", "  Back  ", "Back", "back.png"), this.createConstraints(3, 1, 0, 4));
+        this.add(this.createButton("nextButton", "  Next  ", "Next", "next.png"), this.createConstraints(3, 1, 3, 4));
         
         this.getBackButton().setPreferredSize(new Dimension(200, 30));
         this.getNextButton().setPreferredSize(new Dimension(200, 30));
@@ -154,7 +154,7 @@ public final class PanelBaseEvaluation extends Panel {
      * @return Operation Text Field.
      */
     public JTextField getOperationTextField() {
-        return this.textFields.get("operationTextField");
+        return this.getTextField("operationTextField");
     }
     
     /**
@@ -162,7 +162,7 @@ public final class PanelBaseEvaluation extends Panel {
      * @return Target Combo Box.
      */
     public JComboBox getTargetComboBox() {
-        return this.comboBoxes.get("targetComboBox");
+        return this.getComboBox("targetComboBox");
     }
     
     /**
@@ -170,7 +170,7 @@ public final class PanelBaseEvaluation extends Panel {
      * @return Value Text Field.
      */
     public JTextField getValueTextField() {
-        return this.textFields.get("valueTextField");
+        return this.getTextField("valueTextField");
     }
     
     /**
@@ -178,7 +178,7 @@ public final class PanelBaseEvaluation extends Panel {
      * @return Details List.
      */
     public JList getDetailsList() {
-        return this.lists.get("detailsList");
+        return this.getList("detailsList");
     }
     
     /**
@@ -186,6 +186,6 @@ public final class PanelBaseEvaluation extends Panel {
      * @return Details Scroll Pane.
      */
     public JScrollPane getDetailsScrollPane() {
-        return this.scrollPanes.get("detailsList");
+        return this.getScrollPane("detailsList");
     }
 }

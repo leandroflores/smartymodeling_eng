@@ -84,7 +84,7 @@ public final class PanelBaseStereotype extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -92,6 +92,6 @@ public final class PanelBaseStereotype extends Panel {
      * @return Primitive Check Box.
      */
     public JCheckBox getPrimitiveCheckBox() {
-        return this.checkBoxes.get("primitiveCheckBox");
+        return this.getCheckBox("primitiveCheckBox");
     }
 }

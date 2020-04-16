@@ -63,7 +63,7 @@ public class PanelBaseVarPoints extends Panel {
         this.getVariabilitiesScrollPane().setViewportView(this.createVariabilitiesPanel());
         this.getVariabilitiesScrollPane().setPreferredSize(new Dimension(500, 250));
         this.add(this.getVariabilitiesScrollPane());
-        this.addLines(1);
+//        this.addLines(1);
     }
     
     /**
@@ -203,7 +203,7 @@ public class PanelBaseVarPoints extends Panel {
      * @return Variability Check Box.
      */
     public JCheckBox getVariabilityCheckBox(Variability variability) {
-        return this.checkBoxes.get("checkBox" + variability.getId());
+        return this.getCheckBox("checkBox" + variability.getId());
     }
     
     /**
@@ -213,7 +213,7 @@ public class PanelBaseVarPoints extends Panel {
      * @return Variant Check Box.
      */
     public JCheckBox getVariantCheckBox(Variability variability, Element element) {
-        return this.checkBoxes.get("checkBox" + variability.getId() + element.getId());
+        return this.getCheckBox("checkBox" + variability.getId() + element.getId());
     }
     
     /**
@@ -222,7 +222,7 @@ public class PanelBaseVarPoints extends Panel {
      * @return Variability Combo Box.
      */
     public JComboBox getVariabilityComboBox(Variability variability) {
-        return this.comboBoxes.get("comboBox" + variability.getId());
+        return this.getComboBox("comboBox" + variability.getId());
     }
     
     /**
@@ -230,6 +230,6 @@ public class PanelBaseVarPoints extends Panel {
      * @return Variabilities Scroll Pane.
      */
     public JScrollPane getVariabilitiesScrollPane() {
-        return this.scrollPanes.get("variabilitiesScrollPane");
+        return this.getScrollPane("variabilitiesScrollPane");
     }
 }

@@ -60,7 +60,7 @@ public final class PanelSequenceOperation extends PanelOperation {
      * @return Lifeline Button.
      */
     public JButton getLifelineButton() {
-        return this.buttons.get("lifelineButton");
+        return this.getButton("lifelineButton");
     }
     
     /**
@@ -68,6 +68,6 @@ public final class PanelSequenceOperation extends PanelOperation {
      * @return Instance Button.
      */
     public JButton getInstanceButton() {
-        return this.buttons.get("instanceButton");
+        return this.getButton("instanceButton");
     }
 }

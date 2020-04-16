@@ -64,6 +64,6 @@ public final class PanelFeatureOperation extends PanelOperation {
      * @return Feature Button.
      */
     public JButton getFeatureButton() {
-        return this.buttons.get("featureButton");
+        return this.getButton("featureButton");
     }
 }

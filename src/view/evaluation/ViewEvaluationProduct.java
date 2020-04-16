@@ -1,7 +1,6 @@
 package view.evaluation;
 
 import controller.view.evaluation.ControllerViewEvaluationProduct;
-import controller.view.evaluation.ControllerViewEvaluationProject;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -81,6 +80,6 @@ public final class ViewEvaluationProduct extends ViewEvaluation {
      * @return Scroll Panel Evaluation Product.
      */
     public JScrollPane getScrollPanelEvaluationProduct() {
-        return this.scrollPanes.get("scrollPanelEvaluationProduct");
+        return this.getScrollPane("scrollPanelEvaluationProduct");
     }
 }

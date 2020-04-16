@@ -87,7 +87,7 @@ public final class PanelBaseArtifact extends Panel {
      * @return Product Text Field.
      */
     public JTextField getProductTextField() {
-        return this.textFields.get("productTextField");
+        return this.getTextField("productTextField");
     }
     
     /**
@@ -95,7 +95,7 @@ public final class PanelBaseArtifact extends Panel {
      * @return Instance Text Field.
      */
     public JTextField getInstanceTextField() {
-        return this.textFields.get("instanceTextField");
+        return this.getTextField("instanceTextField");
     }
     
     /**
@@ -103,7 +103,7 @@ public final class PanelBaseArtifact extends Panel {
      * @return Diagram Text Field.
      */
     public JTextField getDiagramTextField() {
-        return this.textFields.get("diagramTextField");
+        return this.getTextField("diagramTextField");
     }
     
     /**
@@ -111,6 +111,6 @@ public final class PanelBaseArtifact extends Panel {
      * @return Element Text Field.
      */
     public JTextField getElementTextField() {
-        return this.textFields.get("elementTextField");
+        return this.getTextField("elementTextField");
     }
 }

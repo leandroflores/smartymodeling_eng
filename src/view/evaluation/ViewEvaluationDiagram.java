@@ -79,6 +79,6 @@ public final class ViewEvaluationDiagram extends ViewEvaluation {
      * @return Scroll Panel Evaluation Diagram.
      */
     public JScrollPane getScrollPanelEvaluationDiagram() {
-        return this.scrollPanes.get("scrollPanelEvaluationDiagram");
+        return this.getScrollPane("scrollPanelEvaluationDiagram");
     }
 }

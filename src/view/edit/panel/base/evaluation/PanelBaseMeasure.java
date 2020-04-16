@@ -126,7 +126,7 @@ public final class PanelBaseMeasure extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -134,7 +134,7 @@ public final class PanelBaseMeasure extends Panel {
      * @return Date Text Field.
      */
     public JTextField getDateTextField() {
-        return this.textFields.get("dateTextField");
+        return this.getTextField("dateTextField");
     }
     
     /**
@@ -142,6 +142,6 @@ public final class PanelBaseMeasure extends Panel {
      * @return Metric Combo Box.
      */
     public JComboBox getMetricComboBox() {
-        return this.comboBoxes.get("metricComboBox");
+        return this.getComboBox("metricComboBox");
     }
 }

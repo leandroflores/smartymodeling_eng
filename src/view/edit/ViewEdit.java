@@ -51,7 +51,7 @@ public abstract class ViewEdit extends ViewModal {
      * @return Save Button.
      */
     public JButton getSaveButton() {
-        return this.buttons.get("saveButton");
+        return this.getButton("saveButton");
     }
     
     /**
@@ -59,6 +59,6 @@ public abstract class ViewEdit extends ViewModal {
      * @return Cancel Button.
      */
     public JButton getCancelButton() {
-        return this.buttons.get("cancelButton");
+        return this.getButton("cancelButton");
     }
 }

@@ -298,6 +298,6 @@ public abstract class PanelInstance extends PanelGraph {
      * @return Scroll Pane Instance.
      */
     public JScrollPane getScrollPaneInstance() {
-        return this.scrollPanes.get("scrollPaneInstance");
+        return this.getScrollPane("scrollPaneInstance");
     }
 }

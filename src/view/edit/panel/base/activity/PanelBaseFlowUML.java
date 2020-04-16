@@ -106,7 +106,7 @@ public final class PanelBaseFlowUML extends Panel {
      * @return Source Text Field.
      */
     public JTextField getSourceTextField() {
-        return this.textFields.get("sourceTextField");
+        return this.getTextField("sourceTextField");
     }
     
     /**
@@ -114,7 +114,7 @@ public final class PanelBaseFlowUML extends Panel {
      * @return Target Text Field.
      */
     public JTextField getTargetTextField() {
-        return this.textFields.get("targetTextField");
+        return this.getTextField("targetTextField");
     }
     
     /**
@@ -122,7 +122,7 @@ public final class PanelBaseFlowUML extends Panel {
      * @return Guard Text Field.
      */
     public JTextField getGuardTextField() {
-        return this.textFields.get("guardTextField");
+        return this.getTextField("guardTextField");
     }
     
     /**
@@ -130,7 +130,7 @@ public final class PanelBaseFlowUML extends Panel {
      * @return Action Text Field.
      */
     public JTextField getActionTextField() {
-        return this.textFields.get("actionTextField");
+        return this.getTextField("actionTextField");
     }
     
     /**
@@ -138,6 +138,6 @@ public final class PanelBaseFlowUML extends Panel {
      * @return Weight Text Field.
      */
     public JTextField getWeightTextField() {
-        return this.textFields.get("weightTextField");
+        return this.getTextField("weightTextField");
     }
 }

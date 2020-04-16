@@ -79,6 +79,6 @@ public final class ViewEvaluationProject extends ViewEvaluation {
      * @return Scroll Panel Evaluation Project.
      */
     public JScrollPane getScrollPanelEvaluationProject() {
-        return this.scrollPanes.get("scrollPanelEvaluationProject");
+        return this.getScrollPane("scrollPanelEvaluationProject");
     }
 }

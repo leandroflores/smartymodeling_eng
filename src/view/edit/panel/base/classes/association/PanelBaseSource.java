@@ -123,7 +123,7 @@ public final class PanelBaseSource extends Panel {
      * @return Source Text Field.
      */
     public JTextField getSourceTextField() {
-        return this.textFields.get("sourceTextField");
+        return this.getTextField("sourceTextField");
     }
     
     /**
@@ -131,7 +131,7 @@ public final class PanelBaseSource extends Panel {
      * @return Visibility Combo Box.
      */
     public JComboBox getVisibilityComboBox() {
-        return this.comboBoxes.get("visibilityComboBox");
+        return this.getComboBox("visibilityComboBox");
     }
     
     /**
@@ -139,7 +139,7 @@ public final class PanelBaseSource extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -147,6 +147,6 @@ public final class PanelBaseSource extends Panel {
      * @return Cardinality Text Field.
      */
     public JTextField getCardinalityTextField() {
-        return this.textFields.get("cardinalityTextField");
+        return this.getTextField("cardinalityTextField");
     }
 }

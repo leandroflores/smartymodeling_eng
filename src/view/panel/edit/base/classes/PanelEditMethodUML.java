@@ -114,7 +114,7 @@ public final class PanelEditMethodUML extends PanelEditElement {
      * @return Scroll Panel Base Method UML.
      */
     public JScrollPane getScrollPanelBaseMethodUML() {
-        return this.scrollPanes.get("scrollPanelBaseMethodUML");
+        return this.getScrollPane("scrollPanelBaseMethodUML");
     }
     
     /**
@@ -122,6 +122,6 @@ public final class PanelEditMethodUML extends PanelEditElement {
      * @return Scroll Panel Parameters UML.
      */
     public JScrollPane getScrollPanelParametersUML() {
-        return this.scrollPanes.get("scrollPanelParametersUML");
+        return this.getScrollPane("scrollPanelParametersUML");
     }
 }

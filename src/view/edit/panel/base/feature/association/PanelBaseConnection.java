@@ -107,7 +107,7 @@ public final class PanelBaseConnection extends Panel {
      * @return Source Text Field.
      */
     public JTextField getSourceTextField() {
-        return this.textFields.get("sourceTextField");
+        return this.getTextField("sourceTextField");
     }
     
     /**
@@ -115,7 +115,7 @@ public final class PanelBaseConnection extends Panel {
      * @return Target Text Field.
      */
     public JTextField getTargetTextField() {
-        return this.textFields.get("targetTextField");
+        return this.getTextField("targetTextField");
     }
     
     /**
@@ -123,6 +123,6 @@ public final class PanelBaseConnection extends Panel {
      * @return Category Combo Box.
      */
     public JComboBox getCategoryComboBox() {
-        return this.comboBoxes.get("categoryComboBox");
+        return this.getComboBox("categoryComboBox");
     }
 }

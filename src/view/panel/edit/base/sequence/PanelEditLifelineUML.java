@@ -79,7 +79,7 @@ public final class PanelEditLifelineUML extends PanelEditElement {
      * @return Scroll Panel Base Lifeline UML.
      */
     public JScrollPane getScrollPanelBaseLifelineUML() {
-        return this.scrollPanes.get("scrollPanelBaseLifelineUML");
+        return this.getScrollPane("scrollPanelBaseLifelineUML");
     }
 
     /**

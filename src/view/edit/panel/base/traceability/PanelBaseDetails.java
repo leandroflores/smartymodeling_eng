@@ -52,11 +52,11 @@ public final class PanelBaseDetails extends Panel {
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name: "), this.getConstraints(1, 1, 0, 0));
-        this.add(this.createTextFieldNoEditable("nameTextField", this.traceability.getName(), 150), this.getConstraints(4, 1, 1, 0));
+        this.add(this.createLabel("Name: "), this.createConstraints(1, 1, 0, 0));
+        this.add(this.createTextFieldNoEditable("nameTextField", this.traceability.getName(), 150), this.createConstraints(4, 1, 1, 0));
         
         this.createList("elementsList");
-        this.add(this.getElementsScrollPane(), this.getConstraints(5, 10, 0, 1));
+        this.add(this.getElementsScrollPane(), this.createConstraints(5, 10, 0, 1));
     }
     
     /**
@@ -106,7 +106,7 @@ public final class PanelBaseDetails extends Panel {
      * @return Elements List.
      */
     public JList getElementsList() {
-        return this.lists.get("elementsList");
+        return this.getList("elementsList");
     }
     
     /**
@@ -114,6 +114,6 @@ public final class PanelBaseDetails extends Panel {
      * @return Elements Scroll Pane.
      */
     public JScrollPane getElementsScrollPane() {
-        return this.scrollPanes.get("elementsList");
+        return this.getScrollPane("elementsList");
     }
 }

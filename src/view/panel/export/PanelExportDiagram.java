@@ -34,8 +34,8 @@ public final class PanelExportDiagram extends PanelExport {
     protected void addComponents() {
         super.addDirectoryField();
         
-        this.add(this.createLabel("Diagram*: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("diagramComboBox", new ControllerProject(this.project).getDiagrams(), 250), this.getConstraints(4, 1, 1, 1));
+        this.add(this.createLabel("Diagram*: "), this.createConstraints(1, 1, 0, 1));
+        this.add(this.createComboBox("diagramComboBox", new ControllerProject(this.project).getDiagrams(), 250), this.createConstraints(4, 1, 1, 1));
         this.setDiagram((Diagram) this.getDiagramComboBox().getSelectedItem());
     }
     
@@ -68,6 +68,6 @@ public final class PanelExportDiagram extends PanelExport {
      * @return Diagram Combo Box.
      */
     public JComboBox getDiagramComboBox() {
-        return this.comboBoxes.get("diagramComboBox");
+        return this.getComboBox("diagramComboBox");
     }
 }

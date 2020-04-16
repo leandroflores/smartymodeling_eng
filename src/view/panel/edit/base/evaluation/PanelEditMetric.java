@@ -89,7 +89,7 @@ public final class PanelEditMetric extends PanelEdit {
      * @return Scroll Panel Base Metric.
      */
     public JScrollPane getScrollPanelBaseMetric() {
-        return this.scrollPanes.get("scrollPanelBaseMetric");
+        return this.getScrollPane("scrollPanelBaseMetric");
     }
     
     /**
@@ -97,6 +97,6 @@ public final class PanelEditMetric extends PanelEdit {
      * @return Scroll Panel Base Operation.
      */
     public JScrollPane getScrollPanelBaseOperation() {
-        return this.scrollPanes.get("scrollPanelBaseOperation");
+        return this.getScrollPane("scrollPanelBaseOperation");
     }
 }

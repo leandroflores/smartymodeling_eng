@@ -39,12 +39,12 @@ public final class PanelExportProduct extends PanelExport {
     protected void addComponents() {
         super.addDirectoryField();
         
-        this.add(this.createLabel("Product: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("productComboBox", new ControllerProduct(this.project).getProducts(), 250), this.getConstraints(4, 1, 1, 1));
+        this.add(this.createLabel("Product: "), this.createConstraints(1, 1, 0, 1));
+        this.add(this.createComboBox("productComboBox", new ControllerProduct(this.project).getProducts(), 250), this.createConstraints(4, 1, 1, 1));
         this.setProduct((Product) this.getProductComboBox().getSelectedItem());
         
         this.createList("instancesList");
-        this.add(this.getInstancesScrollPane(), this.getConstraints(5, 10, 0, 2));    
+        this.add(this.getInstancesScrollPane(), this.createConstraints(5, 10, 0, 2));    
     }
     
     /**
@@ -87,7 +87,7 @@ public final class PanelExportProduct extends PanelExport {
      * @return Product Combo Box.
      */
     public JComboBox getProductComboBox() {
-        return this.comboBoxes.get("productComboBox");
+        return this.getComboBox("productComboBox");
     }
     
     /**
@@ -95,7 +95,7 @@ public final class PanelExportProduct extends PanelExport {
      * @return Instances List.
      */
     public JList getInstancesList() {
-        return this.lists.get("instancesList");
+        return this.getList("instancesList");
     }
     
     /**
@@ -103,6 +103,6 @@ public final class PanelExportProduct extends PanelExport {
      * @return Instances Scroll Pane.
      */
     public JScrollPane getInstancesScrollPane() {
-        return this.scrollPanes.get("instancesList");
+        return this.getScrollPane("instancesList");
     }
 }

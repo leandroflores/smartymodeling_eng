@@ -73,6 +73,6 @@ public final class ViewError extends ViewModal {
      * @return JButton Ok.
      */
     public JButton getButtonOk() {
-        return this.buttons.get("buttonOk");
+        return this.getButton("buttonOk");
     }
 }

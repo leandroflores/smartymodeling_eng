@@ -108,7 +108,7 @@ public final class PanelBaseLifelineUML extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -116,7 +116,7 @@ public final class PanelBaseLifelineUML extends Panel {
      * @return Actor Combo Box.
      */
     public JComboBox getActorComboBox() {
-        return this.comboBoxes.get("actorComboBox");
+        return this.getComboBox("actorComboBox");
     }
     
     /**
@@ -124,6 +124,6 @@ public final class PanelBaseLifelineUML extends Panel {
      * @return Mandatory Check Box.
      */
     public JCheckBox getMandatoryCheckBox() {
-        return this.checkBoxes.get("mandatoryCheckBox");
+        return this.getCheckBox("mandatoryCheckBox");
     }
 }

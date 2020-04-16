@@ -79,7 +79,7 @@ public final class PanelEditComponentUML extends PanelEditElement {
      * @return Scroll Panel Base Element.
      */
     public JScrollPane getScrollPanelBaseElement() {
-        return this.scrollPanes.get("scrollPanelBaseElement");
+        return this.getScrollPane("scrollPanelBaseElement");
     }
 
     /**

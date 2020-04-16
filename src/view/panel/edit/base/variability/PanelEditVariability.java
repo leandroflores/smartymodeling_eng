@@ -93,7 +93,7 @@ public final class PanelEditVariability extends PanelEdit {
      * @return Scroll Panel Base Variability.
      */
     public JScrollPane getScrollPanelBaseVariability() {
-        return this.scrollPanes.get("scrollPanelBaseVariability");
+        return this.getScrollPane("scrollPanelBaseVariability");
     }
     
     /**
@@ -101,6 +101,6 @@ public final class PanelEditVariability extends PanelEdit {
      * @return Scroll Panel Base Variants.
      */
     public JScrollPane getScrollPanelBaseVariants() {
-        return this.scrollPanes.get("scrollPanelBaseVariants");
+        return this.getScrollPane("scrollPanelBaseVariants");
     }
 }

@@ -82,7 +82,7 @@ public final class ViewEditProfile extends ViewEdit {
      * @return Panel Base Profile.
      */
     public JScrollPane getScrollPanelBaseProfile() {
-        return this.scrollPanes.get("scrollPanelBaseProfile");
+        return this.getScrollPane("scrollPanelBaseProfile");
     }
     
     /**

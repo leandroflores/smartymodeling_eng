@@ -77,6 +77,6 @@ public final class PanelEditInstance extends PanelEdit {
      * @return Scroll Panel Base Instance.
      */
     public JScrollPane getScrollPanelBaseInstance() {
-        return this.scrollPanes.get("scrollPanelBaseInstance");
+        return this.getScrollPane("scrollPanelBaseInstance");
     }
 }

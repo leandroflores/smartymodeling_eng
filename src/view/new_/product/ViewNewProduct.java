@@ -97,6 +97,6 @@ public final class ViewNewProduct extends ViewNew {
      * @return Scroll Panel Base Product.
      */
     public JScrollPane getScrollPanelBaseProduct() {
-        return this.scrollPanes.get("scrollPanelBaseProduct");
+        return this.getScrollPane("scrollPanelBaseProduct");
     }
 }

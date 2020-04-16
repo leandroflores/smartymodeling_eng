@@ -131,7 +131,7 @@ public final class PanelBaseVariability extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -139,7 +139,7 @@ public final class PanelBaseVariability extends Panel {
      * @return Variation Point Combo Box.
      */
     public JComboBox getVariationPointComboBox() {
-        return this.comboBoxes.get("variationPointComboBox");
+        return this.getComboBox("variationPointComboBox");
     }
     
     /**
@@ -147,6 +147,6 @@ public final class PanelBaseVariability extends Panel {
      * @return Binding Time Combo Box.
      */
     public JComboBox getBindingTimeComboBox() {
-        return this.comboBoxes.get("bindingTimeComboBox");
+        return this.getComboBox("bindingTimeComboBox");
     }
 }

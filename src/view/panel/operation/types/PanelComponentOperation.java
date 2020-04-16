@@ -60,7 +60,7 @@ public final class PanelComponentOperation extends PanelOperation {
      * @return Component Button.
      */
     public JButton getComponentButton() {
-        return this.buttons.get("componentButton");
+        return this.getButton("componentButton");
     }
     
     /**
@@ -68,6 +68,6 @@ public final class PanelComponentOperation extends PanelOperation {
      * @return Interface Button.
      */
     public JButton getInterfaceButton() {
-        return this.buttons.get("interfaceButton");
+        return this.getButton("interfaceButton");
     }
 }

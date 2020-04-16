@@ -96,7 +96,7 @@ public abstract class ViewDelete extends ViewModal {
      * @return Yes Button.
      */
     public JButton getYesButton() {
-        return this.buttons.get("yesButton");
+        return this.getButton("yesButton");
     }
 
     /**
@@ -104,6 +104,6 @@ public abstract class ViewDelete extends ViewModal {
      * @return Not Button.
      */
     public JButton getNotButton() {
-        return this.buttons.get("notButton");
+        return this.getButton("notButton");
     }
 }

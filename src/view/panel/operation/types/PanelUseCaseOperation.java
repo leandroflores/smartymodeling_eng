@@ -62,7 +62,7 @@ public final class PanelUseCaseOperation extends PanelOperation {
      * @return Actor Button.
      */
     public JButton getActorButton() {
-        return this.buttons.get("actorButton");
+        return this.getButton("actorButton");
     }
     
     /**
@@ -70,6 +70,6 @@ public final class PanelUseCaseOperation extends PanelOperation {
      * @return Use Case Button.
      */
     public JButton getUseCaseButton() {
-        return this.buttons.get("useCaseButton");
+        return this.getButton("useCaseButton");
     }
 }

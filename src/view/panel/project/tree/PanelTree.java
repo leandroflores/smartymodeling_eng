@@ -223,7 +223,7 @@ public final class PanelTree extends Panel {
      * @return Scroll Panel Tree Requirement.
      */
     public JScrollPane getScrollPanelTreeRequirement() {
-        return this.scrollPanes.get("scrollPanelTreeRequirement");
+        return this.getScrollPane("scrollPanelTreeRequirement");
     }
     
     /**
@@ -239,7 +239,7 @@ public final class PanelTree extends Panel {
      * @return Scroll Panel Tree Feature.
      */
     public JScrollPane getScrollPanelTreeFeature() {
-        return this.scrollPanes.get("scrollPanelTreeFeature");
+        return this.getScrollPane("scrollPanelTreeFeature");
     }
     
     /**
@@ -255,7 +255,7 @@ public final class PanelTree extends Panel {
      * @return Scroll Panel Tree Diagram.
      */
     public JScrollPane getScrollPanelTreeDiagram() {
-        return this.scrollPanes.get("scrollPanelTreeDiagram");
+        return this.getScrollPane("scrollPanelTreeDiagram");
     }
     
     /**
@@ -271,7 +271,7 @@ public final class PanelTree extends Panel {
      * @return Scroll Panel Tree Variability.
      */
     public JScrollPane getScrollPanelTreeVariability() {
-        return this.scrollPanes.get("scrollPanelTreeVariability");
+        return this.getScrollPane("scrollPanelTreeVariability");
     }
     
     /**
@@ -287,7 +287,7 @@ public final class PanelTree extends Panel {
      * @return Scroll Panel Tree Product.
      */
     public JScrollPane getScrollPanelTreeProduct() {
-        return this.scrollPanes.get("scrollPanelTreeProduct");
+        return this.getScrollPane("scrollPanelTreeProduct");
     }
     
     /**
@@ -303,6 +303,6 @@ public final class PanelTree extends Panel {
      * @return Scroll Panel Tree Evaluation.
      */
     public JScrollPane getScrollPanelTreeEvaluation() {
-        return this.scrollPanes.get("scrollPanelTreeEvaluation");
+        return this.getScrollPane("scrollPanelTreeEvaluation");
     }
 }

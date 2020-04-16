@@ -120,7 +120,7 @@ public final class ViewEditVariability extends ViewEdit {
      * @return Scroll Panel Base Variability.
      */
     public JScrollPane getScrollPanelBaseVariability() {
-        return this.scrollPanes.get("scrollPanelBaseVariability");
+        return this.getScrollPane("scrollPanelBaseVariability");
     }
     
     /**
@@ -136,6 +136,6 @@ public final class ViewEditVariability extends ViewEdit {
      * @return Scroll Panel Variants.
      */
     public JScrollPane getScrollPanelVariants() {
-        return this.scrollPanes.get("scrollPanelVariants");
+        return this.getScrollPane("scrollPanelVariants");
     }
 }

@@ -110,7 +110,7 @@ public final class ViewNewTraceability extends ViewNew {
      * @return Scroll Panel Base Traceability.
      */
     public JScrollPane getScrollPanelBaseTraceability() {
-        return this.scrollPanes.get("scrollPanelBaseTraceability");
+        return this.getScrollPane("scrollPanelBaseTraceability");
     }
     
     /**
@@ -126,6 +126,6 @@ public final class ViewNewTraceability extends ViewNew {
      * @return Scroll Panel Elements.
      */
     public JScrollPane getScrollPanelElements() {
-        return this.scrollPanes.get("scrollPanelElements");
+        return this.getScrollPane("scrollPanelElements");
     }
 }

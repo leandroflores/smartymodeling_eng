@@ -55,16 +55,16 @@ public final class PanelStereotype extends Panel {
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("New: "), this.getConstraints(1, 1, 0, 0));
-        this.add(this.createTextField("stereotypeTextField", "", 10), this.getConstraints(2, 1, 1, 0));
-        this.add(this.createButton("newStereotypeButton", "New Stereotype"), this.getConstraints(2, 1, 3, 0));
+        this.add(this.createLabel("New: "), this.createConstraints(1, 1, 0, 0));
+        this.add(this.createTextField("stereotypeTextField", "", 10), this.createConstraints(2, 1, 1, 0));
+        this.add(this.createButton("newStereotypeButton", "New Stereotype"), this.createConstraints(2, 1, 3, 0));
       
-        this.add(this.createComboBox("stereotypeComboBox", this.getValues(), 100), this.getConstraints(3, 1, 0, 1));
-        this.add(this.createButton("addStereotypeButton",    "", "Add Stereotype",    "add.png"),    this.getConstraints(1, 1, 3, 1));
-        this.add(this.createButton("removeStereotypeButton", "", "Remove Stereotype", "remove.png"), this.getConstraints(1, 1, 4, 1));
+        this.add(this.createComboBox("stereotypeComboBox", this.getValues(), 100), this.createConstraints(3, 1, 0, 1));
+        this.add(this.createButton("addStereotypeButton",    "", "Add Stereotype",    "add.png"),    this.createConstraints(1, 1, 3, 1));
+        this.add(this.createButton("removeStereotypeButton", "", "Remove Stereotype", "remove.png"), this.createConstraints(1, 1, 4, 1));
         
         this.createList("stereotypesList");
-        this.add(this.getStereotypesScrollPane(), this.getConstraints(5, 10, 0, 2));
+        this.add(this.getStereotypesScrollPane(), this.createConstraints(5, 10, 0, 2));
         this.getStereotypesScrollPane().setMinimumSize(new Dimension(150, 150));
     }
     
@@ -134,7 +134,7 @@ public final class PanelStereotype extends Panel {
      * @return Stereotype Text Field.
      */
     public JTextField getStereotypeTextField() {
-        return this.textFields.get("stereotypeTextField");
+        return this.getTextField("stereotypeTextField");
     }
     
     /**
@@ -142,7 +142,7 @@ public final class PanelStereotype extends Panel {
      * @return New Stereotype Button.
      */
     public JButton getNewStereotypeButton() {
-        return this.buttons.get("newStereotypeButton");
+        return this.getButton("newStereotypeButton");
     }
     
     /**
@@ -150,7 +150,7 @@ public final class PanelStereotype extends Panel {
      * @return Stereotype Combo Box.
      */
     public JComboBox getStereotypeComboBox() {
-        return this.comboBoxes.get("stereotypeComboBox");
+        return this.getComboBox("stereotypeComboBox");
     }
     
     /**
@@ -158,7 +158,7 @@ public final class PanelStereotype extends Panel {
      * @return Stereotypes List.
      */
     public JList getStereotypesList() {
-        return this.lists.get("stereotypesList");
+        return this.getList("stereotypesList");
     }
     
     /**
@@ -166,7 +166,7 @@ public final class PanelStereotype extends Panel {
      * @return Stereotypes Scroll Pane.
      */
     public JScrollPane getStereotypesScrollPane() {
-        return this.scrollPanes.get("stereotypesList");
+        return this.getScrollPane("stereotypesList");
     }
     
     /**
@@ -174,7 +174,7 @@ public final class PanelStereotype extends Panel {
      * @return Add Stereotype Button.
      */
     public JButton getAddStereotypeButton() {
-        return this.buttons.get("addStereotypeButton");
+        return this.getButton("addStereotypeButton");
     }
     
     /**
@@ -182,6 +182,6 @@ public final class PanelStereotype extends Panel {
      * @return Remove Stereotype Button.
      */
     public JButton getRemoveStereotypeButton() {
-        return this.buttons.get("removeStereotypeButton");
+        return this.getButton("removeStereotypeButton");
     }
 }

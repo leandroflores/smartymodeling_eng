@@ -79,7 +79,7 @@ public final class PanelEditAttributeUML extends PanelEditElement {
      * @return Scroll Panel Base Attribute UML.
      */
     public JScrollPane getScrollPanelBaseAttributeUML() {
-        return this.scrollPanes.get("scrollPanelBaseAttributeUML");
+        return this.getScrollPane("scrollPanelBaseAttributeUML");
     }
 
     /**

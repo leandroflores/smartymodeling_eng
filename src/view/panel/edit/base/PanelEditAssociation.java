@@ -70,7 +70,7 @@ public final class PanelEditAssociation extends PanelEdit {
      * @return Scroll Panel Base Association.
      */
     public JScrollPane getScrollPanelBaseAssociation() {
-        return this.scrollPanes.get("scrollPanelBaseAssociation");
+        return this.getScrollPane("scrollPanelBaseAssociation");
     }
     
     /**

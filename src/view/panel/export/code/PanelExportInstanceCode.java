@@ -36,8 +36,8 @@ public final class PanelExportInstanceCode extends PanelExport {
     protected void addComponents() {
         super.addDirectoryField();
         
-        this.add(this.createLabel("Instance*: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("instanceComboBox", new ControllerProduct(this.project).getInstances("class"), 250), this.getConstraints(5, 1, 1, 1));
+        this.add(this.createLabel("Instance*: "), this.createConstraints(1, 1, 0, 1));
+        this.add(this.createComboBox("instanceComboBox", new ControllerProduct(this.project).getInstances("class"), 250), this.createConstraints(5, 1, 1, 1));
         this.setInstance((Instance) this.getInstanceComboBox().getSelectedItem());
         
         super.addNameTextField();
@@ -72,6 +72,6 @@ public final class PanelExportInstanceCode extends PanelExport {
      * @return Instance Combo Box.
      */
     public JComboBox getInstanceComboBox() {
-        return this.comboBoxes.get("instanceComboBox");
+        return this.getComboBox("instanceComboBox");
     }
 }

@@ -85,7 +85,7 @@ public final class PanelBaseProject extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -93,7 +93,7 @@ public final class PanelBaseProject extends Panel {
      * @return Path Text Field.
      */
     public JTextField getPathTextField() {
-        return this.textFields.get("pathTextField");
+        return this.getTextField("pathTextField");
     }
     
     /**
@@ -101,6 +101,6 @@ public final class PanelBaseProject extends Panel {
      * @return Version Text Field.
      */
     public JTextField getVersionTextField() {
-        return this.textFields.get("versionTextField");
+        return this.getTextField("versionTextField");
     }
 }

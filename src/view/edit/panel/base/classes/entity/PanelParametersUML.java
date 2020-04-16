@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.MethodUML;
-import model.structural.diagram.classes.base.ParameterUML;
 import view.Panel;
 import view.structural.ViewMenu;
 
@@ -60,7 +59,7 @@ public final class PanelParametersUML extends Panel {
     private void addTable() {
         this.createTable("parametersTable");
         this.addColumns("parametersTable", new String[]{"Name", "Type"});
-        this.add(this.scrollPanes.get("parametersTable"));
+        this.add(this.getScrollPane("parametersTable"));
     }
     
     /**

@@ -112,7 +112,7 @@ public final class PanelBaseOperation extends Panel {
      * @return Target Combo Box.
      */
     public JComboBox getTargetComboBox() {
-        return this.comboBoxes.get("targetComboBox");
+        return this.getComboBox("targetComboBox");
     }
     
     /**
@@ -120,6 +120,6 @@ public final class PanelBaseOperation extends Panel {
      * @return Operation Text Field.
      */
     public JTextField getOperationTextField() {
-        return this.textFields.get("operationTextField");
+        return this.getTextField("operationTextField");
     }
 }

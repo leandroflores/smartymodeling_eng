@@ -380,6 +380,6 @@ public abstract class PanelDiagram extends PanelGraph {
      * @return Scroll Pane Diagram.
      */
     public JScrollPane getScrollPaneDiagram() {
-        return this.scrollPanes.get("scrollPaneDiagram");
+        return this.getScrollPane("scrollPaneDiagram");
     }
 }

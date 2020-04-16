@@ -46,9 +46,9 @@ public abstract class PanelExport extends Panel {
      * Method responsible for adding the Directory Field.
      */
     protected void addDirectoryField() {
-        this.add(this.createLabel("Directory*: "), this.getConstraints(1, 1, 0, 0));
-        this.add(this.createTextFieldNoEditable("directoryTextField", "", 15), this.getConstraints(4, 1, 1, 0));
-        this.add(this.createButton("searchDirectoryButton", "", "Search Directory", "search.png"), this.getConstraints(1, 1, 5, 0));
+        this.add(this.createLabel("Directory*: "), this.createConstraints(1, 1, 0, 0));
+        this.add(this.createTextFieldNoEditable("directoryTextField", "", 15), this.createConstraints(4, 1, 1, 0));
+        this.add(this.createButton("searchDirectoryButton", "", "Search Directory", "search.png"), this.createConstraints(1, 1, 5, 0));
         this.createDirectoryChooser("searchDirectoryChooser");
     }
     
@@ -56,8 +56,8 @@ public abstract class PanelExport extends Panel {
      * Method responsible for adding the Name Text Field.
      */
     protected void addNameTextField() {
-        this.add(this.createLabel("Name*: "), this.getConstraints(1, 1, 0, 2));
-        this.add(this.createTextField("nameTextField", "", 15), this.getConstraints(5, 1, 1, 2));
+        this.add(this.createLabel("Name*: "), this.createConstraints(1, 1, 0, 2));
+        this.add(this.createTextField("nameTextField", "", 15), this.createConstraints(5, 1, 1, 2));
     }
     
     /**
@@ -81,7 +81,7 @@ public abstract class PanelExport extends Panel {
      * @return Directory Text Field.
      */
     public JTextField getDirectoryTextField() {
-        return this.textFields.get("directoryTextField");
+        return this.getTextField("directoryTextField");
     }
     
     /**
@@ -89,7 +89,7 @@ public abstract class PanelExport extends Panel {
      * @return Search Directory Button.
      */
     public JButton getSearchDirectoryButton() {
-        return this.buttons.get("searchDirectoryButton");
+        return this.getButton("searchDirectoryButton");
     }
     
     /**
@@ -97,7 +97,7 @@ public abstract class PanelExport extends Panel {
      * @return Search Directory Chooser.
      */
     public JFileChooser getSearchDirectoryChooser() {
-        return this.fileChoosers.get("searchDirectoryChooser");
+        return this.getFileChooser("searchDirectoryChooser");
     }
     
     /**
@@ -105,6 +105,6 @@ public abstract class PanelExport extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
 }

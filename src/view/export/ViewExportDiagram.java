@@ -91,6 +91,6 @@ public final class ViewExportDiagram extends ViewExport {
      * @return Panel Export Diagram.
      */
     public JScrollPane getScrollPanelExportDiagram() {
-        return this.scrollPanes.get("scrollPanelExportDiagram");
+        return this.getScrollPane("scrollPanelExportDiagram");
     }
 }

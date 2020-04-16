@@ -65,7 +65,7 @@ public abstract class PanelEditElement extends PanelEdit {
      * @return Scroll Panel Stereotype.
      */
     public JScrollPane getScrollPanelStereotype() {
-        return this.scrollPanes.get("scrollPanelStereotype");
+        return this.getScrollPane("scrollPanelStereotype");
     }
     
     /**
@@ -81,7 +81,7 @@ public abstract class PanelEditElement extends PanelEdit {
      * @return Scroll Panel Dependency.
      */
     public JScrollPane getScrollPanelDependency() {
-        return this.scrollPanes.get("scrollPanelDependency");
+        return this.getScrollPane("scrollPanelDependency");
     }
     
     /**

@@ -51,15 +51,15 @@ public final class PanelBaseMetric extends Panel {
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name*: "),  this.getConstraints(1, 1, 0, 0));
-        this.add(this.createTextField("nameTextField",  "", 10),  this.getConstraints(2, 1, 1, 0));
+        this.add(this.createLabel("Name*: "),  this.createConstraints(1, 1, 0, 0));
+        this.add(this.createTextField("nameTextField",  "", 10),  this.createConstraints(2, 1, 1, 0));
         
-        this.add(this.createLabel("Label*: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createTextField("labelTextField", "", 10), this.getConstraints(2, 1, 1, 1));
+        this.add(this.createLabel("Label*: "), this.createConstraints(1, 1, 0, 1));
+        this.add(this.createTextField("labelTextField", "", 10), this.createConstraints(2, 1, 1, 1));
         
         this.createTextArea("descriptionTextArea");
-        this.add(this.createLabel("Description: "), this.getConstraints(1, 1, 0, 2));
-        this.add(this.getDescriptionScrollPane(), this.getConstraints(2, 5, 1, 2));
+        this.add(this.createLabel("Description: "), this.createConstraints(1, 1, 0, 2));
+        this.add(this.getDescriptionScrollPane(), this.createConstraints(2, 5, 1, 2));
     }
     
     /**
@@ -100,7 +100,7 @@ public final class PanelBaseMetric extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -108,7 +108,7 @@ public final class PanelBaseMetric extends Panel {
      * @return Label Text Field.
      */
     public JTextField getLabelTextField() {
-        return this.textFields.get("labelTextField");
+        return this.getTextField("labelTextField");
     }
     
     /**
@@ -116,7 +116,7 @@ public final class PanelBaseMetric extends Panel {
      * @return Description Text Area.
      */
     public JTextArea getDescriptionTextArea() {
-        return this.textAreas.get("descriptionTextArea");
+        return this.getTextArea("descriptionTextArea");
     }
     
     /**
@@ -124,6 +124,6 @@ public final class PanelBaseMetric extends Panel {
      * @return Description Scroll Pane.
      */
     public JScrollPane getDescriptionScrollPane() {
-        return this.scrollPanes.get("descriptionTextArea");
+        return this.getScrollPane("descriptionTextArea");
     }
 }

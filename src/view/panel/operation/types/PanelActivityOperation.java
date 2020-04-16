@@ -63,7 +63,7 @@ public final class PanelActivityOperation extends PanelOperation {
      * @return Initial Button.
      */
     public JButton getInitialButton() {
-        return this.buttons.get("initialButton");
+        return this.getButton("initialButton");
     }
     
     /**
@@ -71,7 +71,7 @@ public final class PanelActivityOperation extends PanelOperation {
      * @return Activity Button.
      */
     public JButton getActivityButton() {
-        return this.buttons.get("activityButton");
+        return this.getButton("activityButton");
     }
     
     /**
@@ -79,7 +79,7 @@ public final class PanelActivityOperation extends PanelOperation {
      * @return Decision Button.
      */
     public JButton getDecisionButton() {
-        return this.buttons.get("decisionButton");
+        return this.getButton("decisionButton");
     }
     
     /**
@@ -87,6 +87,6 @@ public final class PanelActivityOperation extends PanelOperation {
      * @return Final Button.
      */
     public JButton getFinalButton() {
-        return this.buttons.get("finalButton");
+        return this.getButton("finalButton");
     }
 }

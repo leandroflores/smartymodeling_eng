@@ -89,7 +89,7 @@ public final class ViewConfirmation extends ViewModal {
      * @return JButton Yes.
      */
     public JButton getButtonYes() {
-        return this.buttons.get("buttonYes");
+        return this.getButton("buttonYes");
     }
     
     /**
@@ -97,7 +97,7 @@ public final class ViewConfirmation extends ViewModal {
      * @return JButton No.
      */
     public JButton getButtonNo() {
-        return this.buttons.get("buttonNo");
+        return this.getButton("buttonNo");
     }
     
     /**
@@ -105,6 +105,6 @@ public final class ViewConfirmation extends ViewModal {
      * @return JButton Back.
      */
     public JButton getButtonBack() {
-        return this.buttons.get("buttonBack");
+        return this.getButton("buttonBack");
     }
 }

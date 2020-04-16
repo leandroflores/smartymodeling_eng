@@ -2,7 +2,6 @@ package view;
 
 import controller.Controller;
 import funct.FunctView;
-import funct.FunctString;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -28,32 +27,28 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableModel;
 
 /**
  * <p>Class of View <b>Panel</b>.</p> 
- * <p>Class responsible for defining a Model for the <b>Panels</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining a Abstract Model for the <b>Panels</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  18/05/2019
+ * @since  2019-05-18
  * @see    controller.Controller
  * @see    javax.swing.JPanel
  */
 public abstract class Panel extends JPanel {
     protected Controller controller;
-    
-    protected HashMap<String, JList> lists;
-    protected HashMap<String, JLabel> labels;
-    protected HashMap<String, JButton> buttons;
-    protected HashMap<String, JComboBox> comboBoxes;
-    protected HashMap<String, JCheckBox> checkBoxes;
-    protected HashMap<String, JTextField> textFields;
-    protected HashMap<String, JTextArea>  textAreas;
-    protected HashMap<String, JFileChooser> fileChoosers;
-    
-    protected HashMap<String, JTable> tables;
-    protected HashMap<String, TableModel> tableModels;
-    protected HashMap<String, JScrollPane> scrollPanes;
-    protected HashMap<String, TableColumnModel> tableColumnModels;
+    private HashMap buttons;
+    private HashMap checkBoxes;
+    private HashMap comboBoxes;
+    private HashMap fileChoosers;
+    private HashMap lists;
+    private HashMap scrollPanes;
+    private HashMap tables;
+    private HashMap tableModels;
+    private HashMap tableColums;
+    private HashMap textAreas;
+    private HashMap textFields;
     
     /**
      * Default constructor method of Classe.
@@ -65,22 +60,21 @@ public abstract class Panel extends JPanel {
     }
     
     /**
-     * Method responsible for starting the Lists.
+     * Method responsible for initializing the Component Maps.
      */
     private void init() {
-        this.lists        = new HashMap<>();
-        this.labels       = new HashMap<>();
         this.buttons      = new HashMap<>();
-        this.textFields   = new HashMap<>();
-        this.textAreas    = new HashMap<>();
+        this.lists        = new HashMap<>();
         this.comboBoxes   = new HashMap<>();
         this.checkBoxes   = new HashMap<>();
         this.fileChoosers = new HashMap<>();
+        this.scrollPanes  = new HashMap<>();
+        this.tables       = new HashMap<>();
+        this.tableModels  = new HashMap<>();
+        this.tableColums  = new HashMap<>();
+        this.textAreas    = new HashMap<>();
         
-        this.tables            = new HashMap<>();
-        this.tableModels       = new HashMap<>();
-        this.scrollPanes       = new HashMap<>();
-        this.tableColumnModels = new HashMap<>();
+        this.textFields   = new HashMap<>();
     }
     
     /**
@@ -112,30 +106,9 @@ public abstract class Panel extends JPanel {
     }
     
     /**
-     * Method responsible for adding Lines to Panel.
-     * @param number Number of Lines.
-     */
-    protected void addLines(int number) {
-        for (int i = 0; i < number; ++i)
-            this.add(new JLabel(new FunctString().getSpaces(1000)));
-    }
-    
-    /**
-     * Method responsible for adding Lines by Row and Colum Settings.
-     * @param rows Rows Number.
-     * @param columns Columns Number.
-     */
-    protected void addLines(int rows, int columns) {
-        for (int i = 0; i < rows; i++) {
-            for (int x = 0; x < columns; x++)
-                this.add(this.createLabel(""));
-        }
-    }
-    
-    /**
-     * Method responsible for returning a new JLabel.
-     * @param  title JLabel Title.
-     * @return New JLabel.
+     * Method responsible for returning a New Label.
+     * @param  title Label Title.
+     * @return New Label.
      */
     protected JLabel createLabel(String title) {
         JLabel label = new JLabel(title);
@@ -145,142 +118,37 @@ public abstract class Panel extends JPanel {
     }
     
     /**
-     * Method responsible for returning a new JLabel.
-     * @param  id JLabel Id.
-     * @param  title JLabel Title.
-     * @param  size JLabel Size.
-     * @return New JLabel.
-     */
-    protected JLabel createLabel(String id, String title, int size) {
-        JLabel label = this.createLabel(title, size);
-               this.labels.put(id, label);
-        return label;
-    }
-    
-    /**
-     * Method responsible for returning a new JLabel.
-     * @param  title JLabel Title.
-     * @param  size JLabel Size.
-     * @return New JLabel.
+     * Method responsible for returning a New Label.
+     * @param  title Label Title.
+     * @param  size Label Size.
+     * @return New Label.
      */
     protected JLabel createLabel(String title, int size) {
-        JLabel label = new JLabel(title, SwingConstants.RIGHT);
-               label.addKeyListener(this.controller);
-               label.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
+        JLabel label = this.createLabel(title);
+               label.setHorizontalAlignment(SwingConstants.RIGHT);
                label.setPreferredSize(new Dimension(size, ViewStyle.HEIGHT));
         return label;
     }
     
     /**
-     * Method responsible for returning a new Center JLabel.
-     * @param  title JLabel Title.
-     * @param  size JLabel Size.
+     * Method responsible for returning a New Center JLabel.
+     * @param  title Label Title.
+     * @param  size Label Size.
      * @return New Center JLabel.
      */
     protected JLabel createCenterLabel(String title, int size) {
-        JLabel label = new JLabel(title, SwingConstants.RIGHT);
+        JLabel label = this.createLabel(title, size);
                label.setAlignmentX(Component.CENTER_ALIGNMENT);
-               label.addKeyListener(this.controller);
-               label.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
-               label.setPreferredSize(new Dimension(size, ViewStyle.HEIGHT));
         return label;
     }
     
     /**
-     * Method responsible for returning a new Image JLabel.
-     * @param  url Image URL.
-     * @return New Image JLabel.
+     * Method responsible for returning a New Image Label.
+     * @param  path Image Path.
+     * @return New Image Label.
      */
-    protected JLabel createLabelImage(String url) {
-        return new JLabel(new FunctView().createImage(url));
-    }
-    
-    /**
-     * Method responsible for returning a new JTextField.
-     * @param  id JTextField Id.
-     * @param  message JTextField Message.
-     * @param  size JTextField Size.
-     * @return New JTextField.
-     */
-    protected JTextField createTextField(String id, String message, int size) {
-        JTextField textField = new JTextField(size);
-                   textField.setText(message);
-                   textField.addActionListener(this.controller);
-                   textField.addKeyListener(this.controller);
-                   textField.setPreferredSize(new Dimension(ViewStyle.WIDTH, ViewStyle.HEIGHT));
-                   textField.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
-                   this.textFields.put(id, textField);
-        return     textField;
-    }
-    
-    /**
-     * Method responsible for returning a new No Editable JTextField.
-     * @param  id JTextField Id.
-     * @param  message JTextField Message.
-     * @param  size JTextField Size.
-     * @return New No Editable JTextField.
-     */
-    protected JTextField createTextFieldNoEditable(String id, String message, int size) {
-        JTextField textField = this.createTextField(id, message, size);
-                   textField.setEditable(false);
-        return     textField;
-    }
-    
-    /**
-     * Method responsible for returning a new JComboBox.
-     * @param  id JComboBox Id.
-     * @param  values JComboBox Values.
-     * @param  size JComboBox Size.
-     * @return New JComboBox.
-     */
-    protected JComboBox createComboBox(String id, Object[] values, int size) {
-        JComboBox comboBox = new JComboBox(values);
-                  comboBox.addActionListener(this.controller);
-                  comboBox.addKeyListener(this.controller);
-                  comboBox.setAlignmentX(CENTER_ALIGNMENT);
-                  comboBox.setAlignmentY(CENTER_ALIGNMENT);
-                  comboBox.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
-                  comboBox.setPreferredSize(new Dimension(size, ViewStyle.HEIGHT));
-                  this.comboBoxes.put(id, comboBox);
-        return    comboBox;
-    }
-    
-    /**
-     * Method responsible for returning a new JComboBox.
-     * @param  id JComboBox Id.
-     * @param  values JComboBox Values.
-     * @param  size JComboBox Size.
-     * @param  object Selected Object.
-     * @return New JComboBox.
-     */
-    protected JComboBox createComboBox(String id, Object[] values, int size, Object object) {
-        JComboBox comboBox = new JComboBox(values);
-                  comboBox.setSelectedItem(object);
-                  comboBox.addActionListener(this.controller);
-                  comboBox.addKeyListener(this.controller);
-                  comboBox.setAlignmentX(CENTER_ALIGNMENT);
-                  comboBox.setAlignmentY(CENTER_ALIGNMENT);
-                  comboBox.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
-                  comboBox.setPreferredSize(new Dimension(size, ViewStyle.HEIGHT));
-                  this.comboBoxes.put(id, comboBox);
-        return    comboBox;
-    }
-    
-    /**
-     * Method responsible for returning a new JCheckBox.
-     * @param  id JCheckBox Id.
-     * @param  title JCheckBox Title.
-     * @param  selected Selected Flag.
-     * @return New JCheckBox.
-     */
-    public JCheckBox createCheckBox(String id, String title, boolean selected) {
-        JCheckBox checkBox = new JCheckBox(title);
-                  checkBox.setSelected(selected);
-                  checkBox.addActionListener(this.controller);
-                  checkBox.addKeyListener(this.controller);
-                  checkBox.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
-                  this.checkBoxes.put(id, checkBox);
-        return    checkBox;
+    protected JLabel createLabelImage(String path) {
+        return new JLabel(new FunctView().createImage(path));
     }
     
     /**
@@ -302,49 +170,160 @@ public abstract class Panel extends JPanel {
     }
     
     /**
-     * Method responsible for returning a new JButton.
-     * @param  id JButton Id.
-     * @param  title JButton Title.
-     * @param  url JButton Image URL.
-     * @return New JButton.
+     * Method responsible for returning a New Button.
+     * @param  id Button Id.
+     * @param  title Button Title.
+     * @param  path Button Image Path.
+     * @return New Button.
      */
-    protected JButton createButton(String id, String title, String url) {
-        JButton button = new JButton(new FunctView().createImage("icons/" + url));
-                button.setText(title);
-                button.setToolTipText(title);
-                button.addActionListener(this.controller);
-                button.addKeyListener(this.controller);
-                button.setPreferredSize(new Dimension(75, 30));
-                button.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
-                this.buttons.put(id, button);
+    protected JButton createButton(String id, String title, String path) {
+        JButton button = this.createButton(id, title);
+                button.setIcon(new FunctView().createImage("icons/" + path));
         return  button;
     }
     
     /**
-     * Method responsible for returning a new JButton.
-     * @param  id JButton Id.
-     * @param  title JButton Title.
-     * @param  focusTitle JButton Focus Title.
-     * @param  url JButton Image URL.
-     * @return New JButton.
+     * Method responsible for returning a New Button.
+     * @param  id Button Id.
+     * @param  title Button Title.
+     * @param  focus Button Focus Title.
+     * @param  path Button Image Path.
+     * @return New Button.
      */
-    protected JButton createButton(String id, String title, String focusTitle, String url) {
-        JButton button = this.createButton(id, title, url);
-                button.setToolTipText(focusTitle);
-//                button.setPreferredSize(new Dimension(60, 25));
+    protected JButton createButton(String id, String title, String focus, String path) {
+        JButton button = this.createButton(id, title, path);
+                button.setToolTipText(focus);
         return  button;
     }
     
     /**
-     * Method responsible for returning a new JList.
-     * @param  id JList Id.
-     * @return New JList.
+     * Method responsible for returning the Button by Id.
+     * @param  id Button Id.
+     * @return Button found.
      */
-    public JList createList(String id) {
+    protected JButton getButton(String id) {
+        return (JButton) this.buttons.get(id);
+    }
+    
+    /**
+     * Method responsible for returning the Buttons Map.
+     * @return Buttons Map.
+     */
+    protected HashMap getButtons() {
+        return new HashMap(this.buttons);
+    }
+    
+    /**
+     * Method responsible for returning a New Check Box.
+     * @param  id Check Box Id.
+     * @param  title Check Box Title.
+     * @param  selected Selected Flag.
+     * @return New Check Box.
+     */
+    protected JCheckBox createCheckBox(String id, String title, boolean selected) {
+        JCheckBox checkBox = new JCheckBox(title);
+                  checkBox.setSelected(selected);
+                  checkBox.addActionListener(this.controller);
+                  checkBox.addKeyListener(this.controller);
+                  checkBox.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
+                  this.checkBoxes.put(id, checkBox);
+        return    checkBox;
+    }
+    
+    /**
+     * Method responsible for returning the Check Box by Id.
+     * @param  id Check Box Id.
+     * @return Check Box found.
+     */
+    protected JCheckBox getCheckBox(String id) {
+        return (JCheckBox) this.checkBoxes.get(id);
+    }
+    
+    /**
+     * Method responsible for returning a New Combo Box.
+     * @param  id Combo Box Id.
+     * @param  values Combo Box Values.
+     * @param  size Combo Box Size.
+     * @return New Combo Box.
+     */
+    protected JComboBox createComboBox(String id, Object[] values, int size) {
+        JComboBox comboBox = new JComboBox(values);
+                  comboBox.addActionListener(this.controller);
+                  comboBox.addKeyListener(this.controller);
+                  comboBox.setAlignmentX(CENTER_ALIGNMENT);
+                  comboBox.setAlignmentY(CENTER_ALIGNMENT);
+                  comboBox.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
+                  comboBox.setPreferredSize(new Dimension(size, ViewStyle.HEIGHT));
+                  this.comboBoxes.put(id, comboBox);
+        return    comboBox;
+    }
+    
+    /**
+     * Method responsible for returning a New Combo Box.
+     * @param  id Combo Box Id.
+     * @param  values Combo Box Values.
+     * @param  size Combo Box Size.
+     * @param  object Selected Object.
+     * @return New Combo Box.
+     */
+    protected JComboBox createComboBox(String id, Object[] values, int size, Object object) {
+        JComboBox comboBox = this.createComboBox(id, values, size);
+                  comboBox.setSelectedItem(object);
+        return    comboBox;
+    }
+    
+    /**
+     * Method responsible for returning the Combo Box by Id.
+     * @param  id Combo Box Id.
+     * @return Combo Box found.
+     */
+    protected JComboBox getComboBox(String id) {
+        return (JComboBox) this.comboBoxes.get(id);
+    }
+    
+    /**
+     * Method responsible for returning a New File Chooser.
+     * @param  id File Chooser Id.
+     * @return New File Chooser.
+     */
+    protected JFileChooser createFileChooser(String id) {
+        JFileChooser fileChooser = new JFileChooser();
+                     fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                     fileChooser.setFileFilter(new FileNameExtensionFilter("SMARTY", "smty", "smty"));
+                     this.fileChoosers.put(id, fileChooser);
+        return       fileChooser;
+    }
+    
+    /**
+     * Method responsible for returning a New Directory Chooser.
+     * @param  id Directory Chooser Id.
+     * @return New Directory Chooser.
+     */
+    protected JFileChooser createDirectoryChooser(String id) {
+        JFileChooser fileChooser = new JFileChooser();
+                     fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                     this.fileChoosers.put(id, fileChooser);
+        return       fileChooser;
+    }
+    
+    /**
+     * Method responsible for returning the File Chooser by Id.
+     * @param  id File Chooser Id.
+     * @return File Chooser found.
+     */
+    protected JFileChooser getFileChooser(String id) {
+        return (JFileChooser) this.fileChoosers.get(id);
+    }
+    
+    /**
+     * Method responsible for returning a New List.
+     * @param  id List Id.
+     * @return New List.
+     */
+    protected JList createList(String id) {
         JList  list = new JList();
                list.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                list.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
-//               list.setPreferredSize(new Dimension(340, 100));;
                list.addKeyListener(this.controller);
                this.createScrollPane(id, list);
                this.lists.put(id, list);
@@ -352,11 +331,193 @@ public abstract class Panel extends JPanel {
     }
     
     /**
-     * Method responsible for returning a new JTextArea.
-     * @param  id JTextArea Id.
-     * @return New JTextArea.
+     * Method responsible for returning the List by Id.
+     * @param  id List Id.
+     * @return List found.
      */
-    public JTextArea createTextArea(String id) {
+    protected JList getList(String id) {
+        return (JList) this.lists.get(id);
+    }
+    
+    /**
+     * Method responsible for returning a New Scroll Pane.
+     * @param  id Scroll Pane Id.
+     * @return New Scroll Pane.
+     */
+    protected JScrollPane createScrollPane(String id) {
+        JScrollPane scrollPane = new JScrollPane();
+                    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+                    this.scrollPanes.put(id, scrollPane);
+        return      scrollPane;
+    }
+    
+    /**
+     * Method responsible for returning a New Scroll Pane of a Panel.
+     * @param  id Scroll Pane Id.
+     * @param  panel Panel.
+     * @return New Scroll Pane of a Panel.
+     */
+    protected JScrollPane createScrollPane(String id, JPanel panel) {
+        JScrollPane scrollPane = this.createScrollPane(id);
+                    scrollPane.setPreferredSize(new Dimension(390, 120));
+                    scrollPane.setViewportView(panel);
+        return      scrollPane;
+    }
+    
+    /**
+     * Method responsible for returning a New Scroll Pane of a List.
+     * @param  id Scroll Pane Id.
+     * @param  list List.
+     * @return New Scroll Pane of a JList.
+     */
+    private JScrollPane createScrollPane(String id, JList list) {
+        JScrollPane scrollPane = this.createScrollPane(id);
+                    scrollPane.setViewportView(list);
+                    scrollPane.setPreferredSize(new Dimension(390, 120));
+        return      scrollPane;
+    }
+    
+    /**
+     * Method responsible for returning a New Scroll Pane of a Text Area.
+     * @param  id Scroll Pane Id.
+     * @param  textArea Text Area.
+     * @return New Scroll Pane of a Text Area.
+     */
+    private JScrollPane createScrollPane(String id, JTextArea textArea) {
+        JScrollPane scrollPane = this.createScrollPane(id);
+                    scrollPane.setViewportView(textArea);
+                    scrollPane.setPreferredSize(new Dimension(200, 100));
+        return      scrollPane;
+    }
+    
+    /**
+     * Method responsible for returning a new Scroll Pane of a Table.
+     * @param  id Scroll Pane Id.
+     * @param  table Table.
+     * @return New Scroll Pane of a Table.
+     */
+    private JScrollPane createScrollPane(String id, JTable table) {
+        JScrollPane scrollPane = this.createScrollPane(id);
+                    scrollPane.setViewportView(table);
+                    scrollPane.setPreferredSize(new Dimension(380, 150));
+        return      scrollPane;
+    }
+    
+    /**
+     * Method responsible for returning the Scroll Pane by Id.
+     * @param  id Scroll Pane Id.
+     * @return Scroll Pane found.
+     */
+    protected JScrollPane getScrollPane(String id) {
+        return (JScrollPane) this.scrollPanes.get(id);
+    }
+    
+    /**
+     * Method responsible for returning a New Table.
+     * @param  id Table Id.
+     * @return New Table.
+     */
+    protected JTable createTable(String id) {
+        JTable table = new JTable(this.createTableModel());
+               table.addKeyListener(this.controller);
+               this.createScrollPane(id, table);
+               this.tableModels.put(id, table.getModel());
+               this.tableColums.put(id, table.getColumnModel());
+               this.tables.put(id, table);
+        return table;
+    }
+    
+    /**
+     * Method responsible for returning a New Table Model.
+     * @return New Table Model.
+     */
+    private DefaultTableModel createTableModel() {
+        return 
+            new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int row, int col) {   
+                    return true;
+                }};
+    }
+    
+    /**
+     * Method responsible for adding the Columns on Table.
+     * @param id Table Id.
+     * @param values Column Values.
+     */
+    protected void addColumns(String id, String[] values) {
+        for (String value : values)
+            ((DefaultTableModel) this.tableModels.get(id)).addColumn(value);
+    }
+    
+    /**
+     * Method responsible for setting the Columns Size on Table.
+     * @param id Table Id. 
+     * @param size Size Array.
+     */
+    protected void setColumnsSize(String id, int[] size) {
+        for (int i = 0; i < size.length; i++)
+            this.getTable(id).getColumnModel().getColumn(i).setPreferredWidth(size[i]);
+    }
+    
+    /**
+     * Method responsible for cleaning the Table.
+     * @param id Table Id.
+     */
+    protected void clearTable(String id) {
+        while (this.getTableModel(id).getRowCount() > 0)
+            this.getTableModel(id).removeRow(0);
+        this.getTable(id).removeAll();
+    }
+    
+    /**
+     * Method responsible for adding the Line Values on Table.
+     * @param id Table Id. 
+     * @param values Line Values.
+     */
+    protected void addRows(String id, Object[][] values) {
+        this.clearTable(id);
+        for (Object[] value : values) {
+            this.getTableModel(id).addRow(value);
+            this.getTable(id).setEditingRow(JTable.AUTO_RESIZE_NEXT_COLUMN);
+            this.getTable(id).setEditingRow(0);
+        }
+    }
+    
+    /**
+     * Method responsible for returning the Table by Id.
+     * @param  id Table Id.
+     * @return Table found.
+     */
+    protected JTable getTable(String id) {
+        return (JTable) this.tables.get(id);
+    }
+    
+    /**
+     * Method responsible for returning the Table Model by Id.
+     * @param  id Table Model Id.
+     * @return Table Model found.
+     */
+    protected DefaultTableModel getTableModel(String id) {
+        return (DefaultTableModel) this.tableModels.get(id);
+    }
+    
+    /**
+     * Method responsible for returning the Table Column by Id.
+     * @param  id Table Column Id.
+     * @return Table Column found.
+     */
+    protected TableColumnModel getTableColumn(String id) {
+        return (TableColumnModel) this.tableColums.get(id);
+    }
+    
+    /**
+     * Method responsible for returning a New Text Area.
+     * @param  id Text Area Id.
+     * @return New Text Area.
+     */
+    protected JTextArea createTextArea(String id) {
         JTextArea textArea = new JTextArea(5, 10);
                   textArea.addKeyListener(this.controller);
                   textArea.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
@@ -366,178 +527,63 @@ public abstract class Panel extends JPanel {
     }
     
     /**
-     * Method responsible for returning a new JScrollPane of a JTextArea.
-     * @param  id JScrollPane Id.
-     * @param  textArea JScrollPane JTextArea.
-     * @return New JScrollPane of a JTextArea.
+     * Method responsible for returning the Text Area by Id.
+     * @param  id Text Area Id.
+     * @return Text Area found.
      */
-    private JScrollPane createScrollPane(String id, JTextArea textArea) {
-        JScrollPane scrollPane = new JScrollPane(textArea);
-                    scrollPane.setPreferredSize(new Dimension(200, 100));
-                    this.scrollPanes.put(id, scrollPane);
-        return      scrollPane;
+    protected JTextArea getTextArea(String id) {
+        return (JTextArea) this.textAreas.get(id);
     }
     
     /**
-     * Method responsible for returning a new JScrollPane of a JList.
-     * @param  id Id JScrollPane.
-     * @param  list JList.
-     * @return New JScrollPane of a JList.
+     * Method responsible for returning a New Text Field.
+     * @param  id Text Field Id.
+     * @param  value Text Field Value.
+     * @param  size Text Field Size.
+     * @return New Text Field.
      */
-    private JScrollPane createScrollPane(String id, JList list) {
-        JScrollPane scrollPane = new JScrollPane();
-                    scrollPane.setViewportView(list);
-                    scrollPane.setPreferredSize(new Dimension(390, 120));
-                    this.scrollPanes.put(id, scrollPane);
-        return      scrollPane;
+    protected JTextField createTextField(String id, String value, int size) {
+        JTextField textField = new JTextField(size);
+                   textField.setText(value);
+                   textField.addActionListener(this.controller);
+                   textField.addKeyListener(this.controller);
+                   textField.setPreferredSize(new Dimension(ViewStyle.WIDTH, ViewStyle.HEIGHT));
+                   textField.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
+                   this.textFields.put(id, textField);
+        return     textField;
     }
     
     /**
-     * Method responsible for returning a new JScrollPane of a JPanel.
-     * @param  id JScrollPane Id.
-     * @param  painel JScrollPane JPanel.
-     * @return New JScrollPane of a JPanel.
+     * Method responsible for returning a New No Editable Text Field.
+     * @param  id Text Field Id.
+     * @param  value Text Field Value.
+     * @param  size Text Field Size.
+     * @return New No Editable JTextField.
      */
-    public JScrollPane createScrollPane(String id, JPanel painel) {
-        JScrollPane scrollPane = new JScrollPane(painel);
-                    scrollPane.setPreferredSize(new Dimension(390, 120));
-                    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-                    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-                    this.scrollPanes.put(id, scrollPane);
-        return      scrollPane;
+    protected JTextField createTextFieldNoEditable(String id, String value, int size) {
+        JTextField textField = this.createTextField(id, value, size);
+                   textField.setEditable(false);
+        return     textField;
     }
     
     /**
-     * Method responsible for returning a new JTable.
-     * @param  id JTable Id.
-     * @return New JTable.
+     * Method responsible for returning the Text Field by Id.
+     * @param  id Text Field Id.
+     * @return Text Field found.
      */
-    public JTable createTable(String id) {
-        JTable table = new JTable(this.createTableModel());
-               table.addKeyListener(this.controller);
-        this.createScrollPane(id, table);
-        this.tableModels.put(id, table.getModel());
-        this.tableColumnModels.put(id, table.getColumnModel());
-        this.tables.put(id, table);
-        return table;
+    protected JTextField getTextField(String id) {
+        return (JTextField) this.textFields.get(id);
     }
     
     /**
-     * Method responsible for returning a new DefaultTableModel.
-     * @return New DefaultTableModel.
-     */
-    private DefaultTableModel createTableModel() {
-        return new DefaultTableModel() {
-                   @Override
-                   public boolean isCellEditable(int row, int col) {   
-                        return true;
-                   }};
-    }
-    
-    /**
-     * Method responsible for returning a new JScrollPane.
-     * @param  id JScrollPane Id.
-     * @return New JScrollPane.
-     */
-    public JScrollPane createScrollPane(String id) {
-        JScrollPane scrollPane = new JScrollPane();
-                    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-                    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-                    this.scrollPanes.put(id, scrollPane);
-        return      scrollPane;
-    }
-    
-    /**
-     * Method responsible for returning a new JScrollPane of a JTable.
-     * @param  id JScrollPane Id.
-     * @param  table JScrollPane JTable.
-     * @return New JScrollPane of a JTable.
-     */
-    public JScrollPane createScrollPane(String id, JTable table) {
-        JScrollPane scrollPane = new JScrollPane(table);
-                    scrollPane.setPreferredSize(new Dimension(380, 150));
-                    this.scrollPanes.put(id, scrollPane);
-        return      scrollPane;
-    }
-    
-    /**
-     * Method responsible for adding the Columns on Table.
-     * @param id Table Id.
-     * @param values Columns Values.
-     */
-    protected void addColumns(String id, String[] values) {
-        for (String value : values)
-            ((DefaultTableModel) this.tableModels.get(id)).addColumn(value);
-    }
-    
-    /**
-     * Method responsible for defining the Columns Size on Table.
-     * @param id Table Id. 
-     * @param size Array de Tamanhos.
-     */
-    protected void setColumnsSize(String id, int[] size) {
-        for (int i = 0; i < size.length; i++)
-            this.tables.get(id).getColumnModel().getColumn(i).setPreferredWidth(size[i]);
-    }
-    
-    /**
-     * Method responsible for adding Lines on Table.
-     * @param id Table Id. 
-     * @param values Values.
-     */
-    public void addRows(String id, Object[][] values) {
-        this.clearTable(id);
-        for (Object[] value : values) {
-            ((DefaultTableModel) this.tableModels.get(id)).addRow(value);
-            this.tables.get(id).setEditingRow(JTable.AUTO_RESIZE_NEXT_COLUMN);
-            this.tables.get(id).setEditingRow(0);
-        }
-    }
-    
-    /**
-     * Method responsible to clear the Table.
-     * @param id Table Id.
-     */
-    public void clearTable(String id) {
-        while (this.tableModels.get(id).getRowCount() > 0)
-            ((DefaultTableModel) this.tableModels.get(id)).removeRow(0);
-        this.tables.get(id).removeAll();
-    }
-    
-    /**
-     * Metodo responsavel por retornar um New JFileChooser.
-     * @param  id JFileChooser Id.
-     * @return New JFileChooser.
-     */
-    public JFileChooser createFileChooser(String id) {
-        JFileChooser fileChooser = new JFileChooser();
-                     fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                     fileChooser.setFileFilter(new FileNameExtensionFilter("SMARTY", "smty", "smty"));
-                     this.fileChoosers.put(id, fileChooser);
-        return       fileChooser;
-    }
-    
-    /**
-     * Metodo responsavel por retornar um New  Directory JFileChooser.
-     * @param  id JFileChooser Id.
-     * @return New Directory JFileChooser.
-     */
-    public JFileChooser createDirectoryChooser(String id) {
-        JFileChooser fileChooser = new JFileChooser();
-                     fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                     this.fileChoosers.put(id, fileChooser);
-        return       fileChooser;
-    }
-    
-    /**
-     * Method responsible for returning the Constraints.
+     * Method responsible for returning the New Constraints.
      * @param  width Width Constraints.
      * @param  height Height Constraints.
      * @param  x X Position Grid.
      * @param  y Y Position Grid.
-     * @return Constraints.
+     * @return New Constraints.
      */
-    protected GridBagConstraints getConstraints(int width, int height, int x, int y) {
+    protected GridBagConstraints createConstraints(int width, int height, int x, int y) {
         GridBagConstraints constraints = new GridBagConstraints();
                            constraints.gridheight = height;
                            constraints.gridwidth  = width;
@@ -611,7 +657,7 @@ public abstract class Panel extends JPanel {
      * @return Back Button.
      */
     public JButton getBackButton() {
-        return this.buttons.get("backButton");
+        return this.getButton("backButton");
     }
     
     /**
@@ -619,6 +665,6 @@ public abstract class Panel extends JPanel {
      * @return Next Button.
      */
     public JButton getNextButton() {
-        return this.buttons.get("nextButton");
+        return this.getButton("nextButton");
     }
 }

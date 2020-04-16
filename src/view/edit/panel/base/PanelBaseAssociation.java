@@ -98,7 +98,7 @@ public final class PanelBaseAssociation extends Panel {
      * @return Source Text Field.
      */
     public JTextField getSourceTextField() {
-        return this.textFields.get("sourceTextField");
+        return this.getTextField("sourceTextField");
     }
     
     /**
@@ -106,7 +106,7 @@ public final class PanelBaseAssociation extends Panel {
      * @return Target Text Field.
      */
     public JTextField getTargetTextField() {
-        return this.textFields.get("targetTextField");
+        return this.getTextField("targetTextField");
     }
     
     /**
@@ -114,6 +114,6 @@ public final class PanelBaseAssociation extends Panel {
      * @return Type Text Field.
      */
     public JTextField getTypeTextField() {
-        return this.textFields.get("typeTextField");
+        return this.getTextField("typeTextField");
     }
 }

@@ -78,7 +78,7 @@ public final class PanelEditMessageUML extends PanelEdit {
      * @return Scroll Panel Base Message UML.
      */
     public JScrollPane getScrollPanelBaseMessageUML() {
-        return this.scrollPanes.get("scrollPanelBaseMessageUML");
+        return this.getScrollPane("scrollPanelBaseMessageUML");
     }
 
     /**

@@ -85,7 +85,7 @@ public final class ViewEditProject extends ViewEdit {
      * @return Panel Data Project.
      */
     public JScrollPane getScrollPanelBaseProject() {
-        return this.scrollPanes.get("scrollPanelBaseProject");
+        return this.getScrollPane("scrollPanelBaseProject");
     }
     
     /**

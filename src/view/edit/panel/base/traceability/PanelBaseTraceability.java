@@ -85,7 +85,7 @@ public final class PanelBaseTraceability extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -93,6 +93,6 @@ public final class PanelBaseTraceability extends Panel {
      * @return Description Text Field.
      */
     public JTextField getDescriptionTextField() {
-        return this.textFields.get("descriptionTextField");
+        return this.getTextField("descriptionTextField");
     }
 }

@@ -93,7 +93,7 @@ public final class ViewEditMethod extends ViewEdit {
      * @return Scroll Panel Base Method.
      */
     public JScrollPane getScrollPanelBaseMethod() {
-        return this.scrollPanes.get("scrollPanelBaseMethod");
+        return this.getScrollPane("scrollPanelBaseMethod");
     }
     
     /**
@@ -101,6 +101,6 @@ public final class ViewEditMethod extends ViewEdit {
      * @return Scroll Panel Stereotype.
      */
     public JScrollPane getScrollPanelStereotype() {
-        return this.scrollPanes.get("scrollPanelStereotype");
+        return this.getScrollPane("scrollPanelStereotype");
     }
 }

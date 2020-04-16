@@ -64,6 +64,6 @@ public final class PanelEditProject extends PanelEdit {
      * @return Scroll Panel Base Project.
      */
     public JScrollPane getScrollPanelBaseProject() {
-        return this.scrollPanes.get("scrollPanelBaseProject");
+        return this.getScrollPane("scrollPanelBaseProject");
     }
 }

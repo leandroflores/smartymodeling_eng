@@ -68,7 +68,7 @@ public final class PanelClassOperation extends PanelOperation {
      * @return Package Button.
      */
     public JButton getPackageButton() {
-        return this.buttons.get("packageButton");
+        return this.getButton("packageButton");
     }
     
     /**
@@ -76,7 +76,7 @@ public final class PanelClassOperation extends PanelOperation {
      * @return Class Button.
      */
     public JButton getClassButton() {
-        return this.buttons.get("classButton");
+        return this.getButton("classButton");
     }
     
     /**
@@ -84,6 +84,6 @@ public final class PanelClassOperation extends PanelOperation {
      * @return Interface Button.
      */
     public JButton getInterfaceButton() {
-        return this.buttons.get("interfaceButton");
+        return this.getButton("interfaceButton");
     }
 }

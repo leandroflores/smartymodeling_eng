@@ -70,7 +70,7 @@ public abstract class ViewNew extends ViewModal {
      * @return Insert Button.
      */
     public JButton getInsertButton() {
-        return this.buttons.get("insertButton");
+        return this.getButton("insertButton");
     }
     
     /**
@@ -78,6 +78,6 @@ public abstract class ViewNew extends ViewModal {
      * @return Back Button.
      */
     public JButton getBackButton() {
-        return this.buttons.get("backButton");
+        return this.getButton("backButton");
     }
 }

@@ -4,7 +4,6 @@ import controller.view.edit.panel.base.ControllerPanelBaseElement;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.JTextField;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
@@ -55,7 +54,7 @@ public final class PanelBaseElement extends Panel {
         this.add(this.createLabel("Name*: ", 120));
         this.add(this.createTextField("nameTextField", "", 20));
         
-        this.add(this.createLabel("mandatoryLabel", "Mandatory: ", 120));
+        this.add(this.createLabel("Mandatory: ", 120));
         this.add(this.createCheckBox("mandatoryCheckBox", "", this.element.isMandatory()));
     }
     
@@ -96,15 +95,7 @@ public final class PanelBaseElement extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
-    }
-    
-    /**
-     * Method responsible for returning the Mandatory Label.
-     * @return Mandatory Label.
-     */
-    public JLabel getMandatoryLabel() {
-        return this.labels.get("mandatoryLabel");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -112,6 +103,6 @@ public final class PanelBaseElement extends Panel {
      * @return Mandatory Check Box.
      */
     public JCheckBox getMandatoryCheckBox() {
-        return this.checkBoxes.get("mandatoryCheckBox");
+        return this.getCheckBox("mandatoryCheckBox");
     }
 }

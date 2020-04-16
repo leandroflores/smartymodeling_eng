@@ -57,7 +57,7 @@ public class PanelBaseOptional extends Panel {
         this.getElementsScrollPane().setViewportView(this.createElementsPanel());
         this.getElementsScrollPane().setPreferredSize(new Dimension(500, 250));
         this.add(this.getElementsScrollPane());
-        this.addLines(1);
+//        this.addLines(1);
     }
     
     /**
@@ -110,7 +110,7 @@ public class PanelBaseOptional extends Panel {
      * @return Check Box.
      */
     public JCheckBox getCheckBox(Element element) {
-        return this.checkBoxes.get("checkBox" + element.getId());
+        return this.getCheckBox("checkBox" + element.getId());
     }
     
     /**
@@ -118,6 +118,6 @@ public class PanelBaseOptional extends Panel {
      * @return Elements Scroll Pane.
      */
     public JScrollPane getElementsScrollPane() {
-        return this.scrollPanes.get("elementsScrollPane");
+        return this.getScrollPane("elementsScrollPane");
     }
 }

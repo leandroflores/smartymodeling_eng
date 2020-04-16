@@ -4,7 +4,6 @@ import controller.view.new_.evaluation.ControllerViewNewMetric;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import model.structural.base.Project;
 import model.structural.base.evaluation.Metric;
 import view.edit.panel.base.evaluation.PanelBaseMetric;
 import view.edit.panel.base.evaluation.PanelBaseOperation;
@@ -99,7 +98,7 @@ public final class ViewNewMetric extends ViewNew {
      * @return Scroll Panel Base Metric.
      */
     public JScrollPane getScrollPanelBaseMetric() {
-        return this.scrollPanes.get("scrollPanelBaseMetric");
+        return this.getScrollPane("scrollPanelBaseMetric");
     }
     
     /**
@@ -115,6 +114,6 @@ public final class ViewNewMetric extends ViewNew {
      * @return Scroll Panel Operation.
      */
     public JScrollPane getScrollPanelOperation() {
-        return this.scrollPanes.get("scrollPanelOperation");
+        return this.getScrollPane("scrollPanelOperation");
     }
 }

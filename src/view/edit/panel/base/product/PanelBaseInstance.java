@@ -83,7 +83,7 @@ public final class PanelBaseInstance extends Panel {
      * @return Product Text Field.
      */
     public JTextField getProductTextField() {
-        return this.textFields.get("productTextField");
+        return this.getTextField("productTextField");
     }
     
     /**
@@ -91,7 +91,7 @@ public final class PanelBaseInstance extends Panel {
      * @return Diagram Text Field.
      */
     public JTextField getDiagramTextField() {
-        return this.textFields.get("diagramTextField");
+        return this.getTextField("diagramTextField");
     }
     
     /**
@@ -99,6 +99,6 @@ public final class PanelBaseInstance extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
 }

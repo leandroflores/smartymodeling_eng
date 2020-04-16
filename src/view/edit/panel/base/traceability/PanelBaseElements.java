@@ -67,16 +67,16 @@ public final class PanelBaseElements extends Panel {
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Diagram: "), this.getConstraints(1, 1, 0, 0));
-        this.add(this.createComboBox("diagramComboBox", new ControllerProject(this.project).getDiagrams(), 150), this.getConstraints(4, 1, 1, 0));
+        this.add(this.createLabel("Diagram: "), this.createConstraints(1, 1, 0, 0));
+        this.add(this.createComboBox("diagramComboBox", new ControllerProject(this.project).getDiagrams(), 150), this.createConstraints(4, 1, 1, 0));
         
-        this.add(this.createLabel("Element: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("elementComboBox", new ControllerDiagram(this.diagram).getDefaultElements(), 250), this.getConstraints(2, 1, 1, 1));
-        this.add(this.createButton("addElementButton", "", "add.png"), this.getConstraints(1, 1, 3, 1));
-        this.add(this.createButton("delElementButton", "", "not.png"), this.getConstraints(1, 1, 4, 1));
+        this.add(this.createLabel("Element: "), this.createConstraints(1, 1, 0, 1));
+        this.add(this.createComboBox("elementComboBox", new ControllerDiagram(this.diagram).getDefaultElements(), 250), this.createConstraints(2, 1, 1, 1));
+        this.add(this.createButton("addElementButton", "", "add.png"), this.createConstraints(1, 1, 3, 1));
+        this.add(this.createButton("delElementButton", "", "not.png"), this.createConstraints(1, 1, 4, 1));
         
         this.createList("elementsList");
-        this.add(this.getElementsScrollPane(), this.getConstraints(5, 10, 0, 2));
+        this.add(this.getElementsScrollPane(), this.createConstraints(5, 10, 0, 2));
     }
     
     /**
@@ -175,7 +175,7 @@ public final class PanelBaseElements extends Panel {
      * @return Diagram Combo Box.
      */
     public JComboBox getDiagramComboBox() {
-        return this.comboBoxes.get("diagramComboBox");
+        return this.getComboBox("diagramComboBox");
     }
     
     /**
@@ -183,7 +183,7 @@ public final class PanelBaseElements extends Panel {
      * @return Element Combo Box.
      */
     public JComboBox getElementComboBox() {
-        return this.comboBoxes.get("elementComboBox");
+        return this.getComboBox("elementComboBox");
     }
     
     /**
@@ -191,7 +191,7 @@ public final class PanelBaseElements extends Panel {
      * @return Add Element Button.
      */
     public JButton getAddElementButton() {
-        return this.buttons.get("addElementButton");
+        return this.getButton("addElementButton");
     }
     
     /**
@@ -199,7 +199,7 @@ public final class PanelBaseElements extends Panel {
      * @return Del Element Button.
      */
     public JButton getDelElementButton() {
-        return this.buttons.get("delElementButton");
+        return this.getButton("delElementButton");
     }
     
     /**
@@ -207,7 +207,7 @@ public final class PanelBaseElements extends Panel {
      * @return Elements List.
      */
     public JList getElementsList() {
-        return this.lists.get("elementsList");
+        return this.getList("elementsList");
     }
     
     /**
@@ -215,6 +215,6 @@ public final class PanelBaseElements extends Panel {
      * @return Elements Scroll Pane.
      */
     public JScrollPane getElementsScrollPane() {
-        return this.scrollPanes.get("elementsList");
+        return this.getScrollPane("elementsList");
     }
 }

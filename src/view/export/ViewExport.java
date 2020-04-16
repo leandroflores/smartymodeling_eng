@@ -45,7 +45,7 @@ public abstract class ViewExport extends ViewModal {
      * @return Export Button.
      */
     public JButton getExportButton() {
-        return this.buttons.get("exportButton");
+        return this.getButton("exportButton");
     }
     
     /**
@@ -53,6 +53,6 @@ public abstract class ViewExport extends ViewModal {
      * @return Cancel Button.
      */
     public JButton getCancelButton() {
-        return this.buttons.get("cancelButton");
+        return this.getButton("cancelButton");
     }
 }

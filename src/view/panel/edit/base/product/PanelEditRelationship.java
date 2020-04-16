@@ -77,6 +77,6 @@ public final class PanelEditRelationship extends PanelEdit {
      * @return Scroll Panel Base Relationship.
      */
     public JScrollPane getScrollPanelBaseRelationship() {
-        return this.scrollPanes.get("scrollPanelBaseRelationship");
+        return this.getScrollPane("scrollPanelBaseRelationship");
     }
 }

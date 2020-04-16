@@ -91,6 +91,17 @@ public class FunctDate {
     }
     
     /**
+     * Method responsible for returning a String with a Date in "yyyy-MM-dd" format.
+     * @param  date Date.
+     * @return String with a US Date formatted.
+     */
+    public String getFormattedUSDate(Date date) {
+        if (date != null)
+            return new SimpleDateFormat("yyyy-MM-dd").format(date);
+        return "";
+    }
+    
+    /**
      * Method responsible for returning a String by Format and Date.
      * @param  format Format.
      * @param  date Date.
@@ -154,7 +165,7 @@ public class FunctDate {
      * @return Written Day Name.
      */
     public String getDayName(int day) {
-        if ((day >= 0) && (day <= 6))
+        if (day >= 0 && day < 7)
             return DAY_NAMES[day];
         return "";
     }
@@ -165,7 +176,7 @@ public class FunctDate {
      * @return Month Name.
      */
     public String getMonthName(int mes) {
-        if ((mes >= 0) && (mes <= 11))
+        if (mes >= 0 && mes <= 11)
             return MONTH_NAMES[mes];
         return "";
     }

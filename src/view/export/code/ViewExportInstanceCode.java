@@ -93,6 +93,6 @@ public final class ViewExportInstanceCode extends ViewExport {
      * @return Panel Export Instance Code.
      */
     public JScrollPane getScrollPanelExportInstanceCode() {
-        return this.scrollPanes.get("scrollPanelExportInstanceCode");
+        return this.getScrollPane("scrollPanelExportInstanceCode");
     }
 }

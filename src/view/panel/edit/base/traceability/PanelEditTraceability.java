@@ -89,7 +89,7 @@ public final class PanelEditTraceability extends PanelEdit {
      * @return Scroll Panel Base Traceability.
      */
     public JScrollPane getScrollPanelBaseTraceability() {
-        return this.scrollPanes.get("scrollPanelBaseTraceability");
+        return this.getScrollPane("scrollPanelBaseTraceability");
     }
     
     /**
@@ -97,6 +97,6 @@ public final class PanelEditTraceability extends PanelEdit {
      * @return Scroll Panel Base Elements.
      */
     public JScrollPane getScrollPanelBaseElements() {
-        return this.scrollPanes.get("scrollPanelBaseElements");
+        return this.getScrollPane("scrollPanelBaseElements");
     }
 }

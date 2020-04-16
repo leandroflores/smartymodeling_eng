@@ -1,7 +1,6 @@
 package view.system;
 
 import controller.view.system.ControllerViewSystemInformation;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import view.ViewModal;
 import view.ViewStyle;
@@ -12,7 +11,9 @@ import view.system.panel.PanelInformation;
  * <p>Class of View <b>ViewSystemInformation</b>.</p>
  * <p>Class responsible for defining the <b>System Information View</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  23/05/2019
+ * @since  2019-05-23
+ * @see    controller.view.system.ControllerViewSystemInformation
+ * @see    view.ViewModal
  */
 public final class ViewSystemInformation extends ViewModal {
 
@@ -58,6 +59,6 @@ public final class ViewSystemInformation extends ViewModal {
      * @return JButton Ok.
      */
     public JButton getButtonOk() {
-        return this.buttons.get("buttonOk");
+        return this.getButton("buttonOk");
     }
 }

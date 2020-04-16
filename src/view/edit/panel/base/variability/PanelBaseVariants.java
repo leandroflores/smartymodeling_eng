@@ -57,18 +57,18 @@ public final class PanelBaseVariants extends Panel {
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Constraint: "), this.getConstraints(1, 1, 0, 0));
-        this.add(this.createComboBox("constraintComboBox", ControllerVariability.TYPES, 100), this.getConstraints(2, 1, 1, 0));
-        this.add(this.createTextFieldNoEditable("minimumTextField", "0", 3), this.getConstraints(1, 1, 3, 0));
-        this.add(this.createTextFieldNoEditable("maximumTextField", "0", 3), this.getConstraints(1, 1, 4, 0));        
+        this.add(this.createLabel("Constraint: "), this.createConstraints(1, 1, 0, 0));
+        this.add(this.createComboBox("constraintComboBox", ControllerVariability.TYPES, 100), this.createConstraints(2, 1, 1, 0));
+        this.add(this.createTextFieldNoEditable("minimumTextField", "0", 3), this.createConstraints(1, 1, 3, 0));
+        this.add(this.createTextFieldNoEditable("maximumTextField", "0", 3), this.createConstraints(1, 1, 4, 0));        
         
-        this.add(this.createLabel("Variant: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("variantComboBox", new ControllerDiagram(this.diagram).getDefaultElements(), 175), this.getConstraints(2, 1, 1, 1));
-        this.add(this.createButton("addVariantButton", "", "add.png"), this.getConstraints(1, 1, 3, 1));
-        this.add(this.createButton("delVariantButton", "", "not.png"), this.getConstraints(1, 1, 4, 1));
+        this.add(this.createLabel("Variant: "), this.createConstraints(1, 1, 0, 1));
+        this.add(this.createComboBox("variantComboBox", new ControllerDiagram(this.diagram).getDefaultElements(), 175), this.createConstraints(2, 1, 1, 1));
+        this.add(this.createButton("addVariantButton", "", "add.png"), this.createConstraints(1, 1, 3, 1));
+        this.add(this.createButton("delVariantButton", "", "not.png"), this.createConstraints(1, 1, 4, 1));
         
         this.createList("variantsList");
-        this.add(this.getVariantsScrollPane(), this.getConstraints(5, 10, 0, 2));
+        this.add(this.getVariantsScrollPane(), this.createConstraints(5, 10, 0, 2));
     }
     
     /**
@@ -162,7 +162,7 @@ public final class PanelBaseVariants extends Panel {
      * @return Constraint Combo Box.
      */
     public JComboBox getConstraintComboBox() {
-        return this.comboBoxes.get("constraintComboBox");
+        return this.getComboBox("constraintComboBox");
     }
     
     /**
@@ -170,7 +170,7 @@ public final class PanelBaseVariants extends Panel {
      * @return Minimum Text Field.
      */
     public JTextField getMinimumTextField() {
-        return this.textFields.get("minimumTextField");
+        return this.getTextField("minimumTextField");
     }
     
     /**
@@ -178,7 +178,7 @@ public final class PanelBaseVariants extends Panel {
      * @return Maximum Text Field.
      */
     public JTextField getMaximumTextField() {
-        return this.textFields.get("maximumTextField");
+        return this.getTextField("maximumTextField");
     }
     
     /**
@@ -186,7 +186,7 @@ public final class PanelBaseVariants extends Panel {
      * @return Variant Combo Box.
      */
     public JComboBox getVariantComboBox() {
-        return this.comboBoxes.get("variantComboBox");
+        return this.getComboBox("variantComboBox");
     }
     
     /**
@@ -194,7 +194,7 @@ public final class PanelBaseVariants extends Panel {
      * @return Add Variant Button.
      */
     public JButton getAddVariantButton() {
-        return this.buttons.get("addVariantButton");
+        return this.getButton("addVariantButton");
     }
     
     /**
@@ -202,7 +202,7 @@ public final class PanelBaseVariants extends Panel {
      * @return Del Variant Button.
      */
     public JButton getDelVariantButton() {
-        return this.buttons.get("delVariantButton");
+        return this.getButton("delVariantButton");
     }
     
     /**
@@ -210,7 +210,7 @@ public final class PanelBaseVariants extends Panel {
      * @return Variants List.
      */
     public JList getVariantsList() {
-        return this.lists.get("variantsList");
+        return this.getList("variantsList");
     }
     
     /**
@@ -218,6 +218,6 @@ public final class PanelBaseVariants extends Panel {
      * @return Variants Scroll Pane.
      */
     public JScrollPane getVariantsScrollPane() {
-        return this.scrollPanes.get("variantsList");
+        return this.getScrollPane("variantsList");
     }
 }

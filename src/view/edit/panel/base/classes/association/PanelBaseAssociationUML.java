@@ -117,7 +117,7 @@ public final class PanelBaseAssociationUML extends Panel {
      * @return Source Text Field.
      */
     public JTextField getSourceTextField() {
-        return this.textFields.get("sourceTextField");
+        return this.getTextField("sourceTextField");
     }
     
     /**
@@ -125,7 +125,7 @@ public final class PanelBaseAssociationUML extends Panel {
      * @return Target Text Field.
      */
     public JTextField getTargetTextField() {
-        return this.textFields.get("targetTextField");
+        return this.getTextField("targetTextField");
     }
     
     /**
@@ -133,7 +133,7 @@ public final class PanelBaseAssociationUML extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -141,7 +141,7 @@ public final class PanelBaseAssociationUML extends Panel {
      * @return Category Text Field.
      */
     public JTextField getCategoryTextField() {
-        return this.textFields.get("categoryTextField");
+        return this.getTextField("categoryTextField");
     }
     
     /**
@@ -149,6 +149,6 @@ public final class PanelBaseAssociationUML extends Panel {
      * @return Directed Check Box.
      */
     public JCheckBox getDirectedCheckBox() {
-        return this.checkBoxes.get("directedCheckBox");
+        return this.getCheckBox("directedCheckBox");
     }
 }

@@ -84,6 +84,6 @@ public final class ViewNewRequirement extends ViewNew {
      * @return Scroll Panel Base Requirement.
      */
     public JScrollPane getScrollPanelBaseRequirement() {
-        return this.scrollPanes.get("scrollPanelBaseRequirement");
+        return this.getScrollPane("scrollPanelBaseRequirement");
     }
 }

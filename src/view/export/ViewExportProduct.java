@@ -91,6 +91,6 @@ public final class ViewExportProduct extends ViewExport {
      * @return Panel Export Product.
      */
     public JScrollPane getScrollPanelExportProduct() {
-        return this.scrollPanes.get("scrollPanelExportProduct");
+        return this.getScrollPane("scrollPanelExportProduct");
     }
 }

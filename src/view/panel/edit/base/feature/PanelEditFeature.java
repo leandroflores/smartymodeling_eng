@@ -77,7 +77,7 @@ public final class PanelEditFeature extends PanelEditElement {
      * @return Scroll Panel Base Feature.
      */
     public JScrollPane getScrollPanelBaseFeature() {
-        return this.scrollPanes.get("scrollPanelBaseFeature");
+        return this.getScrollPane("scrollPanelBaseFeature");
     }
 
     /**

@@ -80,7 +80,7 @@ public abstract class ViewEvaluation extends ViewModal {
      * @return Refresh Button.
      */
     public JButton getRefreshButton() {
-        return this.buttons.get("refreshButton");
+        return this.getButton("refreshButton");
     }
     
     /**
@@ -88,7 +88,7 @@ public abstract class ViewEvaluation extends ViewModal {
      * @return Clear Button.
      */
     public JButton getClearButton() {
-        return this.buttons.get("clearButton");
+        return this.getButton("clearButton");
     }
     
     /**
@@ -96,6 +96,6 @@ public abstract class ViewEvaluation extends ViewModal {
      * @return Cancel Button.
      */
     public JButton getCancelButton() {
-        return this.buttons.get("cancelButton");
+        return this.getButton("cancelButton");
     }
 }

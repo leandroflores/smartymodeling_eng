@@ -109,7 +109,7 @@ public final class PanelBaseAttributeUML extends Panel {
      * @return Visibility Combo Box.
      */
     public JComboBox getVisibilityComboBox() {
-        return this.comboBoxes.get("visibilityComboBox");
+        return this.getComboBox("visibilityComboBox");
     }
     
     /**
@@ -117,7 +117,7 @@ public final class PanelBaseAttributeUML extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -125,7 +125,7 @@ public final class PanelBaseAttributeUML extends Panel {
      * @return Type Combo Box.
      */
     public JComboBox getTypeComboBox() {
-        return this.comboBoxes.get("typeComboBox");
+        return this.getComboBox("typeComboBox");
     }
     
     /**
@@ -133,7 +133,7 @@ public final class PanelBaseAttributeUML extends Panel {
      * @return Static Check Box.
      */
     public JCheckBox getStaticCheckBox() {
-        return this.checkBoxes.get("staticCheckBox");
+        return this.getCheckBox("staticCheckBox");
     }
     
     /**
@@ -141,6 +141,6 @@ public final class PanelBaseAttributeUML extends Panel {
      * @return Final Check Box.
      */
     public JCheckBox getFinalCheckBox() {
-        return this.checkBoxes.get("finalCheckBox");
+        return this.getCheckBox("finalCheckBox");
     }
 }

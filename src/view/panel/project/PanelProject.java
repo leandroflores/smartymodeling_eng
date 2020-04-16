@@ -442,7 +442,7 @@ public final class PanelProject extends Panel {
      * @return Scroll Panel Tree.
      */
     public JScrollPane getScrollPanelTree() {
-        return this.scrollPanes.get("scrollPanelTree");
+        return this.getScrollPane("scrollPanelTree");
     }
     
     /**
@@ -458,6 +458,6 @@ public final class PanelProject extends Panel {
      * @return Scroll Panel Edit
      */
     public JScrollPane getScrollPanelEdit() {
-        return this.scrollPanes.get("scrollPanelEdit");
+        return this.getScrollPane("scrollPanelEdit");
     }
 }

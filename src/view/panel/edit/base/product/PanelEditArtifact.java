@@ -77,6 +77,6 @@ public final class PanelEditArtifact extends PanelEdit {
      * @return Scroll Panel Base Artifact.
      */
     public JScrollPane getScrollPanelBaseArtifact() {
-        return this.scrollPanes.get("scrollPanelBaseArtifact");
+        return this.getScrollPane("scrollPanelBaseArtifact");
     }
 }

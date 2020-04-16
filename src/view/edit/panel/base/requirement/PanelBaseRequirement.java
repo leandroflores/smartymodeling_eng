@@ -53,17 +53,17 @@ public final class PanelBaseRequirement extends Panel {
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Id*: "), this.getConstraints(1, 1, 0, 0));
-        this.add(this.createTextField("idTextField", "", 10),  this.getConstraints(1, 1, 1, 0));
-        this.add(this.createLabel("Type*: "), this.getConstraints(1, 1, 2, 0));
-        this.add(this.createComboBox("typeComboBox", ControllerRequirement.TYPES, 10), this.getConstraints(2, 1, 3, 0));
+        this.add(this.createLabel("Id*: "), this.createConstraints(1, 1, 0, 0));
+        this.add(this.createTextField("idTextField", "", 10),  this.createConstraints(1, 1, 1, 0));
+        this.add(this.createLabel("Type*: "), this.createConstraints(1, 1, 2, 0));
+        this.add(this.createComboBox("typeComboBox", ControllerRequirement.TYPES, 10), this.createConstraints(2, 1, 3, 0));
         
-        this.add(this.createLabel("Name*: "), this.getConstraints(1, 1, 0, 1));
-        this.add(this.createTextField("nameTextField", "", 15), this.getConstraints(4, 1, 1, 1));
+        this.add(this.createLabel("Name*: "), this.createConstraints(1, 1, 0, 1));
+        this.add(this.createTextField("nameTextField", "", 15), this.createConstraints(4, 1, 1, 1));
         
         this.createTextArea("descriptionTextArea");
-        this.add(this.createLabel("Description*: "), this.getConstraints(1, 1, 0, 2));
-        this.add(this.getDescriptionScrollPane(), this.getConstraints(4, 5, 1, 2));
+        this.add(this.createLabel("Description*: "), this.createConstraints(1, 1, 0, 2));
+        this.add(this.getDescriptionScrollPane(), this.createConstraints(4, 5, 1, 2));
     }
     
     /**
@@ -97,7 +97,7 @@ public final class PanelBaseRequirement extends Panel {
      * @return Code Text Field.
      */
     public JTextField getCodeTextField() {
-        return this.textFields.get("codeTextField");
+        return this.getTextField("codeTextField");
     }
     
     /**
@@ -105,7 +105,7 @@ public final class PanelBaseRequirement extends Panel {
      * @return Type Combo Box.
      */
     public JComboBox getTypeComboBox() {
-        return this.comboBoxes.get("typeComboBox");
+        return this.getComboBox("typeComboBox");
     }
     
     /**
@@ -113,7 +113,7 @@ public final class PanelBaseRequirement extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -121,7 +121,7 @@ public final class PanelBaseRequirement extends Panel {
      * @return Description Text Area.
      */
     public JTextArea getDescriptionTextArea() {
-        return this.textAreas.get("descriptionTextArea");
+        return this.getTextArea("descriptionTextArea");
     }
     
     /**
@@ -129,6 +129,6 @@ public final class PanelBaseRequirement extends Panel {
      * @return Description Scroll Pane.
      */
     public JScrollPane getDescriptionScrollPane() {
-        return this.scrollPanes.get("descriptionTextArea");
+        return this.getScrollPane("descriptionTextArea");
     }
 }

@@ -43,7 +43,7 @@ public final class PanelEditDiagram extends PanelEdit {
         
         this.add(this.tabbedPane);
 
-        this.addLines(1);
+//        this.addLines(1);
     }
     
     /**
@@ -69,6 +69,6 @@ public final class PanelEditDiagram extends PanelEdit {
      * @return Scroll Panel Base Diagram.
      */
     public JScrollPane getScrollPanelBaseDiagram() {
-        return this.scrollPanes.get("scrollPanelBaseDiagram");
+        return this.getScrollPane("scrollPanelBaseDiagram");
     }
 }

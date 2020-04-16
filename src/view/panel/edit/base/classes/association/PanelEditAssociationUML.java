@@ -96,7 +96,7 @@ public final class PanelEditAssociationUML extends PanelEdit {
      * @return Scroll Panel Base Association UML.
      */
     public JScrollPane getScrollPanelBaseAssociationUML() {
-        return this.scrollPanes.get("scrollPanelBaseAssociationUML");
+        return this.getScrollPane("scrollPanelBaseAssociationUML");
     }
     
     /**
@@ -112,7 +112,7 @@ public final class PanelEditAssociationUML extends PanelEdit {
      * @return Scroll Panel Base Source.
      */
     public JScrollPane getScrollPanelBaseSource() {
-        return this.scrollPanes.get("scrollPanelBaseSource");
+        return this.getScrollPane("scrollPanelBaseSource");
     }
     
     /**
@@ -128,7 +128,7 @@ public final class PanelEditAssociationUML extends PanelEdit {
      * @return Scroll Panel Base Target.
      */
     public JScrollPane getScrollPanelBaseTarget() {
-        return this.scrollPanes.get("scrollPanelBaseTarget");
+        return this.getScrollPane("scrollPanelBaseTarget");
     }
     
     /**

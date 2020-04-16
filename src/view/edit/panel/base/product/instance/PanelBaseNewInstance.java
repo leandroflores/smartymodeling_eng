@@ -104,7 +104,7 @@ public final class PanelBaseNewInstance extends Panel {
      * @return Product Combo Box.
      */
     public JComboBox getProductComboBox() {
-        return this.comboBoxes.get("productComboBox");
+        return this.getComboBox("productComboBox");
     }
     
     /**
@@ -112,7 +112,7 @@ public final class PanelBaseNewInstance extends Panel {
      * @return Diagram Combo Box.
      */
     public JComboBox getDiagramComboBox() {
-        return this.comboBoxes.get("diagramComboBox");
+        return this.getComboBox("diagramComboBox");
     }
     
     /**
@@ -120,6 +120,6 @@ public final class PanelBaseNewInstance extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
 }

@@ -91,7 +91,7 @@ public final class PanelBaseRelationship extends Panel {
      * @return Product Text Field.
      */
     public JTextField getProductTextField() {
-        return this.textFields.get("productTextField");
+        return this.getTextField("productTextField");
     }
     
     /**
@@ -99,7 +99,7 @@ public final class PanelBaseRelationship extends Panel {
      * @return Instance Text Field.
      */
     public JTextField getInstanceTextField() {
-        return this.textFields.get("instanceTextField");
+        return this.getTextField("instanceTextField");
     }
     
     /**
@@ -107,7 +107,7 @@ public final class PanelBaseRelationship extends Panel {
      * @return Diagram Text Field.
      */
     public JTextField getDiagramTextField() {
-        return this.textFields.get("diagramTextField");
+        return this.getTextField("diagramTextField");
     }
     
     /**
@@ -115,7 +115,7 @@ public final class PanelBaseRelationship extends Panel {
      * @return Source Text Field.
      */
     public JTextField getSourceTextField() {
-        return this.textFields.get("sourceTextField");
+        return this.getTextField("sourceTextField");
     }
     
     /**
@@ -123,6 +123,6 @@ public final class PanelBaseRelationship extends Panel {
      * @return Target Text Field.
      */
     public JTextField getTargetTextField() {
-        return this.textFields.get("targetTextField");
+        return this.getTextField("targetTextField");
     }
 }

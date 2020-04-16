@@ -77,7 +77,7 @@ public final class PanelEditFlowUML extends PanelEdit {
      * @return Scroll Panel Base Flow UML.
      */
     public JScrollPane getScrollPanelBaseFlowUML() {
-        return this.scrollPanes.get("scrollPanelBaseFlowUML");
+        return this.getScrollPane("scrollPanelBaseFlowUML");
     }
 
     /**

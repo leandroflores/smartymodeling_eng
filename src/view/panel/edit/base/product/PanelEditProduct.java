@@ -76,6 +76,6 @@ public final class PanelEditProduct extends PanelEdit {
      * @return Scroll Panel Base Product.
      */
     public JScrollPane getScrollPanelBaseProduct() {
-        return this.scrollPanes.get("scrollPanelBaseProduct");
+        return this.getScrollPane("scrollPanelBaseProduct");
     }
 }

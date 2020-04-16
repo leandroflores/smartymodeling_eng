@@ -85,7 +85,7 @@ public final class ViewEditDiagram extends ViewEdit {
      * @return Panel Base Diagram.
      */
     public JScrollPane getScrollPanelBaseDiagram() {
-        return this.scrollPanes.get("scrollPanelBaseDiagram");
+        return this.getScrollPane("scrollPanelBaseDiagram");
     }
     
     /**

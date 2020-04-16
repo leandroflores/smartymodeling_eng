@@ -93,7 +93,7 @@ public final class ViewEditAttribute extends ViewEdit {
      * @return Scroll Panel Base Attribute.
      */
     public JScrollPane getScrollPanelBaseAttribute() {
-        return this.scrollPanes.get("scrollPanelBaseAttribute");
+        return this.getScrollPane("scrollPanelBaseAttribute");
     }
     
     /**
@@ -101,6 +101,6 @@ public final class ViewEditAttribute extends ViewEdit {
      * @return Scroll Panel Stereotype.
      */
     public JScrollPane getScrollPanelStereotype() {
-        return this.scrollPanes.get("scrollPanelStereotype");
+        return this.getScrollPane("scrollPanelStereotype");
     }
 }

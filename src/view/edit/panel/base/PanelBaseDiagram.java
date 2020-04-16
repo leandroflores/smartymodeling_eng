@@ -82,7 +82,7 @@ public final class PanelBaseDiagram extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -90,6 +90,6 @@ public final class PanelBaseDiagram extends Panel {
      * @return Type Text Field.
      */
     public JTextField getTypeTextField() {
-        return this.textFields.get("typeTextField");
+        return this.getTextField("typeTextField");
     }
 }

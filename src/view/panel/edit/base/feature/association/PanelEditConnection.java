@@ -70,7 +70,7 @@ public final class PanelEditConnection extends PanelEdit {
      * @return Scroll Panel Base Connection.
      */
     public JScrollPane getScrollPanelBaseConnection() {
-        return this.scrollPanes.get("scrollPanelBaseConnection");
+        return this.getScrollPane("scrollPanelBaseConnection");
     }
     
     /**

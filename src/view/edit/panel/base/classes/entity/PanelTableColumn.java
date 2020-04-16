@@ -59,7 +59,7 @@ public final class PanelTableColumn extends Panel {
     private void addTable() {
         this.createTable("parametersTable");
         this.addColumns("parametersTable", new String[]{"Name", "Type"});
-        this.add(this.scrollPanes.get("parametersTable"));
+        this.add(this.getScrollPane("parametersTable"));
     }
     
     /**

@@ -93,6 +93,6 @@ public final class ViewExportDiagramCode extends ViewExport {
      * @return Panel Export Diagram Code.
      */
     public JScrollPane getScrollPanelExportDiagramCode() {
-        return this.scrollPanes.get("scrollPanelExportDiagramCode");
+        return this.getScrollPane("scrollPanelExportDiagramCode");
     }
 }

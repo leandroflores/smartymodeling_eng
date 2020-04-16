@@ -102,7 +102,7 @@ public final class PanelBaseClassUML extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.textFields.get("nameTextField");
+        return this.getTextField("nameTextField");
     }
     
     /**
@@ -110,7 +110,7 @@ public final class PanelBaseClassUML extends Panel {
      * @return Abstract Check Box.
      */
     public JCheckBox getAbstractCheckBox() {
-        return this.checkBoxes.get("abstractCheckBox");
+        return this.getCheckBox("abstractCheckBox");
     }
     
     /**
@@ -118,7 +118,7 @@ public final class PanelBaseClassUML extends Panel {
      * @return Final Check Box.
      */
     public JCheckBox getFinalCheckBox() {
-        return this.checkBoxes.get("finalCheckBox");
+        return this.getCheckBox("finalCheckBox");
     }
     
     /**
@@ -126,6 +126,6 @@ public final class PanelBaseClassUML extends Panel {
      * @return Mandatory Check Box.
      */
     public JCheckBox getMandatoryCheckBox() {
-        return this.checkBoxes.get("mandatoryCheckBox");
+        return this.getCheckBox("mandatoryCheckBox");
     }
 }

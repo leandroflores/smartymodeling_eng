@@ -95,7 +95,7 @@ public final class PanelMain extends Panel {
      * Method responsible for activating Panel.
      */
     public void activate() {
-        Iterator<JButton> iterator = this.buttons.values().iterator();
+        Iterator<JButton> iterator = this.getButtons().values().iterator();
         while (iterator.hasNext())
                iterator.next().setEnabled(true);
     }
@@ -131,7 +131,7 @@ public final class PanelMain extends Panel {
      * @return New Project Button.
      */
     public JButton getNewProjectButton() {
-        return this.buttons.get("newProjectButton");
+        return this.getButton("newProjectButton");
     }
     
     /**
@@ -139,7 +139,7 @@ public final class PanelMain extends Panel {
      * @return Open Project Button.
      */
     public JButton getOpenProjectButton() {
-        return this.buttons.get("openProjectButton");
+        return this.getButton("openProjectButton");
     }
     
     /**
@@ -147,7 +147,7 @@ public final class PanelMain extends Panel {
      * @return Save Project Button.
      */
     public JButton getSaveProjectButton() {
-        return this.buttons.get("saveProjectButton");
+        return this.getButton("saveProjectButton");
     }
     
     /**
@@ -155,7 +155,7 @@ public final class PanelMain extends Panel {
      * @return Close Project Button.
      */
     public JButton getCloseProjectButton() {
-        return this.buttons.get("closeProjectButton");
+        return this.getButton("closeProjectButton");
     }
     
     /**
@@ -163,7 +163,7 @@ public final class PanelMain extends Panel {
      * @return Undo Button.
      */
     public JButton getUndoButton() {
-        return this.buttons.get("undoButton");
+        return this.getButton("undoButton");
     }
     
     /**
@@ -171,7 +171,7 @@ public final class PanelMain extends Panel {
      * @return Redo Button.
      */
     public JButton getRedoButton() {
-        return this.buttons.get("redoButton");
+        return this.getButton("redoButton");
     }
     
     /**
@@ -179,7 +179,7 @@ public final class PanelMain extends Panel {
      * @return Original Zoom Button.
      */
     public JButton getOriginalZoomButton() {
-        return this.buttons.get("originalZoomButton");
+        return this.getButton("originalZoomButton");
     }
     
     /**
@@ -187,7 +187,7 @@ public final class PanelMain extends Panel {
      * @return Zoom In Button.
      */
     public JButton getZoomInButton() {
-        return this.buttons.get("zoomInButton");
+        return this.getButton("zoomInButton");
     }
     
     /**
@@ -195,7 +195,7 @@ public final class PanelMain extends Panel {
      * @return Zoom Out Button.
      */
     public JButton getZoomOutButton() {
-        return this.buttons.get("zoomOutButton");
+        return this.getButton("zoomOutButton");
     }
     
     /**
@@ -203,7 +203,7 @@ public final class PanelMain extends Panel {
      * @return Export Image Button.
      */
     public JButton getExportImageButton() {
-        return this.buttons.get("exportImageButton");
+        return this.getButton("exportImageButton");
     }
     
     /**
@@ -211,7 +211,7 @@ public final class PanelMain extends Panel {
      * @return Help Button.
      */
     public JButton getHelpButton() {
-        return this.buttons.get("helpButton");
+        return this.getButton("helpButton");
     }
     
     /**
@@ -219,6 +219,6 @@ public final class PanelMain extends Panel {
      * @return Version Button.
      */
     public JButton getVersionButton() {
-        return this.buttons.get("versionButton");
+        return this.getButton("versionButton");
     }
 }

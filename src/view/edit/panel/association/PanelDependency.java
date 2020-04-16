@@ -64,7 +64,7 @@ public final class PanelDependency extends Panel {
      * @return Dependency Table.
      */
     public JTable getDependencyTable() {
-        return this.tables.get("dependencyTable");
+        return this.getTable("dependencyTable");
     }
     
     /**
@@ -72,6 +72,6 @@ public final class PanelDependency extends Panel {
      * @return Scroll Dependency Table.
      */
     public JScrollPane getScrollDependencyTable() {
-        return this.scrollPanes.get("dependencyTable");
+        return this.getScrollPane("dependencyTable");
     }
 }

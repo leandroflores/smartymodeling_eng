@@ -3,10 +3,8 @@ package view.panel.edit.base;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.base.Stereotype;
-import view.edit.panel.base.PanelBaseDiagram;
 import view.edit.panel.base.PanelBaseStereotype;
 import view.panel.edit.PanelEdit;
 import view.structural.ViewMenu;
@@ -45,7 +43,7 @@ public final class PanelEditStereotype extends PanelEdit {
         
         this.add(this.tabbedPane);
 
-        this.addLines(1);
+//        this.addLines(1);
     }
     
     /**
@@ -71,6 +69,6 @@ public final class PanelEditStereotype extends PanelEdit {
      * @return Scroll Panel Base Stereotype.
      */
     public JScrollPane getScrollPanelBaseStereotype() {
-        return this.scrollPanes.get("scrollPanelBaseStereotype");
+        return this.getScrollPane("scrollPanelBaseStereotype");
     }
 }

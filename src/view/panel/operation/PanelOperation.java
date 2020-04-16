@@ -120,7 +120,7 @@ public abstract class PanelOperation extends Panel {
      * @return Click Button.
      */
     public JButton getClickButton() {
-        return this.buttons.get("clickButton");
+        return this.getButton("clickButton");
     }
     
     /**
@@ -128,7 +128,7 @@ public abstract class PanelOperation extends Panel {
      * @return Variability Button.
      */
     public JButton getVariabilityButton() {
-        return this.buttons.get("variabilityButton");
+        return this.getButton("variabilityButton");
     }
     
     /**
@@ -136,7 +136,7 @@ public abstract class PanelOperation extends Panel {
      * @return Edit Button.
      */
     public JButton getEditButton() {
-        return this.buttons.get("editButton");
+        return this.getButton("editButton");
     }
     
     /**
@@ -144,7 +144,7 @@ public abstract class PanelOperation extends Panel {
      * @return Delete Button.
      */
     public JButton getDeleteButton() {
-        return this.buttons.get("deleteButton");
+        return this.getButton("deleteButton");
     }
     
     /**
@@ -152,6 +152,6 @@ public abstract class PanelOperation extends Panel {
      * @return Association ComboBox.
      */
     public JComboBox getAssociationComboBox() {
-        return this.comboBoxes.get("associationComboBox");
+        return this.getComboBox("associationComboBox");
     }
 }

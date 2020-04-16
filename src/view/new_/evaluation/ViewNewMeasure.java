@@ -160,7 +160,7 @@ public final class ViewNewMeasure extends ViewNew {
      * @return Scroll Panel Base Measure.
      */
     public JScrollPane getScrollPanelBaseMeasure() {
-        return this.scrollPanes.get("scrollPanelBaseMeasure");
+        return this.getScrollPane("scrollPanelBaseMeasure");
     }
     
     /**
@@ -176,7 +176,7 @@ public final class ViewNewMeasure extends ViewNew {
      * @return Scroll Panel Target.
      */
     public JScrollPane getScrollPanelBaseTarget() {
-        return this.scrollPanes.get("scrollPanelBaseTarget");
+        return this.getScrollPane("scrollPanelBaseTarget");
     }
     
     /**
@@ -192,6 +192,6 @@ public final class ViewNewMeasure extends ViewNew {
      * @return Scroll Panel Evaluation.
      */
     public JScrollPane getScrollPanelEvaluation() {
-        return this.scrollPanes.get("scrollPanelEvaluation");
+        return this.getScrollPane("scrollPanelEvaluation");
     }
 }
