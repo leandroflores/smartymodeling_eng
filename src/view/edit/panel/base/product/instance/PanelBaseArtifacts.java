@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.JTextField;
 import model.structural.base.product.Instance;
-import view.Panel;
+import view.panel.Panel;
 import view.new_.product.ViewNewInstance;
 
 /**
@@ -15,7 +15,7 @@ import view.new_.product.ViewNewInstance;
  * @since  09/10/2019
  * @see    controller.view.edit.panel.base.product.instance.ControllerPanelBaseArtifacts
  * @see    model.structural.base.product.Instance
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public class PanelBaseArtifacts extends Panel {
     private final ViewNewInstance viewNew;

@@ -81,15 +81,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
     
     @Override
     public void addHeader() {
-        this.setTitle();
         this.addLines(1);
-    }
-    
-    /**
-     * Method responsible for defining the View Title.
-     */
-    protected void setTitle() {
-        this.setTitle(ViewStyle.SYSTEM + this.title);
     }
     
     /**
@@ -110,17 +102,6 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
         JLabel label = new JLabel(title);
                label.addKeyListener(this.controller);
                label.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
-        return label;
-    }
-    
-    /**
-     * Method responsible for returning a New Title Label.
-     * @param  title Label Title.
-     * @return New Title Label.
-     */
-    protected JLabel createTitleLabel(String title) {
-        JLabel label = this.createLabel(title);
-               label.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE + 10));
         return label;
     }
     

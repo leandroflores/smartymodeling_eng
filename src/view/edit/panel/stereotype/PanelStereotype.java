@@ -14,7 +14,7 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Link;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -23,7 +23,7 @@ import view.structural.ViewMenu;
  * @author Leandro
  * @since  29/05/2019
  * @see    controller.view.edit.panel.stereotype.ControllerPanelStereotype
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelStereotype extends Panel {
     private final ViewMenu viewMenu;

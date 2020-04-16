@@ -1,6 +1,6 @@
 package controller.view.edit.panel.base.product.instance;
 
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import model.structural.base.Diagram;
@@ -13,7 +13,7 @@ import view.message.ViewError;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseNewInstance</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  07/10/2019
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    model.structural.base.product.Instance
  * @see    view.edit.panel.base.product.instance.PanelBaseNewInstance
  */

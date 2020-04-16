@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.MethodUML;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -14,7 +14,7 @@ import view.structural.ViewMenu;
  * @since  18/06/2019
  * @see    controller.view.edit.panel.base.classs.
  * @see    model.structural.diagram.classes.base.MethodUML
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelParametersUML extends Panel {
     private final ViewMenu viewMenu;

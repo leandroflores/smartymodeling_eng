@@ -7,7 +7,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import model.structural.base.product.Product;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -17,7 +17,7 @@ import view.structural.ViewMenu;
  * @since  07/10/2019
  * @see    controller.view.edit.panel.base.product.ControllerPanelBaseProduct
  * @see    model.structural.base.product.Product
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseProduct extends Panel {
     private final ViewMenu viewMenu;

@@ -1,7 +1,5 @@
 package view.panel.edit.base.classes;
 
-import java.awt.Dimension;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.ClassUML;
@@ -10,40 +8,34 @@ import view.panel.edit.base.PanelEditElement;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelEditClassUML</b>.</p> 
- * <p>Class responsible for defining a Panel for Edit the <b>Class UML</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelEditClassUML</b>.</p>
+ * <p>Class responsible for defining a <b>Class UML Edit Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  17/06/2019
+ * @since  2019-06-17
  * @see    model.structural.diagram.classes.base.ClassUML
  * @see    view.panel.edit.base.PanelEditElement
  */
 public final class PanelEditClassUML extends PanelEditElement {
-    private final ClassDiagram diagram;
-    private final ClassUML classUML;
-    private PanelBaseClassUML panelBaseClassUML;
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param diagram Class Diagram.
-     * @param classUML Class UML.
+     * @param class_ Class UML.
      */
-    public PanelEditClassUML(ViewMenu viewMenu, ClassDiagram diagram, ClassUML classUML) {
-        super(viewMenu, classUML);
-        this.diagram  = diagram;
-        this.classUML = classUML;
-        this.setPreferredSize(new Dimension(200, 100));
+    public PanelEditClassUML(ViewMenu view, ClassDiagram diagram, ClassUML class_) {
+        super(view, diagram, class_);
         this.addComponents();
     }
     
     @Override
     protected void addComponents() {
         this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(100, 100));
+//        this.tabbedPane.setPreferredSize(new Dimension(100, 100));
         
         this.addPanelBaseClassUML();
-        this.addPanelStereotype();
-        this.addPanelDependency();
+        super.addPanelStereotype();
+        super.addPanelDependency();
         
         this.add(this.tabbedPane);
     }
@@ -51,42 +43,28 @@ public final class PanelEditClassUML extends PanelEditElement {
     /**
      * Method responsible for adding the Panel Base Class UML.
      */
-    private void addPanelBaseClassUML() {
-        this.panelBaseClassUML = new PanelBaseClassUML(this.viewMenu, this.diagram, this.classUML);
-        this.createScrollPane("scrollPanelBaseClassUML", this.panelBaseClassUML);
-        this.getScrollPanelBaseClassUML().setViewportView(this.panelBaseClassUML);
-        this.tabbedPane.add("Class", this.getScrollPanelBaseClassUML());
+    protected void addPanelBaseClassUML() {
+        this.addPanel("panelBaseClassUML", new PanelBaseClassUML(this.viewMenu, this.getDiagram(), this.getElement()));
+        this.createScrollPane("scrollPanelBaseElement",  this.getPanelBaseClassUML());
+        this.getScrollPanelBaseElement().setViewportView(this.getPanelBaseClassUML());
+        this.tabbedPane.add("Class", this.getScrollPanelBaseElement());
     }
     
-    /**
-     * Method responsible for returning the Diagram.
-     * @return Diagram.
-     */
+    @Override
     public ClassDiagram getDiagram() {
-        return this.diagram;
+        return (ClassDiagram) this.diagram;
     }
     
-    /**
-     * Method responsible for returning the Class UML.
-     * @return Class UML.
-     */
-    public ClassUML getClassUML() {
-        return this.classUML;
+    @Override
+    public ClassUML getElement() {
+        return (ClassUML) this.element;
     }
     
-    /**
-     * Method responsible for returning the Scroll Panel Base Class UML.
-     * @return Scroll Panel Base Class UML.
-     */
-    public JScrollPane getScrollPanelBaseClassUML() {
-        return this.getScrollPane("scrollPanelBaseClassUML");
-    }
-
     /**
      * Method responsible for returning the Panel Base Class UML.
      * @return Panel Base Class UML.
      */
     public PanelBaseClassUML getPanelBaseClassUML() {
-        return this.panelBaseClassUML;
+        return (PanelBaseClassUML) this.getPanel("panelBaseClassUML");
     }
 }

@@ -1,6 +1,6 @@
 package controller.view.edit.panel.base.sequence;
 
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import model.structural.diagram.usecase.base.ActorUML;
@@ -11,7 +11,7 @@ import view.edit.panel.base.sequence.PanelBaseLifelineUML;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseLifelineUML</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  03/10/2019
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    view.edit.panel.base.sequence.PanelBaseLifelineUML
  */
 public class ControllerPanelBaseLifelineUML extends ControllerPanel {

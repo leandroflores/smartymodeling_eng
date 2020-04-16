@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
 import model.structural.base.Diagram;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -15,7 +15,7 @@ import view.structural.ViewMenu;
  * @since  29/05/2019
  * @see    controller.view.edit.panel.base.ControllerPanelBaseDiagram
  * @see    model.structural.base.Diagram
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseDiagram extends Panel {
     private final ViewMenu viewMenu;

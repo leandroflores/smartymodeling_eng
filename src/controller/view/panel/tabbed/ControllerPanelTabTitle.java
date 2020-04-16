@@ -1,6 +1,6 @@
 package controller.view.panel.tabbed;
 
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import model.structural.base.Diagram;
@@ -12,7 +12,7 @@ import view.panel.tabbed.PanelTabTitle;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>Panel Tab Title</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-05-31
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    view.panel.tabbed.PanelTabTitle
  */
 public class ControllerPanelTabTitle extends ControllerPanel {

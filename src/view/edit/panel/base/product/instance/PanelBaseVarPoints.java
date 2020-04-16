@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import model.structural.base.Element;
 import model.structural.base.variability.Variability;
-import view.Panel;
+import view.panel.Panel;
 import view.new_.product.ViewNewInstance;
 
 /**
@@ -23,7 +23,7 @@ import view.new_.product.ViewNewInstance;
  * @since  09/10/2019
  * @see    controller.view.edit.panel.base.product.
  * @see    model.structural.base.product.Instance
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public class PanelBaseVarPoints extends Panel {
     private final ViewNewInstance viewNew;

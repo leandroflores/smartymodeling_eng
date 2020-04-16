@@ -3,30 +3,27 @@ package view.panel.edit.base;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import model.structural.base.Project;
 import view.edit.panel.base.PanelBaseProject;
 import view.panel.edit.PanelEdit;
 import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditProject</b>.</p> 
- * <p>Class responsible for defining a Panel for Edit the <b>Project</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining a <b>Project Edit Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  11/06/2019
+ * @since  2019-06-11
  * @see    model.structural.base.Project
  * @see    view.panel.edit.PanelEdit
  */
 public final class PanelEditProject extends PanelEdit {
-    private final Project project;
     private PanelBaseProject panelBaseProject;
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      */
-    public PanelEditProject(ViewMenu viewMenu) {
-        super(viewMenu);
-        this.project = this.viewMenu.getProject();
+    public PanelEditProject(ViewMenu view) {
+        super(view);
         this.setPreferredSize(new Dimension(200, 100));
         this.addComponents();
     }
@@ -45,18 +42,18 @@ public final class PanelEditProject extends PanelEdit {
      * Method responsible for adding the Panel Base Project.
      */
     private void addPanelBaseProject() {
-        this.panelBaseProject = new PanelBaseProject(this.getViewMenu());
-        this.createScrollPane("scrollPanelBaseProject", this.panelBaseProject);
-        this.getScrollPanelBaseProject().setViewportView(this.panelBaseProject);
+        this.addPanel("panelBaseProject", new PanelBaseProject(this.viewMenu));
+        this.createScrollPane("scrollPanelBaseProject",  this.getPanelBaseProject());
+        this.getScrollPanelBaseProject().setViewportView(this.getPanelBaseProject());
         this.tabbedPane.add("Project", this.getScrollPanelBaseProject());
     }
     
     /**
-     * Method responsible for returning the Project.
-     * @return Project.
+     * Method responsible for returning the Panel Base Project.
+     * @return Panel Base Project.
      */
-    public Project getProject() {
-        return this.project;
+    public PanelBaseProject getPanelBaseProject() {
+        return (PanelBaseProject) this.getPanel("panelBaseProject");
     }
     
     /**

@@ -1,6 +1,6 @@
 package controller.view.panel.evaluation;
 
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import funct.evaluation.Evaluation;
 import funct.evaluation.base.EvaluationDiagram;
 import funct.evaluation.base.EvaluationProduct;
@@ -19,7 +19,7 @@ import view.panel.evaluation.PanelEvaluation;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelEvaluation</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  01/04/2020
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    view.panel.evaluation.PanelEvaluation
  */
 public abstract class ControllerPanelEvaluation extends ControllerPanel {

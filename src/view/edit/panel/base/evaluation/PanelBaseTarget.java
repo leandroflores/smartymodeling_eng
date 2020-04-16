@@ -8,7 +8,7 @@ import javax.swing.JTextField;
 import model.controller.structural.base.ControllerProject;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
-import view.Panel;
+import view.panel.Panel;
 import view.new_.evaluation.ViewNewMeasure;
 
 /**
@@ -18,7 +18,7 @@ import view.new_.evaluation.ViewNewMeasure;
  * @since  23/10/2019
  * @see    controller.view.edit.panel.base.evaluation.
  * @see    model.structural.base.evaluation.Measure
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseTarget extends Panel {
     private final ViewNewMeasure viewNew;

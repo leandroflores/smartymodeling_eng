@@ -11,7 +11,7 @@ import javax.swing.tree.TreeSelectionModel;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
-import view.Panel;
+import view.panel.Panel;
 import view.panel.tree.popup.TreePopup;
 import view.structural.ViewMenu;
 
@@ -21,7 +21,7 @@ import view.structural.ViewMenu;
  * @author Leandro
  * @since  2019-05-27
  * @see    model.structural.base.Project
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public abstract class PanelTree extends Panel {
     protected final ViewMenu viewMenu;

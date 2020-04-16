@@ -2,7 +2,7 @@ package controller.view.panel.diagram;
 
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGeometry;
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -18,7 +18,7 @@ import view.panel.diagram.PanelDiagram;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>Diagram Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  27/05/2019
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    java.awt.event.MouseListener
  * @see    view.panel.diagram.PanelDiagram
  */

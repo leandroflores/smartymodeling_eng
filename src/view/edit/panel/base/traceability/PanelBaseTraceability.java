@@ -6,7 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JTextField;
 import model.structural.base.Project;
 import model.structural.base.traceability.Traceability;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -16,7 +16,7 @@ import view.structural.ViewMenu;
  * @since  22/07/2019
  * @see    controller.view.edit.panel.base.traceability.ControllerPanelBaseTraceability
  * @see    model.structural.base.traceability.Traceability
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseTraceability extends Panel {
     private final ViewMenu viewMenu;

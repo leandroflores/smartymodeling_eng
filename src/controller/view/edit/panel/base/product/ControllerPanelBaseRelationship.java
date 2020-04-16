@@ -1,6 +1,6 @@
 package controller.view.edit.panel.base.product;
 
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import view.edit.panel.base.product.PanelBaseRelationship;
@@ -10,7 +10,7 @@ import view.edit.panel.base.product.PanelBaseRelationship;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseRelationship</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  14/11/2019
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    model.structural.base.product.Relationship
  * @see    view.edit.panel.base.product.PanelBaseRelationship
  */

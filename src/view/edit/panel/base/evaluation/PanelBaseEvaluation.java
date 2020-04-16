@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import model.controller.structural.base.ControllerProject;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
-import view.Panel;
+import view.panel.Panel;
 import view.new_.evaluation.ViewNewMeasure;
 import view.structural.ViewMenu;
 
@@ -23,7 +23,7 @@ import view.structural.ViewMenu;
  * @since  03/09/2019
  * @see    controller.view.edit.panel.base.evaluation.ControllerPanelBaseEvaluation
  * @see    model.structural.base.evaluation.Measure
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseEvaluation extends Panel {
     private final ViewNewMeasure viewNew;

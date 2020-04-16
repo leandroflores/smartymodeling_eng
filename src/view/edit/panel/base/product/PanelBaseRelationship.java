@@ -4,7 +4,7 @@ import controller.view.edit.panel.base.product.ControllerPanelBaseRelationship;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
 import model.structural.base.product.Relationship;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -14,7 +14,7 @@ import view.structural.ViewMenu;
  * @since  14/11/2019
  * @see    controller.view.edit.panel.base.product.ControllerPanelBaseRelationship
  * @see    model.structural.base.product.Relationship
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseRelationship extends Panel {
     private final ViewMenu viewMenu;

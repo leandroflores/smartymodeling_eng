@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import model.structural.base.Diagram;
 import model.structural.base.product.Instance;
-import view.Panel;
+import view.panel.Panel;
 import view.panel.diagram.PanelDiagram;
 import view.panel.instance.PanelInstance;
 import view.panel.modeling.PanelModeling;
@@ -20,7 +20,7 @@ import view.panel.modeling.PanelModeling;
  * @author Leandro
  * @since  2019-05-27
  * @see    controller.view.panel.tabbed.ControllerPanelTabTitle
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelTabTitle extends Panel {
     private final PanelModeling panel;

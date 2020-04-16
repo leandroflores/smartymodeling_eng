@@ -8,7 +8,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.sequence.base.LifelineUML;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -18,7 +18,7 @@ import view.structural.ViewMenu;
  * @since  03/10/2019
  * @see    controller.view.edit.panel.base.sequence.ControllerPanelBaseLifelineUML
  * @see    model.structural.diagram.sequence.base.LifelineUML
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseLifelineUML extends Panel {
     private final ViewMenu viewMenu;

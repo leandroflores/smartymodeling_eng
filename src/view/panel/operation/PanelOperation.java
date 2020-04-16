@@ -8,7 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import view.Panel;
+import view.panel.Panel;
 import view.panel.diagram.PanelDiagram;
 
 /**
@@ -16,7 +16,7 @@ import view.panel.diagram.PanelDiagram;
  * <p>Class responsible for defining a Panel for <b>Diagram Operation</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  09/04/2019
- * @see    view.Panel
+ * @see    view.panel.Panel
  * @see    view.panel.diagram.PanelDiagram
  */
 public abstract class PanelOperation extends Panel {

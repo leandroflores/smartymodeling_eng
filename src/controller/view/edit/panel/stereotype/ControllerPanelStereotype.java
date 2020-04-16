@@ -1,6 +1,6 @@
 package controller.view.edit.panel.stereotype;
 
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import model.structural.base.Element;
@@ -16,7 +16,7 @@ import view.edit.panel.stereotype.PanelStereotype;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelStereotype</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  31/05/2019
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    view.edit.panel.stereotype.PanelStereotype
  */
 public class ControllerPanelStereotype extends ControllerPanel {

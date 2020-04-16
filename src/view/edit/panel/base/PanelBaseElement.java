@@ -7,7 +7,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -17,7 +17,7 @@ import view.structural.ViewMenu;
  * @since  30/05/2019
  * @see    controller.view.edit.panel.base.ControllerPanelBaseElement
  * @see    model.structural.base.Element
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseElement extends Panel {
     private final ViewMenu viewMenu;

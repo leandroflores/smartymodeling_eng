@@ -12,7 +12,7 @@ import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
 import model.structural.diagram.sequence.base.association.MessageUML;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -22,7 +22,7 @@ import view.structural.ViewMenu;
  * @since  04/10/2019
  * @see    controller.view.edit.panel.base.sequence.ControllerPanelBaseMessageUML
  * @see    model.structural.diagram.sequence.base.association.MessageUML
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseMessageUML extends Panel {
     private final ViewMenu viewMenu;

@@ -4,7 +4,7 @@ import funct.FunctView;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -12,7 +12,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Logo Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  27/05/2019
- * @see    view.Panel
+ * @see    view.panel.Panel
  * @see    view.structural.ViewMenu
  */
 public final class PanelLogo extends Panel {

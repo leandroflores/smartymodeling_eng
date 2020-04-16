@@ -2,26 +2,29 @@ package view.panel.edit;
 
 import java.awt.Dimension;
 import javax.swing.JTabbedPane;
-import view.Panel;
+import model.structural.base.Project;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEdit</b>.</p> 
- * <p>Class responsible for defining a Panel for <b>Edit</b> the Elements of SMartyModeling.</p>
+ * <p>Class responsible for defining a Abstract Model for <b>Edit Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  11/06/2019
- * @see    view.Panel
+ * @since  2019-06-11
+ * @see    view.panel.Panel
  */
 public class PanelEdit extends Panel {
     protected final ViewMenu viewMenu;
+    protected final Project project;
     protected JTabbedPane tabbedPane;
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      */
-    public PanelEdit(ViewMenu viewMenu) {
-        this.viewMenu   = viewMenu;
+    public PanelEdit(ViewMenu view) {
+        this.viewMenu   = view;
+        this.project    = view.getProject();
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.setPreferredSize(new Dimension(550, 200));
     }
@@ -35,5 +38,13 @@ public class PanelEdit extends Panel {
      */
     public ViewMenu getViewMenu() {
         return this.viewMenu;
+    }
+    
+    /**
+     * Method responsible for returning the Project.
+     * @return Project.
+     */
+    public Project getProject() {
+        return this.project;
     }
 }

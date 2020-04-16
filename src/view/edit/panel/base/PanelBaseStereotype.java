@@ -6,7 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import model.structural.base.Stereotype;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -16,7 +16,7 @@ import view.structural.ViewMenu;
  * @since  17/01/2020
  * @see    controller.view.edit.panel.base.ControllerPanelBaseStereotype
  * @see    model.structural.base.Stereotype
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseStereotype extends Panel {
     private final ViewMenu viewMenu;

@@ -14,7 +14,7 @@ import model.structural.diagram.ComponentDiagram;
 import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
-import view.Panel;
+import view.panel.Panel;
 import view.panel.PanelGraph;
 import view.panel.diagram.PanelDiagram;
 import view.panel.diagram.types.PanelActivityDiagram;
@@ -38,7 +38,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Modeling Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  27/05/2019
- * @see    view.Panel
+ * @see    view.panel.Panel
  * @see    view.structural.ViewMenu
  */
 public final class PanelModeling extends Panel {

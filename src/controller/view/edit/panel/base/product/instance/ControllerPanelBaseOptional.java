@@ -1,6 +1,6 @@
 package controller.view.edit.panel.base.product.instance;
 
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -12,7 +12,7 @@ import view.edit.panel.base.product.instance.PanelBaseOptional;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseOptOptional</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  08/10/2019
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    view.edit.panel.base.product.instance.PanelBaseOptional
  */
 public class ControllerPanelBaseOptional extends ControllerPanel {

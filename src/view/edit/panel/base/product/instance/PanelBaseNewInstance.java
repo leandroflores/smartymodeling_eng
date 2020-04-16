@@ -6,7 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.base.product.Instance;
-import view.Panel;
+import view.panel.Panel;
 import view.new_.product.ViewNewInstance;
 
 /**
@@ -16,7 +16,7 @@ import view.new_.product.ViewNewInstance;
  * @since  07/10/2019
  * @see    controller.view.edit.panel.base.product.instance.ControllerPanelBaseNewInstance
  * @see    model.structural.base.product.Instance
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseNewInstance extends Panel {
     private final ViewNewInstance viewNew;

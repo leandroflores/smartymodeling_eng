@@ -1,6 +1,6 @@
 package controller.view.panel.export;
 
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import view.panel.export.PanelExport;
@@ -10,7 +10,7 @@ import view.panel.export.PanelExport;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelExportDiagram</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  08/11/2019
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    view.panel.export.PanelExport
  */
 public abstract class ControllerPanelExport extends ControllerPanel {

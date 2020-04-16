@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.traceability.Traceability;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -19,7 +19,7 @@ import view.structural.ViewMenu;
  * @since  15/01/2020
  * @see    controller.view.edit.panel.base.traceability.ControllerPanelBaseDetails
  * @see    model.structural.base.traceability.Traceability
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseDetails extends Panel {
     private final ViewMenu viewMenu;

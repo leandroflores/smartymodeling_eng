@@ -1,6 +1,6 @@
 package controller.view.edit.panel.base.evaluation;
 
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import view.edit.panel.base.evaluation.PanelBaseOperation;
@@ -10,7 +10,7 @@ import view.edit.panel.base.evaluation.PanelBaseOperation;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseOperation</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  20/08/2019
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    view.edit.panel.base.evaluation.PanelBaseOperation
  */
 public class ControllerPanelBaseOperation extends ControllerPanel {

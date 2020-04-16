@@ -10,7 +10,7 @@ import model.controller.structural.base.variability.ControllerVariability;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.variability.Variability;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -20,7 +20,7 @@ import view.structural.ViewMenu;
  * @since  04/07/2019
  * @see    controller.view.edit.panel.base.variability.ControllerPanelBaseVariability
  * @see    model.structural.base.variability.Variability
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseVariability extends Panel {
     private final ViewMenu viewMenu;

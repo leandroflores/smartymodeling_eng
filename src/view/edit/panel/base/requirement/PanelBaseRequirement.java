@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 import model.controller.structural.base.requirement.ControllerRequirement;
 import model.structural.base.Project;
 import model.structural.base.requirement.Requirement;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -20,7 +20,7 @@ import view.structural.ViewMenu;
  * @since  2020-04-15
  * @see    controller.view.edit.panel.base.requirement.ControllerPanelBaseRequirement
  * @see    model.structural.base.requirement.Requirement
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseRequirement extends Panel {
     private final ViewMenu viewMenu;

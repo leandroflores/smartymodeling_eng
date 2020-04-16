@@ -8,7 +8,7 @@ import javax.swing.JTextField;
 import model.structural.base.Diagram;
 import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.feature.base.Feature;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -18,7 +18,7 @@ import view.structural.ViewMenu;
  * @since  2019-06-16
  * @see    controller.view.edit.panel.base.feature.ControllerPanelBaseFeature
  * @see    model.structural.diagram.feature.base.Feature
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseFeature extends Panel {
     private final ViewMenu viewMenu;

@@ -8,7 +8,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import model.structural.base.Element;
-import view.Panel;
+import view.panel.Panel;
 import view.new_.product.ViewNewInstance;
 
 /**
@@ -18,7 +18,7 @@ import view.new_.product.ViewNewInstance;
  * @since  08/10/2019
  * @see    controller.view.edit.panel.base.product.instance.ControllerPanelBaseOptional
  * @see    model.structural.base.product.Instance
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public class PanelBaseOptional extends Panel {
     private final ViewNewInstance viewNew;

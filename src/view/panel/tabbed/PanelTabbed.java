@@ -6,7 +6,7 @@ import javax.swing.Icon;
 import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import model.structural.base.product.Instance;
-import view.Panel;
+import view.panel.Panel;
 import view.panel.modeling.PanelModeling;
 
 /**

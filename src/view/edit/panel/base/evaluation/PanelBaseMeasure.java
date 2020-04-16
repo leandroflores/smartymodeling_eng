@@ -9,7 +9,7 @@ import model.controller.structural.base.evaluation.ControllerMetric;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
-import view.Panel;
+import view.panel.Panel;
 import view.new_.evaluation.ViewNewMeasure;
 
 /**
@@ -19,7 +19,7 @@ import view.new_.evaluation.ViewNewMeasure;
  * @since  02/09/2019
  * @see    controller.view.edit.panel.base.evaluation.ControllerPanelBaseMeasure
  * @see    model.structural.base.evaluation.Measure
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseMeasure extends Panel {
     private final ViewNewMeasure viewNew;

@@ -6,7 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JTextField;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.activity.base.association.FlowUML;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -16,7 +16,7 @@ import view.structural.ViewMenu;
  * @since  04/11/2019
  * @see    controller.view.edit.panel.base.activity.ControllerPanelBaseFlowUML
  * @see    model.structural.diagram.activity.base.association.FlowUML
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseFlowUML extends Panel {
     private final ViewMenu viewMenu;

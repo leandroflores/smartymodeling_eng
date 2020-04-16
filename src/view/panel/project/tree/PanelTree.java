@@ -9,7 +9,7 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.requirement.Requirement;
-import view.Panel;
+import view.panel.Panel;
 import view.panel.tree.PanelTreeDiagram;
 import view.panel.tree.PanelTreeEvaluation;
 import view.panel.tree.PanelTreeFeature;
@@ -24,7 +24,7 @@ import view.structural.ViewMenu;
  * @author Leandro
  * @since  2019-05-27
  * @see    model.structural.base.Project
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelTree extends Panel {
     private final ViewMenu viewMenu;

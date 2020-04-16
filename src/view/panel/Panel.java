@@ -1,4 +1,4 @@
-package view;
+package view.panel;
 
 import controller.Controller;
 import funct.FunctView;
@@ -27,6 +27,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import view.ViewStyle;
 
 /**
  * <p>Class of View <b>Panel</b>.</p> 

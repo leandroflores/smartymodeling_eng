@@ -1,6 +1,6 @@
 package controller.view.edit.panel.base.feature;
 
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import view.edit.panel.base.feature.PanelBaseFeature;
@@ -10,7 +10,7 @@ import view.edit.panel.base.feature.PanelBaseFeature;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseFeature</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-06-17
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    view.edit.panel.base.feature.PanelBaseFeature
  */
 public class ControllerPanelBaseFeature extends ControllerPanel {

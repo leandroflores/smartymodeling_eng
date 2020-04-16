@@ -11,7 +11,7 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import model.structural.base.Project;
-import view.Panel;
+import view.panel.Panel;
 import view.evaluation.ViewEvaluation;
 
 /**
@@ -20,7 +20,7 @@ import view.evaluation.ViewEvaluation;
  * @author Leandro
  * @since  01/04/2020
  * @see    controller.view.edit.panel.base.evaluation.
- * @see    view.Panel
+ * @see    view.panel.Panel
  * @see    view.evaluation.ViewEvaluation
  */
 public abstract class PanelEvaluation extends Panel {

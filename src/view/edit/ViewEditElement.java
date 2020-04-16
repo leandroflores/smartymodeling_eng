@@ -15,7 +15,7 @@ import view.panel.modeling.PanelModeling;
  * <p>Class of View <b>ViewEditElement</b>.</p>
  * <p>Class responsible for defining the <b>Element Edit View</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  30/05/2019
+ * @since  2019-05-30
  * @see    controller.view.edit.ControllerViewEditElement
  * @see    model.structural.base.Element
  * @see    view.edit.ViewEdit
@@ -89,7 +89,7 @@ public final class ViewEditElement extends ViewEdit {
      * Method responsible for adding the Panel Dependency.
      */
     private void addPanelDependency() {
-        this.panelDependency  = new PanelDependency(this.getViewMenu().getProject(), this.element);
+        this.panelDependency  = new PanelDependency(this.getViewMenu(), this.element);
         this.createScrollPane("scrollPanelDependency",  this.panelDependency);
         this.getScrollPanelDependency().setViewportView(this.panelDependency);
         this.tabbedPane.add("Dependency", this.getScrollPanelDependency());

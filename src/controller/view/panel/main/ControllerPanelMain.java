@@ -1,7 +1,7 @@
 package controller.view.panel.main;
 
 import com.itextpdf.text.DocumentException;
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
@@ -14,7 +14,7 @@ import view.system.ViewSystemInformation;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>Main Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  28/05/2019
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    view.panel.main.PanelMain
  */
 public class ControllerPanelMain extends ControllerPanel {

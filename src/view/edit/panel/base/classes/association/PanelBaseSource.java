@@ -7,7 +7,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.association.AssociationUML;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -17,7 +17,7 @@ import view.structural.ViewMenu;
  * @since  15/11/2019
  * @see    controller.view.edit.panel.base.classes.association.ControllerPanelBaseSource
  * @see    model.structural.diagram.classes.base.association.AssociationUML
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelBaseSource extends Panel {
     private final ViewMenu viewMenu;

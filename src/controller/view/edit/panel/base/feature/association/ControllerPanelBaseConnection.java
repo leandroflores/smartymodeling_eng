@@ -1,6 +1,6 @@
 package controller.view.edit.panel.base.feature.association;
 
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import view.edit.panel.base.feature.association.PanelBaseConnection;
@@ -10,7 +10,7 @@ import view.edit.panel.base.feature.association.PanelBaseConnection;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseConnection</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  09/04/2020
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    model.structural.diagram.feature.base.association.Connection
  * @see    view.edit.panel.base.feature.association.PanelBaseConnection
  */

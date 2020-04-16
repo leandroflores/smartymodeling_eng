@@ -8,7 +8,6 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 import java.awt.Color;
 import java.util.Map;
-import view.Panel;
 
 /**
  * <p>Class of View <b>PanelGraph</b>.</p>

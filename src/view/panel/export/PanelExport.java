@@ -6,7 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import model.structural.base.Project;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -15,7 +15,7 @@ import view.structural.ViewMenu;
  * @author Leandro
  * @since  08/11/2019
  * @see    controller.view.panel.export.
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public abstract class PanelExport extends Panel {
     protected final ViewMenu viewMenu;

@@ -1,7 +1,6 @@
 package view.panel.edit.base.classes;
 
 import java.awt.Dimension;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.AttributeUML;
@@ -11,39 +10,32 @@ import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditAttributeUML</b>.</p> 
- * <p>Class responsible for defining a Panel for Edit the <b>Attribute UML</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining a <b>Attribute UML Edit Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  12/06/2019
+ * @since  2019-06-12
  * @see    model.structural.diagram.classes.base.AttributeUML
  * @see    view.panel.edit.base.PanelEditElement
  */
 public final class PanelEditAttributeUML extends PanelEditElement {
-    private final ClassDiagram diagram;
-    private final AttributeUML attributeUML;
-    private PanelBaseAttributeUML panelBaseAttributeUML;
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param diagram Class Diagram.
-     * @param attributeUML Attribute UML.
+     * @param attribute Attribute UML.
      */
-    public PanelEditAttributeUML(ViewMenu viewMenu, ClassDiagram diagram, AttributeUML attributeUML) {
-        super(viewMenu, attributeUML);
-        this.diagram      = diagram;
-        this.attributeUML = attributeUML;
-        this.setPreferredSize(new Dimension(200, 100));
+    public PanelEditAttributeUML(ViewMenu view, ClassDiagram diagram, AttributeUML attribute) {
+        super(view, diagram, attribute);
         this.addComponents();
     }
     
     @Override
     protected void addComponents() {
         this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(100, 100));
         
         this.addPanelBaseAttributeUML();
-        this.addPanelStereotype();
-        this.addPanelDependency();
+        super.addPanelStereotype();
+        super.addPanelDependency();
         
         this.add(this.tabbedPane);
     }
@@ -51,42 +43,28 @@ public final class PanelEditAttributeUML extends PanelEditElement {
     /**
      * Method responsible for adding the Panel Base Attribute UML.
      */
-    private void addPanelBaseAttributeUML() {
-        this.panelBaseAttributeUML = new PanelBaseAttributeUML(this.viewMenu, this.diagram, this.attributeUML);
-        this.createScrollPane("scrollPanelBaseAttributeUML", this.panelBaseAttributeUML);
-        this.getScrollPanelBaseAttributeUML().setViewportView(this.panelBaseAttributeUML);
-        this.tabbedPane.add("Attribute", this.getScrollPanelBaseAttributeUML());
+    protected void addPanelBaseAttributeUML() {
+        this.addPanel("panelBaseAttributeUML", new PanelBaseAttributeUML(this.viewMenu, this.getDiagram(), this.getElement()));
+        this.createScrollPane("scrollPanelBaseElement",  this.getPanelBaseAttributeUML());
+        this.getScrollPanelBaseElement().setViewportView(this.getPanelBaseAttributeUML());
+        this.tabbedPane.add("Attribute", this.getScrollPanelBaseElement());
     }
     
-    /**
-     * Method responsible for returning the Diagram.
-     * @return Diagram.
-     */
+    @Override
     public ClassDiagram getDiagram() {
-        return this.diagram;
+        return (ClassDiagram) this.diagram;
     }
     
-    /**
-     * Method responsible for returning the Attribute UML.
-     * @return Attribute UML.
-     */
-    public AttributeUML getAttributeUML() {
-        return this.attributeUML;
+    @Override
+    public AttributeUML getElement() {
+        return (AttributeUML) this.element;
     }
     
-    /**
-     * Method responsible for returning the Scroll Panel Base Attribute UML.
-     * @return Scroll Panel Base Attribute UML.
-     */
-    public JScrollPane getScrollPanelBaseAttributeUML() {
-        return this.getScrollPane("scrollPanelBaseAttributeUML");
-    }
-
     /**
      * Method responsible for returning the Panel Base Attribute UML.
      * @return Panel Base Attribute UML.
      */
     public PanelBaseAttributeUML getPanelBaseAttributeUML() {
-        return this.panelBaseAttributeUML;
+        return (PanelBaseAttributeUML) this.getPanel("panelBaseAttributeUML");
     }
 }

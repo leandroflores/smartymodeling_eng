@@ -1,6 +1,6 @@
 package controller.view.edit.panel.base.product;
 
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import view.edit.panel.base.product.PanelBaseArtifact;
@@ -10,7 +10,7 @@ import view.edit.panel.base.product.PanelBaseArtifact;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseArtifact</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  25/10/2019
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    model.structural.base.product.Artifact
  * @see    view.edit.panel.base.product.PanelBaseArtifact
  */

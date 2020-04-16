@@ -1,6 +1,6 @@
 package controller.view.edit.panel.base.variability;
 
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import view.edit.panel.base.variability.PanelBaseVariability;
@@ -10,7 +10,7 @@ import view.edit.panel.base.variability.PanelBaseVariability;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseVariability</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  04/07/2019
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    view.edit.panel.base.variability.PanelBaseVariability
  */
 public class ControllerPanelBaseVariability extends ControllerPanel {

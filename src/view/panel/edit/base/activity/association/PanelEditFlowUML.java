@@ -1,4 +1,4 @@
-package view.panel.edit.base.activity;
+package view.panel.edit.base.activity.association;
 
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
@@ -10,10 +10,10 @@ import view.panel.edit.PanelEdit;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelEditMessageUML</b>.</p> 
- * <p>Class responsible for defining a Panel for Edit the <b>Flow UML</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelEditFlowUML</b>.</p>
+ * <p>Class responsible for defining a <b>Flow UML Edit Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  04/11/2019
+ * @since  2019-11-04
  * @see    model.structural.diagram.activity.base.association.FlowUML
  * @see    view.panel.edit.base.PanelEdit
  */

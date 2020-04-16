@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.Iterator;
 import javax.swing.JButton;
-import view.Panel;
+import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
@@ -13,7 +13,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Main Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  23/05/2019
- * @see    view.Panel
+ * @see    view.panel.Panel
  * @see    view.structural.ViewMenu
  */
 public final class PanelMain extends Panel {

@@ -1,6 +1,6 @@
 package controller.view.edit.panel.base.product.instance;
 
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import view.message.ViewError;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseVarPoints</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  09/10/2019
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    model.structural.base.product.Instance
  * @see    model.structural.base.product.Product
  * @see    view.edit.panel.base.product.instance.PanelBaseVarPoints

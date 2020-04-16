@@ -1,7 +1,7 @@
 package controller.view.panel.operation;
 
 import com.mxgraph.model.mxCell;
-import controller.view.ControllerPanel;
+import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
@@ -17,7 +17,7 @@ import view.panel.operation.PanelOperation;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>Operation Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  10/04/2020
- * @see    controller.view.ControllerPanel
+ * @see    controller.view.panel.ControllerPanel
  * @see    view.panel.operation.PanelOperation
  */
 public abstract class ControllerPanelOperation extends ControllerPanel {

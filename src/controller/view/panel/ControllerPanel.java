@@ -1,10 +1,10 @@
-package controller.view;
+package controller.view.panel;
 
 import controller.Controller;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import javax.swing.plaf.ColorUIResource;
-import view.Panel;
+import view.panel.Panel;
 
 /**
  * <p>Class of Controller <b>ControllerPanel</b>.</p>
@@ -12,7 +12,7 @@ import view.Panel;
  * @author Leandro
  * @since  20/05/2019
  * @see    controller.Controller
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public abstract class ControllerPanel extends Controller {
     protected final Panel panel;

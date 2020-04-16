@@ -40,7 +40,7 @@ import model.structural.diagram.sequence.base.LifelineUML;
 import model.structural.diagram.sequence.base.association.MessageUML;
 import model.structural.diagram.usecase.base.ActorUML;
 import model.structural.diagram.usecase.base.UseCaseUML;
-import view.Panel;
+import view.panel.Panel;
 import view.panel.edit.PanelEdit;
 import view.panel.edit.base.PanelEditAssociation;
 import view.panel.edit.base.PanelEditDiagram;
@@ -48,7 +48,7 @@ import view.panel.edit.base.PanelEditProject;
 import view.panel.edit.base.PanelEditStereotype;
 import view.panel.edit.base.activity.PanelEditActivityUML;
 import view.panel.edit.base.activity.PanelEditDecisionUML;
-import view.panel.edit.base.activity.PanelEditFlowUML;
+import view.panel.edit.base.activity.association.PanelEditFlowUML;
 import view.panel.edit.base.classes.PanelEditAttributeUML;
 import view.panel.edit.base.classes.PanelEditClassUML;
 import view.panel.edit.base.classes.PanelEditInterfaceUML;
@@ -78,7 +78,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining a Panel for the <b>Project</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  11/06/2019
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelProject extends Panel {
     private final ViewMenu viewMenu;

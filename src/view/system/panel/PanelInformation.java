@@ -1,13 +1,13 @@
 package view.system.panel;
 
-import view.Panel;
+import view.panel.Panel;
 
 /**
  * <p>Class of Panel <b>PanelInformation</b>.</p> 
  * <p>Class responsible for defining a Panel for the <b>Information Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  23/05/2019
- * @see    view.Panel
+ * @see    view.panel.Panel
  */
 public final class PanelInformation extends Panel {
     

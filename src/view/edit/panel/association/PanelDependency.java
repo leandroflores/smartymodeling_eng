@@ -5,28 +5,28 @@ import java.awt.GridLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import model.structural.base.Element;
-import model.structural.base.Project;
-import view.Panel;
+import view.panel.Panel;
+import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseDiagram</b>.</p> 
  * <p>Class responsible for defining the <b>Dependency Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  30/05/2019
- * @see    view.Panel
+ * @since  2019-05-30
+ * @see    view.panel.Panel
  */
 public final class PanelDependency extends Panel {
-    private final Project project;
+    private final ViewMenu viewMenu;
     private final Element element;
     
     /**
      * Default constructor method of Class.
-     * @param project Project.
+     * @param view View Menu.
      * @param element Element.
      */
-    public PanelDependency(Project project, Element element) {
-        this.project = project;
-        this.element = element;
+    public PanelDependency(ViewMenu view, Element element) {
+        this.viewMenu = view;
+        this.element  = element;
         this.setSettings();
         this.addComponents();
     }
