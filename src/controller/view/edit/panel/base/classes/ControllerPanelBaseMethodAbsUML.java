@@ -4,7 +4,7 @@ import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import model.structural.diagram.classes.base.TypeUML;
-import view.edit.panel.base.classes.PanelBaseMethodAbsUML;
+import view.panel.base.diagram.classes.base.PanelBaseMethodAbsUML;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseMethodAbsUML</b>.</p>
@@ -12,7 +12,7 @@ import view.edit.panel.base.classes.PanelBaseMethodAbsUML;
  * @author Leandro
  * @since  27/01/2020
  * @see    controller.view.panel.ControllerPanel
- * @see    view.edit.panel.base.classes.PanelBaseMethodAbsUML
+ * @see    view.panel.base.diagram.classes.base.PanelBaseMethodAbsUML
  */
 public class ControllerPanelBaseMethodAbsUML extends ControllerPanel {
     private final PanelBaseMethodAbsUML panelBaseMethodAbsUML;

@@ -6,8 +6,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import model.structural.base.variability.Variability;
-import view.edit.panel.base.variability.PanelBaseVariability;
-import view.edit.panel.base.variability.PanelBaseVariants;
+import view.panel.base.variability.PanelBaseVariability;
+import view.panel.base.variability.PanelBaseVariants;
 import view.panel.edit.PanelEdit;
 import view.structural.ViewMenu;
 

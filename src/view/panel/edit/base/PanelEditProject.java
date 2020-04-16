@@ -1,9 +1,8 @@
 package view.panel.edit.base;
 
-import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import view.edit.panel.base.PanelBaseProject;
+import view.panel.base.PanelBaseProject;
 import view.panel.edit.PanelEdit;
 import view.structural.ViewMenu;
 
@@ -16,7 +15,6 @@ import view.structural.ViewMenu;
  * @see    view.panel.edit.PanelEdit
  */
 public final class PanelEditProject extends PanelEdit {
-    private PanelBaseProject panelBaseProject;
     
     /**
      * Default constructor method of Class.
@@ -24,17 +22,13 @@ public final class PanelEditProject extends PanelEdit {
      */
     public PanelEditProject(ViewMenu view) {
         super(view);
-        this.setPreferredSize(new Dimension(200, 100));
         this.addComponents();
     }
     
     @Override
     protected void addComponents() {
         this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(100, 100));
-        
-        this.addPanelBaseProject();
-        
+            this.addPanelBaseProject();
         this.add(this.tabbedPane);
     }
     

@@ -3,7 +3,7 @@ package controller.view.edit.panel.base.product;
 import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import view.edit.panel.base.product.PanelBaseProduct;
+import view.panel.base.product.PanelBaseProduct;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseProduct</b>.</p>
@@ -12,7 +12,7 @@ import view.edit.panel.base.product.PanelBaseProduct;
  * @since  07/10/2019
  * @see    controller.view.panel.ControllerPanel
  * @see    model.structural.base.product.Product
- * @see    view.edit.panel.base.product.PanelBaseProduct
+ * @see    view.panel.base.product.PanelBaseProduct
  */
 public class ControllerPanelBaseProduct extends ControllerPanel {
     private final PanelBaseProduct panelBaseProduct;

@@ -3,7 +3,7 @@ package controller.view.edit.panel.base.product.instance;
 import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import view.edit.panel.base.product.instance.PanelBaseArtifacts;
+import view.panel.base.product.instance.PanelBaseArtifacts;
 import view.message.ViewError;
 
 /**
@@ -13,7 +13,7 @@ import view.message.ViewError;
  * @since  09/10/2019
  * @see    controller.view.panel.ControllerPanel
  * @see    model.structural.base.product.Instance
- * @see    view.edit.panel.base.product.instance.PanelBaseArtifacts
+ * @see    view.panel.base.product.instance.PanelBaseArtifacts
  */
 public class ControllerPanelBaseArtifacts extends ControllerPanel {
     private final PanelBaseArtifacts panelBaseArtifacts;

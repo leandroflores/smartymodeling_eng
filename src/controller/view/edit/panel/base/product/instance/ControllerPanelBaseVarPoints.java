@@ -9,7 +9,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import model.structural.base.Element;
 import model.structural.base.variability.Variability;
-import view.edit.panel.base.product.instance.PanelBaseVarPoints;
+import view.panel.base.product.instance.PanelBaseVarPoints;
 import view.message.ViewError;
 
 /**
@@ -20,7 +20,7 @@ import view.message.ViewError;
  * @see    controller.view.panel.ControllerPanel
  * @see    model.structural.base.product.Instance
  * @see    model.structural.base.product.Product
- * @see    view.edit.panel.base.product.instance.PanelBaseVarPoints
+ * @see    view.panel.base.product.instance.PanelBaseVarPoints
  */
 public class ControllerPanelBaseVarPoints extends ControllerPanel {
     private final PanelBaseVarPoints panelBaseVarPoints;

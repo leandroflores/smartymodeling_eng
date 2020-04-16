@@ -1,15 +1,14 @@
 package view.panel.edit.base;
 
-import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Stereotype;
-import view.edit.panel.base.PanelBaseStereotype;
+import view.panel.base.PanelBaseStereotype;
 import view.panel.edit.PanelEdit;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelEdit</b>.</p> 
+ * <p>Class of View <b>PanelEditStereotype</b>.</p> 
  * <p>Class responsible for defining a <b>Stereotype Edit Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-01-17
@@ -18,7 +17,6 @@ import view.structural.ViewMenu;
  */
 public final class PanelEditStereotype extends PanelEdit {
     private final Stereotype stereotype;
-    private PanelBaseStereotype panelBaseStereotype;
     
     /**
      * Default constructor method of Class.
@@ -28,17 +26,13 @@ public final class PanelEditStereotype extends PanelEdit {
     public PanelEditStereotype(ViewMenu view, Stereotype stereotype) {
         super(view);
         this.stereotype = stereotype;
-        this.setPreferredSize(new Dimension(200, 100));
         this.addComponents();
     }
     
     @Override
     protected void addComponents() {
         this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(100, 100));
-        
-        this.addPanelBaseStereotype();
-        
+            this.addPanelBaseStereotype();
         this.add(this.tabbedPane);
     }
     

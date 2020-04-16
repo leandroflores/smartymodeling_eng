@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import model.structural.base.Element;
-import view.edit.panel.base.product.instance.PanelBaseOptional;
+import view.panel.base.product.instance.PanelBaseOptional;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseOptional</b>.</p>
@@ -13,7 +13,7 @@ import view.edit.panel.base.product.instance.PanelBaseOptional;
  * @author Leandro
  * @since  08/10/2019
  * @see    controller.view.panel.ControllerPanel
- * @see    view.edit.panel.base.product.instance.PanelBaseOptional
+ * @see    view.panel.base.product.instance.PanelBaseOptional
  */
 public class ControllerPanelBaseOptional extends ControllerPanel {
     private final PanelBaseOptional panelBaseOptional;

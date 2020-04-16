@@ -3,7 +3,7 @@ package controller.view.edit.panel.base.feature;
 import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import view.edit.panel.base.feature.PanelBaseFeature;
+import view.panel.base.diagram.feature.base.PanelBaseFeature;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseFeature</b>.</p>
@@ -11,7 +11,7 @@ import view.edit.panel.base.feature.PanelBaseFeature;
  * @author Leandro
  * @since  2019-06-17
  * @see    controller.view.panel.ControllerPanel
- * @see    view.edit.panel.base.feature.PanelBaseFeature
+ * @see    view.panel.base.diagram.feature.base.PanelBaseFeature
  */
 public class ControllerPanelBaseFeature extends ControllerPanel {
     private final PanelBaseFeature panelBaseFeature;

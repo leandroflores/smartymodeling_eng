@@ -4,7 +4,7 @@ import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import model.structural.diagram.classes.base.association.AssociationUML;
-import view.edit.panel.base.classes.association.PanelBaseTarget;
+import view.panel.base.diagram.classes.base.association.PanelBaseTarget;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseTarget</b>.</p>
@@ -13,7 +13,7 @@ import view.edit.panel.base.classes.association.PanelBaseTarget;
  * @since  16/11/2019
  * @see    controller.view.panel.ControllerPanel
  * @see    model.structural.diagram.classes.base.association.AssociationUML
- * @see    view.edit.panel.base.classes.association.PanelBaseTarget
+ * @see    view.panel.base.diagram.classes.base.association.PanelBaseTarget
  */
 public class ControllerPanelBaseTarget extends ControllerPanel {
     private final PanelBaseTarget panelBaseTarget;

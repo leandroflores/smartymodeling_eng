@@ -3,7 +3,7 @@ package controller.view.edit.panel.base.feature.association;
 import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import view.edit.panel.base.feature.association.PanelBaseConnection;
+import view.panel.base.diagram.feature.base.association.PanelBaseConnection;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseConnection</b>.</p>
@@ -12,7 +12,7 @@ import view.edit.panel.base.feature.association.PanelBaseConnection;
  * @since  09/04/2020
  * @see    controller.view.panel.ControllerPanel
  * @see    model.structural.diagram.feature.base.association.Connection
- * @see    view.edit.panel.base.feature.association.PanelBaseConnection
+ * @see    view.panel.base.diagram.feature.base.association.PanelBaseConnection
  */
 public class ControllerPanelBaseConnection extends ControllerPanel {
     private final PanelBaseConnection panelBaseConnection;

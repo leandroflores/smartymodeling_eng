@@ -3,7 +3,7 @@ package controller.view.edit.panel.base.classes.association;
 import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import view.edit.panel.base.classes.association.PanelBaseAssociationUML;
+import view.panel.base.diagram.classes.base.association.PanelBaseAssociationUML;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseAssociationUML</b>.</p>
@@ -12,7 +12,7 @@ import view.edit.panel.base.classes.association.PanelBaseAssociationUML;
  * @since  16/11/2019
  * @see    controller.view.panel.ControllerPanel
  * @see    model.structural.diagram.classes.base.association.AssociationUML
- * @see    view.edit.panel.base.classes.association.PanelBaseAssociationUML
+ * @see    view.panel.base.diagram.classes.base.association.PanelBaseAssociationUML
  */
 public class ControllerPanelBaseAssociationUML extends ControllerPanel {
     private final PanelBaseAssociationUML panelBaseAssociationUML;

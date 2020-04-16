@@ -6,7 +6,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import model.structural.base.product.Product;
-import view.edit.panel.base.product.PanelBaseProduct;
+import view.panel.base.product.PanelBaseProduct;
 import view.new_.ViewNew;
 import view.structural.ViewMenu;
 

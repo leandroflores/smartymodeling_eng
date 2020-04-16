@@ -7,7 +7,7 @@ import javax.swing.JTabbedPane;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.MethodUML;
 import view.edit.ViewEdit;
-import view.edit.panel.base.classes.PanelBaseMethodUML;
+import view.panel.base.diagram.classes.base.PanelBaseMethodUML;
 import view.edit.panel.stereotype.PanelStereotype;
 import view.panel.modeling.PanelModeling;
 

@@ -5,8 +5,8 @@ import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.evaluation.Metric;
-import view.edit.panel.base.evaluation.PanelBaseMetric;
-import view.edit.panel.base.evaluation.PanelBaseOperation;
+import view.panel.base.evaluation.PanelBaseMetric;
+import view.panel.base.evaluation.PanelBaseOperation;
 import view.new_.ViewNew;
 import view.structural.ViewMenu;
 

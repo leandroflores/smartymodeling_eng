@@ -4,7 +4,7 @@ import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import model.structural.diagram.classes.base.TypeUML;
-import view.edit.panel.base.classes.PanelBaseAttributeUML;
+import view.panel.base.diagram.classes.base.PanelBaseAttributeUML;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseAttributeUML</b>.</p>
@@ -12,7 +12,7 @@ import view.edit.panel.base.classes.PanelBaseAttributeUML;
  * @author Leandro
  * @since  06/06/2019
  * @see    controller.view.panel.ControllerPanel
- * @see    view.edit.panel.base.classes.PanelBaseAttributeUML
+ * @see    view.panel.base.diagram.classes.base.PanelBaseAttributeUML
  */
 public class ControllerPanelBaseAttributeUML extends ControllerPanel {
     private final PanelBaseAttributeUML panelBaseAttributeUML;
@@ -33,8 +33,8 @@ public class ControllerPanelBaseAttributeUML extends ControllerPanel {
     
     @Override
     public void keyPressed(KeyEvent event) {
-//        if (this.panelBaseAttributeUML.getNameTextField().equals(event.getSource()))
-//            this.update();
+        if (this.panelBaseAttributeUML.getNameTextField().equals(event.getSource()))
+            this.update();
     }
     
     @Override
@@ -43,11 +43,11 @@ public class ControllerPanelBaseAttributeUML extends ControllerPanel {
             this.update();
     }
     
-    /**
-     * Method responsible for setting the Attribute Values.
-     */
-    private void update() {
+    protected void update() {
+        System.out.println(this.panelBaseAttributeUML);
+        System.out.println(this.panelBaseAttributeUML.getVisibilityComboBox());
         this.panelBaseAttributeUML.getAttributeUML().setVisibility(this.panelBaseAttributeUML.getVisibilityComboBox().getSelectedItem().toString());
+        System.out.println(this.panelBaseAttributeUML.getNameTextField());
         this.panelBaseAttributeUML.getAttributeUML().setName(this.panelBaseAttributeUML.getNameTextField().getText().trim());
         this.panelBaseAttributeUML.getAttributeUML().setTypeUML((TypeUML) this.panelBaseAttributeUML.getTypeComboBox().getSelectedItem());
         this.panelBaseAttributeUML.getAttributeUML().setStatic(this.panelBaseAttributeUML.getStaticCheckBox().isSelected());

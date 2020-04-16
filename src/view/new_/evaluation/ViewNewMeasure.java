@@ -6,9 +6,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
-import view.edit.panel.base.evaluation.PanelBaseEvaluation;
-import view.edit.panel.base.evaluation.PanelBaseMeasure;
-import view.edit.panel.base.evaluation.PanelBaseTarget;
+import view.panel.base.evaluation.PanelBaseEvaluation;
+import view.panel.base.evaluation.PanelBaseMeasure;
+import view.panel.base.evaluation.PanelBaseTarget;
 import view.new_.ViewNew;
 import view.structural.ViewMenu;
 

@@ -3,7 +3,7 @@ package controller.view.edit.panel.base.traceability;
 import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import view.edit.panel.base.traceability.PanelBaseElements;
+import view.panel.base.traceability.PanelBaseElements;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseElements</b>.</p>
@@ -11,7 +11,7 @@ import view.edit.panel.base.traceability.PanelBaseElements;
  * @author Leandro
  * @since  22/07/2019
  * @see    controller.view.panel.ControllerPanel
- * @see    view.edit.panel.base.traceability.PanelBaseElements
+ * @see    view.panel.base.traceability.PanelBaseElements
  */
 public class ControllerPanelBaseElements extends ControllerPanel {
     private final PanelBaseElements panelBaseElements;

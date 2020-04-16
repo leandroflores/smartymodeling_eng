@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
-import view.edit.panel.base.evaluation.PanelBaseTarget;
+import view.panel.base.evaluation.PanelBaseTarget;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseTarget</b>.</p>
@@ -13,7 +13,7 @@ import view.edit.panel.base.evaluation.PanelBaseTarget;
  * @author Leandro
  * @since  23/10/2019
  * @see    controller.view.panel.ControllerPanel
- * @see    view.edit.panel.base.evaluation.PanelBaseTarget
+ * @see    view.panel.base.evaluation.PanelBaseTarget
  */
 public class ControllerPanelBaseTarget extends ControllerPanel {
     private final PanelBaseTarget panelBaseTarget;

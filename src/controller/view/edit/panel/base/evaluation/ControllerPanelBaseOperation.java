@@ -3,7 +3,7 @@ package controller.view.edit.panel.base.evaluation;
 import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import view.edit.panel.base.evaluation.PanelBaseOperation;
+import view.panel.base.evaluation.PanelBaseOperation;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseOperation</b>.</p>
@@ -11,7 +11,7 @@ import view.edit.panel.base.evaluation.PanelBaseOperation;
  * @author Leandro
  * @since  20/08/2019
  * @see    controller.view.panel.ControllerPanel
- * @see    view.edit.panel.base.evaluation.PanelBaseOperation
+ * @see    view.panel.base.evaluation.PanelBaseOperation
  */
 public class ControllerPanelBaseOperation extends ControllerPanel {
     private final PanelBaseOperation panelBaseOperation;

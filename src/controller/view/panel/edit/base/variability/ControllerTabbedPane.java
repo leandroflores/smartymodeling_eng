@@ -5,8 +5,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import view.edit.panel.base.variability.PanelBaseVariability;
-import view.edit.panel.base.variability.PanelBaseVariants;
+import view.panel.base.variability.PanelBaseVariability;
+import view.panel.base.variability.PanelBaseVariants;
 
 /**
  * <p>Class of Controller <b>ControllerTabbedPane</b>.</p>

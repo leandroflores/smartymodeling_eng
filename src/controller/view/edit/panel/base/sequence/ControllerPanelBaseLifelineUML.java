@@ -4,7 +4,7 @@ import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import model.structural.diagram.usecase.base.ActorUML;
-import view.edit.panel.base.sequence.PanelBaseLifelineUML;
+import view.panel.base.diagram.sequence.base.PanelBaseLifelineUML;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseLifelineUML</b>.</p>
@@ -12,7 +12,7 @@ import view.edit.panel.base.sequence.PanelBaseLifelineUML;
  * @author Leandro
  * @since  03/10/2019
  * @see    controller.view.panel.ControllerPanel
- * @see    view.edit.panel.base.sequence.PanelBaseLifelineUML
+ * @see    view.panel.base.diagram.sequence.base.PanelBaseLifelineUML
  */
 public class ControllerPanelBaseLifelineUML extends ControllerPanel {
     private final PanelBaseLifelineUML panelBaseLifelineUML;

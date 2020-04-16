@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import model.structural.base.Diagram;
 import model.structural.base.product.Product;
-import view.edit.panel.base.product.instance.PanelBaseNewInstance;
+import view.panel.base.product.instance.PanelBaseNewInstance;
 import view.message.ViewError;
 
 /**
@@ -15,7 +15,7 @@ import view.message.ViewError;
  * @since  07/10/2019
  * @see    controller.view.panel.ControllerPanel
  * @see    model.structural.base.product.Instance
- * @see    view.edit.panel.base.product.instance.PanelBaseNewInstance
+ * @see    view.panel.base.product.instance.PanelBaseNewInstance
  */
 public class ControllerPanelBaseNewInstance extends ControllerPanel {
     private final PanelBaseNewInstance panelBaseNewInstance;

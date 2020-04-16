@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.requirement.Requirement;
-import view.edit.panel.base.requirement.PanelBaseRequirement;
+import view.panel.base.requirement.PanelBaseRequirement;
 import view.new_.ViewNew;
 import view.structural.ViewMenu;
 

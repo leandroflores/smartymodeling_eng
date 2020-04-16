@@ -6,7 +6,7 @@ import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import view.edit.panel.association.PanelDependency;
-import view.edit.panel.base.PanelBaseElement;
+import view.panel.base.diagram.PanelBaseElement;
 import view.edit.panel.stereotype.PanelStereotype;
 import view.panel.edit.PanelEdit;
 import view.structural.ViewMenu;
@@ -42,11 +42,9 @@ public abstract class PanelEditElement extends PanelEdit {
     protected void addComponents(String title) {
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.setPreferredSize(new Dimension(100, 100));
-        
-        this.addPanelBaseElement(title);
-        this.addPanelStereotype();
-        this.addPanelDependency();
-        
+            this.addPanelBaseElement(title);
+            this.addPanelStereotype();
+            this.addPanelDependency();
         this.add(this.tabbedPane);
     }
     

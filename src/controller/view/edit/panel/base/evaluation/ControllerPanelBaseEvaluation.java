@@ -10,7 +10,7 @@ import javax.script.ScriptException;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Metric;
-import view.edit.panel.base.evaluation.PanelBaseEvaluation;
+import view.panel.base.evaluation.PanelBaseEvaluation;
 import view.message.ViewError;
 
 /**
@@ -19,7 +19,7 @@ import view.message.ViewError;
  * @author Leandro
  * @since  23/10/2019
  * @see    controller.view.panel.ControllerPanel
- * @see    view.edit.panel.base.evaluation.PanelBaseEvaluation
+ * @see    view.panel.base.evaluation.PanelBaseEvaluation
  */
 public class ControllerPanelBaseEvaluation extends ControllerPanel {
     private final PanelBaseEvaluation panelBaseEvaluation;

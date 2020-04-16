@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Profile;
-import view.edit.panel.base.PanelBaseProfile;
+import view.panel.base.PanelBaseProfile;
 import view.panel.modeling.PanelModeling;
 
 /**

@@ -4,7 +4,7 @@ import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import model.structural.diagram.classes.base.TypeUML;
-import view.edit.panel.base.classes.PanelBaseMethodUML;
+import view.panel.base.diagram.classes.base.PanelBaseMethodUML;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseMethodUML</b>.</p>
@@ -12,7 +12,7 @@ import view.edit.panel.base.classes.PanelBaseMethodUML;
  * @author Leandro
  * @since  17/06/2019
  * @see    controller.view.panel.ControllerPanel
- * @see    view.edit.panel.base.classes.PanelBaseMethodUML
+ * @see    view.panel.base.diagram.classes.base.PanelBaseMethodUML
  */
 public class ControllerPanelBaseMethodUML extends ControllerPanel {
     private final PanelBaseMethodUML panelBaseMethodUML;
@@ -40,10 +40,7 @@ public class ControllerPanelBaseMethodUML extends ControllerPanel {
     }
     
     @Override
-    public void keyPressed(KeyEvent event) {
-        if (this.panelBaseMethodUML.getNameTextField().equals(event.getSource()))
-            this.update();
-    }
+    public void keyPressed(KeyEvent event) {}
     
     @Override
     public void keyReleased(KeyEvent event) {
@@ -112,10 +109,10 @@ public class ControllerPanelBaseMethodUML extends ControllerPanel {
         this.panelBaseMethodUML.getMethodUML().setAbstract(this.panelBaseMethodUML.getAbstractCheckBox().isSelected());
         this.panelBaseMethodUML.getMethodUML().setStatic(this.panelBaseMethodUML.getStaticCheckBox().isSelected());
         this.panelBaseMethodUML.getMethodUML().setFinal(this.panelBaseMethodUML.getFinalCheckBox().isSelected());
-        this.panelBaseMethodUML.getViewMenu().getPanelProject().getPanelTree().getPanelTreeDiagram().updateNode(this.panelBaseMethodUML.getMethodUML());
-        this.panelBaseMethodUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
+//        this.panelBaseMethodUML.getViewMenu().getPanelProject().getPanelTree().updateUI();
         this.panelBaseMethodUML.getViewMenu().getProject().changeNames(this.panelBaseMethodUML.getMethodUML());
         this.panelBaseMethodUML.getViewMenu().getPanelModeling().updateDiagram(this.panelBaseMethodUML.getDiagram());
+        this.panelBaseMethodUML.getViewMenu().getPanelProject().getPanelTree().getPanelTreeDiagram().updateNode(this.panelBaseMethodUML.getMethodUML());
         this.panelBaseMethodUML.getViewMenu().setSave(false);
     }
 }

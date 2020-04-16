@@ -1,10 +1,9 @@
 package view.panel.edit.base;
 
-import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
-import view.edit.panel.base.PanelBaseDiagram;
+import view.panel.base.PanelBaseDiagram;
 import view.panel.edit.PanelEdit;
 import view.structural.ViewMenu;
 
@@ -27,24 +26,20 @@ public final class PanelEditDiagram extends PanelEdit {
     public PanelEditDiagram(ViewMenu view, Diagram diagram) {
         super(view);
         this.diagram = diagram;
-        this.setPreferredSize(new Dimension(200, 100));
         this.addComponents();
     }
     
     @Override
     protected void addComponents() {
         this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(100, 100));
-        
-        this.addPanelBaseDiagram();
-        
+            this.addPanelBaseDiagram();
         this.add(this.tabbedPane);
     }
     
     /**
      * Method responsible for adding the Panel Base Diagram.
      */
-    private void addPanelBaseDiagram() {
+    protected void addPanelBaseDiagram() {
         this.addPanel("panelBaseDiagram", new PanelBaseDiagram(this.viewMenu, this.diagram));
         this.createScrollPane("scrollPanelBaseDiagram",  this.getPanelBaseDiagram());
         this.getScrollPanelBaseDiagram().setViewportView(this.getPanelBaseDiagram());

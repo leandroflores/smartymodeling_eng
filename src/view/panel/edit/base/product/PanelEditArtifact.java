@@ -5,7 +5,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import model.structural.base.product.Artifact;
-import view.edit.panel.base.product.PanelBaseArtifact;
+import view.panel.base.product.PanelBaseArtifact;
 import view.panel.edit.PanelEdit;
 import view.structural.ViewMenu;
 
@@ -15,7 +15,7 @@ import view.structural.ViewMenu;
  * @author Leandro
  * @since  25/10/2019
  * @see    model.structural.base.product.Artifact
- * @see    view.edit.panel.base.product.PanelBaseArtifact
+ * @see    view.panel.base.product.PanelBaseArtifact
  * @see    view.panel.edit.PanelEdit
  */
 public final class PanelEditArtifact extends PanelEdit {

@@ -3,7 +3,7 @@ package controller.view.edit.panel.base.evaluation;
 import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import view.edit.panel.base.evaluation.PanelBaseMeasure;
+import view.panel.base.evaluation.PanelBaseMeasure;
 import view.message.ViewError;
 
 /**
@@ -12,7 +12,7 @@ import view.message.ViewError;
  * @author Leandro
  * @since  04/09/2019
  * @see    controller.view.panel.ControllerPanel
- * @see    view.edit.panel.base.evaluation.PanelBaseMeasure
+ * @see    view.panel.base.evaluation.PanelBaseMeasure
  */
 public class ControllerPanelBaseMeasure extends ControllerPanel {
     private final PanelBaseMeasure panelBaseMeasure;

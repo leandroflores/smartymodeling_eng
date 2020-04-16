@@ -3,7 +3,7 @@ package controller.view.edit.panel.base.requirement;
 import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import view.edit.panel.base.requirement.PanelBaseRequirement;
+import view.panel.base.requirement.PanelBaseRequirement;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseRequirement</b>.</p>
@@ -12,7 +12,7 @@ import view.edit.panel.base.requirement.PanelBaseRequirement;
  * @since  2020-04-15
  * @see    controller.view.panel.ControllerPanel
  * @see    model.structural.base.requirement.Requirement
- * @see    view.edit.panel.base.requirement.PanelBaseRequirement
+ * @see    view.panel.base.requirement.PanelBaseRequirement
  */
 public class ControllerPanelBaseRequirement extends ControllerPanel {
     private final PanelBaseRequirement panelBaseRequirement;

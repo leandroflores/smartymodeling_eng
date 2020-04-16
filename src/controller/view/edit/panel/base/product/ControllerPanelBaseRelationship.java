@@ -3,7 +3,7 @@ package controller.view.edit.panel.base.product;
 import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import view.edit.panel.base.product.PanelBaseRelationship;
+import view.panel.base.product.PanelBaseRelationship;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseRelationship</b>.</p>
@@ -12,7 +12,7 @@ import view.edit.panel.base.product.PanelBaseRelationship;
  * @since  14/11/2019
  * @see    controller.view.panel.ControllerPanel
  * @see    model.structural.base.product.Relationship
- * @see    view.edit.panel.base.product.PanelBaseRelationship
+ * @see    view.panel.base.product.PanelBaseRelationship
  */
 public class ControllerPanelBaseRelationship extends ControllerPanel {
     private final PanelBaseRelationship panelBaseRelationship;

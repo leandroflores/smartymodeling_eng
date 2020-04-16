@@ -6,8 +6,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import model.structural.base.traceability.Traceability;
-import view.edit.panel.base.traceability.PanelBaseElements;
-import view.edit.panel.base.traceability.PanelBaseTraceability;
+import view.panel.base.traceability.PanelBaseElements;
+import view.panel.base.traceability.PanelBaseTraceability;
 import view.new_.ViewNew;
 import view.structural.ViewMenu;
 
