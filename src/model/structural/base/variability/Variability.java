@@ -27,10 +27,20 @@ public class Variability implements Exportable {
      * Default constructor method of Class.
      */
     public Variability() {
-        this.name        = "Variability Name";
-        this.constraint  = "Exclusive";
-        this.bindingTime = "DESIGN_TIME";
-        this.variants    = new ArrayList<>();
+        this.name           = "Variability Name";
+        this.variationPoint = null;
+        this.constraint     = "Exclusive";
+        this.bindingTime    = "DESIGN_TIME";
+        this.variants       = new ArrayList<>();
+    }
+    
+    /**
+     * Alternative constructor method of Class.
+     * @param variationPoint Variation Point.
+     */
+    public Variability(Element variationPoint) {
+        this();
+        this.variationPoint = variationPoint;
     }
 
     /**
@@ -38,13 +48,13 @@ public class Variability implements Exportable {
      * @param element W3C Element.
      */
     public Variability(org.w3c.dom.Element element) {
-        this.id               = element.getAttribute("id");
-        this.name             = element.getAttribute("name");
-        this.constraint       = element.getAttribute("constraint");
-        this.bindingTime      = element.getAttribute("bindingTime");
-        this.minimum          = Integer.parseInt(element.getAttribute("min"));
-        this.maximum          = Integer.parseInt(element.getAttribute("max"));
-        this.variants         = new ArrayList<>();
+        this.id          = element.getAttribute("id");
+        this.name        = element.getAttribute("name");
+        this.constraint  = element.getAttribute("constraint");
+        this.bindingTime = element.getAttribute("bindingTime");
+        this.minimum     = Integer.parseInt(element.getAttribute("min"));
+        this.maximum     = Integer.parseInt(element.getAttribute("max"));
+        this.variants    = new ArrayList<>();
     }
 
     /**

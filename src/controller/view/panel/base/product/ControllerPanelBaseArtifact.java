@@ -1,21 +1,18 @@
 package controller.view.panel.base.product;
 
-import controller.view.panel.ControllerPanel;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
+import controller.view.panel.base.ControllerPanelBase;
 import view.panel.base.product.PanelBaseArtifact;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseArtifact</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseArtifact</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelBaseArtifact</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  25/10/2019
- * @see    controller.view.panel.ControllerPanel
+ * @since  2019-10-25
+ * @see    controller.view.panel.base.ControllerPanelBase
  * @see    model.structural.base.product.Artifact
  * @see    view.panel.base.product.PanelBaseArtifact
  */
-public class ControllerPanelBaseArtifact extends ControllerPanel {
-    private final PanelBaseArtifact panelBaseArtifact;
+public class ControllerPanelBaseArtifact extends ControllerPanelBase {
 
     /**
      * Default constructor method of Class.
@@ -23,12 +20,8 @@ public class ControllerPanelBaseArtifact extends ControllerPanel {
      */
     public ControllerPanelBaseArtifact(PanelBaseArtifact panel) {
         super(panel);
-        this.panelBaseArtifact = panel;
     }
 
     @Override
-    public void actionPerformed(ActionEvent event) {}
-
-    @Override
-    public void keyPressed(KeyEvent event) {}
+    protected void update() {}
 }

@@ -69,7 +69,20 @@ public abstract class ControllerPanelOperation extends ControllerPanel {
         this.getPanelOperation().getClickButton().setBackground(this.getDefaultColor());
         this.getPanelDiagram().setOperation("Click");
         if (!this.getPanelDiagram().getDiagram().getElementsList().isEmpty())
-            new ViewNewVariability(this.getPanelDiagram().getViewMenu().getPanelModeling(), this.getPanelDiagram().getDiagram()).setVisible(true);
+            new ViewNewVariability(this.getPanelDiagram().getViewMenu().getPanelModeling(), 
+                                   this.getPanelDiagram().getDiagram(),
+                                   this.getVariationPoint()).setVisible(true);
+    }
+    
+    /**
+     * Method responsible for returning the Variation Point.
+     * @return Variation Point.
+     */
+    protected Element getVariationPoint() {
+        Element element = this.getPanelDiagram().getSelectedElement();
+        if (element != null && element.isDefault())
+            return element;
+        return null;
     }
     
     /**

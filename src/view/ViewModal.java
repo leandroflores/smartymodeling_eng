@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import view.panel.Panel;
 
 /**
  * <p>Class of View <b>ViewModal</b>.</p>
@@ -30,12 +31,13 @@ import javax.swing.SwingConstants;
  * @see    view.InterfaceView
  */
 public abstract class ViewModal extends JDialog implements InterfaceView {
-    protected String     title;
+    protected String title;
     protected Controller controller;
     private HashMap buttons;
     private HashMap scrollPanes;
     private HashMap tables;
     private HashMap textFields;
+    private HashMap panels;
     
     /**
      * Default constructor method of Class.
@@ -61,10 +63,11 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      * Method responsible for initializing the Maps.
      */
     private void init() {
-        this.buttons       = new HashMap<>();
-        this.scrollPanes   = new HashMap<>();
-        this.tables        = new HashMap<>();
-        this.textFields    = new HashMap<>();   
+        this.buttons     = new HashMap<>();
+        this.scrollPanes = new HashMap<>();
+        this.tables      = new HashMap<>();
+        this.textFields  = new HashMap<>();   
+        this.panels      = new HashMap<>();
     }
     
     /**
@@ -238,6 +241,32 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      */
     public JTextField getTextField(String id) {
         return (JTextField) this.textFields.get(id);
+    }
+    
+    /**
+     * Method responsible for adding a Panel.
+     * @param id Panel Id.
+     * @param panel Panel.
+     */
+    protected void addPanel(String id, Panel panel) {
+        this.panels.put(id, panel);
+    }
+    
+    /**
+     * Method responsible for returning a Panel by Id.
+     * @param  id Panel Id.
+     * @return Panel found.
+     */
+    protected Panel getPanel(String id) {
+        return (Panel) this.panels.get(id);
+    }
+    
+    /**
+     * Method responsible for removing a Panel.
+     * @param id Panel Id.
+     */
+    protected void removePanel(String id) {
+        this.panels.remove(id);
     }
     
     /**

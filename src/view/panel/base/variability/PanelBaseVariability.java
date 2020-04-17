@@ -9,7 +9,6 @@ import model.controller.structural.base.variability.ControllerVariability;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.variability.Variability;
-import view.panel.base.PanelBase;
 import view.structural.ViewMenu;
 
 /**
@@ -19,11 +18,9 @@ import view.structural.ViewMenu;
  * @since  2019-07-04
  * @see    controller.view.panel.base.variability.ControllerPanelBaseVariability
  * @see    model.structural.base.variability.Variability
- * @see    view.panel.base.PanelBase
+ * @see    view.panel.base.variability.PanelBase
  */
 public final class PanelBaseVariability extends PanelBase {
-    private final Diagram diagram;
-    private final Variability variability;
     
     /**
      * Default constructor method of Class.
@@ -32,10 +29,8 @@ public final class PanelBaseVariability extends PanelBase {
      * @param variability Variability.
      */
     public PanelBaseVariability(ViewMenu view, Diagram diagram, Variability variability) {
-        super(view);
-        this.diagram     = diagram;
-        this.variability = variability;
-        this.controller  = new ControllerPanelBaseVariability(this);
+        super(view, diagram, variability);
+        this.controller = new ControllerPanelBaseVariability(this);
         this.setDefaultProperties();
         this.addComponents();
         this.getController().setReady();
@@ -93,22 +88,6 @@ public final class PanelBaseVariability extends PanelBase {
     private void setVariantes() {
         if (this.variability.getVariationPoint() != null)
             this.variability.getVariants().remove(this.variability.getVariationPoint());
-    }
-    
-    /**
-     * Method responsible for returning the Diagram.
-     * @return Diagram.
-     */
-    public Diagram getDiagram() {
-        return this.diagram;
-    }
-    
-    /**
-     * Method responsible for return the Variability.
-     * @return Variability.
-     */
-    public Variability getVariability() {
-        return this.variability;
     }
     
     /**

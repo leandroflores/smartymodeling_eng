@@ -14,7 +14,7 @@ import view.panel.base.product.instance.PanelBase;
  * <p>Class responsible for controlling the <b>Instance Panel Base</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-16
- * @see    controller.view.panel.base.ControllerPanelBase
+ * @see    controller.view.panel.base.product.instance.ControllerPanelBase
  * @see    view.panel.base.product.instance.PanelBase
  */
 public abstract class ControllerPanelBase extends controller.view.panel.base.ControllerPanelBase {

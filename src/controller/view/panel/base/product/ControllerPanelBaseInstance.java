@@ -1,21 +1,18 @@
 package controller.view.panel.base.product;
 
-import controller.view.panel.ControllerPanel;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
+import controller.view.panel.base.ControllerPanelBase;
+import model.structural.base.product.Instance;
 import view.panel.base.product.PanelBaseInstance;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseInstance</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseInstance</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelBaseInstance</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  25/10/2019
- * @see    controller.view.panel.ControllerPanel
- * @see    model.structural.base.product.Instance
+ * @since  2019-10-25
+ * @see    controller.view.panel.base.ControllerPanelBase
  * @see    view.panel.base.product.PanelBaseInstance
  */
-public class ControllerPanelBaseInstance extends ControllerPanel {
-    private final PanelBaseInstance panelBaseInstance;
+public class ControllerPanelBaseInstance extends ControllerPanelBase {
 
     /**
      * Default constructor method of Class.
@@ -23,39 +20,41 @@ public class ControllerPanelBaseInstance extends ControllerPanel {
      */
     public ControllerPanelBaseInstance(PanelBaseInstance panel) {
         super(panel);
-        this.panelBaseInstance = panel;
     }
 
     @Override
-    public void actionPerformed(ActionEvent event) {
-        this.update();
-    }
-    
-    @Override
-    public void keyPressed(KeyEvent event) {
-        this.update();
-    }
-    
-    @Override
-    public void keyReleased(KeyEvent event) {
-        this.update();
-    }
-
-    /**
-     * Method responsible for checking the Instance.
-     * @return Instance checked.
-     */
-    private boolean check() {
-        return this.check(this.panelBaseInstance.getNameTextField().getText());
+    protected void refresh() {
+        this.getPanelTree().updateNode(this.getInstance());
+        this.getPanelModeling().updateTab(this.getInstance());
+        super.refresh();
     }
     
     /**
-     * Method responsible for setting the Instance Values.
+     * Method responsible for checking the Product.
+     * @return Product checked.
      */
-    private void update() {
-        this.panelBaseInstance.getInstance().setName(this.panelBaseInstance.getNameTextField().getText().trim());
-        this.panelBaseInstance.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseInstance.getViewMenu().getPanelModeling().updateTab(this.panelBaseInstance.getInstance());
-        this.panelBaseInstance.getViewMenu().setSave(false);
+    protected boolean check() {
+        return this.check(this.getPanel().getNameTextField().getText());
+    }
+    
+    @Override
+    protected void update() {
+        if (this.check()) {
+            this.getInstance().setName(this.getString(this.getPanel().getNameTextField()));
+            this.refresh();
+        }
+    }
+    
+    /**
+     * Method responsible for returning the Instance.
+     * @return Instance.
+     */
+    private Instance getInstance() {
+        return this.getPanel().getInstance();
+    }
+    
+    @Override
+    public PanelBaseInstance getPanel() {
+        return (PanelBaseInstance) this.panel;
     }
 }

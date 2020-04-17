@@ -7,6 +7,8 @@ import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.base.product.Instance;
+import model.structural.base.product.Product;
 import model.structural.base.requirement.Requirement;
 import model.structural.base.variability.Variability;
 import view.panel.Panel;
@@ -211,6 +213,23 @@ public final class PanelTree extends Panel {
     public void updateNode(Variability variability) {
         this.getPanelTreeDiagram().updateNode(variability);
         this.getPanelTreeVariability().updateNode(variability);
+    }
+    
+    
+    /**
+     * Method responsible for updating the Product Node.
+     * @param product Product.
+     */
+    public void updateNode(Product product) {
+        this.getPanelTreeProduct().updateNode(product);
+    }
+    
+    /**
+     * Method responsible for updating the Instance Node.
+     * @param instance Instance.
+     */
+    public void updateNode(Instance instance) {
+        this.getPanelTreeProduct().updateNode(instance);
     }
 
     /**

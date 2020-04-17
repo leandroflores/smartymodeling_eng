@@ -138,4 +138,22 @@ public final class PanelTreeProduct extends PanelTree {
                 node.add(this.createNode(instance, instance.getArtifact(artifact)));
         }
     }
+    
+    /**
+     * Method responsible for updating the Product Node.
+     * @param product Diagram. 
+     */
+    public void updateNode(Product product) {
+        if (this.getNode(product) != null)
+            this.getTreeModel().reload(this.getNode(product));
+    }
+    
+    /**
+     * Method responsible for updating the Instance Node.
+     * @param instance Instance. 
+     */
+    public void updateNode(Instance instance) {
+        if (this.getNode(instance) != null)
+            this.getTreeModel().reload(this.getNode(instance));
+    }
 }

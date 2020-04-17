@@ -1,21 +1,18 @@
 package controller.view.panel.base.product;
 
-import controller.view.panel.ControllerPanel;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
+import controller.view.panel.base.ControllerPanelBase;
+import model.structural.base.product.Product;
 import view.panel.base.product.PanelBaseProduct;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseProduct</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseProduct</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelBaseProduct</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  07/10/2019
- * @see    controller.view.panel.ControllerPanel
- * @see    model.structural.base.product.Product
+ * @since  2019-10-07
+ * @see    controller.view.panel.base.ControllerPanelBase
  * @see    view.panel.base.product.PanelBaseProduct
  */
-public class ControllerPanelBaseProduct extends ControllerPanel {
-    private final PanelBaseProduct panelBaseProduct;
+public class ControllerPanelBaseProduct extends ControllerPanelBase {
 
     /**
      * Default constructor method of Class.
@@ -23,41 +20,46 @@ public class ControllerPanelBaseProduct extends ControllerPanel {
      */
     public ControllerPanelBaseProduct(PanelBaseProduct panel) {
         super(panel);
-        this.panelBaseProduct = panel;
     }
 
     @Override
-    public void actionPerformed(ActionEvent event) {
-        this.update();
+    protected void refresh() {
+        this.getPanelTree().updateNode(this.getProduct());
+        super.refresh();
     }
     
-    @Override
-    public void keyPressed(KeyEvent event) {
-        this.update();
-    }
-    
-    @Override
-    public void keyReleased(KeyEvent event) {
-        this.update();
-    }
-
     /**
      * Method responsible for checking the Product.
      * @return Product checked.
      */
-    private boolean check() {
-        return    this.check(this.panelBaseProduct.getNameTextField().getText())
-               && this.check(this.panelBaseProduct.getVersionTextField().getText());
+    protected boolean check() {
+        return    this.check(this.getPanel().getNameTextField().getText())
+               && this.check(this.getPanel().getVersionTextField().getText());
     }
     
     /**
      * Method responsible for setting the Product Values.
      */
-    private void update() {
-        this.panelBaseProduct.getProduct().setName(this.panelBaseProduct.getNameTextField().getText().trim());
-        this.panelBaseProduct.getProduct().setVersion(this.panelBaseProduct.getVersionTextField().getText().trim());
-        this.panelBaseProduct.getProduct().setDescription(this.panelBaseProduct.getDescriptionTextArea().getText());
-        this.panelBaseProduct.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseProduct.getViewMenu().setSave(false);
+    @Override
+    protected void update() {
+        if (this.check()) {
+            this.getProduct().setName(this.getString(this.getPanel().getNameTextField()));
+            this.getProduct().setVersion(this.getString(this.getPanel().getVersionTextField()));
+            this.getProduct().setDescription(this.getString(this.getPanel().getDescriptionTextArea()));
+            this.refresh();
+        }
+    }
+    
+    /**
+     * Method responsible for returning the Product.
+     * @return Product.
+     */
+    private Product getProduct() {
+        return this.getPanel().getProduct();
+    }
+    
+    @Override
+    public PanelBaseProduct getPanel() {
+        return (PanelBaseProduct) this.panel;
     }
 }

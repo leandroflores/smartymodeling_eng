@@ -4,20 +4,17 @@ import java.awt.Dimension;
 import javax.swing.JButton;
 import model.controller.structural.base.ControllerProject;
 import model.controller.structural.base.evaluation.ControllerMetric;
-import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
 import view.new_.ViewNew;
 import view.new_.evaluation.ViewNewMeasure;
-import view.panel.Panel;
-import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBase</b>.</p> 
  * <p>Class responsible for defining a Abstract Model for <b>Evaluation Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-17
- * @see    controller.view.panel.base.
- * @see    view.panel.Panel
+ * @see    controller.view.panel.base.evaluation.measure.ControllerPanelBase
+ * @see    view.panel.base.PanelBase
  */
 public abstract class PanelBase extends view.panel.base.PanelBase {
     protected final ViewNew view;

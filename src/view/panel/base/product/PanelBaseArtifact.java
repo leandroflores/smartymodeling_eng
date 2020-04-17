@@ -2,22 +2,21 @@ package view.panel.base.product;
 
 import controller.view.panel.base.product.ControllerPanelBaseArtifact;
 import java.awt.GridLayout;
-import javax.swing.JTextField;
 import model.structural.base.product.Artifact;
-import view.panel.Panel;
+import model.structural.base.product.Instance;
+import view.panel.base.PanelBase;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelBaseArtifact</b>.</p> 
- * <p>Class responsible for defining a Panel for showing the <b>Artifact Base</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelBaseArtifact</b>.</p>
+ * <p>Class responsible for defining a <b>Artifact Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  25/10/2019
+ * @since  2019-10-25
  * @see    controller.view.panel.base.product.ControllerPanelBaseArtifact
  * @see    model.structural.base.product.Artifact
- * @see    view.panel.Panel
+ * @see    view.panel.base.PanelBase
  */
-public final class PanelBaseArtifact extends Panel {
-    private final ViewMenu viewMenu;
+public final class PanelBaseArtifact extends PanelBase {
     private final Artifact artifact;
     
     /**
@@ -26,52 +25,39 @@ public final class PanelBaseArtifact extends Panel {
      * @param artifact Artifact.
      */
     public PanelBaseArtifact(ViewMenu view, Artifact artifact) {
-        this.viewMenu   = view;
+        super(view);
         this.artifact   = artifact;
         this.controller = new ControllerPanelBaseArtifact(this);
-        this.setSettings();
+        this.setDefaultProperties();
         this.addComponents();
-        this.setValues();
     }
     
-    /**
-     * Method responsible for defining the Settings.
-     */
-    private void setSettings() {
+    @Override
+    protected void setDefaultProperties() {
         this.setLayout(new GridLayout(4, 2));
     }
     
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Product: "));
-        this.add(this.createTextFieldNoEditable("productTextField",  "", 15));
+        this.add(this.createTextFieldNoEditable("productTextField",  this.getInstance().getProduct().getName(), 15));
         
         this.add(this.createLabel("Instance: "));
-        this.add(this.createTextFieldNoEditable("instanceTextField", "", 15));
+        this.add(this.createTextFieldNoEditable("instanceTextField", this.getInstance().getName(), 15));
         
         this.add(this.createLabel("Diagram: "));
-        this.add(this.createTextFieldNoEditable("diagramTextField",  "", 15));
+        this.add(this.createTextFieldNoEditable("diagramTextField",  this.getInstance().getDiagram().toString(), 15));
         
         this.add(this.createLabel("Element: "));
-        this.add(this.createTextFieldNoEditable("elementTextField",  "", 15));
+        this.add(this.createTextFieldNoEditable("elementTextField",  this.getArtifact().getElement().getName(), 15));
     }
     
     /**
-     * Method responsible for setting the Artifact Values.
+     * Method responsible for returning the Instance.
+     * @return Instance.
      */
-    public void setValues() {
-        this.getProductTextField().setText(this.artifact.getInstance().getProduct().getName());
-        this.getInstanceTextField().setText(this.artifact.getInstance().getName());
-        this.getDiagramTextField().setText(this.artifact.getInstance().getDiagram().toString());
-        this.getElementTextField().setText(this.artifact.getElement().getName());
-    }
-    
-    /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
+    public Instance getInstance() {
+        return this.artifact.getInstance();
     }
     
     /**
@@ -80,37 +66,5 @@ public final class PanelBaseArtifact extends Panel {
      */
     public Artifact getArtifact() {
         return this.artifact;
-    }
-    
-    /**
-     * Method responsible for returning the Product Text Field.
-     * @return Product Text Field.
-     */
-    public JTextField getProductTextField() {
-        return this.getTextField("productTextField");
-    }
-    
-    /**
-     * Method responsible for returning the Instance Text Field.
-     * @return Instance Text Field.
-     */
-    public JTextField getInstanceTextField() {
-        return this.getTextField("instanceTextField");
-    }
-    
-    /**
-     * Method responsible for returning the Diagram Text Field.
-     * @return Diagram Text Field.
-     */
-    public JTextField getDiagramTextField() {
-        return this.getTextField("diagramTextField");
-    }
-    
-    /**
-     * Method responsible for returning the Element Text Field.
-     * @return Element Text Field.
-     */
-    public JTextField getElementTextField() {
-        return this.getTextField("elementTextField");
     }
 }

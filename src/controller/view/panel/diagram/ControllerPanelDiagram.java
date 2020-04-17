@@ -10,7 +10,6 @@ import java.awt.event.MouseListener;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
 import view.delete.ViewDeleteElement;
-import view.new_.variability.ViewNewVariability;
 import view.panel.diagram.PanelDiagram;
 
 /**
@@ -100,17 +99,6 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
 
     @Override
     public void mouseExited(MouseEvent event) {}
-    
-    /**
-     * Method responsible for adding a New Variability.
-     */
-    public void addVariability() {
-//        this.getPanelOperation().resetBackground();
-//        this.getPanelOperation().getClickButton().setBackground(this.getDefaultColor());
-        this.getPanelDiagram().setOperation("Click");
-        if (!this.getPanelDiagram().getDiagram().getElementsList().isEmpty())
-            new ViewNewVariability(this.getPanelDiagram().getViewMenu().getPanelModeling(), this.getPanelDiagram().getDiagram()).setVisible(true);
-    }
     
     /**
      * Method responsible for Editing the Cell Selected.

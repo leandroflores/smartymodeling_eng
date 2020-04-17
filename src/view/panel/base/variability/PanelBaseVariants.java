@@ -14,7 +14,6 @@ import model.controller.structural.base.variability.ControllerVariability;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.variability.Variability;
-import view.panel.base.PanelBase;
 import view.structural.ViewMenu;
 
 /**
@@ -27,8 +26,6 @@ import view.structural.ViewMenu;
  * @see    view.panel.base.PanelBase
  */
 public final class PanelBaseVariants extends PanelBase {
-    private final Diagram diagram;
-    private final Variability variability;
     
     /**
      * Default constructor method of Class.
@@ -37,10 +34,8 @@ public final class PanelBaseVariants extends PanelBase {
      * @param variability Variability.
      */
     public PanelBaseVariants(ViewMenu view, Diagram diagram, Variability variability) {
-        super(view);
-        this.diagram     = diagram;
-        this.variability = variability;
-        this.controller  = new ControllerPanelBaseVariants(this);
+        super(view, diagram, variability);
+        this.controller = new ControllerPanelBaseVariants(this);
         this.setDefaultProperties();
         this.addComponents();
         this.setValues();
@@ -126,22 +121,6 @@ public final class PanelBaseVariants extends PanelBase {
      */
     public Element getVariant() {
         return (Element) this.getVariantComboBox().getSelectedItem();
-    }
-    
-    /**
-     * Method responsible for returning the Diagram.
-     * @return Diagram.
-     */
-    public Diagram getDiagram() {
-        return this.diagram;
-    }
-    
-    /**
-     * Method responsible for return the Variability.
-     * @return Variability.
-     */
-    public Variability getVariability() {
-        return this.variability;
     }
     
     /**

@@ -6,6 +6,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeListener;
 import model.structural.base.Diagram;
+import model.structural.base.Element;
 import model.structural.base.variability.Variability;
 import view.panel.base.variability.PanelBaseVariability;
 import view.panel.base.variability.PanelBaseVariants;
@@ -31,11 +32,12 @@ public final class ViewNewVariability extends ViewNew {
      * Default constructor method of Class.
      * @param panel Panel Modeling.
      * @param diagram Diagram.
+     * @param variationPoint Variation Point.
      */
-    public ViewNewVariability(PanelModeling panel, Diagram diagram) {
+    public ViewNewVariability(PanelModeling panel, Diagram diagram, Element variationPoint) {
         super(panel);
         this.diagram     = diagram;
-        this.variability = new Variability();
+        this.variability = new Variability(variationPoint);
         this.controller  = new ControllerViewNewVariability(this);
         this.title       = "New Variability";
         this.initComponents();
