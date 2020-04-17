@@ -1,6 +1,6 @@
 package view.panel.base.evaluation;
 
-import controller.view.edit.panel.base.evaluation.ControllerPanelBaseOperation;
+import controller.view.panel.base.evaluation.ControllerPanelBaseOperation;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JComboBox;
@@ -16,7 +16,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining a Panel for showing the <b>Operation Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  20/08/2019
- * @see    controller.view.edit.panel.base.evaluation.ControllerPanelBaseOperation
+ * @see    controller.view.panel.base.evaluation.ControllerPanelBaseOperation
  * @see    model.structural.base.evaluation.Metric
  * @see    view.panel.Panel
  */

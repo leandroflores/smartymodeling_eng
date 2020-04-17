@@ -6,9 +6,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
-import view.panel.base.evaluation.PanelBaseEvaluation;
-import view.panel.base.evaluation.PanelBaseMeasure;
-import view.panel.base.evaluation.PanelBaseTarget;
+import view.panel.base.evaluation.measure.PanelBaseEvaluation;
+import view.panel.base.evaluation.measure.PanelBaseNewMeasure;
+import view.panel.base.evaluation.measure.PanelBaseTarget;
 import view.new_.ViewNew;
 import view.structural.ViewMenu;
 
@@ -24,7 +24,7 @@ import view.structural.ViewMenu;
 public final class ViewNewMeasure extends ViewNew { 
     private final Project project;
     private final Measure measure;
-    private PanelBaseMeasure    panelBaseMeasure;
+    private PanelBaseNewMeasure    panelBaseMeasure;
     private PanelBaseTarget     panelBaseTarget;
     private PanelBaseEvaluation panelBaseEvaluation;
     
@@ -70,7 +70,7 @@ public final class ViewNewMeasure extends ViewNew {
      * Method responsible for adding the Panel Base Measure.
      */
     public void addPanelBaseMeasure() {
-        this.panelBaseMeasure = new PanelBaseMeasure(this, this.measure);
+        this.panelBaseMeasure = new PanelBaseNewMeasure(this, this.measure);
         this.tabbedPane.removeAll();
         this.createScrollPane("scrollPanelBaseMeasure",  this.panelBaseMeasure);
         this.getScrollPanelBaseMeasure().setViewportView(this.panelBaseMeasure);
@@ -151,7 +151,7 @@ public final class ViewNewMeasure extends ViewNew {
      * Method responsible for returning the Panel Base Measure.
      * @return Panel Base Measure.
      */
-    public PanelBaseMeasure getPanelBaseMeasure() {
+    public PanelBaseNewMeasure getPanelBaseMeasure() {
         return this.panelBaseMeasure;
     }
     

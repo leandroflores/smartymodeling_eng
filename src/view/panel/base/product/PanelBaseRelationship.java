@@ -1,6 +1,6 @@
 package view.panel.base.product;
 
-import controller.view.edit.panel.base.product.ControllerPanelBaseRelationship;
+import controller.view.panel.base.product.ControllerPanelBaseRelationship;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
 import model.structural.base.product.Relationship;
@@ -12,7 +12,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining a Panel for showing the <b>Relationship Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  14/11/2019
- * @see    controller.view.edit.panel.base.product.ControllerPanelBaseRelationship
+ * @see    controller.view.panel.base.product.ControllerPanelBaseRelationship
  * @see    model.structural.base.product.Relationship
  * @see    view.panel.Panel
  */

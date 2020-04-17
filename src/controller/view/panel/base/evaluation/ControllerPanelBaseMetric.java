@@ -1,4 +1,4 @@
-package controller.view.edit.panel.base.evaluation;
+package controller.view.panel.base.evaluation;
 
 import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,7 @@ import view.panel.base.evaluation.PanelBaseMetric;
  * @author Leandro
  * @since  23/07/2019
  * @see    controller.view.panel.ControllerPanel
- * @see    view.panel.base.evaluation.PanelBaseMetric
+ * @see    view.panel.base.evaluation.metric.PanelBaseMetric
  */
 public class ControllerPanelBaseMetric extends ControllerPanel {
     private final PanelBaseMetric panelBaseMetric;

@@ -2,7 +2,6 @@ package view.panel.project.tree;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.util.HashMap;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
@@ -30,8 +29,9 @@ import view.structural.ViewMenu;
 public final class PanelTree extends Panel {
     private final ViewMenu viewMenu;
     private final Project  project;
-    private final HashMap  panels;
+    private final boolean  complete;
     private JTabbedPane tabbedPane;
+    
     
     /**
      * Default constructor method of Class.
@@ -40,7 +40,7 @@ public final class PanelTree extends Panel {
     public PanelTree(ViewMenu viewMenu) {
         this.viewMenu = viewMenu;
         this.project  = this.viewMenu.getProject();
-        this.panels   = new HashMap();
+        this.complete = true;
         this.addComponents();
     }
     
@@ -71,7 +71,7 @@ public final class PanelTree extends Panel {
             this.addPanelTreeVariability();
             this.addPanelTreeProduct();
             this.addPanelTreeEvaluation();
-//            this.setOnlyUML();
+            this.setUMLVersion();
         }
     }
     
@@ -79,11 +79,21 @@ public final class PanelTree extends Panel {
      * Method responsible for setting the UML Version Tab.
      */
     private void setUMLVersion() {
-        this.getTabbedPane().remove(5);
-        this.getTabbedPane().remove(4);
-        this.getTabbedPane().remove(3);
-        this.getTabbedPane().remove(1);
-        this.getTabbedPane().remove(0);
+        if (!this.complete) {
+            this.getTabbedPane().remove(5);
+            this.getTabbedPane().remove(4);
+            this.getTabbedPane().remove(3);
+            this.getTabbedPane().remove(1);
+            this.getTabbedPane().remove(0);
+        }
+    }
+    
+    
+    public void setTabIndex(int index) {
+        if (this.complete)
+            this.tabbedPane.setSelectedIndex(index);
+        else
+            this.tabbedPane.setSelectedIndex(0); 
     }
     
     /**
@@ -202,15 +212,6 @@ public final class PanelTree extends Panel {
         this.getPanelTreeDiagram().updateNode(variability);
         this.getPanelTreeVariability().updateNode(variability);
     }
-    
-    /**
-     * Method responsible for adding the Panel.
-     * @param id Panel id.
-     * @param panel Panel.
-     */
-    protected void addPanel(String id, Panel panel) {
-        this.panels.put(id, panel);
-    }
 
     /**
      * Method responsible for returning the Tabbed Pane.
@@ -225,7 +226,7 @@ public final class PanelTree extends Panel {
      * @return Panel Tree Requirement.
      */
     public PanelTreeRequirement getPanelTreeRequirement() {
-        return (PanelTreeRequirement) this.panels.get("panelTreeRequirement");
+        return (PanelTreeRequirement) this.getPanel("panelTreeRequirement");
     }
     
     /**
@@ -241,7 +242,7 @@ public final class PanelTree extends Panel {
      * @return Panel Tree Feature.
      */
     public PanelTreeFeature getPanelTreeFeature() {
-        return (PanelTreeFeature) this.panels.get("panelTreeFeature");
+        return (PanelTreeFeature) this.getPanel("panelTreeFeature");
     }
     
     /**
@@ -257,7 +258,7 @@ public final class PanelTree extends Panel {
      * @return Panel Tree Diagram.
      */
     public PanelTreeDiagram getPanelTreeDiagram() {
-        return (PanelTreeDiagram) this.panels.get("panelTreeDiagram");
+        return (PanelTreeDiagram) this.getPanel("panelTreeDiagram");
     }
     
     /**
@@ -273,7 +274,7 @@ public final class PanelTree extends Panel {
      * @return Panel Tree Variability.
      */
     public PanelTreeVariability getPanelTreeVariability() {
-        return (PanelTreeVariability) this.panels.get("panelTreeVariability");
+        return (PanelTreeVariability) this.getPanel("panelTreeVariability");
     }
     
     /**
@@ -289,7 +290,7 @@ public final class PanelTree extends Panel {
      * @return Panel Tree Product.
      */
     public PanelTreeProduct getPanelTreeProduct() {
-        return (PanelTreeProduct) this.panels.get("panelTreeProduct");
+        return (PanelTreeProduct) this.getPanel("panelTreeProduct");
     }
     
     /**
@@ -305,7 +306,7 @@ public final class PanelTree extends Panel {
      * @return Panel Tree Evaluation.
      */
     public PanelTreeEvaluation getPanelTreeEvaluation() {
-        return (PanelTreeEvaluation) this.panels.get("panelTreeEvaluation");
+        return (PanelTreeEvaluation) this.getPanel("panelTreeEvaluation");
     }
     
     /**

@@ -1,6 +1,6 @@
 package view.panel.base.product.instance;
 
-import controller.view.edit.panel.base.product.instance.ControllerPanelBaseOptional;
+import controller.view.panel.base.product.instance.ControllerPanelBaseOptional;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -8,40 +8,36 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import model.structural.base.Element;
-import view.panel.Panel;
 import view.new_.product.ViewNewInstance;
 
 /**
  * <p>Class of View <b>PanelBaseOptional</b>.</p> 
- * <p>Class responsible for defining the for showing the <b>Optional Base</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining a <b>Optional Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  08/10/2019
- * @see    controller.view.edit.panel.base.product.instance.ControllerPanelBaseOptional
+ * @since  2019-10-08
+ * @see    controller.view.panel.base.product.instance.ControllerPanelBaseOptional
  * @see    model.structural.base.product.Instance
- * @see    view.panel.Panel
+ * @see    view.panel.base.product.instance.PanelBase
  */
-public class PanelBaseOptional extends Panel {
-    private final ViewNewInstance viewNew;
+public final class PanelBaseOptional extends PanelBase {
     
     /**
      * Default constructor method of Class.
      * @param view View New Instance.
      */
     public PanelBaseOptional(ViewNewInstance view) {
-        this.viewNew    = view;
+        super(view);
         this.controller = new ControllerPanelBaseOptional(this);
-        this.initComponents();
-    }
-    
-    /**
-     * Method responsible for initializing the Components.
-     */
-    private void initComponents() {
-        this.setPreferredSize(new Dimension(600, 350));
-        this.setLayout(new FlowLayout(FlowLayout.CENTER));
+        this.setDefaultProperties();
         this.addHeader();
         this.addComponents();
         this.addFooter();
+    }
+    
+    @Override
+    protected void setDefaultProperties() {
+        this.setPreferredSize(new Dimension(600, 350));
+        this.setLayout(new FlowLayout(FlowLayout.CENTER));
     }
 
     /**
@@ -57,7 +53,6 @@ public class PanelBaseOptional extends Panel {
         this.getElementsScrollPane().setViewportView(this.createElementsPanel());
         this.getElementsScrollPane().setPreferredSize(new Dimension(500, 250));
         this.add(this.getElementsScrollPane());
-//        this.addLines(1);
     }
     
     /**
@@ -67,7 +62,7 @@ public class PanelBaseOptional extends Panel {
     private JPanel createElementsPanel() {
         JPanel panel = new JPanel();
                panel.setLayout(new GridLayout(0, 4));
-        for (Element element : this.viewNew.getInstance().getDiagram().filterOptionalElements())
+        for (Element element : this.getInstance().getDiagram().filterOptionalElements())
                this.addElementCheckBox(panel, element);
         return panel;
     }
@@ -94,14 +89,6 @@ public class PanelBaseOptional extends Panel {
      */
     public JCheckBox createElementCheckBox(Element element) {
         return this.createCheckBox("checkBox" + element.getId(), "Yes", element.isMandatory());
-    }
-    
-    /**
-     * Method responsible for returning the View New Instance.
-     * @return View New Instance.
-     */
-    public ViewNewInstance getViewNewInstance() {
-        return this.viewNew;
     }
     
     /**

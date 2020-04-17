@@ -7,7 +7,7 @@ import model.structural.base.interfaces.Exportable;
  * <p>Class of Model <b>Measure</b>.</p>
  * <p>Class responsible for representing the <b>Measure</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  02/09/2019
+ * @since  2019-09-02
  * @see    model.structural.base.evaluation.Metric
  * @see    model.structural.base.interfaces.Exportable
  */
@@ -16,6 +16,7 @@ public final class Measure implements Exportable {
     private String name;
     private String date;
     private Metric metric;
+    private String target;
     private Double value;
     
      /**
@@ -26,6 +27,7 @@ public final class Measure implements Exportable {
         this.name   = "NewMeasure";
         this.date   = new FunctDate().getCurrentFormattedDate();
         this.metric = null;
+        this.target = "Project";
         this.value  = 0.0d;
     }
     
@@ -38,6 +40,7 @@ public final class Measure implements Exportable {
         this.name   = element.getAttribute("name");
         this.date   = new FunctDate().getCurrentFormattedDate();
         this.metric = null;
+        this.target = element.getAttribute("target");
         this.setValue(element);
     }
     
@@ -104,6 +107,22 @@ public final class Measure implements Exportable {
     public void setMetric(Metric metric) {
         this.metric = metric;
     }
+    
+    /**
+     * Method responsible for returning the Measure Target.
+     * @return Measure Target.
+     */
+    public String getTarget() {
+        return this.target;
+    }
+
+    /**
+     * Method responsible for setting the Measure Target.
+     * @param target Measure Target.
+     */
+    public void setTarget(String target) {
+        this.target = target;
+    }
 
     /**
      * Method responsible for returning the Measure Value.
@@ -148,6 +167,7 @@ public final class Measure implements Exportable {
                export += " name=\""   + this.name           + "\"";
                export += " date=\""   + this.date           + "\"";
                export += " metric=\"" + this.metric.getId() + "\"";
+               export += " target=\"" + this.target         + "\"";
                export += " value=\""  + this.value          + "\">\n";
         return export;
     }

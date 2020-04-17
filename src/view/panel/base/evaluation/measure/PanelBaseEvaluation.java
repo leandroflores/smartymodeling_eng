@@ -1,6 +1,6 @@
-package view.panel.base.evaluation;
+package view.panel.base.evaluation.measure;
 
-import controller.view.edit.panel.base.evaluation.ControllerPanelBaseEvaluation;
+import controller.view.panel.base.evaluation.measure.ControllerPanelBaseEvaluation;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.util.List;
@@ -9,49 +9,36 @@ import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import model.controller.structural.base.ControllerProject;
-import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
-import view.panel.Panel;
 import view.new_.evaluation.ViewNewMeasure;
-import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelBaseEvalutaion</b>.</p> 
- * <p>Class responsible for defining a Panel for showing the <b>Evalutaion Base Panel</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelBaseEvaluation</b>.</p> 
+ * <p>Class responsible for defining a <b>Measure Evaluation Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  03/09/2019
- * @see    controller.view.edit.panel.base.evaluation.ControllerPanelBaseEvaluation
+ * @since  2019-09-03
+ * @see    controller.view.panel.base.evaluation.measure.ControllerPanelBaseEvaluation
  * @see    model.structural.base.evaluation.Measure
- * @see    view.panel.Panel
+ * @see    view.panel.base.evaluation.measure.PanelBase
  */
-public final class PanelBaseEvaluation extends Panel {
-    private final ViewNewMeasure viewNew;
-    private final ViewMenu viewMenu;
-    private final Project project;
-    private final Measure measure;
+public final class PanelBaseEvaluation extends PanelBase {
     
     /**
      * Default constructor method of Class.
-     * @param viewNew View New Measure.
+     * @param view View New Measure.
      * @param measure Measure.
      */
-    public PanelBaseEvaluation(ViewNewMeasure viewNew, Measure measure) {
-        this.viewNew    = viewNew;
-        this.viewMenu   = viewNew.getViewMenu();
-        this.project    = this.viewMenu.getProject();
-        this.measure    = measure;
+    public PanelBaseEvaluation(ViewNewMeasure view, Measure measure) {
+        super(view, measure);
         this.controller = new ControllerPanelBaseEvaluation(this);
-        this.setSettings();
+        this.setDefaultProperties();
         this.addComponents();
         this.addFooter();
         this.setValues();
     }
     
-    /**
-     * Method responsible for defining the Settings.
-     */
-    private void setSettings() {
+    @Override
+    protected void setDefaultProperties() {
         this.setLayout(new GridBagLayout());
         this.setPreferredSize(new Dimension(200, 300));
         this.setSize(new Dimension(200, 300));
@@ -73,14 +60,6 @@ public final class PanelBaseEvaluation extends Panel {
     }
     
     /**
-     * Method responsible for returning the Targets Array.
-     * @return Targets Array.
-     */
-    private Object[] getTargets() {
-        return new ControllerProject(this.project).getTargets(this.measure.getMetric().getTarget());
-    }
-    
-    /**
      * Method responsible for setting the Operation Values.
      */
     public void setValues() {
@@ -89,10 +68,10 @@ public final class PanelBaseEvaluation extends Panel {
     }
     
     /**
-     * Method responsible for updating the Target.
+     * Method responsible for updating the Target Panel.
      */
     public void updateTarget() {
-        Object target = this.viewNew.getPanelBaseTarget().getTargetComboBox().getSelectedItem();
+        Object target = this.getViewNew().getPanelBaseTarget().getTargetComboBox().getSelectedItem();
         this.getTargetComboBox().setSelectedItem(target);
     }
     
@@ -106,47 +85,6 @@ public final class PanelBaseEvaluation extends Panel {
         for (Object object :  list)
             model.addElement(object);
         this.getDetailsList().setModel(model);
-    }
-    
-    @Override
-    public void addFooter() {
-        this.add(this.createButton("backButton", "  Back  ", "Back", "back.png"), this.createConstraints(3, 1, 0, 4));
-        this.add(this.createButton("nextButton", "  Next  ", "Next", "next.png"), this.createConstraints(3, 1, 3, 4));
-        
-        this.getBackButton().setPreferredSize(new Dimension(200, 30));
-        this.getNextButton().setPreferredSize(new Dimension(200, 30));
-    }
-    
-    /**
-     * Method responsible for returning the View New Measure.
-     * @return View New Measure.
-     */
-    public ViewNewMeasure getViewNewMeasure() {
-        return this.viewNew;
-    }
-    
-    /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
-    }
-    
-    /**
-     * Method responsible for returning the Project.
-     * @return Project.
-     */
-    public Project getProject() {
-        return this.project;
-    }
-    
-    /**
-     * Method responsible for return the Measure.
-     * @return Measure.
-     */
-    public Measure getMeasure() {
-        return this.measure;
     }
     
     /**

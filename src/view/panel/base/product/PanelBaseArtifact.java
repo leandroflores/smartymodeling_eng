@@ -1,6 +1,6 @@
 package view.panel.base.product;
 
-import controller.view.edit.panel.base.product.ControllerPanelBaseArtifact;
+import controller.view.panel.base.product.ControllerPanelBaseArtifact;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
 import model.structural.base.product.Artifact;
@@ -12,7 +12,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining a Panel for showing the <b>Artifact Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  25/10/2019
- * @see    controller.view.edit.panel.base.product.ControllerPanelBaseArtifact
+ * @see    controller.view.panel.base.product.ControllerPanelBaseArtifact
  * @see    model.structural.base.product.Artifact
  * @see    view.panel.Panel
  */

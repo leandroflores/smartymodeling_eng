@@ -1,28 +1,25 @@
-package controller.view.edit.panel.base.evaluation;
+package controller.view.panel.base.evaluation.measure;
 
-import controller.view.panel.ControllerPanel;
 import funct.evaluation.Evaluation;
 import funct.evaluation.base.EvaluationDiagram;
 import funct.evaluation.base.EvaluationProject;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import javax.script.ScriptException;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Metric;
-import view.panel.base.evaluation.PanelBaseEvaluation;
+import view.panel.base.evaluation.measure.PanelBaseEvaluation;
 import view.message.ViewError;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseEvaluation</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseEvaluation</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelBaseEvaluation</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  23/10/2019
- * @see    controller.view.panel.ControllerPanel
- * @see    view.panel.base.evaluation.PanelBaseEvaluation
+ * @since  2019-10-23
+ * @see    controller.view.panel.base.evaluation.measure.ControllerPanelBase
+ * @see    view.panel.base.evaluation.measure.PanelBaseEvaluation
  */
-public class ControllerPanelBaseEvaluation extends ControllerPanel {
-    private final PanelBaseEvaluation panelBaseEvaluation;
+public class ControllerPanelBaseEvaluation extends ControllerPanelBase {
 
     /**
      * Default constructor method of Class.
@@ -30,30 +27,22 @@ public class ControllerPanelBaseEvaluation extends ControllerPanel {
      */
     public ControllerPanelBaseEvaluation(PanelBaseEvaluation panel) {
         super(panel);
-        this.panelBaseEvaluation = panel;
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        this.evaluate();
-        if (this.panelBaseEvaluation.getBackButton().equals(event.getSource()))
-            this.panelBaseEvaluation.getViewNewMeasure().removePanelBaseEvaluation();
-        else if (this.panelBaseEvaluation.getNextButton().equals(event.getSource()))
-            this.panelBaseEvaluation.getViewNewMeasure().getController().insert();
+        this.refresh();
+        super.actionPerformed(event);
     }
     
     @Override
-    public void keyPressed(KeyEvent event) {}
+    protected void return_() {
+        this.getViewNew().removePanelBaseEvaluation();
+    }
     
     @Override
-    public void keyReleased(KeyEvent event) {}
-    
-    /**
-     * Method responsible for returning the Project.
-     * @return Project.
-     */
-    private Project getProject() {
-        return this.panelBaseEvaluation.getProject();
+    protected boolean check() {
+        return true;
     }
     
     /**
@@ -61,22 +50,21 @@ public class ControllerPanelBaseEvaluation extends ControllerPanel {
      * @return Diagram selected.
      */
     private Diagram getDiagram() {
-        return (Diagram) this.panelBaseEvaluation.getTargetComboBox().getSelectedItem();
+        return (Diagram) this.getPanel().getTargetComboBox().getSelectedItem();
     }
     
-    /**
-     * Method responsible for Evaluate the Target by Operation.
-     */
-    public void evaluate() {
-        Object target = this.panelBaseEvaluation.getTargetComboBox().getSelectedItem();
-        Metric metric = this.panelBaseEvaluation.getMeasure().getMetric();
+    @Override
+    public void refresh() {
+        super.refresh();
+        Object target = this.getPanel().getTargetComboBox().getSelectedItem();
+        Metric metric = this.getPanel().getMeasure().getMetric();
         try {
             if (target.toString().equalsIgnoreCase("Project"))
                 this.evaluate(this.getProject(), metric);
             else if (target instanceof Diagram)
                 this.evaluate(this.getDiagram(), metric);
         }catch (ScriptException exception) {
-            new ViewError(this.panelBaseEvaluation.getViewNewMeasure(), "Error to Apply Metric!").setVisible(true);
+            new ViewError(this.getViewNew(), "Error to Apply Metric!").setVisible(true);
         }
     }
     
@@ -89,8 +77,8 @@ public class ControllerPanelBaseEvaluation extends ControllerPanel {
     public void evaluate(Project project, Metric metric) throws ScriptException {
         Evaluation evaluation = new EvaluationProject(project);
         Double     finalValue = evaluation.getFinalValue(metric.getOperation());
-        this.panelBaseEvaluation.getValueTextField().setText(Double.toString(finalValue));
-        this.panelBaseEvaluation.updateDetails(evaluation.getObjects());
+        this.getPanel().getValueTextField().setText(Double.toString(finalValue));
+        this.getPanel().updateDetails(evaluation.getObjects());
     }
     
     /**
@@ -102,7 +90,23 @@ public class ControllerPanelBaseEvaluation extends ControllerPanel {
     public void evaluate(Diagram diagram, Metric metric) throws ScriptException {
         Evaluation evaluation = new EvaluationDiagram(diagram);
         Double     finalValue = evaluation.getFinalValue(metric.getOperation());
-        this.panelBaseEvaluation.getValueTextField().setText(Double.toString(finalValue));
-        this.panelBaseEvaluation.updateDetails(evaluation.getObjects());
+        this.getPanel().getValueTextField().setText(Double.toString(finalValue));
+        this.getPanel().updateDetails(evaluation.getObjects());
+    }
+    
+    @Override
+    public void next() {
+        this.update();
+        this.getViewNew().getController().insert();
+    }
+    
+    @Override
+    protected void update() {
+        this.getMeasure().setValue(this.getDouble(this.getPanel().getValueTextField()));
+    }
+    
+    @Override
+    public PanelBaseEvaluation getPanel() {
+        return (PanelBaseEvaluation) this.panel;
     }
 }

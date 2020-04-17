@@ -37,6 +37,14 @@ public class FunctDate {
     }
     
     /**
+     * Method responsible for returning the System Current US Formatted Date.
+     * @return System Current US Formatted Date.
+     */
+    public String getCurrentUSFormattedDate() {
+        return this.getFormattedUSDate(this.getCurrentDate());
+    }
+    
+    /**
      * Method responsible for returning a System Current Time.
      * @return System Current Time.
      */
@@ -118,7 +126,7 @@ public class FunctDate {
      * @param  date  Date.
      * @return String with a Date formatted.
      */
-    public String getFormattedDate2(Date date) {
+    public String getSampleFormattedDate(Date date) {
         if (date != null)
             return new SimpleDateFormat("dd/MM/yy").format(date);
         return "";

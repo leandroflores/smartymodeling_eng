@@ -1,25 +1,23 @@
 package view.panel.base.product.instance;
 
-import controller.view.edit.panel.base.product.instance.ControllerPanelBaseNewInstance;
+import controller.view.panel.base.product.instance.ControllerPanelBaseNewInstance;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.base.product.Instance;
-import view.panel.Panel;
 import view.new_.product.ViewNewInstance;
 
 /**
  * <p>Class of View <b>PanelBaseNewInstance</b>.</p> 
- * <p>Class responsible for defining a Panel for showing the <b>New Instance Base</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining a <b>New Instance Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  07/10/2019
- * @see    controller.view.edit.panel.base.product.instance.ControllerPanelBaseNewInstance
+ * @since  2019-10-07
+ * @see    controller.view.panel.base.product.instance.ControllerPanelBaseNewInstance
  * @see    model.structural.base.product.Instance
- * @see    view.panel.Panel
+ * @see    view.panel.base.product.instance.PanelBase
  */
-public final class PanelBaseNewInstance extends Panel {
-    private final ViewNewInstance viewNew;
+public final class PanelBaseNewInstance extends PanelBase {
     private final Instance instance;
     
     /**
@@ -28,30 +26,28 @@ public final class PanelBaseNewInstance extends Panel {
      * @param instance Instance.
      */
     public PanelBaseNewInstance(ViewNewInstance view, Instance instance) {
-        this.viewNew    = view;
+        super(view);
         this.instance   = instance;
         this.controller = new ControllerPanelBaseNewInstance(this);
-        this.setSettings();
+        this.setDefaultProperties();
         this.addComponents();
         this.addFooter();
         this.setValues();
     }
     
-    /**
-     * Method responsible for defining the Settings.
-     */
-    private void setSettings() {
+    @Override
+    protected void setDefaultProperties() {
         this.setLayout(new GridLayout(4, 2));
     }
     
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Product*: "));
-        this.add(this.createComboBox("productComboBox", this.viewNew.getViewMenu().getProject().getProductsList().toArray(), 15));
+        this.add(this.createComboBox("productComboBox", this.getProject().getProductsList().toArray(), 15));
         this.getProductComboBox().setPreferredSize(new Dimension(325, 30));
         
         this.add(this.createLabel("Diagram*: "));
-        this.add(this.createComboBox("diagramComboBox", this.viewNew.getViewMenu().getProject().getUMLDiagramsList().toArray(), 15));
+        this.add(this.createComboBox("diagramComboBox", this.getProject().getUMLDiagramsList().toArray(), 15));
         this.getDiagramComboBox().setPreferredSize(new Dimension(325, 30));
         
         this.add(this.createLabel("Name*: "));
@@ -84,22 +80,6 @@ public final class PanelBaseNewInstance extends Panel {
     }
     
     /**
-     * Method responsible for returning the View New Instance.
-     * @return View New Instance.
-     */
-    public ViewNewInstance getViewNewInstance() {
-        return this.viewNew;
-    }
-    
-    /**
-     * Method responsible for returning the Instance.
-     * @return Instance.
-     */
-    public Instance getInstance() {
-        return this.instance;
-    }
-    
-    /**
      * Method responsible for returning the Product Combo Box.
      * @return Product Combo Box.
      */
@@ -121,5 +101,10 @@ public final class PanelBaseNewInstance extends Panel {
      */
     public JTextField getNameTextField() {
         return this.getTextField("nameTextField");
+    }
+    
+    @Override
+    public Instance getInstance() {
+        return this.instance;
     }
 }

@@ -102,6 +102,19 @@ public abstract class ControllerPanel extends Controller {
     }
     
     /**
+     * Method responsible for returning the Double by Value.
+     * @param  value String Value.
+     * @return Double parsed.
+     */
+    protected Double getDoubleValue(String value) {
+        try {
+            return Double.parseDouble(value);
+        }catch (NumberFormatException exception) {
+            return 0.0d;
+        }
+    }
+    
+    /**
      * Method responsible for returning the Text of JTextComponent.
      * @param  textComponent JTextComponent.
      * @return String of JTextComponent.

@@ -1,4 +1,4 @@
-package controller.view.edit.panel.base.product;
+package controller.view.panel.base.product;
 
 import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;

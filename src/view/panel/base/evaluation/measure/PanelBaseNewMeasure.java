@@ -1,51 +1,41 @@
-package view.panel.base.evaluation;
+package view.panel.base.evaluation.measure;
 
-import controller.view.edit.panel.base.evaluation.ControllerPanelBaseMeasure;
+import controller.view.panel.base.evaluation.measure.ControllerPanelBaseNewMeasure;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
-import model.controller.structural.base.evaluation.ControllerMetric;
-import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
-import view.panel.Panel;
 import view.new_.evaluation.ViewNewMeasure;
 
 /**
- * <p>Class of View <b>PanelBaseMeasure</b>.</p> 
- * <p>Class responsible for defining a Panel for showing the <b>Measure Base Panel</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelBaseNewMeasure</b>.</p> 
+ * <p>Class responsible for defining a <b>New Measure Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  02/09/2019
- * @see    controller.view.edit.panel.base.evaluation.ControllerPanelBaseMeasure
+ * @since  2019-09-02
+ * @see    controller.view.panel.base.evaluation.measure.ControllerPanelBaseNewMeasure
  * @see    model.structural.base.evaluation.Measure
- * @see    view.panel.Panel
+ * @see    view.panel.base.evaluation.measure.PanelBase
  */
-public final class PanelBaseMeasure extends Panel {
-    private final ViewNewMeasure viewNew;
-    private final Project project;
-    private final Measure measure;
+public final class PanelBaseNewMeasure extends PanelBase {
     
     /**
      * Default constructor method of Class.
-     * @param viewNew View New Measure.
+     * @param view View New Measure.
      * @param measure Measure.
      */
-    public PanelBaseMeasure(ViewNewMeasure viewNew, Measure measure) {
-        this.viewNew    = viewNew;
-        this.project    = this.viewNew.getViewMenu().getProject();
-        this.measure    = measure;
-        this.controller = new ControllerPanelBaseMeasure(this);
-        this.setSettings();
+    public PanelBaseNewMeasure(ViewNewMeasure view, Measure measure) {
+        super(view, measure);
+        this.controller = new ControllerPanelBaseNewMeasure(this);
+        this.setDefaultProperties();
         this.addComponents();
         this.addFooter();
         this.setValues();
     }
     
-    /**
-     * Method responsible for defining the Settings.
-     */
-    private void setSettings() {
+    @Override
+    protected void setDefaultProperties() {
         this.setLayout(new GridLayout(4, 2));
         this.setPreferredSize(new Dimension(50, 50));
         this.setSize(new Dimension(50, 50));
@@ -61,14 +51,6 @@ public final class PanelBaseMeasure extends Panel {
         
         this.add(this.createLabel("Metric*: "));
         this.add(this.createComboBox("metricComboBox", this.getMetrics(), 15, this.getSelectedItem()));
-    }
-    
-    /**
-     * Method responsible for returning the Metrics.
-     * @return Metrics.
-     */
-    private Object[] getMetrics() {
-        return new ControllerMetric(this.project).getMetrics();
     }
     
     /**
@@ -95,30 +77,6 @@ public final class PanelBaseMeasure extends Panel {
      */
     public void setMetric() {
         this.measure.setMetric((Metric) this.getMetricComboBox().getSelectedItem());
-    }
-    
-    /**
-     * Method responsible for returning the View New Measure.
-     * @return View New Measure.
-     */
-    public ViewNewMeasure getViewNewMeasure() {
-        return this.viewNew;
-    }
-    
-    /**
-     * Method responsible for returning the Project.
-     * @return Project.
-     */
-    public Project getProject() {
-        return this.project;
-    }
-    
-    /**
-     * Method responsible for return the Measure.
-     * @return Measure.
-     */
-    public Measure getMeasure() {
-        return this.measure;
     }
     
     /**

@@ -83,6 +83,15 @@ public abstract class Controller implements ActionListener, KeyListener {
     }
     
     /**
+     * Method responsible for checking a US Date String.
+     * @param  string String.
+     * @return String checked.
+     */
+    protected boolean checkUSDate(String string) {
+        return string.matches("\\d{4}/\\d{2}\\/\\d{2}");
+    }
+    
+    /**
      * Method responsible for checking a Number String.
      * @param  string String.
      * @return String checked.

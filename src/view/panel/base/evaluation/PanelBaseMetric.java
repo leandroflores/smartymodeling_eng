@@ -1,6 +1,6 @@
 package view.panel.base.evaluation;
 
-import controller.view.edit.panel.base.evaluation.ControllerPanelBaseMetric;
+import controller.view.panel.base.evaluation.ControllerPanelBaseMetric;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.JScrollPane;
@@ -16,7 +16,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining a Panel for showing the <b>Metric Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  23/07/2019
- * @see    controller.view.edit.panel.base.evaluation.ControllerPanelBaseMetric
+ * @see    controller.view.panel.base.evaluation.ControllerPanelBaseMetric
  * @see    model.structural.base.evaluation.Metric
  * @see    view.panel.Panel
  */

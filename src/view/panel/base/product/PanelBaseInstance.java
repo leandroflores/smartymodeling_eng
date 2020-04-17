@@ -1,6 +1,6 @@
 package view.panel.base.product;
 
-import controller.view.edit.panel.base.product.ControllerPanelBaseInstance;
+import controller.view.panel.base.product.ControllerPanelBaseInstance;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
 import model.structural.base.product.Instance;
@@ -12,7 +12,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining a Panel for showing the <b>Instance Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  07/10/2019
- * @see    controller.view.edit.panel.base.product.ControllerPanelBaseInstance
+ * @see    controller.view.panel.base.product.ControllerPanelBaseInstance
  * @see    model.structural.base.product.Instance
  * @see    view.panel.Panel
  */

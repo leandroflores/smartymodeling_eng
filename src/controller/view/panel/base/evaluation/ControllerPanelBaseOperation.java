@@ -1,4 +1,4 @@
-package controller.view.edit.panel.base.evaluation;
+package controller.view.panel.base.evaluation;
 
 import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,7 @@ import view.panel.base.evaluation.PanelBaseOperation;
  * @author Leandro
  * @since  20/08/2019
  * @see    controller.view.panel.ControllerPanel
- * @see    view.panel.base.evaluation.PanelBaseOperation
+ * @see    view.panel.base.evaluation.metric.PanelBaseOperation
  */
 public class ControllerPanelBaseOperation extends ControllerPanel {
     private final PanelBaseOperation panelBaseOperation;

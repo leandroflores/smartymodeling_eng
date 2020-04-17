@@ -1,6 +1,6 @@
 package view.panel.base.product;
 
-import controller.view.edit.panel.base.product.ControllerPanelBaseProduct;
+import controller.view.panel.base.product.ControllerPanelBaseProduct;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.JScrollPane;
@@ -15,7 +15,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining a Panel for showing the <b>Product Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  07/10/2019
- * @see    controller.view.edit.panel.base.product.ControllerPanelBaseProduct
+ * @see    controller.view.panel.base.product.ControllerPanelBaseProduct
  * @see    model.structural.base.product.Product
  * @see    view.panel.Panel
  */
