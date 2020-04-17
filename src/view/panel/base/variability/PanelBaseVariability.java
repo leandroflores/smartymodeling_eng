@@ -1,7 +1,6 @@
 package view.panel.base.variability;
 
-import controller.view.edit.panel.base.variability.ControllerPanelBaseVariability;
-import java.awt.Dimension;
+import controller.view.panel.base.variability.ControllerPanelBaseVariability;
 import java.awt.GridLayout;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -10,59 +9,53 @@ import model.controller.structural.base.variability.ControllerVariability;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.variability.Variability;
-import view.panel.Panel;
+import view.panel.base.PanelBase;
 import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseVariability</b>.</p> 
- * <p>Class responsible for defining a Panel for showing the <b>Variability Base Panel</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining a <b>Variability Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  04/07/2019
- * @see    controller.view.edit.panel.base.variability.ControllerPanelBaseVariability
+ * @since  2019-07-04
+ * @see    controller.view.panel.base.variability.ControllerPanelBaseVariability
  * @see    model.structural.base.variability.Variability
- * @see    view.panel.Panel
+ * @see    view.panel.base.PanelBase
  */
-public final class PanelBaseVariability extends Panel {
-    private final ViewMenu viewMenu;
+public final class PanelBaseVariability extends PanelBase {
     private final Diagram diagram;
     private final Variability variability;
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param diagram Diagram.
      * @param variability Variability.
      */
-    public PanelBaseVariability(ViewMenu viewMenu, Diagram diagram, Variability variability) {
-        this.viewMenu    = viewMenu;
+    public PanelBaseVariability(ViewMenu view, Diagram diagram, Variability variability) {
+        super(view);
         this.diagram     = diagram;
         this.variability = variability;
         this.controller  = new ControllerPanelBaseVariability(this);
-        this.setSettings();
+        this.setDefaultProperties();
         this.addComponents();
-        this.setValues();
+        this.getController().setReady();
     }
     
-    /**
-     * Method responsible for defining the Settings.
-     */
-    private void setSettings() {
+    @Override
+    protected void setDefaultProperties() {
         this.setLayout(new GridLayout(5, 2));
-        this.setMinimumSize(new Dimension(150, 150));
-        this.setPreferredSize(new Dimension(50, 50));
-        this.setSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", "", 15));
+        this.add(this.createTextField("nameTextField", this.variability.getName(), 15));
         
         this.add(this.createLabel("Variation Point*: "));
         this.add(this.createComboBox("variationPointComboBox", new ControllerDiagram(this.diagram).getDefaultElements(), 15, this.getSelectedItem()));
 
         this.add(this.createLabel("Binding Time*: "));
-        this.add(this.createComboBox("bindingTimeComboBox", ControllerVariability.BINDINGS, 15));
+        this.add(this.createComboBox("bindingTimeComboBox", ControllerVariability.BINDINGS, 15, this.variability.getBindingTime()));
     }
     
     /**
@@ -100,14 +93,6 @@ public final class PanelBaseVariability extends Panel {
     private void setVariantes() {
         if (this.variability.getVariationPoint() != null)
             this.variability.getVariants().remove(this.variability.getVariationPoint());
-    }
-    
-    /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
     }
     
     /**

@@ -1,5 +1,6 @@
 package controller.view.panel.base;
 
+import model.structural.base.Diagram;
 import view.panel.base.PanelBaseDiagram;
 
 /**
@@ -22,15 +23,23 @@ public class ControllerPanelBaseDiagram extends ControllerPanelBase {
     
     @Override
     protected void refresh() {
-        this.getPanelTree().updateNode(this.getPanel().getDiagram());
-        this.getPanelModeling().updateTab(this.getPanel().getDiagram());
+        this.getPanelTree().updateNode(this.getDiagram());
+        this.getPanelModeling().updateTab(this.getDiagram());
         super.refresh();
     }
     
     @Override
     protected void update() {
-        this.getPanel().getDiagram().setName(this.getPanel().getNameTextField().getText().trim());
+        this.getDiagram().setName(this.getPanel().getNameTextField().getText().trim());
         this.refresh();
+    }
+    
+    /**
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
+     */
+    private Diagram getDiagram() {
+        return this.getPanel().getDiagram();
     }
     
     @Override

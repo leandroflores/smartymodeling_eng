@@ -1,9 +1,15 @@
 package controller.view.panel;
 
 import controller.Controller;
+import funct.FunctDate;
+import funct.FunctString;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.util.Date;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
 import javax.swing.plaf.ColorUIResource;
+import javax.swing.text.JTextComponent;
 import view.panel.Panel;
 
 /**
@@ -93,6 +99,51 @@ public abstract class ControllerPanel extends Controller {
         }catch (NumberFormatException exception) {
             return Integer.MAX_VALUE;
         }
+    }
+    
+    /**
+     * Method responsible for returning the Text of JTextComponent.
+     * @param  textComponent JTextComponent.
+     * @return String of JTextComponent.
+     */
+    protected String getString(JTextComponent textComponent) {
+        return new FunctString().removeSpecialChars(textComponent.getText().trim());
+    }
+    
+    /**
+     * Method responsible for returning the Date of JTextComponent.
+     * @param  textComponent JTextComponent.
+     * @return Date of JTextComponent.
+     */
+    protected Date getDate(JTextField textComponent) {
+        return new FunctDate().createDate(textComponent.getText().trim());
+    }
+    
+    /**
+     * Method responsible for returning the Integer of JTextComponent.
+     * @param  textComponent JTextComponent.
+     * @return Integer of JTextComponent.
+     */
+    protected Integer getInteger(JTextComponent textComponent) {
+        return Integer.parseInt(textComponent.getText().trim());
+    }
+    
+    /**
+     * Method responsible for returning the Double of JTextComponent.
+     * @param  textComponent JTextComponent.
+     * @return Double of JTextComponent.
+     */
+    protected Double getDouble(JTextComponent textComponent) {
+        return Double.parseDouble(textComponent.getText().trim());
+    }
+    
+    /**
+     * Method responsible for returning the Value of JComboBox.
+     * @param  comboBox JComboBox.
+     * @return Value of JComboBox.
+     */
+    protected String getValue(JComboBox comboBox) {
+        return comboBox.getSelectedItem().toString();
     }
     
     /**

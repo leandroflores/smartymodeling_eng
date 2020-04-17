@@ -555,6 +555,18 @@ public abstract class Panel extends JPanel {
     }
     
     /**
+     * Method responsible for returning a New Text Area.
+     * @param  id Text Area Id.
+     * @param  text Text Area Text.
+     * @return New Text Area.
+     */
+    protected JTextArea createTextArea(String id, String text) {
+        JTextArea textArea = this.createTextArea(id);
+                  textArea.setText(text);
+        return    textArea;
+    }
+    
+    /**
      * Method responsible for returning the Text Area by Id.
      * @param  id Text Area Id.
      * @return Text Area found.

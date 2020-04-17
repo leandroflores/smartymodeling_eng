@@ -1,6 +1,6 @@
 package view.panel.base.diagram.classes.base;
 
-import controller.view.edit.panel.base.classes.ControllerPanelBaseAttributeUML;
+import controller.view.panel.base.diagram.classes.base.ControllerPanelBaseAttributeUML;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JCheckBox;
@@ -8,44 +8,36 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.AttributeUML;
-import view.panel.Panel;
+import view.panel.base.PanelBaseElement;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelBaseAttributeUML</b>.</p> 
- * <p>Class responsible for defining a Base Panel for the <b>Attribute UML</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelBaseAttributeUML</b>.</p>
+ * <p>Class responsible for defining a <b>Attribute UML Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  05/06/2019
- * @see    controller.view.edit.panel.base.classes.ControllerPanelBaseAttributeUML
+ * @since  2019-06-05
+ * @see    controller.view.panel.base.diagram.classes.base.ControllerPanelBaseAttributeUML
  * @see    model.structural.diagram.classes.base.AttributeUML
- * @see    view.panel.Panel
+ * @see    view.panel.base.PanelBaseElement
  */
-public final class PanelBaseAttributeUML extends Panel {
-    private final ViewMenu viewMenu;
-    private final ClassDiagram diagram;
-    private final AttributeUML attributeUML;
+public final class PanelBaseAttributeUML extends PanelBaseElement {
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param diagram Class Diagram.
-     * @param attributeUML Attribute UML.
+     * @param attribute Attribute UML.
      */
-    public PanelBaseAttributeUML(ViewMenu viewMenu, ClassDiagram diagram, AttributeUML attributeUML) {
-        this.viewMenu     = viewMenu;
-        this.diagram      = diagram;
-        this.attributeUML = attributeUML;
-        this.controller   = new ControllerPanelBaseAttributeUML(this);
-        this.setSettings();
+    public PanelBaseAttributeUML(ViewMenu view, ClassDiagram diagram, AttributeUML attribute) {
+        super(view, diagram, attribute);
+        this.controller  = new ControllerPanelBaseAttributeUML(this);
+        this.setDefaultProperties();
         this.addComponents();
-//        this.getController().setReady();
-//        this.setValues();
+        this.getController().setReady();
     }
     
-    /**
-     * Method responsible for defining the Settings.
-     */
-    private void setSettings() {
+    @Override
+    protected void setDefaultProperties() {
         this.setLayout(new GridLayout(5, 2, 2, 5));
         this.setPreferredSize(new Dimension(50, 50));
     }
@@ -53,60 +45,42 @@ public final class PanelBaseAttributeUML extends Panel {
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Visibility: "));
-        this.add(this.createComboBox("visibilityComboBox", this.diagram.getVisibilities(), 30, this.attributeUML.getVisibility()));
+        this.add(this.createComboBox("visibilityComboBox", this.getDiagram().getVisibilities(), 30, this.getElement().getVisibility()));
         this.getVisibilityComboBox().setPreferredSize(new Dimension(325, 30));
         
         this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.attributeUML.getName(), 25));
+        this.add(this.createTextField("nameTextField", this.getElement().getName(), 25));
         
         this.add(this.createLabel("Type: "));
-        this.add(this.createComboBox("typeComboBox", this.diagram.getProject().getTypesList().toArray(), 30, this.attributeUML.getTypeUML()));
+        this.add(this.createComboBox("typeComboBox", this.getProject().getTypesList().toArray(), 30, this.getElement().getTypeUML()));
         this.getTypeComboBox().setPreferredSize(new Dimension(325, 30));
         
         this.add(this.createLabel("Static: "));
-        this.add(this.createCheckBox("staticCheckBox", "", this.attributeUML.isStatic()));
+        this.add(this.createCheckBox("staticCheckBox", "", this.getElement().isStatic()));
         
         this.add(this.createLabel("Final: "));
-        this.add(this.createCheckBox("finalCheckBox",  "", this.attributeUML.isFinal()));
+        this.add(this.createCheckBox("finalCheckBox",  "", this.getElement().isFinal()));
     }
     
     /**
      * Method responsible for setting the Attribute Values.
      */
     public void setValues() {
-        this.getVisibilityComboBox().setSelectedItem(this.attributeUML.getVisibility());
-        this.getNameTextField().setText(this.attributeUML.getName());
-        this.getTypeComboBox().setSelectedItem(this.attributeUML.getTypeUML());
-        this.getStaticCheckBox().setSelected(this.attributeUML.isStatic());
-        this.getFinalCheckBox().setSelected(this.attributeUML.isFinal());
+        this.getVisibilityComboBox().setSelectedItem(this.getElement().getVisibility());
+        this.getNameTextField().setText(this.getElement().getName());
+        this.getTypeComboBox().setSelectedItem(this.getElement().getTypeUML());
+        this.getStaticCheckBox().setSelected(this.getElement().isStatic());
+        this.getFinalCheckBox().setSelected(this.getElement().isFinal());
     }
     
-    public ControllerPanelBaseAttributeUML getController() {
-        return (ControllerPanelBaseAttributeUML) this.controller;
-    }
-    
-    /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
-    }
-    
-    /**
-     * Method responsible for returning the Class Diagram.
-     * @return Class Diagram.
-     */
+    @Override
     public ClassDiagram getDiagram() {
-        return this.diagram;
+        return (ClassDiagram) this.diagram;
     }
     
-    /**
-     * Method responsible for returning the Attribute UML.
-     * @return Attribute UML.
-     */
-    public AttributeUML getAttributeUML() {
-        return this.attributeUML;
+    @Override
+    public AttributeUML getElement() {
+        return (AttributeUML) this.element;
     }
     
     /**

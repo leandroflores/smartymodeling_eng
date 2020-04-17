@@ -1,49 +1,42 @@
 package view.panel.base.diagram.classes.base;
 
-import controller.view.edit.panel.base.classes.ControllerPanelBaseClassUML;
+import controller.view.panel.base.diagram.classes.base.ControllerPanelBaseClassUML;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.ClassUML;
-import view.panel.Panel;
+import view.panel.base.PanelBaseElement;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelBaseClassUML</b>.</p> 
- * <p>Class responsible for defining a Base Panel for the <b>Class UML</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelBaseClassUML</b>.</p>
+ * <p>Class responsible for defining a <b>Class UML Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  17/06/2019
- * @see    controller.view.edit.panel.base.classs.
+ * @since  2019-06-17
+ * @see    controller.view.panel.base.diagram.classes.base.ControllerPanelBaseClassUML
  * @see    model.structural.diagram.classes.base.ClassUML
- * @see    view.panel.Panel
+ * @see    view.panel.base.PanelBaseElement
  */
-public final class PanelBaseClassUML extends Panel {
-    private final ViewMenu viewMenu;
-    private final ClassDiagram diagram;
-    private final ClassUML classUML;
+public final class PanelBaseClassUML extends PanelBaseElement {
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param diagram Class Diagram.
-     * @param classUML Class UML.
+     * @param class_ Class UML.
      */
-    public PanelBaseClassUML(ViewMenu viewMenu, ClassDiagram diagram, ClassUML classUML) {
-        this.viewMenu   = viewMenu;
-        this.diagram    = diagram;
-        this.classUML   = classUML;
+    public PanelBaseClassUML(ViewMenu view, ClassDiagram diagram, ClassUML class_) {
+        super(view, diagram, class_);
         this.controller = new ControllerPanelBaseClassUML(this);
-        this.setSettings();
+        this.setDefaultProperties();
         this.addComponents();
-        this.setValues();
+        this.getController().setReady();
     }
     
-    /**
-     * Method responsible for defining the Settings.
-     */
-    private void setSettings() {
+    @Override
+    protected void setDefaultProperties() {
         this.setLayout(new GridLayout(5, 2, 2, 5));
         this.setPreferredSize(new Dimension(50, 50));
     }
@@ -51,50 +44,26 @@ public final class PanelBaseClassUML extends Panel {
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.classUML.getName(), 25));
+        this.add(this.createTextField("nameTextField", this.getElement().getName(), 25));
         
         this.add(this.createLabel("Abstract: "));
-        this.add(this.createCheckBox("abstractCheckBox",  "", this.classUML.isAbstract()));
+        this.add(this.createCheckBox("abstractCheckBox",  "", this.getElement().isAbstract()));
         
         this.add(this.createLabel("Final: "));
-        this.add(this.createCheckBox("finalCheckBox",     "", this.classUML.isFinal()));
+        this.add(this.createCheckBox("finalCheckBox",     "", this.getElement().isFinal()));
         
         this.add(this.createLabel("Mandatory: "));
-        this.add(this.createCheckBox("mandatoryCheckBox", "", this.classUML.isMandatory()));
+        this.add(this.createCheckBox("mandatoryCheckBox", "", this.getElement().isMandatory()));
     }
     
-    /**
-     * Method responsible for setting the Class UML Values.
-     */
-    public void setValues() {
-        this.getNameTextField().setText(this.classUML.getName());
-        this.getAbstractCheckBox().setSelected(this.classUML.isAbstract());
-        this.getFinalCheckBox().setSelected(this.classUML.isFinal());
-        this.getMandatoryCheckBox().setSelected(this.classUML.isMandatory());
-    }
-    
-    /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
-    }
-    
-    /**
-     * Method responsible for returning the Class Diagram.
-     * @return Class Diagram.
-     */
+    @Override
     public ClassDiagram getDiagram() {
-        return this.diagram;
+        return (ClassDiagram) this.diagram;
     }
     
-    /**
-     * Method responsible for returning the Class UML.
-     * @return Class UML.
-     */
-    public ClassUML getClassUML() {
-        return this.classUML;
+    @Override
+    public ClassUML getElement() {
+        return (ClassUML) this.element;
     }
     
     /**

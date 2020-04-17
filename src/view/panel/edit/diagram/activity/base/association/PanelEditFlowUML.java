@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import javax.swing.JTabbedPane;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.activity.base.association.FlowUML;
-import view.panel.base.diagram.activity.base.PanelBaseFlowUML;
+import view.panel.base.diagram.activity.base.association.PanelBaseFlowUML;
 import view.panel.edit.base.PanelEditAssociation;
 import view.structural.ViewMenu;
 

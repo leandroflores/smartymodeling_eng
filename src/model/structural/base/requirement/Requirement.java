@@ -21,7 +21,9 @@ public class Requirement implements Exportable {
      * Default constructor method of Class.
      */
     public Requirement() {
+        this.code        = "";
         this.type        = ControllerRequirement.TYPES[0];
+        this.name        = "";
         this.description = "";
     }
     

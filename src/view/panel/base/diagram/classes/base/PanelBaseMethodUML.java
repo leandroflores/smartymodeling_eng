@@ -1,6 +1,6 @@
 package view.panel.base.diagram.classes.base;
 
-import controller.view.edit.panel.base.classes.ControllerPanelBaseMethodUML;
+import controller.view.panel.base.diagram.classes.base.ControllerPanelBaseMethodUML;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JCheckBox;
@@ -8,43 +8,36 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.MethodUML;
-import view.panel.Panel;
+import view.panel.base.PanelBaseElement;
 import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseMethodUML</b>.</p> 
- * <p>Class responsible for defining a Base Panel for the <b>Method UML</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining a <b>Method UML Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  16/06/2019
- * @see    controller.view.edit.panel.base.classes.ControllerPanelBaseMethodUML
+ * @since  2019-06-16
+ * @see    controller.view.panel.base.diagram.classes.base.ControllerPanelBaseMethodUML
  * @see    model.structural.diagram.classes.base.MethodUML
- * @see    view.panel.Panel
+ * @see    view.panel.base.PanelBaseElement
  */
-public final class PanelBaseMethodUML extends Panel {
-    private final ViewMenu viewMenu;
-    private final ClassDiagram diagram;
-    private final MethodUML methodUML;
+public final class PanelBaseMethodUML extends PanelBaseElement {
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param diagram Class Diagram.
      * @param method Method UML.
      */
-    public PanelBaseMethodUML(ViewMenu viewMenu, ClassDiagram diagram, MethodUML method) {
-        this.viewMenu   = viewMenu;
-        this.diagram    = diagram;
-        this.methodUML  = method;
+    public PanelBaseMethodUML(ViewMenu view, ClassDiagram diagram, MethodUML method) {
+        super(view, diagram, method);
         this.controller = new ControllerPanelBaseMethodUML(this);
-        this.setSettings();
+        this.setDefaultProperties();
         this.addComponents();
-//        this.setValues();
+        this.getController().setReady();
     }
     
-    /**
-     * Method responsible for defining the Settings.
-     */
-    private void setSettings() {
+    @Override
+    protected void setDefaultProperties() {
         this.setLayout(new GridLayout(7, 2, 2, 5));
         this.setPreferredSize(new Dimension(50, 50));
     }
@@ -52,65 +45,41 @@ public final class PanelBaseMethodUML extends Panel {
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Visibility*: "));
-        this.add(this.createComboBox("visibilityComboBox", this.diagram.getVisibilities(), 30, this.methodUML.getVisibility()));
+        this.add(this.createComboBox("visibilityComboBox", this.getDiagram().getVisibilities(), 30, this.getElement().getVisibility()));
         this.getVisibilityComboBox().setPreferredSize(new Dimension(325, 30));
         
         this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.methodUML.getName(), 25));
+        this.add(this.createTextField("nameTextField", this.getElement().getName(), 25));
         
         this.add(this.createLabel("Constructor: "));
-        this.add(this.createCheckBox("constructorCheckBox", "", this.methodUML.isConstructor()));
+        this.add(this.createCheckBox("constructorCheckBox", "", this.getElement().isConstructor()));
         
         this.add(this.createLabel("Return: "));
-        this.add(this.createComboBox("returnComboBox", this.diagram.getProject().getTypesList().toArray(), 30, this.methodUML.getReturn()));
+        this.add(this.createComboBox("returnComboBox", this.diagram.getProject().getTypesList().toArray(), 30, this.getElement().getReturn()));
         this.getReturnComboBox().setPreferredSize(new Dimension(200, 30));
         
         this.add(this.createLabel("Abstract: "));
-        this.add(this.createCheckBox("abstractCheckBox", "", this.methodUML.isAbstract()));
+        this.add(this.createCheckBox("abstractCheckBox", "", this.getElement().isAbstract()));
         
         this.add(this.createLabel("Static: "));
-        this.add(this.createCheckBox("staticCheckBox",   "", this.methodUML.isStatic()));
+        this.add(this.createCheckBox("staticCheckBox",   "", this.getElement().isStatic()));
         
         this.add(this.createLabel("Final: "));
-        this.add(this.createCheckBox("finalCheckBox",    "", this.methodUML.isFinal()));
+        this.add(this.createCheckBox("finalCheckBox",    "", this.getElement().isFinal()));
     }
     
     /**
      * Method responsible for setting the Method Values.
      */
     public void setValues() {
-        this.getVisibilityComboBox().setSelectedItem(this.methodUML.getVisibility());
-        this.getNameTextField().setText(this.methodUML.getName());
-        this.getConstructorCheckBox().setSelected(this.methodUML.isConstructor());
-        this.getReturnComboBox().setSelectedItem(this.methodUML.getReturn());
-        this.getReturnComboBox().setEnabled(!this.methodUML.isConstructor());
-        this.getAbstractCheckBox().setSelected(this.methodUML.isAbstract());
-        this.getStaticCheckBox().setSelected(this.methodUML.isStatic());
-        this.getFinalCheckBox().setSelected(this.methodUML.isFinal());
-    }
-    
-    /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
-    }
-    
-    /**
-     * Method responsible for returning the Class Diagram.
-     * @return Class Diagram.
-     */
-    public ClassDiagram getDiagram() {
-        return this.diagram;
-    }
-    
-    /**
-     * Method responsible for returning the Method.
-     * @return Method.
-     */
-    public MethodUML getMethodUML() {
-        return this.methodUML;
+        this.getVisibilityComboBox().setSelectedItem(this.getElement().getVisibility());
+        this.getNameTextField().setText(this.getElement().getName());
+        this.getConstructorCheckBox().setSelected(this.getElement().isConstructor());
+        this.getReturnComboBox().setSelectedItem(this.getElement().getReturn());
+        this.getReturnComboBox().setEnabled(!this.getElement().isConstructor());
+        this.getAbstractCheckBox().setSelected(this.getElement().isAbstract());
+        this.getStaticCheckBox().setSelected(this.getElement().isStatic());
+        this.getFinalCheckBox().setSelected(this.getElement().isFinal());
     }
     
     /**
@@ -167,5 +136,15 @@ public final class PanelBaseMethodUML extends Panel {
      */
     public JCheckBox getFinalCheckBox() {
         return this.getCheckBox("finalCheckBox");
+    }
+    
+    @Override
+    public ClassDiagram getDiagram() {
+        return (ClassDiagram) this.diagram;
+    }
+    
+    @Override
+    public MethodUML getElement() {
+        return (MethodUML) this.element;
     }
 }

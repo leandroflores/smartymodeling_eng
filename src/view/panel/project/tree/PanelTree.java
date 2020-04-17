@@ -9,6 +9,7 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.requirement.Requirement;
+import model.structural.base.variability.Variability;
 import view.panel.Panel;
 import view.panel.tree.PanelTreeDiagram;
 import view.panel.tree.PanelTreeEvaluation;
@@ -191,6 +192,15 @@ public final class PanelTree extends Panel {
         
         this.getPanelTreeDiagram().updateVariability(element);
         this.getPanelTreeVariability().updateVariability(element);
+    }
+    
+    /**
+     * Method responsible for updating the Variability Node.
+     * @param variability Variability.
+     */
+    public void updateNode(Variability variability) {
+        this.getPanelTreeDiagram().updateNode(variability);
+        this.getPanelTreeVariability().updateNode(variability);
     }
     
     /**

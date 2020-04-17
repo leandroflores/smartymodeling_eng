@@ -1,4 +1,4 @@
-package view.panel.base.diagram.activity.base;
+package view.panel.base.diagram.activity.base.association;
 
 import controller.view.panel.base.activity.base.ControllerPanelBaseFlowUML;
 import java.awt.Dimension;

@@ -3,7 +3,7 @@ package controller.view.panel.base.activity.base;
 import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import view.panel.base.diagram.activity.base.PanelBaseFlowUML;
+import view.panel.base.diagram.activity.base.association.PanelBaseFlowUML;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseFlowUML</b>.</p>
@@ -11,7 +11,7 @@ import view.panel.base.diagram.activity.base.PanelBaseFlowUML;
  * @author Leandro
  * @since  04/11/2019
  * @see    controller.view.panel.ControllerPanel
- * @see    view.panel.base.diagram.activity.base.PanelBaseFlowUML
+ * @see    view.panel.base.diagram.activity.base.association.PanelBaseFlowUML
  */
 public class ControllerPanelBaseFlowUML extends ControllerPanel {
     private final PanelBaseFlowUML panelBaseFlowUML;

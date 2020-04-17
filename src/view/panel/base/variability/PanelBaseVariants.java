@@ -1,6 +1,6 @@
 package view.panel.base.variability;
 
-import controller.view.edit.panel.base.variability.ControllerPanelBaseVariants;
+import controller.view.panel.base.variability.ControllerPanelBaseVariants;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.DefaultListModel;
@@ -14,43 +14,41 @@ import model.controller.structural.base.variability.ControllerVariability;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.variability.Variability;
-import view.panel.Panel;
+import view.panel.base.PanelBase;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelBaseVariants</b>.</p> 
- * <p>Class responsible for defining a Panel for showing the <b>Variants Base</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelBaseVariants</b>.</p>
+ * <p>Class responsible for defining a <b>Variants Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  04/07/2019
- * @see    controller.view.edit.panel.base.
+ * @since  2019-07-04
+ * @see    controller.view.panel.base.variability.ControllerPanelBaseVariants
  * @see    model.structural.base.variability.Variability
- * @see    view.panel.Panel
+ * @see    view.panel.base.PanelBase
  */
-public final class PanelBaseVariants extends Panel {
-    private final ViewMenu viewMenu;
+public final class PanelBaseVariants extends PanelBase {
     private final Diagram diagram;
     private final Variability variability;
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param diagram Diagram.
      * @param variability Variability.
      */
-    public PanelBaseVariants(ViewMenu viewMenu, Diagram diagram, Variability variability) {
-        this.viewMenu    = viewMenu;
+    public PanelBaseVariants(ViewMenu view, Diagram diagram, Variability variability) {
+        super(view);
         this.diagram     = diagram;
         this.variability = variability;
         this.controller  = new ControllerPanelBaseVariants(this);
-        this.setSettings();
+        this.setDefaultProperties();
         this.addComponents();
         this.setValues();
+        this.getController().setReady();
     }
     
-    /**
-     * Method responsible for defining the Settings.
-     */
-    private void setSettings() {
+    @Override
+    protected void setDefaultProperties() {
         this.setLayout(new GridBagLayout());
         this.setMinimumSize(new Dimension(150, 150));
     }
@@ -127,18 +125,7 @@ public final class PanelBaseVariants extends Panel {
      * @return Variant Element.
      */
     public Element getVariant() {
-//        String item = this.getVariantComboBox().getSelectedItem().toString();
-//        String id   = item.substring(item.indexOf("[") + 1, item.indexOf("]")).trim();
-//        return this.diagram.getElement(id);
         return (Element) this.getVariantComboBox().getSelectedItem();
-    }
-    
-    /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
     }
     
     /**
