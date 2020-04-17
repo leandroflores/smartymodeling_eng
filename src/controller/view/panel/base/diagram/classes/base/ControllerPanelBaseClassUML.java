@@ -25,12 +25,12 @@ public class ControllerPanelBaseClassUML extends ControllerPanelBaseElement {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.getPanel().getAbstractCheckBox().equals(event.getSource()))
-            this.actionAbstract();
-        else if (this.getPanel().getFinalCheckBox().equals(event.getSource()))
-            this.actionFinal();
-        if (this.ready)
-            this.update();
+        if (this.ready) {
+            if (this.getPanel().getAbstractCheckBox().equals(event.getSource()))
+                this.actionAbstract();
+            else if (this.getPanel().getFinalCheckBox().equals(event.getSource()))
+                this.actionFinal();
+        }
     }
 
     /**

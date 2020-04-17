@@ -1,73 +1,65 @@
 package view.panel.base.diagram.classes.base.association;
 
-import controller.view.edit.panel.base.classes.association.ControllerPanelBaseAssociationUML;
+import controller.view.panel.base.diagram.classes.base.association.ControllerPanelBaseAssociationUML;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.association.AssociationUML;
-import view.panel.Panel;
+import view.panel.base.PanelBaseAssociation;
 import view.panel.edit.diagram.classes.base.association.PanelEditAssociationUML;
-import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseAssociationUML</b>.</p> 
- * <p>Class responsible for defining a Panel for showing the <b>Association UML Base</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining a <b>Association UML Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  15/11/2019
- * @see    controller.view.edit.panel.base.classes.association.ControllerPanelBaseAssociationUML
+ * @since  2019-11-15
+ * @see    controller.view.panel.base.diagram.classes.base.association.ControllerPanelBaseAssociationUML
  * @see    model.structural.diagram.classes.base.association.AssociationUML
- * @see    view.panel.Panel
+ * @see    view.panel.base.PanelBaseAssociation
  */
-public final class PanelBaseAssociationUML extends Panel {
-    private final ViewMenu viewMenu;
+public final class PanelBaseAssociationUML extends PanelBaseAssociation {
     private final PanelEditAssociationUML panelEdit;
-    private final ClassDiagram diagram;
-    private final AssociationUML associationUML;
     
     /**
      * Default constructor method of Class.
-     * @param panelEdit View Edit Association UML.
+     * @param panel View Edit Association UML.
      * @param diagram Class Diagram.
-     * @param associationUML Association UML.
+     * @param association Association UML.
      */
-    public PanelBaseAssociationUML(PanelEditAssociationUML panelEdit, ClassDiagram diagram, AssociationUML associationUML) {
-        this.viewMenu       = panelEdit.getViewMenu();
-        this.panelEdit      = panelEdit;
-        this.diagram        = diagram;
-        this.associationUML = associationUML;
-        this.controller     = new ControllerPanelBaseAssociationUML(this);
-        this.setSettings();
+    public PanelBaseAssociationUML(PanelEditAssociationUML panel, ClassDiagram diagram, AssociationUML association) {
+        super(panel.getViewMenu(), diagram, association);
+        this.panelEdit  = panel;
+        this.controller = new ControllerPanelBaseAssociationUML(this);
+        this.setDefaultProperties();
         this.addComponents();
-        this.setValues();
+        this.getController().setReady();
     }
     
-    /**
-     * Method responsible for defining the Settings.
-     */
-    private void setSettings() {
+    @Override
+    protected void setDefaultProperties() {
         this.setLayout(new GridLayout(5, 2));
-        this.setPreferredSize(new Dimension(50, 50));
+        super.setDefaultProperties();
         this.setSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Source: ", 120));
-        this.add(this.createTextFieldNoEditable("sourceTextField", "", 20));
+        this.add(this.createTextFieldNoEditable("sourceTextField", this.getAssociation().getSource().getName(), 20));
         
         this.add(this.createLabel("Target: ", 120));
-        this.add(this.createTextFieldNoEditable("targetTextField", "", 20));
+        this.add(this.createTextFieldNoEditable("targetTextField", this.getAssociation().getTarget().getName(), 20));
         
         this.add(this.createLabel("Name: ", 120));
-        this.add(this.createTextField("nameTextField", "", 20));
+        this.add(this.createTextField("nameTextField", this.getAssociation().getName(), 20));
         
         this.add(this.createLabel("Category: ", 120));
-        this.add(this.createTextFieldNoEditable("categoryTextField", "", 20));
+        this.add(this.createTextFieldNoEditable("categoryTextField", this.getAssociation().getCategory(), 20));
         
         this.add(this.createLabel("Directed: ", 120));
-        this.add(this.createCheckBox("directedCheckBox", "Yes", this.associationUML.isDirection()));
+        this.add(this.createCheckBox("directedCheckBox", "Yes", this.getAssociation().isDirection()));
     }
     
     /**
@@ -75,41 +67,6 @@ public final class PanelBaseAssociationUML extends Panel {
      */
     public void updatePanelBaseSource() {
         this.panelEdit.getPanelBaseSource().updateValues();
-    }
-    
-    /**
-     * Method responsible for setting the Association UML Values.
-     */
-    public void setValues() {
-        this.getSourceTextField().setText(this.associationUML.getSource().getName());
-        this.getTargetTextField().setText(this.associationUML.getTarget().getName());
-        this.getNameTextField().setText(this.associationUML.getName());
-        this.getCategoryTextField().setText(this.associationUML.getCategory());
-        this.getDirectedCheckBox().setSelected(this.associationUML.isDirection());
-    }
-    
-    /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
-    }
-    
-    /**
-     * Method responsible for returning the Class Diagram.
-     * @return Class Diagram.
-     */
-    public ClassDiagram getDiagram() {
-        return this.diagram;
-    }
-    
-    /**
-     * Method responsible for returning the Association UML.
-     * @return Association UML.
-     */
-    public AssociationUML getAssociationUML() {
-        return this.associationUML;
     }
     
     /**
@@ -150,5 +107,15 @@ public final class PanelBaseAssociationUML extends Panel {
      */
     public JCheckBox getDirectedCheckBox() {
         return this.getCheckBox("directedCheckBox");
+    }
+    
+    @Override
+    public ClassDiagram getDiagram() {
+        return (ClassDiagram) this.diagram;
+    }
+    
+    @Override
+    public AssociationUML getAssociation() {
+        return (AssociationUML) this.association;
     }
 }

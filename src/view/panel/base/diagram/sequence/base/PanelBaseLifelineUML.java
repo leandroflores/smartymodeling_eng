@@ -1,6 +1,6 @@
 package view.panel.base.diagram.sequence.base;
 
-import controller.view.edit.panel.base.sequence.ControllerPanelBaseLifelineUML;
+import controller.view.panel.base.diagram.sequence.base.ControllerPanelBaseLifelineUML;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JCheckBox;
@@ -8,43 +8,37 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.sequence.base.LifelineUML;
-import view.panel.Panel;
+import view.panel.base.PanelBaseElement;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelBaseLifelineUML</b>.</p> 
- * <p>Class responsible for defining a Base Panel for the <b>Lifeline UML</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelBaseLifelineUML</b>.</p>
+ * <p>Class responsible for defining the <b>Lifeline UML Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  03/10/2019
- * @see    controller.view.edit.panel.base.sequence.ControllerPanelBaseLifelineUML
+ * @since  2019-10-03
+ * @see    controller.view.panel.base.diagram.sequence.base.ControllerPanelBaseLifelineUML
  * @see    model.structural.diagram.sequence.base.LifelineUML
- * @see    view.panel.Panel
+ * @see    view.panel.base.PanelBaseElement
  */
-public final class PanelBaseLifelineUML extends Panel {
-    private final ViewMenu viewMenu;
-    private final SequenceDiagram diagram;
-    private final LifelineUML lifelineUML;
+public final class PanelBaseLifelineUML extends PanelBaseElement {
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param diagram Sequence Diagram.
-     * @param lifelineUML Lifeline UML.
+     * @param lifeline Lifeline UML.
      */
-    public PanelBaseLifelineUML(ViewMenu viewMenu, SequenceDiagram diagram, LifelineUML lifelineUML) {
-        this.viewMenu    = viewMenu;
-        this.diagram     = diagram;
-        this.lifelineUML = lifelineUML;
-        this.controller   = new ControllerPanelBaseLifelineUML(this);
-        this.setSettings();
+    public PanelBaseLifelineUML(ViewMenu view, SequenceDiagram diagram, LifelineUML lifeline) {
+        super(view, diagram, lifeline);
+        this.controller = new ControllerPanelBaseLifelineUML(this);
+        this.setDefaultProperties();
         this.addComponents();
-        this.setValues();
+        this.setActorUML();
+        this.getController().setReady();
     }
     
-    /**
-     * Method responsible for defining the Settings.
-     */
-    private void setSettings() {
+    @Override
+    protected void setDefaultProperties() {
         this.setLayout(new GridLayout(3, 2, 2, 5));
         this.setPreferredSize(new Dimension(50, 50));
     }
@@ -52,55 +46,22 @@ public final class PanelBaseLifelineUML extends Panel {
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.lifelineUML.getName(), 25));
+        this.add(this.createTextField("nameTextField", this.getElement().getName(), 25));
         
         this.add(this.createLabel("Actor: "));
-        this.add(this.createComboBox("actorComboBox", this.diagram.getProject().getElements("actor").toArray(), 30));
+        this.add(this.createComboBox("actorComboBox", this.getProject().getElements("actor").toArray(), 30));
         this.getActorComboBox().setPreferredSize(new Dimension(325, 30));
         
         this.add(this.createLabel("Mandatory: "));
-        this.add(this.createCheckBox("mandatoryCheckBox", "", this.lifelineUML.isMandatory()));
-    }
-    
-    /**
-     * Method responsible for setting the Lifeline Values.
-     */
-    public void setValues() {
-        this.getNameTextField().setText(this.lifelineUML.getName());
-        this.setActorUML();
-        this.getMandatoryCheckBox().setSelected(this.lifelineUML.isMandatory());
+        this.add(this.createCheckBox("mandatoryCheckBox", "", this.getElement().isMandatory()));
     }
     
     /**
      * Method responsible for setting the Actor UML.
      */
     private void setActorUML() {
-        if (this.lifelineUML.getActor() != null)
-            this.getActorComboBox().setSelectedItem(this.lifelineUML.getActor());
-    }
-    
-    /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
-    }
-    
-    /**
-     * Method responsible for returning the Sequence Diagram.
-     * @return Sequence Diagram.
-     */
-    public SequenceDiagram getDiagram() {
-        return this.diagram;
-    }
-    
-    /**
-     * Method responsible for returning the Lifeline UML.
-     * @return Lifeline UML.
-     */
-    public LifelineUML getLifelineUML() {
-        return this.lifelineUML;
+        if (this.getElement().getActor() != null)
+            this.getActorComboBox().setSelectedItem(this.getElement().getActor());
     }
     
     /**
@@ -125,5 +86,15 @@ public final class PanelBaseLifelineUML extends Panel {
      */
     public JCheckBox getMandatoryCheckBox() {
         return this.getCheckBox("mandatoryCheckBox");
+    }
+    
+    @Override
+    public SequenceDiagram getDiagram() {
+        return (SequenceDiagram) this.diagram;
+    }
+    
+    @Override
+    public LifelineUML getElement() {
+        return (LifelineUML) this.element;
     }
 }

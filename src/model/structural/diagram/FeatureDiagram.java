@@ -146,6 +146,14 @@ public final class FeatureDiagram extends Diagram {
         super.removeAssociation(association);
     }
     
+    /**
+     * Method responsible for returning the Categories Array.
+     * @return Categories Array.
+     */
+    public String[] getCategories() {
+        return new String[]{"mandatory", "optional", "inclusive", "exclusive"};
+    }
+    
     @Override
     public String getIcon() {
         return super.getFolder() + "feature.png";

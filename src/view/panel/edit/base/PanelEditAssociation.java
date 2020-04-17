@@ -5,7 +5,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import model.structural.base.association.Association;
-import view.panel.base.PanelBaseAssociation;
+import view.panel.base.diagram.PanelBaseAssociation;
 import view.panel.edit.PanelEdit;
 import view.structural.ViewMenu;
 

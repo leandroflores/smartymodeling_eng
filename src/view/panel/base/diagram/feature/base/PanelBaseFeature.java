@@ -1,14 +1,13 @@
 package view.panel.base.diagram.feature.base;
 
-import controller.view.edit.panel.base.feature.ControllerPanelBaseFeature;
+import controller.view.panel.base.diagram.feature.base.ControllerPanelBaseFeature;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
-import model.structural.base.Diagram;
 import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.feature.base.Feature;
-import view.panel.Panel;
+import view.panel.base.PanelBaseElement;
 import view.structural.ViewMenu;
 
 /**
@@ -16,35 +15,28 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Feature Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-06-16
- * @see    controller.view.edit.panel.base.feature.ControllerPanelBaseFeature
+ * @see    controller.view.panel.base.feature.base.ControllerPanelBaseFeature
  * @see    model.structural.diagram.feature.base.Feature
- * @see    view.panel.Panel
+ * @see    view.panel.base.PanelBaseElement
  */
-public final class PanelBaseFeature extends Panel {
-    private final ViewMenu viewMenu;
-    private final Diagram  diagram;
-    private final Feature  feature;
+public final class PanelBaseFeature extends PanelBaseElement {
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param diagram Feature Diagram.
      * @param feature Feature.
      */
-    public PanelBaseFeature(ViewMenu viewMenu, FeatureDiagram diagram, Feature feature) {
-        this.viewMenu   = viewMenu;
-        this.diagram    = diagram;
-        this.feature    = feature;
+    public PanelBaseFeature(ViewMenu view, FeatureDiagram diagram, Feature feature) {
+        super(view, diagram, feature);
         this.controller = new ControllerPanelBaseFeature(this);
-        this.setSettings();
+        this.setDefaultProperties();
         this.addComponents();
-//        this.setValues();
+        this.getController().setReady();
     }
     
-    /**
-     * Method responsible for defining the Settings.
-     */
-    private void setSettings() {
+    @Override
+    protected void setDefaultProperties() {
         this.setLayout(new GridLayout(2, 2));
         this.setPreferredSize(new Dimension(50, 50));
     }
@@ -52,42 +44,10 @@ public final class PanelBaseFeature extends Panel {
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.feature.getName(), 25));        
+        this.add(this.createTextField("nameTextField", this.getElement().getName(), 25));        
         
         this.add(this.createLabel("Abstract: "));
-        this.add(this.createCheckBox("abstractCheckBox", "", this.feature.isAbstract()));
-    }
-    
-    /**
-     * Method responsible for setting the Feature Values.
-     */
-    public void setValues() {
-        this.getNameTextField().setText(this.feature.getName());
-        this.getAbstractCheckBox().setSelected(this.feature.isAbstract());
-    }
-    
-    /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
-    }
-    
-    /**
-     * Method responsible for returning the Diagram.
-     * @return Diagram.
-     */
-    public FeatureDiagram getDiagram() {
-        return (FeatureDiagram) this.diagram;
-    }
-    
-    /**
-     * Method responsible for returning the Feature.
-     * @return Feature.
-     */
-    public Feature getFeature() {
-        return this.feature;
+        this.add(this.createCheckBox("abstractCheckBox", "", this.getElement().isAbstract()));
     }
     
     /**
@@ -104,5 +64,15 @@ public final class PanelBaseFeature extends Panel {
      */
     public JCheckBox getAbstractCheckBox() {
         return this.getCheckBox("abstractCheckBox");
+    }
+    
+    @Override
+    public FeatureDiagram getDiagram() {
+        return (FeatureDiagram) this.diagram;
+    }
+    
+    @Override
+    public Feature getElement() {
+        return (Feature) this.element;
     }
 }

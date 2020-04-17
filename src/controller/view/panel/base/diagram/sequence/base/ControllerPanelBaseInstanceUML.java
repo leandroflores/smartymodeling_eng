@@ -1,0 +1,47 @@
+package controller.view.panel.base.diagram.sequence.base;
+
+import controller.view.panel.base.ControllerPanelBaseElement;
+import model.structural.diagram.classes.base.ClassUML;
+import model.structural.diagram.sequence.base.InstanceUML;
+import view.panel.base.diagram.sequence.base.PanelBaseInstanceUML;
+
+/**
+ * <p>Class of Controller <b>ControllerPanelBaseInstanceUML</b>.</p>
+ * <p>Class responsible for controlling the <b>PanelBaseInstanceUML</b> Events of SMartyModeling.</p>
+ * @author Leandro
+ * @since  2019-10-03
+ * @see    controller.view.panel.base.ControllerPanelBaseElement
+ * @see    view.panel.base.diagram.sequence.base.PanelBaseInstanceUML
+ */
+public class ControllerPanelBaseInstanceUML extends ControllerPanelBaseElement {
+
+    /**
+     * Default constructor method of Class.
+     * @param panel Panel Base Instance UML.
+     */
+    public ControllerPanelBaseInstanceUML(PanelBaseInstanceUML panel) {
+        super(panel);
+    }
+    
+    @Override
+    protected void update() {
+        this.getInstance().setName(this.getString(this.getPanel().getNameTextField()));
+        this.getInstance().setClassUML((ClassUML) this.getPanel().getClassComboBox().getSelectedItem());
+        this.getInstance().setMandatory(this.getPanel().getMandatoryCheckBox().isSelected());
+        this.getDiagram().updateStereotype(this.getInstance());
+        super.refresh();
+    }
+    
+    /**
+     * Method responsible for returning the Instance UML.
+     * @return Instance UML.
+     */
+    private InstanceUML getInstance() {
+        return this.getPanel().getElement();
+    }
+    
+    @Override
+    public PanelBaseInstanceUML getPanel() {
+        return (PanelBaseInstanceUML) this.panel;
+    }
+}

@@ -57,7 +57,6 @@ public final class PanelBaseRequirement extends PanelBase {
         this.add(this.getDescriptionScrollPane(), this.createConstraints(4, 5, 1, 2));
     }
     
-    
     /**
      * Method responsible for return the Requirement.
      * @return Requirement.

@@ -1,51 +1,45 @@
 package view.panel.base.diagram.classes.base.association;
 
-import controller.view.edit.panel.base.classes.association.ControllerPanelBaseSource;
+import controller.view.panel.base.diagram.classes.base.association.ControllerPanelBaseSource;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.association.AssociationUML;
-import view.panel.Panel;
+import view.panel.base.PanelBaseAssociation;
 import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseSource</b>.</p> 
- * <p>Class responsible for defining a Panel for showing the <b>Source Association Base</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining a <b>Association UML Source Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  15/11/2019
- * @see    controller.view.edit.panel.base.classes.association.ControllerPanelBaseSource
+ * @since  2019-11-15
+ * @see    controller.view.panel.base.diagram.classes.base.association.ControllerPanelBaseSource
  * @see    model.structural.diagram.classes.base.association.AssociationUML
- * @see    view.panel.Panel
+ * @see    view.panel.base.PanelBaseAssociation
  */
-public final class PanelBaseSource extends Panel {
-    private final ViewMenu viewMenu;
-    private final ClassDiagram diagram;
-    private final AssociationUML associationUML;
+public final class PanelBaseSource extends PanelBaseAssociation {
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param diagram Class Diagram.
      * @param association Association UML.
      */
-    public PanelBaseSource(ViewMenu viewMenu, ClassDiagram diagram, AssociationUML association) {
-        this.viewMenu       = viewMenu;
-        this.diagram        = diagram;
-        this.associationUML = association;
-        this.controller     = new ControllerPanelBaseSource(this);
-        this.setSettings();
+    public PanelBaseSource(ViewMenu view, ClassDiagram diagram, AssociationUML association) {
+        super(view, diagram, association);
+        this.controller = new ControllerPanelBaseSource(this);
+        this.setDefaultProperties();
         this.addComponents();
         this.setValues();
+        this.getController().setReady();
     }
     
-    /**
-     * Method responsible for defining the Settings.
-     */
-    private void setSettings() {
+    @Override
+    protected void setDefaultProperties() {
         this.setLayout(new GridLayout(4, 2));
-        this.setPreferredSize(new Dimension(50, 50));
+        super.setDefaultProperties();
         this.setSize(new Dimension(50, 50));
     }
     
@@ -55,16 +49,16 @@ public final class PanelBaseSource extends Panel {
         this.add(this.createTextFieldNoEditable("sourceTextField", "", 20));
         
         this.add(this.createLabel("Visibility: ", 120));
-        this.add(this.createComboBox("visibilityComboBox", this.diagram.getVisibilities(), 30, this.associationUML.getSourceVisibility()));
-        this.getVisibilityComboBox().setEnabled(!this.associationUML.isDirection());
+        this.add(this.createComboBox("visibilityComboBox", this.getDiagram().getVisibilities(), 30));
+        this.getVisibilityComboBox().setEnabled(!this.getAssociation().isDirection());
         
         this.add(this.createLabel("Name: ", 120));
-        this.add(this.createTextField("nameTextField", this.associationUML.getSourceName(), 20));
-        this.getNameTextField().setEnabled(!this.associationUML.isDirection());
+        this.add(this.createTextField("nameTextField", "", 20));
+        this.getNameTextField().setEnabled(!this.getAssociation().isDirection());
         
         this.add(this.createLabel("Cardinality: ", 120));
         this.add(this.createTextField("cardinalityTextField", "", 20));
-        this.getCardinalityTextField().setEnabled(!this.associationUML.isDirection());
+        this.getCardinalityTextField().setEnabled(!this.getAssociation().isDirection());
     }
     
      /**
@@ -79,43 +73,19 @@ public final class PanelBaseSource extends Panel {
      * Method responsible for updating the Elements Enabled.
      */
     private void updateEnabled() {
-        this.getVisibilityComboBox().setEnabled(!this.associationUML.isDirection());
-        this.getNameTextField().setEnabled(!this.associationUML.isDirection());
-        this.getCardinalityTextField().setEnabled(!this.associationUML.isDirection());
+        this.getVisibilityComboBox().setEnabled(!this.getAssociation().isDirection());
+        this.getNameTextField().setEnabled(!this.getAssociation().isDirection());
+        this.getCardinalityTextField().setEnabled(!this.getAssociation().isDirection());
     }
     
     /**
      * Method responsible for setting the Source Association Values.
      */
     public void setValues() {
-        this.getNameTextField().setText(this.associationUML.isDirection() ? "" : this.associationUML.getSourceName());
-        this.getSourceTextField().setText(this.associationUML.getSource().getName());
-        this.getVisibilityComboBox().setSelectedItem(this.associationUML.getSourceVisibility());
-        this.getCardinalityTextField().setText(this.associationUML.isDirection() ? "" : this.associationUML.getCardinalitySourceLabel());
-    }
-    
-    /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
-    }
-    
-    /**
-     * Method responsible for returning the Class Diagram.
-     * @return Class Diagram.
-     */
-    public ClassDiagram getDiagram() {
-        return this.diagram;
-    }
-    
-    /**
-     * Method responsible for returning the Association UML.
-     * @return Association UML.
-     */
-    public AssociationUML getAssociationUML() {
-        return this.associationUML;
+        this.getNameTextField().setText(this.getAssociation().isDirection() ? "" : this.getAssociation().getSourceName());
+        this.getSourceTextField().setText(this.getAssociation().getSource().getName());
+        this.getVisibilityComboBox().setSelectedItem(this.getAssociation().getSourceVisibility());
+        this.getCardinalityTextField().setText(this.getAssociation().isDirection() ? "" : this.getAssociation().getCardinalitySourceLabel());
     }
     
     /**
@@ -148,5 +118,15 @@ public final class PanelBaseSource extends Panel {
      */
     public JTextField getCardinalityTextField() {
         return this.getTextField("cardinalityTextField");
+    }
+    
+    @Override
+    public ClassDiagram getDiagram() {
+        return (ClassDiagram) this.diagram;
+    }
+    
+    @Override
+    public AssociationUML getAssociation() {
+        return (AssociationUML) this.association;
     }
 }

@@ -1,6 +1,6 @@
 package view.panel.base.diagram.sequence.base.association;
 
-import controller.view.edit.panel.base.sequence.ControllerPanelBaseMessageUML;
+import controller.view.panel.base.diagram.sequence.base.association.ControllerPanelBaseMessageUML;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -12,45 +12,39 @@ import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
 import model.structural.diagram.sequence.base.association.MessageUML;
-import view.panel.Panel;
+import view.panel.base.PanelBaseAssociation;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelBaseMessageUML</b>.</p> 
- * <p>Class responsible for defining a Base Panel for the <b>Message UML</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelBaseMessageUML</b>.</p>
+ * <p>Class responsible for defining a <b>Message UML Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  04/10/2019
- * @see    controller.view.edit.panel.base.sequence.ControllerPanelBaseMessageUML
+ * @since  2019-10-04
+ * @see    controller.view.panel.base.diagram.sequence.base.association.ControllerPanelBaseMessageUML
  * @see    model.structural.diagram.sequence.base.association.MessageUML
- * @see    view.panel.Panel
+ * @see    view.panel.base.PanelBaseAssociation
  */
-public final class PanelBaseMessageUML extends Panel {
-    private final ViewMenu viewMenu;
-    private final SequenceDiagram diagram;
-    private final MessageUML messageUML;
+public final class PanelBaseMessageUML extends PanelBaseAssociation {
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param diagram Sequence Diagram.
-     * @param messageUML Message UML.
+     * @param message Message UML.
      */
-    public PanelBaseMessageUML(ViewMenu viewMenu, SequenceDiagram diagram, MessageUML messageUML) {
-        this.viewMenu   = viewMenu;
-        this.diagram    = diagram;
-        this.messageUML = messageUML;
+    public PanelBaseMessageUML(ViewMenu view, SequenceDiagram diagram, MessageUML message) {
+        super(view, diagram, message);
         this.controller = new ControllerPanelBaseMessageUML(this);
-        this.setSettings();
+        this.setDefaultProperties();
         this.addComponents();
         this.setValues();
+        this.getController().setReady();
     }
     
-    /**
-     * Method responsible for defining the Settings.
-     */
-    private void setSettings() {
+    @Override
+    protected void setDefaultProperties() {
         this.setLayout(new GridLayout(4, 2, 2, 5));
-        this.setPreferredSize(new Dimension(50, 50));
+        super.setDefaultProperties();
     }
     
     @Override
@@ -62,7 +56,7 @@ public final class PanelBaseMessageUML extends Panel {
         this.add(this.createTextFieldNoEditable("targetTextField", "", 25));
         
         this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.messageUML.getName(), 25));
+        this.add(this.createTextField("nameTextField", this.getAssociation().getName(), 25));
         
         this.add(this.createLabel("Method: "));
         this.add(this.createComboBox("methodComboBox", this.getMethodsList().toArray(), 30));
@@ -74,8 +68,8 @@ public final class PanelBaseMessageUML extends Panel {
      * @return Methods List.
      */
     private List<MethodUML> getMethodsList() {
-        if (this.messageUML.getTarget() instanceof InstanceUML)
-            return this.getMethodsList((InstanceUML) this.messageUML.getTarget());
+        if (this.getAssociation().getTarget() instanceof InstanceUML)
+            return this.getMethodsList((InstanceUML) this.getAssociation().getTarget());
         return new ArrayList<>();
     }
     
@@ -86,17 +80,17 @@ public final class PanelBaseMessageUML extends Panel {
      */
     private List<MethodUML> getMethodsList(InstanceUML instance) {
         if (instance.getClassUML() != null)
-            return new ArrayList<>(((InstanceUML) this.messageUML.getTarget()).getClassUML().getAllMethods());
+            return new ArrayList<>(((InstanceUML) this.getAssociation().getTarget()).getClassUML().getAllMethods());
         return new ArrayList<>();
     }
     
     /**
-     * Method responsible for setting the Lifeline Values.
+     * Method responsible for setting the Lifeline UML Values.
      */
     public void setValues() {
         this.setSource();
         this.setTarget();
-        this.getNameTextField().setText(this.messageUML.getName());
+        this.getNameTextField().setText(this.getAssociation().getName());
         this.setMethodUML();
     }
     
@@ -104,52 +98,28 @@ public final class PanelBaseMessageUML extends Panel {
      * Method responsible for setting the Source.
      */
     private void setSource() {
-        if (this.messageUML.getSource() instanceof LifelineUML)
-            this.getSourceTextField().setText(((LifelineUML) this.messageUML.getSource()).getSignature());
+        if (this.getAssociation().getSource() instanceof LifelineUML)
+            this.getSourceTextField().setText(((LifelineUML) this.getAssociation().getSource()).getSignature());
         else 
-            this.getSourceTextField().setText(((InstanceUML) this.messageUML.getSource()).getSignature());
+            this.getSourceTextField().setText(((InstanceUML) this.getAssociation().getSource()).getSignature());
     }
     
     /**
      * Method responsible for setting the Target.
      */
     private void setTarget() {
-        if (this.messageUML.getTarget() instanceof LifelineUML)
-            this.getTargetTextField().setText(((LifelineUML) this.messageUML.getTarget()).getSignature());
+        if (this.getAssociation().getTarget() instanceof LifelineUML)
+            this.getTargetTextField().setText(((LifelineUML) this.getAssociation().getTarget()).getSignature());
         else 
-            this.getTargetTextField().setText(((InstanceUML) this.messageUML.getTarget()).getSignature());
+            this.getTargetTextField().setText(((InstanceUML) this.getAssociation().getTarget()).getSignature());
     }
     
     /**
      * Method responsible for setting the Method UML.
      */
     private void setMethodUML() {
-        if (this.messageUML.getMethod() != null)
-            this.getMethodComboBox().setSelectedItem(this.messageUML.getMethod());
-    }
-    
-    /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
-    }
-    
-    /**
-     * Method responsible for returning the Sequence Diagram.
-     * @return Sequence Diagram.
-     */
-    public SequenceDiagram getDiagram() {
-        return this.diagram;
-    }
-    
-    /**
-     * Method responsible for returning the Message UML.
-     * @return Message UML.
-     */
-    public MessageUML getMessageUML() {
-        return this.messageUML;
+        if (this.getAssociation().getMethod() != null)
+            this.getMethodComboBox().setSelectedItem(this.getAssociation().getMethod());
     }
     
     /**
@@ -182,5 +152,15 @@ public final class PanelBaseMessageUML extends Panel {
      */
     public JComboBox getMethodComboBox() {
         return this.getComboBox("methodComboBox");
+    }
+    
+    @Override
+    public SequenceDiagram getDiagram() {
+        return (SequenceDiagram) this.diagram;
+    }
+    
+    @Override
+    public MessageUML getAssociation() {
+        return (MessageUML) this.association;
     }
 }

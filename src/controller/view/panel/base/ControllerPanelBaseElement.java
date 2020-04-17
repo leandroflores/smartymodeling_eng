@@ -27,7 +27,7 @@ public abstract class ControllerPanelBaseElement extends ControllerPanelBase {
         this.getPanelTree().updateNode(this.getElement());
         this.getPanelModeling().updateDiagram(this.getDiagram());
         this.getPanelModeling().setSelected(this.getDiagram(), this.getElement().getId());
-        this.getPanelModeling().updateInstancePanels();
+        this.getPanelModeling().updateModelingPanels();
         super.refresh();
     }
     

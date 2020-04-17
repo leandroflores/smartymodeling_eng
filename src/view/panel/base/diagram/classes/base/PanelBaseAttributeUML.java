@@ -30,7 +30,7 @@ public final class PanelBaseAttributeUML extends PanelBaseElement {
      */
     public PanelBaseAttributeUML(ViewMenu view, ClassDiagram diagram, AttributeUML attribute) {
         super(view, diagram, attribute);
-        this.controller  = new ControllerPanelBaseAttributeUML(this);
+        this.controller = new ControllerPanelBaseAttributeUML(this);
         this.setDefaultProperties();
         this.addComponents();
         this.getController().setReady();
@@ -73,16 +73,6 @@ public final class PanelBaseAttributeUML extends PanelBaseElement {
         this.getFinalCheckBox().setSelected(this.getElement().isFinal());
     }
     
-    @Override
-    public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
-    }
-    
-    @Override
-    public AttributeUML getElement() {
-        return (AttributeUML) this.element;
-    }
-    
     /**
      * Method responsible for returning the Visibility Combo Box.
      * @return Visibility Combo Box.
@@ -121,5 +111,15 @@ public final class PanelBaseAttributeUML extends PanelBaseElement {
      */
     public JCheckBox getFinalCheckBox() {
         return this.getCheckBox("finalCheckBox");
+    }
+    
+    @Override
+    public ClassDiagram getDiagram() {
+        return (ClassDiagram) this.diagram;
+    }
+    
+    @Override
+    public AttributeUML getElement() {
+        return (AttributeUML) this.element;
     }
 }

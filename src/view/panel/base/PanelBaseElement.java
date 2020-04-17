@@ -12,7 +12,7 @@ import view.structural.ViewMenu;
  * @since  2019-05-30
  * @see    controller.view.panel.base.ControllerPanelBaseElement
  * @see    model.structural.base.Element
- * @see    view.panel.Panel
+ * @see    view.panel.base.PanelBase
  */
 public abstract class PanelBaseElement extends PanelBase {
     protected final Diagram diagram;

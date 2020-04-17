@@ -1,6 +1,6 @@
 package view.panel.base.diagram.sequence.base;
 
-import controller.view.edit.panel.base.sequence.ControllerPanelBaseInstanceUML;
+import controller.view.panel.base.diagram.sequence.base.ControllerPanelBaseInstanceUML;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JCheckBox;
@@ -8,43 +8,37 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.sequence.base.InstanceUML;
-import view.panel.Panel;
+import view.panel.base.PanelBaseElement;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelBaseInstanceUML</b>.</p> 
- * <p>Class responsible for defining a Base Panel for the <b>Instance UML</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelBaseInstanceUML</b>.</p>
+ * <p>Class responsible for defining the <b>Instance UML Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  03/10/2019
- * @see    controller.view.edit.panel.base.sequence.ControllerPanelBaseInstanceUML
+ * @since  2019-10-03
+ * @see    controller.view.panel.base.diagram.sequence.base.ControllerPanelBaseInstanceUML
  * @see    model.structural.diagram.sequence.base.InstanceUML
- * @see    view.panel.Panel
+ * @see    view.panel.base.PanelBaseElement
  */
-public final class PanelBaseInstanceUML extends Panel {
-    private final ViewMenu viewMenu;
-    private final SequenceDiagram diagram;
-    private final InstanceUML instanceUML;
+public final class PanelBaseInstanceUML extends PanelBaseElement {
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param diagram Sequence Diagram.
-     * @param instanceUML Instance UML.
+     * @param instance Instance UML.
      */
-    public PanelBaseInstanceUML(ViewMenu viewMenu, SequenceDiagram diagram, InstanceUML instanceUML) {
-        this.viewMenu    = viewMenu;
-        this.diagram     = diagram;
-        this.instanceUML = instanceUML;
-        this.controller   = new ControllerPanelBaseInstanceUML(this);
-        this.setSettings();
+    public PanelBaseInstanceUML(ViewMenu view, SequenceDiagram diagram, InstanceUML instance) {
+        super(view, diagram, instance);
+        this.controller = new ControllerPanelBaseInstanceUML(this);
+        this.setDefaultProperties();
         this.addComponents();
-        this.setValues();
+        this.setClassUML();
+        this.getController().setReady();
     }
     
-    /**
-     * Method responsible for defining the Settings.
-     */
-    private void setSettings() {
+    @Override
+    protected void setDefaultProperties() {
         this.setLayout(new GridLayout(3, 2, 2, 5));
         this.setPreferredSize(new Dimension(50, 50));
     }
@@ -52,55 +46,22 @@ public final class PanelBaseInstanceUML extends Panel {
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.instanceUML.getName(), 25));
+        this.add(this.createTextField("nameTextField", this.getElement().getName(), 25));
         
         this.add(this.createLabel("Class: "));
-        this.add(this.createComboBox("classComboBox", this.diagram.getProject().getElements("class").toArray(), 30));
+        this.add(this.createComboBox("classComboBox", this.getProject().getElements("class").toArray(), 30));
         this.getClassComboBox().setPreferredSize(new Dimension(325, 30));
         
         this.add(this.createLabel("Mandatory: "));
-        this.add(this.createCheckBox("mandatoryCheckBox", "", this.instanceUML.isMandatory()));
-    }
-    
-    /**
-     * Method responsible for setting the Instance Values.
-     */
-    public void setValues() {
-        this.getNameTextField().setText(this.instanceUML.getName());
-        this.setClassUML();
-        this.getMandatoryCheckBox().setSelected(this.instanceUML.isMandatory());
+        this.add(this.createCheckBox("mandatoryCheckBox", "", this.getElement().isMandatory()));
     }
     
     /**
      * Method responsible for setting the Class UML.
      */
-    private void setClassUML() {
-        if (this.instanceUML.getClassUML() != null)
-            this.getClassComboBox().setSelectedItem(this.instanceUML.getClassUML());
-    }
-    
-    /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
-    }
-    
-    /**
-     * Method responsible for returning the Sequence Diagram.
-     * @return Sequence Diagram.
-     */
-    public SequenceDiagram getDiagram() {
-        return this.diagram;
-    }
-    
-    /**
-     * Method responsible for returning the Instance UML.
-     * @return Instance UML.
-     */
-    public InstanceUML getInstanceUML() {
-        return this.instanceUML;
+    public void setClassUML() {
+        if (this.getElement().getClassUML() != null)
+            this.getClassComboBox().setSelectedItem(this.getElement().getClassUML());
     }
     
     /**
@@ -125,5 +86,15 @@ public final class PanelBaseInstanceUML extends Panel {
      */
     public JCheckBox getMandatoryCheckBox() {
         return this.getCheckBox("mandatoryCheckBox");
+    }
+    
+    @Override
+    public SequenceDiagram getDiagram() {
+        return (SequenceDiagram) this.diagram;
+    }
+    
+    @Override
+    public InstanceUML getElement() {
+        return (InstanceUML) this.element;
     }
 }

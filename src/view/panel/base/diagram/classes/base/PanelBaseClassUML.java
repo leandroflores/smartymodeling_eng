@@ -56,16 +56,6 @@ public final class PanelBaseClassUML extends PanelBaseElement {
         this.add(this.createCheckBox("mandatoryCheckBox", "", this.getElement().isMandatory()));
     }
     
-    @Override
-    public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
-    }
-    
-    @Override
-    public ClassUML getElement() {
-        return (ClassUML) this.element;
-    }
-    
     /**
      * Method responsible for returning the Name Text Field.
      * @return Name Text Field.
@@ -96,5 +86,15 @@ public final class PanelBaseClassUML extends PanelBaseElement {
      */
     public JCheckBox getMandatoryCheckBox() {
         return this.getCheckBox("mandatoryCheckBox");
+    }
+    
+    @Override
+    public ClassDiagram getDiagram() {
+        return (ClassDiagram) this.diagram;
+    }
+    
+    @Override
+    public ClassUML getElement() {
+        return (ClassUML) this.element;
     }
 }

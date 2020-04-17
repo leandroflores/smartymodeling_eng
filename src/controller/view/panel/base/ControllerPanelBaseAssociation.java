@@ -1,20 +1,18 @@
 package controller.view.panel.base;
 
-import controller.view.panel.ControllerPanel;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
+import model.structural.base.Diagram;
+import model.structural.base.association.Association;
 import view.panel.base.PanelBaseAssociation;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseAssociation</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseAssociation</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelBaseAssociation</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  07/11/2019
- * @see    controller.view.panel.ControllerPanel
+ * @since  2019-11-07
+ * @see    controller.view.panel.base.ControllerPanelBase
  * @see    view.panel.base.PanelBaseAssociation
  */
-public class ControllerPanelBaseAssociation extends ControllerPanel {
-    private final PanelBaseAssociation panelBaseAssociation;
+public abstract class ControllerPanelBaseAssociation extends ControllerPanelBase {
 
     /**
      * Default constructor method of Class.
@@ -22,15 +20,34 @@ public class ControllerPanelBaseAssociation extends ControllerPanel {
      */
     public ControllerPanelBaseAssociation(PanelBaseAssociation panel) {
         super(panel);
-        this.panelBaseAssociation = panel;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent event) {}
+    /**
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
+     */
+    protected Diagram getDiagram() {
+        return this.getPanel().getDiagram();
+    }
     
     @Override
-    public void keyPressed(KeyEvent event) {}
+    protected void refresh() {
+        this.getPanelModeling().updateDiagram(this.getDiagram());
+        this.getPanelModeling().setSelected(this.getDiagram(), this.getAssociation().getId());
+        this.getPanelModeling().updateInstancePanels();
+        super.refresh();
+    }
+    
+    /**
+     * Method responsible for returning the Element.
+     * @return Element.
+     */
+    protected Association getAssociation() {
+        return this.getPanel().getAssociation();
+    }
     
     @Override
-    public void keyReleased(KeyEvent event) {}
+    public PanelBaseAssociation getPanel() {
+        return (PanelBaseAssociation) this.panel;
+    }
 }
