@@ -1,4 +1,4 @@
-package view.panel.tree;
+package view.panel.tree.base;
 
 import controller.view.panel.tree.popup.ControllerTreePopup;
 import java.awt.FlowLayout;

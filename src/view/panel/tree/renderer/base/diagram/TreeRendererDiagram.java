@@ -1,28 +1,29 @@
-package view.panel.tree.renderer;
+package view.panel.tree.renderer.base.diagram;
 
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
-import model.structural.base.Diagram;
 import model.structural.base.Element;
-import model.structural.base.Project;
 import model.structural.base.variability.Variability;
+import model.structural.diagram.classes.base.AttributeUML;
+import model.structural.diagram.classes.base.MethodUML;
+import view.panel.tree.renderer.base.TreeRenderer;
 
 /**
- * <p>Class of View <b>TreeRendererVariability</b>.</p>
- * <p>Class responsible for defining the <b>Variability Tree Renderer</b> of SMartyModeling.</p>
+ * <p>Class of View <b>TreeRendererDiagram</b>.</p>
+ * <p>Class responsible for defining the <b>Diagram Tree Renderer</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-14
- * @see    view.panel.tree.renderer.TreeRenderer
+ * @see    view.panel.tree.renderer.base.TreeRenderer
  */
-public class TreeRendererVariability extends TreeRenderer {
+public class TreeRendererDiagram extends TreeRenderer {
     
     /**
      * Default constructor method of Class.
      * @param tree Tree.
      */
-    public TreeRendererVariability(JTree tree) {
+    public TreeRendererDiagram(JTree tree) {
         super(tree);
     }
     
@@ -50,6 +51,26 @@ public class TreeRendererVariability extends TreeRenderer {
     }
     
     /**
+     * Method responsible for setting the Attribute UML Icon.
+     * @param attribute Attribute UML.
+     */
+    public void setAttributeIcon(AttributeUML attribute) {
+        this.setText(attribute.getName());
+        this.setToolTipText(attribute.getName());
+        this.setIcon(this.getImage(attribute.getIcon()));
+    }
+    
+    /**
+     * Method responsible for setting the Method UML Icon.
+     * @param method Method UML.
+     */
+    public void setMethodIcon(MethodUML method) {
+        this.setText(method.getName());
+        this.setToolTipText(method.getName());
+        this.setIcon(this.getImage(method.getIcon()));
+    }
+    
+    /**
      * Method responsible for setting the Variability.
      * @param variability Variability.
      */
@@ -66,12 +87,12 @@ public class TreeRendererVariability extends TreeRenderer {
         DefaultMutableTreeNode node   = (DefaultMutableTreeNode) value;
         DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
         Object object = node.getUserObject();
-        if (object instanceof Project)
-            this.setProjectIcon((Project) object);
-        else if (object instanceof Diagram)
-            this.setDiagramIcon((Diagram) object);
-        else if (object instanceof Element)
+        if (object instanceof Element)
             this.setElementIcon((Element) object, parent);
+        else if (object instanceof AttributeUML)
+            this.setAttributeIcon((AttributeUML) object);
+        else if (object instanceof MethodUML)
+            this.setMethodIcon((MethodUML) object);
         else if (object instanceof Variability)
             this.setVariabilityIcon((Variability) object);
         return this;

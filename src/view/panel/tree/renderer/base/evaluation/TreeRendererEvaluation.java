@@ -1,4 +1,4 @@
-package view.panel.tree.renderer;
+package view.panel.tree.renderer.base.evaluation;
 
 import java.awt.Component;
 import javax.swing.JTree;
@@ -6,13 +6,14 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
+import view.panel.tree.renderer.base.TreeRenderer;
 
 /**
  * <p>Class of View <b>TreeRendererEvaluation</b>.</p>
  * <p>Class responsible for defining the <b>Evaluation Tree Renderer</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-14
- * @see    view.panel.tree.renderer.TreeRenderer
+ * @see    view.panel.tree.renderer.base.TreeRenderer
  */
 public class TreeRendererEvaluation extends TreeRenderer {
     

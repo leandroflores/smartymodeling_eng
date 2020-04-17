@@ -1,4 +1,4 @@
-package view.panel.tree;
+package view.panel.tree.base.product;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Project;
@@ -7,7 +7,8 @@ import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.PackageUML;
-import view.panel.tree.renderer.TreeRendererProduct;
+import view.panel.tree.base.PanelTree;
+import view.panel.tree.renderer.base.product.TreeRendererProduct;
 import view.structural.ViewMenu;
 
 /**
@@ -15,8 +16,8 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Product Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-14
- * @see    view.panel.tree.PanelTree
- * @see    view.panel.tree.renderer.TreeRendererProduct
+ * @see    view.panel.tree.base.PanelTree
+ * @see    view.panel.tree.renderer.base.product.TreeRendererProduct
  */
 public final class PanelTreeProduct extends PanelTree {
     

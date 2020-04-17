@@ -7,7 +7,7 @@ import java.awt.Font;
 import java.util.HashMap;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import view.panel.tree.PanelTree;
+import view.panel.tree.base.PanelTree;
 
 /**
  * <p>Class of View <b>TreePopup</b>.</p>
@@ -15,7 +15,7 @@ import view.panel.tree.PanelTree;
  * @author Leandro
  * @since  2019-05-2019
  * @see    javax.swing.JPopupMenu
- * @see    view.panel.tree.PanelTree
+ * @see    view.panel.tree.base.PanelTree
  */
 public final class TreePopup extends JPopupMenu {
     private final PanelTree panel;

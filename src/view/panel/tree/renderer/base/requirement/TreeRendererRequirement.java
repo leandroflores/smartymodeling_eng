@@ -1,4 +1,4 @@
-package view.panel.tree.renderer;
+package view.panel.tree.renderer.base.requirement;
 
 import java.awt.Component;
 import javax.swing.JTree;
@@ -6,13 +6,14 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.requirement.Requirement;
+import view.panel.tree.renderer.base.TreeRenderer;
 
 /**
  * <p>Class of View <b>TreeRendererRequirement</b>.</p>
  * <p>Class responsible for defining the <b>Requirement Tree Renderer</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-15
- * @see    view.panel.tree.renderer.TreeRenderer
+ * @see    view.panel.tree.renderer.base.TreeRenderer
  */
 public class TreeRendererRequirement extends TreeRenderer {
     

@@ -1,10 +1,11 @@
-package view.panel.tree;
+package view.panel.tree.base.diagram;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
-import view.panel.tree.renderer.TreeRendererFeature;
+import view.panel.tree.base.PanelTree;
+import view.panel.tree.renderer.base.diagram.TreeRendererFeature;
 import view.structural.ViewMenu;
 
 /**
@@ -12,8 +13,8 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Feature Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-06
- * @see    view.panel.tree.PanelTree
- * @see    view.panel.tree.renderer.TreeRendererFeature
+ * @see    view.panel.tree.base.PanelTree
+ * @see    view.panel.tree.renderer.base.diagram.TreeRendererFeature
  */
 public final class PanelTreeFeature extends PanelTree {
     

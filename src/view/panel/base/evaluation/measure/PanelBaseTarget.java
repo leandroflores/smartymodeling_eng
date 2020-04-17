@@ -13,9 +13,9 @@ import view.new_.evaluation.ViewNewMeasure;
  * <p>Class responsible for defining a <b>Measure Target Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-10-23
- * @see    controller.view.edit.panel.base.evaluation.
+ * @see    controller.view.panel.base.evaluation.measure.ControllerPanelBaseTarget
  * @see    model.structural.base.evaluation.Measure
- * @see   view.panel.base.evaluation.measure.PanelBase
+ * @see    view.panel.base.evaluation.measure.PanelBase
  */
 public final class PanelBaseTarget extends PanelBase {
     
@@ -94,10 +94,7 @@ public final class PanelBaseTarget extends PanelBase {
         return this.getTextField("variabilitiesTextField");
     }
     
-    /**
-     * Method responsible for returning the Panel Controller.
-     * @return Panel Controller.
-     */
+    @Override
     public ControllerPanelBaseTarget getController() {
         return (ControllerPanelBaseTarget) this.controller;
     }

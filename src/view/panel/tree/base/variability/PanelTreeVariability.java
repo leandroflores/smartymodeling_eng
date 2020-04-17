@@ -1,11 +1,12 @@
-package view.panel.tree;
+package view.panel.tree.base.variability;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.variability.Variability;
-import view.panel.tree.renderer.TreeRendererVariability;
+import view.panel.tree.base.PanelTree;
+import view.panel.tree.renderer.base.variability.TreeRendererVariability;
 import view.structural.ViewMenu;
 
 /**
@@ -13,8 +14,8 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Variability Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-14
- * @see    view.panel.tree.PanelTree
- * @see    view.panel.tree.renderer.TreeRendererVariability
+ * @see    view.panel.tree.base.PanelTree
+ * @see    view.panel.tree.renderer.base.variability.TreeRendererVariability
  */
 public final class PanelTreeVariability extends PanelTree {
     

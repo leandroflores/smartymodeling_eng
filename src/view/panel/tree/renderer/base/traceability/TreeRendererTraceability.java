@@ -1,4 +1,4 @@
-package view.panel.tree.renderer;
+package view.panel.tree.renderer.base.traceability;
 
 import java.awt.Component;
 import javax.swing.JTree;
@@ -7,13 +7,14 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
+import view.panel.tree.renderer.base.TreeRenderer;
 
 /**
  * <p>Class of View <b>TreeRendererTraceability</b>.</p>
  * <p>Class responsible for defining the <b>Traceability Tree Renderer</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-14
- * @see    view.panel.tree.renderer.TreeRenderer
+ * @see    view.panel.tree.renderer.base.TreeRenderer
  */
 public class TreeRendererTraceability extends TreeRenderer {
     

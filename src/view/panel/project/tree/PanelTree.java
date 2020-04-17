@@ -10,12 +10,12 @@ import model.structural.base.Project;
 import model.structural.base.requirement.Requirement;
 import model.structural.base.variability.Variability;
 import view.panel.Panel;
-import view.panel.tree.PanelTreeDiagram;
-import view.panel.tree.PanelTreeEvaluation;
-import view.panel.tree.PanelTreeFeature;
-import view.panel.tree.PanelTreeProduct;
-import view.panel.tree.PanelTreeRequirement;
-import view.panel.tree.PanelTreeVariability;
+import view.panel.tree.base.diagram.PanelTreeDiagram;
+import view.panel.tree.base.evaluation.PanelTreeEvaluation;
+import view.panel.tree.base.diagram.PanelTreeFeature;
+import view.panel.tree.base.product.PanelTreeProduct;
+import view.panel.tree.base.requirement.PanelTreeRequirement;
+import view.panel.tree.base.variability.PanelTreeVariability;
 import view.structural.ViewMenu;
 
 /**
