@@ -58,7 +58,7 @@ public class ControllerViewNewVariability extends ControllerViewNew implements C
     }
 
     @Override
-    public void insert() {
+    public void new_() {
         this.getView().getDiagram().addVariability(this.getView().getVariability());
         this.getView().getDiagram().updateElementsStereotype();
     }

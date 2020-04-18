@@ -28,7 +28,7 @@ public class ControllerViewEditVariability extends ControllerViewEdit  {
     }
 
     @Override
-    public void update() {
+    public void save() {
         this.close();
     }
 }

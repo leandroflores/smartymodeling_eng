@@ -32,7 +32,7 @@ public class ControllerViewNewMetric extends ControllerViewNew {
     }
 
     @Override
-    public void insert() {
+    public void new_() {
         this.viewNewMetric.getProject().addMetric(this.viewNewMetric.getMetric());
     }
     

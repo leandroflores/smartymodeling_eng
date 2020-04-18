@@ -28,7 +28,7 @@ public class ControllerViewEditElement extends ControllerViewEdit  {
     }
 
     @Override
-    public void update() {
+    public void save() {
 //        this.getView().getElement().setName(this.getString(this.getView().getPanelBaseElement().getNameTextField()));
 //        this.getView().getElement().setMandatory(this.getView().getPanelBaseElement().getMandatoryCheckBox().isSelected());
 //        this.getView().getDiagram().updateStereotype(this.getView().getElement());

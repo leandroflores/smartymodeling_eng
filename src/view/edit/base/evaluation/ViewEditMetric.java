@@ -1,42 +1,43 @@
-package view.new_.base.evaluation;
+package view.edit.base.evaluation;
 
-import controller.view.new_.base.evaluation.ControllerViewNewMetric;
+import controller.view.edit.base.evaluation.ControllerViewEditMetric;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.evaluation.Metric;
-import view.new_.ViewNew;
+import view.edit.ViewEdit;
 import view.panel.base.evaluation.PanelBaseMetric;
 import view.panel.base.evaluation.PanelBaseOperation;
-import view.structural.ViewMenu;
+import view.panel.modeling.PanelModeling;
 
 /**
- * <p>Class of View <b>ViewNewMetric</b>.</p>
- * <p>Class responsible for defining the <b>New Metric View</b> of SMartyModeling.</p>
+ * <p>Class of View <b>ViewEditMetric</b>.</p>
+ * <p>Class responsible for defining the <b>Metric Edit View</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  2019-08-20
- * @see    controller.view.new_.base.evaluation.ControllerViewNewMetric
+ * @since  2020-04-18
+ * @see    controller.view.edit.base.evaluation.ControllerViewEditMetric
  * @see    model.structural.base.evaluation.Metric
- * @see    view.new_.ViewNew
+ * @see    view.edit.ViewEdit
  */
-public final class ViewNewMetric extends ViewNew {
+public final class ViewEditMetric extends ViewEdit {
     private final Metric metric;
     
     /**
      * Default constructor method of Class.
-     * @param view View Menu.
+     * @param panel Panel Modeling.
+     * @param metric Metric.
      */
-    public ViewNewMetric(ViewMenu view) {
-        super(view);
-        this.metric     = new Metric();
-        this.controller = new ControllerViewNewMetric(this);
-        this.title      = "New Metric";
+    public ViewEditMetric(PanelModeling panel, Metric metric) {
+        super(panel);
+        this.metric     = metric;
+        this.controller = new ControllerViewEditMetric(this);
+        this.title      = "Edit Metric Data";
         this.initComponents();
     }
     
     @Override
     public void initComponents() {
-        this.setSize(600, 445);
+        this.setSize(600, 350);
         this.addHeader();
         this.addComponents();
         this.addFooter();
@@ -45,9 +46,8 @@ public final class ViewNewMetric extends ViewNew {
     @Override
     public void addComponents() {
         this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 325));
+        this.tabbedPane.setPreferredSize(new Dimension(550, 225));
             this.addPanelBaseMetric();
-            this.addPanelBaseOperation();
         this.add(this.tabbedPane);
         this.addLines(1);
     }
@@ -81,8 +81,8 @@ public final class ViewNewMetric extends ViewNew {
     }
     
     /**
-     * Method responsible for returning the Scroll Panel Base Metric.
-     * @return Scroll Panel Base Metric.
+     * Method responsible for returning Panel Base Metric.
+     * @return Panel Base Metric.
      */
     public JScrollPane getScrollPanelBaseMetric() {
         return this.getScrollPane("scrollPanelBaseMetric");

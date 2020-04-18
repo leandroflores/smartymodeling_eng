@@ -1,5 +1,6 @@
 package view.delete.base.evaluation;
 
+import controller.view.delete.base.evaluation.ControllerViewDeleteMetric;
 import view.delete.ViewDelete;
 import model.structural.base.evaluation.Metric;
 import view.panel.modeling.PanelModeling;
@@ -9,7 +10,7 @@ import view.panel.modeling.PanelModeling;
  * <p>Class responsible for defining the <b>Metric Delete View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-18
- * @see    controller.view.delete.ControllerViewDeleteDiagram
+ * @see    controller.view.delete.base.evaluation.ControllerViewDeleteMetric
  * @see    model.structural.base.evaluation.Metric
  * @see    view.delete.ViewDelete
  */
@@ -24,7 +25,7 @@ public final class ViewDeleteMetric extends ViewDelete {
     public ViewDeleteMetric(PanelModeling panel, Metric metric) {
         super(panel);
         this.metric     = metric;
-//        this.controller = new ControllerViewDeleteDiagram(this);
+        this.controller = new ControllerViewDeleteMetric(this);
         this.title      = "Delete Metric";
         this.initComponents();
         this.addComponents();

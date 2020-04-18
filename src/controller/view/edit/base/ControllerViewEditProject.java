@@ -28,7 +28,7 @@ public class ControllerViewEditProject extends ControllerViewEdit {
     }
 
     @Override
-    public void update() {
+    public void save() {
 //        this.getView().getProject().setName(this.getString(this.getView().getPanelBaseProject().getNameTextField()));
         this.close();
     }

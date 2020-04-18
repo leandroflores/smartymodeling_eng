@@ -34,7 +34,7 @@ public class ControllerPanelBaseArtifacts extends ControllerPanelBase {
     @Override
     public void next() {
         this.update();
-        this.getViewNew().getController().insert();
+        this.getViewNew().getController().new_();
     }
     
     @Override

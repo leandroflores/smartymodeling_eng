@@ -6,6 +6,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.base.requirement.Requirement;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.AttributeUML;
@@ -13,6 +14,7 @@ import model.structural.diagram.classes.base.MethodUML;
 import view.edit.base.ViewEditDiagram;
 import view.edit.base.ViewEditElement;
 import view.edit.base.ViewEditProject;
+import view.edit.base.requirement.ViewEditRequirement;
 import view.edit.base.variability.ViewEditVariability;
 import view.edit.diagram.classes.ViewEditAttributeUML;
 import view.edit.diagram.classes.ViewEditMethodUML;
@@ -54,6 +56,8 @@ public class ControllerMenuItemEdit implements ActionListener {
     private void action(Object object, DefaultMutableTreeNode node) {
         if (object instanceof Project)
             new ViewEditProject(this.popup.getPanel().getViewMenu().getPanelModeling(), (Project) object).setVisible(true);
+        else if (object instanceof Requirement)
+            new ViewEditRequirement(this.popup.getPanel().getViewMenu().getPanelModeling(), (Requirement) object).setVisible(true);
         else if (object instanceof Diagram)
             new ViewEditDiagram(this.popup.getPanel().getViewMenu().getPanelModeling(), (Diagram) object).setVisible(true);
         else if (object instanceof AttributeUML)

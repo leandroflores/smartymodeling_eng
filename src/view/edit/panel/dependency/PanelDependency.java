@@ -1,4 +1,4 @@
-package view.edit.panel.association;
+package view.edit.panel.dependency;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -9,7 +9,7 @@ import view.panel.Panel;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelBaseDiagram</b>.</p> 
+ * <p>Class of View <b>PanelBaseDependency</b>.</p> 
  * <p>Class responsible for defining the <b>Dependency Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-05-30

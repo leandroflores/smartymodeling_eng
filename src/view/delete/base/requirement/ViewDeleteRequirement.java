@@ -26,12 +26,8 @@ public final class ViewDeleteRequirement extends ViewDelete {
         super(panel);
         this.requirement = requirement;
         this.controller  = new ControllerViewDeleteRequirement(this);
+        this.title       = "Delete Requirement";
         this.initComponents();
-    }
-
-    @Override
-    public void initComponents() {
-        this.setTitle("Delete Requirement");
         this.addComponents();
     }
 

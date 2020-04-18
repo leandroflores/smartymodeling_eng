@@ -28,7 +28,7 @@ public class ControllerViewEditMethodUML extends ControllerViewEdit {
     }
 
     @Override
-    public void update() {
+    public void save() {
         this.close();
     }
 }

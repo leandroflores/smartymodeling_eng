@@ -29,7 +29,7 @@ public class ControllerViewNewProduct extends ControllerViewNew {
     }
 
     @Override
-    public void insert() {
+    public void new_() {
         this.getView().getProject().addProduct(this.getView().getProduct());
     }
     

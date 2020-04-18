@@ -26,7 +26,7 @@ public abstract class ControllerViewNew extends ControllerViewModal {
     @Override
     public void actionPerformed(ActionEvent event) {
         if (this.getView().getInsertButton().equals(event.getSource()))
-            this.new_();
+            this.insert();
         else if (this.getView().getBackButton().equals(event.getSource()))
             this.getView().dispose();
     }
@@ -36,7 +36,7 @@ public abstract class ControllerViewNew extends ControllerViewModal {
         super.keyPressed(event);
         switch (event.getKeyCode()) {
             case F1:
-                this.new_();
+                this.insert();
                 break;
             case F2:
                 this.getView().dispose();
@@ -49,9 +49,9 @@ public abstract class ControllerViewNew extends ControllerViewModal {
     /**
      * Method responsible for Insert a New Object.
      */
-    private void new_() {
+    private void insert() {
         if (this.check()) {
-            this.insert();
+            this.new_();
             this.close();
         }
     }
@@ -63,9 +63,9 @@ public abstract class ControllerViewNew extends ControllerViewModal {
     public abstract boolean check();
     
     /**
-     * Abstract Method responsible for inserting the new Object.
+     * Abstract Method responsible for creating a New Object.
      */
-    public abstract void insert();
+    public abstract void new_();
     
     /**
      * Method responsible for closing the View New.

@@ -32,7 +32,7 @@ public class ControllerViewNewMeasure extends ControllerViewNew {
     }
 
     @Override
-    public void insert() {
+    public void new_() {
         Measure measure = this.getView().getMeasure();
                 measure.setName(this.getView().getPanelBaseMeasure().getNameTextField().getText().trim());
                 measure.setDate(this.getView().getPanelBaseMeasure().getDateTextField().getText().trim());

@@ -30,7 +30,7 @@ public abstract class ControllerViewEdit extends ControllerViewModal {
     @Override
     public void actionPerformed(ActionEvent event) {
         if (this.viewEdit.getSaveButton().equals(event.getSource()))
-            this.save();
+            this.update();
         else if (this.viewEdit.getCancelButton().equals(event.getSource()))
             this.viewEdit.dispose();
     }
@@ -39,17 +39,17 @@ public abstract class ControllerViewEdit extends ControllerViewModal {
     public void keyPressed(KeyEvent event) {
         super.keyPressed(event);
         if (F1 == event.getKeyCode())
-            this.save();
+            this.update();
         else if (F2 == event.getKeyCode())
             this.viewEdit.dispose();
     }
     
     /**
-     * Abstract Method responsible for saving the Edit.
+     * Abstract Method responsible for updating.
      */
-    public void save() {
+    public void update() {
         if (this.check())
-            this.update();
+            this.save();
     }
     
     /**
@@ -59,9 +59,9 @@ public abstract class ControllerViewEdit extends ControllerViewModal {
     public abstract boolean check();
     
     /**
-     * Abstract Method responsible for updating the values.
+     * Abstract Method responsible for save the values.
      */
-    public abstract void update();
+    public abstract void save();
     
     /**
      * Method responsible for closing the View Edit.

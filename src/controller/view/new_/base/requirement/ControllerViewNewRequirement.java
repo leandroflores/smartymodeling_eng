@@ -29,7 +29,7 @@ public class ControllerViewNewRequirement extends ControllerViewNew {
     }
 
     @Override
-    public void insert() {
+    public void new_() {
         this.getView().getProject().addRequirement(this.getView().getRequirement());
     }
     

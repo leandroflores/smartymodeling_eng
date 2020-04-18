@@ -26,7 +26,7 @@ public final class ViewDeleteTraceability extends ViewDelete {
         super(panel);
         this.traceability = traceability;
         this.controller   = new ControllerViewDeleteTraceability(this);
-        this.title       = "Delete Traceability";
+        this.title        = "Delete Traceability";
         this.initComponents();
         this.addComponents();
     }

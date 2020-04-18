@@ -1,7 +1,6 @@
 package view.panel.base.requirement;
 
 import controller.view.panel.base.requirement.ControllerPanelBaseRequirement;
-import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;

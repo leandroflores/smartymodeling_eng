@@ -1,5 +1,6 @@
 package view.delete.base.evaluation;
 
+import controller.view.delete.base.evaluation.ControllerViewDeleteMeasure;
 import view.delete.ViewDelete;
 import model.structural.base.evaluation.Measure;
 import view.panel.modeling.PanelModeling;
@@ -9,7 +10,7 @@ import view.panel.modeling.PanelModeling;
  * <p>Class responsible for defining the <b>Measure Delete View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-18
- * @see    controller.view.delete.ControllerViewDeleteDiagram
+ * @see    controller.view.delete.base.evaluation.ControllerViewDeleteMeasure
  * @see    model.structural.base.evaluation.Measure
  * @see    view.delete.ViewDelete
  */
@@ -23,8 +24,8 @@ public final class ViewDeleteMeasure extends ViewDelete {
      */
     public ViewDeleteMeasure(PanelModeling panel, Measure measure) {
         super(panel);
-        this.measure     = measure;
-//        this.controller = new ControllerViewDeleteDiagram(this);
+        this.measure    = measure;
+        this.controller = new ControllerViewDeleteMeasure(this);
         this.title      = "Delete Measure";
         this.initComponents();
         this.addComponents();
