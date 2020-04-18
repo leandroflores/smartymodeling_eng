@@ -14,6 +14,7 @@ import model.structural.base.evaluation.Metric;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
+import model.structural.base.requirement.Requirement;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ActivityDiagram;
@@ -132,6 +133,8 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
             Diagram diagram = this.getDiagram(node);
             if (node.getUserObject() instanceof Project)
                 this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
+            else if (node.getUserObject() instanceof Requirement)
+                this.showPanelEditRequirement((Requirement) node.getUserObject());
             else if (node.getUserObject() instanceof Diagram)
                 this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) node.getUserObject());
             else if (node.getUserObject() instanceof Variability)
@@ -160,6 +163,14 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
      */
     private void showPanelEditVariability(Diagram diagram, Variability variability) {
         this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, variability);
+    }
+    
+    /**
+     * Method responsible for showing the Panel Edit Requirement.
+     * @param requirement Requirement.
+     */
+    private void showPanelEditRequirement(Requirement requirement) {
+        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditRequirement(requirement);
     }
     
     /**

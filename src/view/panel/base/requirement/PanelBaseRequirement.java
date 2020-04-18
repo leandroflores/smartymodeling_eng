@@ -1,6 +1,7 @@
 package view.panel.base.requirement;
 
 import controller.view.panel.base.requirement.ControllerPanelBaseRequirement;
+import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
@@ -45,16 +46,17 @@ public final class PanelBaseRequirement extends PanelBase {
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Id*: "), this.createConstraints(1, 1, 0, 0));
-        this.add(this.createTextField("codeTextField", this.requirement.getCode(), 10),  this.createConstraints(1, 1, 1, 0));
-        this.add(this.createLabel("Type*: "), this.createConstraints(1, 1, 2, 0));
-        this.add(this.createComboBox("typeComboBox", ControllerRequirement.TYPES, 10, this.requirement.getType()), this.createConstraints(2, 1, 3, 0));
+        this.add(this.createTextField("codeTextField", this.requirement.getCode(), 10),  this.createConstraints(4, 1, 1, 0));
         
-        this.add(this.createLabel("Name*: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createTextField("nameTextField", this.requirement.getName(), 15), this.createConstraints(4, 1, 1, 1));
+        this.add(this.createLabel("Type*: "), this.createConstraints(1, 1, 0, 1));
+        this.add(this.createComboBox("typeComboBox", ControllerRequirement.TYPES, 10, this.requirement.getType()), this.createConstraints(4, 1, 1, 1));
+        
+        this.add(this.createLabel("Name*: "), this.createConstraints(1, 1, 0, 2));
+        this.add(this.createTextField("nameTextField", this.requirement.getName(), 15), this.createConstraints(4, 1, 1, 2));
         
         this.createTextArea("descriptionTextArea", this.requirement.getDescription());
-        this.add(this.createLabel("Description*: "), this.createConstraints(1, 1, 0, 2));
-        this.add(this.getDescriptionScrollPane(), this.createConstraints(4, 5, 1, 2));
+        this.add(this.createLabel("Description*: "), this.createConstraints(1, 1, 0, 3));
+        this.add(this.getDescriptionScrollPane(), this.createConstraints(4, 5, 1, 3));
     }
     
     /**

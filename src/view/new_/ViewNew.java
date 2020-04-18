@@ -50,22 +50,6 @@ public abstract class ViewNew extends ViewModal {
     }
     
     /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.view;
-    }
-    
-    /**
-     * Method responsible for returning the Project.
-     * @return Project.
-     */
-    public Project getProject() {
-        return this.project;
-    }
-    
-    /**
      * Method responsible for returning the Insert Button.
      * @return Insert Button.
      */
@@ -79,5 +63,21 @@ public abstract class ViewNew extends ViewModal {
      */
     public JButton getBackButton() {
         return this.getButton("backButton");
+    }
+    
+    /**
+     * Method responsible for returning the Project.
+     * @return Project.
+     */
+    public Project getProject() {
+        return this.project;
+    }
+    
+    /**
+     * Method responsible for returning the View Menu.
+     * @return View Menu.
+     */
+    public ViewMenu getViewMenu() {
+        return this.view;
     }
 }

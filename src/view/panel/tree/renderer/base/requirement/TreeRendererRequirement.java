@@ -30,8 +30,8 @@ public class TreeRendererRequirement extends TreeRenderer {
      * @param requirement Requirement.
      */
     public void setRequirementIcon(Requirement requirement) {
-        this.setText(requirement.getName());
-        this.setToolTipText(requirement.getName());
+        this.setText(requirement.toString());
+        this.setToolTipText(requirement.toString());
         this.setIcon(this.getImage(requirement.getIcon()));
     }
     

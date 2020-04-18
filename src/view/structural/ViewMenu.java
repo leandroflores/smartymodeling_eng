@@ -5,7 +5,6 @@ import file.importation.ImportProject;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ComponentListener;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Iterator;
@@ -17,7 +16,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
-import javax.swing.KeyStroke;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import model.structural.base.Diagram;
@@ -113,18 +111,12 @@ public final class ViewMenu extends View implements Operation {
     private void createFileMenu() {
         this.createMenu("menuFile", "File");
         
-        this.createMenuItem("menuItemNewProject",   "New Project",   "file/new.png");
-        this.createMenuItem("menuItemOpenProject",  "Open Project",  "file/open.png");
-        this.createMenuItem("menuItemSaveProject",  "Save Project",  "file/save.png");
+        this.createMenuItem("menuItemNewProject",   "New Project",   "file/new.png",  KeyEvent.VK_N);
+        this.createMenuItem("menuItemOpenProject",  "Open Project",  "file/open.png", KeyEvent.VK_O);
+        this.createMenuItem("menuItemSaveProject",  "Save Project",  "file/save.png", KeyEvent.VK_S);
         this.createMenuItem("menuItemSaveAs",       "Save As",       "file/save.png");
         this.createMenuItem("menuItemCloseProject", "Close Project", "file/close.png");
-        this.createMenuItem("menuItemExitSystem",   "Exit",          "file/exit.png");
-        
-        this.getMenuItemNewProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
-        this.getMenuItemOpenProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
-        this.getMenuItemSaveProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
-//        this.getMenuItemCloseProject().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
-        this.getMenuItemExitSystem().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
+        this.createMenuItem("menuItemExitSystem",   "Exit",          "file/exit.png", KeyEvent.VK_Q);
         
         this.getMenuFile().add(this.getMenuItemNewProject());
         this.getMenuFile().addSeparator();
@@ -146,14 +138,13 @@ public final class ViewMenu extends View implements Operation {
     private void createRequirementMenu() {
         this.createMenu("menuRequirement", "Requirement");
         
-        this.createMenuItem("menuItemNewRequirement",    "New Requirement",    "requirement/functional.png");
-        this.createMenuItem("menuItemRequirementMatrix", "Requirement Matrix", "requirement/functional.png");
-        
-        this.getMenuItemNewRequirement().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
-        this.getMenuItemRequirementMatrix().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK));
+        this.createMenuItem("menuItemNewRequirement",          "New Requirement",          "requirement/requirement.png",  KeyEvent.VK_R);
+        this.createMenuItem("menuItemRequirementTraceability", "Requirement Traceability", "requirement/traceability.png", KeyEvent.VK_T);
+        this.createMenuItem("menuItemRequirementMatrix",       "Requirement Matrix",       "requirement/matrix.png",       KeyEvent.VK_X);
         
         this.getMenuRequirement().add(this.getMenuItemNewRequirement());
         this.getMenuRequirement().addSeparator();
+        this.getMenuRequirement().add(this.getMenuItemRequirementTraceability());
         this.getMenuRequirement().add(this.getMenuItemRequirementMatrix());
     }
     
@@ -163,19 +154,12 @@ public final class ViewMenu extends View implements Operation {
     private void createDiagramMenu() {
         this.createMenu("menuDiagram", "New Diagram");
         
-        this.createMenuItem("menuItemFeatureDiagram",   "Feature Diagram",   "diagram/feature.png");
-        this.createMenuItem("menuItemUseCaseDiagram",   "Use Case Diagram",  "diagram/use-case.png");
-        this.createMenuItem("menuItemClassDiagram",     "Class Diagram",     "diagram/class.png");
-        this.createMenuItem("menuItemComponentDiagram", "Component Diagram", "diagram/component.png");
-        this.createMenuItem("menuItemSequenceDiagram",  "Sequence Diagram",  "diagram/sequence.png");
-        this.createMenuItem("menuItemActivityDiagram",  "Activity Diagram",  "diagram/activity.png");
-        
-        this.getMenuItemFeatureDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
-        this.getMenuItemUseCaseDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_MASK));
-        this.getMenuItemClassDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
-        this.getMenuItemComponentDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK));
-        this.getMenuItemSequenceDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
-        this.getMenuItemActivityDiagram().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
+        this.createMenuItem("menuItemFeatureDiagram",   "Feature Diagram",   "diagram/feature.png",   KeyEvent.VK_F);
+        this.createMenuItem("menuItemUseCaseDiagram",   "Use Case Diagram",  "diagram/use-case.png",  KeyEvent.VK_U);
+        this.createMenuItem("menuItemClassDiagram",     "Class Diagram",     "diagram/class.png",     KeyEvent.VK_C);
+        this.createMenuItem("menuItemComponentDiagram", "Component Diagram", "diagram/component.png", KeyEvent.VK_M);
+        this.createMenuItem("menuItemSequenceDiagram",  "Sequence Diagram",  "diagram/sequence.png",  KeyEvent.VK_E);
+        this.createMenuItem("menuItemActivityDiagram",  "Activity Diagram",  "diagram/activity.png",  KeyEvent.VK_A);
         
         this.getMenuDiagram().add(this.getMenuItemFeatureDiagram());
         this.getMenuDiagram().addSeparator();
@@ -192,15 +176,10 @@ public final class ViewMenu extends View implements Operation {
     private void createProductLineMenu() {
         this.createMenu("menuProductLine", "Product Line");
         
-        this.createMenuItem("menuItemEditProfile",        "Edit Profile",        "about/information.png");
-        this.createMenuItem("menuItemNewProduct",         "New Product",         "product_line/product.png");
-        this.createMenuItem("menuItemInstantiateProduct", "Instantiate Diagram", "about/information.png");
-        this.createMenuItem("menuItemNewTraceability",    "New Traceability",    "product_line/traceability.png");
-        
-        this.getMenuItemEditProfile().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_MASK));
-        this.getMenuItemNewProduct().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_MASK));
-        this.getMenuItemInstantiateProduct().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK));
-        this.getMenuItemNewTraceability().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK));
+        this.createMenuItem("menuItemEditProfile",        "Edit Profile",        "about/information.png",         KeyEvent.VK_L);
+        this.createMenuItem("menuItemNewProduct",         "New Product",         "product_line/product.png",      KeyEvent.VK_P);
+        this.createMenuItem("menuItemInstantiateProduct", "Instantiate Diagram", "about/information.png",         KeyEvent.VK_I);
+        this.createMenuItem("menuItemNewTraceability",    "New Traceability",    "product_line/traceability.png", KeyEvent.VK_Y);
         
         this.getMenuProductLine().add(this.getMenuItemEditProfile());
         this.getMenuProductLine().add(this.getMenuItemNewProduct());
@@ -253,13 +232,9 @@ public final class ViewMenu extends View implements Operation {
     private void createAboutMenu() {
         this.createMenu("menuAbout", "About");
         
-        this.createMenuItem("menuItemAboutInformation", "Information", "about/information.png");
-        this.createMenuItem("menuItemAboutSite",        "Site",        "about/site.png");
-        this.createMenuItem("menuItemAboutExit",        "Exit",        "about/exit.png");
-        
-        this.getMenuItemAboutInformation().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_MASK));
-        this.getMenuItemAboutSite().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_MASK));
-//        this.getMenuItemAboutExit().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK));
+        this.createMenuItem("menuItemAboutInformation", "Information", "about/information.png", KeyEvent.VK_F2);
+        this.createMenuItem("menuItemAboutSite",        "Site",        "about/site.png", KeyEvent.VK_W);
+        this.createMenuItem("menuItemAboutExit",        "Exit",        "about/exit.png", KeyEvent.VK_F4);
         
         this.getMenuAbout().add(this.getMenuItemAboutInformation());
         this.getMenuAbout().add(this.getMenuItemAboutSite());
@@ -397,6 +372,10 @@ public final class ViewMenu extends View implements Operation {
      */
     private void setDiagramMenuItems(boolean flag) {
         this.getMenuItemFeatureDiagram().setEnabled(flag);
+        
+        this.getMenuItemNewRequirement().setEnabled(flag);
+        this.getMenuItemRequirementTraceability().setEnabled(flag);
+        this.getMenuItemRequirementMatrix().setEnabled(flag);
         
         this.getMenuItemActivityDiagram().setEnabled(flag);
         this.getMenuItemUseCaseDiagram().setEnabled(flag);
@@ -655,7 +634,15 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item Requirement Matrix.
+     * Method responsible for returning the Menu Item Requirement Traceability.
+     * @return Menu Item Requirement Traceability.
+     */
+    public JMenuItem getMenuItemRequirementTraceability() {
+        return this.getMenuItem("menuItemRequirementTraceability");
+    }
+    
+    /**
+     * Method responsible for returning the Menu Item Requirement Matrix.
      * @return Menu Item Requirement Matrix.
      */
     public JMenuItem getMenuItemRequirementMatrix() {

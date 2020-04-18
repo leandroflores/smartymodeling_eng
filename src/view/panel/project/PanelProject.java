@@ -15,6 +15,7 @@ import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.base.product.Relationship;
+import model.structural.base.requirement.Requirement;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ActivityDiagram;
@@ -63,6 +64,7 @@ import view.panel.edit.base.product.PanelEditArtifact;
 import view.panel.edit.base.product.PanelEditInstance;
 import view.panel.edit.base.product.PanelEditProduct;
 import view.panel.edit.base.product.PanelEditRelationship;
+import view.panel.edit.base.requirement.PanelEditRequirement;
 import view.panel.edit.diagram.sequence.base.PanelEditInstanceUML;
 import view.panel.edit.diagram.sequence.base.PanelEditLifelineUML;
 import view.panel.edit.diagram.sequence.base.association.PanelEditMessageUML;
@@ -350,6 +352,15 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditStereotype(Stereotype stereotype) {
         this.panelEdit = new PanelEditStereotype(this.viewMenu, stereotype);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Requirement.
+     * @param requirement Requirement.
+     */
+    public void initPanelEditRequirement(Requirement requirement) {
+        this.panelEdit = new PanelEditRequirement(this.viewMenu, requirement);
         this.updatePanelEdit();
     }
     

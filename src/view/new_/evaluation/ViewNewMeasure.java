@@ -16,17 +16,13 @@ import view.structural.ViewMenu;
  * <p>Class of View <b>ViewNewMeasure</b>.</p>
  * <p>Class responsible for defining the <b>New Measure View</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  03/09/2019
+ * @since  2019-09-03
  * @see    controller.view.new_.evaluation.ControllerViewNewMeasure
  * @see    model.structural.base.evaluation.Measure
  * @see    view.new_.ViewNew
  */
-public final class ViewNewMeasure extends ViewNew { 
-    private final Project project;
+public final class ViewNewMeasure extends ViewNew {
     private final Measure measure;
-    private PanelBaseNewMeasure    panelBaseMeasure;
-    private PanelBaseTarget     panelBaseTarget;
-    private PanelBaseEvaluation panelBaseEvaluation;
     
     /**
      * Default constructor method of Class.
@@ -35,7 +31,6 @@ public final class ViewNewMeasure extends ViewNew {
      */
     public ViewNewMeasure(ViewMenu view, Project project) {
         super(view);
-        this.project    = project;
         this.measure    = new Measure();
         this.controller = new ControllerViewNewMeasure(this);
         this.title      = "New Measure";
@@ -70,10 +65,10 @@ public final class ViewNewMeasure extends ViewNew {
      * Method responsible for adding the Panel Base Measure.
      */
     public void addPanelBaseMeasure() {
-        this.panelBaseMeasure = new PanelBaseNewMeasure(this, this.measure);
+        this.addPanel("panelBaseNewMeasure", new PanelBaseNewMeasure(this, this.measure));
         this.tabbedPane.removeAll();
-        this.createScrollPane("scrollPanelBaseMeasure",  this.panelBaseMeasure);
-        this.getScrollPanelBaseMeasure().setViewportView(this.panelBaseMeasure);
+        this.createScrollPane("scrollPanelBaseMeasure",  this.getPanelBaseMeasure());
+        this.getScrollPanelBaseMeasure().setViewportView(this.getPanelBaseMeasure());
         this.tabbedPane.add("Measure", this.getScrollPanelBaseMeasure());
         this.getInsertButton().setEnabled(false);
     }
@@ -82,9 +77,9 @@ public final class ViewNewMeasure extends ViewNew {
      * Method responsible for adding the Panel Base Target.
      */
     public void addPanelBaseTarget() {
-        this.panelBaseTarget = new PanelBaseTarget(this, this.measure);
-        this.createScrollPane("scrollPanelBaseTarget",  this.panelBaseTarget);
-        this.getScrollPanelBaseTarget().setViewportView(this.panelBaseTarget);
+        this.addPanel("panelBaseTarget", new PanelBaseTarget(this, this.measure));
+        this.createScrollPane("scrollPanelBaseTarget",  this.getPanelBaseTarget());
+        this.getScrollPanelBaseTarget().setViewportView(this.getPanelBaseTarget());
         this.tabbedPane.add("Target", this.getScrollPanelBaseTarget());
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(1));
         this.tabbedPane.setEnabledAt(0, false);
@@ -104,9 +99,9 @@ public final class ViewNewMeasure extends ViewNew {
      * Method responsible for adding the Panel Base Evaluation.
      */
     public void addPanelBaseEvaluation() {
-        this.panelBaseEvaluation  = new PanelBaseEvaluation(this, this.measure);
-        this.createScrollPane("scrollPanelEvaluation",  this.panelBaseEvaluation);
-        this.getScrollPanelEvaluation().setViewportView(this.panelBaseEvaluation);
+        this.addPanel("panelBaseEvaluation", new PanelBaseEvaluation(this, this.measure));
+        this.createScrollPane("scrollPanelEvaluation",  this.getPanelBaseEvaluation());
+        this.getScrollPanelEvaluation().setViewportView(this.getPanelBaseEvaluation());
         this.tabbedPane.add("Evaluation", this.getScrollPanelEvaluation());
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(2));
         this.tabbedPane.setEnabledAt(1, false);
@@ -124,11 +119,51 @@ public final class ViewNewMeasure extends ViewNew {
     }
     
     /**
-     * Method responsible for returning the Project.
-     * @return Project.
+     * Method responsible for returning the Panel Base Measure.
+     * @return Panel Base Measure.
      */
-    public Project getProject() {
-        return this.project;
+    public PanelBaseNewMeasure getPanelBaseMeasure() {
+        return (PanelBaseNewMeasure) this.getPanel("panelBaseMeasure");
+    }
+    
+    /**
+     * Method responsible for returning the Scroll Panel Base Measure.
+     * @return Scroll Panel Base Measure.
+     */
+    public JScrollPane getScrollPanelBaseMeasure() {
+        return this.getScrollPane("scrollPanelBaseMeasure");
+    }
+    
+    /**
+     * Method responsible for returning the Panel Base Target.
+     * @return Panel Base Target.
+     */
+    public PanelBaseTarget getPanelBaseTarget() {
+        return (PanelBaseTarget) this.getPanel("panelBaseTarget");
+    }
+    
+    /**
+     * Method responsible for returning the Scroll Panel Target.
+     * @return Scroll Panel Target.
+     */
+    public JScrollPane getScrollPanelBaseTarget() {
+        return this.getScrollPane("scrollPanelBaseTarget");
+    }
+    
+    /**
+     * Method responsible for returning the Panel Base Evaluation.
+     * @return Panel Base Evaluation.
+     */
+    public PanelBaseEvaluation getPanelBaseEvaluation() {
+        return (PanelBaseEvaluation) this.getPanel("panelBaseEvaluation");
+    }
+    
+    /**
+     * Method responsible for returning the Scroll Panel Evaluation.
+     * @return Scroll Panel Evaluation.
+     */
+    public JScrollPane getScrollPanelEvaluation() {
+        return this.getScrollPane("scrollPanelEvaluation");
     }
     
     /**
@@ -145,53 +180,5 @@ public final class ViewNewMeasure extends ViewNew {
      */
     public Measure getMeasure() {
         return this.measure;
-    }
-    
-    /**
-     * Method responsible for returning the Panel Base Measure.
-     * @return Panel Base Measure.
-     */
-    public PanelBaseNewMeasure getPanelBaseMeasure() {
-        return this.panelBaseMeasure;
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Measure.
-     * @return Scroll Panel Base Measure.
-     */
-    public JScrollPane getScrollPanelBaseMeasure() {
-        return this.getScrollPane("scrollPanelBaseMeasure");
-    }
-    
-    /**
-     * Method responsible for returning the Panel Base Target.
-     * @return Panel Base Target.
-     */
-    public PanelBaseTarget getPanelBaseTarget() {
-        return this.panelBaseTarget;
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Target.
-     * @return Scroll Panel Target.
-     */
-    public JScrollPane getScrollPanelBaseTarget() {
-        return this.getScrollPane("scrollPanelBaseTarget");
-    }
-    
-    /**
-     * Method responsible for returning the Panel Base Evaluation.
-     * @return Panel Base Evaluation.
-     */
-    public PanelBaseEvaluation getPanelBaseEvaluation() {
-        return this.panelBaseEvaluation;
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Evaluation.
-     * @return Scroll Panel Evaluation.
-     */
-    public JScrollPane getScrollPanelEvaluation() {
-        return this.getScrollPane("scrollPanelEvaluation");
     }
 }

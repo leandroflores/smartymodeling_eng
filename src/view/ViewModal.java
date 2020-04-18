@@ -85,6 +85,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
     @Override
     public void addHeader() {
         this.addLines(1);
+        this.setTitle(ViewStyle.SYSTEM + this.title);
     }
     
     /**

@@ -7,14 +7,13 @@ import view.delete.ViewDelete;
 
 /**
  * <p>Class of Controller <b>ControllerViewDelete</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewDelete</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>ViewDelete</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  27/05/2019
+ * @since  2019-05-27
  * @see    controller.view.ControllerViewModal
  * @see    view.delete.ViewDelete
  */
 public abstract class ControllerViewDelete extends ControllerViewModal {
-    protected ViewDelete viewDelete;
     
     /**
      * Default constructor method of Class.
@@ -22,29 +21,14 @@ public abstract class ControllerViewDelete extends ControllerViewModal {
      */
     public ControllerViewDelete(ViewDelete view) {
         super(view);
-        this.viewDelete = view;
     }
 
-    /**
-     * Abstract Method responsible for deleting.
-     */
-    public abstract void delete();
-    
-    /**
-     * Method responsible for closing the View Delete.
-     */
-    protected void close() {
-        this.viewDelete.getPanelModeling().getViewMenu().setSave(false);
-        this.viewDelete.getPanelModeling().getViewMenu().update();
-        this.viewDelete.dispose();
-    }
-    
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.viewDelete.getYesButton().equals(event.getSource()))
+        if (this.getView().getYesButton().equals(event.getSource()))
             this.delete();
-        else if (this.viewDelete.getNotButton().equals(event.getSource()))
-            this.viewDelete.dispose();
+        else if (this.getView().getNotButton().equals(event.getSource()))
+            this.getView().dispose();
     }
     
     @Override
@@ -53,6 +37,25 @@ public abstract class ControllerViewDelete extends ControllerViewModal {
         if (F1 == event.getKeyCode())
             this.delete();
         else if (F2 == event.getKeyCode())
-            this.viewDelete.dispose();
+            this.getView().dispose();
+    }
+    
+    /**
+     * Abstract Method responsible for Deleting the Object.
+     */
+    public abstract void delete();
+    
+    /**
+     * Method responsible for closing the View Delete.
+     */
+    protected void close() {
+        this.getView().getPanelModeling().getViewMenu().setSave(false);
+        this.getView().getPanelModeling().getViewMenu().update();
+        this.getView().dispose();
+    }
+    
+    @Override
+    public ViewDelete getView() {
+        return (ViewDelete) this.viewModal;
     }
 }

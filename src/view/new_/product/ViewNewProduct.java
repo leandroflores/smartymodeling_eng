@@ -14,15 +14,13 @@ import view.structural.ViewMenu;
  * <p>Class of View <b>ViewNewProduct</b>.</p>
  * <p>Class responsible for defining the <b>New Product View</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  09/08/2019
+ * @since  2019-08-09
  * @see    controller.view.new_.product.ControllerViewNewProduct
  * @see    model.structural.base.product.Product
  * @see    view.new_.ViewNew
  */
-public final class ViewNewProduct extends ViewNew { 
-    private final Project project;
+public final class ViewNewProduct extends ViewNew {
     private final Product product;
-    private PanelBaseProduct panelBaseProduct;
     
     /**
      * Default constructor method of Class.
@@ -31,7 +29,6 @@ public final class ViewNewProduct extends ViewNew {
      */
     public ViewNewProduct(ViewMenu view, Project project) {
         super(view);
-        this.project    = project;
         this.product    = new Product();
         this.controller = new ControllerViewNewProduct(this);
         this.title      = "New Product";
@@ -62,26 +59,10 @@ public final class ViewNewProduct extends ViewNew {
      * Method responsible for adding the Panel Base Product.
      */
     private void addPanelBaseProduct() {
-        this.panelBaseProduct = new PanelBaseProduct(this.getViewMenu(), this.product);
-        this.createScrollPane("scrollPanelBaseProduct", this.panelBaseProduct);
-        this.getScrollPanelBaseProduct().setViewportView(this.panelBaseProduct);
+        this.addPanel("panelBaseProduct", new PanelBaseProduct(this.getViewMenu(), this.product));
+        this.createScrollPane("scrollPanelBaseProduct",  this.getPanelBaseProduct());
+        this.getScrollPanelBaseProduct().setViewportView(this.getPanelBaseProduct());
         this.tabbedPane.add("Product", this.getScrollPanelBaseProduct());
-    }
-    
-    /**
-     * Method responsible for returning the Project.
-     * @return Project.
-     */
-    public Project getProject() {
-        return this.project;
-    }
-    
-    /**
-     * Method responsible for returning the Product.
-     * @return Product.
-     */
-    public Product getProduct() {
-        return this.product;
     }
     
     /**
@@ -89,7 +70,7 @@ public final class ViewNewProduct extends ViewNew {
      * @return Panel Base Product.
      */
     public PanelBaseProduct getPanelBaseProduct() {
-        return this.panelBaseProduct;
+        return (PanelBaseProduct) this.getPanel("panelBaseProduct");
     }
     
     /**
@@ -98,5 +79,13 @@ public final class ViewNewProduct extends ViewNew {
      */
     public JScrollPane getScrollPanelBaseProduct() {
         return this.getScrollPane("scrollPanelBaseProduct");
+    }
+    
+    /**
+     * Method responsible for returning the Product.
+     * @return Product.
+     */
+    public Product getProduct() {
+        return this.product;
     }
 }

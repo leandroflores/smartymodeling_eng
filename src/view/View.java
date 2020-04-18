@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.InputEvent;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
+import javax.swing.KeyStroke;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -221,6 +223,21 @@ public abstract class View extends JFrame {
                   menuItem.addKeyListener(this.controller);
                   menuItem.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
                   this.menuItems.put(id, menuItem);
+        return    menuItem;
+    }
+    
+    /**
+     * Method responsible for returning a New Menu Item.
+     * @param  id Menu Item Id.
+     * @param  title Menu Item Title.
+     * @param  path Menu Item Image Path.
+     * @param  keychar Menu Item Key Char.
+     * @return New Menu Item.
+     */
+    protected JMenuItem createMenuItem(String id, String title, String path, int keychar) {
+        JMenuItem menuItem = this.createMenuItem(id, title, path);
+                  menuItem.setAccelerator(KeyStroke.getKeyStroke(keychar, InputEvent.CTRL_MASK));
+                  menuItem.setMnemonic(keychar);
         return    menuItem;
     }
     

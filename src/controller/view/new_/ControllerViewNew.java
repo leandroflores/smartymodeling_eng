@@ -14,7 +14,6 @@ import view.new_.ViewNew;
  * @see    view.new_.ViewNew
  */
 public abstract class ControllerViewNew extends ControllerViewModal {
-    protected ViewNew viewNew;
     
     /**
      * Default constructor method of Class.
@@ -22,9 +21,41 @@ public abstract class ControllerViewNew extends ControllerViewModal {
      */
     public ControllerViewNew(ViewNew view) {
         super(view);
-        this.viewNew = view;
     }
 
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        if (this.getView().getInsertButton().equals(event.getSource()))
+            this.new_();
+        else if (this.getView().getBackButton().equals(event.getSource()))
+            this.getView().dispose();
+    }
+    
+    @Override
+    public void keyPressed(KeyEvent event) {
+        super.keyPressed(event);
+        switch (event.getKeyCode()) {
+            case F1:
+                this.new_();
+                break;
+            case F2:
+                this.getView().dispose();
+                break;
+            default:
+                break;
+        }
+    }
+    
+    /**
+     * Method responsible for Insert a New Object.
+     */
+    private void new_() {
+        if (this.check()) {
+            this.insert();
+            this.close();
+        }
+    }
+    
     /**
      * Abstract method responsible for Checking Values.
      * @return Values checked.
@@ -40,34 +71,13 @@ public abstract class ControllerViewNew extends ControllerViewModal {
      * Method responsible for closing the View New.
      */
     protected void close() {
-        this.viewNew.getViewMenu().setSave(false);
-        this.viewNew.getViewMenu().update();
-        this.viewNew.dispose();
+        this.getView().getViewMenu().setSave(false);
+        this.getView().getViewMenu().update();
+        this.getView().dispose();
     }
     
     @Override
-    public void actionPerformed(ActionEvent event) {
-        if (this.viewNew.getInsertButton().equals(event.getSource())) {
-            if (this.check())
-                this.insert();
-        }else if (this.viewNew.getBackButton().equals(event.getSource())) {
-            this.viewNew.dispose();
-        }
-    }
-    
-    @Override
-    public void keyPressed(KeyEvent event) {
-        super.keyPressed(event);
-        switch (event.getKeyCode()) {
-            case F1:
-                if (this.check())
-                    this.insert();
-                break;
-            case F2:
-                this.viewNew.dispose();
-                break;
-            default:
-                break;
-        }
+    public ViewNew getView() {
+        return (ViewNew) this.viewModal;
     }
 }

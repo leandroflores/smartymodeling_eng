@@ -124,7 +124,7 @@ public class Requirement implements Exportable {
      * @return Requirement Icon.
      */
     public String getIcon() {
-        return "icons/requirement/" + this.type.toLowerCase().trim() + ".png";
+        return "icons/requirement/types/" + this.type.toLowerCase().trim() + ".png";
     }
     
     @Override
@@ -141,6 +141,6 @@ public class Requirement implements Exportable {
     
     @Override
     public String toString() {
-        return this.id + " - " + this.name;
+        return this.code + " - " + this.name;
     }
 }

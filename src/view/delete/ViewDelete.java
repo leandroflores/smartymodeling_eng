@@ -3,6 +3,7 @@ package view.delete;
 import funct.FunctView;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import model.structural.base.Project;
 import view.View;
 import view.ViewModal;
 import view.panel.modeling.PanelModeling;
@@ -12,13 +13,13 @@ import view.structural.ViewMenu;
  * <p>Class of View <b>ViewDelete</b>.</p>
  * <p>Class responsible for defining the <b>Delete View</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  27/05/2019
+ * @since  2019-05-27
  * @see    controller.view.delete.ControllerViewDelete
- * @see    view.panel.modeling.PanelModeling
  * @see    view.ViewModal
  */
 public abstract class ViewDelete extends ViewModal {
     protected final ViewMenu view;
+    protected final Project  project;
     protected final PanelModeling panel;
     
     /**
@@ -27,8 +28,9 @@ public abstract class ViewDelete extends ViewModal {
      */
     public ViewDelete(ViewMenu view) {
         super(view);
-        this.view  = view;
-        this.panel = null;
+        this.view    = view;
+        this.project = view.getProject();
+        this.panel   = null;
     }
     
     /**
@@ -37,8 +39,9 @@ public abstract class ViewDelete extends ViewModal {
      */
     public ViewDelete(PanelModeling panel) {
         super(panel.getViewMenu());
-        this.view  = panel.getViewMenu();
-        this.panel = panel;
+        this.view    = panel.getViewMenu();
+        this.project = panel.getViewMenu().getProject();
+        this.panel   = panel;
         this.setSettings();
     }
     
@@ -76,22 +79,6 @@ public abstract class ViewDelete extends ViewModal {
     }
     
     /**
-     * Method responsible for returning the Panel Modeling.
-     * @return Panel Modeling.
-     */
-    public PanelModeling getPanelModeling() {
-        return this.panel;
-    }
-    
-    /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public View getView() {
-        return this.panel.getViewMenu();
-    }
-    
-    /**
      * Method responsible for returning the Yes Button.
      * @return Yes Button.
      */
@@ -105,5 +92,29 @@ public abstract class ViewDelete extends ViewModal {
      */
     public JButton getNotButton() {
         return this.getButton("notButton");
+    }
+    
+    /**
+     * Method responsible for returning the Project.
+     * @return Project.
+     */
+    public Project getProject() {
+        return this.project;
+    }
+    
+    /**
+     * Method responsible for returning the Panel Modeling.
+     * @return Panel Modeling.
+     */
+    public PanelModeling getPanelModeling() {
+        return this.panel;
+    }
+    
+    /**
+     * Method responsible for returning the View Menu.
+     * @return View Menu.
+     */
+    public View getView() {
+        return this.panel.getViewMenu();
     }
 }

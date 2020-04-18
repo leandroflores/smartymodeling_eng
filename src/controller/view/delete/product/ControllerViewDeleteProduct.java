@@ -33,7 +33,7 @@ public class ControllerViewDeleteProduct extends ControllerViewDelete {
      */
     private void removeInstances() {
         for (Instance instance : this.product.getInstancesList())
-            this.viewDelete.getPanelModeling().removeInstance(instance);
+            this.getView().getPanelModeling().removeInstance(instance);
     }
     
     @Override

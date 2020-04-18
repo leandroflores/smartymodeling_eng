@@ -1,16 +1,15 @@
 package controller.view.new_.evaluation;
 
 import controller.view.new_.ControllerViewNew;
-import java.awt.event.ActionEvent;
-import model.structural.base.evaluation.Metric;
 import view.new_.evaluation.ViewNewMetric;
 
 /**
  * <p>Class of Controller <b>ControllerViewNewMetric</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewNewMetric</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>ViewNewMetric</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  20/08/2019
+ * @since  2019-08-20
  * @see    controller.view.new_.ControllerViewNew
+ * @see    model.structural.base.evaluation.Metric
  * @see    view.new_.evaluation.ViewNewMetric
  */
 public class ControllerViewNewMetric extends ControllerViewNew {
@@ -26,45 +25,19 @@ public class ControllerViewNewMetric extends ControllerViewNew {
     }
     
     @Override
-    public void actionPerformed(ActionEvent event) {
-        super.actionPerformed(event);
-    }
-
-    /**
-     * Method responsible for checking the Metric Name.
-     * @return Name is checked.
-     */
-    public boolean checkName() {
-        return this.check(this.viewNewMetric.getPanelBaseMetric().getNameTextField(), "Name is required!");
-    }
-    
-    /**
-     * Method responsible for checking the Metric Label.
-     * @return Label is checked.
-     */
-    public boolean checkLabel() {
-        return this.check(this.viewNewMetric.getPanelBaseMetric().getLabelTextField(), "Label is required!");
-    }
-    
-    /**
-     * Method responsible for checking the Metric Operation.
-     * @return Operation is checked.
-     */
-    public boolean checkOperation() {
-        return this.check(this.viewNewMetric.getPanelBaseOperation().getOperationTextField(), "Operation is required!");
-    }
-    
-    @Override
     public boolean check() {
-        return this.checkName()
-            && this.checkLabel()
-            && this.checkOperation();
+        return this.check(this.viewNewMetric.getPanelBaseMetric().getNameTextField(),  "Name is required!")
+            && this.check(this.viewNewMetric.getPanelBaseMetric().getLabelTextField(), "Label is required!")
+            && this.check(this.viewNewMetric.getPanelBaseOperation().getOperationTextField(), "Operation is required!");
     }
 
     @Override
     public void insert() {
-        Metric metric = this.viewNewMetric.getMetric();
-        this.viewNewMetric.getProject().addMetric(metric);
-        this.close();
+        this.viewNewMetric.getProject().addMetric(this.viewNewMetric.getMetric());
+    }
+    
+    @Override
+    public ViewNewMetric getView() {
+        return (ViewNewMetric) this.viewModal;
     }
 }

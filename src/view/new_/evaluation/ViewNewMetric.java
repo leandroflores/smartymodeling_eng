@@ -14,15 +14,13 @@ import view.structural.ViewMenu;
  * <p>Class of View <b>ViewNewMetric</b>.</p>
  * <p>Class responsible for defining the <b>New Metric View</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  20/08/2019
+ * @since  2019-08-20
  * @see    controller.view.new_.evaluation.ControllerViewNewMetric
  * @see    model.structural.base.evaluation.Metric
  * @see    view.new_.ViewNew
  */
 public final class ViewNewMetric extends ViewNew {
-    private final Metric  metric;
-    private PanelBaseMetric panelBaseMetric;
-    private PanelBaseOperation panelBaseOperation;
+    private final Metric metric;
     
     /**
      * Default constructor method of Class.
@@ -61,9 +59,9 @@ public final class ViewNewMetric extends ViewNew {
      * Method responsible for adding the Panel Base Metric.
      */
     private void addPanelBaseMetric() {
-        this.panelBaseMetric = new PanelBaseMetric(this.getViewMenu(), this.metric);
-        this.createScrollPane("scrollPanelBaseMetric", this.panelBaseMetric);
-        this.getScrollPanelBaseMetric().setViewportView(this.panelBaseMetric);
+        this.addPanel("panelBaseMetric", new PanelBaseMetric(this.getViewMenu(), this.metric));
+        this.createScrollPane("scrollPanelBaseMetric",  this.getPanelBaseMetric());
+        this.getScrollPanelBaseMetric().setViewportView(this.getPanelBaseMetric());
         this.tabbedPane.add("Metric", this.getScrollPanelBaseMetric());
     }
     
@@ -71,18 +69,10 @@ public final class ViewNewMetric extends ViewNew {
      * Method responsible for adding the Panel Base Operation.
      */
     private void addPanelBaseOperation() {
-        this.panelBaseOperation  = new PanelBaseOperation(this.getViewMenu(), this.metric);
-        this.createScrollPane("scrollPanelOperation",  this.panelBaseOperation);
-        this.getScrollPanelOperation().setViewportView(this.panelBaseOperation);
+        this.addPanel("panelBaseMetric", new PanelBaseOperation(this.getViewMenu(), this.metric));
+        this.createScrollPane("scrollPanelOperation",  this.getPanelBaseOperation());
+        this.getScrollPanelOperation().setViewportView(this.getPanelBaseOperation());
         this.tabbedPane.add("Operation", this.getScrollPanelOperation());
-    }
-    
-    /**
-     * Method responsible for returning the Metric.
-     * @return Metric.
-     */
-    public Metric getMetric() {
-        return this.metric;
     }
     
     /**
@@ -90,7 +80,7 @@ public final class ViewNewMetric extends ViewNew {
      * @return Panel Base Metric.
      */
     public PanelBaseMetric getPanelBaseMetric() {
-        return this.panelBaseMetric;
+        return (PanelBaseMetric) this.getPanel("panelBaseMetric");
     }
     
     /**
@@ -106,7 +96,7 @@ public final class ViewNewMetric extends ViewNew {
      * @return Panel Base Operation.
      */
     public PanelBaseOperation getPanelBaseOperation() {
-        return this.panelBaseOperation;
+        return (PanelBaseOperation) this.getPanel("panelBaseOperation");
     }
     
     /**
@@ -115,5 +105,13 @@ public final class ViewNewMetric extends ViewNew {
      */
     public JScrollPane getScrollPanelOperation() {
         return this.getScrollPane("scrollPanelOperation");
+    }
+    
+    /**
+     * Method responsible for returning the Metric.
+     * @return Metric.
+     */
+    public Metric getMetric() {
+        return this.metric;
     }
 }

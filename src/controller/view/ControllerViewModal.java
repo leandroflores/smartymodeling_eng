@@ -20,7 +20,7 @@ import view.message.ViewError;
  * @see    view.ViewModal
  */
 public abstract class ControllerViewModal extends Controller {
-    private final ViewModal viewModal;
+    protected final ViewModal viewModal;
     
     /**
      * Default contructor method of Class.
@@ -159,5 +159,13 @@ public abstract class ControllerViewModal extends Controller {
      */
     protected String getValue(JComboBox comboBox) {
         return comboBox.getSelectedItem().toString();
+    }
+    
+    /**
+     * Method responsible for returning the View.
+     * @return View.
+     */
+    public ViewModal getView() {
+        return this.viewModal;
     }
 }
