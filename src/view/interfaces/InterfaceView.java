@@ -2,29 +2,29 @@ package view.interfaces;
 
 /**
  * <p>Interface <b>View</b>.</p>
- * <p>Interface responsavel por definir as <b>Operacoes Basicas</b> das Classes de Visao do Sistema.</p>
+ * <p>Interface responsible for defining <b>View Operations</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  12/07/2018
+ * @since  2019-07-12
  */
 public interface InterfaceView {
     
     /**
-     * Metodo responsavel por inicializar os componentes de uma View.
+     * Method responsible for initializing the View Components.
      */
     public void initComponents();
      
     /**
-     * Metodo responsavel por adicionar o Cabecalho de uma View.
+     * Method responsible for adding the View Header.
      */
     public void addHeader();
     
     /**
-     * Metodo responsavel por adicionar os componentes de uma View.
+     * Method responsible for adding the View Components.
      */
     public void addComponents();
     
     /**
-     * Metodo responsavel por adicionar o Rodape de uma View.
+     * Method responsible for adding the View Footer.
      */
     public void addFooter();
 }

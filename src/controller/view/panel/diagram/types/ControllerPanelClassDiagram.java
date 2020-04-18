@@ -12,7 +12,7 @@ import model.structural.diagram.classes.base.ClassUML;
 import model.structural.diagram.classes.base.InterfaceUML;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.PackageUML;
-import view.delete.ViewDeleteElement;
+import view.delete.base.ViewDeleteElement;
 import view.panel.diagram.types.PanelClassDiagram;
 
 /**
@@ -221,13 +221,6 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
             this.delete(this.getDiagram().getAssociation(id));
         else if (this.getDiagram().getElement(id) != null)
             this.delete(this.getDiagram().getElement(id));
-            
-//        else if (this.panelDiagram.getDiagram().getElement(id) instanceof AttributeUML)
-//            this.panelDiagram.getDiagram().removeAttribute((AttributeUML) this.panelDiagram.getDiagram().getElement(id));
-//        else if (this.panelDiagram.getDiagram().getElement(id) instanceof MethodUML)
-//            this.panelDiagram.getDiagram().removeMethod((MethodUML) this.panelDiagram.getDiagram().getElement(id));
-//        else if (this.panelDiagram.getDiagram().getElement(id) != null)
-//            new ViewDeleteElement(this.panelDiagram.getViewMenu().getPanelModeling(), this.panelDiagram.getDiagram().getElement(id)).setVisible(true);
 //        this.update();
     }
     
@@ -263,7 +256,9 @@ public class ControllerPanelClassDiagram extends ControllerPanelDiagram {
      * @param element Element.
      */
     private void delete(Element element) {
-        new ViewDeleteElement(this.getPanelDiagram().getViewMenu().getPanelModeling(), element).setVisible(true);
+        new ViewDeleteElement(this.getPanelDiagram().getViewMenu().getPanelModeling(), 
+                              this.getDiagram(),
+                              element).setVisible(true);
         this.update();
     }
     

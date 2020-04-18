@@ -1105,10 +1105,21 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for removing the Instances from a Product.
+     * @param product Product.
+     */
+    private void removeInstances(Product product) {
+        List<Instance> list = product.getInstancesList();
+        for (int  i =  list.size() - 1; i >= 0; i--)
+            product.removeInstance(list.get(i));
+    }
+    
+    /**
      * Method responsible for removing a Product.
      * @param product Product.
      */
     public void removeProduct(Product product) {
+        this.removeInstances(product);
         this.products.remove(product.getId());
     }
     

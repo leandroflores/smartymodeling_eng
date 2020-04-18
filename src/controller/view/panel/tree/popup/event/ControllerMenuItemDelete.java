@@ -8,15 +8,18 @@ import model.structural.base.Element;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
+import model.structural.base.requirement.Requirement;
 import model.structural.base.traceability.Traceability;
 import model.structural.base.variability.Variability;
-import view.delete.ViewDeleteDiagram;
-import view.delete.ViewDeleteElement;
-import view.delete.product.ViewDeleteArtifact;
-import view.delete.product.ViewDeleteInstance;
-import view.delete.product.ViewDeleteProduct;
-import view.delete.traceability.ViewDeleteTraceability;
-import view.delete.variability.ViewDeleteVariability;
+import view.delete.base.ViewDeleteDiagram;
+import view.delete.base.ViewDeleteElement;
+import view.delete.base.product.ViewDeleteArtifact;
+import view.delete.base.product.ViewDeleteInstance;
+import view.delete.base.product.ViewDeleteProduct;
+import view.delete.base.requirement.ViewDeleteRequirement;
+import view.delete.base.traceability.ViewDeleteTraceability;
+import view.delete.base.variability.ViewDeleteVariability;
+import view.panel.modeling.PanelModeling;
 import view.panel.tree.popup.TreePopup;
 
 /**
@@ -53,20 +56,22 @@ public class ControllerMenuItemDelete implements ActionListener {
      * @param node JTree Node.
      */
     private void action(Object object, DefaultMutableTreeNode node) {
-        if (object instanceof Diagram)
-            new ViewDeleteDiagram(this.popup.getPanel().getViewMenu().getPanelModeling(), ((Diagram) object)).setVisible(true);
+        if (object instanceof Requirement)
+            new ViewDeleteRequirement(this.getPanelModeling(), (Requirement) object).setVisible(true);
+        else if (object instanceof Diagram)
+            new ViewDeleteDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
         else if (object instanceof Element)
-            new ViewDeleteElement(this.popup.getPanel().getViewMenu().getPanelModeling(), ((Element) object)).setVisible(true);
+            new ViewDeleteElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
         else if (object instanceof Variability)
-            new ViewDeleteVariability(this.popup.getPanel().getViewMenu().getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
+            new ViewDeleteVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
         else if (object instanceof Traceability)
-            new ViewDeleteTraceability(this.popup.getPanel().getViewMenu().getPanelModeling(), (Traceability) object).setVisible(true);
+            new ViewDeleteTraceability(this.getPanelModeling(), (Traceability) object).setVisible(true);
         else if (object instanceof Product)
-            new ViewDeleteProduct(this.popup.getPanel().getViewMenu().getPanelModeling(),  (Product) object).setVisible(true);
+            new ViewDeleteProduct(this.getPanelModeling(),  (Product) object).setVisible(true);
         else if (object instanceof Instance)
-            new ViewDeleteInstance(this.popup.getPanel().getViewMenu().getPanelModeling(), (Instance) object).setVisible(true);
+            new ViewDeleteInstance(this.getPanelModeling(), (Instance) object).setVisible(true);
         else if (object instanceof Artifact)
-            new ViewDeleteArtifact(this.popup.getPanel().getViewMenu().getPanelModeling(), (Artifact) object).setVisible(true);
+            new ViewDeleteArtifact(this.getPanelModeling(), (Artifact) object).setVisible(true);
     }
     
     /**
@@ -79,5 +84,13 @@ public class ControllerMenuItemDelete implements ActionListener {
         while ((parent != null) && !(parent.getUserObject() instanceof Diagram))
                parent = (DefaultMutableTreeNode) parent.getParent();
         return parent == null ? null : (Diagram) parent.getUserObject();
+    }
+    
+    /**
+     * Method responsible for returning the Panel Modeling.
+     * @return Panel Modeling.
+     */
+    private PanelModeling getPanelModeling() {
+        return this.popup.getPanel().getViewMenu().getPanelModeling();
     }
 }

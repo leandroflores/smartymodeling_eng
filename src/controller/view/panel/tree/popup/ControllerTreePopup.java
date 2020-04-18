@@ -25,14 +25,14 @@ import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
-import view.delete.ViewDeleteDiagram;
-import view.delete.ViewDeleteElement;
-import view.delete.variability.ViewDeleteVariability;
-import view.edit.ViewEditDiagram;
-import view.edit.ViewEditElement;
-import view.edit.ViewEditProject;
-import view.edit.classs.ViewEditAttribute;
-import view.edit.classs.ViewEditMethod;
+import view.delete.base.ViewDeleteDiagram;
+import view.delete.base.ViewDeleteElement;
+import view.delete.base.variability.ViewDeleteVariability;
+import view.edit.base.ViewEditDiagram;
+import view.edit.base.ViewEditElement;
+import view.edit.base.ViewEditProject;
+import view.edit.base.diagram.classes.ViewEditAttribute;
+import view.edit.base.diagram.classes.ViewEditMethod;
 import view.panel.tree.popup.TreePopup;
 
 /**
@@ -265,7 +265,9 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
         if (object instanceof Diagram)
             new ViewDeleteDiagram(this.treePopup.getPanel().getViewMenu().getPanelModeling(), (Diagram) object).setVisible(true);
         else if (object instanceof Element)
-            new ViewDeleteElement(this.treePopup.getPanel().getViewMenu().getPanelModeling(), (Element) object).setVisible(true);
+            new ViewDeleteElement(this.treePopup.getPanel().getViewMenu().getPanelModeling(), 
+                                  this.getDiagram(node),
+                                  (Element) object).setVisible(true);
         else if (object instanceof Variability)
             new ViewDeleteVariability(this.treePopup.getPanel().getViewMenu().getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
     }

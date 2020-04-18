@@ -6,7 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.base.evaluation.Measure;
-import view.new_.evaluation.ViewNewMeasure;
+import view.new_.base.evaluation.ViewNewMeasure;
 
 /**
  * <p>Class of View <b>PanelBaseTarget</b>.</p> 

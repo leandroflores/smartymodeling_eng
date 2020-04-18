@@ -11,9 +11,9 @@ import view.system.ViewSystemInformation;
 
 /**
  * <p>Class of Controller <b>ControllerPanelMain</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>Main Panel</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelMain</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  28/05/2019
+ * @since  2019-05-28
  * @see    controller.view.panel.ControllerPanel
  * @see    view.panel.main.PanelMain
  */

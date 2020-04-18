@@ -7,8 +7,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
-import view.delete.ViewDeleteElement;
-import view.new_.variability.ViewNewVariability;
+import view.delete.base.ViewDeleteElement;
+import view.new_.base.variability.ViewNewVariability;
 import view.panel.diagram.PanelDiagram;
 import view.panel.operation.PanelOperation;
 
@@ -113,7 +113,9 @@ public abstract class ControllerPanelOperation extends ControllerPanel {
      * @param element Element.
      */
     private void delete(Element element) {
-        new ViewDeleteElement(this.getPanelDiagram().getViewMenu().getPanelModeling(), element).setVisible(true);
+        new ViewDeleteElement(this.getPanelDiagram().getViewMenu().getPanelModeling(),
+                              this.getPanelDiagram().getDiagram(),
+                              element).setVisible(true);
         this.getPanelDiagram().updateGraph();
     }
     

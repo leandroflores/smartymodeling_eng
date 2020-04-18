@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
-import view.delete.ViewDeleteElement;
+import view.delete.base.ViewDeleteElement;
 import view.panel.diagram.PanelDiagram;
 
 /**
@@ -128,7 +128,9 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
      * @param element Element.
      */
     private void delete(Element element) {
-        new ViewDeleteElement(this.getPanelDiagram().getViewMenu().getPanelModeling(), element).setVisible(true);
+        new ViewDeleteElement(this.getPanelDiagram().getViewMenu().getPanelModeling(), 
+                              this.getPanelDiagram().getDiagram(),
+                              element).setVisible(true);
         this.getPanelDiagram().updateGraph();
     }
     

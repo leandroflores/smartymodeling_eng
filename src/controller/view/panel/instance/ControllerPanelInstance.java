@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Relationship;
-import view.delete.product.ViewDeleteArtifact;
+import view.delete.base.product.ViewDeleteArtifact;
 import view.panel.instance.PanelInstance;
 
 /**

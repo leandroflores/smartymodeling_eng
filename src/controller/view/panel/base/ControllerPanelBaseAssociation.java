@@ -33,8 +33,8 @@ public abstract class ControllerPanelBaseAssociation extends ControllerPanelBase
     @Override
     protected void refresh() {
         this.getPanelModeling().updateDiagram(this.getDiagram());
-        this.getPanelModeling().setSelected(this.getDiagram(), this.getAssociation().getId());
         this.getPanelModeling().updateInstancePanels();
+        this.getPanelModeling().setSelected(this.getDiagram(), this.getAssociation().getId());
         super.refresh();
     }
     

@@ -735,8 +735,8 @@ public abstract class Diagram implements Exportable {
      * @param element Variation Point.
      */
     private void removeVariationPoint(Element element) {
-        for (Variability variabilidade : this.getVariationPoints(element))
-            this.removeVariability(variabilidade);
+        for (Variability variability : this.getVariationPoints(element))
+            this.removeVariability(variability);
     }
     
     /**
@@ -744,10 +744,10 @@ public abstract class Diagram implements Exportable {
      * @param element Element.
      */
     private void removeVariants(Element element) {
-        for (Variability variabilidade : this.filterVariants(element, "")) {
-            variabilidade.removeVariant(element);
-            if (variabilidade.emptyVariants())
-                this.removeVariability(variabilidade);
+        for (Variability variability : this.filterVariants(element, "")) {
+            variability.removeVariant(element);
+            if (variability.emptyVariants())
+                this.removeVariability(variability);
         }
     }
     

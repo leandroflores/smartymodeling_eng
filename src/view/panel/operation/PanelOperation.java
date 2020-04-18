@@ -15,7 +15,8 @@ import view.panel.diagram.PanelDiagram;
  * <p>Class of View <b>PanelOperation</b>.</p> 
  * <p>Class responsible for defining a Panel for <b>Diagram Operation</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  09/04/2019
+ * @since  2019-04-09
+ * @see    controller.view.panel.operation.ControllerPanelOperation
  * @see    view.panel.Panel
  * @see    view.panel.diagram.PanelDiagram
  */

@@ -12,7 +12,8 @@ import view.structural.ViewMenu;
  * <p>Class of View <b>PanelMain</b>.</p> 
  * <p>Class responsible for defining the <b>Main Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  23/05/2019
+ * @since  2019-05-23
+ * @see    controller.view.panel.main.ControllerPanelMain
  * @see    view.panel.Panel
  * @see    view.structural.ViewMenu
  */

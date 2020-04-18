@@ -6,7 +6,7 @@ import javax.swing.JComboBox;
 import javax.swing.text.JTextComponent;
 import model.structural.base.product.Instance;
 import view.message.ViewError;
-import view.new_.product.ViewNewInstance;
+import view.new_.base.product.ViewNewInstance;
 import view.panel.base.product.instance.PanelBase;
 
 /**

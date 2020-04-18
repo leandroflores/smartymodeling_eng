@@ -1,6 +1,6 @@
 package controller.view.edit.base.variability;
 
-import controller.view.edit.ControllerViewEdit;
+import controller.view.edit.base.ControllerViewEdit;
 import view.edit.base.variability.ViewEditVariability;
 
 /**
@@ -8,7 +8,7 @@ import view.edit.base.variability.ViewEditVariability;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewEditVariability</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  29/01/2020
- * @see    controller.view.edit.ControllerViewEdit
+ * @see    controller.view.edit.base.ControllerViewEdit
  * @see    model.structural.base.variability.Variability
  * @see    view.edit.base.variability.ViewEditVariability
  */

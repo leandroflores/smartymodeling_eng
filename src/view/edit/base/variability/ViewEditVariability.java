@@ -1,7 +1,7 @@
 package view.edit.base.variability;
 
+import view.edit.base.ViewEdit;
 import controller.view.edit.base.variability.ControllerViewEditVariability;
-import view.edit.*;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;

@@ -6,7 +6,7 @@ import javax.swing.JComboBox;
 import javax.swing.text.JTextComponent;
 import model.structural.base.evaluation.Measure;
 import view.message.ViewError;
-import view.new_.evaluation.ViewNewMeasure;
+import view.new_.base.evaluation.ViewNewMeasure;
 import view.panel.base.evaluation.measure.PanelBase;
 
 /**
