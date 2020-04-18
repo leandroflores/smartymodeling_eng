@@ -424,6 +424,8 @@ public final class ViewMenu extends View implements Operation {
         this.panelMain.activate();
         if (this.project == null)
             this.panelMain.setNoProject();
+        else
+            this.getPanelModeling().updatePanelMain();
         this.updateSave();
     }
     
@@ -489,6 +491,7 @@ public final class ViewMenu extends View implements Operation {
      * Method responsible for running Zoom In.
      */
     public void zoomIn() {
+        this.zoom  = this.getPanelModeling().getSelectedPanel().getZoom();
         this.zoom += 0.10;
         this.zoom  = (this.zoom > 3.00) ? 3.00 : this.zoom;
         this.resetZoom();
@@ -499,6 +502,7 @@ public final class ViewMenu extends View implements Operation {
      * Method responsible for running Zoom Out.
      */
     public void zoomOut() {
+        this.zoom  = this.getPanelModeling().getSelectedPanel().getZoom();
         this.zoom -= 0.10;
         this.zoom  = (this.zoom <= 0.20) ? 0.20 : this.zoom;
         this.resetZoom();

@@ -136,6 +136,7 @@ public abstract class PanelDiagram extends PanelGraph {
         
         this.addElements();
         this.addAssociations();
+        this.setZoom(this.zoom);
     }
     
     /**

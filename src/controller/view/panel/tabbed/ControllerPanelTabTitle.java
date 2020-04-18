@@ -60,6 +60,7 @@ public class ControllerPanelTabTitle extends ControllerPanel {
             this.getPanel().getPanelModeling().removeInstance(this.getPanel().getInstance());
         else
             this.getPanel().getPanelModeling().getPanelTabbed().removeAll();
+        this.getPanel().getPanelModeling().updatePanelMain();
     }
     
     @Override

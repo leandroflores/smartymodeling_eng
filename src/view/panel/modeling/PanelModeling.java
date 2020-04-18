@@ -65,6 +65,19 @@ public final class PanelModeling extends Panel {
     }
     
     /**
+     * Method responsible for updating the Panel Main.
+     */
+    public void updatePanelMain() {
+        if (this.viewMenu.getProject() == null
+         || this.panelTabbed.getTabCount() == 0) {
+            this.viewMenu.getPanelMain().setModeling(false);
+        }else {
+            this.viewMenu.getPanelMain().setModeling(true);
+//            this.viewMenu.getPanelMain().setOriginalZoom(this.getSelectedPanel().getZoom() != 1.0d);
+        }
+    }
+    
+    /**
      * Method responsible for adding a Tab to Panel Modeling.
      * @param id Component Id.
      * @param title Title Tab.
@@ -77,6 +90,7 @@ public final class PanelModeling extends Panel {
             this.panels.put(id, component);
             get = component;
         }
+        this.updatePanelMain();
         this.panelTabbed.setSelectedComponent(get);
     }
     
@@ -157,6 +171,7 @@ public final class PanelModeling extends Panel {
             this.panels.remove(diagram.getId());
             this.updateUI();
         }
+        this.updatePanelMain();
     }
     
     /**
@@ -233,6 +248,7 @@ public final class PanelModeling extends Panel {
             this.panels.remove(instance.getCompleteId());
             this.updateUI();
         }
+        this.updatePanelMain();
     }
     
     /**
@@ -254,10 +270,8 @@ public final class PanelModeling extends Panel {
      * @param zoom Zoom Value.
      */
     public void setZoom(Double zoom) {
-        if (this.getPanelDiagram() != null)
-            this.getPanelDiagram().setZoom(zoom);
-        else if (this.getPanelInstance() != null)
-            this.getPanelInstance().setZoom(zoom);
+        if (this.getSelectedPanel() != null)
+            this.getSelectedPanel().setZoom(zoom);
     }
     
     /**
@@ -282,6 +296,7 @@ public final class PanelModeling extends Panel {
         this.panelTabbed.removeAll();
         if (this.viewMenu.getProject() == null)
             this.addTab("Start", "Start", new PanelLogo(this.viewMenu));
+        this.updatePanelMain();
     }
     
     /**
@@ -295,6 +310,16 @@ public final class PanelModeling extends Panel {
                 return i - 1;
         }
         return -1;
+    }
+    
+    /**
+     * Method responsible for returning the Selected Panel.
+     * @return Selected Panel.
+     */
+    public PanelGraph getSelectedPanel() {
+        if (this.getPanelDiagram() != null)
+            return this.getPanelDiagram();
+        return this.getPanelInstance();
     }
     
     /**

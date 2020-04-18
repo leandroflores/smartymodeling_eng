@@ -39,16 +39,27 @@ public class ControllerPanelMain extends ControllerPanel {
             this.panelMain.getViewMenu().getController().saveProject();
         else if (this.panelMain.getCloseProjectButton().equals(event.getSource()))
             this.panelMain.getViewMenu().getController().showCloseProject();
-        else if (this.panelMain.getOriginalZoomButton().equals(event.getSource()))
-            this.panelMain.getViewMenu().setOriginalZoom();
-        else if (this.panelMain.getZoomInButton().equals(event.getSource()))
-            this.panelMain.getViewMenu().zoomIn();
-        else if (this.panelMain.getZoomOutButton().equals(event.getSource()))
-            this.panelMain.getViewMenu().zoomOut();
         else if (this.panelMain.getExportImageButton().equals(event.getSource()))
             this.exportImage();
         else if (this.panelMain.getVersionButton().equals(event.getSource()))
             new ViewSystemInformation(this.panelMain.getViewMenu()).setVisible(true);
+        else
+            this.actionZoom(event);
+    }
+    
+    /**
+     * Method responsible for Forward the File Menu.
+     * @param event Action Event.
+     */
+    private void actionZoom(ActionEvent event) {
+        if (this.panelMain.getViewMenu().getPanelModeling().getSelectedPanel() != null) {
+            if (this.panelMain.getOriginalZoomButton().equals(event.getSource()))
+                this.panelMain.getViewMenu().setOriginalZoom();
+            else if (this.panelMain.getZoomInButton().equals(event.getSource()))
+                this.panelMain.getViewMenu().zoomIn();
+            else if (this.panelMain.getZoomOutButton().equals(event.getSource()))
+                this.panelMain.getViewMenu().zoomOut();
+        }
     }
     
     /**

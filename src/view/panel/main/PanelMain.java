@@ -120,6 +120,25 @@ public final class PanelMain extends Panel {
     }
     
     /**
+     * Method responsible for setting the Modeling Buttons.
+     * @param enabled Enabled Flag.
+     */
+    public void setModeling(boolean enabled) {
+        this.getOriginalZoomButton().setEnabled(enabled);
+        this.getZoomInButton().setEnabled(enabled);
+        this.getZoomOutButton().setEnabled(enabled);
+        this.getExportImageButton().setEnabled(enabled);
+    }
+    
+    /**
+     * Method responsible for setting the Original Zoom Button.
+     * @param enabled Enabled Flag.
+     */
+    public void setOriginalZoom(boolean enabled) {
+        this.getOriginalZoomButton().setEnabled(enabled);
+    }
+    
+    /**
      * Method responsible for returning View Menu.
      * @return View Menu.
      */
