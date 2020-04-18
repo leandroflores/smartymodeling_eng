@@ -1,6 +1,6 @@
 package controller.view.new_.base.requirement;
 
-import controller.view.new_.base.ControllerViewNew;
+import controller.view.new_.ControllerViewNew;
 import view.new_.base.requirement.ViewNewRequirement;
 
 /**
@@ -8,7 +8,7 @@ import view.new_.base.requirement.ViewNewRequirement;
  * <p>Class responsible for controlling the <b>ViewNewRequirement</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-17
- * @see    controller.view.new_.base.ControllerViewNew
+ * @see    controller.view.new_.ControllerViewNew
  * @see    model.structural.base.requirement.Requirement
  * @see    view.new_.base.requirement.ViewNewRequirement
  */

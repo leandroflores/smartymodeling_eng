@@ -1,17 +1,18 @@
 package controller.view.edit.base;
 
+import controller.view.edit.ControllerViewEdit;
 import view.edit.base.ViewEditElement;
 
 /**
  * <p>Class of Controller <b>ControllerViewEditElement</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewEditElement</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>ViewEditElement</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  30/05/2019
- * @see    controller.view.edit.base.ControllerViewEdit
+ * @since  2019-05-30
+ * @see    controller.view.edit.ControllerViewEdit
+ * @see    model.structural.base.Element
  * @see    view.edit.base.ViewEditElement
  */
 public class ControllerViewEditElement extends ControllerViewEdit  {
-    private final ViewEditElement viewEditElement;
 
     /**
      * Default constructor method of Class.
@@ -19,27 +20,23 @@ public class ControllerViewEditElement extends ControllerViewEdit  {
      */
     public ControllerViewEditElement(ViewEditElement viewEdit) {
         super(viewEdit);
-        this.viewEditElement = viewEdit;
-    }
-
-    /**
-     * Method responsible for checking the Element Name.
-     * @return Name checked.
-     */
-    private boolean checkName() {
-        return this.check(this.viewEditElement.getPanelBaseElement().getNameTextField(), "Name is a required field!");
     }
     
     @Override
     public boolean check() {
-        return this.checkName();
+        return this.check(this.getView().getPanelBaseElement().getNameTextField(), "Name is a required!");
     }
 
     @Override
-    public void save() {
-        this.viewEditElement.getElement().setName(this.viewEditElement.getPanelBaseElement().getNameTextField().getText());
-        this.viewEditElement.getElement().setMandatory(this.viewEditElement.getPanelBaseElement().getMandatoryCheckBox().isSelected());
-        this.viewEditElement.getDiagram().updateStereotype(this.viewEditElement.getElement());
+    public void update() {
+//        this.getView().getElement().setName(this.getString(this.getView().getPanelBaseElement().getNameTextField()));
+//        this.getView().getElement().setMandatory(this.getView().getPanelBaseElement().getMandatoryCheckBox().isSelected());
+//        this.getView().getDiagram().updateStereotype(this.getView().getElement());
         this.close();
+    }
+    
+    @Override
+    public ViewEditElement getView() {
+        return (ViewEditElement) this.viewModal;
     }
 }

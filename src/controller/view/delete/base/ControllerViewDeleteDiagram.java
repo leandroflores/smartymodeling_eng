@@ -1,5 +1,6 @@
 package controller.view.delete.base;
 
+import controller.view.delete.ControllerViewDelete;
 import model.structural.base.Diagram;
 import view.delete.base.ViewDeleteDiagram;
 
@@ -8,7 +9,7 @@ import view.delete.base.ViewDeleteDiagram;
  * <p>Class responsible for controlling the <b>ViewDeleteDiagram</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-05-27
- * @see    controller.view.delete.base.ControllerViewDelete
+ * @see    controller.view.delete.ControllerViewDelete
  * @see    model.structural.base.Diagram
  * @see    view.delete.base.ViewDeleteDiagram
  */

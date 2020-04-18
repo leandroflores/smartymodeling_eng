@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.evaluation.Metric;
-import view.new_.base.ViewNew;
+import view.new_.ViewNew;
 import view.panel.base.evaluation.PanelBaseMetric;
 import view.panel.base.evaluation.PanelBaseOperation;
 import view.structural.ViewMenu;
@@ -17,7 +17,7 @@ import view.structural.ViewMenu;
  * @since  2019-08-20
  * @see    controller.view.new_.base.evaluation.ControllerViewNewMetric
  * @see    model.structural.base.evaluation.Metric
- * @see    view.new_.base.ViewNew
+ * @see    view.new_.ViewNew
  */
 public final class ViewNewMetric extends ViewNew {
     private final Metric metric;

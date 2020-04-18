@@ -3,7 +3,7 @@ package view.delete.base.product;
 import controller.view.delete.base.product.ControllerViewDeleteInstance;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
-import view.delete.base.ViewDelete;
+import view.delete.ViewDelete;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -13,7 +13,7 @@ import view.panel.modeling.PanelModeling;
  * @since  2019-10-10
  * @see    controller.view.delete.base.product.ControllerViewDeleteInstance
  * @see    model.structural.base.product.Instance
- * @see    view.delete.base.ViewDelete
+ * @see    view.delete.ViewDelete
  */
 public final class ViewDeleteInstance extends ViewDelete {
     private final Product  product;

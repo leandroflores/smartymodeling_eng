@@ -3,6 +3,7 @@ package view.delete.base;
 import controller.view.delete.base.ControllerViewDeleteElement;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
+import view.delete.ViewDelete;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -12,7 +13,7 @@ import view.panel.modeling.PanelModeling;
  * @since  2019-05-27
  * @see    controller.view.delete.base.ControllerViewDeleteElement
  * @see    model.structural.base.Element
- * @see    view.delete.base.ViewDelete
+ * @see    view.delete.ViewDelete
  */
 public final class ViewDeleteElement extends ViewDelete {
     private final Diagram diagram;

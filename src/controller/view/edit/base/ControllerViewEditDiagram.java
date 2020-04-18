@@ -1,13 +1,15 @@
 package controller.view.edit.base;
 
+import controller.view.edit.ControllerViewEdit;
 import view.edit.base.ViewEditDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerViewEditDiagram</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewEditDiagram</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>ViewEditDiagram</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  29/05/2019
- * @see    controller.view.edit.base.ControllerViewEdit
+ * @since  2019-05-29
+ * @see    controller.view.edit.ControllerViewEdit
+ * @see    model.structural.base.Diagram
  * @see    view.edit.base.ViewEditDiagram
  */
 public class ControllerViewEditDiagram extends ControllerViewEdit {
@@ -21,23 +23,20 @@ public class ControllerViewEditDiagram extends ControllerViewEdit {
         super(viewEdit);
         this.viewEditDiagram = viewEdit;
     }
-
-    /**
-     * Method responsible for checking the Diagram Name.
-     * @return Name checked.
-     */
-    private boolean checkName() {
-        return this.check(this.viewEditDiagram.getPanelBaseDiagram().getNameTextField(), "Name is a required field!");
-    }
     
     @Override
     public boolean check() {
-        return this.checkName();
+        return this.check(this.viewEditDiagram.getPanelBaseDiagram().getNameTextField(), "Name is required!");
     }
 
     @Override
-    public void save() {
-        this.viewEditDiagram.getDiagram().setName(this.viewEditDiagram.getPanelBaseDiagram().getNameTextField().getText());
+    public void update() {
+//        this.getView().getDiagram().setName(this.getString(this.getView().getPanelBaseDiagram().getNameTextField()));
         this.close();
+    }
+    
+    @Override
+    public ViewEditDiagram getView() {
+        return (ViewEditDiagram) this.viewModal;
     }
 }

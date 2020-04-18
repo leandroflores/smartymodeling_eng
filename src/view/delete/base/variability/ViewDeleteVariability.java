@@ -3,7 +3,7 @@ package view.delete.base.variability;
 import controller.view.delete.base.variability.ControllerViewDeleteVariability;
 import model.structural.base.Diagram;
 import model.structural.base.variability.Variability;
-import view.delete.base.ViewDelete;
+import view.delete.ViewDelete;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -13,7 +13,7 @@ import view.panel.modeling.PanelModeling;
  * @since  2019-05-27
  * @see    controller.view.delete.base.variability.ControllerViewDeleteVariability
  * @see    model.structural.base.variability.Variability
- * @see    view.delete.base.ViewDelete
+ * @see    view.delete.ViewDelete
  */
 public final class ViewDeleteVariability extends ViewDelete {
     private final Diagram diagram;

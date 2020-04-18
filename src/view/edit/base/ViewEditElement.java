@@ -6,6 +6,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
+import view.edit.ViewEdit;
 import view.edit.panel.association.PanelDependency;
 import view.panel.base.diagram.PanelBaseElement;
 import view.edit.panel.stereotype.PanelStereotype;
@@ -18,14 +19,11 @@ import view.panel.modeling.PanelModeling;
  * @since  2019-05-30
  * @see    controller.view.edit.base.ControllerViewEditElement
  * @see    model.structural.base.Element
- * @see    view.edit.base.ViewEdit
+ * @see    view.edit.ViewEdit
  */
 public final class ViewEditElement extends ViewEdit {
-    private final Element element;
     private final Diagram diagram;
-    private PanelBaseElement panelBaseElement;
-    private PanelStereotype  panelStereotype;
-    private PanelDependency  panelDependency;
+    private final Element element;
     
     /**
      * Default constructor method of Class.
@@ -35,8 +33,8 @@ public final class ViewEditElement extends ViewEdit {
      */
     public ViewEditElement(PanelModeling panel, Diagram diagram, Element element) {
         super(panel);
-        this.element    = element;
         this.diagram    = diagram;
+        this.element    = element;
         this.controller = new ControllerViewEditElement(this);
         this.title      = "Edit Element Data";
         this.initComponents();
@@ -48,7 +46,6 @@ public final class ViewEditElement extends ViewEdit {
         this.addHeader();
         this.addComponents();
         this.addFooter();
-        this.setValues();
     }
     
     @Override
@@ -69,9 +66,9 @@ public final class ViewEditElement extends ViewEdit {
      * Method responsible for adding the Panel Base Element.
      */
     private void addPanelBaseElement() {
-        this.panelBaseElement = new PanelBaseElement(this.getViewMenu(), this.diagram, this.element);
-        this.createScrollPane("scrollPanelBaseElement",  this.panelBaseElement);
-        this.getScrollPanelBaseElement().setViewportView(this.panelBaseElement);
+        this.addPanel("panelBaseElement", new PanelBaseElement(this.getViewMenu(), this.diagram, this.element));
+        this.createScrollPane("scrollPanelBaseElement",  this.getPanelBaseElement());
+        this.getScrollPanelBaseElement().setViewportView(this.getPanelBaseElement());
         this.tabbedPane.add("Element", this.getScrollPanelBaseElement());
     }
     
@@ -79,9 +76,9 @@ public final class ViewEditElement extends ViewEdit {
      * Method responsible for adding the Panel Stereotype.
      */
     private void addPanelStereotype() {
-        this.panelStereotype  = new PanelStereotype(this.getViewMenu(), this.element);
-        this.createScrollPane("scrollPanelStereotype",  this.panelStereotype);
-        this.getScrollPanelStereotype().setViewportView(this.panelStereotype);
+        this.addPanel("panelStereotype", new PanelStereotype(this.getViewMenu(), this.element));
+        this.createScrollPane("scrollPanelStereotype",  this.getPanelStereotype());
+        this.getScrollPanelStereotype().setViewportView(this.getPanelStereotype());
         this.tabbedPane.add("Stereotype", this.getScrollPanelStereotype());
     }
     
@@ -89,26 +86,58 @@ public final class ViewEditElement extends ViewEdit {
      * Method responsible for adding the Panel Dependency.
      */
     private void addPanelDependency() {
-        this.panelDependency  = new PanelDependency(this.getViewMenu(), this.element);
-        this.createScrollPane("scrollPanelDependency",  this.panelDependency);
-        this.getScrollPanelDependency().setViewportView(this.panelDependency);
+        this.addPanel("panelDependency", new PanelDependency(this.getViewMenu(), this.element));
+        this.createScrollPane("scrollPanelDependency",  this.getPanelDependency());
+        this.getScrollPanelDependency().setViewportView(this.getPanelDependency());
         this.tabbedPane.add("Dependency", this.getScrollPanelDependency());
     }
     
-    @Override
-    public void setValues() {
-        this.panelBaseElement.getNameTextField().setText(this.element.getName());
-        this.panelBaseElement.getMandatoryCheckBox().setSelected(this.element.isMandatory());
-        
-        this.panelBaseElement.getNameTextField().requestFocus();
+    /**
+     * Method responsible for returning the Panel Base Element.
+     * @return Panel Base Element.
+     */
+    public PanelBaseElement getPanelBaseElement() {
+        return (PanelBaseElement) this.getPanel("panelBaseElement");
     }
     
     /**
-     * Method responsible for returning the Diagram.
-     * @return Diagram.
+     * Method responsible for returning the Scroll Panel Base Element.
+     * @return Scroll Panel Base Element.
      */
-    public Diagram getDiagram() {
-        return this.diagram;
+    public JScrollPane getScrollPanelBaseElement() {
+        return this.getScrollPane("scrollPanelBaseElement");
+    }
+    
+    /**
+     * Method responsible for returning the Panel Stereotype.
+     * @return Panel Stereotype.
+     */
+    public PanelStereotype getPanelStereotype() {
+        return (PanelStereotype) this.getPanel("panelStereotype");
+    }
+    
+    /**
+     * Method responsible for returning the Scroll Panel Stereotype.
+     * @return Scroll Panel Stereotype.
+     */
+    public JScrollPane getScrollPanelStereotype() {
+        return this.getScrollPane("scrollPanelStereotype");
+    }
+    
+    /**
+     * Method responsible for returning the Panel Dependency.
+     * @return Panel Dependency.
+     */
+    public PanelDependency getPanelDependency() {
+        return (PanelDependency) this.getPanel("panelDependency");
+    }
+    
+    /**
+     * Method responsible for returning the Scroll Panel Dependency.
+     * @return Scroll Panel Dependency.
+     */
+    public JScrollPane getScrollPanelDependency() {
+        return this.getScrollPane("scrollPanelDependency");
     }
     
     /**
@@ -120,50 +149,10 @@ public final class ViewEditElement extends ViewEdit {
     }
     
     /**
-     * Method responsible for returning Scroll Panel Base Element.
-     * @return Scroll Panel Base Element.
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
      */
-    public JScrollPane getScrollPanelBaseElement() {
-        return this.getScrollPane("scrollPanelBaseElement");
-    }
-    
-    /**
-     * Method responsible for returning Panel Data Element.
-     * @return Panel Data Element.
-     */
-    public PanelBaseElement getPanelBaseElement() {
-        return this.panelBaseElement;
-    }
-    
-    /**
-     * Method responsible for returning Scroll Panel Stereotype.
-     * @return Scroll Panel Stereotype.
-     */
-    public JScrollPane getScrollPanelStereotype() {
-        return this.getScrollPane("scrollPanelStereotype");
-    }
-    
-    /**
-     * Method responsible for returning Panel Stereotype.
-     * @return Panel Stereotype.
-     */
-    public PanelStereotype getPanelStereotype() {
-        return this.panelStereotype;
-    }
-    
-    /**
-     * Method responsible for returning Scroll Panel Dependency.
-     * @return Scroll Panel Dependency.
-     */
-    public JScrollPane getScrollPanelDependency() {
-        return this.getScrollPane("scrollPanelDependency");
-    }
-    
-    /**
-     * Method responsible for returning Panel Dependency.
-     * @return Panel Dependency.
-     */
-    public PanelDependency getPanelDependency() {
-        return this.panelDependency;
+    public Diagram getDiagram() {
+        return this.diagram;
     }
 }

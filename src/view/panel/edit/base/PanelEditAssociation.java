@@ -56,22 +56,6 @@ public abstract class PanelEditAssociation extends PanelEdit {
     }
     
     /**
-     * Method responsible for returning the Diagram.
-     * @return Diagram.
-     */
-    public Diagram getDiagram() {
-        return this.diagram;
-    }
-    
-    /**
-     * Method responsible for returning the Association.
-     * @return Association.
-     */
-    public Association getAssociation() {
-        return this.association;
-    }
-    
-    /**
      * Method responsible for returning the Panel Base Association.
      * @return Panel Base Association.
      */
@@ -85,5 +69,21 @@ public abstract class PanelEditAssociation extends PanelEdit {
      */
     public JScrollPane getScrollPanelBaseAssociation() {
         return this.getScrollPane("scrollPanelBaseAssociation");
+    }
+    
+    /**
+     * Method responsible for returning the Association.
+     * @return Association.
+     */
+    public Association getAssociation() {
+        return this.association;
+    }
+    
+    /**
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
+     */
+    public Diagram getDiagram() {
+        return this.diagram;
     }
 }

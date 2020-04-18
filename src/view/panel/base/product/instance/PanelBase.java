@@ -3,7 +3,7 @@ package view.panel.base.product.instance;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import model.structural.base.product.Instance;
-import view.new_.base.ViewNew;
+import view.new_.ViewNew;
 import view.new_.base.product.ViewNewInstance;
 
 /**

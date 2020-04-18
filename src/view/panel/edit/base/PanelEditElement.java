@@ -80,22 +80,6 @@ public abstract class PanelEditElement extends PanelEdit {
     }
     
     /**
-     * Method responsible for returning the Diagram.
-     * @return Diagram.
-     */
-    public Diagram getDiagram() {
-        return this.diagram;
-    }
-    
-    /**
-     * Method responsible for returning the Element.
-     * @return Element.
-     */
-    public Element getElement() {
-        return this.element;
-    }
-    
-    /**
      * Method responsible for returning the Panel Base Element.
      * @return Panel Base Element.
      */
@@ -141,5 +125,21 @@ public abstract class PanelEditElement extends PanelEdit {
      */
     public JScrollPane getScrollPanelDependency() {
         return this.getScrollPane("scrollPanelDependency");
+    }
+    
+    /**
+     * Method responsible for returning the Element.
+     * @return Element.
+     */
+    public Element getElement() {
+        return this.element;
+    }
+    
+    /**
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
+     */
+    public Diagram getDiagram() {
+        return this.diagram;
     }
 }

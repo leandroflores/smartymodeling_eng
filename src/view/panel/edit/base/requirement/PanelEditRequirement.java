@@ -43,7 +43,7 @@ public final class PanelEditRequirement extends PanelEdit {
      * Method responsible for adding the Panel Base Requirement.
      */
     private void addPanelBaseRequirement() {
-        this.addPanel("panelBaseRequirement",  new PanelBaseRequirement(this.getViewMenu(), this.requirement));
+        this.addPanel("panelBaseRequirement", new PanelBaseRequirement(this.getViewMenu(), this.requirement));
         this.createScrollPane("scrollPanelBaseRequirement",  this.getPanelBaseRequirement());
         this.getScrollPanelBaseRequirement().setViewportView(this.getPanelBaseRequirement());
         this.tabbedPane.add("Requirement", this.getScrollPanelBaseRequirement());

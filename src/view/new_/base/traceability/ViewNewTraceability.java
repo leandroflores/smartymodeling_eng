@@ -8,7 +8,7 @@ import model.structural.base.Project;
 import model.structural.base.traceability.Traceability;
 import view.panel.base.traceability.PanelBaseElements;
 import view.panel.base.traceability.PanelBaseTraceability;
-import view.new_.base.ViewNew;
+import view.new_.ViewNew;
 import view.structural.ViewMenu;
 
 /**
@@ -18,7 +18,7 @@ import view.structural.ViewMenu;
  * @since  2019-07-22
  * @see    controller.view.new_.base.traceability.ControllerViewNewTraceability
  * @see    model.structural.base.traceability.Traceability
- * @see    view.new_.base.ViewNew
+ * @see    view.new_.ViewNew
  */
 public final class ViewNewTraceability extends ViewNew {
     private final Traceability traceability;

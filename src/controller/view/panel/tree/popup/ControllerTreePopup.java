@@ -31,8 +31,8 @@ import view.delete.base.variability.ViewDeleteVariability;
 import view.edit.base.ViewEditDiagram;
 import view.edit.base.ViewEditElement;
 import view.edit.base.ViewEditProject;
-import view.edit.base.diagram.classes.ViewEditAttribute;
-import view.edit.base.diagram.classes.ViewEditMethod;
+import view.edit.diagram.classes.ViewEditAttributeUML;
+import view.edit.diagram.classes.ViewEditMethodUML;
 import view.panel.tree.popup.TreePopup;
 
 /**
@@ -285,9 +285,9 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
         else if (object instanceof Variability)
             this.editVariability(object, node);
         else if (object instanceof AttributeUML)
-            new ViewEditAttribute(this.treePopup.getPanel().getViewMenu().getPanelModeling(), ((ClassDiagram) this.getDiagram(node)), ((AttributeUML) object)).setVisible(true);
+            new ViewEditAttributeUML(this.treePopup.getPanel().getViewMenu().getPanelModeling(), ((ClassDiagram) this.getDiagram(node)), ((AttributeUML) object)).setVisible(true);
         else if (object instanceof MethodUML)
-            new ViewEditMethod(this.treePopup.getPanel().getViewMenu().getPanelModeling(), ((ClassDiagram) this.getDiagram(node)), ((MethodUML) object)).setVisible(true);
+            new ViewEditMethodUML(this.treePopup.getPanel().getViewMenu().getPanelModeling(), ((ClassDiagram) this.getDiagram(node)), ((MethodUML) object)).setVisible(true);
         else if (object instanceof Element)
             new ViewEditElement(this.treePopup.getPanel().getViewMenu().getPanelModeling(), this.getDiagram(node), ((Element) object)).setVisible(true);
     }

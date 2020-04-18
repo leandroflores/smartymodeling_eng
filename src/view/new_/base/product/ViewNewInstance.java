@@ -16,7 +16,7 @@ import view.panel.base.product.instance.PanelBaseArtifacts;
 import view.panel.base.product.instance.PanelBaseNewInstance;
 import view.panel.base.product.instance.PanelBaseOptional;
 import view.panel.base.product.instance.PanelBaseVarPoints;
-import view.new_.base.ViewNew;
+import view.new_.ViewNew;
 import view.structural.ViewMenu;
 
 /**
@@ -26,7 +26,7 @@ import view.structural.ViewMenu;
  * @since  2019-10-07
  * @see    controller.view.new_.base.product.ControllerViewNewInstance
  * @see    model.structural.base.product.Instance
- * @see    view.new_.base.ViewNew
+ * @see    view.new_.ViewNew
  */
 public final class ViewNewInstance extends ViewNew {
     private final Instance instance;

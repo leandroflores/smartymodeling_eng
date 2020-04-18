@@ -3,7 +3,6 @@ package view.panel.edit.base.product;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import model.structural.base.Project;
 import model.structural.base.product.Artifact;
 import view.panel.base.product.PanelBaseArtifact;
 import view.panel.edit.PanelEdit;
@@ -11,17 +10,14 @@ import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditArtifact</b>.</p> 
- * <p>Class responsible for defining a Panel for Edit the <b>Artifact</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining a <b>Artifact Edit Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  25/10/2019
+ * @since  2019-10-25
  * @see    model.structural.base.product.Artifact
- * @see    view.panel.base.product.PanelBaseArtifact
  * @see    view.panel.edit.PanelEdit
  */
 public final class PanelEditArtifact extends PanelEdit {
-    private final Project  project;
     private final Artifact artifact;
-    private PanelBaseArtifact panelBaseArtifact;
     
     /**
      * Default constructor method of Class.
@@ -30,7 +26,6 @@ public final class PanelEditArtifact extends PanelEdit {
      */
     public PanelEditArtifact(ViewMenu viewMenu, Artifact artifact) {
         super(viewMenu);
-        this.project  = this.viewMenu.getProject();
         this.artifact = artifact;
         this.setPreferredSize(new Dimension(200, 100));
         this.addComponents();
@@ -40,9 +35,7 @@ public final class PanelEditArtifact extends PanelEdit {
     protected void addComponents() {
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.setPreferredSize(new Dimension(100, 100));
-        
-        this.addPanelBaseArtifact();
-        
+            this.addPanelBaseArtifact();
         this.add(this.tabbedPane);
     }
     
@@ -50,26 +43,18 @@ public final class PanelEditArtifact extends PanelEdit {
      * Method responsible for adding the Panel Base Artifact.
      */
     private void addPanelBaseArtifact() {
-        this.panelBaseArtifact = new PanelBaseArtifact(this.viewMenu, this.artifact);
-        this.createScrollPane("scrollPanelBaseArtifact",  this.panelBaseArtifact);
-        this.getScrollPanelBaseArtifact().setViewportView(this.panelBaseArtifact);
+        this.addPanel("panelBaseArtifact", new PanelBaseArtifact(this.viewMenu, this.artifact));
+        this.createScrollPane("scrollPanelBaseArtifact",  this.getPanelBaseArtifact());
+        this.getScrollPanelBaseArtifact().setViewportView(this.getPanelBaseArtifact());
         this.tabbedPane.add("Artifact", this.getScrollPanelBaseArtifact());
     }
     
     /**
-     * Method responsible for returning the Project.
-     * @return Project.
+     * Method responsible for returning the Panel Base Artifact.
+     * @return Panel Base Artifact.
      */
-    public Project getProject() {
-        return this.project;
-    }
-    
-    /**
-     * Method responsible for returning the Artifact.
-     * @return Artifact.
-     */
-    public Artifact getArtifact() {
-        return this.artifact;
+    public PanelBaseArtifact getPanelBaseArtifact() {
+        return (PanelBaseArtifact) this.getPanel("panelBaseArtifact");
     }
     
     /**
@@ -78,5 +63,13 @@ public final class PanelEditArtifact extends PanelEdit {
      */
     public JScrollPane getScrollPanelBaseArtifact() {
         return this.getScrollPane("scrollPanelBaseArtifact");
+    }
+    
+    /**
+     * Method responsible for returning the Artifact.
+     * @return Artifact.
+     */
+    public Artifact getArtifact() {
+        return this.artifact;
     }
 }

@@ -47,14 +47,6 @@ public final class PanelBaseDiagram extends PanelBase {
     }
     
     /**
-     * Method responsible for returning the Diagram.
-     * @return Diagram.
-     */
-    public Diagram getDiagram() {
-        return this.diagram;
-    }
-    
-    /**
      * Method responsible for returning Name Text Field.
      * @return Name Text Field.
      */
@@ -68,5 +60,13 @@ public final class PanelBaseDiagram extends PanelBase {
      */
     public JTextField getTypeTextField() {
         return this.getTextField("typeTextField");
+    }
+    
+    /**
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
+     */
+    public Diagram getDiagram() {
+        return this.diagram;
     }
 }

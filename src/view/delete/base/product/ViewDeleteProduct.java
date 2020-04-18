@@ -2,7 +2,7 @@ package view.delete.base.product;
 
 import controller.view.delete.base.product.ControllerViewDeleteProduct;
 import model.structural.base.product.Product;
-import view.delete.base.ViewDelete;
+import view.delete.ViewDelete;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -12,7 +12,7 @@ import view.panel.modeling.PanelModeling;
  * @since  2019-10-1
  * @see    controller.view.delete.base.product.ControllerViewDeleteProduct
  * @see    model.structural.base.product.Product
- * @see    view.delete.base.ViewDelete
+ * @see    view.delete.ViewDelete
  */
 public final class ViewDeleteProduct extends ViewDelete {
     private final Product product;

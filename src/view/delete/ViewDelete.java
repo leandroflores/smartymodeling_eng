@@ -1,4 +1,4 @@
-package view.delete.base;
+package view.delete;
 
 import funct.FunctView;
 import javax.swing.JButton;
@@ -15,7 +15,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Delete View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-05-27
- * @see    controller.view.delete.base.ControllerViewDelete
+ * @see    controller.view.delete.ControllerViewDelete
  * @see    view.ViewModal
  */
 public abstract class ViewDelete extends ViewModal {

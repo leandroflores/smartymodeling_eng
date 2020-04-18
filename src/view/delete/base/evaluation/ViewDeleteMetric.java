@@ -1,6 +1,6 @@
 package view.delete.base.evaluation;
 
-import view.delete.base.ViewDelete;
+import view.delete.ViewDelete;
 import model.structural.base.evaluation.Metric;
 import view.panel.modeling.PanelModeling;
 

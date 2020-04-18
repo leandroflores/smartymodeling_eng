@@ -1,17 +1,18 @@
 package controller.view.edit.base;
 
+import controller.view.edit.ControllerViewEdit;
 import view.edit.base.ViewEditProject;
 
 /**
  * <p>Class of Controller <b>ControllerViewEditProject</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewEditProject</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>ViewEditProject</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  29/05/2019
- * @see    controller.view.edit.base.ControllerViewEdit
+ * @since  2019-05-29
+ * @see    controller.view.edit.ControllerViewEdit
+ * @see    model.structural.base.Project
  * @see    view.edit.base.ViewEditProject
  */
 public class ControllerViewEditProject extends ControllerViewEdit {
-    private final ViewEditProject viewEditProject;
 
     /**
      * Default constructor method of Class.
@@ -19,25 +20,21 @@ public class ControllerViewEditProject extends ControllerViewEdit {
      */
     public ControllerViewEditProject(ViewEditProject viewEdit) {
         super(viewEdit);
-        this.viewEditProject = viewEdit;
-    }
-
-    /**
-     * Method responsible for checking the Project Name.
-     * @return Name checked.
-     */
-    private boolean checkName() {
-        return this.check(this.viewEditProject.getPanelBaseProject().getNameTextField(), "Name is a required field!");
     }
     
     @Override
     public boolean check() {
-        return this.checkName();
+        return this.check(this.getView().getPanelBaseProject().getNameTextField(), "Name is a required!");
     }
 
     @Override
-    public void save() {
-        this.viewEditProject.getProject().setName(this.viewEditProject.getPanelBaseProject().getNameTextField().getText());
+    public void update() {
+//        this.getView().getProject().setName(this.getString(this.getView().getPanelBaseProject().getNameTextField()));
         this.close();
+    }
+    
+    @Override
+    public ViewEditProject getView() {
+        return (ViewEditProject) this.viewModal;
     }
 }

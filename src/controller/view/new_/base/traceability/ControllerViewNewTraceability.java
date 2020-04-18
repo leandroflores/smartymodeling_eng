@@ -1,6 +1,6 @@
 package controller.view.new_.base.traceability;
 
-import controller.view.new_.base.ControllerViewNew;
+import controller.view.new_.ControllerViewNew;
 import view.message.ViewError;
 import view.new_.base.traceability.ViewNewTraceability;
 
@@ -9,7 +9,7 @@ import view.new_.base.traceability.ViewNewTraceability;
  * <p>Class responsible for controlling the <b>ViewNewTraceability</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-07-05
- * @see    controller.view.new_.base.ControllerViewNew
+ * @see    controller.view.new_.ControllerViewNew
  * @see    model.structural.base.traceability.Traceability
  * @see    view.new_.base.traceability.ViewNewTraceability
  */

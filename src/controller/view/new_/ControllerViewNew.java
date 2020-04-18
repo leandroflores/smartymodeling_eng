@@ -1,9 +1,9 @@
-package controller.view.new_.base;
+package controller.view.new_;
 
 import controller.view.ControllerViewModal;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import view.new_.base.ViewNew;
+import view.new_.ViewNew;
 
 /**
  * <p>Class of Controller <b>ControllerViewNew</b>.</p>
@@ -11,7 +11,7 @@ import view.new_.base.ViewNew;
  * @author Leandro
  * @since  2019-07-04
  * @see    controller.view.ControllerViewModal
- * @see    view.new_.base.ViewNew
+ * @see    view.new_.ViewNew
  */
 public abstract class ControllerViewNew extends ControllerViewModal {
     

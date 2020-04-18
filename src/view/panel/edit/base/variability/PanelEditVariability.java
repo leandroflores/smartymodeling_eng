@@ -23,20 +23,18 @@ import view.structural.ViewMenu;
 public final class PanelEditVariability extends PanelEdit {
     private final Diagram diagram;
     private final Variability variability;
-    private PanelBaseVariability panelBaseVariability;
-    private PanelBaseVariants    panelBaseVariants;
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param diagram Diagram.
      * @param variability Variability.
      */
-    public PanelEditVariability(ViewMenu viewMenu, Diagram diagram, Variability variability) {
-        super(viewMenu);
+    public PanelEditVariability(ViewMenu view, Diagram diagram, Variability variability) {
+        super(view);
         this.diagram     = diagram;
         this.variability = variability;
-        this.setPreferredSize(new Dimension(200, 100));
+//        this.setPreferredSize(new Dimension(200, 100));
         this.addComponents();
     }
     
@@ -45,10 +43,8 @@ public final class PanelEditVariability extends PanelEdit {
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.addChangeListener(new ControllerTabbedPane(this.tabbedPane));
         this.tabbedPane.setPreferredSize(new Dimension(100, 100));
-        
-        this.addPanelBaseVariability();
-        this.addPanelBaseVariants();
-        
+            this.addPanelBaseVariability();
+            this.addPanelBaseVariants();
         this.add(this.tabbedPane);
     }
     
@@ -56,9 +52,9 @@ public final class PanelEditVariability extends PanelEdit {
      * Method responsible for adding the Panel Base Variability.
      */
     private void addPanelBaseVariability() {
-        this.panelBaseVariability = new PanelBaseVariability(this.viewMenu, this.diagram, this.variability);
-        this.createScrollPane("scrollPanelBaseVariability",  this.panelBaseVariability);
-        this.getScrollPanelBaseVariability().setViewportView(this.panelBaseVariability);
+        this.addPanel("panelBaseVariability", new PanelBaseVariability(this.viewMenu, this.diagram, this.variability));
+        this.createScrollPane("scrollPanelBaseVariability",  this.getPanelBaseVariability());
+        this.getScrollPanelBaseVariability().setViewportView(this.getPanelBaseVariability());
         this.tabbedPane.add("Variability", this.getScrollPanelBaseVariability());
     }
     
@@ -66,26 +62,18 @@ public final class PanelEditVariability extends PanelEdit {
      * Method responsible for adding the Panel Base Variants.
      */
     private void addPanelBaseVariants() {
-        this.panelBaseVariants = new PanelBaseVariants(this.viewMenu, this.diagram, this.variability);
-        this.createScrollPane("scrollPanelBaseVariants",  this.panelBaseVariants);
-        this.getScrollPanelBaseVariants().setViewportView(this.panelBaseVariants);
+        this.addPanel("panelBaseVariants", new PanelBaseVariants(this.viewMenu, this.diagram, this.variability));
+        this.createScrollPane("scrollPanelBaseVariants",  this.getPanelBaseVariants());
+        this.getScrollPanelBaseVariants().setViewportView(this.getPanelBaseVariants());
         this.tabbedPane.add("Variants", this.getScrollPanelBaseVariants());
     }
     
     /**
-     * Method responsible for returning the Diagram.
-     * @return Diagram.
+     * Method responsible for returning the Panel Base Variability.
+     * @return Panel Base Variability.
      */
-    public Diagram getDiagram() {
-        return this.diagram;
-    }
-    
-    /**
-     * Method responsible for returning the Variability.
-     * @return Variability.
-     */
-    public Variability getVariability() {
-        return this.variability;
+    public PanelBaseVariability getPanelBaseVariability() {
+        return (PanelBaseVariability) this.getPanel("panelBaseVariability");
     }
     
     /**
@@ -97,10 +85,34 @@ public final class PanelEditVariability extends PanelEdit {
     }
     
     /**
+     * Method responsible for returning the Panel Base Variants.
+     * @return Panel Base Variants.
+     */
+    public PanelBaseVariants getPanelBaseVariants() {
+        return (PanelBaseVariants) this.getPanel("panelBaseVariants");
+    }
+    
+    /**
      * Method responsible for returning the Scroll Panel Base Variants.
      * @return Scroll Panel Base Variants.
      */
     public JScrollPane getScrollPanelBaseVariants() {
         return this.getScrollPane("scrollPanelBaseVariants");
+    }
+    
+    /**
+     * Method responsible for returning the Variability.
+     * @return Variability.
+     */
+    public Variability getVariability() {
+        return this.variability;
+    }
+    
+    /**
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
+     */
+    public Diagram getDiagram() {
+        return this.diagram;
     }
 }

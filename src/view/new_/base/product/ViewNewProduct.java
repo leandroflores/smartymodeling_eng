@@ -7,7 +7,7 @@ import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import model.structural.base.product.Product;
 import view.panel.base.product.PanelBaseProduct;
-import view.new_.base.ViewNew;
+import view.new_.ViewNew;
 import view.structural.ViewMenu;
 
 /**
@@ -17,7 +17,7 @@ import view.structural.ViewMenu;
  * @since  2019-08-09
  * @see    controller.view.new_.base.product.ControllerViewNewProduct
  * @see    model.structural.base.product.Product
- * @see    view.new_.base.ViewNew
+ * @see    view.new_.ViewNew
  */
 public final class ViewNewProduct extends ViewNew {
     private final Product product;

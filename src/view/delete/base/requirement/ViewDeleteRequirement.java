@@ -2,7 +2,7 @@ package view.delete.base.requirement;
 
 import controller.view.delete.base.requirement.ControllerViewDeleteRequirement;
 import model.structural.base.requirement.Requirement;
-import view.delete.base.ViewDelete;
+import view.delete.ViewDelete;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -12,7 +12,7 @@ import view.panel.modeling.PanelModeling;
  * @since  2020-04-17
  * @see    controller.view.delete.base.requirement.ControllerViewDeleteRequirement
  * @see    model.structural.base.requirement.Requirement
- * @see    view.delete.base.ViewDelete
+ * @see    view.delete.ViewDelete
  */
 public final class ViewDeleteRequirement extends ViewDelete {
     private final Requirement requirement;

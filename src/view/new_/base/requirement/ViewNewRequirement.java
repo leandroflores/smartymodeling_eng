@@ -6,7 +6,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.requirement.Requirement;
 import view.panel.base.requirement.PanelBaseRequirement;
-import view.new_.base.ViewNew;
+import view.new_.ViewNew;
 import view.structural.ViewMenu;
 
 /**
@@ -16,7 +16,7 @@ import view.structural.ViewMenu;
  * @since  2020-04-15
  * @see    controller.view.new_.base.requirement.ControllerViewNewRequirement
  * @see    model.structural.base.requirement.Requirement
- * @see    view.new_.base.ViewNew
+ * @see    view.new_.ViewNew
  */
 public final class ViewNewRequirement extends ViewNew {
     private final Requirement requirement;

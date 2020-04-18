@@ -1,6 +1,6 @@
 package controller.view.new_.base.variability;
 
-import controller.view.new_.base.ControllerViewNew;
+import controller.view.new_.ControllerViewNew;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -12,7 +12,7 @@ import view.new_.base.variability.ViewNewVariability;
  * <p>Class responsible for controlling the <b>ViewNewVariability</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-07-05
- * @see    controller.view.new_.base.ControllerViewNew
+ * @see    controller.view.new_.ControllerViewNew
  * @see    javax.swing.event.ChangeListener
  * @see    model.structural.base.variability.Variability
  * @see    view.new_.base.variability.ViewNewVariability

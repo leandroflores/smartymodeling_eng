@@ -31,11 +31,9 @@ public final class PanelEditAttributeUML extends PanelEditElement {
     @Override
     protected void addComponents() {
         this.tabbedPane = new JTabbedPane();
-        
-        this.addPanelBaseAttributeUML();
-        super.addPanelStereotype();
-        super.addPanelDependency();
-        
+            this.addPanelBaseAttributeUML();
+            super.addPanelStereotype();
+            super.addPanelDependency();
         this.add(this.tabbedPane);
     }
     
@@ -49,9 +47,12 @@ public final class PanelEditAttributeUML extends PanelEditElement {
         this.tabbedPane.add("Attribute", this.getScrollPanelBaseElement());
     }
     
-    @Override
-    public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+    /**
+     * Method responsible for returning the Panel Base Attribute UML.
+     * @return Panel Base Attribute UML.
+     */
+    public PanelBaseAttributeUML getPanelBaseAttributeUML() {
+        return (PanelBaseAttributeUML) this.getPanel("panelBaseAttributeUML");
     }
     
     @Override
@@ -59,11 +60,8 @@ public final class PanelEditAttributeUML extends PanelEditElement {
         return (AttributeUML) this.element;
     }
     
-    /**
-     * Method responsible for returning the Panel Base Attribute UML.
-     * @return Panel Base Attribute UML.
-     */
-    public PanelBaseAttributeUML getPanelBaseAttributeUML() {
-        return (PanelBaseAttributeUML) this.getPanel("panelBaseAttributeUML");
+    @Override
+    public ClassDiagram getDiagram() {
+        return (ClassDiagram) this.diagram;
     }
 }

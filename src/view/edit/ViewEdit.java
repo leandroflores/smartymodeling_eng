@@ -1,4 +1,4 @@
-package view.edit.base;
+package view.edit;
 
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
@@ -31,11 +31,6 @@ public abstract class ViewEdit extends ViewModal {
         this.project = this.view.getProject();
         this.panel   = panel;
     }
-    
-    /**
-     * Method responsible for setting Values.
-     */
-    public abstract void setValues();
     
     @Override
     public void addFooter() {

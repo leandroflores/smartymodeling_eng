@@ -5,7 +5,7 @@ import javax.swing.JButton;
 import model.controller.structural.base.ControllerProject;
 import model.controller.structural.base.evaluation.ControllerMetric;
 import model.structural.base.evaluation.Measure;
-import view.new_.base.ViewNew;
+import view.new_.ViewNew;
 import view.new_.base.evaluation.ViewNewMeasure;
 
 /**

@@ -1,6 +1,6 @@
 package controller.view.delete.base.evaluation;
 
-import controller.view.delete.base.ControllerViewDelete;
+import controller.view.delete.ControllerViewDelete;
 import model.structural.base.evaluation.Measure;
 import view.delete.base.evaluation.ViewDeleteMeasure;
 
@@ -9,7 +9,7 @@ import view.delete.base.evaluation.ViewDeleteMeasure;
  * <p>Class responsible for controlling the <b>ViewDeleteMeasure</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-18
- * @see    controller.view.delete.base.ControllerViewDelete
+ * @see    controller.view.delete.ControllerViewDelete
  * @see    model.structural.base.evaluation.Measure
  * @see    view.delete.base.evaluation.ViewDeleteMeasure
  */

@@ -2,7 +2,7 @@ package view.delete.base.traceability;
 
 import controller.view.delete.base.traceability.ControllerViewDeleteTraceability;
 import model.structural.base.traceability.Traceability;
-import view.delete.base.ViewDelete;
+import view.delete.ViewDelete;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -12,7 +12,7 @@ import view.panel.modeling.PanelModeling;
  * @since  23-07-2019
  * @see    controller.view.delete.base.traceability.ControllerViewDeleteTraceability
  * @see    model.structural.base.traceability.Traceability
- * @see    view.delete.base.ViewDelete
+ * @see    view.delete.ViewDelete
  */
 public final class ViewDeleteTraceability extends ViewDelete {
     private final Traceability traceability;

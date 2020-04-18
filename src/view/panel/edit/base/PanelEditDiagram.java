@@ -47,14 +47,6 @@ public final class PanelEditDiagram extends PanelEdit {
     }
     
     /**
-     * Method responsible for returning the Diagram.
-     * @return Diagram.
-     */
-    public Diagram getDiagram() {
-        return this.diagram;
-    }
-    
-    /**
      * Method responsible for returning the Panel Base Diagram.
      * @return Panel Base Diagram.
      */
@@ -68,5 +60,13 @@ public final class PanelEditDiagram extends PanelEdit {
      */
     public JScrollPane getScrollPanelBaseDiagram() {
         return this.getScrollPane("scrollPanelBaseDiagram");
+    }
+    
+    /**
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
+     */
+    public Diagram getDiagram() {
+        return this.diagram;
     }
 }

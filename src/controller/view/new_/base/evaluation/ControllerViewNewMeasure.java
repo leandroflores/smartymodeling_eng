@@ -1,6 +1,6 @@
 package controller.view.new_.base.evaluation;
 
-import controller.view.new_.base.ControllerViewNew;
+import controller.view.new_.ControllerViewNew;
 import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
 import view.new_.base.evaluation.ViewNewMeasure;
@@ -10,7 +10,7 @@ import view.new_.base.evaluation.ViewNewMeasure;
  * <p>Class responsible for controlling the <b>ViewNewMeasure</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-03-26
- * @see    controller.view.new_.base.ControllerViewNew
+ * @see    controller.view.new_.ControllerViewNew
  * @see    model.structural.base.evaluation.Measure
  * @see    view.new_.base.evaluation.ViewNewMeasure
  */

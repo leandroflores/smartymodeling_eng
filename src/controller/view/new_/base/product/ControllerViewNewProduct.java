@@ -1,6 +1,6 @@
 package controller.view.new_.base.product;
 
-import controller.view.new_.base.ControllerViewNew;
+import controller.view.new_.ControllerViewNew;
 import view.new_.base.product.ViewNewProduct;
 
 /**
@@ -8,7 +8,7 @@ import view.new_.base.product.ViewNewProduct;
  * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewNewProduct</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-10-09
- * @see    controller.view.new_.base.ControllerViewNew
+ * @see    controller.view.new_.ControllerViewNew
  * @see    model.structural.base.product.Product
  * @see    view.new_.base.product.ViewNewProduct
  */

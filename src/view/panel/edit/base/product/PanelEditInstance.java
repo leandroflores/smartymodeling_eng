@@ -3,7 +3,6 @@ package view.panel.edit.base.product;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import model.structural.base.Project;
 import model.structural.base.product.Instance;
 import view.panel.base.product.PanelBaseInstance;
 import view.panel.edit.PanelEdit;
@@ -11,17 +10,14 @@ import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditInstance</b>.</p> 
- * <p>Class responsible for defining a Panel for Edit the <b>Instance</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining a <b>Instance Edit Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  25/10/2019
+ * @since  2019-10-25
  * @see    model.structural.base.product.Instance
- * @see    view.panel.base.product.PanelBaseInstance
  * @see    view.panel.edit.PanelEdit
  */
 public final class PanelEditInstance extends PanelEdit {
-    private final Project  project;
     private final Instance instance;
-    private PanelBaseInstance panelBaseInstance;
     
     /**
      * Default constructor method of Class.
@@ -30,7 +26,6 @@ public final class PanelEditInstance extends PanelEdit {
      */
     public PanelEditInstance(ViewMenu viewMenu, Instance instance) {
         super(viewMenu);
-        this.project  = this.viewMenu.getProject();
         this.instance = instance;
         this.setPreferredSize(new Dimension(200, 100));
         this.addComponents();
@@ -40,9 +35,7 @@ public final class PanelEditInstance extends PanelEdit {
     protected void addComponents() {
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.setPreferredSize(new Dimension(100, 100));
-        
-        this.addPanelBaseInstance();
-        
+            this.addPanelBaseInstance();
         this.add(this.tabbedPane);
     }
     
@@ -50,26 +43,18 @@ public final class PanelEditInstance extends PanelEdit {
      * Method responsible for adding the Panel Base Instance.
      */
     private void addPanelBaseInstance() {
-        this.panelBaseInstance = new PanelBaseInstance(this.viewMenu, this.instance);
-        this.createScrollPane("scrollPanelBaseInstance", this.panelBaseInstance);
-        this.getScrollPanelBaseInstance().setViewportView(this.panelBaseInstance);
+        this.addPanel("panelBaseInstance", new PanelBaseInstance(this.viewMenu, this.instance));
+        this.createScrollPane("scrollPanelBaseInstance",  this.getPanelBaseInstance());
+        this.getScrollPanelBaseInstance().setViewportView(this.getPanelBaseInstance());
         this.tabbedPane.add("Instance", this.getScrollPanelBaseInstance());
     }
     
     /**
-     * Method responsible for returning the Project.
-     * @return Project.
+     * Method responsible for returning the Panel Base Instance.
+     * @return Panel Base Instance.
      */
-    public Project getProject() {
-        return this.project;
-    }
-    
-    /**
-     * Method responsible for returning the Instance.
-     * @return Instance.
-     */
-    public Instance getInstance() {
-        return this.instance;
+    public PanelBaseInstance getPanelBaseInstance() {
+        return (PanelBaseInstance) this.getPanel("panelBaseInstance");
     }
     
     /**
@@ -78,5 +63,13 @@ public final class PanelEditInstance extends PanelEdit {
      */
     public JScrollPane getScrollPanelBaseInstance() {
         return this.getScrollPane("scrollPanelBaseInstance");
+    }
+    
+    /**
+     * Method responsible for returning the Instance.
+     * @return Instance.
+     */
+    public Instance getInstance() {
+        return this.instance;
     }
 }

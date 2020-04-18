@@ -10,7 +10,7 @@ import model.structural.base.Element;
 import model.structural.base.variability.Variability;
 import view.panel.base.variability.PanelBaseVariability;
 import view.panel.base.variability.PanelBaseVariants;
-import view.new_.base.ViewNew;
+import view.new_.ViewNew;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -20,7 +20,7 @@ import view.panel.modeling.PanelModeling;
  * @since  2019-07-04
  * @see    controller.view.new_.base.variability.ControllerViewNewVariability
  * @see    model.structural.base.variability.Variability
- * @see    view.new_.base.ViewNew
+ * @see    view.new_.ViewNew
  */
 public final class ViewNewVariability extends ViewNew { 
     private final Diagram diagram;

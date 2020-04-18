@@ -1,6 +1,6 @@
 package controller.view.delete.base.product;
 
-import controller.view.delete.base.ControllerViewDelete;
+import controller.view.delete.ControllerViewDelete;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import view.delete.base.product.ViewDeleteProduct;
@@ -10,7 +10,7 @@ import view.delete.base.product.ViewDeleteProduct;
  * <p>Class responsible for controlling the <b>ViewDeleteProduct</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-10-10
- * @see    controller.view.delete.base.ControllerViewDelete
+ * @see    controller.view.delete.ControllerViewDelete
  * @see    model.structural.base.product.Product
  * @see    view.delete.base.product.ViewDeleteProduct
  */

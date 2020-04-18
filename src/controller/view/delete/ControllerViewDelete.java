@@ -1,9 +1,9 @@
-package controller.view.delete.base;
+package controller.view.delete;
 
 import controller.view.ControllerViewModal;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import view.delete.base.ViewDelete;
+import view.delete.ViewDelete;
 
 /**
  * <p>Class of Controller <b>ControllerViewDelete</b>.</p>
@@ -11,7 +11,7 @@ import view.delete.base.ViewDelete;
  * @author Leandro
  * @since  2019-05-27
  * @see    controller.view.ControllerViewModal
- * @see    view.delete.base.ViewDelete
+ * @see    view.delete.ViewDelete
  */
 public abstract class ControllerViewDelete extends ControllerViewModal {
     

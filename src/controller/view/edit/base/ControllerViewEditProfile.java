@@ -1,17 +1,18 @@
 package controller.view.edit.base;
 
+import controller.view.edit.ControllerViewEdit;
 import view.edit.base.ViewEditProfile;
 
 /**
  * <p>Class of Controller <b>ControllerViewEditProfile</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewEditProfile</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>ViewEditProfile</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  21/07/2019
- * @see    controller.view.edit.base.ControllerViewEdit
+ * @since  2019-07-21
+ * @see    controller.view.edit.ControllerViewEdit
+ * @see    model.structural.base.Profile
  * @see    view.edit.base.ViewEditProfile
  */
 public class ControllerViewEditProfile extends ControllerViewEdit {
-    private final ViewEditProfile viewEditProfile;
 
     /**
      * Default constructor method of Class.
@@ -19,7 +20,6 @@ public class ControllerViewEditProfile extends ControllerViewEdit {
      */
     public ControllerViewEditProfile(ViewEditProfile viewEdit) {
         super(viewEdit);
-        this.viewEditProfile = viewEdit;
     }
     
     @Override
@@ -28,8 +28,13 @@ public class ControllerViewEditProfile extends ControllerViewEdit {
     }
 
     @Override
-    public void save() {
-        this.viewEditProfile.getViewMenu().getPanelModeling().updateModelingPanels();
+    public void update() {
+        this.getViewMenu().getPanelModeling().updateModelingPanels();
         this.close();
+    }
+    
+    @Override
+    public ViewEditProfile getView() {
+        return (ViewEditProfile) this.viewModal;
     }
 }

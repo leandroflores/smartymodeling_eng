@@ -1,6 +1,6 @@
 package controller.view.new_.base.product;
 
-import controller.view.new_.base.ControllerViewNew;
+import controller.view.new_.ControllerViewNew;
 import java.awt.event.ActionEvent;
 import java.util.Map;
 import model.structural.base.product.Artifact;
@@ -13,7 +13,7 @@ import view.new_.base.product.ViewNewInstance;
  * <p>Class responsible for controlling the <b>ViewNewInstance</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-10-11
- * @see    controller.view.new_.base.ControllerViewNew
+ * @see    controller.view.new_.ControllerViewNew
  * @see    model.structural.base.product.Instance
  * @see    view.new_.base.product.ViewNewInstance
  */

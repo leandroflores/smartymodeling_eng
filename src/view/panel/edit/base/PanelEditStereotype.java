@@ -47,14 +47,6 @@ public final class PanelEditStereotype extends PanelEdit {
     }
     
     /**
-     * Method responsible for returning the Stereotype.
-     * @return Stereotype.
-     */
-    public Stereotype getStereotype() {
-        return this.stereotype;
-    }
-    
-    /**
      * Method responsible for returning the Panel Base Stereotype.
      * @return Panel Base Stereotype.
      */
@@ -68,5 +60,13 @@ public final class PanelEditStereotype extends PanelEdit {
      */
     public JScrollPane getScrollPanelBaseStereotype() {
         return this.getScrollPane("scrollPanelBaseStereotype");
+    }
+    
+    /**
+     * Method responsible for returning the Stereotype.
+     * @return Stereotype.
+     */
+    public Stereotype getStereotype() {
+        return this.stereotype;
     }
 }

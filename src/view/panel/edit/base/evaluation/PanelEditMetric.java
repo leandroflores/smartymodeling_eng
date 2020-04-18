@@ -59,14 +59,6 @@ public final class PanelEditMetric extends PanelEdit {
     }
     
     /**
-     * Method responsible for returning the Metric.
-     * @return Metric.
-     */
-    public Metric getMetric() {
-        return this.metric;
-    }
-    
-    /**
      * Method responsible for returning the Panel Base Metric.
      * @return Panel Base Metric.
      */
@@ -96,5 +88,13 @@ public final class PanelEditMetric extends PanelEdit {
      */
     public JScrollPane getScrollPanelBaseOperation() {
         return this.getScrollPane("scrollPanelBaseOperation");
+    }
+    
+    /**
+     * Method responsible for returning the Metric.
+     * @return Metric.
+     */
+    public Metric getMetric() {
+        return this.metric;
     }
 }

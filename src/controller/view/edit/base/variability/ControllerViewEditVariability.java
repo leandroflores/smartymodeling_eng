@@ -1,19 +1,18 @@
 package controller.view.edit.base.variability;
 
-import controller.view.edit.base.ControllerViewEdit;
+import controller.view.edit.ControllerViewEdit;
 import view.edit.base.variability.ViewEditVariability;
 
 /**
  * <p>Class of Controller <b>ControllerViewEditVariability</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewEditVariability</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>ViewEditVariability</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  29/01/2020
- * @see    controller.view.edit.base.ControllerViewEdit
+ * @since  2020-01-29
+ * @see    controller.view.edit.ControllerViewEdit
  * @see    model.structural.base.variability.Variability
  * @see    view.edit.base.variability.ViewEditVariability
  */
 public class ControllerViewEditVariability extends ControllerViewEdit  {
-    private final ViewEditVariability viewEditVariability;
 
     /**
      * Default constructor method of Class.
@@ -21,7 +20,6 @@ public class ControllerViewEditVariability extends ControllerViewEdit  {
      */
     public ControllerViewEditVariability(ViewEditVariability viewEdit) {
         super(viewEdit);
-        this.viewEditVariability = viewEdit;
     }
     
     @Override
@@ -30,7 +28,7 @@ public class ControllerViewEditVariability extends ControllerViewEdit  {
     }
 
     @Override
-    public void save() {
+    public void update() {
         this.close();
     }
 }

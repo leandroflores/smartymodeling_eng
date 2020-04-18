@@ -3,7 +3,6 @@ package view.panel.edit.base.traceability;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import model.structural.base.Project;
 import model.structural.base.traceability.Traceability;
 import view.panel.base.traceability.PanelBaseElements;
 import view.panel.base.traceability.PanelBaseTraceability;
@@ -12,26 +11,22 @@ import view.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditTraceability</b>.</p> 
- * <p>Class responsible for defining a Panel for Edit the <b>Traceability</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Edit Traceability Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  23/07/2019
+ * @since  2019-07-23
  * @see    model.structural.base.traceability.Traceability
  * @see    view.panel.edit.PanelEdit
  */
 public final class PanelEditTraceability extends PanelEdit {
-    private final Project project;
     private final Traceability traceability;
-    private PanelBaseTraceability panelBaseTraceability;
-    private PanelBaseElements panelBaseElements;
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param traceability Traceability.
      */
-    public PanelEditTraceability(ViewMenu viewMenu, Traceability traceability) {
-        super(viewMenu);
-        this.project      = this.viewMenu.getProject();
+    public PanelEditTraceability(ViewMenu view, Traceability traceability) {
+        super(view);
         this.traceability = traceability;
         this.setPreferredSize(new Dimension(200, 100));
         this.addComponents();
@@ -41,10 +36,8 @@ public final class PanelEditTraceability extends PanelEdit {
     protected void addComponents() {
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.setPreferredSize(new Dimension(100, 100));
-        
-        this.addPanelBaseTraceability();
-        this.addPanelBaseElements();
-        
+            this.addPanelBaseTraceability();
+            this.addPanelBaseElements();
         this.add(this.tabbedPane);
     }
     
@@ -52,9 +45,9 @@ public final class PanelEditTraceability extends PanelEdit {
      * Method responsible for adding the Panel Base Traceability.
      */
     private void addPanelBaseTraceability() {
-        this.panelBaseTraceability = new PanelBaseTraceability(this.viewMenu, this.traceability);
-        this.createScrollPane("scrollPanelBaseTraceability",  this.panelBaseTraceability);
-        this.getScrollPanelBaseTraceability().setViewportView(this.panelBaseTraceability);
+        this.addPanel("panelBaseTraceability", new PanelBaseTraceability(this.getViewMenu(), this.traceability));
+        this.createScrollPane("scrollPanelBaseTraceability",  this.getPanelBaseTraceability());
+        this.getScrollPanelBaseTraceability().setViewportView(this.getPanelBaseTraceability());
         this.tabbedPane.add("Traceability", this.getScrollPanelBaseTraceability());
     }
     
@@ -62,26 +55,18 @@ public final class PanelEditTraceability extends PanelEdit {
      * Method responsible for adding the Panel Base Elements.
      */
     private void addPanelBaseElements() {
-        this.panelBaseElements = new PanelBaseElements(this.viewMenu, this.traceability);
-        this.createScrollPane("scrollPanelBaseElements",  this.panelBaseElements);
-        this.getScrollPanelBaseElements().setViewportView(this.panelBaseElements);
+        this.addPanel("panelBaseElements", new PanelBaseElements(this.getViewMenu(), this.traceability));
+        this.createScrollPane("scrollPanelBaseElements",  this.getPanelBaseElements());
+        this.getScrollPanelBaseElements().setViewportView(this.getPanelBaseElements());
         this.tabbedPane.add("Elements", this.getScrollPanelBaseElements());
     }
     
     /**
-     * Method responsible for returning the Project.
-     * @return Project.
+     * Method responsible for returning the Panel Base Traceability.
+     * @return Panel Base Traceability.
      */
-    public Project getProject() {
-        return this.project;
-    }
-    
-    /**
-     * Method responsible for returning the Traceability.
-     * @return Traceability.
-     */
-    public Traceability getTraceability() {
-        return this.traceability;
+    public PanelBaseTraceability getPanelBaseTraceability() {
+        return (PanelBaseTraceability) this.getPanel("panelBaseTraceability");
     }
     
     /**
@@ -93,10 +78,26 @@ public final class PanelEditTraceability extends PanelEdit {
     }
     
     /**
+     * Method responsible for returning the Panel Base Elements.
+     * @return Panel Base Elements.
+     */
+    public PanelBaseElements getPanelBaseElements() {
+        return (PanelBaseElements) this.getPanel("panelBaseElements");
+    }
+    
+    /**
      * Method responsible for returning the Scroll Panel Base Elements.
      * @return Scroll Panel Base Elements.
      */
     public JScrollPane getScrollPanelBaseElements() {
         return this.getScrollPane("scrollPanelBaseElements");
+    }
+    
+    /**
+     * Method responsible for returning the Traceability.
+     * @return Traceability.
+     */
+    public Traceability getTraceability() {
+        return this.traceability;
     }
 }

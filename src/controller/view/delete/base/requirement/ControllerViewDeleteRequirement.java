@@ -1,6 +1,6 @@
 package controller.view.delete.base.requirement;
 
-import controller.view.delete.base.ControllerViewDelete;
+import controller.view.delete.ControllerViewDelete;
 import model.structural.base.requirement.Requirement;
 import view.delete.base.requirement.ViewDeleteRequirement;
 
@@ -9,7 +9,7 @@ import view.delete.base.requirement.ViewDeleteRequirement;
  * <p>Class responsible for controlling the <b>ViewDeleteRequirement</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-17
- * @see    controller.view.delete.base.ControllerViewDelete
+ * @see    controller.view.delete.ControllerViewDelete
  * @see    model.structural.base.requirement.Requirement
  * @see    view.delete.base.requirement.ViewDeleteRequirement
  */

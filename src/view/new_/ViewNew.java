@@ -1,4 +1,4 @@
-package view.new_.base;
+package view.new_;
 
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;

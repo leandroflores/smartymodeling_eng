@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
+import view.edit.ViewEdit;
 import view.panel.base.PanelBaseDiagram;
 import view.panel.modeling.PanelModeling;
 
@@ -12,13 +13,13 @@ import view.panel.modeling.PanelModeling;
  * <p>Class of View <b>ViewEditDiagram</b>.</p>
  * <p>Class responsible for defining the <b>Diagram Edit View</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  29/05/2019
+ * @since  2019-05-29
  * @see    controller.view.edit.base.ControllerViewEditDiagram
- * @see    view.edit.base.ViewEdit
+ * @see    model.structural.base.Diagram
+ * @see    view.edit.ViewEdit
  */
 public final class ViewEditDiagram extends ViewEdit {
     private final Diagram diagram;
-    private PanelBaseDiagram panelBaseDiagram;
     
     /**
      * Default constructor method of Class.
@@ -39,7 +40,6 @@ public final class ViewEditDiagram extends ViewEdit {
         this.addHeader();
         this.addComponents();
         this.addFooter();
-        this.setValues();
     }
     
     @Override
@@ -58,18 +58,26 @@ public final class ViewEditDiagram extends ViewEdit {
      * Method responsible for adding the Panel Base Diagram.
      */
     private void addPanelBaseDiagram() {
-        this.panelBaseDiagram = new PanelBaseDiagram(this.getViewMenu(), this.diagram);
-        this.createScrollPane("scrollPanelBaseDiagram",  this.panelBaseDiagram);
-        this.getScrollPanelBaseDiagram().setViewportView(this.panelBaseDiagram);
+        this.addPanel("panelBaseDiagram", new PanelBaseDiagram(this.getViewMenu(), this.diagram));
+        this.createScrollPane("scrollPanelBaseDiagram",  this.getPanelBaseDiagram());
+        this.getScrollPanelBaseDiagram().setViewportView(this.getPanelBaseDiagram());
         this.tabbedPane.add("Diagram", this.getScrollPanelBaseDiagram());
     }
     
-    @Override
-    public void setValues() {
-        this.panelBaseDiagram.getNameTextField().setText(this.diagram.getName());
-        this.panelBaseDiagram.getTypeTextField().setText(this.diagram.getType());
-        
-        this.panelBaseDiagram.getNameTextField().requestFocus();
+    /**
+     * Method responsible for returning the Panel Base Diagram.
+     * @return Panel Base Diagram.
+     */
+    public PanelBaseDiagram getPanelBaseDiagram() {
+        return (PanelBaseDiagram) this.getPanel("panelBaseDiagram");
+    }
+    
+    /**
+     * Method responsible for returning the Scroll Panel Base Diagram.
+     * @return Scroll Panel Base Diagram.
+     */
+    public JScrollPane getScrollPanelBaseDiagram() {
+        return this.getScrollPane("scrollPanelBaseDiagram");
     }
     
     /**
@@ -78,21 +86,5 @@ public final class ViewEditDiagram extends ViewEdit {
      */
     public Diagram getDiagram() {
         return this.diagram;
-    }
-    
-    /**
-     * Method responsible for returning Panel Base Diagram.
-     * @return Panel Base Diagram.
-     */
-    public JScrollPane getScrollPanelBaseDiagram() {
-        return this.getScrollPane("scrollPanelBaseDiagram");
-    }
-    
-    /**
-     * Method responsible for returning Panel Data Diagram.
-     * @return Panel Data Diagram.
-     */
-    public PanelBaseDiagram getPanelBaseDiagram() {
-        return this.panelBaseDiagram;
     }
 }

@@ -14,8 +14,8 @@ import view.edit.base.ViewEditDiagram;
 import view.edit.base.ViewEditElement;
 import view.edit.base.ViewEditProject;
 import view.edit.base.variability.ViewEditVariability;
-import view.edit.base.diagram.classes.ViewEditAttribute;
-import view.edit.base.diagram.classes.ViewEditMethod;
+import view.edit.diagram.classes.ViewEditAttributeUML;
+import view.edit.diagram.classes.ViewEditMethodUML;
 import view.panel.tree.popup.TreePopup;
 
 /**
@@ -57,9 +57,9 @@ public class ControllerMenuItemEdit implements ActionListener {
         else if (object instanceof Diagram)
             new ViewEditDiagram(this.popup.getPanel().getViewMenu().getPanelModeling(), (Diagram) object).setVisible(true);
         else if (object instanceof AttributeUML)
-            new ViewEditAttribute(this.popup.getPanel().getViewMenu().getPanelModeling(), this.getClassDiagram(node), (AttributeUML) object).setVisible(true);
+            new ViewEditAttributeUML(this.popup.getPanel().getViewMenu().getPanelModeling(), this.getClassDiagram(node), (AttributeUML) object).setVisible(true);
         else if (object instanceof MethodUML)
-            new ViewEditMethod(this.popup.getPanel().getViewMenu().getPanelModeling(),    this.getClassDiagram(node), (MethodUML) object).setVisible(true);
+            new ViewEditMethodUML(this.popup.getPanel().getViewMenu().getPanelModeling(),    this.getClassDiagram(node), (MethodUML) object).setVisible(true);
         else if (object instanceof Element)
             new ViewEditElement(this.popup.getPanel().getViewMenu().getPanelModeling(),   this.getParentDiagram(node), (Element) object).setVisible(true);
         else if (object instanceof Variability)
