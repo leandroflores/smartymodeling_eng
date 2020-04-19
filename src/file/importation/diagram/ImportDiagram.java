@@ -2,6 +2,7 @@ package file.importation.diagram;
 
 import com.mxgraph.util.mxPoint;
 import model.structural.base.Diagram;
+import model.structural.base.Project;
 import model.structural.base.association.Association;
 import model.structural.base.association.Dependency;
 import model.structural.base.association.Generalization;
@@ -15,7 +16,7 @@ import org.w3c.dom.NodeList;
  * <p>Class of Import <b>ImportDiagram</b>.</p>
  * <p>Class responsible for <b>Importing Diagram</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  23/05/2019
+ * @since  2019-05-23
  * @see    model.structural.base.Diagram
  * @see    org.w3c.dom.Element
  */
@@ -24,10 +25,10 @@ public abstract class ImportDiagram {
     protected Element element;
     
     /**
-     * Method responsible for returning the Imported Diagram.
-     * @return Imported Diagram.
+     * Method responsible for importing the Diagram.
+     * @return Diagram.
      */
-    public Diagram getDiagram() {
+    public Diagram importDiagram() {
                this.importElements();
                this.importAssociations();
                this.importRelationships();
@@ -71,11 +72,20 @@ public abstract class ImportDiagram {
             Element     current     = (Element) variabilities.item(i);
             Variability variability = new Variability(current);
                         variability.setVariationPoint(this.diagram.getElement(current.getAttribute("variationPoint")));
-            NodeList    variants    = current.getElementsByTagName("variant");
-            for (int x = 0; x < variants.getLength(); x++)
-                variability.addVariant(this.diagram.getElement(((Element) variants.item(x)).getAttribute("id")));
+                        this.addVariants(variability, current);
             this.diagram.addVariability(variability);
         }
+    }
+    
+    /**
+     * Method responsible for adding the Variability Variants.
+     * @param variability Variability.
+     * @param node W3C Element.
+     */
+    protected void addVariants(Variability variability, Element node) {
+        NodeList variants = node.getElementsByTagName("variant");
+        for (int i = 0; i < variants.getLength(); i++)
+            variability.addVariant(this.diagram.getElement(((Element) variants.item(i)).getAttribute("id")));
     }
     
     /**
@@ -106,7 +116,8 @@ public abstract class ImportDiagram {
         NodeList list = this.element.getElementsByTagName("mutex");
         for (int i = 0; i < list.getLength(); i++) {
             Element current = (Element) list.item(i);
-            Mutex   mutex   = new Mutex(this.diagram.getElement(current.getAttribute("source")), this.diagram.getElement(current.getAttribute("target")));
+            Mutex   mutex   = new Mutex(this.diagram.getElement(current.getAttribute("source")),
+                                        this.diagram.getElement(current.getAttribute("target")));
                     mutex.setId(current.getAttribute("id"));
                     this.addPoints(current, mutex);
             this.diagram.addAssociation(mutex);
@@ -148,10 +159,36 @@ public abstract class ImportDiagram {
         NodeList list = this.element.getElementsByTagName("dependency");
         for (int i = 0; i < list.getLength(); i++) {
             Element    current    = (Element) list.item(i);
-            Dependency dependency = new Dependency(this.diagram.getElement(current.getAttribute("source")), this.diagram.getElement(current.getAttribute("target")));
+            Dependency dependency = new Dependency(this.diagram.getElement(current.getAttribute("source")), 
+                                                   this.diagram.getElement(current.getAttribute("target")));
                        dependency.setId(current.getAttribute("id"));
                        this.addPoints(current, dependency);
             this.diagram.addAssociation(dependency);
         }
+    }
+    
+    /**
+     * Method responsible for returning the Element by Id.
+     * @param  id Element Id.
+     * @return Element by Id.
+     */
+    protected model.structural.base.Element getElement(String id) {
+        return this.diagram.getElement(id);
+    }
+    
+    /**
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
+     */
+    protected Diagram getDiagram() {
+        return this.diagram;
+    }
+    
+    /**
+     * Method responsible for returning the Project.
+     * @return Project.
+     */
+    protected Project getProject() {
+        return this.diagram.getProject();
     }
 }

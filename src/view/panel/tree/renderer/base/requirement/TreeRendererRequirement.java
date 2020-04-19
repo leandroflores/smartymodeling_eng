@@ -49,9 +49,7 @@ public class TreeRendererRequirement extends TreeRenderer {
     @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
         super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
-        DefaultMutableTreeNode node   = (DefaultMutableTreeNode) value;
-        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
-        Object object = node.getUserObject();
+        Object object = ((DefaultMutableTreeNode) value).getUserObject();
         if (object instanceof Project)
             this.setProjectIcon((Project) object);
         else if (object instanceof Requirement)

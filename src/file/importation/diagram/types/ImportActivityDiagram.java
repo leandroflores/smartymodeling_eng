@@ -1,7 +1,6 @@
 package file.importation.diagram.types;
 
 import file.importation.diagram.ImportDiagram;
-import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.activity.base.ActivityUML;
@@ -17,12 +16,11 @@ import org.w3c.dom.NodeList;
  * <p>Class of Import <b>ImportActivityDiagram</b>.</p>
  * <p>Class responsible for <b>Importing Activity Diagram</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  18/07/2019
+ * @since  2019-07-18
  * @see    file.importation.diagram.ImportDiagram
  * @see    model.structural.diagram.ActivityDiagram
  */
 public class ImportActivityDiagram extends ImportDiagram {
-    private final ActivityDiagram activityDiagram;
     
     /**
      * Default constructor method of Class.
@@ -30,9 +28,8 @@ public class ImportActivityDiagram extends ImportDiagram {
      * @param element W3C Element.
      */
     public ImportActivityDiagram(Project project, Element element) {
-        this.activityDiagram = new ActivityDiagram(project, element);
-        this.diagram         = this.activityDiagram;
-        this.element         = element;
+        this.diagram = new ActivityDiagram(project, element);
+        this.element = element;
     }
     
     @Override
@@ -45,48 +42,48 @@ public class ImportActivityDiagram extends ImportDiagram {
     }
     
     /**
-     * Method responsible for importing the Activities.
+     * Method responsible for importing the UML Activities.
      */
     private void importActivities() {
-        NodeList activities = this.element.getElementsByTagName("activity");
-        for (int i = 0; i < activities.getLength(); i++)
-            this.activityDiagram.addActivity(new ActivityUML((Element) activities.item(i)));
+        NodeList list = this.element.getElementsByTagName("activity");
+        for (int i = 0; i < list.getLength(); i++)
+            this.getDiagram().addActivity(new ActivityUML((Element) list.item(i)));
     }
     
     /**
-     * Method responsible for importing the Decisions.
+     * Method responsible for importing the UML Decisions.
      */
     private void importDecisions() {
-        NodeList decisions = this.element.getElementsByTagName("decision");
-        for (int i = 0; i < decisions.getLength(); i++)
-            this.activityDiagram.addDecision(new DecisionUML((Element) decisions.item(i)));
+        NodeList list = this.element.getElementsByTagName("decision");
+        for (int i = 0; i < list.getLength(); i++)
+            this.getDiagram().addDecision(new DecisionUML((Element) list.item(i)));
     }
     
     /**
-     * Method responsible for importing the Initials.
+     * Method responsible for importing the Initial Nodes.
      */
     private void importInitials() {
-        NodeList initials  = this.element.getElementsByTagName("initial");
-        for (int i = 0; i < initials.getLength(); i++)
-            this.activityDiagram.addInitial(new InitialUML((Element) initials.item(i)));
+        NodeList list = this.element.getElementsByTagName("initial");
+        for (int i = 0; i < list.getLength(); i++)
+            this.getDiagram().addInitial(new InitialUML((Element) list.item(i)));
     }
     
     /**
-     * Method responsible for importing the Finals.
+     * Method responsible for importing the Final Nodes.
      */
     private void importFinals() {
-        NodeList finals  = this.element.getElementsByTagName("final");
-        for (int i = 0; i < finals.getLength(); i++)
-            this.activityDiagram.addFinal(new FinalUML((Element) finals.item(i)));
+        NodeList list = this.element.getElementsByTagName("final");
+        for (int i = 0; i < list.getLength(); i++)
+            this.getDiagram().addFinal(new FinalUML((Element) list.item(i)));
     }
     
     /**
      * Method responsible for importing the Joins.
      */
     private void importJoins() {
-        NodeList joins  = this.element.getElementsByTagName("join");
-        for (int i = 0; i < joins.getLength(); i++)
-            this.activityDiagram.addJoin(new JoinUML((Element) joins.item(i)));
+        NodeList list = this.element.getElementsByTagName("join");
+        for (int i = 0; i < list.getLength(); i++)
+            this.getDiagram().addJoin(new JoinUML((Element) list.item(i)));
     }
     
     @Override
@@ -95,20 +92,22 @@ public class ImportActivityDiagram extends ImportDiagram {
     }
     
     /**
-     * Method responsible for importing the Flows.
+     * Method responsible for importing the UML Flows.
      */
     private void importFlows() {
-        NodeList flows = this.element.getElementsByTagName("flow");
-        for (int i = 0; i < flows.getLength(); i++) {
-            Element current = (Element) flows.item(i);
-            FlowUML flow    = new FlowUML(this.diagram.getElement(current.getAttribute("source")), 
-                                          this.diagram.getElement(current.getAttribute("target")));
-                    flow.setId(current.getAttribute("id"));
-                    flow.setGuard(current.getAttribute("guard"));
-                    flow.setAction(current.getAttribute("action"));
-                    flow.setWeight(current.getAttribute("weight"));
-                    super.addPoints(current, flow);
-            this.activityDiagram.addFlow(flow);
+        NodeList list = this.element.getElementsByTagName("flow");
+        for (int i = 0; i < list.getLength(); i++) {
+            Element node = (Element) list.item(i);
+            FlowUML flow = new FlowUML(node);
+                    flow.setSource(this.getElement(node.getAttribute("source")));
+                    flow.setTarget(this.getElement(node.getAttribute("target")));
+                super.addPoints(node, flow);
+            this.getDiagram().addFlow(flow);
         }
+    }
+    
+    @Override
+    protected ActivityDiagram getDiagram() {
+        return (ActivityDiagram) this.diagram;
     }
 }

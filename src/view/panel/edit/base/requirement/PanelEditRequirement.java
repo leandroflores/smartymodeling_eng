@@ -5,7 +5,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.requirement.Requirement;
 import view.panel.base.requirement.PanelBaseRequirement;
-import view.panel.base.requirement.traceability.PanelBaseRequirementTraceability;
+import view.panel.base.requirement.traceability.PanelBaseRequirementDiagram;
 import view.panel.edit.PanelEdit;
 import view.structural.ViewMenu;
 
@@ -60,7 +60,7 @@ public final class PanelEditRequirement extends PanelEdit {
             String type      = types[i];
             String panel_id  = "panelBaseRequirement" + type;
             String scroll_id = "scrollPanelBaseRequirement" + type;
-            this.addPanel(panel_id, new PanelBaseRequirementTraceability(this.getViewMenu(), this.requirement, type));
+            this.addPanel(panel_id, new PanelBaseRequirementDiagram(this.getViewMenu(), this.requirement, type));
             this.createScrollPane(scroll_id, this.getPanel(panel_id));
             this.getScrollPane(scroll_id).setViewportView(this.getPanel(panel_id));
             this.tabbedPane.add(type, this.getScrollPane(scroll_id));
@@ -89,8 +89,8 @@ public final class PanelEditRequirement extends PanelEdit {
      * @param  id Panel Id.
      * @return Panel Base Requirement Traceability.
      */
-    public PanelBaseRequirementTraceability getPanelBaseRequirement(String id) {
-        return (PanelBaseRequirementTraceability) this.getPanel(id);
+    public PanelBaseRequirementDiagram getPanelBaseRequirement(String id) {
+        return (PanelBaseRequirementDiagram) this.getPanel(id);
     }
     
     /**

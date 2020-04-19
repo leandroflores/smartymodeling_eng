@@ -12,12 +12,11 @@ import org.w3c.dom.NodeList;
  * <p>Class of Import <b>ImportFeatureDiagram</b>.</p>
  * <p>Class responsible for <b>Importing Feature Diagram</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  23/05/2019
+ * @since  2019-05-23
  * @see    file.importation.diagram.ImportDiagram
  * @see    model.structural.diagram.FeatureDiagram
  */
 public class ImportFeatureDiagram extends ImportDiagram {
-    private final FeatureDiagram featureDiagram;
 
     /**
      * Default constructor method of Class.
@@ -25,9 +24,8 @@ public class ImportFeatureDiagram extends ImportDiagram {
      * @param element W3C Element.
      */
     public ImportFeatureDiagram(Project project, Element element) {
-        this.featureDiagram = new FeatureDiagram(project, element);
-        this.diagram        = this.featureDiagram;
-        this.element        = element;
+        this.diagram = new FeatureDiagram(project, element);
+        this.element = element;
     }
     
     @Override
@@ -39,9 +37,9 @@ public class ImportFeatureDiagram extends ImportDiagram {
      * Method responsible for importing the Features.
      */
     private void importFeatures() {
-        NodeList features = this.element.getElementsByTagName("feature");
-        for (int i = 0; i < features.getLength(); i++)
-            this.featureDiagram.addFeature(new Feature((Element) features.item(i)));
+        NodeList list = this.element.getElementsByTagName("feature");
+        for (int i = 0; i < list.getLength(); i++)
+            this.getDiagram().addFeature(new Feature((Element) list.item(i)));
     }
     
     @Override
@@ -56,13 +54,16 @@ public class ImportFeatureDiagram extends ImportDiagram {
         NodeList connections = this.element.getElementsByTagName("connection");
         for (int i = 0; i < connections.getLength(); i++) {
             Element    current    = (Element) connections.item(i);
-            Feature    source     = (Feature) this.diagram.getElement(current.getAttribute("source"));
-            Feature    target     = (Feature) this.diagram.getElement(current.getAttribute("target"));
             Connection connection = new Connection(current);
-                       connection.setSource(source);
-                       connection.setTarget(target);
-                       super.addPoints(current, connection);
-            this.featureDiagram.addConnection(connection);
+                       connection.setSource(this.getElement(current.getAttribute("source")));
+                       connection.setTarget(this.getElement(current.getAttribute("target")));
+                super.addPoints(current, connection);
+            this.getDiagram().addConnection(connection);
         }
+    }
+    
+    @Override
+    protected FeatureDiagram getDiagram() {
+        return (FeatureDiagram) this.diagram;
     }
 }

@@ -1,6 +1,6 @@
 package view.panel.base.requirement.traceability;
 
-import controller.view.panel.base.requirement.traceability.ControllerPanelBaseRequirementTraceability;
+import controller.view.panel.base.requirement.traceability.ControllerPanelBaseRequirementDiagram;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -19,16 +19,16 @@ import view.panel.base.PanelBase;
 import view.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelBaseRequirementTraceability</b>.</p>
- * <p>Class responsible for defining a <b>Feature Traceability Panel</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelBaseRequirementDiagram</b>.</p>
+ * <p>Class responsible for defining a <b>Diagram Requirement Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-18
- * @see    importcontroller.view.panel.base.requirement.traceability.ControllerPanelBaseRequirementTraceability
+ * @see    controller.view.panel.base.requirement.traceability.ControllerPanelBaseRequirementDiagram
  * @see    model.structural.base.requirement.Requirement
  * @see    model.structural.diagram.FeatureDiagram
  * @see    view.panel.base.PanelBase
  */
-public final class PanelBaseRequirementTraceability extends PanelBase {
+public final class PanelBaseRequirementDiagram extends PanelBase {
     protected final Requirement requirement;
     protected final String type;
     private Diagram diagram;
@@ -39,11 +39,11 @@ public final class PanelBaseRequirementTraceability extends PanelBase {
      * @param requirement Requirement.
      * @param type Diagram Type.
      */
-    public PanelBaseRequirementTraceability(ViewMenu view, Requirement requirement, String type) {
+    public PanelBaseRequirementDiagram(ViewMenu view, Requirement requirement, String type) {
         super(view);
         this.requirement = requirement;
         this.type        = type;
-        this.controller  = new ControllerPanelBaseRequirementTraceability(this);
+        this.controller  = new ControllerPanelBaseRequirementDiagram(this);
         this.setDefaultProperties();
         this.addComponents();
         this.getController().setReady();
@@ -133,6 +133,7 @@ public final class PanelBaseRequirementTraceability extends PanelBase {
         if (element != null) {
             this.requirement.addElement(this.type, element);
             this.updateElementsList();
+            this.getViewMenu().updatePanelTree();
         }
     }
     
@@ -144,6 +145,7 @@ public final class PanelBaseRequirementTraceability extends PanelBase {
         if (element != null) {
             this.requirement.removeElement(element);
             this.updateElementsList();
+            this.getViewMenu().updatePanelTree();
         }
     }
     

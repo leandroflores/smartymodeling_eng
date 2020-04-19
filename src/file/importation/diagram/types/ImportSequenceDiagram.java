@@ -16,13 +16,11 @@ import org.w3c.dom.NodeList;
  * <p>Class of Import <b>ImportSequenceDiagram</b>.</p>
  * <p>Class responsible for <b>Importing Sequence Diagram</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  01/10/2019
+ * @since  2019-10-01
  * @see    file.importation.diagram.ImportDiagram
  * @see    model.structural.diagram.SequenceDiagram
  */
 public class ImportSequenceDiagram extends ImportDiagram {
-    private final SequenceDiagram sequenceDiagram;
-    private final Project project;
     
     /**
      * Default constructor method of Class.
@@ -30,10 +28,8 @@ public class ImportSequenceDiagram extends ImportDiagram {
      * @param element W3C Element.
      */
     public ImportSequenceDiagram(Project project, Element element) {
-        this.sequenceDiagram = new SequenceDiagram(project, element);
-        this.project         = project;
-        this.diagram         = this.sequenceDiagram;
-        this.element         = element;
+        this.diagram = new SequenceDiagram(project, element);
+        this.element = element;
     }
     
     @Override
@@ -43,30 +39,30 @@ public class ImportSequenceDiagram extends ImportDiagram {
     }
     
     /**
-     * Method responsible for importing the Lifelines.
+     * Method responsible for importing the UML Lifelines.
      */
     private void importLifelines() {
-        NodeList lifelines = this.element.getElementsByTagName("lifeline");
-        for (int i = 0; i < lifelines.getLength(); i++) {
-            Element     item     = (Element) lifelines.item(i);
+        NodeList list = this.element.getElementsByTagName("lifeline");
+        for (int i = 0; i < list.getLength(); i++) {
+            Element     item     = (Element) list.item(i);
             LifelineUML lifeline = new LifelineUML(item);
-            ActorUML    actorUML = (ActorUML) this.project.objects.get(item.getAttribute("actor"));
-                        lifeline.setActor(actorUML);
-            this.sequenceDiagram.addLifeline(lifeline);
+            ActorUML    actor    = (ActorUML) this.getProject().objects.get(item.getAttribute("actor"));
+                        lifeline.setActor(actor);
+            this.getDiagram().addLifeline(lifeline);
         }
     }
     
     /**
-     * Method responsible for importing the Instances.
+     * Method responsible for importing the UML Instances.
      */
     private void importInstances() {
-        NodeList instances = this.element.getElementsByTagName("instance");
-        for (int i = 0; i < instances.getLength(); i++) {
-            Element     item     = (Element) instances.item(i);
+        NodeList list = this.element.getElementsByTagName("instance");
+        for (int i = 0; i < list.getLength(); i++) {
+            Element     item     = (Element) list.item(i);
             InstanceUML instance = new InstanceUML(item);
-            ClassUML    classUML = (ClassUML) this.project.objects.get(item.getAttribute("class"));
-                        instance.setClassUML(classUML);
-            this.sequenceDiagram.addInstance(instance);
+            ClassUML    class_   = (ClassUML) this.getProject().objects.get(item.getAttribute("class"));
+                        instance.setClassUML(class_);
+            this.getDiagram().addInstance(instance);
         }
     }
     
@@ -76,21 +72,22 @@ public class ImportSequenceDiagram extends ImportDiagram {
     }
     
     /**
-     * Method responsible for importing the Messages.
+     * Method responsible for importing the UML Messages.
      */
     private void importMessages() {
-        NodeList messages = this.element.getElementsByTagName("message");
-        for (int i = 0; i < messages.getLength(); i++) {
-            Element    current = (Element)   messages.item(i);
-            MethodUML  method  = (MethodUML) this.project.objects.get(current.getAttribute("method"));
-            MessageUML message = new MessageUML(this.diagram.getElement(current.getAttribute("source")), 
-                                                this.diagram.getElement(current.getAttribute("target")));
-                       message.setId(current.getAttribute("id"));
-                       message.setCategory(current.getAttribute("category"));
+        NodeList list = this.element.getElementsByTagName("message");
+        for (int i = 0; i < list.getLength(); i++) {
+            Element    current = (Element)   list.item(i);
+            MethodUML  method  = (MethodUML) this.getProject().objects.get(current.getAttribute("method"));
+            MessageUML message = new MessageUML(current);
                        message.setMethod(method);
-                       message.setSequence(Integer.parseInt(current.getAttribute("sequence")));
-                       super.addPoints(current, message);
-            this.sequenceDiagram.addMessage(message);
+                super.addPoints(current, message);
+            this.getDiagram().addMessage(message);
         }
+    }
+    
+    @Override
+    protected SequenceDiagram getDiagram() {
+        return (SequenceDiagram) this.diagram;
     }
 }

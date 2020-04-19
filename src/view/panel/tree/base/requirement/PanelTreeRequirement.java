@@ -1,6 +1,7 @@
 package view.panel.tree.base.requirement;
 
 import javax.swing.tree.DefaultMutableTreeNode;
+import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.requirement.Requirement;
 import view.panel.tree.base.PanelTree;
@@ -36,7 +37,7 @@ public final class PanelTreeRequirement extends PanelTree {
     protected DefaultMutableTreeNode createNode(Project project) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(project);
                this.addRequirements(node);
-               super.addNode(project, node);
+            super.addNode(project, node);
         return node;
     }
     
@@ -56,7 +57,8 @@ public final class PanelTreeRequirement extends PanelTree {
      */
     protected DefaultMutableTreeNode createNode(Requirement requirement) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(requirement);
-               super.addNode(requirement, node);
+                this.addElements(requirement, node);
+            super.addNode(requirement, node);
         return node;
     }
     
@@ -66,6 +68,16 @@ public final class PanelTreeRequirement extends PanelTree {
      */
     public void updateNode(Requirement requirement) {
         if (this.getNode(requirement) != null)
-            this.getTreeModel().reload(this.getNode(requirement));
+            this.getTreeModel().reload(this.createNode(requirement));
+    }
+    
+    /**
+     * Method responsible for adding the Element Nodes of a Requirement.
+     * @param requirement Requirement.
+     * @param node Requirement Node.
+     */
+    protected void addElements(Requirement requirement, DefaultMutableTreeNode node) {
+        for (Element element : requirement.getAllElements())
+            super.addElement(element, super.createNode(element), node);
     }
 }

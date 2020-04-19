@@ -243,8 +243,8 @@ public class Requirement implements Exportable {
     private String exportTraceability(String type) {
         String export  = "";
         for (Element element : this.getElements(type))
-               export += "    <"     + type.toLowerCase().trim() 
-                      +  " element=" + element.getId() +  "/>\n";
+               export += "    <"       + type.toLowerCase().trim() 
+                      +  " element=\"" + element.getId() +  "\"/>\n";
         return export;
     }
     

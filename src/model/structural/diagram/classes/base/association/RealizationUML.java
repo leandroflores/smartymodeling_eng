@@ -24,9 +24,19 @@ public class RealizationUML extends Association {
      * @param interface_ Interface UML.
      */
     public RealizationUML(ClassUML class_, InterfaceUML interface_) {
+        super();
         this.source = class_;
         this.target = interface_;
         this.type   = "realization";
+    }
+    
+    /**
+     * Alternative constructor method of Class.
+     * @param element W3C Element.
+     */
+    public RealizationUML(org.w3c.dom.Element element) {
+        super(element);
+        this.type = "realization";
     }
 
     @Override

@@ -22,11 +22,21 @@ public class ExtendUML extends Association {
      * @param target Use Case UML.
      */
     public ExtendUML(UseCaseUML source, UseCaseUML target) {
+        super();
         this.source = source;
         this.target = target;
         this.type   = "extend";
     }
 
+    /**
+     * Alternative constructor method of Class.
+     * @param element W3C Element.
+     */
+    public ExtendUML(org.w3c.dom.Element element) {
+        super(element);
+        this.type = "extend";
+    }
+    
     @Override
     public UseCaseUML getSource() {
         return (UseCaseUML) this.source;

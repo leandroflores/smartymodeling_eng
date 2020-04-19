@@ -58,7 +58,7 @@ public final class PanelTreeFeature extends PanelTree {
     protected DefaultMutableTreeNode createNode(Diagram diagram) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(diagram);
                this.addElements(diagram, node);
-               super.addNode(diagram, node);
+            super.addNode(diagram, node);
         return node;
     }
     

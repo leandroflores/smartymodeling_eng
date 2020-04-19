@@ -2,23 +2,23 @@ package controller.view.panel.base.requirement.traceability;
 
 import controller.view.panel.base.ControllerPanelBase;
 import java.awt.event.ActionEvent;
-import view.panel.base.requirement.traceability.PanelBaseRequirementTraceability;
+import view.panel.base.requirement.traceability.PanelBaseRequirementDiagram;
 
 /**
- * <p>Class of Controller <b>ControllerPanelBaseRequirementTraceability</b>.</p>
- * <p>Class responsible for controlling the <b>PanelBaseRequirementTraceability</b> Events of SMartyModeling.</p>
+ * <p>Class of Controller <b>ControllerPanelBaseRequirementDiagram</b>.</p>
+ * <p>Class responsible for controlling the <b>PanelBaseRequirementDiagram</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-19
  * @see    controller.view.panel.base.ControllerPanelBase
- * @see    view.panel.base.requirement.traceability.PanelBaseRequirementTraceability
+ * @see    view.panel.base.requirement.traceability.PanelBaseRequirementDiagram
  */
-public class ControllerPanelBaseRequirementTraceability extends ControllerPanelBase {
+public class ControllerPanelBaseRequirementDiagram extends ControllerPanelBase {
 
     /**
      * Default constructor method of Class.
      * @param panel Panel Base Requirement Feature.
      */
-    public ControllerPanelBaseRequirementTraceability(PanelBaseRequirementTraceability panel) {
+    public ControllerPanelBaseRequirementDiagram(PanelBaseRequirementDiagram panel) {
         super(panel);
     }
 
@@ -37,15 +37,11 @@ public class ControllerPanelBaseRequirementTraceability extends ControllerPanelB
     
     @Override
     protected void update() {
-//        this.getVariability().setConstraint(this.getValue(this.getPanel().getConstraintComboBox()));
-//        this.getVariability().setMinimum(this.getInteger(this.getPanel().getMinimumTextField()));
-//        this.getVariability().setMaximum(this.getInteger(this.getPanel().getMaximumTextField()));
-//        this.getPanel().getDiagram().updateElementsStereotype();
         this.refresh();
     }
     
     @Override
-    public PanelBaseRequirementTraceability getPanel() {
-        return (PanelBaseRequirementTraceability) this.panel;
+    public PanelBaseRequirementDiagram getPanel() {
+        return (PanelBaseRequirementDiagram) this.panel;
     }
 }

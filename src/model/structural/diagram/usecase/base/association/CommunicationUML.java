@@ -24,9 +24,19 @@ public class CommunicationUML extends Association {
      * @param useCase Use Case UML.
      */
     public CommunicationUML(ActorUML actor, UseCaseUML useCase) {
+        super();
         this.source = actor;
         this.target = useCase;
         this.type   = "communication";
+    }
+    
+    /**
+     * Alternative constructor method of Class.
+     * @param element W3C Element.
+     */
+    public CommunicationUML(org.w3c.dom.Element element) {
+        super(element);
+        this.type = "communication";
     }
 
     @Override

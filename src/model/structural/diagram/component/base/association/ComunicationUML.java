@@ -43,6 +43,16 @@ public class ComunicationUML extends Association {
         this.category = category;
         this.type     = "comunication";
     }
+    
+    /**
+     * Alternative constructor method of Class.
+     * @param element W3C Element.
+     */
+    public ComunicationUML(org.w3c.dom.Element element) {
+        super(element);
+        this.category = element.getAttribute("category");
+        this.type     = "comunication";
+    }
 
     @Override
     public ComponentUML getSource() {

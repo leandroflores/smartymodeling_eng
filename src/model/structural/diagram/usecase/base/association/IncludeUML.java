@@ -22,11 +22,21 @@ public class IncludeUML extends Association {
      * @param target Use Case UML.
      */
     public IncludeUML(UseCaseUML source, UseCaseUML target) {
+        super();
         this.source = source;
         this.target = target;
         this.type   = "include";
     }
 
+    /**
+     * Alternative constructor method of Class.
+     * @param element W3C Element.
+     */
+    public IncludeUML(org.w3c.dom.Element element) {
+        super(element);
+        this.type = "include";
+    }
+    
     @Override
     public UseCaseUML getSource() {
         return (UseCaseUML) this.source;

@@ -31,9 +31,9 @@ public class MessageUML extends Association implements Comparator<MessageUML> {
         super();
         this.source   = source;
         this.target   = target;
-        this.type     = "message";
         this.sequence = 0;
         this.method   = null;
+        this.type     = "message";
     }
     
     /**
@@ -46,11 +46,24 @@ public class MessageUML extends Association implements Comparator<MessageUML> {
         super();
         this.source   = source;
         this.target   = target;
-        this.type     = "message";
         this.name     = ".operation()";
         this.category = category;
         this.sequence = 0;
         this.method   = null;
+        this.type     = "message";
+    }
+    
+    /**
+     * Alternative constructor method of Class.
+     * @param element W3C Element.
+     */
+    public MessageUML(org.w3c.dom.Element element) {
+        super(element);
+        this.category = element.getAttribute("category");
+        this.name     = "";
+        this.sequence = Integer.parseInt(element.getAttribute("sequence"));
+        this.method   = null;
+        this.type     = "message";
     }
     
     /**

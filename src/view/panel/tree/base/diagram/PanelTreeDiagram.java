@@ -64,7 +64,7 @@ public final class PanelTreeDiagram extends PanelTree {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(diagram);
                this.addElements(diagram, node);
                this.addVariabilities(diagram, node);
-               super.addNode(diagram, node);
+            super.addNode(diagram, node);
         return node;
     }
     

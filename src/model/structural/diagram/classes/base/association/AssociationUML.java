@@ -40,10 +40,10 @@ public class AssociationUML extends Association {
         super();
         this.source    = source;
         this.target    = target;
-        this.type      = "association";
         this.name      = "";
         this.category  = "normal";
         this.direction = false;
+        this.type      = "association";
         this.setDefault();
     }
     
@@ -53,10 +53,10 @@ public class AssociationUML extends Association {
      */
     public AssociationUML(Element element) {
         super(element);
-        this.type      = "association";
         this.name      = element.getAttribute("name");
         this.category  = element.getAttribute("category");
         this.direction = element.getAttribute("direction").contains("true");
+        this.type      = "association";
     }
     
     /**

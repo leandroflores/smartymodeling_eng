@@ -2,11 +2,11 @@ package view.new_.base.requirement;
 
 import controller.view.new_.base.requirement.ControllerViewNewRequirement;
 import java.awt.Dimension;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.requirement.Requirement;
-import view.panel.base.requirement.PanelBaseRequirement;
 import view.new_.ViewNew;
+import view.panel.base.requirement.PanelBaseRequirement;
+import view.panel.edit.base.requirement.PanelEditRequirement;
 import view.structural.ViewMenu;
 
 /**
@@ -54,10 +54,10 @@ public final class ViewNewRequirement extends ViewNew {
      * Method responsible for adding the Panel Base Requirement.
      */
     private void addPanelBaseRequirement() {
-        this.addPanel("panelBaseRequirement",  new PanelBaseRequirement(this.getViewMenu(), this.requirement));
-        this.createScrollPane("scrollPanelBaseRequirement",  this.getPanelBaseRequirement());
-        this.getScrollPanelBaseRequirement().setViewportView(this.getPanelBaseRequirement());
-        this.tabbedPane.add("Requirement", this.getScrollPanelBaseRequirement());
+        this.addPanel("panelEditRequirement", new PanelEditRequirement(this.view, this.requirement));
+        this.createScrollPane("scrollPanelEditRequirement", this.getPanel("panelEditRequirement"));
+        this.getScrollPane("scrollPanelEditRequirement").setViewportView(this.getPanel("panelEditRequirement"));
+        this.tabbedPane.add("Requirement", this.getScrollPane("scrollPanelEditRequirement"));
     }
     
     /**
@@ -65,15 +65,7 @@ public final class ViewNewRequirement extends ViewNew {
      * @return Panel Base Requirement.
      */
     public PanelBaseRequirement getPanelBaseRequirement() {
-        return (PanelBaseRequirement) this.getPanel("panelBaseRequirement");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Requirement.
-     * @return Scroll Panel Base Requirement.
-     */
-    public JScrollPane getScrollPanelBaseRequirement() {
-        return this.getScrollPane("scrollPanelBaseRequirement");
+        return ((PanelEditRequirement) this.getPanel("panelEditRequirement")).getPanelBaseRequirement();
     }
     
     /**

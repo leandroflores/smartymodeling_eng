@@ -39,7 +39,7 @@ import org.xml.sax.SAXException;
  * <p>Class of Import <b>ImportProject</b>.</p>
  * <p>Class responsible for <b>Importing Project</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  23/05/2019
+ * @since  2019-05-23
  * @see    model.structural.base.Element
  * @see    model.structural.base.Project
  */
@@ -123,9 +123,9 @@ public class ImportProject {
         this.expression = "/project/types/type";
         this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
         for (int i = 0; i < this.nodeList.getLength(); i++) {
-            Element   element = (Element) this.nodeList.item(i);
-            TypeUML   typeUML = new TypeUML(element);
-            this.project.addDefaultType(typeUML);
+            Element element = (Element) this.nodeList.item(i);
+            TypeUML type    = new TypeUML(element);
+            this.project.addDefaultType(type);
         }
     }
     
@@ -186,22 +186,22 @@ public class ImportProject {
     private void importDiagram(Element element, int index) throws XPathExpressionException {
         switch (index) {
             case 0:
-                this.project.addDiagram(new ImportFeatureDiagram(this.project, element).getDiagram());
+                this.project.addDiagram(new ImportFeatureDiagram(this.project, element).importDiagram());
                 break;
             case 1:
-                this.project.addDiagram(new ImportActivityDiagram(this.project, element).getDiagram());
+                this.project.addDiagram(new ImportActivityDiagram(this.project, element).importDiagram());
                 break;
             case 2:
-                this.project.addDiagram(new ImportClassDiagram(this.project, element).getDiagram());
+                this.project.addDiagram(new ImportClassDiagram(this.project, element).importDiagram());
                 break;
             case 3:
-                this.project.addDiagram(new ImportComponentDiagram(this.project, element).getDiagram());
+                this.project.addDiagram(new ImportComponentDiagram(this.project, element).importDiagram());
                 break;
             case 4:
-                this.project.addDiagram(new ImportUseCaseDiagram(this.project, element).getDiagram());
+                this.project.addDiagram(new ImportUseCaseDiagram(this.project, element).importDiagram());
                 break;
             case 5:
-                this.project.addDiagram(new ImportSequenceDiagram(this.project, element).getDiagram());
+                this.project.addDiagram(new ImportSequenceDiagram(this.project, element).importDiagram());
                 break;
             default:
                 break;
@@ -233,14 +233,15 @@ public class ImportProject {
     private void addTraceabilities(Requirement requirement, Element current) throws XPathExpressionException {
         String[] tags = {"feature", "usecase", "class", "component", "sequence", "activity"};
         for (String tag : tags) {
-            NodeList elements = current.getElementsByTagName(tag);
-            for (int x = 0; x < elements.getLength(); x++)
-                requirement.addElement(tag, this.getElement(((Element) elements.item(x)).getAttribute("id")));
+            String   script = this.expression + "/" + tag;
+            NodeList list   = (NodeList) this.xPath.compile(script).evaluate(this.document, XPathConstants.NODESET);
+            for (int i = 0; i < list.getLength(); i++)
+                requirement.addElement(tag, this.getElement(((Element) list.item(i)).getAttribute("element")));
         }
     }
     
     /**
-     * Method responsible for importing Project Traceabilities.
+     * Method responsible for importing the Project Traceabilities.
      * throws XPathExpressionException XPath Exception.
      */
     private void importTraceabilities() throws XPathExpressionException {
@@ -250,7 +251,7 @@ public class ImportProject {
             Element      current      = (Element) this.nodeList.item(i);
             Traceability traceability = new Traceability(current);
                          traceability.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
-                         this.addElements(traceability, current);
+                this.addElements(traceability, current);
             this.project.addTraceability(traceability);
         }
     }
@@ -262,13 +263,13 @@ public class ImportProject {
      * @throws XPathExpressionException XPath Exception.
      */
     private void addElements(Traceability traceability, Element current) throws XPathExpressionException {
-        NodeList elements = current.getElementsByTagName("element");
-        for (int i = 0; i < elements.getLength(); i++)
-            traceability.addElement(this.getElement(((Element) elements.item(i)).getAttribute("id")));
+        NodeList list = current.getElementsByTagName("element");
+        for (int i = 0; i < list.getLength(); i++)
+            traceability.addElement(this.getElement(((Element) list.item(i)).getAttribute("id")));
     }
     
     /**
-     * Method responsible for importing Project Links.
+     * Method responsible for importing the Project Links.
      * throws XPathExpressionException XPath Exception.
      */
     private void importLinks() throws XPathExpressionException {
@@ -283,7 +284,7 @@ public class ImportProject {
     }
     
     /**
-     * Method responsible for importing Project Products.
+     * Method responsible for importing the Project Products.
      * throws XPathExpressionException XPath Exception. 
      */
     private void importProducts() throws XPathExpressionException {
@@ -304,30 +305,30 @@ public class ImportProject {
      * @param current W3C Element.
      */
     private void addInstances(Product product, Element current) {
-        NodeList instances = current.getElementsByTagName("instance");
-        for (int i = 0; i < instances.getLength(); i++) {
-            Element  node     = (Element) instances.item(i);
+        NodeList list = current.getElementsByTagName("instance");
+        for (int i = 0; i < list.getLength(); i++) {
+            Element  node     = (Element) list.item(i);
             Instance instance = new Instance(node);
                      instance.setProduct(product);
-                     instance.setDiagram((Diagram) this.project.getDiagrams().get(node.getAttribute("diagram")));
-                     this.addArtifacts(instance, node);
-                     this.addRelationships(instance, node);
+                     instance.setDiagram((Diagram) this.getDiagram(node.getAttribute("diagram")));
+                this.addArtifacts(instance, node);
+                this.addRelationships(instance, node);
             product.addInstance(instance);
         }
     }
     
     /**
-     * Method responsible for adding the Instance Artefacts.
+     * Method responsible for adding the Instance Artifacts.
      * @param instance Instance.
      * @param current W3C Element.
      */
     private void addArtifacts(Instance instance, Element current) {
-        NodeList artifacts = current.getElementsByTagName("artifact");
-        for (int i = 0; i < artifacts.getLength(); i++) {
-            Element  node     = (Element) artifacts.item(i);
+        NodeList list = current.getElementsByTagName("artifact");
+        for (int i = 0; i < list.getLength(); i++) {
+            Element  node     = (Element) list.item(i);
             Artifact artifact = new Artifact(node, true);
                      artifact.setInstance(instance);
-                     artifact.setElement((model.structural.base.Element) instance.getDiagram().getElement(node.getAttribute("element")));
+                     artifact.setElement(this.getElement(node.getAttribute("element")));
             instance.addArtifact(artifact);
         }
     }
@@ -345,7 +346,7 @@ public class ImportProject {
             Relationship relationship = new Relationship(node);
                          relationship.setInstance(instance);
                          relationship.setAssociation(association);
-                         this.addPoints(node, relationship);
+                this.addPoints(node, relationship);
             instance.addRelationship(relationship);
         }
     }
@@ -356,9 +357,9 @@ public class ImportProject {
      * @param relationship Relationship.
      */
     protected void addPoints(Element node, Relationship relationship) {
-        NodeList points = node.getElementsByTagName("point");
-        for (int i = 0; i < points.getLength(); i++)
-            relationship.addPoint(this.getPoint((Element) points.item(i)));
+        NodeList list = node.getElementsByTagName("point");
+        for (int i = 0; i < list.getLength(); i++)
+            relationship.addPoint(this.getPoint((Element) list.item(i)));
     }
     
     /**
@@ -372,7 +373,7 @@ public class ImportProject {
     }
     
     /**
-     * Method responsible for importing Project Metrics.
+     * Method responsible for importing the Project Metrics.
      * throws XPathExpressionException XPath Exception. 
      */
     private void importMetrics() throws XPathExpressionException {
@@ -388,7 +389,7 @@ public class ImportProject {
     }
     
     /**
-     * Method responsible for importing Project Measures.
+     * Method responsible for importing the Project Measures.
      * throws XPathExpressionException XPath Exception. 
      */
     private void importMeasures() throws XPathExpressionException {

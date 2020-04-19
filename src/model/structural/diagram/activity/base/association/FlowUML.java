@@ -32,6 +32,18 @@ public class FlowUML extends Association {
         this.weight = "";
         this.type   = "flow";
     }
+    
+    /**
+     * Alternative constructor method of Class.
+     * @param element W3C Element.
+     */
+    public FlowUML(org.w3c.dom.Element element) {
+        super(element);
+        this.guard  = element.getAttribute("guard");
+        this.action = element.getAttribute("action");
+        this.weight = element.getAttribute("weight");
+        this.type   = "flow";
+    }
 
     /**
      * Method responsible for returning the Guard.
