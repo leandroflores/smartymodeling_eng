@@ -282,6 +282,15 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for removing a Element of Requirements.
+     * @param element Element.
+     */
+    public void removeRequirement(Element element) {
+        for (Requirement requirement : this.getRequirementsList())
+            requirement.removeElement(element);
+    }
+    
+    /**
      * Method responsible for returning Requirements List.
      * @return Requirements List.
      */

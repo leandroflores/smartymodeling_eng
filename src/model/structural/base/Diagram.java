@@ -298,6 +298,7 @@ public abstract class Diagram implements Exportable {
     public void removeElement(Element element) {
         this.removeAssociation(element);
         this.removeVariability(element);
+        this.project.removeRequirement(element);
         this.project.removeTraceability(element);
         this.project.removeProduct(element);
         this.project.removeLinks(element);
