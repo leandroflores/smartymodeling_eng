@@ -37,10 +37,7 @@ public final class PanelEditRequirement extends PanelEdit {
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.setPreferredSize(new Dimension(100, 100));
             this.addPanelBaseRequirement();
-            this.addPanelBaseTraceability();
-//            this.addPanelBaseRequirementFeature();
-//            this.addPanelBaseRequirementUseCase();
-//            this.addPanelBaseRequirementClass();
+            this.addPanelBaseRequirementTraceability();
         this.add(this.tabbedPane);
     }
     
@@ -54,17 +51,20 @@ public final class PanelEditRequirement extends PanelEdit {
         this.tabbedPane.add("Requirement", this.getScrollPanelBaseRequirement());
     }
     
-    private void addPanelBaseTraceability() {
-        String[] types = {"Feature", "Activity", "Class", "Component", "UseCase", "Sequence"};
+    /**
+     * Method responsible for adding the Panel Base Requirement Traceability.
+     */
+    private void addPanelBaseRequirementTraceability() {
+        String[] types = {"Feature", "UseCase", "Class", "Component", "Sequence", "Activity"};
         for (int i = 0; i < types.length; i++) {
-            String  panel_id    = "panelBaseRequirement" + types[i];
-            Integer panel_index = i + 1;
-            String  scroll_id   = "scrollPanelBaseRequirement" + types[i];
-            this.addPanel(panel_id, new PanelBaseRequirementTraceability(this.getViewMenu(), this.requirement, types[i]));
+            String type      = types[i];
+            String panel_id  = "panelBaseRequirement" + type;
+            String scroll_id = "scrollPanelBaseRequirement" + type;
+            this.addPanel(panel_id, new PanelBaseRequirementTraceability(this.getViewMenu(), this.requirement, type));
             this.createScrollPane(scroll_id, this.getPanel(panel_id));
             this.getScrollPane(scroll_id).setViewportView(this.getPanel(panel_id));
-            this.tabbedPane.add(types[i], this.getScrollPane(scroll_id));
-            this.tabbedPane.setEnabledAt(panel_index, this.getPanelBaseRequirement(panel_id).existsDiagram());
+            this.tabbedPane.add(type, this.getScrollPane(scroll_id));
+            this.tabbedPane.setEnabledAt(i + 1, this.getPanelBaseRequirement(panel_id).existsDiagram());
         }
     }
     

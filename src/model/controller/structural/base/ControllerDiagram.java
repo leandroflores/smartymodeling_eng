@@ -9,7 +9,7 @@ import model.structural.base.Element;
  * <p>Class of Controller <b>ControllerDiagram</b>.</p>
  * <p>Class responsible for defining the <b>Diagram Controller</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  31/05/2019
+ * @since  2019-05-31
  * @see    model.structural.base.Diagram
  */
 public class ControllerDiagram {

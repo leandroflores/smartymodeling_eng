@@ -5,12 +5,15 @@ import funct.FunctDate;
 import funct.FunctString;
 import funct.evaluation.base.EvaluationProject;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
+import model.comparator.structural.base.ComparatorDiagram;
+import model.comparator.structural.base.ComparatorStereotype;
+import model.comparator.structural.base.association.ComparatorLink;
+import model.comparator.structural.diagram.classes.base.ComparatorTypeUML;
 import model.structural.base.association.Link;
 import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
@@ -33,7 +36,7 @@ import model.structural.diagram.usecase.base.ActorUML;
  * <p>Class of Model <b>Project</b>.</p>
  * <p>Class responsible for representing <b>Project</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    model.structural.base.interfaces.Exportable
  */
 public class Project implements Exportable {
@@ -42,10 +45,10 @@ public class Project implements Exportable {
     private String  path;
     private String  version;
     private Profile profile;
-    private HashMap requirements;
     private HashMap diagrams;
     public  HashMap types;
     public  HashMap variabilities;
+    private HashMap requirements;
     public  HashMap traceabilities;
     public  HashMap metrics;
     public  HashMap measures;
@@ -81,13 +84,13 @@ public class Project implements Exportable {
     }
     
     /**
-     * Method responsible for initializing HashMaps.
+     * Method responsible for initializing the HashMaps.
      */
     private void init() {
-        this.requirements   = new LinkedHashMap();
         this.diagrams       = new LinkedHashMap();
         this.types          = new LinkedHashMap();
         this.variabilities  = new LinkedHashMap();
+        this.requirements   = new LinkedHashMap();
         this.traceabilities = new LinkedHashMap();
         this.metrics        = new LinkedHashMap();
         this.measures       = new LinkedHashMap();
@@ -222,10 +225,10 @@ public class Project implements Exportable {
      * @return Elements List.
      */
     public List<Element> getElementsList() {
-        List<Element> elements = new ArrayList<>();
+        List   elements = new ArrayList<>();
         for (Object object : this.objects.values()) {
             if (object instanceof Element)
-                elements.add((Element) object);
+               elements.add((Element) object);
         }
         return elements;
     }
@@ -235,78 +238,12 @@ public class Project implements Exportable {
      * @return Associations List.
      */
     public List<Association> getAssociationsList() {
-        List<Association> associations = new ArrayList<>();
+        List   associations = new ArrayList<>();
         for (Object object : this.objects.values()) {
             if (object instanceof Association)
-                associations.add((Association) object);
+               associations.add((Association) object);
         }
         return associations;
-    }
-    
-    /**
-     * Method responsible for returning the Next Requirement Id.
-     * @return Next Requirement Id.
-     */
-    public String nextRequirementId() {
-        Integer index  = this.requirements.size() + 1;
-        String  nextId = "REQUIREMENT#" + index;
-        while (this.requirements.get(nextId) != null)
-                nextId = "REQUIREMENT#" + ++index;
-        return  nextId;
-    }
-    
-    /**
-     * Method responsible for adding a Requirement.
-     * @param requirement Requirement.
-     */
-    public void addRequirement(Requirement requirement) {
-        requirement.setId(this.nextRequirementId());
-        this.requirements.put(requirement.getId(), requirement);
-    }
-    
-    /**
-     * Method responsible for returning a Requirement by Id.
-     * @param  id Requirement Id.
-     * @return Requirement found.
-     */
-    public Requirement getRequirement(String id) {
-        return (Requirement) this.requirements.get(id);
-    }
-    
-    /**
-     * Method responsible for removing a Requirement.
-     * @param requirement Requirement.
-     */
-    public void removeRequirement(Requirement requirement) {
-        this.requirements.remove(requirement.getId());
-    }
-    
-    /**
-     * Method responsible for removing a Element of Requirements.
-     * @param element Element.
-     */
-    public void removeRequirement(Element element) {
-        for (Requirement requirement : this.getRequirementsList())
-            requirement.removeElement(element);
-    }
-    
-    /**
-     * Method responsible for returning Requirements List.
-     * @return Requirements List.
-     */
-    public List<Requirement> getRequirementsList() {
-        return new ArrayList<>(this.requirements.values());
-    }
-    
-    /**
-     * Method responsible for exporting the Requirements.
-     * @return Requirements.
-     */
-    private String exportRequirements() {
-        String export  = "";
-        for (Requirement requirement : this.getRequirementsList())
-               export += requirement.export();
-        return export;
     }
     
     /**
@@ -323,7 +260,7 @@ public class Project implements Exportable {
      */
     public List<Diagram> getFeatureDiagramsList() {
         List   list = this.getDiagrams("Feature");
-               list.sort(this.getDiagramComparator());
+               list.sort(new ComparatorDiagram());
         return list;
     }
     
@@ -332,10 +269,10 @@ public class Project implements Exportable {
      * @return UML Diagrams List.
      */
     public List<Diagram> getUMLDiagramsList() {
-        ArrayList list = new ArrayList<>(this.diagrams.values());
-                  list.sort(this.getDiagramComparator());
-                  list.removeAll(this.getFeatureDiagramsList());
-        return    list;
+        List   list = new ArrayList<>(this.diagrams.values());
+               list.sort(new ComparatorDiagram());
+               list.removeAll(this.getFeatureDiagramsList());
+        return list;
     }
     
     /**
@@ -356,24 +293,9 @@ public class Project implements Exportable {
      * @return Diagrams List.
      */
     public List<Diagram> getDiagramsList() {
-        ArrayList list = new ArrayList<>(this.diagrams.values());
-                  list.sort(this.getDiagramComparator());
-        return    list;
-    }
-    
-    /**
-     * Method responsible for returning the Diagram Comparator.
-     * @return Diagram Comparator.
-     */
-    private Comparator<Diagram> getDiagramComparator() {
-        return 
-            new Comparator<Diagram>() {
-                @Override
-                public int compare(Diagram diagramA, Diagram diagramB) {
-                    if (diagramA.getType().equals(diagramB.getType()))
-                        return diagramA.getName().compareTo(diagramB.getName());
-                    return diagramA.getType().compareTo(diagramB.getType());
-            }};
+        List   list = new ArrayList<>(this.diagrams.values());
+               list.sort(new ComparatorDiagram());
+        return list;
     }
     
     /**
@@ -461,14 +383,9 @@ public class Project implements Exportable {
      * @return Types List.
      */
     public List<TypeUML> getTypesList() {
-        ArrayList list = new ArrayList<>(this.types.values());
-                  list.sort(new Comparator<TypeUML>() {
-                      @Override
-                      public int compare(TypeUML typeA, TypeUML typeB) {
-                          return typeA.getName().compareTo(typeB.getName());
-                      }
-                  });
-        return    list;
+        List   list = new ArrayList<>(this.types.values());
+               list.sort(new ComparatorTypeUML());
+        return list;
     }
     
     /**
@@ -696,7 +613,7 @@ public class Project implements Exportable {
      */
     public TypeUML getTypeBySignature(String signature) {
         for (TypeUML type : this.getTypesList()) {
-            if ((type.getSignature().equals(signature)) && (type.isPrimitive() == false))
+            if (type.getSignature().equals(signature) && (type.isPrimitive() == false))
                 return type;
         }
         return this.getObjectType();
@@ -798,6 +715,72 @@ public class Project implements Exportable {
      */
     public void removeVariability(Variability variability) {
         this.variabilities.remove(variability.getId());
+    }
+    
+    /**
+     * Method responsible for returning the Next Requirement Id.
+     * @return Next Requirement Id.
+     */
+    public String nextRequirementId() {
+        Integer index  = this.requirements.size() + 1;
+        String  nextId = "REQUIREMENT#" + index;
+        while (this.requirements.get(nextId) != null)
+                nextId = "REQUIREMENT#" + ++index;
+        return  nextId;
+    }
+    
+    /**
+     * Method responsible for adding a Requirement.
+     * @param requirement Requirement.
+     */
+    public void addRequirement(Requirement requirement) {
+        requirement.setId(this.nextRequirementId());
+        this.requirements.put(requirement.getId(), requirement);
+    }
+    
+    /**
+     * Method responsible for returning a Requirement by Id.
+     * @param  id Requirement Id.
+     * @return Requirement found.
+     */
+    public Requirement getRequirement(String id) {
+        return (Requirement) this.requirements.get(id);
+    }
+    
+    /**
+     * Method responsible for removing a Requirement.
+     * @param requirement Requirement.
+     */
+    public void removeRequirement(Requirement requirement) {
+        this.requirements.remove(requirement.getId());
+    }
+    
+    /**
+     * Method responsible for removing a Element of Requirements.
+     * @param element Element.
+     */
+    public void removeRequirement(Element element) {
+        for (Requirement requirement : this.getRequirementsList())
+            requirement.removeElement(element);
+    }
+    
+    /**
+     * Method responsible for returning Requirements List.
+     * @return Requirements List.
+     */
+    public List<Requirement> getRequirementsList() {
+        return new ArrayList<>(this.requirements.values());
+    }
+    
+    /**
+     * Method responsible for exporting the Requirements.
+     * @return Requirements.
+     */
+    private String exportRequirements() {
+        String export  = "";
+        for (Requirement requirement : this.getRequirementsList())
+               export += requirement.export();
+        return export;
     }
     
     /**
@@ -1176,7 +1159,7 @@ public class Project implements Exportable {
      */
     public List<Stereotype> getStereotypesList() {
         ArrayList list = new ArrayList<>(this.stereotypes.values());
-                  list.sort(this.getStereotypeComparator());
+                  list.sort(new ComparatorStereotype());
         return    list;
     }
     
@@ -1186,25 +1169,12 @@ public class Project implements Exportable {
      * @return Stereotypes List.
      */
     public List<Stereotype> getStereotypesList(boolean primitive) {
-        List<Stereotype> filter = new ArrayList<>();
-        for (Object stereotype : this.stereotypes.values()) {
-            if (((Stereotype) stereotype).isPrimitive() == primitive)
-                filter.add((Stereotype) stereotype);
+        List   filter = new ArrayList<>();
+        for (Stereotype stereotype : this.getStereotypesList()) {
+            if (stereotype.isPrimitive() == primitive)
+               filter.add((Stereotype) stereotype);
         }
-                filter.sort(this.getStereotypeComparator());
-        return  filter;
-    }
-    
-    /**
-     * Method responsible for returning the Stereotype Comparator.
-     * @return Stereotype Comparator.
-     */
-    private Comparator getStereotypeComparator() {
-        return new Comparator<Stereotype>() {
-                @Override
-                public int compare(Stereotype stereotypeA, Stereotype stereotypeB) {
-                    return stereotypeA.getName().compareTo(stereotypeB.getName());                          
-                }};
+        return filter;
     }
     
     /**
@@ -1312,7 +1282,7 @@ public class Project implements Exportable {
         String export  = "  <stereotypes>\n";
         for (Stereotype stereotype : this.getStereotypesList())
                export += stereotype.export();
-        return export  + "  </stereotypes>\n";
+        return export +  "  </stereotypes>\n";
     }
     
     /**
@@ -1328,21 +1298,9 @@ public class Project implements Exportable {
      * @return Links List.
      */
     public List<Link> getLinksList() {
-        ArrayList list = new ArrayList<>(this.links.values());
-                  list.sort(this.getLinkComparator());
-        return    list;
-    }
-    
-    /**
-     * Method responsible for returning the Link Comparator.
-     * @return Link Comparator.
-     */
-    private Comparator getLinkComparator() {
-        return new Comparator<Link>() {
-                @Override
-                public int compare(Link linkA, Link linkB) {
-                    return linkA.getSignature().compareTo(linkB.getSignature());
-                }};
+        List   list = new ArrayList<>(this.links.values());
+               list.sort(new ComparatorLink());
+        return list;
     }
     
     /**
@@ -1384,12 +1342,12 @@ public class Project implements Exportable {
      * @return Links by Element.
      */
     public List<Link> getLinksByElement(Element element) {
-        List<Link> filter = new ArrayList<>();
+        List   filter = new ArrayList<>();
         for (Link link : this.getLinksList()) {
             if (link.getElement().getId().equals(element.getId()))
-                   filter.add(link);
+               filter.add(link);
         }
-        return     filter;
+        return filter;
     }
     
     /**
@@ -1398,12 +1356,12 @@ public class Project implements Exportable {
      * @return Links by Stereotype.
      */
     public List<Link> getLinksByStereotype(Stereotype stereotype) {
-        List<Link> filter = new ArrayList<>();
+        List   filter = new ArrayList<>();
         for (Link link : this.getLinksList()) {
             if (link.getStereotype().equals(stereotype))
-                   filter.add(link);
+               filter.add(link);
         }
-        return     filter;
+        return filter;
     }
     
     /**
@@ -1500,12 +1458,12 @@ public class Project implements Exportable {
     @Override
     public String export() {
         String export  = "<project id=\"" + this.id + "\" name=\"" + this.name + "\" version=\"" + this.version + "\">\n";
-               export += this.exportRequirements();
                export += this.exportTypes();
                export += this.exportStereotypes();
                export += this.profile.export();
                export += this.exportFeatureDiagrams();
                export += this.exportUMLDiagrams();
+               export += this.exportRequirements();
                export += this.exportTraceabilities();
                export += this.exportLinks();
                export += this.exportProducts();
@@ -1537,14 +1495,16 @@ public class Project implements Exportable {
                project += "Path           = " + this.path           + "\n";
                project += "Version        = " + this.version        + "\n";
                project += "Diagrams       = " + this.diagrams       + "\n";
+               project += "Types          = " + this.types          + "\n";
+               project += "Variabilities  = " + this.variabilities  + "\n";
+               project += "Requirements   = " + this.requirements   + "\n";
                project += "Traceabilities = " + this.traceabilities + "\n";
                project += "Metrics        = " + this.metrics        + "\n";
+               project += "Measures       = " + this.measures       + "\n";
                project += "Stereotypes    = " + this.stereotypes    + "\n";
-               project += "Variabilities  = " + this.variabilities  + "\n";
-               project += "Objects        = " + this.objects        + "\n";
-               project += "Types          = " + this.types          + "\n";
-               project += "Links          = " + this.links          + "\n";
                project += "Products       = " + this.products       + "\n";
+               project += "Objects        = " + this.objects        + "\n";
+               project += "Links          = " + this.links          + "\n";
         return project;
     }
 }

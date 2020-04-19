@@ -10,7 +10,7 @@ import model.structural.base.Stereotype;
  * <p>Class of Controller <b>ControllerProject</b>.</p>
  * <p>Class responsible for defining the <b>Project Controller</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  31/05/2019
+ * @since  2019-05-31
  * @see    model.structural.base.Project
  */
 public class ControllerProject {

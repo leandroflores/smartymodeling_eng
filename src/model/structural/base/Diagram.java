@@ -4,11 +4,13 @@ import model.structural.base.association.Association;
 import model.structural.base.association.Generalization;
 import funct.FunctString;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import model.comparator.structural.base.ComparatorElement;
+import model.comparator.structural.base.association.ComparatorAssociation;
+import model.comparator.structural.base.variability.ComparatorVariability;
 import model.structural.base.association.Dependency;
 import model.structural.base.association.Link;
 import model.structural.base.interfaces.Exportable;
@@ -21,7 +23,7 @@ import model.structural.base.variability.Variability;
  * <p>Class of Model <b>Diagram</b>.</p>
  * <p>Class responsible for representing <b>Diagram</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    model.structural.base.interfaces.Exportable
  */
 public abstract class Diagram implements Exportable {
@@ -201,9 +203,9 @@ public abstract class Diagram implements Exportable {
      * @return Elements List.
      */
     public List<Element> getElementsList() {
-        ArrayList<Element> list = new ArrayList<>(this.elements.values());
-                           list.sort(this.getElementComparator());
-        return             list;
+        List   list = new ArrayList<>(this.elements.values());
+               list.sort(new ComparatorElement());
+        return list;
     }
     
     /**
@@ -246,21 +248,6 @@ public abstract class Diagram implements Exportable {
                 filter.add(list.get(i));
         }
         return filter;
-    }
-    
-    /**
-     * Method responsible for returning Element Comparator.
-     * @return Element Comparator.
-     */
-    private Comparator<Element> getElementComparator() {
-        return new Comparator<Element>() {
-            @Override
-            public int compare(Element element1, Element element2) {
-                if (element1.getType().compareTo(element2.getType()) == 0)
-                     return element1.getName().compareTo(element2.getName());
-                return element1.getType().compareTo(element2.getType());
-            }
-        };
     }
     
     /**
@@ -367,9 +354,9 @@ public abstract class Diagram implements Exportable {
      * @return Associations List.
      */
     public List<Association> getAssociationsList() {
-        ArrayList<Association> list = new ArrayList<>(this.associations.values());
-                               list.sort(this.getAssociationComparator());
-        return                 list;
+        List   list = new ArrayList<>(this.associations.values());
+               list.sort(new ComparatorAssociation());
+        return list;
     }
     
     /**
@@ -426,21 +413,6 @@ public abstract class Diagram implements Exportable {
                 filter.add(association);
         }
         return  filter;
-    }
-    
-    /**
-     * Method responsible for returning Association Comparator.
-     * @return Association Comparator.
-     */
-    private Comparator<Association> getAssociationComparator() {
-        return new Comparator<Association>() {
-            @Override
-            public int compare(Association association1, Association association2) {
-                if (association1.getType().compareTo(association2.getType()) == 0)
-                     return association1.getId().compareTo(association2.getId());
-                return association1.getType().compareTo(association2.getType());
-            }
-        };
     }
     
     /**
@@ -519,8 +491,8 @@ public abstract class Diagram implements Exportable {
      */
     public void addGeneralization(Generalization generalization) {
         generalization.setId(this.nextId(generalization));
-        if (this.associations.containsKey(generalization.getId()) == false)
-            this.addAssociation(generalization);
+        if (!this.associations.containsKey(generalization.getId()))
+             this.addAssociation(generalization);
     }
     
     /**
@@ -674,22 +646,9 @@ public abstract class Diagram implements Exportable {
      * @return Variabilities List.
      */
     public List<Variability> getVariabilitiesList() {
-        ArrayList<Variability> list = new ArrayList<>(this.variabilities.values());
-                               list.sort(this.getVariabilityComparator());
-        return                 list;
-    }
-    
-    /**
-     * Method responsible for returning Variability Comparator.
-     * @return Variability Comparator.
-     */
-    private Comparator<Variability> getVariabilityComparator() {
-        return new Comparator<Variability>() {
-            @Override
-            public int compare(Variability variability1, Variability variability2) {
-                return variability1.getName().compareTo(variability2.getName());
-            }
-        };
+        List   list = new ArrayList<>(this.variabilities.values());
+               list.sort(new ComparatorVariability());
+        return list;
     }
     
     /**

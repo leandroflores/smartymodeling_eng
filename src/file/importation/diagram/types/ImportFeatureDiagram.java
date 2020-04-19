@@ -36,7 +36,7 @@ public class ImportFeatureDiagram extends ImportDiagram {
     }
 
     /**
-     * Method responsible for importing Use Cases.
+     * Method responsible for importing the Features.
      */
     private void importFeatures() {
         NodeList features = this.element.getElementsByTagName("feature");

@@ -220,6 +220,34 @@ public class Requirement implements Exportable {
         return "icons/requirement/types/" + this.type.toLowerCase().trim() + ".png";
     }
     
+    /**
+     * Method responsible for exporting the Traceability Requirement.
+     * @return Traceability Requirement.
+     */
+    private String exportTraceability() {
+        String export  = "";
+               export += this.exportTraceability("Feature");
+               export += this.exportTraceability("UseCase");
+               export += this.exportTraceability("Class");
+               export += this.exportTraceability("Component");
+               export += this.exportTraceability("Sequence");
+               export += this.exportTraceability("Activity");
+        return export;
+    }
+    
+    /**
+     * Method responsible for exporting the Traceability Requirement by Diagram Type.
+     * @param  type Diagram Type.
+     * @return Traceability Requirement.
+     */
+    private String exportTraceability(String type) {
+        String export  = "";
+        for (Element element : this.getElements(type))
+               export += "    <"     + type.toLowerCase().trim() 
+                      +  " element=" + element.getId() +  "/>\n";
+        return export;
+    }
+    
     @Override
     public String export() {
         String export  = "  <requirement";
@@ -228,6 +256,7 @@ public class Requirement implements Exportable {
                export += " type=\"" + this.type + "\"";
                export += " name=\"" + this.name + "\">\n";
                export += "    <description>" + this.description + "</description>\n";
+               export += this.exportTraceability();
                export += "  </requirement>\n";
         return export;
     }

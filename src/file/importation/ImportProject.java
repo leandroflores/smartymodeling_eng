@@ -100,11 +100,11 @@ public class ImportProject {
         this.root       = (Element) this.nodeList.item(0);
         this.project    = new Project(this.path, this.root);
         
-            this.importRequirements();
             this.importTypes();
             this.importStereotypes();
             this.importProfile();
             this.importDiagrams();
+            this.importRequirements();
             this.importTraceabilities();
             this.importLinks();
             this.importProducts();
@@ -113,21 +113,6 @@ public class ImportProject {
         
                this.project.updateStereotypes();
         return this.project;
-    }
-    
-    /**
-     * Method responsible for importing Project Requirements.
-     * throws XPathExpressionException XPath Exception.
-     */
-    private void importRequirements() throws XPathExpressionException {
-        this.expression = "/project/requirement";
-        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
-        for (int i = 0; i < this.nodeList.getLength(); i++) {
-            Element     current     = (Element) this.nodeList.item(i);
-            Requirement requirement = new Requirement(current);
-                        requirement.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
-            this.project.addRequirement(requirement);
-        }
     }
     
     /**
@@ -224,6 +209,37 @@ public class ImportProject {
     }
     
     /**
+     * Method responsible for importing Project Requirements.
+     * throws XPathExpressionException XPath Exception.
+     */
+    private void importRequirements() throws XPathExpressionException {
+        this.expression = "/project/requirement";
+        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
+        for (int i = 0; i < this.nodeList.getLength(); i++) {
+            Element     current     = (Element) this.nodeList.item(i);
+            Requirement requirement = new Requirement(current);
+                        requirement.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
+                this.addTraceabilities(requirement, current);
+            this.project.addRequirement(requirement);
+        }
+    }
+    
+    /**
+     * Method responsible for adding the Requirement Traceabilities.
+     * @param current W3C Element.
+     * @param requirement Requirement.
+     * @throws XPathExpressionException XPath Exception.
+     */
+    private void addTraceabilities(Requirement requirement, Element current) throws XPathExpressionException {
+        String[] tags = {"feature", "usecase", "class", "component", "sequence", "activity"};
+        for (String tag : tags) {
+            NodeList elements = current.getElementsByTagName(tag);
+            for (int x = 0; x < elements.getLength(); x++)
+                requirement.addElement(tag, this.getElement(((Element) elements.item(x)).getAttribute("id")));
+        }
+    }
+    
+    /**
      * Method responsible for importing Project Traceabilities.
      * throws XPathExpressionException XPath Exception.
      */
@@ -234,11 +250,21 @@ public class ImportProject {
             Element      current      = (Element) this.nodeList.item(i);
             Traceability traceability = new Traceability(current);
                          traceability.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
-            NodeList     elements     = current.getElementsByTagName("element");
-            for (int x = 0; x < elements.getLength(); x++)
-                         traceability.addElement((model.structural.base.Element) this.project.objects.get(((Element) elements.item(x)).getAttribute("id")));
+                         this.addElements(traceability, current);
             this.project.addTraceability(traceability);
         }
+    }
+    
+    /**
+     * Method responsible for adding the Requirement Traceabilities.
+     * @param current W3C Element.
+     * @param traceability Traceability.
+     * @throws XPathExpressionException XPath Exception.
+     */
+    private void addElements(Traceability traceability, Element current) throws XPathExpressionException {
+        NodeList elements = current.getElementsByTagName("element");
+        for (int i = 0; i < elements.getLength(); i++)
+            traceability.addElement(this.getElement(((Element) elements.item(i)).getAttribute("id")));
     }
     
     /**
@@ -250,8 +276,8 @@ public class ImportProject {
         this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
         for (int i = 0; i < this.nodeList.getLength(); i++) {
             Element current = (Element) this.nodeList.item(i);
-            Link    link    = new Link((model.structural.base.Element) this.project.objects.get(current.getAttribute("element")), 
-                                                          (Stereotype) this.project.getStereotypes().get(current.getAttribute("stereotype")));
+            Link    link    = new Link(this.getElement(current.getAttribute("element")), 
+                                      (Stereotype) this.project.getStereotypes().get(current.getAttribute("stereotype")));
             this.project.addLink(link);
         }
     }
@@ -374,5 +400,32 @@ public class ImportProject {
                     measure.setMetric(this.project.getMetric(current.getAttribute("metric")));
             this.project.addMeasure(measure);
         }
+    }
+    
+    /**
+     * Method responsible for returning the Element by Id.
+     * @param  id Element Id.
+     * @return Element by Id.
+     */
+    protected model.structural.base.Element getElement(String id) {
+        return (model.structural.base.Element) this.project.objects.get(id);
+    }
+    
+    /**
+     * Method responsible for returning the Stereotype by Id.
+     * @param  id Stereotype Id.
+     * @return Stereotype by Id.
+     */
+    protected Stereotype getStereotype(String id) {
+        return this.project.getStereotype(id);
+    }
+    
+    /**
+     * Method responsible for returning the Diagram by Id.
+     * @param  id Diagram Id.
+     * @return Diagram by Id.
+     */
+    protected Diagram getDiagram(String id) {
+        return (Diagram) this.project.getDiagrams().get(id);
     }
 }
