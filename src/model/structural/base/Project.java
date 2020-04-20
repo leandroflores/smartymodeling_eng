@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 import model.comparator.structural.base.ComparatorDiagram;
+import model.comparator.structural.base.ComparatorElement;
 import model.comparator.structural.base.ComparatorStereotype;
 import model.comparator.structural.base.association.ComparatorLink;
 import model.comparator.structural.diagram.classes.base.ComparatorTypeUML;
@@ -225,12 +226,26 @@ public class Project implements Exportable {
      * @return Elements List.
      */
     public List<Element> getElementsList() {
-        List   elements = new ArrayList<>();
+        List   list = new ArrayList<>();
         for (Object object : this.objects.values()) {
             if (object instanceof Element)
-               elements.add((Element) object);
+               list.add((Element) object);
         }
-        return elements;
+        return list;
+    }
+    
+    /**
+     * Method responsible for returning the Default Elements.
+     * @return Default Elements.
+     */
+    public List<Element> getDefaultElements() {
+        List   list = new ArrayList<>();
+        for (Object object : this.objects.values()) {
+            if (object instanceof Element && ((Element) object).isDefault())
+               list.add((Element) object);
+        }
+               list.sort(new ComparatorElement());
+        return list;
     }
     
     /**
@@ -238,12 +253,12 @@ public class Project implements Exportable {
      * @return Associations List.
      */
     public List<Association> getAssociationsList() {
-        List   associations = new ArrayList<>();
+        List   list = new ArrayList<>();
         for (Object object : this.objects.values()) {
             if (object instanceof Association)
-               associations.add((Association) object);
+               list.add((Association) object);
         }
-        return associations;
+        return list;
     }
     
     /**

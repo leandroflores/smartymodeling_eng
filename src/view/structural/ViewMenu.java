@@ -142,6 +142,9 @@ public final class ViewMenu extends View implements Operation {
         this.createMenuItem("menuItemRequirementTraceability", "Requirement Traceability", "requirement/traceability.png", KeyEvent.VK_T);
         this.createMenuItem("menuItemRequirementMatrix",       "Requirement Matrix",       "requirement/matrix.png",       KeyEvent.VK_X);
         
+        this.getMenuItemRequirementTraceability().setVisible(false);
+        this.getMenuItemRequirementMatrix().setVisible(false);
+        
         this.getMenuRequirement().add(this.getMenuItemNewRequirement());
         this.getMenuRequirement().addSeparator();
         this.getMenuRequirement().add(this.getMenuItemRequirementTraceability());

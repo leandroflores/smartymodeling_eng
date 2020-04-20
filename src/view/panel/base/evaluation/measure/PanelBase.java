@@ -36,7 +36,7 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Targets Array.
      */
     protected Object[] getTargets() {
-        return new ControllerProject(this.project).getTargets(this.measure.getMetric().getTarget());
+        return new ControllerProject(this.project).getDiagramTargets(this.measure.getMetric().getTarget());
     }
     
     /**

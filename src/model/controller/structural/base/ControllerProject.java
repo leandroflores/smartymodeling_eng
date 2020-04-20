@@ -5,6 +5,7 @@ import java.util.List;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.base.Stereotype;
+import model.structural.base.requirement.Requirement;
 
 /**
  * <p>Class of Controller <b>ControllerProject</b>.</p>
@@ -61,16 +62,28 @@ public class ControllerProject {
     }
     
     /**
-     * Method responsible for returning the Targets Array by Type.
+     * Method responsible for returning the Diagram Targets Array by Type.
      * @param  type Target Type.
-     * @return Targets Array.
+     * @return Diagram Targets Array.
      */
-    public Object[] getTargets(String type) {
+    public Object[] getDiagramTargets(String type) {
         Object[] diagrams   = this.getDiagrams(type);
         Object[] targets    = new Object[diagrams.length + 1];
                  targets[0] = "Project";
         System.arraycopy(diagrams, 0, targets, 1, diagrams.length);
         return   targets;
+    }
+    
+    /**
+     * Method responsible for returning the General Context Array.
+     * @return General Context Array.
+     */
+    public Object[] getGeneralContext() {
+        Object[] diagrams   = this.getDiagrams();
+        Object[] context    = new Object[diagrams.length + 1];
+                 context[0] = "Project";
+        System.arraycopy(diagrams, 0, context, 1, diagrams.length);
+        return   context;
     }
     
     /**
@@ -141,5 +154,13 @@ public class ControllerProject {
         for (int i = 0; i < list.size(); i++)
                  array[i] = list.get(i);
         return   array;
+    }
+    
+    /**
+     * Method responsible for returning the Requirements Array.
+     * @return Requirements Array.
+     */
+    public Requirement[] getRequirements() {
+        return (Requirement[]) this.project.getRequirementsList().toArray();
     }
 }
