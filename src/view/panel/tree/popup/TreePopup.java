@@ -1,7 +1,5 @@
 package view.panel.tree.popup;
 
-import controller.view.panel.tree.popup.event.ControllerMenuItemDelete;
-import controller.view.panel.tree.popup.event.ControllerMenuItemEdit;
 import funct.FunctView;
 import java.awt.Font;
 import java.util.HashMap;
@@ -13,13 +11,13 @@ import view.panel.tree.base.PanelTree;
  * <p>Class of View <b>TreePopup</b>.</p>
  * <p>Class responsible for defining the <b>Tree Popup</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  2019-05-2019
+ * @since  2019-05-20
  * @see    javax.swing.JPopupMenu
  * @see    view.panel.tree.base.PanelTree
  */
-public final class TreePopup extends JPopupMenu {
-    private final PanelTree panel;
-    private final HashMap   items;
+public abstract class TreePopup extends JPopupMenu {
+    protected final PanelTree panel;
+    protected final HashMap   items;
     
     /**
      * Default constructor method of Class.
@@ -28,20 +26,25 @@ public final class TreePopup extends JPopupMenu {
     public TreePopup(PanelTree panel) {
         this.panel = panel;
         this.items = new HashMap<>();
-        this.addComponents();
     }
     
     /**
-     * Method responsible for adding the Components to Popup.
+     * Method responsible for creating the Menu Items.
      */
-    protected void addComponents() {
-        this.add(this.createMenuItem("editMenuItem",    "Edit",    "edit.png"));
-        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
-        this.add(this.createMenuItem("deleteMenuItem",  "Delete",  "delete.png"));
-        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
-//        this.add(this.createMenuItem("detailsMenuItem", "Details", "details.png"));
-//        this.getDetailsMenuItem().addActionListener(new ControllerMenuItemDetails(this));
+    protected void createMenuItems() {
+        this.createMenuItem("editMenuItem",   "Edit",   "edit");
+        this.createMenuItem("deleteMenuItem", "Delete", "delete");
     }
+    
+    /**
+     * Method responsible for setting the Menu Items Controllers.
+     */
+    protected abstract void setControllers();
+    
+    /**
+     * Method responsible for adding the Menu Items to Popup.
+     */
+    protected abstract void addMenuItems();
     
     /**
      * Method responsible for returning a New JMenuItem.
@@ -53,7 +56,7 @@ public final class TreePopup extends JPopupMenu {
     protected JMenuItem createMenuItem(String id, String title, String url) {
         JMenuItem menuItem = new JMenuItem();
                   menuItem.setText(title);
-                  menuItem.setIcon(new FunctView().createImage("icons/" + url));
+                  menuItem.setIcon(new FunctView().createImage("icons/" + url + ".png"));
                   menuItem.setFont(new Font("Arial", Font.BOLD, 15));
         this.items.put(id, menuItem);
         return    menuItem;
@@ -89,13 +92,5 @@ public final class TreePopup extends JPopupMenu {
      */
     public JMenuItem getDeleteMenuItem() {
         return this.getItems().get("deleteMenuItem");
-    }
-
-    /**
-     * Method responsible for returning the Details Menu Item.
-     * @return Details Menu Item.
-     */
-    public JMenuItem getDetailsMenuItem() {
-        return this.getItems().get("detailsMenuItem");
     }
 }

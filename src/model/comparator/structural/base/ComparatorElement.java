@@ -15,7 +15,7 @@ public class ComparatorElement implements Comparator<Element> {
     @Override
     public int compare(Element element1, Element element2) {
         return element1.getType().equals(element2.getType())  ?
-               element1.getName().compareTo(element2.getId()) :
+               element1.getName().compareTo(element2.getName()) :
                element1.getType().compareTo(element2.getType());
     }
 }

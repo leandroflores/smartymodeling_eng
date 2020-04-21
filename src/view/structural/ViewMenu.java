@@ -33,7 +33,7 @@ import view.panel.project.PanelProject;
  * <p>Class of View <b>ViewMenu</b>.</p>
  * <p>Class responsible for defining the <b>View Menu</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  21/05/2019
+ * @since  2019-05-21
  * @see    controller.view.structural.ControllerViewMenu
  * @see    view.interfaces.Operation
  * @see    view.View

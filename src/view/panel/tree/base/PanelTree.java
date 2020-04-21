@@ -12,7 +12,7 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import view.panel.Panel;
-import view.panel.tree.popup.TreePopup;
+import view.panel.tree.popup.diagram.TreePopup;
 import view.structural.ViewMenu;
 
 /**

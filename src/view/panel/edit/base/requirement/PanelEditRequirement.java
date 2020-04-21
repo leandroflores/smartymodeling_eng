@@ -1,7 +1,6 @@
 package view.panel.edit.base.requirement;
 
 import java.awt.Dimension;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.requirement.Requirement;
 import view.panel.base.requirement.PanelBaseRequirement;
@@ -37,7 +36,7 @@ public final class PanelEditRequirement extends PanelEdit {
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.setPreferredSize(new Dimension(100, 100));
             this.addPanelBaseRequirement();
-            this.addPanelBaseRequirementTraceability();
+            this.addPanelBaseRequirementDiagrams();
         this.add(this.tabbedPane);
     }
     
@@ -46,15 +45,15 @@ public final class PanelEditRequirement extends PanelEdit {
      */
     private void addPanelBaseRequirement() {
         this.addPanel("panelBaseRequirement", new PanelBaseRequirement(this.getViewMenu(), this.requirement));
-        this.createScrollPane("scrollPanelBaseRequirement",  this.getPanelBaseRequirement());
-        this.getScrollPanelBaseRequirement().setViewportView(this.getPanelBaseRequirement());
-        this.tabbedPane.add("Requirement", this.getScrollPanelBaseRequirement());
+        this.createScrollPane("scrollPanelBaseRequirement", this.getPanelBaseRequirement());
+        this.getScrollPane("scrollPanelBaseRequirement").setViewportView(this.getPanelBaseRequirement());
+        this.tabbedPane.add("Requirement", this.getScrollPane("scrollPanelBaseRequirement"));
     }
     
     /**
-     * Method responsible for adding the Panel Base Requirement Traceability.
+     * Method responsible for adding the Panel Base Requirement Diagrams.
      */
-    private void addPanelBaseRequirementTraceability() {
+    private void addPanelBaseRequirementDiagrams() {
         String[] types = {"Feature", "UseCase", "Class", "Component", "Sequence", "Activity"};
         for (int i = 0; i < types.length; i++) {
             String type      = types[i];
@@ -74,14 +73,6 @@ public final class PanelEditRequirement extends PanelEdit {
      */
     public PanelBaseRequirement getPanelBaseRequirement() {
         return (PanelBaseRequirement) this.getPanel("panelBaseRequirement");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Requirement.
-     * @return Scroll Panel Base Requirement.
-     */
-    public JScrollPane getScrollPanelBaseRequirement() {
-        return this.getScrollPane("scrollPanelBaseRequirement");
     }
     
     /**

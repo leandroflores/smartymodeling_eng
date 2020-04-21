@@ -33,16 +33,16 @@ import view.edit.base.ViewEditElement;
 import view.edit.base.ViewEditProject;
 import view.edit.diagram.classes.ViewEditAttributeUML;
 import view.edit.diagram.classes.ViewEditMethodUML;
-import view.panel.tree.popup.TreePopup;
+import view.panel.tree.popup.diagram.TreePopup;
 
 /**
  * <p>Class of Controller <b>ControllerTreePopup</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>Tree Popup</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>TreePoput</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  27/05/2019
+ * @since  2019-05-27
  * @see    java.awt.event.KeyListener
  * @see    java.awt.event.MouseListener
- * @see    view.panel.tree.popup.TreePopup
+ * @see    view.panel.tree.popup.diagram.TreePopup
  */
 public class ControllerTreePopup implements MouseListener, KeyListener {
     private final TreePopup treePopup;
