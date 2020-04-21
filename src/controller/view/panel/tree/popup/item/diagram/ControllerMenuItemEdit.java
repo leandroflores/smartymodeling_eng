@@ -1,4 +1,4 @@
-package controller.view.panel.tree.popup.diagram;
+package controller.view.panel.tree.popup.item.diagram;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +18,7 @@ import view.edit.base.requirement.ViewEditRequirement;
 import view.edit.base.variability.ViewEditVariability;
 import view.edit.diagram.classes.ViewEditAttributeUML;
 import view.edit.diagram.classes.ViewEditMethodUML;
-import view.panel.tree.popup.diagram.TreePopup;
+import view.panel.tree.popup.diagram.TreePopupDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerMenuItemEdit</b>.</p>
@@ -26,16 +26,16 @@ import view.panel.tree.popup.diagram.TreePopup;
  * @author Leandro
  * @since  27/05/2019
  * @see    java.awt.event.ActionListener
- * @see    view.panel.tree.popup.diagram.TreePopup
+ * @see    view.panel.tree.popup.diagram.TreePopupDiagram
  */
 public class ControllerMenuItemEdit implements ActionListener {
-    private final TreePopup popup;
+    private final TreePopupDiagram popup;
     
     /**
      * Default constructor method of Class.
      * @param popup Tree Popup.
      */
-    public ControllerMenuItemEdit(TreePopup popup) {
+    public ControllerMenuItemEdit(TreePopupDiagram popup) {
         this.popup = popup;
     }
 

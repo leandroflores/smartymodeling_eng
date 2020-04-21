@@ -1,4 +1,4 @@
-package controller.view.panel.tree.popup.diagram;
+package controller.view.panel.tree.popup.item.diagram;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,24 +20,24 @@ import view.delete.base.requirement.ViewDeleteRequirement;
 import view.delete.base.traceability.ViewDeleteTraceability;
 import view.delete.base.variability.ViewDeleteVariability;
 import view.panel.modeling.PanelModeling;
-import view.panel.tree.popup.diagram.TreePopup;
+import view.panel.tree.popup.diagram.TreePopupDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerMenuItemDelete</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>Menu Item Delete</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>MenuItemDelete</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  27/05/2019
+ * @since  2020-04-21
  * @see    java.awt.event.ActionListener
- * @see    view.panel.tree.popup.diagram.TreePopup
+ * @see    view.panel.tree.popup.diagram.TreePopupDiagram
  */
 public class ControllerMenuItemDelete implements ActionListener {
-    private final TreePopup popup;
+    private final TreePopupDiagram popup;
     
     /**
      * Default constructor method of Class.
      * @param popup Tree Popup.
      */
-    public ControllerMenuItemDelete(TreePopup popup) {
+    public ControllerMenuItemDelete(TreePopupDiagram popup) {
         this.popup = popup;
     }
 

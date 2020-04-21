@@ -1,6 +1,5 @@
 package view.panel.tree.base;
 
-import controller.view.panel.tree.popup.ControllerTreePopup;
 import java.awt.FlowLayout;
 import java.util.HashMap;
 import javax.swing.JTree;
@@ -12,7 +11,7 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import view.panel.Panel;
-import view.panel.tree.popup.diagram.TreePopup;
+import view.panel.tree.popup.TreePopup;
 import view.structural.ViewMenu;
 
 /**
@@ -20,6 +19,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-05-27
+ * @see    controller.view.panel.tree.
  * @see    model.structural.base.Project
  * @see    view.panel.Panel
  */
@@ -44,7 +44,9 @@ public abstract class PanelTree extends Panel {
     public void addComponents() {
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.initTree();
-        this.addControllers();
+        this.initTreeRenderer();
+        this.initTreePopup();
+        this.setControllers();
         this.add(this.tree);
     }
     
@@ -53,17 +55,23 @@ public abstract class PanelTree extends Panel {
      */
     protected void initTree() {
         this.tree  = new JTree(this.createNode(this.getProject()));
-        this.popup = new TreePopup(this);
+        this.tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     }
     
     /**
-     * Method responsible for adding the Tree Controllers.
+     * Method responsible for initializing the Tree Renderer.
      */
-    protected void addControllers() {
-        this.tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        this.tree.addMouseListener(new ControllerTreePopup(this.popup));
-        this.tree.addKeyListener(new ControllerTreePopup(this.popup));
-    }
+    protected abstract void initTreeRenderer();
+    
+    /**
+     * Method responsible for initializing the Tree Popup.
+     */
+    protected abstract void initTreePopup();
+    
+    /**
+     * Method responsible for setting the Tree Controllers.
+     */
+    protected abstract void setControllers();
     
     /**
      * Method responsible for expanding the Tree.
@@ -204,10 +212,18 @@ public abstract class PanelTree extends Panel {
     }
     
     /**
-     * Method responsible for returning the Tree.
+     * Method responsible for returning the Tree Model.
      * @return Tree Model.
      */
     public DefaultTreeModel getTreeModel() {
         return (DefaultTreeModel) this.tree.getModel();
+    }
+    
+    /**
+     * Method Method responsible for returning the Tree Popup.
+     * @return Tree Popup.
+     */
+    public TreePopup getPopup() {
+        return this.popup;
     }
 }

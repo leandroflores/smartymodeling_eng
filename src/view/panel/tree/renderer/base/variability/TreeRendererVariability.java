@@ -8,14 +8,14 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.variability.Variability;
-import view.panel.tree.renderer.base.TreeRenderer;
+import view.panel.tree.renderer.TreeRenderer;
 
 /**
  * <p>Class of View <b>TreeRendererVariability</b>.</p>
  * <p>Class responsible for defining the <b>Variability Tree Renderer</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-14
- * @see    view.panel.tree.renderer.base.TreeRenderer
+ * @see    view.panel.tree.renderer.TreeRenderer
  */
 public class TreeRendererVariability extends TreeRenderer {
     

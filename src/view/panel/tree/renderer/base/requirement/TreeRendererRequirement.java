@@ -6,14 +6,15 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.requirement.Requirement;
-import view.panel.tree.renderer.base.TreeRenderer;
+import model.structural.base.traceability.Traceability;
+import view.panel.tree.renderer.TreeRenderer;
 
 /**
  * <p>Class of View <b>TreeRendererRequirement</b>.</p>
  * <p>Class responsible for defining the <b>Requirement Tree Renderer</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-15
- * @see    view.panel.tree.renderer.base.TreeRenderer
+ * @see    view.panel.tree.renderer.TreeRenderer
  */
 public class TreeRendererRequirement extends TreeRenderer {
     
@@ -36,6 +37,16 @@ public class TreeRendererRequirement extends TreeRenderer {
     }
     
     /**
+     * Method responsible for setting the Traceability.
+     * @param traceability Traceability.
+     */
+    public void setTraceabilityIcon(Traceability traceability) {
+        this.setText(traceability.getName());
+        this.setToolTipText(traceability.getName());
+        this.setIcon(this.getImage(traceability.getIcon()));
+    }
+    
+    /**
      * Method responsible for setting the Element Icon by Node.
      * @param element Element.
      * @param parent Parent Node.
@@ -54,6 +65,8 @@ public class TreeRendererRequirement extends TreeRenderer {
             this.setProjectIcon((Project) object);
         else if (object instanceof Requirement)
             this.setRequirementIcon((Requirement) object);
+        else if (object instanceof Traceability)
+            this.setTraceabilityIcon((Traceability) object);
         return this;
     }
 }

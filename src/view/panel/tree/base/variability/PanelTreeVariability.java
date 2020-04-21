@@ -6,6 +6,7 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.variability.Variability;
 import view.panel.tree.base.PanelTree;
+import view.panel.tree.popup.base.variability.TreePopupVariability;
 import view.panel.tree.renderer.base.variability.TreeRendererVariability;
 import view.structural.ViewMenu;
 
@@ -15,6 +16,7 @@ import view.structural.ViewMenu;
  * @author Leandro
  * @since  2020-04-14
  * @see    view.panel.tree.base.PanelTree
+ * @see    view.panel.tree.popup.base.variability.TreePopupVariability
  * @see    view.panel.tree.renderer.base.variability.TreeRendererVariability
  */
 public final class PanelTreeVariability extends PanelTree {
@@ -29,9 +31,19 @@ public final class PanelTreeVariability extends PanelTree {
     }
     
     @Override
-    protected void addControllers() {
-        super.addControllers();
+    protected void initTreeRenderer() {
         this.getTree().setCellRenderer(new TreeRendererVariability(this.getTree()));
+    }
+    
+    @Override
+    protected void initTreePopup() {
+        this.popup = new TreePopupVariability(this);
+    }
+    
+    @Override
+    protected void setControllers() {
+//        this.tree.addMouseListener(new ControllerTreePopup((TreePopupDiagram) this.popup));
+//        this.tree.addKeyListener(new ControllerTreePopup((TreePopupDiagram) this.popup));
     }
     
     @Override
@@ -152,5 +164,10 @@ public final class PanelTreeVariability extends PanelTree {
     private void updateVariants(Diagram diagram, Element element) {
         for (Variability variability : diagram.filterVariants(element, ""))
             this.updateNode(variability);
+    }
+    
+    @Override
+    public TreePopupVariability getPopup() {
+        return (TreePopupVariability) this.popup;
     }
 }

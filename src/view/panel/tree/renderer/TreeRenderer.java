@@ -1,4 +1,4 @@
-package view.panel.tree.renderer.base;
+package view.panel.tree.renderer;
 
 import funct.FunctView;
 import java.awt.Color;

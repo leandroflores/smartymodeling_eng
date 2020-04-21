@@ -1,4 +1,4 @@
-package controller.view.panel.tree.popup.base;
+package controller.view.panel.tree.popup.item;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,35 +8,35 @@ import view.panel.modeling.PanelModeling;
 import view.panel.tree.popup.TreePopup;
 
 /**
- * <p>Class of Controller <b>ControllerMenuItemDelete</b>.</p>
- * <p>Class responsible for controlling the <b>MenuItemDelete</b> Events of SMartyModeling.</p>
+ * <p>Class of Controller <b>ControllerMenuItem</b>.</p>
+ * <p>Class responsible for controlling the <b>MenuItem</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-21
  * @see    java.awt.event.ActionListener
  * @see    view.panel.tree.popup.TreePopup
  */
-public abstract class ControllerMenuItemDelete implements ActionListener {
+public abstract class ControllerMenuItem implements ActionListener {
     protected final TreePopup popup;
     
     /**
      * Default constructor method of Class.
      * @param popup Tree Popup.
      */
-    public ControllerMenuItemDelete(TreePopup popup) {
+    public ControllerMenuItem(TreePopup popup) {
         this.popup = popup;
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
         if (this.getSelectedNode() != null)
-            this.delete(this.getSelectedNode());
+            this.action(this.getSelectedNode());
     }
     
     /**
-     * Method responsible for deleting the Object Node.
-     * @param node 
+     * Method responsible for action the Object Node.
+     * @param node Object Node.
      */
-    protected abstract void delete(DefaultMutableTreeNode node);
+    protected abstract void action(DefaultMutableTreeNode node);
     
     /**
      * Method responsible for returning the Diagram Node.
@@ -64,5 +64,13 @@ public abstract class ControllerMenuItemDelete implements ActionListener {
      */
     protected PanelModeling getPanelModeling() {
         return this.popup.getPanel().getViewMenu().getPanelModeling();
+    }
+    
+    /**
+     * Method responsible for returning the Tree Popup.
+     * @return Tree Popup.
+     */
+    public TreePopup getPopup() {
+        return this.popup;
     }
 }

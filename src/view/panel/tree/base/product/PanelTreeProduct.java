@@ -8,6 +8,7 @@ import model.structural.base.product.Product;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.PackageUML;
 import view.panel.tree.base.PanelTree;
+import view.panel.tree.popup.base.product.TreePopupProduct;
 import view.panel.tree.renderer.base.product.TreeRendererProduct;
 import view.structural.ViewMenu;
 
@@ -17,6 +18,7 @@ import view.structural.ViewMenu;
  * @author Leandro
  * @since  2020-04-14
  * @see    view.panel.tree.base.PanelTree
+ * @see    view.panel.tree.popup.base.product.TreePopupProduct
  * @see    view.panel.tree.renderer.base.product.TreeRendererProduct
  */
 public final class PanelTreeProduct extends PanelTree {
@@ -31,9 +33,19 @@ public final class PanelTreeProduct extends PanelTree {
     }
     
     @Override
-    protected void addControllers() {
-        super.addControllers();
+    protected void initTreeRenderer() {
         this.getTree().setCellRenderer(new TreeRendererProduct(this.getTree()));
+    }
+    
+    @Override
+    protected void initTreePopup() {
+        this.popup = new TreePopupProduct(this);
+    }
+    
+    @Override
+    protected void setControllers() {
+//        this.tree.addMouseListener(new ControllerTreePopup((TreePopupDiagram) this.popup));
+//        this.tree.addKeyListener(new ControllerTreePopup((TreePopupDiagram) this.popup));
     }
     
     @Override
@@ -155,5 +167,10 @@ public final class PanelTreeProduct extends PanelTree {
     public void updateNode(Instance instance) {
         if (this.getNode(instance) != null)
             this.getTreeModel().reload(this.getNode(instance));
+    }
+    
+    @Override
+    public TreePopupProduct getPopup() {
+        return (TreePopupProduct) this.popup;
     }
 }

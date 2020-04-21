@@ -1,7 +1,7 @@
 package view.panel.tree.popup.base.requirement;
 
 import javax.swing.JMenuItem;
-import view.panel.tree.base.PanelTree;
+import view.panel.tree.base.requirement.PanelTreeRequirement;
 import view.panel.tree.popup.TreePopup;
 
 /**
@@ -9,17 +9,20 @@ import view.panel.tree.popup.TreePopup;
  * <p>Class responsible for defining the <b>Requirement Tree Popup</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-21
- * @see    javax.swing.JPopupMenu
+ * @see    view.panel.tree.base.requirement.PanelTreeRequirement
  * @see    view.panel.tree.popup.TreePopup
  */
 public final class TreePopupRequirement extends TreePopup {
     
     /**
      * Default constructor method of Class.
-     * @param panel Panel Tree.
+     * @param panel Panel Tree Requirement.
      */
-    public TreePopupRequirement(PanelTree panel) {
+    public TreePopupRequirement(PanelTreeRequirement panel) {
         super(panel);
+        createMenuItems();
+        setControllers();
+        addMenuItems();
     }
     
     @Override

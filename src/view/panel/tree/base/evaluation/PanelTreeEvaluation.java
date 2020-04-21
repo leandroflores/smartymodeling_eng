@@ -1,10 +1,12 @@
 package view.panel.tree.base.evaluation;
 
+import controller.view.panel.tree.popup.base.evalution.ControllerTreePopupEvaluation;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
 import view.panel.tree.base.PanelTree;
+import view.panel.tree.popup.base.evaluation.TreePopupEvaluation;
 import view.panel.tree.renderer.base.evaluation.TreeRendererEvaluation;
 import view.structural.ViewMenu;
 
@@ -14,6 +16,7 @@ import view.structural.ViewMenu;
  * @author Leandro
  * @since  2020-04-14
  * @see    view.panel.tree.base.PanelTree
+ * @see    view.panel.tree.popup.base.evaluation.TreePopupEvaluation
  * @see    view.panel.tree.renderer.base.evaluation.TreeRendererEvaluation
  */
 public final class PanelTreeEvaluation extends PanelTree {
@@ -28,9 +31,19 @@ public final class PanelTreeEvaluation extends PanelTree {
     }
     
     @Override
-    protected void addControllers() {
-        super.addControllers();
+    protected void initTreeRenderer() {
         this.getTree().setCellRenderer(new TreeRendererEvaluation(this.getTree()));
+    }
+    
+    @Override
+    protected void initTreePopup() {
+        this.popup = new TreePopupEvaluation(this);
+    }
+    
+    @Override
+    protected void setControllers() {
+        this.tree.addMouseListener(new ControllerTreePopupEvaluation(this.getPopup()));
+        this.tree.addKeyListener(new ControllerTreePopupEvaluation(this.getPopup()));
     }
     
     @Override
@@ -81,5 +94,10 @@ public final class PanelTreeEvaluation extends PanelTree {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(measure);
             super.addNode(measure, node);
         return node;
+    }
+    
+    @Override
+    public TreePopupEvaluation getPopup() {
+        return (TreePopupEvaluation) this.popup;
     }
 }

@@ -1,4 +1,4 @@
-package view.panel.tree.base.diagram;
+package view.panel.tree.diagram;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
@@ -10,7 +10,8 @@ import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.PackageUML;
 import view.panel.tree.base.PanelTree;
-import view.panel.tree.renderer.base.diagram.TreeRendererDiagram;
+import view.panel.tree.popup.diagram.TreePopupDiagram;
+import view.panel.tree.renderer.diagram.TreeRendererDiagram;
 import view.structural.ViewMenu;
 
 /**
@@ -19,7 +20,8 @@ import view.structural.ViewMenu;
  * @author Leandro
  * @since  2020-04-14
  * @see    view.panel.tree.base.PanelTree
- * @see    view.panel.tree.renderer.base.diagram.TreeRendererDiagram
+ * @see    view.panel.tree.popup.diagram.TreePopupDiagram
+ * @see    view.panel.tree.renderer.diagram.TreeRendererDiagram
  */
 public final class PanelTreeDiagram extends PanelTree {
     
@@ -29,13 +31,23 @@ public final class PanelTreeDiagram extends PanelTree {
      */
     public PanelTreeDiagram(ViewMenu view) {
         super(view);
-        this.addComponents();
+        super.addComponents();
     }
     
     @Override
-    protected void addControllers() {
-        super.addControllers();
+    protected void initTreeRenderer() {
         this.getTree().setCellRenderer(new TreeRendererDiagram(this.getTree()));
+    }
+    
+    @Override
+    protected void initTreePopup() {
+        this.popup = new TreePopupDiagram(this);
+    }
+    
+    @Override
+    protected void setControllers() {
+//        this.tree.addMouseListener(new ControllerTreePopup((TreePopupDiagram) this.popup));
+//        this.tree.addKeyListener(new ControllerTreePopup((TreePopupDiagram) this.popup));
     }
     
     @Override
@@ -255,5 +267,10 @@ public final class PanelTreeDiagram extends PanelTree {
     private void updateVariants(Diagram diagram, Element element) {
         for (Variability variability : diagram.filterVariants(element, ""))
             this.updateNode(variability);
+    }
+    
+    @Override
+    public TreePopupDiagram getPopup() {
+        return (TreePopupDiagram) this.popup;
     }
 }

@@ -7,14 +7,14 @@ import model.structural.base.Project;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
-import view.panel.tree.renderer.base.TreeRenderer;
+import view.panel.tree.renderer.TreeRenderer;
 
 /**
  * <p>Class of View <b>TreeRendererProduct</b>.</p>
  * <p>Class responsible for defining the <b>Product Tree Renderer</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-14
- * @see    view.panel.tree.renderer.base.TreeRenderer
+ * @see    view.panel.tree.renderer.TreeRenderer
  */
 public class TreeRendererProduct extends TreeRenderer {
     

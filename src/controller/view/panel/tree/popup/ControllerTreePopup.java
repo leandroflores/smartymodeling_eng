@@ -7,45 +7,21 @@ import java.awt.event.MouseListener;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
-import model.structural.base.Element;
-import model.structural.base.Project;
-import model.structural.base.association.Association;
-import model.structural.base.evaluation.Metric;
-import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
-import model.structural.base.product.Product;
-import model.structural.base.requirement.Requirement;
-import model.structural.base.traceability.Traceability;
-import model.structural.base.variability.Variability;
-import model.structural.diagram.ActivityDiagram;
-import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.ComponentDiagram;
-import model.structural.diagram.FeatureDiagram;
-import model.structural.diagram.SequenceDiagram;
-import model.structural.diagram.UseCaseDiagram;
-import model.structural.diagram.classes.base.AttributeUML;
-import model.structural.diagram.classes.base.MethodUML;
-import view.delete.base.ViewDeleteDiagram;
-import view.delete.base.ViewDeleteElement;
-import view.delete.base.variability.ViewDeleteVariability;
-import view.edit.base.ViewEditDiagram;
-import view.edit.base.ViewEditElement;
-import view.edit.base.ViewEditProject;
-import view.edit.diagram.classes.ViewEditAttributeUML;
-import view.edit.diagram.classes.ViewEditMethodUML;
-import view.panel.tree.popup.diagram.TreePopup;
+import view.panel.modeling.PanelModeling;
+import view.panel.tree.popup.TreePopup;
 
 /**
  * <p>Class of Controller <b>ControllerTreePopup</b>.</p>
- * <p>Class responsible for controlling the <b>TreePoput</b> Events of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>TreePopup</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  2019-05-27
+ * @since  2020-04-21
  * @see    java.awt.event.KeyListener
  * @see    java.awt.event.MouseListener
- * @see    view.panel.tree.popup.diagram.TreePopup
+ * @see    view.panel.tree.popup.TreePopup
  */
-public class ControllerTreePopup implements MouseListener, KeyListener {
-    private final TreePopup treePopup;
+public abstract class ControllerTreePopup implements MouseListener, KeyListener {
+    protected final TreePopup treePopup;
     
     /**
      * Default constructor method of Class.
@@ -56,23 +32,57 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
     }
     
     @Override
-    public void mouseReleased(MouseEvent event) {
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanel().getTree().getLastSelectedPathComponent();
-//        System.out.println("Released: " + node.getUserObject());
-//        System.out.println("");
-    }
+    public void mouseReleased(MouseEvent event) {}
 
     @Override
     public void mouseClicked(MouseEvent event) {
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanel().getTree().getLastSelectedPathComponent();
+        DefaultMutableTreeNode node = this.getSelectedNode();
         if (node != null) {
             if (!SwingUtilities.isLeftMouseButton(event))
                 this.showPopup(node, event);
             else if (event.getClickCount() == 1)
                 this.showPanelEdit(node);
             else if (event.getClickCount() == 2)
-                this.showPanel(node);
+                this.showPanelModeling(node);
         }
+    }
+    
+    /**
+     * Method responsible for showing the Popup.
+     * @param node Tree Node.
+     * @param event Mouse Event.
+     */
+    protected abstract void showPopup(DefaultMutableTreeNode node, MouseEvent event);
+
+    /**
+     * Method responsible for showing the Panel Edit.
+     * @param node Tree Node.
+     */
+    protected void showPanelEdit(DefaultMutableTreeNode node) {
+        if (node != null && node.getUserObject() != null)
+            this.showPanelEdit(node.getUserObject());
+    }
+    
+    /**
+     * Method responsible for showing the Panel Edit.
+     * @param object Object Node.
+     */
+    protected abstract void showPanelEdit(Object object);
+    
+    /**
+     * Method responsible for showing the Panel Modeling.
+     * @param node Tree Node.
+     */
+    protected void showPanelModeling(DefaultMutableTreeNode node) {
+        if (node.getUserObject() instanceof Diagram) 
+            this.treePopup.getPanel().getViewMenu().showDiagram( (Diagram)  node.getUserObject());
+        else if (node.getUserObject() instanceof Instance)
+            this.treePopup.getPanel().getViewMenu().showInstance((Instance) node.getUserObject());
+    }
+    
+    @Override
+    public void keyReleased(KeyEvent event) {
+        this.showPanelEdit(this.getSelectedNode());
     }
     
     @Override
@@ -89,229 +99,77 @@ public class ControllerTreePopup implements MouseListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent event) {
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanel().getTree().getLastSelectedPathComponent();
+        DefaultMutableTreeNode node = this.getSelectedNode();
         switch (event.getKeyCode()) {
             case KeyEvent.VK_ENTER:
-                this.showPanel(node);
+                this.showPanelModeling(node);
                 break;
             case KeyEvent.VK_DELETE:
-                this.delete(node.getUserObject(), node);
+                this.delete(node);
                 break;
             case KeyEvent.VK_F2:
-                this.edit(node.getUserObject(), node);
+                this.edit(node);
                 break;
             default:
                 break;
         }
     }
-
-    @Override
-    public void keyReleased(KeyEvent event) {
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.treePopup.getPanel().getTree().getLastSelectedPathComponent();
-        this.showPanelEdit(node);
+    
+    /**
+     * Method responsible for deleting the Object Node.
+     * @param node Tree Node.
+     */
+    protected void delete(DefaultMutableTreeNode node) {
+        if (node != null && node.getUserObject() != null)
+            this.delete(node.getUserObject());
     }
     
     /**
-     * Method responsible for showing Popup.
-     * @param node JTree Node.
-     * @param event Mouse Event.
+     * Method responsible for deleting the Object Node.
+     * @param object Object Node.
      */
-    private void showPopup(DefaultMutableTreeNode node, MouseEvent event) {
-        if (node.getUserObject() instanceof Project)
-            this.treePopup.getDeleteMenuItem().setVisible(false);
-        else
-            this.treePopup.getDeleteMenuItem().setVisible(true);
-        this.treePopup.show(event.getComponent(), event.getX(), event.getY());
-    }
-
+    protected abstract void delete(Object object);
+    
     /**
-     * Method responsible for showing the Panel Edit.
-     * @param node JTree Node.
+     * Method responsible for editing the Object Node.
+     * @param node Tree Node.
      */
-    private void showPanelEdit(DefaultMutableTreeNode node) {
-        if (node != null && node.getUserObject() != null) {
-            Diagram diagram = this.getDiagram(node);
-            if (node.getUserObject() instanceof Project)
-                this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
-            else if (node.getUserObject() instanceof Requirement)
-                this.showPanelEditRequirement((Requirement) node.getUserObject());
-            else if (node.getUserObject() instanceof Diagram)
-                this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) node.getUserObject());
-            else if (node.getUserObject() instanceof Variability)
-                this.showPanelEditVariability(diagram, (Variability) node.getUserObject());
-            else if (node.getUserObject() instanceof Traceability)
-                this.showPanelEditTraceability((Traceability) node.getUserObject());
-            else if (node.getUserObject() instanceof Metric)
-                this.showPanelEditMetric((Metric) node.getUserObject());
-            else if (node.getUserObject() instanceof Product)
-                this.showPanelEditProduct((Product) node.getUserObject());
-            else if (node.getUserObject() instanceof Instance)
-                this.showPanelEditInstance((Instance) node.getUserObject());
-            else if (node.getUserObject() instanceof Artifact)
-                this.showPanelEditArtifact((Artifact) node.getUserObject());
-            else if (node.getUserObject() instanceof Element)
-                this.showPanelEdit(diagram, (Element) node.getUserObject());
-            else if (node.getUserObject() instanceof Association)
-                this.showPanelEdit(diagram, (Association) node.getUserObject());
-        }
+    protected void edit(DefaultMutableTreeNode node) {
+        if (node != null && node.getUserObject() != null)
+            this.edit(node.getUserObject());
     }
     
     /**
-     * Method responsible for showing the Panel Edit Variability.
-     * @param diagram Diagram.
-     * @param variability Variability.
+     * Method responsible for deleting the Object Node.
+     * @param object Object Node.
      */
-    private void showPanelEditVariability(Diagram diagram, Variability variability) {
-        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, variability);
-    }
+    protected abstract void edit(Object object);
     
     /**
-     * Method responsible for showing the Panel Edit Requirement.
-     * @param requirement Requirement.
-     */
-    private void showPanelEditRequirement(Requirement requirement) {
-        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditRequirement(requirement);
-    }
-    
-    /**
-     * Method responsible for showing the Panel Edit Traceability.
-     * @param traceability Traceability.
-     */
-    private void showPanelEditTraceability(Traceability traceability) {
-        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditTraceability(traceability);
-    }
-    
-    /**
-     * Method responsible for showing the Panel Edit Metric.
-     * @param metric Metric.
-     */
-    private void showPanelEditMetric(Metric metric) {
-        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditMetric(metric);
-    }
-    
-    /**
-     * Method responsible for showing the Panel Edit Product.
-     * @param product Product.
-     */
-    private void showPanelEditProduct(Product product) {
-        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditProduct(product);
-    }
-    
-    /**
-     * Method responsible for showing the Panel Edit Instance.
-     * @param instance Instance.
-     */
-    private void showPanelEditInstance(Instance instance) {
-        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditInstance(instance);
-    }
-    
-    /**
-     * Method responsible for showing the Panel Edit Artifact.
-     * @param artifact Artifact.
-     */
-    private void showPanelEditArtifact(Artifact artifact) {
-        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditArtifact(artifact);
-    }
-    
-    /**
-     * Method responsible for showing the Panel Edit.
-     * @param diagram Diagram.
-     * @param element Element.
-     */
-    private void showPanelEdit(Diagram diagram, Element element) {
-        if (diagram instanceof FeatureDiagram)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((FeatureDiagram) diagram, element);
-        else if (diagram instanceof ActivityDiagram)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((ActivityDiagram) diagram, element);
-        else if (diagram instanceof ClassDiagram)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((ClassDiagram) diagram, element);
-        else if (diagram instanceof ComponentDiagram)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((ComponentDiagram) diagram, element);
-        else if (diagram instanceof UseCaseDiagram)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((UseCaseDiagram)  diagram, element);
-        else if (diagram instanceof SequenceDiagram)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((SequenceDiagram) diagram, element);
-    }
-    
-    /**
-     * Method responsible for showing the Panel Edit.
-     * @param diagram Diagram.
-     * @param association Association.
-     */
-    private void showPanelEdit(Diagram diagram, Association association) {
-        if (diagram instanceof ActivityDiagram)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditAssociation((ActivityDiagram) diagram, association);
-        else if (diagram instanceof SequenceDiagram)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditAssociation((SequenceDiagram) diagram, association);
-    }
-    
-    /**
-     * Method responsible for showing the Panel.
-     * @param node Object Node.
-     */
-    private void showPanel(DefaultMutableTreeNode node) {
-        if (node.getUserObject() instanceof Diagram) 
-            this.treePopup.getPanel().getViewMenu().showDiagram( (Diagram)  node.getUserObject());
-        else if (node.getUserObject() instanceof Instance)
-            this.treePopup.getPanel().getViewMenu().showInstance((Instance) node.getUserObject());
-    }
-    
-    /**
-     * Method responsible for deleting the JTree Node.
-     * @param object Object.
-     * @param node JTree Node.
-     */
-    private void delete(Object object, DefaultMutableTreeNode node) {
-        if (object instanceof Diagram)
-            new ViewDeleteDiagram(this.treePopup.getPanel().getViewMenu().getPanelModeling(), (Diagram) object).setVisible(true);
-        else if (object instanceof Element)
-            new ViewDeleteElement(this.treePopup.getPanel().getViewMenu().getPanelModeling(), 
-                                  this.getDiagram(node),
-                                  (Element) object).setVisible(true);
-        else if (object instanceof Variability)
-            new ViewDeleteVariability(this.treePopup.getPanel().getViewMenu().getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
-    }
-    
-    /**
-     * Method responsible for editing JTree Node.
-     * @param object Object.
-     * @param node JTree Node.
-     */
-    private void edit(Object object, DefaultMutableTreeNode node) {
-        if (object instanceof Project)
-            new ViewEditProject(this.treePopup.getPanel().getViewMenu().getPanelModeling(), ((Project) object)).setVisible(true);
-        else if (object instanceof Diagram)
-            new ViewEditDiagram(this.treePopup.getPanel().getViewMenu().getPanelModeling(), ((Diagram) object)).setVisible(true);
-        else if (object instanceof Variability)
-            this.editVariability(object, node);
-        else if (object instanceof AttributeUML)
-            new ViewEditAttributeUML(this.treePopup.getPanel().getViewMenu().getPanelModeling(), ((ClassDiagram) this.getDiagram(node)), ((AttributeUML) object)).setVisible(true);
-        else if (object instanceof MethodUML)
-            new ViewEditMethodUML(this.treePopup.getPanel().getViewMenu().getPanelModeling(), ((ClassDiagram) this.getDiagram(node)), ((MethodUML) object)).setVisible(true);
-        else if (object instanceof Element)
-            new ViewEditElement(this.treePopup.getPanel().getViewMenu().getPanelModeling(), this.getDiagram(node), ((Element) object)).setVisible(true);
-    }
-    
-    /**
-     * Method responsible for editing Variability.
-     * @param object Selected Object.
-     * @param node JTree Node.
-     */
-    private void editVariability(Object object, DefaultMutableTreeNode node) {
-        Diagram     diagram     = this.getDiagram((DefaultMutableTreeNode) node.getParent());
-        Variability variability = (Variability) object;
-        
-    }
-    
-    /**
-     * Method responsible for returning the Diagram from Node.
+     * Method responsible for returning the Diagram Node.
      * @param  node JTree Node.
-     * @return Diagram.
+     * @return Diagram Node.
      */
-    private Diagram getDiagram(DefaultMutableTreeNode node) {
+    protected Diagram getDiagram(DefaultMutableTreeNode node) {
         DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
         while ((parent != null) && !(parent.getUserObject() instanceof Diagram))
-            parent = (DefaultMutableTreeNode) parent.getParent();
-        return parent == null ? null : (Diagram) parent.getUserObject();
+                parent = (DefaultMutableTreeNode) parent.getParent();
+        return  parent == null ? null : (Diagram) parent.getUserObject();
+    }
+    
+    /**
+     * Method responsible for returning the Selected Node.
+     * @return Selected Node.
+     */
+    protected DefaultMutableTreeNode getSelectedNode() {
+        return (DefaultMutableTreeNode) this.treePopup.getPanel().getTree().getLastSelectedPathComponent();
+    }
+    
+    /**
+     * Method responsible for returning the Panel Modeling.
+     * @return Panel Modeling.
+     */
+    protected PanelModeling getPanelModeling() {
+        return this.treePopup.getPanel().getViewMenu().getPanelModeling();
     }
 }

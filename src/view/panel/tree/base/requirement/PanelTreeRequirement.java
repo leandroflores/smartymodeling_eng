@@ -5,6 +5,7 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.requirement.Requirement;
 import view.panel.tree.base.PanelTree;
+import view.panel.tree.popup.base.requirement.TreePopupRequirement;
 import view.panel.tree.renderer.base.requirement.TreeRendererRequirement;
 import view.structural.ViewMenu;
 
@@ -14,6 +15,7 @@ import view.structural.ViewMenu;
  * @author Leandro
  * @since  2020-04-15
  * @see    view.panel.tree.base.PanelTree
+ * @see    view.panel.tree.popup.base.requirement.TreePopupRequirement
  * @see    view.panel.tree.renderer.base.requirement.TreeRendererRequirement
  */
 public final class PanelTreeRequirement extends PanelTree {
@@ -28,9 +30,19 @@ public final class PanelTreeRequirement extends PanelTree {
     }
     
     @Override
-    protected void addControllers() {
-        super.addControllers();
+    protected void initTreeRenderer() {
         this.getTree().setCellRenderer(new TreeRendererRequirement(this.getTree()));
+    }
+    
+    @Override
+    protected void initTreePopup() {
+        this.popup = new TreePopupRequirement(this);
+    }
+    
+    @Override
+    protected void setControllers() {
+//        this.tree.addMouseListener(new ControllerTreePopup((TreePopupDiagram) this.popup));
+//        this.tree.addKeyListener(new ControllerTreePopup((TreePopupDiagram) this.popup));
     }
     
     @Override
@@ -79,5 +91,10 @@ public final class PanelTreeRequirement extends PanelTree {
     protected void addElements(Requirement requirement, DefaultMutableTreeNode node) {
         for (Element element : requirement.getAllElements())
             super.addElement(element, super.createNode(element), node);
+    }
+    
+    @Override
+    public TreePopupRequirement getPopup() {
+        return (TreePopupRequirement) this.popup;
     }
 }
