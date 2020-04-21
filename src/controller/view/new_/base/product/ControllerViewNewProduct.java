@@ -31,6 +31,7 @@ public class ControllerViewNewProduct extends ControllerViewNew {
     @Override
     public void new_() {
         this.getView().getProject().addProduct(this.getView().getProduct());
+        this.getView().getViewMenu().setTabIndex(4);
     }
     
     @Override

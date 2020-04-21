@@ -78,6 +78,7 @@ public class ControllerViewNewInstance extends ControllerViewNew {
     public void new_() {
         Instance instance = this.createNewInstance();
                  instance.getProduct().addInstance(instance);
+        this.getView().getViewMenu().setTabIndex(4);
         this.getView().getViewMenu().showInstance(instance);
     }
     

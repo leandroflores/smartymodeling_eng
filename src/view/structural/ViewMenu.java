@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
@@ -94,13 +93,13 @@ public final class ViewMenu extends View implements Operation {
         this.createExportMenu();
         this.createAboutMenu();
         
-        this.menuBar.add(this.getMenuFile());
-        this.menuBar.add(this.getMenuRequirement());
-        this.menuBar.add(this.getMenuDiagram());
-        this.menuBar.add(this.getMenuProductLine());
-        this.menuBar.add(this.getMenuEvaluation());
-        this.menuBar.add(this.getMenuExport());
-        this.menuBar.add(this.getMenuAbout());
+        this.menuBar.add(this.getMenu("file"));
+        this.menuBar.add(this.getMenu("requirement"));
+        this.menuBar.add(this.getMenu("diagram"));
+        this.menuBar.add(this.getMenu("productLine"));
+        this.menuBar.add(this.getMenu("evaluation"));
+        this.menuBar.add(this.getMenu("export"));
+        this.menuBar.add(this.getMenu("about"));
         
         this.setJMenuBar(this.menuBar);
     }
@@ -109,140 +108,141 @@ public final class ViewMenu extends View implements Operation {
      * Method responsible for creating File Menu.
      */
     private void createFileMenu() {
-        this.createMenu("menuFile", "File");
+        this.createMenu("file", "File");
         
-        this.createMenuItem("menuItemNewProject",   "New Project",   "file/new.png",  KeyEvent.VK_N);
-        this.createMenuItem("menuItemOpenProject",  "Open Project",  "file/open.png", KeyEvent.VK_O);
-        this.createMenuItem("menuItemSaveProject",  "Save Project",  "file/save.png", KeyEvent.VK_S);
-        this.createMenuItem("menuItemSaveAs",       "Save As",       "file/save.png");
-        this.createMenuItem("menuItemCloseProject", "Close Project", "file/close.png");
-        this.createMenuItem("menuItemExitSystem",   "Exit",          "file/exit.png", KeyEvent.VK_Q);
+        this.createMenuItem("new_project",   "New Project",   "file/new.png",  KeyEvent.VK_N);
+        this.createMenuItem("open_project",  "Open Project",  "file/open.png", KeyEvent.VK_O);
+        this.createMenuItem("save_project",  "Save Project",  "file/save.png", KeyEvent.VK_S);
+        this.createMenuItem("save_as",       "Save As",       "file/save.png");
+        this.createMenuItem("close_project", "Close Project", "file/close.png");
+        this.createMenuItem("exit_system",   "Exit",          "file/exit.png", KeyEvent.VK_Q);
         
-        this.getMenuFile().add(this.getMenuItemNewProject());
-        this.getMenuFile().addSeparator();
-        this.getMenuFile().add(this.getMenuItemOpenProject());
-        this.getMenuFile().add(this.getMenuItemSaveProject());
-        this.getMenuFile().add(this.getMenuItemSaveAs());
+        this.getMenu("file").add(this.getMenuItemNewProject());
+        this.getMenu("file").addSeparator();
+        this.getMenu("file").add(this.getMenuItemOpenProject());
+        this.getMenu("file").add(this.getMenuItemSaveProject());
+        this.getMenu("file").add(this.getMenuItemSaveAs());
         this.getMenuItemSaveProject().setEnabled(false);
         this.getMenuItemSaveAs().setEnabled(false);
-        this.getMenuFile().addSeparator();
-        this.getMenuFile().add(this.getMenuItemCloseProject());
+        this.getMenu("file").addSeparator();
+        this.getMenu("file").add(this.getMenuItemCloseProject());
         this.getMenuItemCloseProject().setEnabled(false);
-        this.getMenuFile().addSeparator();
-        this.getMenuFile().add(this.getMenuItemExitSystem());
+        this.getMenu("file").addSeparator();
+        this.getMenu("file").add(this.getMenuItemExitSystem());
     }
     
     /**
      * Method responsible for creating the Requirement Menu.
      */
     private void createRequirementMenu() {
-        this.createMenu("menuRequirement", "Requirement");
+        this.createMenu("requirement", "Requirement");
         
-        this.createMenuItem("menuItemNewRequirement",          "New Requirement",          "requirement/requirement.png",  KeyEvent.VK_R);
-        this.createMenuItem("menuItemRequirementTraceability", "Requirement Traceability", "requirement/traceability.png", KeyEvent.VK_T);
-        this.createMenuItem("menuItemRequirementMatrix",       "Requirement Matrix",       "requirement/matrix.png",       KeyEvent.VK_X);
+        this.createMenuItem("new_requirement",          "New Requirement",          "requirement/requirement.png",  KeyEvent.VK_R);
+        this.createMenuItem("requirement_traceability", "Requirement Traceability", "requirement/traceability.png", KeyEvent.VK_T);
+        this.createMenuItem("requirement_matriz",       "Requirement Matrix",       "requirement/matrix.png",       KeyEvent.VK_X);
         
         this.getMenuItemRequirementTraceability().setVisible(false);
         this.getMenuItemRequirementMatrix().setVisible(false);
         
-        this.getMenuRequirement().add(this.getMenuItemNewRequirement());
-        this.getMenuRequirement().addSeparator();
-        this.getMenuRequirement().add(this.getMenuItemRequirementTraceability());
-        this.getMenuRequirement().add(this.getMenuItemRequirementMatrix());
+        this.getMenu("requirement").add(this.getMenuItemNewRequirement());
+        this.getMenu("requirement").addSeparator();
+        this.getMenu("requirement").add(this.getMenuItemRequirementTraceability());
+        this.getMenu("requirement").add(this.getMenuItemRequirementMatrix());
     }
     
     /**
      * Method responsible for creating Diagram Menu.
      */
     private void createDiagramMenu() {
-        this.createMenu("menuDiagram", "New Diagram");
+        this.createMenu("diagram", "New Diagram");
         
-        this.createMenuItem("menuItemFeatureDiagram",   "Feature Diagram",   "diagram/feature.png",   KeyEvent.VK_F);
-        this.createMenuItem("menuItemUseCaseDiagram",   "Use Case Diagram",  "diagram/use-case.png",  KeyEvent.VK_U);
-        this.createMenuItem("menuItemClassDiagram",     "Class Diagram",     "diagram/class.png",     KeyEvent.VK_C);
-        this.createMenuItem("menuItemComponentDiagram", "Component Diagram", "diagram/component.png", KeyEvent.VK_M);
-        this.createMenuItem("menuItemSequenceDiagram",  "Sequence Diagram",  "diagram/sequence.png",  KeyEvent.VK_E);
-        this.createMenuItem("menuItemActivityDiagram",  "Activity Diagram",  "diagram/activity.png",  KeyEvent.VK_A);
+        this.createMenuItem("feature_diagram",   "Feature Diagram",   "diagram/feature.png",   KeyEvent.VK_F);
+        this.createMenuItem("usecase_diagram",   "Use Case Diagram",  "diagram/use-case.png",  KeyEvent.VK_U);
+        this.createMenuItem("class_diagram",     "Class Diagram",     "diagram/class.png",     KeyEvent.VK_C);
+        this.createMenuItem("component_diagram", "Component Diagram", "diagram/component.png", KeyEvent.VK_M);
+        this.createMenuItem("sequence_diagram",  "Sequence Diagram",  "diagram/sequence.png",  KeyEvent.VK_E);
+        this.createMenuItem("activity_diagram",  "Activity Diagram",  "diagram/activity.png",  KeyEvent.VK_A);
         
-        this.getMenuDiagram().add(this.getMenuItemFeatureDiagram());
-        this.getMenuDiagram().addSeparator();
-        this.getMenuDiagram().add(this.getMenuItemUseCaseDiagram());
-        this.getMenuDiagram().add(this.getMenuItemClassDiagram());
-        this.getMenuDiagram().add(this.getMenuItemComponentDiagram());
-        this.getMenuDiagram().add(this.getMenuItemSequenceDiagram());
-        this.getMenuDiagram().add(this.getMenuItemActivityDiagram());
+        this.getMenu("diagram").add(this.getMenuItemFeatureDiagram());
+        this.getMenu("diagram").addSeparator();
+        this.getMenu("diagram").add(this.getMenuItemUseCaseDiagram());
+        this.getMenu("diagram").add(this.getMenuItemClassDiagram());
+        this.getMenu("diagram").add(this.getMenuItemComponentDiagram());
+        this.getMenu("diagram").add(this.getMenuItemSequenceDiagram());
+        this.getMenu("diagram").add(this.getMenuItemActivityDiagram());
     }
     
     /**
      * Method responsible for creating Product Line Menu.
      */
     private void createProductLineMenu() {
-        this.createMenu("menuProductLine", "Product Line");
+        this.createMenu("productLine", "Product Line");
         
-        this.createMenuItem("menuItemEditProfile",        "Edit Profile",        "about/information.png",         KeyEvent.VK_L);
-        this.createMenuItem("menuItemNewProduct",         "New Product",         "product_line/product.png",      KeyEvent.VK_P);
-        this.createMenuItem("menuItemInstantiateProduct", "Instantiate Diagram", "about/information.png",         KeyEvent.VK_I);
-        this.createMenuItem("menuItemNewTraceability",    "New Traceability",    "product_line/traceability.png", KeyEvent.VK_Y);
+        this.createMenuItem("edit_profile",     "Edit Profile",     "product_line/profile.png",      KeyEvent.VK_L);
+        this.createMenuItem("new_product",      "New Product",      "product_line/product.png",      KeyEvent.VK_P);
+        this.createMenuItem("new_instance",     "New Instance",     "product_line/instance.png",     KeyEvent.VK_I);
+        this.createMenuItem("new_traceability", "New Traceability", "product_line/traceability.png", KeyEvent.VK_Y);
         
-        this.getMenuProductLine().add(this.getMenuItemEditProfile());
-        this.getMenuProductLine().add(this.getMenuItemNewProduct());
-        this.getMenuProductLine().add(this.getMenuItemInstantiateProduct());
-        this.getMenuProductLine().add(this.getMenuItemNewTraceability());
+        this.getMenu("productLine").add(this.getMenuItemEditProfile());
+        this.getMenu("productLine").addSeparator();
+        this.getMenu("productLine").add(this.getMenuItemNewProduct());
+        this.getMenu("productLine").add(this.getMenuItemNewInstance());
+        this.getMenu("productLine").add(this.getMenuItemNewTraceability());
     }
     
     /**
      * Method responsible for creating the Evaluation Menu.
      */
     private void createEvaluationMenu() {
-        this.createMenu("menuEvaluation", "Evaluation");
+        this.createMenu("evaluation", "Evaluation");
         
-        this.createMenuItem("menuItemEvaluationMetric",  "New Metric",  "evaluation/metric.png");
-        this.createMenuItem("menuItemEvaluationMeasure", "New Measure", "evaluation/measure.png");
+        this.createMenuItem("new_metric",  "New Metric",  "evaluation/metric.png");
+        this.createMenuItem("new_measure", "New Measure", "evaluation/measure.png");
         
-        this.createMenuItem("menuItemEvaluationProject", "Evaluate Project", "evaluation/project.png");
-        this.createMenuItem("menuItemEvaluationDiagram", "Evaluate Diagram", "evaluation/diagram.png");
-        this.createMenuItem("menuItemEvaluationProduct", "Evaluate Product", "evaluation/product.png");
+        this.createMenuItem("evaluate_project", "Evaluate Project", "evaluation/project.png");
+        this.createMenuItem("evaluate_diagram", "Evaluate Diagram", "evaluation/diagram.png");
+        this.createMenuItem("evaluate_product", "Evaluate Product", "evaluation/product.png");
         
-        this.getMenuEvaluation().add(this.getMenuItemEvaluationMetric());
-        this.getMenuEvaluation().add(this.getMenuItemEvaluationMeasure());
-        this.getMenuEvaluation().addSeparator();
-        this.getMenuEvaluation().add(this.getMenuItemEvaluationProject());
-        this.getMenuEvaluation().add(this.getMenuItemEvaluationDiagram());
-        this.getMenuEvaluation().add(this.getMenuItemEvaluationProduct());
+        this.getMenu("evaluation").add(this.getMenuItemEvaluationMetric());
+        this.getMenu("evaluation").add(this.getMenuItemEvaluationMeasure());
+        this.getMenu("evaluation").addSeparator();
+        this.getMenu("evaluation").add(this.getMenuItemEvaluationProject());
+        this.getMenu("evaluation").add(this.getMenuItemEvaluationDiagram());
+        this.getMenu("evaluation").add(this.getMenuItemEvaluationProduct());
     }
     
     /**
      * Method responsible for creating the Export Menu.
      */
     private void createExportMenu() {
-        this.createMenu("menuExport", "Export");
+        this.createMenu("export", "Export");
         
-        this.createMenuItem("menuItemExportDiagram",     "Export Diagram",       "export/diagram.png");
-        this.createMenuItem("menuItemExportProduct",      "Export Product",       "export/product.png");
-        this.createMenuItem("menuItemExportDiagramCode",  "Export Diagram Code",  "export/code-diagram.png");
-        this.createMenuItem("menuItemExportInstanceCode", "Export Instance Code", "export/code-instance.png");
+        this.createMenuItem("export_diagram", "Export Diagram",       "export/diagram.png");
+        this.createMenuItem("export_product", "Export Product",       "export/product.png");
+        this.createMenuItem("diagram_code",   "Export Diagram Code",  "export/code-diagram.png");
+        this.createMenuItem("instance_code",  "Export Instance Code", "export/code-instance.png");
         
-        this.getMenuExport().add(this.getMenuItemExportDiagram());
-        this.getMenuExport().add(this.getMenuItemExportProduct());
-        this.getMenuExport().addSeparator();
-        this.getMenuExport().add(this.getMenuItemExportDiagramCode());
-        this.getMenuExport().add(this.getMenuItemExportInstanceCode());
+        this.getMenu("export").add(this.getMenuItemExportDiagram());
+        this.getMenu("export").add(this.getMenuItemExportProduct());
+        this.getMenu("export").addSeparator();
+        this.getMenu("export").add(this.getMenuItemExportDiagramCode());
+        this.getMenu("export").add(this.getMenuItemExportInstanceCode());
     }
     
     /**
      * Method responsible for creating the About Menu.
      */
     private void createAboutMenu() {
-        this.createMenu("menuAbout", "About");
+        this.createMenu("about", "About");
         
-        this.createMenuItem("menuItemAboutInformation", "Information", "about/information.png", KeyEvent.VK_F2);
-        this.createMenuItem("menuItemAboutSite",        "Site",        "about/site.png", KeyEvent.VK_W);
-        this.createMenuItem("menuItemAboutExit",        "Exit",        "about/exit.png", KeyEvent.VK_F4);
+        this.createMenuItem("about_info", "Information", "about/information.png", KeyEvent.VK_F2);
+        this.createMenuItem("about_site",  "Site",       "about/site.png", KeyEvent.VK_W);
+        this.createMenuItem("about_exit",  "Exit",       "about/exit.png", KeyEvent.VK_F4);
         
-        this.getMenuAbout().add(this.getMenuItemAboutInformation());
-        this.getMenuAbout().add(this.getMenuItemAboutSite());
-        this.getMenuAbout().addSeparator();
-        this.getMenuAbout().add(this.getMenuItemAboutExit());
+        this.getMenu("about").add(this.getMenuItemAboutInformation());
+        this.getMenu("about").add(this.getMenuItemAboutSite());
+        this.getMenu("about").addSeparator();
+        this.getMenu("about").add(this.getMenuItemAboutExit());
     }
     
     /**
@@ -388,7 +388,7 @@ public final class ViewMenu extends View implements Operation {
         
         this.getMenuItemEditProfile().setEnabled(flag);
         this.getMenuItemNewProduct().setEnabled(flag);
-        this.getMenuItemInstantiateProduct().setEnabled(flag);
+        this.getMenuItemNewInstance().setEnabled(flag);
         this.getMenuItemNewTraceability().setEnabled(flag);
         
         this.getMenuItemExportDiagram().setEnabled(flag);
@@ -455,6 +455,14 @@ public final class ViewMenu extends View implements Operation {
     public Integer getTabIndex() {
         Integer index = this.panelProject.getPanelTree().getTabbedPane().getSelectedIndex();
         return  index < 0 ? 0 : index;
+    }
+    
+    /**
+     * Method responsible for setting the Tab Index.
+     * @param index Tab Index.
+     */
+    public void setTabIndex(Integer index) {
+        this.panelProject.getPanelTree().getTabbedPane().setSelectedIndex(index);
     }
     
     /**
@@ -569,19 +577,11 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu File.
-     * @return Menu File.
-     */
-    public JMenu getMenuFile() {
-        return this.getMenu("menuFile");
-    }
-    
-    /**
      * Method responsible for returning Menu Item New Project.
      * @return Menu Item New Project.
      */
     public JMenuItem getMenuItemNewProject() {
-        return this.getMenuItem("menuItemNewProject");
+        return this.getMenuItem("new_project");
     }
     
     /**
@@ -589,7 +589,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Open Project.
      */
     public JMenuItem getMenuItemOpenProject() {
-        return this.getMenuItem("menuItemOpenProject");
+        return this.getMenuItem("open_project");
     }
     
     /**
@@ -597,7 +597,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Save Project.
      */
     public JMenuItem getMenuItemSaveProject() {
-        return this.getMenuItem("menuItemSaveProject");
+        return this.getMenuItem("save_project");
     }
     
     /**
@@ -605,7 +605,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Save As.
      */
     public JMenuItem getMenuItemSaveAs() {
-        return this.getMenuItem("menuItemSaveAs");
+        return this.getMenuItem("save_as");
     }
     
     /**
@@ -613,7 +613,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Close Project.
      */
     public JMenuItem getMenuItemCloseProject() {
-        return this.getMenuItem("menuItemCloseProject");
+        return this.getMenuItem("close_project");
     }
     
     /**
@@ -621,15 +621,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Exit System.
      */
     public JMenuItem getMenuItemExitSystem() {
-        return this.getMenuItem("menuItemExitSystem");
-    }
-    
-    /**
-     * Method responsible for returning Menu Requirement.
-     * @return Menu Requirement.
-     */
-    public JMenu getMenuRequirement() {
-        return this.getMenu("menuRequirement");
+        return this.getMenuItem("exit_system");
     }
     
     /**
@@ -637,7 +629,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item New Requirement.
      */
     public JMenuItem getMenuItemNewRequirement() {
-        return this.getMenuItem("menuItemNewRequirement");
+        return this.getMenuItem("new_requirement");
     }
     
     /**
@@ -645,7 +637,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Requirement Traceability.
      */
     public JMenuItem getMenuItemRequirementTraceability() {
-        return this.getMenuItem("menuItemRequirementTraceability");
+        return this.getMenuItem("requirement_traceability");
     }
     
     /**
@@ -653,15 +645,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Requirement Matrix.
      */
     public JMenuItem getMenuItemRequirementMatrix() {
-        return this.getMenuItem("menuItemRequirementMatrix");
-    }
-    
-    /**
-     * Method responsible for returning Menu Diagram.
-     * @return Menu Diagram.
-     */
-    public JMenu getMenuDiagram() {
-        return this.getMenu("menuDiagram");
+        return this.getMenuItem("requirement_matriz");
     }
     
     /**
@@ -669,7 +653,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Feature Diagram.
      */
     public JMenuItem getMenuItemFeatureDiagram() {
-        return this.getMenuItem("menuItemFeatureDiagram");
+        return this.getMenuItem("feature_diagram");
     }
     
     /**
@@ -677,7 +661,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Use Case Diagram.
      */
     public JMenuItem getMenuItemUseCaseDiagram() {
-        return this.getMenuItem("menuItemUseCaseDiagram");
+        return this.getMenuItem("usecase_diagram");
     }
     
     /**
@@ -685,7 +669,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Class Diagram.
      */
     public JMenuItem getMenuItemClassDiagram() {
-        return this.getMenuItem("menuItemClassDiagram");
+        return this.getMenuItem("class_diagram");
     }
     
     /**
@@ -693,7 +677,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Component Diagram.
      */
     public JMenuItem getMenuItemComponentDiagram() {
-        return this.getMenuItem("menuItemComponentDiagram");
+        return this.getMenuItem("component_diagram");
     }
     
     /**
@@ -701,7 +685,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Sequence Diagram.
      */
     public JMenuItem getMenuItemSequenceDiagram() {
-        return this.getMenuItem("menuItemSequenceDiagram");
+        return this.getMenuItem("sequence_diagram");
     }
     
     /**
@@ -709,15 +693,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Activity Diagram.
      */
     public JMenuItem getMenuItemActivityDiagram() {
-        return this.getMenuItem("menuItemActivityDiagram");
-    }
-    
-    /**
-     * Method responsible for returning Menu Product Line.
-     * @return Menu Product Line.
-     */
-    public JMenu getMenuProductLine() {
-        return this.getMenu("menuProductLine");
+        return this.getMenuItem("activity_diagram");
     }
     
     /**
@@ -725,7 +701,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Edit Profile.
      */
     public JMenuItem getMenuItemEditProfile() {
-        return this.getMenuItem("menuItemEditProfile");
+        return this.getMenuItem("edit_profile");
     }
     
     /**
@@ -733,15 +709,15 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item New Product.
      */
     public JMenuItem getMenuItemNewProduct() {
-        return this.getMenuItem("menuItemNewProduct");
+        return this.getMenuItem("new_product");
     }
     
     /**
-     * Method responsible for returning the Menu Item Instantiate Product.
-     * @return Menu Item Instantiate Product.
+     * Method responsible for returning the Menu Item New Instance.
+     * @return Menu Item New Instance.
      */
-    public JMenuItem getMenuItemInstantiateProduct() {
-        return this.getMenuItem("menuItemInstantiateProduct");
+    public JMenuItem getMenuItemNewInstance() {
+        return this.getMenuItem("new_instance");
     }
     
     /**
@@ -749,15 +725,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item New Traceability.
      */
     public JMenuItem getMenuItemNewTraceability() {
-        return this.getMenuItem("menuItemNewTraceability");
-    }
-    
-    /**
-     * Method responsible for returning Menu Evaluation.
-     * @return Menu Evaluation.
-     */
-    public JMenu getMenuEvaluation() {
-        return this.getMenu("menuEvaluation");
+        return this.getMenuItem("new_traceability");
     }
     
     /**
@@ -765,7 +733,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Evaluation Metric.
      */
     public JMenuItem getMenuItemEvaluationMetric() {
-        return this.getMenuItem("menuItemEvaluationMetric");
+        return this.getMenuItem("new_metric");
     }
     
     /**
@@ -773,7 +741,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Evaluation Measure.
      */
     public JMenuItem getMenuItemEvaluationMeasure() {
-        return this.getMenuItem("menuItemEvaluationMeasure");
+        return this.getMenuItem("new_measure");
     }
     
     /**
@@ -781,7 +749,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Evaluation Project.
      */
     public JMenuItem getMenuItemEvaluationProject() {
-        return this.getMenuItem("menuItemEvaluationProject");
+        return this.getMenuItem("evaluate_project");
     }
     
     /**
@@ -789,7 +757,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Evaluation Diagram.
      */
     public JMenuItem getMenuItemEvaluationDiagram() {
-        return this.getMenuItem("menuItemEvaluationDiagram");
+        return this.getMenuItem("evaluate_diagram");
     }
     
     /**
@@ -797,15 +765,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Evaluation Product.
      */
     public JMenuItem getMenuItemEvaluationProduct() {
-        return this.getMenuItem("menuItemEvaluationProduct");
-    }
-    
-    /**
-     * Method responsible for returning the Menu Export.
-     * @return Menu Export.
-     */
-    public JMenu getMenuExport() {
-        return this.getMenu("menuExport");
+        return this.getMenuItem("evaluate_product");
     }
     
     /**
@@ -813,7 +773,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Export Diagram.
      */
     public JMenuItem getMenuItemExportDiagram() {
-        return this.getMenuItem("menuItemExportDiagram");
+        return this.getMenuItem("export_diagram");
     }
     
     /**
@@ -821,7 +781,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Export Product.
      */
     public JMenuItem getMenuItemExportProduct() {
-        return this.getMenuItem("menuItemExportProduct");
+        return this.getMenuItem("export_product");
     }
     
     /**
@@ -829,7 +789,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Export Diagram Code.
      */
     public JMenuItem getMenuItemExportDiagramCode() {
-        return this.getMenuItem("menuItemExportDiagramCode");
+        return this.getMenuItem("diagram_code");
     }
     
     /**
@@ -837,15 +797,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item Export Instance Code.
      */
     public JMenuItem getMenuItemExportInstanceCode() {
-        return this.getMenuItem("menuItemExportInstanceCode");
-    }
-    
-    /**
-     * Method responsible for returning Menu About.
-     * @return Menu About.
-     */
-    public JMenu getMenuAbout() {
-        return this.getMenu("menuAbout");
+        return this.getMenuItem("instance_code");
     }
     
     /**
@@ -853,7 +805,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item About Information.
      */
     public JMenuItem getMenuItemAboutInformation() {
-        return this.getMenuItem("menuItemAboutInformation");
+        return this.getMenuItem("about_info");
     }
     
     /**
@@ -861,7 +813,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item About Site.
      */
     public JMenuItem getMenuItemAboutSite() {
-        return this.getMenuItem("menuItemAboutSite");
+        return this.getMenuItem("about_site");
     }
 
     /**
@@ -869,7 +821,7 @@ public final class ViewMenu extends View implements Operation {
      * @return Menu Item About Exit.
      */
     public JMenuItem getMenuItemAboutExit() {
-        return this.getMenuItem("menuItemAboutExit");
+        return this.getMenuItem("about_exit");
     }
 
     /**

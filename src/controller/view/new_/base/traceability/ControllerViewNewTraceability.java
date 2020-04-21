@@ -45,6 +45,7 @@ public class ControllerViewNewTraceability extends ControllerViewNew {
     @Override
     public void new_() {
         this.getView().getProject().addTraceability(this.getView().getTraceability());
+        this.getView().getViewMenu().setTabIndex(0);
     }
     
     @Override

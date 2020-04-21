@@ -299,25 +299,23 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * Method responsible for creating a New Feature Diagram.
      */
     private void newFeatureDiagram() {
-        if (this.viewMenu.getProject() != null) {
-            FeatureDiagram diagram = new FeatureDiagram(this.viewMenu.getProject());
-            this.viewMenu.getProject().addDiagram(diagram);
-                           diagram.setDefaultName();
-            this.viewMenu.showDiagram(diagram);
-        }
+        FeatureDiagram diagram = new FeatureDiagram(this.viewMenu.getProject());
+        this.viewMenu.getProject().addDiagram(diagram);
+                       diagram.setDefaultName();
+        this.viewMenu.showDiagram(diagram);
+        this.viewMenu.setTabIndex(1);
         this.viewMenu.update();
     }
     
     /**
-     * Method responsible for creating a New Activity Diagram.
+     * Method responsible for creating a New Use Case Diagram.
      */
-    private void newActivityDiagram() {
-        if (this.viewMenu.getProject() != null) {
-            ActivityDiagram diagram = new ActivityDiagram(this.viewMenu.getProject());
-            this.viewMenu.getProject().addDiagram(diagram);
-                            diagram.setDefaultName();
-            this.viewMenu.showDiagram(diagram);
-        }
+    private void newUseCaseDiagram() {
+        UseCaseDiagram diagram = new UseCaseDiagram(this.viewMenu.getProject());
+        this.viewMenu.getProject().addDiagram(diagram);
+                       diagram.setDefaultName();
+        this.viewMenu.showDiagram(diagram);
+        this.viewMenu.setTabIndex(2);
         this.viewMenu.update();
     }
     
@@ -325,12 +323,11 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * Method responsible for creating a New Class Diagram.
      */
     private void newClassDiagram() {
-        if (this.viewMenu.getProject() != null) {
-            ClassDiagram diagram = new ClassDiagram(this.viewMenu.getProject());
-            this.viewMenu.getProject().addDiagram(diagram);
-                         diagram.setDefaultName();
-            this.viewMenu.showDiagram(diagram);
-        }
+        ClassDiagram diagram = new ClassDiagram(this.viewMenu.getProject());
+        this.viewMenu.getProject().addDiagram(diagram);
+                     diagram.setDefaultName();
+        this.viewMenu.showDiagram(diagram);
+        this.viewMenu.setTabIndex(2);
         this.viewMenu.update();
     }
     
@@ -338,28 +335,12 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * Method responsible for creating a New Component Diagram.
      */
     private void newComponentDiagram() {
-        if (this.viewMenu.getProject() != null) {
-            ComponentDiagram diagram = new ComponentDiagram(this.viewMenu.getProject());
-            this.viewMenu.getProject().addDiagram(diagram);
-                             diagram.setDefaultName();
-            this.viewMenu.showDiagram(diagram);
-        }
+        ComponentDiagram diagram = new ComponentDiagram(this.viewMenu.getProject());
+        this.viewMenu.getProject().addDiagram(diagram);
+                         diagram.setDefaultName();
+        this.viewMenu.showDiagram(diagram);
+        this.viewMenu.setTabIndex(2);
         this.viewMenu.update();
-    }
-    
-    /**
-     * Method responsible for creating a New Sequence Diagram.
-     */
-    private void newSequenceDiagram() {
-        if (this.checkNewSequenceDiagram()) {
-            SequenceDiagram diagram = new SequenceDiagram(this.viewMenu.getProject());
-            this.viewMenu.getProject().addDiagram(diagram);
-                            diagram.setDefaultName();
-            this.viewMenu.showDiagram(diagram);
-            this.viewMenu.update();
-        }else {
-            new ViewError(this.viewMenu, "Project without Actors or Classes!").setVisible(true);
-        }
     }
     
     /**
@@ -373,15 +354,30 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     }
     
     /**
-     * Method responsible for creating a New Use Case Diagram.
+     * Method responsible for creating a New Sequence Diagram.
      */
-    private void newUseCaseDiagram() {
-        if (this.viewMenu.getProject() != null) {
-            UseCaseDiagram diagram = new UseCaseDiagram(this.viewMenu.getProject());
+    private void newSequenceDiagram() {
+        if (this.checkNewSequenceDiagram()) {
+            SequenceDiagram diagram = new SequenceDiagram(this.viewMenu.getProject());
             this.viewMenu.getProject().addDiagram(diagram);
-                           diagram.setDefaultName();
+                            diagram.setDefaultName();
             this.viewMenu.showDiagram(diagram);
+            this.viewMenu.setTabIndex(2);
+            this.viewMenu.update();
+        }else {
+            new ViewError(this.viewMenu, "Project without Actors or Classes!").setVisible(true);
         }
+    }
+    
+    /**
+     * Method responsible for creating a New Activity Diagram.
+     */
+    private void newActivityDiagram() {
+        ActivityDiagram diagram = new ActivityDiagram(this.viewMenu.getProject());
+        this.viewMenu.getProject().addDiagram(diagram);
+                        diagram.setDefaultName();
+        this.viewMenu.showDiagram(diagram);
+        this.viewMenu.setTabIndex(2);
         this.viewMenu.update();
     }
     
@@ -394,8 +390,8 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             this.editProfile();
         else if (this.viewMenu.getMenuItemNewProduct().equals(event.getSource()))
             this.newProduct();
-        else if (this.viewMenu.getMenuItemInstantiateProduct().equals(event.getSource()))
-            this.instantiateNewProduct();
+        else if (this.viewMenu.getMenuItemNewInstance().equals(event.getSource()))
+            this.newInstance();
         else if (this.viewMenu.getMenuItemNewTraceability().equals(event.getSource()))
             this.newTraceability();
         else
@@ -414,28 +410,24 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * Method responsible for inserting a New Product.
      */
     private void newProduct() {
-        if (this.viewMenu.getProject() != null)
-            new ViewNewProduct(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+        new ViewNewProduct(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
     }
     
     /**
-     * Method responsible for instantiating a New Product.
+     * Method responsible for inserting a New Instance.
      */
-    private void instantiateNewProduct() {
-        if (this.viewMenu.getProject() != null)
-            new ViewNewInstance(this.viewMenu).setVisible(true);
+    private void newInstance() {
+        new ViewNewInstance(this.viewMenu).setVisible(true);
     }
     
     /**
      * Method responsible for inserting a New Traceability.
      */
     private void newTraceability() {
-        if (this.viewMenu.getProject() != null) {
-            if (!this.viewMenu.getProject().getDiagrams().isEmpty())
-                new ViewNewTraceability(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
-            else
-                new ViewMessage(this.viewMenu, "Project with no Elements!").setVisible(true);
-        }
+        if (!this.viewMenu.getProject().getDiagrams().isEmpty())
+            new ViewNewTraceability(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+        else
+            new ViewMessage(this.viewMenu, "Project with no Elements!").setVisible(true);
     }
     
     /**

@@ -42,6 +42,7 @@ public class ControllerViewNewMeasure extends ControllerViewNew {
         System.out.println(measure);
         System.out.println("");
 //        this.viewNewMeasure.getProject().addMeasure(measure);
+        this.getView().getViewMenu().setTabIndex(5);
     }
     
     @Override

@@ -31,6 +31,7 @@ public class ControllerViewNewRequirement extends ControllerViewNew {
     @Override
     public void new_() {
         this.getView().getProject().addRequirement(this.getView().getRequirement());
+        this.getView().getViewMenu().setTabIndex(0);
     }
     
     @Override

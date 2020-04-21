@@ -13,7 +13,6 @@ import view.new_.base.evaluation.ViewNewMetric;
  * @see    view.new_.base.evaluation.ViewNewMetric
  */
 public class ControllerViewNewMetric extends ControllerViewNew {
-    private final ViewNewMetric viewNewMetric;
 
     /**
      * Default constructor method of Class.
@@ -21,19 +20,19 @@ public class ControllerViewNewMetric extends ControllerViewNew {
      */
     public ControllerViewNewMetric(ViewNewMetric viewNew) {
         super(viewNew);
-        this.viewNewMetric = viewNew;
     }
     
     @Override
     public boolean check() {
-        return this.check(this.viewNewMetric.getPanelBaseMetric().getNameTextField(),  "Name is required!")
-            && this.check(this.viewNewMetric.getPanelBaseMetric().getLabelTextField(), "Label is required!")
-            && this.check(this.viewNewMetric.getPanelBaseOperation().getOperationTextField(), "Operation is required!");
+        return this.check(this.getView().getPanelBaseMetric().getNameTextField(),  "Name is required!")
+            && this.check(this.getView().getPanelBaseMetric().getLabelTextField(), "Label is required!")
+            && this.check(this.getView().getPanelBaseOperation().getOperationTextField(), "Operation is required!");
     }
 
     @Override
     public void new_() {
-        this.viewNewMetric.getProject().addMetric(this.viewNewMetric.getMetric());
+        this.getView().getProject().addMetric(this.getView().getMetric());
+        this.getView().getViewMenu().setTabIndex(5);
     }
     
     @Override
