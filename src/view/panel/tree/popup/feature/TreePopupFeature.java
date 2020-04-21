@@ -1,5 +1,7 @@
 package view.panel.tree.popup.feature;
 
+import controller.view.panel.tree.popup.item.feature.ControllerMenuItemDelete;
+import controller.view.panel.tree.popup.item.feature.ControllerMenuItemEdit;
 import view.panel.tree.feature.PanelTreeFeature;
 import view.panel.tree.popup.TreePopup;
 
@@ -19,15 +21,13 @@ public final class TreePopupFeature extends TreePopup {
      */
     public TreePopupFeature(PanelTreeFeature panel) {
         super(panel);
-        this.createMenuItems();
-        this.setControllers();
-        this.addMenuItems();
+        this.addComponents();
     }
     
     @Override
     protected void setControllers() {
-//        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
-//        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
+        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
+        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
     }
     
     @Override

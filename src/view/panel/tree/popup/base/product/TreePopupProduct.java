@@ -1,5 +1,7 @@
 package view.panel.tree.popup.base.product;
 
+import controller.view.panel.tree.popup.item.base.product.ControllerMenuItemDelete;
+import controller.view.panel.tree.popup.item.base.product.ControllerMenuItemEdit;
 import view.panel.tree.base.product.PanelTreeProduct;
 import view.panel.tree.popup.TreePopup;
 
@@ -19,15 +21,13 @@ public final class TreePopupProduct extends TreePopup {
      */
     public TreePopupProduct(PanelTreeProduct panel) {
         super(panel);
-        this.createMenuItems();
-        this.setControllers();
-        this.addMenuItems();
+        this.addComponents();
     }
     
     @Override
     protected void setControllers() {
-//        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
-//        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
+        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
+        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
     }
     
     @Override

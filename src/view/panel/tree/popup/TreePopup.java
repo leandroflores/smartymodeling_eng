@@ -29,6 +29,15 @@ public abstract class TreePopup extends JPopupMenu {
     }
     
     /**
+     * Method responsible for adding the Components.
+     */
+    protected void addComponents() {
+        this.createMenuItems();
+        this.setControllers();
+        this.addMenuItems();
+    }
+    
+    /**
      * Method responsible for creating the Menu Items.
      */
     protected void createMenuItems() {

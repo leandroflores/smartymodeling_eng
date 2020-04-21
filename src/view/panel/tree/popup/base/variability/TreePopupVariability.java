@@ -1,5 +1,7 @@
 package view.panel.tree.popup.base.variability;
 
+import controller.view.panel.tree.popup.item.base.variability.ControllerMenuItemDelete;
+import controller.view.panel.tree.popup.item.base.variability.ControllerMenuItemEdit;
 import view.panel.tree.base.variability.PanelTreeVariability;
 import view.panel.tree.popup.TreePopup;
 
@@ -19,15 +21,13 @@ public final class TreePopupVariability extends TreePopup {
      */
     public TreePopupVariability(PanelTreeVariability panel) {
         super(panel);
-        this.createMenuItems();
-        this.setControllers();
-        this.addMenuItems();
+        this.addComponents();
     }
     
     @Override
     protected void setControllers() {
-//        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
-//        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
+        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
+        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
     }
     
     @Override

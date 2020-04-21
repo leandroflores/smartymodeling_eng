@@ -60,14 +60,15 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
      */
     protected void showPanelEdit(DefaultMutableTreeNode node) {
         if (node != null && node.getUserObject() != null)
-            this.showPanelEdit(node.getUserObject());
+            this.showPanelEdit(node, node.getUserObject());
     }
     
     /**
      * Method responsible for showing the Panel Edit.
+     * @param node Tree Node.
      * @param object Object Node.
      */
-    protected abstract void showPanelEdit(Object object);
+    protected abstract void showPanelEdit(DefaultMutableTreeNode node, Object object);
     
     /**
      * Method responsible for showing the Panel Modeling.
@@ -121,14 +122,15 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
      */
     protected void delete(DefaultMutableTreeNode node) {
         if (node != null && node.getUserObject() != null)
-            this.delete(node.getUserObject());
+            this.delete(node, node.getUserObject());
     }
     
     /**
      * Method responsible for deleting the Object Node.
+     * @param node Tree Node.
      * @param object Object Node.
      */
-    protected abstract void delete(Object object);
+    protected abstract void delete(DefaultMutableTreeNode node, Object object);
     
     /**
      * Method responsible for editing the Object Node.
@@ -136,14 +138,15 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
      */
     protected void edit(DefaultMutableTreeNode node) {
         if (node != null && node.getUserObject() != null)
-            this.edit(node.getUserObject());
+            this.edit(node, node.getUserObject());
     }
     
     /**
      * Method responsible for deleting the Object Node.
+     * @param node Tree Node.
      * @param object Object Node.
      */
-    protected abstract void edit(Object object);
+    protected abstract void edit(DefaultMutableTreeNode node, Object object);
     
     /**
      * Method responsible for returning the Diagram Node.

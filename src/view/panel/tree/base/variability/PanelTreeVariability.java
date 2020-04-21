@@ -1,5 +1,6 @@
 package view.panel.tree.base.variability;
 
+import controller.view.panel.tree.popup.base.variability.ControllerTreePopupVariability;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
@@ -42,8 +43,8 @@ public final class PanelTreeVariability extends PanelTree {
     
     @Override
     protected void setControllers() {
-//        this.tree.addMouseListener(new ControllerTreePopup((TreePopupDiagram) this.popup));
-//        this.tree.addKeyListener(new ControllerTreePopup((TreePopupDiagram) this.popup));
+        this.tree.addMouseListener(new ControllerTreePopupVariability(this.getPopup()));
+        this.tree.addKeyListener(new ControllerTreePopupVariability(this.getPopup()));
     }
     
     @Override

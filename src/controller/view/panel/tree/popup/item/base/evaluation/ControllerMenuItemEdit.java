@@ -26,7 +26,8 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
     
     @Override
     protected void action(DefaultMutableTreeNode node) {
-        if (node.getUserObject() instanceof Metric)
-            new ViewEditMetric(this.popup.getPanel().getViewMenu().getPanelModeling(), (Metric) node.getUserObject()).setVisible(true);
+        Object object = node.getUserObject();
+        if (object instanceof Metric)
+            new ViewEditMetric(this.getPanelModeling(), (Metric) object).setVisible(true);
     }
 }

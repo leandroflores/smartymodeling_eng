@@ -1,5 +1,6 @@
 package view.panel.tree.diagram;
 
+import controller.view.panel.tree.popup.diagram.ControllerTreePopupDiagram;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
@@ -46,8 +47,8 @@ public final class PanelTreeDiagram extends PanelTree {
     
     @Override
     protected void setControllers() {
-//        this.tree.addMouseListener(new ControllerTreePopup((TreePopupDiagram) this.popup));
-//        this.tree.addKeyListener(new ControllerTreePopup((TreePopupDiagram) this.popup));
+        this.tree.addMouseListener(new ControllerTreePopupDiagram(this.getPopup()));
+        this.tree.addKeyListener(new ControllerTreePopupDiagram(this.getPopup()));
     }
     
     @Override

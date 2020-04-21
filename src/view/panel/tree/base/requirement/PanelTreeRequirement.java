@@ -1,5 +1,6 @@
 package view.panel.tree.base.requirement;
 
+import controller.view.panel.tree.popup.base.requirement.ControllerTreePopupRequirement;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Element;
 import model.structural.base.Project;
@@ -41,8 +42,8 @@ public final class PanelTreeRequirement extends PanelTree {
     
     @Override
     protected void setControllers() {
-//        this.tree.addMouseListener(new ControllerTreePopup((TreePopupDiagram) this.popup));
-//        this.tree.addKeyListener(new ControllerTreePopup((TreePopupDiagram) this.popup));
+        this.tree.addMouseListener(new ControllerTreePopupRequirement(this.getPopup()));
+        this.tree.addKeyListener(new ControllerTreePopupRequirement(this.getPopup()));
     }
     
     @Override

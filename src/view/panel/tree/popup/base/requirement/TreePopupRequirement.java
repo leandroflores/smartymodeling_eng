@@ -1,5 +1,7 @@
 package view.panel.tree.popup.base.requirement;
 
+import controller.view.panel.tree.popup.item.base.requirement.ControllerMenuItemDelete;
+import controller.view.panel.tree.popup.item.base.requirement.ControllerMenuItemEdit;
 import javax.swing.JMenuItem;
 import view.panel.tree.base.requirement.PanelTreeRequirement;
 import view.panel.tree.popup.TreePopup;
@@ -20,9 +22,7 @@ public final class TreePopupRequirement extends TreePopup {
      */
     public TreePopupRequirement(PanelTreeRequirement panel) {
         super(panel);
-        createMenuItems();
-        setControllers();
-        addMenuItems();
+        this.addComponents();
     }
     
     @Override
@@ -33,14 +33,15 @@ public final class TreePopupRequirement extends TreePopup {
     
     @Override
     protected void setControllers() {
-        
+        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
+        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
     }
     
     @Override
     protected void addMenuItems() {
-        add(getAddElementMenuItem());
-        add(getEditMenuItem());
-        add(getDeleteMenuItem());
+        this.add(this.getAddElementMenuItem());
+        this.add(this.getEditMenuItem());
+        this.add(this.getDeleteMenuItem());
     }
     
     /**

@@ -1,5 +1,7 @@
 package view.panel.tree.popup.base.evaluation;
 
+import controller.view.panel.tree.popup.item.base.evaluation.ControllerMenuItemDelete;
+import controller.view.panel.tree.popup.item.base.evaluation.ControllerMenuItemEdit;
 import view.panel.tree.base.evaluation.PanelTreeEvaluation;
 import view.panel.tree.popup.TreePopup;
 
@@ -19,15 +21,13 @@ public final class TreePopupEvaluation extends TreePopup {
      */
     public TreePopupEvaluation(PanelTreeEvaluation panel) {
         super(panel);
-        this.createMenuItems();
-        this.setControllers();
-        this.addMenuItems();
+        this.addComponents();
     }
     
     @Override
     protected void setControllers() {
-//        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
-//        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
+        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
+        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
     }
     
     @Override

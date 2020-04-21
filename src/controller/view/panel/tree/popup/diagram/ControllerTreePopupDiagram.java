@@ -22,13 +22,14 @@ import view.delete.base.variability.ViewDeleteVariability;
 import view.edit.base.ViewEditDiagram;
 import view.edit.base.ViewEditElement;
 import view.edit.base.ViewEditProject;
+import view.edit.base.variability.ViewEditVariability;
 import view.edit.diagram.classes.ViewEditAttributeUML;
 import view.edit.diagram.classes.ViewEditMethodUML;
 import view.panel.tree.popup.diagram.TreePopupDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerTreePopupDiagram</b>.</p>
- * <p>Class responsible for controlling the <b>TreePoput</b> Events of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>TreePopupDiagram</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-05-27
  * @see    controller.view.panel.tree.popup.ControllerTreePopup
@@ -54,29 +55,18 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
     }
 
     @Override
-    protected void showPanelEdit(DefaultMutableTreeNode node) {
-        if (node != null && node.getUserObject() != null) {
-            Diagram diagram = this.getDiagram(node);
-            if (node.getUserObject() instanceof Project)
-                this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
-            else if (node.getUserObject() instanceof Diagram)
-                this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) node.getUserObject());
-            else if (node.getUserObject() instanceof Variability)
-                this.showPanelEditVariability(diagram, (Variability) node.getUserObject());
-            else if (node.getUserObject() instanceof Element)
-                this.showPanelEdit(diagram, (Element) node.getUserObject());
-            else if (node.getUserObject() instanceof Association)
-                this.showPanelEdit(diagram, (Association) node.getUserObject());
-        }
-    }
-    
-    /**
-     * Method responsible for showing the Panel Edit Variability.
-     * @param diagram Diagram.
-     * @param variability Variability.
-     */
-    private void showPanelEditVariability(Diagram diagram, Variability variability) {
-        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, variability);
+    protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
+        Diagram diagram = this.getDiagram(node);
+        if (object instanceof Project)
+            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
+        else if (object instanceof Diagram)
+            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) object);
+        else if (object instanceof Variability)
+            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, (Variability) object);
+        else if (object instanceof Element)
+            this.showPanelEdit(diagram, (Element) object);
+        else if (object instanceof Association)
+            this.showPanelEdit(diagram, (Association) object);
     }
     
     /**
@@ -112,41 +102,28 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
     }
     
     @Override
-    protected void delete(DefaultMutableTreeNode node) {
-        if (node.getUserObject() instanceof Diagram)
-            new ViewDeleteDiagram(this.treePopup.getPanel().getViewMenu().getPanelModeling(), (Diagram) node.getUserObject()).setVisible(true);
-        else if (node.getUserObject() instanceof Element)
-            new ViewDeleteElement(this.treePopup.getPanel().getViewMenu().getPanelModeling(), 
-                                  this.getDiagram(node),
-                                  (Element) node.getUserObject()).setVisible(true);
-        else if (node.getUserObject() instanceof Variability)
-            new ViewDeleteVariability(this.treePopup.getPanel().getViewMenu().getPanelModeling(), this.getDiagram(node), (Variability) node.getUserObject()).setVisible(true);
+    protected void delete(DefaultMutableTreeNode node, Object object) {
+        if (object instanceof Diagram)
+            new ViewDeleteDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
+        else if (object instanceof Element)
+            new ViewDeleteElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
+        else if (object instanceof Variability)
+            new ViewDeleteVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
     }
     
     @Override
-    protected void edit(DefaultMutableTreeNode node) {
-        if (node.getUserObject() instanceof Project)
-            new ViewEditProject(this.treePopup.getPanel().getViewMenu().getPanelModeling(), ((Project) node.getUserObject())).setVisible(true);
-        else if (node.getUserObject() instanceof Diagram)
-            new ViewEditDiagram(this.treePopup.getPanel().getViewMenu().getPanelModeling(), ((Diagram) node.getUserObject())).setVisible(true);
-        else if (node.getUserObject() instanceof Variability)
-            this.editVariability(node.getUserObject(), node);
-        else if (node.getUserObject() instanceof AttributeUML)
-            new ViewEditAttributeUML(this.treePopup.getPanel().getViewMenu().getPanelModeling(), ((ClassDiagram) this.getDiagram(node)), ((AttributeUML) node.getUserObject())).setVisible(true);
-        else if (node.getUserObject() instanceof MethodUML)
-            new ViewEditMethodUML(this.treePopup.getPanel().getViewMenu().getPanelModeling(), ((ClassDiagram) this.getDiagram(node)), ((MethodUML) node.getUserObject())).setVisible(true);
-        else if (node.getUserObject() instanceof Element)
-            new ViewEditElement(this.treePopup.getPanel().getViewMenu().getPanelModeling(), this.getDiagram(node), ((Element) node.getUserObject())).setVisible(true);
-    }
-    
-    /**
-     * Method responsible for editing Variability.
-     * @param object Selected Object.
-     * @param node JTree Node.
-     */
-    private void editVariability(Object object, DefaultMutableTreeNode node) {
-        Diagram     diagram     = this.getDiagram((DefaultMutableTreeNode) node.getParent());
-        Variability variability = (Variability) object;
-        
+    protected void edit(DefaultMutableTreeNode node, Object object) {
+        if (object instanceof Project)
+            new ViewEditProject(this.getPanelModeling(), (Project) object).setVisible(true);
+        else if (object instanceof Diagram)
+            new ViewEditDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
+        else if (object instanceof Variability)
+            new ViewEditVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
+        else if (object instanceof AttributeUML)
+            new ViewEditAttributeUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (AttributeUML) object).setVisible(true);
+        else if (object instanceof MethodUML)
+            new ViewEditMethodUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (MethodUML) object).setVisible(true);
+        else if (object instanceof Element)
+            new ViewEditElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
     }
 }

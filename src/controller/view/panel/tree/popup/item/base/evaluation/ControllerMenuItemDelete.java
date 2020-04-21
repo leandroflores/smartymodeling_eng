@@ -28,9 +28,10 @@ public class ControllerMenuItemDelete extends ControllerMenuItem {
     
     @Override
     protected void action(DefaultMutableTreeNode node) {
-        if (node.getUserObject() instanceof Metric)
-            new ViewDeleteMetric(this.getPanelModeling(),  (Metric) node.getUserObject()).setVisible(true);
-        else if (node.getUserObject() instanceof Measure)
-            new ViewDeleteMeasure(this.getPanelModeling(), (Measure) node.getUserObject()).setVisible(true);
+        Object object = node.getUserObject();
+        if (object instanceof Metric)
+            new ViewDeleteMetric(this.getPanelModeling(),  (Metric) object).setVisible(true);
+        else if (object instanceof Measure)
+            new ViewDeleteMeasure(this.getPanelModeling(), (Measure) object).setVisible(true);
     }
 }

@@ -28,7 +28,7 @@ public abstract class ControllerMenuItem implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.getSelectedNode() != null)
+        if (this.getSelectedNode() != null && this.getSelectedNode().getUserObject() != null)
             this.action(this.getSelectedNode());
     }
     

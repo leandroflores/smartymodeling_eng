@@ -37,7 +37,7 @@ public class ControllerTreePopupRequirement extends ControllerTreePopup {
     }
 
     @Override
-    protected void showPanelEdit(Object object) {
+    protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Project)
             this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
         else if (object instanceof Requirement)
@@ -47,7 +47,7 @@ public class ControllerTreePopupRequirement extends ControllerTreePopup {
     }
     
     @Override
-    protected void delete(Object object) {
+    protected void delete(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Requirement)
             new ViewDeleteRequirement(this.getPanelModeling(), (Requirement) object).setVisible(true);
 //        else if (object instanceof Measure)
@@ -55,7 +55,7 @@ public class ControllerTreePopupRequirement extends ControllerTreePopup {
     }
     
     @Override
-    protected void edit(Object object) {
+    protected void edit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Requirement)
             new ViewEditRequirement(this.getPanelModeling(), (Requirement) object).setVisible(true);
     }

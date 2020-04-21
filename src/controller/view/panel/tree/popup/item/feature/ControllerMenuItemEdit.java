@@ -1,21 +1,14 @@
-package controller.view.panel.tree.popup.item.diagram;
+package controller.view.panel.tree.popup.item.feature;
 
 import controller.view.panel.tree.popup.item.ControllerMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
-import model.structural.base.variability.Variability;
-import model.structural.diagram.ClassDiagram;
-import model.structural.diagram.classes.base.AttributeUML;
-import model.structural.diagram.classes.base.MethodUML;
 import view.edit.base.ViewEditDiagram;
 import view.edit.base.ViewEditElement;
 import view.edit.base.ViewEditProject;
-import view.edit.base.variability.ViewEditVariability;
-import view.edit.diagram.classes.ViewEditAttributeUML;
-import view.edit.diagram.classes.ViewEditMethodUML;
-import view.panel.tree.popup.diagram.TreePopupDiagram;
+import view.panel.tree.popup.feature.TreePopupFeature;
 
 /**
  * <p>Class of Controller <b>ControllerMenuItemEdit</b>.</p>
@@ -23,15 +16,15 @@ import view.panel.tree.popup.diagram.TreePopupDiagram;
  * @author Leandro
  * @since  2020-04-21
  * @see    controller.view.panel.tree.popup.item.ControllerMenuItem
- * @see    view.panel.tree.popup.diagram.TreePopupDiagram
+ * @see    view.panel.tree.popup.feature.TreePopupFeature
  */
 public class ControllerMenuItemEdit extends ControllerMenuItem {
     
     /**
      * Default constructor method of Class.
-     * @param popup Tree Popup Diagram.
+     * @param popup Tree Popup pFeature.
      */
-    public ControllerMenuItemEdit(TreePopupDiagram popup) {
+    public ControllerMenuItemEdit(TreePopupFeature popup) {
         super(popup);
     }
     
@@ -42,13 +35,7 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
             new ViewEditProject(this.getPanelModeling(), (Project) object).setVisible(true);
         else if (object instanceof Diagram)
             new ViewEditDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
-        else if (object instanceof AttributeUML)
-            new ViewEditAttributeUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (AttributeUML) object).setVisible(true);
-        else if (object instanceof MethodUML)
-            new ViewEditMethodUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (MethodUML) object).setVisible(true);
         else if (object instanceof Element)
             new ViewEditElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
-        else if (object instanceof Variability)
-            new ViewEditVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
     }
 }

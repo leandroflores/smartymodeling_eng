@@ -2,7 +2,6 @@ package view.panel.tree.popup.diagram;
 
 import controller.view.panel.tree.popup.item.diagram.ControllerMenuItemDelete;
 import controller.view.panel.tree.popup.item.diagram.ControllerMenuItemEdit;
-import view.panel.tree.base.PanelTree;
 import view.panel.tree.diagram.PanelTreeDiagram;
 import view.panel.tree.popup.TreePopup;
 
@@ -22,9 +21,7 @@ public final class TreePopupDiagram extends TreePopup {
      */
     public TreePopupDiagram(PanelTreeDiagram panel) {
         super(panel);
-        this.createMenuItems();
-        this.setControllers();
-        this.addMenuItems();
+        this.addComponents();
     }
     
     @Override
