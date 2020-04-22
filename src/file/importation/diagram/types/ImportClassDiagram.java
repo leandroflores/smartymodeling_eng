@@ -52,7 +52,7 @@ public class ImportClassDiagram extends ImportDiagram {
         NodeList list = this.element.getElementsByTagName("package");
         for (int i = 0; i < list.getLength(); i++) {
             Element    current  = (Element) list.item(i);
-            PackageUML package_ = new PackageUML(current);
+            PackageUML package_ = new PackageUML(current, this.getDiagram());
             this.getDiagram().addPackage(package_);
         }
     }
@@ -77,7 +77,7 @@ public class ImportClassDiagram extends ImportDiagram {
         NodeList list = this.element.getElementsByTagName("class");
         for (int i = 0; i < list.getLength(); i++) {
             Element  current = (Element) list.item(i);
-            ClassUML class_  = new ClassUML(current);
+            ClassUML class_  = new ClassUML(current, this.getDiagram());
                      class_.setTypeUML(this.project.getEntityType(class_));
                 this.addAttributes(current, class_);
                 this.addMethods(current, class_);
@@ -93,7 +93,7 @@ public class ImportClassDiagram extends ImportDiagram {
         NodeList list = this.element.getElementsByTagName("interface");
         for (int i = 0; i < list.getLength(); i++) {
             Element      current    = (Element) list.item(i);
-            InterfaceUML interface_ = new InterfaceUML(current);
+            InterfaceUML interface_ = new InterfaceUML(current, this.getDiagram());
                          interface_.setTypeUML(this.project.getEntityType(interface_));
                 this.addAttributes(current, interface_);
                 this.addMethods(current, interface_);
@@ -111,7 +111,7 @@ public class ImportClassDiagram extends ImportDiagram {
         NodeList list = node.getElementsByTagName("attribute");
         for (int i = 0; i < list.getLength(); i++) {
             Element      current   = (Element) list.item(i);
-            AttributeUML attribute = new AttributeUML(current);
+            AttributeUML attribute = new AttributeUML(current, this.getDiagram());
                          attribute.setTypeUML(this.getType(current.getAttribute("type")));
                          attribute.setEntity(entity);
                          entity.addAttribute(attribute);
@@ -128,7 +128,7 @@ public class ImportClassDiagram extends ImportDiagram {
         NodeList list = node.getElementsByTagName("method");
         for (int i = 0; i < list.getLength(); i++) {
             Element   current = (Element) list.item(i);
-            MethodUML method  = new MethodUML(current);
+            MethodUML method  = new MethodUML(current, this.getDiagram());
                       method.setEntity(entity);
                       method.setReturn(this.getType(current.getAttribute("return")));
                 this.importParameters(current, method);

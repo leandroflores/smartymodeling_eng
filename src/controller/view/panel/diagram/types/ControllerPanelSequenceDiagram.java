@@ -41,7 +41,7 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
      * @param event Mouse Event.
      */
     public void addLifeline(MouseEvent event) {
-        LifelineUML lifeline = new LifelineUML();
+        LifelineUML lifeline = new LifelineUML(this.getPanelDiagram().getDiagram());
                     lifeline.setPosition(event.getX(), this.getPanelDiagram().getDiagram().getYDefault());
                     lifeline.setHeight(this.getPanelDiagram().getDiagram().getHeightDefault());
         this.getPanelDiagram().getDiagram().addLifeline(lifeline);
@@ -64,7 +64,7 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
      * @param event Mouse Event.
      */
     public void addInstance(MouseEvent event) {
-        InstanceUML instance = new InstanceUML();
+        InstanceUML instance = new InstanceUML(this.getPanelDiagram().getDiagram());
                     instance.setPosition(event.getX(), this.getPanelDiagram().getDiagram().getYDefault());
                     instance.setHeight(this.getPanelDiagram().getDiagram().getHeightDefault());
         this.getPanelDiagram().getDiagram().addInstance(instance);

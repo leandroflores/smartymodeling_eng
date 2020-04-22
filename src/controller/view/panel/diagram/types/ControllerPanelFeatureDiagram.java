@@ -34,7 +34,7 @@ public class ControllerPanelFeatureDiagram extends ControllerPanelDiagram {
      * @param event Mouse Event.
      */
     public void addFeature(MouseEvent event) {
-        Feature feature = new Feature();
+        Feature feature = new Feature(this.getPanelDiagram().getDiagram());
                 feature.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addFeature(feature);
                 feature.setDefaultName();

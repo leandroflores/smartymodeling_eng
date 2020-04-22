@@ -3,7 +3,7 @@ package controller.view.panel.tree.popup.item.base.requirement;
 import controller.view.panel.tree.popup.item.ControllerMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.requirement.Requirement;
-import view.new_.base.requirement.traceability.ViewNewRequirementTraceability;
+import view.new_.base.requirement.traceability.ViewNewAddElement;
 import view.panel.tree.popup.TreePopup;
 
 /**
@@ -28,7 +28,7 @@ public class ControllerMenuItemAdd extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node) {
         Object object = node.getUserObject();
         if (object instanceof Requirement)
-            new ViewNewRequirementTraceability(this.getPanelModeling().getViewMenu(), (Requirement) object).setVisible(true);
+            new ViewNewAddElement(this.getPanelModeling().getViewMenu(), (Requirement) object).setVisible(true);
     }
 
     /**

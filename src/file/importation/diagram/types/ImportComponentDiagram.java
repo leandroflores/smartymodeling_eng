@@ -41,7 +41,7 @@ public class ImportComponentDiagram extends ImportDiagram {
     private void importComponents() {
         NodeList list = this.element.getElementsByTagName("component");
         for (int i = 0; i < list.getLength(); i++)
-            this.getDiagram().addComponent(new ComponentUML((Element) list.item(i)));
+            this.getDiagram().addComponent(new ComponentUML((Element) list.item(i), this.getDiagram()));
     }
     
     /**
@@ -50,7 +50,7 @@ public class ImportComponentDiagram extends ImportDiagram {
     private void importInterfaces() {
         NodeList list = this.element.getElementsByTagName("interface");
         for (int i = 0; i < list.getLength(); i++)
-            this.getDiagram().addInterface(new InterfaceUML((Element) list.item(i)));
+            this.getDiagram().addInterface(new InterfaceUML((Element) list.item(i), this.getDiagram()));
     }
     
     @Override

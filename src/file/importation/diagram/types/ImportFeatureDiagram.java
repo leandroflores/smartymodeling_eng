@@ -39,7 +39,7 @@ public class ImportFeatureDiagram extends ImportDiagram {
     private void importFeatures() {
         NodeList list = this.element.getElementsByTagName("feature");
         for (int i = 0; i < list.getLength(); i++)
-            this.getDiagram().addFeature(new Feature((Element) list.item(i)));
+            this.getDiagram().addFeature(new Feature((Element) list.item(i), this.getDiagram()));
     }
     
     @Override

@@ -4,33 +4,36 @@ import com.mxgraph.util.mxConstants;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
+import model.structural.base.Diagram;
 import model.structural.base.Element;
 
 /**
  * <p>Class of Model <b>InitialUML</b>.</p>
  * <p>Class responsible for representing the <b>Initial UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  17/07/2019
+ * @since  2019-07-17
  * @see    model.structural.base.Element
  */
 public class InitialUML extends Element {
     
     /**
      * Default constructor method of Class.
+     * @param diagram Activity Diagram.
      */
-    public InitialUML() {
-        this.name      = "";
-        this.type      = "initial";
-        this.mandatory = true;
-        this.size      = new Point(30, 30);
+    public InitialUML(Diagram diagram) {
+        super(diagram);
+        this.name = "";
+        this.size = new Point(30, 30);
+        this.type = "initial";
     }
     
     /**
      * Alternative constructor method of Class.
      * @param element W3C Element.
+     * @param diagram Activity Diagram.
      */
-    public InitialUML(org.w3c.dom.Element element) {
-        super(element, true);
+    public InitialUML(org.w3c.dom.Element element, Diagram diagram) {
+        super(element, diagram, true);
         this.type = "initial";
     }
 

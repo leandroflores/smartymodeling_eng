@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import model.structural.base.Diagram;
 import model.structural.base.association.Association;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.Entity;
@@ -16,7 +17,7 @@ import model.structural.base.Element;
  * <p>Class of Model <b>ClassUML</b>.</p>
  * <p>Class responsible for representing <b>Class UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  03/06/2019
+ * @since  2019-06-03
  * @see    model.structural.diagram.classes.Entity
  */
 public class ClassUML extends Entity {
@@ -39,9 +40,10 @@ public class ClassUML extends Entity {
     /**
      * Alternative constructor method of Class.
      * @param element W3C Element.
+     * @param diagram Class Diagram.
      */
-    public ClassUML(org.w3c.dom.Element element) {
-        super(element);
+    public ClassUML(org.w3c.dom.Element element, Diagram diagram) {
+        super(element, diagram);
         this.type      = "class";
         this.abstract_ = element.getAttribute("abstract").equals("true");
         this.final_    = element.getAttribute("final").equals("true");
@@ -120,7 +122,7 @@ public class ClassUML extends Entity {
      */
     public List<InterfaceUML> getRealizations() {
         List   interfaces = new ArrayList<>();
-        for (Association association : this.diagram.getRealizations(this))
+        for (Association association : this.getDiagram().getRealizations(this))
                interfaces.add(((RealizationUML) association).getTarget());
         return interfaces;
     }

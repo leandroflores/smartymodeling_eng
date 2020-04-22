@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.diagram.classes.Encodable;
 import model.structural.diagram.classes.Entity;
@@ -15,7 +16,7 @@ import model.structural.diagram.classes.Entity;
  * <p>Classe de Modelo <b>MethodUML</b>.</p>
  * <p>Class responsible for representing <b>Method UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    model.structural.base.Element
  * @see    model.structural.diagram.classes.Encodable
  * @see    model.structural.diagram.classes.base.ParameterUML
@@ -33,11 +34,12 @@ public class MethodUML extends Element implements Encodable {
     
     /**
      * Default constructor method of Class.
+     * @param diagram Class Diagram.
      */
-    public MethodUML() {
+    public MethodUML(Diagram diagram) {
+        super(diagram);
         this.id          = null;
         this.name        = "method";
-        this.type        = "method";
         this.entity      = null;
         this.return_     = null;
         this.visibility  = "public";
@@ -46,16 +48,18 @@ public class MethodUML extends Element implements Encodable {
         this.final_      = false;
         this.abstract_   = false;
         this.parameters  = new ArrayList<>();
+        this.type        = "method";
     }
     
     /**
      * Alternative constructor method of Class.
      * @param element W3C Element.
+     * @param diagram Class Diagram.
      */
-    public MethodUML(org.w3c.dom.Element element) {
+    public MethodUML(org.w3c.dom.Element element, Diagram diagram) {
+        super(element, diagram);
         this.id          = element.getAttribute("id");
         this.name        = element.getAttribute("name");
-        this.type        = "method";
         this.entity      = null;
         this.return_     = null;
         this.visibility  = element.getAttribute("visibility");
@@ -65,6 +69,7 @@ public class MethodUML extends Element implements Encodable {
         this.abstract_   = element.getAttribute("abstract").equals("true");
         this.parameters  = new ArrayList<>();
         this.setReturn(element);
+        this.type        = "method";
     }
 
     @Override

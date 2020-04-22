@@ -2,6 +2,7 @@ package controller.view.panel.tree.popup.item.base.requirement;
 
 import controller.view.panel.tree.popup.item.ControllerMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
+import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.requirement.Requirement;
 import view.edit.base.ViewEditProject;
@@ -32,6 +33,17 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
         if (object instanceof Project)
             new ViewEditProject(this.getPanelModeling(), (Project) object).setVisible(true);
         else if (object instanceof Requirement)
-            new ViewEditRequirement(this.getPanelModeling(), (Requirement) object).setVisible(true);
+            new ViewEditRequirement(this.getPanelModeling(), (Requirement) object, 0).setVisible(true);
+        else if (object instanceof Element)
+            this.edit(this.getRequirement(node), (Element) object);
+    }
+    
+    /**
+     * Method responsible for Editing a Element of Requirement.
+     * @param requirement Requirement.
+     * @param element Element.
+     */
+    private void edit(Requirement requirement, Element element) {
+        new ViewEditRequirement(this.getPanelModeling(), requirement, element.getDiagram().getIndex()).setVisible(true);
     }
 }

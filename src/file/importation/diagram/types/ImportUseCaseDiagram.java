@@ -43,7 +43,7 @@ public class ImportUseCaseDiagram extends ImportDiagram {
     private void importActors() {
         NodeList list = this.element.getElementsByTagName("actor");
         for (int i = 0; i < list.getLength(); i++)
-            this.getDiagram().addActor(new ActorUML((Element) list.item(i)));
+            this.getDiagram().addActor(new ActorUML((Element) list.item(i), this.getDiagram()));
     }
     
     /**
@@ -52,7 +52,7 @@ public class ImportUseCaseDiagram extends ImportDiagram {
     private void importUseCases() {
         NodeList list = this.element.getElementsByTagName("useCase");
         for (int i = 0; i < list.getLength(); i++)
-            this.getDiagram().addUseCase(new UseCaseUML((Element) list.item(i)));
+            this.getDiagram().addUseCase(new UseCaseUML((Element) list.item(i), this.getDiagram()));
     }
     
     @Override

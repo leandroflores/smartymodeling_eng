@@ -54,7 +54,7 @@ public final class ViewNewRequirement extends ViewNew {
      * Method responsible for adding the Panel Base Requirement.
      */
     private void addPanelBaseRequirement() {
-        this.addPanel("panelEditRequirement", new PanelEditRequirement(this.view, this.requirement));
+        this.addPanel("panelEditRequirement", new PanelEditRequirement(this.view, this.requirement, 0));
         this.createScrollPane("scrollPanelEditRequirement", this.getPanel("panelEditRequirement"));
         this.getScrollPane("scrollPanelEditRequirement").setViewportView(this.getPanel("panelEditRequirement"));
         this.tabbedPane.add("Requirement", this.getScrollPane("scrollPanelEditRequirement"));

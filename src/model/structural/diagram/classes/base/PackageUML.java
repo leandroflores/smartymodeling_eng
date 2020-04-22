@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Stereotype;
 import model.structural.diagram.ClassDiagram;
@@ -15,11 +16,10 @@ import model.structural.diagram.classes.Entity;
  * <p>Class of Model <b>PackageUML</b>.</p>
  * <p>Class responsible for representing <b>Package UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  03/06/2019
+ * @since  2019-06-03
  * @see    model.structural.base.Element
  */
 public class PackageUML extends Element {
-    private ClassDiagram diagram;
     private PackageUML parent;
     private HashMap packages;
     private HashMap entities;
@@ -29,27 +29,33 @@ public class PackageUML extends Element {
      * @param diagram Class Diagram.
      */
     public PackageUML(ClassDiagram diagram) {
-        this.diagram   = diagram;
-        this.parent    = null;
-        this.packages  = new HashMap<>();
-        this.entities  = new HashMap<>();
-        this.name      = "package";
-        this.type      = "package";
-        this.mandatory = true;
-        this.size      = new Point(250, 100);
+        super(diagram);
+        this.name = "package";
+        this.size = new Point(250, 100);
+        this.type = "package";
+        this.init();
     }
     
     /**
      * Alternative constructor method of Class.
      * @param element W3C Element.
+     * @param diagram Class Diagram.
      */
-    public PackageUML(org.w3c.dom.Element element) {
-        super(element, true);
-        this.type     = "package";
+    public PackageUML(org.w3c.dom.Element element, Diagram diagram) {
+        super(element, diagram, true);
+        this.type = "package";
+        this.init();
+    }
+
+    /**
+     * Method responsible for initializing the Maps.
+     */
+    private void init() {
+        this.parent   = null;
         this.packages = new HashMap<>();
         this.entities = new HashMap<>();
     }
-
+    
     @Override
     public void setDefaultName() {
         super.setDefaultName();
@@ -243,12 +249,9 @@ public class PackageUML extends Element {
         return this.diagram.getStereotypesList(this);
     }
     
-    /**
-     * Method responsible for returning the Class Diagram.
-     * @return Class Diagram.
-     */
+    @Override
     public ClassDiagram getDiagram() {
-        return this.diagram;
+        return (ClassDiagram) this.diagram;
     }
 
     /**

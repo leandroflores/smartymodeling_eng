@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
+import model.structural.base.requirement.Requirement;
 import view.panel.modeling.PanelModeling;
 import view.panel.tree.popup.TreePopup;
 
@@ -37,6 +38,18 @@ public abstract class ControllerMenuItem implements ActionListener {
      * @param node Object Node.
      */
     protected abstract void action(DefaultMutableTreeNode node);
+    
+    /**
+     * Method responsible for returning the Requirement Node.
+     * @param  node Tree Node.
+     * @return Requirement Node.
+     */
+    protected Requirement getRequirement(DefaultMutableTreeNode node) {
+        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
+        if (parent != null && parent.getUserObject() instanceof Requirement)
+            return (Requirement) parent.getUserObject();
+        return null;
+    }
     
     /**
      * Method responsible for returning the Diagram Node.

@@ -4,6 +4,7 @@ import com.mxgraph.util.mxConstants;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
+import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.diagram.classes.base.ClassUML;
 
@@ -11,7 +12,7 @@ import model.structural.diagram.classes.base.ClassUML;
  * <p>Class of Model <b>InstanceUML</b>.</p>
  * <p>Class responsible for representing the <b>Instance UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  24/07/2019
+ * @since  2019-07-24
  * @see    model.structural.base.Element
  */
 public class InstanceUML extends Element {
@@ -19,23 +20,25 @@ public class InstanceUML extends Element {
     
     /**
      * Default constructor method of Class.
+     * @param diagram Sequence Diagram.
      */
-    public InstanceUML() {
-        this.name      = "Instance";
-        this.type      = "instance";
-        this.mandatory = true;
-        this.size      = new Point(200, 380);
-        this.classUML  = null;
+    public InstanceUML(Diagram diagram) {
+        super(diagram);
+        this.name     = "Instance";
+        this.size     = new Point(200, 380);
+        this.classUML = null;
+        this.type     = "instance";
     }
     
     /**
      * Alternative constructor method of Class.
      * @param element W3C Element.
+     * @param diagram Sequence Diagram.
      */
-    public InstanceUML(org.w3c.dom.Element element) {
-        super(element, true);
-        this.type     = "instance";
+    public InstanceUML(org.w3c.dom.Element element, Diagram diagram) {
+        super(element, diagram, true);
         this.classUML = null;
+        this.type     = "instance";
     }
     
     @Override

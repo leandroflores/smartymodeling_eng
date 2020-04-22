@@ -179,6 +179,16 @@ public abstract class PanelTree extends Panel {
     }
     
     /**
+     * Method responsible for setting the Expanded Node.
+     * @param node Tree Node.
+     * @param expanded Expanded Flag.
+     */
+    protected void setExpanded(DefaultMutableTreeNode node, boolean expanded) {
+        if (expanded)
+            this.tree.expandPath(new TreePath(node.getPath()));
+    }
+    
+    /**
      * Method responsible for adding a Node Object.
      * @param object Object.
      * @param node Object Node.

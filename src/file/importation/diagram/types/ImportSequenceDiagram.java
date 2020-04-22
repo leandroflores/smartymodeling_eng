@@ -45,7 +45,7 @@ public class ImportSequenceDiagram extends ImportDiagram {
         NodeList list = this.element.getElementsByTagName("lifeline");
         for (int i = 0; i < list.getLength(); i++) {
             Element     item     = (Element) list.item(i);
-            LifelineUML lifeline = new LifelineUML(item);
+            LifelineUML lifeline = new LifelineUML(item, this.getDiagram());
             ActorUML    actor    = (ActorUML) this.getProject().objects.get(item.getAttribute("actor"));
                         lifeline.setActor(actor);
             this.getDiagram().addLifeline(lifeline);
@@ -59,7 +59,7 @@ public class ImportSequenceDiagram extends ImportDiagram {
         NodeList list = this.element.getElementsByTagName("instance");
         for (int i = 0; i < list.getLength(); i++) {
             Element     item     = (Element) list.item(i);
-            InstanceUML instance = new InstanceUML(item);
+            InstanceUML instance = new InstanceUML(this.getDiagram());
             ClassUML    class_   = (ClassUML) this.getProject().objects.get(item.getAttribute("class"));
                         instance.setClassUML(class_);
             this.getDiagram().addInstance(instance);

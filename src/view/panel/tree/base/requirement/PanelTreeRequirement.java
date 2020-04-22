@@ -80,8 +80,13 @@ public final class PanelTreeRequirement extends PanelTree {
      * @param requirement Requirement.
      */
     public void updateNode(Requirement requirement) {
-        if (this.getNode(requirement) != null)
+        if (this.getNode(requirement) != null) {
             this.getTreeModel().reload(this.createNode(requirement));
+//            boolean expanded = this.isExpanded(this.getNode(requirement));
+//            System.out.println(expanded);
+//            this.tree.expandRow(ERROR);
+//            this.tree.setE
+        }
     }
     
     /**

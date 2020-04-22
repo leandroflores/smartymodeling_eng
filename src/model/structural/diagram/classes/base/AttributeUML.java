@@ -3,6 +3,7 @@ package model.structural.diagram.classes.base;
 import com.mxgraph.util.mxConstants;
 import java.util.HashMap;
 import java.util.Map;
+import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.diagram.classes.Encodable;
 import model.structural.diagram.classes.Entity;
@@ -11,7 +12,7 @@ import model.structural.diagram.classes.Entity;
  * <p>Class of Model <b>AttributeUML</b>.</p>
  * <p>Class responsible for representing <b>Attribute UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    model.structural.base.Element
  * @see    model.structural.diagram.classes.Encodable
  * @see    model.structural.diagram.classes.Entity
@@ -26,31 +27,35 @@ public class AttributeUML extends Element implements Encodable {
     
     /**
      * Default constructor method of Class.
+     * @param diagram Class Diagram.
      */
-    public AttributeUML() {
+    public AttributeUML(Diagram diagram) {
+        super(diagram);
         this.id         = null;
         this.name       = "attribute";
-        this.type       = "attribute";
         this.entity     = null;
         this.typeUML    = null;
         this.visibility = "private";
         this.static_    = false;
         this.final_     = false;
+        this.type       = "attribute";
     }
     
     /**
      * Alternative constructor method of Class.
      * @param element W3C Element.
+     * @param diagram Class Diagram.
      */
-    public AttributeUML(org.w3c.dom.Element element) {
+    public AttributeUML(org.w3c.dom.Element element, Diagram diagram) {
+        super(element, diagram);
         this.id         = element.getAttribute("id");
         this.name       = element.getAttribute("name");
-        this.type       = "attribute";
         this.entity     = null;
         this.typeUML    = null;
         this.visibility = element.getAttribute("visibility");
         this.static_    = element.getAttribute("static").trim().equals("true");
         this.final_     = element.getAttribute("final").trim().equals("true");
+        this.type       = "attribute";
     }
 
     @Override

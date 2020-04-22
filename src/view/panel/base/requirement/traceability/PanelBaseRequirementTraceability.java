@@ -11,7 +11,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import model.controller.structural.base.ControllerDiagram;
-import model.controller.structural.base.ControllerElement;
 import model.controller.structural.base.ControllerProject;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
@@ -136,7 +135,6 @@ public final class PanelBaseRequirementTraceability extends PanelBase {
     public void updateElementsList() {
         this.getElementsList().removeAll();
         DefaultListModel model = new DefaultListModel();
-        System.out.println("Req: " + this.requirement);
         for (Element element :  this.requirement.getAllElements())
             model.addElement(element);
         this.getElementsList().setModel(model);
@@ -148,8 +146,7 @@ public final class PanelBaseRequirementTraceability extends PanelBase {
     public void addElement() {
         Element element = this.getElement();
         if (element != null) {
-            String type = new ControllerElement().getType(element);
-            this.requirement.addElement(type, element);
+            this.requirement.addElement(element.getDiagramType(), element);
             this.updateElementsList();
             this.getViewMenu().updatePanelTree();
         }

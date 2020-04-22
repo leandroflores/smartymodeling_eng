@@ -4,33 +4,36 @@ import com.mxgraph.util.mxConstants;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
+import model.structural.base.Diagram;
 import model.structural.base.Element;
 
 /**
  * <p>Class of Model <b>ComponentUML</b>.</p>
  * <p>Class responsible for representing <b>Component UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  20/07/2019
+ * @since  2019-07-20
  * @see    model.structural.base.Element
  */
 public class ComponentUML extends Element {
 
     /**
      * Default constructor method of Class.
+     * @param diagram Component Diagram.
      */
-    public ComponentUML() {
-        this.name      = "Component";
-        this.type      = "component";
-        this.mandatory = true;
-        this.size      = new Point(200, 100);
+    public ComponentUML(Diagram diagram) {
+        super(diagram);
+        this.name = "Component";
+        this.size = new Point(200, 100);
+        this.type = "component";
     }
     
     /**
      * Alternative constructor method of Class.
      * @param element W3C Element.
+     * @param diagram Component Diagram.
      */
-    public ComponentUML(org.w3c.dom.Element element) {
-        super(element, true);
+    public ComponentUML(org.w3c.dom.Element element, Diagram diagram) {
+        super(element, diagram, true);
         this.type = "component";
     }
     

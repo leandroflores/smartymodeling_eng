@@ -37,7 +37,7 @@ public class ControllerPanelComponentDiagram extends ControllerPanelDiagram {
      * @param event Mouse Event.
      */
     public void addComponent(MouseEvent event) {
-        ComponentUML component = new ComponentUML();
+        ComponentUML component = new ComponentUML(this.getPanelDiagram().getDiagram());
                      component.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addComponent(component);
                      component.setDefaultName();
@@ -50,7 +50,7 @@ public class ControllerPanelComponentDiagram extends ControllerPanelDiagram {
      * @param event Mouse Event.
      */
     public void addInterface(MouseEvent event) {
-        InterfaceUML interface_ = new InterfaceUML();
+        InterfaceUML interface_ = new InterfaceUML(this.getPanelDiagram().getDiagram());
                      interface_.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addInterface(interface_);
                      interface_.setDefaultName();

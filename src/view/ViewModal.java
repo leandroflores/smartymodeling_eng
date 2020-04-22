@@ -8,6 +8,7 @@ import funct.FunctString;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.util.Date;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
@@ -84,7 +85,14 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
     
     @Override
     public void addHeader() {
+        this.updateTitle();
         this.addLines(1);
+    }
+    
+    /**
+     * Method responsible for updating the View Title.
+     */
+    protected void updateTitle() {
         this.setTitle(ViewStyle.SYSTEM + this.title);
     }
     
@@ -268,6 +276,24 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      */
     protected void removePanel(String id) {
         this.panels.remove(id);
+    }
+    
+    /**
+     * Method responsible for returning the New Constraints.
+     * @param  width Width Constraints.
+     * @param  height Height Constraints.
+     * @param  x X Position Grid.
+     * @param  y Y Position Grid.
+     * @return New Constraints.
+     */
+    protected GridBagConstraints createConstraints(int width, int height, int x, int y) {
+        GridBagConstraints constraints = new GridBagConstraints();
+                           constraints.gridheight = height;
+                           constraints.gridwidth  = width;
+                           constraints.gridx      = x;
+                           constraints.gridy      = y;
+                           constraints.fill       = GridBagConstraints.HORIZONTAL;
+        return constraints;
     }
     
     /**

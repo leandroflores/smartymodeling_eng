@@ -72,7 +72,7 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
      * @param entity Entity.
      */
     private void newAttribute(mxCell cell, Entity entity) {
-        AttributeUML attribute = new AttributeUML();
+        AttributeUML attribute = new AttributeUML(entity.getDiagram());
                      this.panel.getDiagram().addAttribute(attribute);
                      attribute.setEntity(entity);
                      attribute.setTypeUML(this.panel.getDiagram().getObjectType());
@@ -90,7 +90,7 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
      * @param entity Entity.
      */
     private void newMethod(mxCell cell, Entity entity) {
-        MethodUML method = new MethodUML();
+        MethodUML method = new MethodUML(entity.getDiagram());
                   method.setId(this.panel.getDiagram().nextMethodId());
                   method.setEntity(entity);
                   method.setReturn(this.panel.getDiagram().getVoidType());

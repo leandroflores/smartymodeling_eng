@@ -42,7 +42,9 @@ public final class TreePopupRequirement extends TreePopup {
     @Override
     protected void addMenuItems() {
         this.add(this.getAddElementMenuItem());
+        this.addSeparator();
         this.add(this.getEditMenuItem());
+        this.addSeparator();
         this.add(this.getDeleteMenuItem());
     }
     

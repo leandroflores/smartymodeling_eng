@@ -13,7 +13,6 @@ import model.structural.diagram.activity.base.ActivityUML;
 import model.structural.diagram.activity.base.DecisionUML;
 import model.structural.diagram.activity.base.FinalUML;
 import model.structural.diagram.activity.base.InitialUML;
-import model.structural.diagram.activity.base.JoinUML;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.ClassUML;
 import model.structural.diagram.classes.base.InterfaceUML;
@@ -108,8 +107,6 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
             diagram.removeFinal((FinalUML) this.element);
         else if (this.element instanceof InitialUML)
             diagram.removeInitial((InitialUML) this.element);
-        else if (this.element instanceof JoinUML)
-            diagram.removeJoin((JoinUML) this.element);
     }
     
     /**

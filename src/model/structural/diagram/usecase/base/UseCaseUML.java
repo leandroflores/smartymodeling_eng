@@ -4,33 +4,36 @@ import com.mxgraph.util.mxConstants;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
+import model.structural.base.Diagram;
 import model.structural.base.Element;
 
 /**
  * <p>Class of Model <b>UseCaseUML</b>.</p>
  * <p>Class responsible for representing <b>Use Case UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  22/05/2019
+ * @since  2019-05-22
  * @see    model.structural.base.Element
  */
 public class UseCaseUML extends Element {
     
     /**
      * Default constructor method of Class.
+     * @param diagram Use Case Diagram.
      */
-    public UseCaseUML() {
-        this.name      = "UseCase";
-        this.type      = "useCase";
-        this.mandatory = true;
-        this.size      = new Point(200, 100);
+    public UseCaseUML(Diagram diagram) {
+        super(diagram);
+        this.name = "UseCase";
+        this.size = new Point(200, 100);
+        this.type = "useCase";
     }
     
     /**
      * Alternative constructor method of Class.
      * @param element W3C Element.
+     * @param diagram Use Case Diagram.
      */
-    public UseCaseUML(org.w3c.dom.Element element) {
-        super(element, true);
+    public UseCaseUML(org.w3c.dom.Element element, Diagram diagram) {
+        super(element, diagram, true);
         this.type = "useCase";
     }
 

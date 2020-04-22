@@ -4,13 +4,14 @@ import com.mxgraph.util.mxConstants;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
+import model.structural.base.Diagram;
 import model.structural.base.Element;
 
 /**
  * <p>Class of Model <b>Feature</b>.</p>
  * <p>Class responsible for representing <b>Feature</b> in SMartyModeling.</p>
  * @author Henrique
- * @since  10/02/2020
+ * @since  2020-02-10
  * @see    model.structural.base.Element
  */
 public class Feature extends Element {
@@ -18,21 +19,24 @@ public class Feature extends Element {
     
     /**
      * Default constructor method of Class.
+     * @param diagram Feature Diagram.
      */
-    public Feature() {
+    public Feature(Diagram diagram) {
+        super(diagram);
         this.name      = "Feature";
-        this.type      = "feature";
         this.mandatory = false;
         this.abstract_ = false;
         this.size      = new Point(150, 50);
+        this.type      = "feature";
     }
     
     /**
      * Alternative constructor method of Class.
      * @param element W3C Element.
+     * @param diagram Feature Diagram.
      */
-    public Feature(org.w3c.dom.Element element) {
-        super(element, true);
+    public Feature(org.w3c.dom.Element element, Diagram diagram) {
+        super(element, diagram, true);
         this.abstract_ = element.getAttribute("abstract").equals("true");
         this.type      = "feature";
     }

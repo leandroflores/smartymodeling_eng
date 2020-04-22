@@ -7,7 +7,6 @@ import model.structural.diagram.activity.base.ActivityUML;
 import model.structural.diagram.activity.base.DecisionUML;
 import model.structural.diagram.activity.base.FinalUML;
 import model.structural.diagram.activity.base.InitialUML;
-import model.structural.diagram.activity.base.JoinUML;
 import model.structural.diagram.activity.base.association.FlowUML;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -38,7 +37,6 @@ public class ImportActivityDiagram extends ImportDiagram {
         this.importDecisions();
         this.importInitials();
         this.importFinals();
-        this.importJoins();
     }
     
     /**
@@ -47,7 +45,7 @@ public class ImportActivityDiagram extends ImportDiagram {
     private void importActivities() {
         NodeList list = this.element.getElementsByTagName("activity");
         for (int i = 0; i < list.getLength(); i++)
-            this.getDiagram().addActivity(new ActivityUML((Element) list.item(i)));
+            this.getDiagram().addActivity(new ActivityUML((Element) list.item(i), this.getDiagram()));
     }
     
     /**
@@ -56,7 +54,7 @@ public class ImportActivityDiagram extends ImportDiagram {
     private void importDecisions() {
         NodeList list = this.element.getElementsByTagName("decision");
         for (int i = 0; i < list.getLength(); i++)
-            this.getDiagram().addDecision(new DecisionUML((Element) list.item(i)));
+            this.getDiagram().addDecision(new DecisionUML((Element) list.item(i), this.getDiagram()));
     }
     
     /**
@@ -65,7 +63,7 @@ public class ImportActivityDiagram extends ImportDiagram {
     private void importInitials() {
         NodeList list = this.element.getElementsByTagName("initial");
         for (int i = 0; i < list.getLength(); i++)
-            this.getDiagram().addInitial(new InitialUML((Element) list.item(i)));
+            this.getDiagram().addInitial(new InitialUML((Element) list.item(i), this.getDiagram()));
     }
     
     /**
@@ -74,16 +72,7 @@ public class ImportActivityDiagram extends ImportDiagram {
     private void importFinals() {
         NodeList list = this.element.getElementsByTagName("final");
         for (int i = 0; i < list.getLength(); i++)
-            this.getDiagram().addFinal(new FinalUML((Element) list.item(i)));
-    }
-    
-    /**
-     * Method responsible for importing the Joins.
-     */
-    private void importJoins() {
-        NodeList list = this.element.getElementsByTagName("join");
-        for (int i = 0; i < list.getLength(); i++)
-            this.getDiagram().addJoin(new JoinUML((Element) list.item(i)));
+            this.getDiagram().addFinal(new FinalUML((Element) list.item(i), this.getDiagram()));
     }
     
     @Override

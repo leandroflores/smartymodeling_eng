@@ -358,9 +358,10 @@ public final class PanelProject extends Panel {
     /**
      * Method responsible for initializing the Panel Edit Requirement.
      * @param requirement Requirement.
+     * @param index Tab Index.
      */
-    public void initPanelEditRequirement(Requirement requirement) {
-        this.panelEdit = new PanelEditRequirement(this.viewMenu, requirement);
+    public void initPanelEditRequirement(Requirement requirement, Integer index) {
+        this.panelEdit = new PanelEditRequirement(this.viewMenu, requirement, index);
         this.updatePanelEdit();
     }
     

@@ -56,23 +56,58 @@ public class ControllerTreePopupRequirement extends ControllerTreePopup {
         if (object instanceof Project)
             this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
         else if (object instanceof Requirement)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditRequirement((Requirement) object);
-//        else if (object instanceof Element)
-//            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditElement((Requirement) object);
+            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditRequirement((Requirement) object, 0);
+        else if (object instanceof Element)
+            this.showPanelEditElement(node, (Element) object);
+    }
+    
+    /**
+     * Method responsible for showing the Panel Edit Element.
+     * @param node Tree Node.
+     * @param element Element.
+     */
+    private void showPanelEditElement(DefaultMutableTreeNode node, Element element) {
+        Requirement requirement = this.getRequirement(node);
+        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditRequirement(requirement, element.getDiagram().getIndex());
     }
     
     @Override
     protected void delete(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Requirement)
             new ViewDeleteRequirement(this.getPanelModeling(), (Requirement) object).setVisible(true);
-//        else if (object instanceof Measure)
-//            new ViewDeleteMeasure(this.getPanelModeling(), (Measure) object).setVisible(true);        
+        else if (object instanceof Element)
+            this.delete(this.getRequirement(node), (Element) object);      
+    }
+    
+    /**
+     * Method responsible for deleting a Element if Requirement.
+     * @param requirement Requirement.
+     * @param element Element.
+     */
+    private void delete(Requirement requirement, Element element) {
+        requirement.removeElement(element);
+        this.getPanelModeling().getViewMenu().updatePanelTree();
+        this.getPanelModeling().getViewMenu().setSave(false);
     }
     
     @Override
     protected void edit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Requirement)
-            new ViewEditRequirement(this.getPanelModeling(), (Requirement) object).setVisible(true);
+            new ViewEditRequirement(this.getPanelModeling(), (Requirement) object, 0).setVisible(true);
+//        else if (object instanceof Element)
+//            new ViewEditRequirement(this.getPanelModeling(), (Requirement) object, 0).setVisible(true);
+    }
+    
+    /**
+     * Method responsible for returning the Requirement Node.
+     * @param  node Tree Node.
+     * @return Requirement Node.
+     */
+    protected Requirement getRequirement(DefaultMutableTreeNode node) {
+        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
+        if (parent != null && parent.getUserObject() instanceof Requirement)
+            return (Requirement) parent.getUserObject();
+        return null;
     }
     
     @Override

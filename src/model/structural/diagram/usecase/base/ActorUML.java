@@ -4,33 +4,36 @@ import com.mxgraph.util.mxConstants;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
+import model.structural.base.Diagram;
 import model.structural.base.Element;
 
 /**
  * <p>Class of Model <b>ActorUML</b>.</p>
  * <p>Class responsible for representing <b>Actor UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  22/05/2019
+ * @since  2019-05-22
  * @see    model.structural.base.Element
  */
 public class ActorUML extends Element {
     
     /**
      * Default constructor method of Class.
+     * @param diagram Use Case Diagram.
      */
-    public ActorUML() {
-        this.name      = "Actor";
-        this.type      = "actor";
-        this.mandatory = true;
-        this.size      = new Point(75, 50);
+    public ActorUML(Diagram diagram) {
+        super(diagram);
+        this.name = "Actor";
+        this.size = new Point(75, 50);
+        this.type = "actor";
     }
     
     /**
      * Alternative constructor method of Class.
      * @param element W3C Element.
+     * @param diagram Use Case Diagram.
      */
-    public ActorUML(org.w3c.dom.Element element) {
-        super(element, true);
+    public ActorUML(org.w3c.dom.Element element, Diagram diagram) {
+        super(element, diagram, true);
         this.type = "actor";
     }
 

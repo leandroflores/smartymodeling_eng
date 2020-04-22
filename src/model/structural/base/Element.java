@@ -15,6 +15,7 @@ import model.structural.base.interfaces.Modelable;
  * @see    model.structural.base.interfaces.Modelable
  */
 public abstract class Element implements Exportable, Modelable {
+    protected Diagram diagram;
     protected String  id;
     protected String  name;
     protected String  type;
@@ -25,8 +26,11 @@ public abstract class Element implements Exportable, Modelable {
     
     /**
      * Default constructor method of Class.
+     * @param diagram Diagram.
      */
-    public Element() {
+    public Element(Diagram diagram) {
+        super();
+        this.diagram   = diagram;
         this.mandatory = true;
         this.position  = new Point(0, 0);
         this.global    = new Point(0, 0);
@@ -36,9 +40,10 @@ public abstract class Element implements Exportable, Modelable {
     /**
      * Alternative constructor method of Class.
      * @param element W3C Element.
+     * @param diagram Diagram.
      */
-    public Element(org.w3c.dom.Element element) {
-        this();
+    public Element(org.w3c.dom.Element element, Diagram diagram) {
+        this(diagram);
         this.id        = element.getAttribute("id");
         this.name      = element.getAttribute("name");
         this.type      = element.getAttribute("type");
@@ -48,13 +53,38 @@ public abstract class Element implements Exportable, Modelable {
     /**
      * Alternative constructor method of Class.
      * @param element W3C Element.
+     * @param diagram Diagram.
      * @param position Reading Coordinates.
      */
-    public Element(org.w3c.dom.Element element, boolean position) {
-        this(element);
+    public Element(org.w3c.dom.Element element, Diagram diagram, boolean position) {
+        this(element, diagram);
         this.setPosition(element);
         this.setGlobalPosition(element);
         this.setSize(element);
+    }
+    
+    /**
+     * Method responsible for returning the Diagram Element.
+     * @return Diagram Element.
+     */
+    public Diagram getDiagram() {
+        return this.diagram;
+    }
+
+    /**
+     * Method responsible for returning the Diagram Type.
+     * @return Diagram Type.
+     */
+    public String getDiagramType() {
+        return this.diagram.getType();
+    }
+    
+    /**
+     * Method responsible for setting the Diagram Element.
+     * @param diagram Diagram Element.
+     */
+    public void setDiagram(Diagram diagram) {
+        this.diagram = diagram;
     }
     
     /**

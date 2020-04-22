@@ -11,7 +11,6 @@ import model.structural.diagram.activity.base.ActivityUML;
 import model.structural.diagram.activity.base.DecisionUML;
 import model.structural.diagram.activity.base.FinalUML;
 import model.structural.diagram.activity.base.InitialUML;
-import model.structural.diagram.activity.base.JoinUML;
 import model.structural.diagram.activity.base.association.FlowUML;
 
 /**
@@ -32,7 +31,6 @@ public final class ActivityDiagram extends Diagram {
     private HashMap<String, DecisionUML> decisions;
     private HashMap<String, InitialUML>  initials;
     private HashMap<String, FinalUML>    finals;
-    private HashMap<String, JoinUML>     joins;
     private HashMap<String, Association> flows;
 
     /**
@@ -61,7 +59,6 @@ public final class ActivityDiagram extends Diagram {
         this.decisions  = new HashMap<>();
         this.initials   = new HashMap<>();
         this.finals     = new HashMap<>();
-        this.joins      = new HashMap<>();
         this.flows      = new HashMap<>();
     }
     
@@ -167,28 +164,6 @@ public final class ActivityDiagram extends Diagram {
         this.removeAssociations(final_);
         this.removeElement(final_);
         this.finals.remove(final_.getId());
-    }
-    
-    /**
-     * Method responsible for adding a Join UML.
-     * @param join Join UML.
-     */
-    public void addJoin(JoinUML join) {
-        join.setId(this.nextId(join));
-        if (this.joins.get(join.getId()) == null) {
-            this.joins.put(join.getId(), join);
-            this.addElement(join);
-        }
-    }
-    
-    /**
-     * Method responsible for removing a Join UML.
-     * @param join Join UML.
-     */
-    public void removeJoin(JoinUML join) {
-        this.removeAssociations(join);
-        this.removeElement(join);
-        this.joins.remove(join.getId());
     }
     
     /**

@@ -4,6 +4,8 @@ import controller.view.ControllerViewModal;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import view.new_.ViewNew;
+import view.panel.project.tree.PanelTree;
+import view.structural.ViewMenu;
 
 /**
  * <p>Class of Controller <b>ControllerViewNew</b>.</p>
@@ -74,6 +76,22 @@ public abstract class ControllerViewNew extends ControllerViewModal {
         this.getView().getViewMenu().setSave(false);
         this.getView().getViewMenu().update();
         this.getView().dispose();
+    }
+    
+    /**
+     * Method responsible for returning the Panel Tree.
+     * @return Panel Tree.
+     */
+    protected PanelTree getPanelTree() {
+        return this.getViewMenu().getPanelProject().getPanelTree();
+    }
+    
+    /**
+     * Method responsible for returning the View Menu.
+     * @return View Menu.
+     */
+    protected ViewMenu getViewMenu() {
+        return this.getView().getViewMenu();
     }
     
     @Override

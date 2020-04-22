@@ -166,6 +166,29 @@ public abstract class Diagram implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Diagram Index.
+     * @return Diagram Index.
+     */
+    public Integer getIndex() {
+        switch (this.type.toLowerCase().trim()) {
+            case "feature":
+                return 1;
+            case "usecase":
+                return 2;
+            case "class":
+                return 3;
+            case "component":
+                return 4;
+            case "sequence":
+                return 5;
+            case "activity":
+                return 6;
+            default:
+                return 0;
+        }
+    }
+    
+    /**
      * Method responsible for defining Diagram Type.
      * @param type Diagram Type.
      */

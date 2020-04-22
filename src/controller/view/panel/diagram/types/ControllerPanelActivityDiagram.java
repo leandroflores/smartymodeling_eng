@@ -27,19 +27,19 @@ public class ControllerPanelActivityDiagram extends ControllerPanelDiagram {
     }
 
     @Override
-    public void mousePressed(MouseEvent evento) {
+    public void mousePressed(MouseEvent event) {
         switch (this.getPanelDiagram().getOperation()) {
             case "Initial":
-                this.addInitial(evento);
+                this.addInitial(event);
                 break;
             case "Activity":
-                this.addActivity(evento);
+                this.addActivity(event);
                 break;
             case "Decision":
-                this.addDecision(evento);
+                this.addDecision(event);
                 break;
             case "Final":
-                this.addFim(evento);
+                this.addFim(event);
                 break;
             default:
                 break;
@@ -51,7 +51,7 @@ public class ControllerPanelActivityDiagram extends ControllerPanelDiagram {
      * @param event Mouse Event.
      */
     public void addInitial(MouseEvent event) {
-        InitialUML initial = new InitialUML();
+        InitialUML initial = new InitialUML(this.getPanelDiagram().getDiagram());
                    initial.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addInitial(initial);
         this.getPanelDiagram().updateGraph();
@@ -63,7 +63,7 @@ public class ControllerPanelActivityDiagram extends ControllerPanelDiagram {
      * @param event Mouse Event.
      */
     public void addActivity(MouseEvent event) {
-        ActivityUML activity = new ActivityUML();
+        ActivityUML activity = new ActivityUML(this.getPanelDiagram().getDiagram());
                     activity.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addActivity(activity);
         this.getPanelDiagram().updateGraph();
@@ -75,7 +75,7 @@ public class ControllerPanelActivityDiagram extends ControllerPanelDiagram {
      * @param event Mouse Event.
      */
     public void addDecision(MouseEvent event) {
-        DecisionUML decision = new DecisionUML();
+        DecisionUML decision = new DecisionUML(this.getPanelDiagram().getDiagram());
                     decision.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addDecision(decision);
         this.getPanelDiagram().updateGraph();
@@ -87,7 +87,7 @@ public class ControllerPanelActivityDiagram extends ControllerPanelDiagram {
      * @param event Mouse Event.
      */
     public void addFim(MouseEvent event) {
-        FinalUML final_ = new FinalUML();
+        FinalUML final_ = new FinalUML(this.getPanelDiagram().getDiagram());
                  final_.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addFinal(final_);
         this.getPanelDiagram().updateGraph();

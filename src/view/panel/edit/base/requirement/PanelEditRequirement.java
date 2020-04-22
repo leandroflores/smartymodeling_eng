@@ -23,12 +23,14 @@ public final class PanelEditRequirement extends PanelEdit {
      * Default constructor method of Class.
      * @param viewMenu View Menu.
      * @param requirement Requirement.
+     * @param index Tab Index.
      */
-    public PanelEditRequirement(ViewMenu viewMenu, Requirement requirement) {
+    public PanelEditRequirement(ViewMenu viewMenu, Requirement requirement, Integer index) {
         super(viewMenu);
         this.requirement = requirement;
         this.setPreferredSize(new Dimension(200, 100));
         this.addComponents();
+        this.tabbedPane.setSelectedIndex(index);
     }
     
     @Override

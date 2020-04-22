@@ -4,33 +4,36 @@ import com.mxgraph.util.mxConstants;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
+import model.structural.base.Diagram;
 import model.structural.base.Element;
 
 /**
  * <p>Class of Model <b>InterfaceUML</b>.</p>
  * <p>Class responsible for representing the <b>Interface UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  20/07/2019
+ * @since  2019-07-20
  * @see    model.structural.base.Element
  */
 public class InterfaceUML extends Element {
     
     /**
      * Default constructor method of Class.
+     * @param diagram Component Diagram.
      */
-    public InterfaceUML() {
-        this.name      = "Interface";
-        this.type      = "interface";
-        this.mandatory = true;
-        this.size      = new Point(30, 30);
+    public InterfaceUML(Diagram diagram) {
+        super(diagram);
+        this.name = "Interface";
+        this.size = new Point(30, 30);
+        this.type = "interface";
     }
     
     /**
      * Alternative constructor method of Class.
      * @param element W3C Element.
+     * @param diagram Component Diagram.
      */
-    public InterfaceUML(org.w3c.dom.Element element) {
-        super(element, true);
+    public InterfaceUML(org.w3c.dom.Element element, Diagram diagram) {
+        super(element, diagram, true);
         this.type = "interface";
     }
     

@@ -5,6 +5,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Element;
 import model.structural.base.requirement.Requirement;
 import view.delete.base.requirement.ViewDeleteRequirement;
+import view.panel.tree.base.requirement.PanelTreeRequirement;
 import view.panel.tree.popup.TreePopup;
 
 /**
@@ -31,18 +32,25 @@ public class ControllerMenuItemDelete extends ControllerMenuItem {
         if (object instanceof Requirement)
             new ViewDeleteRequirement(this.getPanelModeling(), (Requirement) object).setVisible(true);
         else if (object instanceof Element)
-            this.getRequirement(node).removeElement((Element) object);
+            this.delete(this.getRequirement(node), (Element) object);
     }
 
     /**
-     * Method responsible for returning the Requirement Node.
-     * @param  node Tree Node.
-     * @return Requirement Node.
+     * Method responsible for Deleting a Element if Requirement.
+     * @param requirement Requirement.
+     * @param element Element.
      */
-    protected Requirement getRequirement(DefaultMutableTreeNode node) {
-        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
-        if (parent != null && parent.getUserObject() instanceof Requirement)
-            return (Requirement) parent.getUserObject();
-        return null;
+    private void delete(Requirement requirement, Element element) {
+        requirement.removeElement(element);
+        this.getPanelTree().getViewMenu().updatePanelTree();
+        this.getPanelTree().getViewMenu().setSave(false);
+    }
+    
+    /**
+     * Method responsible for returning the Panel Tree.
+     * @return Panel Tree.
+     */
+    protected PanelTreeRequirement getPanelTree() {
+        return (PanelTreeRequirement) this.getPopup().getPanel();
     }
 }

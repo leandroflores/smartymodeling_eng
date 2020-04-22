@@ -4,6 +4,7 @@ import com.mxgraph.util.mxConstants;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
+import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.diagram.usecase.base.ActorUML;
 
@@ -11,7 +12,7 @@ import model.structural.diagram.usecase.base.ActorUML;
  * <p>Class of Model <b>LifelineUML</b>.</p>
  * <p>Class responsible for representing the <b>Lifeline UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  24/07/2019
+ * @since  2019-07-24
  * @see    model.structural.base.Element
  */
 public class LifelineUML extends Element {
@@ -19,21 +20,23 @@ public class LifelineUML extends Element {
     
     /**
      * Default constructor method of Class.
+     * @param diagram Sequence Diagram.
      */
-    public LifelineUML() {
-        this.name      = "Lifeline";
-        this.type      = "lifeline";
-        this.mandatory = true;
-        this.size      = new Point(200, 350);
-        this.actor     = null;
+    public LifelineUML(Diagram diagram) {
+        super(diagram);
+        this.name  = "Lifeline";
+        this.size  = new Point(200, 350);
+        this.actor = null;
+        this.type  = "lifeline";
     }
     
     /**
      * Alternative constructor method of Class.
      * @param element W3C Element.
+     * @param diagram Sequence Diagram.
      */
-    public LifelineUML(org.w3c.dom.Element element) {
-        super(element, true);
+    public LifelineUML(org.w3c.dom.Element element, Diagram diagram) {
+        super(element, diagram, true);
         this.type = "lifeline";
     }
     

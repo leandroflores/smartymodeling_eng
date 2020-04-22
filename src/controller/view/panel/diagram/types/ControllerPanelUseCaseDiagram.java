@@ -37,7 +37,7 @@ public class ControllerPanelUseCaseDiagram extends ControllerPanelDiagram {
      * @param event Mouse Event.
      */
     public void addActor(MouseEvent event) {
-        ActorUML actor = new ActorUML();
+        ActorUML actor = new ActorUML(this.getPanelDiagram().getDiagram());
                  actor.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addActor(actor);
                  actor.setDefaultName();
@@ -50,7 +50,7 @@ public class ControllerPanelUseCaseDiagram extends ControllerPanelDiagram {
      * @param event Mouse Event.
      */
     public void addUseCase(MouseEvent event) {
-        UseCaseUML useCase = new UseCaseUML();
+        UseCaseUML useCase = new UseCaseUML(this.getPanelDiagram().getDiagram());
                    useCase.setPosition(event.getX(), event.getY());
         this.getPanelDiagram().getDiagram().addUseCase(useCase);
                    useCase.setDefaultName();

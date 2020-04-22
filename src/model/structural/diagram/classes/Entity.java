@@ -15,6 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Association;
@@ -36,9 +37,8 @@ import model.structural.diagram.classes.base.association.AssociationUML;
  * @see    model.structural.diagram.classes.Encodable
  */
 public abstract class Entity extends Element implements Encodable {
-    protected ClassDiagram diagram;
-    protected PackageUML   packageUML;
-    protected TypeUML      typeUML;
+    protected PackageUML packageUML;
+    protected TypeUML typeUML;
     protected final LinkedHashMap attributes;
     protected final LinkedHashMap methods;
     
@@ -47,9 +47,8 @@ public abstract class Entity extends Element implements Encodable {
      * @param diagram Class Diagram.
      */
     public Entity(ClassDiagram diagram) {
-        this.diagram    = diagram;
+        super(diagram);
         this.packageUML = null;
-        this.mandatory  = true;
         this.size       = new Point(200, 120);
         this.attributes = new LinkedHashMap();
         this.methods    = new LinkedHashMap();
@@ -58,9 +57,10 @@ public abstract class Entity extends Element implements Encodable {
     /**
      * Alternative constructor method of Class.
      * @param element W3C Element.
+     * @param diagram Diagram.
      */
-    public Entity(org.w3c.dom.Element element) {
-        super(element, true);
+    public Entity(org.w3c.dom.Element element, Diagram diagram) {
+        super(element, diagram, true);
         this.packageUML = null;
         this.attributes = new LinkedHashMap();
         this.methods    = new LinkedHashMap();
@@ -218,12 +218,9 @@ public abstract class Entity extends Element implements Encodable {
             this.packageUML.updateSize();
     }
     
-    /**
-     * Method responsible for returning the Class Diagram.
-     * @return Class Diagram.
-     */
+    @Override
     public ClassDiagram getDiagram() {
-        return this.diagram;
+        return (ClassDiagram) this.diagram;
     }
 
     /**
