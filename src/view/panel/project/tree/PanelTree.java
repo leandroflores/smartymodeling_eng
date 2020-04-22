@@ -7,6 +7,7 @@ import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.base.evaluation.Metric;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.base.requirement.Requirement;
@@ -233,6 +234,14 @@ public final class PanelTree extends Panel {
         this.getPanelTreeProduct().updateNode(instance);
     }
 
+    /**
+     * Method responsible for updating the Metric Node.
+     * @param metric Metric.
+     */
+    public void updateNode(Metric metric) {
+        this.getPanelTreeEvaluation().updateNode(metric);
+    }
+    
     /**
      * Method responsible for returning the Tabbed Pane.
      * @return Tabbed Pane.

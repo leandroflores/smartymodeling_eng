@@ -1,20 +1,16 @@
 package controller.view.panel.base.evaluation;
 
-import controller.view.panel.ControllerPanel;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import view.panel.base.evaluation.PanelBaseOperation;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseOperation</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseOperation</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelBaseOperation</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  20/08/2019
- * @see    controller.view.panel.ControllerPanel
- * @see    view.panel.base.evaluation.metric.PanelBaseOperation
+ * @since  2019-08-20
+ * @see    controller.view.panel.base.evaluation.ControllerPanelBase
+ * @see    view.panel.base.evaluation.PanelBaseOperation
  */
-public class ControllerPanelBaseOperation extends ControllerPanel {
-    private final PanelBaseOperation panelBaseOperation;
+public class ControllerPanelBaseOperation extends ControllerPanelBase {
 
     /**
      * Default constructor method of Class.
@@ -22,39 +18,17 @@ public class ControllerPanelBaseOperation extends ControllerPanel {
      */
     public ControllerPanelBaseOperation(PanelBaseOperation panel) {
         super(panel);
-        this.panelBaseOperation = panel;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent event) {
-        this.update();
     }
     
     @Override
-    public void keyPressed(KeyEvent event) {
-        this.update();
+    protected void update() {
+        this.getPanel().setTarget();
+        this.getMetric().setOperation(this.getString(this.getPanel().getOperationTextField()));
+        this.refresh();
     }
     
     @Override
-    public void keyReleased(KeyEvent event) {
-        this.update();
-    }
-
-    /**
-     * Method responsible for checking the Metric.
-     * @return Metric checked.
-     */
-    private boolean check() {
-        return this.check(this.panelBaseOperation.getOperationTextField().getText());
-    }
-    
-    /**
-     * Method responsible for setting the Metric Values.
-     */
-    public void update() {
-        this.panelBaseOperation.setTarget();
-        this.panelBaseOperation.getMetric().setOperation(this.panelBaseOperation.getOperationTextField().getText().trim());
-        this.panelBaseOperation.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseOperation.getViewMenu().setSave(false);
+    public PanelBaseOperation getPanel() {
+        return (PanelBaseOperation) this.panel;
     }
 }

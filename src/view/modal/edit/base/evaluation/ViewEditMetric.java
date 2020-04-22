@@ -2,11 +2,11 @@ package view.modal.edit.base.evaluation;
 
 import controller.view.modal.edit.base.evaluation.ControllerViewEditMetric;
 import java.awt.Dimension;
-import javax.swing.JTabbedPane;
 import model.structural.base.evaluation.Metric;
 import view.modal.edit.ViewEdit;
 import view.panel.base.evaluation.PanelBaseMetric;
 import view.panel.base.evaluation.PanelBaseOperation;
+import view.panel.edit.base.evaluation.PanelEditMetric;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -36,7 +36,7 @@ public final class ViewEditMetric extends ViewEdit {
     
     @Override
     public void initComponents() {
-        this.setSize(new Dimension(650, 350));
+        this.setSize(new Dimension(650, 430));
         this.addHeader();
         this.addComponents();
         this.addFooter();
@@ -44,10 +44,7 @@ public final class ViewEditMetric extends ViewEdit {
     
     @Override
     public void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 225));
-            this.addPanelBaseMetric();
-        this.add(this.tabbedPane);
+        this.addPanelBaseMetric();
         this.addLines(1);
     }
     
@@ -55,20 +52,17 @@ public final class ViewEditMetric extends ViewEdit {
      * Method responsible for adding the Panel Base Metric.
      */
     private void addPanelBaseMetric() {
-        this.addPanel("panelBaseMetric", new PanelBaseMetric(this.getViewMenu(), this.metric));
-        this.createScrollPane("scrollPanelBaseMetric",  this.getPanelBaseMetric());
-        this.getScrollPane("scrollPanelBaseMetric").setViewportView(this.getPanelBaseMetric());
-        this.tabbedPane.add("Metric", this.getScrollPane("scrollPanelBaseMetric"));
+        this.addPanel("panelEditMetric", new PanelEditMetric(this.view, this.metric));
+        this.getPanel("panelEditMetric").setPreferredSize(new Dimension(500, 300));
+        this.add(this.getPanel("panelEditMetric"));
     }
     
     /**
-     * Method responsible for adding the Panel Base Operation.
+     * Method responsible for returning the Panel Edit Metric.
+     * @return Panel Edit Metric.
      */
-    private void addPanelBaseOperation() {
-        this.addPanel("panelBaseOperation", new PanelBaseOperation(this.getViewMenu(), this.metric));
-        this.createScrollPane("scrollPanelBaseOperation",  this.getPanelBaseOperation());
-        this.getScrollPane("scrollPanelBaseOperation").setViewportView(this.getPanelBaseOperation());
-        this.tabbedPane.add("Operation", this.getScrollPane("scrollPanelBaseOperation"));
+    public PanelEditMetric getPanelEditMetric() {
+        return (PanelEditMetric) this.getPanel("panelEditMetric");
     }
     
     /**
@@ -76,7 +70,7 @@ public final class ViewEditMetric extends ViewEdit {
      * @return Panel Base Metric.
      */
     public PanelBaseMetric getPanelBaseMetric() {
-        return (PanelBaseMetric) this.getPanel("panelBaseMetric");
+        return this.getPanelEditMetric().getPanelBaseMetric();
     }
     
     /**
@@ -84,7 +78,7 @@ public final class ViewEditMetric extends ViewEdit {
      * @return Panel Base Operation.
      */
     public PanelBaseOperation getPanelBaseOperation() {
-        return (PanelBaseOperation) this.getPanel("panelBaseOperation");
+        return this.getPanelEditMetric().getPanelBaseOperation();
     }
     
     /**

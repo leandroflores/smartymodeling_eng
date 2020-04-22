@@ -96,6 +96,15 @@ public final class PanelTreeEvaluation extends PanelTree {
         return node;
     }
     
+    /**
+     * Method responsible for updating the Metric Node.
+     * @param metric Metric. 
+     */
+    public void updateNode(Metric metric) {
+        if (this.getNode(metric) != null)
+            this.getTreeModel().reload(this.getNode(metric));
+    }
+    
     @Override
     public TreePopupEvaluation getPopup() {
         return (TreePopupEvaluation) this.popup;
