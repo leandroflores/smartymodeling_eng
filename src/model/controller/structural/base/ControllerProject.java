@@ -3,6 +3,7 @@ package model.controller.structural.base;
 import java.util.ArrayList;
 import java.util.List;
 import model.structural.base.Diagram;
+import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.Stereotype;
 import model.structural.base.requirement.Requirement;
@@ -114,6 +115,18 @@ public class ControllerProject {
      */
     public Object[] getElements() {
         return this.project.getElementsList().toArray();
+    }
+    
+    /**
+     * Method responsible for returning the Default Elements Array.
+     * @return Default Elements Array.
+     */
+    public Element[] getDefaultElements() {
+        List<Element> list  = this.project.getDefaultElements();
+        Element[]     array = new Element[list.size()];
+        for (int i = 0; i < list.size(); i++)
+               array[i] = list.get(i);
+        return array;
     }
     
     /**

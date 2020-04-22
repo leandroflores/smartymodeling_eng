@@ -2,9 +2,8 @@ package controller.view.panel.tree.popup.item.base.requirement;
 
 import controller.view.panel.tree.popup.item.ControllerMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
-import model.structural.base.Element;
 import model.structural.base.requirement.Requirement;
-import view.delete.base.requirement.ViewDeleteRequirement;
+import view.new_.base.requirement.traceability.ViewNewRequirementTraceability;
 import view.panel.tree.popup.TreePopup;
 
 /**
@@ -15,13 +14,13 @@ import view.panel.tree.popup.TreePopup;
  * @see    controller.view.panel.tree.popup.item.ControllerMenuItem
  * @see    view.panel.tree.popup.TreePopup
  */
-public class ControllerMenuItemDelete extends ControllerMenuItem {
+public class ControllerMenuItemAdd extends ControllerMenuItem {
     
     /**
      * Default constructor method of Class.
      * @param popup Tree Popup.
      */
-    public ControllerMenuItemDelete(TreePopup popup) {
+    public ControllerMenuItemAdd(TreePopup popup) {
         super(popup);
     }
     
@@ -29,9 +28,7 @@ public class ControllerMenuItemDelete extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node) {
         Object object = node.getUserObject();
         if (object instanceof Requirement)
-            new ViewDeleteRequirement(this.getPanelModeling(), (Requirement) object).setVisible(true);
-        else if (object instanceof Element)
-            this.getRequirement(node).removeElement((Element) object);
+            new ViewNewRequirementTraceability(this.getPanelModeling().getViewMenu(), (Requirement) object).setVisible(true);
     }
 
     /**

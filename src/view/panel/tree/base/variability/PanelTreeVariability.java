@@ -6,7 +6,7 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.variability.Variability;
-import view.panel.tree.base.PanelTree;
+import view.panel.tree.PanelTree;
 import view.panel.tree.popup.base.variability.TreePopupVariability;
 import view.panel.tree.renderer.base.variability.TreeRendererVariability;
 import view.structural.ViewMenu;
@@ -16,7 +16,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Variability Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-14
- * @see    view.panel.tree.base.PanelTree
+ * @see    view.panel.tree1.PanelTree
  * @see    view.panel.tree.popup.base.variability.TreePopupVariability
  * @see    view.panel.tree.renderer.base.variability.TreeRendererVariability
  */

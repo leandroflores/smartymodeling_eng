@@ -10,7 +10,7 @@ import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.PackageUML;
-import view.panel.tree.base.PanelTree;
+import view.panel.tree.PanelTree;
 import view.panel.tree.popup.diagram.TreePopupDiagram;
 import view.panel.tree.renderer.diagram.TreeRendererDiagram;
 import view.structural.ViewMenu;
@@ -20,7 +20,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Diagram Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-14
- * @see    view.panel.tree.base.PanelTree
+ * @see    view.panel.tree1.PanelTree
  * @see    view.panel.tree.popup.diagram.TreePopupDiagram
  * @see    view.panel.tree.renderer.diagram.TreeRendererDiagram
  */

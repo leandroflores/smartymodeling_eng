@@ -161,6 +161,14 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
     }
     
     /**
+     * Method responsible for returning the Tree Popup.
+     * @return Tree Popup.
+     */
+    protected TreePopup getPopup() {
+        return this.treePopup;
+    }
+    
+    /**
      * Method responsible for returning the Selected Node.
      * @return Selected Node.
      */

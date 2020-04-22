@@ -5,7 +5,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
-import view.panel.tree.base.PanelTree;
+import view.panel.tree.PanelTree;
 import view.panel.tree.popup.base.evaluation.TreePopupEvaluation;
 import view.panel.tree.renderer.base.evaluation.TreeRendererEvaluation;
 import view.structural.ViewMenu;
@@ -15,7 +15,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Evaluation Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-14
- * @see    view.panel.tree.base.PanelTree
+ * @see    view.panel.tree1.PanelTree
  * @see    view.panel.tree.popup.base.evaluation.TreePopupEvaluation
  * @see    view.panel.tree.renderer.base.evaluation.TreeRendererEvaluation
  */

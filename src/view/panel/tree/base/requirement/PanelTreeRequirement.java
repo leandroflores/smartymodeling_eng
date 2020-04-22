@@ -5,7 +5,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.requirement.Requirement;
-import view.panel.tree.base.PanelTree;
+import view.panel.tree.PanelTree;
 import view.panel.tree.popup.base.requirement.TreePopupRequirement;
 import view.panel.tree.renderer.base.requirement.TreeRendererRequirement;
 import view.structural.ViewMenu;
@@ -15,7 +15,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Requirement Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-15
- * @see    view.panel.tree.base.PanelTree
+ * @see    view.panel.tree1.PanelTree
  * @see    view.panel.tree.popup.base.requirement.TreePopupRequirement
  * @see    view.panel.tree.renderer.base.requirement.TreeRendererRequirement
  */

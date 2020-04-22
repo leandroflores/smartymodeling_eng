@@ -435,15 +435,15 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * @param event Action Event.
      */
     private void forwardEvaluation(ActionEvent event) {
-        if (this.viewMenu.getMenuItemEvaluationMetric().equals(event.getSource()))
+        if (this.viewMenu.getMenuItemNewMetric().equals(event.getSource()))
             this.newMetric();
-        else if (this.viewMenu.getMenuItemEvaluationMeasure().equals(event.getSource()))
+        else if (this.viewMenu.getMenuItemNewMeasure().equals(event.getSource()))
             this.newMeasure();
-        else if (this.viewMenu.getMenuItemEvaluationProject().equals(event.getSource()))
+        else if (this.viewMenu.getMenuItemEvaluateProject().equals(event.getSource()))
             this.evaluateProject();
-        else if (this.viewMenu.getMenuItemEvaluationDiagram().equals(event.getSource()))
+        else if (this.viewMenu.getMenuItemEvaluateDiagram().equals(event.getSource()))
             this.evaluateDiagram();
-        else if (this.viewMenu.getMenuItemEvaluationProduct().equals(event.getSource()))
+        else if (this.viewMenu.getMenuItemEvaluateProduct().equals(event.getSource()))
             this.evaluateProduct();
         else
             this.flag = true;

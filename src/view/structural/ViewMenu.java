@@ -1,26 +1,19 @@
 package view.structural;
 
 import controller.view.structural.ControllerViewMenu;
-import file.importation.ImportProject;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.base.product.Instance;
-import org.xml.sax.SAXException;
 import view.interfaces.Operation;
 import view.View;
 import view.ViewStyle;
@@ -203,12 +196,12 @@ public final class ViewMenu extends View implements Operation {
         this.createMenuItem("evaluate_diagram", "Evaluate Diagram", "evaluation/diagram.png");
         this.createMenuItem("evaluate_product", "Evaluate Product", "evaluation/product.png");
         
-        this.getMenu("evaluation").add(this.getMenuItemEvaluationMetric());
-        this.getMenu("evaluation").add(this.getMenuItemEvaluationMeasure());
+        this.getMenu("evaluation").add(this.getMenuItemNewMetric());
+        this.getMenu("evaluation").add(this.getMenuItemNewMeasure());
         this.getMenu("evaluation").addSeparator();
-        this.getMenu("evaluation").add(this.getMenuItemEvaluationProject());
-        this.getMenu("evaluation").add(this.getMenuItemEvaluationDiagram());
-        this.getMenu("evaluation").add(this.getMenuItemEvaluationProduct());
+        this.getMenu("evaluation").add(this.getMenuItemEvaluateProject());
+        this.getMenu("evaluation").add(this.getMenuItemEvaluateDiagram());
+        this.getMenu("evaluation").add(this.getMenuItemEvaluateProduct());
     }
     
     /**
@@ -263,10 +256,10 @@ public final class ViewMenu extends View implements Operation {
 
         this.panelMain = new PanelMain(this);
         this.createScrollPane("scrollPanelMain");
-        this.getScrollPanelMain().setMinimumSize(new Dimension(200, 35));
-        this.getScrollPanelMain().setPreferredSize(new Dimension(200, 35));
-        this.getScrollPanelMain().setViewportView(this.panelMain);
-        this.getContentPane().add(this.getScrollPanelMain(), BorderLayout.NORTH);
+        this.getScrollPane("scrollPanelMain").setMinimumSize(new Dimension(200, 35));
+        this.getScrollPane("scrollPanelMain").setPreferredSize(new Dimension(200, 35));
+        this.getScrollPane("scrollPanelMain").setViewportView(this.panelMain);
+        this.getContentPane().add(this.getScrollPane("scrollPanelMain"), BorderLayout.NORTH);
     }
     
     /**
@@ -277,7 +270,6 @@ public final class ViewMenu extends View implements Operation {
     private JSplitPane createSplitPane(boolean flag) {
         JSplitPane split = new JSplitPane();
                    split.setOrientation(flag ? JSplitPane.HORIZONTAL_SPLIT : JSplitPane.VERTICAL_SPLIT);
-//                   splitPane.setLayout(new GridLayout(2, 0));
         return     split;
     }
     
@@ -288,14 +280,13 @@ public final class ViewMenu extends View implements Operation {
         this.initPanelProject();
         this.initPanelModeling();
         
-        this.getScrollPanelProject().setMinimumSize(new Dimension(325, 150));
-        this.getScrollPanelProject().setPreferredSize(new Dimension(325, 150));
-        this.getScrollPanelModeling().setPreferredSize(new Dimension((int) (this.getWidth() - 375), this.getHeight() - 100));
-//        this.getScrollPanelModeling().setPreferredSize(new Dimension((int) (this.getWidth() * 0.7) - 10, this.getHeight() - 100));
+        this.getScrollPane("scrollPanelProject").setMinimumSize(new Dimension(325, 150));
+        this.getScrollPane("scrollPanelProject").setPreferredSize(new Dimension(325, 150));
+        this.getScrollPane("scrollPanelModeling").setPreferredSize(new Dimension((int) (this.getWidth() - 375), this.getHeight() - 100));
         
         this.mainSplitPane = this.createSplitPane(true);
-        this.mainSplitPane.setLeftComponent(this.getScrollPanelProject());
-        this.mainSplitPane.setRightComponent(this.getScrollPanelModeling());
+        this.mainSplitPane.setLeftComponent(this.getScrollPane("scrollPanelProject"));
+        this.mainSplitPane.setRightComponent(this.getScrollPane("scrollPanelModeling"));
         
         this.getContentPane().add(this.mainSplitPane, BorderLayout.WEST);
     }
@@ -306,7 +297,7 @@ public final class ViewMenu extends View implements Operation {
     private void initPanelProject() {
         this.panelProject = new PanelProject(this);
         this.createScrollPane("scrollPanelProject");
-        this.getScrollPanelProject().setViewportView(this.panelProject);
+        this.getScrollPane("scrollPanelProject").setViewportView(this.panelProject);
     }
     
     /**
@@ -315,7 +306,7 @@ public final class ViewMenu extends View implements Operation {
     private void initPanelModeling() {
         this.panelModeling = new PanelModeling(this);
         this.createScrollPane("scrollPanelModeling");
-        this.getScrollPanelModeling().setViewportView(this.panelModeling);
+        this.getScrollPane("scrollPanelModeling").setViewportView(this.panelModeling);
     }
     
     /**
@@ -396,11 +387,11 @@ public final class ViewMenu extends View implements Operation {
         this.getMenuItemExportDiagramCode().setEnabled(flag);
         this.getMenuItemExportInstanceCode().setEnabled(flag);
         
-        this.getMenuItemEvaluationMetric().setEnabled(flag);
-        this.getMenuItemEvaluationMeasure().setEnabled(flag);
-        this.getMenuItemEvaluationProject().setEnabled(flag);
-        this.getMenuItemEvaluationDiagram().setEnabled(flag);
-        this.getMenuItemEvaluationProduct().setEnabled(flag);
+        this.getMenuItemNewMetric().setEnabled(flag);
+        this.getMenuItemNewMeasure().setEnabled(flag);
+        this.getMenuItemEvaluateProject().setEnabled(flag);
+        this.getMenuItemEvaluateDiagram().setEnabled(flag);
+        this.getMenuItemEvaluateProduct().setEnabled(flag);
     }
     
     /**
@@ -439,11 +430,11 @@ public final class ViewMenu extends View implements Operation {
         if (this.project != null) {
             Integer index     = this.getTabIndex();
             this.panelProject = new PanelProject(this);
-            this.getScrollPanelProject().setViewportView(this.panelProject);
+            this.getScrollPane("scrollPanelProject").setViewportView(this.panelProject);
             this.unlockDiagramas();
             this.panelProject.getPanelTree().getTabbedPane().setSelectedIndex(index);
         }else {
-            this.getScrollPanelProject().setViewportView(this.createLabel(""));
+            this.getScrollPane("scrollPanelProject").setViewportView(this.createLabel(""));
             this.lockDiagramas();
         }
     }
@@ -529,7 +520,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Controller.
+     * Method responsible for returning the Controller.
      * @return Controller.
      */
     public ControllerViewMenu getController() {
@@ -537,7 +528,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Project.
+     * Method responsible for returning the Project.
      * @return Project.
      */
     public Project getProject() {
@@ -545,7 +536,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for defining Project.
+     * Method responsible for defining the Project.
      * @param project Project.
      */
     public void setProject(Project project) {
@@ -553,7 +544,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning File Chooser Open Project.
+     * Method responsible for returning the File Chooser Open Project.
      * @return File Chooser Open Project.
      */
     public JFileChooser getFileChooserOpenProject() {
@@ -577,7 +568,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item New Project.
+     * Method responsible for returning the Menu Item New Project.
      * @return Menu Item New Project.
      */
     public JMenuItem getMenuItemNewProject() {
@@ -585,7 +576,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item Open Project.
+     * Method responsible for returning the Menu Item Open Project.
      * @return Menu Item Open Project.
      */
     public JMenuItem getMenuItemOpenProject() {
@@ -593,7 +584,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item Save Project.
+     * Method responsible for returning the Menu Item Save Project.
      * @return Menu Item Save Project.
      */
     public JMenuItem getMenuItemSaveProject() {
@@ -601,7 +592,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item Save As.
+     * Method responsible for returning the Menu Item Save As.
      * @return Menu Item Save As.
      */
     public JMenuItem getMenuItemSaveAs() {
@@ -609,7 +600,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item Close Project.
+     * Method responsible for returning the Menu Item Close Project.
      * @return Menu Item Close Project.
      */
     public JMenuItem getMenuItemCloseProject() {
@@ -617,7 +608,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item Exit System.
+     * Method responsible for returning the Menu Item Exit System.
      * @return Menu Item Exit System.
      */
     public JMenuItem getMenuItemExitSystem() {
@@ -649,7 +640,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item Feature Diagram.
+     * Method responsible for returning the Menu Item Feature Diagram.
      * @return Menu Item Feature Diagram.
      */
     public JMenuItem getMenuItemFeatureDiagram() {
@@ -657,7 +648,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item Use Case Diagram.
+     * Method responsible for returning the Menu Item Use Case Diagram.
      * @return Menu Item Use Case Diagram.
      */
     public JMenuItem getMenuItemUseCaseDiagram() {
@@ -665,7 +656,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item Class Diagram.
+     * Method responsible for returning the Menu Item Class Diagram.
      * @return Menu Item Class Diagram.
      */
     public JMenuItem getMenuItemClassDiagram() {
@@ -673,7 +664,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item Component Diagram.
+     * Method responsible for returning the Menu Item Component Diagram.
      * @return Menu Item Component Diagram.
      */
     public JMenuItem getMenuItemComponentDiagram() {
@@ -681,7 +672,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item Sequence Diagram.
+     * Method responsible for returning the Menu Item Sequence Diagram.
      * @return Menu Item Sequence Diagram.
      */
     public JMenuItem getMenuItemSequenceDiagram() {
@@ -689,7 +680,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item Activity Diagram.
+     * Method responsible for returning the Menu Item Activity Diagram.
      * @return Menu Item Activity Diagram.
      */
     public JMenuItem getMenuItemActivityDiagram() {
@@ -729,42 +720,42 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning the Menu Item Evaluation Metric.
-     * @return Menu Item Evaluation Metric.
+     * Method responsible for returning the Menu Item New Metric.
+     * @return Menu Item New Metric.
      */
-    public JMenuItem getMenuItemEvaluationMetric() {
+    public JMenuItem getMenuItemNewMetric() {
         return this.getMenuItem("new_metric");
     }
     
     /**
-     * Method responsible for returning the Menu Item Evaluation Measure.
-     * @return Menu Item Evaluation Measure.
+     * Method responsible for returning the Menu Item New Measure.
+     * @return Menu Item New Measure.
      */
-    public JMenuItem getMenuItemEvaluationMeasure() {
+    public JMenuItem getMenuItemNewMeasure() {
         return this.getMenuItem("new_measure");
     }
     
     /**
-     * Method responsible for returning the Menu Item Evaluation Project.
-     * @return Menu Item Evaluation Project.
+     * Method responsible for returning the Menu Item Evaluate Project.
+     * @return Menu Item Evaluate Project.
      */
-    public JMenuItem getMenuItemEvaluationProject() {
+    public JMenuItem getMenuItemEvaluateProject() {
         return this.getMenuItem("evaluate_project");
     }
     
     /**
-     * Method responsible for returning the Menu Item Evaluation Diagram.
-     * @return Menu Item Evaluation Diagram.
+     * Method responsible for returning the Menu Item Evaluate Diagram.
+     * @return Menu Item Evaluate Diagram.
      */
-    public JMenuItem getMenuItemEvaluationDiagram() {
+    public JMenuItem getMenuItemEvaluateDiagram() {
         return this.getMenuItem("evaluate_diagram");
     }
     
     /**
-     * Method responsible for returning the Menu Item Evaluation Product.
-     * @return Menu Item Evaluation Product.
+     * Method responsible for returning the Menu Item Evaluate Product.
+     * @return Menu Item Evaluate Product.
      */
-    public JMenuItem getMenuItemEvaluationProduct() {
+    public JMenuItem getMenuItemEvaluateProduct() {
         return this.getMenuItem("evaluate_product");
     }
     
@@ -801,7 +792,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item About Information.
+     * Method responsible for returning the Menu Item About Information.
      * @return Menu Item About Information.
      */
     public JMenuItem getMenuItemAboutInformation() {
@@ -809,7 +800,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Menu Item About Site.
+     * Method responsible for returning the Menu Item About Site.
      * @return Menu Item About Site.
      */
     public JMenuItem getMenuItemAboutSite() {
@@ -817,7 +808,7 @@ public final class ViewMenu extends View implements Operation {
     }
 
     /**
-     * Method responsible for returning Menu Item About Exit.
+     * Method responsible for returning the Menu Item About Exit.
      * @return Menu Item About Exit.
      */
     public JMenuItem getMenuItemAboutExit() {
@@ -825,7 +816,7 @@ public final class ViewMenu extends View implements Operation {
     }
 
     /**
-     * Method responsible for returning Save Flag.
+     * Method responsible for returning the Save Flag.
      * @return Save Flag.
      */
     public boolean isSave() {
@@ -833,7 +824,7 @@ public final class ViewMenu extends View implements Operation {
     }
 
     /**
-     * Method responsible for defining Save Flag.
+     * Method responsible for setting the Save Flag.
      * @param save Save Flag.
      */
     public void setSave(boolean save) {
@@ -842,19 +833,11 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Panel Main.
+     * Method responsible for returning the Panel Main.
      * @return Panel Main.
      */
     public PanelMain getPanelMain() {
         return this.panelMain;
-    }
-    
-    /**
-     * Method responsible for returning Panel Main Scroll.
-     * @return Panel Main Scroll.
-     */
-    public JScrollPane getScrollPanelMain() {
-        return this.getScrollPane("scrollPanelMain");
     }
     
     /**
@@ -874,7 +857,7 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Panel Modeling.
+     * Method responsible for returning the Panel Modeling.
      * @return Panel Modeling.
      */
     public PanelModeling getPanelModeling() {
@@ -882,8 +865,8 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning Panel Modeling Scroll.
-     * @return Panel Modeling Scroll.
+     * Method responsible for returning the Scroll Panel Modeling.
+     * @return Scroll Panel Modeling.
      */
     public JScrollPane getScrollPanelModeling() {
         return this.getScrollPane("scrollPanelModeling");
@@ -893,29 +876,29 @@ public final class ViewMenu extends View implements Operation {
 //     * Main Method of SMartyModeling.
 //     * @param args 
 //     */
-//    public static void main(String[] args) {
-//        new ViewMenu().setVisible(true);
-//    }
+    public static void main(String[] args) {
+        new ViewMenu().setVisible(true);
+    }
     
     /**
      * Alternative Main Method of SMartyModeling.
      * @param args 
      */
-    public static void main(String[] args) {
-        try {
-            if (args.length == 0) {
-                new ViewMenu().setVisible(true);
-            }else {
-                String   path     = args[0].trim();
-                Project  project_ = new ImportProject(path).getProject(); 
-                ViewMenu view     = new ViewMenu();
-                         view.setProject(project_);
-                         view.update();
-                         view.getPanelModeling().clear();
-                         view.setVisible(true);
-            }
-        } catch (IOException | ParserConfigurationException | SAXException | XPathExpressionException ex) {
-            Logger.getLogger(ViewMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    public static void main(String[] args) {
+//        try {
+//            if (args.length == 0) {
+//                new ViewMenu().setVisible(true);
+//            }else {
+//                String   path     = args[0].trim();
+//                Project  project_ = new ImportProject(path).getProject(); 
+//                ViewMenu view     = new ViewMenu();
+//                         view.setProject(project_);
+//                         view.update();
+//                         view.getPanelModeling().clear();
+//                         view.setVisible(true);
+//            }
+//        } catch (IOException | ParserConfigurationException | SAXException | XPathExpressionException ex) {
+//            Logger.getLogger(ViewMenu.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 }

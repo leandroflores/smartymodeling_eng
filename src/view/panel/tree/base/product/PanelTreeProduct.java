@@ -8,7 +8,7 @@ import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.PackageUML;
-import view.panel.tree.base.PanelTree;
+import view.panel.tree.PanelTree;
 import view.panel.tree.popup.base.product.TreePopupProduct;
 import view.panel.tree.renderer.base.product.TreeRendererProduct;
 import view.structural.ViewMenu;
@@ -18,7 +18,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Product Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-14
- * @see    view.panel.tree.base.PanelTree
+ * @see    view.panel.tree1.PanelTree
  * @see    view.panel.tree.popup.base.product.TreePopupProduct
  * @see    view.panel.tree.renderer.base.product.TreeRendererProduct
  */

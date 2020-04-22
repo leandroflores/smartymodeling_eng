@@ -115,7 +115,7 @@ public final class PanelBaseRequirementTraceability extends PanelBase {
         Diagram diagram = this.getSelectedDiagram();
         if (diagram != null)
             return new ControllerDiagram(diagram).getDefaultElements();
-        return (Element[]) this.project.getDefaultElements().toArray();
+        return new ControllerProject(this.project).getDefaultElements();
     }
     
     /**
@@ -136,6 +136,7 @@ public final class PanelBaseRequirementTraceability extends PanelBase {
     public void updateElementsList() {
         this.getElementsList().removeAll();
         DefaultListModel model = new DefaultListModel();
+        System.out.println("Req: " + this.requirement);
         for (Element element :  this.requirement.getAllElements())
             model.addElement(element);
         this.getElementsList().setModel(model);

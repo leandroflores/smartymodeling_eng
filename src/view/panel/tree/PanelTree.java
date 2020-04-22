@@ -1,4 +1,4 @@
-package view.panel.tree.base;
+package view.panel.tree;
 
 import java.awt.FlowLayout;
 import java.util.HashMap;
