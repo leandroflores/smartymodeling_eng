@@ -7,11 +7,11 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.variability.Variability;
-import view.delete.base.ViewDeleteDiagram;
-import view.delete.base.variability.ViewDeleteVariability;
-import view.edit.base.ViewEditDiagram;
-import view.edit.base.ViewEditProject;
-import view.edit.base.variability.ViewEditVariability;
+import view.modal.delete.base.ViewDeleteDiagram;
+import view.modal.delete.base.variability.ViewDeleteVariability;
+import view.modal.edit.base.ViewEditDiagram;
+import view.modal.edit.base.ViewEditProject;
+import view.modal.edit.base.variability.ViewEditVariability;
 import view.panel.tree.popup.base.variability.TreePopupVariability;
 
 /**

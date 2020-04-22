@@ -4,8 +4,8 @@ import controller.view.panel.tree.popup.item.ControllerMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
-import view.delete.base.evaluation.ViewDeleteMeasure;
-import view.delete.base.evaluation.ViewDeleteMetric;
+import view.modal.delete.base.evaluation.ViewDeleteMeasure;
+import view.modal.delete.base.evaluation.ViewDeleteMetric;
 import view.panel.tree.popup.base.evaluation.TreePopupEvaluation;
 
 /**

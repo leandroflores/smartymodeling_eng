@@ -1,6 +1,6 @@
 package view.panel.base.traceability;
 
-import controller.view.edit.panel.base.traceability.ControllerPanelBaseElements;
+import controller.view.panel.base.traceability.ControllerPanelBaseElements;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.DefaultListModel;
@@ -22,7 +22,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining a Panel for showing the <b>Elements Base</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  22/07/2019
- * @see    controller.view.edit.panel.base.traceability.ControllerPanelBaseElements
+ * @see    controller.view.panel.base.traceability.ControllerPanelBaseElements
  * @see    model.structural.base.traceability.Traceability
  * @see    view.panel.Panel
  */

@@ -7,7 +7,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
-import view.new_.base.evaluation.ViewNewMeasure;
+import view.modal.new_.base.evaluation.ViewNewMeasure;
 
 /**
  * <p>Class of View <b>PanelBaseNewMeasure</b>.</p> 

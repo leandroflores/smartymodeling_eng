@@ -16,15 +16,15 @@ import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
-import view.delete.base.ViewDeleteDiagram;
-import view.delete.base.ViewDeleteElement;
-import view.delete.base.variability.ViewDeleteVariability;
-import view.edit.base.ViewEditDiagram;
-import view.edit.base.ViewEditElement;
-import view.edit.base.ViewEditProject;
-import view.edit.base.variability.ViewEditVariability;
-import view.edit.diagram.classes.ViewEditAttributeUML;
-import view.edit.diagram.classes.ViewEditMethodUML;
+import view.modal.delete.base.ViewDeleteDiagram;
+import view.modal.delete.base.ViewDeleteElement;
+import view.modal.delete.base.variability.ViewDeleteVariability;
+import view.modal.edit.base.ViewEditDiagram;
+import view.modal.edit.base.ViewEditElement;
+import view.modal.edit.base.ViewEditProject;
+import view.modal.edit.base.variability.ViewEditVariability;
+import view.modal.edit.diagram.classes.ViewEditAttributeUML;
+import view.modal.edit.diagram.classes.ViewEditMethodUML;
 import view.panel.tree.popup.diagram.TreePopupDiagram;
 
 /**

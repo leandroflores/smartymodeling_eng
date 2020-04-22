@@ -9,7 +9,7 @@ import model.structural.base.Element;
 import model.structural.base.product.Instance;
 import model.structural.base.variability.Variability;
 import view.panel.base.product.instance.PanelBaseVarPoints;
-import view.message.ViewError;
+import view.modal.message.ViewError;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseVarPoints</b>.</p>

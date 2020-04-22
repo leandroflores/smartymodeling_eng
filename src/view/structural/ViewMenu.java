@@ -16,7 +16,7 @@ import model.structural.base.Project;
 import model.structural.base.product.Instance;
 import view.interfaces.Operation;
 import view.View;
-import view.ViewStyle;
+import view.style.ViewStyle;
 import view.panel.main.PanelMain;
 import view.panel.modeling.PanelModeling;
 import view.panel.project.PanelProject;

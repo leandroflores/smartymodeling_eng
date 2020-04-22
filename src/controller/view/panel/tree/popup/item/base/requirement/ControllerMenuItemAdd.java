@@ -3,7 +3,7 @@ package controller.view.panel.tree.popup.item.base.requirement;
 import controller.view.panel.tree.popup.item.ControllerMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.requirement.Requirement;
-import view.new_.base.requirement.traceability.ViewNewAddElement;
+import view.modal.new_.base.requirement.traceability.ViewNewAddElement;
 import view.panel.tree.popup.TreePopup;
 
 /**

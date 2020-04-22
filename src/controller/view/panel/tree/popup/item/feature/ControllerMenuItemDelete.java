@@ -4,8 +4,8 @@ import controller.view.panel.tree.popup.item.ControllerMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
-import view.delete.base.ViewDeleteDiagram;
-import view.delete.base.ViewDeleteElement;
+import view.modal.delete.base.ViewDeleteDiagram;
+import view.modal.delete.base.ViewDeleteElement;
 import view.panel.tree.popup.feature.TreePopupFeature;
 
 /**

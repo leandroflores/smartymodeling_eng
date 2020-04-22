@@ -4,8 +4,8 @@ import controller.view.panel.tree.popup.item.ControllerMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
-import view.edit.base.product.ViewEditInstance;
-import view.edit.base.product.ViewEditProduct;
+import view.modal.edit.base.product.ViewEditInstance;
+import view.modal.edit.base.product.ViewEditProduct;
 import view.panel.tree.popup.base.product.TreePopupProduct;
 
 /**

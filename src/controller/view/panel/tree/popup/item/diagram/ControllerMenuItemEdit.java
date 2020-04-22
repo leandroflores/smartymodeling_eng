@@ -9,12 +9,12 @@ import model.structural.base.variability.Variability;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
-import view.edit.base.ViewEditDiagram;
-import view.edit.base.ViewEditElement;
-import view.edit.base.ViewEditProject;
-import view.edit.base.variability.ViewEditVariability;
-import view.edit.diagram.classes.ViewEditAttributeUML;
-import view.edit.diagram.classes.ViewEditMethodUML;
+import view.modal.edit.base.ViewEditDiagram;
+import view.modal.edit.base.ViewEditElement;
+import view.modal.edit.base.ViewEditProject;
+import view.modal.edit.base.variability.ViewEditVariability;
+import view.modal.edit.diagram.classes.ViewEditAttributeUML;
+import view.modal.edit.diagram.classes.ViewEditMethodUML;
 import view.panel.tree.popup.diagram.TreePopupDiagram;
 
 /**

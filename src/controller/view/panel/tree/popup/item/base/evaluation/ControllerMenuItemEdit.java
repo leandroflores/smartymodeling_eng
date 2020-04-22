@@ -3,7 +3,7 @@ package controller.view.panel.tree.popup.item.base.evaluation;
 import controller.view.panel.tree.popup.item.ControllerMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.evaluation.Metric;
-import view.edit.base.evaluation.ViewEditMetric;
+import view.modal.edit.base.evaluation.ViewEditMetric;
 import view.panel.tree.popup.base.evaluation.TreePopupEvaluation;
 
 /**

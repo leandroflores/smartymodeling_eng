@@ -1,7 +1,7 @@
 package controller.view.panel.evaluation;
 
 import javax.script.ScriptException;
-import view.message.ViewError;
+import view.modal.message.ViewError;
 import view.panel.evaluation.PanelEvaluationProduct;
 
 /**

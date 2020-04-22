@@ -5,8 +5,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.requirement.Requirement;
-import view.edit.base.ViewEditProject;
-import view.edit.base.requirement.ViewEditRequirement;
+import view.modal.edit.base.ViewEditProject;
+import view.modal.edit.base.requirement.ViewEditRequirement;
 import view.panel.tree.popup.TreePopup;
 
 /**

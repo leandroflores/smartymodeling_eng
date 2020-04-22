@@ -6,7 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.base.product.Instance;
-import view.new_.base.product.ViewNewInstance;
+import view.modal.new_.base.product.ViewNewInstance;
 
 /**
  * <p>Class of View <b>PanelBaseNewInstance</b>.</p> 

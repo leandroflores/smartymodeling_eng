@@ -6,9 +6,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
-import view.delete.base.evaluation.ViewDeleteMeasure;
-import view.delete.base.evaluation.ViewDeleteMetric;
-import view.edit.base.evaluation.ViewEditMetric;
+import view.modal.delete.base.evaluation.ViewDeleteMeasure;
+import view.modal.delete.base.evaluation.ViewDeleteMetric;
+import view.modal.edit.base.evaluation.ViewEditMetric;
 import view.panel.tree.popup.base.evaluation.TreePopupEvaluation;
 
 /**

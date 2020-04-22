@@ -12,7 +12,7 @@ import model.structural.diagram.classes.base.ClassUML;
 import model.structural.diagram.classes.base.InterfaceUML;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.PackageUML;
-import view.delete.base.ViewDeleteElement;
+import view.modal.delete.base.ViewDeleteElement;
 import view.panel.diagram.types.PanelClassDiagram;
 
 /**

@@ -7,8 +7,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
-import view.delete.base.ViewDeleteElement;
-import view.new_.base.variability.ViewNewVariability;
+import view.modal.delete.base.ViewDeleteElement;
+import view.modal.new_.base.variability.ViewNewVariability;
 import view.panel.diagram.PanelDiagram;
 import view.panel.operation.PanelOperation;
 

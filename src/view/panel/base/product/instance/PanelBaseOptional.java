@@ -8,7 +8,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import model.structural.base.Element;
-import view.new_.base.product.ViewNewInstance;
+import view.modal.new_.base.product.ViewNewInstance;
 
 /**
  * <p>Class of View <b>PanelBaseOptional</b>.</p> 

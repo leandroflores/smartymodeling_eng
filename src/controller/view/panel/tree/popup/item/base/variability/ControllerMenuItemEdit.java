@@ -6,10 +6,10 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.variability.Variability;
-import view.edit.base.ViewEditDiagram;
-import view.edit.base.ViewEditElement;
-import view.edit.base.ViewEditProject;
-import view.edit.base.variability.ViewEditVariability;
+import view.modal.edit.base.ViewEditDiagram;
+import view.modal.edit.base.ViewEditElement;
+import view.modal.edit.base.ViewEditProject;
+import view.modal.edit.base.variability.ViewEditVariability;
 import view.panel.tree.popup.base.variability.TreePopupVariability;
 
 /**

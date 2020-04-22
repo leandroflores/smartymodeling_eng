@@ -10,7 +10,7 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import model.structural.base.evaluation.Measure;
-import view.new_.base.evaluation.ViewNewMeasure;
+import view.modal.new_.base.evaluation.ViewNewMeasure;
 
 /**
  * <p>Class of View <b>PanelBaseEvaluation</b>.</p> 

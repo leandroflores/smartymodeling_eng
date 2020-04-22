@@ -2,7 +2,7 @@ package view.panel.evaluation;
 
 import controller.view.panel.evaluation.ControllerPanelEvaluationProduct;
 import model.controller.structural.base.ControllerProject;
-import view.evaluation.ViewEvaluationProduct;
+import view.modal.evaluation.ViewEvaluationProduct;
 
 /**
  * <p>Class of View <b>PanelEvaluationProject</b>.</p> 
@@ -11,7 +11,7 @@ import view.evaluation.ViewEvaluationProduct;
  * @since  01/04/2020
  * @see    controller.view.panel.evaluation.ControllerPanelEvaluationProduct
  * @see    view.panel.evaluation.PanelEvaluation
- * @see    view.evaluation.ViewEvaluationProduct
+ * @see    view.modal.evaluation.ViewEvaluationProduct
  */
 public final class PanelEvaluationProduct extends PanelEvaluation {
     

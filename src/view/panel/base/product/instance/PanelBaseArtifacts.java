@@ -4,7 +4,7 @@ import controller.view.panel.base.product.instance.ControllerPanelBaseArtifacts;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.JTextField;
-import view.new_.base.product.ViewNewInstance;
+import view.modal.new_.base.product.ViewNewInstance;
 
 /**
  * <p>Class of View <b>PanelBaseArtifacts</b>.</p> 

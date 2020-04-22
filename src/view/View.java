@@ -1,5 +1,6 @@
 package view;
 
+import view.style.ViewStyle;
 import controller.Controller;
 import file.filter.SMartyFilter;
 import funct.FunctView;

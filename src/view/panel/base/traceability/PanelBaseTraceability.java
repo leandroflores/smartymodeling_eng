@@ -1,6 +1,6 @@
 package view.panel.base.traceability;
 
-import controller.view.edit.panel.base.traceability.ControllerPanelBaseTraceability;
+import controller.view.panel.base.traceability.ControllerPanelBaseTraceability;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
@@ -14,7 +14,7 @@ import view.structural.ViewMenu;
  * <p>Class responsible for defining a Panel for showing the <b>Traceability Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  22/07/2019
- * @see    controller.view.edit.panel.base.traceability.ControllerPanelBaseTraceability
+ * @see    controller.view.panel.base.traceability.ControllerPanelBaseTraceability
  * @see    model.structural.base.traceability.Traceability
  * @see    view.panel.Panel
  */

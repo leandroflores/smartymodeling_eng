@@ -5,9 +5,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
-import view.delete.base.product.ViewDeleteArtifact;
-import view.delete.base.product.ViewDeleteInstance;
-import view.delete.base.product.ViewDeleteProduct;
+import view.modal.delete.base.product.ViewDeleteArtifact;
+import view.modal.delete.base.product.ViewDeleteInstance;
+import view.modal.delete.base.product.ViewDeleteProduct;
 import view.panel.tree.popup.base.product.TreePopupProduct;
 
 /**

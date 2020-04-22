@@ -4,7 +4,7 @@ import controller.view.panel.tree.popup.item.ControllerMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Element;
 import model.structural.base.requirement.Requirement;
-import view.delete.base.requirement.ViewDeleteRequirement;
+import view.modal.delete.base.requirement.ViewDeleteRequirement;
 import view.panel.tree.base.requirement.PanelTreeRequirement;
 import view.panel.tree.popup.TreePopup;
 

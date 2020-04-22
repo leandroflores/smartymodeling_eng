@@ -9,9 +9,9 @@ import model.structural.base.evaluation.Metric;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
-import view.delete.base.evaluation.ViewDeleteMeasure;
-import view.delete.base.evaluation.ViewDeleteMetric;
-import view.edit.base.evaluation.ViewEditMetric;
+import view.modal.delete.base.evaluation.ViewDeleteMeasure;
+import view.modal.delete.base.evaluation.ViewDeleteMetric;
+import view.modal.edit.base.evaluation.ViewEditMetric;
 import view.panel.tree.popup.base.product.TreePopupProduct;
 
 /**

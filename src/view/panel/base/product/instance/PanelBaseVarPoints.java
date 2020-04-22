@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import model.structural.base.Element;
 import model.structural.base.variability.Variability;
-import view.new_.base.product.ViewNewInstance;
+import view.modal.new_.base.product.ViewNewInstance;
 
 /**
  * <p>Class of View <b>PanelBaseVarPoints</b>.</p> 

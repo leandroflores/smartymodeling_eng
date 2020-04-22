@@ -10,7 +10,7 @@ import model.structural.base.association.Dependency;
 import model.structural.base.association.Generalization;
 import model.structural.base.variability.Mutex;
 import model.structural.base.variability.Requires;
-import view.message.ViewError;
+import view.modal.message.ViewError;
 import view.panel.diagram.PanelDiagram;
 
 /**

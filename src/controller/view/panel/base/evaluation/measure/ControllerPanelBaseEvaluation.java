@@ -9,7 +9,7 @@ import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.base.evaluation.Metric;
 import view.panel.base.evaluation.measure.PanelBaseEvaluation;
-import view.message.ViewError;
+import view.modal.message.ViewError;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseEvaluation</b>.</p>

@@ -5,9 +5,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.variability.Variability;
-import view.delete.base.ViewDeleteDiagram;
-import view.delete.base.ViewDeleteElement;
-import view.delete.base.variability.ViewDeleteVariability;
+import view.modal.delete.base.ViewDeleteDiagram;
+import view.modal.delete.base.ViewDeleteElement;
+import view.modal.delete.base.variability.ViewDeleteVariability;
 import view.panel.tree.popup.base.variability.TreePopupVariability;
 
 /**

@@ -5,8 +5,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.JComboBox;
 import javax.swing.text.JTextComponent;
 import model.structural.base.evaluation.Measure;
-import view.message.ViewError;
-import view.new_.base.evaluation.ViewNewMeasure;
+import view.modal.message.ViewError;
+import view.modal.new_.base.evaluation.ViewNewMeasure;
 import view.panel.base.evaluation.measure.PanelBase;
 
 /**

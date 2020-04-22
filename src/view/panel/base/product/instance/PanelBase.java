@@ -3,8 +3,8 @@ package view.panel.base.product.instance;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import model.structural.base.product.Instance;
-import view.new_.ViewNew;
-import view.new_.base.product.ViewNewInstance;
+import view.modal.new_.ViewNew;
+import view.modal.new_.base.product.ViewNewInstance;
 
 /**
  * <p>Class of View <b>PanelBase</b>.</p> 

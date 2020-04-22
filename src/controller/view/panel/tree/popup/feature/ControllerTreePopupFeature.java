@@ -7,11 +7,11 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.diagram.FeatureDiagram;
-import view.delete.base.ViewDeleteDiagram;
-import view.delete.base.ViewDeleteElement;
-import view.edit.base.ViewEditDiagram;
-import view.edit.base.ViewEditElement;
-import view.edit.base.ViewEditProject;
+import view.modal.delete.base.ViewDeleteDiagram;
+import view.modal.delete.base.ViewDeleteElement;
+import view.modal.edit.base.ViewEditDiagram;
+import view.modal.edit.base.ViewEditElement;
+import view.modal.edit.base.ViewEditProject;
 import view.panel.tree.popup.feature.TreePopupFeature;
 
 /**

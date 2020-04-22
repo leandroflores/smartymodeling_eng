@@ -5,8 +5,8 @@ import javax.swing.JButton;
 import model.controller.structural.base.ControllerProject;
 import model.controller.structural.base.evaluation.ControllerMetric;
 import model.structural.base.evaluation.Measure;
-import view.new_.ViewNew;
-import view.new_.base.evaluation.ViewNewMeasure;
+import view.modal.new_.ViewNew;
+import view.modal.new_.base.evaluation.ViewNewMeasure;
 
 /**
  * <p>Class of View <b>PanelBase</b>.</p> 

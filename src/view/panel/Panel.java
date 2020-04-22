@@ -27,7 +27,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import view.ViewStyle;
+import view.style.ViewStyle;
 
 /**
  * <p>Class of View <b>Panel</b>.</p> 

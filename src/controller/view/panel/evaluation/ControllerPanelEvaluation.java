@@ -11,7 +11,7 @@ import javax.script.ScriptException;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.base.product.Product;
-import view.message.ViewError;
+import view.modal.message.ViewError;
 import view.panel.evaluation.PanelEvaluation;
 
 /**

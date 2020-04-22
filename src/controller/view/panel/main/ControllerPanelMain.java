@@ -5,9 +5,9 @@ import controller.view.panel.ControllerPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
-import view.message.ViewError;
+import view.modal.message.ViewError;
 import view.panel.main.PanelMain;
-import view.system.ViewSystemInformation;
+import view.modal.system.ViewSystemInformation;
 
 /**
  * <p>Class of Controller <b>ControllerPanelMain</b>.</p>

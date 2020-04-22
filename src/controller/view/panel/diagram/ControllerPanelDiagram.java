@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
-import view.delete.base.ViewDeleteElement;
+import view.modal.delete.base.ViewDeleteElement;
 import view.panel.diagram.PanelDiagram;
 
 /**

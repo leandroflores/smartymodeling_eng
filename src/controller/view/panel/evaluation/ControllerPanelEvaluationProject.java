@@ -4,7 +4,7 @@ import javax.script.ScriptException;
 import model.structural.base.Diagram;
 import model.structural.base.product.Product;
 import view.panel.evaluation.PanelEvaluationProject;
-import view.message.ViewError;
+import view.modal.message.ViewError;
 
 /**
  * <p>Class of Controller <b>ControllerPanelEvaluationProject</b>.</p>

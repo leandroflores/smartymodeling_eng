@@ -7,7 +7,7 @@ import model.structural.base.Element;
 import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.feature.base.Feature;
 import model.structural.diagram.feature.base.association.Connection;
-import view.message.ViewError;
+import view.modal.message.ViewError;
 import view.panel.diagram.types.PanelFeatureDiagram;
 
 /**
