@@ -2,7 +2,6 @@ package view.modal.edit.base;
 
 import controller.view.modal.edit.base.ControllerViewEditProfile;
 import java.awt.Dimension;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Profile;
 import view.modal.edit.ViewEdit;
@@ -36,7 +35,7 @@ public final class ViewEditProfile extends ViewEdit {
     
     @Override
     public void initComponents() {
-        this.setSize(600, 350);
+        this.setSize(new Dimension(650, 450));
         this.addHeader();
         this.addComponents();
         this.addFooter();
@@ -45,7 +44,7 @@ public final class ViewEditProfile extends ViewEdit {
     @Override
     public void addComponents() {
         this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 225));
+        this.tabbedPane.setPreferredSize(new Dimension(550, 325));
             this.addPanelBaseProfile();
         this.add(this.tabbedPane);
         this.addLines(1);
@@ -56,9 +55,9 @@ public final class ViewEditProfile extends ViewEdit {
      */
     private void addPanelBaseProfile() {
         this.addPanel("panelBaseProfile", new PanelBaseProfile(this.getViewMenu(), this.profile));
-        this.createScrollPane("scrollPanelBaseProfile",  this.getPanelBaseProfile());
-        this.getScrollPanelBaseProfile().setViewportView(this.getPanelBaseProfile());
-        this.tabbedPane.add("Profile", this.getScrollPanelBaseProfile());
+        this.createScrollPane("scrollPanelBaseProfile", this.getPanelBaseProfile());
+        this.getScrollPane("scrollPanelBaseProfile").setViewportView(this.getPanelBaseProfile());
+        this.tabbedPane.add("Profile", this.getScrollPane("scrollPanelBaseProfile"));
     }
     
     /**
@@ -66,15 +65,7 @@ public final class ViewEditProfile extends ViewEdit {
      * @return Panel Base Profile.
      */
     public PanelBaseProfile getPanelBaseProfile() {
-        return (PanelBaseProfile) this.getPanel("panelBaseDiagram");
-    }
-    
-    /**
-     * Method responsible for returning Panel Base Profile.
-     * @return Panel Base Profile.
-     */
-    public JScrollPane getScrollPanelBaseProfile() {
-        return this.getScrollPane("scrollPanelBaseProfile");
+        return (PanelBaseProfile) this.getPanel("panelBaseProfile");
     }
     
     /**

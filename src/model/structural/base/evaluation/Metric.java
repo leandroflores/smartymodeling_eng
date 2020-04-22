@@ -136,7 +136,7 @@ public class Metric implements Exportable {
      * @return Metric Icon.
      */
     public String getIcon() {
-        return "icons/evaluation/metric.png";
+        return "icons/menu/evaluation/metric.png";
     }
     
     @Override

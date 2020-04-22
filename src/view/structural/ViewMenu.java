@@ -103,12 +103,12 @@ public final class ViewMenu extends View implements Operation {
     private void createFileMenu() {
         this.createMenu("file", "File");
         
-        this.createMenuItem("new_project",   "New Project",   "file/new.png",  KeyEvent.VK_N);
-        this.createMenuItem("open_project",  "Open Project",  "file/open.png", KeyEvent.VK_O);
-        this.createMenuItem("save_project",  "Save Project",  "file/save.png", KeyEvent.VK_S);
-        this.createMenuItem("save_as",       "Save As",       "file/save.png");
-        this.createMenuItem("close_project", "Close Project", "file/close.png");
-        this.createMenuItem("exit_system",   "Exit",          "file/exit.png", KeyEvent.VK_Q);
+        this.createMenuItem("new_project",   "New Project",   "menu/file/new.png",  KeyEvent.VK_N);
+        this.createMenuItem("open_project",  "Open Project",  "menu/file/open.png", KeyEvent.VK_O);
+        this.createMenuItem("save_project",  "Save Project",  "menu/file/save.png", KeyEvent.VK_S);
+        this.createMenuItem("save_as",       "Save As",       "menu/file/save.png");
+        this.createMenuItem("close_project", "Close Project", "menu/file/close.png");
+        this.createMenuItem("exit_system",   "Exit",          "menu/file/exit.png", KeyEvent.VK_Q);
         
         this.getMenu("file").add(this.getMenuItemNewProject());
         this.getMenu("file").addSeparator();
@@ -130,9 +130,9 @@ public final class ViewMenu extends View implements Operation {
     private void createRequirementMenu() {
         this.createMenu("requirement", "Requirement");
         
-        this.createMenuItem("new_requirement",          "New Requirement",          "requirement/requirement.png",  KeyEvent.VK_R);
-        this.createMenuItem("requirement_traceability", "Requirement Traceability", "requirement/traceability.png", KeyEvent.VK_T);
-        this.createMenuItem("requirement_matriz",       "Requirement Matrix",       "requirement/matrix.png",       KeyEvent.VK_X);
+        this.createMenuItem("new_requirement",          "New Requirement",          "menu/requirement/requirement.png",  KeyEvent.VK_R);
+        this.createMenuItem("requirement_traceability", "Requirement Traceability", "menu/requirement/traceability.png", KeyEvent.VK_T);
+        this.createMenuItem("requirement_matriz",       "Requirement Matrix",       "menu/requirement/matrix.png",       KeyEvent.VK_X);
         
         this.getMenuItemRequirementTraceability().setVisible(false);
         this.getMenuItemRequirementMatrix().setVisible(false);
@@ -149,12 +149,12 @@ public final class ViewMenu extends View implements Operation {
     private void createDiagramMenu() {
         this.createMenu("diagram", "New Diagram");
         
-        this.createMenuItem("feature_diagram",   "Feature Diagram",   "diagram/feature.png",   KeyEvent.VK_F);
-        this.createMenuItem("usecase_diagram",   "Use Case Diagram",  "diagram/use-case.png",  KeyEvent.VK_U);
-        this.createMenuItem("class_diagram",     "Class Diagram",     "diagram/class.png",     KeyEvent.VK_C);
-        this.createMenuItem("component_diagram", "Component Diagram", "diagram/component.png", KeyEvent.VK_M);
-        this.createMenuItem("sequence_diagram",  "Sequence Diagram",  "diagram/sequence.png",  KeyEvent.VK_E);
-        this.createMenuItem("activity_diagram",  "Activity Diagram",  "diagram/activity.png",  KeyEvent.VK_A);
+        this.createMenuItem("feature_diagram",   "Feature Diagram",   "menu/diagram/feature.png",   KeyEvent.VK_F);
+        this.createMenuItem("usecase_diagram",   "Use Case Diagram",  "menu/diagram/use-case.png",  KeyEvent.VK_U);
+        this.createMenuItem("class_diagram",     "Class Diagram",     "menu/diagram/class.png",     KeyEvent.VK_C);
+        this.createMenuItem("component_diagram", "Component Diagram", "menu/diagram/component.png", KeyEvent.VK_M);
+        this.createMenuItem("sequence_diagram",  "Sequence Diagram",  "menu/diagram/sequence.png",  KeyEvent.VK_E);
+        this.createMenuItem("activity_diagram",  "Activity Diagram",  "menu/diagram/activity.png",  KeyEvent.VK_A);
         
         this.getMenu("diagram").add(this.getMenuItemFeatureDiagram());
         this.getMenu("diagram").addSeparator();
@@ -171,10 +171,10 @@ public final class ViewMenu extends View implements Operation {
     private void createProductLineMenu() {
         this.createMenu("productLine", "Product Line");
         
-        this.createMenuItem("edit_profile",     "Edit Profile",     "product_line/profile.png",      KeyEvent.VK_L);
-        this.createMenuItem("new_product",      "New Product",      "product_line/product.png",      KeyEvent.VK_P);
-        this.createMenuItem("new_instance",     "New Instance",     "product_line/instance.png",     KeyEvent.VK_I);
-        this.createMenuItem("new_traceability", "New Traceability", "product_line/traceability.png", KeyEvent.VK_Y);
+        this.createMenuItem("edit_profile",     "Edit Profile",     "menu/product_line/profile.png",      KeyEvent.VK_L);
+        this.createMenuItem("new_product",      "New Product",      "menu/product_line/product.png",      KeyEvent.VK_P);
+        this.createMenuItem("new_instance",     "New Instance",     "menu/product_line/instance.png",     KeyEvent.VK_I);
+        this.createMenuItem("new_traceability", "New Traceability", "menu/product_line/traceability.png", KeyEvent.VK_Y);
         
         this.getMenu("productLine").add(this.getMenuItemEditProfile());
         this.getMenu("productLine").addSeparator();
@@ -189,12 +189,12 @@ public final class ViewMenu extends View implements Operation {
     private void createEvaluationMenu() {
         this.createMenu("evaluation", "Evaluation");
         
-        this.createMenuItem("new_metric",  "New Metric",  "evaluation/metric.png");
-        this.createMenuItem("new_measure", "New Measure", "evaluation/measure.png");
+        this.createMenuItem("new_metric",  "New Metric",  "menu/evaluation/metric.png");
+        this.createMenuItem("new_measure", "New Measure", "menu/evaluation/measure.png");
         
-        this.createMenuItem("evaluate_project", "Evaluate Project", "evaluation/project.png");
-        this.createMenuItem("evaluate_diagram", "Evaluate Diagram", "evaluation/diagram.png");
-        this.createMenuItem("evaluate_product", "Evaluate Product", "evaluation/product.png");
+        this.createMenuItem("evaluate_project", "Evaluate Project", "menu/evaluation/project.png");
+        this.createMenuItem("evaluate_diagram", "Evaluate Diagram", "menu/evaluation/diagram.png");
+        this.createMenuItem("evaluate_product", "Evaluate Product", "menu/evaluation/product.png");
         
         this.getMenu("evaluation").add(this.getMenuItemNewMetric());
         this.getMenu("evaluation").add(this.getMenuItemNewMeasure());
@@ -210,10 +210,10 @@ public final class ViewMenu extends View implements Operation {
     private void createExportMenu() {
         this.createMenu("export", "Export");
         
-        this.createMenuItem("export_diagram", "Export Diagram",       "export/diagram.png");
-        this.createMenuItem("export_product", "Export Product",       "export/product.png");
-        this.createMenuItem("diagram_code",   "Export Diagram Code",  "export/code-diagram.png");
-        this.createMenuItem("instance_code",  "Export Instance Code", "export/code-instance.png");
+        this.createMenuItem("export_diagram", "Export Diagram",       "menu/export/diagram.png");
+        this.createMenuItem("export_product", "Export Product",       "menu/export/product.png");
+        this.createMenuItem("diagram_code",   "Export Diagram Code",  "menu/export/code-diagram.png");
+        this.createMenuItem("instance_code",  "Export Instance Code", "menu/export/code-instance.png");
         
         this.getMenu("export").add(this.getMenuItemExportDiagram());
         this.getMenu("export").add(this.getMenuItemExportProduct());
@@ -228,9 +228,9 @@ public final class ViewMenu extends View implements Operation {
     private void createAboutMenu() {
         this.createMenu("about", "About");
         
-        this.createMenuItem("about_info", "Information", "about/information.png", KeyEvent.VK_F2);
-        this.createMenuItem("about_site",  "Site",       "about/site.png", KeyEvent.VK_W);
-        this.createMenuItem("about_exit",  "Exit",       "about/exit.png", KeyEvent.VK_F4);
+        this.createMenuItem("about_info", "Information", "menu/about/information.png", KeyEvent.VK_F2);
+        this.createMenuItem("about_site",  "Site",       "menu/about/site.png", KeyEvent.VK_W);
+        this.createMenuItem("about_exit",  "Exit",       "menu/about/exit.png", KeyEvent.VK_F4);
         
         this.getMenu("about").add(this.getMenuItemAboutInformation());
         this.getMenu("about").add(this.getMenuItemAboutSite());

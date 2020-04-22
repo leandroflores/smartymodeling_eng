@@ -79,7 +79,7 @@ public abstract class Diagram implements Exportable {
      * @return Image Default Folder.
      */
     protected String getFolder() {
-        return "icons/diagram/";
+        return "icons/menu/diagram/";
     }
     
     /**

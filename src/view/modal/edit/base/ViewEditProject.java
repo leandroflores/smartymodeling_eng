@@ -34,7 +34,7 @@ public final class ViewEditProject extends ViewEdit {
     
     @Override
     public void initComponents() {
-        this.setSize(600, 320);
+        this.setSize(new Dimension(650, 350));
         this.addHeader();
         this.addComponents();
         this.addFooter();
@@ -43,7 +43,7 @@ public final class ViewEditProject extends ViewEdit {
     @Override
     public void addComponents() {
         this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 200));
+        this.tabbedPane.setPreferredSize(new Dimension(550, 225));
             this.addPanelBaseProject();
         this.add(this.tabbedPane);
         this.addLines(1);
@@ -55,8 +55,8 @@ public final class ViewEditProject extends ViewEdit {
     private void addPanelBaseProject() {
         this.addPanel("panelBaseProject", new PanelBaseProject(this.getViewMenu()));
         this.createScrollPane("scrollPanelBaseProject",  this.getPanelBaseProject());
-        this.getScrollPanelBaseProject().setViewportView(this.getPanelBaseProject());
-        this.tabbedPane.add("Project", this.getScrollPanelBaseProject());
+        this.getScrollPane("scrollPanelBaseProject").setViewportView(this.getPanelBaseProject());
+        this.tabbedPane.add("Project", this.getScrollPane("scrollPanelBaseProject"));
     }
     
     /**
@@ -65,13 +65,5 @@ public final class ViewEditProject extends ViewEdit {
      */
     public PanelBaseProject getPanelBaseProject() {
         return (PanelBaseProject) this.getPanel("panelBaseProject");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Project.
-     * @return Scroll Panel Base Project.
-     */
-    public JScrollPane getScrollPanelBaseProject() {
-        return this.getScrollPane("scrollPanelBaseProject");
     }
 }

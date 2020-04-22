@@ -2,7 +2,6 @@ package view.modal.edit.base;
 
 import controller.view.modal.edit.base.ControllerViewEditDiagram;
 import java.awt.Dimension;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import view.modal.edit.ViewEdit;
@@ -46,11 +45,8 @@ public final class ViewEditDiagram extends ViewEdit {
     public void addComponents() {
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.setPreferredSize(new Dimension(550, 200));
-        
-        this.addPanelBaseDiagram();
-        
+            this.addPanelBaseDiagram();
         this.add(this.tabbedPane);
-        
         this.addLines(1);
     }
     
@@ -60,8 +56,8 @@ public final class ViewEditDiagram extends ViewEdit {
     private void addPanelBaseDiagram() {
         this.addPanel("panelBaseDiagram", new PanelBaseDiagram(this.getViewMenu(), this.diagram));
         this.createScrollPane("scrollPanelBaseDiagram",  this.getPanelBaseDiagram());
-        this.getScrollPanelBaseDiagram().setViewportView(this.getPanelBaseDiagram());
-        this.tabbedPane.add("Diagram", this.getScrollPanelBaseDiagram());
+        this.getScrollPane("scrollPanelBaseDiagram").setViewportView(this.getPanelBaseDiagram());
+        this.tabbedPane.add("Diagram", this.getScrollPane("scrollPanelBaseDiagram"));
     }
     
     /**
@@ -70,14 +66,6 @@ public final class ViewEditDiagram extends ViewEdit {
      */
     public PanelBaseDiagram getPanelBaseDiagram() {
         return (PanelBaseDiagram) this.getPanel("panelBaseDiagram");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Diagram.
-     * @return Scroll Panel Base Diagram.
-     */
-    public JScrollPane getScrollPanelBaseDiagram() {
-        return this.getScrollPane("scrollPanelBaseDiagram");
     }
     
     /**

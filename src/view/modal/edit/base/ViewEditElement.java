@@ -2,7 +2,6 @@ package view.modal.edit.base;
 
 import controller.view.modal.edit.base.ControllerViewEditElement;
 import java.awt.Dimension;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
@@ -52,13 +51,10 @@ public final class ViewEditElement extends ViewEdit {
     public void addComponents() {
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.setPreferredSize(new Dimension(570, 375));
-        
-        this.addPanelBaseElement();
-        this.addPanelStereotype();
-        this.addPanelDependency();
-        
+            this.addPanelBaseElement();
+            this.addPanelStereotype();
+            this.addPanelDependency();
         this.add(this.tabbedPane);
-        
         this.addLines(1);
     }
     
@@ -68,8 +64,8 @@ public final class ViewEditElement extends ViewEdit {
     private void addPanelBaseElement() {
         this.addPanel("panelBaseElement", new PanelBaseElement(this.getViewMenu(), this.diagram, this.element));
         this.createScrollPane("scrollPanelBaseElement",  this.getPanelBaseElement());
-        this.getScrollPanelBaseElement().setViewportView(this.getPanelBaseElement());
-        this.tabbedPane.add("Element", this.getScrollPanelBaseElement());
+        this.getScrollPane("scrollPanelBaseElement").setViewportView(this.getPanelBaseElement());
+        this.tabbedPane.add("Element", this.getScrollPane("scrollPanelBaseElement"));
     }
     
     /**
@@ -78,8 +74,8 @@ public final class ViewEditElement extends ViewEdit {
     private void addPanelStereotype() {
         this.addPanel("panelStereotype", new PanelStereotype(this.getViewMenu(), this.element));
         this.createScrollPane("scrollPanelStereotype",  this.getPanelStereotype());
-        this.getScrollPanelStereotype().setViewportView(this.getPanelStereotype());
-        this.tabbedPane.add("Stereotype", this.getScrollPanelStereotype());
+        this.getScrollPane("scrollPanelStereotype").setViewportView(this.getPanelStereotype());
+        this.tabbedPane.add("Stereotype", this.getScrollPane("scrollPanelStereotype"));
     }
     
     /**
@@ -88,8 +84,8 @@ public final class ViewEditElement extends ViewEdit {
     private void addPanelDependency() {
         this.addPanel("panelDependency", new PanelDependency(this.getViewMenu(), this.element));
         this.createScrollPane("scrollPanelDependency",  this.getPanelDependency());
-        this.getScrollPanelDependency().setViewportView(this.getPanelDependency());
-        this.tabbedPane.add("Dependency", this.getScrollPanelDependency());
+        this.getScrollPane("scrollPanelDependency").setViewportView(this.getPanelDependency());
+        this.tabbedPane.add("Dependency", this.getScrollPane("scrollPanelDependency"));
     }
     
     /**
@@ -101,14 +97,6 @@ public final class ViewEditElement extends ViewEdit {
     }
     
     /**
-     * Method responsible for returning the Scroll Panel Base Element.
-     * @return Scroll Panel Base Element.
-     */
-    public JScrollPane getScrollPanelBaseElement() {
-        return this.getScrollPane("scrollPanelBaseElement");
-    }
-    
-    /**
      * Method responsible for returning the Panel Stereotype.
      * @return Panel Stereotype.
      */
@@ -117,27 +105,11 @@ public final class ViewEditElement extends ViewEdit {
     }
     
     /**
-     * Method responsible for returning the Scroll Panel Stereotype.
-     * @return Scroll Panel Stereotype.
-     */
-    public JScrollPane getScrollPanelStereotype() {
-        return this.getScrollPane("scrollPanelStereotype");
-    }
-    
-    /**
      * Method responsible for returning the Panel Dependency.
      * @return Panel Dependency.
      */
     public PanelDependency getPanelDependency() {
         return (PanelDependency) this.getPanel("panelDependency");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Dependency.
-     * @return Scroll Panel Dependency.
-     */
-    public JScrollPane getScrollPanelDependency() {
-        return this.getScrollPane("scrollPanelDependency");
     }
     
     /**

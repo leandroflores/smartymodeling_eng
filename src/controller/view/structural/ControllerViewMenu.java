@@ -52,7 +52,7 @@ import view.modal.system.ViewSystemInformation;
  * <p>Class of Controller <b>ControllerViewMenu</b>.</p>
  * <p>Class responsible for controlling the <b>Events</b> from <b>ViewMenu</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  22/05/2019
+ * @since  2019-05-22
  * @see    controller.view.ControllerView
  * @see    view.structural.ViewMenu
  */
@@ -402,8 +402,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * Method responsible for editing the Profile.
      */
     private void editProfile() {
-        if (this.viewMenu.getPanelModeling() != null)
-            new ViewEditProfile(this.viewMenu.getPanelModeling(), this.viewMenu.getProject().getProfile()).setVisible(true);
+        new ViewEditProfile(this.viewMenu.getPanelModeling(), this.viewMenu.getProject().getProfile()).setVisible(true);
     }
     
     /**

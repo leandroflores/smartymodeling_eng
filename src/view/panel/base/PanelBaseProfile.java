@@ -1,7 +1,7 @@
 package view.panel.base;
 
 import controller.view.panel.base.ControllerPanelBaseProfile;
-import java.awt.GridLayout;
+import java.awt.GridBagLayout;
 import javax.swing.JTextField;
 import model.structural.base.Profile;
 import view.structural.ViewMenu;
@@ -34,31 +34,32 @@ public final class PanelBaseProfile extends PanelBase {
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(7, 2));
+        this.setLayout(new GridBagLayout());
+//        this.setLayout(new GridLayout(7, 2));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Mandatory*: "));
-        this.add(this.createTextField("mandatoryTextField", this.profile.getMandatory().getName(), 20));
+        this.add(this.createLabel("Mandatory*: "),  this.createConstraints(1, 1, 0, 0));
+        this.add(this.createTextField("mandatoryTextField", this.profile.getMandatory().getName(), 20), this.createConstraints(4, 1, 1, 0));
         
-        this.add(this.createLabel("Optional*: "));
-        this.add(this.createTextField("optionalTextField",  this.profile.getOptional().getName(), 20));
+        this.add(this.createLabel("Optional*: "),   this.createConstraints(1, 1, 0, 1));
+        this.add(this.createTextField("optionalTextField",  this.profile.getOptional().getName(), 20), this.createConstraints(4, 1, 1, 1));
         
-        this.add(this.createLabel("Var. Point*: "));
-        this.add(this.createTextField("varPointTextField",  this.profile.getVariationPoint().getName(), 20));
+        this.add(this.createLabel("Var. Point*: "), this.createConstraints(1, 1, 0, 2));
+        this.add(this.createTextField("varPointTextField",  this.profile.getVariationPoint().getName(), 20), this.createConstraints(4, 1, 1, 2));
         
-        this.add(this.createLabel("Inclusive*: "));
-        this.add(this.createTextField("inclusiveTextField", this.profile.getInclusive().getName(), 20));
+        this.add(this.createLabel("Inclusive*: "),  this.createConstraints(1, 1, 0, 3));
+        this.add(this.createTextField("inclusiveTextField", this.profile.getInclusive().getName(), 20), this.createConstraints(4, 1, 1, 3));
         
-        this.add(this.createLabel("Exclusive*: "));
-        this.add(this.createTextField("exclusiveTextField", this.profile.getExclusive().getName(), 20));
+        this.add(this.createLabel("Exclusive*: "),  this.createConstraints(1, 1, 0, 4));
+        this.add(this.createTextField("exclusiveTextField", this.profile.getExclusive().getName(), 20), this.createConstraints(4, 1, 1, 4));
         
-        this.add(this.createLabel("Requires*: "));
-        this.add(this.createTextField("requiresTextField", this.profile.getRequires().getName(), 20));
+        this.add(this.createLabel("Requires*: "),   this.createConstraints(1, 1, 0, 5));
+        this.add(this.createTextField("requiresTextField", this.profile.getRequires().getName(), 20), this.createConstraints(4, 1, 1, 5));
         
-        this.add(this.createLabel("Mutex*: "));
-        this.add(this.createTextField("mutexTextField", this.profile.getMutex().getName(), 20));
+        this.add(this.createLabel("Mutex*: "),      this.createConstraints(1, 1, 0, 6));
+        this.add(this.createTextField("mutexTextField", this.profile.getMutex().getName(), 20), this.createConstraints(4, 1, 1, 6));
     }
     
     /**

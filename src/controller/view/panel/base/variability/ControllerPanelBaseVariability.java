@@ -20,6 +20,12 @@ public class ControllerPanelBaseVariability extends ControllerPanelBase {
     public ControllerPanelBaseVariability(PanelBaseVariability panel) {
         super(panel);
     }
+    
+    @Override
+    public void setReady() {
+        this.ready = true;
+        this.getPanel().setVariationPoint();
+    }
 
     @Override
     public void actionPerformed(ActionEvent event) {

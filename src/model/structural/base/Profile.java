@@ -6,7 +6,7 @@ import model.structural.base.interfaces.Exportable;
  * <p>Class of Model <b>Profile</b>.</p>
  * <p>Class responsible for representing the <b>Profile</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  22/05/2019
+ * @since  2019-05-22
  * @see    model.structural.base.Stereotype
  * @see    model.structural.base.interfaces.Exportable
  */
@@ -139,8 +139,8 @@ public class Profile implements Exportable {
                export += " variationPoint=\"" + this.variationPoint.getId() + "\"";
                export += " inclusive=\""      + this.inclusive.getId()      + "\"";
                export += " exclusive=\""      + this.exclusive.getId()      + "\"";
-//               export += " requires=\""       + this.requires.getId()       + "\"";
-//               export += " mutex=\""          + this.mutex.getId()          + "\"";
+               export += " requires=\""       + this.requires.getId()       + "\"";
+               export += " mutex=\""          + this.mutex.getId()          + "\"";
                export += "/>\n";
         return export;
     }

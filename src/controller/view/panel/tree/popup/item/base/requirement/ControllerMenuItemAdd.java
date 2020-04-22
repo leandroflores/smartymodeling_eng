@@ -2,7 +2,9 @@ package controller.view.panel.tree.popup.item.base.requirement;
 
 import controller.view.panel.tree.popup.item.ControllerMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
+import model.structural.base.Project;
 import model.structural.base.requirement.Requirement;
+import view.modal.new_.base.requirement.ViewNewRequirement;
 import view.modal.new_.base.requirement.traceability.ViewNewAddElement;
 import view.panel.tree.popup.TreePopup;
 
@@ -27,19 +29,9 @@ public class ControllerMenuItemAdd extends ControllerMenuItem {
     @Override
     protected void action(DefaultMutableTreeNode node) {
         Object object = node.getUserObject();
-        if (object instanceof Requirement)
+        if (object instanceof Project)
+            new ViewNewRequirement(this.getPanelModeling().getViewMenu()).setVisible(true);
+        else if (object instanceof Requirement)
             new ViewNewAddElement(this.getPanelModeling().getViewMenu(), (Requirement) object).setVisible(true);
-    }
-
-    /**
-     * Method responsible for returning the Requirement Node.
-     * @param  node Tree Node.
-     * @return Requirement Node.
-     */
-    protected Requirement getRequirement(DefaultMutableTreeNode node) {
-        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
-        if (parent != null && parent.getUserObject() instanceof Requirement)
-            return (Requirement) parent.getUserObject();
-        return null;
     }
 }

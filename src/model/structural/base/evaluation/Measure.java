@@ -157,7 +157,7 @@ public final class Measure implements Exportable {
      * @return Measure Icon.
      */
     public String getIcon() {
-        return "icons/evaluation/measure.png";
+        return "icons/menu/evaluation/measure.png";
     }
     
     @Override

@@ -2,7 +2,6 @@ package view.modal.new_.base.requirement;
 
 import controller.view.modal.new_.base.requirement.ControllerViewNewRequirement;
 import java.awt.Dimension;
-import javax.swing.JTabbedPane;
 import model.structural.base.requirement.Requirement;
 import view.modal.new_.ViewNew;
 import view.panel.base.requirement.PanelBaseRequirement;
@@ -43,10 +42,7 @@ public final class ViewNewRequirement extends ViewNew {
     
     @Override
     public void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(450, 325));
-            this.addPanelBaseRequirement();
-        this.add(this.tabbedPane);
+        this.addPanelBaseRequirement();
         this.addLines(1);
     }
     
@@ -55,9 +51,8 @@ public final class ViewNewRequirement extends ViewNew {
      */
     private void addPanelBaseRequirement() {
         this.addPanel("panelEditRequirement", new PanelEditRequirement(this.view, this.requirement, 0));
-        this.createScrollPane("scrollPanelEditRequirement", this.getPanel("panelEditRequirement"));
-        this.getScrollPane("scrollPanelEditRequirement").setViewportView(this.getPanel("panelEditRequirement"));
-        this.tabbedPane.add("Requirement", this.getScrollPane("scrollPanelEditRequirement"));
+        this.getPanel("panelEditRequirement").setPreferredSize(new Dimension(500, 325));
+        this.add(this.getPanel("panelEditRequirement"));
     }
     
     /**

@@ -197,6 +197,7 @@ public final class PanelTree extends Panel {
      * @param element Element.
      */
     public void updateNode(Element element) {
+        this.getPanelTreeRequirement().updateNode(element);
         this.getPanelTreeFeature().updateNode(element);
         this.getPanelTreeDiagram().updateNode(element);
         this.getPanelTreeVariability().updateNode(element);

@@ -2,7 +2,6 @@ package view.modal.edit.base.evaluation;
 
 import controller.view.modal.edit.base.evaluation.ControllerViewEditMetric;
 import java.awt.Dimension;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import model.structural.base.evaluation.Metric;
 import view.modal.edit.ViewEdit;
@@ -37,7 +36,7 @@ public final class ViewEditMetric extends ViewEdit {
     
     @Override
     public void initComponents() {
-        this.setSize(600, 350);
+        this.setSize(new Dimension(650, 350));
         this.addHeader();
         this.addComponents();
         this.addFooter();
@@ -58,8 +57,8 @@ public final class ViewEditMetric extends ViewEdit {
     private void addPanelBaseMetric() {
         this.addPanel("panelBaseMetric", new PanelBaseMetric(this.getViewMenu(), this.metric));
         this.createScrollPane("scrollPanelBaseMetric",  this.getPanelBaseMetric());
-        this.getScrollPanelBaseMetric().setViewportView(this.getPanelBaseMetric());
-        this.tabbedPane.add("Metric", this.getScrollPanelBaseMetric());
+        this.getScrollPane("scrollPanelBaseMetric").setViewportView(this.getPanelBaseMetric());
+        this.tabbedPane.add("Metric", this.getScrollPane("scrollPanelBaseMetric"));
     }
     
     /**
@@ -68,8 +67,8 @@ public final class ViewEditMetric extends ViewEdit {
     private void addPanelBaseOperation() {
         this.addPanel("panelBaseOperation", new PanelBaseOperation(this.getViewMenu(), this.metric));
         this.createScrollPane("scrollPanelBaseOperation",  this.getPanelBaseOperation());
-        this.getScrollPanelBaseOperation().setViewportView(this.getPanelBaseOperation());
-        this.tabbedPane.add("Operation", this.getScrollPanelBaseOperation());
+        this.getScrollPane("scrollPanelBaseOperation").setViewportView(this.getPanelBaseOperation());
+        this.tabbedPane.add("Operation", this.getScrollPane("scrollPanelBaseOperation"));
     }
     
     /**
@@ -81,27 +80,11 @@ public final class ViewEditMetric extends ViewEdit {
     }
     
     /**
-     * Method responsible for returning Panel Base Metric.
-     * @return Panel Base Metric.
-     */
-    public JScrollPane getScrollPanelBaseMetric() {
-        return this.getScrollPane("scrollPanelBaseMetric");
-    }
-    
-    /**
      * Method responsible for returning the Panel Base Operation.
      * @return Panel Base Operation.
      */
     public PanelBaseOperation getPanelBaseOperation() {
         return (PanelBaseOperation) this.getPanel("panelBaseOperation");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Operation.
-     * @return Scroll Panel Base Operation.
-     */
-    public JScrollPane getScrollPanelBaseOperation() {
-        return this.getScrollPane("scrollPanelBaseOperation");
     }
     
     /**

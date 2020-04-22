@@ -31,24 +31,26 @@ public class ControllerTreePopupRequirement extends ControllerTreePopup {
     @Override
     protected void showPopup(DefaultMutableTreeNode node, MouseEvent event) {
         if (node.getUserObject() instanceof Project)
-            this.setPopupFlag(false, true, false);
+            this.setPopupFlag(true, false, true, false);
         else if (node.getUserObject() instanceof Requirement)
-            this.setPopupFlag(true, true, true);
+            this.setPopupFlag(false, true, true, true);
         else if (node.getUserObject() instanceof Element)
-            this.setPopupFlag(false, true, true);
+            this.setPopupFlag(false, false, true, true);
         this.getPopup().show(event.getComponent(), event.getX(), event.getY());
     }
 
     /**
      * Method responsible for setting the Popup Flag.
+     * @param new_ New Requirement Flag.
      * @param add Add Element Flag.
      * @param edit Edit Flag.
      * @param delete Delete Flag.
      */
-    private void setPopupFlag(boolean add, boolean edit, boolean delete) {
+    private void setPopupFlag(boolean new_, boolean add, boolean edit, boolean delete) {
+        this.getPopup().getNewRequirementMenuItem().setVisible(new_);
         this.getPopup().getAddElementMenuItem().setVisible(add);
         this.getPopup().getEditMenuItem().setVisible(edit);
-        this.getPopup().getDeleteMenuItem().setVisible(delete);
+        this.getPopup().getDeleteMenuItem().setEnabled(delete);
     }
     
     @Override
