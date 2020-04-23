@@ -35,22 +35,22 @@ public class ControllerTreePopupProduct extends ControllerTreePopup {
     @Override
     protected void showPopup(DefaultMutableTreeNode node, MouseEvent event) {
         if (node.getUserObject() instanceof Project)
-            this.treePopup.getDeleteMenuItem().setVisible(false);
+            this.popup.getDeleteMenuItem().setVisible(false);
         else
-            this.treePopup.getDeleteMenuItem().setVisible(true);
-        this.treePopup.show(event.getComponent(), event.getX(), event.getY());
+            this.popup.getDeleteMenuItem().setVisible(true);
+        this.popup.show(event.getComponent(), event.getX(), event.getY());
     }
 
     @Override
     protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Project)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
+            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
         else if (object instanceof Product)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditProduct((Product) object);
+            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditProduct((Product) object);
         else if (object instanceof Instance)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditInstance((Instance) object);
+            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditInstance((Instance) object);
         else if (object instanceof Artifact)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditArtifact((Artifact) object);
+            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditArtifact((Artifact) object);
     }
     
     @Override

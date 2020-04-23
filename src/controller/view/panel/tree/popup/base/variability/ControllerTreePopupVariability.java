@@ -35,21 +35,21 @@ public class ControllerTreePopupVariability extends ControllerTreePopup {
     @Override
     protected void showPopup(DefaultMutableTreeNode node, MouseEvent event) {
         if (node.getUserObject() instanceof Project)
-            this.treePopup.getDeleteMenuItem().setVisible(false);
+            this.popup.getDeleteMenuItem().setVisible(false);
         else
-            this.treePopup.getDeleteMenuItem().setVisible(true);
-        this.treePopup.show(event.getComponent(), event.getX(), event.getY());
+            this.popup.getDeleteMenuItem().setVisible(true);
+        this.popup.show(event.getComponent(), event.getX(), event.getY());
     }
 
     @Override
     protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
         Diagram diagram = this.getDiagram(node);
         if (object instanceof Project)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
+            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
         else if (object instanceof Diagram)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) object);
+            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) object);
         else if (object instanceof Variability)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, (Variability) object);
+            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, (Variability) object);
         else if (object instanceof Element)
             this.showPanelEdit(diagram, (Element) object);
     }

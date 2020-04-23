@@ -31,6 +31,7 @@ public final class TreePopupRequirement extends TreePopup {
         super.createMenuItems();
         this.createMenuItem("new_requirement", "New Requirement", "menu/requirement/requirement");
         this.createMenuItem("new_element",     "Add Element",     "add");
+        this.getNewMenu().add(this.getNewRequirementMenuItem());
     }
     
     @Override
@@ -43,7 +44,7 @@ public final class TreePopupRequirement extends TreePopup {
     
     @Override
     protected void addMenuItems() {
-        this.add(this.getNewRequirementMenuItem());
+        this.add(this.getNewMenu());
         this.add(this.getAddElementMenuItem());
         this.addSeparator();
         this.add(this.getEditMenuItem());

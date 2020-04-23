@@ -47,18 +47,17 @@ public class ControllerTreePopupRequirement extends ControllerTreePopup {
      * @param delete Delete Flag.
      */
     private void setPopupFlag(boolean new_, boolean add, boolean edit, boolean delete) {
+        super.setPopupFlag(new_, edit, delete);
         this.getPopup().getNewRequirementMenuItem().setVisible(new_);
         this.getPopup().getAddElementMenuItem().setVisible(add);
-        this.getPopup().getEditMenuItem().setVisible(edit);
-        this.getPopup().getDeleteMenuItem().setEnabled(delete);
     }
     
     @Override
     protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Project)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
+            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
         else if (object instanceof Requirement)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditRequirement((Requirement) object, 0);
+            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditRequirement((Requirement) object, 0);
         else if (object instanceof Element)
             this.showPanelEditElement(node, (Element) object);
     }
@@ -70,7 +69,7 @@ public class ControllerTreePopupRequirement extends ControllerTreePopup {
      */
     private void showPanelEditElement(DefaultMutableTreeNode node, Element element) {
         Requirement requirement = this.getRequirement(node);
-        this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditRequirement(requirement, element.getDiagram().getIndex());
+        this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditRequirement(requirement, element.getDiagram().getIndex());
     }
     
     @Override
@@ -114,6 +113,6 @@ public class ControllerTreePopupRequirement extends ControllerTreePopup {
     
     @Override
     protected TreePopupRequirement getPopup() {
-        return (TreePopupRequirement) this.treePopup;
+        return (TreePopupRequirement) this.popup;
     }
 }

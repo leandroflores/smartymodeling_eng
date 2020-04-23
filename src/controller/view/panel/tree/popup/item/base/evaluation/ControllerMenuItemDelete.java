@@ -1,6 +1,7 @@
 package controller.view.panel.tree.popup.item.base.evaluation;
 
 import controller.view.panel.tree.popup.item.ControllerMenuItem;
+import javax.swing.JMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
@@ -27,7 +28,7 @@ public class ControllerMenuItemDelete extends ControllerMenuItem {
     }
     
     @Override
-    protected void action(DefaultMutableTreeNode node) {
+    protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Metric)
             new ViewDeleteMetric(this.getPanelModeling(),  (Metric) object).setVisible(true);

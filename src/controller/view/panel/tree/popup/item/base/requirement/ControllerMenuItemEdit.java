@@ -1,6 +1,7 @@
 package controller.view.panel.tree.popup.item.base.requirement;
 
 import controller.view.panel.tree.popup.item.ControllerMenuItem;
+import javax.swing.JMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Element;
 import model.structural.base.Project;
@@ -28,7 +29,7 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
     }
     
     @Override
-    protected void action(DefaultMutableTreeNode node) {
+    protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Project)
             new ViewEditProject(this.getPanelModeling(), (Project) object).setVisible(true);

@@ -2,9 +2,11 @@ package controller.view.panel.tree.popup.item;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.requirement.Requirement;
+import view.main.structural.ViewMenu;
 import view.panel.modeling.PanelModeling;
 import view.panel.tree.popup.TreePopup;
 
@@ -29,15 +31,18 @@ public abstract class ControllerMenuItem implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.getSelectedNode() != null && this.getSelectedNode().getUserObject() != null)
-            this.action(this.getSelectedNode());
+        System.out.println(event.getSource());
+        if (this.getSelectedNode() != null && this.getSelectedNode().getUserObject() != null
+            && event.getSource()   != null && event.getSource() instanceof JMenuItem)
+            this.action(this.getSelectedNode(), (JMenuItem) event.getSource());
     }
     
     /**
      * Method responsible for action the Object Node.
      * @param node Object Node.
+     * @param item Menu Item.
      */
-    protected abstract void action(DefaultMutableTreeNode node);
+    protected abstract void action(DefaultMutableTreeNode node, JMenuItem item);
     
     /**
      * Method responsible for returning the Requirement Node.
@@ -76,7 +81,15 @@ public abstract class ControllerMenuItem implements ActionListener {
      * @return Panel Modeling.
      */
     protected PanelModeling getPanelModeling() {
-        return this.popup.getPanel().getViewMenu().getPanelModeling();
+        return this.getViewMenu().getPanelModeling();
+    }
+    
+    /**
+     * Method responsible for returning the View Menu.
+     * @return View Menu.
+     */
+    protected ViewMenu getViewMenu() {
+        return this.getPopup().getPanel().getViewMenu();
     }
     
     /**

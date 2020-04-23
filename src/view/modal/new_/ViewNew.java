@@ -12,7 +12,7 @@ import view.main.structural.ViewMenu;
  * <p>Class responsible for defining the <b>New View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-07-04
- * @see    controller.view.new_.ControllerViewNew
+ * @see    controller.view.modal.new_.ControllerViewNew
  * @see    view.modal.ViewModal
  */
 public abstract class ViewNew extends ViewModal {

@@ -298,7 +298,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     /**
      * Method responsible for creating a New Feature Diagram.
      */
-    private void newFeatureDiagram() {
+    public void newFeatureDiagram() {
         FeatureDiagram diagram = new FeatureDiagram(this.viewMenu.getProject());
         this.viewMenu.getProject().addDiagram(diagram);
                        diagram.setDefaultName();
@@ -310,7 +310,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     /**
      * Method responsible for creating a New Use Case Diagram.
      */
-    private void newUseCaseDiagram() {
+    public void newUseCaseDiagram() {
         UseCaseDiagram diagram = new UseCaseDiagram(this.viewMenu.getProject());
         this.viewMenu.getProject().addDiagram(diagram);
                        diagram.setDefaultName();
@@ -322,7 +322,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     /**
      * Method responsible for creating a New Class Diagram.
      */
-    private void newClassDiagram() {
+    public void newClassDiagram() {
         ClassDiagram diagram = new ClassDiagram(this.viewMenu.getProject());
         this.viewMenu.getProject().addDiagram(diagram);
                      diagram.setDefaultName();
@@ -334,7 +334,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     /**
      * Method responsible for creating a New Component Diagram.
      */
-    private void newComponentDiagram() {
+    public void newComponentDiagram() {
         ComponentDiagram diagram = new ComponentDiagram(this.viewMenu.getProject());
         this.viewMenu.getProject().addDiagram(diagram);
                          diagram.setDefaultName();
@@ -347,7 +347,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * Method responsible for checking for a New Sequence Diagram.
      * @return New Sequence Diagram is able.
      */
-    private boolean checkNewSequenceDiagram() {
+    public boolean checkNewSequenceDiagram() {
         return  this.viewMenu.getProject() != null
             && !this.viewMenu.getProject().getElements("actor").isEmpty()
             && !this.viewMenu.getProject().getElements("class").isEmpty();
@@ -356,7 +356,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     /**
      * Method responsible for creating a New Sequence Diagram.
      */
-    private void newSequenceDiagram() {
+    public void newSequenceDiagram() {
         if (this.checkNewSequenceDiagram()) {
             SequenceDiagram diagram = new SequenceDiagram(this.viewMenu.getProject());
             this.viewMenu.getProject().addDiagram(diagram);
@@ -372,7 +372,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     /**
      * Method responsible for creating a New Activity Diagram.
      */
-    private void newActivityDiagram() {
+    public void newActivityDiagram() {
         ActivityDiagram diagram = new ActivityDiagram(this.viewMenu.getProject());
         this.viewMenu.getProject().addDiagram(diagram);
                         diagram.setDefaultName();

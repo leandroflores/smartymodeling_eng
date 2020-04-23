@@ -35,19 +35,21 @@ public class ControllerTreePopupFeature extends ControllerTreePopup {
     @Override
     protected void showPopup(DefaultMutableTreeNode node, MouseEvent event) {
         if (node.getUserObject() instanceof Project)
-            this.treePopup.getDeleteMenuItem().setVisible(false);
-        else
-            this.treePopup.getDeleteMenuItem().setVisible(true);
-        this.treePopup.show(event.getComponent(), event.getX(), event.getY());
+            this.setPopupFlag(true, true, false);
+        else if (node.getUserObject() instanceof Diagram)
+            this.setPopupFlag(false, true, true);
+        else if (node.getUserObject() instanceof Element)
+            this.setPopupFlag(false, true, true);
+        this.getPopup().show(event.getComponent(), event.getX(), event.getY());
     }
-
+    
     @Override
     protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
         Diagram diagram = this.getDiagram(node);
         if (object instanceof Project)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
+            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
         else if (object instanceof Diagram)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) object);
+            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) object);
         else if (object instanceof Element)
             this.showPanelEdit(diagram, (Element) object);
     }
@@ -59,7 +61,7 @@ public class ControllerTreePopupFeature extends ControllerTreePopup {
      */
     private void showPanelEdit(Diagram diagram, Element element) {
         if (diagram instanceof FeatureDiagram)
-            this.treePopup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((FeatureDiagram) diagram, element);
+            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((FeatureDiagram) diagram, element);
     }
     
     @Override
@@ -78,5 +80,10 @@ public class ControllerTreePopupFeature extends ControllerTreePopup {
             new ViewEditDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
         else if (object instanceof Element)
             new ViewEditElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
+    }
+    
+    @Override
+    protected TreePopupFeature getPopup() {
+        return (TreePopupFeature) this.popup;
     }
 }

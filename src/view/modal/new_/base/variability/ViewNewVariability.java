@@ -8,6 +8,7 @@ import javax.swing.event.ChangeListener;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.variability.Variability;
+import view.main.structural.ViewMenu;
 import view.panel.base.variability.PanelBaseVariability;
 import view.panel.base.variability.PanelBaseVariants;
 import view.modal.new_.ViewNew;
@@ -28,6 +29,20 @@ public final class ViewNewVariability extends ViewNew {
     
     /**
      * Default constructor method of Class.
+     * @param view View Menu.
+     * @param diagram Diagram.
+     */
+    public ViewNewVariability(ViewMenu view, Diagram diagram) {
+        super(view);
+        this.diagram     = diagram;
+        this.variability = new Variability();
+        this.controller  = new ControllerViewNewVariability(this);
+        this.title       = "New Variability";
+        this.initComponents();
+    }
+    
+    /**
+     * Alternative constructor method of Class.
      * @param panel Panel Modeling.
      * @param diagram Diagram.
      * @param variationPoint Variation Point.
