@@ -5,7 +5,7 @@ import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.sequence.base.LifelineUML;
 import view.panel.base.diagram.sequence.base.PanelBaseLifelineUML;
 import view.panel.edit.base.PanelEditElement;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditLifelineUML</b>.</p> 

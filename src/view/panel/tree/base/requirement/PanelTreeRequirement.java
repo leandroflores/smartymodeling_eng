@@ -8,7 +8,7 @@ import model.structural.base.requirement.Requirement;
 import view.panel.tree.PanelTree;
 import view.panel.tree.popup.base.requirement.TreePopupRequirement;
 import view.panel.tree.renderer.base.requirement.TreeRendererRequirement;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelTreeRequirement</b>.</p>

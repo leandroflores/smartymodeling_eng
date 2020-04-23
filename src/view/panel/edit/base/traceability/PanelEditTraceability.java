@@ -7,7 +7,7 @@ import model.structural.base.traceability.Traceability;
 import view.panel.base.traceability.PanelBaseElements;
 import view.panel.base.traceability.PanelBaseTraceability;
 import view.panel.edit.PanelEdit;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditTraceability</b>.</p> 

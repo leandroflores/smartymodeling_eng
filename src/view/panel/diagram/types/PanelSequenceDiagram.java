@@ -22,7 +22,7 @@ import model.structural.diagram.sequence.base.association.MessageUML;
 import style.association.types.StyleSequenceAssociation;
 import view.panel.diagram.PanelDiagram;
 import view.panel.operation.types.PanelSequenceOperation;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelSequenceDiagram</b>.</p>

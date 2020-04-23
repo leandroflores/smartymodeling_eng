@@ -8,7 +8,7 @@ import model.structural.base.Project;
 import model.structural.base.product.Product;
 import view.panel.base.product.PanelBaseProduct;
 import view.modal.new_.ViewNew;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>ViewNewProduct</b>.</p>

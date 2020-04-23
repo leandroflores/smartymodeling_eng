@@ -6,7 +6,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import model.structural.base.Element;
 import view.panel.Panel;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseDependency</b>.</p> 

@@ -4,7 +4,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import view.panel.base.PanelBaseProject;
 import view.panel.edit.PanelEdit;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditProject</b>.</p> 

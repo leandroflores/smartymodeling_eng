@@ -27,7 +27,7 @@ import model.structural.diagram.classes.base.PackageUML;
 import style.association.types.StyleClassAssociation;
 import view.panel.diagram.PanelDiagram;
 import view.panel.operation.types.PanelClassOperation;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelClassDiagram</b>.</p>

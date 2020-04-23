@@ -5,7 +5,7 @@ import java.awt.GridLayout;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.MethodUML;
 import view.panel.Panel;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelParametersUML</b>.</p> 

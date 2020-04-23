@@ -6,7 +6,7 @@ import javax.swing.JTextField;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.activity.base.association.FlowUML;
 import view.panel.base.PanelBaseAssociation;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseFlowUML</b>.</p>

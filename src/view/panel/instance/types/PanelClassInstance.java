@@ -16,7 +16,7 @@ import model.structural.diagram.classes.base.InterfaceUML;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.PackageUML;
 import view.panel.instance.PanelInstance;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelClassInstance</b>.</p>

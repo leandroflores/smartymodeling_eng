@@ -10,7 +10,7 @@ import view.panel.base.evaluation.measure.PanelBaseEvaluation;
 import view.panel.base.evaluation.measure.PanelBaseNewMeasure;
 import view.panel.base.evaluation.measure.PanelBaseTarget;
 import view.modal.new_.ViewNew;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>ViewNewMeasure</b>.</p>

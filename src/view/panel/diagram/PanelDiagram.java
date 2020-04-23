@@ -13,7 +13,7 @@ import model.structural.base.association.Association;
 import style.association.StyleAssociation;
 import view.panel.PanelGraph;
 import view.panel.operation.PanelOperation;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelDiagram</b>.</p>

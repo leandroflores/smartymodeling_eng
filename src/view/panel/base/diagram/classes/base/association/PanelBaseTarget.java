@@ -8,7 +8,7 @@ import javax.swing.JTextField;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.association.AssociationUML;
 import view.panel.base.PanelBaseAssociation;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseTarget</b>.</p> 

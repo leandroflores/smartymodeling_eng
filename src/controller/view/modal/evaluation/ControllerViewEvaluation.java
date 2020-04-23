@@ -7,14 +7,13 @@ import view.modal.evaluation.ViewEvaluation;
 
 /**
  * <p>Class of Controller <b>ControllerViewEvaluation</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewEvaluation</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>ViewEvaluation</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  28/03/2020
+ * @since  2020-03-28
  * @see    controller.view.modal.ControllerViewModal
  * @see    view.modal.evaluation.ViewEvaluation
  */
 public abstract class ControllerViewEvaluation extends ControllerViewModal {
-    protected ViewEvaluation viewEvaluation;
     
     /**
      * Default constructor method of Class.
@@ -22,7 +21,35 @@ public abstract class ControllerViewEvaluation extends ControllerViewModal {
      */
     public ControllerViewEvaluation(ViewEvaluation view) {
         super(view);
-        this.viewEvaluation = view;
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        if (this.getView().getRefreshButton().equals(event.getSource()))
+            this.refresh();
+        else if (this.getView().getClearButton().equals(event.getSource()))
+            this.clear();
+        else if (this.getView().getCancelButton().equals(event.getSource()))
+            this.getView().dispose();
+    }
+    
+    @Override
+    public void keyPressed(KeyEvent event) {
+        super.keyPressed(event);
+        switch (event.getKeyCode()) {
+            case F1:
+            case ENTER:
+                this.refresh();
+                break;
+            case F2:
+                this.clear();
+                break;
+            case F3:
+                this.getView().dispose();
+                break;
+            default:
+                break;
+        }
     }
     
     /**
@@ -39,35 +66,11 @@ public abstract class ControllerViewEvaluation extends ControllerViewModal {
      * Method responsible for closing the View Evaluation.
      */
     protected void close() {
-        this.viewEvaluation.dispose();
+        this.getView().dispose();
     }
     
     @Override
-    public void actionPerformed(ActionEvent event) {
-        if (this.viewEvaluation.getRefreshButton().equals(event.getSource()))
-            this.refresh();
-        else if (this.viewEvaluation.getClearButton().equals(event.getSource()))
-            this.clear();
-        else if (this.viewEvaluation.getCancelButton().equals(event.getSource()))
-            this.viewEvaluation.dispose();
-    }
-    
-    @Override
-    public void keyPressed(KeyEvent event) {
-        super.keyPressed(event);
-        switch (event.getKeyCode()) {
-            case F1:
-            case ENTER:
-                this.refresh();
-                break;
-            case F2:
-                this.clear();
-                break;
-            case F3:
-                this.viewEvaluation.dispose();
-                break;
-            default:
-                break;
-        }
+    public ViewEvaluation getView() {
+        return (ViewEvaluation) this.viewModal;
     }
 }

@@ -31,7 +31,7 @@ import view.panel.instance.types.PanelSequenceInstance;
 import view.panel.instance.types.PanelUseCaseInstance;
 import view.panel.logo.PanelLogo;
 import view.panel.tabbed.PanelTabbed;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelModeling</b>.</p>
@@ -39,7 +39,7 @@ import view.structural.ViewMenu;
  * @author Leandro
  * @since  27/05/2019
  * @see    view.panel.Panel
- * @see    view.structural.ViewMenu
+ * @see    view.main.structural.ViewMenu
  */
 public final class PanelModeling extends Panel {
     private final ViewMenu viewMenu;

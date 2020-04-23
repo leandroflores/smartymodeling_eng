@@ -4,7 +4,7 @@ import controller.view.modal.message.ControllerViewSave;
 import javax.swing.JButton;
 import view.modal.ViewModal;
 import view.style.ViewStyle;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>ViewSave</b>.</p>

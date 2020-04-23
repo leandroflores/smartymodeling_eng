@@ -2,7 +2,7 @@ package view.panel.base.variability;
 
 import model.structural.base.Diagram;
 import model.structural.base.variability.Variability;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBase</b>.</p> 

@@ -8,7 +8,7 @@ import model.structural.base.Element;
 import view.modal.edit.ViewEdit;
 import view.panel.dependency.PanelDependency;
 import view.panel.base.diagram.PanelBaseElement;
-import view.panel.stereotype.PanelStereotype;
+import view.panel.base.stereotype.PanelStereotype;
 import view.panel.modeling.PanelModeling;
 
 /**

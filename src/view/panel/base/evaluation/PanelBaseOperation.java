@@ -6,7 +6,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.controller.structural.base.evaluation.ControllerMetric;
 import model.structural.base.evaluation.Metric;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseOperation</b>.</p>

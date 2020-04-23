@@ -1,36 +1,29 @@
 package view.panel.base.traceability;
 
 import controller.view.panel.base.traceability.ControllerPanelBaseElements;
-import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JList;
-import javax.swing.JScrollPane;
 import model.controller.structural.base.ControllerDiagram;
 import model.controller.structural.base.ControllerProject;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
-import model.structural.base.Project;
 import model.structural.base.traceability.Traceability;
-import view.panel.Panel;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelBaseElements</b>.</p> 
- * <p>Class responsible for defining a Panel for showing the <b>Elements Base</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelBaseElements</b>.</p>
+ * <p>Class responsible for defining a <b>Elements Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  22/07/2019
+ * @since  2019-07-22
  * @see    controller.view.panel.base.traceability.ControllerPanelBaseElements
  * @see    model.structural.base.traceability.Traceability
- * @see    view.panel.Panel
+ * @see    view.panel.base.traceability.PanelBase
  */
-public final class PanelBaseElements extends Panel {
-    private final ViewMenu viewMenu;
-    private final Project  project;
-    private       Diagram  diagram;
-    private final Traceability traceability;
+public final class PanelBaseElements extends PanelBase {
+    private Diagram diagram;
     
     /**
      * Default constructor method of Class.
@@ -38,14 +31,17 @@ public final class PanelBaseElements extends Panel {
      * @param traceability Traceability.
      */
     public PanelBaseElements(ViewMenu viewMenu, Traceability traceability) {
-        this.viewMenu     = viewMenu;
-        this.project      = this.viewMenu.getProject();
+        super(viewMenu, traceability);
+        this.controller = new ControllerPanelBaseElements(this);
+        this.setDefaultProperties();
         this.setDiagram();
-        this.traceability = traceability;
-        this.controller   = new ControllerPanelBaseElements(this);
-        this.setSettings();
         this.addComponents();
         this.setValues();
+    }
+    
+    @Override
+    protected void setDefaultProperties() {
+        this.setLayout(new GridBagLayout());
     }
     
     /**
@@ -56,14 +52,6 @@ public final class PanelBaseElements extends Panel {
             this.diagram = this.project.getDiagramsList().get(0);
     }
     
-    /**
-     * Method responsible for defining the Settings.
-     */
-    private void setSettings() {
-        this.setLayout(new GridBagLayout());
-        this.setPreferredSize(new Dimension(300, 300));
-        this.setSize(new Dimension(300, 300));
-    }
     
     @Override
     protected void addComponents() {
@@ -76,7 +64,7 @@ public final class PanelBaseElements extends Panel {
         this.add(this.createButton("delElementButton", "", "not.png"), this.createConstraints(1, 1, 4, 1));
         
         this.createList("elementsList");
-        this.add(this.getElementsScrollPane(), this.createConstraints(5, 10, 0, 2));
+        this.add(this.getScrollPane("elementsList"), this.createConstraints(5, 10, 0, 2));
     }
     
     /**
@@ -139,35 +127,11 @@ public final class PanelBaseElements extends Panel {
     }
     
     /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
-    }
-    
-    /**
-     * Method responsible for returning the Project.
-     * @return Project.
-     */
-    public Project getProject() {
-        return this.project;
-    }
-    
-    /**
      * Method responsible for returning the Diagram.
      * @return Diagram.
      */
     public Diagram getDiagram() {
         return this.diagram;
-    }
-    
-    /**
-     * Method responsible for return the Traceability.
-     * @return Traceability.
-     */
-    public Traceability getTraceability() {
-        return this.traceability;
     }
     
     /**
@@ -208,13 +172,5 @@ public final class PanelBaseElements extends Panel {
      */
     public JList getElementsList() {
         return this.getList("elementsList");
-    }
-    
-    /**
-     * Method responsible for return the Elements Scroll Pane.
-     * @return Elements Scroll Pane.
-     */
-    public JScrollPane getElementsScrollPane() {
-        return this.getScrollPane("elementsList");
     }
 }

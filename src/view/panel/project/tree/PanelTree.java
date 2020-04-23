@@ -19,7 +19,7 @@ import view.panel.tree.feature.PanelTreeFeature;
 import view.panel.tree.base.product.PanelTreeProduct;
 import view.panel.tree.base.requirement.PanelTreeRequirement;
 import view.panel.tree.base.variability.PanelTreeVariability;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelTree</b>.</p>

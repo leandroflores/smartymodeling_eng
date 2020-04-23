@@ -7,14 +7,13 @@ import view.modal.export.ViewExport;
 
 /**
  * <p>Class of Controller <b>ControllerViewExport</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewExport</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>ViewExport</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  05/11/2019
+ * @since  2019-11-05
  * @see    controller.view.modal.ControllerViewModal
  * @see    view.modal.export.ViewExport
  */
 public abstract class ControllerViewExport extends ControllerViewModal {
-    protected ViewExport viewExport;
     
     /**
      * Default constructor method of Class.
@@ -22,9 +21,33 @@ public abstract class ControllerViewExport extends ControllerViewModal {
      */
     public ControllerViewExport(ViewExport view) {
         super(view);
-        this.viewExport = view;
     }
 
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        if (this.getView().getExportButton().equals(event.getSource()))
+            this.action();
+        else if (this.getView().getCancelButton().equals(event.getSource()))
+            this.getView().dispose();
+    }
+    
+    @Override
+    public void keyPressed(KeyEvent event) {
+        super.keyPressed(event);
+        if (F1 == event.getKeyCode())
+            this.action();
+        else if (F2 == event.getKeyCode())
+            this.getView().dispose();
+    }
+    
+    /**
+     * Method responsible for Exporting.
+     */
+    private void action() {
+        if (this.check())
+            this.export();
+    }
+    
     /**
      * Abstract method responsible for Checking the Values.
      * @return Values checked.
@@ -36,24 +59,9 @@ public abstract class ControllerViewExport extends ControllerViewModal {
      */
     public abstract void export();
     
-    @Override
-    public void actionPerformed(ActionEvent event) {
-        if (this.viewExport.getExportButton().equals(event.getSource())) {
-            if (this.check())
-                this.export();
-        }else if (this.viewExport.getCancelButton().equals(event.getSource())) {
-            this.viewExport.dispose();
-        }
-    }
     
     @Override
-    public void keyPressed(KeyEvent event) {
-        super.keyPressed(event);
-        if (F1 == event.getKeyCode()) {
-            if (this.check())
-                this.export();
-        }else if (F2 == event.getKeyCode()) {
-            this.viewExport.dispose();
-        }
+    public ViewExport getView() {
+        return (ViewExport) this.viewModal;
     }
 }

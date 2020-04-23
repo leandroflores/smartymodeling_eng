@@ -3,7 +3,7 @@ package view.panel.edit.diagram;
 import funct.FunctString;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditElement</b>.</p> 

@@ -3,7 +3,7 @@ package view.panel.instance.types;
 import controller.view.panel.instance.ControllerPanelInstance;
 import model.structural.base.product.Instance;
 import view.panel.instance.PanelInstance;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelActivityInstance</b>.</p>

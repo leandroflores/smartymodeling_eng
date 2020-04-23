@@ -13,7 +13,7 @@ import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
 import model.structural.diagram.sequence.base.association.MessageUML;
 import view.panel.base.PanelBaseAssociation;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseMessageUML</b>.</p>

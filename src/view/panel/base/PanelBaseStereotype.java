@@ -5,7 +5,7 @@ import java.awt.GridLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import model.structural.base.Stereotype;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseStereotype</b>.</p> 

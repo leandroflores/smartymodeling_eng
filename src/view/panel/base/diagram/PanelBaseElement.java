@@ -6,7 +6,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseElement</b>.</p> 

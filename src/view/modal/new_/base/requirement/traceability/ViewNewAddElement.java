@@ -6,7 +6,7 @@ import javax.swing.JTabbedPane;
 import model.structural.base.requirement.Requirement;
 import view.modal.new_.ViewNew;
 import view.panel.base.requirement.traceability.PanelBaseAddElement;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>ViewNewAddElement</b>.</p>

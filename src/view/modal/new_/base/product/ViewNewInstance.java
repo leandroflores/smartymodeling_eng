@@ -17,7 +17,7 @@ import view.panel.base.product.instance.PanelBaseNewInstance;
 import view.panel.base.product.instance.PanelBaseOptional;
 import view.panel.base.product.instance.PanelBaseVarPoints;
 import view.modal.new_.ViewNew;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>ViewNewInstance</b>.</p>

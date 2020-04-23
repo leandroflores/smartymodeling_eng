@@ -9,7 +9,7 @@ import model.structural.base.variability.Variability;
 import view.panel.base.variability.PanelBaseVariability;
 import view.panel.base.variability.PanelBaseVariants;
 import view.panel.edit.PanelEdit;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditVariability</b>.</p> 

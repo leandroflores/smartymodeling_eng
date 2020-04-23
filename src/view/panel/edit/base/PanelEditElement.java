@@ -7,9 +7,9 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import view.panel.dependency.PanelDependency;
 import view.panel.base.diagram.PanelBaseElement;
-import view.panel.stereotype.PanelStereotype;
+import view.panel.base.stereotype.PanelStereotype;
 import view.panel.edit.PanelEdit;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditElement</b>.</p> 

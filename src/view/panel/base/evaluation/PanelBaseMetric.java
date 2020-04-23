@@ -5,7 +5,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import model.structural.base.evaluation.Metric;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseMetric</b>.</p> 

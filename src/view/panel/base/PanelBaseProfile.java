@@ -4,7 +4,7 @@ import controller.view.panel.base.ControllerPanelBaseProfile;
 import java.awt.GridBagLayout;
 import javax.swing.JTextField;
 import model.structural.base.Profile;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseProfile</b>.</p> 

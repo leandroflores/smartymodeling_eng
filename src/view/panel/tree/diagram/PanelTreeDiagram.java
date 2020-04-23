@@ -13,7 +13,7 @@ import model.structural.diagram.classes.base.PackageUML;
 import view.panel.tree.PanelTree;
 import view.panel.tree.popup.diagram.TreePopupDiagram;
 import view.panel.tree.renderer.diagram.TreeRendererDiagram;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelTreeDiagram</b>.</p>

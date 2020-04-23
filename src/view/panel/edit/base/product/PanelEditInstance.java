@@ -6,7 +6,7 @@ import javax.swing.JTabbedPane;
 import model.structural.base.product.Instance;
 import view.panel.base.product.PanelBaseInstance;
 import view.panel.edit.PanelEdit;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditInstance</b>.</p> 

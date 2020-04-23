@@ -6,7 +6,7 @@ import model.structural.base.requirement.Requirement;
 import view.modal.new_.ViewNew;
 import view.panel.base.requirement.PanelBaseRequirement;
 import view.panel.edit.base.requirement.PanelEditRequirement;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>ViewNewRequirement</b>.</p>

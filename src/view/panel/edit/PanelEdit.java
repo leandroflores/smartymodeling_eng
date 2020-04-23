@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import view.panel.Panel;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEdit</b>.</p> 

@@ -20,7 +20,7 @@ import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Relationship;
 import view.panel.PanelGraph;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelInstance</b>.</p>

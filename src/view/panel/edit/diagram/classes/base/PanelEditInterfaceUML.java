@@ -3,7 +3,7 @@ package view.panel.edit.diagram.classes.base;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.InterfaceUML;
 import view.panel.edit.base.PanelEditElement;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditInterfaceUML</b>.</p> 

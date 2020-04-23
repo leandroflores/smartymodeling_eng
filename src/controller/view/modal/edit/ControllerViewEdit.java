@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import model.structural.base.Project;
 import view.modal.edit.ViewEdit;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of Controller <b>ControllerViewEdit</b>.</p>

@@ -6,7 +6,7 @@ import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.activity.base.association.FlowUML;
 import view.panel.base.diagram.activity.base.association.PanelBaseFlowUML;
 import view.panel.edit.base.PanelEditAssociation;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditFlowUML</b>.</p>

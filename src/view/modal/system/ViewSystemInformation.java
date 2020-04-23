@@ -4,7 +4,7 @@ import controller.view.modal.system.ControllerViewSystemInformation;
 import javax.swing.JButton;
 import view.modal.ViewModal;
 import view.style.ViewStyle;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 import view.panel.system.PanelInformation;
 
 /**

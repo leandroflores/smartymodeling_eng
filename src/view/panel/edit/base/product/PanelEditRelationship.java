@@ -6,7 +6,7 @@ import javax.swing.JTabbedPane;
 import model.structural.base.product.Relationship;
 import view.panel.base.product.PanelBaseRelationship;
 import view.panel.edit.PanelEdit;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditRelationship</b>.</p> 

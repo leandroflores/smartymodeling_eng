@@ -8,7 +8,7 @@ import model.structural.base.Project;
 import view.panel.tree.PanelTree;
 import view.panel.tree.popup.feature.TreePopupFeature;
 import view.panel.tree.renderer.feature.TreeRendererFeature;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelTreeFeature</b>.</p>

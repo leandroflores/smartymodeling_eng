@@ -10,7 +10,7 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.requirement.Requirement;
 import view.panel.base.PanelBase;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseAddElement</b>.</p>

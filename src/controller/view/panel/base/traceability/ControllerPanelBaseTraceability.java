@@ -1,20 +1,16 @@
 package controller.view.panel.base.traceability;
 
-import controller.view.panel.ControllerPanel;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import view.panel.base.traceability.PanelBaseTraceability;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBaseTraceability</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBaseTraceability</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelBaseTraceability</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  22/07/2019
- * @see    controller.view.panel.ControllerPanel
+ * @since  2019-07-22
+ * @see    controller.view.panel.base.traceability.ControllerPanelBase
  * @see    view.panel.base.traceability.PanelBaseTraceability
  */
-public class ControllerPanelBaseTraceability extends ControllerPanel {
-    private final PanelBaseTraceability panelBaseTraceability;
+public class ControllerPanelBaseTraceability extends ControllerPanelBase {
 
     /**
      * Default constructor method of Class.
@@ -22,40 +18,17 @@ public class ControllerPanelBaseTraceability extends ControllerPanel {
      */
     public ControllerPanelBaseTraceability(PanelBaseTraceability panel) {
         super(panel);
-        this.panelBaseTraceability = panel;
     }
 
     @Override
-    public void actionPerformed(ActionEvent event) {
-        this.update();
+    protected void update() {
+        this.getTraceability().setName(this.getString(this.getPanel().getNameTextField()));
+        this.getTraceability().setDescription(this.getString(this.getPanel().getDescriptionTextField()));
+        this.refresh();
     }
     
     @Override
-    public void keyPressed(KeyEvent event) {
-        this.update();
-    }
-    
-    @Override
-    public void keyReleased(KeyEvent event) {
-        this.update();
-    }
-
-    /**
-     * Method responsible for checking the Traceability.
-     * @return Traceability checked.
-     */
-    private boolean check() {
-        return    this.check(this.panelBaseTraceability.getNameTextField().getText())
-               && this.check(this.panelBaseTraceability.getDescriptionTextField().getText());
-    }
-    
-    /**
-     * Method responsible for setting the Project Values.
-     */
-    public void update() {
-        this.panelBaseTraceability.getTraceability().setName(this.panelBaseTraceability.getNameTextField().getText().trim());
-        this.panelBaseTraceability.getTraceability().setDescription(this.panelBaseTraceability.getDescriptionTextField().getText().trim());
-        this.panelBaseTraceability.getViewMenu().getPanelProject().getPanelTree().updateUI();
-        this.panelBaseTraceability.getViewMenu().setSave(false);
+    public PanelBaseTraceability getPanel() {
+        return (PanelBaseTraceability) this.panel;
     }
 }

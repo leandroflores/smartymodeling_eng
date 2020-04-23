@@ -5,7 +5,7 @@ import javax.swing.JTabbedPane;
 import model.structural.base.Stereotype;
 import view.panel.base.PanelBaseStereotype;
 import view.panel.edit.PanelEdit;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditStereotype</b>.</p> 

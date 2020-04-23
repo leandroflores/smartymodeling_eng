@@ -8,7 +8,7 @@ import model.structural.base.evaluation.Metric;
 import view.modal.new_.ViewNew;
 import view.panel.base.evaluation.PanelBaseMetric;
 import view.panel.base.evaluation.PanelBaseOperation;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>ViewNewMetric</b>.</p>

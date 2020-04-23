@@ -3,13 +3,13 @@ package view.modal.export;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 import view.modal.ViewModal;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>ViewExport</b>.</p>
  * <p>Class responsible for defining the <b>Export View</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  05/11/2019
+ * @since  2019-11-05
  * @see    controller.view.export.ControllerViewExport
  * @see    view.modal.ViewModal
  */
@@ -19,11 +19,11 @@ public abstract class ViewExport extends ViewModal {
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      */
-    public ViewExport(ViewMenu viewMenu) {
-        super(viewMenu);
-        this.viewMenu = viewMenu;
+    public ViewExport(ViewMenu view) {
+        super(view);
+        this.viewMenu = view;
     }
     
     @Override

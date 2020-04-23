@@ -8,7 +8,7 @@ import view.panel.base.diagram.classes.base.PanelBaseMethodAbsUML;
 import view.panel.base.diagram.classes.base.PanelBaseMethodUML;
 import view.panel.base.diagram.classes.entity.PanelParametersUML;
 import view.panel.edit.base.PanelEditElement;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditMethodUML</b>.</p> 

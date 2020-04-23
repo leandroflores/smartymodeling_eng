@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import model.structural.base.Diagram;
 import model.structural.base.association.Association;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseAssociation</b>.</p> 

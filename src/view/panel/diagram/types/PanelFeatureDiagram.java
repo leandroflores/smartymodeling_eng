@@ -15,7 +15,7 @@ import model.structural.diagram.FeatureDiagram;
 import style.association.types.StyleFeatureAssociation;
 import view.panel.diagram.PanelDiagram;
 import view.panel.operation.types.PanelFeatureOperation;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelFeatureDiagram</b>.</p>

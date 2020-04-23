@@ -5,7 +5,7 @@ import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.ClassUML;
 import view.panel.base.diagram.classes.base.PanelBaseClassUML;
 import view.panel.edit.base.PanelEditElement;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditClassUML</b>.</p>

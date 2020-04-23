@@ -6,7 +6,7 @@ import model.structural.base.evaluation.Metric;
 import view.panel.base.evaluation.PanelBaseMetric;
 import view.panel.base.evaluation.PanelBaseOperation;
 import view.panel.edit.PanelEdit;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditMetric</b>.</p> 

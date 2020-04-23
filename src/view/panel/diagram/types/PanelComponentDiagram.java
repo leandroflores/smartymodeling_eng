@@ -17,7 +17,7 @@ import model.structural.diagram.component.base.ComponentUML;
 import style.association.types.StyleComponentAssociation;
 import view.panel.diagram.PanelDiagram;
 import view.panel.operation.types.PanelComponentOperation;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelComponentDiagram</b>.</p>

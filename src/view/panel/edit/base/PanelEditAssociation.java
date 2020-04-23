@@ -7,7 +7,7 @@ import model.structural.base.Diagram;
 import model.structural.base.association.Association;
 import view.panel.base.diagram.PanelBaseAssociation;
 import view.panel.edit.PanelEdit;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditAssociation</b>.</p> 

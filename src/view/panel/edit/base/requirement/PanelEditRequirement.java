@@ -6,7 +6,7 @@ import model.structural.base.requirement.Requirement;
 import view.panel.base.requirement.PanelBaseRequirement;
 import view.panel.base.requirement.traceability.PanelBaseRequirementDiagram;
 import view.panel.edit.PanelEdit;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditRequirement</b>.</p> 

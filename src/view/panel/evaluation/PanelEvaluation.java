@@ -1,14 +1,12 @@
 package view.panel.evaluation;
 
 import controller.view.panel.evaluation.ControllerPanelEvaluation;
-import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JList;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import model.structural.base.Project;
 import view.panel.Panel;
@@ -16,33 +14,31 @@ import view.modal.evaluation.ViewEvaluation;
 
 /**
  * <p>Class of View <b>PanelEvaluation</b>.</p> 
- * <p>Class responsible for defining a Panel for showing the <b>Panel Evaluation</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining a Abstract Model for <b>Evaluation Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  01/04/2020
- * @see    controller.view.edit.panel.base.evaluation.
+ * @since  2020-04-01
+ * @see    controller.view.panel.evaluation.ControllerPanelEvaluation
  * @see    view.panel.Panel
  * @see    view.modal.evaluation.ViewEvaluation
  */
 public abstract class PanelEvaluation extends Panel {
-    protected final Project project;
     protected final ViewEvaluation viewEvaluation;
+    protected final Project project;
     
     /**
      * Default constructor method of Class.
-     * @param viewEvaluation View Evaluation.
+     * @param view View Evaluation.
      */
-    public PanelEvaluation(ViewEvaluation viewEvaluation) {
-        this.project        = viewEvaluation.getViewMenu().getProject();
-        this.viewEvaluation = viewEvaluation;
+    public PanelEvaluation(ViewEvaluation view) {
+        this.viewEvaluation = view;
+        this.project        = view.getViewMenu().getProject();
     }
     
     /**
-     * Method responsible for defining the Settings.
+     * Method responsible for setting the Default Properties.
      */
-    protected void setSettings() {
+    protected void setDefaultProperties() {
         this.setLayout(new GridBagLayout());
-        this.setPreferredSize(new Dimension(200, 300));
-        this.setSize(new Dimension(200, 300));
     }
     
     @Override
@@ -58,7 +54,7 @@ public abstract class PanelEvaluation extends Panel {
         this.add(this.createTextFieldNoEditable("valueTextField", "", 15), this.createConstraints(5, 1, 1, 2));
         
         this.createList("detailsList");
-        this.add(this.getDetailsScrollPane(), this.createConstraints(6, 1, 0, 3));
+        this.add(this.getScrollPane("detailsList"), this.createConstraints(6, 1, 0, 3));
     }
     
     /**
@@ -89,30 +85,6 @@ public abstract class PanelEvaluation extends Panel {
         for (Object object :  list)
             model.addElement(object);
         this.getDetailsList().setModel(model);
-    }
-    
-    /**
-     * Method responsible for returning the View Evaluation.
-     * @return View Evaluation.
-     */
-    public ViewEvaluation getViewEvaluation() {
-        return this.viewEvaluation;
-    }
-    
-    /**
-     * Method responsible for returning the Controller.
-     * @return Controller.
-     */
-    public ControllerPanelEvaluation getController() {
-        return (ControllerPanelEvaluation) this.controller;
-    }
-    
-    /**
-     * Method responsible for returning the Project.
-     * @return Project.
-     */
-    public Project getProject() {
-        return this.project;
     }
     
     /**
@@ -156,10 +128,26 @@ public abstract class PanelEvaluation extends Panel {
     }
     
     /**
-     * Method responsible for return the Details Scroll Pane.
-     * @return Details Scroll Pane.
+     * Method responsible for returning the Project.
+     * @return Project.
      */
-    public JScrollPane getDetailsScrollPane() {
-        return this.getScrollPane("detailsList");
+    public Project getProject() {
+        return this.project;
+    }
+    
+    /**
+     * Method responsible for returning the View Evaluation.
+     * @return View Evaluation.
+     */
+    public ViewEvaluation getViewEvaluation() {
+        return this.viewEvaluation;
+    }
+    
+    /**
+     * Method responsible for returning the Controller.
+     * @return Controller.
+     */
+    public ControllerPanelEvaluation getController() {
+        return (ControllerPanelEvaluation) this.controller;
     }
 }

@@ -73,7 +73,7 @@ import view.panel.edit.diagram.usecase.base.PanelEditActorUML;
 import view.panel.edit.diagram.usecase.base.PanelEditUseCaseUML;
 import view.panel.edit.base.variability.PanelEditVariability;
 import view.panel.project.tree.PanelTree;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelProject</b>.</p> 

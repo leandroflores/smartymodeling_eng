@@ -1,20 +1,21 @@
 package view.panel.export;
 
-import java.awt.Dimension;
+import controller.view.panel.export.ControllerPanelExport;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import model.structural.base.Project;
 import view.panel.Panel;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelExport</b>.</p> 
- * <p>Class responsible for defining a Panel Model for <b>Export</b> on SMartyModeling.</p>
+ * <p>Class of View <b>PanelExport</b>.</p>
+ * <p>Class responsible for defining a Abstract Model for <b>Export Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  08/11/2019
- * @see    controller.view.panel.export.
+ * @since  2019-11-08
+ * @see    controller.view.panel.export.ControllerPanelExport
  * @see    view.panel.Panel
  */
 public abstract class PanelExport extends Panel {
@@ -23,20 +24,18 @@ public abstract class PanelExport extends Panel {
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      */
-    public PanelExport(ViewMenu viewMenu) {
-        this.viewMenu = viewMenu;
+    public PanelExport(ViewMenu view) {
+        this.viewMenu = view;
         this.project  = this.viewMenu.getProject();
     }
     
     /**
-     * Method responsible for defining the Settings.
+     * Method responsible for setting the Default Properties.
      */
-    protected void setSettings() {
+    protected void setDefaultProperties() {
         this.setLayout(new GridBagLayout());
-        this.setPreferredSize(new Dimension(50, 50));
-        this.setSize(new Dimension(50, 50));
     }
     
     @Override
@@ -58,22 +57,6 @@ public abstract class PanelExport extends Panel {
     protected void addNameTextField() {
         this.add(this.createLabel("Name*: "), this.createConstraints(1, 1, 0, 2));
         this.add(this.createTextField("nameTextField", "", 15), this.createConstraints(5, 1, 1, 2));
-    }
-    
-    /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
-     */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
-    }
-    
-    /**
-     * Method responsible for returning the Project.
-     * @return Project.
-     */
-    public Project getProject() {
-        return this.project;
     }
     
     /**
@@ -106,5 +89,37 @@ public abstract class PanelExport extends Panel {
      */
     public JTextField getNameTextField() {
         return this.getTextField("nameTextField");
+    }
+    
+    /**
+     * Method responsible for returning the Context Combo Box.
+     * @return Context Combo Box.
+     */
+    public JComboBox getContextComboBox() {
+        return this.getComboBox("contextComboBox");
+    }
+    
+    /**
+     * Method responsible for returning the Controller.
+     * @return Controller.
+     */
+    public ControllerPanelExport getController() {
+        return (ControllerPanelExport) this.controller;
+    }
+    
+    /**
+     * Method responsible for returning the Project.
+     * @return Project.
+     */
+    public Project getProject() {
+        return this.project;
+    }
+    
+    /**
+     * Method responsible for returning the View Menu.
+     * @return View Menu.
+     */
+    public ViewMenu getViewMenu() {
+        return this.viewMenu;
     }
 }

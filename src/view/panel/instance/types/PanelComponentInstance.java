@@ -9,7 +9,7 @@ import model.structural.base.product.Instance;
 import model.structural.diagram.ComponentDiagram;
 import model.structural.diagram.component.base.ComponentUML;
 import view.panel.instance.PanelInstance;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelComponentInstance</b>.</p>

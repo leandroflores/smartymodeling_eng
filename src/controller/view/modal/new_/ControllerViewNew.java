@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import view.modal.new_.ViewNew;
 import view.panel.project.tree.PanelTree;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of Controller <b>ControllerViewNew</b>.</p>

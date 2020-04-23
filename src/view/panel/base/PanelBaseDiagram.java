@@ -4,7 +4,7 @@ import controller.view.panel.base.ControllerPanelBaseDiagram;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
 import model.structural.base.Diagram;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseDiagram</b>.</p>

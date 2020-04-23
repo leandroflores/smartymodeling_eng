@@ -1,7 +1,7 @@
 package view.panel.base.evaluation;
 
 import model.structural.base.evaluation.Metric;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBase</b>.</p> 

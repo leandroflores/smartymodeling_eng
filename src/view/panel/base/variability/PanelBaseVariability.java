@@ -9,7 +9,7 @@ import model.controller.structural.base.variability.ControllerVariability;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.variability.Variability;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseVariability</b>.</p> 

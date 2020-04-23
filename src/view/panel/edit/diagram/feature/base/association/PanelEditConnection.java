@@ -6,7 +6,7 @@ import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.feature.base.association.Connection;
 import view.panel.base.diagram.feature.base.association.PanelBaseConnection;
 import view.panel.edit.base.PanelEditAssociation;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditConnection</b>.</p> 

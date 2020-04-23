@@ -3,7 +3,7 @@ package view.panel.base;
 import controller.view.panel.base.ControllerPanelBaseProject;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseProject</b>.</p>

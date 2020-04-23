@@ -5,7 +5,7 @@ import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.sequence.base.association.MessageUML;
 import view.panel.base.diagram.sequence.base.association.PanelBaseMessageUML;
 import view.panel.edit.base.PanelEditAssociation;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditMessageUML</b>.</p> 

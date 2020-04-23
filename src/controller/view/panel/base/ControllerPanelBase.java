@@ -7,7 +7,7 @@ import model.structural.base.Project;
 import view.panel.base.PanelBase;
 import view.panel.modeling.PanelModeling;
 import view.panel.project.tree.PanelTree;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBase</b>.</p>

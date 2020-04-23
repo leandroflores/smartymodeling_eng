@@ -8,7 +8,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import model.structural.base.product.Product;
 import view.panel.base.PanelBase;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseProduct</b>.</p>

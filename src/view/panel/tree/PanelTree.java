@@ -12,7 +12,7 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import view.panel.Panel;
 import view.panel.tree.popup.TreePopup;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelTree</b>.</p>

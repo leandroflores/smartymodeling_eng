@@ -8,7 +8,7 @@ import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.AttributeUML;
 import view.modal.edit.ViewEdit;
 import view.panel.base.diagram.classes.base.PanelBaseAttributeUML;
-import view.panel.stereotype.PanelStereotype;
+import view.panel.base.stereotype.PanelStereotype;
 import view.panel.modeling.PanelModeling;
 
 /**

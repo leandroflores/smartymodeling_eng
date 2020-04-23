@@ -8,7 +8,7 @@ import view.View;
 import view.modal.ViewModal;
 import view.style.ViewStyle;
 import view.panel.modeling.PanelModeling;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>ViewDelete</b>.</p>

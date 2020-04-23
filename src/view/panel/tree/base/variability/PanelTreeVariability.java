@@ -9,7 +9,7 @@ import model.structural.base.variability.Variability;
 import view.panel.tree.PanelTree;
 import view.panel.tree.popup.base.variability.TreePopupVariability;
 import view.panel.tree.renderer.base.variability.TreeRendererVariability;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelTreeVariability</b>.</p>

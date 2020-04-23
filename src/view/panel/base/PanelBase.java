@@ -3,7 +3,7 @@ package view.panel.base;
 import controller.view.panel.base.ControllerPanelBase;
 import model.structural.base.Project;
 import view.panel.Panel;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBase</b>.</p> 

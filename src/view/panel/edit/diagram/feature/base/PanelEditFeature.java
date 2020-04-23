@@ -5,7 +5,7 @@ import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.feature.base.Feature;
 import view.panel.base.diagram.feature.base.PanelBaseFeature;
 import view.panel.edit.base.PanelEditElement;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelEditFeature</b>.</p> 

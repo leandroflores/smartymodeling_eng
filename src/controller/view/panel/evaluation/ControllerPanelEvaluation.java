@@ -16,14 +16,13 @@ import view.panel.evaluation.PanelEvaluation;
 
 /**
  * <p>Class of Controller <b>ControllerPanelEvaluation</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelEvaluation</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>Evaluation Panel</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  01/04/2020
+ * @since  2020-04-01
  * @see    controller.view.panel.ControllerPanel
  * @see    view.panel.evaluation.PanelEvaluation
  */
 public abstract class ControllerPanelEvaluation extends ControllerPanel {
-    protected final PanelEvaluation panelEvaluation;
 
     /**
      * Default constructor method of Class.
@@ -31,12 +30,11 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
      */
     public ControllerPanelEvaluation(PanelEvaluation panel) {
         super(panel);
-        this.panelEvaluation = panel;
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.panelEvaluation.getApplyButton().equals(event.getSource()))
+        if (this.getPanel().getApplyButton().equals(event.getSource()))
             this.update();
     }
     
@@ -56,7 +54,7 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
      * @return Project.
      */
     protected Project getProject() {
-        return this.panelEvaluation.getProject();
+        return this.getPanel().getProject();
     }
     
     /**
@@ -64,7 +62,7 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
      * @return Diagram selected.
      */
     protected Diagram getDiagram() {
-        return (Diagram) this.panelEvaluation.getTargetComboBox().getSelectedItem();
+        return (Diagram) this.getPanel().getTargetComboBox().getSelectedItem();
     }
     
     /**
@@ -72,7 +70,7 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
      * @return Product selected.
      */
     protected Product getProduct() {
-        return (Product) this.panelEvaluation.getTargetComboBox().getSelectedItem();
+        return (Product) this.getPanel().getTargetComboBox().getSelectedItem();
     }
     
     /**
@@ -80,9 +78,9 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
      * @return Operation is checked.
      */
     protected boolean check() {
-        if (!this.check(this.panelEvaluation.getOperationTextField().getText())) {
-            new ViewError(this.panelEvaluation.getViewEvaluation(), "Type a Operation!").setVisible(true);
-            this.panelEvaluation.getOperationTextField().requestFocus();
+        if (!this.check(this.getPanel().getOperationTextField().getText())) {
+            new ViewError(this.getPanel().getViewEvaluation(), "Type a Operation!").setVisible(true);
+            this.getPanel().getOperationTextField().requestFocus();
             return false;
         }
         return true;
@@ -103,9 +101,9 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
         System.out.println("AAA");
         Evaluation evaluation = new EvaluationProject(project);
         Double     finalValue = evaluation.getFinalValue(operation);
-        this.panelEvaluation.getValueTextField().setText(Double.toString(finalValue));
+        this.getPanel().getValueTextField().setText(Double.toString(finalValue));
         System.out.println("List: " + evaluation.getObjects());
-        this.panelEvaluation.updateDetails(evaluation.getObjects());
+        this.getPanel().updateDetails(evaluation.getObjects());
         System.out.println("");
     }
     
@@ -118,8 +116,8 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
     protected void evaluate(Product product, String operation) throws ScriptException {
         Evaluation evaluation = new EvaluationProduct(this.getProject(), product);
         Double     finalValue = evaluation.getFinalValue(operation);
-        this.panelEvaluation.getValueTextField().setText(Double.toString(finalValue));
-        this.panelEvaluation.updateDetails(evaluation.getObjects());
+        this.getPanel().getValueTextField().setText(Double.toString(finalValue));
+        this.getPanel().updateDetails(evaluation.getObjects());
     }
     
     /**
@@ -131,7 +129,12 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
     protected void evaluate(Diagram diagram, String operation) throws ScriptException {
         Evaluation evaluation = new EvaluationDiagram(diagram);
         Double     finalValue = evaluation.getFinalValue(operation);
-        this.panelEvaluation.getValueTextField().setText(Double.toString(finalValue));
-        this.panelEvaluation.updateDetails(evaluation.getObjects());
+        this.getPanel().getValueTextField().setText(Double.toString(finalValue));
+        this.getPanel().updateDetails(evaluation.getObjects());
+    }
+    
+    @Override
+    public PanelEvaluation getPanel() {
+        return (PanelEvaluation) this.panel;
     }
 }

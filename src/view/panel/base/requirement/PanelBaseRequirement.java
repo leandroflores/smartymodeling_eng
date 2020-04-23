@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 import model.controller.structural.base.requirement.ControllerRequirement;
 import model.structural.base.requirement.Requirement;
 import view.panel.base.PanelBase;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseRequirement</b>.</p> 

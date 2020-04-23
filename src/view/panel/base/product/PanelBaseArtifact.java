@@ -5,7 +5,7 @@ import java.awt.GridLayout;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import view.panel.base.PanelBase;
-import view.structural.ViewMenu;
+import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of View <b>PanelBaseArtifact</b>.</p>
