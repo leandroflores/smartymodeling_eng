@@ -34,9 +34,33 @@ public class ControllerMenuItemDelete extends ControllerMenuItem {
         Object object = node.getUserObject();
         if (object instanceof Diagram)
             new ViewDeleteDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
-        else if (object instanceof Element)
-            new ViewDeleteElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
         else if (object instanceof Variability)
             new ViewDeleteVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
+        else if (object instanceof Element)
+            this.delete((Element) object, node);
+    }
+    
+    /**
+     * Method responsible for deleting the Element by Node.
+     * @param element Element.
+     * @param node Tree Node.
+     */
+    private void delete(Element element, DefaultMutableTreeNode node) {
+        if (this.getVariability(node) != null)
+            System.out.println("Dlte Variant: " + element);
+        else
+            new ViewDeleteElement(this.getPanelModeling(), this.getDiagram(node), element).setVisible(true);
+    }
+    
+    /**
+     * Method responsible for returning the Variability Parent Node.
+     * @param  node Tree Node.
+     * @return Variability Parent.
+     */
+    protected Variability getVariability(DefaultMutableTreeNode node) {
+        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
+        if (parent != null && parent.getUserObject() instanceof Variability)
+            return (Variability) parent.getUserObject();
+        return null;
     }
 }

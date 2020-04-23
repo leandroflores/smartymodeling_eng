@@ -14,6 +14,7 @@ import model.structural.diagram.ComponentDiagram;
 import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
+import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
 import view.modal.delete.base.ViewDeleteDiagram;
@@ -53,6 +54,8 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
             this.setDiagramPopup();
         else if (node.getUserObject() instanceof Variability)
             this.setVariabilityPopup();
+        else if (node.getUserObject() instanceof Entity)
+            this.setEntityPopup();
         else if (node.getUserObject() instanceof Element)
             super.setPopupFlag(false, true, true);
         this.getPopup().show(event.getComponent(), event.getX(), event.getY());
@@ -64,7 +67,8 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
     private void setProjectPopup() {
         super.setPopupFlag(true, true, false);
         this.setNewDiagram(true);
-        this.getPopup().getVariabilityMenuItem().setVisible(false);
+        this.setNewVariability(false);
+        this.setNewElement(false);
     }
     
     /**
@@ -73,7 +77,8 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
     private void setDiagramPopup() {
         super.setPopupFlag(true, true, true);
         this.setNewDiagram(false);
-        this.getPopup().getVariabilityMenuItem().setVisible(true);
+        this.setNewVariability(true);
+        this.setNewElement(false);
     }
     
     /**
@@ -81,6 +86,16 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
      */
     private void setVariabilityPopup() {
         super.setPopupFlag(false, true, true);
+    }
+    
+    /**
+     * Method responsible for setting the Entity Popup.
+     */
+    private void setEntityPopup() {
+        super.setPopupFlag(true, true, true);
+        this.setNewDiagram(false);
+        this.setNewVariability(false);
+        this.setNewElement(true);
     }
     
     /**
@@ -93,6 +108,23 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
         this.getPopup().getComponentDiagramMenuItem().setVisible(flag);
         this.getPopup().getSequenceDiagramMenuItem().setVisible(flag);
         this.getPopup().getActivityDiagramMenuItem().setVisible(flag);
+    }
+    
+    /**
+     * Method responsible for setting the New Variability.
+     * @param flag New Variability Flag.
+     */
+    private void setNewVariability(boolean flag) {
+        this.getPopup().getVariabilityMenuItem().setVisible(flag);
+    }
+    
+    /**
+     * Method responsible for setting the New Element.
+     * @param flag New Element Flag.
+     */
+    private void setNewElement(boolean flag) {
+        this.getPopup().getAttributeMenuItem().setVisible(flag);
+        this.getPopup().getMethodMenuItem().setVisible(flag);
     }
     
     @Override

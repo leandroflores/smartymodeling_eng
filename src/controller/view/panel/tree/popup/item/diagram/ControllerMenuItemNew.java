@@ -5,6 +5,9 @@ import javax.swing.JMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
+import model.structural.diagram.classes.Entity;
+import model.structural.diagram.classes.base.AttributeUML;
+import model.structural.diagram.classes.base.MethodUML;
 import view.modal.new_.base.variability.ViewNewVariability;
 import view.panel.tree.popup.diagram.TreePopupDiagram;
 
@@ -33,6 +36,8 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
             this.newDiagram(item.getText());
         else if (object instanceof Diagram)
             this.newVariability((Diagram) object);
+        else if (object instanceof Entity)
+            this.newElement((Entity) object, item.getText());
     }
     
     /**
@@ -58,5 +63,50 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
      */
     private void newVariability(Diagram diagram) {
         new ViewNewVariability(this.getViewMenu(), diagram).setVisible(true);
+    }
+    
+    /**
+     * Method responsible for adding a New Element.
+     * @param entity Entity.
+     * @param type Element TYpe
+     */
+    private void newElement(Entity entity, String type) {
+        if (type.equalsIgnoreCase("UML Attribute"))
+            this.newAttribute(entity);
+        else if (type.equalsIgnoreCase("UML Method"))
+            this.newMethod(entity);
+    }
+    
+    /**
+     * Method responsible for adding a New Attribute to a Entity.
+     * @param entity Entity.
+     */
+    private void newAttribute(Entity entity) {
+        AttributeUML attribute = new AttributeUML(entity.getDiagram());
+                     entity.getDiagram().addAttribute(attribute);
+                     attribute.setEntity(entity);
+                     attribute.setTypeUML(entity.getDiagram().getObjectType());
+                     entity.addAttribute(attribute);
+                     attribute.setDefaultName();
+                     entity.updateSize();
+        this.getViewMenu().update();
+        this.getViewMenu().setSave(false);
+    }
+    
+    /**
+     * Method responsible for adding a New Method to a Entity.
+     * @param entity Entity.
+     */
+    private void newMethod(Entity entity) {
+        MethodUML method = new MethodUML(entity.getDiagram());
+                  method.setId(entity.getDiagram().nextMethodId());
+                  method.setEntity(entity);
+                  method.setReturn(entity.getDiagram().getVoidType());
+                  entity.addMethod(method);
+                  entity.getDiagram().addMethod(method);
+                  method.setDefaultName();
+                  entity.updateSize();
+        this.getViewMenu().update();
+        this.getViewMenu().setSave(false);
     }
 }

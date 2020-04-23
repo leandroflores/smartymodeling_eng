@@ -31,9 +31,8 @@ public abstract class ControllerMenuItem implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        System.out.println(event.getSource());
         if (this.getSelectedNode() != null && this.getSelectedNode().getUserObject() != null
-            && event.getSource()   != null && event.getSource() instanceof JMenuItem)
+              && event.getSource() != null && event.getSource() instanceof JMenuItem)
             this.action(this.getSelectedNode(), (JMenuItem) event.getSource());
     }
     

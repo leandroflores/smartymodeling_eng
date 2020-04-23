@@ -47,9 +47,33 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
             new ViewEditAttributeUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (AttributeUML) object).setVisible(true);
         else if (object instanceof MethodUML)
             new ViewEditMethodUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (MethodUML) object).setVisible(true);
-        else if (object instanceof Element)
-            new ViewEditElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
         else if (object instanceof Variability)
             new ViewEditVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
+        else if (object instanceof Element)
+            this.edit((Element) object, node);
+    }
+    
+    /**
+     * Method responsible for editing the Element by Node.
+     * @param element Element.
+     * @param node Tree Node.
+     */
+    private void edit(Element element, DefaultMutableTreeNode node) {
+        if (this.getVariability(node) != null)
+            System.out.println("Edit Variant: " + element);
+        else
+            new ViewEditElement(this.getPanelModeling(), this.getDiagram(node), element).setVisible(true);
+    }
+    
+    /**
+     * Method responsible for returning the Variability Parent Node.
+     * @param  node Tree Node.
+     * @return Variability Parent.
+     */
+    protected Variability getVariability(DefaultMutableTreeNode node) {
+        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
+        if (parent != null && parent.getUserObject() instanceof Variability)
+            return (Variability) parent.getUserObject();
+        return null;
     }
 }

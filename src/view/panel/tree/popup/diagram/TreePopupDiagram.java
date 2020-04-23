@@ -38,6 +38,8 @@ public final class TreePopupDiagram extends TreePopup {
         this.createMenuItem("sequence_diagram",  "Sequence Diagram",  "menu/diagram/sequence",  KeyEvent.VK_E, InputEvent.CTRL_MASK);
         this.createMenuItem("activity_diagram",  "Activity Diagram",  "menu/diagram/activity",  KeyEvent.VK_A, InputEvent.CTRL_MASK);
         this.createMenuItem("variability",       "Variability",       "variability");
+        this.createMenuItem("attribute",         "UML Attribute",     "/diagram/classes/attribute");
+        this.createMenuItem("method",            "UML Method",        "/diagram/classes/method");
         
         this.getNewMenu().add(this.getUseCaseDiagramMenuItem());
         this.getNewMenu().add(this.getClassDiagramMenuItem());
@@ -45,6 +47,8 @@ public final class TreePopupDiagram extends TreePopup {
         this.getNewMenu().add(this.getSequenceDiagramMenuItem());
         this.getNewMenu().add(this.getActivityDiagramMenuItem());
         this.getNewMenu().add(this.getVariabilityMenuItem());
+        this.getNewMenu().add(this.getAttributeMenuItem());
+        this.getNewMenu().add(this.getMethodMenuItem());
     }
     
     @Override
@@ -54,6 +58,9 @@ public final class TreePopupDiagram extends TreePopup {
         this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
     }
     
+    /**
+     * Method responsible for setting the New Controllers.
+     */
     private void setNewControllers() {
         ControllerMenuItem controller = new ControllerMenuItemNew(this);
         this.getUseCaseDiagramMenuItem().addActionListener(controller);
@@ -62,6 +69,8 @@ public final class TreePopupDiagram extends TreePopup {
         this.getSequenceDiagramMenuItem().addActionListener(controller);
         this.getActivityDiagramMenuItem().addActionListener(controller);
         this.getVariabilityMenuItem().addActionListener(controller);
+        this.getAttributeMenuItem().addActionListener(controller);
+        this.getMethodMenuItem().addActionListener(controller);
     }
     
     @Override
@@ -119,5 +128,21 @@ public final class TreePopupDiagram extends TreePopup {
      */
     public JMenuItem getVariabilityMenuItem() {
         return this.getItems().get("variability");
+    }
+    
+    /**
+     * Method responsible for returning the Attribute Menu Item.
+     * @return Attribute Menu Item.
+     */
+    public JMenuItem getAttributeMenuItem() {
+        return this.getItems().get("attribute");
+    }
+    
+    /**
+     * Method responsible for returning the Method Menu Item.
+     * @return Method Menu Item.
+     */
+    public JMenuItem getMethodMenuItem() {
+        return this.getItems().get("method");
     }
 }
