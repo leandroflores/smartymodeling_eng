@@ -2,10 +2,10 @@ package view.modal.edit.base;
 
 import controller.view.modal.edit.base.ControllerViewEditDiagram;
 import java.awt.Dimension;
-import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import view.modal.edit.ViewEdit;
 import view.panel.base.PanelBaseDiagram;
+import view.panel.edit.base.PanelEditDiagram;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -26,7 +26,7 @@ public final class ViewEditDiagram extends ViewEdit {
      * @param diagram Diagram.
      */
     public ViewEditDiagram(PanelModeling panel, Diagram diagram) {
-        super(panel);
+        super(panel.getViewMenu());
         this.diagram    = diagram;
         this.controller = new ControllerViewEditDiagram(this);
         this.title      = "Edit Diagram Data";
@@ -35,7 +35,7 @@ public final class ViewEditDiagram extends ViewEdit {
     
     @Override
     public void initComponents() {
-        this.setSize(600, 320);
+        this.setSize(600, 325);
         this.addHeader();
         this.addComponents();
         this.addFooter();
@@ -43,21 +43,25 @@ public final class ViewEditDiagram extends ViewEdit {
     
     @Override
     public void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 200));
-            this.addPanelBaseDiagram();
-        this.add(this.tabbedPane);
+        this.addPanelEditDiagram();
         this.addLines(1);
     }
     
     /**
-     * Method responsible for adding the Panel Base Diagram.
+     * Method responsible for adding the Panel Edit Diagram.
      */
-    private void addPanelBaseDiagram() {
-        this.addPanel("panelBaseDiagram", new PanelBaseDiagram(this.getViewMenu(), this.diagram));
-        this.createScrollPane("scrollPanelBaseDiagram",  this.getPanelBaseDiagram());
-        this.getScrollPane("scrollPanelBaseDiagram").setViewportView(this.getPanelBaseDiagram());
-        this.tabbedPane.add("Diagram", this.getScrollPane("scrollPanelBaseDiagram"));
+    private void addPanelEditDiagram() {
+        this.addPanel("panelEditDiagram", new PanelEditDiagram(this.view, this.diagram));
+        this.getPanelEditDiagram().setPreferredSize(new Dimension(500, 200));
+        this.add(this.getPanelEditDiagram());
+    }
+    
+    /**
+     * Method responsible for returning the Panel Edit Diagram.
+     * @return Panel Edit Diagram.
+     */
+    private PanelEditDiagram getPanelEditDiagram() {
+        return (PanelEditDiagram) this.getPanel("panelEditDiagram");
     }
     
     /**
@@ -65,7 +69,7 @@ public final class ViewEditDiagram extends ViewEdit {
      * @return Panel Base Diagram.
      */
     public PanelBaseDiagram getPanelBaseDiagram() {
-        return (PanelBaseDiagram) this.getPanel("panelBaseDiagram");
+        return this.getPanelEditDiagram().getPanelBaseDiagram();
     }
     
     /**

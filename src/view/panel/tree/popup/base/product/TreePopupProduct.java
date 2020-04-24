@@ -3,6 +3,8 @@ package view.panel.tree.popup.base.product;
 import controller.view.panel.tree.popup.item.base.product.ControllerMenuItemDelete;
 import controller.view.panel.tree.popup.item.base.product.ControllerMenuItemEdit;
 import controller.view.panel.tree.popup.item.base.product.ControllerMenuItemNew;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import javax.swing.JMenuItem;
 import view.panel.tree.base.product.PanelTreeProduct;
 import view.panel.tree.popup.TreePopup;
@@ -29,8 +31,8 @@ public final class TreePopupProduct extends TreePopup {
     @Override
     protected void createMenuItems() {
         super.createMenuItems();
-        this.createMenuItem("product",  "Product",  "menu/product_line/product");
-        this.createMenuItem("instance", "Instance", "menu/product_line/instance");
+        this.createMenuItem("product",  "Product",  "menu/product_line/product",  KeyEvent.VK_P, InputEvent.CTRL_MASK);
+        this.createMenuItem("instance", "Instance", "menu/product_line/instance", KeyEvent.VK_I, InputEvent.CTRL_MASK);
         
         this.getNewMenu().add(this.getProductMenuItem());
         this.getNewMenu().add(this.getInstanceMenuItem());

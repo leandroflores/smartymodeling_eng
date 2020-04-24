@@ -1,7 +1,5 @@
 package view.panel.edit.base;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import view.panel.base.PanelBaseProject;
 import view.panel.edit.PanelEdit;
 import view.main.structural.ViewMenu;
@@ -26,10 +24,8 @@ public final class PanelEditProject extends PanelEdit {
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-            this.addPanelBaseProject();
-        this.add(this.tabbedPane);
+    protected void addPanels() {
+        this.addPanelBaseProject();
     }
     
     /**
@@ -38,8 +34,8 @@ public final class PanelEditProject extends PanelEdit {
     private void addPanelBaseProject() {
         this.addPanel("panelBaseProject", new PanelBaseProject(this.viewMenu));
         this.createScrollPane("scrollPanelBaseProject",  this.getPanelBaseProject());
-        this.getScrollPanelBaseProject().setViewportView(this.getPanelBaseProject());
-        this.tabbedPane.add("Project", this.getScrollPanelBaseProject());
+        this.getScrollPane("scrollPanelBaseProject").setViewportView(this.getPanelBaseProject());
+        this.tabbedPane.add("Project", this.getScrollPane("scrollPanelBaseProject"));
     }
     
     /**
@@ -48,13 +44,5 @@ public final class PanelEditProject extends PanelEdit {
      */
     public PanelBaseProject getPanelBaseProject() {
         return (PanelBaseProject) this.getPanel("panelBaseProject");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Project.
-     * @return Scroll Panel Base Project.
-     */
-    public JScrollPane getScrollPanelBaseProject() {
-        return this.getScrollPane("scrollPanelBaseProject");
     }
 }

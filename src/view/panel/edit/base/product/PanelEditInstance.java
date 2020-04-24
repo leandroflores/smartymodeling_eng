@@ -1,8 +1,6 @@
 package view.panel.edit.base.product;
 
 import java.awt.Dimension;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import model.structural.base.product.Instance;
 import view.panel.base.product.PanelBaseInstance;
 import view.panel.edit.PanelEdit;
@@ -21,22 +19,19 @@ public final class PanelEditInstance extends PanelEdit {
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param instance Instance.
      */
-    public PanelEditInstance(ViewMenu viewMenu, Instance instance) {
-        super(viewMenu);
+    public PanelEditInstance(ViewMenu view, Instance instance) {
+        super(view);
         this.instance = instance;
         this.setPreferredSize(new Dimension(200, 100));
         this.addComponents();
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(100, 100));
-            this.addPanelBaseInstance();
-        this.add(this.tabbedPane);
+    protected void addPanels() {
+        this.addPanelBaseInstance();
     }
     
     /**
@@ -45,8 +40,8 @@ public final class PanelEditInstance extends PanelEdit {
     private void addPanelBaseInstance() {
         this.addPanel("panelBaseInstance", new PanelBaseInstance(this.viewMenu, this.instance));
         this.createScrollPane("scrollPanelBaseInstance",  this.getPanelBaseInstance());
-        this.getScrollPanelBaseInstance().setViewportView(this.getPanelBaseInstance());
-        this.tabbedPane.add("Instance", this.getScrollPanelBaseInstance());
+        this.getScrollPane("scrollPanelBaseInstance").setViewportView(this.getPanelBaseInstance());
+        this.tabbedPane.add("Instance", this.getScrollPane("scrollPanelBaseInstance"));
     }
     
     /**
@@ -55,14 +50,6 @@ public final class PanelEditInstance extends PanelEdit {
      */
     public PanelBaseInstance getPanelBaseInstance() {
         return (PanelBaseInstance) this.getPanel("panelBaseInstance");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Instance.
-     * @return Scroll Panel Base Instance.
-     */
-    public JScrollPane getScrollPanelBaseInstance() {
-        return this.getScrollPane("scrollPanelBaseInstance");
     }
     
     /**

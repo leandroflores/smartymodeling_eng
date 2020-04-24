@@ -74,6 +74,7 @@ import view.panel.edit.diagram.usecase.base.PanelEditUseCaseUML;
 import view.panel.edit.base.variability.PanelEditVariability;
 import view.panel.project.tree.PanelTree;
 import view.main.structural.ViewMenu;
+import view.panel.edit.PanelVoid;
 
 /**
  * <p>Class of View <b>PanelProject</b>.</p> 
@@ -144,7 +145,7 @@ public final class PanelProject extends Panel {
      * Method responsible for initializing the Panel Edit.
      */
     public void initPanelEdit() {
-        this.panelEdit = new PanelEdit(this.viewMenu);
+        this.panelEdit = new PanelVoid(this.viewMenu);
         this.createScrollPane("scrollPanelEdit");
         this.getScrollPanelEdit().setViewportView(this.panelEdit);
         this.getScrollPanelEdit().setMinimumSize(new Dimension(200, 200));
@@ -340,9 +341,10 @@ public final class PanelProject extends Panel {
      * Method responsible for initializing the Panel Edit Variability.
      * @param diagram Diagram.
      * @param variability Variability.
+     * @param index Tab Index.
      */
-    public void initPanelEditVariability(Diagram diagram, Variability variability) {
-        this.panelEdit = new PanelEditVariability(this.viewMenu, diagram, variability);
+    public void initPanelEditVariability(Diagram diagram, Variability variability, Integer index) {
+        this.panelEdit = new PanelEditVariability(this.viewMenu, diagram, variability, index);
         this.updatePanelEdit();
     }
     

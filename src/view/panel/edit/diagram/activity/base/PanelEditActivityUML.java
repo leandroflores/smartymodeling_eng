@@ -27,8 +27,8 @@ public final class PanelEditActivityUML extends PanelEditElement {
     }
     
     @Override
-    protected void addComponents() {
-        super.addComponents("Activity");
+    protected void addPanels() {
+        super.addPanels("Activity");
     }
     
     @Override

@@ -1,7 +1,7 @@
 package controller.view.modal.edit.diagram.classes.base;
 
 import controller.view.modal.edit.ControllerViewEdit;
-import view.modal.edit.diagram.classes.ViewEditAttributeUML;
+import view.modal.edit.diagram.classes.base.ViewEditAttributeUML;
 
 /**
  * <p>Class of Controller <b>ControllerViewEditAttributeUML</b>.</p>
@@ -10,7 +10,7 @@ import view.modal.edit.diagram.classes.ViewEditAttributeUML;
  * @since  2019-06-06
  * @see    controller.view.modal.edit.ControllerViewEdit
  * @see    model.structural.diagram.classes.base.AttributeUML
- * @see    view.modal.edit.diagram.classes.ViewEditAttributeUML
+ * @see    view.modal.edit.diagram.classes.base.ViewEditAttributeUML
  */
 public class ControllerViewEditAttributeUML extends ControllerViewEdit  {
 

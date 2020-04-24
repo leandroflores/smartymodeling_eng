@@ -1,10 +1,8 @@
 package view.modal.edit;
 
 import javax.swing.JButton;
-import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import view.modal.ViewModal;
-import view.panel.modeling.PanelModeling;
 import view.main.structural.ViewMenu;
 
 /**
@@ -18,18 +16,15 @@ import view.main.structural.ViewMenu;
 public abstract class ViewEdit extends ViewModal {
     protected final ViewMenu view;
     protected final Project  project;
-    protected final PanelModeling panel;
-    protected JTabbedPane tabbedPane;
     
     /**
      * Default constructor method of Class.
-     * @param panel Panel Modeling.
+     * @param view View Menu.
      */
-    public ViewEdit(PanelModeling panel) {
-        super(panel.getViewMenu());
-        this.view    = panel.getViewMenu();
-        this.project = this.view.getProject();
-        this.panel   = panel;
+    public ViewEdit(ViewMenu view) {
+        super(view);
+        this.view    = view;
+        this.project = view.getProject();
     }
     
     @Override

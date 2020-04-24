@@ -1,6 +1,5 @@
 package view.panel.edit.diagram.sequence.base.association;
 
-import javax.swing.JTabbedPane;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.sequence.base.association.MessageUML;
 import view.panel.base.diagram.sequence.base.association.PanelBaseMessageUML;
@@ -29,10 +28,8 @@ public final class PanelEditMessageUML extends PanelEditAssociation {
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-            this.addPanelBaseMessageUML();
-        this.add(this.tabbedPane);
+    protected void addPanels() {
+        this.addPanelBaseMessageUML();
     }
     
     /**
@@ -40,26 +37,26 @@ public final class PanelEditMessageUML extends PanelEditAssociation {
      */
     protected void addPanelBaseMessageUML() {
         this.addPanel("panelBaseMessageUML", new PanelBaseMessageUML(this.viewMenu, this.getDiagram(), this.getAssociation()));
-        this.createScrollPane("scrollPanelBaseAssociation",  this.getPanelBaseMessageUML());
-        this.getScrollPanelBaseAssociation().setViewportView(this.getPanelBaseMessageUML());
-        this.tabbedPane.add("Message", this.getScrollPanelBaseAssociation());
+        this.createScrollPane("scrollPanelBaseMessageUML",  this.getPanelBaseMessageUML());
+        this.getScrollPane("scrollPanelBaseMessageUML").setViewportView(this.getPanelBaseMessageUML());
+        this.tabbedPane.add("Message", this.getScrollPane("scrollPanelBaseMessageUML"));
     }
     
-    @Override
-    public SequenceDiagram getDiagram() {
-        return (SequenceDiagram) this.diagram;
-    }
-    
-    @Override
-    public MessageUML getAssociation() {
-        return (MessageUML) this.association;
-    }
-
     /**
      * Method responsible for returning the Panel Base Message UML.
      * @return Panel Base Message UML.
      */
     public PanelBaseMessageUML getPanelBaseMessageUML() {
         return (PanelBaseMessageUML) this.getPanel("panelBaseMessageUML");
+    }
+    
+    @Override
+    public MessageUML getAssociation() {
+        return (MessageUML) this.association;
+    }
+    
+    @Override
+    public SequenceDiagram getDiagram() {
+        return (SequenceDiagram) this.diagram;
     }
 }

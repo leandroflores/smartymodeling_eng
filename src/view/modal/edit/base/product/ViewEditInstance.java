@@ -2,11 +2,10 @@ package view.modal.edit.base.product;
 
 import controller.view.modal.edit.base.product.ControllerViewEditInstance;
 import java.awt.Dimension;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import model.structural.base.product.Instance;
 import view.modal.edit.ViewEdit;
 import view.panel.base.product.PanelBaseInstance;
+import view.panel.edit.base.product.PanelEditInstance;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -27,7 +26,7 @@ public final class ViewEditInstance extends ViewEdit {
      * @param instance Instance.
      */
     public ViewEditInstance(PanelModeling panel, Instance instance) {
-        super(panel);
+        super(panel.getViewMenu());
         this.instance    = instance;
         this.controller = new ControllerViewEditInstance(this);
         this.title      = "Edit Instance Data";
@@ -44,21 +43,17 @@ public final class ViewEditInstance extends ViewEdit {
     
     @Override
     public void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 225));
-            this.addPanelBaseInstance();
-        this.add(this.tabbedPane);
+        this.addPanelEditInstance();
         this.addLines(1);
     }
     
     /**
-     * Method responsible for adding the Panel Base Instance.
+     * Method responsible for adding the Panel Edit Instance.
      */
-    private void addPanelBaseInstance() {
-        this.addPanel("panelBaseInstance", new PanelBaseInstance(this.getViewMenu(), this.instance));
-        this.createScrollPane("scrollPanelBaseInstance",  this.getPanelBaseInstance());
-        this.getScrollPanelBaseInstance().setViewportView(this.getPanelBaseInstance());
-        this.tabbedPane.add("Instance", this.getScrollPanelBaseInstance());
+    private void addPanelEditInstance() {
+        this.addPanel("panelEditInstance", new PanelEditInstance(this.view, this.instance));
+        this.getPanel("panelEditInstance").setPreferredSize(new Dimension(500, 225));
+        this.add(this.getPanel("panelEditInstance"));
     }
     
     /**
@@ -66,15 +61,7 @@ public final class ViewEditInstance extends ViewEdit {
      * @return Panel Base Instance.
      */
     public PanelBaseInstance getPanelBaseInstance() {
-        return (PanelBaseInstance) this.getPanel("panelBaseInstance");
-    }
-    
-    /**
-     * Method responsible for returning Panel Base Instance.
-     * @return Panel Base Instance.
-     */
-    public JScrollPane getScrollPanelBaseInstance() {
-        return this.getScrollPane("scrollPanelBaseInstance");
+        return ((PanelEditInstance) this.getPanel("panelEditInstance")).getPanelBaseInstance();
     }
     
     /**

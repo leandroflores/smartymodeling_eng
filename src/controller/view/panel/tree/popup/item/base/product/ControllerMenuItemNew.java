@@ -5,8 +5,6 @@ import javax.swing.JMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Project;
 import model.structural.base.product.Product;
-import view.modal.new_.base.product.ViewNewInstance;
-import view.modal.new_.base.product.ViewNewProduct;
 import view.panel.tree.popup.base.product.TreePopupProduct;
 
 /**
@@ -31,8 +29,8 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Project)
-            new ViewNewProduct(this.getViewMenu(), this.getViewMenu().getProject()).setVisible(true);
+            this.getViewMenu().getController().newProduct();
         else if (object instanceof Product)
-            new ViewNewInstance(this.getViewMenu()).setVisible(true);
+            this.getViewMenu().getController().newInstance();
     }
 }

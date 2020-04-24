@@ -1,6 +1,5 @@
 package view.panel.edit.diagram.classes.base;
 
-import javax.swing.JTabbedPane;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.ClassUML;
 import view.panel.base.diagram.classes.base.PanelBaseClassUML;
@@ -29,15 +28,10 @@ public final class PanelEditClassUML extends PanelEditElement {
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-//        this.tabbedPane.setPreferredSize(new Dimension(100, 100));
-        
+    protected void addPanels() {
         this.addPanelBaseClassUML();
         super.addPanelStereotype();
         super.addPanelDependency();
-        
-        this.add(this.tabbedPane);
     }
     
     /**
@@ -45,19 +39,9 @@ public final class PanelEditClassUML extends PanelEditElement {
      */
     protected void addPanelBaseClassUML() {
         this.addPanel("panelBaseClassUML", new PanelBaseClassUML(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelBaseElement",  this.getPanelBaseClassUML());
-        this.getScrollPanelBaseElement().setViewportView(this.getPanelBaseClassUML());
-        this.tabbedPane.add("Class", this.getScrollPanelBaseElement());
-    }
-    
-    @Override
-    public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
-    }
-    
-    @Override
-    public ClassUML getElement() {
-        return (ClassUML) this.element;
+        this.createScrollPane("scrollPanelBaseClassUML",  this.getPanelBaseClassUML());
+        this.getScrollPane("scrollPanelBaseClassUML").setViewportView(this.getPanelBaseClassUML());
+        this.tabbedPane.add("Class", this.getScrollPane("scrollPanelBaseClassUML"));
     }
     
     /**
@@ -66,5 +50,15 @@ public final class PanelEditClassUML extends PanelEditElement {
      */
     public PanelBaseClassUML getPanelBaseClassUML() {
         return (PanelBaseClassUML) this.getPanel("panelBaseClassUML");
+    }
+    
+    @Override
+    public ClassUML getElement() {
+        return (ClassUML) this.element;
+    }
+    
+    @Override
+    public ClassDiagram getDiagram() {
+        return (ClassDiagram) this.diagram;
     }
 }

@@ -1,7 +1,5 @@
 package view.panel.edit.diagram.classes.base.association;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.association.AssociationUML;
 import view.panel.base.diagram.classes.base.association.PanelBaseAssociationUML;
@@ -32,12 +30,10 @@ public final class PanelEditAssociationUML extends PanelEditAssociation {
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-            this.addPanelBaseAssociationUML();
-            this.addPanelBaseSource();
-            this.addPanelBaseTarget();
-        this.add(this.tabbedPane);
+    protected void addPanels() {
+        this.addPanelBaseAssociationUML();
+        this.addPanelBaseSource();
+        this.addPanelBaseTarget();
     }
     
     /**
@@ -45,9 +41,9 @@ public final class PanelEditAssociationUML extends PanelEditAssociation {
      */
     protected void addPanelBaseAssociationUML() {
         this.addPanel("panelBaseAssociationUML", new PanelBaseAssociationUML(this, this.getDiagram(), this.getAssociation()));
-        this.createScrollPane("scrollPanelBaseAssociation",  this.getPanelBaseAssociationUML());
-        this.getScrollPanelBaseAssociation().setViewportView(this.getPanelBaseAssociationUML());
-        this.tabbedPane.add("Association", this.getScrollPanelBaseAssociation());
+        this.createScrollPane("scrollPanelBaseAssociationUML",  this.getPanelBaseAssociationUML());
+        this.getScrollPane("scrollPanelBaseAssociationUML").setViewportView(this.getPanelBaseAssociationUML());
+        this.tabbedPane.add("Association", this.getScrollPane("scrollPanelBaseAssociationUML"));
     }
     
     /**
@@ -56,8 +52,8 @@ public final class PanelEditAssociationUML extends PanelEditAssociation {
     protected void addPanelBaseSource() {
         this.addPanel("panelBaseSource", new PanelBaseSource(this.viewMenu, this.getDiagram(), this.getAssociation()));
         this.createScrollPane("scrollPanelBaseSource",  this.getPanelBaseSource());
-        this.getScrollPanelBaseSource().setViewportView(this.getPanelBaseSource());
-        this.tabbedPane.add("Source", this.getScrollPanelBaseSource());
+        this.getScrollPane("scrollPanelBaseSource").setViewportView(this.getPanelBaseSource());
+        this.tabbedPane.add("Source", this.getScrollPane("scrollPanelBaseSource"));
     }
     
     /**
@@ -66,18 +62,8 @@ public final class PanelEditAssociationUML extends PanelEditAssociation {
     protected void addPanelBaseTarget() {
         this.addPanel("panelBaseTarget", new PanelBaseTarget(this.viewMenu, this.getDiagram(), this.getAssociation()));
         this.createScrollPane("scrollPanelBaseTarget",  this.getPanelBaseTarget());
-        this.getScrollPanelBaseTarget().setViewportView(this.getPanelBaseTarget());
-        this.tabbedPane.add("Target", this.getScrollPanelBaseTarget());
-    }
-    
-    @Override
-    public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
-    }
-    
-    @Override
-    public AssociationUML getAssociation() {
-        return (AssociationUML) this.association;
+        this.getScrollPane("scrollPanelBaseTarget").setViewportView(this.getPanelBaseTarget());
+        this.tabbedPane.add("Target", this.getScrollPane("scrollPanelBaseTarget"));
     }
     
     /**
@@ -97,14 +83,6 @@ public final class PanelEditAssociationUML extends PanelEditAssociation {
     }
     
     /**
-     * Method responsible for returning the Scroll Panel Base Source.
-     * @return Scroll Panel Base Source.
-     */
-    public JScrollPane getScrollPanelBaseSource() {
-        return this.getScrollPane("scrollPanelBaseSource");
-    }
-    
-    /**
      * Method responsible for returning the Panel Base Target.
      * @return Panel Base Target.
      */
@@ -112,11 +90,13 @@ public final class PanelEditAssociationUML extends PanelEditAssociation {
         return (PanelBaseTarget) this.getPanel("panelBaseTarget");
     }
     
-    /**
-     * Method responsible for returning the Scroll Panel Base Target.
-     * @return Scroll Panel Base Target.
-     */
-    public JScrollPane getScrollPanelBaseTarget() {
-        return this.getScrollPane("scrollPanelBaseTarget");
+    @Override
+    public AssociationUML getAssociation() {
+        return (AssociationUML) this.association;
+    }
+    
+    @Override
+    public ClassDiagram getDiagram() {
+        return (ClassDiagram) this.diagram;
     }
 }

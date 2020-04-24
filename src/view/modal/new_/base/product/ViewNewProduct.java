@@ -2,13 +2,12 @@ package view.modal.new_.base.product;
 
 import controller.view.modal.new_.base.product.ControllerViewNewProduct;
 import java.awt.Dimension;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import model.structural.base.Project;
 import model.structural.base.product.Product;
 import view.panel.base.product.PanelBaseProduct;
 import view.modal.new_.ViewNew;
 import view.main.structural.ViewMenu;
+import view.panel.edit.base.product.PanelEditProduct;
 
 /**
  * <p>Class of View <b>ViewNewProduct</b>.</p>
@@ -25,9 +24,8 @@ public final class ViewNewProduct extends ViewNew {
     /**
      * Default constructor method of Class.
      * @param view View Menu.
-     * @param project Project.
      */
-    public ViewNewProduct(ViewMenu view, Project project) {
+    public ViewNewProduct(ViewMenu view) {
         super(view);
         this.product    = new Product();
         this.controller = new ControllerViewNewProduct(this);
@@ -45,24 +43,17 @@ public final class ViewNewProduct extends ViewNew {
     
     @Override
     public void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 325));
-        
-        this.addPanelBaseProduct();
-        
-        this.add(this.tabbedPane);
-        
+        this.addPanelEditProduct();
         this.addLines(1);
     }
     
     /**
-     * Method responsible for adding the Panel Base Product.
+     * Method responsible for adding the Panel Edit Product.
      */
-    private void addPanelBaseProduct() {
-        this.addPanel("panelBaseProduct", new PanelBaseProduct(this.getViewMenu(), this.product));
-        this.createScrollPane("scrollPanelBaseProduct",  this.getPanelBaseProduct());
-        this.getScrollPanelBaseProduct().setViewportView(this.getPanelBaseProduct());
-        this.tabbedPane.add("Product", this.getScrollPanelBaseProduct());
+    private void addPanelEditProduct() {
+        this.addPanel("panelEditProduct", new PanelEditProduct(this.view, this.product));
+        this.getPanel("panelEditProduct").setPreferredSize(new Dimension(500, 325));
+        this.add(this.getPanel("panelEditProduct"));
     }
     
     /**
@@ -70,15 +61,7 @@ public final class ViewNewProduct extends ViewNew {
      * @return Panel Base Product.
      */
     public PanelBaseProduct getPanelBaseProduct() {
-        return (PanelBaseProduct) this.getPanel("panelBaseProduct");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Product.
-     * @return Scroll Panel Base Product.
-     */
-    public JScrollPane getScrollPanelBaseProduct() {
-        return this.getScrollPane("scrollPanelBaseProduct");
+        return ((PanelEditProduct) this.getPanel("panelEditProduct")).getPanelBaseProduct();
     }
     
     /**

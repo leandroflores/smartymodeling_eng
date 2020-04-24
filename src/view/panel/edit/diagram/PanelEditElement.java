@@ -27,8 +27,8 @@ public final class PanelEditElement extends view.panel.edit.base.PanelEditElemen
     }
     
     @Override
-    protected void addComponents() {
-        super.addComponents(this.getTitle());
+    protected void addPanels() {
+        super.addPanels(this.getTitle());
     }
     
     /**

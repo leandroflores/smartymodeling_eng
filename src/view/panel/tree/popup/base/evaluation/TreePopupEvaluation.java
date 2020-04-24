@@ -2,6 +2,9 @@ package view.panel.tree.popup.base.evaluation;
 
 import controller.view.panel.tree.popup.item.base.evaluation.ControllerMenuItemDelete;
 import controller.view.panel.tree.popup.item.base.evaluation.ControllerMenuItemEdit;
+import controller.view.panel.tree.popup.item.base.evaluation.ControllerMenuItemNew;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import javax.swing.JMenuItem;
 import view.panel.tree.base.evaluation.PanelTreeEvaluation;
 import view.panel.tree.popup.TreePopup;
@@ -28,8 +31,8 @@ public final class TreePopupEvaluation extends TreePopup {
     @Override
     protected void createMenuItems() {
         super.createMenuItems();
-        this.createMenuItem("metric",  "Metric",  "menu/evaluation/metric");
-        this.createMenuItem("measure", "Measure", "menu/evaluation/measure");
+        this.createMenuItem("metric",  "Metric",  "/menu/evaluation/metric",  KeyEvent.VK_M, InputEvent.ALT_MASK);
+        this.createMenuItem("measure", "Measure", "/menu/evaluation/measure", KeyEvent.VK_S, InputEvent.ALT_MASK);
         
         this.getNewMenu().add(this.getMetricMenuItem());
         this.getNewMenu().add(this.getMeasureMenuItem());
@@ -37,6 +40,8 @@ public final class TreePopupEvaluation extends TreePopup {
     
     @Override
     protected void setControllers() {
+        this.getMetricMenuItem().addActionListener(new ControllerMenuItemNew(this));
+        this.getMeasureMenuItem().addActionListener(new ControllerMenuItemNew(this));
         this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
         this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
     }

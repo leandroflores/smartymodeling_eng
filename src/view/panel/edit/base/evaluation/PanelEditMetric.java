@@ -1,7 +1,6 @@
 package view.panel.edit.base.evaluation;
 
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import model.structural.base.evaluation.Metric;
 import view.panel.base.evaluation.PanelBaseMetric;
 import view.panel.base.evaluation.PanelBaseOperation;
@@ -31,11 +30,9 @@ public final class PanelEditMetric extends PanelEdit {
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-            this.addPanelBaseMetric();
-            this.addPanelBaseOperation();
-        this.add(this.tabbedPane);
+    protected void addPanels() {
+        this.addPanelBaseMetric();
+        this.addPanelBaseOperation();
     }
     
     /**

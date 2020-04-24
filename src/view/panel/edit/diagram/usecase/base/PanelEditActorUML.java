@@ -27,17 +27,17 @@ public final class PanelEditActorUML extends PanelEditElement {
     }
     
     @Override
-    protected void addComponents() {
-        super.addComponents("Actor");
-    }
-    
-    @Override
-    public UseCaseDiagram getDiagram() {
-        return (UseCaseDiagram) this.diagram;
+    protected void addPanels() {
+        super.addPanels("Actor");
     }
     
     @Override
     public ActorUML getElement() {
         return (ActorUML) this.element;
+    }
+    
+    @Override
+    public UseCaseDiagram getDiagram() {
+        return (UseCaseDiagram) this.diagram;
     }
 }

@@ -1,8 +1,6 @@
 package view.panel.edit.base.product;
 
 import java.awt.Dimension;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import model.structural.base.product.Artifact;
 import view.panel.base.product.PanelBaseArtifact;
 import view.panel.edit.PanelEdit;
@@ -21,22 +19,19 @@ public final class PanelEditArtifact extends PanelEdit {
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param artifact Artifact.
      */
-    public PanelEditArtifact(ViewMenu viewMenu, Artifact artifact) {
-        super(viewMenu);
+    public PanelEditArtifact(ViewMenu view, Artifact artifact) {
+        super(view);
         this.artifact = artifact;
         this.setPreferredSize(new Dimension(200, 100));
         this.addComponents();
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(100, 100));
-            this.addPanelBaseArtifact();
-        this.add(this.tabbedPane);
+    protected void addPanels() {
+        this.addPanelBaseArtifact();
     }
     
     /**
@@ -45,8 +40,8 @@ public final class PanelEditArtifact extends PanelEdit {
     private void addPanelBaseArtifact() {
         this.addPanel("panelBaseArtifact", new PanelBaseArtifact(this.viewMenu, this.artifact));
         this.createScrollPane("scrollPanelBaseArtifact",  this.getPanelBaseArtifact());
-        this.getScrollPanelBaseArtifact().setViewportView(this.getPanelBaseArtifact());
-        this.tabbedPane.add("Artifact", this.getScrollPanelBaseArtifact());
+        this.getScrollPane("scrollPanelBaseArtifact").setViewportView(this.getPanelBaseArtifact());
+        this.tabbedPane.add("Artifact", this.getScrollPane("scrollPanelBaseArtifact"));
     }
     
     /**
@@ -55,14 +50,6 @@ public final class PanelEditArtifact extends PanelEdit {
      */
     public PanelBaseArtifact getPanelBaseArtifact() {
         return (PanelBaseArtifact) this.getPanel("panelBaseArtifact");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Artifact.
-     * @return Scroll Panel Base Artifact.
-     */
-    public JScrollPane getScrollPanelBaseArtifact() {
-        return this.getScrollPane("scrollPanelBaseArtifact");
     }
     
     /**

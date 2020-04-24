@@ -2,14 +2,12 @@ package view.modal.new_.base.traceability;
 
 import controller.view.modal.new_.base.traceability.ControllerViewNewTraceability;
 import java.awt.Dimension;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import model.structural.base.Project;
 import model.structural.base.traceability.Traceability;
 import view.panel.base.traceability.PanelBaseElements;
 import view.panel.base.traceability.PanelBaseTraceability;
 import view.modal.new_.ViewNew;
 import view.main.structural.ViewMenu;
+import view.panel.edit.base.traceability.PanelEditTraceability;
 
 /**
  * <p>Class of View <b>ViewNewTraceability</b>.</p>
@@ -26,9 +24,8 @@ public final class ViewNewTraceability extends ViewNew {
     /**
      * Default constructor method of Class.
      * @param view View Menu.
-     * @param project Project.
      */
-    public ViewNewTraceability(ViewMenu view, Project project) {
+    public ViewNewTraceability(ViewMenu view) {
         super(view);
         this.traceability = new Traceability();
         this.controller   = new ControllerViewNewTraceability(this);
@@ -46,35 +43,17 @@ public final class ViewNewTraceability extends ViewNew {
     
     @Override
     public void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 325));
-        
-        this.addPanelBaseTraceability();
-        this.addPanelBaseElements();
-        
-        this.add(this.tabbedPane);
-        
+        this.addPanelEditTraceability();
         this.addLines(1);
     }
     
     /**
-     * Method responsible for adding the Panel Base Traceability.
+     * Method responsible for adding the Panel Edit Traceability.
      */
-    private void addPanelBaseTraceability() {
-        this.addPanel("panelBaseTraceability", new PanelBaseTraceability(this.getViewMenu(), this.traceability));
-        this.createScrollPane("scrollPanelBaseTraceability",  this.getPanelBaseTraceability());
-        this.getScrollPanelBaseTraceability().setViewportView(this.getPanelBaseTraceability());
-        this.tabbedPane.add("Traceability", this.getScrollPanelBaseTraceability());
-    }
-    
-    /**
-     * Method responsible for adding the Panel Base Elements.
-     */
-    private void addPanelBaseElements() {
-        this.addPanel("panelBaseElements", new PanelBaseElements(this.getViewMenu(), this.traceability));
-        this.createScrollPane("scrollPanelElements",  this.getPanelBaseElements());
-        this.getScrollPanelElements().setViewportView(this.getPanelBaseElements());
-        this.tabbedPane.add("Elements", this.getScrollPanelElements());
+    private void addPanelEditTraceability() {
+        this.addPanel("panelEditTraceability", new PanelEditTraceability(this.view, this.traceability));
+        this.getPanel("panelEditTraceability").setPreferredSize(new Dimension(500, 325));
+        this.add(this.getPanel("panelEditTraceability"));
     }
     
     /**
@@ -82,15 +61,7 @@ public final class ViewNewTraceability extends ViewNew {
      * @return Panel Base Traceability.
      */
     public PanelBaseTraceability getPanelBaseTraceability() {
-        return (PanelBaseTraceability) this.getPanel("panelBaseTraceability");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Traceability.
-     * @return Scroll Panel Base Traceability.
-     */
-    public JScrollPane getScrollPanelBaseTraceability() {
-        return this.getScrollPane("scrollPanelBaseTraceability");
+        return ((PanelEditTraceability) this.getPanel("panelEditTraceability")).getPanelBaseTraceability();
     }
     
     /**
@@ -98,15 +69,7 @@ public final class ViewNewTraceability extends ViewNew {
      * @return Panel Base Elements.
      */
     public PanelBaseElements getPanelBaseElements() {
-        return (PanelBaseElements) this.getPanel("panelBaseElements");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Elements.
-     * @return Scroll Panel Elements.
-     */
-    public JScrollPane getScrollPanelElements() {
-        return this.getScrollPane("scrollPanelElements");
+        return ((PanelEditTraceability) this.getPanel("panelEditTraceability")).getPanelBaseElements();
     }
     
     /**

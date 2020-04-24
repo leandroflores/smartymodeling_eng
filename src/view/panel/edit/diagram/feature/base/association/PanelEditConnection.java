@@ -1,7 +1,5 @@
 package view.panel.edit.diagram.feature.base.association;
 
-import java.awt.Dimension;
-import javax.swing.JTabbedPane;
 import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.feature.base.association.Connection;
 import view.panel.base.diagram.feature.base.association.PanelBaseConnection;
@@ -30,10 +28,8 @@ public final class PanelEditConnection extends PanelEditAssociation {
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-            this.addPanelBaseConnection();
-        this.add(this.tabbedPane);
+    protected void addPanels() {
+        this.addPanelBaseConnection();
     }
     
     /**
@@ -41,19 +37,9 @@ public final class PanelEditConnection extends PanelEditAssociation {
      */
     protected void addPanelBaseConnection() {
         this.addPanel("panelBaseConnection", new PanelBaseConnection(this, this.getDiagram(), this.getAssociation()));
-        this.createScrollPane("scrollPanelBaseAssociation",  this.getPanelBaseConnection());
-        this.getScrollPanelBaseAssociation().setViewportView(this.getPanelBaseConnection());
-        this.tabbedPane.add("Connection", this.getScrollPanelBaseAssociation());
-    }
-    
-    @Override
-    public FeatureDiagram getDiagram() {
-        return (FeatureDiagram) this.diagram;
-    }
-    
-    @Override
-    public Connection getAssociation() {
-        return (Connection) this.association;
+        this.createScrollPane("scrollPanelBaseConnection",  this.getPanelBaseConnection());
+        this.getScrollPane("scrollPanelBaseConnection").setViewportView(this.getPanelBaseConnection());
+        this.tabbedPane.add("Connection", this.getScrollPane("scrollPanelBaseConnection"));
     }
     
     /**
@@ -62,5 +48,15 @@ public final class PanelEditConnection extends PanelEditAssociation {
      */
     public PanelBaseConnection getPanelBaseConnection() {
         return (PanelBaseConnection) this.getPanel("panelBaseConnection");
+    }
+    
+    @Override
+    public Connection getAssociation() {
+        return (Connection) this.association;
+    }
+    
+    @Override
+    public FeatureDiagram getDiagram() {
+        return (FeatureDiagram) this.diagram;
     }
 }

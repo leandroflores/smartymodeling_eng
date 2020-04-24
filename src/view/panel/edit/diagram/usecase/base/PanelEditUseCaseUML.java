@@ -27,17 +27,17 @@ public final class PanelEditUseCaseUML extends PanelEditElement {
     }
     
     @Override
-    protected void addComponents() {
-        super.addComponents("Use Case");
-    }
-    
-    @Override
-    public UseCaseDiagram getDiagram() {
-        return (UseCaseDiagram) this.diagram;
+    protected void addPanels() {
+        super.addPanels("Use Case");
     }
     
     @Override
     public UseCaseUML getElement() {
         return (UseCaseUML) this.element;
+    }
+    
+    @Override
+    public UseCaseDiagram getDiagram() {
+        return (UseCaseDiagram) this.diagram;
     }
 }

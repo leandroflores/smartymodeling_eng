@@ -1,4 +1,4 @@
-package view.modal.edit.diagram.classes;
+package view.modal.edit.diagram.classes.base;
 
 import controller.view.modal.edit.diagram.classes.base.ControllerViewEditClassUML;
 import java.awt.Dimension;
@@ -30,7 +30,7 @@ public final class ViewEditClassUML extends ViewEdit {
      * @param class_ Class UML.
      */
     public ViewEditClassUML(PanelModeling panel, ClassDiagram diagram, ClassUML class_) {
-        super(panel);
+        super(panel.getViewMenu());
         this.diagram    = diagram;
         this.class_     = class_;
         this.controller = new ControllerViewEditClassUML(this);

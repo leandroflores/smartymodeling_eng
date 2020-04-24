@@ -4,7 +4,6 @@ import controller.view.modal.new_.base.evaluation.ControllerViewNewMeasure;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
 import view.panel.base.evaluation.measure.PanelBaseEvaluation;
 import view.panel.base.evaluation.measure.PanelBaseNewMeasure;
@@ -27,9 +26,8 @@ public final class ViewNewMeasure extends ViewNew {
     /**
      * Default constructor method of Class.
      * @param view View Menu.
-     * @param project Project.
      */
-    public ViewNewMeasure(ViewMenu view, Project project) {
+    public ViewNewMeasure(ViewMenu view) {
         super(view);
         this.measure    = new Measure();
         this.controller = new ControllerViewNewMeasure(this);

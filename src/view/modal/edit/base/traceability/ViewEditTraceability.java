@@ -27,7 +27,7 @@ public final class ViewEditTraceability extends ViewEdit {
      * @param traceability Traceability.
      */
     public ViewEditTraceability(PanelModeling panel, Traceability traceability) {
-        super(panel);
+        super(panel.getViewMenu());
         this.traceability = traceability;
         this.controller  = new ControllerViewEditTraceability(this);
         this.title       = "Edit Traceability Data";
@@ -44,14 +44,14 @@ public final class ViewEditTraceability extends ViewEdit {
     
     @Override
     public void addComponents() {
-        this.addPanelBaseTraceability();
+        this.addPanelEditTraceability();
         this.addLines(1);
     }
     
     /**
-     * Method responsible for adding the Panel Base Traceability.
+     * Method responsible for adding the Panel Edit Traceability.
      */
-    private void addPanelBaseTraceability() {
+    private void addPanelEditTraceability() {
         this.addPanel("panelEditTraceability", new PanelEditTraceability(this.view, this.traceability));
         this.getPanel("panelEditTraceability").setPreferredSize(new Dimension(500, 300));
         this.add(this.getPanel("panelEditTraceability"));
@@ -61,7 +61,7 @@ public final class ViewEditTraceability extends ViewEdit {
      * Method responsible for returning the Panel Edit Traceability.
      * @return Panel Edit Traceability.
      */
-    public PanelEditTraceability getPanelEditTraceability() {
+    private PanelEditTraceability getPanelEditTraceability() {
         return (PanelEditTraceability) this.getPanel("panelEditTraceability");
     }
     

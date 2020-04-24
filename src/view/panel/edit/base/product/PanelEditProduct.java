@@ -1,8 +1,6 @@
 package view.panel.edit.base.product;
 
 import java.awt.Dimension;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import model.structural.base.product.Product;
 import view.panel.base.product.PanelBaseProduct;
 import view.panel.edit.PanelEdit;
@@ -18,26 +16,22 @@ import view.main.structural.ViewMenu;
  */
 public final class PanelEditProduct extends PanelEdit {
     private final Product product;
-    private PanelBaseProduct panelBaseProduct;
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param product Product.
      */
-    public PanelEditProduct(ViewMenu viewMenu, Product product) {
-        super(viewMenu);
-        this.product  = product;
+    public PanelEditProduct(ViewMenu view, Product product) {
+        super(view);
+        this.product = product;
         this.setPreferredSize(new Dimension(200, 100));
         this.addComponents();
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(100, 100));
-            this.addPanelBaseProduct();
-        this.add(this.tabbedPane);
+    protected void addPanels() {
+        this.addPanelBaseProduct();
     }
     
     /**
@@ -46,8 +40,8 @@ public final class PanelEditProduct extends PanelEdit {
     private void addPanelBaseProduct() {
         this.addPanel("panelBaseProduct", new PanelBaseProduct(this.viewMenu, this.product));
         this.createScrollPane("scrollPanelBaseProduct",  this.getPanelBaseProduct());
-        this.getScrollPanelBaseProduct().setViewportView(this.getPanelBaseProduct());
-        this.tabbedPane.add("Product", this.getScrollPanelBaseProduct());
+        this.getScrollPane("scrollPanelBaseProduct").setViewportView(this.getPanelBaseProduct());
+        this.tabbedPane.add("Product", this.getScrollPane("scrollPanelBaseProduct"));
     }
     
     /**
@@ -56,14 +50,6 @@ public final class PanelEditProduct extends PanelEdit {
      */
     public PanelBaseProduct getPanelBaseProduct() {
         return (PanelBaseProduct) this.getPanel("panelBaseProduct");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Product.
-     * @return Scroll Panel Base Product.
-     */
-    public JScrollPane getScrollPanelBaseProduct() {
-        return this.getScrollPane("scrollPanelBaseProduct");
     }
     
     /**

@@ -26,7 +26,7 @@ public final class PanelEditAssociation extends view.panel.edit.base.PanelEditAs
     }
     
     @Override
-    protected void addComponents() {
-        super.addComponents("Association");
+    protected void addPanels() {
+        super.addPanels("Association");
     }
 }

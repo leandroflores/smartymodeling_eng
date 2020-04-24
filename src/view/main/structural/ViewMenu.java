@@ -189,12 +189,12 @@ public final class ViewMenu extends View implements Operation {
     private void createEvaluationMenu() {
         this.createMenu("evaluation", "Evaluation");
         
-        this.createMenuItem("new_metric",  "New Metric",  "menu/evaluation/metric.png");
-        this.createMenuItem("new_measure", "New Measure", "menu/evaluation/measure.png");
+        this.createMenuItemAlt("new_metric",  "New Metric",  "menu/evaluation/metric.png",  KeyEvent.VK_M);
+        this.createMenuItemAlt("new_measure", "New Measure", "menu/evaluation/measure.png", KeyEvent.VK_S);
         
-        this.createMenuItem("evaluate_project", "Evaluate Project", "menu/evaluation/project.png");
-        this.createMenuItem("evaluate_diagram", "Evaluate Diagram", "menu/evaluation/diagram.png");
-        this.createMenuItem("evaluate_product", "Evaluate Product", "menu/evaluation/product.png");
+        this.createMenuItemAlt("evaluate_project", "Evaluate Project", "menu/evaluation/project.png", KeyEvent.VK_P);
+        this.createMenuItemAlt("evaluate_diagram", "Evaluate Diagram", "menu/evaluation/diagram.png", KeyEvent.VK_D);
+        this.createMenuItemAlt("evaluate_product", "Evaluate Product", "menu/evaluation/product.png", KeyEvent.VK_R);
         
         this.getMenu("evaluation").add(this.getMenuItemNewMetric());
         this.getMenu("evaluation").add(this.getMenuItemNewMeasure());
@@ -210,10 +210,11 @@ public final class ViewMenu extends View implements Operation {
     private void createExportMenu() {
         this.createMenu("export", "Export");
         
-        this.createMenuItem("export_diagram", "Export Diagram",       "menu/export/diagram.png");
-        this.createMenuItem("export_product", "Export Product",       "menu/export/product.png");
-        this.createMenuItem("diagram_code",   "Export Diagram Code",  "menu/export/code-diagram.png");
-        this.createMenuItem("instance_code",  "Export Instance Code", "menu/export/code-instance.png");
+        this.createMenuItemShift("export_diagram", "Export Diagram", "menu/export/diagram.png", KeyEvent.VK_D);
+        this.createMenuItemShift("export_product", "Export Product", "menu/export/product.png", KeyEvent.VK_P);
+        
+        this.createMenuItemShift("diagram_code",   "Export Diagram Code",  "menu/export/code-diagram.png",  KeyEvent.VK_C);
+        this.createMenuItemShift("instance_code",  "Export Instance Code", "menu/export/code-instance.png", KeyEvent.VK_I);
         
         this.getMenu("export").add(this.getMenuItemExportDiagram());
         this.getMenu("export").add(this.getMenuItemExportProduct());

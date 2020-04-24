@@ -1,7 +1,5 @@
 package view.panel.edit.diagram.classes.base;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.MethodUML;
 import view.panel.base.diagram.classes.base.PanelBaseMethodAbsUML;
@@ -32,15 +30,11 @@ public final class PanelEditMethodUML extends PanelEditElement {
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        
+    protected void addPanels() {
         this.addPanelBaseMethod();
         super.addPanelStereotype();
         super.addPanelDependency();
         this.addPanelParametersUML();
-        
-        this.add(this.tabbedPane);
     }
     
     /**
@@ -58,9 +52,9 @@ public final class PanelEditMethodUML extends PanelEditElement {
      */
     protected void addPanelBaseMethodUML() {
         this.addPanel("panelBaseMethodUML", new PanelBaseMethodUML(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelBaseElement",  this.getPanelBaseMethodUML());
-        this.getScrollPanelBaseElement().setViewportView(this.getPanelBaseMethodUML());
-        this.tabbedPane.add("Method", this.getScrollPanelBaseElement());
+        this.createScrollPane("scrollPanelBaseMethodUML",  this.getPanelBaseMethodUML());
+        this.getScrollPane("scrollPanelBaseMethodUML").setViewportView(this.getPanelBaseMethodUML());
+        this.tabbedPane.add("Method", this.getScrollPane("scrollPanelBaseMethodUML"));
     }
     
     /**
@@ -68,9 +62,9 @@ public final class PanelEditMethodUML extends PanelEditElement {
      */
     protected void addPanelBaseMethodAbstractUML() {
         this.addPanel("panelBaseMethodUML", new PanelBaseMethodAbsUML(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelBaseElement",  this.getPanelBaseMethodAbsUML());
-        this.getScrollPanelBaseElement().setViewportView(this.getPanelBaseMethodAbsUML());
-        this.tabbedPane.add("Method", this.getScrollPanelBaseElement());
+        this.createScrollPane("scrollPanelBaseMethodUML",  this.getPanelBaseMethodAbsUML());
+        this.getScrollPane("scrollPanelBaseMethodUML").setViewportView(this.getPanelBaseMethodAbsUML());
+        this.tabbedPane.add("Method", this.getScrollPane("scrollPanelBaseMethodUML"));
     }
     
     /**
@@ -79,18 +73,8 @@ public final class PanelEditMethodUML extends PanelEditElement {
     protected void addPanelParametersUML() {
         this.addPanel("panelBaseParametersUML", new PanelParametersUML(this.viewMenu, this.getDiagram(), this.getElement()));
         this.createScrollPane("scrollPanelParametersUML",  this.getPanelParametersUML());
-        this.getScrollPanelParametersUML().setViewportView(this.getPanelParametersUML());
-        this.tabbedPane.add("Parameters", this.getScrollPanelParametersUML());
-    }
-    
-    @Override
-    public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
-    }
-    
-    @Override
-    public MethodUML getElement() {
-        return (MethodUML) this.element;
+        this.getScrollPane("scrollPanelParametersUML").setViewportView(this.getPanelParametersUML());
+        this.tabbedPane.add("Parameters", this.getScrollPane("scrollPanelParametersUML"));
     }
     
     /**
@@ -117,11 +101,13 @@ public final class PanelEditMethodUML extends PanelEditElement {
         return (PanelParametersUML) this.getPanel("panelParametersUML");
     }
     
-    /**
-     * Method responsible for returning the Scroll Panel Parameters UML.
-     * @return Scroll Panel Parameters UML.
-     */
-    public JScrollPane getScrollPanelParametersUML() {
-        return this.getScrollPane("scrollPanelParametersUML");
+    @Override
+    public MethodUML getElement() {
+        return (MethodUML) this.element;
+    }
+    
+    @Override
+    public ClassDiagram getDiagram() {
+        return (ClassDiagram) this.diagram;
     }
 }

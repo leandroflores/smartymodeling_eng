@@ -1,7 +1,5 @@
 package view.panel.edit.base;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import model.structural.base.Stereotype;
 import view.panel.base.PanelBaseStereotype;
 import view.panel.edit.PanelEdit;
@@ -30,10 +28,8 @@ public final class PanelEditStereotype extends PanelEdit {
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-            this.addPanelBaseStereotype();
-        this.add(this.tabbedPane);
+    protected void addPanels() {
+        this.addPanelBaseStereotype();
     }
     
     /**
@@ -42,8 +38,8 @@ public final class PanelEditStereotype extends PanelEdit {
     private void addPanelBaseStereotype() {
         this.addPanel("panelBaseStereotype", new PanelBaseStereotype(this.viewMenu, this.stereotype));
         this.createScrollPane("scrollPanelBaseStereotype",  this.getPanelBaseStereotype());
-        this.getScrollPanelBaseStereotype().setViewportView(this.getPanelBaseStereotype());
-        this.tabbedPane.add("Stereotype", this.getScrollPanelBaseStereotype());
+        this.getScrollPane("scrollPanelBaseStereotype").setViewportView(this.getPanelBaseStereotype());
+        this.tabbedPane.add("Stereotype", this.getScrollPane("scrollPanelBaseStereotype"));
     }
     
     /**
@@ -52,14 +48,6 @@ public final class PanelEditStereotype extends PanelEdit {
      */
     public PanelBaseStereotype getPanelBaseStereotype() {
         return (PanelBaseStereotype) this.getPanel("panelBaseStereotype");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Stereotype.
-     * @return Scroll Panel Base Stereotype.
-     */
-    public JScrollPane getScrollPanelBaseStereotype() {
-        return this.getScrollPane("scrollPanelBaseStereotype");
     }
     
     /**

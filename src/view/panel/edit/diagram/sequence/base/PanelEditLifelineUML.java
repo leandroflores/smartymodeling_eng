@@ -1,6 +1,5 @@
 package view.panel.edit.diagram.sequence.base;
 
-import javax.swing.JTabbedPane;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.sequence.base.LifelineUML;
 import view.panel.base.diagram.sequence.base.PanelBaseLifelineUML;
@@ -29,13 +28,9 @@ public final class PanelEditLifelineUML extends PanelEditElement {
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        
+    protected void addPanels() {
         this.addPanelBaseLifelineUML();
         this.addPanelDependency();
-        
-        this.add(this.tabbedPane);
     }
     
     /**
@@ -43,26 +38,26 @@ public final class PanelEditLifelineUML extends PanelEditElement {
      */
     protected void addPanelBaseLifelineUML() {
         this.addPanel("panelBaseLifelineUML", new PanelBaseLifelineUML(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelBaseElement",  this.getPanelBaseLifelineUML());
-        this.getScrollPanelBaseElement().setViewportView(this.getPanelBaseLifelineUML());
-        this.tabbedPane.add("Lifeline", this.getScrollPanelBaseElement());
+        this.createScrollPane("scrollPanelBaseLifelineUML",  this.getPanelBaseLifelineUML());
+        this.getScrollPane("scrollPanelBaseLifelineUML").setViewportView(this.getPanelBaseLifelineUML());
+        this.tabbedPane.add("Lifeline", this.getScrollPane("scrollPanelBaseLifelineUML"));
     }
     
-    @Override
-    public SequenceDiagram getDiagram() {
-        return (SequenceDiagram) this.diagram;
-    }
-    
-    @Override
-    public LifelineUML getElement() {
-        return (LifelineUML) this.element;
-    }
-
     /**
      * Method responsible for returning the Panel Base Lifeline UML.
      * @return Panel Base Lifeline UML.
      */
     public PanelBaseLifelineUML getPanelBaseLifelineUML() {
         return (PanelBaseLifelineUML) this.getPanel("panelBaseLifelineUML");
+    }
+    
+    @Override
+    public LifelineUML getElement() {
+        return (LifelineUML) this.element;
+    }
+    
+    @Override
+    public SequenceDiagram getDiagram() {
+        return (SequenceDiagram) this.diagram;
     }
 }

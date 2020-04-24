@@ -1,8 +1,5 @@
 package view.panel.edit.base;
 
-import java.awt.Dimension;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import model.structural.base.association.Association;
 import view.panel.base.diagram.PanelBaseAssociation;
@@ -37,11 +34,8 @@ public abstract class PanelEditAssociation extends PanelEdit {
      * Method responsible for adding the Components.
      * @param title Tab Element Title.
      */
-    protected void addComponents(String title) {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(100, 100));
-            this.addPanelBaseAssociation(title);
-        this.add(this.tabbedPane);
+    protected void addPanels(String title) {
+        this.addPanelBaseAssociation(title);
     }
     
     /**
@@ -51,8 +45,8 @@ public abstract class PanelEditAssociation extends PanelEdit {
     protected void addPanelBaseAssociation(String title) {
         this.addPanel("panelBaseAssociation", new PanelBaseAssociation(this.viewMenu, this.getDiagram(), this.getAssociation()));
         this.createScrollPane("scrollPanelBaseAssociation",  this.getPanelBaseAssociation());
-        this.getScrollPanelBaseAssociation().setViewportView(this.getPanelBaseAssociation());
-        this.tabbedPane.add(title, this.getScrollPanelBaseAssociation());
+        this.getScrollPane("scrollPanelBaseAssociation").setViewportView(this.getPanelBaseAssociation());
+        this.tabbedPane.add(title, this.getScrollPane("scrollPanelBaseAssociation"));
     }
     
     /**
@@ -61,14 +55,6 @@ public abstract class PanelEditAssociation extends PanelEdit {
      */
     public PanelBaseAssociation getPanelBaseAssociation() {
         return (PanelBaseAssociation) this.getPanel("panelBaseAssociation");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Association.
-     * @return Scroll Panel Base Association.
-     */
-    public JScrollPane getScrollPanelBaseAssociation() {
-        return this.getScrollPane("scrollPanelBaseAssociation");
     }
     
     /**

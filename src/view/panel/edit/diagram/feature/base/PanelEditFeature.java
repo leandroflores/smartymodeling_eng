@@ -1,6 +1,5 @@
 package view.panel.edit.diagram.feature.base;
 
-import javax.swing.JTabbedPane;
 import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.feature.base.Feature;
 import view.panel.base.diagram.feature.base.PanelBaseFeature;
@@ -29,10 +28,8 @@ public final class PanelEditFeature extends PanelEditElement {
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-            this.addPanelBaseFeature();
-        this.add(this.tabbedPane);
+    protected void addPanels() {
+        this.addPanelBaseFeature();
     }
     
     /**
@@ -40,26 +37,26 @@ public final class PanelEditFeature extends PanelEditElement {
      */
     protected void addPanelBaseFeature() {
         this.addPanel("panelBaseFeature", new PanelBaseFeature(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelBaseElement",  this.getPanelBaseFeature());
-        this.getScrollPanelBaseElement().setViewportView(this.getPanelBaseFeature());
-        this.tabbedPane.add("Feature", this.getScrollPanelBaseElement());
+        this.createScrollPane("scrollPanelBaseFeature",  this.getPanelBaseFeature());
+        this.getScrollPane("scrollPanelBaseFeature").setViewportView(this.getPanelBaseFeature());
+        this.tabbedPane.add("Feature", this.getScrollPane("scrollPanelBaseFeature"));
     }
     
-    @Override
-    public FeatureDiagram getDiagram() {
-        return (FeatureDiagram) this.diagram;
-    }
-    
-    @Override
-    public Feature getElement() {
-        return (Feature) this.element;
-    }
-
     /**
      * Method responsible for returning the Panel Base Feature.
      * @return Panel Base Feature.
      */
     public PanelBaseFeature getPanelBaseFeature() {
         return (PanelBaseFeature) this.getPanel("panelBaseFeature");
+    }
+    
+    @Override
+    public Feature getElement() {
+        return (Feature) this.element;
+    }
+    
+    @Override
+    public FeatureDiagram getDiagram() {
+        return (FeatureDiagram) this.diagram;
     }
 }

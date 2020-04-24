@@ -1,8 +1,6 @@
 package view.panel.edit.base.product;
 
 import java.awt.Dimension;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import model.structural.base.product.Relationship;
 import view.panel.base.product.PanelBaseRelationship;
 import view.panel.edit.PanelEdit;
@@ -21,22 +19,19 @@ public final class PanelEditRelationship extends PanelEdit {
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      * @param relationship Relationship.
      */
-    public PanelEditRelationship(ViewMenu viewMenu, Relationship relationship) {
-        super(viewMenu);
+    public PanelEditRelationship(ViewMenu view, Relationship relationship) {
+        super(view);
         this.relationship = relationship;
         this.setPreferredSize(new Dimension(200, 100));
         this.addComponents();
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(100, 100));
-            this.addPanelBaseRelationship();
-        this.add(this.tabbedPane);
+    protected void addPanels() {
+        this.addPanelBaseRelationship();
     }
     
     /**
@@ -45,8 +40,8 @@ public final class PanelEditRelationship extends PanelEdit {
     private void addPanelBaseRelationship() {
         this.addPanel("panelBaseRelationship", new PanelBaseRelationship(this.viewMenu, this.relationship));
         this.createScrollPane("scrollPanelBaseRelationship",  this.getPanelBaseRelationship());
-        this.getScrollPanelBaseRelationship().setViewportView(this.getPanelBaseRelationship());
-        this.tabbedPane.add("Relationship", this.getScrollPanelBaseRelationship());
+        this.getScrollPane("scrollPanelBaseRelationship").setViewportView(this.getPanelBaseRelationship());
+        this.tabbedPane.add("Relationship", this.getScrollPane("scrollPanelBaseRelationship"));
     }
     
     /**
@@ -55,14 +50,6 @@ public final class PanelEditRelationship extends PanelEdit {
      */
     public PanelBaseRelationship getPanelBaseRelationship() {
         return (PanelBaseRelationship) this.getPanel("panelBaseRelationship");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Relationship.
-     * @return Scroll Panel Base Relationship.
-     */
-    public JScrollPane getScrollPanelBaseRelationship() {
-        return this.getScrollPane("scrollPanelBaseRelationship");
     }
     
     /**

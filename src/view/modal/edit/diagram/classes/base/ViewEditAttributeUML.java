@@ -1,4 +1,4 @@
-package view.modal.edit.diagram.classes;
+package view.modal.edit.diagram.classes.base;
 
 import controller.view.modal.edit.diagram.classes.base.ControllerViewEditAttributeUML;
 import java.awt.Dimension;
@@ -30,7 +30,7 @@ public final class ViewEditAttributeUML extends ViewEdit {
      * @param attribute Attribute UML.
      */
     public ViewEditAttributeUML(PanelModeling panel, ClassDiagram diagram, AttributeUML attribute) {
-        super(panel);
+        super(panel.getViewMenu());
         this.diagram    = diagram;
         this.attribute  = attribute;
         this.controller = new ControllerViewEditAttributeUML(this);

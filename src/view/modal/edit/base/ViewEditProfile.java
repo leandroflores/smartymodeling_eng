@@ -2,10 +2,10 @@ package view.modal.edit.base;
 
 import controller.view.modal.edit.base.ControllerViewEditProfile;
 import java.awt.Dimension;
-import javax.swing.JTabbedPane;
 import model.structural.base.Profile;
 import view.modal.edit.ViewEdit;
 import view.panel.base.PanelBaseProfile;
+import view.panel.edit.base.PanelEditProfile;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -26,7 +26,7 @@ public final class ViewEditProfile extends ViewEdit {
      * @param profile Profile.
      */
     public ViewEditProfile(PanelModeling panel, Profile profile) {
-        super(panel);
+        super(panel.getViewMenu());
         this.profile    = profile;
         this.controller = new ControllerViewEditProfile(this);
         this.title      = "Edit Profile Data";
@@ -43,21 +43,25 @@ public final class ViewEditProfile extends ViewEdit {
     
     @Override
     public void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 325));
-            this.addPanelBaseProfile();
-        this.add(this.tabbedPane);
+        this.addPanelEditProfile();
         this.addLines(1);
     }
     
     /**
-     * Method responsible for adding the Panel Base Profile.
+     * Method responsible for adding the Panel Edit Profile.
      */
-    private void addPanelBaseProfile() {
-        this.addPanel("panelBaseProfile", new PanelBaseProfile(this.getViewMenu(), this.profile));
-        this.createScrollPane("scrollPanelBaseProfile", this.getPanelBaseProfile());
-        this.getScrollPane("scrollPanelBaseProfile").setViewportView(this.getPanelBaseProfile());
-        this.tabbedPane.add("Profile", this.getScrollPane("scrollPanelBaseProfile"));
+    private void addPanelEditProfile() {
+        this.addPanel("panelEditProfile", new PanelEditProfile(this.view, this.profile));
+        this.getPanelEditProfile().setPreferredSize(new Dimension(500, 325));
+        this.add(this.getPanelEditProfile());
+    }
+    
+    /**
+     * Method responsible for returning the Panel Edit Profile.
+     * @return Panel Edit Profile.
+     */
+    private PanelEditProfile getPanelEditProfile() {
+        return (PanelEditProfile) this.getPanel("panelEditProfile");
     }
     
     /**
@@ -65,7 +69,7 @@ public final class ViewEditProfile extends ViewEdit {
      * @return Panel Base Profile.
      */
     public PanelBaseProfile getPanelBaseProfile() {
-        return (PanelBaseProfile) this.getPanel("panelBaseProfile");
+        return this.getPanelEditProfile().getPanelBaseProfile();
     }
     
     /**

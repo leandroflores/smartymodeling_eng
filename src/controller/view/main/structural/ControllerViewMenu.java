@@ -393,7 +393,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
         else if (this.viewMenu.getMenuItemNewInstance().equals(event.getSource()))
             this.newInstance();
         else if (this.viewMenu.getMenuItemNewTraceability().equals(event.getSource()))
-            this.newTraceability();
+            this.newManualTraceability();
         else
             this.flag = true;
     }
@@ -408,23 +408,23 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     /**
      * Method responsible for inserting a New Product.
      */
-    private void newProduct() {
-        new ViewNewProduct(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+    public void newProduct() {
+        new ViewNewProduct(this.viewMenu).setVisible(true);
     }
     
     /**
      * Method responsible for inserting a New Instance.
      */
-    private void newInstance() {
+    public void newInstance() {
         new ViewNewInstance(this.viewMenu).setVisible(true);
     }
     
     /**
-     * Method responsible for inserting a New Traceability.
+     * Method responsible for inserting a New Manual Traceability.
      */
-    private void newTraceability() {
+    public void newManualTraceability() {
         if (!this.viewMenu.getProject().getDiagrams().isEmpty())
-            new ViewNewTraceability(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+            new ViewNewTraceability(this.viewMenu).setVisible(true);
         else
             new ViewMessage(this.viewMenu, "Project with no Elements!").setVisible(true);
     }
@@ -460,7 +460,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      */
     public void newMeasure() {
         if (this.viewMenu.getProject().getMetricsList().isEmpty() == false)
-            new ViewNewMeasure(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+            new ViewNewMeasure(this.viewMenu).setVisible(true);
         else
             new ViewError(this.viewMenu, "Metrics List is void!").setVisible(true);
     }

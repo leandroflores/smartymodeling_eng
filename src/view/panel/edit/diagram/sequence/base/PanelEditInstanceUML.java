@@ -1,7 +1,5 @@
 package view.panel.edit.diagram.sequence.base;
 
-import java.awt.Dimension;
-import javax.swing.JTabbedPane;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.sequence.base.InstanceUML;
 import view.panel.base.diagram.sequence.base.PanelBaseInstanceUML;
@@ -30,13 +28,9 @@ public final class PanelEditInstanceUML extends PanelEditElement {
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        
+    protected void addPanels() {
         this.addPanelBaseInstanceUML();
         this.addPanelDependency();
-        
-        this.add(this.tabbedPane);
     }
     
     /**
@@ -44,26 +38,26 @@ public final class PanelEditInstanceUML extends PanelEditElement {
      */
     protected void addPanelBaseInstanceUML() {
         this.addPanel("panelBaseInstanceUML", new PanelBaseInstanceUML(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelBaseElement",  this.getPanelBaseInstanceUML());
-        this.getScrollPanelBaseElement().setViewportView(this.getPanelBaseInstanceUML());
-        this.tabbedPane.add("Instance", this.getScrollPanelBaseElement());
+        this.createScrollPane("scrollPanelBaseInstanceUML",  this.getPanelBaseInstanceUML());
+        this.getScrollPane("scrollPanelBaseInstanceUML").setViewportView(this.getPanelBaseInstanceUML());
+        this.tabbedPane.add("Instance", this.getScrollPane("scrollPanelBaseInstanceUML"));
     }
     
-    @Override
-    public SequenceDiagram getDiagram() {
-        return (SequenceDiagram) this.diagram;
-    }
-    
-    @Override
-    public InstanceUML getElement() {
-        return (InstanceUML) this.element;
-    }
-
     /**
      * Method responsible for returning the Panel Base Instance UML.
      * @return Panel Base Instance UML.
      */
     public PanelBaseInstanceUML getPanelBaseInstanceUML() {
         return (PanelBaseInstanceUML) this.getPanel("panelBaseInstanceUML");
+    }
+    
+    @Override
+    public InstanceUML getElement() {
+        return (InstanceUML) this.element;
+    }
+    
+    @Override
+    public SequenceDiagram getDiagram() {
+        return (SequenceDiagram) this.diagram;
     }
 }

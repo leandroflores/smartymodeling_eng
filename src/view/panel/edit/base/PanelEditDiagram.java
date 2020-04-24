@@ -1,7 +1,5 @@
 package view.panel.edit.base;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import view.panel.base.PanelBaseDiagram;
 import view.panel.edit.PanelEdit;
@@ -30,10 +28,8 @@ public final class PanelEditDiagram extends PanelEdit {
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-            this.addPanelBaseDiagram();
-        this.add(this.tabbedPane);
+    protected void addPanels() {
+        this.addPanelBaseDiagram();
     }
     
     /**
@@ -42,8 +38,8 @@ public final class PanelEditDiagram extends PanelEdit {
     protected void addPanelBaseDiagram() {
         this.addPanel("panelBaseDiagram", new PanelBaseDiagram(this.viewMenu, this.diagram));
         this.createScrollPane("scrollPanelBaseDiagram",  this.getPanelBaseDiagram());
-        this.getScrollPanelBaseDiagram().setViewportView(this.getPanelBaseDiagram());
-        this.tabbedPane.add("Diagram", this.getScrollPanelBaseDiagram());
+        this.getScrollPane("scrollPanelBaseDiagram").setViewportView(this.getPanelBaseDiagram());
+        this.tabbedPane.add("Diagram", this.getScrollPane("scrollPanelBaseDiagram"));
     }
     
     /**
@@ -52,14 +48,6 @@ public final class PanelEditDiagram extends PanelEdit {
      */
     public PanelBaseDiagram getPanelBaseDiagram() {
         return (PanelBaseDiagram) this.getPanel("panelBaseDiagram");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Diagram.
-     * @return Scroll Panel Base Diagram.
-     */
-    public JScrollPane getScrollPanelBaseDiagram() {
-        return this.getScrollPane("scrollPanelBaseDiagram");
     }
     
     /**

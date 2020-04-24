@@ -17,11 +17,11 @@ import view.modal.edit.base.ViewEditDiagram;
 import view.modal.edit.base.ViewEditElement;
 import view.modal.edit.base.ViewEditProject;
 import view.modal.edit.base.variability.ViewEditVariability;
-import view.modal.edit.diagram.classes.ViewEditAttributeUML;
-import view.modal.edit.diagram.classes.ViewEditClassUML;
-import view.modal.edit.diagram.classes.ViewEditInterfaceUML;
-import view.modal.edit.diagram.classes.ViewEditMethodUML;
-import view.modal.edit.diagram.classes.ViewEditPackageUML;
+import view.modal.edit.diagram.classes.base.ViewEditAttributeUML;
+import view.modal.edit.diagram.classes.base.ViewEditClassUML;
+import view.modal.edit.diagram.classes.base.ViewEditInterfaceUML;
+import view.modal.edit.diagram.classes.base.ViewEditMethodUML;
+import view.modal.edit.diagram.classes.base.ViewEditPackageUML;
 import view.panel.tree.popup.diagram.TreePopupDiagram;
 
 /**

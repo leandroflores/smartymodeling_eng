@@ -29,7 +29,7 @@ public final class ViewEditFeature extends ViewEdit {
      * @param feature Feature.
      */
     public ViewEditFeature(PanelModeling panel, FeatureDiagram diagram, Feature feature) {
-        super(panel);
+        super(panel.getViewMenu());
         this.diagram    = diagram;
         this.feature    = feature;
         this.controller = new ControllerViewEditFeature(this);

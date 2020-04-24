@@ -4,7 +4,6 @@ import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import view.modal.ViewModal;
-import view.panel.modeling.PanelModeling;
 import view.main.structural.ViewMenu;
 
 /**
@@ -18,7 +17,6 @@ import view.main.structural.ViewMenu;
 public abstract class ViewNew extends ViewModal {
     protected final ViewMenu view;
     protected final Project  project;
-    protected final PanelModeling panel;
     protected JTabbedPane tabbedPane;
     
     /**
@@ -29,18 +27,6 @@ public abstract class ViewNew extends ViewModal {
         super(view);
         this.view    = view;
         this.project = view.getProject();
-        this.panel   = null;
-    }
-    
-    /**
-     * Alternative constructor method of Class.
-     * @param panel Panel Modeling.
-     */
-    public ViewNew(PanelModeling panel) {
-        super(panel.getViewMenu());
-        this.view    = panel.getViewMenu();
-        this.project = panel.getViewMenu().getProject();
-        this.panel   = panel;
     }
     
     @Override

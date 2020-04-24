@@ -27,7 +27,7 @@ public final class ViewEditMetric extends ViewEdit {
      * @param metric Metric.
      */
     public ViewEditMetric(PanelModeling panel, Metric metric) {
-        super(panel);
+        super(panel.getViewMenu());
         this.metric     = metric;
         this.controller = new ControllerViewEditMetric(this);
         this.title      = "Edit Metric Data";

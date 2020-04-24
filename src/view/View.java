@@ -243,6 +243,36 @@ public abstract class View extends JFrame {
     }
     
     /**
+     * Method responsible for returning a New Menu Item.
+     * @param  id Menu Item Id.
+     * @param  title Menu Item Title.
+     * @param  path Menu Item Image Path.
+     * @param  keychar Menu Item Key Char.
+     * @return New Menu Item.
+     */
+    protected JMenuItem createMenuItemAlt(String id, String title, String path, int keychar) {
+        JMenuItem menuItem = this.createMenuItem(id, title, path);
+                  menuItem.setAccelerator(KeyStroke.getKeyStroke(keychar, InputEvent.ALT_MASK));
+                  menuItem.setMnemonic(keychar);
+        return    menuItem;
+    }
+    
+    /**
+     * Method responsible for returning a New Menu Item.
+     * @param  id Menu Item Id.
+     * @param  title Menu Item Title.
+     * @param  path Menu Item Image Path.
+     * @param  keychar Menu Item Key Char.
+     * @return New Menu Item.
+     */
+    protected JMenuItem createMenuItemShift(String id, String title, String path, int keychar) {
+        JMenuItem menuItem = this.createMenuItem(id, title, path);
+                  menuItem.setAccelerator(KeyStroke.getKeyStroke(keychar, InputEvent.SHIFT_MASK));
+                  menuItem.setMnemonic(keychar);
+        return    menuItem;
+    }
+    
+    /**
      * Method responsible for returning the Menu Item by Id.
      * @param  id Menu Item Id.
      * @return Menu Item found.

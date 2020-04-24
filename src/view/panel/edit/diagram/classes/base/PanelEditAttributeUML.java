@@ -1,6 +1,5 @@
 package view.panel.edit.diagram.classes.base;
 
-import javax.swing.JTabbedPane;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.AttributeUML;
 import view.panel.base.diagram.classes.base.PanelBaseAttributeUML;
@@ -29,12 +28,10 @@ public final class PanelEditAttributeUML extends PanelEditElement {
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-            this.addPanelBaseAttributeUML();
-            super.addPanelStereotype();
-            super.addPanelDependency();
-        this.add(this.tabbedPane);
+    protected void addPanels() {
+        this.addPanelBaseAttributeUML();
+        super.addPanelStereotype();
+        super.addPanelDependency();
     }
     
     /**
@@ -42,9 +39,9 @@ public final class PanelEditAttributeUML extends PanelEditElement {
      */
     protected void addPanelBaseAttributeUML() {
         this.addPanel("panelBaseAttributeUML", new PanelBaseAttributeUML(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelBaseElement",  this.getPanelBaseAttributeUML());
-        this.getScrollPanelBaseElement().setViewportView(this.getPanelBaseAttributeUML());
-        this.tabbedPane.add("Attribute", this.getScrollPanelBaseElement());
+        this.createScrollPane("scrollPanelBaseAttributeUML",  this.getPanelBaseAttributeUML());
+        this.getScrollPane("scrollPanelBaseAttributeUML").setViewportView(this.getPanelBaseAttributeUML());
+        this.tabbedPane.add("Attribute", this.getScrollPane("scrollPanelBaseAttributeUML"));
     }
     
     /**

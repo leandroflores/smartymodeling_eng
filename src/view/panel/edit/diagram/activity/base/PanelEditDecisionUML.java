@@ -27,8 +27,8 @@ public final class PanelEditDecisionUML extends PanelEditElement {
     }
     
     @Override
-    protected void addComponents() {
-        super.addComponents("Decision");
+    protected void addPanels() {
+        super.addPanels("Decision");
     }
     
     @Override

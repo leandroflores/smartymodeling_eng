@@ -28,7 +28,7 @@ public final class ViewEditRequirement extends ViewEdit {
      * @param index Tab Index.
      */
     public ViewEditRequirement(PanelModeling panel, Requirement requirement, Integer index) {
-        super(panel);
+        super(panel.getViewMenu());
         this.requirement = requirement;
         this.controller  = new ControllerViewEditRequirement(this);
         this.title       = "Edit Requirement Data";
@@ -46,14 +46,14 @@ public final class ViewEditRequirement extends ViewEdit {
     
     @Override
     public void addComponents() {
-        this.addPanelBaseRequirement();
+        this.addPanelEditRequirement();
         this.addLines(1);
     }
     
     /**
-     * Method responsible for adding the Panel Base Requirement.
+     * Method responsible for adding the Panel Edit Requirement.
      */
-    private void addPanelBaseRequirement() {
+    private void addPanelEditRequirement() {
         this.addPanel("panelEditRequirement", new PanelEditRequirement(this.view, this.requirement, this.index));
         this.getPanel("panelEditRequirement").setPreferredSize(new Dimension(500, 300));
         this.add(this.getPanel("panelEditRequirement"));

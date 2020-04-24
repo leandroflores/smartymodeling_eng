@@ -2,11 +2,10 @@ package view.modal.edit.base;
 
 import controller.view.modal.edit.base.ControllerViewEditProject;
 import java.awt.Dimension;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import view.modal.edit.ViewEdit;
 import view.panel.base.PanelBaseProject;
+import view.panel.edit.base.PanelEditProject;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -26,7 +25,7 @@ public final class ViewEditProject extends ViewEdit {
      * @param project Project.
      */
     public ViewEditProject(PanelModeling panel, Project project) {
-        super(panel);
+        super(panel.getViewMenu());
         this.controller = new ControllerViewEditProject(this);
         this.title      = "Edit Project Data";
         this.initComponents();
@@ -34,7 +33,7 @@ public final class ViewEditProject extends ViewEdit {
     
     @Override
     public void initComponents() {
-        this.setSize(new Dimension(650, 350));
+        this.setSize(new Dimension(620, 350));
         this.addHeader();
         this.addComponents();
         this.addFooter();
@@ -42,21 +41,25 @@ public final class ViewEditProject extends ViewEdit {
     
     @Override
     public void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 225));
-            this.addPanelBaseProject();
-        this.add(this.tabbedPane);
+        this.addPanelEditProject();
         this.addLines(1);
     }
     
     /**
-     * Method responsible for adding the Panel Base Project.
+     * Method responsible for adding the Panel Edit Element.
      */
-    private void addPanelBaseProject() {
-        this.addPanel("panelBaseProject", new PanelBaseProject(this.getViewMenu()));
-        this.createScrollPane("scrollPanelBaseProject",  this.getPanelBaseProject());
-        this.getScrollPane("scrollPanelBaseProject").setViewportView(this.getPanelBaseProject());
-        this.tabbedPane.add("Project", this.getScrollPane("scrollPanelBaseProject"));
+    private void addPanelEditProject() {
+        this.addPanel("panelEditProject", new PanelEditProject(this.view));
+        this.getPanelEditProject().setPreferredSize(new Dimension(500, 225));
+        this.add(this.getPanelEditProject());
+    }
+    
+    /**
+     * Method responsible for returning the Panel Edit Project.
+     * @return Panel Edit Project.
+     */
+    private PanelEditProject getPanelEditProject() {
+        return (PanelEditProject) this.getPanel("panelEditProject");
     }
     
     /**
@@ -64,6 +67,6 @@ public final class ViewEditProject extends ViewEdit {
      * @return Panel Base Project.
      */
     public PanelBaseProject getPanelBaseProject() {
-        return (PanelBaseProject) this.getPanel("panelBaseProject");
+        return this.getPanelEditProject().getPanelBaseProject();
     }
 }

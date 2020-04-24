@@ -2,12 +2,12 @@ package view.modal.edit.base.variability;
 
 import controller.view.modal.edit.base.variability.ControllerViewEditVariability;
 import java.awt.Dimension;
-import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import model.structural.base.variability.Variability;
 import view.modal.edit.ViewEdit;
 import view.panel.base.variability.PanelBaseVariability;
 import view.panel.base.variability.PanelBaseVariants;
+import view.panel.edit.base.variability.PanelEditVariability;
 import view.panel.modeling.PanelModeling;
 
 /**
@@ -30,7 +30,7 @@ public final class ViewEditVariability extends ViewEdit {
      * @param variability Variability.
      */
     public ViewEditVariability(PanelModeling panel, Diagram diagram, Variability variability) {
-        super(panel);
+        super(panel.getViewMenu());
         this.variability = variability;
         this.diagram     = diagram;
         this.controller  = new ControllerViewEditVariability(this);
@@ -48,32 +48,25 @@ public final class ViewEditVariability extends ViewEdit {
     
     @Override
     public void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 325));
-            this.addPanelBaseVariability();
-            this.addPanelBaseVariants();
-        this.add(this.tabbedPane);
+        this.addPanelEditVariability();
         this.addLines(1);
     }
     
     /**
-     * Method responsible for adding the Panel Base Variability.
+     * Method responsible for adding the Panel Edit Variability.
      */
-    private void addPanelBaseVariability() {
-        this.addPanel("panelBaseVariability", new PanelBaseVariability(this.getViewMenu(), this.diagram, this.variability));
-        this.createScrollPane("scrollPanelBaseVariability",  this.getPanelBaseVariability());
-        this.getScrollPane("scrollPanelBaseVariability").setViewportView(this.getPanelBaseVariability());
-        this.tabbedPane.add("Variability", this.getScrollPane("scrollPanelBaseVariability"));
+    private void addPanelEditVariability() {
+        this.addPanel("panelEditVariability", new PanelEditVariability(this.view, this.diagram, this.variability, 0));
+        this.getPanel("panelEditVariability").setPreferredSize(new Dimension(500, 300));
+        this.add(this.getPanel("panelEditVariability"));
     }
     
     /**
-     * Method responsible for adding the Panel Base Variants.
+     * Method responsible for returning the Panel Edit Variability.
+     * @return Panel Edit Variability.
      */
-    private void addPanelBaseVariants() {
-        this.addPanel("panelBaseVariants", new PanelBaseVariants(this.getViewMenu(), this.diagram, this.variability));
-        this.createScrollPane("scrollPanelBaseVariants",  this.getPanelBaseVariants());
-        this.getScrollPane("scrollPanelBaseVariants").setViewportView(this.getPanelBaseVariants());
-        this.tabbedPane.add("Variants", this.getScrollPane("scrollPanelBaseVariants"));
+    private PanelEditVariability getPanelEditVariability() {
+        return (PanelEditVariability) this.getPanel("panelEditVariability");
     }
     
     /**
@@ -81,7 +74,7 @@ public final class ViewEditVariability extends ViewEdit {
      * @return Panel Base Variability.
      */
     public PanelBaseVariability getPanelBaseVariability() {
-        return (PanelBaseVariability) this.getPanel("panelBaseVariability");
+        return this.getPanelEditVariability().getPanelBaseVariability();
     }
     
     /**
@@ -89,7 +82,7 @@ public final class ViewEditVariability extends ViewEdit {
      * @return Panel Base Variants.
      */
     public PanelBaseVariants getPanelBaseVariants() {
-        return (PanelBaseVariants) this.getPanel("panelBaseVariants");
+        return this.getPanelEditVariability().getPanelBaseVariants();
     }
     
     /**

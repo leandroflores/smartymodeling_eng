@@ -1,7 +1,5 @@
 package view.panel.edit.diagram.activity.base.association;
 
-import java.awt.Dimension;
-import javax.swing.JTabbedPane;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.activity.base.association.FlowUML;
 import view.panel.base.diagram.activity.base.association.PanelBaseFlowUML;
@@ -30,13 +28,8 @@ public final class PanelEditFlowUML extends PanelEditAssociation {
     }
     
     @Override
-    protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(100, 100));
-        
+    protected void addPanels() {
         this.addPanelBaseFlowUML();
-        
-        this.add(this.tabbedPane);
     }
     
     /**
@@ -44,26 +37,26 @@ public final class PanelEditFlowUML extends PanelEditAssociation {
      */
     protected void addPanelBaseFlowUML() {
         this.addPanel("panelBaseFlowUML", new PanelBaseFlowUML(this.viewMenu, this.getDiagram(), this.getAssociation()));
-        this.createScrollPane("scrollPanelBaseAssociation",  this.getPanelBaseFlowUML());
-        this.getScrollPanelBaseAssociation().setViewportView(this.getPanelBaseFlowUML());
-        this.tabbedPane.add("Flow", this.getScrollPanelBaseAssociation());
+        this.createScrollPane("scrollPanelBaseFlowUML",  this.getPanelBaseFlowUML());
+        this.getScrollPane("scrollPanelBaseFlowUML").setViewportView(this.getPanelBaseFlowUML());
+        this.tabbedPane.add("Flow", this.getScrollPane("scrollPanelBaseFlowUML"));
     }
     
-    @Override
-    public ActivityDiagram getDiagram() {
-        return (ActivityDiagram) this.diagram;
-    }
-    
-    @Override
-    public FlowUML getAssociation() {
-        return (FlowUML) this.association;
-    }
-
     /**
      * Method responsible for returning the Panel Base Flow UML.
      * @return Panel Base Flow UML.
      */
     public PanelBaseFlowUML getPanelBaseFlowUML() {
         return (PanelBaseFlowUML) this.getPanel("panelBaseFlowUML");
+    }
+    
+    @Override
+    public FlowUML getAssociation() {
+        return (FlowUML) this.association;
+    }
+    
+    @Override
+    public ActivityDiagram getDiagram() {
+        return (ActivityDiagram) this.diagram;
     }
 }

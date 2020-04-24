@@ -24,8 +24,8 @@ import view.modal.edit.base.ViewEditDiagram;
 import view.modal.edit.base.ViewEditElement;
 import view.modal.edit.base.ViewEditProject;
 import view.modal.edit.base.variability.ViewEditVariability;
-import view.modal.edit.diagram.classes.ViewEditAttributeUML;
-import view.modal.edit.diagram.classes.ViewEditMethodUML;
+import view.modal.edit.diagram.classes.base.ViewEditAttributeUML;
+import view.modal.edit.diagram.classes.base.ViewEditMethodUML;
 import view.panel.tree.popup.diagram.TreePopupDiagram;
 
 /**
@@ -131,11 +131,11 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
     protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
         Diagram diagram = this.getDiagram(node);
         if (object instanceof Project)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditProject();
         else if (object instanceof Diagram)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) object);
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) object);
         else if (object instanceof Variability)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, (Variability) object);
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, (Variability) object, 0);
         else if (object instanceof Element)
             this.showPanelEdit(diagram, (Element) object);
         else if (object instanceof Association)
@@ -149,17 +149,17 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
      */
     private void showPanelEdit(Diagram diagram, Element element) {
         if (diagram instanceof FeatureDiagram)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((FeatureDiagram) diagram, element);
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditElement((FeatureDiagram) diagram, element);
         else if (diagram instanceof ActivityDiagram)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((ActivityDiagram) diagram, element);
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditElement((ActivityDiagram) diagram, element);
         else if (diagram instanceof ClassDiagram)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((ClassDiagram) diagram, element);
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditElement((ClassDiagram) diagram, element);
         else if (diagram instanceof ComponentDiagram)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((ComponentDiagram) diagram, element);
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditElement((ComponentDiagram) diagram, element);
         else if (diagram instanceof UseCaseDiagram)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((UseCaseDiagram)  diagram, element);
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditElement((UseCaseDiagram)  diagram, element);
         else if (diagram instanceof SequenceDiagram)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((SequenceDiagram) diagram, element);
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditElement((SequenceDiagram) diagram, element);
     }
     
     /**
@@ -169,9 +169,9 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
      */
     private void showPanelEdit(Diagram diagram, Association association) {
         if (diagram instanceof ActivityDiagram)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditAssociation((ActivityDiagram) diagram, association);
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditAssociation((ActivityDiagram) diagram, association);
         else if (diagram instanceof SequenceDiagram)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditAssociation((SequenceDiagram) diagram, association);
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditAssociation((SequenceDiagram) diagram, association);
     }
     
     @Override

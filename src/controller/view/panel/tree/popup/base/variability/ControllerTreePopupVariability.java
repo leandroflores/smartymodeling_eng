@@ -52,9 +52,9 @@ public class ControllerTreePopupVariability extends ControllerTreePopup {
         else if (object instanceof Diagram)
             this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) object);
         else if (object instanceof Variability)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, (Variability) object);
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, (Variability) object, 0);
         else if (object instanceof Element)
-            System.out.println("Edit Variant: " + object);
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, (Variability) object, 1);
     }
     
     /**

@@ -13,7 +13,7 @@ import view.main.structural.ViewMenu;
  * @since  2019-06-11
  * @see    view.panel.Panel
  */
-public class PanelEdit extends Panel {
+public abstract class PanelEdit extends Panel {
     protected final ViewMenu viewMenu;
     protected final Project project;
     protected JTabbedPane tabbedPane;
@@ -30,7 +30,16 @@ public class PanelEdit extends Panel {
     }
     
     @Override
-    protected void addComponents() {}
+    protected void addComponents() {
+        this.tabbedPane = new JTabbedPane();
+            this.addPanels();
+        this.add(this.tabbedPane);
+    }
+    
+    /**
+     * Method responsible for adding the Panels.
+     */
+    protected abstract void addPanels();
     
     /**
      * Method responsible for returning the View Menu.
