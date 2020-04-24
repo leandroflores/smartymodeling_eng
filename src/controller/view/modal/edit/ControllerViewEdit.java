@@ -16,7 +16,6 @@ import view.main.structural.ViewMenu;
  * @see    view.modal.edit.ViewEdit
  */
 public abstract class ControllerViewEdit extends ControllerViewModal {
-    protected ViewEdit viewEdit;
     
     /**
      * Default constructor method of Class.
@@ -24,15 +23,14 @@ public abstract class ControllerViewEdit extends ControllerViewModal {
      */
     public ControllerViewEdit(ViewEdit view) {
         super(view);
-        this.viewEdit = view;
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.viewEdit.getSaveButton().equals(event.getSource()))
+        if (this.getView().getSaveButton().equals(event.getSource()))
             this.update();
-        else if (this.viewEdit.getCancelButton().equals(event.getSource()))
-            this.viewEdit.dispose();
+        else if (this.getView().getCancelButton().equals(event.getSource()))
+            this.getView().dispose();
     }
     
     @Override
@@ -41,7 +39,7 @@ public abstract class ControllerViewEdit extends ControllerViewModal {
         if (F1 == event.getKeyCode())
             this.update();
         else if (F2 == event.getKeyCode())
-            this.viewEdit.dispose();
+            this.getView().dispose();
     }
     
     /**
@@ -67,9 +65,9 @@ public abstract class ControllerViewEdit extends ControllerViewModal {
      * Method responsible for closing the View Edit.
      */
     protected void close() {
-        this.viewEdit.getViewMenu().setSave(false);
-        this.viewEdit.getViewMenu().update();
-        this.viewEdit.dispose();
+        this.getView().getViewMenu().setSave(false);
+        this.getView().getViewMenu().update();
+        this.getView().dispose();
     }
     
     /**

@@ -1,4 +1,4 @@
-package controller.view.modal.edit.diagram.classes;
+package controller.view.modal.edit.diagram.classes.base;
 
 import controller.view.modal.edit.ControllerViewEdit;
 import view.modal.edit.diagram.classes.ViewEditMethodUML;
@@ -24,11 +24,16 @@ public class ControllerViewEditMethodUML extends ControllerViewEdit {
 
     @Override
     public boolean check() {
-        return true;
+        return this.check(this.getView().getPanelBaseMethodUML().getNameTextField(), "Name is required!");
     }
 
     @Override
     public void save() {
         this.close();
+    }
+    
+    @Override
+    public ViewEditMethodUML getView() {
+        return (ViewEditMethodUML) this.viewModal;
     }
 }

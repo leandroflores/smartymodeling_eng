@@ -8,7 +8,6 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.variability.Variability;
 import view.modal.edit.base.ViewEditDiagram;
-import view.modal.edit.base.ViewEditElement;
 import view.modal.edit.base.ViewEditProject;
 import view.modal.edit.base.variability.ViewEditVariability;
 import view.panel.tree.popup.base.variability.TreePopupVariability;
@@ -41,6 +40,7 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
         else if (object instanceof Variability)
             new ViewEditVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
         else if (object instanceof Element)
-            new ViewEditElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
+            System.out.println("Edit Variant: " + object);
+//            new ViewEditElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
     }
 }

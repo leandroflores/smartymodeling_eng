@@ -9,13 +9,19 @@ import model.structural.base.Project;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.AttributeUML;
+import model.structural.diagram.classes.base.ClassUML;
+import model.structural.diagram.classes.base.InterfaceUML;
 import model.structural.diagram.classes.base.MethodUML;
+import model.structural.diagram.classes.base.PackageUML;
 import view.modal.edit.base.ViewEditDiagram;
 import view.modal.edit.base.ViewEditElement;
 import view.modal.edit.base.ViewEditProject;
 import view.modal.edit.base.variability.ViewEditVariability;
 import view.modal.edit.diagram.classes.ViewEditAttributeUML;
+import view.modal.edit.diagram.classes.ViewEditClassUML;
+import view.modal.edit.diagram.classes.ViewEditInterfaceUML;
 import view.modal.edit.diagram.classes.ViewEditMethodUML;
+import view.modal.edit.diagram.classes.ViewEditPackageUML;
 import view.panel.tree.popup.diagram.TreePopupDiagram;
 
 /**
@@ -47,6 +53,8 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
             new ViewEditAttributeUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (AttributeUML) object).setVisible(true);
         else if (object instanceof MethodUML)
             new ViewEditMethodUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (MethodUML) object).setVisible(true);
+        else if (object instanceof PackageUML)
+            new ViewEditPackageUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (PackageUML) object).setVisible(true);
         else if (object instanceof Variability)
             new ViewEditVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
         else if (object instanceof Element)
@@ -61,6 +69,10 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
     private void edit(Element element, DefaultMutableTreeNode node) {
         if (this.getVariability(node) != null)
             System.out.println("Edit Variant: " + element);
+        else if (element instanceof ClassUML)
+            new ViewEditClassUML(this.getPanelModeling(),     (ClassDiagram) this.getDiagram(node), (ClassUML) element).setVisible(true);
+        else if (element instanceof InterfaceUML)
+            new ViewEditInterfaceUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (InterfaceUML) element).setVisible(true);
         else
             new ViewEditElement(this.getPanelModeling(), this.getDiagram(node), element).setVisible(true);
     }

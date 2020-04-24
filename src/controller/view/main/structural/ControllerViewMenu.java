@@ -451,14 +451,14 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     /**
      * Method responsible for inserting a New Metric.
      */
-    private void newMetric() {
+    public void newMetric() {
         new ViewNewMetric(this.viewMenu).setVisible(true);
     }
     
     /**
      * Method responsible for inserting a New Measure.
      */
-    private void newMeasure() {
+    public void newMeasure() {
         if (this.viewMenu.getProject().getMetricsList().isEmpty() == false)
             new ViewNewMeasure(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
         else

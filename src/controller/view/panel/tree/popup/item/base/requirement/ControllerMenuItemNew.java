@@ -7,23 +7,23 @@ import model.structural.base.Project;
 import model.structural.base.requirement.Requirement;
 import view.modal.new_.base.requirement.ViewNewRequirement;
 import view.modal.new_.base.requirement.traceability.ViewNewAddElement;
-import view.panel.tree.popup.TreePopup;
+import view.panel.tree.popup.base.requirement.TreePopupRequirement;
 
 /**
- * <p>Class of Controller <b>ControllerMenuItemDelete</b>.</p>
- * <p>Class responsible for controlling the <b>MenuItemDelete</b> Events of SMartyModeling.</p>
+ * <p>Class of Controller <b>ControllerMenuItemNew</b>.</p>
+ * <p>Class responsible for controlling the <b>MenuItemNew</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-21
  * @see    controller.view.panel.tree.popup.item.ControllerMenuItem
- * @see    view.panel.tree.popup.TreePopup
+ * @see    view.panel.tree.popup.base.requirement.TreePopupRequirement
  */
-public class ControllerMenuItemAdd extends ControllerMenuItem {
+public class ControllerMenuItemNew extends ControllerMenuItem {
     
     /**
      * Default constructor method of Class.
-     * @param popup Tree Popup.
+     * @param popup Tree Popup Requirement.
      */
-    public ControllerMenuItemAdd(TreePopup popup) {
+    public ControllerMenuItemNew(TreePopupRequirement popup) {
         super(popup);
     }
     

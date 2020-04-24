@@ -6,9 +6,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.variability.Variability;
-import view.modal.delete.base.ViewDeleteDiagram;
-import view.modal.delete.base.ViewDeleteElement;
 import view.modal.delete.base.variability.ViewDeleteVariability;
+import view.modal.message.ViewError;
 import view.panel.tree.popup.base.variability.TreePopupVariability;
 
 /**
@@ -32,11 +31,47 @@ public class ControllerMenuItemDelete extends ControllerMenuItem {
     @Override
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
-        if (object instanceof Diagram)
-            new ViewDeleteDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
-        else if (object instanceof Variability)
+        if (object instanceof Variability)
             new ViewDeleteVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
         else if (object instanceof Element)
-            new ViewDeleteElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
+            this.delete((Element) object, node);
+    }
+    
+    /**
+     * Method responsible for deleting the Element by Node.
+     * @param element Element.
+     * @param node Tree Node.
+     */
+    private void delete(Element element, DefaultMutableTreeNode node) {
+        Diagram diagram = this.getDiagram(node);
+        if (this.getVariability(node) != null)
+            this.delete(diagram, this.getVariability(node), element);
+    }
+    
+    /**
+     * Method responsible for deleting a Element of Variability.
+     * @param diagram Diagram.
+     * @param variability Variability.
+     * @param element Element.
+     */
+    private void delete(Diagram diagram, Variability variability, Element element) {
+        if (variability.getVariationPoint().equals(element))
+            new ViewError(this.getViewMenu(), "Set a New Variation Point!").setVisible(true);
+        else
+            variability.removeVariant(element);
+        diagram.updateElementsStereotype();
+        this.getPopup().getPanel().updateTree();
+    }
+    
+    /**
+     * Method responsible for returning the Variability Parent Node.
+     * @param  node Tree Node.
+     * @return Variability Parent.
+     */
+    protected Variability getVariability(DefaultMutableTreeNode node) {
+        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
+        if (parent != null && parent.getUserObject() instanceof Variability)
+            return (Variability) parent.getUserObject();
+        return null;
     }
 }

@@ -7,7 +7,6 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.variability.Variability;
-import view.modal.delete.base.ViewDeleteDiagram;
 import view.modal.delete.base.variability.ViewDeleteVariability;
 import view.modal.edit.base.ViewEditDiagram;
 import view.modal.edit.base.ViewEditProject;
@@ -35,23 +34,27 @@ public class ControllerTreePopupVariability extends ControllerTreePopup {
     @Override
     protected void showPopup(DefaultMutableTreeNode node, MouseEvent event) {
         if (node.getUserObject() instanceof Project)
-            this.popup.getDeleteMenuItem().setVisible(false);
-        else
-            this.popup.getDeleteMenuItem().setVisible(true);
-        this.popup.show(event.getComponent(), event.getX(), event.getY());
+            super.setPopupFlag(false, true, false);
+        else if (node.getUserObject() instanceof Diagram)
+            super.setPopupFlag(true, true, false);
+        else if (node.getUserObject() instanceof Variability)
+            super.setPopupFlag(false, true, true);
+        else if (node.getUserObject() instanceof Element)
+            super.setPopupFlag(false, true, true);
+        this.getPopup().show(event.getComponent(), event.getX(), event.getY());
     }
 
     @Override
     protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
         Diagram diagram = this.getDiagram(node);
         if (object instanceof Project)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditProject();
         else if (object instanceof Diagram)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) object);
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) object);
         else if (object instanceof Variability)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, (Variability) object);
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, (Variability) object);
         else if (object instanceof Element)
-            this.showPanelEdit(diagram, (Element) object);
+            System.out.println("Edit Variant: " + object);
     }
     
     /**
@@ -65,12 +68,10 @@ public class ControllerTreePopupVariability extends ControllerTreePopup {
     
     @Override
     protected void delete(DefaultMutableTreeNode node, Object object) {
-        if (object instanceof Diagram)
-            new ViewDeleteDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
-        else if (object instanceof Variability)
+        if (object instanceof Variability)
             new ViewDeleteVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
         else if (object instanceof Element)
-            System.out.println("");
+            System.out.println("Delete Variant: " + object);
 //            new ViewDeleteElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
     }
     

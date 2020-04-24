@@ -9,6 +9,7 @@ import model.structural.base.variability.Variability;
 import view.modal.delete.base.ViewDeleteDiagram;
 import view.modal.delete.base.ViewDeleteElement;
 import view.modal.delete.base.variability.ViewDeleteVariability;
+import view.modal.message.ViewError;
 import view.panel.tree.popup.diagram.TreePopupDiagram;
 
 /**
@@ -46,10 +47,26 @@ public class ControllerMenuItemDelete extends ControllerMenuItem {
      * @param node Tree Node.
      */
     private void delete(Element element, DefaultMutableTreeNode node) {
+        Diagram diagram = this.getDiagram(node);
         if (this.getVariability(node) != null)
-            System.out.println("Dlte Variant: " + element);
+            this.delete(diagram, this.getVariability(node), element);
         else
-            new ViewDeleteElement(this.getPanelModeling(), this.getDiagram(node), element).setVisible(true);
+            new ViewDeleteElement(this.getPanelModeling(), diagram, element).setVisible(true);
+    }
+    
+    /**
+     * Method responsible for deleting a Element of Variability.
+     * @param diagram Diagram.
+     * @param variability Variability.
+     * @param element Element.
+     */
+    private void delete(Diagram diagram, Variability variability, Element element) {
+        if (variability.getVariationPoint().equals(element))
+            new ViewError(this.getViewMenu(), "Set a New Variation Point!").setVisible(true);
+        else
+            variability.removeVariant(element);
+        diagram.updateElementsStereotype();
+        this.getPopup().getPanel().updateTree();
     }
     
     /**

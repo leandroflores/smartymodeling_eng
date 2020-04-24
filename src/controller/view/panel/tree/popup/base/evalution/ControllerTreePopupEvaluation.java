@@ -32,24 +32,44 @@ public class ControllerTreePopupEvaluation extends ControllerTreePopup {
     @Override
     protected void showPopup(DefaultMutableTreeNode node, MouseEvent event) {
         if (node.getUserObject() instanceof Project)
-            this.popup.getDeleteMenuItem().setVisible(false);
-        else
-            this.popup.getDeleteMenuItem().setVisible(true);
-        this.popup.show(event.getComponent(), event.getX(), event.getY());
+            this.setProjectPopup();
+        else if (node.getUserObject() instanceof Metric)
+            this.setMetricPopup();
+        else if (node.getUserObject() instanceof Measure)
+            super.setPopupFlag(false, false, true);
+        this.getPopup().show(event.getComponent(), event.getX(), event.getY());
+    }
+    
+    /**
+     * Method responsible for setting the Project Popup.
+     */
+    private void setProjectPopup() {
+        super.setPopupFlag(true, true, false);
+        this.getPopup().getMetricMenuItem().setVisible(true);
+        this.getPopup().getMeasureMenuItem().setVisible(false);
+    }
+    
+    /**
+     * Method responsible for setting the Metric Popup.
+     */
+    private void setMetricPopup() {
+        super.setPopupFlag(true, true, true);
+        this.getPopup().getMetricMenuItem().setVisible(false);
+        this.getPopup().getMeasureMenuItem().setVisible(true);
     }
 
     @Override
     protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Project)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditProject();
         else if (object instanceof Metric)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditMetric((Metric) object);
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditMetric((Metric) object);
     }
     
     @Override
     protected void delete(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Metric)
-            new ViewDeleteMetric(this.getPanelModeling(), (Metric) object).setVisible(true);
+            new ViewDeleteMetric(this.getPanelModeling(),  (Metric)  object).setVisible(true);
         else if (object instanceof Measure)
             new ViewDeleteMeasure(this.getPanelModeling(), (Measure) object).setVisible(true);        
     }
@@ -58,5 +78,10 @@ public class ControllerTreePopupEvaluation extends ControllerTreePopup {
     protected void edit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Metric)
             new ViewEditMetric(this.getPanelModeling(),  (Metric) object).setVisible(true);
+    }
+    
+    @Override
+    protected TreePopupEvaluation getPopup() {
+        return (TreePopupEvaluation) this.popup;
     }
 }

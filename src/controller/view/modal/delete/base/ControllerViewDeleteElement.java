@@ -52,17 +52,17 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
     @Override
     public void delete() {
         if (this.diagram instanceof FeatureDiagram)
-            this.deleteElement((FeatureDiagram) diagram);
+            this.deleteElement((FeatureDiagram)  this.diagram);
         else if (this.diagram instanceof ActivityDiagram)
-            this.deleteElement((ActivityDiagram) diagram);
+            this.deleteElement((ActivityDiagram) this.diagram);
         else if (this.diagram instanceof ClassDiagram)
-            this.deleteElement((ClassDiagram) diagram);
+            this.deleteElement((ClassDiagram) this.diagram);
         else if (this.diagram instanceof ComponentDiagram)
-            this.deleteElement((ComponentDiagram) diagram);
+            this.deleteElement((ComponentDiagram) this.diagram);
         else if (this.diagram instanceof UseCaseDiagram)
-            this.deleteElement((UseCaseDiagram) diagram);
+            this.deleteElement((UseCaseDiagram)  this.diagram);
         else if (this.diagram instanceof SequenceDiagram)
-            this.deleteElement((SequenceDiagram) diagram);
+            this.deleteElement((SequenceDiagram) this.diagram);
         this.close();
     }
     
@@ -107,6 +107,7 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
             diagram.removeFinal((FinalUML) this.element);
         else if (this.element instanceof InitialUML)
             diagram.removeInitial((InitialUML) this.element);
+        this.diagram.updateElementsStereotype();
     }
     
     /**
@@ -124,6 +125,7 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
             diagram.removeAttribute((AttributeUML) this.element);
         else if (this.element instanceof MethodUML)
             diagram.removeMethod((MethodUML) this.element);
+        this.diagram.updateElementsStereotype();
     }
     
     /**
@@ -135,6 +137,7 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
             diagram.removeComponent((ComponentUML) this.element);
         else if (this.element instanceof model.structural.diagram.component.base.InterfaceUML)
             diagram.removeInterface((model.structural.diagram.component.base.InterfaceUML) this.element);
+        this.diagram.updateElementsStereotype();
     }
     
     /**
@@ -146,6 +149,7 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
             diagram.removeActor((ActorUML) this.element);
         else if (this.element instanceof UseCaseUML)
             diagram.removeUseCase((UseCaseUML) this.element);
+        this.diagram.updateElementsStereotype();
     }
     
     /**
@@ -157,6 +161,7 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
             diagram.removeLifeline((LifelineUML) this.element);
         else if (this.element instanceof InstanceUML)
             diagram.removeInstance((InstanceUML) this.element);
+        this.diagram.updateElementsStereotype();
     }
     
     @Override
