@@ -57,8 +57,16 @@ public final class ViewEditClassUML extends ViewEdit {
      */
     private void addPanelEditClassUML() {
         this.addPanel("panelEditClass", new PanelEditClassUML(this.view, this.diagram, this.class_));
-        this.getPanel("panelEditClass").setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanel("panelEditClass"));
+        this.getPanelEditClass().setPreferredSize(new Dimension(500, 300));
+        this.add(this.getPanelEditClass());
+    }
+    
+    /**
+     * Method responsible for returning the Panel Edit Class UML.
+     * @return Panel Edit Class UML.
+     */
+    private PanelEditClassUML getPanelEditClass() {
+        return (PanelEditClassUML) this.getPanel("panelEditClass");
     }
     
     /**
@@ -66,7 +74,7 @@ public final class ViewEditClassUML extends ViewEdit {
      * @return Panel Base Class UML.
      */
     public PanelBaseClassUML getPanelBaseClassUML() {
-        return ((PanelEditClassUML) this.getPanel("panelEditClass")).getPanelBaseClassUML();
+        return this.getPanelEditClass().getPanelBaseClassUML();
     }
     
     /**
@@ -74,6 +82,6 @@ public final class ViewEditClassUML extends ViewEdit {
      * @return Panel Stereotype.
      */
     public PanelStereotype getPanelStereotype() {
-        return ((PanelEditClassUML) this.getPanel("panelEditClass")).getPanelStereotype();
+        return this.getPanelEditClass().getPanelStereotype();
     }
 }

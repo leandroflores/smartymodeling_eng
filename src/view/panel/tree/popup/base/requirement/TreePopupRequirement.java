@@ -39,7 +39,6 @@ public final class TreePopupRequirement extends TreePopup {
     @Override
     protected void setControllers() {
         this.getNewRequirementMenuItem().addActionListener(new ControllerMenuItemNew(this));
-        this.getAddElementMenuItem().addActionListener(new ControllerMenuItemNew(this));
         this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
         this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
     }
@@ -47,7 +46,6 @@ public final class TreePopupRequirement extends TreePopup {
     @Override
     protected void addMenuItems() {
         this.add(this.getNewMenu());
-        this.add(this.getAddElementMenuItem());
         this.addSeparator();
         this.add(this.getEditMenuItem());
         this.addSeparator();
@@ -60,13 +58,5 @@ public final class TreePopupRequirement extends TreePopup {
      */
     public JMenuItem getNewRequirementMenuItem() {
         return this.getItems().get("new_requirement");
-    }
-    
-    /**
-     * Method responsible for returning the Add Element Menu Item.
-     * @return Add Element Menu Item.
-     */
-    public JMenuItem getAddElementMenuItem() {
-        return this.getItems().get("new_element");
     }
 }

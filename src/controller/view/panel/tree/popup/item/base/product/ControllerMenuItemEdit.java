@@ -3,8 +3,10 @@ package controller.view.panel.tree.popup.item.base.product;
 import controller.view.panel.tree.popup.item.ControllerMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
+import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
+import view.modal.edit.base.product.ViewEditArtifact;
 import view.modal.edit.base.product.ViewEditInstance;
 import view.modal.edit.base.product.ViewEditProduct;
 import view.panel.tree.popup.base.product.TreePopupProduct;
@@ -34,5 +36,7 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
             new ViewEditProduct(this.getPanelModeling(), (Product) object).setVisible(true);
         else if (object instanceof Instance)
             new ViewEditInstance(this.getPanelModeling(), (Instance) object).setVisible(true);
+        else if (object instanceof Artifact)
+            new ViewEditArtifact(this.getPanelModeling(), (Artifact) object).setVisible(true);
     }
 }

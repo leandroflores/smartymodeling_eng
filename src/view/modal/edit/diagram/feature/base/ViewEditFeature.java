@@ -56,8 +56,16 @@ public final class ViewEditFeature extends ViewEdit {
      */
     private void addPanelBaseFeature() {
         this.addPanel("panelEditFeature", new PanelEditFeature(this.view, this.diagram, this.feature));
-        this.getPanel("panelEditFeature").setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanel("panelEditFeature"));
+        this.getPanelEditFeature().setPreferredSize(new Dimension(500, 300));
+        this.add(this.getPanelEditFeature());
+    }
+    
+    /**
+     * Method responsible for returning the Panel Edit Feature.
+     * @return Panel Edit Feature.
+     */
+    private PanelEditFeature getPanelEditFeature() {
+        return (PanelEditFeature) this.getPanel("panelEditFeature");
     }
     
     /**
@@ -65,7 +73,7 @@ public final class ViewEditFeature extends ViewEdit {
      * @return Panel Base Feature.
      */
     public PanelBaseFeature getPanelBaseFeature() {
-        return ((PanelEditFeature) this.getPanel("panelEditFeature")).getPanelBaseFeature();
+        return this.getPanelEditFeature().getPanelBaseFeature();
     }
     
     /**

@@ -88,7 +88,7 @@ public abstract class Controller implements ActionListener, KeyListener {
      * @return String checked.
      */
     protected boolean checkUSDate(String string) {
-        return string.matches("\\d{4}/\\d{2}\\/\\d{2}");
+        return string.matches("\\d{4}-\\d{2}\\-\\d{2}");
     }
     
     /**

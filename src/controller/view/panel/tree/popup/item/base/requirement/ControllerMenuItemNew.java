@@ -4,9 +4,7 @@ import controller.view.panel.tree.popup.item.ControllerMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Project;
-import model.structural.base.requirement.Requirement;
 import view.modal.new_.base.requirement.ViewNewRequirement;
-import view.modal.new_.base.requirement.traceability.ViewNewAddElement;
 import view.panel.tree.popup.base.requirement.TreePopupRequirement;
 
 /**
@@ -32,7 +30,5 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
         Object object = node.getUserObject();
         if (object instanceof Project)
             new ViewNewRequirement(this.getPanelModeling().getViewMenu()).setVisible(true);
-        else if (object instanceof Requirement)
-            new ViewNewAddElement(this.getPanelModeling().getViewMenu(), (Requirement) object).setVisible(true);
     }
 }

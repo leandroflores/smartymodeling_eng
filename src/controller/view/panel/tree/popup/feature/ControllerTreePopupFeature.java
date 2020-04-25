@@ -7,11 +7,12 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.diagram.FeatureDiagram;
+import model.structural.diagram.feature.base.Feature;
 import view.modal.delete.base.ViewDeleteDiagram;
 import view.modal.delete.base.ViewDeleteElement;
 import view.modal.edit.base.ViewEditDiagram;
-import view.modal.edit.base.ViewEditElement;
 import view.modal.edit.base.ViewEditProject;
+import view.modal.edit.diagram.feature.base.ViewEditFeature;
 import view.panel.tree.popup.feature.TreePopupFeature;
 
 /**
@@ -47,9 +48,9 @@ public class ControllerTreePopupFeature extends ControllerTreePopup {
     protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
         Diagram diagram = this.getDiagram(node);
         if (object instanceof Project)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
+            this.getPanelProject().initPanelEditProject();
         else if (object instanceof Diagram)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) object);
+            this.getPanelProject().initPanelEditDiagram((Diagram) object);
         else if (object instanceof Element)
             this.showPanelEdit(diagram, (Element) object);
     }
@@ -61,7 +62,7 @@ public class ControllerTreePopupFeature extends ControllerTreePopup {
      */
     private void showPanelEdit(Diagram diagram, Element element) {
         if (diagram instanceof FeatureDiagram)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditElement((FeatureDiagram) diagram, element);
+            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditElement((FeatureDiagram) diagram, element);
     }
     
     @Override
@@ -78,8 +79,8 @@ public class ControllerTreePopupFeature extends ControllerTreePopup {
             new ViewEditProject(this.getPanelModeling(), (Project) object).setVisible(true);
         else if (object instanceof Diagram)
             new ViewEditDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
-        else if (object instanceof Element)
-            new ViewEditElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
+        else if (object instanceof Feature)
+            new ViewEditFeature(this.getPanelModeling(), (FeatureDiagram) this.getDiagram(node), (Feature) object).setVisible(true);
     }
     
     @Override

@@ -1,19 +1,26 @@
 package view.main.structural;
 
 import controller.view.main.structural.ControllerViewMenu;
+import file.importation.ImportProject;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.base.product.Instance;
+import org.xml.sax.SAXException;
 import view.interfaces.Operation;
 import view.View;
 import view.style.ViewStyle;
@@ -210,11 +217,11 @@ public final class ViewMenu extends View implements Operation {
     private void createExportMenu() {
         this.createMenu("export", "Export");
         
-        this.createMenuItemShift("export_diagram", "Export Diagram", "menu/export/diagram.png", KeyEvent.VK_D);
-        this.createMenuItemShift("export_product", "Export Product", "menu/export/product.png", KeyEvent.VK_P);
+        this.createMenuItem("export_diagram", "Export Diagram", "menu/export/diagram.png");
+        this.createMenuItem("export_product", "Export Product", "menu/export/product.png");
         
-        this.createMenuItemShift("diagram_code",   "Export Diagram Code",  "menu/export/code-diagram.png",  KeyEvent.VK_C);
-        this.createMenuItemShift("instance_code",  "Export Instance Code", "menu/export/code-instance.png", KeyEvent.VK_I);
+        this.createMenuItem("diagram_code",   "Export Diagram Code",  "menu/export/code-diagram.png");
+        this.createMenuItem("instance_code",  "Export Instance Code", "menu/export/code-instance.png");
         
         this.getMenu("export").add(this.getMenuItemExportDiagram());
         this.getMenu("export").add(this.getMenuItemExportProduct());
@@ -877,29 +884,30 @@ public final class ViewMenu extends View implements Operation {
 //     * Main Method of SMartyModeling.
 //     * @param args 
 //     */
-    public static void main(String[] args) {
-        new ViewMenu().setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        new ViewMenu().setVisible(true);
+//    }
     
     /**
      * Alternative Main Method of SMartyModeling.
      * @param args 
      */
-//    public static void main(String[] args) {
-//        try {
+    public static void main(String[] args) {
+        try {
 //            if (args.length == 0) {
 //                new ViewMenu().setVisible(true);
 //            }else {
 //                String   path     = args[0].trim();
-//                Project  project_ = new ImportProject(path).getProject(); 
-//                ViewMenu view     = new ViewMenu();
-//                         view.setProject(project_);
-//                         view.update();
-//                         view.getPanelModeling().clear();
-//                         view.setVisible(true);
+                String   path     = "C:\\Users\\Leandro\\Documents\\0.smty";
+                Project  project_ = new ImportProject(path).getProject(); 
+                ViewMenu view     = new ViewMenu();
+                         view.setProject(project_);
+                         view.update();
+                         view.getPanelModeling().clear();
+                         view.setVisible(true);
 //            }
-//        } catch (IOException | ParserConfigurationException | SAXException | XPathExpressionException ex) {
-//            Logger.getLogger(ViewMenu.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+        } catch (IOException | ParserConfigurationException | SAXException | XPathExpressionException ex) {
+            Logger.getLogger(ViewMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

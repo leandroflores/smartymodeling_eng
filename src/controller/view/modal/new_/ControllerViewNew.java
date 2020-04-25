@@ -51,7 +51,7 @@ public abstract class ControllerViewNew extends ControllerViewModal {
     /**
      * Method responsible for Insert a New Object.
      */
-    private void insert() {
+    protected void insert() {
         if (this.check()) {
             this.new_();
             this.close();

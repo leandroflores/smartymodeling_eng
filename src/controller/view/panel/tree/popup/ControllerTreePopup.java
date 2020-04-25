@@ -9,6 +9,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.product.Instance;
 import view.panel.modeling.PanelModeling;
+import view.panel.project.PanelProject;
 import view.panel.tree.popup.TreePopup;
 
 /**
@@ -173,14 +174,6 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
     }
     
     /**
-     * Method responsible for returning the Tree Popup.
-     * @return Tree Popup.
-     */
-    protected TreePopup getPopup() {
-        return this.popup;
-    }
-    
-    /**
      * Method responsible for returning the Selected Node.
      * @return Selected Node.
      */
@@ -193,6 +186,22 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
      * @return Panel Modeling.
      */
     protected PanelModeling getPanelModeling() {
-        return this.popup.getPanel().getViewMenu().getPanelModeling();
+        return this.getPopup().getPanel().getViewMenu().getPanelModeling();
+    }
+    
+    /**
+     * Method responsible for returning the Panel Project.
+     * @return Panel Project.
+     */
+    protected PanelProject getPanelProject() {
+        return this.getPopup().getPanel().getViewMenu().getPanelProject();
+    }
+    
+    /**
+     * Method responsible for returning the Tree Popup.
+     * @return Tree Popup.
+     */
+    protected TreePopup getPopup() {
+        return this.popup;
     }
 }

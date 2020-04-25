@@ -11,12 +11,16 @@ import model.structural.base.variability.Variability;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.ComponentDiagram;
-import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.UseCaseDiagram;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.AttributeUML;
+import model.structural.diagram.classes.base.ClassUML;
+import model.structural.diagram.classes.base.InterfaceUML;
 import model.structural.diagram.classes.base.MethodUML;
+import model.structural.diagram.classes.base.PackageUML;
+import model.structural.diagram.sequence.base.InstanceUML;
+import model.structural.diagram.sequence.base.LifelineUML;
 import view.modal.delete.base.ViewDeleteDiagram;
 import view.modal.delete.base.ViewDeleteElement;
 import view.modal.delete.base.variability.ViewDeleteVariability;
@@ -25,7 +29,12 @@ import view.modal.edit.base.ViewEditElement;
 import view.modal.edit.base.ViewEditProject;
 import view.modal.edit.base.variability.ViewEditVariability;
 import view.modal.edit.diagram.classes.base.ViewEditAttributeUML;
+import view.modal.edit.diagram.classes.base.ViewEditClassUML;
+import view.modal.edit.diagram.classes.base.ViewEditInterfaceUML;
 import view.modal.edit.diagram.classes.base.ViewEditMethodUML;
+import view.modal.edit.diagram.classes.base.ViewEditPackageUML;
+import view.modal.edit.diagram.sequence.base.ViewEditInstanceUML;
+import view.modal.edit.diagram.sequence.base.ViewEditLifelineUML;
 import view.panel.tree.popup.diagram.TreePopupDiagram;
 
 /**
@@ -148,18 +157,16 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
      * @param element Element.
      */
     private void showPanelEdit(Diagram diagram, Element element) {
-        if (diagram instanceof FeatureDiagram)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditElement((FeatureDiagram) diagram, element);
-        else if (diagram instanceof ActivityDiagram)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditElement((ActivityDiagram) diagram, element);
+        if (diagram instanceof ActivityDiagram)
+            this.getPanelProject().initPanelEditElement((ActivityDiagram) diagram, element);
         else if (diagram instanceof ClassDiagram)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditElement((ClassDiagram) diagram, element);
+            this.getPanelProject().initPanelEditElement((ClassDiagram) diagram, element);
         else if (diagram instanceof ComponentDiagram)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditElement((ComponentDiagram) diagram, element);
+            this.getPanelProject().initPanelEditElement((ComponentDiagram) diagram, element);
         else if (diagram instanceof UseCaseDiagram)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditElement((UseCaseDiagram)  diagram, element);
+            this.getPanelProject().initPanelEditElement((UseCaseDiagram)  diagram, element);
         else if (diagram instanceof SequenceDiagram)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditElement((SequenceDiagram) diagram, element);
+            this.getPanelProject().initPanelEditElement((SequenceDiagram) diagram, element);
     }
     
     /**
@@ -169,9 +176,11 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
      */
     private void showPanelEdit(Diagram diagram, Association association) {
         if (diagram instanceof ActivityDiagram)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditAssociation((ActivityDiagram) diagram, association);
+            this.getPanelProject().initPanelEditAssociation((ActivityDiagram) diagram, association);
+        else if (diagram instanceof ClassDiagram)
+            this.getPanelProject().initPanelEditAssociation((ClassDiagram)    diagram, association);
         else if (diagram instanceof SequenceDiagram)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditAssociation((SequenceDiagram) diagram, association);
+            this.getPanelProject().initPanelEditAssociation((SequenceDiagram) diagram, association);
     }
     
     @Override
@@ -192,10 +201,20 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
             new ViewEditDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
         else if (object instanceof Variability)
             new ViewEditVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
+        else if (object instanceof PackageUML)
+            new ViewEditPackageUML(this.getPanelModeling(),   (ClassDiagram) this.getDiagram(node), (PackageUML) object).setVisible(true);
+        else if (object instanceof InterfaceUML)
+            new ViewEditInterfaceUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (InterfaceUML) object).setVisible(true);
+        else if (object instanceof ClassUML)
+            new ViewEditClassUML(this.getPanelModeling(),     (ClassDiagram) this.getDiagram(node), (ClassUML) object).setVisible(true);
         else if (object instanceof AttributeUML)
             new ViewEditAttributeUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (AttributeUML) object).setVisible(true);
         else if (object instanceof MethodUML)
-            new ViewEditMethodUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (MethodUML) object).setVisible(true);
+            new ViewEditMethodUML(this.getPanelModeling(),    (ClassDiagram) this.getDiagram(node), (MethodUML) object).setVisible(true);
+        else if (object instanceof LifelineUML)
+            new ViewEditLifelineUML(this.getPanelModeling(),  (SequenceDiagram) this.getDiagram(node), (LifelineUML) object).setVisible(true);
+        else if (object instanceof InstanceUML)
+            new ViewEditInstanceUML(this.getPanelModeling(),  (SequenceDiagram) this.getDiagram(node), (InstanceUML) object).setVisible(true);
         else if (object instanceof Element)
             new ViewEditElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
     }

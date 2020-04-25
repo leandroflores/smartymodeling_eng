@@ -10,6 +10,7 @@ import model.structural.base.product.Product;
 import view.modal.delete.base.product.ViewDeleteArtifact;
 import view.modal.delete.base.product.ViewDeleteInstance;
 import view.modal.delete.base.product.ViewDeleteProduct;
+import view.modal.edit.base.product.ViewEditArtifact;
 import view.modal.edit.base.product.ViewEditInstance;
 import view.modal.edit.base.product.ViewEditProduct;
 import view.panel.tree.popup.base.product.TreePopupProduct;
@@ -41,7 +42,7 @@ public class ControllerTreePopupProduct extends ControllerTreePopup {
         else if (node.getUserObject() instanceof Instance)
             super.setPopupFlag(false, true, true);
         else if (node.getUserObject() instanceof Artifact)
-            super.setPopupFlag(false, false, true);
+            super.setPopupFlag(false, true, true);
         this.getPopup().show(event.getComponent(), event.getX(), event.getY());
     }
 
@@ -66,13 +67,13 @@ public class ControllerTreePopupProduct extends ControllerTreePopup {
     @Override
     protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Project)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditProject();
+            this.getPanelProject().initPanelEditProject();
         else if (object instanceof Product)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditProduct((Product) object);
+            this.getPanelProject().initPanelEditProduct((Product) object);
         else if (object instanceof Instance)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditInstance((Instance) object);
+            this.getPanelProject().initPanelEditInstance((Instance) object);
         else if (object instanceof Artifact)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditArtifact((Artifact) object);
+            this.getPanelProject().initPanelEditArtifact((Artifact) object);
     }
     
     @Override
@@ -91,6 +92,8 @@ public class ControllerTreePopupProduct extends ControllerTreePopup {
             new ViewEditProduct(this.getPanelModeling(),  (Product) object).setVisible(true);
         else if (object instanceof Instance)
             new ViewEditInstance(this.getPanelModeling(), (Instance) object).setVisible(true);
+        else if (object instanceof Artifact)
+            new ViewEditArtifact(this.getPanelModeling(), (Artifact) object).setVisible(true);
     }
     
     @Override

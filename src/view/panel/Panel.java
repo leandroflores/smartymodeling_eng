@@ -199,6 +199,21 @@ public abstract class Panel extends JPanel {
     }
     
     /**
+     * Method responsible for returning a New Button.
+     * @param  id Button Id.
+     * @param  title Button Title.
+     * @param  focus Button Focus Title.
+     * @param  path Button Image Path.
+     * @param  dimension Button Dimension.
+     * @return New Button.
+     */
+    protected JButton createButton(String id, String title, String focus, String path, Dimension dimension) {
+        JButton button = this.createButton(id, title, focus, path);
+                button.setPreferredSize(dimension);
+        return  button;
+    }
+    
+    /**
      * Method responsible for returning the Button by Id.
      * @param  id Button Id.
      * @return Button found.

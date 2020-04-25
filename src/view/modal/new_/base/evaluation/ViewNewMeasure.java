@@ -2,14 +2,13 @@ package view.modal.new_.base.evaluation;
 
 import controller.view.modal.new_.base.evaluation.ControllerViewNewMeasure;
 import java.awt.Dimension;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import model.structural.base.evaluation.Measure;
-import view.panel.base.evaluation.measure.PanelBaseEvaluation;
-import view.panel.base.evaluation.measure.PanelBaseNewMeasure;
-import view.panel.base.evaluation.measure.PanelBaseTarget;
+import view.panel.new_.base.evaluation.measure.PanelBaseEvaluation;
+import view.panel.new_.base.evaluation.measure.PanelBaseMeasure;
+import view.panel.new_.base.evaluation.measure.PanelBaseTarget;
 import view.modal.new_.ViewNew;
 import view.main.structural.ViewMenu;
+import view.panel.new_.base.evaluation.PanelNewMeasure;
 
 /**
  * <p>Class of View <b>ViewNewMeasure</b>.</p>
@@ -37,99 +36,42 @@ public final class ViewNewMeasure extends ViewNew {
     
     @Override
     public void initComponents() {
-        this.setSize(600, 520);
+        this.setSize(new Dimension(600, 525));
         this.addHeader();
         this.addComponents();
         this.addFooter();
-        this.addPanelBaseMeasure();
+        this.getInsertButton().setEnabled(false);
     }
     
     @Override
     public void addComponents() {
-        this.addTabbedPane();
+        this.addPanelNewMeasure();
         this.addLines(1);
     }
     
     /**
-     * Method responsible for adding the Tabbed Pane.
+     * Method responsible for adding the Panel New Measure.
      */
-    private void addTabbedPane() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(500, 400));
-        this.add(this.tabbedPane);
+    private void addPanelNewMeasure() {
+        this.addPanel("panelNewMeasure", new PanelNewMeasure(this, this.measure));
+        this.getPanelNewMeasure().setPreferredSize(new Dimension(500, 400));
+        this.add(this.getPanelNewMeasure());
     }
     
     /**
-     * Method responsible for adding the Panel Base Measure.
+     * Method responsible for returning the Panel New Measure.
+     * @return Panel New Measure.
      */
-    public void addPanelBaseMeasure() {
-        this.addPanel("panelBaseNewMeasure", new PanelBaseNewMeasure(this, this.measure));
-        this.tabbedPane.removeAll();
-        this.createScrollPane("scrollPanelBaseMeasure",  this.getPanelBaseMeasure());
-        this.getScrollPanelBaseMeasure().setViewportView(this.getPanelBaseMeasure());
-        this.tabbedPane.add("Measure", this.getScrollPanelBaseMeasure());
-        this.getInsertButton().setEnabled(false);
-    }
-    
-    /**
-     * Method responsible for adding the Panel Base Target.
-     */
-    public void addPanelBaseTarget() {
-        this.addPanel("panelBaseTarget", new PanelBaseTarget(this, this.measure));
-        this.createScrollPane("scrollPanelBaseTarget",  this.getPanelBaseTarget());
-        this.getScrollPanelBaseTarget().setViewportView(this.getPanelBaseTarget());
-        this.tabbedPane.add("Target", this.getScrollPanelBaseTarget());
-        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(1));
-        this.tabbedPane.setEnabledAt(0, false);
-        this.getInsertButton().setEnabled(false);
-    }
-    
-    /**
-     * Method responsible for removing the Panel Base Target.
-     */
-    public void removePanelBaseTarget() {
-        this.tabbedPane.getComponent(0).setEnabled(true);
-        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(0));
-        this.tabbedPane.remove(1);
-    }
-    
-    /**
-     * Method responsible for adding the Panel Base Evaluation.
-     */
-    public void addPanelBaseEvaluation() {
-        this.addPanel("panelBaseEvaluation", new PanelBaseEvaluation(this, this.measure));
-        this.createScrollPane("scrollPanelEvaluation",  this.getPanelBaseEvaluation());
-        this.getScrollPanelEvaluation().setViewportView(this.getPanelBaseEvaluation());
-        this.tabbedPane.add("Evaluation", this.getScrollPanelEvaluation());
-        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(2));
-        this.tabbedPane.setEnabledAt(1, false);
-        this.getInsertButton().setEnabled(true);
-    }
-    
-    /**
-     * Method responsible for removing the Panel Base Evaluation.
-     */
-    public void removePanelBaseEvaluation() {
-        this.tabbedPane.getComponent(1).setEnabled(true);
-        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(1));
-        this.tabbedPane.remove(2);
-        this.getInsertButton().setEnabled(false);
+    private PanelNewMeasure getPanelNewMeasure() {
+        return (PanelNewMeasure) this.getPanel("panelNewMeasure");
     }
     
     /**
      * Method responsible for returning the Panel Base Measure.
      * @return Panel Base Measure.
      */
-    public PanelBaseNewMeasure getPanelBaseMeasure() {
-        return (PanelBaseNewMeasure) this.getPanel("panelBaseMeasure");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Base Measure.
-     * @return Scroll Panel Base Measure.
-     */
-    public JScrollPane getScrollPanelBaseMeasure() {
-        return this.getScrollPane("scrollPanelBaseMeasure");
+    public PanelBaseMeasure getPanelBaseMeasure() {
+        return this.getPanelNewMeasure().getPanelBaseMeasure();
     }
     
     /**
@@ -137,15 +79,7 @@ public final class ViewNewMeasure extends ViewNew {
      * @return Panel Base Target.
      */
     public PanelBaseTarget getPanelBaseTarget() {
-        return (PanelBaseTarget) this.getPanel("panelBaseTarget");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Target.
-     * @return Scroll Panel Target.
-     */
-    public JScrollPane getScrollPanelBaseTarget() {
-        return this.getScrollPane("scrollPanelBaseTarget");
+        return this.getPanelNewMeasure().getPanelBaseTarget();
     }
     
     /**
@@ -153,15 +87,7 @@ public final class ViewNewMeasure extends ViewNew {
      * @return Panel Base Evaluation.
      */
     public PanelBaseEvaluation getPanelBaseEvaluation() {
-        return (PanelBaseEvaluation) this.getPanel("panelBaseEvaluation");
-    }
-    
-    /**
-     * Method responsible for returning the Scroll Panel Evaluation.
-     * @return Scroll Panel Evaluation.
-     */
-    public JScrollPane getScrollPanelEvaluation() {
-        return this.getScrollPane("scrollPanelEvaluation");
+        return this.getPanelNewMeasure().getPanelBaseEvaluation();
     }
     
     /**

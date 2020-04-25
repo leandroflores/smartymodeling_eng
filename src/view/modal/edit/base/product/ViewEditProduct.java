@@ -52,8 +52,16 @@ public final class ViewEditProduct extends ViewEdit {
      */
     private void addPanelEditProduct() {
         this.addPanel("panelEditProduct", new PanelEditProduct(this.view, this.product));
-        this.getPanel("panelEditProduct").setPreferredSize(new Dimension(500, 225));
-        this.add(this.getPanel("panelEditProduct"));
+        this.getPanelEditProduct().setPreferredSize(new Dimension(500, 225));
+        this.add(this.getPanelEditProduct());
+    }
+    
+    /**
+     * Method responsible for returning the Panel Edit Product.
+     * @return Panel Edit Product.
+     */
+    private PanelEditProduct getPanelEditProduct() {
+        return (PanelEditProduct) this.getPanel("panelEditProduct");
     }
     
     /**
@@ -61,7 +69,7 @@ public final class ViewEditProduct extends ViewEdit {
      * @return Panel Base Product.
      */
     public PanelBaseProduct getPanelBaseProduct() {
-        return ((PanelEditProduct) this.getPanel("panelEditProduct")).getPanelBaseProduct();
+        return this.getPanelEditProduct().getPanelBaseProduct();
     }
     
     /**

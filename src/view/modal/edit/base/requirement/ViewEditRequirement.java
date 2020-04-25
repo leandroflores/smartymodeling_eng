@@ -55,8 +55,16 @@ public final class ViewEditRequirement extends ViewEdit {
      */
     private void addPanelEditRequirement() {
         this.addPanel("panelEditRequirement", new PanelEditRequirement(this.view, this.requirement, this.index));
-        this.getPanel("panelEditRequirement").setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanel("panelEditRequirement"));
+        this.getPanelEditRequirement().setPreferredSize(new Dimension(500, 300));
+        this.add(this.getPanelEditRequirement());
+    }
+    
+    /**
+     * Method responsible for returning the Panel Edit Requirement.
+     * @return Panel Edit Requirement.
+     */
+    private PanelEditRequirement getPanelEditRequirement() {
+        return (PanelEditRequirement) this.getPanel("panelEditRequirement");
     }
     
     /**
@@ -64,7 +72,7 @@ public final class ViewEditRequirement extends ViewEdit {
      * @return Panel Base Requirement.
      */
     public PanelBaseRequirement getPanelBaseRequirement() {
-        return ((PanelEditRequirement) this.getPanel("panelEditRequirement")).getPanelBaseRequirement();
+        return this.getPanelEditRequirement().getPanelBaseRequirement();
     }
     
     /**

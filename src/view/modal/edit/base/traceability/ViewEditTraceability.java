@@ -53,8 +53,8 @@ public final class ViewEditTraceability extends ViewEdit {
      */
     private void addPanelEditTraceability() {
         this.addPanel("panelEditTraceability", new PanelEditTraceability(this.view, this.traceability));
-        this.getPanel("panelEditTraceability").setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanel("panelEditTraceability"));
+        this.getPanelEditTraceability().setPreferredSize(new Dimension(500, 300));
+        this.add(this.getPanelEditTraceability());
     }
     
     /**

@@ -31,33 +31,20 @@ public class ControllerTreePopupRequirement extends ControllerTreePopup {
     @Override
     protected void showPopup(DefaultMutableTreeNode node, MouseEvent event) {
         if (node.getUserObject() instanceof Project)
-            this.setPopupFlag(true, false, true, false);
+            this.setPopupFlag(true, true, false);
         else if (node.getUserObject() instanceof Requirement)
-            this.setPopupFlag(false, true, true, true);
+            this.setPopupFlag(true, true, true);
         else if (node.getUserObject() instanceof Element)
-            this.setPopupFlag(false, false, true, true);
+            this.setPopupFlag(false, true, true);
         this.getPopup().show(event.getComponent(), event.getX(), event.getY());
-    }
-
-    /**
-     * Method responsible for setting the Popup Flag.
-     * @param new_ New Requirement Flag.
-     * @param add Add Element Flag.
-     * @param edit Edit Flag.
-     * @param delete Delete Flag.
-     */
-    private void setPopupFlag(boolean new_, boolean add, boolean edit, boolean delete) {
-        super.setPopupFlag(new_, edit, delete);
-        this.getPopup().getNewRequirementMenuItem().setVisible(new_);
-        this.getPopup().getAddElementMenuItem().setVisible(add);
     }
     
     @Override
     protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Project)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditProject();
+            this.getPanelProject().initPanelEditProject();
         else if (object instanceof Requirement)
-            this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditRequirement((Requirement) object, 0);
+            this.getPanelProject().initPanelEditRequirement((Requirement) object, 0);
         else if (object instanceof Element)
             this.showPanelEditElement(node, (Element) object);
     }
@@ -69,7 +56,7 @@ public class ControllerTreePopupRequirement extends ControllerTreePopup {
      */
     private void showPanelEditElement(DefaultMutableTreeNode node, Element element) {
         Requirement requirement = this.getRequirement(node);
-        this.popup.getPanel().getViewMenu().getPanelProject().initPanelEditRequirement(requirement, element.getDiagram().getIndex());
+        this.getPanelProject().initPanelEditRequirement(requirement, element.getDiagram().getIndex());
     }
     
     @Override

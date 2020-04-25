@@ -61,9 +61,9 @@ public class ControllerTreePopupEvaluation extends ControllerTreePopup {
     @Override
     protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Project)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditProject();
+            this.getPanelProject().initPanelEditProject();
         else if (object instanceof Metric)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditMetric((Metric) object);
+            this.getPanelProject().initPanelEditMetric((Metric) object);
     }
     
     @Override

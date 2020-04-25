@@ -52,8 +52,16 @@ public final class ViewEditInstance extends ViewEdit {
      */
     private void addPanelEditInstance() {
         this.addPanel("panelEditInstance", new PanelEditInstance(this.view, this.instance));
-        this.getPanel("panelEditInstance").setPreferredSize(new Dimension(500, 225));
-        this.add(this.getPanel("panelEditInstance"));
+        this.getPanelEditInstance().setPreferredSize(new Dimension(500, 225));
+        this.add(this.getPanelEditInstance());
+    }
+    
+    /**
+     * Method responsible for returning the Panel Edit Instance.
+     * @return Panel Edit Instance.
+     */
+    private PanelEditInstance getPanelEditInstance() {
+        return (PanelEditInstance) this.getPanel("panelEditInstance");
     }
     
     /**
@@ -61,7 +69,7 @@ public final class ViewEditInstance extends ViewEdit {
      * @return Panel Base Instance.
      */
     public PanelBaseInstance getPanelBaseInstance() {
-        return ((PanelEditInstance) this.getPanel("panelEditInstance")).getPanelBaseInstance();
+        return this.getPanelEditInstance().getPanelBaseInstance();
     }
     
     /**

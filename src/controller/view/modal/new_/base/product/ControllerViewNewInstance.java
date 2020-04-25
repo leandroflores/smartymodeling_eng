@@ -34,9 +34,9 @@ public class ControllerViewNewInstance extends ControllerViewNew {
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseNewInstance().getProductComboBox(), "Select a Product!")
-            && this.check(this.getView().getPanelBaseNewInstance().getDiagramComboBox(), "Select a Diagram!")
-            && this.check(this.getView().getPanelBaseNewInstance().getNameTextField(), "Name is required!")
+        return this.check(this.getView().getPanelBaseInstance().getProductComboBox(), "Select a Product!")
+            && this.check(this.getView().getPanelBaseInstance().getDiagramComboBox(), "Select a Diagram!")
+            && this.check(this.getView().getPanelBaseInstance().getNameTextField(), "Name is required!")
             && this.checkInstance();
     }
     
@@ -72,6 +72,11 @@ public class ControllerViewNewInstance extends ControllerViewNew {
                  this.addInstanceArtifacts();
                  instance.update();
         return   instance;
+    }
+    
+    @Override
+    public void insert() {
+        super.insert();
     }
     
     @Override

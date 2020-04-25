@@ -26,22 +26,23 @@ public class ControllerViewNewMeasure extends ControllerViewNew {
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseMeasure().getNameTextField(),  "Name is required!")
-            && this.checkDate(this.getView().getPanelBaseMeasure().getDateTextField(), "Type a Date (YYYY-MM-DD)!")
-            && this.check(this.getView().getPanelBaseMeasure().getMetricComboBox(), "Select a Metric!");
+        return this.check(this.getView().getPanelBaseEvaluation().getValueTextField(), "Invalid Value!");
     }
 
+    @Override
+    public void insert() {
+        super.insert();
+    }
+    
     @Override
     public void new_() {
         Measure measure = this.getView().getMeasure();
                 measure.setName(this.getView().getPanelBaseMeasure().getNameTextField().getText().trim());
                 measure.setDate(this.getView().getPanelBaseMeasure().getDateTextField().getText().trim());
                 measure.setMetric((Metric) this.getView().getPanelBaseMeasure().getMetricComboBox().getSelectedItem());
+                measure.setTarget(this.getValue(this.getView().getPanelBaseTarget().getTargetComboBox()));
                 measure.setValue(this.getDouble(this.getView().getPanelBaseEvaluation().getValueTextField()));
-        System.out.println("New Measure: ");
-        System.out.println(measure);
-        System.out.println("");
-//        this.viewNewMeasure.getProject().addMeasure(measure);
+        this.getView().getProject().addMeasure(measure);
         this.getView().getViewMenu().setTabIndex(5);
     }
     

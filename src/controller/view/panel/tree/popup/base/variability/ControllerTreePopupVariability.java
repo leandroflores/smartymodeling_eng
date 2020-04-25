@@ -48,22 +48,26 @@ public class ControllerTreePopupVariability extends ControllerTreePopup {
     protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
         Diagram diagram = this.getDiagram(node);
         if (object instanceof Project)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditProject();
+            this.getPanelProject().initPanelEditProject();
         else if (object instanceof Diagram)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) object);
+            this.getPanelProject().initPanelEditDiagram((Diagram) object);
         else if (object instanceof Variability)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, (Variability) object, 0);
+            this.getPanelProject().initPanelEditVariability(diagram, (Variability) object, 0);
         else if (object instanceof Element)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, (Variability) object, 1);
+            this.showPanelEdit(diagram, this.getVariability(node), (Element) object);
     }
     
     /**
      * Method responsible for showing the Panel Edit.
      * @param diagram Diagram.
+     * @param variability Variability.
      * @param element Element.
      */
-    private void showPanelEdit(Diagram diagram, Element element) {
-        
+    private void showPanelEdit(Diagram diagram, Variability variability, Element element) {
+        if (variability.isVariant(element))
+            this.getPanelProject().initPanelEditVariability(diagram, variability, 1);
+        else
+            this.getPanelProject().initPanelEditVariability(diagram, variability, 0);
     }
     
     @Override
@@ -71,8 +75,18 @@ public class ControllerTreePopupVariability extends ControllerTreePopup {
         if (object instanceof Variability)
             new ViewDeleteVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
         else if (object instanceof Element)
-            System.out.println("Delete Variant: " + object);
-//            new ViewDeleteElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
+            this.delete(this.getVariability(node), (Element) object);
+    }
+    
+    /**
+     * Method responsible for deleting a Element of a Variability.
+     * @param variability Variability.
+     * @param element Element.
+     */
+    private void delete(Variability variability, Element element) {
+        variability.removeVariant(element);
+        this.getPanelModeling().getViewMenu().updatePanelTree();
+        this.getPanelModeling().getViewMenu().setSave(false);
     }
     
     @Override
@@ -83,5 +97,17 @@ public class ControllerTreePopupVariability extends ControllerTreePopup {
             new ViewEditDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
         else if (object instanceof Variability)
             new ViewEditVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
+    }
+    
+    /**
+     * Method responsible for returning the Variability Node.
+     * @param  node Tree Node.
+     * @return Variability Node.
+     */
+    protected Variability getVariability(DefaultMutableTreeNode node) {
+        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
+        if (parent != null && parent.getUserObject() instanceof Variability)
+            return (Variability) parent.getUserObject();
+        return null;
     }
 }

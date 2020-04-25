@@ -1,7 +1,6 @@
 package view.modal.new_;
 
 import javax.swing.JButton;
-import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import view.modal.ViewModal;
 import view.main.structural.ViewMenu;
@@ -17,7 +16,6 @@ import view.main.structural.ViewMenu;
 public abstract class ViewNew extends ViewModal {
     protected final ViewMenu view;
     protected final Project  project;
-    protected JTabbedPane tabbedPane;
     
     /**
      * Default constructor method of Class.

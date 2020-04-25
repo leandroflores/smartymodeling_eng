@@ -25,7 +25,7 @@ public final class Measure implements Exportable {
     public Measure() {
         this.id     = "";
         this.name   = "NewMeasure";
-        this.date   = new FunctDate().getCurrentFormattedDate();
+        this.date   = new FunctDate().getCurrentUSFormattedDate();
         this.metric = null;
         this.target = "Project";
         this.value  = 0.0d;
@@ -38,7 +38,7 @@ public final class Measure implements Exportable {
     public Measure(org.w3c.dom.Element element) {
         this.id     = element.getAttribute("id");
         this.name   = element.getAttribute("name");
-        this.date   = new FunctDate().getCurrentFormattedDate();
+        this.date   = new FunctDate().getCurrentUSFormattedDate();
         this.metric = null;
         this.target = element.getAttribute("target");
         this.setValue(element);
@@ -168,7 +168,7 @@ public final class Measure implements Exportable {
                export += " date=\""   + this.date           + "\"";
                export += " metric=\"" + this.metric.getId() + "\"";
                export += " target=\"" + this.target         + "\"";
-               export += " value=\""  + this.value          + "\">\n";
+               export += " value=\""  + this.value          + "\"/>\n";
         return export;
     }
     

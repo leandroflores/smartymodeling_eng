@@ -20,8 +20,8 @@ import view.panel.modeling.PanelModeling;
  * @see    view.modal.edit.ViewEdit
  */
 public final class ViewEditVariability extends ViewEdit {
-    private final Variability variability;
     private final Diagram diagram;
+    private final Variability variability;
     
     /**
      * Default constructor method of Class.
@@ -31,8 +31,8 @@ public final class ViewEditVariability extends ViewEdit {
      */
     public ViewEditVariability(PanelModeling panel, Diagram diagram, Variability variability) {
         super(panel.getViewMenu());
-        this.variability = variability;
         this.diagram     = diagram;
+        this.variability = variability;
         this.controller  = new ControllerViewEditVariability(this);
         this.title       = "Edit Variability Data";
         this.initComponents();
@@ -57,8 +57,8 @@ public final class ViewEditVariability extends ViewEdit {
      */
     private void addPanelEditVariability() {
         this.addPanel("panelEditVariability", new PanelEditVariability(this.view, this.diagram, this.variability, 0));
-        this.getPanel("panelEditVariability").setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanel("panelEditVariability"));
+        this.getPanelEditVariability().setPreferredSize(new Dimension(500, 300));
+        this.add(this.getPanelEditVariability());
     }
     
     /**
