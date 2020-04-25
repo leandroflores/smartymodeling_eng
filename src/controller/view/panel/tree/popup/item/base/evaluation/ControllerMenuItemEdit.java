@@ -4,8 +4,10 @@ import controller.view.panel.tree.popup.item.ControllerMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Project;
+import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
 import view.modal.edit.base.ViewEditProject;
+import view.modal.edit.base.evaluation.ViewEditMeasure;
 import view.modal.edit.base.evaluation.ViewEditMetric;
 import view.panel.tree.popup.base.evaluation.TreePopupEvaluation;
 
@@ -34,5 +36,7 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
             new ViewEditProject(this.getPanelModeling(), (Project) object).setVisible(true);
         else if (object instanceof Metric)
             new ViewEditMetric(this.getPanelModeling(),  (Metric)  object).setVisible(true);
+        else if (object instanceof Measure)
+            new ViewEditMeasure(this.getPanelModeling(), (Measure) object).setVisible(true);
     }
 }

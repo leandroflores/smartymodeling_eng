@@ -8,6 +8,7 @@ import view.panel.new_.base.product.instance.PanelBaseInstance;
 import view.modal.new_.ViewNew;
 import view.main.structural.ViewMenu;
 import view.panel.new_.base.product.PanelNewInstance;
+import view.panel.new_.base.product.instance.PanelBaseArtifacts;
 
 /**
  * <p>Class of View <b>ViewNewInstance</b>.</p>
@@ -71,6 +72,14 @@ public final class ViewNewInstance extends ViewNew {
      */
     public PanelBaseInstance getPanelBaseInstance() {
         return this.getPanelNewInstance().getPanelBaseInstance();
+    }
+    
+    /**
+     * Method responsible for returning the Panel Base Artifacts.
+     * @return Panel Base Artifacts.
+     */
+    public PanelBaseArtifacts getPanelBaseArtifacts() {
+        return this.getPanelNewInstance().getPanelBaseArtifacts();
     }
     
     /**

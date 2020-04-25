@@ -16,10 +16,10 @@ public class ControllerViewEditMetric extends ControllerViewEdit {
 
     /**
      * Default constructor method of Class.
-     * @param viewEdit View Edit Metric.
+     * @param view View Edit Metric.
      */
-    public ControllerViewEditMetric(ViewEditMetric viewEdit) {
-        super(viewEdit);
+    public ControllerViewEditMetric(ViewEditMetric view) {
+        super(view);
     }
     
     @Override

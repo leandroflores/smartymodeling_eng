@@ -1,8 +1,8 @@
 package view.panel.new_.base.product.instance;
 
 import controller.view.panel.new_.base.product.instance.ControllerPanelBaseArtifacts;
-import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.base.product.Instance;
 import view.panel.new_.base.product.PanelNewInstance;
@@ -34,7 +34,6 @@ public final class PanelBaseArtifacts extends PanelBase {
     
     @Override
     protected void setDefaultProperties() {
-        this.setPreferredSize(new Dimension(600, 350));
         this.setLayout(new GridBagLayout());
     }
     
@@ -48,18 +47,24 @@ public final class PanelBaseArtifacts extends PanelBase {
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Name*: "), this.createConstraints(2, 1, 0, 1));
-        this.add(this.createTextFieldNoEditable("nameTextField", this.getInstance().getName(), 10), this.createConstraints(4, 1, 2, 1));
+        this.add(this.createTextField("nameTextField", "", 10), this.createConstraints(4, 1, 2, 1));
         
-        this.add(this.createLabel("Artifacts: "), this.createConstraints(2, 1, 0, 2));
-        this.add(this.createTextFieldNoEditable("elementsTextField", "", 10), this.createConstraints(4, 1, 2, 2));
+        this.add(this.createLabel("Product*: "), this.createConstraints(2, 1, 0, 2));
+        this.add(this.createComboBox("productComboBox", this.getProject().getProductsList().toArray(), 15), this.createConstraints(4, 1, 2, 2));
         
-        this.add(this.createLabel("Relationships: "), this.createConstraints(2, 1, 0, 3));
-        this.add(this.createTextFieldNoEditable("associationsTextField", "", 10), this.createConstraints(4, 1, 2, 3));
+        this.add(this.createLabel("Diagram: "), this.createConstraints(2, 1, 0, 3));
+        this.add(this.createTextFieldNoEditable("diagramTextField", "", 10), this.createConstraints(4, 1, 2, 3));
+        
+        this.add(this.createLabel("Artifacts: "), this.createConstraints(2, 1, 0, 4));
+        this.add(this.createTextFieldNoEditable("elementsTextField", "", 10), this.createConstraints(4, 1, 2, 4));
+        
+        this.add(this.createLabel("Relationships: "), this.createConstraints(2, 1, 0, 5));
+        this.add(this.createTextFieldNoEditable("associationsTextField", "", 10), this.createConstraints(4, 1, 2, 5));
     }
     
     @Override
     public void addFooter() {
-        this.add(this.getFooter(), this.createConstraints(6, 1, 0, 4));
+        this.add(this.getFooter(), this.createConstraints(6, 1, 0, 6));
         this.getNextButton().setEnabled(false);
     }
     
@@ -68,6 +73,8 @@ public final class PanelBaseArtifacts extends PanelBase {
      */
     public void setValues() {
         this.getNameTextField().setText(this.getInstance().getName());
+        this.getProductComboBox().setSelectedItem(this.getInstance().getProduct());
+        this.getDiagramTextField().setText(this.getInstance().getDiagram().toString());
         this.getElementsTextField().setText(Integer.toString(this.getPanelNew().getElementsSize()));
         this.getAssociationsTextField().setText(Integer.toString(this.getPanelNew().getAssociationsSize()));
         
@@ -80,6 +87,22 @@ public final class PanelBaseArtifacts extends PanelBase {
      */
     public JTextField getNameTextField() {
         return this.getTextField("nameTextField");
+    }
+    
+    /**
+     * Method responsible for returning the Product Combo Box.
+     * @return Product Combo Box.
+     */
+    public JComboBox getProductComboBox() {
+        return this.getComboBox("productComboBox");
+    }
+    
+    /**
+     * Method responsible for returning the Diagram Text Field.
+     * @return Diagram Text Field.
+     */
+    public JTextField getDiagramTextField() {
+        return this.getTextField("diagramTextField");
     }
     
     /**

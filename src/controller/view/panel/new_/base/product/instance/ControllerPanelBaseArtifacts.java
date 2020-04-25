@@ -1,6 +1,8 @@
 package controller.view.panel.new_.base.product.instance;
 
+import java.awt.event.ActionEvent;
 import model.structural.base.product.Instance;
+import model.structural.base.product.Product;
 import view.panel.new_.base.product.instance.PanelBaseArtifacts;
 
 /**
@@ -19,6 +21,13 @@ public class ControllerPanelBaseArtifacts extends ControllerPanelBase {
      */
     public ControllerPanelBaseArtifacts(PanelBaseArtifacts panel) {
         super(panel);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        super.actionPerformed(event);
+        if (this.getPanel().getProductComboBox().equals(event.getSource()))
+            this.getInstance().setProduct((Product) this.getPanel().getProductComboBox().getSelectedItem());
     }
     
     @Override

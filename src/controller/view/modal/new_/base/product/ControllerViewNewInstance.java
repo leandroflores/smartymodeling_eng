@@ -1,7 +1,6 @@
 package controller.view.modal.new_.base.product;
 
 import controller.view.modal.new_.ControllerViewNew;
-import java.awt.event.ActionEvent;
 import java.util.Map;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
@@ -28,16 +27,23 @@ public class ControllerViewNewInstance extends ControllerViewNew {
     }
     
     @Override
-    public void actionPerformed(ActionEvent event) {
-        super.actionPerformed(event);
+    public boolean check() {
+        return this.check(this.getView().getPanelBaseInstance().getDiagramComboBox(),  "Select a Diagram!")
+            && this.check(this.getView().getPanelBaseArtifacts().getProductComboBox(), "Select a Product!")
+            && this.check(this.getView().getPanelBaseArtifacts().getNameTextField(), "Name is required!")
+            && this.checkInstance();
     }
     
-    @Override
-    public boolean check() {
-        return this.check(this.getView().getPanelBaseInstance().getProductComboBox(), "Select a Product!")
-            && this.check(this.getView().getPanelBaseInstance().getDiagramComboBox(), "Select a Diagram!")
-            && this.check(this.getView().getPanelBaseInstance().getNameTextField(), "Name is required!")
-            && this.checkInstance();
+    /**
+     * Method responsible for returning if the Instance contains Artifacts.
+     * @return Instance contains Artifacts.
+     */
+    private boolean containsArtifacts() {
+        for (Integer count : this.getView().getElements().values()) {
+            if (count > 0)
+                return true;
+        }
+        return false;
     }
     
     /**
@@ -45,7 +51,7 @@ public class ControllerViewNewInstance extends ControllerViewNew {
      * @return Instance is not Empty.
      */
     public boolean checkInstance() {
-        if (this.getView().getInstance().isEmpty()) {
+        if (!this.containsArtifacts()) {
             new ViewError(this.getView(), "Instance is Empty!").setVisible(true);
             return false;
         }
@@ -53,9 +59,9 @@ public class ControllerViewNewInstance extends ControllerViewNew {
     }
 
     /**
-     * Method responsible for adding the Instance Artifacts.
+     * Method responsible for adding the New Artifacts.
      */
-    public void addInstanceArtifacts() {
+    public void addNewArtifacts() {
         Instance instance = this.getView().getInstance();
         for (Map.Entry<String, Integer> artifact : this.getView().getElements().entrySet()) {
             if (artifact.getValue() > 0)
@@ -69,7 +75,7 @@ public class ControllerViewNewInstance extends ControllerViewNew {
      */
     public Instance createNewInstance() {
         Instance instance = this.getView().getInstance();
-                 this.addInstanceArtifacts();
+                 this.addNewArtifacts();
                  instance.update();
         return   instance;
     }

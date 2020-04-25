@@ -52,8 +52,7 @@ public final class PanelNewInstance extends PanelNew {
     public void addPanelBaseInstance() {
         this.addPanel("panelBaseInstance", new PanelBaseInstance(this, this.instance));
         this.tabbedPane.removeAll();
-        this.createScrollPane("scrollPanelBaseInstance");
-        this.getScrollPane("scrollPanelBaseInstance").setViewportView(this.getPanelBaseInstance());
+        this.createScrollPane("scrollPanelBaseInstance", this.getPanelBaseInstance());
         this.tabbedPane.add("Instance", this.getScrollPane("scrollPanelBaseInstance"));
     }
     
@@ -87,7 +86,9 @@ public final class PanelNewInstance extends PanelNew {
      */
     public void addPanelBaseVarPoints() {
         this.addPanel("panelBaseVarPoints", new PanelBaseVarPoints(this, this.instance));
-        this.tabbedPane.add("Variation Points", this.getPanelBaseVarPoints());
+        this.createScrollPane("scrollPanelBaseVarPoints", this.getPanelBaseVarPoints());
+        this.getScrollPane("scrollPanelBaseVarPoints").setPreferredSize(new Dimension(600, 350));
+        this.tabbedPane.add("Variation Points", this.getScrollPane("scrollPanelBaseVarPoints"));
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(2));
         this.tabbedPane.setEnabledAt(1, false);
         this.getView().getInsertButton().setEnabled(false);

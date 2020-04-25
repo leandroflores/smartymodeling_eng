@@ -10,6 +10,7 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Association;
+import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
@@ -75,6 +76,7 @@ import view.panel.edit.base.variability.PanelEditVariability;
 import view.panel.project.tree.PanelTree;
 import view.main.structural.ViewMenu;
 import view.panel.edit.PanelVoid;
+import view.panel.edit.base.evaluation.PanelEditMeasure;
 
 /**
  * <p>Class of View <b>PanelProject</b>.</p> 
@@ -377,15 +379,6 @@ public final class PanelProject extends Panel {
     }
     
     /**
-     * Method responsible for initializing the Panel Edit Metric.
-     * @param metric Metric.
-     */
-    public void initPanelEditMetric(Metric metric) {
-        this.panelEdit = new PanelEditMetric(this.viewMenu, metric);
-        this.updatePanelEdit();
-    }
-    
-    /**
      * Method responsible for initializing the Panel Edit Product.
      * @param product Product.
      */
@@ -418,6 +411,24 @@ public final class PanelProject extends Panel {
      */
     public void initPanelRelationship(Relationship relationship) {
         this.panelEdit = new PanelEditRelationship(this.viewMenu, relationship);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Metric.
+     * @param metric Metric.
+     */
+    public void initPanelEditMetric(Metric metric) {
+        this.panelEdit = new PanelEditMetric(this.viewMenu, metric);
+        this.updatePanelEdit();
+    }
+    
+    /**
+     * Method responsible for initializing the Panel Edit Measure.
+     * @param measure Measure.
+     */
+    public void initPanelEditMeasure(Measure measure) {
+        this.panelEdit = new PanelEditMeasure(this.viewMenu, measure);
         this.updatePanelEdit();
     }
     

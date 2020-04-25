@@ -3,10 +3,12 @@ package view.panel.base.variability;
 import controller.view.panel.base.variability.ControllerPanelBaseVariants;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import model.controller.structural.base.ControllerDiagram;
@@ -53,15 +55,26 @@ public final class PanelBaseVariants extends PanelBase {
         this.add(this.createLabel("Constraint: "), this.createConstraints(1, 1, 0, 0));
         this.add(this.createComboBox("constraintComboBox", ControllerVariability.TYPES, 100), this.createConstraints(2, 1, 1, 0));
         this.add(this.createTextFieldNoEditable("minimumTextField", "0", 3), this.createConstraints(1, 1, 3, 0));
-        this.add(this.createTextFieldNoEditable("maximumTextField", "0", 3), this.createConstraints(1, 1, 4, 0));        
+        this.add(this.createTextFieldNoEditable("maximumTextField", "0", 3), this.createConstraints(1, 1, 4, 0));
         
         this.add(this.createLabel("Variant: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("variantComboBox", new ControllerDiagram(this.diagram).getDefaultElements(), 175), this.createConstraints(2, 1, 1, 1));
-        this.add(this.createButton("addVariantButton", "", "add.png"), this.createConstraints(1, 1, 3, 1));
-        this.add(this.createButton("delVariantButton", "", "not.png"), this.createConstraints(1, 1, 4, 1));
+        this.add(this.createComboBox("variantComboBox", new ControllerDiagram(this.diagram).getDefaultElements(), 175), this.createConstraints(4, 1, 1, 1));
+        
+        this.addButtons();
         
         this.createList("variantsList");
-        this.add(this.getVariantsScrollPane(), this.createConstraints(5, 10, 0, 2));
+        this.add(this.getVariantsScrollPane(), this.createConstraints(5, 10, 0, 3));
+    }
+    
+    /**
+     * Method responsible for adding the Buttons.
+     */
+    private void addButtons() {
+        JPanel panel = new JPanel();
+               panel.setLayout(new GridLayout(1, 2));
+               panel.add(this.createButton("addVariantButton", "", "add.png"));
+               panel.add(this.createButton("delVariantButton", "", "not.png"));
+        this.add(panel, this.createConstraints(5, 1, 0, 2));
     }
     
     /**
