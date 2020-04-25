@@ -880,34 +880,34 @@ public final class ViewMenu extends View implements Operation {
         return this.getScrollPane("scrollPanelModeling");
     }
     
-//    /**
-//     * Main Method of SMartyModeling.
-//     * @param args 
-//     */
-//    public static void main(String[] args) {
-//        new ViewMenu().setVisible(true);
-//    }
+    /**
+     * Main Method of SMartyModeling.
+     * @param args 
+     */
+    public static void main(String[] args) {
+        new ViewMenu().setVisible(true);
+    }
     
     /**
      * Alternative Main Method of SMartyModeling.
      * @param args 
      */
-    public static void main(String[] args) {
-        try {
+//    public static void main(String[] args) {
+//        try {
 //            if (args.length == 0) {
 //                new ViewMenu().setVisible(true);
 //            }else {
 //                String   path     = args[0].trim();
-                String   path     = "C:\\Users\\Leandro\\Documents\\0.smty";
-                Project  project_ = new ImportProject(path).getProject(); 
-                ViewMenu view     = new ViewMenu();
-                         view.setProject(project_);
-                         view.update();
-                         view.getPanelModeling().clear();
-                         view.setVisible(true);
+////                String   path     = "C:\\Users\\Leandro\\Documents\\0.smty";
+//                Project  project_ = new ImportProject(path).getProject(); 
+//                ViewMenu view     = new ViewMenu();
+//                         view.setProject(project_);
+//                         view.update();
+//                         view.getPanelModeling().clear();
+//                         view.setVisible(true);
 //            }
-        } catch (IOException | ParserConfigurationException | SAXException | XPathExpressionException ex) {
-            Logger.getLogger(ViewMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//        } catch (IOException | ParserConfigurationException | SAXException | XPathExpressionException ex) {
+//            Logger.getLogger(ViewMenu.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 }

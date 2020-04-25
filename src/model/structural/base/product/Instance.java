@@ -34,6 +34,7 @@ public class Instance implements Exportable {
      * Default constructor method of Class.
      */
     public Instance() {
+        this.name          = "NewInstance";
         this.product       = null;
         this.diagram       = null;
         this.artifacts     = new HashMap<>();

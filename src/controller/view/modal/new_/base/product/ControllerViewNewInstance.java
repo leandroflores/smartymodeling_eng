@@ -75,11 +75,6 @@ public class ControllerViewNewInstance extends ControllerViewNew {
     }
     
     @Override
-    public void insert() {
-        super.insert();
-    }
-    
-    @Override
     public void new_() {
         Instance instance = this.createNewInstance();
                  instance.getProduct().addInstance(instance);

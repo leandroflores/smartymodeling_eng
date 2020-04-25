@@ -20,7 +20,6 @@ import view.panel.new_.base.product.PanelNewInstance;
  */
 public final class ViewNewInstance extends ViewNew {
     private final Instance instance;
-    private HashMap elements;
     
     /**
      * Default constructor method of Class.
@@ -36,7 +35,7 @@ public final class ViewNewInstance extends ViewNew {
     
     @Override
     public void initComponents() {
-        this.setSize(575, 520);
+        this.setSize(585, 520);
         this.addHeader();
         this.addComponents();
         this.addFooter();

@@ -1,6 +1,7 @@
 package view.panel.new_.base.product;
 
 import controller.view.modal.new_.base.product.ControllerViewNewInstance;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,8 +52,9 @@ public final class PanelNewInstance extends PanelNew {
     public void addPanelBaseInstance() {
         this.addPanel("panelBaseInstance", new PanelBaseInstance(this, this.instance));
         this.tabbedPane.removeAll();
-        this.tabbedPane.add("Instance", this.getPanelBaseInstance());
-//        this.getInsertButton().setEnabled(false);
+        this.createScrollPane("scrollPanelBaseInstance");
+        this.getScrollPane("scrollPanelBaseInstance").setViewportView(this.getPanelBaseInstance());
+        this.tabbedPane.add("Instance", this.getScrollPane("scrollPanelBaseInstance"));
     }
     
     /**
@@ -62,7 +64,9 @@ public final class PanelNewInstance extends PanelNew {
         this.resetElements();
         this.instance.reset();
         this.addPanel("panelBaseOptional", new PanelBaseOptional(this, this.instance));
-        this.tabbedPane.add("Optional", this.getPanelBaseOptional());
+        this.createScrollPane("scrollPanelBaseOptional", this.getPanelBaseOptional());
+        this.getScrollPane("scrollPanelBaseOptional").setPreferredSize(new Dimension(600, 350));
+        this.tabbedPane.add("Optional", this.getScrollPane("scrollPanelBaseOptional"));
         this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(1));
         this.tabbedPane.setEnabledAt(0, false);
         this.getView().getInsertButton().setEnabled(false);

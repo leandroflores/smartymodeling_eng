@@ -42,7 +42,7 @@ public final class PanelBaseArtifacts extends PanelBase {
      * Method responsible for adding the Header.
      */
     public void addHeader() {
-        this.add(this.createLabel("Finishing the New Instance:"), this.createConstraints(6, 1, 0, 0));
+        this.add(this.createLabel("New Instance:"), this.createConstraints(6, 1, 0, 0));
     }
     
     @Override
@@ -60,6 +60,7 @@ public final class PanelBaseArtifacts extends PanelBase {
     @Override
     public void addFooter() {
         this.add(this.getFooter(), this.createConstraints(6, 1, 0, 4));
+        this.getNextButton().setEnabled(false);
     }
     
     /**

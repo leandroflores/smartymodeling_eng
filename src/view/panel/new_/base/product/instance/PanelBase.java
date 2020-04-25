@@ -4,7 +4,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import model.structural.base.Diagram;
 import model.structural.base.product.Instance;
+import model.structural.base.product.Product;
 import view.modal.new_.base.product.ViewNewInstance;
 import view.panel.new_.PanelNew;
 import view.panel.new_.base.product.PanelNewInstance;
@@ -63,6 +65,22 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      */
     public JButton getNextButton() {
         return this.getButton("nextButton");
+    }
+    
+    /**
+     * Method responsible for returning the Product.
+     * @return Product.
+     */
+    public Product getProduct() {
+        return this.getInstance().getProduct();
+    }
+    
+    /**
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
+     */
+    public Diagram getDiagram() {
+        return this.getInstance().getDiagram();
     }
     
     /**

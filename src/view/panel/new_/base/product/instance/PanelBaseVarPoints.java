@@ -3,13 +3,11 @@ package view.panel.new_.base.product.instance;
 import controller.view.panel.new_.base.product.instance.ControllerPanelBaseVarPoints;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.util.List;
-import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JPanel;
 import model.structural.base.Element;
 import model.structural.base.product.Instance;
 import model.structural.base.variability.Variability;
@@ -25,6 +23,7 @@ import view.panel.new_.base.product.PanelNewInstance;
  * @see    view.panel.new_.base.product.instance.PanelBase
  */
 public final class PanelBaseVarPoints extends PanelBase {
+    private Integer index;
     
     /**
      * Default constructor method of Class.
@@ -38,71 +37,59 @@ public final class PanelBaseVarPoints extends PanelBase {
         this.addHeader();
         this.addComponents();
         this.addFooter();
-        this.updateElements();
+        this.updateFlag();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setPreferredSize(new Dimension(600, 350));
-//        this.setLayout(new GridBagLayout());
-        this.setLayout(new FlowLayout(FlowLayout.CENTER));
+        this.setLayout(new GridBagLayout());
     }
     
     /**
      * Method responsible for adding the Header.
      */
     public void addHeader() {
-        this.add(this.createLabel("Solve the Variation Points for the New Instance:"));
-//        this.add(this.createLabel("Solve the Variation Points:"), this.createConstraints(2, 1, 0, 0));
+        this.add(this.createLabel("Solve the Variation Points:"), this.createConstraints(2, 1, 0, 0));
     }
     
     @Override
     protected void addComponents() {
-        this.createScrollPane("var_points");
-        this.getScrollPane("var_points").setViewportView(this.createPanel());
-        this.getScrollPane("var_points").setPreferredSize(new Dimension(500, 250));
-        this.add(this.getScrollPane("var_points"));
-    }
-    
-    /**
-     * Method responsible for returning the Panel.
-     * @return Panel.
-     */
-    private JPanel createPanel() {
-        JPanel panel = new JPanel();
-               panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-               panel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        System.out.println(this.getInstance().getDiagram().getVariabilities());
+        this.index = 2;
         for (Variability variability : this.getInstance().getDiagram().getVariabilitiesList())
-               this.addVariability(panel, variability);
-        return panel;
+               this.addVariability(variability);
     }
     
     /**
-     * Method responsible for adding the Variability to Panel.
-     * @param panel Panel.
+     * Method responsible for adding the Variability.
      * @param variability Variability.
      */
-    private void addVariability(JPanel panel, Variability variability) {
-        JPanel newPanel = new JPanel();
-               newPanel.setLayout(new BoxLayout(newPanel, BoxLayout.Y_AXIS));
-               newPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-               newPanel.add(this.createVariabilityCheckBox(variability));
-                   this.addVariabilityPanel(newPanel, variability);
-               newPanel.add(this.createLabel(" "));
-               panel.add(newPanel);
-    }
-    
-    /**
-     * Method responsible for adding the Variability Panel.
-     * @param panel New Panel.
-     * @param variability Variability.
-     */
-    private void addVariabilityPanel(JPanel panel, Variability variability) {
+    private void addVariability(Variability variability) {
+        this.index++;
+        this.add(this.createVariabilityCheckBox(variability), this.createConstraints(1, 1, 0, this.index));
         if (variability.getConstraint().toLowerCase().trim().equals("inclusive"))
-            this.addInclusiveVariability(panel, variability);
+            this.addInclusiveVariability(variability);
         else
-            this.addExclusiveVariability(panel, variability);
+            this.addExclusiveVariability(variability);
+    }
+    
+    /**
+     * Method responsible for adding a Inclusive Variability.
+     * @param variability Inclusive Variability.
+     */
+    private void addInclusiveVariability(Variability variability) {
+        for (Element variant : variability.getVariants()) {
+            this.add(this.createVariantCheckBox(variability, variant), this.createConstraints(1, 1, 1, this.index));
+            this.index++;
+        }
+    }
+    
+    /**
+     * Method responsible for adding a Exclusive Variability.
+     * @param variability Exclusive Variability.
+     */
+    private void addExclusiveVariability(Variability variability) {
+        this.add(this.createVariabilityComboBox(variability), this.createConstraints(1, 1, 1, this.index));
+        this.index++;
     }
     
     /**
@@ -119,29 +106,6 @@ public final class PanelBaseVarPoints extends PanelBase {
                   checkBox.setFont(new Font("Arial", Font.BOLD, 15));
                   checkBox.setAlignmentX(Component.LEFT_ALIGNMENT);
         return    checkBox;
-    }
-    
-    /**
-     * Method responsible for adding a Inclusive Variability.
-     * @param panel Panel.
-     * @param variability Inclusive Variability.
-     */
-    private void addInclusiveVariability(JPanel panel, Variability variability) {
-        for (Element variant : variability.getVariants()) {
-            JCheckBox checkBoxVariant = this.createVariantCheckBox(variability, variant);
-                      panel.add(checkBoxVariant);
-        }
-        panel.add(this.createLabel(" "));
-    }
-    
-    /**
-     * Method responsible for adding a Exclusive Variability.
-     * @param panel Panel.
-     * @param variability Exclusive Variability.
-     */
-    private void addExclusiveVariability(JPanel panel, Variability variability) {
-        panel.add(this.createVariabilityComboBox(variability));
-        panel.add(this.createLabel(" "));
     }
     
     /**
@@ -173,13 +137,14 @@ public final class PanelBaseVarPoints extends PanelBase {
     
     @Override
     public void addFooter() {
-        this.add(this.getFooter());
+        this.index++;
+        this.add(this.getFooter(), this.createConstraints(2, 1, 0, this.index));
     }
     
     /**
-     * Method responsible for updating the Elements.
+     * Method responsible for updating the Flags.
      */
-    private void updateElements() {
+    private void updateFlag() {
         List<Variability> list = this.getPanelNew().getVariabilities();
         for (Variability  variability : this.instance.getDiagram().getVariabilitiesList())
             this.getController().setFlag(variability, list.contains(variability));

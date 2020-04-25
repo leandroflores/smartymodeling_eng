@@ -1,7 +1,6 @@
 package view.panel.new_.base.product.instance;
 
 import controller.view.panel.new_.base.product.instance.ControllerPanelBaseOptional;
-import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import javax.swing.JCheckBox;
 import model.structural.base.Element;
@@ -36,7 +35,6 @@ public final class PanelBaseOptional extends PanelBase {
     
     @Override
     protected void setDefaultProperties() {
-        this.setPreferredSize(new Dimension(600, 350));
         this.setLayout(new GridBagLayout());
     }
 
@@ -49,31 +47,12 @@ public final class PanelBaseOptional extends PanelBase {
     
     @Override
     protected void addComponents() {
-        this.index = 2;
+        this.index = 3;
         for (Element element : this.getInstance().getDiagram().filterOptionalElements()) {
             this.add(this.createLabel(element.getName() + ":"), this.createConstraints(1, 1, 0, this.index));
             this.add(this.createElementCheckBox(element),       this.createConstraints(1, 1, 1, this.index));
             this.index++;
         }
-//        this.addElements();
-//        this.createElementsPanel();
-//        this.createScrollPane("elementsScrollPane");
-//        this.getElementsScrollPane().setViewportView(this.createElementsPanel());
-//        this.getElementsScrollPane().setPreferredSize(new Dimension(500, 250));
-//        this.add(this.getElementsScrollPane());
-    }
-    
-    /**
-     * Method responsible for returning the Elements Panel.
-     * @return Elements Panel.
-     */
-    private void addElements() {
-        
-//        JPanel panel = new JPanel();
-//               panel.setLayout(new GridLayout(0, 4));
-//        for (Element element : this.getInstance().getDiagram().filterOptionalElements())
-//               this.getElementCheckBox(panel, element);
-//        return panel;
     }
     
     /**
@@ -88,6 +67,12 @@ public final class PanelBaseOptional extends PanelBase {
         return    checkBox;
     }
     
+    @Override
+    public void addFooter() {
+        this.index++;
+        this.add(this.getFooter(), this.createConstraints(4, 1, 0, this.index));
+    }
+    
     /**
      * Method responsible for returning the Check Box by Element.
      * @param  element Element.
@@ -95,10 +80,5 @@ public final class PanelBaseOptional extends PanelBase {
      */
     public JCheckBox getCheckBox(Element element) {
         return this.getCheckBox("checkBox" + element.getId());
-    }
-    
-    @Override
-    public void addFooter() {
-        this.add(this.getFooter(), this.createConstraints(4, 1, 0, this.index));
     }
 }

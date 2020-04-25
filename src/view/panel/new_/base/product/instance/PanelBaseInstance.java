@@ -50,36 +50,37 @@ public final class PanelBaseInstance extends PanelBase {
     }
     
     /**
-     * Method responsible for adding the Panel Footer.
-     */
-    @Override
-    public void addFooter() {
-        this.add(this.getFooter(), this.createConstraints(4, 1, 0, 3));
-    }
-    
-    /**
      * Method responsible for setting the Instance Values.
      */
     public void setValues() {
         this.setProduct();
         this.setDiagram();
-        this.getNameTextField().setText(this.instance.getName());
+        this.getNameTextField().setText(this.getInstance().getName());
     }
     
     /**
      * Method responsible for setting the Instance Product.
      */
     private void setProduct() {
-        if (this.instance.getProduct() != null)
-            this.getProductComboBox().setSelectedItem(this.instance.getProduct());
+        if (this.getProduct() != null)
+            this.getProductComboBox().setSelectedItem(this.getProduct());
     }
     
     /**
-     * Method responsible for setting the Instance Diagram.
+     * Method responsible for setting the Diagram.
      */
     private void setDiagram() {
-        if (this.instance.getDiagram() != null)
-            this.getDiagramComboBox().setSelectedItem(this.instance.getDiagram());
+        if (this.getDiagram() != null)
+            this.getDiagramComboBox().setSelectedItem(this.getDiagram());
+    }
+    
+    /**
+     * Method responsible for adding the Panel Footer.
+     */
+    @Override
+    public void addFooter() {
+        this.add(this.getFooter(), this.createConstraints(4, 1, 0, 3));
+        this.getReturnButton().setEnabled(false);
     }
     
     /**

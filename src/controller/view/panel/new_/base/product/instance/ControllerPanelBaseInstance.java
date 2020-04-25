@@ -31,7 +31,8 @@ public class ControllerPanelBaseInstance extends ControllerPanelBase {
     @Override
     protected boolean check() {
         return this.check(this.getPanel().getProductComboBox(), "Select a Product!")
-            && this.check(this.getPanel().getDiagramComboBox(), "Select a Diagram!");
+            && this.check(this.getPanel().getDiagramComboBox(), "Select a Diagram!")
+            && this.check(this.getPanel().getNameTextField(),   "Name is required!");
     }
     
     @Override
