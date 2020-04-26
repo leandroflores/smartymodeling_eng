@@ -1,26 +1,19 @@
 package view.main.structural;
 
 import controller.view.main.structural.ControllerViewMenu;
-import file.importation.ImportProject;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.base.product.Instance;
-import org.xml.sax.SAXException;
 import view.interfaces.Operation;
 import view.View;
 import view.style.ViewStyle;
@@ -142,7 +135,6 @@ public final class ViewMenu extends View implements Operation {
         this.createMenuItem("requirement_matriz",       "Requirement Matrix",       "menu/requirement/matrix.png",       KeyEvent.VK_X);
         
         this.getMenuItemRequirementTraceability().setVisible(false);
-        this.getMenuItemRequirementMatrix().setVisible(false);
         
         this.getMenu("requirement").add(this.getMenuItemNewRequirement());
         this.getMenu("requirement").addSeparator();

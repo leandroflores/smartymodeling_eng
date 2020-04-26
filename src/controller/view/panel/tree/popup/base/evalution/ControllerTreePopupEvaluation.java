@@ -36,7 +36,7 @@ public class ControllerTreePopupEvaluation extends ControllerTreePopup {
         else if (node.getUserObject() instanceof Metric)
             this.setMetricPopup();
         else if (node.getUserObject() instanceof Measure)
-            super.setPopupFlag(false, false, true);
+            super.setPopupFlag(false, true, true);
         this.getPopup().show(event.getComponent(), event.getX(), event.getY());
     }
     

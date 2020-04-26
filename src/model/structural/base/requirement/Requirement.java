@@ -86,6 +86,13 @@ public class Requirement implements Exportable {
     public String getCode() {
         return this.code;
     }
+    
+    public String getHtmlCode() {
+        String html  = "<html>";
+        for (String string : this.code.split(""))
+               html += string + "<br>";
+        return html += "</html>";
+    }
 
     /**
      * Method responsible for setting the Requirement Code.
@@ -161,6 +168,15 @@ public class Requirement implements Exportable {
             this.sequence.put(element.getId(), element);
         else if (type.equalsIgnoreCase("Activity"))
             this.activity.put(element.getId(), element);
+    }
+    
+    /**
+     * Method responsible for returning if Requirement contains a Element.
+     * @param  element Element.
+     * @return Requirement contains a Element.
+     */
+    public boolean contains(Element element) {
+        return this.getAllElements().contains(element);
     }
     
     /**

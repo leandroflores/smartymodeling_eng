@@ -124,7 +124,7 @@ public final class PanelBaseRequirementTraceability extends PanelBase {
         this.getElementComboBox().removeAllItems();
         Diagram diagram = this.getSelectedDiagram();
         if (diagram != null) {
-            for (Element element : diagram.getDefaultElementsList())
+            for (Element element : diagram.getDefaultElements())
                 this.getElementComboBox().addItem(element);
         }
     }

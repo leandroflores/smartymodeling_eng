@@ -42,7 +42,7 @@ public class ControllerDiagram {
      * @return Default Elements Array.
      */
     public Element[] getDefaultElements() {
-        List      list  = this.diagram.getDefaultElementsList();
+        List      list  = this.diagram.getDefaultElements();
         Element[] array = new Element[list.size()];
         for (int i = 0; i < list.size(); i++)
                   array[i] = (Element) list.get(i);
@@ -54,7 +54,7 @@ public class ControllerDiagram {
      * @return Default Elements Array.
      */
     public Element[] getAllElements() {
-        List<Element> list  = this.diagram.getDefaultElementsList();
+        List<Element> list  = this.diagram.getDefaultElements();
         Element[]     array = new Element[list.size()];
         for (int i = 0; i < list.size(); i++)
                     array[i] = list.get(i);

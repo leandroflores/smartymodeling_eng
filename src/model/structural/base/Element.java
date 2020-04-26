@@ -112,6 +112,17 @@ public abstract class Element implements Exportable, Modelable {
     }
 
     /**
+     * Method responsible for returning the HTML Name.
+     * @return HTML Name.
+     */
+    public String getHTMLCode() {
+        String html  = "<html>";
+        for (String string : this.name.split(""))
+               html += string + "<br>";
+        return html += "</html>";
+    }
+    
+    /**
      * Method responsible for defining Default Name.
      */
     public void setDefaultName() {

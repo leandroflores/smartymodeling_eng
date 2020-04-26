@@ -108,7 +108,7 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
         this.getElementComboBox().removeAllItems();
         this.diagram = (Diagram) this.getDiagramComboBox().getSelectedItem();
         if (this.diagram != null) {
-            for (Element element : this.diagram.getDefaultElementsList())
+            for (Element element : this.diagram.getDefaultElements())
                 this.getElementComboBox().addItem(element);
         }
     }

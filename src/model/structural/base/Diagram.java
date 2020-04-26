@@ -235,7 +235,7 @@ public abstract class Diagram implements Exportable {
      * Method responsible for returning the Default Elements List.
      * @return Default Elements List.
      */
-    public List<Element> getDefaultElementsList() {
+    public List<Element> getDefaultElements() {
         List<Element> filter  = new ArrayList<>();
         for (Element  element : this.getElementsList()) {
             if (element.isDefault())

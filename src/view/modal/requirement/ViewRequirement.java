@@ -17,7 +17,6 @@ import view.main.structural.ViewMenu;
 public abstract class ViewRequirement extends ViewModal {
     protected final ViewMenu view;
     protected final Project  project;
-    protected JTabbedPane tabbedPane;
     
     /**
      * Default constructor method of Class.

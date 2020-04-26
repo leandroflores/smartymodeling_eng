@@ -102,7 +102,7 @@ public final class PanelBaseElements extends PanelBase {
     public void updateValues() {
         this.diagram = (Diagram) this.getDiagramComboBox().getSelectedItem();
         this.getElementComboBox().removeAllItems();
-        for (Element element : this.diagram.getDefaultElementsList())
+        for (Element element : this.diagram.getDefaultElements())
             this.getElementComboBox().addItem(element);
         this.getElementComboBox().updateUI();
     }
