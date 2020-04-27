@@ -1,5 +1,6 @@
 package view.panel.requirement.base.matrix;
 
+import controller.view.panel.requirement.base.matrix.ControllerPanelMatrix;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
@@ -18,21 +19,25 @@ import view.panel.requirement.base.PanelRequirementMatrix;
  * <p>Class responsible for defining the <b>Matrix Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-26
+ * @see    controller.view.panel.requirement.base.matrix.ControllerPanelMatrix
  * @see    view.panel.requirement.PanelRequirement
  */
 public final class PanelMatrix extends PanelRequirement {
-    private Requirement requirement_;
-    private Diagram diagram;
-    private Integer columns;
+    private final Diagram diagram;
+    private final List requirements;
     private Integer index;
     
     /**
      * Default constructor method of Class.
      * @param panel View Requirement.
+     * @param diagram Diagram.
+     * @param requirements Requirements List.
      */
-    public PanelMatrix(PanelRequirementMatrix panel) {
+    public PanelMatrix(PanelRequirementMatrix panel, Diagram diagram, List requirements) {
         super(panel.getView());
-//        this.controller = new ControllerPanelBaseArtifacts(this);
+        this.diagram      = diagram;
+        this.requirements = requirements;
+        this.controller   = new ControllerPanelMatrix(this);
         this.setDefaultProperties();
         this.addComponents();
         
@@ -52,14 +57,29 @@ public final class PanelMatrix extends PanelRequirement {
      * Method responsible for adding the Matrix.
      */
     private void addMatrix() {
-        List<Element>  list = this.getElements();
-        this.columns = list.size();
-        this.addHeaderMatrix(list);
-        this.index   = 1;
-        int count    = 0;
-        for (Requirement requirement : this.getProject().getRequirementsList()) {
+        this.addMatrixHeader();
+        this.addMatrixBody();
+    }
+    
+    /**
+     * Method responsible for adding the Matrix Header.
+     */
+    private void addMatrixHeader() {
+        int count = 1;
+        this.add(this.createLabel(""), this.createConstraints(1, 1, 0, 0));
+        for (Element element : this.getElements())
+            this.add(this.createLabel(element.getHTMLCode()), this.createConstraints(1, 1, count++, 0));
+    }
+    
+    /**
+     * Method responsible for adding the Matrix Body.
+     */
+    private void addMatrixBody() {
+        this.index = 1;
+        for (Requirement requirement : this.getRequirements()) {
+            int count = 0;
             this.add(super.createLabel(requirement.getCode()), this.createConstraints(1, 1, count++, this.index));
-            for (Element element : list)
+            for (Element element : this.getElements())
                 this.add(this.createElementCheckBox(requirement, element), this.createConstraints(1, 1, count++, this.index));
             this.index++;
         }
@@ -76,13 +96,6 @@ public final class PanelMatrix extends PanelRequirement {
         return label;
     }
     
-    private void addHeaderMatrix(List<Element> list) {
-        this.add(this.createLabel(""), this.createConstraints(1, 1, 0, 0));
-        int count = 1;
-        for (Element element : list)
-            this.add(this.createLabel(element.getHTMLCode()), this.createConstraints(1, 1, count++, 0));
-    }
-    
     /**
      * Method responsible for returning the Elements List.
      * @return Elements List.
@@ -91,6 +104,14 @@ public final class PanelMatrix extends PanelRequirement {
         if (this.diagram != null)
             return this.diagram.getDefaultElements();
         return this.getProject().getDefaultElements();
+    }
+    
+    /**
+     * Method responsible for returning the Requirements List.
+     * @return Requirements List.
+     */
+    private List<Requirement> getRequirements() {
+        return this.requirements;
     }
     
     /**
@@ -104,7 +125,7 @@ public final class PanelMatrix extends PanelRequirement {
         JCheckBox checkBox = this.createCheckBox(id, "", true);
                   checkBox.setName(requirement.getId() + "|" + element.getId());
                   checkBox.setSelected(requirement.contains(element));
-                  checkBox.setEnabled(false);
+                  checkBox.setEnabled(true);
         return    checkBox;
     }
     

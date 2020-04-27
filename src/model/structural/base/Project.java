@@ -235,6 +235,15 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for returning a Element by Id.
+     * @param  id Element Id.
+     * @return Element found.
+     */
+    public Element getElement(String id) {
+        return (Element) this.objects.get(id);
+    }
+    
+    /**
      * Method responsible for returning the Default Elements.
      * @return Default Elements.
      */

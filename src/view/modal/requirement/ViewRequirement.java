@@ -1,7 +1,6 @@
 package view.modal.requirement;
 
 import javax.swing.JButton;
-import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import view.modal.ViewModal;
 import view.main.structural.ViewMenu;
@@ -30,16 +29,16 @@ public abstract class ViewRequirement extends ViewModal {
     
     @Override
     public void addFooter() {
-        this.add(this.createButton("refreshButton", " Refresh ", "refresh"));
-        this.add(this.createButton("cancelButton",  " Cancel  ", "cancel"));
+        this.add(this.createButton("saveButton",    "  Save  ", "save"));
+        this.add(this.createButton("cancelButton",  " Cancel ", "cancel"));
     }
     
     /**
-     * Method responsible for returning the Refresh Button.
-     * @return Refresh Button.
+     * Method responsible for returning the Save Button.
+     * @return Save Button.
      */
-    public JButton getRefreshButton() {
-        return this.getButton("refreshButton");
+    public JButton getSaveButton() {
+        return this.getButton("saveButton");
     }
     
     /**

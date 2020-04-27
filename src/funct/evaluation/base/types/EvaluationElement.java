@@ -65,7 +65,7 @@ public class EvaluationElement extends Evaluation {
                 filter = this.filterFinal(filter,  (Boolean) parameters[5]);
                 filter = this.filterStatic(filter, (Boolean) parameters[6]);
                 filter = this.filterVisibility(filter, (String) parameters[7]);
-                this.addObjects(this.getList(filter));
+                super.addObjects(this.getList(filter));
         return  filter;
     }
     

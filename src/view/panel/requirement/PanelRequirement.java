@@ -28,22 +28,10 @@ public abstract class PanelRequirement extends Panel {
         this.tabbedPane.setPreferredSize(new Dimension(550, 200));
     }
     
-//    @Override
-//    protected void addComponents() {
-//        this.tabbedPane = new JTabbedPane();
-//            this.addPanels();
-//        this.add(this.tabbedPane);
-//    }
-    
     /**
      * Method responsible for setting the Default Properties.
      */
     protected abstract void setDefaultProperties();
-    
-    /**
-     * Method responsible for adding the Panels.
-     */
-//    protected abstract void addPanels();
     
     /**
      * Method responsible for returning the Project.

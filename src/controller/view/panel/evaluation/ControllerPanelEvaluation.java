@@ -98,7 +98,6 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
      * @throws ScriptException Exception to Apply Operation on Project.
      */
     protected void evaluate(Project project, String operation) throws ScriptException {
-        System.out.println("AAA");
         Evaluation evaluation = new EvaluationProject(project);
         Double     finalValue = evaluation.getFinalValue(operation);
         this.getPanel().getValueTextField().setText(Double.toString(finalValue));

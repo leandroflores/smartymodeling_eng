@@ -34,6 +34,7 @@ public abstract class Evaluation {
     protected void addObjects(List list) {
         this.objects.addAll(new ArrayList<>(list));
         this.objects.add("\n");
+        System.out.println("Obj.: " + this.objects);
     }
     
     /**
@@ -43,6 +44,7 @@ public abstract class Evaluation {
      */
     protected boolean isElement(String keyword) {
         String[] array = {"element", "elements", 
+                          "feature", 
                           "actor", "usecase", 
                           "package", "class", "interface", "attribute", "method",
                           "component",
@@ -58,6 +60,7 @@ public abstract class Evaluation {
      */
     protected boolean isAssociation(String keyword) {
         String[] array = {"associations", "dependency", "generalization", 
+                          "connection",
                           "communication", "extend", "include",
                           "association", "realization",
                           "comunication",
@@ -104,8 +107,6 @@ public abstract class Evaluation {
      */
     public String getExpression(String expression) {
         String toReturn = "";
-        System.out.println(expression);
-        System.out.println(this.checkToken(expression, "(", ")"));
         if (this.checkToken(expression, "(", ")")) {
             for (int i = 0; i < expression.length(); i++) {
                 if (this.checkCharacter(expression.charAt(i))) {

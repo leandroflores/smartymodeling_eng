@@ -1,7 +1,10 @@
 package view.panel.requirement.base;
 
+import controller.view.panel.requirement.base.ControllerPanelRequirementMatrix;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JComboBox;
 import model.controller.structural.base.ControllerProject;
 import model.controller.structural.base.requirement.ControllerRequirement;
@@ -16,6 +19,7 @@ import view.panel.requirement.base.matrix.PanelMatrix;
  * <p>Class responsible for defining the <b>Requirement Matrix Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-25
+ * @see    controller.view.panel.requirement.base.ControllerPanelRequirementMatrix
  * @see    view.panel.requirement.PanelRequirement
  */
 public final class PanelRequirementMatrix extends PanelRequirement {
@@ -28,13 +32,9 @@ public final class PanelRequirementMatrix extends PanelRequirement {
      */
     public PanelRequirementMatrix(ViewRequirementMatrix view) {
         super(view);
-//        this.controller = new ControllerPanelBaseArtifacts(this);
+        this.controller = new ControllerPanelRequirementMatrix(this);
         this.setDefaultProperties();
-//        this.addHeader();
         this.addComponents();
-//        this.addFooter();
-//        this.setValues();
-        
     }
     
     @Override
@@ -46,9 +46,6 @@ public final class PanelRequirementMatrix extends PanelRequirement {
     protected void addComponents() {
         this.addFilters();
         this.addMatrix();
-//        this.tabbedPane = new JTabbedPane();
-//            this.addPanels();
-//        this.add(this.tabbedPane);
     }
     
     /**
@@ -56,19 +53,61 @@ public final class PanelRequirementMatrix extends PanelRequirement {
      */
     private void addFilters() {
         this.add(this.createLabel("Requirement: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("requirementComboBox", new ControllerRequirement(this.getProject()).getRequirements(), 175), this.createConstraints(4, 1, 1, 1));
+        this.add(this.createComboBox("requirementComboBox", new ControllerRequirement(this.getProject()).getRequirements(), 400), this.createConstraints(4, 1, 1, 1));
+        
         
         this.add(this.createLabel("Diagram: "), this.createConstraints(1, 1, 0, 2));
-        this.add(this.createComboBox("diagramComboBox", new ControllerProject(this.getProject()).getProjectTargets(), 175), this.createConstraints(4, 1, 1, 2));
+        this.add(this.createComboBox("diagramComboBox", new ControllerProject(this.getProject()).getProjectTargets(), 400), this.createConstraints(4, 1, 1, 2));
     }
     
+    /**
+     * Method responsible for adding the Matrix.
+     */
     private void addMatrix() {
-        this.addPanel("panelMatrix", new PanelMatrix(this));
+        this.addPanel("panelMatrix", new PanelMatrix(this, this.getSelectedDiagram(), this.getRequirements()));
         this.createScrollPane("scrollPanelMatrix",  this.getPanelMatrix());
-        this.getScrollPane("scrollPanelMatrix").setMinimumSize(new Dimension(350, 300));
+        this.getScrollPane("scrollPanelMatrix").setMinimumSize(new Dimension(540, 360));
+        this.getScrollPane("scrollPanelMatrix").setPreferredSize(new Dimension(540, 360));
         this.add(this.getScrollPane("scrollPanelMatrix"), this.createConstraints(5, 15, 0, 3));
-//        this.tabbedPane.add("Measure", this.getScrollPane("scrollPanelBaseMeasure"));
-//        System.out.println("Requirements: " + this.getProject().getRequirementsList());
+    }
+    
+    /**
+     * Method responsible for updating the Matrix.
+     */
+    public void updateMatrix() {
+        this.getScrollPane("scrollPanelMatrix").setViewportView(new PanelMatrix(this, this.getSelectedDiagram(), this.getRequirements()));
+        this.getScrollPane("scrollPanelMatrix").setMinimumSize(new Dimension(540, 360));
+        this.getScrollPane("scrollPanelMatrix").setPreferredSize(new Dimension(540, 360));
+    }
+    
+    /**
+     * Method responsible for returning the Requirements List.
+     * @return Requirements List.
+     */
+    private List<Requirement> getRequirements() {
+        return this.getRequirementComboBox().getSelectedItem() instanceof Requirement ?
+               this.getList((Requirement) this.getRequirementComboBox().getSelectedItem()) :
+               this.getProject().getRequirementsList();
+    }
+    
+    /**
+     * Method responsible for returning the Requirement List.
+     * @param  requirement Selected Requirement.
+     * @return Requirement List.
+     */
+    private List<Requirement> getList(Requirement requirement) {
+        List   list = new ArrayList();
+               list.add(requirement);
+        return list;
+    }
+    
+    /**
+     * Method responsible for returning the Selected Diagram.
+     * @return Selected Diagram.
+     */
+    private Diagram getSelectedDiagram() {
+        return this.getDiagramComboBox().getSelectedItem() instanceof Diagram ?
+               (Diagram) this.getDiagramComboBox().getSelectedItem() : null;
     }
     
     /**
