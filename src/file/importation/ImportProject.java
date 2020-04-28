@@ -233,7 +233,7 @@ public class ImportProject {
     private void addTraceabilities(Requirement requirement, Element current) throws XPathExpressionException {
         String[] tags = {"feature", "usecase", "class", "component", "sequence", "activity"};
         for (String tag : tags) {
-            String   script = this.expression + "/" + tag;
+            String   script = this.expression + "[@id='" + requirement.getId() + "']/" + tag;
             NodeList list   = (NodeList) this.xPath.compile(script).evaluate(this.document, XPathConstants.NODESET);
             for (int i = 0; i < list.getLength(); i++)
                 requirement.addElement(tag, this.getElement(((Element) list.item(i)).getAttribute("element")));

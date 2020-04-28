@@ -27,6 +27,14 @@ public class ControllerProject {
     }
     
     /**
+     * Method responsible for returning the Diagrams Types Array.
+     * @return Diagrams Types Array.
+     */
+    public String[] getDiagramsTypes() {
+        return new String[]{"Feature", "UseCase", "Class", "Component", "Sequence", "Activity"};
+    }
+    
+    /**
      * Method responsible for returning the Diagrams Array.
      * @return Diagrams Array.
      */

@@ -113,7 +113,7 @@ public final class PanelBaseRequirementTraceability extends PanelBase {
     private Element[] getElements() {
         Diagram diagram = this.getSelectedDiagram();
         if (diagram != null)
-            return new ControllerDiagram(diagram).getDefaultElements();
+            return  new ControllerDiagram(diagram).getDefaultElements();
         return new ControllerProject(this.project).getDefaultElements();
     }
     

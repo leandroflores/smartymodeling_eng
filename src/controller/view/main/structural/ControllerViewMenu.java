@@ -47,6 +47,7 @@ import view.modal.evaluation.base.ViewEvaluationProject;
 import view.modal.new_.base.requirement.ViewNewRequirement;
 import view.main.structural.ViewMenu;
 import view.modal.requirement.base.ViewRequirementMatrix;
+import view.modal.requirement.base.ViewRequirementTraceability;
 import view.modal.system.ViewSystemInformation;
 
 /**
@@ -271,7 +272,7 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      */
     private void traceabilityRequirement() {
         if (!this.viewMenu.getProject().getRequirementsList().isEmpty())
-            System.out.println("Traceability Requirement");
+            new ViewRequirementTraceability(this.viewMenu).setVisible(true);
         else
             new ViewMessage(this.viewMenu, "Project with no Requirements!").setVisible(true);
     }

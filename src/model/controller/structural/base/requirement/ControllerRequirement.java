@@ -26,6 +26,14 @@ public class ControllerRequirement {
      * @return Requirements Array.
      */
     public Object[] getRequirements() {
+        return this.project.getRequirementsList().toArray();
+    }
+    
+    /**
+     * Method responsible for returning the Requirements Target.
+     * @return Requirements Target.
+     */
+    public Object[] getRequirementsTarget() {
         Object[] objects  = this.project.getRequirementsList().toArray();
         Object[] array    = new Object[objects.length + 1];
                  array[0] = "All Requirements";

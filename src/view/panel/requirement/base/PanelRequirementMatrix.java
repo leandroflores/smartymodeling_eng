@@ -28,7 +28,7 @@ public final class PanelRequirementMatrix extends PanelRequirement {
     
     /**
      * Default constructor method of Class.
-     * @param view View Requirement.
+     * @param view View Requirement Matrix.
      */
     public PanelRequirementMatrix(ViewRequirementMatrix view) {
         super(view);
@@ -53,7 +53,7 @@ public final class PanelRequirementMatrix extends PanelRequirement {
      */
     private void addFilters() {
         this.add(this.createLabel("Requirement: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("requirementComboBox", new ControllerRequirement(this.getProject()).getRequirements(), 400), this.createConstraints(4, 1, 1, 1));
+        this.add(this.createComboBox("requirementComboBox", new ControllerRequirement(this.getProject()).getRequirementsTarget(), 400), this.createConstraints(4, 1, 1, 1));
         
         
         this.add(this.createLabel("Diagram: "), this.createConstraints(1, 1, 0, 2));
