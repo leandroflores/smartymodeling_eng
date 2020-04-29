@@ -8,6 +8,7 @@ import model.structural.base.Project;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
+import view.modal.message.ViewError;
 import view.modal.new_.base.variability.ViewNewVariability;
 import view.panel.tree.popup.diagram.TreePopupDiagram;
 
@@ -62,7 +63,10 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
      * @param diagram Diagram.
      */
     private void newVariability(Diagram diagram) {
-        new ViewNewVariability(this.getViewMenu(), diagram).setVisible(true);
+        if (diagram.getElementsList().isEmpty())
+            new ViewError(this.getViewMenu(), "Diagram with no Elements!").setVisible(true);
+        else
+            new ViewNewVariability(this.getViewMenu(), diagram).setVisible(true);
     }
     
     /**

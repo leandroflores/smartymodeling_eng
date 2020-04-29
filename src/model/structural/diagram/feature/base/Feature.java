@@ -104,9 +104,9 @@ public class Feature extends Element {
                style.put(mxConstants.STYLE_EDITABLE, "1");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+               style.put(mxConstants.STYLE_FILLCOLOR,   mxConstants.NONE);
                style.put(mxConstants.STYLE_DASHED,      this.abstract_ ? "1": "0");
                style.put(mxConstants.STYLE_FONTSTYLE,   this.abstract_ ? mxConstants.FONT_ITALIC : "0");
-               style.put(mxConstants.STYLE_FILLCOLOR,   this.abstract_ ? "#A9A9A9" : mxConstants.NONE);
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
                style.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_CENTER);
         return style;
