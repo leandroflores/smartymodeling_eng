@@ -87,9 +87,7 @@ public class TreeRendererDiagram extends TreeRenderer {
         DefaultMutableTreeNode node   = (DefaultMutableTreeNode) value;
         DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
         Object object = node.getUserObject();
-        if (object instanceof Element)
-            this.setElementIcon((Element) object, parent);
-        else if (object instanceof AttributeUML)
+        if (object instanceof AttributeUML)
             this.setAttributeIcon((AttributeUML) object);
         else if (object instanceof MethodUML)
             this.setMethodIcon((MethodUML) object);

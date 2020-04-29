@@ -3,7 +3,6 @@ package view.panel.tree.renderer.base.evaluation;
 import java.awt.Component;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
-import model.structural.base.Project;
 import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
 import view.panel.tree.renderer.TreeRenderer;
@@ -51,9 +50,7 @@ public class TreeRendererEvaluation extends TreeRenderer {
         DefaultMutableTreeNode node   = (DefaultMutableTreeNode) value;
         DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
         Object object = node.getUserObject();
-        if (object instanceof Project)
-            this.setProjectIcon((Project) object);
-        else if (object instanceof Metric)
+        if (object instanceof Metric)
             this.setMetricIcon((Metric) object);
         else if (object instanceof Measure)
             this.setMeasureIcon((Measure) object);

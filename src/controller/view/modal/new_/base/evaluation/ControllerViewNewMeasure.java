@@ -28,11 +28,6 @@ public class ControllerViewNewMeasure extends ControllerViewNew {
     public boolean check() {
         return this.check(this.getView().getPanelBaseEvaluation().getValueTextField(), "Invalid Value!");
     }
-
-    @Override
-    public void insert() {
-        super.insert();
-    }
     
     @Override
     public void new_() {

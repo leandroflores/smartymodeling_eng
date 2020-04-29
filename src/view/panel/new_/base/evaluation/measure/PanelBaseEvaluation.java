@@ -59,6 +59,7 @@ public final class PanelBaseEvaluation extends PanelBase {
     @Override
     public void addFooter() {
         this.add(this.getFooter(), this.createConstraints(6, 1, 0, 4));
+        this.getNextButton().setEnabled(false);
     }
     
     /**

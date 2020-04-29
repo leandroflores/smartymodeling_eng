@@ -8,6 +8,7 @@ import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
 import view.modal.delete.base.evaluation.ViewDeleteMeasure;
 import view.modal.delete.base.evaluation.ViewDeleteMetric;
+import view.modal.edit.base.evaluation.ViewEditMeasure;
 import view.modal.edit.base.evaluation.ViewEditMetric;
 import view.panel.tree.popup.base.evaluation.TreePopupEvaluation;
 
@@ -64,6 +65,8 @@ public class ControllerTreePopupEvaluation extends ControllerTreePopup {
             this.getPanelProject().initPanelEditProject();
         else if (object instanceof Metric)
             this.getPanelProject().initPanelEditMetric((Metric) object);
+        else if (object instanceof Measure)
+            this.getPanelProject().initPanelEditMeasure((Measure) object);
     }
     
     @Override
@@ -77,7 +80,9 @@ public class ControllerTreePopupEvaluation extends ControllerTreePopup {
     @Override
     protected void edit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Metric)
-            new ViewEditMetric(this.getPanelModeling(),  (Metric) object).setVisible(true);
+            new ViewEditMetric(this.getPanelModeling(),  (Metric)  object).setVisible(true);
+        if (object instanceof Measure)
+            new ViewEditMeasure(this.getPanelModeling(), (Measure) object).setVisible(true);
     }
     
     @Override

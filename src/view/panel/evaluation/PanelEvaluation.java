@@ -70,9 +70,17 @@ public abstract class PanelEvaluation extends Panel {
         this.getTargetComboBox().setSelectedIndex(0);
         this.getOperationTextField().setText("");
         this.getValueTextField().setText("");
-        this.getDetailsList().removeAll();
+        this.clearDetails();
         
         this.getOperationTextField().requestFocus();
+    }
+    
+    /**
+     * Method responsible for clearing the Details List.
+     */
+    private void clearDetails() {
+        this.getDetailsList().removeAll();
+        this.getDetailsList().setModel(new DefaultListModel());
     }
     
     /**

@@ -22,9 +22,7 @@ public class ControllerPanelBaseMeasure extends ControllerPanelBase {
     }
     
     @Override
-    protected void return_() {
-        this.getViewNew().dispose();
-    }
+    protected void return_() {}
 
     @Override
     protected boolean check() {

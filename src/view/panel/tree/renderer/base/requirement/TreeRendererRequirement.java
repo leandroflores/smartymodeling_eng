@@ -4,7 +4,6 @@ import java.awt.Component;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Element;
-import model.structural.base.Project;
 import model.structural.base.requirement.Requirement;
 import model.structural.base.traceability.Traceability;
 import view.panel.tree.renderer.TreeRenderer;
@@ -61,9 +60,7 @@ public class TreeRendererRequirement extends TreeRenderer {
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
         super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
         Object object = ((DefaultMutableTreeNode) value).getUserObject();
-        if (object instanceof Project)
-            this.setProjectIcon((Project) object);
-        else if (object instanceof Requirement)
+        if (object instanceof Requirement)
             this.setRequirementIcon((Requirement) object);
         else if (object instanceof Traceability)
             this.setTraceabilityIcon((Traceability) object);

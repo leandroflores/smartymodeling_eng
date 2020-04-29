@@ -7,6 +7,7 @@ import javax.swing.JTabbedPane;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.base.evaluation.Measure;
 import model.structural.base.evaluation.Metric;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
@@ -240,6 +241,14 @@ public final class PanelTree extends Panel {
      */
     public void updateNode(Metric metric) {
         this.getPanelTreeEvaluation().updateNode(metric);
+    }
+    
+    /**
+     * Method responsible for updating the Measure Node.
+     * @param measure Measure.
+     */
+    public void updateNode(Measure measure) {
+        this.getPanelTreeEvaluation().updateNode(measure);
     }
     
     /**

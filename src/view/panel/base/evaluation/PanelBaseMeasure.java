@@ -30,6 +30,7 @@ public final class PanelBaseMeasure extends PanelBase {
         this.controller = new ControllerPanelBaseMeasure(this);
         this.setDefaultProperties();
         this.addComponents();
+        this.getController().setReady();
     }
     
     @Override

@@ -25,7 +25,7 @@ public class ControllerPanelBaseMeasure extends ControllerPanelBase {
 
     @Override
     protected void refresh() {
-//        this.getPanelTree().updateNode(this.getInstance());
+        this.getPanelTree().updateNode(this.getMeasure());
         super.refresh();
     }
     

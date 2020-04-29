@@ -1,6 +1,6 @@
 package controller.view.panel.new_.base.evaluation.measure;
 
-import funct.evaluation.Evaluation;
+import funct.evaluation.base.EvaluationBase;
 import funct.evaluation.base.EvaluationDiagram;
 import funct.evaluation.base.EvaluationProject;
 import java.awt.event.ActionEvent;
@@ -77,10 +77,9 @@ public class ControllerPanelBaseEvaluation extends ControllerPanelBase {
      * @throws ScriptException Exception to Evaluate the Project.
      */
     public void evaluate(Project project, Metric metric) throws ScriptException {
-        Evaluation evaluation = new EvaluationProject(project);
-        Double     finalValue = evaluation.getFinalValue(metric.getOperation());
-        this.getPanel().getValueTextField().setText(Double.toString(finalValue));
-        this.getPanel().updateDetails(evaluation.getObjects());
+        EvaluationBase evaluation = new EvaluationProject(project);
+        this.getPanel().getValueTextField().setText(Double.toString(evaluation.getFinalValue(metric.getOperation())));
+        this.getPanel().updateDetails(evaluation.getResult());
     }
     
     /**
@@ -90,17 +89,13 @@ public class ControllerPanelBaseEvaluation extends ControllerPanelBase {
      * @throws ScriptException Exception to Evaluate the Diagram.
      */
     public void evaluate(Diagram diagram, Metric metric) throws ScriptException {
-        Evaluation evaluation = new EvaluationDiagram(diagram);
-        Double     finalValue = evaluation.getFinalValue(metric.getOperation());
-        this.getPanel().getValueTextField().setText(Double.toString(finalValue));
-        this.getPanel().updateDetails(evaluation.getObjects());
+        EvaluationBase evaluation = new EvaluationDiagram(diagram);
+        this.getPanel().getValueTextField().setText(Double.toString(evaluation.getFinalValue(metric.getOperation())));
+        this.getPanel().updateDetails(evaluation.getResult());
     }
     
     @Override
-    public void next() {
-        this.update();
-        this.getViewNew().getController().insert();
-    }
+    public void next() {}
     
     @Override
     protected void update() {

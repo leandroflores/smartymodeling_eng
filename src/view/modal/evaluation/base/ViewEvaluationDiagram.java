@@ -1,5 +1,6 @@
 package view.modal.evaluation.base;
 
+import controller.view.modal.evaluation.base.ControllerViewEvaluationDiagram;
 import java.awt.Dimension;
 import javax.swing.JTabbedPane;
 import model.structural.base.Project;
@@ -14,7 +15,7 @@ import view.main.structural.ViewMenu;
  * @since  2020-04-01
  * @see    controller.view.modal.evaluation.ControllerViewEvaluationDiagram
  * @see    view.modal.evaluation.ViewEvaluation
- * @see    view.panel.evaluation.PanelEvaluationProduct
+ * @see    view.panel.evaluation.base.PanelEvaluationDiagram
  */
 public final class ViewEvaluationDiagram extends ViewEvaluation {
     
@@ -25,7 +26,7 @@ public final class ViewEvaluationDiagram extends ViewEvaluation {
      */
     public ViewEvaluationDiagram(ViewMenu view, Project project) {
         super(view);
-//        this.controller = new ControllerViewEvaluationDi(this);
+        this.controller = new ControllerViewEvaluationDiagram(this);
         this.title      = "Evaluation Diagram";
         this.initComponents();
     }

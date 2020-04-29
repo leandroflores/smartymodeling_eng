@@ -102,7 +102,16 @@ public final class PanelTreeEvaluation extends PanelTree {
      */
     public void updateNode(Metric metric) {
         if (this.getNode(metric) != null)
-            this.getTreeModel().reload(this.getNode(metric));
+            this.getTreeModel().reload(this.createNode(metric));
+    }
+    
+    /**
+     * Method responsible for updating the Measure Node.
+     * @param measure Measure. 
+     */
+    public void updateNode(Measure measure) {
+        if (this.getNode(measure) != null)
+            this.getTreeModel().reload(this.getNode(measure));
     }
     
     @Override

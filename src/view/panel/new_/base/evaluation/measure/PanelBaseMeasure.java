@@ -55,6 +55,7 @@ public final class PanelBaseMeasure extends PanelBase {
     @Override
     public void addFooter() {
         this.add(this.getFooter(), this.createConstraints(4, 1, 0, 3));
+        this.getReturnButton().setEnabled(false);
     }
     
     /**

@@ -3,7 +3,6 @@ package view.panel.tree.renderer.base.product;
 import java.awt.Component;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
-import model.structural.base.Project;
 import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
@@ -62,9 +61,7 @@ public class TreeRendererProduct extends TreeRenderer {
         DefaultMutableTreeNode node   = (DefaultMutableTreeNode) value;
         DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
         Object object = node.getUserObject();
-        if (object instanceof Project)
-            this.setProjectIcon((Project) object);
-        else if (object instanceof Product)
+        if (object instanceof Product)
             this.setProductIcon((Product) object);
         else if (object instanceof Instance)
             this.setInstanceIcon((Instance) object);

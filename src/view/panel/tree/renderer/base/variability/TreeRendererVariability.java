@@ -4,9 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
-import model.structural.base.Diagram;
 import model.structural.base.Element;
-import model.structural.base.Project;
 import model.structural.base.variability.Variability;
 import view.panel.tree.renderer.TreeRenderer;
 
@@ -67,13 +65,7 @@ public class TreeRendererVariability extends TreeRenderer {
         DefaultMutableTreeNode node   = (DefaultMutableTreeNode) value;
         DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
         Object object = node.getUserObject();
-        if (object instanceof Project)
-            this.setProjectIcon((Project) object);
-        else if (object instanceof Diagram)
-            this.setDiagramIcon((Diagram) object);
-        else if (object instanceof Element)
-            this.setElementIcon((Element) object, parent);
-        else if (object instanceof Variability)
+        if (object instanceof Variability)
             this.setVariabilityIcon((Variability) object);
         return this;
     }
