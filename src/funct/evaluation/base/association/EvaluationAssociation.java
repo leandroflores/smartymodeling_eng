@@ -1,4 +1,4 @@
-package funct.evaluation.base.types;
+package funct.evaluation.base.association;
 
 import funct.evaluation.Evaluation;
 import java.util.ArrayList;
@@ -9,9 +9,9 @@ import model.structural.base.association.Association;
 
 /**
  * <p>Class of Evaluation <b>EvaluationAssociation</b>.</p>
- * <p>Class responsible for <b>Evaluate</b> the <b>Associations</b>.</p>
+ * <p>Class responsible for <b>Evaluate</b> the <b>Association</b> in the SMartyModeling.</p>
  * @author Leandro
- * @since  30/03/2020
+ * @since  2020-03-30
  * @see    funct.evaluation.Evaluation
  * @see    model.structural.base.Diagram
  * @see    model.structural.base.Project

@@ -1,4 +1,4 @@
-package funct.evaluation.base.types;
+package funct.evaluation.base;
 
 import funct.evaluation.Evaluation;
 import java.util.ArrayList;
@@ -7,12 +7,13 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.diagram.classes.Encodable;
+import model.structural.diagram.feature.base.Feature;
 
 /**
  * <p>Class of Evaluation <b>EvaluationElement</b>.</p>
- * <p>Class responsible for <b>Evaluate</b> the <b>Elements</b>.</p>
+ * <p>Class responsible for <b>Evaluate</b> the <b>Element</b> in the SMartyModeling.</p>
  * @author Leandro
- * @since  30/03/2020
+ * @since  2020-03-30
  * @see    funct.evaluation.Evaluation
  * @see    model.structural.base.Diagram
  * @see    model.structural.base.Element
@@ -210,6 +211,8 @@ public class EvaluationElement extends Evaluation {
     private boolean checkAbstract(Element element, Boolean abstract_) {
         if (element instanceof Encodable)
             return abstract_.equals(((Encodable) element).isAbstract());
+        else if (element instanceof Feature)
+            return abstract_.equals(((Feature)   element).isAbstract());
         return true;
     }
     

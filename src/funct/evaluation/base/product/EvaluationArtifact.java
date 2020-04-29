@@ -1,4 +1,4 @@
-package funct.evaluation.base.types;
+package funct.evaluation.base.product;
 
 import funct.evaluation.Evaluation;
 import java.util.ArrayList;
@@ -9,9 +9,9 @@ import model.structural.base.product.Product;
 
 /**
  * <p>Class of Evaluation <b>EvaluationArtifact</b>.</p>
- * <p>Class responsible for <b>Evaluate</b> the <b>Artifacts</b>.</p>
+ * <p>Class responsible for <b>Evaluate</b> the <b>Artifact</b> in the SMartyModeling.</p>
  * @author Leandro
- * @since  01/04/2020
+ * @since  2020-04-01
  * @see    funct.evaluation.Evaluation
  * @see    model.structural.base.Project
  * @see    model.structural.base.product.Artifact

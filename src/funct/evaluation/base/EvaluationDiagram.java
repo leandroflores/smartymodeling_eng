@@ -1,23 +1,21 @@
 package funct.evaluation.base;
 
-import funct.evaluation.base.types.EvaluationElement;
-import funct.evaluation.base.types.EvaluationAssociation;
-import funct.evaluation.Evaluation;
-import funct.evaluation.base.types.EvaluationVariability;
+import funct.evaluation.base.association.EvaluationAssociation;
+import funct.evaluation.base.variability.EvaluationVariability;
 import model.structural.base.Diagram;
 
 /**
  * <p>Class of Evaluation <b>EvaluationDiagram</b>.</p>
- * <p>Class responsible for <b>Evaluate</b> the <b>Diagram</b>.</p>
+ * <p>Class responsible for <b>Evaluate</b> the <b>Diagram</b> in the SMartyModeling.</p>
  * @author Leandro
- * @since  23/10/2019
- * @see    funct.evaluation.Evaluation
+ * @since  2019-10-23
+ * @see    funct.evaluation.base.EvaluationBase
+ * @see    funct.evaluation.base.EvaluationElement
+ * @see    funct.evaluation.base.association.EvaluationAssociation
+ * @see    funct.evaluation.base.variability.EvaluationVariability
  * @see    model.structural.base.Diagram
- * @see    funct.evaluation.base.types.EvaluationAssociation
- * @see    funct.evaluation.base.types.EvaluationElement
- * @see    funct.evaluation.base.types.EvaluationVariability
  */
-public class EvaluationDiagram extends Evaluation {
+public class EvaluationDiagram extends EvaluationBase {
     private final Diagram diagram;
     
     /**
@@ -30,13 +28,13 @@ public class EvaluationDiagram extends Evaluation {
     }
 
     @Override
-    protected Double getClauseValue(String keyword, String filter) {
+    public Double getClauseValue(String keyword, String filter) {
         if (this.isElement(keyword))
-            return new EvaluationElement(this.diagram, keyword).getClauseValue(keyword, filter);
+            return super.getValue(new EvaluationElement(this.diagram, keyword), keyword, filter);
         else if (this.isAssociation(keyword))
-            return new EvaluationAssociation(this.diagram, keyword).getClauseValue(keyword, filter);
+            return super.getValue(new EvaluationAssociation(this.diagram, keyword), keyword, filter);
         else if (this.isVariability(keyword))
-            return new EvaluationVariability(this.diagram, keyword).getClauseValue(keyword, filter);
+            return super.getValue(new EvaluationVariability(this.diagram, keyword), keyword, filter);
         return 0.0d;
     }
 }

@@ -1,4 +1,4 @@
-package funct.evaluation.base.types;
+package funct.evaluation.base.variability;
 
 import funct.evaluation.Evaluation;
 import java.util.ArrayList;
@@ -9,9 +9,9 @@ import model.structural.base.variability.Variability;
 
 /**
  * <p>Class of Evaluation <b>EvaluationVariability</b>.</p>
- * <p>Class responsible for <b>Evaluate</b> the <b>Variabilities</b>.</p>
+ * <p>Class responsible for <b>Evaluate</b> the <b>Variability</b> in the SMartyModeling.</p>
  * @author Leandro
- * @since  31/03/2020
+ * @since  2020-03-31
  * @see    funct.evaluation.Evaluation
  * @see    model.structural.base.Diagram
  * @see    model.structural.base.Project

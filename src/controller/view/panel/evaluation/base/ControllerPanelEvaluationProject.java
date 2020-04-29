@@ -42,7 +42,7 @@ public class ControllerPanelEvaluationProject extends ControllerPanelEvaluation 
             new ViewError(this.getPanel().getViewEvaluation(), "Error to Apply Operation!").setVisible(true);
             this.getPanel().getOperationTextField().requestFocus();
         }catch (Exception exception) {
-            new ViewError(this.getPanel().getViewEvaluation(), "Error to Apply Operation!").setVisible(true);
+            new ViewError(this.getPanel().getViewEvaluation(), "Invalid Operation Expression!").setVisible(true);
             this.getPanel().getOperationTextField().requestFocus();
         }
     }

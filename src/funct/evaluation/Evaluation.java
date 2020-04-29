@@ -1,7 +1,6 @@
 package funct.evaluation;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -34,59 +33,6 @@ public abstract class Evaluation {
     protected void addObjects(List list) {
         this.objects.addAll(new ArrayList<>(list));
         this.objects.add("\n");
-        System.out.println("Obj.: " + this.objects);
-    }
-    
-    /**
-     * Method responsible for checking if the Keyword is a Element.
-     * @param  keyword Clause Keyword.
-     * @return Keyword is a Element.
-     */
-    protected boolean isElement(String keyword) {
-        String[] array = {"element", "elements", 
-                          "feature", 
-                          "actor", "usecase", 
-                          "package", "class", "interface", "attribute", "method",
-                          "component",
-                          "activity", "decision",
-                          "lifeline", "instance"};
-        return Arrays.asList(array).contains(keyword.toLowerCase());
-    }
-    
-    /**
-     * Method responsible for checking if the Keyword is a Association.
-     * @param  keyword Clause Keyword.
-     * @return Keyword is a Association.
-     */
-    protected boolean isAssociation(String keyword) {
-        String[] array = {"associations", "dependency", "generalization", 
-                          "connection",
-                          "communication", "extend", "include",
-                          "association", "realization",
-                          "comunication",
-                          "flow",
-                          "message"};
-        return Arrays.asList(array).contains(keyword.toLowerCase());
-    }
-    
-    /**
-     * Method responsible for checking if the Keyword is a Variability.
-     * @param  keyword Clause Keyword.
-     * @return Keyword is a Product Line.
-     */
-    protected boolean isVariability(String keyword) {
-        String[] array = {"variability", "variabilities"};
-        return Arrays.asList(array).contains(keyword.toLowerCase());
-    }
-    
-    /**
-     * Method responsible for checking if the Keyword is a Product Line.
-     * @param  keyword Clause Keyword.
-     * @return Keyword is a Product Line.
-     */
-    protected boolean isProduct(String keyword) {
-        String[] array = {"product", "instance", "artifact"};
-        return Arrays.asList(array).contains(keyword.toLowerCase());
     }
     
     /**
@@ -160,7 +106,7 @@ public abstract class Evaluation {
      * @param  filter Filter.
      * @return Clause Value.
      */
-    protected abstract Double getClauseValue(String keyword, String filter);
+    public abstract Double getClauseValue(String keyword, String filter);
     
     /**
      * Method responsible for checking the Expression Character.

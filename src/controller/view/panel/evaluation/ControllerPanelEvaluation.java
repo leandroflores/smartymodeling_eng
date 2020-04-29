@@ -2,11 +2,14 @@ package controller.view.panel.evaluation;
 
 import controller.view.panel.ControllerPanel;
 import funct.evaluation.Evaluation;
+import funct.evaluation.base.EvaluationBase;
 import funct.evaluation.base.EvaluationDiagram;
-import funct.evaluation.base.EvaluationProduct;
+import funct.evaluation.base.product.EvaluationProduct;
 import funct.evaluation.base.EvaluationProject;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 import javax.script.ScriptException;
 import model.structural.base.Diagram;
 import model.structural.base.Project;
@@ -23,6 +26,7 @@ import view.panel.evaluation.PanelEvaluation;
  * @see    view.panel.evaluation.PanelEvaluation
  */
 public abstract class ControllerPanelEvaluation extends ControllerPanel {
+    private final List result;
 
     /**
      * Default constructor method of Class.
@@ -30,6 +34,7 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
      */
     public ControllerPanelEvaluation(PanelEvaluation panel) {
         super(panel);
+        this.result = new ArrayList();
     }
 
     @Override
@@ -98,12 +103,9 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
      * @throws ScriptException Exception to Apply Operation on Project.
      */
     protected void evaluate(Project project, String operation) throws ScriptException {
-        Evaluation evaluation = new EvaluationProject(project);
-        Double     finalValue = evaluation.getFinalValue(operation);
-        this.getPanel().getValueTextField().setText(Double.toString(finalValue));
-        System.out.println("List: " + evaluation.getObjects());
-        this.getPanel().updateDetails(evaluation.getObjects());
-        System.out.println("");
+        EvaluationBase evaluation = new EvaluationProject(project);
+        this.getPanel().getValueTextField().setText(Double.toString(evaluation.getFinalValue(operation)));
+        this.getPanel().updateDetails(evaluation.getResult());
     }
     
     /**
@@ -113,10 +115,12 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
      * @throws ScriptException Exception to Apply Operation on Product.
      */
     protected void evaluate(Product product, String operation) throws ScriptException {
-        Evaluation evaluation = new EvaluationProduct(this.getProject(), product);
-        Double     finalValue = evaluation.getFinalValue(operation);
-        this.getPanel().getValueTextField().setText(Double.toString(finalValue));
-        this.getPanel().updateDetails(evaluation.getObjects());
+        EvaluationBase evaluation = new EvaluationProduct(this.getProject(), product);
+        this.getPanel().getValueTextField().setText(Double.toString(evaluation.getFinalValue(operation)));
+        this.getPanel().updateDetails(evaluation.getResult());
+//        Double     finalValue = evaluation.getFinalValue(operation);
+//        this.getPanel().getValueTextField().setText(Double.toString(finalValue));
+//        this.getPanel().updateDetails(evaluation.getObjects());
     }
     
     /**
@@ -126,10 +130,12 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
      * @throws ScriptException Exception to Apply Operation on Diagram.
      */
     protected void evaluate(Diagram diagram, String operation) throws ScriptException {
-        Evaluation evaluation = new EvaluationDiagram(diagram);
-        Double     finalValue = evaluation.getFinalValue(operation);
-        this.getPanel().getValueTextField().setText(Double.toString(finalValue));
-        this.getPanel().updateDetails(evaluation.getObjects());
+        EvaluationBase evaluation = new EvaluationDiagram(diagram);
+        this.getPanel().getValueTextField().setText(Double.toString(evaluation.getFinalValue(operation)));
+        this.getPanel().updateDetails(evaluation.getResult());
+//        Double     finalValue = evaluation.getFinalValue(operation);
+//        this.getPanel().getValueTextField().setText(Double.toString(finalValue));
+//        this.getPanel().updateDetails(evaluation.getObjects());
     }
     
     @Override
