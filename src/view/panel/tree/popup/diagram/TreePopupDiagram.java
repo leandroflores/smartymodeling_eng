@@ -38,8 +38,8 @@ public final class TreePopupDiagram extends TreePopup {
         this.createMenuItem("sequence_diagram",  "Sequence Diagram",  "menu/diagram/sequence",  KeyEvent.VK_E, InputEvent.CTRL_MASK);
         this.createMenuItem("activity_diagram",  "Activity Diagram",  "menu/diagram/activity",  KeyEvent.VK_A, InputEvent.CTRL_MASK);
         this.createMenuItem("variability",       "Variability",       "variability");
-        this.createMenuItem("attribute",         "UML Attribute",     "/diagram/classes/attribute");
-        this.createMenuItem("method",            "UML Method",        "/diagram/classes/method");
+        this.createMenuItem("attribute",         "UML Attribute",     "diagram/classes/attribute");
+        this.createMenuItem("method",            "UML Method",        "diagram/classes/method");
         
         this.getNewMenu().add(this.getUseCaseDiagramMenuItem());
         this.getNewMenu().add(this.getClassDiagramMenuItem());

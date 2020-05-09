@@ -31,8 +31,8 @@ public final class TreePopupEvaluation extends TreePopup {
     @Override
     protected void createMenuItems() {
         super.createMenuItems();
-        this.createMenuItem("metric",  "Metric",  "/menu/evaluation/metric",  KeyEvent.VK_M, InputEvent.ALT_MASK);
-        this.createMenuItem("measure", "Measure", "/menu/evaluation/measure", KeyEvent.VK_S, InputEvent.ALT_MASK);
+        this.createMenuItem("metric",  "Metric",  "menu/evaluation/metric",  KeyEvent.VK_M, InputEvent.ALT_MASK);
+        this.createMenuItem("measure", "Measure", "menu/evaluation/measure", KeyEvent.VK_S, InputEvent.ALT_MASK);
         
         this.getNewMenu().add(this.getMetricMenuItem());
         this.getNewMenu().add(this.getMeasureMenuItem());

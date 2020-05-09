@@ -94,6 +94,7 @@ public abstract class TreePopup extends JPopupMenu {
     protected JMenuItem createMenuItem(String id, String title, String url) {
         JMenuItem menuItem = new JMenuItem();
                   menuItem.setText(title);
+                  System.out.println("icons/" + url + ".png");
                   menuItem.setIcon(new FunctView().createImage("icons/" + url + ".png"));
                   menuItem.setFont(new Font("Arial", Font.BOLD, 15));
         this.items.put(id, menuItem);
