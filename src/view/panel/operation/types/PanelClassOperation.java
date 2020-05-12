@@ -44,6 +44,8 @@ public final class PanelClassOperation extends PanelOperation {
                           this.getAssociationImage("classes/directed-composition"),
                           this.getAssociationImage("generalization"),
                           this.getAssociationImage("classes/realization"),
+                          this.getAssociationImage("classes/abstraction"),
+                          this.getAssociationImage("classes/usage"),
                           this.getAssociationImage("dependency"),
                           this.getAssociationImage("requires"),
                           this.getAssociationImage("mutex")};

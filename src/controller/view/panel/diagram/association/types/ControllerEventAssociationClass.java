@@ -7,8 +7,10 @@ import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.ClassUML;
 import model.structural.diagram.classes.base.InterfaceUML;
+import model.structural.diagram.classes.base.association.Abstraction;
 import model.structural.diagram.classes.base.association.AssociationUML;
 import model.structural.diagram.classes.base.association.RealizationUML;
+import model.structural.diagram.classes.base.association.Usage;
 import view.panel.diagram.types.PanelClassDiagram;
 
 /**
@@ -60,12 +62,18 @@ public class ControllerEventAssociationClass extends ControllerEventAssociation 
                 this.addRealizationUML(association);
                 break;
             case 8:
-                this.addDependency(association);
+                this.addAbstraction(association);
                 break;
             case 9:
-                this.addRequires(association);
+                this.addUsage(association);
                 break;
             case 10:
+                this.addDependency(association);
+                break;
+            case 11:
+                this.addRequires(association);
+                break;
+            case 12:
                 this.addMutex(association);
                 break;
             default:
@@ -152,7 +160,7 @@ public class ControllerEventAssociationClass extends ControllerEventAssociation 
     
     /**
      * Method responsible for returning a new Realization UML.
-     * @param  association Association.
+     * @param  association Association Cell.
      * @return Realization UML.
      */
     private RealizationUML createRealizationUML(mxCell association) {
@@ -160,6 +168,56 @@ public class ControllerEventAssociationClass extends ControllerEventAssociation 
         Element target = this.getTarget(association);
         try {
             return new RealizationUML((ClassUML) source, (InterfaceUML) target);
+        }catch (ClassCastException exception) {
+            return null;
+        }
+    }
+    
+    /**
+     * Method responsible for adding the Abstraction.
+     * @param association Abstraction mxCell.
+     */
+    private void addAbstraction(mxCell association) {
+        Abstraction abstraction = this.createAbstraction(association);
+        if (abstraction != null)
+            this.diagram.addAbstraction(abstraction);
+    }
+    
+    /**
+     * Method responsible for returning a New Abstraction.
+     * @param  association Association Cell.
+     * @return New Abstraction.
+     */
+    private Abstraction createAbstraction(mxCell association) {
+        Element source = this.getSource(association);
+        Element target = this.getTarget(association);
+        try {
+            return new Abstraction(source, target);
+        }catch (ClassCastException exception) {
+            return null;
+        }
+    }
+    
+    /**
+     * Method responsible for adding the Usage.
+     * @param association Usage mxCell.
+     */
+    private void addUsage(mxCell association) {
+        Usage usage = this.createUsage(association);
+        if (usage != null)
+            this.diagram.addUsage(usage);
+    }
+    
+    /**
+     * Method responsible for returning a New Usage.
+     * @param  association Association Cell.
+     * @return New Usage.
+     */
+    private Usage createUsage(mxCell association) {
+        Element source = this.getSource(association);
+        Element target = this.getTarget(association);
+        try {
+            return new Usage(source, target);
         }catch (ClassCastException exception) {
             return null;
         }

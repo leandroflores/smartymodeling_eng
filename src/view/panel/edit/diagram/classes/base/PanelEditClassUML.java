@@ -5,6 +5,7 @@ import model.structural.diagram.classes.base.ClassUML;
 import view.panel.base.diagram.classes.base.PanelBaseClassUML;
 import view.panel.edit.base.PanelEditElement;
 import view.main.structural.ViewMenu;
+import view.panel.base.diagram.classes.base.PanelBaseDescription;
 
 /**
  * <p>Class of View <b>PanelEditClassUML</b>.</p>
@@ -32,6 +33,7 @@ public final class PanelEditClassUML extends PanelEditElement {
         this.addPanelBaseClassUML();
         super.addPanelStereotype();
         super.addPanelDependency();
+        this.addPanelBaseDescription();
     }
     
     /**
@@ -45,11 +47,29 @@ public final class PanelEditClassUML extends PanelEditElement {
     }
     
     /**
+     * Method responsible for adding the Panel Base Description.
+     */
+    protected void addPanelBaseDescription() {
+        this.addPanel("panelBaseDescription", new PanelBaseDescription(this.viewMenu, this.getElement()));
+        this.createScrollPane("scrollPanelBaseDescription",  this.getPanelBaseDescription());
+        this.getScrollPane("scrollPanelBaseDescription").setViewportView(this.getPanelBaseDescription());
+        this.tabbedPane.add("Description", this.getScrollPane("scrollPanelBaseDescription"));
+    }
+    
+    /**
      * Method responsible for returning the Panel Base Class UML.
      * @return Panel Base Class UML.
      */
     public PanelBaseClassUML getPanelBaseClassUML() {
         return (PanelBaseClassUML) this.getPanel("panelBaseClassUML");
+    }
+    
+    /**
+     * Method responsible for returning the Panel Base Description.
+     * @return Panel Base Description.
+     */
+    public PanelBaseDescription getPanelBaseDescription() {
+        return (PanelBaseDescription) this.getPanel("panelBaseDescription");
     }
     
     @Override

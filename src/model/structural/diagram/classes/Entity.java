@@ -37,6 +37,7 @@ import model.structural.diagram.classes.base.association.AssociationUML;
  * @see    model.structural.diagram.classes.Encodable
  */
 public abstract class Entity extends Element implements Encodable {
+    protected String description;
     protected PackageUML packageUML;
     protected TypeUML typeUML;
     protected final LinkedHashMap attributes;
@@ -48,10 +49,11 @@ public abstract class Entity extends Element implements Encodable {
      */
     public Entity(ClassDiagram diagram) {
         super(diagram);
-        this.packageUML = null;
-        this.size       = new Point(200, 120);
-        this.attributes = new LinkedHashMap();
-        this.methods    = new LinkedHashMap();
+        this.description = "";
+        this.packageUML  = null;
+        this.size        = new Point(200, 120);
+        this.attributes  = new LinkedHashMap();
+        this.methods     = new LinkedHashMap();
     }
 
     /**
@@ -61,9 +63,10 @@ public abstract class Entity extends Element implements Encodable {
      */
     public Entity(org.w3c.dom.Element element, Diagram diagram) {
         super(element, diagram, true);
-        this.packageUML = null;
-        this.attributes = new LinkedHashMap();
-        this.methods    = new LinkedHashMap();
+        this.description = "";
+        this.packageUML  = null;
+        this.attributes  = new LinkedHashMap();
+        this.methods     = new LinkedHashMap();
     }
     
     /**
@@ -231,6 +234,22 @@ public abstract class Entity extends Element implements Encodable {
         this.diagram = diagram;
     }
 
+    /**
+     * Method responsible for returning the Entity Description.
+     * @return Entity Description.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Method responsible for setting the Entity Description.
+     * @param description Entity Description.
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
     /**
      * Method responsible for returning the Package UML.
      * @return Package UML.
@@ -971,6 +990,18 @@ public abstract class Entity extends Element implements Encodable {
     }
     
     /**
+     * Method responsible for exporting the Description.
+     * @return Description.
+     */
+    public String exportDescription() {
+        String export  = "      ";
+               export += "<description>";
+               export += this.description;
+               export +=  "</description>\n";
+        return export;
+    }
+    
+    /**
      * Method responsible for exporting Attributes.
      * @return Attributes.
      */
@@ -1003,6 +1034,7 @@ public abstract class Entity extends Element implements Encodable {
     @Override
     public String export() {
         return   this.exportHeader()
+               + this.exportDescription()
                + this.exportAttributes()
                + this.exportMethods()
                + this.exportFooter();

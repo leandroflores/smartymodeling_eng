@@ -4,7 +4,9 @@ import model.structural.base.association.Association;
 import funct.FunctDate;
 import funct.FunctString;
 import funct.evaluation.base.EvaluationProject;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -1494,7 +1496,22 @@ public class Project implements Exportable {
                export += this.exportMetrics();
                export += this.exportMeasures();
                export += "</project>";
-        return export;
+        return this.getString(export);
+    }
+    
+    /**
+     * Method responsible for returning the Base 64 String.
+     * @param  export String Export.
+     * @return Base 64 decoded String.
+     */
+    private String getString(String export) {
+        try {
+            byte[] original = Base64.getEncoder().encode(export.getBytes());
+            byte[] decoded  = Base64.getDecoder().decode(new String(original).getBytes("UTF-8"));
+            return new String(decoded);
+        } catch (UnsupportedEncodingException exception) {
+            return export;
+        }
     }
     
     @Override

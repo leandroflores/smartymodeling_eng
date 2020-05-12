@@ -13,6 +13,8 @@ import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.classes.base.ParameterUML;
 import model.structural.diagram.classes.base.TypeUML;
+import model.structural.diagram.classes.base.association.Abstraction;
+import model.structural.diagram.classes.base.association.Usage;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -79,6 +81,7 @@ public class ImportClassDiagram extends ImportDiagram {
             Element  current = (Element) list.item(i);
             ClassUML class_  = new ClassUML(current, this.getDiagram());
                      class_.setTypeUML(this.project.getEntityType(class_));
+                     class_.setDescription(this.getDescription(current));
                 this.addAttributes(current, class_);
                 this.addMethods(current, class_);
             this.getDiagram().addClass(class_);
@@ -95,11 +98,23 @@ public class ImportClassDiagram extends ImportDiagram {
             Element      current    = (Element) list.item(i);
             InterfaceUML interface_ = new InterfaceUML(current, this.getDiagram());
                          interface_.setTypeUML(this.project.getEntityType(interface_));
+                         interface_.setDescription(this.getDescription(current));
                 this.addAttributes(current, interface_);
                 this.addMethods(current, interface_);
             this.getDiagram().addInterface(interface_);
             this.updateParent(current.getAttribute("parent"), interface_);
         }
+    }
+    
+    /**
+     * Method responsible for returning the Entity Description.
+     * @param  element W3C Element.
+     * @return Entity Description.
+     */
+    private String getDescription(Element element) {
+        if (element.getElementsByTagName("description").getLength() > 0)
+            return element.getElementsByTagName("description").item(0).getTextContent();
+        return "";
     }
     
     /**
@@ -166,6 +181,8 @@ public class ImportClassDiagram extends ImportDiagram {
     @Override
     protected void importAssociations() {
         this.importRealizations();
+        this.importAbstractions();
+        this.importUsages();
         this.importAssociationsUML();
         this.importReferences();
     }
@@ -182,6 +199,36 @@ public class ImportClassDiagram extends ImportDiagram {
                            realization.setTarget((InterfaceUML) this.getElement(current.getAttribute("interface")));
                            super.addPoints(current, realization);
             this.getDiagram().addRealizationUML(realization);
+        }
+    }
+    
+    /**
+     * Method responsible for importing the Abstractions.
+     */
+    private void importAbstractions() {
+        NodeList list = this.element.getElementsByTagName("abstraction");
+        for (int i = 0; i < list.getLength(); i++) {
+            Element     current     = (Element) list.item(i);
+            Abstraction abstraction = new Abstraction(current);
+                           abstraction.setSource(this.getElement(current.getAttribute("source")));
+                           abstraction.setTarget(this.getElement(current.getAttribute("target")));
+                           super.addPoints(current, abstraction);
+            this.getDiagram().addAbstraction(abstraction);
+        }
+    }
+    
+    /**
+     * Method responsible for importing the Usages.
+     */
+    private void importUsages() {
+        NodeList list = this.element.getElementsByTagName("usage");
+        for (int i = 0; i < list.getLength(); i++) {
+            Element current = (Element) list.item(i);
+            Usage   usage   = new Usage(current);
+                    usage.setSource(this.getElement(current.getAttribute("source")));
+                    usage.setTarget(this.getElement(current.getAttribute("target")));
+                    super.addPoints(current, usage);
+            this.getDiagram().addUsage(usage);
         }
     }
     

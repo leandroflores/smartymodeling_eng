@@ -4,6 +4,7 @@ import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.InterfaceUML;
 import view.panel.edit.base.PanelEditElement;
 import view.main.structural.ViewMenu;
+import view.panel.base.diagram.classes.base.PanelBaseDescription;
 
 /**
  * <p>Class of View <b>PanelEditInterfaceUML</b>.</p> 
@@ -29,6 +30,25 @@ public final class PanelEditInterfaceUML extends PanelEditElement {
     @Override
     protected void addPanels() {
         super.addPanels("Interface");
+        this.addPanelBaseDescription();
+    }
+    
+    /**
+     * Method responsible for adding the Panel Base Description.
+     */
+    protected void addPanelBaseDescription() {
+        this.addPanel("panelBaseDescription", new PanelBaseDescription(this.viewMenu, this.getElement()));
+        this.createScrollPane("scrollPanelBaseDescription",  this.getPanelBaseDescription());
+        this.getScrollPane("scrollPanelBaseDescription").setViewportView(this.getPanelBaseDescription());
+        this.tabbedPane.add("Description", this.getScrollPane("scrollPanelBaseDescription"));
+    }
+    
+    /**
+     * Method responsible for returning the Panel Base Description.
+     * @return Panel Base Description.
+     */
+    public PanelBaseDescription getPanelBaseDescription() {
+        return (PanelBaseDescription) this.getPanel("panelBaseDescription");
     }
     
     @Override

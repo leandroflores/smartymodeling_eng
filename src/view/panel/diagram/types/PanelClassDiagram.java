@@ -428,6 +428,8 @@ public final class PanelClassDiagram extends PanelDiagram {
             case 8:
             case 9:
             case 10:
+            case 11:
+            case 12:
                 this.setDependencyStyle();
                 break;
             default:

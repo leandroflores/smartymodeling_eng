@@ -1,7 +1,6 @@
 package view.panel.edit.base.requirement;
 
 import java.awt.Dimension;
-import javax.swing.JTabbedPane;
 import model.structural.base.requirement.Requirement;
 import view.panel.base.requirement.PanelBaseRequirement;
 import view.panel.base.requirement.traceability.PanelBaseRequirementDiagram;

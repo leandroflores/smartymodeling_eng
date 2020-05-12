@@ -16,6 +16,8 @@ import model.structural.diagram.classes.base.InterfaceUML;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.classes.base.TypeUML;
+import model.structural.diagram.classes.base.association.Abstraction;
+import model.structural.diagram.classes.base.association.Usage;
 
 /**
  * <p>Class of Model <b>ClassDiagram</b>.</p>
@@ -38,6 +40,8 @@ public final class ClassDiagram extends Diagram {
     private HashMap<String, MethodUML>    methods;
     private HashMap<String, Association>  associations_;
     private HashMap<String, Association>  realizations;
+    private HashMap<String, Association>  abstractions;
+    private HashMap<String, Association>  usages;
     
     /**
      * Default constructor method of Class.
@@ -68,6 +72,8 @@ public final class ClassDiagram extends Diagram {
         this.methods       = new HashMap<>();
         this.associations_ = new HashMap<>();
         this.realizations  = new HashMap<>();
+        this.abstractions  = new HashMap<>();
+        this.usages        = new HashMap<>();
     }
     
     /**
@@ -441,12 +447,56 @@ public final class ClassDiagram extends Diagram {
     }
     
     /**
+     * Method responsible for adding a Abstraction.
+     * @param abstraction Abstraction.
+     */
+    public void addAbstraction(Abstraction abstraction) {
+        abstraction.setId(this.nextId(abstraction));
+        if (this.abstractions.get(abstraction .getId()) == null) {
+            this.abstractions.put(abstraction .getId(), abstraction);
+            this.addAssociation(abstraction);
+        }
+    }
+    
+    /**
+     * Method responsible for removing a Abstraction.
+     * @param abstraction Abstraction.
+     */
+    public void removeAbstraction(Abstraction abstraction) {
+        super.removeAssociation(abstraction);
+        this.abstractions.remove(abstraction.getId());
+    }
+    
+    /**
+     * Method responsible for adding a Usage.
+     * @param usage Usage.
+     */
+    public void addUsage(Usage usage) {
+        usage.setId(this.nextId(usage));
+        if (this.usages.get(usage .getId()) == null) {
+            this.usages.put(usage .getId(), usage);
+            this.addAssociation(usage);
+        }
+    }
+    
+    /**
+     * Method responsible for removing a Usage.
+     * @param usage Usage.
+     */
+    public void removeAbstraction(Usage usage) {
+        super.removeAssociation(usage);
+        this.usages.remove(usage.getId());
+    }
+    
+    /**
      * Method responsible for removing the Associations by Element.
      * @param element Element.
      */
     private void removeAssociations(Element element) {
         this.removeAssociation(element, this.associations_);
         this.removeAssociation(element, this.realizations);
+        this.removeAssociation(element, this.abstractions);
+        this.removeAssociation(element, this.usages);
     }
     
     @Override
