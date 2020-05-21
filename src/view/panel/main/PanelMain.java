@@ -95,8 +95,9 @@ public final class PanelMain extends Panel {
      */
     private void addExtraButtons() {
         this.add(this.createLabel(""));
-        this.add(this.createButton("helpButton",    "", "Help",    this.getPath("help")));
+//        this.add(this.createButton("helpButton",    "", "Help",    this.getPath("help")));
         this.add(this.createButton("versionButton", "", "Version", this.getPath("version")));
+        this.add(this.createLabel(""));
     }
     
     /**
