@@ -74,6 +74,7 @@ public final class ViewMenu extends View implements Operation {
         this.createFileChooser("fileChooserOpenProject");
         this.createFileChooser("fileChooserSaveProject");
         this.createImageChooser("fileChooserImage");
+        this.createPdfChooser("fileChooserPdf");
         
         this.addPanelMain();
         this.addPanelProject();
@@ -570,6 +571,14 @@ public final class ViewMenu extends View implements Operation {
      */
     public JFileChooser getFileChooserImage() {
         return this.getFileChooser("fileChooserImage");
+    }
+    
+    /**
+     * Method responsible for returning the File Chooser Pdf.
+     * @return File Chooser Pdf.
+     */
+    public JFileChooser getFileChooserPdf() {
+        return this.getFileChooser("fileChooserPdf");
     }
     
     /**

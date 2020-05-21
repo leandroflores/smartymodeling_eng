@@ -180,6 +180,19 @@ public abstract class View extends JFrame {
     }
     
     /**
+     * Method responsible for returning a New Pdf Chooser.
+     * @param  id Pdf Chooser Id.
+     * @return New Pdf Chooser.
+     */
+    public JFileChooser createPdfChooser(String id) {
+        JFileChooser fileChooser = new JFileChooser();
+                     fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                     fileChooser.setFileFilter(new FileNameExtensionFilter("PDF", "pdf", "pdf"));
+                     this.fileChoosers.put(id, fileChooser);
+        return       fileChooser;
+    }
+    
+    /**
      * Method responsible for returning the File Chooser by Id.
      * @param  id File Chooser Id.
      * @return File Chooser found.

@@ -2,7 +2,6 @@ package controller.view.main.structural;
 
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Image;
 import controller.view.ControllerView;
 import file.exportation.ExportProject;
 import file.exportation.pdf.ExportImage;
@@ -575,19 +574,6 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     }
     
     /**
-     * Method responsible for exporting the Pdf Image.
-     * @param path Path.
-     * @param image
-     * @throws BadElementException
-     * @throws IOException
-     * @throws DocumentException 
-     */
-    public void exportPdfImage(String path, Image image) throws BadElementException, IOException, DocumentException  {
-        ExportPdfImage export = new ExportPdfImage(image, path);
-                       export.export();
-    }
-    
-    /**
      * Method responsible for exporting the Image.
      * @throws com.itextpdf.text.DocumentException
      * @throws com.itextpdf.text.BadElementException
@@ -596,16 +582,41 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     public void exportImage() throws DocumentException, BadElementException, MalformedURLException {
         if (this.viewMenu.getFileChooserImage().showSaveDialog(this.viewMenu) != 1) {
             String        path     = this.viewMenu.getFileChooserImage().getSelectedFile().getAbsolutePath();
-            BufferedImage original = this.viewMenu.getPanelModeling().getImage();
+            BufferedImage modeling = this.viewMenu.getPanelModeling().getImage();
             BufferedImage image;
-            if (original != null) {
+            if (modeling != null) {
                 try {
                     path  = (path.toLowerCase().endsWith(".png")) ? path : path + ".png";
-                    image = new ExportImage(original).getPNGImage();
+                    image = new ExportImage(modeling).getPNGImage();
                         ImageIO.write(image, "PNG", new File(path));
                     new ViewMessage(this.viewMenu, "Image exported Successfully!").setVisible(true);
                 } catch (IOException exception) {
                     new ViewError(this.viewMenu, "Error to export Image!").setVisible(true);
+                }
+            }else {
+                new ViewError(this.viewMenu, "Open a Diagram or Instance Panel!").setVisible(true);
+            }
+        }
+    }
+    
+    /**
+     * Method responsible for exporting the Pdf Image.
+     * @throws BadElementException
+     * @throws DocumentException 
+     */
+    public void exportPdfImage() throws BadElementException, DocumentException {
+        if (this.viewMenu.getFileChooserPdf().showSaveDialog(this.viewMenu) != 1) {
+            String        path     = this.viewMenu.getFileChooserPdf().getSelectedFile().getAbsolutePath();
+            BufferedImage original = this.viewMenu.getPanelModeling().getImage();
+            BufferedImage newImage;
+            if (original != null) {
+                try {
+                    path     = (path.toLowerCase().endsWith(".pdf")) ? path : path + ".pdf";
+                    newImage = new ExportImage(original).getPNGImage();
+                    new ExportPdfImage(newImage, path).export();
+                    new ViewMessage(this.viewMenu, "PDF exported Successfully!").setVisible(true);
+                } catch (IOException exception) {
+                    new ViewError(this.viewMenu, "Error to export PDF!").setVisible(true);
                 }
             }else {
                 new ViewError(this.viewMenu, "Open a Diagram or Instance Panel!").setVisible(true);

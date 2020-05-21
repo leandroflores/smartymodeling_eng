@@ -41,6 +41,8 @@ public class ControllerPanelMain extends ControllerPanel {
             this.panelMain.getViewMenu().getController().showCloseProject();
         else if (this.panelMain.getExportImageButton().equals(event.getSource()))
             this.exportImage();
+        else if (this.panelMain.getExportPdfButton().equals(event.getSource()))
+            this.exportPdf();
         else if (this.panelMain.getVersionButton().equals(event.getSource()))
             new ViewSystemInformation(this.panelMain.getViewMenu()).setVisible(true);
         else
@@ -70,6 +72,17 @@ public class ControllerPanelMain extends ControllerPanel {
             this.panelMain.getViewMenu().getController().exportImage();
         } catch (DocumentException | MalformedURLException exception) {
             new ViewError(this.panelMain.getViewMenu(), "Error to Export Image!").setVisible(true);
+        }
+    }
+    
+    /**
+     * Method responsible for exporting the Pdf.
+     */
+    public void exportPdf() {
+        try {
+            this.panelMain.getViewMenu().getController().exportPdfImage();
+        } catch (DocumentException exception) {
+            new ViewError(this.panelMain.getViewMenu(), "Error to Export Pdf!").setVisible(true);
         }
     }
 

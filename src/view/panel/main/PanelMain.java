@@ -38,6 +38,7 @@ public final class PanelMain extends Panel {
         this.addProjectButtons();
         this.addActionButtons();
         this.addZoomButtons();
+        this.addExportButtons();
         this.addExtraButtons();
     }
 
@@ -81,15 +82,21 @@ public final class PanelMain extends Panel {
     }
     
     /**
+     * Method responsible for adding Export Buttons.
+     */
+    private void addExportButtons() {
+        this.add(this.createLabel(""));
+        this.add(this.createButton("exportImageButton", "", "Export Image", this.getPath("export-image")));
+        this.add(this.createButton("exportPdfButton",   "", "Export PDF",   this.getPath("export-pdf")));
+    }
+    
+    /**
      * Method responsible for adding Extra Buttons.
      */
     private void addExtraButtons() {
         this.add(this.createLabel(""));
-        this.add(this.createButton("exportImageButton", "", "Export Image", this.getPath("export-image")));
-        this.add(this.createLabel(""));
-        this.add(this.createButton("helpButton",        "", "Help",         this.getPath("help")));
-        this.add(this.createButton("versionButton",     "", "Version",      this.getPath("version")));
-        this.add(this.createLabel(""));
+        this.add(this.createButton("helpButton",    "", "Help",    this.getPath("help")));
+        this.add(this.createButton("versionButton", "", "Version", this.getPath("version")));
     }
     
     /**
@@ -117,6 +124,7 @@ public final class PanelMain extends Panel {
         this.getZoomInButton().setEnabled(false);
         this.getZoomOutButton().setEnabled(false);
         this.getExportImageButton().setEnabled(false);
+        this.getExportPdfButton().setEnabled(false);
     }
     
     /**
@@ -128,6 +136,7 @@ public final class PanelMain extends Panel {
         this.getZoomInButton().setEnabled(enabled);
         this.getZoomOutButton().setEnabled(enabled);
         this.getExportImageButton().setEnabled(enabled);
+        this.getExportPdfButton().setEnabled(enabled);
     }
     
     /**
@@ -216,6 +225,14 @@ public final class PanelMain extends Panel {
      */
     public JButton getExportImageButton() {
         return this.getButton("exportImageButton");
+    }
+    
+    /**
+     * Method responsible for returning Export Pdf Button.
+     * @return Export Pdf Button.
+     */
+    public JButton getExportPdfButton() {
+        return this.getButton("exportPdfButton");
     }
     
     /**
