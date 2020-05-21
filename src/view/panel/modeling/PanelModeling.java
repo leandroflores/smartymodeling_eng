@@ -1,8 +1,6 @@
 package view.panel.modeling;
 
-import com.mxgraph.io.mxObjectCodec;
 import com.mxgraph.util.mxCellRenderer;
-import com.mxgraph.util.mxXmlUtils;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.image.BufferedImage;
@@ -288,15 +286,6 @@ public final class PanelModeling extends Panel {
         else if (this.getPanelInstance() != null)
             return mxCellRenderer.createBufferedImage(this.getPanelInstance().getGraph(), null, 1, color, true, null);
         return null;
-    }
-    
-    public void test() {
-//        mxObjectCodec
-////        this.getPanelDiagram().getGraph().get
-//        mxXmlUtils.getXml();
-        if (this.getPanelDiagram() != null) {
-//            this.getPanelDiagram().getGraph().getModel().get
-        }
     }
     
     /**
