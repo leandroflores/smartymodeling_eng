@@ -11,7 +11,7 @@ import org.w3c.dom.Element;
  * <p>Class of Model <b>Connection</b>.</p>
  * <p>Class responsible for representing <b>Connection</b> in SMartyModeling.</p>
  * @author Henrique
- * @since  10/02/2020
+ * @since  2020-02-10
  * @see    model.structural.base.association.Association
  * @see    model.structural.diagram.feature.base.Feature
  */
