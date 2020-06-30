@@ -6,6 +6,8 @@ import java.util.List;
 import model.structural.base.Element;
 import model.structural.diagram.FeatureDiagram;
 import model.structural.diagram.feature.base.Feature;
+import model.structural.diagram.feature.base.Variability;
+import model.structural.diagram.feature.base.association.Combination;
 import model.structural.diagram.feature.base.association.Connection;
 import view.modal.message.ViewError;
 import view.panel.diagram.types.PanelFeatureDiagram;
@@ -37,9 +39,20 @@ public class ControllerEventAssociationFeature extends ControllerEventAssociatio
     public void addAssociation(mxCell association) {
         Element source = this.getSource(association);
         Element target = this.getTarget(association);
-        if (this.check(source, target) && this.distinct(source, target) 
+        if (this.check(source, target) && this.distinct(source, target)
          && this.containsRoot(target)  && this.isValid(target))
             this.createAssociation(association);
+    }
+    
+    /**
+     * Method responsible for checking the Association Types.
+     * @param  source Association Source.
+     * @param  target Association Target.
+     * @return Association Types is checked.
+     */
+    private boolean checkFeature(Element source, Element target) {
+        return source instanceof Feature 
+            && target instanceof Feature;
     }
     
     /**
@@ -71,14 +84,16 @@ public class ControllerEventAssociationFeature extends ControllerEventAssociatio
         switch (this.panelDiagram.getType()) {
             case 0:
             case 1:
-            case 2:
-            case 3:
                 this.addConnection(association);
+                break;
+            case 2:
+                this.addCombination(association);
                 break;
             default:
                 break;
         }
     }
+    
     /**
      * Method responsible for adding a Connection.
      * @param association Association.
@@ -98,7 +113,11 @@ public class ControllerEventAssociationFeature extends ControllerEventAssociatio
         Element source   = this.getSource(association);
         Element target   = this.getTarget(association);
         String  category = this.getCategory();
-        return new Connection((Feature) source, (Feature) target, category);
+        try {
+            return new Connection((Feature) source, (Feature) target, category);
+        }catch (ClassCastException exception) {
+            return null;
+        }
     }
     
     /**
@@ -107,16 +126,41 @@ public class ControllerEventAssociationFeature extends ControllerEventAssociatio
      */
     private String getCategory() {
         switch (this.panelDiagram.getType()) {
-            case 0:
-                return "mandatory";
             case 1:
                 return "optional";
-            case 2:
-                return "inclusive";
-            case 3:
-                return "exclusive";
             default:
                 return "mandatory";
+        }
+    }
+    
+    /**
+     * Method responsible for adding a Combination.
+     * @param association Association.
+     */
+    private void addCombination(mxCell association) {
+        Combination combination = this.createCombination(association);
+        if (combination != null) {
+            Variability variability = combination.getSource();
+            if (!variability.getVariationPoint().equals(combination.getTarget())) {
+                this.diagram.addCombination(combination);
+                variability.addVariant(combination.getTarget());
+            }
+        }
+    }
+    
+    /**
+     * Method responsible for returning a new Combination.
+     * @param  association Association.
+     * @return Combination.
+     */
+    private Combination createCombination(mxCell association) {
+        Element source = this.getSource(association);
+        Element target = this.getTarget(association);
+        boolean root   = false;
+        try {
+            return new Combination((Variability) source, (Feature) target, root);
+        }catch (ClassCastException exception) {
+            return null;
         }
     }
 }

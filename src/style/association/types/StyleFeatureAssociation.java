@@ -29,4 +29,12 @@ public class StyleFeatureAssociation extends StyleAssociation {
         style.put(mxConstants.STYLE_STARTSIZE, oval ? "10" : "15");
         style.put(mxConstants.STYLE_ENDARROW,   oval ? mxConstants.ARROW_OVAL : mxConstants.ARROW_BLOCK);
     }
+    
+    /**
+     * Method responsible for setting the Combination Style.
+     * @param style Edge Style.
+     */
+    public void setCombinationStyle(Map style) {
+        this.setDefault(style);
+    }
 }

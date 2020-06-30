@@ -199,6 +199,8 @@ public final class PanelProject extends Panel {
     public void initPanelEditElement(FeatureDiagram diagram, Element element) {
         if (element instanceof Feature)
             this.panelEdit = new PanelEditFeature(this.viewMenu, diagram, (Feature) element);
+        else if (element instanceof model.structural.diagram.feature.base.Variability)
+            this.panelEdit = new view.panel.edit.diagram.feature.base.PanelEditVariability(this.viewMenu, diagram, (model.structural.diagram.feature.base.Variability) element);
         this.updatePanelEdit();
     }
     

@@ -12,6 +12,7 @@ import controller.view.panel.diagram.event.feature.ControllerEventResize;
 import controller.view.panel.diagram.types.ControllerPanelFeatureDiagram;
 import model.structural.base.Element;
 import model.structural.diagram.FeatureDiagram;
+import model.structural.diagram.feature.base.Feature;
 import style.association.types.StyleFeatureAssociation;
 import view.panel.diagram.PanelDiagram;
 import view.panel.operation.types.PanelFeatureOperation;
@@ -60,7 +61,9 @@ public final class PanelFeatureDiagram extends PanelDiagram {
     
     @Override
     protected String getTitle(Element element) {
-        return element.getName();
+        if (element instanceof Feature)
+            return element.getName();
+        return element.getTitle();
     }
     
     @Override
@@ -73,10 +76,10 @@ public final class PanelFeatureDiagram extends PanelDiagram {
                 this.getStyle().setConnectionStyle(this.getEdgeStyle(), true, false);
                 break;
             case 2:
-                this.getStyle().setConnectionStyle(this.getEdgeStyle(), false, false);
+                this.getStyle().setCombinationStyle(this.getEdgeStyle());
                 break;
             default:
-                this.getStyle().setConnectionStyle(this.getEdgeStyle(), false, true);
+                this.getStyle().setConnectionStyle(this.getEdgeStyle(), true, true);
                 break;
         }
     }

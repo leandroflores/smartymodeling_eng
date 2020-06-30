@@ -5,6 +5,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
+import model.structural.diagram.FeatureDiagram;
+import model.structural.diagram.feature.base.Feature;
+import model.structural.diagram.feature.base.Variability;
 import view.panel.tree.PanelTree;
 import view.panel.tree.popup.feature.TreePopupFeature;
 import view.panel.tree.renderer.feature.TreeRendererFeature;
@@ -70,19 +73,62 @@ public final class PanelTreeFeature extends PanelTree {
      */
     protected DefaultMutableTreeNode createNode(Diagram diagram) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(diagram);
-               this.addElements(diagram, node);
+               this.addFeatures(diagram, node);
+               this.addVariabilities(diagram, node);
             super.addNode(diagram, node);
         return node;
     }
     
     /**
-     * Method responsible for adding the Element Nodes of a Feature Diagram.
+     * Method responsible for adding the Feature Nodes of a Feature Diagram.
      * @param diagram Feature Diagram.
      * @param node Feature Diagram Node.
      */
-    protected void addElements(Diagram diagram, DefaultMutableTreeNode node) {
-        for (Element  element : diagram.getTreeElementsList())
-            super.addElement(element, super.createNode(element), node);
+    protected void addFeatures(Diagram diagram, DefaultMutableTreeNode node) {
+        for (Feature feature : ((FeatureDiagram) diagram).getFeaturesList())
+            super.addElement(feature, super.createNode(feature), node);
+    }
+    
+    /**
+     * Method responsible for adding the Variability Nodes of a Feature Diagram.
+     * @param diagram Feature Diagram.
+     * @param node Feature Diagram Node.
+     */
+    protected void addVariabilities(Diagram diagram, DefaultMutableTreeNode node) {
+        for (Variability variability : ((FeatureDiagram) diagram).getVariability())
+            node.add(this.createNode(variability));
+    }
+    
+    /**
+     * Method responsible for returning a New Variability Node.
+     * @param  variability Variability.
+     * @return New Variability Node.
+     */
+    protected DefaultMutableTreeNode createNode(Variability variability) {
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(variability);
+               this.addVariationPoint(variability, node);
+               this.addVariants(variability, node);
+               super.addNode(variability, node);
+        return node;
+    }
+    
+    /**
+     * Method responsible for adding the Variation Point Node of a Variability.
+     * @param variability Variability.
+     * @param node Variability Node.
+     */
+    private void addVariationPoint(Variability variability, DefaultMutableTreeNode node) {
+        node.add(new DefaultMutableTreeNode(variability.getVariationPoint()));
+    }
+    
+    /**
+     * Method responsible for adding the Variant Nodes of a Variability.
+     * @param variability Variability.
+     * @param node Variability Node.
+     */
+    private void addVariants(Variability variability, DefaultMutableTreeNode node) {
+        for (Element variant : variability.getVariants())
+            node.add(new DefaultMutableTreeNode(variant));
     }
     
     @Override

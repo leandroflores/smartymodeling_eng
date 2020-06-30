@@ -20,6 +20,7 @@ import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.component.base.ComponentUML;
 import model.structural.diagram.feature.base.Feature;
+import model.structural.diagram.feature.base.Variability;
 import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
 import model.structural.diagram.usecase.base.ActorUML;
@@ -92,6 +93,8 @@ public class ControllerViewDeleteElement extends ControllerViewDelete {
     private void deleteElement(FeatureDiagram diagram) {
         if (this.element instanceof Feature)
             diagram.removeFeature((Feature) this.element);
+        else if (this.element instanceof Variability)
+            diagram.removeVariability((Variability) this.element);
     }
     
     /**

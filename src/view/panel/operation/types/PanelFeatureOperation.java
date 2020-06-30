@@ -35,7 +35,9 @@ public final class PanelFeatureOperation extends PanelOperation {
     
     @Override
     protected void addDiagramButtons() {
-        this.add(this.createButton("featureButton", "", "New Feature", "diagram/feature/feature.png"));
+        this.add(this.createButton("featureButton",   "", "New Feature",               "diagram/feature/feature.png"));
+        this.add(this.createButton("inclusiveButton", "", "New Inclusive Variability", "diagram/feature/inclusive.png"));
+        this.add(this.createButton("exclusiveButton", "", "New Exclusive Variability", "diagram/feature/exclusive.png"));
     }
     
     @Override
@@ -43,8 +45,7 @@ public final class PanelFeatureOperation extends PanelOperation {
         Object[] icons  = {
                  this.getAssociationImage("feature/mandatory"),
                  this.getAssociationImage("feature/optional"),
-                 this.getAssociationImage("feature/inclusive"),
-                 this.getAssociationImage("feature/exclusive")};
+                 this.getAssociationImage("feature/variant")};
         return   icons;
     }
 
@@ -52,6 +53,8 @@ public final class PanelFeatureOperation extends PanelOperation {
     public void resetBackground() {
         this.getClickButton().setBackground(this.getDefaultColor());
         this.getFeatureButton().setBackground(this.getDefaultColor());
+        this.getInclusiveButton().setBackground(this.getDefaultColor());
+        this.getExclusiveButton().setBackground(this.getDefaultColor());
     }
     
     @Override
@@ -65,5 +68,21 @@ public final class PanelFeatureOperation extends PanelOperation {
      */
     public JButton getFeatureButton() {
         return this.getButton("featureButton");
+    }
+    
+    /**
+     * Method responsible for returning the Inclusive Button.
+     * @return Inclusive Button.
+     */
+    public JButton getInclusiveButton() {
+        return this.getButton("inclusiveButton");
+    }
+    
+    /**
+     * Method responsible for returning the Exclusive Button.
+     * @return Exclusive Button.
+     */
+    public JButton getExclusiveButton() {
+        return this.getButton("exclusiveButton");
     }
 }

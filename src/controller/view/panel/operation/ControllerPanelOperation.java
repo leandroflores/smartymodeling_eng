@@ -112,7 +112,7 @@ public abstract class ControllerPanelOperation extends ControllerPanel {
      * Method responsible for Deleting a Element.
      * @param element Element.
      */
-    private void delete(Element element) {
+    protected void delete(Element element) {
         new ViewDeleteElement(this.getPanelDiagram().getViewMenu().getPanelModeling(),
                               this.getPanelDiagram().getDiagram(),
                               element).setVisible(true);
@@ -123,7 +123,7 @@ public abstract class ControllerPanelOperation extends ControllerPanel {
      * Method responsible for Deleting a Association.
      * @param association Association.
      */
-    private void delete(Association association) {
+    protected void delete(Association association) {
         this.getPanelDiagram().getDiagram().removeAssociation(association);
         this.getPanelDiagram().updateGraph();
     }
