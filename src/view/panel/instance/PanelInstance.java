@@ -34,8 +34,6 @@ import view.main.structural.ViewMenu;
 public abstract class PanelInstance extends PanelGraph {
     protected final ViewMenu viewMenu;
     protected final Instance instance;
-    protected HashMap identifiers;
-    protected HashMap objects;
     
     /**
      * Default constructor method of Class.
@@ -61,9 +59,7 @@ public abstract class PanelInstance extends PanelGraph {
         this.addControllers();
     }
     
-    /**
-     * Method responsible for adding the Instance Panel Controllers.
-     */
+    @Override
     public void addControllers() {
         this.component.getGraph().addListener(mxEvent.CELLS_MOVED,   new ControllerEventMove(this));
         this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
@@ -71,9 +67,7 @@ public abstract class PanelInstance extends PanelGraph {
         this.component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
     }
     
-    /**
-     * Method responsible for adding the Modeling Panel.
-     */
+    @Override
     public void addModelingPanel() {
         this.identifiers = new HashMap<>();
         this.objects     = new HashMap<>();
@@ -84,7 +78,6 @@ public abstract class PanelInstance extends PanelGraph {
             this.addGraphPanel();
         this.component.refresh();
     }
-    
     
     @Override
     protected void initGraph() {
@@ -99,9 +92,7 @@ public abstract class PanelInstance extends PanelGraph {
         this.component.getGraphControl().getGraphContainer().addKeyListener((ControllerPanelInstance) this.controller);
     }
     
-    /**
-     * Method responsible for adding the Graph Panel.
-     */
+    @Override
     protected void addGraphPanel() {
         this.createScrollPane("scrollPaneInstance");
         this.getScrollPaneInstance().setViewportView(this.component);

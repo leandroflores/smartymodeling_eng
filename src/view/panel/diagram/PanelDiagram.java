@@ -31,8 +31,6 @@ public abstract class PanelDiagram extends PanelGraph {
     protected StyleAssociation style;
     protected String  operation;
     protected Integer type;
-    protected HashMap identifiers;
-    protected HashMap objects;
     
     /**
      * Default constructor method of Class.
@@ -87,14 +85,7 @@ public abstract class PanelDiagram extends PanelGraph {
      */
     public abstract void setStyle();
     
-    /**
-     * Method responsible for adding the Diagram Panel Controllers.
-     */
-    public abstract void addControllers();
-    
-    /**
-     * Method responsible for adding the Modeling Panel.
-     */
+    @Override
     public void addModelingPanel() {
         this.identifiers = new HashMap<>();
         this.objects     = new HashMap<>();
@@ -115,9 +106,7 @@ public abstract class PanelDiagram extends PanelGraph {
         this.component.getGraphControl().getGraphContainer().addKeyListener((ControllerPanelDiagram) this.controller);
     }
     
-    /**
-     * Method responsible for adding the Graph Panel.
-     */
+    @Override
     protected void addGraphPanel() {
         this.createScrollPane("scrollPaneDiagram");
         this.getScrollPaneDiagram().setViewportView(this.component);

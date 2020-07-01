@@ -247,7 +247,7 @@ public final class FeatureDiagram extends Diagram {
      * @return Categories Array.
      */
     public String[] getCategories() {
-        return new String[]{"mandatory", "optional", "inclusive", "exclusive"};
+        return new String[]{"mandatory", "optional"};
     }
     
     @Override

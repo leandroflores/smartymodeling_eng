@@ -7,6 +7,7 @@ import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 import java.awt.Color;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -22,6 +23,8 @@ public abstract class PanelGraph extends Panel {
     protected mxGraph graph;
     protected mxGraphLayout layout;
     protected mxGraphComponent component;
+    protected HashMap identifiers;
+    protected HashMap objects;
     
     /**
      * Default constructor of Class.
@@ -41,6 +44,11 @@ public abstract class PanelGraph extends Panel {
      * Method responsible for loading the Default Styles.
      */
     protected void loadDefaultStyles() {}
+    
+    /**
+     * Method responsible for adding the Panel Controllers.
+     */
+    public abstract void addControllers();
     
     /**
      * Method responsible for updating the Graph.
@@ -92,6 +100,16 @@ public abstract class PanelGraph extends Panel {
             }
         };
     }
+    
+    /**
+     * Method responsible for adding the Modeling Panel.
+     */
+    public abstract void addModelingPanel();
+    
+    /**
+     * Method responsible for adding the Graph Panel.
+     */
+    protected abstract void addGraphPanel();
     
     /**
      * Method responsible for initializing the Graph Component.

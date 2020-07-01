@@ -16,7 +16,7 @@ import view.panel.Panel;
  * <p>Class of Controller <b>ControllerPanel</b>.</p>
  * <p>Class responsible for controlling the <b>Events</b> from the Panels of SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    controller.Controller
  * @see    view.panel.Panel
  */

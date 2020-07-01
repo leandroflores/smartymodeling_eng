@@ -51,7 +51,6 @@ public class ExportDiagram {
         String newPath = this.path + "\\" + this.diagram.getId() + ".png";
         BufferedImage pngImage = new ExportImage(this.getImage()).getPNGImage();
         ImageIO.write(pngImage, "PNG", new File(newPath));
-
     }
     
     /**
