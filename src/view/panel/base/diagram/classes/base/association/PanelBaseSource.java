@@ -38,8 +38,8 @@ public final class PanelBaseSource extends PanelBaseAssociation {
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(4, 2));
         super.setDefaultProperties();
+        this.setLayout(new GridLayout(4, 2));
         this.setSize(new Dimension(50, 50));
     }
     

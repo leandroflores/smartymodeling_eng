@@ -4,7 +4,7 @@ package view.interfaces;
  * <p>Interface <b>Operation</b>.</p>
  * <p>Interface responsible for defining the <b>Main Operation</b> of the Class.</p>
  * @author Leandro
- * @since  20/052019
+ * @since  2019-05-20
  */
 public interface Operation {
     

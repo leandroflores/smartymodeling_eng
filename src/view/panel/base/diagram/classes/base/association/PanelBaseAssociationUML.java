@@ -39,8 +39,8 @@ public final class PanelBaseAssociationUML extends PanelBaseAssociation {
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(5, 2));
         super.setDefaultProperties();
+        this.setLayout(new GridLayout(5, 2));
         this.setSize(new Dimension(50, 50));
     }
     
