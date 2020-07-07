@@ -66,8 +66,8 @@ public class ImportComponentDiagram extends ImportDiagram {
         for (int i = 0; i < list.getLength(); i++) {
             Element         current      = (Element) list.item(i);
             ComunicationUML comunication = new ComunicationUML(current);
-                            comunication.setSource(this.getElement(current.getAttribute("source")));
-                            comunication.setTarget(this.getElement(current.getAttribute("target")));
+                            comunication.setSource(this.getElement(current.getAttribute("component")));
+                            comunication.setTarget(this.getElement(current.getAttribute("interface")));
                     super.addPoints(current, comunication);
             this.getDiagram().addComunication(comunication);
         }
