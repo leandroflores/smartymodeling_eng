@@ -18,6 +18,8 @@ import model.structural.diagram.classes.base.TypeUML;
 import model.structural.base.variability.Mutex;
 import model.structural.base.variability.Requires;
 import model.structural.base.variability.Variability;
+import model.structural.diagram.classes.Entity;
+import model.structural.diagram.classes.base.PackageUML;
 
 /**
  * <p>Class of Model <b>Diagram</b>.</p>
@@ -257,6 +259,34 @@ public abstract class Diagram implements Exportable {
                 filter.add(list.get(i));
         }
         return filter;
+    }
+    
+    /**
+     * Method responsible for returning a Entity by Name.
+     * @param  name Entity Name.
+     * @return Entity found.
+     */
+    public Entity filterEntityByName(String name) {
+        for (Element element : this.getElementsList()) {
+            if (element instanceof Entity &&
+                element.getName().equalsIgnoreCase(name))
+                return (Entity) element;
+        }
+        return null;
+    }
+    
+    /**
+     * Method responsible for returning a Package UML by Name.
+     * @param  name Package UML Name.
+     * @return Package UML found.
+     */
+    public PackageUML filterPackageUMLByName(String name) {
+        for (Element element : this.getElementsList()) {
+            if (element instanceof PackageUML &&
+                element.getName().equalsIgnoreCase(name))
+                return (PackageUML) element;
+        }
+        return null;
     }
     
     /**

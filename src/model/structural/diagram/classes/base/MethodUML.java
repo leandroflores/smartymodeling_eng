@@ -94,6 +94,40 @@ public class MethodUML extends Element implements Encodable {
     }
     
     /**
+     * Method responsible for returning if the Method is Getter.
+     * @return Method is Getter.
+     */
+    public boolean isGetter() {
+        for (String attribute : this.entity.getAttributesNames())
+            if (this.name.equalsIgnoreCase("get" + attribute))
+                return true;
+        return false;    
+    }
+    
+    /**
+     * Method responsible for returning if the Method is Setter.
+     * @return Method is Setter.
+     */
+    public boolean isSetter() {
+        for (String attribute : this.entity.getAttributesNames())
+            if (this.name.equalsIgnoreCase("set" + attribute))
+                return true;
+        return false;    
+    }
+    
+    /**
+     * Method responsible for returning if the Method is Inherited.
+     * @return Method is Inherited.
+     */
+    public boolean isInherited() {
+        for (MethodUML method : this.entity.getInheritedMethods()) {
+            if (this.getCompleteSignature().equalsIgnoreCase(method.getCompleteSignature()))
+                return true;
+        }
+        return false;
+    }
+    
+    /**
      * Method responsible for changing the Type UML.
      * @param oldType Old Type.
      * @param newType New Type.

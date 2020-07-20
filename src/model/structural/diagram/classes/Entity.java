@@ -408,6 +408,17 @@ public abstract class Entity extends Element implements Encodable {
     }
     
     /**
+     * Method responsible for returning the Attributes Names.
+     * @return Attributes Names.
+     */
+    public List<String> getAttributesNames() {
+        List   attributes = new ArrayList();
+        for (AttributeUML attribute : this.getAttributesList())
+               attributes.add(attribute.getName());
+        return attributes;
+    }
+    
+    /**
      * Method responsible for adding a Attribute UML.
      * @param attribute Attribute UML.
      */

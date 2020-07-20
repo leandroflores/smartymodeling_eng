@@ -7,6 +7,7 @@ import model.structural.base.Diagram;
 import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.diagram.classes.Encodable;
+import model.structural.diagram.classes.Entity;
 import model.structural.diagram.feature.base.Feature;
 
 /**
@@ -59,6 +60,7 @@ public class EvaluationElement extends Evaluation {
      */
     public List filter(Object[] parameters) {
            List filter = this.filterContext();
+                filter = this.filterParent(filter, this.getParent((List<String>) parameters[2]));
                 filter = this.filterName(filter, (List<String>) parameters[0]);
                 filter = this.filterStereotype(filter, (List<String>) parameters[1]);
                 filter = this.filterMandatory(filter,  (Boolean) parameters[3]);
@@ -68,6 +70,15 @@ public class EvaluationElement extends Evaluation {
                 filter = this.filterVisibility(filter, (String) parameters[7]);
                 super.addObjects(this.getList(filter));
         return  filter;
+    }
+    
+    /**
+     * Method responsible for returning the Parent Name.
+     * @param  parameter Parameter List.
+     * @return Parent Name.
+     */
+    private String getParent(List<String> parameter) {
+        return parameter.isEmpty() ? "" : parameter.get(0);
     }
     
     /**
@@ -112,6 +123,50 @@ public class EvaluationElement extends Evaluation {
                filter.add(element);
         }
         return filter;
+    }
+    
+    /**
+     * Method responsible for filtering the Parent List.
+     * @param  list Initial List.
+     * @param  parent Parent.
+     * @return Parent List.
+     */
+    protected List<Element> filterParent(List<Element> list, String parent) {
+        if (this.type.equalsIgnoreCase("method"))
+            return this.getMethods(list, parent);
+        if (this.type.equalsIgnoreCase("attribute"))
+            return this.getAttributes(list, parent);
+        return list;
+    }
+    
+    /**
+     * Method resposible for returning the filtered Methods.
+     * @param  list Initial List.
+     * @param  parent Parent Name.
+     * @return Methods List.
+     */
+    protected List<Element> getMethods(List<Element> list, String parent) {
+        Entity entity = this.diagram.filterEntityByName(parent);
+        if (parent.trim().equals(""))
+            return list;
+        if (entity == null)
+            return new ArrayList<>();
+        return (List<Element>) new ArrayList(entity.getMethodsList());
+    }
+    
+    /**
+     * Method resposible for returning the filtered Attributes.
+     * @param  list Initial List.
+     * @param  parent Parent Name.
+     * @return Attributes List.
+     */
+    protected List<Element> getAttributes(List<Element> list, String parent) {
+        Entity entity = this.diagram.filterEntityByName(parent);
+        if (parent.trim().equals(""))
+            return list;
+        if (entity == null)
+            return new ArrayList<>();
+        return (List<Element>) new ArrayList(entity.getAttributesList());
     }
     
     /**

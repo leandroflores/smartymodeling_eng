@@ -10,7 +10,7 @@ import model.structural.base.Project;
  * <p>Class of Evaluation <b>Evaluation</b>.</p>
  * <p>Class responsible for operations involving <b>Evaluation</b> and <b>Measures</b>.</p>
  * @author Leandro
- * @since  02/09/2019
+ * @since  2019-09-02
  * @see    model.structural.base.Project
  */
 public abstract class Evaluation {
@@ -59,8 +59,8 @@ public abstract class Evaluation {
                     toReturn += expression.charAt(i);
                 }else {
                     String valor  = expression.substring(i, expression.indexOf(")", i) + 1);
-                       toReturn  += this.getClauseValue(valor);
-                              i   = expression.indexOf(")", i);
+                        toReturn += this.getClauseValue(valor);
+                               i  = expression.indexOf(")", i);
                 }
             }
         }
@@ -269,6 +269,28 @@ public abstract class Evaluation {
     }
     
     /**
+     * Method responsible for returning the Filter Getter Flag.
+     * @param  filter Clause Filter.
+     * @return Filter Getter Flag.
+     */
+    protected Boolean getGetter(String filter) {
+        if (filter.toUpperCase().contains("GETTER"))
+            return true;
+        return null;
+    }
+    
+    /**
+     * Method responsible for returning the Filter Setter Flag.
+     * @param  filter Clause Filter.
+     * @return Filter Setter Flag.
+     */
+    protected Boolean getSetter(String filter) {
+        if (filter.toUpperCase().contains("SETTER"))
+            return true;
+        return null;
+    }
+    
+    /**
      * Method responsible for returning the Value Expression.
      * @param  expression Operation Expression.
      * @return Expression Value.
@@ -294,7 +316,7 @@ public abstract class Evaluation {
      * @return Element Filters.
      */
     protected Object[] getElementFilters(String filter) {
-        Object[] filters    = new Object[8];
+        Object[] filters    = new Object[10];
                  filters[0] = this.getParameters(filter, "[", "]");
                  filters[1] = this.getParameters(filter, "<", ">");
                  filters[2] = this.getParameters(filter, "{", "}");
@@ -303,6 +325,8 @@ public abstract class Evaluation {
                  filters[5] = this.getFinal(filter);
                  filters[6] = this.getStatic(filter);
                  filters[7] = this.getVisibility(filter);
+                 filters[8] = this.getGetter(filter);
+                 filters[9] = this.getSetter(filter);
         return   filters;
     }
     

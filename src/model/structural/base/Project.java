@@ -397,6 +397,30 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Entity by Name.
+     * @param  name Entity Name.
+     * @return Entity by Name.
+     */
+    public Entity getEntityByName(String name) {
+        for (Object diagram : this.getDiagrams("class")) {
+            Entity entity = this.getEntityByName((Diagram) diagram, name);
+            if (entity != null)
+                return entity;
+        }
+        return null;
+    }
+    
+    /**
+     * Method responsible for returning the Entity by Diagram and Name.
+     * @param  diagram Class Diagram.
+     * @param  name Entity Name.
+     * @return Entity by Diagram and Name.
+     */
+    public Entity getEntityByName(Diagram diagram, String name) {
+        return diagram.filterEntityByName(name);
+    }
+    
+    /**
      * Method responsible for returning the Types HashMap.
      * @return Types HashMap.
      */
