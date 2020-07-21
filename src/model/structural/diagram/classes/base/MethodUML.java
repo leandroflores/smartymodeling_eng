@@ -98,10 +98,7 @@ public class MethodUML extends Element implements Encodable {
      * @return Method is Getter.
      */
     public boolean isGetter() {
-        for (String attribute : this.entity.getAttributesNames())
-            if (this.name.equalsIgnoreCase("get" + attribute))
-                return true;
-        return false;    
+        return this.name.toLowerCase().startsWith("get");
     }
     
     /**
@@ -109,22 +106,30 @@ public class MethodUML extends Element implements Encodable {
      * @return Method is Setter.
      */
     public boolean isSetter() {
-        for (String attribute : this.entity.getAttributesNames())
-            if (this.name.equalsIgnoreCase("set" + attribute))
-                return true;
-        return false;    
+        return this.name.toLowerCase().startsWith("set");
     }
     
     /**
-     * Method responsible for returning if the Method is Inherited.
-     * @return Method is Inherited.
+     * Method responsible for returning if the Method is Overwritten.
+     * @return Method is Overwritten.
      */
-    public boolean isInherited() {
+    public boolean isOverwritten() {
         for (MethodUML method : this.entity.getInheritedMethods()) {
             if (this.getCompleteSignature().equalsIgnoreCase(method.getCompleteSignature()))
                 return true;
         }
         return false;
+    }
+    
+    /**
+     * Method responsible for returning if the Method is Specific.
+     * @return Method is Specific.
+     */
+    public boolean isSpecific() {
+        return !this.isGetter()    &&
+               !this.isSetter()    &&
+               !this.isOverwritten() &&
+               !this.constructor; 
     }
     
     /**

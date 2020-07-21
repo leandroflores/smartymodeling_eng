@@ -8,6 +8,7 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.diagram.classes.Encodable;
 import model.structural.diagram.classes.Entity;
+import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.feature.base.Feature;
 
 /**
@@ -68,6 +69,10 @@ public class EvaluationElement extends Evaluation {
                 filter = this.filterFinal(filter,  (Boolean) parameters[5]);
                 filter = this.filterStatic(filter, (Boolean) parameters[6]);
                 filter = this.filterVisibility(filter, (String) parameters[7]);
+                filter = this.filterGetter(filter, (Boolean) parameters[8]);
+                filter = this.filterSetter(filter, (Boolean) parameters[9]);
+                filter = this.filterOverwritten(filter, (Boolean) parameters[10]);
+                filter = this.filterSpecific(filter, (Boolean) parameters[11]);
                 super.addObjects(this.getList(filter));
         return  filter;
     }
@@ -151,7 +156,7 @@ public class EvaluationElement extends Evaluation {
             return list;
         if (entity == null)
             return new ArrayList<>();
-        return (List<Element>) new ArrayList(entity.getMethodsList());
+        return (List<Element>) new ArrayList(entity.getAllMethods());
     }
     
     /**
@@ -355,6 +360,122 @@ public class EvaluationElement extends Evaluation {
     private boolean checkVisibility(Element element, String visibility) {
         if (element instanceof Encodable)
             return visibility.equalsIgnoreCase(((Encodable) element).getVisibility());
+        return true;
+    }
+    
+    /**
+     * Method responsible for returning the Elements List by Getter Flag.
+     * @param  list Elements List.
+     * @param  getter Getter Flag.
+     * @return Elements filtered by Getter Flag.
+     */
+    protected List<Element> filterGetter(List<Element> list, Boolean getter) {
+        List filter = new ArrayList<>();
+        if (getter == null)
+            return list;
+        for (Element element : list) {
+            if (this.checkGetter(element, getter))
+                filter.add(element);
+        }
+        return filter;
+    }
+    
+    /**
+     * Method responsible for checking if a Element is Getter.
+     * @param  element Element.
+     * @param  getter Getter Flag.
+     * @return Element is Getter.
+     */
+    private boolean checkGetter(Element element, Boolean getter) {
+        if (element instanceof MethodUML)
+            return getter.equals(((MethodUML) element).isGetter());
+        return true;
+    }
+    
+    /**
+     * Method responsible for returning the Elements List by Setter Flag.
+     * @param  list Elements List.
+     * @param  setter Setter Flag.
+     * @return Elements filtered by Setter Flag.
+     */
+    protected List<Element> filterSetter(List<Element> list, Boolean setter) {
+        List filter = new ArrayList<>();
+        if (setter == null)
+            return list;
+        for (Element element : list) {
+            if (this.checkSetter(element, setter))
+                filter.add(element);
+        }
+        return filter;
+    }
+    
+    /**
+     * Method responsible for checking if a Element is Setter.
+     * @param  element Element.
+     * @param  setter Setter Flag.
+     * @return Element is Setter.
+     */
+    private boolean checkSetter(Element element, Boolean setter) {
+        if (element instanceof MethodUML)
+            return setter.equals(((MethodUML) element).isSetter());
+        return true;
+    }
+    
+    /**
+     * Method responsible for returning the Elements List by Overwritten Flag.
+     * @param  list Elements List.
+     * @param  overwritten Overwritten Flag.
+     * @return Elements filtered by Overwritten Flag.
+     */
+    protected List<Element> filterOverwritten(List<Element> list, Boolean overwritten) {
+        List filter = new ArrayList<>();
+        if (overwritten == null)
+            return list;
+        for (Element element : list) {
+            if (this.checkOverwritten(element, overwritten))
+                filter.add(element);
+        }
+        return filter;
+    }
+    
+    /**
+     * Method responsible for checking if a Element is Overwritten.
+     * @param  element Element.
+     * @param  overwritten Overwritten Flag.
+     * @return Element is Overwritten.
+     */
+    private boolean checkOverwritten(Element element, Boolean overwritten) {
+        if (element instanceof MethodUML)
+            return overwritten.equals(((MethodUML) element).isOverwritten());
+        return true;
+    }
+    
+    /**
+     * Method responsible for returning the Elements List by Specific Flag.
+     * @param  list Elements List.
+     * @param  specific Specific Flag.
+     * @return Elements filtered by Specific Flag.
+     */
+    protected List<Element> filterSpecific(List<Element> list, Boolean specific) {
+        List filter = new ArrayList<>();
+        if (specific == null)
+            return list;
+        for (Element element : list) {
+            if (this.checkSpecific(element, specific))
+                filter.add(element);
+        }
+        return filter;
+    }
+    
+    /**
+     * Method responsible for checking if a Element is Specific.
+     * @param  element Element.
+     * @param  specific Specific Flag.
+     * @return Element is Specific.
+     */
+    private boolean checkSpecific(Element element, Boolean specific) {
+        if (element instanceof MethodUML)
+            return specific.equals(((MethodUML) element).isSpecific());
         return true;
     }
     

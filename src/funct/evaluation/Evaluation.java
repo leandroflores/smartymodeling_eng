@@ -274,6 +274,8 @@ public abstract class Evaluation {
      * @return Filter Getter Flag.
      */
     protected Boolean getGetter(String filter) {
+        if (filter.toUpperCase().contains("NO-GETTER"))
+            return false;
         if (filter.toUpperCase().contains("GETTER"))
             return true;
         return null;
@@ -285,7 +287,35 @@ public abstract class Evaluation {
      * @return Filter Setter Flag.
      */
     protected Boolean getSetter(String filter) {
+        if (filter.toUpperCase().contains("NO-SETTER"))
+            return false;
         if (filter.toUpperCase().contains("SETTER"))
+            return true;
+        return null;
+    }
+    
+    /**
+     * Method responsible for returning the Filter Overwritten Flag.
+     * @param  filter Clause Filter.
+     * @return Filter Overwritten Flag.
+     */
+    protected Boolean getOverwritten(String filter) {
+        if (filter.toUpperCase().contains("NO-WRITTEN"))
+            return false;
+        if (filter.toUpperCase().contains("OVERWRITTEN"))
+            return true;
+        return null;
+    }
+    
+    /**
+     * Method responsible for returning the Filter Specific Flag.
+     * @param  filter Clause Filter.
+     * @return Filter Specific Flag.
+     */
+    protected Boolean getSpecific(String filter) {
+        if (filter.toUpperCase().contains("NO-SPECIFIC"))
+            return false;
+        if (filter.toUpperCase().contains("SPECIFIC"))
             return true;
         return null;
     }
@@ -316,17 +346,19 @@ public abstract class Evaluation {
      * @return Element Filters.
      */
     protected Object[] getElementFilters(String filter) {
-        Object[] filters    = new Object[10];
-                 filters[0] = this.getParameters(filter, "[", "]");
-                 filters[1] = this.getParameters(filter, "<", ">");
-                 filters[2] = this.getParameters(filter, "{", "}");
-                 filters[3] = this.getMandatory(filter);
-                 filters[4] = this.getAbstract(filter);
-                 filters[5] = this.getFinal(filter);
-                 filters[6] = this.getStatic(filter);
-                 filters[7] = this.getVisibility(filter);
-                 filters[8] = this.getGetter(filter);
-                 filters[9] = this.getSetter(filter);
+        Object[] filters     = new Object[12];
+                 filters[0]  = this.getParameters(filter, "[", "]");
+                 filters[1]  = this.getParameters(filter, "<", ">");
+                 filters[2]  = this.getParameters(filter, "{", "}");
+                 filters[3]  = this.getMandatory(filter);
+                 filters[4]  = this.getAbstract(filter);
+                 filters[5]  = this.getFinal(filter);
+                 filters[6]  = this.getStatic(filter);
+                 filters[7]  = this.getVisibility(filter);
+                 filters[8]  = this.getGetter(filter);
+                 filters[9]  = this.getSetter(filter);
+                 filters[10] = this.getOverwritten(filter);
+                 filters[11] = this.getSpecific(filter);
         return   filters;
     }
     
