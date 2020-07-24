@@ -205,9 +205,9 @@ public abstract class Evaluation {
      * @return Filter Constraint.
      */
     protected String getConstraint(String filter) {
-        if (filter.toUpperCase().contains("INCLUSIVE"))
+        if (filter.toLowerCase().contains("inclusive"))
             return "inclusive";
-        if (filter.toUpperCase().contains("EXCLUSIVE"))
+        if (filter.toLowerCase().contains("exclusive"))
             return "exclusive";
         return "";
     }
@@ -393,7 +393,7 @@ public abstract class Evaluation {
      * @return Variability Filters.
      */
     protected Object[] getVariabilityFilters(String filter) {
-        Object[] filters    = new Object[3];
+        Object[] filters    = new Object[4];
                  filters[0] = this.getParameters(filter, "[", "]");
                  filters[1] = this.getParameters(filter, "{", "}");
                  filters[2] = this.getParameters(filter, "<", ">");

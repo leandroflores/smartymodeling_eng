@@ -4,6 +4,7 @@ import funct.evaluation.Evaluation;
 import java.util.ArrayList;
 import java.util.List;
 import model.structural.base.Diagram;
+import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.variability.Variability;
 
@@ -45,40 +46,31 @@ public class EvaluationVariability extends Evaluation {
     
     @Override
     public Double getClauseValue(String keyword, String filter) {
-        List   list = this.filter(this.getAssociationFilters(filter));
+        List   list = this.filter(keyword, this.getVariabilityFilters(filter));
         String size = Integer.toString(list.size());
         return Double.parseDouble(size);
     }
     
     /**
      * Method responsible for filtering the Associations by Parameters.
+     * @param  keyword Keyword.
      * @param  parameters Parameters List.
-     * @return Associations filtered.
+     * @return Variants filtered.
      */
-    public List filter(Object[] parameters) {
+    public List filter(String keyword, Object[] parameters) {
            List filter = this.filterContext();
-                filter = this.filterVariationPoint(filter, (List<String>) parameters[0]);
-                filter = this.filterVariants(filter, (List<String>) parameters[1]);
+                filter = this.filterName(filter, (List<String>) parameters[0]);
                 filter = this.filterConstraint(filter, (String) parameters[3]);
-                this.addObjects(this.getList(filter));
+                filter = this.filterElements(filter, keyword);
+                super.addObjects(this.getList(filter, keyword));
         return  filter;
-    }
-    
-    /**
-     * Method responsible for returning if Flag is for All Types.
-     * @return Flag is for All Types.
-     */
-    protected boolean allTypes() {
-        return this.type.equalsIgnoreCase("") 
-            || this.type.equalsIgnoreCase("variability")
-            || this.type.equalsIgnoreCase("variabilities");
     }
     
     /**
      * Method responsible for returning the Variabilities List by Context.
      * @return Variabilities List by Context.
      */
-    protected List<Variability> getVariabilities() {
+    protected List getVariabilities() {
         return this.diagram != null ?
                this.diagram.getVariabilitiesList(): 
                this.project.getVariabilitiesList();
@@ -88,60 +80,33 @@ public class EvaluationVariability extends Evaluation {
      * Method responsible for filtering the Variabilities Context.
      * @return Variabilities Context.
      */
-    protected List<Variability> filterContext() {
+    protected List filterContext() {
         return this.getVariabilities();
     }
     
     /**
-     * Method responsible for filtering the Variabilities by Variation Points List.
-     * @param  list Variabilities List.
-     * @param  varPoints Variation Points List.
-     * @return Variabilities filtered by Variation Points.
+     * Method responsible for returning the Variants List by Names.
+     * @param  list Variants List.
+     * @param  names Names List.
+     * @return Variants filtered.
      */
-    protected List<Variability> filterVariationPoint(List<Variability> list, List<String> varPoints) {
-        return this.isVoid(varPoints) ? list : this.selectVariationPoints(list, varPoints);
+    protected List filterName(List list, List names) {
+        return this.isVoid(names) ? list : this.getNames(list, names);
     }
     
     /**
-     * Method responsible for selecting the Variabilities by Variation Points List.
-     * @param  list Variabilities List.
-     * @param  varPoints Variation Points List.
-     * @return Variabilities selected by Variation Points.
+     * Method responsible for returning the Variability List by Names.
+     * @param  list Variability List.
+     * @param  names Names List.
+     * @return Variability Name filtered.
      */
-    protected List<Variability> selectVariationPoints(List<Variability> list, List<String> varPoints) {
+    private List getNames(List<Variability> list, List<String> names) {
         List filter = new ArrayList<>();
         for (Variability variability : list) {
-            if (varPoints.contains(variability.getVariationPoint().getName()))
+            if (names.contains(variability.getName()))
                 filter.add(variability);
         }
         return  filter;
-    }
-    
-    /**
-     * Method responsible for filtering the Variabilities by Variants List.
-     * @param  list Variabilities List.
-     * @param  variants Variants List.
-     * @return Variabilities filtered by Variants.
-     */
-    protected List<Variability> filterVariants(List<Variability> list, List<String> variants) {
-        return this.isVoid(variants) ? list : this.selectVariants(list, variants);
-    }
-    
-    /**
-     * Method responsible for selecting the Variabilities by Variants List.
-     * @param  list Variabilities List.
-     * @param  variants Variants List.
-     * @return Variabilities selected by Variants.
-     */
-    protected List<Variability> selectVariants(List<Variability> list, List<String> variants) {
-        List   filter = new ArrayList<>();
-        for (Variability variability : list) {
-            for (String variant : variants) {
-                if (variability.isVariant(variant))
-                    filter.add(variability);
-            }
-        }
-        return filter;
     }
     
     /**
@@ -162,11 +127,54 @@ public class EvaluationVariability extends Evaluation {
     }
     
     /**
+     * Method responsible for filtering the Elements.
+     * @param  list Initial List.
+     * @param  keyword Type Keyword.
+     * @return Elements filtered.
+     */
+    public List filterElements(List<Variability> list, String keyword) {
+        List   filter = new ArrayList<>();
+        if (keyword.equalsIgnoreCase("variability"))
+            return list;
+        for (Variability variability : list) {
+            if (keyword.equalsIgnoreCase("variants"))
+               filter.addAll(variability.getVariants());
+            else if (keyword.equalsIgnoreCase("variationPoint"))
+               filter.add(variability.getVariationPoint());
+        }
+        return filter;
+    }
+    
+    /**
+     * Method responsible for returning the Summary List.
+     * @param  filter Filter List.
+     * @param  keyword Keyword.
+     * @return Summary List.
+     */
+    private List getList(List filter, String keyword) {
+        if (keyword.equalsIgnoreCase("variability"))
+            return this.getVariabilitiesList(filter);
+        return this.getElementsList(filter);
+    }
+    
+    /**
+     * Method responsible for returning the Summary List of Elements List.
+     * @param  filter Elements List.
+     * @return Summary List.
+     */
+    private List getElementsList(List<Element> filter) {
+        List   list = new ArrayList();
+        for (Element element : filter)
+               list.add(element.getSummary());
+        return list;
+    }
+    
+    /**
      * Method responsible for returning the Summary List of Variabilities List.
      * @param  filter Variabilities List.
      * @return Summary List.
      */
-    private List getList(List<Variability> filter) {
+    private List getVariabilitiesList(List<Variability> filter) {
         List   list = new ArrayList();
         for (Variability variability : filter)
                list.add(variability.getSummary());

@@ -76,7 +76,7 @@ public abstract class EvaluationBase extends Evaluation {
      * @return Keyword is a Product Line.
      */
     protected boolean isVariability(String keyword) {
-        String[] array = {"variability", "variabilities"};
+        String[] array = {"variability", "variants", "variationpoint"};
         return Arrays.asList(array).contains(keyword.toLowerCase());
     }
     

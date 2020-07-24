@@ -8,6 +8,7 @@ import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.diagram.classes.Encodable;
 import model.structural.diagram.classes.Entity;
+import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.feature.base.Feature;
 
@@ -239,10 +240,24 @@ public class EvaluationElement extends Evaluation {
         if (mandatory == null)
             return list;
         for (Element element : list) {
-            if (mandatory.equals(element.isMandatory()))
-                filter.add(element);
+            if (this.checkMandatory(element, mandatory))
+                filter.add(element);        
         }
         return filter;
+    }
+    
+    /**
+     * Method responsible for checking if a Element is Mandatory.
+     * @param  element Element.
+     * @param  mandatory Mandatory Flag.
+     * @return Element is Mandatory.
+     */
+    private boolean checkMandatory(Element element, Boolean mandatory) {
+        if (element instanceof AttributeUML)
+            return false;
+        if (element instanceof MethodUML)
+            return false;
+        return mandatory.equals(element.isMandatory());
     }
     
     /**

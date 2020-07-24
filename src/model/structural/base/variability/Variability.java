@@ -313,6 +313,6 @@ public class Variability implements Exportable {
     
     @Override
     public String toString() {
-        return super.toString() + "(" + this.variationPoint.getId() + ")";
+        return this.name;
     }
 }
