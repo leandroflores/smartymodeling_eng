@@ -138,6 +138,68 @@ public abstract class Evaluation {
     }
     
     /**
+     * Method responsible for returning the Element Filters.
+     * @param  filter Clause Filter.
+     * @return Element Filters.
+     */
+    protected Object[] getElementFilters(String filter) {
+        Object[] filters     = new Object[13];
+                 filters[0]  = this.getParameters(filter, "[", "]");
+                 filters[1]  = this.getParameters(filter, "<", ">");
+                 filters[2]  = this.getParameters(filter, "{", "}");
+                 filters[3]  = this.getMandatory(filter);
+                 filters[4]  = this.getAbstract(filter);
+                 filters[5]  = this.getFinal(filter);
+                 filters[6]  = this.getStatic(filter);
+                 filters[7]  = this.getConstructor(filter);
+                 filters[8]  = this.getVisibility(filter);
+                 filters[9]  = this.getGetter(filter);
+                 filters[10] = this.getSetter(filter);
+                 filters[11] = this.getOverwritten(filter);
+                 filters[12] = this.getSpecific(filter);
+        return   filters;
+    }
+    
+    /**
+     * Method responsible for returning the Association Filters.
+     * @param  filter Clause Filter.
+     * @return Association Filters.
+     */
+    protected Object[] getAssociationFilters(String filter) {
+        Object[] filters    = new Object[3];
+                 filters[0] = this.getParameters(filter, "[", "]");
+                 filters[1] = this.getParameters(filter, "<", ">");
+                 filters[2] = this.getParameters(filter, "{", "}");
+        return   filters;
+    }
+    
+    /**
+     * Method responsible for returning the Artifact Filters.
+     * @param  filter Clause Filter.
+     * @return Artifact Filters.
+     */
+    protected Object[] getArtifactFilters(String filter) {
+        Object[] filters    = new Object[2];
+                 filters[0] = this.getParameters(filter, "{", "}");
+                 filters[1] = this.getParameters(filter, "[", "]");
+        return   filters;
+    }
+    
+    /**
+     * Method responsible for returning the Variability Filters.
+     * @param  filter Clause Filter.
+     * @return Variability Filters.
+     */
+    protected Object[] getVariabilityFilters(String filter) {
+        Object[] filters    = new Object[4];
+                 filters[0] = this.getParameters(filter, "[", "]");
+                 filters[1] = this.getParameters(filter, "{", "}");
+                 filters[2] = this.getParameters(filter, "<", ">");
+                 filters[3] = this.getConstraint(filter);
+        return   filters;
+    }
+    
+    /**
      * Method responsible for cheking the Token.
      * @param  filter String Filter.
      * @param  begin Begin Delimiter.
@@ -186,15 +248,15 @@ public abstract class Evaluation {
      * @return Filter Visibility.
      */
     protected String getVisibility(String filter) {
-        if (filter.toUpperCase().contains("PUBLIC"))
+        if (filter.toLowerCase().contains("public"))
             return "public";
-        if (filter.toUpperCase().contains("PROTECTED"))
+        if (filter.toLowerCase().contains("protected"))
             return "protected";
-        if (filter.toUpperCase().contains("PRIVATE"))
+        if (filter.toLowerCase().contains("private"))
             return "private";
-        if (filter.toUpperCase().contains("DEFAULT"))
+        if (filter.toLowerCase().contains("default"))
             return "default";
-        if (filter.toUpperCase().contains("PACKAGE"))
+        if (filter.toLowerCase().contains("package"))
             return "default";
         return "";
     }
@@ -218,9 +280,9 @@ public abstract class Evaluation {
      * @return Filter Mandatory Flag.
      */
     protected Boolean getMandatory(String filter) {
-        if (filter.toUpperCase().contains("MANDATORY"))
+        if (filter.toLowerCase().contains("mandatory"))
             return true;
-        if (filter.toUpperCase().contains("OPTIONAL"))
+        if (filter.toLowerCase().contains("optional"))
             return false;
         return null;
     }
@@ -231,13 +293,13 @@ public abstract class Evaluation {
      * @return Filter Final Flag.
      */
     protected Boolean getFinal(String filter) {
-        if (filter.toUpperCase().contains("NO-FINAL"))
+        if (filter.toLowerCase().contains("no-final"))
             return false;
-        if (filter.toUpperCase().contains("NO-LEAF"))
+        if (filter.toLowerCase().contains("no-leaf"))
             return false;
-        if (filter.toUpperCase().contains("FINAL"))
+        if (filter.toLowerCase().contains("final"))
             return true;
-        if (filter.toUpperCase().contains("LEAF"))
+        if (filter.toLowerCase().contains("leaf"))
             return true;
         return null;
     }
@@ -248,9 +310,9 @@ public abstract class Evaluation {
      * @return Filter Abstract Flag.
      */
     protected Boolean getAbstract(String filter) {
-        if (filter.toUpperCase().contains("NO-ABSTRACT"))
+        if (filter.toLowerCase().contains("no-abstract"))
             return false;
-        if (filter.toUpperCase().contains("ABSTRACT"))
+        if (filter.toLowerCase().contains("abstract"))
             return true;
         return null;
     }
@@ -261,9 +323,22 @@ public abstract class Evaluation {
      * @return Filter Static Flag.
      */
     protected Boolean getStatic(String filter) {
-        if (filter.toUpperCase().contains("NO-STATIC"))
+        if (filter.toLowerCase().contains("no-static"))
             return false;
-        if (filter.toUpperCase().contains("STATIC"))
+        if (filter.toLowerCase().contains("static"))
+            return true;
+        return null;
+    }
+    
+    /**
+     * Method responsible for returning the Filter Constructor Flag.
+     * @param  filter Clause Filter.
+     * @return Filter Constructor Flag.
+     */
+    protected Boolean getConstructor(String filter) {
+        if (filter.toLowerCase().contains("no-constructor"))
+            return false;
+        if (filter.toLowerCase().contains("constructor"))
             return true;
         return null;
     }
@@ -274,9 +349,9 @@ public abstract class Evaluation {
      * @return Filter Getter Flag.
      */
     protected Boolean getGetter(String filter) {
-        if (filter.toUpperCase().contains("NO-GETTER"))
+        if (filter.toLowerCase().contains("no-getter"))
             return false;
-        if (filter.toUpperCase().contains("GETTER"))
+        if (filter.toLowerCase().contains("getter"))
             return true;
         return null;
     }
@@ -287,9 +362,9 @@ public abstract class Evaluation {
      * @return Filter Setter Flag.
      */
     protected Boolean getSetter(String filter) {
-        if (filter.toUpperCase().contains("NO-SETTER"))
+        if (filter.toLowerCase().contains("no-setter"))
             return false;
-        if (filter.toUpperCase().contains("SETTER"))
+        if (filter.toLowerCase().contains("setter"))
             return true;
         return null;
     }
@@ -300,9 +375,7 @@ public abstract class Evaluation {
      * @return Filter Overwritten Flag.
      */
     protected Boolean getOverwritten(String filter) {
-        if (filter.toUpperCase().contains("NO-WRITTEN"))
-            return false;
-        if (filter.toUpperCase().contains("OVERWRITTEN"))
+        if (filter.toLowerCase().contains("overwritten"))
             return true;
         return null;
     }
@@ -313,9 +386,7 @@ public abstract class Evaluation {
      * @return Filter Specific Flag.
      */
     protected Boolean getSpecific(String filter) {
-        if (filter.toUpperCase().contains("NO-SPECIFIC"))
-            return false;
-        if (filter.toUpperCase().contains("SPECIFIC"))
+        if (filter.toLowerCase().contains("specific"))
             return true;
         return null;
     }
@@ -338,67 +409,6 @@ public abstract class Evaluation {
      */
     public Double getFinalValue(String expression) throws ScriptException {
         return this.getValue(this.getExpression(expression));
-    }
-    
-    /**
-     * Method responsible for returning the Element Filters.
-     * @param  filter Clause Filter.
-     * @return Element Filters.
-     */
-    protected Object[] getElementFilters(String filter) {
-        Object[] filters     = new Object[12];
-                 filters[0]  = this.getParameters(filter, "[", "]");
-                 filters[1]  = this.getParameters(filter, "<", ">");
-                 filters[2]  = this.getParameters(filter, "{", "}");
-                 filters[3]  = this.getMandatory(filter);
-                 filters[4]  = this.getAbstract(filter);
-                 filters[5]  = this.getFinal(filter);
-                 filters[6]  = this.getStatic(filter);
-                 filters[7]  = this.getVisibility(filter);
-                 filters[8]  = this.getGetter(filter);
-                 filters[9]  = this.getSetter(filter);
-                 filters[10] = this.getOverwritten(filter);
-                 filters[11] = this.getSpecific(filter);
-        return   filters;
-    }
-    
-    /**
-     * Method responsible for returning the Association Filters.
-     * @param  filter Clause Filter.
-     * @return Association Filters.
-     */
-    protected Object[] getAssociationFilters(String filter) {
-        Object[] filters    = new Object[3];
-                 filters[0] = this.getParameters(filter, "[", "]");
-                 filters[1] = this.getParameters(filter, "<", ">");
-                 filters[2] = this.getParameters(filter, "{", "}");
-        return   filters;
-    }
-    
-    /**
-     * Method responsible for returning the Artifact Filters.
-     * @param  filter Clause Filter.
-     * @return Artifact Filters.
-     */
-    protected Object[] getArtifactFilters(String filter) {
-        Object[] filters    = new Object[2];
-                 filters[0] = this.getParameters(filter, "{", "}");
-                 filters[1] = this.getParameters(filter, "[", "]");
-        return   filters;
-    }
-    
-    /**
-     * Method responsible for returning the Variability Filters.
-     * @param  filter Clause Filter.
-     * @return Variability Filters.
-     */
-    protected Object[] getVariabilityFilters(String filter) {
-        Object[] filters    = new Object[4];
-                 filters[0] = this.getParameters(filter, "[", "]");
-                 filters[1] = this.getParameters(filter, "{", "}");
-                 filters[2] = this.getParameters(filter, "<", ">");
-                 filters[3] = this.getConstraint(filter);
-        return   filters;
     }
     
     /**

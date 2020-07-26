@@ -69,11 +69,12 @@ public class EvaluationElement extends Evaluation {
                 filter = this.filterAbstract(filter,   (Boolean) parameters[4]);
                 filter = this.filterFinal(filter,  (Boolean) parameters[5]);
                 filter = this.filterStatic(filter, (Boolean) parameters[6]);
-                filter = this.filterVisibility(filter, (String) parameters[7]);
-                filter = this.filterGetter(filter, (Boolean) parameters[8]);
-                filter = this.filterSetter(filter, (Boolean) parameters[9]);
-                filter = this.filterOverwritten(filter, (Boolean) parameters[10]);
-                filter = this.filterSpecific(filter, (Boolean) parameters[11]);
+                filter = this.filterConstructor(filter, (Boolean) parameters[7]);
+                filter = this.filterVisibility(filter, (String) parameters[8]);
+                filter = this.filterGetter(filter, (Boolean) parameters[9]);
+                filter = this.filterSetter(filter, (Boolean) parameters[10]);
+                filter = this.filterOverwritten(filter, (Boolean) parameters[11]);
+                filter = this.filterSpecific(filter, (Boolean) parameters[12]);
                 super.addObjects(this.getList(filter));
         return  filter;
     }
@@ -346,6 +347,35 @@ public class EvaluationElement extends Evaluation {
     private boolean checkStatic(Element element, Boolean static_) {
         if (element instanceof Encodable)
             return static_.equals(((Encodable) element).isStatic());
+        return true;
+    }
+    
+    /**
+     * Method responsible for returning the Elements List by Constructor Flag.
+     * @param  list Elements List.
+     * @param  constructor Constructor Flag.
+     * @return Elements filtered by Constructor Flag.
+     */
+    protected List<Element> filterConstructor(List<Element> list, Boolean constructor) {
+        List filter = new ArrayList<>();
+        if (constructor == null)
+            return list;
+        for (Element element : list) {
+            if (this.checkConstructor(element, constructor))
+                filter.add(element);
+        }
+        return filter;
+    }
+    
+    /**
+     * Method responsible for checking if a Element is Constructor.
+     * @param  element Element.
+     * @param  constructor Constructor Flag.
+     * @return Element is Constructor.
+     */
+    private boolean checkConstructor(Element element, Boolean constructor) {
+        if (element instanceof MethodUML)
+            return constructor.equals(((MethodUML) element).isConstructor());
         return true;
     }
     
