@@ -114,7 +114,8 @@ public class MethodUML extends Element implements Encodable {
      * @return Method is Overwritten.
      */
     public boolean isOverwritten() {
-        if (this.entity.isInterface())
+        if (this.entity.getSuper() == null && 
+            this.entity.getImplementsMethods().isEmpty())
             return false;
         for (MethodUML method : this.entity.getInheritedMethods()) {
             if (this.getCompleteSignature().equalsIgnoreCase(method.getCompleteSignature()))

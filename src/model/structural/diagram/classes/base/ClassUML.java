@@ -183,6 +183,25 @@ public class ClassUML extends Entity {
         return set;
     }
     
+    /**
+     * Method responsible for returning the Abstract Methods.
+     * @return Abstract Methods.
+     */
+    public List<MethodUML> getAbstractMethods() {
+        List   list = new ArrayList<>();
+        for (MethodUML method : this.getAllMethods()) {
+            if (method.isAbstract())
+                list.add(method);
+        }
+        return list;
+    }
+    
+    @Override
+    public Double getExtensValue() {
+        return Double.parseDouble(Integer.toString(this.getAbstractMethods().size())) /
+               Double.parseDouble(Integer.toString(this.getAllMethods().size()));
+    }
+    
     @Override
     public String exportHeader() {
         String export  = "    <"         + this.type;

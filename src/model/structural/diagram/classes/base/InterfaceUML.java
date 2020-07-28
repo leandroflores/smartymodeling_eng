@@ -91,6 +91,11 @@ public class InterfaceUML extends Entity {
     }
     
     @Override
+    public Double getExtensValue() {
+        return 1.0d;
+    }
+    
+    @Override
     public String exportHeader() {
         String export  = "    <"         + this.type;
                export += " id=\""        + this.id           + "\"";

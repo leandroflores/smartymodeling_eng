@@ -462,6 +462,12 @@ public abstract class Entity extends Element implements Encodable {
     public abstract Set<MethodUML> getImplementsMethods();
     
     /**
+     * Method responsible for returning the Extens Value.
+     * @return Extens Value.
+     */
+    public abstract Double getExtensValue();
+    
+    /**
      * Method responsible for returning the Inherited Methods Set.
      * @return Inherited Methods Set.
      */
