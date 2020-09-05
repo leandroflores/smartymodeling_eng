@@ -168,8 +168,8 @@ public abstract class Evaluation {
     protected Object[] getAssociationFilters(String filter) {
         Object[] filters    = new Object[3];
                  filters[0] = this.getParameters(filter, "[", "]");
-                 filters[1] = this.getParameters(filter, "<", ">");
-                 filters[2] = this.getParameters(filter, "{", "}");
+                 filters[1] = this.getParameters(filter, "{", "}");
+                 filters[2] = this.getParameters(filter, "<", ">");
         return   filters;
     }
     
