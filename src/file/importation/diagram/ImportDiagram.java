@@ -15,7 +15,7 @@ import org.w3c.dom.NodeList;
 /**
  * <p>Class of Import <b>ImportDiagram</b>.</p>
  * <p>Class responsible for <b>Importing Diagram</b> in SMartyModeling.</p>
- * @author Leandro
+ * @author Leandro 
  * @since  2019-05-23
  * @see    model.structural.base.Diagram
  * @see    org.w3c.dom.Element
@@ -69,10 +69,10 @@ public abstract class ImportDiagram {
     protected void addVariabilities() {
         NodeList variabilities = this.element.getElementsByTagName("variability");
         for (int i = 0; i < variabilities.getLength(); i++) {
-            Element     current     = (Element) variabilities.item(i);
-            Variability variability = new Variability(current);
-                        variability.setVariationPoint(this.diagram.getElement(current.getAttribute("variationPoint")));
-                        this.addVariants(variability, current);
+            Element     current_    = (Element) variabilities.item(i);
+            Variability variability = new Variability(current_);
+                        variability.setVariationPoint(this.diagram.getElement(current_.getAttribute("variationPoint")));
+                        this.addVariants(variability, current_);
             this.diagram.addVariability(variability);
         }
     }
