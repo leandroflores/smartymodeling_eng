@@ -107,7 +107,7 @@ public final class PanelTree extends Panel {
         this.addPanel("panelTreeRequirement", new PanelTreeRequirement(this.viewMenu));
         this.createScrollPane("scrollPanelTreeRequirement",  this.getPanelTreeRequirement());
         this.getScrollPanelTreeRequirement().setViewportView(this.getPanelTreeRequirement());
-        this.tabbedPane.add("Requirement", this.getScrollPanelTreeRequirement());
+        this.tabbedPane.add("Requirements", this.getScrollPanelTreeRequirement());
     }
     
     /**
@@ -117,7 +117,7 @@ public final class PanelTree extends Panel {
         this.addPanel("panelTreeFeature", new PanelTreeFeature(this.viewMenu));
         this.createScrollPane("scrollPanelTreeFeature",  this.getPanelTreeFeature());
         this.getScrollPanelTreeFeature().setViewportView(this.getPanelTreeFeature());
-        this.tabbedPane.add("Feature", this.getScrollPanelTreeFeature());
+        this.tabbedPane.add("Features", this.getScrollPanelTreeFeature());
     }
     
     /**
@@ -137,7 +137,7 @@ public final class PanelTree extends Panel {
         this.addPanel("panelTreeVariability", new PanelTreeVariability(this.viewMenu));
         this.createScrollPane("scrollPanelTreeVariability",  this.getPanelTreeVariability());
         this.getScrollPanelTreeVariability().setViewportView(this.getPanelTreeVariability());
-        this.tabbedPane.add("Variability", this.getScrollPanelTreeVariability());
+        this.tabbedPane.add("Variability View", this.getScrollPanelTreeVariability());
     }
     
     /**
@@ -147,7 +147,7 @@ public final class PanelTree extends Panel {
         this.addPanel("panelTreeProduct", new PanelTreeProduct(this.viewMenu));
         this.createScrollPane("scrollPanelTreeProduct",  this.getPanelTreeProduct());
         this.getScrollPanelTreeProduct().setViewportView(this.getPanelTreeProduct());
-        this.tabbedPane.add("Product", this.getScrollPanelTreeProduct());
+        this.tabbedPane.add("Product View", this.getScrollPanelTreeProduct());
     }
     
     /**

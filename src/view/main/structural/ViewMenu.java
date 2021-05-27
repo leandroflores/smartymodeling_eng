@@ -136,11 +136,11 @@ public final class ViewMenu extends View implements Operation {
      * Method responsible for creating the Requirement Menu.
      */
     private void createRequirementMenu() {
-        this.createMenu("requirement", "Requirement");
+        this.createMenu("requirement", "Requirements");
         
         this.createMenuItem("new_requirement",          "New Requirement",          "menu/requirement/requirement.png",  KeyEvent.VK_R);
-        this.createMenuItem("requirement_traceability", "Requirement Traceability", "menu/requirement/traceability.png", KeyEvent.VK_T);
-        this.createMenuItem("requirement_matriz",       "Requirement Matrix",       "menu/requirement/matrix.png",       KeyEvent.VK_X);
+        this.createMenuItem("requirement_traceability", "Requirements Traceability", "menu/requirement/traceability.png", KeyEvent.VK_T);
+        this.createMenuItem("requirement_matriz",       "Requirements Matrix",       "menu/requirement/matrix.png",       KeyEvent.VK_X);
         
         this.getMenu("requirement").add(this.getMenuItemNewRequirement());
         this.getMenu("requirement").addSeparator();
@@ -174,7 +174,7 @@ public final class ViewMenu extends View implements Operation {
      * Method responsible for creating Product Line Menu.
      */
     private void createProductLineMenu() {
-        this.createMenu("productLine", "Product Line");
+        this.createMenu("productLine", "SPL Profile");
         
         this.createMenuItem("edit_profile",     "Edit Profile",     "menu/product_line/profile.png",      KeyEvent.VK_L);
         this.createMenuItem("new_product",      "New Product",      "menu/product_line/product.png",      KeyEvent.VK_P);
