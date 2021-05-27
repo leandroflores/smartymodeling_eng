@@ -15,7 +15,7 @@ import view.modal.message.ViewError;
  * <p>Class of Controller <b>ControllerViewModal</b>.</p>
  * <p>Class responsible for controlling the <b>Events</b> from the ViewModals of SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    controller.Controller
  * @see    view.modal.ViewModal
  */
@@ -24,16 +24,16 @@ public abstract class ControllerViewModal extends Controller {
     
     /**
      * Default contructor method of Class.
-     * @param viewModal ViewModal.
+     * @param viewModal_ ViewModal.
      */
-    public ControllerViewModal(ViewModal viewModal) {
-        this.viewModal = viewModal;
+    public ControllerViewModal(ViewModal viewModal_) {
+        viewModal = viewModal_;
     }
     
     @Override
     public void keyPressed(KeyEvent event) {
         if (ESC == event.getKeyCode())
-            this.viewModal.dispose();
+            viewModal.dispose();
     }
     
     /**
@@ -44,8 +44,8 @@ public abstract class ControllerViewModal extends Controller {
      */
     protected boolean check(JTextComponent textComponent, String message) {
         String text = textComponent.getText().trim();
-        if (this.check(text) == false) {
-            new ViewError(this.viewModal, message).setVisible(true);
+        if (!check(text)) {
+            new ViewError(viewModal, message).setVisible(true);
             textComponent.requestFocus();
             return false;
         }
@@ -61,7 +61,7 @@ public abstract class ControllerViewModal extends Controller {
     protected boolean check(JComboBox comboBox, String message) {
         Object selected = comboBox.getSelectedItem();
         if (selected == null) {
-            new ViewError(this.viewModal, message).setVisible(true);
+            new ViewError(viewModal, message).setVisible(true);
             comboBox.requestFocus();
             return false;
         }
@@ -76,8 +76,8 @@ public abstract class ControllerViewModal extends Controller {
      */
     protected boolean checkYear(JTextComponent textComponent, String message) {
         String text = textComponent.getText().trim();
-        if (this.checkYear(text) == false) {
-            new ViewError(this.viewModal, message).setVisible(true);
+        if (!checkYear(text)) {
+            new ViewError(viewModal, message).setVisible(true);
             textComponent.requestFocus();
             return false;
         }
@@ -92,8 +92,8 @@ public abstract class ControllerViewModal extends Controller {
      */
     protected boolean checkDate(JTextComponent textComponent, String message) {
         String text = textComponent.getText().trim();
-        if (this.checkDate(text) == false) {
-            new ViewError(this.viewModal, message).setVisible(true);
+        if (!checkDate(text)) {
+            new ViewError(viewModal, message).setVisible(true);
             textComponent.requestFocus();
             return false;
         }
@@ -108,8 +108,8 @@ public abstract class ControllerViewModal extends Controller {
      */
     protected boolean checkNumbers(JTextComponent textComponent, String message) {
         String text = textComponent.getText().trim();
-        if (this.checkNumbers(text) == false) {
-            new ViewError(this.viewModal, message).setVisible(true);
+        if (!checkNumbers(text)) {
+            new ViewError(viewModal, message).setVisible(true);
             textComponent.requestFocus();
             return false;
         }
@@ -166,6 +166,6 @@ public abstract class ControllerViewModal extends Controller {
      * @return View.
      */
     public ViewModal getView() {
-        return this.viewModal;
+        return viewModal;
     }
 }

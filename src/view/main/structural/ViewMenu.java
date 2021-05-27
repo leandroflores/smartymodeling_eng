@@ -95,7 +95,7 @@ public final class ViewMenu extends View implements Operation {
         this.createAboutMenu();
         
         this.menuBar.add(this.getMenu("file"));
-        this.menuBar.add(this.getMenu("requirement"));
+        this.menuBar.add(this.getMenu("requirements"));
         this.menuBar.add(this.getMenu("diagram"));
         this.menuBar.add(this.getMenu("productLine"));
         this.menuBar.add(this.getMenu("evaluation"));
@@ -136,16 +136,16 @@ public final class ViewMenu extends View implements Operation {
      * Method responsible for creating the Requirement Menu.
      */
     private void createRequirementMenu() {
-        this.createMenu("requirement", "Requirements");
+        this.createMenu("requirements", "Requirements");
         
         this.createMenuItem("new_requirement",          "New Requirement",          "menu/requirement/requirement.png",  KeyEvent.VK_R);
-        this.createMenuItem("requirement_traceability", "Requirements Traceability", "menu/requirement/traceability.png", KeyEvent.VK_T);
-        this.createMenuItem("requirement_matriz",       "Requirements Matrix",       "menu/requirement/matrix.png",       KeyEvent.VK_X);
+        this.createMenuItem("requirements_traceability", "Requirements Traceability", "menu/requirement/traceability.png", KeyEvent.VK_T);
+        this.createMenuItem("requirements_matriz",       "Requirements Matrix",       "menu/requirement/matrix.png",       KeyEvent.VK_X);
         
-        this.getMenu("requirement").add(this.getMenuItemNewRequirement());
-        this.getMenu("requirement").addSeparator();
-        this.getMenu("requirement").add(this.getMenuItemRequirementTraceability());
-        this.getMenu("requirement").add(this.getMenuItemRequirementMatrix());
+        this.getMenu("requirements").add(this.getMenuItemNewRequirement());
+        this.getMenu("requirements").addSeparator();
+        this.getMenu("requirements").add(this.getMenuItemRequirementsTraceability());
+        this.getMenu("requirements").add(this.getMenuItemRequirementsMatrix());
     }
     
     /**
@@ -374,8 +374,8 @@ public final class ViewMenu extends View implements Operation {
         this.getMenuItemFeatureDiagram().setEnabled(flag);
         
         this.getMenuItemNewRequirement().setEnabled(flag);
-        this.getMenuItemRequirementTraceability().setEnabled(flag);
-        this.getMenuItemRequirementMatrix().setEnabled(flag);
+        this.getMenuItemRequirementsTraceability().setEnabled(flag);
+        this.getMenuItemRequirementsMatrix().setEnabled(flag);
         
         this.getMenuItemActivityDiagram().setEnabled(flag);
         this.getMenuItemUseCaseDiagram().setEnabled(flag);
@@ -638,19 +638,19 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning the Menu Item Requirement Traceability.
-     * @return Menu Item Requirement Traceability.
+     * Method responsible for returning the Menu Item Requirements Traceability.
+     * @return Menu Item Requirements Traceability.
      */
-    public JMenuItem getMenuItemRequirementTraceability() {
-        return this.getMenuItem("requirement_traceability");
+    public JMenuItem getMenuItemRequirementsTraceability() {
+        return this.getMenuItem("requirements_traceability");
     }
     
     /**
-     * Method responsible for returning the Menu Item Requirement Matrix.
-     * @return Menu Item Requirement Matrix.
+     * Method responsible for returning the Menu Item Requirements Matrix.
+     * @return Menu Item Requirements Matrix.
      */
-    public JMenuItem getMenuItemRequirementMatrix() {
-        return this.getMenuItem("requirement_matriz");
+    public JMenuItem getMenuItemRequirementsMatrix() {
+        return this.getMenuItem("requirements_matriz");
     }
     
     /**

@@ -9,19 +9,19 @@ import view.View;
  * <p>Class of Controller <b>ControllerView</b>.</p>
  * <p>Class responsible for controlling the <b>Events</b> from the Views of SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
- * @see    controlador.Controller
- * @see    visao.View
+ * @since  2019-05-20
+ * @see    controller.Controller
+ * @see    view.View
  */
 public abstract class ControllerView extends Controller {
     private final View view;
     
     /**
      * Default constructor method of Class.
-     * @param view View.
+     * @param view_ View.
      */
-    public ControllerView(View view) {
-        this.view = view;
+    public ControllerView(View view_) {
+        view = view_;
     }
     
     @Override
@@ -30,6 +30,6 @@ public abstract class ControllerView extends Controller {
     @Override
     public void keyPressed(KeyEvent event) {
         if (event.getKeyCode() == ESC)
-            this.view.dispose();
+            view.dispose();
     }
 }

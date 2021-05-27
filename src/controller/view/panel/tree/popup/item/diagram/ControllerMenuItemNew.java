@@ -47,15 +47,15 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
      */
     private void newDiagram(String type) {
         if (type.equalsIgnoreCase("Use Case Diagram"))
-            this.getViewMenu().getController().newUseCaseDiagram();
+            this.getViewMenu().getController().createNewUseCaseDiagram();
         else if (type.equalsIgnoreCase("Class Diagram"))
-            this.getViewMenu().getController().newClassDiagram();
+            this.getViewMenu().getController().createNewClassDiagram();
         else if (type.equalsIgnoreCase("Component Diagram"))
-            this.getViewMenu().getController().newComponentDiagram();
+            this.getViewMenu().getController().createNewComponentDiagram();
         else if (type.equalsIgnoreCase("SequenceDiagram"))
-            this.getViewMenu().getController().newSequenceDiagram();
+            this.getViewMenu().getController().createNewSequenceDiagram();
         else if (type.equalsIgnoreCase("ActivityDiagram"))
-            this.getViewMenu().getController().newActivityDiagram();
+            this.getViewMenu().getController().createNewActivityDiagram();
     }
     
     /**

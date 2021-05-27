@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import javax.imageio.ImageIO;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
+import model.structural.base.Diagram;
 import model.structural.base.Project;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
@@ -55,6 +56,7 @@ import view.modal.system.ViewSystemInformation;
  * @author Leandro
  * @since  2019-05-22
  * @see    controller.view.ControllerView
+ * @see    java.awt.event.ComponentListener
  * @see    view.main.structural.ViewMenu
  */
 public class ControllerViewMenu extends ControllerView implements ComponentListener {
@@ -63,139 +65,139 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
 
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param viewMenu_ View Menu.
      */
-    public ControllerViewMenu(ViewMenu viewMenu) {
-        super(viewMenu);
-        this.viewMenu = viewMenu;
+    public ControllerViewMenu(ViewMenu viewMenu_) {
+        super(viewMenu_);
+        viewMenu = viewMenu_;
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        this.flag = true;
-        while (this.flag) {
-            this.forwardFile(event);
-            this.forwardRequirement(event);
-            this.forwardDiagram(event);
-            this.forwardProductLine(event);
-            this.forwardEvaluation(event);
-            this.forwardExport(event);
-            this.forwardAbout(event);
+        flag = true;
+        while (flag) {
+            actionFile(event);
+            actionRequirement(event);
+            actionDiagram(event);
+            actionProductLine(event);
+            actionEvaluation(event);
+            actionExport(event);
+            actionAbout(event);
         }
+    }
+    
+    @Override
+    public void keyPressed(KeyEvent event) {
+        if (event.getKeyCode() == ESC)
+            exit();
     }
     
     /**
      * Method responsible for Forward the File Menu.
      * @param event Action Event.
      */
-    private void forwardFile(ActionEvent event) {
-        if (this.viewMenu.getMenuItemNewProject().equals(event.getSource()))
-            this.showNewProject();
-        else if (this.viewMenu.getMenuItemOpenProject().equals(event.getSource()))
-            this.openProject();
-        else if (this.viewMenu.getMenuItemSaveProject().equals(event.getSource()))
-            this.saveProject();
-        else if (this.viewMenu.getMenuItemSaveAs().equals(event.getSource()))
-            this.saveProjectAs();
-        else if (this.viewMenu.getMenuItemCloseProject().equals(event.getSource()))
-            this.closeProject();
-        else if (this.viewMenu.getMenuItemExitSystem().equals(event.getSource()))
-            this.exit();
+    private void actionFile(ActionEvent event) {
+        if (viewMenu.getMenuItemNewProject().equals(event.getSource()))
+            showNewProject();
+        else if (viewMenu.getMenuItemOpenProject().equals(event.getSource()))
+            openProject();
+        else if (viewMenu.getMenuItemSaveProject().equals(event.getSource()))
+            saveProject();
+        else if (viewMenu.getMenuItemSaveAs().equals(event.getSource()))
+            saveProjectAs();
+        else if (viewMenu.getMenuItemCloseProject().equals(event.getSource()))
+            closeProject();
+        else if (viewMenu.getMenuItemExitSystem().equals(event.getSource()))
+            exit();
         else
-            this.flag = true;
-    }
-    
-    @Override
-    public void keyPressed(KeyEvent event) {
-        if (event.getKeyCode() == ESC)
-            this.exit();
+            flag = true;
     }
     
     /**
      * Method responsible for showing a New Project.
      */
     public void showNewProject() {
-        if (this.viewMenu.isSave())
-            this.createNewProject();
+        if (viewMenu.isSave())
+            createNewProject();
         else
-            new ViewSave(this.viewMenu, 1).setVisible(true);
+            new ViewSave(viewMenu, 1).setVisible(true);
     }
     
     /**
      * Method responsible for creating a New Project.
      */
     public void createNewProject() {
-        this.viewMenu.setProject(new Project());
-        this.viewMenu.getPanelModeling().clear();
-        this.viewMenu.setSave(true);
-        this.viewMenu.update();
+        viewMenu.setProject(new Project());
+        viewMenu.getPanelModeling().clear();
+        viewMenu.setSave(true);
+        viewMenu.update();
     }
     
     /**
      * Method responsible for showing Open Project.
      */
     public void showOpenProject() {
-        if (this.viewMenu.isSave())
-            this.openProject();
+        if (viewMenu.isSave())
+            openProject();
         else
-            new ViewSave(this.viewMenu, 2).setVisible(true);
+            new ViewSave(viewMenu, 2).setVisible(true);
     }
     
     /**
      * Method responsible for opening a Project.
      */
     public void openProject() {
-        this.viewMenu.getFileChooserSaveProject().setDialogTitle("Open a Project");
-        this.viewMenu.getFileChooserSaveProject().setApproveButtonText("Open");
-        this.viewMenu.getFileChooserSaveProject().setApproveButtonToolTipText("Open a Project");
-        this.viewMenu.getFileChooserSaveProject().setToolTipText("Open");
-        if (this.viewMenu.getFileChooserSaveProject().showSaveDialog(this.viewMenu) != 1) {
-            String path = this.viewMenu.getFileChooserSaveProject().getSelectedFile().getAbsolutePath();
+        viewMenu.getFileChooserSaveProject().setDialogTitle("Open a Project");
+        viewMenu.getFileChooserSaveProject().setApproveButtonText("Open");
+        viewMenu.getFileChooserSaveProject().setApproveButtonToolTipText("Open a Project");
+        viewMenu.getFileChooserSaveProject().setToolTipText("Open");
+        if (viewMenu.getFileChooserSaveProject().showSaveDialog(viewMenu) != 1) {
+            String path = viewMenu.getFileChooserSaveProject().getSelectedFile().getAbsolutePath();
             try {
-                this.viewMenu.setProject(new ImportProject(path).getProject());
-                this.viewMenu.update();
+                viewMenu.setProject(new ImportProject(path).getProject());
+                viewMenu.update();
             }catch (IOException | ParserConfigurationException | SAXException | XPathExpressionException exception) {
-                new ViewError(this.viewMenu, "Error opening Project!").setVisible(true);
+                new ViewError(viewMenu, "Error opening Project!").setVisible(true);
             }
         }
-        this.viewMenu.getPanelModeling().clear();
-        this.viewMenu.update();
+        viewMenu.getPanelModeling().clear();
+        viewMenu.update();
     }
     
     /**
      * Method responsible for Saving a Project.
      */
     public void saveProject() {
-        this.viewMenu.getFileChooserSaveProject().setDialogTitle("Save Project");
-        this.viewMenu.getFileChooserSaveProject().setApproveButtonText("Save");
-        this.viewMenu.getFileChooserSaveProject().setApproveButtonToolTipText("Save Project");
-        this.viewMenu.getFileChooserSaveProject().setToolTipText("Save");
-        String path = this.viewMenu.getProject().getPath();
-        if (this.viewMenu.getProject().getPath().equals("New_Project.smty"))
-            this.viewMenu.getProject().setPath(this.getPath());
-        this.viewMenu.setTitle();
-        this.exportProject();
+        viewMenu.getFileChooserSaveProject().setDialogTitle("Save Project");
+        viewMenu.getFileChooserSaveProject().setApproveButtonText("Save");
+        viewMenu.getFileChooserSaveProject().setApproveButtonToolTipText("Save Project");
+        viewMenu.getFileChooserSaveProject().setToolTipText("Save");
+        String path = viewMenu.getProject().getPath();
+        if (viewMenu.getProject().getPath().equals("New_Project.smty"))
+            viewMenu.getProject().setPath(getPath());
+        viewMenu.setTitle();
+        exportProject();
     }
     
     /**
      * Method responsible for Saving As a Project.
      */
     public void saveProjectAs() {
-        this.viewMenu.getFileChooserSaveProject().setDialogTitle("Save Project As");
-        this.viewMenu.getFileChooserSaveProject().setApproveButtonText("Save As");
-        this.viewMenu.getFileChooserSaveProject().setApproveButtonToolTipText("Save Project As");
-        this.viewMenu.getFileChooserSaveProject().setToolTipText("Save");
-        this.viewMenu.getProject().setPath(this.getPath());
+        viewMenu.getFileChooserSaveProject().setDialogTitle("Save Project As");
+        viewMenu.getFileChooserSaveProject().setApproveButtonText("Save As");
+        viewMenu.getFileChooserSaveProject().setApproveButtonToolTipText("Save Project As");
+        viewMenu.getFileChooserSaveProject().setToolTipText("Save");
+        viewMenu.getProject().setPath(getPath());
     }
     
     /**
-     * Method responsible for returning Path.
-     * @return Path.
+     * Method responsible for returning the Project Path.
+     * @return Project Path.
      */
     public String getPath() {
         String path = "New_Project.smty";
-        if (this.viewMenu.getFileChooserSaveProject().showSaveDialog(this.viewMenu) != 1) {
-            path = this.viewMenu.getFileChooserSaveProject().getSelectedFile().getAbsolutePath();
+        if (viewMenu.getFileChooserSaveProject().showSaveDialog(viewMenu) != 1) {
+            path = viewMenu.getFileChooserSaveProject().getSelectedFile().getAbsolutePath();
             path = (path.toLowerCase().endsWith(".smty")) ? path : path + ".smty";
         }
         return path;
@@ -206,13 +208,12 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      */
     public void exportProject() {
         try {
-//            if (this.viewMenu.getFileChooserSaveProject().getSelectedFile() != null) {
-            if (!this.viewMenu.getProject().getPath().equalsIgnoreCase("New_Project.smty")) {
-                new ExportProject(this.viewMenu.getProject(), this.viewMenu.getProject().getPath()).export();
-                this.viewMenu.setSave(true);
+            if (!viewMenu.getProject().getPath().equalsIgnoreCase("New_Project.smty")) {
+                new ExportProject(viewMenu.getProject(), viewMenu.getProject().getPath()).export();
+                viewMenu.setSave(true);
             }
         }catch (IOException exception) {
-            new ViewError(this.viewMenu, "Error writing Project File!").setVisible(true);
+            new ViewError(viewMenu, "Error writing Project File!").setVisible(true);
         }
     }
     
@@ -220,138 +221,118 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * Method responsible for showing Close Project.
      */
     public void showCloseProject() {
-        if (this.viewMenu.isSave())
-            this.closeProject();
+        if (viewMenu.isSave())
+            closeProject();
         else
-            new ViewSave(this.viewMenu, 3).setVisible(true);
+            new ViewSave(viewMenu, 3).setVisible(true);
     }
     
     /**
      * Method responsible for Closing Project.
      */
     public void closeProject() {
-        this.viewMenu.setProject(null);
-        this.viewMenu.update();
+        viewMenu.setProject(null);
+        viewMenu.update();
     }
     
     /**
-     * Method responsible for Exiting System.
+     * Method responsible for Exit of the System.
      */
     public void exit() {
-        if ((this.viewMenu.getProject() != null) && (this.viewMenu.isSave() == false))
-            new ViewSave(this.viewMenu, 4).setVisible(true);
+        if ((viewMenu.getProject() != null) && (!viewMenu.isSave()))
+            new ViewSave(viewMenu, 4).setVisible(true);
         else
-            this.viewMenu.dispose();
+            viewMenu.dispose();
     }
     
     /**
      * Method responsible for Forward the Requirement Menu.
      * @param event Action Event.
      */
-    private void forwardRequirement(ActionEvent event) {
-        if (this.viewMenu.getMenuItemNewRequirement().equals(event.getSource()))
-            this.newRequirement();
-        else if (this.viewMenu.getMenuItemRequirementTraceability().equals(event.getSource()))
-            this.traceabilityRequirement();
-        else if (this.viewMenu.getMenuItemRequirementMatrix().equals(event.getSource()))
-            this.requirementMatrix();
+    private void actionRequirement(ActionEvent event) {
+        if (viewMenu.getMenuItemNewRequirement().equals(event.getSource()))
+            showNewRequirementView();
+        else if (viewMenu.getMenuItemRequirementsTraceability().equals(event.getSource()))
+            showRequirementsTraceabilityView();
+        else if (viewMenu.getMenuItemRequirementsMatrix().equals(event.getSource()))
+            showRequirementsMatrixView();
         else
-            this.flag = true;
+            flag = true;
     }
     
     /**
-     * Method responsible for inserting a New Requirement.
+     * Method responsible for showing the New Requirement View.
      */
-    private void newRequirement() {
-        new ViewNewRequirement(this.viewMenu).setVisible(true);
+    private void showNewRequirementView() {
+        new ViewNewRequirement(viewMenu).setVisible(true);
     }
     
     /**
-     * Method responsible for Traceability Requirement.
+     * Method responsible for showing the Requirements Traceability View.
      */
-    private void traceabilityRequirement() {
-        if (!this.viewMenu.getProject().getRequirementsList().isEmpty())
-            new ViewRequirementTraceability(this.viewMenu).setVisible(true);
+    private void showRequirementsTraceabilityView() {
+        if (!viewMenu.getProject().getRequirementsList().isEmpty())
+            new ViewRequirementTraceability(viewMenu).setVisible(true);
         else
-            new ViewMessage(this.viewMenu, "Project with no Requirements!").setVisible(true);
+            new ViewMessage(viewMenu, "Project with no Requirements!").setVisible(true);
     }
     
     /**
-     * Method responsible for Requirement Matrix.
+     * Method responsible for showing the Requirements Matrix View.
      */
-    private void requirementMatrix() {
-        if (!this.viewMenu.getProject().getRequirementsList().isEmpty())
-            new ViewRequirementMatrix(this.viewMenu).setVisible(true);
+    private void showRequirementsMatrixView() {
+        if (!viewMenu.getProject().getRequirementsList().isEmpty())
+            new ViewRequirementMatrix(viewMenu).setVisible(true);
         else
-            new ViewMessage(this.viewMenu, "Project with no Requirements!").setVisible(true);
+            new ViewMessage(viewMenu, "Project with no Requirements!").setVisible(true);
     }
     
     /**
      * Method responsible for Forward the Diagram Menu.
      * @param event Action Event.
      */
-    private void forwardDiagram(ActionEvent event) {
-        if (this.viewMenu.getMenuItemFeatureDiagram().equals(event.getSource()))
-            this.newFeatureDiagram();
-        else if (this.viewMenu.getMenuItemActivityDiagram().equals(event.getSource()))
-            this.newActivityDiagram();
-        else if (this.viewMenu.getMenuItemClassDiagram().equals(event.getSource()))
-            this.newClassDiagram();
-        else if (this.viewMenu.getMenuItemComponentDiagram().equals(event.getSource()))
-            this.newComponentDiagram();
-        else if (this.viewMenu.getMenuItemSequenceDiagram().equals(event.getSource()))
-            this.newSequenceDiagram();
-        else if (this.viewMenu.getMenuItemUseCaseDiagram().equals(event.getSource()))
-            this.newUseCaseDiagram();
+    private void actionDiagram(ActionEvent event) {
+        if (viewMenu.getMenuItemFeatureDiagram().equals(event.getSource()))
+            createNewFeatureDiagram();
+        else if (viewMenu.getMenuItemUseCaseDiagram().equals(event.getSource()))
+            createNewUseCaseDiagram();
+        else if (viewMenu.getMenuItemClassDiagram().equals(event.getSource()))
+            createNewClassDiagram();
+        else if (viewMenu.getMenuItemComponentDiagram().equals(event.getSource()))
+            createNewComponentDiagram();
+        else if (viewMenu.getMenuItemSequenceDiagram().equals(event.getSource()))
+            createNewSequenceDiagram();
+        else if (viewMenu.getMenuItemActivityDiagram().equals(event.getSource()))
+            createNewActivityDiagram();
         else
             flag = true;
     }
     /**
      * Method responsible for creating a New Feature Diagram.
      */
-    public void newFeatureDiagram() {
-        FeatureDiagram diagram = new FeatureDiagram(this.viewMenu.getProject());
-        this.viewMenu.getProject().addDiagram(diagram);
-                       diagram.setDefaultName();
-        this.viewMenu.showDiagram(diagram);
-        this.viewMenu.setTabIndex(1);
-        this.viewMenu.update();
+    public void createNewFeatureDiagram() {
+        showNewDiagram(new FeatureDiagram(viewMenu.getProject()), 1);
     }
     
     /**
      * Method responsible for creating a New Use Case Diagram.
      */
-    public void newUseCaseDiagram() {
-        UseCaseDiagram diagram = new UseCaseDiagram(this.viewMenu.getProject());
-        this.viewMenu.getProject().addDiagram(diagram);
-                       diagram.setDefaultName();
-        this.viewMenu.showDiagram(diagram);
-        this.viewMenu.setTabIndex(2);
-        this.viewMenu.update();
+    public void createNewUseCaseDiagram() {
+        showNewDiagram(new UseCaseDiagram(viewMenu.getProject()), 2);
     }
     
     /**
      * Method responsible for creating a New Class Diagram.
      */
-    public void newClassDiagram() {
-        ClassDiagram diagram = new ClassDiagram(this.viewMenu.getProject());
-        this.viewMenu.getProject().addDiagram(diagram);
-                     diagram.setDefaultName();
-        this.viewMenu.showDiagram(diagram);
-        this.viewMenu.setTabIndex(2);
-        this.viewMenu.update();
+    public void createNewClassDiagram() {
+        showNewDiagram(new ClassDiagram(viewMenu.getProject()), 2);
     }
     
     /**
      * Method responsible for creating a New Component Diagram.
      */
-    public void newComponentDiagram() {
-        ComponentDiagram diagram = new ComponentDiagram(this.viewMenu.getProject());
-        this.viewMenu.getProject().addDiagram(diagram);
-                         diagram.setDefaultName();
-        this.viewMenu.showDiagram(diagram);
-        this.viewMenu.setTabIndex(2);
-        this.viewMenu.update();
+    public void createNewComponentDiagram() {
+        showNewDiagram(new ComponentDiagram(viewMenu.getProject()), 2);
     }
     
     /**
@@ -359,218 +340,220 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * @return New Sequence Diagram is able.
      */
     public boolean checkNewSequenceDiagram() {
-        return  this.viewMenu.getProject() != null
-            && !this.viewMenu.getProject().getElements("actor").isEmpty()
-            && !this.viewMenu.getProject().getElements("class").isEmpty();
+        return  viewMenu.getProject() != null
+            && !viewMenu.getProject().getElements("actor").isEmpty()
+            && !viewMenu.getProject().getElements("class").isEmpty();
     }
     
     /**
      * Method responsible for creating a New Sequence Diagram.
      */
-    public void newSequenceDiagram() {
-        if (this.checkNewSequenceDiagram()) {
-            SequenceDiagram diagram = new SequenceDiagram(this.viewMenu.getProject());
-            this.viewMenu.getProject().addDiagram(diagram);
-                            diagram.setDefaultName();
-            this.viewMenu.showDiagram(diagram);
-            this.viewMenu.setTabIndex(2);
-            this.viewMenu.update();
-        }else {
-            new ViewError(this.viewMenu, "Project without Actors or Classes!").setVisible(true);
-        }
+    public void createNewSequenceDiagram() {
+        if (checkNewSequenceDiagram())
+            showNewDiagram(new SequenceDiagram(viewMenu.getProject()), 2);
+        else 
+            new ViewError(viewMenu, "Project without Actors or Classes!").setVisible(true);
     }
     
     /**
      * Method responsible for creating a New Activity Diagram.
      */
-    public void newActivityDiagram() {
-        ActivityDiagram diagram = new ActivityDiagram(this.viewMenu.getProject());
-        this.viewMenu.getProject().addDiagram(diagram);
-                        diagram.setDefaultName();
-        this.viewMenu.showDiagram(diagram);
-        this.viewMenu.setTabIndex(2);
-        this.viewMenu.update();
+    public void createNewActivityDiagram() {
+        showNewDiagram(new ActivityDiagram(viewMenu.getProject()), 2);
+    }
+    
+    /**
+     * Method responsible for showing a New Diagram to Project.
+     * @param diagram New Diagram.
+     * @param index Tab Index.
+     */
+    private void showNewDiagram(Diagram diagram, int index) {
+        viewMenu.getProject().addDiagram(diagram);
+            diagram.setDefaultName();
+        viewMenu.showDiagram(diagram);
+        viewMenu.setTabIndex(index);
+        viewMenu.update();
     }
     
     /**
      * Method responsible for Forward the Product Line Menu.
      * @param event Action Event.
      */
-    private void forwardProductLine(ActionEvent event) {
-        if (this.viewMenu.getMenuItemEditProfile().equals(event.getSource()))
-            this.editProfile();
-        else if (this.viewMenu.getMenuItemNewProduct().equals(event.getSource()))
-            this.newProduct();
-        else if (this.viewMenu.getMenuItemNewInstance().equals(event.getSource()))
-            this.newInstance();
-        else if (this.viewMenu.getMenuItemNewTraceability().equals(event.getSource()))
-            this.newManualTraceability();
+    private void actionProductLine(ActionEvent event) {
+        if (viewMenu.getMenuItemEditProfile().equals(event.getSource()))
+            showEditProfileView();
+        else if (viewMenu.getMenuItemNewProduct().equals(event.getSource()))
+            showNewProductView();
+        else if (viewMenu.getMenuItemNewInstance().equals(event.getSource()))
+            showNewInstanceView();
+        else if (viewMenu.getMenuItemNewTraceability().equals(event.getSource()))
+            showManualTraceabilityView();
         else
-            this.flag = true;
+            flag = true;
     }
     
     /**
-     * Method responsible for editing the Profile.
+     * Method responsible for showing the Profile Edit View.
      */
-    private void editProfile() {
-        new ViewEditProfile(this.viewMenu.getPanelModeling(), this.viewMenu.getProject().getProfile()).setVisible(true);
+    private void showEditProfileView() {
+        new ViewEditProfile(viewMenu.getPanelModeling(), viewMenu.getProject().getProfile()).setVisible(true);
     }
     
     /**
-     * Method responsible for inserting a New Product.
+     * Method responsible for showing the New Product View.
      */
-    public void newProduct() {
-        new ViewNewProduct(this.viewMenu).setVisible(true);
+    public void showNewProductView() {
+        new ViewNewProduct(viewMenu).setVisible(true);
     }
     
     /**
-     * Method responsible for inserting a New Instance.
+     * Method responsible for showing the New Instance View.
      */
-    public void newInstance() {
-        new ViewNewInstance(this.viewMenu).setVisible(true);
+    public void showNewInstanceView() {
+        new ViewNewInstance(viewMenu).setVisible(true);
     }
     
     /**
-     * Method responsible for inserting a New Manual Traceability.
+     * Method responsible for showing the New Manual Traceability.
      */
-    public void newManualTraceability() {
-        if (!this.viewMenu.getProject().getDiagrams().isEmpty())
-            new ViewNewTraceability(this.viewMenu).setVisible(true);
+    public void showManualTraceabilityView() {
+        if (!viewMenu.getProject().getDiagrams().isEmpty())
+            new ViewNewTraceability(viewMenu).setVisible(true);
         else
-            new ViewMessage(this.viewMenu, "Project with no Elements!").setVisible(true);
+            new ViewMessage(viewMenu, "Project with no Elements!").setVisible(true);
     }
     
     /**
      * Method responsible for Forward the Evaluation Menu.
      * @param event Action Event.
      */
-    private void forwardEvaluation(ActionEvent event) {
-        if (this.viewMenu.getMenuItemNewMetric().equals(event.getSource()))
-            this.newMetric();
-        else if (this.viewMenu.getMenuItemNewMeasure().equals(event.getSource()))
-            this.newMeasure();
-        else if (this.viewMenu.getMenuItemEvaluateProject().equals(event.getSource()))
-            this.evaluateProject();
-        else if (this.viewMenu.getMenuItemEvaluateDiagram().equals(event.getSource()))
-            this.evaluateDiagram();
-        else if (this.viewMenu.getMenuItemEvaluateProduct().equals(event.getSource()))
-            this.evaluateProduct();
+    private void actionEvaluation(ActionEvent event) {
+        if (viewMenu.getMenuItemNewMetric().equals(event.getSource()))
+            showNewMetricView();
+        else if (viewMenu.getMenuItemNewMeasure().equals(event.getSource()))
+            showNewMeasureView();
+        else if (viewMenu.getMenuItemEvaluateProject().equals(event.getSource()))
+            showEvaluationProjectView();
+        else if (viewMenu.getMenuItemEvaluateDiagram().equals(event.getSource()))
+            showEvaluationDiagramView();
+        else if (viewMenu.getMenuItemEvaluateProduct().equals(event.getSource()))
+            showEvaluationProductView();
         else
-            this.flag = true;
+            flag = true;
     }
     
     /**
-     * Method responsible for inserting a New Metric.
+     * Method responsible for showing the New Metric View.
      */
-    public void newMetric() {
-        new ViewNewMetric(this.viewMenu).setVisible(true);
+    public void showNewMetricView() {
+        new ViewNewMetric(viewMenu).setVisible(true);
     }
     
     /**
-     * Method responsible for inserting a New Measure.
+     * Method responsible for showing the New Measure View.
      */
-    public void newMeasure() {
-        if (this.viewMenu.getProject().getMetricsList().isEmpty() == false)
-            new ViewNewMeasure(this.viewMenu).setVisible(true);
+    public void showNewMeasureView() {
+        if (!viewMenu.getProject().getMetricsList().isEmpty())
+            new ViewNewMeasure(viewMenu).setVisible(true);
         else
-            new ViewError(this.viewMenu, "Metrics List is void!").setVisible(true);
+            new ViewError(viewMenu, "Metrics List is void!").setVisible(true);
     }
     
     /**
-     * Method responsible for Evaluate Project.
+     * Method responsible for showing the Evaluation Project View.
      */
-    private void evaluateProject() {
-        new ViewEvaluationProject(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+    private void showEvaluationProjectView() {
+        new ViewEvaluationProject(viewMenu, viewMenu.getProject()).setVisible(true);
     }
     
     /**
-     * Method responsible for Evaluate Diagrams.
+     * Method responsible for showing the Evaluation Diagram View.
      */
-    private void evaluateDiagram() {
-        if (this.viewMenu.getProject().getDiagramsList().isEmpty() == false)
-            new ViewEvaluationDiagram(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+    private void showEvaluationDiagramView() {
+        if (!viewMenu.getProject().getDiagramsList().isEmpty())
+            new ViewEvaluationDiagram(viewMenu, viewMenu.getProject()).setVisible(true);
         else
-            new ViewError(this.viewMenu, "Diagrams List is void!").setVisible(true);
+            new ViewError(viewMenu, "Diagrams List is void!").setVisible(true);
     }
     
     /**
-     * Method responsible for Evaluate Products.
+     * Method responsible for showing the Evaluation Product View.
      */
-    private void evaluateProduct() {
-        if (this.viewMenu.getProject().getProductsList().isEmpty() == false)
-            new ViewEvaluationProduct(this.viewMenu, this.viewMenu.getProject()).setVisible(true);
+    private void showEvaluationProductView() {
+        if (!viewMenu.getProject().getProductsList().isEmpty())
+            new ViewEvaluationProduct(viewMenu, viewMenu.getProject()).setVisible(true);
         else
-            new ViewError(this.viewMenu, "Product List is void!").setVisible(true);
+            new ViewError(viewMenu, "Product List is void!").setVisible(true);
     }
     
     /**
      * Method responsible for Forward the Export Menu.
      * @param event Action Event.
      */
-    private void forwardExport(ActionEvent event) {
-        if (this.viewMenu.getMenuItemExportDiagram().equals(event.getSource()))
-            this.exportDiagram();
-        else if (this.viewMenu.getMenuItemExportProduct().equals(event.getSource()))
-            this.exportProduct();
-        else if (this.viewMenu.getMenuItemExportDiagramCode().equals(event.getSource()))
-            this.exportDiagramCode();
-        else if (this.viewMenu.getMenuItemExportInstanceCode().equals(event.getSource()))
-            this.exportInstanceCode();
+    private void actionExport(ActionEvent event) {
+        if (viewMenu.getMenuItemExportDiagram().equals(event.getSource()))
+            showExportDiagramView();
+        else if (viewMenu.getMenuItemExportProduct().equals(event.getSource()))
+            showExportProductView();
+        else if (viewMenu.getMenuItemExportDiagramCode().equals(event.getSource()))
+            showExportDiagramCodeView();
+        else if (viewMenu.getMenuItemExportInstanceCode().equals(event.getSource()))
+            showExportInstanceCodeView();
         else
-            this.flag = true;
+            flag = true;
     }
     
     /**
-     * Method responsible for exporting a Diagram.
+     * Method responsible for showing the Export Diagram View.
      */
-    private void exportDiagram() {
-        if (!this.viewMenu.getProject().getDiagrams().isEmpty())
-            new ViewExportDiagram(this.viewMenu).setVisible(true);
+    private void showExportDiagramView() {
+        if (!viewMenu.getProject().getDiagrams().isEmpty())
+            new ViewExportDiagram(viewMenu).setVisible(true);
         else
-            new ViewMessage(this.viewMenu, "Project with no Diagrams!").setVisible(true);
+            new ViewMessage(viewMenu, "Project with no Diagrams!").setVisible(true);
     }
     
     /**
-     * Method responsible for exporting a Product.
+     * Method responsible for showing the Export Product View.
      */
-    private void exportProduct() {
-        if (!this.viewMenu.getProject().getProductsList().isEmpty())
-            new ViewExportProduct(this.viewMenu).setVisible(true);
+    private void showExportProductView() {
+        if (!viewMenu.getProject().getProductsList().isEmpty())
+            new ViewExportProduct(viewMenu).setVisible(true);
         else
-            new ViewMessage(this.viewMenu, "Project with no Products!").setVisible(true);
+            new ViewMessage(viewMenu, "Project with no Products!").setVisible(true);
     }
     
     /**
-     * Method responsible for exporting the Diagram Code.
+     * Method responsible for showing the Export Diagram Code View.
      */
-    private void exportDiagramCode() {
-        if (!this.viewMenu.getProject().getDiagrams("class").isEmpty())
-            new ViewExportDiagramCode(this.viewMenu).setVisible(true);
+    private void showExportDiagramCodeView() {
+        if (!viewMenu.getProject().getDiagrams("class").isEmpty())
+            new ViewExportDiagramCode(viewMenu).setVisible(true);
         else
-            new ViewMessage(this.viewMenu, "Project with no Class Diagrams!").setVisible(true);
+            new ViewMessage(viewMenu, "Project with no Class Diagrams!").setVisible(true);
         
     }
     
     /**
-     * Method responsible for exporting the Instance Code.
+     * Method responsible for showing the Export Instance Code View.
      */
-    private void exportInstanceCode() {
-        if (!this.viewMenu.getProject().getInstances("class").isEmpty())
-            new ViewExportInstanceCode(this.viewMenu).setVisible(true);
+    private void showExportInstanceCodeView() {
+        if (!viewMenu.getProject().getInstances("class").isEmpty())
+            new ViewExportInstanceCode(viewMenu).setVisible(true);
         else
-            new ViewMessage(this.viewMenu, "Project with no Class Instances!").setVisible(true);
+            new ViewMessage(viewMenu, "Project with no Class Instances!").setVisible(true);
     }
     
     /**
      * Method responsible for Forward the About Menu.
      * @param event Action Event.
      */
-    private void forwardAbout(ActionEvent event) {
-        if (this.viewMenu.getMenuItemAboutInformation().equals(event.getSource()))
-            new ViewSystemInformation(this.viewMenu).setVisible(true);
-        else if (this.viewMenu.getMenuItemAboutExit().equals(event.getSource()))
-            this.exit();
-        this.flag = false;
+    private void actionAbout(ActionEvent event) {
+        if (viewMenu.getMenuItemAboutInformation().equals(event.getSource()))
+            new ViewSystemInformation(viewMenu).setVisible(true);
+        else if (viewMenu.getMenuItemAboutExit().equals(event.getSource()))
+            exit();
+        flag = false;
     }
     
     /**
@@ -580,21 +563,21 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * @throws java.net.MalformedURLException
      */
     public void exportImage() throws DocumentException, BadElementException, MalformedURLException {
-        if (this.viewMenu.getFileChooserImage().showSaveDialog(this.viewMenu) != 1) {
-            String        path     = this.viewMenu.getFileChooserImage().getSelectedFile().getAbsolutePath();
-            BufferedImage modeling = this.viewMenu.getPanelModeling().getImage();
+        if (viewMenu.getFileChooserImage().showSaveDialog(viewMenu) != 1) {
+            String        path     = viewMenu.getFileChooserImage().getSelectedFile().getAbsolutePath();
+            BufferedImage modeling = viewMenu.getPanelModeling().getImage();
             BufferedImage image;
             if (modeling != null) {
                 try {
                     path  = (path.toLowerCase().endsWith(".png")) ? path : path + ".png";
                     image = new ExportImage(modeling).getPNGImage();
                         ImageIO.write(image, "PNG", new File(path));
-                    new ViewMessage(this.viewMenu, "Image exported Successfully!").setVisible(true);
+                    new ViewMessage(viewMenu, "Image exported Successfully!").setVisible(true);
                 } catch (IOException exception) {
-                    new ViewError(this.viewMenu, "Error to export Image!").setVisible(true);
+                    new ViewError(viewMenu, "Error to export Image!").setVisible(true);
                 }
             }else {
-                new ViewError(this.viewMenu, "Open a Diagram or Instance Panel!").setVisible(true);
+                new ViewError(viewMenu, "Open a Diagram or Instance Panel!").setVisible(true);
             }
         }
     }
@@ -605,21 +588,21 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * @throws DocumentException 
      */
     public void exportPdfImage() throws BadElementException, DocumentException {
-        if (this.viewMenu.getFileChooserPdf().showSaveDialog(this.viewMenu) != 1) {
-            String        path     = this.viewMenu.getFileChooserPdf().getSelectedFile().getAbsolutePath();
-            BufferedImage original = this.viewMenu.getPanelModeling().getImage();
+        if (viewMenu.getFileChooserPdf().showSaveDialog(viewMenu) != 1) {
+            String        path     = viewMenu.getFileChooserPdf().getSelectedFile().getAbsolutePath();
+            BufferedImage original = viewMenu.getPanelModeling().getImage();
             BufferedImage newImage;
             if (original != null) {
                 try {
                     path     = (path.toLowerCase().endsWith(".pdf")) ? path : path + ".pdf";
                     newImage = new ExportImage(original).getPNGImage();
                     new ExportPdfImage(newImage, path).export();
-                    new ViewMessage(this.viewMenu, "PDF exported Successfully!").setVisible(true);
+                    new ViewMessage(viewMenu, "PDF exported Successfully!").setVisible(true);
                 } catch (IOException exception) {
-                    new ViewError(this.viewMenu, "Error to export PDF!").setVisible(true);
+                    new ViewError(viewMenu, "Error to export PDF!").setVisible(true);
                 }
             }else {
-                new ViewError(this.viewMenu, "Open a Diagram or Instance Panel!").setVisible(true);
+                new ViewError(viewMenu, "Open a Diagram or Instance Panel!").setVisible(true);
             }
         }
     }
@@ -628,41 +611,41 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
      * Method responsible for resizing the Panel Project.
      */
     private void resizePanelProject() {
-        Integer width  = new Double(this.viewMenu.getSize().getWidth() * 0.2).intValue();
-        Integer height = new Double(this.viewMenu.getSize().getHeight()).intValue() - 70;
-        this.viewMenu.getScrollPanelProject().setPreferredSize(new Dimension(width, height));
+        Integer width  = new Double(viewMenu.getSize().getWidth() * 0.2).intValue();
+        Integer height = new Double(viewMenu.getSize().getHeight()).intValue() - 70;
+        viewMenu.getScrollPanelProject().setPreferredSize(new Dimension(width, height));
     }
     
     /**
      * Method responsible for resizing the Panel Modeling.
      */
     private void resizePanelModeling() {
-        Integer width  = new Double(this.viewMenu.getSize().getWidth() * 0.8).intValue() - 30;
-        Integer height = new Double(this.viewMenu.getSize().getHeight()).intValue() - 100;
-        this.viewMenu.getScrollPanelModeling().setPreferredSize(new Dimension(width, height));
+        Integer width  = new Double(viewMenu.getSize().getWidth() * 0.8).intValue() - 30;
+        Integer height = new Double(viewMenu.getSize().getHeight()).intValue() - 100;
+        viewMenu.getScrollPanelModeling().setPreferredSize(new Dimension(width, height));
     }
     
     @Override
     public void componentResized(ComponentEvent event) {
-        this.resizePanelProject();
-        this.resizePanelModeling();
+        resizePanelProject();
+        resizePanelModeling();
     }
 
     @Override
     public void componentMoved(ComponentEvent event) {
-        this.resizePanelProject();
-        this.resizePanelModeling();
+        resizePanelProject();
+        resizePanelModeling();
     }
 
     @Override
     public void componentShown(ComponentEvent event) {
-        this.resizePanelProject();
-        this.resizePanelModeling();
+        resizePanelProject();
+        resizePanelModeling();
     }
 
     @Override
     public void componentHidden(ComponentEvent event) {
-        this.resizePanelProject();
-        this.resizePanelModeling();
+        resizePanelProject();
+        resizePanelModeling();
     }
 }

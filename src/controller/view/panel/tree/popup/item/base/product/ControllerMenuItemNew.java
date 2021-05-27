@@ -29,8 +29,8 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Project)
-            this.getViewMenu().getController().newProduct();
+            this.getViewMenu().getController().showNewProductView();
         else if (object instanceof Product)
-            this.getViewMenu().getController().newInstance();
+            this.getViewMenu().getController().showNewInstanceView();
     }
 }

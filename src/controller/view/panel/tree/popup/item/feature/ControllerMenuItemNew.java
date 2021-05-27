@@ -28,6 +28,6 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Project)
-            this.getViewMenu().getController().newFeatureDiagram();
+            this.getViewMenu().getController().createNewFeatureDiagram();
     }
 }

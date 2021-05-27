@@ -29,8 +29,8 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Project)
-            this.getViewMenu().getController().newMetric();
+            this.getViewMenu().getController().showNewMetricView();
         else if (object instanceof Metric)
-            this.getViewMenu().getController().newMeasure();
+            this.getViewMenu().getController().showNewMeasureView();
     }
 }
