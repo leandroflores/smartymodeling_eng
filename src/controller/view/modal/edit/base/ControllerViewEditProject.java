@@ -16,25 +16,24 @@ public class ControllerViewEditProject extends ControllerViewEdit {
 
     /**
      * Default constructor method of Class.
-     * @param viewEdit View Edit Project.
+     * @param view View Edit Project.
      */
-    public ControllerViewEditProject(ViewEditProject viewEdit) {
-        super(viewEdit);
+    public ControllerViewEditProject(ViewEditProject view) {
+        super(view);
     }
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseProject().getNameTextField(), "Name is a required!");
+        return check(getView().getPanelBaseProject().getNameTextField(), "Name is a required!");
     }
 
     @Override
     public void save() {
-//        this.getView().getProject().setName(this.getString(this.getView().getPanelBaseProject().getNameTextField()));
-        this.close();
+        close();
     }
     
     @Override
     public ViewEditProject getView() {
-        return (ViewEditProject) this.viewModal;
+        return (ViewEditProject) super.getView();
     }
 }

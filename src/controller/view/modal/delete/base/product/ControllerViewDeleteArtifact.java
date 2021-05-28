@@ -13,28 +13,28 @@ import view.modal.delete.base.product.ViewDeleteArtifact;
  * @see    model.structural.base.product.Artifact
  * @see    view.modal.delete.base.product.ViewDeleteArtifact
  */
-public class ControllerViewDeleteArtifact extends ControllerViewDelete {
+public final class ControllerViewDeleteArtifact extends ControllerViewDelete {
     private final Artifact artifact;
     
     /**
      * Default constructor method of Class.
-     * @param viewDelete View Delete Artifact.
+     * @param view View Delete Artifact.
      */
-    public ControllerViewDeleteArtifact(ViewDeleteArtifact viewDelete) {
-        super(viewDelete);
-        this.artifact = viewDelete.getArtifact();
+    public ControllerViewDeleteArtifact(ViewDeleteArtifact view) {
+        super(view);
+        artifact = getView().getArtifact();
     }
     
     @Override
     public void delete() {
-        this.getView().getInstance().removeArtifact(this.artifact);
-        this.getView().getInstance().getProduct().updateInstances();
-        this.getView().getPanelModeling().updateInstance(this.getView().getInstance());
-        this.close();
+        getView().getInstance().removeArtifact(artifact);
+        getView().getInstance().getProduct().updateInstances();
+        getView().getPanelModeling().updateInstance(getView().getInstance());
+        close();
     }
     
     @Override
     public ViewDeleteArtifact getView() {
-        return (ViewDeleteArtifact) this.viewModal;
+        return (ViewDeleteArtifact) super.getView();
     }
 }

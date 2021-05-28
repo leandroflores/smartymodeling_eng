@@ -16,24 +16,24 @@ public class ControllerViewEditTraceability extends ControllerViewEdit {
 
     /**
      * Default constructor method of Class.
-     * @param viewEdit View Edit Traceability.
+     * @param view View Edit Traceability.
      */
-    public ControllerViewEditTraceability(ViewEditTraceability viewEdit) {
-        super(viewEdit);
+    public ControllerViewEditTraceability(ViewEditTraceability view) {
+        super(view);
     }
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseTraceability().getNameTextField(), "Name is required!");
+        return check(getView().getPanelBaseTraceability().getNameTextField(), "Name is required!");
     }
 
     @Override
     public void save() {
-        this.close();
+        close();
     }
     
     @Override
     public ViewEditTraceability getView() {
-        return (ViewEditTraceability) this.viewModal;
+        return (ViewEditTraceability) super.getView();
     }
 }

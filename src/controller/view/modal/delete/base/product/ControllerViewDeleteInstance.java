@@ -13,27 +13,27 @@ import view.modal.delete.base.product.ViewDeleteInstance;
  * @see    model.structural.base.product.Instance
  * @see    view.modal.delete.base.product.ViewDeleteInstance
  */
-public class ControllerViewDeleteInstance extends ControllerViewDelete {
+public final class ControllerViewDeleteInstance extends ControllerViewDelete {
     private final Instance instance;
     
     /**
      * Default constructor method of Class.
-     * @param viewDelete View Delete Instance.
+     * @param view View Delete Instance.
      */
-    public ControllerViewDeleteInstance(ViewDeleteInstance viewDelete) {
-        super(viewDelete);
-        this.instance = viewDelete.getInstance();
+    public ControllerViewDeleteInstance(ViewDeleteInstance view) {
+        super(view);
+        instance = getView().getInstance();
     }
     
     @Override
     public void delete() {
-        this.getView().getProduct().removeInstance(this.instance);
-        this.getView().getPanelModeling().removeInstance(this.instance);
-        this.close();
+        getView().getProduct().removeInstance(instance);
+        getView().getPanelModeling().removeInstance(instance);
+        close();
     }
     
     @Override
     public ViewDeleteInstance getView() {
-        return (ViewDeleteInstance) this.viewModal;
+        return (ViewDeleteInstance) super.getView();
     }
 }

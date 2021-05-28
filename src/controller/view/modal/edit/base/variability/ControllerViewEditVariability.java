@@ -16,10 +16,10 @@ public class ControllerViewEditVariability extends ControllerViewEdit  {
 
     /**
      * Default constructor method of Class.
-     * @param viewEdit View Edit Variability.
+     * @param view View Edit Variability.
      */
-    public ControllerViewEditVariability(ViewEditVariability viewEdit) {
-        super(viewEdit);
+    public ControllerViewEditVariability(ViewEditVariability view) {
+        super(view);
     }
     
     @Override
@@ -29,6 +29,6 @@ public class ControllerViewEditVariability extends ControllerViewEdit  {
 
     @Override
     public void save() {
-        this.close();
+        close();
     }
 }

@@ -18,22 +18,22 @@ public class ControllerViewDeleteDiagram extends ControllerViewDelete {
     
     /**
      * Default constructor method of Class.
-     * @param viewDelete View Delete Diagram.
+     * @param view View Delete Diagram.
      */
-    public ControllerViewDeleteDiagram(ViewDeleteDiagram viewDelete) {
-        super(viewDelete);
-        this.diagram = viewDelete.getDiagram();
+    public ControllerViewDeleteDiagram(ViewDeleteDiagram view) {
+        super(view);
+        diagram = view.getDiagram();
     }
     
     @Override
     public void delete() {
-        this.getView().getProject().removeDiagram(this.diagram);
-        this.getView().getPanelModeling().removeDiagram(this.diagram);
-        this.close();
+        getView().getProject().removeDiagram(diagram);
+        getView().getPanelModeling().removeDiagram(diagram);
+        close();
     }
     
     @Override
     public ViewDeleteDiagram getView() {
-        return (ViewDeleteDiagram) this.viewModal;
+        return (ViewDeleteDiagram) super.getView();
     }
 }

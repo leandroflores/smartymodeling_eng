@@ -13,30 +13,27 @@ import view.modal.edit.base.ViewEditDiagram;
  * @see    view.modal.edit.base.ViewEditDiagram
  */
 public class ControllerViewEditDiagram extends ControllerViewEdit {
-    private final ViewEditDiagram viewEditDiagram;
 
     /**
      * Default constructor method of Class.
-     * @param viewEdit View Edit Diagram.
+     * @param view View Edit Diagram.
      */
-    public ControllerViewEditDiagram(ViewEditDiagram viewEdit) {
-        super(viewEdit);
-        this.viewEditDiagram = viewEdit;
+    public ControllerViewEditDiagram(ViewEditDiagram view) {
+        super(view);
     }
     
     @Override
     public boolean check() {
-        return this.check(this.viewEditDiagram.getPanelBaseDiagram().getNameTextField(), "Name is required!");
+        return check(getView().getPanelBaseDiagram().getNameTextField(), "Name is required!");
     }
 
     @Override
     public void save() {
-//        this.getView().getDiagram().setName(this.getString(this.getView().getPanelBaseDiagram().getNameTextField()));
-        this.close();
+        close();
     }
     
     @Override
     public ViewEditDiagram getView() {
-        return (ViewEditDiagram) this.viewModal;
+        return (ViewEditDiagram) super.getView();
     }
 }

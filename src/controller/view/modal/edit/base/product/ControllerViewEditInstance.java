@@ -16,24 +16,24 @@ public class ControllerViewEditInstance extends ControllerViewEdit {
 
     /**
      * Default constructor method of Class.
-     * @param viewEdit View Edit Instance.
+     * @param view View Edit Instance.
      */
-    public ControllerViewEditInstance(ViewEditInstance viewEdit) {
-        super(viewEdit);
+    public ControllerViewEditInstance(ViewEditInstance view) {
+        super(view);
     }
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseInstance().getNameTextField(), "Name is required!");
+        return check(getView().getPanelBaseInstance().getNameTextField(), "Name is required!");
     }
 
     @Override
     public void save() {
-        this.close();
+        close();
     }
     
     @Override
     public ViewEditInstance getView() {
-        return (ViewEditInstance) this.viewModal;
+        return (ViewEditInstance) super.getView();
     }
 }

@@ -24,16 +24,16 @@ public class ControllerViewEditMeasure extends ControllerViewEdit {
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseMeasure().getNameTextField(),  "Name is required!");
+        return check(getView().getPanelBaseMeasure().getNameTextField(), "Name is required!");
     }
 
     @Override
     public void save() {
-        this.close();
+        close();
     }
     
     @Override
     public ViewEditMeasure getView() {
-        return (ViewEditMeasure) this.viewModal;
+        return (ViewEditMeasure) super.getView();
     }
 }

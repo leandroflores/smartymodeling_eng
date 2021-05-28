@@ -65,11 +65,11 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
 
     /**
      * Default constructor method of Class.
-     * @param viewMenu_ View Menu.
+     * @param view View Menu.
      */
-    public ControllerViewMenu(ViewMenu viewMenu_) {
-        super(viewMenu_);
-        viewMenu = viewMenu_;
+    public ControllerViewMenu(ViewMenu view) {
+        super(view);
+        viewMenu = view;
     }
 
     @Override

@@ -16,25 +16,25 @@ public class ControllerViewEditRequirement extends ControllerViewEdit {
 
     /**
      * Default constructor method of Class.
-     * @param viewEdit View Edit Requirement.
+     * @param view View Edit Requirement.
      */
-    public ControllerViewEditRequirement(ViewEditRequirement viewEdit) {
-        super(viewEdit);
+    public ControllerViewEditRequirement(ViewEditRequirement view) {
+        super(view);
     }
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseRequirement().getCodeTextField(), "Id is required!")
-            && this.check(this.getView().getPanelBaseRequirement().getNameTextField(), "Name is required!");
+        return check(getView().getPanelBaseRequirement().getCodeTextField(), "Id is required!")
+            && check(getView().getPanelBaseRequirement().getNameTextField(), "Name is required!");
     }
 
     @Override
     public void save() {
-        this.close();
+        close();
     }
     
     @Override
     public ViewEditRequirement getView() {
-        return (ViewEditRequirement) this.viewModal;
+        return (ViewEditRequirement) super.getView();
     }
 }

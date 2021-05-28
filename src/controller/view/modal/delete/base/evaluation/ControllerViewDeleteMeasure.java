@@ -18,21 +18,21 @@ public final class ControllerViewDeleteMeasure extends ControllerViewDelete {
     
     /**
      * Default constructor method of Class.
-     * @param viewDelete View Delete Measure.
+     * @param view View Delete Measure.
      */
-    public ControllerViewDeleteMeasure(ViewDeleteMeasure viewDelete) {
-        super(viewDelete);
-        this.measure = this.getView().getMeasure();
+    public ControllerViewDeleteMeasure(ViewDeleteMeasure view) {
+        super(view);
+        measure = getView().getMeasure();
     }
     
     @Override
     public void delete() {
-        this.getView().getProject().removeMeasure(this.measure);
-        this.close();
+        getView().getProject().removeMeasure(measure);
+        close();
     }
     
     @Override
     public ViewDeleteMeasure getView() {
-        return (ViewDeleteMeasure) this.viewModal;
+        return (ViewDeleteMeasure) super.getView();
     }
 }

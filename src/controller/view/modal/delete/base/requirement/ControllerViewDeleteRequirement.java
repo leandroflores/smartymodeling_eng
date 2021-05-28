@@ -18,21 +18,21 @@ public final class ControllerViewDeleteRequirement extends ControllerViewDelete 
     
     /**
      * Default constructor method of Class.
-     * @param viewDelete View Delete Requirement.
+     * @param view View Delete Requirement.
      */
-    public ControllerViewDeleteRequirement(ViewDeleteRequirement viewDelete) {
-        super(viewDelete);
-        this.requirement = this.getView().getRequirement();
+    public ControllerViewDeleteRequirement(ViewDeleteRequirement view) {
+        super(view);
+        requirement = getView().getRequirement();
     }
     
     @Override
     public void delete() {
-        this.getView().getProject().removeRequirement(this.requirement);
-        this.close();
+        getView().getProject().removeRequirement(requirement);
+        close();
     }
     
     @Override
     public ViewDeleteRequirement getView() {
-        return (ViewDeleteRequirement) this.viewModal;
+        return (ViewDeleteRequirement) super.getView();
     }
 }

@@ -13,27 +13,27 @@ import view.modal.delete.base.variability.ViewDeleteVariability;
  * @see    model.structural.base.variability.Variability
  * @see    view.modal.delete.base.variability.ViewDeleteVariability
  */
-public class ControllerViewDeleteVariability extends ControllerViewDelete {
+public final class ControllerViewDeleteVariability extends ControllerViewDelete {
     private final Variability variability;
     
     /**
      * Default constructor method of Class.
-     * @param viewDelete View Delete Variability.
+     * @param view View Delete Variability.
      */
-    public ControllerViewDeleteVariability(ViewDeleteVariability viewDelete) {
-        super(viewDelete);
-        this.variability = viewDelete.getVariability();
+    public ControllerViewDeleteVariability(ViewDeleteVariability view) {
+        super(view);
+        variability = getView().getVariability();
     }
     
     @Override
     public void delete() {
-        this.getView().getDiagram().removeVariability(this.variability);
-        this.getView().getDiagram().updateElementsStereotype();
-        this.close();
+        getView().getDiagram().removeVariability(variability);
+        getView().getDiagram().updateElementsStereotype();
+        close();
     }
     
     @Override
     public ViewDeleteVariability getView() {
-        return (ViewDeleteVariability) this.viewModal;
+        return (ViewDeleteVariability) super.getView();
     }
 }

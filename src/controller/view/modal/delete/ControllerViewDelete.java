@@ -25,19 +25,19 @@ public abstract class ControllerViewDelete extends ControllerViewModal {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.getView().getYesButton().equals(event.getSource()))
-            this.delete();
-        else if (this.getView().getNotButton().equals(event.getSource()))
-            this.getView().dispose();
+        if (getView().getYesButton().equals(event.getSource()))
+            delete();
+        else if (getView().getNotButton().equals(event.getSource()))
+            getView().dispose();
     }
     
     @Override
     public void keyPressed(KeyEvent event) {
         super.keyPressed(event);
         if (F1 == event.getKeyCode())
-            this.delete();
+            delete();
         else if (F2 == event.getKeyCode())
-            this.getView().dispose();
+            getView().dispose();
     }
     
     /**
@@ -49,13 +49,13 @@ public abstract class ControllerViewDelete extends ControllerViewModal {
      * Method responsible for closing the View Delete.
      */
     protected void close() {
-        this.getView().getPanelModeling().getViewMenu().update();
-        this.getView().getPanelModeling().getViewMenu().setSave(false);
-        this.getView().dispose();
+        getView().getPanelModeling().getViewMenu().update();
+        getView().getPanelModeling().getViewMenu().setSave(false);
+        getView().dispose();
     }
     
     @Override
     public ViewDelete getView() {
-        return (ViewDelete) this.viewModal;
+        return (ViewDelete) super.getView();
     }
 }

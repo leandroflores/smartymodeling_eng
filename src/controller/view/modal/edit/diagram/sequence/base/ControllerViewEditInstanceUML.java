@@ -24,16 +24,16 @@ public class ControllerViewEditInstanceUML extends ControllerViewEdit {
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseInstanceUML().getNameTextField(), "Name is required!");
+        return check(getView().getPanelBaseInstanceUML().getNameTextField(), "Name is required!");
     }
 
     @Override
     public void save() {
-        this.close();
+        close();
     }
     
     @Override
     public ViewEditInstanceUML getView() {
-        return (ViewEditInstanceUML) this.viewModal;
+        return (ViewEditInstanceUML) super.getView();
     }
 }

@@ -24,10 +24,10 @@ public abstract class ControllerViewModal extends Controller {
     
     /**
      * Default contructor method of Class.
-     * @param viewModal_ ViewModal.
+     * @param view ViewModal.
      */
-    public ControllerViewModal(ViewModal viewModal_) {
-        viewModal = viewModal_;
+    public ControllerViewModal(ViewModal view) {
+        viewModal = view;
     }
     
     @Override

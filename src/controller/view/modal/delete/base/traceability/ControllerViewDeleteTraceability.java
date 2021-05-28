@@ -13,26 +13,26 @@ import view.modal.delete.base.traceability.ViewDeleteTraceability;
  * @see    model.structural.base.traceability.Traceability
  * @see    view.modal.delete.base.traceability.ViewDeleteTraceability
  */
-public class ControllerViewDeleteTraceability extends ControllerViewDelete {
+public final class ControllerViewDeleteTraceability extends ControllerViewDelete {
     private final Traceability traceability;
     
     /**
      * Default constructor method of Class.
-     * @param viewDelete View Delete Traceability.
+     * @param view View Delete Traceability.
      */
-    public ControllerViewDeleteTraceability(ViewDeleteTraceability viewDelete) {
-        super(viewDelete);
-        this.traceability = viewDelete.getTraceability();
+    public ControllerViewDeleteTraceability(ViewDeleteTraceability view) {
+        super(view);
+        traceability = getView().getTraceability();
     }
     
     @Override
     public void delete() {
-        this.getView().getProject().removeTraceability(this.traceability);
-        this.close();
+        getView().getProject().removeTraceability(traceability);
+        close();
     }
     
     @Override
     public ViewDeleteTraceability getView() {
-        return (ViewDeleteTraceability) this.viewModal;
+        return (ViewDeleteTraceability) super.getView();
     }
 }

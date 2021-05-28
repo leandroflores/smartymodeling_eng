@@ -16,24 +16,24 @@ public class ControllerViewEditClassUML extends ControllerViewEdit {
 
     /**
      * Default constructor method of Class.
-     * @param viewEdit View Edit Class UML.
+     * @param view View Edit Class UML.
      */
-    public ControllerViewEditClassUML(ViewEditClassUML viewEdit) {
-        super(viewEdit);
+    public ControllerViewEditClassUML(ViewEditClassUML view) {
+        super(view);
     }
 
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseClassUML().getNameTextField(), "Name is required!");
+        return check(getView().getPanelBaseClassUML().getNameTextField(), "Name is required!");
     }
 
     @Override
     public void save() {
-        this.close();
+        close();
     }
     
     @Override
     public ViewEditClassUML getView() {
-        return (ViewEditClassUML) this.viewModal;
+        return (ViewEditClassUML) super.getView();
     }
 }

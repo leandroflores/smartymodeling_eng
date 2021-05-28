@@ -16,27 +16,24 @@ public class ControllerViewEditElement extends ControllerViewEdit  {
 
     /**
      * Default constructor method of Class.
-     * @param viewEdit View Edit Element.
+     * @param view View Edit Element.
      */
-    public ControllerViewEditElement(ViewEditElement viewEdit) {
-        super(viewEdit);
+    public ControllerViewEditElement(ViewEditElement view) {
+        super(view);
     }
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseElement().getNameTextField(), "Name is a required!");
+        return check(getView().getPanelBaseElement().getNameTextField(), "Name is a required!");
     }
 
     @Override
     public void save() {
-//        this.getView().getElement().setName(this.getString(this.getView().getPanelBaseElement().getNameTextField()));
-//        this.getView().getElement().setMandatory(this.getView().getPanelBaseElement().getMandatoryCheckBox().isSelected());
-//        this.getView().getDiagram().updateStereotype(this.getView().getElement());
-        this.close();
+        close();
     }
     
     @Override
     public ViewEditElement getView() {
-        return (ViewEditElement) this.viewModal;
+        return (ViewEditElement) super.getView();
     }
 }

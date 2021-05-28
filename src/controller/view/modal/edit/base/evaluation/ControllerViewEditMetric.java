@@ -24,18 +24,18 @@ public class ControllerViewEditMetric extends ControllerViewEdit {
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseMetric().getNameTextField(),  "Name is required!")
-            && this.check(this.getView().getPanelBaseMetric().getLabelTextField(), "Label is required!")
-            && this.check(this.getView().getPanelBaseOperation().getOperationTextField(), "Operation is required!");
+        return check(getView().getPanelBaseMetric().getNameTextField(),  "Name is required!")
+            && check(getView().getPanelBaseMetric().getLabelTextField(), "Label is required!")
+            && check(getView().getPanelBaseOperation().getOperationTextField(), "Operation is required!");
     }
 
     @Override
     public void save() {
-        this.close();
+        close();
     }
     
     @Override
     public ViewEditMetric getView() {
-        return (ViewEditMetric) this.viewModal;
+        return (ViewEditMetric) super.getView();
     }
 }

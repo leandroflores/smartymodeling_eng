@@ -27,27 +27,27 @@ public abstract class ControllerViewEdit extends ControllerViewModal {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.getView().getSaveButton().equals(event.getSource()))
-            this.update();
-        else if (this.getView().getCancelButton().equals(event.getSource()))
-            this.getView().dispose();
+        if (getView().getSaveButton().equals(event.getSource()))
+            update();
+        else if (getView().getCancelButton().equals(event.getSource()))
+            getView().dispose();
     }
     
     @Override
     public void keyPressed(KeyEvent event) {
         super.keyPressed(event);
         if (F1 == event.getKeyCode())
-            this.update();
+            update();
         else if (F2 == event.getKeyCode())
-            this.getView().dispose();
+            getView().dispose();
     }
     
     /**
-     * Abstract Method responsible for updating.
+     * Abstract Method responsible for updating the values for Edit.
      */
     public void update() {
-        if (this.check())
-            this.save();
+        if (check())
+            save();
     }
     
     /**
@@ -57,7 +57,7 @@ public abstract class ControllerViewEdit extends ControllerViewModal {
     public abstract boolean check();
     
     /**
-     * Abstract Method responsible for save the values.
+     * Abstract Method responsible for saving the values.
      */
     public abstract void save();
     
@@ -65,9 +65,9 @@ public abstract class ControllerViewEdit extends ControllerViewModal {
      * Method responsible for closing the View Edit.
      */
     protected void close() {
-        this.getView().getViewMenu().setSave(false);
-        this.getView().getViewMenu().update();
-        this.getView().dispose();
+        getView().getViewMenu().setSave(false);
+        getView().getViewMenu().update();
+        getView().dispose();
     }
     
     /**
@@ -75,7 +75,7 @@ public abstract class ControllerViewEdit extends ControllerViewModal {
      * @return Project.
      */
     public Project getProject() {
-        return this.getViewMenu().getProject();
+        return getViewMenu().getProject();
     }
     
     /**
@@ -83,11 +83,11 @@ public abstract class ControllerViewEdit extends ControllerViewModal {
      * @return View Menu.
      */
     public ViewMenu getViewMenu() {
-        return this.getView().getViewMenu();
+        return getView().getViewMenu();
     }
     
     @Override
     public ViewEdit getView() {
-        return (ViewEdit) this.viewModal;
+        return (ViewEdit) super.getView();
     }
 }

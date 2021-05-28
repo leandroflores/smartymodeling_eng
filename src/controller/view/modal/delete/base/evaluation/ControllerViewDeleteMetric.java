@@ -18,21 +18,21 @@ public final class ControllerViewDeleteMetric extends ControllerViewDelete {
     
     /**
      * Default constructor method of Class.
-     * @param viewDelete View Delete Metric.
+     * @param view View Delete Metric.
      */
-    public ControllerViewDeleteMetric(ViewDeleteMetric viewDelete) {
-        super(viewDelete);
-        this.metric = this.getView().getMetric();
+    public ControllerViewDeleteMetric(ViewDeleteMetric view) {
+        super(view);
+        metric = getView().getMetric();
     }
     
     @Override
     public void delete() {
-        this.getView().getProject().removeMetric(this.metric);
-        this.close();
+        getView().getProject().removeMetric(metric);
+        close();
     }
     
     @Override
     public ViewDeleteMetric getView() {
-        return (ViewDeleteMetric) this.viewModal;
+        return (ViewDeleteMetric) super.getView();
     }
 }

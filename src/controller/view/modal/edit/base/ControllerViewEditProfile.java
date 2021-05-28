@@ -16,10 +16,10 @@ public class ControllerViewEditProfile extends ControllerViewEdit {
 
     /**
      * Default constructor method of Class.
-     * @param viewEdit View Edit Profile.
+     * @param view View Edit Profile.
      */
-    public ControllerViewEditProfile(ViewEditProfile viewEdit) {
-        super(viewEdit);
+    public ControllerViewEditProfile(ViewEditProfile view) {
+        super(view);
     }
     
     @Override
@@ -29,12 +29,12 @@ public class ControllerViewEditProfile extends ControllerViewEdit {
 
     @Override
     public void save() {
-        this.getViewMenu().getPanelModeling().updateModelingPanels();
-        this.close();
+        getViewMenu().getPanelModeling().updateModelingPanels();
+        close();
     }
     
     @Override
     public ViewEditProfile getView() {
-        return (ViewEditProfile) this.viewModal;
+        return (ViewEditProfile) super.getView();
     }
 }

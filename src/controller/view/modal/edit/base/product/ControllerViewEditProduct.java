@@ -16,25 +16,25 @@ public class ControllerViewEditProduct extends ControllerViewEdit {
 
     /**
      * Default constructor method of Class.
-     * @param viewEdit View Edit Product.
+     * @param view View Edit Product.
      */
-    public ControllerViewEditProduct(ViewEditProduct viewEdit) {
-        super(viewEdit);
+    public ControllerViewEditProduct(ViewEditProduct view) {
+        super(view);
     }
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseProduct().getNameTextField(), "Name is required!")
-            && this.check(this.getView().getPanelBaseProduct().getVersionTextField(), "Version is required!");
+        return check(getView().getPanelBaseProduct().getNameTextField(), "Name is required!")
+            && check(getView().getPanelBaseProduct().getVersionTextField(), "Version is required!");
     }
 
     @Override
     public void save() {
-        this.close();
+        close();
     }
     
     @Override
     public ViewEditProduct getView() {
-        return (ViewEditProduct) this.viewModal;
+        return (ViewEditProduct) super.getView();
     }
 }

@@ -24,16 +24,16 @@ public class ControllerViewEditLifelineUML extends ControllerViewEdit {
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseLifelineUML().getNameTextField(), "Name is required!");
+        return check(getView().getPanelBaseLifelineUML().getNameTextField(), "Name is required!");
     }
 
     @Override
     public void save() {
-        this.close();
+        close();
     }
     
     @Override
     public ViewEditLifelineUML getView() {
-        return (ViewEditLifelineUML) this.viewModal;
+        return (ViewEditLifelineUML) super.getView();
     }
 }

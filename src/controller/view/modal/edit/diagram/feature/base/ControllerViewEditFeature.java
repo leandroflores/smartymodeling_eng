@@ -16,24 +16,24 @@ public class ControllerViewEditFeature extends ControllerViewEdit {
 
     /**
      * Default constructor method of Class.
-     * @param viewEdit View Edit Feature.
+     * @param view View Edit Feature.
      */
-    public ControllerViewEditFeature(ViewEditFeature viewEdit) {
-        super(viewEdit);
+    public ControllerViewEditFeature(ViewEditFeature view) {
+        super(view);
     }
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseFeature().getNameTextField(), "Name is required!");
+        return check(getView().getPanelBaseFeature().getNameTextField(), "Name is required!");
     }
 
     @Override
     public void save() {
-        this.close();
+        close();
     }
     
     @Override
     public ViewEditFeature getView() {
-        return (ViewEditFeature) this.viewModal;
+        return (ViewEditFeature) super.getView();
     }
 }

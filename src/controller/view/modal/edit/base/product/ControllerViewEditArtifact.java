@@ -29,11 +29,11 @@ public class ControllerViewEditArtifact extends ControllerViewEdit {
 
     @Override
     public void save() {
-        this.close();
+        close();
     }
     
     @Override
     public ViewEditArtifact getView() {
-        return (ViewEditArtifact) this.viewModal;
+        return (ViewEditArtifact) super.getView();
     }
 }
