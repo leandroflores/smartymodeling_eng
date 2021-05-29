@@ -8,7 +8,7 @@ import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 
 /**
- * <p>Class of Evaluation <b>EvaluationInstance</b>.</p>
+ * <p>Class of Funct <b>EvaluationInstance</b>.</p>
  * <p>Class responsible for <b>Evaluate</b> the <b>Instance</b> in the SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-01
@@ -26,22 +26,22 @@ public class EvaluationInstance extends Evaluation {
      */
     public EvaluationInstance(Project project) {
         super(project);
-        this.product = null;
+        product = null;
     }
     
     /**
      * Alternative constructor method of Class.
      * @param project Project.
-     * @param product Product.
+     * @param product_ Product.
      */
-    public EvaluationInstance(Project project, Product product) {
+    public EvaluationInstance(Project project, Product product_) {
         super(project);
-        this.product = product;
+        product = product_;
     }
     
     @Override
     public Double getClauseValue(String keyword, String filter) {
-        List   list = this.filter(this.getArtifactFilters(filter));
+        List   list = filter(getArtifactFilters(filter));
         String size = Integer.toString(list.size());
         return Double.parseDouble(size);
     }
@@ -52,10 +52,10 @@ public class EvaluationInstance extends Evaluation {
      * @return Instances filtered.
      */
     public List filter(Object[] parameters) {
-           List filter = this.filterContext();
-                filter = this.filterType(filter, (List<String>) parameters[0]);
-                filter = this.filterName(filter, (List<String>) parameters[1]);
-                this.addObjects(this.getList(filter));
+           List filter = filterContext();
+                filter = filterType(filter, (List<String>) parameters[0]);
+                filter = filterName(filter, (List<String>) parameters[1]);
+                addObjects(getList(filter));
         return  filter;
     }
     
@@ -64,9 +64,7 @@ public class EvaluationInstance extends Evaluation {
      * @return Instances List by Context.
      */
     protected List<Instance> filterContext() {
-        return this.product != null ?
-               this.product.getInstancesList() :
-               this.project.getInstancesList();
+        return product != null ? product.getInstancesList() : project.getInstancesList();
     }
     
     /**
@@ -76,7 +74,7 @@ public class EvaluationInstance extends Evaluation {
      * @return Instances filtered by Types List.
      */
     protected List<Instance> filterType(List<Instance> list, List<String> types) {
-        return this.isVoid(types) ? list : this.selectInstancesByTypes(list, types);
+        return isVoid(types) ? list : selectInstancesByTypes(list, types);
     }
     
     /**
@@ -101,7 +99,7 @@ public class EvaluationInstance extends Evaluation {
      * @return Instances filtered by Names List.
      */
     protected List<Instance> filterName(List<Instance> list, List<String> names) {
-        return this.isVoid(names) ? list : this.selectInstancesByNames(list, names);
+        return isVoid(names) ? list : selectInstancesByNames(list, names);
     }
     
     /**

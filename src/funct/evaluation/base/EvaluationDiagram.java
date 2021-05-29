@@ -5,7 +5,7 @@ import funct.evaluation.base.variability.EvaluationVariability;
 import model.structural.base.Diagram;
 
 /**
- * <p>Class of Evaluation <b>EvaluationDiagram</b>.</p>
+ * <p>Class of Funct <b>EvaluationDiagram</b>.</p>
  * <p>Class responsible for <b>Evaluate</b> the <b>Diagram</b> in the SMartyModeling.</p>
  * @author Leandro
  * @since  2019-10-23
@@ -20,21 +20,21 @@ public class EvaluationDiagram extends EvaluationBase {
     
     /**
      * Default constructor method of Class.
-     * @param diagram Diagram.
+     * @param diagram_ Diagram.
      */
-    public EvaluationDiagram(Diagram diagram) {
-        super(diagram.getProject());
-        this.diagram = diagram;
+    public EvaluationDiagram(Diagram diagram_) {
+        super(diagram_.getProject());
+        diagram = diagram_;
     }
 
     @Override
     public Double getClauseValue(String keyword, String filter) {
-        if (this.isElement(keyword))
-            return super.getValue(new EvaluationElement(this.diagram, keyword), keyword, filter);
-        else if (this.isAssociation(keyword))
-            return super.getValue(new EvaluationAssociation(this.diagram, keyword), keyword, filter);
-        else if (this.isVariability(keyword))
-            return super.getValue(new EvaluationVariability(this.diagram, keyword), keyword, filter);
+        if (isElement(keyword))
+            return getValue(new EvaluationElement(diagram, keyword), keyword, filter);
+        else if (isAssociation(keyword))
+            return getValue(new EvaluationAssociation(diagram, keyword), keyword, filter);
+        else if (isVariability(keyword))
+            return getValue(new EvaluationVariability(diagram, keyword), keyword, filter);
         return 0.0d;
     }
 }

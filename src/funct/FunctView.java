@@ -12,7 +12,7 @@ import javax.swing.JLabel;
  * <p>Class of Functions <b>FunctView</b>.</p>
  * <p>Class responsible for operations involving <b>Views</b> and <b>Images</b>.</p>
  * @author Leandro
- * @since  14/01/2019
+ * @since  2019-01-14
  * @see    javax.swing.ImageIcon
  */
 public class FunctView {
@@ -24,7 +24,7 @@ public class FunctView {
      * @return  New ImageIcon.
      */
     public ImageIcon createImage(String imageURL) {
-        return new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource(FOLDER + imageURL)));
+        return new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource(FOLDER + imageURL)));
     }
     
     /**
@@ -33,7 +33,7 @@ public class FunctView {
      * @return New Image JLabel.
      */
     public JLabel getLabelImage(String imageURL) {
-        return new JLabel((Icon) this.createImage(imageURL));
+        return new JLabel((Icon) createImage(imageURL));
     }
     
     /**
@@ -43,7 +43,7 @@ public class FunctView {
      */
     public Image getIcone(String imageURL) {
         try {
-            return ImageIO.read(this.getClass().getResource(FOLDER + "components/" + imageURL));
+            return ImageIO.read(getClass().getResource(FOLDER + "components/" + imageURL));
         }catch (IOException exception) {
             return null;
         }

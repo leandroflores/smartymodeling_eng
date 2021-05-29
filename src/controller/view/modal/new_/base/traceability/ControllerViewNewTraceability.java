@@ -17,17 +17,17 @@ public class ControllerViewNewTraceability extends ControllerViewNew {
 
     /**
      * Default constructor method of Class.
-     * @param viewNew View New Traceability.
+     * @param view View New Traceability.
      */
-    public ControllerViewNewTraceability(ViewNewTraceability viewNew) {
-        super(viewNew);
+    public ControllerViewNewTraceability(ViewNewTraceability view) {
+        super(view);
     }
 
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseTraceability().getNameTextField(), "Name is required!")
-            && this.check(this.getView().getPanelBaseTraceability().getDescriptionTextField(), "Description is required!")
-            && this.checkElements();
+        return check(getView().getPanelBaseTraceability().getNameTextField(), "Name is required!")
+            && check(getView().getPanelBaseTraceability().getDescriptionTextField(), "Description is required!")
+            && checkElements();
     }
     
     /**
@@ -35,8 +35,8 @@ public class ControllerViewNewTraceability extends ControllerViewNew {
      * @return Elements are checkeds.
      */
     public boolean checkElements() {
-        if (this.getView().getTraceability().getElements().isEmpty()) {
-            new ViewError(this.getView(), "Add some Element!").setVisible(true);
+        if (getView().getTraceability().getElements().isEmpty()) {
+            new ViewError(getView(), "Add some Element!").setVisible(true);
             return false;
         }
         return true;
@@ -44,12 +44,12 @@ public class ControllerViewNewTraceability extends ControllerViewNew {
 
     @Override
     public void new_() {
-        this.getView().getProject().addTraceability(this.getView().getTraceability());
-        this.getView().getViewMenu().setTabIndex(0);
+        getView().getProject().addTraceability(getView().getTraceability());
+        getView().getViewMenu().setTabIndex(0);
     }
     
     @Override
     public ViewNewTraceability getView() {
-        return (ViewNewTraceability) this.viewModal;
+        return (ViewNewTraceability) super.getView();
     }
 }

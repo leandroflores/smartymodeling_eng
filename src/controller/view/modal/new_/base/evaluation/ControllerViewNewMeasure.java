@@ -18,31 +18,31 @@ public class ControllerViewNewMeasure extends ControllerViewNew {
 
     /**
      * Default constructor method of Class.
-     * @param viewNew View New Measure.
+     * @param view View New Measure.
      */
-    public ControllerViewNewMeasure(ViewNewMeasure viewNew) {
-        super(viewNew);
+    public ControllerViewNewMeasure(ViewNewMeasure view) {
+        super(view);
     }
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseEvaluation().getValueTextField(), "Invalid Value!");
+        return check(getView().getPanelBaseEvaluation().getValueTextField(), "Invalid Value!");
     }
     
     @Override
     public void new_() {
-        Measure measure = this.getView().getMeasure();
-                measure.setName(this.getView().getPanelBaseMeasure().getNameTextField().getText().trim());
-                measure.setDate(this.getView().getPanelBaseMeasure().getDateTextField().getText().trim());
-                measure.setMetric((Metric) this.getView().getPanelBaseMeasure().getMetricComboBox().getSelectedItem());
-                measure.setTarget(this.getValue(this.getView().getPanelBaseTarget().getTargetComboBox()));
-                measure.setValue(this.getDouble(this.getView().getPanelBaseEvaluation().getValueTextField()));
-        this.getView().getProject().addMeasure(measure);
-        this.getView().getViewMenu().setTabIndex(5);
+        Measure measure = getView().getMeasure();
+                measure.setName(getView().getPanelBaseMeasure().getNameTextField().getText().trim());
+                measure.setDate(getView().getPanelBaseMeasure().getDateTextField().getText().trim());
+                measure.setMetric((Metric) getView().getPanelBaseMeasure().getMetricComboBox().getSelectedItem());
+                measure.setTarget(getValue(getView().getPanelBaseTarget().getTargetComboBox()));
+                measure.setValue(getDouble(getView().getPanelBaseEvaluation().getValueTextField()));
+        getView().getProject().addMeasure(measure);
+        getView().getViewMenu().setTabIndex(5);
     }
     
     @Override
     public ViewNewMeasure getView() {
-        return (ViewNewMeasure) this.viewModal;
+        return (ViewNewMeasure) super.getView();
     }
 }

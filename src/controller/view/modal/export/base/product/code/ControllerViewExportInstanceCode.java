@@ -21,17 +21,17 @@ public class ControllerViewExportInstanceCode extends ControllerViewExport {
 
     /**
      * Default constructor method of Class.
-     * @param viewExport View Export Instance Code.
+     * @param view View Export Instance Code.
      */
-    public ControllerViewExportInstanceCode(ViewExportInstanceCode viewExport) {
-        super(viewExport);
+    public ControllerViewExportInstanceCode(ViewExportInstanceCode view) {
+        super(view);
     }
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelExportInstanceCode().getDirectoryTextField(), "Select a Directory!")
-            && this.check(this.getView().getPanelExportInstanceCode().getNameTextField(), "Name is required!")
-            && this.checkInstance();
+        return check(getView().getPanelExportInstanceCode().getDirectoryTextField(), "Select a Directory!")
+            && check(getView().getPanelExportInstanceCode().getNameTextField(), "Name is required!")
+            && checkInstance();
     }
     
     /**
@@ -39,8 +39,8 @@ public class ControllerViewExportInstanceCode extends ControllerViewExport {
      * @return Instance is selected.
      */
     private boolean checkInstance() {
-        if (this.getView().getPanelExportInstanceCode().getInstance() == null) {
-            new ViewError(this.getView(), "Select a Class Instance!").setVisible(true);
+        if (getView().getPanelExportInstanceCode().getInstance() == null) {
+            new ViewError(getView(), "Select a Class Instance!").setVisible(true);
             return false;
         }
         return true;
@@ -48,19 +48,19 @@ public class ControllerViewExportInstanceCode extends ControllerViewExport {
     
     @Override
     public void export() {
-        String   path     = this.getView().getPanelExportInstanceCode().getDirectoryTextField().getText().trim();
-        Instance instance = this.getView().getPanelExportInstanceCode().getInstance();
-        String   name     = this.getView().getPanelExportInstanceCode().getNameTextField().getText().trim();
+        String   path     = getView().getPanelExportInstanceCode().getDirectoryTextField().getText().trim();
+        Instance instance = getView().getPanelExportInstanceCode().getInstance();
+        String   name     = getView().getPanelExportInstanceCode().getNameTextField().getText().trim();
         try {
             new ExportInstance(path, name, instance).export();
         } catch (IOException exception) {
-            new ViewError(this.getView(), "Error to Export the Code Instance!").setVisible(true);
+            new ViewError(getView(), "Error to Export the Code Instance!").setVisible(true);
         }
-        this.getView().dispose();
+        getView().dispose();
     }
     
     @Override
     public ViewExportInstanceCode getView() {
-        return (ViewExportInstanceCode) this.viewModal;
+        return (ViewExportInstanceCode) super.getView();
     }
 }

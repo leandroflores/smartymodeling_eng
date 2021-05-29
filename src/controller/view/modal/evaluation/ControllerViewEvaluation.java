@@ -25,12 +25,12 @@ public abstract class ControllerViewEvaluation extends ControllerViewModal {
     
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.getView().getRefreshButton().equals(event.getSource()))
-            this.refresh();
-        else if (this.getView().getClearButton().equals(event.getSource()))
-            this.clear();
-        else if (this.getView().getCancelButton().equals(event.getSource()))
-            this.getView().dispose();
+        if (getView().getRefreshButton().equals(event.getSource()))
+            refresh();
+        else if (getView().getClearButton().equals(event.getSource()))
+            clear();
+        else if (getView().getCancelButton().equals(event.getSource()))
+            getView().dispose();
     }
     
     @Override
@@ -39,13 +39,13 @@ public abstract class ControllerViewEvaluation extends ControllerViewModal {
         switch (event.getKeyCode()) {
             case F1:
             case ENTER:
-                this.refresh();
+                refresh();
                 break;
             case F2:
-                this.clear();
+                clear();
                 break;
             case F3:
-                this.getView().dispose();
+                getView().dispose();
                 break;
             default:
                 break;
@@ -66,11 +66,11 @@ public abstract class ControllerViewEvaluation extends ControllerViewModal {
      * Method responsible for closing the View Evaluation.
      */
     protected void close() {
-        this.getView().dispose();
+        getView().dispose();
     }
     
     @Override
     public ViewEvaluation getView() {
-        return (ViewEvaluation) this.viewModal;
+        return (ViewEvaluation) super.getView();
     }
 }

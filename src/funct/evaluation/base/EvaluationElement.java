@@ -13,7 +13,7 @@ import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.feature.base.Feature;
 
 /**
- * <p>Class of Evaluation <b>EvaluationElement</b>.</p>
+ * <p>Class of Funct <b>EvaluationElement</b>.</p>
  * <p>Class responsible for <b>Evaluate</b> the <b>Element</b> in the SMartyModeling.</p>
  * @author Leandro
  * @since  2020-03-30
@@ -29,28 +29,28 @@ public class EvaluationElement extends Evaluation {
     /**
      * Default constructor method of Class.
      * @param project Project.
-     * @param type Element Type.
+     * @param type_ Element Type.
      */
-    public EvaluationElement(Project project, String type) {
+    public EvaluationElement(Project project, String type_) {
         super(project);
-        this.diagram = null;
-        this.type    = type;
+        diagram = null;
+        type    = type_;
     }
     
     /**
      * Alternative constructor method of Class.
-     * @param diagram Diagram.
-     * @param type Element Type.
+     * @param diagram_ Diagram.
+     * @param type_ Element Type.
      */
-    public EvaluationElement(Diagram diagram, String type) {
-        super(diagram.getProject());
-        this.diagram = diagram;
-        this.type    = type;
+    public EvaluationElement(Diagram diagram_, String type_) {
+        super(diagram_.getProject());
+        diagram = diagram_;
+        type    = type_;
     }
     
     @Override
     public Double getClauseValue(String keyword, String filter) {
-        List   list = this.filter(this.getElementFilters(filter));
+        List   list = filter(getElementFilters(filter));
         String size = Integer.toString(list.size());
         return Double.parseDouble(size);
     }
@@ -61,21 +61,21 @@ public class EvaluationElement extends Evaluation {
      * @return Elements filtered.
      */
     public List filter(Object[] parameters) {
-           List filter = this.filterContext();
-                filter = this.filterParent(filter, this.getParent((List<String>) parameters[2]));
-                filter = this.filterName(filter, (List<String>) parameters[0]);
-                filter = this.filterStereotype(filter, (List<String>) parameters[1]);
-                filter = this.filterMandatory(filter,  (Boolean) parameters[3]);
-                filter = this.filterAbstract(filter,   (Boolean) parameters[4]);
-                filter = this.filterFinal(filter,  (Boolean) parameters[5]);
-                filter = this.filterStatic(filter, (Boolean) parameters[6]);
-                filter = this.filterConstructor(filter, (Boolean) parameters[7]);
-                filter = this.filterVisibility(filter, (String) parameters[8]);
-                filter = this.filterGetter(filter, (Boolean) parameters[9]);
-                filter = this.filterSetter(filter, (Boolean) parameters[10]);
-                filter = this.filterOverwritten(filter, (Boolean) parameters[11]);
-                filter = this.filterSpecific(filter, (Boolean) parameters[12]);
-                super.addObjects(this.getList(filter));
+           List filter = filterContext();
+                filter = filterParent(filter, getParent((List<String>) parameters[2]));
+                filter = filterName(filter, (List<String>) parameters[0]);
+                filter = filterStereotype(filter, (List<String>) parameters[1]);
+                filter = filterMandatory(filter,  (Boolean) parameters[3]);
+                filter = filterAbstract(filter,   (Boolean) parameters[4]);
+                filter = filterFinal(filter,  (Boolean) parameters[5]);
+                filter = filterStatic(filter, (Boolean) parameters[6]);
+                filter = filterConstructor(filter, (Boolean) parameters[7]);
+                filter = filterVisibility(filter, (String) parameters[8]);
+                filter = filterGetter(filter, (Boolean) parameters[9]);
+                filter = filterSetter(filter, (Boolean) parameters[10]);
+                filter = filterOverwritten(filter, (Boolean) parameters[11]);
+                filter = filterSpecific(filter, (Boolean) parameters[12]);
+                addObjects(getList(filter));
         return  filter;
     }
     
@@ -93,9 +93,9 @@ public class EvaluationElement extends Evaluation {
      * @return Flag is for All Types.
      */
     protected boolean allTypes() {
-        return this.type.equalsIgnoreCase("") 
-            || this.type.equalsIgnoreCase("element")
-            || this.type.equalsIgnoreCase("elements");
+        return type.equalsIgnoreCase("") 
+            || type.equalsIgnoreCase("element")
+            || type.equalsIgnoreCase("elements");
     }
     
     /**
@@ -103,9 +103,9 @@ public class EvaluationElement extends Evaluation {
      * @return Elements List by Context.
      */
     protected List<Element> getElements() {
-        return this.diagram != null ?
-               this.diagram.getElementsList() : 
-               this.project.getElementsList();
+        return diagram != null ?
+               diagram.getElementsList() : 
+               project.getElementsList();
     }
     
     /**
@@ -113,9 +113,7 @@ public class EvaluationElement extends Evaluation {
      * @return Context List.
      */
     protected List<Element> filterContext() {
-        return this.allTypes() ?
-               this.getElements() :
-               this.filterType(this.getElements());
+        return allTypes() ? getElements() : filterType(getElements());
     }
     
     /**
@@ -126,7 +124,7 @@ public class EvaluationElement extends Evaluation {
     protected List<Element> filterType(List<Element> list) {
         List filter = new ArrayList<>();
         for (Element element : list) {
-            if (element.getType().equalsIgnoreCase(this.type))
+            if (element.getType().equalsIgnoreCase(type))
                filter.add(element);
         }
         return filter;
@@ -139,10 +137,10 @@ public class EvaluationElement extends Evaluation {
      * @return Parent List.
      */
     protected List<Element> filterParent(List<Element> list, String parent) {
-        if (this.type.equalsIgnoreCase("method"))
-            return this.getMethods(list, parent);
-        if (this.type.equalsIgnoreCase("attribute"))
-            return this.getAttributes(list, parent);
+        if (type.equalsIgnoreCase("method"))
+            return getMethods(list, parent);
+        if (type.equalsIgnoreCase("attribute"))
+            return getAttributes(list, parent);
         return list;
     }
     
@@ -153,7 +151,7 @@ public class EvaluationElement extends Evaluation {
      * @return Methods List.
      */
     protected List<Element> getMethods(List<Element> list, String parent) {
-        Entity entity = this.diagram.filterEntityByName(parent);
+        Entity entity = diagram.filterEntityByName(parent);
         if (parent.trim().equals(""))
             return list;
         if (entity == null)
@@ -168,7 +166,7 @@ public class EvaluationElement extends Evaluation {
      * @return Attributes List.
      */
     protected List<Element> getAttributes(List<Element> list, String parent) {
-        Entity entity = this.diagram.filterEntityByName(parent);
+        Entity entity = diagram.filterEntityByName(parent);
         if (parent.trim().equals(""))
             return list;
         if (entity == null)
@@ -183,7 +181,7 @@ public class EvaluationElement extends Evaluation {
      * @return Elements filtered.
      */
     protected List<Element> filterName(List<Element> list, List<String> names) {
-        return this.isVoid(names) ? list : this.getNames(list, names);
+        return isVoid(names) ? list : getNames(list, names);
     }
     
     /**
@@ -208,7 +206,7 @@ public class EvaluationElement extends Evaluation {
      * @return Elements filtered.
      */
     protected List<Element> filterStereotype(List<Element> list, List<String> stereotypes) {
-        return this.isVoid(stereotypes) ? list : this.getStereotypes(list, stereotypes);
+        return isVoid(stereotypes) ? list : getStereotypes(list, stereotypes);
     }
     
     /**
@@ -218,16 +216,16 @@ public class EvaluationElement extends Evaluation {
      * @return Elements Name filtered.
      */
     private List<Element> getStereotypes(List<Element> list, List<String> stereotypes) {
-        List filter = new ArrayList<>();
+        List   filter = new ArrayList<>();
         for (Element element : list) {
-            String links = this.project.getStereotypesString(element);
+            String links = project.getStereotypesString(element);
             for (String stereotype : stereotypes)
                 if (links.contains(stereotype)) {
                     filter.add(element);
                     break;
                 }
         }
-        return  filter;
+        return filter;
     }
     
     /**
@@ -241,10 +239,10 @@ public class EvaluationElement extends Evaluation {
         if (mandatory == null)
             return list;
         for (Element element : list) {
-            if (this.checkMandatory(element, mandatory))
+            if (checkMandatory(element, mandatory))
                 filter.add(element);        
         }
-        return filter;
+        return  filter;
     }
     
     /**
@@ -272,7 +270,7 @@ public class EvaluationElement extends Evaluation {
         if (abstract_ == null)
             return list;
         for (Element element : list) {
-            if (this.checkAbstract(element, abstract_))
+            if (checkAbstract(element, abstract_))
                 filter.add(element);
         }
         return  filter;
@@ -303,7 +301,7 @@ public class EvaluationElement extends Evaluation {
         if (final_ == null)
             return list;
         for (Element element : list) {
-            if (this.checkFinal(element, final_))
+            if (checkFinal(element, final_))
                 filter.add(element);
         }
         return filter;
@@ -332,7 +330,7 @@ public class EvaluationElement extends Evaluation {
         if (static_ == null)
             return list;
         for (Element element : list) {
-            if (this.checkStatic(element, static_))
+            if (checkStatic(element, static_))
                 filter.add(element);
         }
         return filter;
@@ -361,7 +359,7 @@ public class EvaluationElement extends Evaluation {
         if (constructor == null)
             return list;
         for (Element element : list) {
-            if (this.checkConstructor(element, constructor))
+            if (checkConstructor(element, constructor))
                 filter.add(element);
         }
         return filter;
@@ -390,7 +388,7 @@ public class EvaluationElement extends Evaluation {
         if (visibility.equals(""))
             return list;
         for (Element element : list) {
-            if (this.checkVisibility(element, visibility))
+            if (checkVisibility(element, visibility))
                 filter.add(element);
         }
         return filter;
@@ -419,7 +417,7 @@ public class EvaluationElement extends Evaluation {
         if (getter == null)
             return list;
         for (Element element : list) {
-            if (this.checkGetter(element, getter))
+            if (checkGetter(element, getter))
                 filter.add(element);
         }
         return filter;
@@ -448,7 +446,7 @@ public class EvaluationElement extends Evaluation {
         if (setter == null)
             return list;
         for (Element element : list) {
-            if (this.checkSetter(element, setter))
+            if (checkSetter(element, setter))
                 filter.add(element);
         }
         return filter;
@@ -477,7 +475,7 @@ public class EvaluationElement extends Evaluation {
         if (overwritten == null)
             return list;
         for (Element element : list) {
-            if (this.checkOverwritten(element, overwritten))
+            if (checkOverwritten(element, overwritten))
                 filter.add(element);
         }
         return filter;
@@ -506,7 +504,7 @@ public class EvaluationElement extends Evaluation {
         if (specific == null)
             return list;
         for (Element element : list) {
-            if (this.checkSpecific(element, specific))
+            if (checkSpecific(element, specific))
                 filter.add(element);
         }
         return filter;

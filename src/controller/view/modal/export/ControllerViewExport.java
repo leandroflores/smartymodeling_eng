@@ -25,27 +25,27 @@ public abstract class ControllerViewExport extends ControllerViewModal {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.getView().getExportButton().equals(event.getSource()))
-            this.action();
-        else if (this.getView().getCancelButton().equals(event.getSource()))
-            this.getView().dispose();
+        if (getView().getExportButton().equals(event.getSource()))
+            action();
+        else if (getView().getCancelButton().equals(event.getSource()))
+            getView().dispose();
     }
     
     @Override
     public void keyPressed(KeyEvent event) {
         super.keyPressed(event);
         if (F1 == event.getKeyCode())
-            this.action();
+            action();
         else if (F2 == event.getKeyCode())
-            this.getView().dispose();
+            getView().dispose();
     }
     
     /**
      * Method responsible for Exporting.
      */
     private void action() {
-        if (this.check())
-            this.export();
+        if (check())
+            export();
     }
     
     /**
@@ -62,6 +62,6 @@ public abstract class ControllerViewExport extends ControllerViewModal {
     
     @Override
     public ViewExport getView() {
-        return (ViewExport) this.viewModal;
+        return (ViewExport) super.getView();
     }
 }

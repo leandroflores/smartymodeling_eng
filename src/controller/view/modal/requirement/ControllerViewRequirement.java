@@ -3,7 +3,6 @@ package controller.view.modal.requirement;
 import controller.view.modal.ControllerViewModal;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import view.modal.new_.ViewNew;
 import view.modal.requirement.ViewRequirement;
 
 /**
@@ -26,10 +25,10 @@ public abstract class ControllerViewRequirement extends ControllerViewModal {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.getView().getSaveButton().equals(event.getSource()))
-            this.save();
-        else if (this.getView().getCancelButton().equals(event.getSource()))
-            this.getView().dispose();
+        if (getView().getSaveButton().equals(event.getSource()))
+            save();
+        else if (getView().getCancelButton().equals(event.getSource()))
+            getView().dispose();
     }
     
     @Override
@@ -37,10 +36,10 @@ public abstract class ControllerViewRequirement extends ControllerViewModal {
         super.keyPressed(event);
         switch (event.getKeyCode()) {
             case F1:
-                this.save();
+                save();
                 break;
             case F2:
-                this.getView().dispose();
+                getView().dispose();
                 break;
             default:
                 break;
@@ -51,20 +50,20 @@ public abstract class ControllerViewRequirement extends ControllerViewModal {
      * Method responsible for Saving the View.
      */
     public void save() {
-        this.getView().getViewMenu().setSave(false);
-        this.getView().getViewMenu().updatePanelTree();
-        this.getView().dispose();
+        getView().getViewMenu().setSave(false);
+        getView().getViewMenu().updatePanelTree();
+        getView().dispose();
     }
     
     /**
      * Method responsible for closing the View New.
      */
     protected void close() {
-        this.getView().dispose();
+        getView().dispose();
     }
     
     @Override
     public ViewRequirement getView() {
-        return (ViewRequirement) this.viewModal;
+        return (ViewRequirement) super.getView();
     }
 }

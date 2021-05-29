@@ -27,10 +27,10 @@ public abstract class ControllerViewNew extends ControllerViewModal {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.getView().getInsertButton().equals(event.getSource()))
-            this.insert();
-        else if (this.getView().getBackButton().equals(event.getSource()))
-            this.getView().dispose();
+        if (getView().getInsertButton().equals(event.getSource()))
+            insert();
+        else if (getView().getBackButton().equals(event.getSource()))
+            getView().dispose();
     }
     
     @Override
@@ -38,10 +38,10 @@ public abstract class ControllerViewNew extends ControllerViewModal {
         super.keyPressed(event);
         switch (event.getKeyCode()) {
             case F1:
-                this.insert();
+                insert();
                 break;
             case F2:
-                this.getView().dispose();
+                getView().dispose();
                 break;
             default:
                 break;
@@ -52,9 +52,9 @@ public abstract class ControllerViewNew extends ControllerViewModal {
      * Method responsible for Insert a New Object.
      */
     protected void insert() {
-        if (this.check()) {
-            this.new_();
-            this.close();
+        if (check()) {
+            new_();
+            close();
         }
     }
     
@@ -73,9 +73,9 @@ public abstract class ControllerViewNew extends ControllerViewModal {
      * Method responsible for closing the View New.
      */
     protected void close() {
-        this.getView().getViewMenu().setSave(false);
-        this.getView().getViewMenu().update();
-        this.getView().dispose();
+        getView().getViewMenu().setSave(false);
+        getView().getViewMenu().update();
+        getView().dispose();
     }
     
     /**
@@ -83,7 +83,7 @@ public abstract class ControllerViewNew extends ControllerViewModal {
      * @return Panel Tree.
      */
     protected PanelTree getPanelTree() {
-        return this.getViewMenu().getPanelProject().getPanelTree();
+        return getViewMenu().getPanelProject().getPanelTree();
     }
     
     /**
@@ -91,11 +91,11 @@ public abstract class ControllerViewNew extends ControllerViewModal {
      * @return View Menu.
      */
     protected ViewMenu getViewMenu() {
-        return this.getView().getViewMenu();
+        return getView().getViewMenu();
     }
     
     @Override
     public ViewNew getView() {
-        return (ViewNew) this.viewModal;
+        return (ViewNew) super.getView();
     }
 }

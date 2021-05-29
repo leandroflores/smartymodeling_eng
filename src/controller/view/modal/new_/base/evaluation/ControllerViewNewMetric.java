@@ -16,27 +16,27 @@ public class ControllerViewNewMetric extends ControllerViewNew {
 
     /**
      * Default constructor method of Class.
-     * @param viewNew View New Metric.
+     * @param view View New Metric.
      */
-    public ControllerViewNewMetric(ViewNewMetric viewNew) {
-        super(viewNew);
+    public ControllerViewNewMetric(ViewNewMetric view) {
+        super(view);
     }
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseMetric().getNameTextField(),  "Name is required!")
-            && this.check(this.getView().getPanelBaseMetric().getLabelTextField(), "Label is required!")
-            && this.check(this.getView().getPanelBaseOperation().getOperationTextField(), "Operation is required!");
+        return check(getView().getPanelBaseMetric().getNameTextField(),  "Name is required!")
+            && check(getView().getPanelBaseMetric().getLabelTextField(), "Label is required!")
+            && check(getView().getPanelBaseOperation().getOperationTextField(), "Operation is required!");
     }
 
     @Override
     public void new_() {
-        this.getView().getProject().addMetric(this.getView().getMetric());
-        this.getView().getViewMenu().setTabIndex(5);
+        getView().getProject().addMetric(getView().getMetric());
+        getView().getViewMenu().setTabIndex(5);
     }
     
     @Override
     public ViewNewMetric getView() {
-        return (ViewNewMetric) this.viewModal;
+        return (ViewNewMetric) super.getView();
     }
 }

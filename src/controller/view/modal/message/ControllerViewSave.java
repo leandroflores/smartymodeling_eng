@@ -7,14 +7,13 @@ import view.modal.message.ViewSave;
 
 /**
  * <p>Class of Controller <b>ControllerViewSave</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from <b>ViewSave</b> in SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>ViewSave</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    controller.view.modal.ControllerViewModal
  * @see    view.modal.message.ViewSave
  */
 public class ControllerViewSave extends ControllerViewModal {
-    private final ViewSave viewSave;
     
     /**
      * Default constructor method of Class.
@@ -22,58 +21,63 @@ public class ControllerViewSave extends ControllerViewModal {
      */
     public ControllerViewSave(ViewSave view) {
         super(view);
-        this.viewSave = view;
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.viewSave.getButtonYes().equals(event.getSource()))
-            this.save();
-        else if (this.viewSave.getButtonNo().equals(event.getSource()))
-            this.nextOperation();
-        else if (this.viewSave.getButtonBack().equals(event.getSource()))
-            this.viewSave.dispose();
+        if (getView().getButtonYes().equals(event.getSource()))
+            save();
+        else if (getView().getButtonNo().equals(event.getSource()))
+            nextOperation();
+        else if (getView().getButtonBack().equals(event.getSource()))
+            getView().dispose();
     }
     
     @Override
     public void keyPressed(KeyEvent event) {
         super.keyPressed(event);
         if (ENTER == event.getKeyCode())
-            this.viewSave.dispose();
+            getView().dispose();
     }
     
     /**
      * Method responsible for Saving the Project.
      */
     private void save() {
-        this.viewSave.getViewMenu().getController().exportProject();
-        this.nextOperation();
+        getView().getViewMenu().getController().exportProject();
+        nextOperation();
     }
     
     /**
      * Method responsible for forwarding the next operation.
      */
     private void nextOperation() {
-        if (null != this.viewSave.getCode())
-            switch (this.viewSave.getCode()) {
-            case 1:
-                this.viewSave.getViewMenu().getController().createNewProject();
-                this.viewSave.dispose();
-                break;
-            case 2:
-                this.viewSave.getViewMenu().getController().openProject();
-                this.viewSave.dispose();
-                break;
-            case 3:
-                this.viewSave.getViewMenu().getController().closeProject();
-                this.viewSave.dispose();
-                break;
-            case 4:
-                this.viewSave.getViewMenu().dispose();
-                this.viewSave.dispose();
-                break;
-            default:
-                break;
+        if (null != getView().getCode()) { 
+            switch (getView().getCode()) {
+                case 1:
+                    getView().getViewMenu().getController().createNewProject();
+                    getView().dispose();
+                    break;
+                case 2:
+                    getView().getViewMenu().getController().openProject();
+                    getView().dispose();
+                    break;
+                case 3:
+                    getView().getViewMenu().getController().closeProject();
+                    getView().dispose();
+                    break;
+                case 4:
+                    getView().getViewMenu().dispose();
+                    getView().dispose();
+                    break;
+                default:
+                    break;
+            }
         }
+    }
+    
+    @Override
+    public ViewSave getView() {
+        return (ViewSave) super.getView();
     }
 }

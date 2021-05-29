@@ -21,28 +21,28 @@ public class ControllerViewNewVariability extends ControllerViewNew implements C
 
     /**
      * Default constructor method of Class.
-     * @param viewNew View New Variability.
+     * @param view View New Variability.
      */
-    public ControllerViewNewVariability(ViewNewVariability viewNew) {
-        super(viewNew);
+    public ControllerViewNewVariability(ViewNewVariability view) {
+        super(view);
     }
 
     @Override
     public void stateChanged(ChangeEvent event) {
         if (event.getSource() instanceof JTabbedPane) {
             if (((JTabbedPane) event.getSource()).getSelectedIndex() == 0) {
-                this.getView().getPanelBaseVariability().updateUI();
+                getView().getPanelBaseVariability().updateUI();
             }else {
-                this.getView().getPanelBaseVariants().updateVariantsList();
-                this.getView().getPanelBaseVariants().updateValues();
+                getView().getPanelBaseVariants().updateVariantsList();
+                getView().getPanelBaseVariants().updateValues();
             }
         }
     }
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseVariability().getNameTextField(), "Name is required!")
-            && this.checkVariants();
+        return check(getView().getPanelBaseVariability().getNameTextField(), "Name is required!")
+            && checkVariants();
     }
     
     /**
@@ -50,8 +50,8 @@ public class ControllerViewNewVariability extends ControllerViewNew implements C
      * @return Variants are checkeds.
      */
     public boolean checkVariants() {
-        if (this.getView().getVariability().getVariants().isEmpty()) {
-            new ViewError(this.getView(), "Add some Variant!").setVisible(true);
+        if (getView().getVariability().getVariants().isEmpty()) {
+            new ViewError(getView(), "Add some Variant!").setVisible(true);
             return false;
         }
         return true;
@@ -59,13 +59,13 @@ public class ControllerViewNewVariability extends ControllerViewNew implements C
 
     @Override
     public void new_() {
-        this.getView().getDiagram().addVariability(this.getView().getVariability());
-        this.getView().getViewMenu().setTabIndex(2);
-        this.getView().getDiagram().updateElementsStereotype();
+        getView().getDiagram().addVariability(getView().getVariability());
+        getView().getViewMenu().setTabIndex(2);
+        getView().getDiagram().updateElementsStereotype();
     }
     
     @Override
     public ViewNewVariability getView() {
-        return (ViewNewVariability) this.viewModal;
+        return (ViewNewVariability) super.getView();
     }
 }

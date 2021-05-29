@@ -16,26 +16,26 @@ public class ControllerViewNewRequirement extends ControllerViewNew {
 
     /**
      * Default constructor method of Class.
-     * @param viewNew View New Requirement.
+     * @param view View New Requirement.
      */
-    public ControllerViewNewRequirement(ViewNewRequirement viewNew) {
-        super(viewNew);
+    public ControllerViewNewRequirement(ViewNewRequirement view) {
+        super(view);
     }
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseRequirement().getCodeTextField(), "Id is required!")
-            && this.check(this.getView().getPanelBaseRequirement().getNameTextField(), "Name is required!");
+        return check(getView().getPanelBaseRequirement().getCodeTextField(), "Id is required!")
+            && check(getView().getPanelBaseRequirement().getNameTextField(), "Name is required!");
     }
 
     @Override
     public void new_() {
-        this.getView().getProject().addRequirement(this.getView().getRequirement());
-        this.getView().getViewMenu().setTabIndex(0);
+        getView().getProject().addRequirement(getView().getRequirement());
+        getView().getViewMenu().setTabIndex(0);
     }
     
     @Override
     public ViewNewRequirement getView() {
-        return (ViewNewRequirement) this.viewModal;
+        return (ViewNewRequirement) super.getView();
     }
 }

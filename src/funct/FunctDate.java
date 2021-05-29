@@ -9,7 +9,7 @@ import java.util.Date;
  * <p>Class of Functions <b>FunctDate</b>.</p>
  * <p>Class responsible for operations involving <b>Dates</b> and <b>Hours</b>.</p>
  * @author Leandro
- * @since  14/01/2019
+ * @since  2019-01-14
  * @see    java.util.Date
  * @see    java.sql.Time
  */
@@ -33,7 +33,7 @@ public class FunctDate {
      * @return System Current Formatted Date.
      */
     public String getCurrentFormattedDate() {
-        return this.getFormattedDate(this.getCurrentDate());
+        return getFormattedDate(getCurrentDate());
     }
     
     /**
@@ -41,7 +41,7 @@ public class FunctDate {
      * @return System Current US Formatted Date.
      */
     public String getCurrentUSFormattedDate() {
-        return this.getFormattedUSDate(this.getCurrentDate());
+        return getFormattedUSDate(getCurrentDate());
     }
     
     /**
@@ -49,7 +49,7 @@ public class FunctDate {
      * @return System Current Time.
      */
     public Time getCurrentTime() {
-        return new Time(this.getCurrentDate().getTime());
+        return new Time(getCurrentDate().getTime());
     }
     
     /**
@@ -160,8 +160,8 @@ public class FunctDate {
      * @return String with written Date.
      */
     public String getDateName(Date date) {
-        String string  = this.getDayName(date.getDay()) + ", ";
-               string += this.getMonthName(date.getMonth()) + " ";
+        String string  = getDayName(date.getDay()) + ", ";
+               string += getMonthName(date.getMonth()) + " ";
                string += date.getDate() + " ";
                string += date.getYear();
         return string;
@@ -194,8 +194,8 @@ public class FunctDate {
      * @return Current Information.
      */
     public String getCurrentInformation() {
-        return this.getFormattedDate(new Date()).replace("/", "-") 
+        return getFormattedDate(new Date()).replace("/", "-") 
              + "-"
-             + this.getCurrentTime().toString().replace(":", "-");
+             + getCurrentTime().toString().replace(":", "-");
     }
 }

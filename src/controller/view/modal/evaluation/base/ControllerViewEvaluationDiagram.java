@@ -24,16 +24,16 @@ public class ControllerViewEvaluationDiagram extends ControllerViewEvaluation {
     
     @Override
     public void refresh() {
-        this.getView().getPanelEvaluationDiagram().getController().update();
+        getView().getPanelEvaluationDiagram().getController().update();
     }
 
     @Override
     public void clear() {
-        this.getView().getPanelEvaluationDiagram().clear();
+        getView().getPanelEvaluationDiagram().clear();
     }
     
     @Override
     public ViewEvaluationDiagram getView() {
-        return (ViewEvaluationDiagram) this.viewModal;
+        return (ViewEvaluationDiagram) super.getView();
     }
 }

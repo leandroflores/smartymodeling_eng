@@ -7,10 +7,11 @@ import java.util.List;
 import model.structural.base.Project;
 
 /**
- * <p>Class of EvaluationBase <b>EvaluationBase</b>.</p>
- * <p>Class responsible for operations involving <b>Base Evaluations</b> in the SMartyModeling.</p>
+ * <p>Class of Funct <b>EvaluationBase</b>.</p>
+ * <p>Class responsible for defining the <b>Evaluation Base</b> in the SMartyModeling.</p>
  * @author Leandro
- * @since  2010-04-28
+ * @since  2020-04-28
+ * @see    funct.evaluation.Evaluation
  * @see    model.structural.base.Project
  */
 public abstract class EvaluationBase extends Evaluation {
@@ -22,7 +23,7 @@ public abstract class EvaluationBase extends Evaluation {
      */
     public EvaluationBase(Project project) {
         super(project);
-        this.result = new ArrayList<>();
+        result = new ArrayList<>();
     }
     
     /**
@@ -34,7 +35,7 @@ public abstract class EvaluationBase extends Evaluation {
      */
     public Double getValue(Evaluation evaluation, String keyword, String filter) {
         Double value = evaluation.getClauseValue(keyword, filter);
-        this.addResult(evaluation.getObjects());
+        addResult(evaluation.getObjects());
         return value;
     }
     
@@ -95,7 +96,7 @@ public abstract class EvaluationBase extends Evaluation {
      * @param list Objects List.
      */
     protected void addResult(List list) {
-        this.result.addAll(new ArrayList<>(list));
+        result.addAll(new ArrayList<>(list));
     }
     
     /**
@@ -103,6 +104,6 @@ public abstract class EvaluationBase extends Evaluation {
      * @return Objects List.
      */
     public List<Object> getResult() {
-        return this.result;
+        return result;
     }
 }

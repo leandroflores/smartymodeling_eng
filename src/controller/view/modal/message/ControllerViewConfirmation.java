@@ -7,14 +7,13 @@ import view.modal.message.ViewConfirmation;
 
 /**
  * <p>Class of Controller <b>ControllerViewConfirmation</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewConfirmation</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>ViewConfirmation</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    controller.view.modal.ControllerViewModal
  * @see    view.modal.message.ViewConfirmation
  */
 public class ControllerViewConfirmation extends ControllerViewModal {
-    private final ViewConfirmation viewConfirmation;
     
     /**
      * Default constructor method of Class.
@@ -22,23 +21,27 @@ public class ControllerViewConfirmation extends ControllerViewModal {
      */
     public ControllerViewConfirmation(ViewConfirmation view) {
         super(view);
-        this.viewConfirmation = view;
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.viewConfirmation.getButtonYes().equals(event.getSource()))
-            this.viewConfirmation.getView().operation();
-        else if (this.viewConfirmation.getButtonNo().equals(event.getSource()))
-            this.viewConfirmation.dispose();
-        else if (this.viewConfirmation.getButtonBack().equals(event.getSource()))
-            this.viewConfirmation.dispose();
+        if (getView().getButtonYes().equals(event.getSource()))
+            getView().getView().operation();
+        else if (getView().getButtonNo().equals(event.getSource()))
+            getView().dispose();
+        else if (getView().getButtonBack().equals(event.getSource()))
+            getView().dispose();
     }
     
     @Override
     public void keyPressed(KeyEvent event) {
         super.keyPressed(event);
         if (ENTER == event.getKeyCode())
-            this.viewConfirmation.dispose();
+            getView().dispose();
+    }
+    
+    @Override
+    public ViewConfirmation getView() {
+        return (ViewConfirmation) super.getView();
     }
 }

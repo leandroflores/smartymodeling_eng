@@ -9,7 +9,7 @@ import view.modal.requirement.base.ViewRequirementTraceability;
  * @author Leandro
  * @since  2020-04-27
  * @see    controller.view.modal.requirement.ControllerViewRequirement
- * @see    view.modal.requirement.base.ViewRequirementMatrix
+ * @see    view.modal.requirement.base.ViewRequirementTraceability
  */
 public class ControllerViewRequirementTraceability extends ControllerViewRequirement {
     

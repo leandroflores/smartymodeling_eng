@@ -7,7 +7,7 @@ import javax.script.ScriptException;
 import model.structural.base.Project;
 
 /**
- * <p>Class of Evaluation <b>Evaluation</b>.</p>
+ * <p>Class of Funct <b>Evaluation</b>.</p>
  * <p>Class responsible for operations involving <b>Evaluation</b> and <b>Measures</b>.</p>
  * @author Leandro
  * @since  2019-09-02
@@ -19,11 +19,11 @@ public abstract class Evaluation {
     
     /**
      * Default constructor method of Class.
-     * @param project Project.
+     * @param project_ Project.
      */
-    public Evaluation(Project project) {
-        this.project = project;
-        this.objects = new ArrayList<>();
+    public Evaluation(Project project_) {
+        project = project_;
+        objects = new ArrayList<>();
     }
     
     /**
@@ -31,8 +31,8 @@ public abstract class Evaluation {
      * @param list Objects List.
      */
     protected void addObjects(List list) {
-        this.objects.addAll(new ArrayList<>(list));
-        this.objects.add("\n");
+        objects.addAll(new ArrayList<>(list));
+        objects.add("\n");
     }
     
     /**
@@ -53,13 +53,13 @@ public abstract class Evaluation {
      */
     public String getExpression(String expression) {
         String toReturn = "";
-        if (this.checkToken(expression, "(", ")")) {
+        if (checkToken(expression, "(", ")")) {
             for (int i = 0; i < expression.length(); i++) {
-                if (this.checkCharacter(expression.charAt(i))) {
+                if (checkCharacter(expression.charAt(i))) {
                     toReturn += expression.charAt(i);
                 }else {
                     String valor  = expression.substring(i, expression.indexOf(")", i) + 1);
-                        toReturn += this.getClauseValue(valor);
+                        toReturn += getClauseValue(valor);
                                i  = expression.indexOf(")", i);
                 }
             }
@@ -97,7 +97,7 @@ public abstract class Evaluation {
      * @return Clause Value.
      */
     protected Double getClauseValue(String clause) {
-        return this.getClauseValue(this.getKeyword(clause), this.getFilter(clause));
+        return getClauseValue(getKeyword(clause), getFilter(clause));
     }
     
     /**
@@ -144,19 +144,19 @@ public abstract class Evaluation {
      */
     protected Object[] getElementFilters(String filter) {
         Object[] filters     = new Object[13];
-                 filters[0]  = this.getParameters(filter, "[", "]");
-                 filters[1]  = this.getParameters(filter, "<", ">");
-                 filters[2]  = this.getParameters(filter, "{", "}");
-                 filters[3]  = this.getMandatory(filter);
-                 filters[4]  = this.getAbstract(filter);
-                 filters[5]  = this.getFinal(filter);
-                 filters[6]  = this.getStatic(filter);
-                 filters[7]  = this.getConstructor(filter);
-                 filters[8]  = this.getVisibility(filter);
-                 filters[9]  = this.getGetter(filter);
-                 filters[10] = this.getSetter(filter);
-                 filters[11] = this.getOverwritten(filter);
-                 filters[12] = this.getSpecific(filter);
+                 filters[0]  = getParameters(filter, "[", "]");
+                 filters[1]  = getParameters(filter, "<", ">");
+                 filters[2]  = getParameters(filter, "{", "}");
+                 filters[3]  = getMandatory(filter);
+                 filters[4]  = getAbstract(filter);
+                 filters[5]  = getFinal(filter);
+                 filters[6]  = getStatic(filter);
+                 filters[7]  = getConstructor(filter);
+                 filters[8]  = getVisibility(filter);
+                 filters[9]  = getGetter(filter);
+                 filters[10] = getSetter(filter);
+                 filters[11] = getOverwritten(filter);
+                 filters[12] = getSpecific(filter);
         return   filters;
     }
     
@@ -167,9 +167,9 @@ public abstract class Evaluation {
      */
     protected Object[] getAssociationFilters(String filter) {
         Object[] filters    = new Object[3];
-                 filters[0] = this.getParameters(filter, "[", "]");
-                 filters[1] = this.getParameters(filter, "{", "}");
-                 filters[2] = this.getParameters(filter, "<", ">");
+                 filters[0] = getParameters(filter, "[", "]");
+                 filters[1] = getParameters(filter, "{", "}");
+                 filters[2] = getParameters(filter, "<", ">");
         return   filters;
     }
     
@@ -180,8 +180,8 @@ public abstract class Evaluation {
      */
     protected Object[] getArtifactFilters(String filter) {
         Object[] filters    = new Object[2];
-                 filters[0] = this.getParameters(filter, "{", "}");
-                 filters[1] = this.getParameters(filter, "[", "]");
+                 filters[0] = getParameters(filter, "{", "}");
+                 filters[1] = getParameters(filter, "[", "]");
         return   filters;
     }
     
@@ -192,10 +192,10 @@ public abstract class Evaluation {
      */
     protected Object[] getVariabilityFilters(String filter) {
         Object[] filters    = new Object[4];
-                 filters[0] = this.getParameters(filter, "[", "]");
-                 filters[1] = this.getParameters(filter, "{", "}");
-                 filters[2] = this.getParameters(filter, "<", ">");
-                 filters[3] = this.getConstraint(filter);
+                 filters[0] = getParameters(filter, "[", "]");
+                 filters[1] = getParameters(filter, "{", "}");
+                 filters[2] = getParameters(filter, "<", ">");
+                 filters[3] = getConstraint(filter);
         return   filters;
     }
     
@@ -220,7 +220,7 @@ public abstract class Evaluation {
      * @return New Filter.
      */
     protected String clearToken(String filter, String begin, String end) {
-        if (this.checkToken(filter, begin, end))
+        if (checkToken(filter, begin, end))
             return filter.substring(0, filter.indexOf(begin)) + filter.substring(filter.indexOf(end) + 1);
         return filter;
     }
@@ -233,12 +233,12 @@ public abstract class Evaluation {
      * @return Parameters List.
      */
     protected List<String> getParameters(String filter, String begin, String end) {
-        if (!this.checkToken(filter, begin, end))
+        if (!checkToken(filter, begin, end))
             return new ArrayList<>();
         List   list = new ArrayList<>();
         for (String nome : filter.substring(filter.indexOf(begin) + 1, filter.indexOf(end)).split(","))
                list.add(nome.trim());
-        this.clearToken(filter, begin, end);
+        clearToken(filter, begin, end);
         return list;
     }
     
@@ -408,7 +408,7 @@ public abstract class Evaluation {
      * @throws ScriptException Expression Error.
      */
     public Double getFinalValue(String expression) throws ScriptException {
-        return this.getValue(this.getExpression(expression));
+        return getValue(getExpression(expression));
     }
     
     /**
@@ -416,6 +416,6 @@ public abstract class Evaluation {
      * @return Objects List.
      */
     public List<Object> getObjects() {
-        return this.objects;
+        return objects;
     }
 }

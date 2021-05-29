@@ -30,9 +30,9 @@ public class ControllerViewExportDiagramCode extends ControllerViewExport {
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelExportDiagramCode().getDirectoryTextField(), "Select a Directory!")
-            && this.check(this.getView().getPanelExportDiagramCode().getNameTextField(), "Name is required!")
-            && this.checkDiagram();
+        return check(getView().getPanelExportDiagramCode().getDirectoryTextField(), "Select a Directory!")
+            && check(getView().getPanelExportDiagramCode().getNameTextField(), "Name is required!")
+            && checkDiagram();
     }
     
     /**
@@ -40,8 +40,8 @@ public class ControllerViewExportDiagramCode extends ControllerViewExport {
      * @return Diagram is selected.
      */
     private boolean checkDiagram() {
-        if (this.getView().getPanelExportDiagramCode().getDiagram() == null) {
-            new ViewError(this.getView(), "Select a Class Diagram!").setVisible(true);
+        if (getView().getPanelExportDiagramCode().getDiagram() == null) {
+            new ViewError(getView(), "Select a Class Diagram!").setVisible(true);
             return false;
         }
         return true;
@@ -49,19 +49,19 @@ public class ControllerViewExportDiagramCode extends ControllerViewExport {
     
     @Override
     public void export() {
-        String  path    = this.getView().getPanelExportDiagramCode().getDirectoryTextField().getText().trim();
-        Diagram diagram = this.getView().getPanelExportDiagramCode().getDiagram();
-        String  name    = this.getView().getPanelExportDiagramCode().getNameTextField().getText().trim();
+        String  path    = getView().getPanelExportDiagramCode().getDirectoryTextField().getText().trim();
+        Diagram diagram = getView().getPanelExportDiagramCode().getDiagram();
+        String  name    = getView().getPanelExportDiagramCode().getNameTextField().getText().trim();
         try {
             new ExportDiagram(path, name, (ClassDiagram) diagram).export();
         } catch (IOException exception) {
-            new ViewError(this.getView(), "Error to Export the Code Diagram!").setVisible(true);
+            new ViewError(getView(), "Error to Export the Code Diagram!").setVisible(true);
         }
-        this.getView().dispose();
+        getView().dispose();
     }
     
     @Override
     public ViewExportDiagramCode getView() {
-        return (ViewExportDiagramCode) this.viewModal;
+        return (ViewExportDiagramCode) super.getView();
     }
 }

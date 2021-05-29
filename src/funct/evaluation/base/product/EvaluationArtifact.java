@@ -8,7 +8,7 @@ import model.structural.base.product.Artifact;
 import model.structural.base.product.Product;
 
 /**
- * <p>Class of Evaluation <b>EvaluationArtifact</b>.</p>
+ * <p>Class of Funct <b>EvaluationArtifact</b>.</p>
  * <p>Class responsible for <b>Evaluate</b> the <b>Artifact</b> in the SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-01
@@ -26,22 +26,22 @@ public class EvaluationArtifact extends Evaluation {
      */
     public EvaluationArtifact(Project project) {
         super(project);
-        this.product = null;
+        product = null;
     }
     
     /**
      * Alternative constructor method of Class.
      * @param project Project.
-     * @param product Product.
+     * @param product_ Product.
      */
-    public EvaluationArtifact(Project project, Product product) {
+    public EvaluationArtifact(Project project, Product product_) {
         super(project);
-        this.product = product;
+        product = product_;
     }
     
     @Override
     public Double getClauseValue(String keyword, String filter) {
-        List   list = this.filter(this.getArtifactFilters(filter));
+        List   list = filter(getArtifactFilters(filter));
         String size = Integer.toString(list.size());
         return Double.parseDouble(size);
     }
@@ -52,10 +52,10 @@ public class EvaluationArtifact extends Evaluation {
      * @return Artifacts filtered.
      */
     public List filter(Object[] parameters) {
-           List filter = this.filterContext();
-                filter = this.filterType(filter, (List<String>) parameters[0]);
-                filter = this.filterName(filter, (List<String>) parameters[1]);
-                this.addObjects(this.getList(filter));
+           List filter = filterContext();
+                filter = filterType(filter, (List<String>) parameters[0]);
+                filter = filterName(filter, (List<String>) parameters[1]);
+                addObjects(getList(filter));
         return  filter;
     }
     
@@ -64,9 +64,7 @@ public class EvaluationArtifact extends Evaluation {
      * @return Artifacts List by Context.
      */
     protected List<Artifact> filterContext() {
-        return this.product != null ?
-               this.product.getArtifactsList() :
-               this.project.getArtifactsList();
+        return product != null ? product.getArtifactsList() : project.getArtifactsList();
     }
     
     /**
@@ -76,7 +74,7 @@ public class EvaluationArtifact extends Evaluation {
      * @return Artifacts filtered by Types List.
      */
     protected List<Artifact> filterType(List<Artifact> list, List<String> types) {
-        return this.isVoid(types) ? list : this.selectTypes(list, types);
+        return isVoid(types) ? list : selectTypes(list, types);
     }
     
     /**
@@ -101,7 +99,7 @@ public class EvaluationArtifact extends Evaluation {
      * @return Artifacts filtered by Names List.
      */
     protected List<Artifact> filterName(List<Artifact> list, List<String> names) {
-        return this.isVoid(names) ? list : this.selectNames(list, names);
+        return isVoid(names) ? list : selectNames(list, names);
     }
     
     /**

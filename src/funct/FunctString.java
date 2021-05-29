@@ -10,7 +10,7 @@ import java.util.List;
  * <p>Class of Functions <b>FunctString</b>.</p>
  * <p>Class responsible for operations involving <b>Strings</b>.</p>
  * @author Leandro
- * @since  14/01/2019
+ * @since  2019-01-14
  */
 public class FunctString {
     
@@ -53,7 +53,7 @@ public class FunctString {
      * @return String containing spaces.
      */
     public String getSpaces(int size) {
-        return this.getString(' ', size);
+        return getString(' ', size);
     }
     
     /**
@@ -65,9 +65,7 @@ public class FunctString {
     public String toRight(String string, int size) {
         if (string.length() > size) 
             return string;
-        String right  = this.getSpaces(size - string.length());
-               right += string;
-        return right;
+        return getSpaces(size - string.length()) + string;
     }
     
     /**
@@ -79,9 +77,7 @@ public class FunctString {
     public String toLeft(String string, int size) {
         if (string.length() > size) 
             return string;
-        String left  = string;
-               left += this.getSpaces(size - string.length());
-        return left;
+        return string + getSpaces(size - string.length());
     }
     
     /**
@@ -91,12 +87,10 @@ public class FunctString {
      * @return String center aligned.
      */
     public String toCenter(String string, int size) {
+        String gap = getSpaces((size - string.length()) / 2);
         if (string.length() > size) 
             return string;
-        String center  = this.getSpaces((size - string.length()) / 2);
-               center += string;
-               center += this.getSpaces((size - string.length()) / 2);
-        return center;
+        return gap + string + gap;
     }
     
     /**
@@ -105,13 +99,13 @@ public class FunctString {
      * @param  character Character.
      * @return Frequency of Character in a String.
      */
-    public int countChar(String string, char character) {
-        int cont = 0;
+    public Integer countChar(String string, char character) {
+        Integer count = 0;
         for (int i = 0; i < string.length(); i++) {
             if (string.charAt(i) == character)
-                cont += 1;
+                count += 1;
         }
-        return cont;
+        return count;
     }
     
     /**
@@ -136,9 +130,7 @@ public class FunctString {
             return "";
         if (string.length() == 1) 
             return string.toUpperCase();
-        String initUpper  = string.substring(0, 1).toUpperCase();
-               initUpper += string.substring(1).toLowerCase();
-        return initUpper;
+        return string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
     }
     
     /**
@@ -148,9 +140,9 @@ public class FunctString {
      */
     public String getInitUpperCase(String string) {
         String   initUpper = "";
-        String[] words     = string.split(" ");
-        for (int i = 0; i < words.length; ++i)
-                 initUpper += this.initUpperCase(words[i]) + " ";
+        String[] wordsList = string.split(" ");
+        for (int i = 0; i < wordsList.length; ++i)
+                 initUpper += initUpperCase(wordsList[i]) + " ";
         return   initUpper.trim();
     }
     
@@ -175,7 +167,7 @@ public class FunctString {
     public String removeSpecialChars(String string) {
         String newString  = "";
         for (int i = 0; i < string.length(); i++)
-               newString += this.replaceChar(string.charAt(i));
+               newString += replaceChar(string.charAt(i));
         return newString;
     }
     

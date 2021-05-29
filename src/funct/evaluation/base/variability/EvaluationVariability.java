@@ -9,7 +9,7 @@ import model.structural.base.Project;
 import model.structural.base.variability.Variability;
 
 /**
- * <p>Class of Evaluation <b>EvaluationVariability</b>.</p>
+ * <p>Class of Funct <b>EvaluationVariability</b>.</p>
  * <p>Class responsible for <b>Evaluate</b> the <b>Variability</b> in the SMartyModeling.</p>
  * @author Leandro
  * @since  2020-03-31
@@ -25,28 +25,28 @@ public class EvaluationVariability extends Evaluation {
     /**
      * Default constructor method of Class.
      * @param project Project.
-     * @param type Variabilty Type.
+     * @param type_ Variabilty Type.
      */
-    public EvaluationVariability(Project project, String type) {
+    public EvaluationVariability(Project project, String type_) {
         super(project);
-        this.diagram = null;
-        this.type    = type;
+        diagram = null;
+        type    = type_;
     }
     
     /**
      * Alternative constructor method of Class.
-     * @param diagram Diagram.
-     * @param type Variabilty Type.
+     * @param diagram_ Diagram.
+     * @param type_ Variabilty Type.
      */
-    public EvaluationVariability(Diagram diagram, String type) {
-        super(diagram.getProject());
-        this.diagram = diagram;
-        this.type    = type;
+    public EvaluationVariability(Diagram diagram_, String type_) {
+        super(diagram_.getProject());
+        diagram = diagram_;
+        type    = type_;
     }
     
     @Override
     public Double getClauseValue(String keyword, String filter) {
-        List   list = this.filter(keyword, this.getVariabilityFilters(filter));
+        List   list = filter(keyword, getVariabilityFilters(filter));
         String size = Integer.toString(list.size());
         return Double.parseDouble(size);
     }
@@ -58,11 +58,11 @@ public class EvaluationVariability extends Evaluation {
      * @return Variants filtered.
      */
     public List filter(String keyword, Object[] parameters) {
-           List filter = this.filterContext();
-                filter = this.filterName(filter, (List<String>) parameters[0]);
-                filter = this.filterConstraint(filter, (String) parameters[3]);
-                filter = this.filterElements(filter, keyword);
-                super.addObjects(this.getList(filter, keyword));
+           List filter = filterContext();
+                filter = filterName(filter, (List<String>) parameters[0]);
+                filter = filterConstraint(filter, (String) parameters[3]);
+                filter = filterElements(filter, keyword);
+                addObjects(getList(filter, keyword));
         return  filter;
     }
     
@@ -71,9 +71,7 @@ public class EvaluationVariability extends Evaluation {
      * @return Variabilities List by Context.
      */
     protected List getVariabilities() {
-        return this.diagram != null ?
-               this.diagram.getVariabilitiesList(): 
-               this.project.getVariabilitiesList();
+        return diagram != null ? diagram.getVariabilitiesList() : project.getVariabilitiesList();
     }
     
     /**
@@ -81,7 +79,7 @@ public class EvaluationVariability extends Evaluation {
      * @return Variabilities Context.
      */
     protected List filterContext() {
-        return this.getVariabilities();
+        return getVariabilities();
     }
     
     /**
@@ -91,7 +89,7 @@ public class EvaluationVariability extends Evaluation {
      * @return Variants filtered.
      */
     protected List filterName(List list, List names) {
-        return this.isVoid(names) ? list : this.getNames(list, names);
+        return isVoid(names) ? list : getNames(list, names);
     }
     
     /**
@@ -153,8 +151,8 @@ public class EvaluationVariability extends Evaluation {
      */
     private List getList(List filter, String keyword) {
         if (keyword.equalsIgnoreCase("variability"))
-            return this.getVariabilitiesList(filter);
-        return this.getElementsList(filter);
+            return getVariabilitiesList(filter);
+        return getElementsList(filter);
     }
     
     /**

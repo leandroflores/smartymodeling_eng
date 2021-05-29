@@ -7,14 +7,13 @@ import view.modal.system.ViewSystemInformation;
 
 /**
  * <p>Class of Controller <b>ControllerViewSystemInformation</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewSystemInformation</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>ViewSystemInformation</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  23/05/2019
+ * @since  2019-05-23
  * @see    controller.view.modal.ControllerViewModal
  * @see    view.modal.system.ViewSystemInformation
  */
 public class ControllerViewSystemInformation extends ControllerViewModal {
-    private final ViewSystemInformation viewSistemaInformation;
     
     /**
      * Default constructor method of Class.
@@ -22,21 +21,25 @@ public class ControllerViewSystemInformation extends ControllerViewModal {
      */
     public ControllerViewSystemInformation(ViewSystemInformation view) {
         super(view);
-        this.viewSistemaInformation = view;
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.viewSistemaInformation.getButtonOk().equals(event.getSource()))
-            this.viewSistemaInformation.dispose();
+        if (getView().getButtonOk().equals(event.getSource()))
+            getView().dispose();
     }
     
     @Override
     public void keyPressed(KeyEvent event) {
         super.keyPressed(event);
         if (ENTER == event.getKeyCode()) {
-            if (this.viewSistemaInformation.getFocusOwner().equals(this.viewSistemaInformation.getButtonOk()))
-                this.viewSistemaInformation.dispose();
+            if (getView().getFocusOwner().equals(getView().getButtonOk()))
+                getView().dispose();
         }
+    }
+    
+    @Override
+    public ViewSystemInformation getView() {
+        return (ViewSystemInformation) super.getView();
     }
 }

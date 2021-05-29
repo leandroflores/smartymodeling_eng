@@ -5,7 +5,7 @@ import view.modal.new_.base.product.ViewNewProduct;
 
 /**
  * <p>Class of Controller <b>ControllerViewNewProduct</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>ViewNewProduct</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>ViewNewProduct</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-10-09
  * @see    controller.view.modal.new_.ControllerViewNew
@@ -16,26 +16,26 @@ public class ControllerViewNewProduct extends ControllerViewNew {
 
     /**
      * Default constructor method of Class.
-     * @param viewNew View New Product.
+     * @param view View New Product.
      */
-    public ControllerViewNewProduct(ViewNewProduct viewNew) {
-        super(viewNew);
+    public ControllerViewNewProduct(ViewNewProduct view) {
+        super(view);
     }
     
     @Override
     public boolean check() {
-        return this.check(this.getView().getPanelBaseProduct().getNameTextField(), "Name is required!")
-            && this.check(this.getView().getPanelBaseProduct().getVersionTextField(), "Version is required!");
+        return check(getView().getPanelBaseProduct().getNameTextField(), "Name is required!")
+            && check(getView().getPanelBaseProduct().getVersionTextField(), "Version is required!");
     }
 
     @Override
     public void new_() {
-        this.getView().getProject().addProduct(this.getView().getProduct());
-        this.getView().getViewMenu().setTabIndex(4);
+        getView().getProject().addProduct(getView().getProduct());
+        getView().getViewMenu().setTabIndex(4);
     }
     
     @Override
     public ViewNewProduct getView() {
-        return (ViewNewProduct) this.viewModal;
+        return (ViewNewProduct) super.getView();
     }
 }
