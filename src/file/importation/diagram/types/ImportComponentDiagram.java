@@ -10,7 +10,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- * <p>Class of Import <b>ImportComponentDiagram</b>.</p>
+ * <p>Class of File <b>ImportComponentDiagram</b>.</p>
  * <p>Class responsible for <b>Importing Component Diagram</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  2019-07-20
@@ -21,60 +21,60 @@ public class ImportComponentDiagram extends ImportDiagram {
     
     /**
      * Default constructor method of Class.
-     * @param project Project.
-     * @param element W3C Element.
+     * @param project_ Project.
+     * @param element_ W3C Element.
      */
-    public ImportComponentDiagram(Project project, Element element) {
-        this.diagram = new ComponentDiagram(project, element);
-        this.element = element;
+    public ImportComponentDiagram(Project project_, Element element_) {
+        diagram = new ComponentDiagram(project_, element_);
+        element = element_;
     }
     
     @Override
     protected void importElements() {
-        this.importComponents();
-        this.importInterfaces();
+        importComponents();
+        importInterfaces();
     }
     
     /**
      * Method responsible for importing the UML Components.
      */
     private void importComponents() {
-        NodeList list = this.element.getElementsByTagName("component");
+        NodeList list = element.getElementsByTagName("component");
         for (int i = 0; i < list.getLength(); i++)
-            this.getDiagram().addComponent(new ComponentUML((Element) list.item(i), this.getDiagram()));
+            getDiagram().addComponent(new ComponentUML((Element) list.item(i), getDiagram()));
     }
     
     /**
      * Method responsible for importing the UML Interfaces.
      */
     private void importInterfaces() {
-        NodeList list = this.element.getElementsByTagName("interface");
+        NodeList list = element.getElementsByTagName("interface");
         for (int i = 0; i < list.getLength(); i++)
-            this.getDiagram().addInterface(new InterfaceUML((Element) list.item(i), this.getDiagram()));
+            getDiagram().addInterface(new InterfaceUML((Element) list.item(i), getDiagram()));
     }
     
     @Override
     protected void importAssociations() {
-        this.importComunications();
+        importComunications();
     }
     
     /**
      * Method responsible for importing the Comunications.
      */
     private void importComunications() {
-        NodeList list = this.element.getElementsByTagName("comunication");
+        NodeList list = element.getElementsByTagName("comunication");
         for (int i = 0; i < list.getLength(); i++) {
             Element         current      = (Element) list.item(i);
             ComunicationUML comunication = new ComunicationUML(current);
-                            comunication.setSource(this.getElement(current.getAttribute("component")));
-                            comunication.setTarget(this.getElement(current.getAttribute("interface")));
-                    super.addPoints(current, comunication);
-            this.getDiagram().addComunication(comunication);
+                            comunication.setSource(getElement(current.getAttribute("component")));
+                            comunication.setTarget(getElement(current.getAttribute("interface")));
+                    addPoints(current, comunication);
+            getDiagram().addComunication(comunication);
         }
     }
     
     @Override
     protected ComponentDiagram getDiagram() {
-        return (ComponentDiagram) this.diagram;
+        return (ComponentDiagram) diagram;
     }
 }

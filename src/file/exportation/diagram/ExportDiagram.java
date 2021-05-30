@@ -23,10 +23,10 @@ import view.panel.diagram.types.PanelSequenceDiagram;
 import view.panel.diagram.types.PanelUseCaseDiagram;
 
 /**
- * <p>Class of Export <b>ExportDiagram</b>.</p>
+ * <p>Class of File <b>ExportDiagram</b>.</p>
  * <p>Class responsible for <b>Exporting</b> the <b>Diagram</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  08/11/2019
+ * @since  2019-11-08
  * @see    model.structural.base.Diagram
  */
 public class ExportDiagram {
@@ -35,12 +35,12 @@ public class ExportDiagram {
     
     /**
      * Default constructor method of Class.
-     * @param path Path to Export.
-     * @param diagram Diagram.
+     * @param path_ Path to Export.
+     * @param diagram_ Diagram.
      */
-    public ExportDiagram(String path, Diagram diagram) {
-        this.path     = path;
-        this.diagram = diagram;
+    public ExportDiagram(String path_, Diagram diagram_) {
+        path     = path_;
+        diagram = diagram_;
     }
     
     /**
@@ -48,8 +48,8 @@ public class ExportDiagram {
      * @throws java.io.IOException Exception to Create Image.
      */
     public void export() throws IOException {
-        String newPath = this.path + "\\" + this.diagram.getId() + ".png";
-        BufferedImage pngImage = new ExportImage(this.getImage()).getPNGImage();
+        String newPath = path + "\\" + diagram.getId() + ".png";
+        BufferedImage pngImage = new ExportImage(getImage()).getPNGImage();
         ImageIO.write(pngImage, "PNG", new File(newPath));
     }
     
@@ -58,7 +58,7 @@ public class ExportDiagram {
      * @return Diagram Image.
      */
     private BufferedImage getImage() {
-        PanelDiagram panel = this.getPanelDiagram();
+        PanelDiagram panel = getPanelDiagram();
                      panel.updateGraph();
         return mxCellRenderer.createBufferedImage(panel.getGraph(),  null, 1, Color.WHITE, true, null);
     }
@@ -68,16 +68,16 @@ public class ExportDiagram {
      * @return Panel Diagram.
      */
     private PanelDiagram getPanelDiagram() {
-        if (this.diagram.getType().equals("Feature"))
-            return new PanelFeatureDiagram(null, (FeatureDiagram)  this.diagram);
-        else if (this.diagram.getType().equals("Activity"))
-            return new PanelActivityDiagram(null, (ActivityDiagram)  this.diagram);
-        else if (this.diagram.getType().equals("Class"))
-            return new PanelClassDiagram(null, (ClassDiagram) this.diagram);
-        else if (this.diagram.getType().equals("Component"))
-            return new PanelComponentDiagram(null, (ComponentDiagram) this.diagram);
-        else if (this.diagram.getType().equals("Sequence"))
-            return new PanelSequenceDiagram(null,  (SequenceDiagram)  this.diagram);
-        return new PanelUseCaseDiagram(null, (UseCaseDiagram) this.diagram);
+        if (diagram.getType().equals("Feature"))
+            return new PanelFeatureDiagram(null, (FeatureDiagram)  diagram);
+        else if (diagram.getType().equals("Activity"))
+            return new PanelActivityDiagram(null, (ActivityDiagram)  diagram);
+        else if (diagram.getType().equals("Class"))
+            return new PanelClassDiagram(null, (ClassDiagram) diagram);
+        else if (diagram.getType().equals("Component"))
+            return new PanelComponentDiagram(null, (ComponentDiagram) diagram);
+        else if (diagram.getType().equals("Sequence"))
+            return new PanelSequenceDiagram(null,  (SequenceDiagram)  diagram);
+        return new PanelUseCaseDiagram(null, (UseCaseDiagram) diagram);
     }
 }

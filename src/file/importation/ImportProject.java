@@ -36,7 +36,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- * <p>Class of Import <b>ImportProject</b>.</p>
+ * <p>Class of File <b>ImportProject</b>.</p>
  * <p>Class responsible for <b>Importing Project</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  2019-05-23
@@ -55,11 +55,11 @@ public class ImportProject {
     
     /**
      * Default constructor method of Class.
-     * @param path File Path.
+     * @param path_ File Path.
      */
-    public ImportProject(String path) {
-        this.path  = path;
-        this.xPath = XPathFactory.newInstance().newXPath();
+    public ImportProject(String path_) {
+        path  = path_;
+        xPath = XPathFactory.newInstance().newXPath();
     }
     
     /**
@@ -69,9 +69,9 @@ public class ImportProject {
      * @throws IOException 
      */
     private void openFile() throws ParserConfigurationException, SAXException, IOException {
-        this.file      = new File(this.path);
-        this.document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(this.file);
-        this.document.getDocumentElement().normalize();
+        file      = new File(path);
+        document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
+        document.getDocumentElement().normalize();
     }
     
     /**
@@ -81,7 +81,7 @@ public class ImportProject {
      * @throws IOException
      */
     protected void init() throws ParserConfigurationException, SAXException, IOException {
-        this.openFile();
+        openFile();
     }
     
     /**
@@ -93,26 +93,26 @@ public class ImportProject {
      * @throws javax.xml.xpath.XPathExpressionException 
      */
     public Project getProject() throws IOException, ParserConfigurationException, SAXException, XPathExpressionException {
-        this.init();
+        init();
         
-        this.expression = "/project";
-        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
-        this.root       = (Element) this.nodeList.item(0);
-        this.project    = new Project(this.path, this.root);
+        expression = "/project";
+        nodeList   = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+        root       = (Element) nodeList.item(0);
+        project    = new Project(path, root);
         
-            this.importTypes();
-            this.importStereotypes();
-            this.importProfile();
-            this.importDiagrams();
-            this.importRequirements();
-            this.importTraceabilities();
-            this.importLinks();
-            this.importProducts();
-            this.importMetrics();
-            this.importMeasures();
+            importTypes();
+            importStereotypes();
+            importProfile();
+            importDiagrams();
+            importRequirements();
+            importTraceabilities();
+            importLinks();
+            importProducts();
+            importMetrics();
+            importMeasures();
         
-               this.project.updateStereotypes();
-        return this.project;
+               project.updateStereotypes();
+        return project;
     }
     
     /**
@@ -120,12 +120,12 @@ public class ImportProject {
      * throws XPathExpressionException XPath Exception.
      */
     private void importTypes() throws XPathExpressionException {
-        this.expression = "/project/types/type";
-        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
-        for (int i = 0; i < this.nodeList.getLength(); i++) {
-            Element element = (Element) this.nodeList.item(i);
+        expression = "/project/types/type";
+        nodeList   = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Element element = (Element) nodeList.item(i);
             TypeUML type    = new TypeUML(element);
-            this.project.addDefaultType(type);
+            project.addDefaultType(type);
         }
     }
     
@@ -134,12 +134,12 @@ public class ImportProject {
      * throws XPathExpressionException XPath Exception.
      */
     private void importStereotypes() throws XPathExpressionException {
-        this.expression = "/project/stereotypes/stereotype";
-        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
-        for (int i = 0; i < this.nodeList.getLength(); i++) {
-            Element    element    = (Element) this.nodeList.item(i);
+        expression = "/project/stereotypes/stereotype";
+        nodeList   = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Element    element    = (Element) nodeList.item(i);
             Stereotype stereotype = new Stereotype(element);
-            this.project.addDefaultStereotype(stereotype);
+            project.addDefaultStereotype(stereotype);
         }
     }
     
@@ -148,18 +148,18 @@ public class ImportProject {
      * throws XPathExpressionException XPath Exception.
      */
     private void importProfile() throws XPathExpressionException {
-        this.expression = "/project/profile";
-        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
-        Element element = (Element) this.nodeList.item(0);
+        expression = "/project/profile";
+        nodeList   = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+        Element element = (Element) nodeList.item(0);
         Profile profile = new Profile();
-                profile.setMandatory((Stereotype) this.project.getStereotypes().get(element.getAttribute("mandatory")));
-                profile.setOptional((Stereotype) this.project.getStereotypes().get(element.getAttribute("optional")));
-                profile.setVariationPoint((Stereotype) this.project.getStereotypes().get(element.getAttribute("variationPoint")));
-                profile.setInclusive((Stereotype) this.project.getStereotypes().get(element.getAttribute("inclusive")));
-                profile.setExclusive((Stereotype) this.project.getStereotypes().get(element.getAttribute("exclusive")));
-                profile.setRequires((Stereotype) this.project.getStereotypes().get(element.getAttribute("requires")));
-                profile.setMutex((Stereotype) this.project.getStereotypes().get(element.getAttribute("mutex")));
-        this.project.setProfile(profile);
+                profile.setMandatory((Stereotype) project.getStereotypes().get(element.getAttribute("mandatory")));
+                profile.setOptional((Stereotype) project.getStereotypes().get(element.getAttribute("optional")));
+                profile.setVariationPoint((Stereotype) project.getStereotypes().get(element.getAttribute("variationPoint")));
+                profile.setInclusive((Stereotype) project.getStereotypes().get(element.getAttribute("inclusive")));
+                profile.setExclusive((Stereotype) project.getStereotypes().get(element.getAttribute("exclusive")));
+                profile.setRequires((Stereotype) project.getStereotypes().get(element.getAttribute("requires")));
+                profile.setMutex((Stereotype) project.getStereotypes().get(element.getAttribute("mutex")));
+        project.setProfile(profile);
     }
     
     /**
@@ -169,11 +169,11 @@ public class ImportProject {
     private void importDiagrams() throws XPathExpressionException {
         String[] types = {"Feature", "Activity", "Class", "Component", "UseCase", "Sequence"};
         for (int i = 0; i < types.length; i++) {
-            this.expression = "/project/diagram";
-            String filter   = this.expression + "[@type='" + types[i] + "']";
-            this.nodeList   = (NodeList) this.xPath.compile(filter).evaluate(this.document, XPathConstants.NODESET);
-            for (int x = 0; x < this.nodeList.getLength(); x++)
-                this.importDiagram((Element) this.nodeList.item(x), i);
+                   expression = "/project/diagram";
+            String filter     = expression + "[@type='" + types[i] + "']";
+                   nodeList   = (NodeList) xPath.compile(filter).evaluate(document, XPathConstants.NODESET);
+            for (int x = 0; x < nodeList.getLength(); x++)
+                importDiagram((Element) nodeList.item(x), i);
         }
     }
     
@@ -186,22 +186,22 @@ public class ImportProject {
     private void importDiagram(Element element, int index) throws XPathExpressionException {
         switch (index) {
             case 0:
-                this.project.addDiagram(new ImportFeatureDiagram(this.project, element).importDiagram());
+                project.addDiagram(new ImportFeatureDiagram(project, element).importDiagram());
                 break;
             case 1:
-                this.project.addDiagram(new ImportActivityDiagram(this.project, element).importDiagram());
+                project.addDiagram(new ImportActivityDiagram(project, element).importDiagram());
                 break;
             case 2:
-                this.project.addDiagram(new ImportClassDiagram(this.project, element).importDiagram());
+                project.addDiagram(new ImportClassDiagram(project, element).importDiagram());
                 break;
             case 3:
-                this.project.addDiagram(new ImportComponentDiagram(this.project, element).importDiagram());
+                project.addDiagram(new ImportComponentDiagram(project, element).importDiagram());
                 break;
             case 4:
-                this.project.addDiagram(new ImportUseCaseDiagram(this.project, element).importDiagram());
+                project.addDiagram(new ImportUseCaseDiagram(project, element).importDiagram());
                 break;
             case 5:
-                this.project.addDiagram(new ImportSequenceDiagram(this.project, element).importDiagram());
+                project.addDiagram(new ImportSequenceDiagram(project, element).importDiagram());
                 break;
             default:
                 break;
@@ -213,14 +213,14 @@ public class ImportProject {
      * throws XPathExpressionException XPath Exception.
      */
     private void importRequirements() throws XPathExpressionException {
-        this.expression = "/project/requirement";
-        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
-        for (int i = 0; i < this.nodeList.getLength(); i++) {
-            Element     current     = (Element) this.nodeList.item(i);
+        expression = "/project/requirement";
+        nodeList   = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Element     current     = (Element) nodeList.item(i);
             Requirement requirement = new Requirement(current);
                         requirement.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
-                this.addTraceabilities(requirement, current);
-            this.project.addRequirement(requirement);
+                addTraceabilities(requirement, current);
+            project.addRequirement(requirement);
         }
     }
     
@@ -233,10 +233,10 @@ public class ImportProject {
     private void addTraceabilities(Requirement requirement, Element current) throws XPathExpressionException {
         String[] tags = {"feature", "usecase", "class", "component", "sequence", "activity"};
         for (String tag : tags) {
-            String   script = this.expression + "[@id='" + requirement.getId() + "']/" + tag;
-            NodeList list   = (NodeList) this.xPath.compile(script).evaluate(this.document, XPathConstants.NODESET);
+            String   script = expression + "[@id='" + requirement.getId() + "']/" + tag;
+            NodeList list   = (NodeList) xPath.compile(script).evaluate(document, XPathConstants.NODESET);
             for (int i = 0; i < list.getLength(); i++)
-                requirement.addElement(tag, this.getElement(((Element) list.item(i)).getAttribute("element")));
+                requirement.addElement(tag, getElement(((Element) list.item(i)).getAttribute("element")));
         }
     }
     
@@ -245,14 +245,14 @@ public class ImportProject {
      * throws XPathExpressionException XPath Exception.
      */
     private void importTraceabilities() throws XPathExpressionException {
-        this.expression = "/project/traceability";
-        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
-        for (int i = 0; i < this.nodeList.getLength(); i++) {
-            Element      current      = (Element) this.nodeList.item(i);
+        expression = "/project/traceability";
+        nodeList   = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Element      current      = (Element) nodeList.item(i);
             Traceability traceability = new Traceability(current);
                          traceability.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
-                this.addElements(traceability, current);
-            this.project.addTraceability(traceability);
+                addElements(traceability, current);
+            project.addTraceability(traceability);
         }
     }
     
@@ -265,7 +265,7 @@ public class ImportProject {
     private void addElements(Traceability traceability, Element current) throws XPathExpressionException {
         NodeList list = current.getElementsByTagName("element");
         for (int i = 0; i < list.getLength(); i++)
-            traceability.addElement(this.getElement(((Element) list.item(i)).getAttribute("id")));
+            traceability.addElement(getElement(((Element) list.item(i)).getAttribute("id")));
     }
     
     /**
@@ -273,13 +273,13 @@ public class ImportProject {
      * throws XPathExpressionException XPath Exception.
      */
     private void importLinks() throws XPathExpressionException {
-        this.expression = "/project/links/link";
-        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
-        for (int i = 0; i < this.nodeList.getLength(); i++) {
-            Element current = (Element) this.nodeList.item(i);
-            Link    link    = new Link(this.getElement(current.getAttribute("element")), 
-                                      (Stereotype) this.project.getStereotypes().get(current.getAttribute("stereotype")));
-            this.project.addLink(link);
+        expression = "/project/links/link";
+        nodeList   = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Element current = (Element) nodeList.item(i);
+            Link    link    = new Link(getElement(current.getAttribute("element")), 
+                                      (Stereotype) project.getStereotypes().get(current.getAttribute("stereotype")));
+            project.addLink(link);
         }
     }
     
@@ -288,14 +288,14 @@ public class ImportProject {
      * throws XPathExpressionException XPath Exception. 
      */
     private void importProducts() throws XPathExpressionException {
-        this.expression = "/project/products/product";
-        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
-        for (int i = 0; i < this.nodeList.getLength(); i++) {
-            Element current = (Element) this.nodeList.item(i);
+        expression = "/project/products/product";
+        nodeList   = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Element current = (Element) nodeList.item(i);
             Product product = new Product(current);
                     product.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
-                this.addInstances(product, current);
-            this.project.addProduct(product);
+                addInstances(product, current);
+            project.addProduct(product);
         }
     }
     
@@ -310,9 +310,9 @@ public class ImportProject {
             Element  node     = (Element) list.item(i);
             Instance instance = new Instance(node);
                      instance.setProduct(product);
-                     instance.setDiagram((Diagram) this.getDiagram(node.getAttribute("diagram")));
-                this.addArtifacts(instance, node);
-                this.addRelationships(instance, node);
+                     instance.setDiagram((Diagram) getDiagram(node.getAttribute("diagram")));
+                addArtifacts(instance, node);
+                addRelationships(instance, node);
             product.addInstance(instance);
         }
     }
@@ -328,7 +328,7 @@ public class ImportProject {
             Element  node     = (Element) list.item(i);
             Artifact artifact = new Artifact(node, true);
                      artifact.setInstance(instance);
-                     artifact.setElement(this.getElement(node.getAttribute("element")));
+                     artifact.setElement(getElement(node.getAttribute("element")));
             instance.addArtifact(artifact);
         }
     }
@@ -346,7 +346,7 @@ public class ImportProject {
             Relationship relationship = new Relationship(node);
                          relationship.setInstance(instance);
                          relationship.setAssociation(association);
-                this.addPoints(node, relationship);
+                addPoints(node, relationship);
             instance.addRelationship(relationship);
         }
     }
@@ -359,7 +359,7 @@ public class ImportProject {
     protected void addPoints(Element node, Relationship relationship) {
         NodeList list = node.getElementsByTagName("point");
         for (int i = 0; i < list.getLength(); i++)
-            relationship.addPoint(this.getPoint((Element) list.item(i)));
+            relationship.addPoint(getPoint((Element) list.item(i)));
     }
     
     /**
@@ -377,14 +377,14 @@ public class ImportProject {
      * throws XPathExpressionException XPath Exception. 
      */
     private void importMetrics() throws XPathExpressionException {
-        this.expression = "/project/metric";
-        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
-        for (int i = 0; i < this.nodeList.getLength(); i++) {
-            Element current = (Element) this.nodeList.item(i);
+        expression = "/project/metric";
+        nodeList   = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Element current = (Element) nodeList.item(i);
             Metric  metric  = new Metric(current);
                     metric.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
                     metric.setOperation(current.getElementsByTagName("operation").item(0).getTextContent());
-            this.project.addMetric(metric);
+            project.addMetric(metric);
         }
     }
     
@@ -393,13 +393,13 @@ public class ImportProject {
      * throws XPathExpressionException XPath Exception. 
      */
     private void importMeasures() throws XPathExpressionException {
-        this.expression = "/project/measure";
-        this.nodeList   = (NodeList) this.xPath.compile(this.expression).evaluate(this.document, XPathConstants.NODESET);
-        for (int i = 0; i < this.nodeList.getLength(); i++) {
-            Element current = (Element) this.nodeList.item(i);
+        expression = "/project/measure";
+        nodeList   = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Element current = (Element) nodeList.item(i);
             Measure measure = new Measure(current);
-                    measure.setMetric(this.project.getMetric(current.getAttribute("metric")));
-            this.project.addMeasure(measure);
+                    measure.setMetric(project.getMetric(current.getAttribute("metric")));
+            project.addMeasure(measure);
         }
     }
     
@@ -409,7 +409,7 @@ public class ImportProject {
      * @return Element by Id.
      */
     protected model.structural.base.Element getElement(String id) {
-        return (model.structural.base.Element) this.project.objects.get(id);
+        return (model.structural.base.Element) project.objects.get(id);
     }
     
     /**
@@ -418,7 +418,7 @@ public class ImportProject {
      * @return Stereotype by Id.
      */
     protected Stereotype getStereotype(String id) {
-        return this.project.getStereotype(id);
+        return project.getStereotype(id);
     }
     
     /**
@@ -427,6 +427,6 @@ public class ImportProject {
      * @return Diagram by Id.
      */
     protected Diagram getDiagram(String id) {
-        return (Diagram) this.project.getDiagrams().get(id);
+        return (Diagram) project.getDiagrams().get(id);
     }
 }

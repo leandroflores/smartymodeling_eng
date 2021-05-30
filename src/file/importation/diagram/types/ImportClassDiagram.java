@@ -19,7 +19,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- * <p>Class of Import <b>ImportClassDiagram</b>.</p>
+ * <p>Class of File <b>ImportClassDiagram</b>.</p>
  * <p>Class responsible for <b>Importing Class Diagram</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  2019-06-03
@@ -31,31 +31,31 @@ public class ImportClassDiagram extends ImportDiagram {
     
     /**
      * Default constructor method of Class.
-     * @param project Project.
-     * @param element W3C Element.
+     * @param project_ Project.
+     * @param element_ W3C Element.
      */
-    public ImportClassDiagram(Project project, Element element) {
-        this.project = project;
-        this.diagram = new ClassDiagram(project, element);
-        this.element = element;
+    public ImportClassDiagram(Project project_, Element element_) {
+        project = project_;
+        diagram = new ClassDiagram(project_, element_);
+        element = element_;
     }
     
     @Override
     protected void importElements() {
-        this.importPackages();
-        this.importClasses();
-        this.importInterfaces();
+        importPackages();
+        importClasses();
+        importInterfaces();
     }
     
     /**
      * Method responsible for importing the UML Packages.
      */
     private void importPackages() {
-        NodeList list = this.element.getElementsByTagName("package");
+        NodeList list = element.getElementsByTagName("package");
         for (int i = 0; i < list.getLength(); i++) {
             Element    current  = (Element) list.item(i);
-            PackageUML package_ = new PackageUML(current, this.getDiagram());
-            this.getDiagram().addPackage(package_);
+            PackageUML package_ = new PackageUML(current, getDiagram());
+            getDiagram().addPackage(package_);
         }
     }
     
@@ -65,8 +65,8 @@ public class ImportClassDiagram extends ImportDiagram {
      * @param entity Entity.
      */
     private void updateParent(String parent, Entity entity) {
-        if (this.getElement(parent) instanceof PackageUML) {
-            PackageUML package_ = (PackageUML) this.getElement(parent);
+        if (getElement(parent) instanceof PackageUML) {
+            PackageUML package_ = (PackageUML) getElement(parent);
                        package_.addEntity(entity);
                        entity.setPackageUML(package_);
         }
@@ -76,16 +76,16 @@ public class ImportClassDiagram extends ImportDiagram {
      * Method responsible for importing the UML Classes.
      */
     private void importClasses() {
-        NodeList list = this.element.getElementsByTagName("class");
+        NodeList list = element.getElementsByTagName("class");
         for (int i = 0; i < list.getLength(); i++) {
             Element  current = (Element) list.item(i);
-            ClassUML class_  = new ClassUML(current, this.getDiagram());
-                     class_.setTypeUML(this.project.getEntityType(class_));
-                     class_.setDescription(this.getDescription(current));
-                this.addAttributes(current, class_);
-                this.addMethods(current, class_);
-            this.getDiagram().addClass(class_);
-            this.updateParent(current.getAttribute("parent"), class_);
+            ClassUML class_  = new ClassUML(current, getDiagram());
+                     class_.setTypeUML(project.getEntityType(class_));
+                     class_.setDescription(getDescription(current));
+                addAttributes(current, class_);
+                addMethods(current, class_);
+            getDiagram().addClass(class_);
+            updateParent(current.getAttribute("parent"), class_);
         }
     }
     
@@ -93,16 +93,16 @@ public class ImportClassDiagram extends ImportDiagram {
      * Method responsible for importing the UML Interfaces.
      */
     private void importInterfaces() {
-        NodeList list = this.element.getElementsByTagName("interface");
+        NodeList list = element.getElementsByTagName("interface");
         for (int i = 0; i < list.getLength(); i++) {
             Element      current    = (Element) list.item(i);
-            InterfaceUML interface_ = new InterfaceUML(current, this.getDiagram());
-                         interface_.setTypeUML(this.project.getEntityType(interface_));
-                         interface_.setDescription(this.getDescription(current));
-                this.addAttributes(current, interface_);
-                this.addMethods(current, interface_);
-            this.getDiagram().addInterface(interface_);
-            this.updateParent(current.getAttribute("parent"), interface_);
+            InterfaceUML interface_ = new InterfaceUML(current, getDiagram());
+                         interface_.setTypeUML(project.getEntityType(interface_));
+                         interface_.setDescription(getDescription(current));
+                addAttributes(current, interface_);
+                addMethods(current, interface_);
+            getDiagram().addInterface(interface_);
+            updateParent(current.getAttribute("parent"), interface_);
         }
     }
     
@@ -126,11 +126,11 @@ public class ImportClassDiagram extends ImportDiagram {
         NodeList list = node.getElementsByTagName("attribute");
         for (int i = 0; i < list.getLength(); i++) {
             Element      current   = (Element) list.item(i);
-            AttributeUML attribute = new AttributeUML(current, this.getDiagram());
-                         attribute.setTypeUML(this.getType(current.getAttribute("type")));
+            AttributeUML attribute = new AttributeUML(current, getDiagram());
+                         attribute.setTypeUML(getType(current.getAttribute("type")));
                          attribute.setEntity(entity);
                          entity.addAttribute(attribute);
-            this.getDiagram().addAttribute(attribute);
+            getDiagram().addAttribute(attribute);
         }
     }
     
@@ -143,12 +143,12 @@ public class ImportClassDiagram extends ImportDiagram {
         NodeList list = node.getElementsByTagName("method");
         for (int i = 0; i < list.getLength(); i++) {
             Element   current = (Element) list.item(i);
-            MethodUML method  = new MethodUML(current, this.getDiagram());
+            MethodUML method  = new MethodUML(current, getDiagram());
                       method.setEntity(entity);
-                      method.setReturn(this.getType(current.getAttribute("return")));
-                this.importParameters(current, method);
+                      method.setReturn(getType(current.getAttribute("return")));
+                importParameters(current, method);
                 entity.addMethod(method);
-            this.getDiagram().addMethod(method);
+            getDiagram().addMethod(method);
         }
     }
     
@@ -162,7 +162,7 @@ public class ImportClassDiagram extends ImportDiagram {
         for (int i = 0; i < list.getLength(); i++) {
             Element      current   = (Element) list.item(i);
             ParameterUML parameter = new ParameterUML(current);
-                         parameter.setType(this.getType(current.getAttribute("type")));
+                         parameter.setType(getType(current.getAttribute("type")));
             method.addParameter(parameter);
         }
     }
@@ -173,32 +173,32 @@ public class ImportClassDiagram extends ImportDiagram {
      * @return Type found.
      */
     private TypeUML getType(String id) {
-        if (this.project.getTypes().get(id) == null)
-            return this.diagram.getObjectType();
-        return (TypeUML) this.project.getTypes().get(id);
+        if (project.getTypes().get(id) == null)
+            return diagram.getObjectType();
+        return (TypeUML) project.getTypes().get(id);
     }
     
     @Override
     protected void importAssociations() {
-        this.importRealizations();
-        this.importAbstractions();
-        this.importUsages();
-        this.importAssociationsUML();
-        this.importReferences();
+        importRealizations();
+        importAbstractions();
+        importUsages();
+        importAssociationsUML();
+        importReferences();
     }
     
     /**
      * Method responsible for importing the UML Realizations.
      */
     private void importRealizations() {
-        NodeList list = this.element.getElementsByTagName("realization");
+        NodeList list = element.getElementsByTagName("realization");
         for (int i = 0; i < list.getLength(); i++) {
             Element        current     = (Element) list.item(i);
             RealizationUML realization = new RealizationUML(current);
-                           realization.setSource((ClassUML)     this.getElement(current.getAttribute("class")));
-                           realization.setTarget((InterfaceUML) this.getElement(current.getAttribute("interface")));
-                           super.addPoints(current, realization);
-            this.getDiagram().addRealizationUML(realization);
+                           realization.setSource((ClassUML) getElement(current.getAttribute("class")));
+                           realization.setTarget((InterfaceUML) getElement(current.getAttribute("interface")));
+                           addPoints(current, realization);
+            getDiagram().addRealizationUML(realization);
         }
     }
     
@@ -206,14 +206,14 @@ public class ImportClassDiagram extends ImportDiagram {
      * Method responsible for importing the Abstractions.
      */
     private void importAbstractions() {
-        NodeList list = this.element.getElementsByTagName("abstraction");
+        NodeList list = element.getElementsByTagName("abstraction");
         for (int i = 0; i < list.getLength(); i++) {
             Element     current     = (Element) list.item(i);
             Abstraction abstraction = new Abstraction(current);
-                           abstraction.setSource(this.getElement(current.getAttribute("source")));
-                           abstraction.setTarget(this.getElement(current.getAttribute("target")));
-                           super.addPoints(current, abstraction);
-            this.getDiagram().addAbstraction(abstraction);
+                        abstraction.setSource(getElement(current.getAttribute("source")));
+                        abstraction.setTarget(getElement(current.getAttribute("target")));
+                        addPoints(current, abstraction);
+            getDiagram().addAbstraction(abstraction);
         }
     }
     
@@ -221,14 +221,14 @@ public class ImportClassDiagram extends ImportDiagram {
      * Method responsible for importing the Usages.
      */
     private void importUsages() {
-        NodeList list = this.element.getElementsByTagName("usage");
+        NodeList list = element.getElementsByTagName("usage");
         for (int i = 0; i < list.getLength(); i++) {
             Element current = (Element) list.item(i);
             Usage   usage   = new Usage(current);
-                    usage.setSource(this.getElement(current.getAttribute("source")));
-                    usage.setTarget(this.getElement(current.getAttribute("target")));
-                    super.addPoints(current, usage);
-            this.getDiagram().addUsage(usage);
+                    usage.setSource(getElement(current.getAttribute("source")));
+                    usage.setTarget(getElement(current.getAttribute("target")));
+                    addPoints(current, usage);
+            getDiagram().addUsage(usage);
         }
     }
     
@@ -236,14 +236,14 @@ public class ImportClassDiagram extends ImportDiagram {
      * Method responsible for importing the UML Associations.
      */
     private void importAssociationsUML() {
-        NodeList list = this.element.getElementsByTagName("association");
+        NodeList list = element.getElementsByTagName("association");
         for (int i = 0; i < list.getLength(); i++) {
             Element        current     = (Element) list.item(i);
             AssociationUML association = new AssociationUML(current);
-                this.setSource(current, association);
-                this.setTarget(current, association);
-                super.addPoints(current, association);
-            this.getDiagram().addAssociationUML(association);
+                setSource(current, association);
+                setTarget(current, association);
+                addPoints(current, association);
+            getDiagram().addAssociationUML(association);
         }
     }
     
@@ -255,7 +255,7 @@ public class ImportClassDiagram extends ImportDiagram {
     private void setSource(Element node, AssociationUML association) {
         Element item = (Element) node.getElementsByTagName("source").item(0);
                 association.setSource(item);
-                association.setSource(this.getElement(item.getAttribute("entity")));
+                association.setSource(getElement(item.getAttribute("entity")));
     }
     
     /**
@@ -266,18 +266,18 @@ public class ImportClassDiagram extends ImportDiagram {
     private void setTarget(Element node, AssociationUML association) {
         Element item = (Element) node.getElementsByTagName("target").item(0);
                 association.setTarget(item);
-                association.setTarget(this.getElement(item.getAttribute("entity")));
+                association.setTarget(getElement(item.getAttribute("entity")));
     }
     
     /**
      * Method responsible for importing the References.
      */
     protected void importReferences() {
-        NodeList list =  this.element.getElementsByTagName("reference");
+        NodeList list =  element.getElementsByTagName("reference");
         for (int i = 0; i < list.getLength(); i++) {
             Element    current  = (Element)    list.item(i);
-            PackageUML package_ = (PackageUML) this.getElement(current.getAttribute("package"));
-            PackageUML parent   = (PackageUML) this.getElement(current.getAttribute("parent"));
+            PackageUML package_ = (PackageUML) getElement(current.getAttribute("package"));
+            PackageUML parent   = (PackageUML) getElement(current.getAttribute("parent"));
                        package_.setParent(parent);
                        parent.addPackage(package_);
         }
@@ -285,6 +285,6 @@ public class ImportClassDiagram extends ImportDiagram {
     
     @Override
     protected ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+        return (ClassDiagram) diagram;
     }
 }

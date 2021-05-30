@@ -12,7 +12,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- * <p>Class of Import <b>ImportUseCaseDiagram</b>.</p>
+ * <p>Class of File <b>ImportUseCaseDiagram</b>.</p>
  * <p>Class responsible for <b>Importing Use Case Diagram</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  2019-05-23
@@ -23,57 +23,57 @@ public class ImportUseCaseDiagram extends ImportDiagram {
     
     /**
      * Default constructor method of Class.
-     * @param project Project.
-     * @param element W3C Element.
+     * @param project_ Project.
+     * @param element_ W3C Element.
      */
-    public ImportUseCaseDiagram(Project project, Element element) {
-        this.diagram = new UseCaseDiagram(project, element);
-        this.element = element;
+    public ImportUseCaseDiagram(Project project_, Element element_) {
+        diagram = new UseCaseDiagram(project_, element_);
+        element = element_;
     }
     
     @Override
     protected void importElements() {
-        this.importActors();
-        this.importUseCases();
+        importActors();
+        importUseCases();
     }
     
     /**
      * Method responsible for importing UML Actors.
      */
     private void importActors() {
-        NodeList list = this.element.getElementsByTagName("actor");
+        NodeList list = element.getElementsByTagName("actor");
         for (int i = 0; i < list.getLength(); i++)
-            this.getDiagram().addActor(new ActorUML((Element) list.item(i), this.getDiagram()));
+            getDiagram().addActor(new ActorUML((Element) list.item(i), getDiagram()));
     }
     
     /**
      * Method responsible for importing UML Use Cases.
      */
     private void importUseCases() {
-        NodeList list = this.element.getElementsByTagName("useCase");
+        NodeList list = element.getElementsByTagName("useCase");
         for (int i = 0; i < list.getLength(); i++)
-            this.getDiagram().addUseCase(new UseCaseUML((Element) list.item(i), this.getDiagram()));
+            getDiagram().addUseCase(new UseCaseUML((Element) list.item(i), getDiagram()));
     }
     
     @Override
     protected void importAssociations() {
-        this.importCommunications();
-        this.importExtends();
-        this.importIncludes();
+        importCommunications();
+        importExtends();
+        importIncludes();
     }
     
     /**
      * Method responsible for importing the Communications.
      */
     private void importCommunications() {
-        NodeList list = this.element.getElementsByTagName("communication");
+        NodeList list = element.getElementsByTagName("communication");
         for (int i = 0; i < list.getLength(); i++) {
             Element          current       = (Element) list.item(i);
             CommunicationUML communication = new CommunicationUML(current);
-                             communication.setSource((ActorUML)   this.getElement(current.getAttribute("actor")));
-                             communication.setTarget((UseCaseUML) this.getElement(current.getAttribute("useCase")));
-                super.addPoints(current, communication);
-            this.getDiagram().addCommunication(communication);
+                             communication.setSource((ActorUML) getElement(current.getAttribute("actor")));
+                             communication.setTarget((UseCaseUML) getElement(current.getAttribute("useCase")));
+                addPoints(current, communication);
+            getDiagram().addCommunication(communication);
         }
     }
     
@@ -81,14 +81,14 @@ public class ImportUseCaseDiagram extends ImportDiagram {
      * Method responsible for importing the Extends.
      */
     private void importExtends() {
-        NodeList list = this.element.getElementsByTagName("extend");
+        NodeList list = element.getElementsByTagName("extend");
         for (int i = 0; i < list.getLength(); i++) {
             Element   current = (Element) list.item(i);
             ExtendUML extend  = new ExtendUML(current);
-                      extend.setSource((UseCaseUML) this.getElement(current.getAttribute("source")));
-                      extend.setTarget((UseCaseUML) this.getElement(current.getAttribute("target")));
-                super.addPoints(current, extend);
-            this.getDiagram().addExtend(extend);
+                      extend.setSource((UseCaseUML) getElement(current.getAttribute("source")));
+                      extend.setTarget((UseCaseUML) getElement(current.getAttribute("target")));
+                addPoints(current, extend);
+            getDiagram().addExtend(extend);
         }
     }
     
@@ -96,19 +96,19 @@ public class ImportUseCaseDiagram extends ImportDiagram {
      * Method responsible for importing the Includes.
      */
     private void importIncludes() {
-        NodeList list = this.element.getElementsByTagName("include");
+        NodeList list = element.getElementsByTagName("include");
         for (int i = 0; i < list.getLength(); i++) {
             Element    current = (Element) list.item(i);
             IncludeUML include = new IncludeUML(current);
-                       include.setSource((UseCaseUML) this.getElement(current.getAttribute("source")));
-                       include.setTarget((UseCaseUML) this.getElement(current.getAttribute("target")));
-                super.addPoints(current, include);
-            this.getDiagram().addInclude(include);
+                       include.setSource((UseCaseUML) getElement(current.getAttribute("source")));
+                       include.setTarget((UseCaseUML) getElement(current.getAttribute("target")));
+                addPoints(current, include);
+            getDiagram().addInclude(include);
         }
     }
     
     @Override
     protected UseCaseDiagram getDiagram() {
-        return (UseCaseDiagram) this.diagram;
+        return (UseCaseDiagram) diagram;
     }
 }

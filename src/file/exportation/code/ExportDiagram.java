@@ -6,46 +6,46 @@ import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.PackageUML;
 
 /**
- * <p>Class of Export <b>ExportDiagram</b>.</p>
+ * <p>Class of File <b>ExportDiagram</b>.</p>
  * <p>Class responsible for <b>Exporting Diagram</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  19/01/2020
+ * @since  2020-01-19
  * @see    file.exportation.code.ExportCode
- * @see    model.structural.base.Diagram
+ * @see    model.structural.diagram.ClassDiagram
  */
 public class ExportDiagram extends ExportCode {
     private final ClassDiagram diagram;
     
     /**
      * Default constructor method of Class.
-     * @param path Path to Export.
-     * @param diagram Diagram to Export.
+     * @param path_ Path to Export.
+     * @param diagram_ Diagram to Export.
      */
-    public ExportDiagram(String path, ClassDiagram diagram) {
-        super(path);
-        this.path    = path + "\\" + diagram.getName();
-        this.folder  = path + "\\" + diagram.getName();
-        this.diagram = diagram;
+    public ExportDiagram(String path_, ClassDiagram diagram_) {
+        super(path_);
+        path    = path_ + "\\" + diagram_.getName();
+        folder  = path_ + "\\" + diagram_.getName();
+        diagram = diagram_;
     }
     
     /**
      * Alternative constructor method of Class.
-     * @param path Path to Export.
+     * @param path_ Path to Export.
      * @param name Folder Name to Export.
-     * @param diagram Diagram to Export.
+     * @param diagram_ Diagram to Export.
      */
-    public ExportDiagram(String path, String name, ClassDiagram diagram) {
-        super(path);
-        this.path    = path + "\\" + name;
-        this.folder  = path + "\\" + name;
-        this.diagram = diagram;
+    public ExportDiagram(String path_, String name, ClassDiagram diagram_) {
+        super(path_);
+        path    = path_ + "\\" + name;
+        folder  = path_ + "\\" + name;
+        diagram = diagram_;
     }
     
     @Override
     public void export() throws IOException {
-        this.deleteFolder();
-        this.createFolder();
-        this.exportDiagram();
+        deleteFolder();
+        createFolder();
+        exportDiagram();
     }
     
     /**
@@ -53,8 +53,8 @@ public class ExportDiagram extends ExportCode {
      * @throws IOException Exception to Export the Diagram.
      */
     private void exportDiagram() throws IOException {
-        this.exportPackages();
-        this.exportEntities();
+        exportPackages();
+        exportEntities();
     }
     
     /**
@@ -62,9 +62,9 @@ public class ExportDiagram extends ExportCode {
      * @throws IOException Exception to Export the Packages.
      */
     private void exportPackages() throws IOException {
-        for (PackageUML packageUML : this.diagram.getPackagesList()) {
+        for (PackageUML packageUML : diagram.getPackagesList()) {
             if (packageUML.getParent() == null)
-                this.export(this.path, packageUML);
+                export(path, packageUML);
         }
     }
     
@@ -73,9 +73,9 @@ public class ExportDiagram extends ExportCode {
      * @throws IOException Exception to Export the Entities.
      */
     private void exportEntities() throws IOException {
-        for (Entity entity : this.diagram.getEntitiesList()) {
+        for (Entity entity : diagram.getEntitiesList()) {
             if (entity.getPackageUML() == null)
-                this.export(this.path, entity);
+                export(path, entity);
         }
     }
 }

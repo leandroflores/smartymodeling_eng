@@ -8,10 +8,10 @@ import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.PackageUML;
 
 /**
- * <p>Class of Export <b>ExportCode</b>.</p>
+ * <p>Class of File <b>ExportCode</b>.</p>
  * <p>Class responsible for <b>Exporting Source Code</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  19/01/2020
+ * @since  2020-01-19
  * @see    file.exportation.code.classes.ExportEntity
  * @see    java.io.File
  */
@@ -22,10 +22,10 @@ public abstract class ExportCode {
     
     /**
      * Default constructor method of Class.
-     * @param path Path to Export.
+     * @param path_ Path to Export.
      */
-    public ExportCode(String path) {
-        this.path = path;
+    public ExportCode(String path_) {
+        path = path_;
     }
     
     /**
@@ -39,8 +39,8 @@ public abstract class ExportCode {
      * @throws IOException Exception to Delete the Folder.
      */
     protected void deleteFolder() throws IOException {
-        this.file = new File(this.path);
-        this.deleteFolder(this.file);
+        file = new File(path);
+        deleteFolder(file);
     }
     
     /**
@@ -50,7 +50,7 @@ public abstract class ExportCode {
     private void deleteFolder(File file) {
         if (file.listFiles() != null) {
             for (File current : file.listFiles()) {
-                this.deleteFolder(current);
+                deleteFolder(current);
                 file.delete();
             }
         }
@@ -62,8 +62,8 @@ public abstract class ExportCode {
      * @throws IOException Exception to Create the Folder.
      */
     protected void createFolder() throws IOException {
-        this.file = new File(this.path);
-        this.file.mkdirs();
+        file = new File(path);
+        file.mkdirs();
     }
     
     /**
@@ -72,8 +72,8 @@ public abstract class ExportCode {
      * @throws IOException Exception to create the Folder.
      */
     protected void createPackage(PackageUML packageUML) throws IOException {
-        this.file = new File(this.path + "\\" + packageUML.getFolderPath());
-        this.file.mkdir();
+        file = new File(path + "\\" + packageUML.getFolderPath());
+        file.mkdir();
     }
     
     /**
@@ -84,9 +84,9 @@ public abstract class ExportCode {
      */
     protected void export(String path, Element element) throws IOException {
         if (element instanceof PackageUML)
-            this.export(path, ((PackageUML) element));
+            export(path, ((PackageUML) element));
         else if (element instanceof Entity)
-            this.export(path, ((Entity) element));
+            export(path, ((Entity) element));
     }
     
     /**
@@ -96,13 +96,13 @@ public abstract class ExportCode {
      * @throws IOException Exception to Export Package.
      */
     protected void export(String path, PackageUML packageUML) throws IOException {
-        this.createPackage(packageUML);
+        createPackage(packageUML);
         
         for (PackageUML subPackage : packageUML.getPackagesList())
-            this.export(this.folder + "\\" + packageUML.getFolderPath(), subPackage);
+            export(folder + "\\" + packageUML.getFolderPath(), subPackage);
         
         for (Entity entity : packageUML.getEntitiesList())
-            this.export(this.folder + "\\" + packageUML.getFolderPath(), entity);
+            export(folder + "\\" + packageUML.getFolderPath(), entity);
     }
     
     /**

@@ -5,20 +5,20 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
- * <p>Class of Export <b>ExportImage</b>.</p>
+ * <p>Class of File <b>ExportImage</b>.</p>
  * <p>Class responsible for <b>Exporting</b> the <b>Image</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  31/10/2019
+ * @since  2019-10-31
  */
 public class ExportImage {
     private final BufferedImage image;
     
     /**
      * Default constructor method of Class.
-     * @param image Buffered Image.
+     * @param image_ Buffered Image.
      */
-    public ExportImage(BufferedImage image) {
-        this.image = image;
+    public ExportImage(BufferedImage image_) {
+        image = image_;
     }
     
     /**
@@ -27,7 +27,7 @@ public class ExportImage {
      * @throws IOException Exception.
      */
     public BufferedImage getPNGImage() throws IOException {
-        return this.getPNGImage(this.image, Color.WHITE);
+        return getPNGImage(image, Color.WHITE);
     }
     
     /**

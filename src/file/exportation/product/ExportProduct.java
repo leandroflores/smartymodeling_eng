@@ -6,10 +6,10 @@ import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 
 /**
- * <p>Class of Export <b>ExportProduct</b>.</p>
+ * <p>Class of File <b>ExportProduct</b>.</p>
  * <p>Class responsible for <b>Exporting</b> the <b>Product</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  06/11/2019
+ * @since  2019-11-06
  * @see    model.structural.base.product.Product
  */
 public class ExportProduct {
@@ -18,12 +18,12 @@ public class ExportProduct {
     
     /**
      * Default constructor method of Class.
-     * @param path Path to Export Product.
-     * @param product Product.
+     * @param path_ Path to Export Product.
+     * @param product_ Product.
      */
-    public ExportProduct(String path, Product product) {
-        this.path    = path;
-        this.product = product;
+    public ExportProduct(String path_, Product product_) {
+        path    = path_;
+        product = product_;
     }
     
     /**
@@ -31,15 +31,15 @@ public class ExportProduct {
      * @throws java.io.IOException
      */
     public void export() throws IOException {
-        this.createDirectory();
-        this.exportInstances();
+        createDirectory();
+        exportInstances();
     }
     
     /**
      * Method responsible for creating the Directory to Export.
      */
     private void createDirectory() {
-        String folder = this.path + "\\" + this.product.getName();
+        String folder = path + "\\" + product.getName();
                new File(folder).mkdir();
     }
     
@@ -47,7 +47,7 @@ public class ExportProduct {
      * Method responsible for exporting the Instances.
      */
     private void exportInstances() throws IOException {
-        for (Instance instance : this.product.getInstancesList())
-            new ExportInstance(this.path + "\\" + this.product.getName(), instance).export();
+        for (Instance instance : product.getInstancesList())
+            new ExportInstance(path + "\\" + product.getName(), instance).export();
     }
 }

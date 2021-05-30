@@ -6,10 +6,10 @@ import java.io.PrintWriter;
 import model.structural.diagram.classes.Entity;
 
 /**
- * <p>Class of Export <b>ExportEntity</b>.</p>
+ * <p>Class of File <b>ExportEntity</b>.</p>
  * <p>Class responsible for <b>Exporting Entity Code</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  19/01/2020
+ * @since  2020-01-19
  * @see    model.structural.diagram.classes.Entity
  */
 public class ExportEntity {
@@ -20,12 +20,12 @@ public class ExportEntity {
     
     /**
      * Default constructor method of Class.
-     * @param path Path to Export.
-     * @param entity Entity to Export.
+     * @param path_ Path to Export.
+     * @param entity_ Entity to Export.
      */
-    public ExportEntity(String path, Entity entity) {
-        this.path   = path;
-        this.entity = entity;
+    public ExportEntity(String path_, Entity entity_) {
+        path   = path_;
+        entity = entity_;
     }
     
     /**
@@ -33,9 +33,9 @@ public class ExportEntity {
      * @throws java.io.IOException Exception to export.
      */
     public void export() throws IOException {
-        this.createFile();
-        this.exportEntity();
-        this.closeFile();
+        createFile();
+        exportEntity();
+        closeFile();
     }
     
     /**
@@ -43,15 +43,15 @@ public class ExportEntity {
      * @throws IOException Exception to create File.
      */
     private void createFile() throws IOException {
-        this.fileWriter  = new FileWriter(this.path + "\\" + this.entity.getName() + ".java");
-        this.printWriter = new PrintWriter(this.fileWriter);
+        fileWriter  = new FileWriter(path + "\\" + entity.getName() + ".java");
+        printWriter = new PrintWriter(fileWriter);
     }
     
     /**
      * Method responsible for exporting the Entity.
      */
     private void exportEntity() {
-        this.printWriter.println(this.entity.exportCode());
+        printWriter.println(entity.exportCode());
     }
     
     /**
@@ -59,7 +59,7 @@ public class ExportEntity {
      * @throws IOException Exception to close the File.
      */
     private void closeFile() throws IOException {
-        this.printWriter.close();
-        this.fileWriter.close();
+        printWriter.close();
+        fileWriter.close();
     }
 }

@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * <p>Class of Export <b>ExportPdfImage</b>.</p>
+ * <p>Class of File <b>ExportPdfImage</b>.</p>
  * <p>Class responsible for <b>Exporting Pdf Image</b> in SMartyModeling.</p>
  * @author Leandro
  * @since  2020-05-20
@@ -25,14 +25,14 @@ public class ExportPdfImage {
     
     /**
      * Default constructor method of Class.
-     * @param image PDF Image.
-     * @param path Path to export.
+     * @param image_ PDF Image.
+     * @param path_ Path to export.
      * @throws com.itextpdf.text.BadElementException
      * @throws java.io.IOException
      */
-    public ExportPdfImage(BufferedImage image, String path) throws BadElementException, IOException {
-        this.image    = Image.getInstance(image, null);
-        this.path     = path.replace(".png", ".pdf");
+    public ExportPdfImage(BufferedImage image_, String path_) throws BadElementException, IOException {
+        image = Image.getInstance(image_, null);
+        path  = path_.replace(".png", ".pdf");
     }
     
     /**
@@ -41,17 +41,17 @@ public class ExportPdfImage {
      * @throws DocumentException 
      */
     public void export() throws FileNotFoundException, DocumentException, IOException {
-        OutputStream stream   = new FileOutputStream(this.path);
+        OutputStream stream   = new FileOutputStream(path);
         Document document = new Document(PageSize.A4, 0, 0, 0, 0);
                  document.setPageSize(PageSize.A4.rotate());
             PdfWriter.getInstance(document, stream);
                  document.open();
-            this.image.setBorder(Image.NO_BORDER);
-            this.image.setBorderColor(BaseColor.BLACK);
-//            this.image.setBorder(Image.);
-            this.image.scaleToFit(PageSize.A4.getHeight(), PageSize.A4.getWidth());
+            image.setBorder(Image.NO_BORDER);
+            image.setBorderColor(BaseColor.BLACK);
+//            image.setBorder(Image.);
+            image.scaleToFit(PageSize.A4.getHeight(), PageSize.A4.getWidth());
                  document.newPage();
-                 document.add(this.image);
+                 document.add(image);
                  document.close();
         stream.close();
     }

@@ -15,10 +15,10 @@ import view.panel.instance.types.PanelComponentInstance;
 import view.panel.instance.types.PanelUseCaseInstance;
 
 /**
- * <p>Class of Export <b>ExportInstance</b>.</p>
+ * <p>Class of File <b>ExportInstance</b>.</p>
  * <p>Class responsible for <b>Exporting</b> the <b>Instance</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  04/11/2019
+ * @since  2019-11-04
  * @see    model.structural.base.product.Instance
  */
 public class ExportInstance {
@@ -27,12 +27,12 @@ public class ExportInstance {
     
     /**
      * Default constructor method of Class.
-     * @param path Path to Export.
-     * @param instance Product Instance.
+     * @param path_ Path to Export.
+     * @param instance_ Product Instance.
      */
-    public ExportInstance(String path, Instance instance) {
-        this.path     = path;
-        this.instance = instance;
+    public ExportInstance(String path_, Instance instance_) {
+        path     = path_;
+        instance = instance_;
     }
     
     /**
@@ -40,8 +40,8 @@ public class ExportInstance {
      * @throws java.io.IOException Exception to Create Image.
      */
     public void export() throws IOException {
-        String newPath = this.path + "\\" + this.instance.getId() + ".png";
-        BufferedImage pngImage = new ExportImage(this.getImage()).getPNGImage();
+        String newPath = path + "\\" + instance.getId() + ".png";
+        BufferedImage pngImage = new ExportImage(getImage()).getPNGImage();
         ImageIO.write(pngImage, "PNG", new File(newPath));
 
     }
@@ -51,7 +51,7 @@ public class ExportInstance {
      * @return Instance Image.
      */
     private BufferedImage getImage() {
-        PanelInstance panel = this.getPanelInstance();
+        PanelInstance panel = getPanelInstance();
                       panel.updateGraph();
         return mxCellRenderer.createBufferedImage(panel.getGraph(),  null, 1, Color.WHITE, true, null);
     }
@@ -61,12 +61,12 @@ public class ExportInstance {
      * @return Panel Instance.
      */
     private PanelInstance getPanelInstance() {
-        if (this.instance.getDiagram().getType().equals("Activity"))
-            return new PanelActivityInstance(null,  this.instance);
-        else if (this.instance.getDiagram().getType().equals("Class"))
-            return new PanelClassInstance(null, this.instance);
-        else if (this.instance.getDiagram().getType().equals("Component"))
-            return new PanelComponentInstance(null, this.instance);
-        return new PanelUseCaseInstance(null, this.instance);
+        if (instance.getDiagram().getType().equals("Activity"))
+            return new PanelActivityInstance(null, instance);
+        else if (instance.getDiagram().getType().equals("Class"))
+            return new PanelClassInstance(null, instance);
+        else if (instance.getDiagram().getType().equals("Component"))
+            return new PanelComponentInstance(null, instance);
+        return new PanelUseCaseInstance(null, instance);
     }
 }

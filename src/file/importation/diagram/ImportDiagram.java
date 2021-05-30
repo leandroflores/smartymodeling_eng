@@ -13,7 +13,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- * <p>Class of Import <b>ImportDiagram</b>.</p>
+ * <p>Class of File <b>ImportDiagram</b>.</p>
  * <p>Class responsible for <b>Importing Diagram</b> in SMartyModeling.</p>
  * @author Leandro 
  * @since  2019-05-23
@@ -29,11 +29,11 @@ public abstract class ImportDiagram {
      * @return Diagram.
      */
     public Diagram importDiagram() {
-               this.importElements();
-               this.importAssociations();
-               this.importRelationships();
-               this.importVariabilities();
-        return this.diagram;
+               importElements();
+               importAssociations();
+               importRelationships();
+               importVariabilities();
+        return diagram;
     }
     
     /**
@@ -50,30 +50,30 @@ public abstract class ImportDiagram {
      * Method responsible for importing the Variabilities.
      */
     protected void importVariabilities() {
-        this.addVariabilities();
-        this.addMutex();
-        this.addRequires();
+        addVariabilities();
+        addMutex();
+        addRequires();
     }
     
     /**
      * Method responsible for importing the Relationships.
      */
     protected void importRelationships() {
-        this.addGeneralizations();
-        this.addDependencies();
+        addGeneralizations();
+        addDependencies();
     }
     
     /**
      * Method responsible for adding the Variabilities.
      */
     protected void addVariabilities() {
-        NodeList variabilities = this.element.getElementsByTagName("variability");
+        NodeList variabilities = element.getElementsByTagName("variability");
         for (int i = 0; i < variabilities.getLength(); i++) {
             Element     current_    = (Element) variabilities.item(i);
             Variability variability = new Variability(current_);
-                        variability.setVariationPoint(this.diagram.getElement(current_.getAttribute("variationPoint")));
-                        this.addVariants(variability, current_);
-            this.diagram.addVariability(variability);
+                        variability.setVariationPoint(diagram.getElement(current_.getAttribute("variationPoint")));
+                        addVariants(variability, current_);
+            diagram.addVariability(variability);
         }
     }
     
@@ -85,7 +85,7 @@ public abstract class ImportDiagram {
     protected void addVariants(Variability variability, Element node) {
         NodeList variants = node.getElementsByTagName("variant");
         for (int i = 0; i < variants.getLength(); i++)
-            variability.addVariant(this.diagram.getElement(((Element) variants.item(i)).getAttribute("id")));
+            variability.addVariant(diagram.getElement(((Element) variants.item(i)).getAttribute("id")));
     }
     
     /**
@@ -96,7 +96,7 @@ public abstract class ImportDiagram {
     protected void addPoints(Element node, Association association) {
         NodeList points = node.getElementsByTagName("point");
         for (int i = 0; i < points.getLength(); i++)
-            association.addPoint(this.getPoint((Element) points.item(i)));
+            association.addPoint(getPoint((Element) points.item(i)));
     }
     
     /**
@@ -113,14 +113,14 @@ public abstract class ImportDiagram {
      * Method responsible for adding Mutex.
      */
     protected void addMutex() {
-        NodeList list = this.element.getElementsByTagName("mutex");
+        NodeList list = element.getElementsByTagName("mutex");
         for (int i = 0; i < list.getLength(); i++) {
             Element current = (Element) list.item(i);
-            Mutex   mutex   = new Mutex(this.diagram.getElement(current.getAttribute("source")),
-                                        this.diagram.getElement(current.getAttribute("target")));
+            Mutex   mutex   = new Mutex(diagram.getElement(current.getAttribute("source")),
+                                        diagram.getElement(current.getAttribute("target")));
                     mutex.setId(current.getAttribute("id"));
-                    this.addPoints(current, mutex);
-            this.diagram.addAssociation(mutex);
+                    addPoints(current, mutex);
+            diagram.addAssociation(mutex);
         }
     }
     
@@ -128,13 +128,14 @@ public abstract class ImportDiagram {
      * Method responsible for adding Requires.
      */
     protected void addRequires() {
-        NodeList list = this.element.getElementsByTagName("requires");
+        NodeList list = element.getElementsByTagName("requires");
         for (int i = 0; i < list.getLength(); i++) {
             Element  current  = (Element) list.item(i);
-            Requires requires = new Requires(this.diagram.getElement(current.getAttribute("source")), this.diagram.getElement(current.getAttribute("target")));
+            Requires requires = new Requires(diagram.getElement(current.getAttribute("source")), 
+                                             diagram.getElement(current.getAttribute("target")));
                      requires.setId(current.getAttribute("id"));
-                     this.addPoints(current, requires);
-            this.diagram.addAssociation(requires);
+                     addPoints(current, requires);
+            diagram.addAssociation(requires);
         }
     }
     
@@ -142,13 +143,14 @@ public abstract class ImportDiagram {
      * Method responsible for adding Generalization.
      */
     protected void addGeneralizations() {
-        NodeList list = this.element.getElementsByTagName("generalization");
+        NodeList list = element.getElementsByTagName("generalization");
         for (int i = 0; i < list.getLength(); i++) {
-            Element        current        = (Element) list.item(i);
-            Generalization generalization = new Generalization(this.diagram.getElement(current.getAttribute("source")), this.diagram.getElement(current.getAttribute("target")));
-                           generalization.setId(current.getAttribute("id"));
-                           this.addPoints(current, generalization);
-            this.diagram.addAssociation(generalization);
+            Element        current = (Element) list.item(i);
+            Generalization general = new Generalization(diagram.getElement(current.getAttribute("source")), 
+                                                        diagram.getElement(current.getAttribute("target")));
+                           general.setId(current.getAttribute("id"));
+                           addPoints(current, general);
+            diagram.addAssociation(general);
         }
     }
     
@@ -156,14 +158,14 @@ public abstract class ImportDiagram {
      * Method responsible for adding Dependency.
      */
     protected void addDependencies() {
-        NodeList list = this.element.getElementsByTagName("dependency");
+        NodeList list = element.getElementsByTagName("dependency");
         for (int i = 0; i < list.getLength(); i++) {
             Element    current    = (Element) list.item(i);
-            Dependency dependency = new Dependency(this.diagram.getElement(current.getAttribute("source")), 
-                                                   this.diagram.getElement(current.getAttribute("target")));
+            Dependency dependency = new Dependency(diagram.getElement(current.getAttribute("source")), 
+                                                   diagram.getElement(current.getAttribute("target")));
                        dependency.setId(current.getAttribute("id"));
-                       this.addPoints(current, dependency);
-            this.diagram.addAssociation(dependency);
+                       addPoints(current, dependency);
+            diagram.addAssociation(dependency);
         }
     }
     
@@ -173,7 +175,7 @@ public abstract class ImportDiagram {
      * @return Element by Id.
      */
     protected model.structural.base.Element getElement(String id) {
-        return this.diagram.getElement(id);
+        return diagram.getElement(id);
     }
     
     /**
@@ -181,7 +183,7 @@ public abstract class ImportDiagram {
      * @return Diagram.
      */
     protected Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
     
     /**
@@ -189,6 +191,6 @@ public abstract class ImportDiagram {
      * @return Project.
      */
     protected Project getProject() {
-        return this.diagram.getProject();
+        return diagram.getProject();
     }
 }

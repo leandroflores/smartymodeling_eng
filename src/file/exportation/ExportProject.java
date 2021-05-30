@@ -6,10 +6,10 @@ import java.io.PrintWriter;
 import model.structural.base.Project;
 
 /**
- * <p>Class of Export <b>ExportProject</b>.</p>
+ * <p>Class of File <b>ExportProject</b>.</p>
  * <p>Class responsible for <b>Exporting Project</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  23/05/2019
+ * @since  2019-05-23
  * @see    model.structural.Project
  */
 public class ExportProject {
@@ -20,12 +20,12 @@ public class ExportProject {
     
     /**
      * Default constructor method of Class.
-     * @param project SMartyModeling Project.
-     * @param path Project Path.
+     * @param project_ SMartyModeling Project.
+     * @param path_ Project Path.
      */
-    public ExportProject(Project project, String path) {
-        this.project = project;
-        this.path    = path;
+    public ExportProject(Project project_, String path_) {
+        project = project_;
+        path    = path_;
     }
     
     /**
@@ -33,9 +33,9 @@ public class ExportProject {
      * @throws IOException
      */
     public void export() throws IOException {
-        this.createFile();
-        this.exportProject();
-        this.closeFile();
+        createFile();
+        exportProject();
+        closeFile();
     }
     
     /**
@@ -43,15 +43,15 @@ public class ExportProject {
      * @throws IOException 
      */
     private void createFile() throws IOException {
-        this.fileWriter  = new FileWriter(this.path);
-        this.printWriter = new PrintWriter(this.fileWriter);
+        fileWriter  = new FileWriter(path);
+        printWriter = new PrintWriter(fileWriter);
     }
     
     /**
      * Method responsible for exporting the Project.
      */
     private void exportProject() {
-        this.printWriter.print(this.project.export());
+        printWriter.print(project.export());
     }
     
     /**
@@ -59,7 +59,7 @@ public class ExportProject {
      * @throws IOException
      */
     private void closeFile() throws IOException {
-        this.printWriter.close();
-        this.fileWriter.close();
+        printWriter.close();
+        fileWriter.close();
     }
 }
