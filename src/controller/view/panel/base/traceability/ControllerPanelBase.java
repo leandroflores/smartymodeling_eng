@@ -10,6 +10,7 @@ import view.panel.base.traceability.PanelBase;
  * @author Leandro
  * @since  2020-04-22
  * @see    controller.view.panel.base.ControllerPanelBase
+ * @see    model.structural.base.traceability.Traceability
  * @see    view.panel.base.traceability.PanelBase
  */
 public abstract class ControllerPanelBase extends controller.view.panel.base.ControllerPanelBase {
@@ -27,14 +28,8 @@ public abstract class ControllerPanelBase extends controller.view.panel.base.Con
     
     @Override
     public void keyReleased(KeyEvent event) {
-        if (this.ready)
-            this.update();
-    }
-    
-    @Override
-    protected void refresh() {
-//        this.getPanelTree().updateNode(this.getTraceability());
-        super.refresh();
+        if (ready)
+            update();
     }
     
     /**
@@ -42,11 +37,11 @@ public abstract class ControllerPanelBase extends controller.view.panel.base.Con
      * @return Traceability.
      */
     protected Traceability getTraceability() {
-        return this.getPanel().getTraceability();
+        return getPanel().getTraceability();
     }
     
     @Override
     public PanelBase getPanel() {
-        return (PanelBase) this.panel;
+        return (PanelBase) panel;
     }
 }

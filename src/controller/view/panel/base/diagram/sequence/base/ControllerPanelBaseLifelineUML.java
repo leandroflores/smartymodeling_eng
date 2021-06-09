@@ -25,11 +25,11 @@ public class ControllerPanelBaseLifelineUML extends ControllerPanelBaseElement {
     
     @Override
     protected void update() {
-        this.getInstance().setName(this.getString(this.getPanel().getNameTextField()));
-        this.getInstance().setActor((ActorUML) this.getPanel().getActorComboBox().getSelectedItem());
-        this.getInstance().setMandatory(this.getPanel().getMandatoryCheckBox().isSelected());
-        this.getDiagram().updateStereotype(this.getInstance());
-        super.refresh();
+        getInstance().setName(getString(getPanel().getNameTextField()));
+        getInstance().setActor((ActorUML) getPanel().getActorComboBox().getSelectedItem());
+        getInstance().setMandatory(getPanel().getMandatoryCheckBox().isSelected());
+        getDiagram().updateStereotype(getInstance());
+        refresh();
     }
     
     /**
@@ -37,11 +37,11 @@ public class ControllerPanelBaseLifelineUML extends ControllerPanelBaseElement {
      * @return Lifeline UML.
      */
     private LifelineUML getInstance() {
-        return this.getPanel().getElement();
+        return getPanel().getElement();
     }
     
     @Override
     public PanelBaseLifelineUML getPanel() {
-        return (PanelBaseLifelineUML) this.panel;
+        return (PanelBaseLifelineUML) panel;
     }
 }

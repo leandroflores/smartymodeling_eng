@@ -24,24 +24,24 @@ public class ControllerPanelBaseRequirementTraceability extends ControllerPanelB
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.ready) {
-            if (this.getPanel().getContextComboBox().equals(event.getSource()))
-                this.getPanel().updateElementComboBox();
-            if (this.getPanel().getAddElementButton().equals(event.getSource()))
-                this.getPanel().addElement();
-            else if (this.getPanel().getDelElementButton().equals(event.getSource()))
-                this.getPanel().delElement();
-            this.update();
+        if (ready) {
+            if (getPanel().getContextComboBox().equals(event.getSource()))
+                getPanel().updateElementComboBox();
+            else if (getPanel().getAddElementButton().equals(event.getSource()))
+                getPanel().addElement();
+            else if (getPanel().getDelElementButton().equals(event.getSource()))
+                getPanel().delElement();
+            update();
         }
     }
     
     @Override
     protected void update() {
-        this.refresh();
+        refresh();
     }
     
     @Override
     public PanelBaseRequirementTraceability getPanel() {
-        return (PanelBaseRequirementTraceability) this.panel;
+        return (PanelBaseRequirementTraceability) panel;
     }
 }

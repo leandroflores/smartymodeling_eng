@@ -8,6 +8,7 @@ import view.panel.base.traceability.PanelBaseTraceability;
  * @author Leandro
  * @since  2019-07-22
  * @see    controller.view.panel.base.traceability.ControllerPanelBase
+ * @see    model.structural.base.traceability.Traceability
  * @see    view.panel.base.traceability.PanelBaseTraceability
  */
 public class ControllerPanelBaseTraceability extends ControllerPanelBase {
@@ -22,13 +23,13 @@ public class ControllerPanelBaseTraceability extends ControllerPanelBase {
 
     @Override
     protected void update() {
-        this.getTraceability().setName(this.getString(this.getPanel().getNameTextField()));
-        this.getTraceability().setDescription(this.getString(this.getPanel().getDescriptionTextField()));
-        this.refresh();
+        getTraceability().setName(getString(getPanel().getNameTextField()));
+        getTraceability().setDescription(getString(getPanel().getDescriptionTextField()));
+        refresh();
     }
     
     @Override
     public PanelBaseTraceability getPanel() {
-        return (PanelBaseTraceability) this.panel;
+        return (PanelBaseTraceability) panel;
     }
 }

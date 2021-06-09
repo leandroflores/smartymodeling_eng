@@ -14,7 +14,7 @@ import view.panel.Panel;
 
 /**
  * <p>Class of Controller <b>ControllerPanel</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the Panels of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>Panel</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-05-20
  * @see    controller.Controller
@@ -25,10 +25,10 @@ public abstract class ControllerPanel extends Controller {
     
     /**
      * Default constructor method of Class.
-     * @param panel Panel.
+     * @param panel_ Panel.
      */
-    public ControllerPanel(Panel panel) {
-        this.panel = panel;
+    public ControllerPanel(Panel panel_) {
+        panel = panel_;
     }
     
     @Override
@@ -39,7 +39,7 @@ public abstract class ControllerPanel extends Controller {
      * @return Default Color.
      */
     protected Color getDefaultColor() {
-        return this.panel.getBackground();
+        return panel.getBackground();
     }
     
     /**
@@ -84,7 +84,7 @@ public abstract class ControllerPanel extends Controller {
         if (value.equals("*"))
             return Integer.MAX_VALUE;
         if (value.contains(".."))
-            return this.getValue(value.substring(value.lastIndexOf(".") + 1));
+            return getValue(value.substring(value.lastIndexOf(".") + 1));
         return Integer.parseInt(value);
     }
     
@@ -164,6 +164,6 @@ public abstract class ControllerPanel extends Controller {
      * @return Panel.
      */
     public Panel getPanel() {
-        return this.panel;
+        return panel;
     }
 }

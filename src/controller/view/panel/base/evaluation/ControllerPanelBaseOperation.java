@@ -22,13 +22,13 @@ public class ControllerPanelBaseOperation extends ControllerPanelBase {
     
     @Override
     protected void update() {
-        this.getPanel().setTarget();
-        this.getMetric().setOperation(this.getString(this.getPanel().getOperationTextField()));
-        this.refresh();
+        getPanel().setTarget();
+        getMetric().setOperation(getString(getPanel().getOperationTextField()));
+        refresh();
     }
     
     @Override
     public PanelBaseOperation getPanel() {
-        return (PanelBaseOperation) this.panel;
+        return (PanelBaseOperation) panel;
     }
 }

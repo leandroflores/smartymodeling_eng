@@ -22,24 +22,24 @@ public class ControllerPanelBaseProfile extends ControllerPanelBase {
     
     @Override
     protected void refresh() {
-        this.getPanelModeling().updateModelingPanels();
+        getPanelModeling().updateModelingPanels();
         super.refresh();
     }
     
     @Override
     protected void update() {
-        this.getPanel().getProfile().getMandatory().setName(this.getPanel().getMandatoryTextField().getText());
-        this.getPanel().getProfile().getOptional().setName(this.getPanel().getOptionalTextField().getText());
-        this.getPanel().getProfile().getVariationPoint().setName(this.getPanel().getVarPointTextField().getText());
-        this.getPanel().getProfile().getInclusive().setName(this.getPanel().getInclusiveTextField().getText());
-        this.getPanel().getProfile().getExclusive().setName(this.getPanel().getExclusiveTextField().getText());
-        this.getPanel().getProfile().getRequires().setName(this.getPanel().getRequiresTextField().getText());
-        this.getPanel().getProfile().getMutex().setName(this.getPanel().getMutexTextField().getText());
-        this.refresh();
+        getPanel().getProfile().getMandatory().setName(getPanel().getMandatoryTextField().getText());
+        getPanel().getProfile().getOptional().setName(getPanel().getOptionalTextField().getText());
+        getPanel().getProfile().getVariationPoint().setName(getPanel().getVarPointTextField().getText());
+        getPanel().getProfile().getInclusive().setName(getPanel().getInclusiveTextField().getText());
+        getPanel().getProfile().getExclusive().setName(getPanel().getExclusiveTextField().getText());
+        getPanel().getProfile().getRequires().setName(getPanel().getRequiresTextField().getText());
+        getPanel().getProfile().getMutex().setName(getPanel().getMutexTextField().getText());
+        refresh();
     }
     
     @Override
     public PanelBaseProfile getPanel() {
-        return (PanelBaseProfile) this.panel;
+        return (PanelBaseProfile) panel;
     }
 }

@@ -26,16 +26,16 @@ public class ControllerPanelBaseMethodUML extends ControllerPanelBaseElement {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.ready) {
-            if (this.getPanel().getConstructorCheckBox().equals(event.getSource()))
-                this.actionConstructor();
-            else if (this.getPanel().getAbstractCheckBox().equals(event.getSource()))
-                this.actionAbstract();
-            else if (this.getPanel().getStaticCheckBox().equals(event.getSource()))
-                this.actionStatic();
-            else if (this.getPanel().getFinalCheckBox().equals(event.getSource()))
-                this.actionFinal();
-            this.update();
+        if (ready) {
+            if (getPanel().getConstructorCheckBox().equals(event.getSource()))
+                actionConstructor();
+            else if (getPanel().getAbstractCheckBox().equals(event.getSource()))
+                actionAbstract();
+            else if (getPanel().getStaticCheckBox().equals(event.getSource()))
+                actionStatic();
+            else if (getPanel().getFinalCheckBox().equals(event.getSource()))
+                actionFinal();
+            update();
         }
     }
     
@@ -43,68 +43,68 @@ public class ControllerPanelBaseMethodUML extends ControllerPanelBaseElement {
      * Method responsible for updating the Constructor.
      */
     private void actionConstructor() {
-        this.getPanel().getNameTextField().setEnabled(!this.getPanel().getConstructorCheckBox().isSelected());
-        this.getPanel().getNameTextField().setText(this.getMethod().getName().trim());
-        this.getPanel().getReturnComboBox().setEnabled(!this.getPanel().getConstructorCheckBox().isSelected());
-        this.getPanel().getAbstractCheckBox().setEnabled(!this.getPanel().getConstructorCheckBox().isSelected());
-        this.getPanel().getAbstractCheckBox().setSelected(this.getPanel().getConstructorCheckBox().isSelected() ? false : this.getPanel().getAbstractCheckBox().isSelected());
-        this.getPanel().getStaticCheckBox().setEnabled(!this.getPanel().getConstructorCheckBox().isSelected());
-        this.getPanel().getStaticCheckBox().setSelected(this.getPanel().getConstructorCheckBox().isSelected()   ? false : this.getPanel().getStaticCheckBox().isSelected());
-        this.getPanel().getFinalCheckBox().setEnabled(!this.getPanel().getConstructorCheckBox().isSelected());
-        this.getPanel().getFinalCheckBox().setSelected(this.getPanel().getConstructorCheckBox().isSelected()    ? false : this.getPanel().getFinalCheckBox().isSelected());
+        getPanel().getNameTextField().setEnabled(!getPanel().getConstructorCheckBox().isSelected());
+        getPanel().getNameTextField().setText(getMethod().getName().trim());
+        getPanel().getReturnComboBox().setEnabled(!getPanel().getConstructorCheckBox().isSelected());
+        getPanel().getAbstractCheckBox().setEnabled(!getPanel().getConstructorCheckBox().isSelected());
+        getPanel().getAbstractCheckBox().setSelected(getPanel().getConstructorCheckBox().isSelected() ? false : getPanel().getAbstractCheckBox().isSelected());
+        getPanel().getStaticCheckBox().setEnabled(!getPanel().getConstructorCheckBox().isSelected());
+        getPanel().getStaticCheckBox().setSelected(getPanel().getConstructorCheckBox().isSelected()   ? false : getPanel().getStaticCheckBox().isSelected());
+        getPanel().getFinalCheckBox().setEnabled(!getPanel().getConstructorCheckBox().isSelected());
+        getPanel().getFinalCheckBox().setSelected(getPanel().getConstructorCheckBox().isSelected()    ? false : getPanel().getFinalCheckBox().isSelected());
     }
 
     /**
      * Method responsible for updating the Abstract.
      */
     private void actionAbstract() {
-        this.getPanel().getReturnComboBox().setEnabled(this.getPanel().getAbstractCheckBox().isSelected());
-        this.getPanel().getConstructorCheckBox().setEnabled(!this.getPanel().getAbstractCheckBox().isSelected());
-        this.getPanel().getConstructorCheckBox().setSelected(this.getPanel().getAbstractCheckBox().isSelected() ? false : this.getPanel().getConstructorCheckBox().isSelected());
-        this.getPanel().getStaticCheckBox().setEnabled(!this.getPanel().getAbstractCheckBox().isSelected());
-        this.getPanel().getStaticCheckBox().setSelected(this.getPanel().getAbstractCheckBox().isSelected()      ? false : this.getPanel().getStaticCheckBox().isSelected());
-        this.getPanel().getFinalCheckBox().setEnabled(!this.getPanel().getAbstractCheckBox().isSelected());
-        this.getPanel().getFinalCheckBox().setSelected(this.getPanel().getAbstractCheckBox().isSelected()       ? false : this.getPanel().getFinalCheckBox().isSelected());
+        getPanel().getReturnComboBox().setEnabled(getPanel().getAbstractCheckBox().isSelected());
+        getPanel().getConstructorCheckBox().setEnabled(!getPanel().getAbstractCheckBox().isSelected());
+        getPanel().getConstructorCheckBox().setSelected(getPanel().getAbstractCheckBox().isSelected() ? false : getPanel().getConstructorCheckBox().isSelected());
+        getPanel().getStaticCheckBox().setEnabled(!getPanel().getAbstractCheckBox().isSelected());
+        getPanel().getStaticCheckBox().setSelected(getPanel().getAbstractCheckBox().isSelected() ? false : getPanel().getStaticCheckBox().isSelected());
+        getPanel().getFinalCheckBox().setEnabled(!getPanel().getAbstractCheckBox().isSelected());
+        getPanel().getFinalCheckBox().setSelected(getPanel().getAbstractCheckBox().isSelected()  ? false : getPanel().getFinalCheckBox().isSelected());
     }
     
     /**
      * Method responsible for updating the Static.
      */
     private void actionStatic() {
-        this.getPanel().getReturnComboBox().setEnabled(this.getPanel().getStaticCheckBox().isSelected());
-        this.getPanel().getConstructorCheckBox().setEnabled(!this.getPanel().getStaticCheckBox().isSelected());
-        this.getPanel().getConstructorCheckBox().setSelected(this.getPanel().getStaticCheckBox().isSelected() ? false : this.getPanel().getConstructorCheckBox().isSelected());
-        this.getPanel().getAbstractCheckBox().setEnabled(!this.getPanel().getStaticCheckBox().isSelected());
-        this.getPanel().getAbstractCheckBox().setSelected(this.getPanel().getStaticCheckBox().isSelected()    ? false : this.getPanel().getAbstractCheckBox().isSelected());
+        getPanel().getReturnComboBox().setEnabled(getPanel().getStaticCheckBox().isSelected());
+        getPanel().getConstructorCheckBox().setEnabled(!getPanel().getStaticCheckBox().isSelected());
+        getPanel().getConstructorCheckBox().setSelected(getPanel().getStaticCheckBox().isSelected() ? false : getPanel().getConstructorCheckBox().isSelected());
+        getPanel().getAbstractCheckBox().setEnabled(!getPanel().getStaticCheckBox().isSelected());
+        getPanel().getAbstractCheckBox().setSelected(getPanel().getStaticCheckBox().isSelected() ? false : getPanel().getAbstractCheckBox().isSelected());
     }
     
     /**
      * Method responsible for updating the Final.
      */
     private void actionFinal() {
-        this.getPanel().getReturnComboBox().setEnabled(this.getPanel().getFinalCheckBox().isSelected());
-        this.getPanel().getConstructorCheckBox().setEnabled(!this.getPanel().getFinalCheckBox().isSelected());
-        this.getPanel().getConstructorCheckBox().setSelected(this.getPanel().getFinalCheckBox().isSelected() ? false : this.getPanel().getConstructorCheckBox().isSelected());
-        this.getPanel().getAbstractCheckBox().setEnabled(!this.getPanel().getFinalCheckBox().isSelected());
-        this.getPanel().getAbstractCheckBox().setSelected(this.getPanel().getFinalCheckBox().isSelected()    ? false : this.getPanel().getAbstractCheckBox().isSelected());
+        getPanel().getReturnComboBox().setEnabled(getPanel().getFinalCheckBox().isSelected());
+        getPanel().getConstructorCheckBox().setEnabled(!getPanel().getFinalCheckBox().isSelected());
+        getPanel().getConstructorCheckBox().setSelected(getPanel().getFinalCheckBox().isSelected() ? false : getPanel().getConstructorCheckBox().isSelected());
+        getPanel().getAbstractCheckBox().setEnabled(!getPanel().getFinalCheckBox().isSelected());
+        getPanel().getAbstractCheckBox().setSelected(getPanel().getFinalCheckBox().isSelected() ? false : getPanel().getAbstractCheckBox().isSelected());
     }
     
     @Override
     protected void refresh() {
-        this.getProject().changeNames(this.getMethod());
+        getProject().changeNames(getMethod());
         super.refresh();
     }
     
     @Override
     protected void update() {
-        this.getMethod().setVisibility(this.getValue(this.getPanel().getVisibilityComboBox()));
-        this.getMethod().setName(this.getString(this.getPanel().getNameTextField()));
-        this.getMethod().setConstructor(this.getPanel().getConstructorCheckBox().isSelected());
-        this.getMethod().setReturn((TypeUML) this.getPanel().getReturnComboBox().getSelectedItem());
-        this.getMethod().setAbstract(this.getPanel().getAbstractCheckBox().isSelected());
-        this.getMethod().setStatic(this.getPanel().getStaticCheckBox().isSelected());
-        this.getMethod().setFinal(this.getPanel().getFinalCheckBox().isSelected());
-        this.refresh();
+        getMethod().setVisibility(getValue(getPanel().getVisibilityComboBox()));
+        getMethod().setName(getString(getPanel().getNameTextField()));
+        getMethod().setConstructor(getPanel().getConstructorCheckBox().isSelected());
+        getMethod().setReturn((TypeUML) getPanel().getReturnComboBox().getSelectedItem());
+        getMethod().setAbstract(getPanel().getAbstractCheckBox().isSelected());
+        getMethod().setStatic(getPanel().getStaticCheckBox().isSelected());
+        getMethod().setFinal(getPanel().getFinalCheckBox().isSelected());
+        refresh();
     }
     
     /**
@@ -112,11 +112,11 @@ public class ControllerPanelBaseMethodUML extends ControllerPanelBaseElement {
      * @return Method UML.
      */
     private MethodUML getMethod() {
-        return this.getPanel().getElement();
+        return getPanel().getElement();
     }
     
     @Override
     public PanelBaseMethodUML getPanel() {
-        return (PanelBaseMethodUML) this.panel;
+        return (PanelBaseMethodUML) panel;
     }
 }

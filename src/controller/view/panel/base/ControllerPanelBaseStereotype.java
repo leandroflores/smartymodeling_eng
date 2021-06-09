@@ -22,18 +22,18 @@ public class ControllerPanelBaseStereotype extends ControllerPanelBase {
     
     @Override
     protected void refresh() {
-        this.getPanelModeling().updateModelingPanels();
+        getPanelModeling().updateModelingPanels();
         super.refresh();
     }
     
     @Override
     protected void update() {
-        this.getPanel().getStereotype().setName(this.getPanel().getNameTextField().getText().trim());
-        this.refresh();
+        getPanel().getStereotype().setName(getPanel().getNameTextField().getText().trim());
+        refresh();
     }
     
     @Override
     public PanelBaseStereotype getPanel() {
-        return (PanelBaseStereotype) this.panel;
+        return (PanelBaseStereotype) panel;
     }
 }

@@ -24,8 +24,8 @@ public class ControllerPanelBaseDescription extends ControllerPanelBase {
     
     @Override
     protected void update() {
-        this.getEntity().setDescription(this.getPanel().getDescriptionTextArea().getText().trim());
-        this.refresh();
+        getEntity().setDescription(getPanel().getDescriptionTextArea().getText().trim());
+        refresh();
     }
     
     /**
@@ -33,11 +33,11 @@ public class ControllerPanelBaseDescription extends ControllerPanelBase {
      * @return Entity.
      */
     private Entity getEntity() {
-        return this.getPanel().getEntity();
+        return getPanel().getEntity();
     }
     
     @Override
     public PanelBaseDescription getPanel() {
-        return (PanelBaseDescription) this.panel;
+        return (PanelBaseDescription) panel;
     }
 }

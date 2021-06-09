@@ -24,19 +24,19 @@ public class ControllerPanelBaseAssociationUML extends ControllerPanelBaseAssoci
     
     @Override
     protected void update() {
-        this.getAssociation().setName(this.getString(this.getPanel().getNameTextField()));
-        this.getAssociation().setDirection(this.getPanel().getDirectedCheckBox().isSelected());
-        this.getPanel().updatePanelBaseSource();
-        super.refresh();
+        getAssociation().setName(getString(getPanel().getNameTextField()));
+        getAssociation().setDirection(getPanel().getDirectedCheckBox().isSelected());
+        getPanel().updatePanelBaseSource();
+        refresh();
     }
     
     @Override
     protected AssociationUML getAssociation() {
-        return this.getPanel().getAssociation();
+        return getPanel().getAssociation();
     }
     
     @Override
     public PanelBaseAssociationUML getPanel() {
-        return (PanelBaseAssociationUML) this.panel;
+        return (PanelBaseAssociationUML) panel;
     }
 }

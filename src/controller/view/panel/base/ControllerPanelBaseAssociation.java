@@ -22,20 +22,20 @@ public abstract class ControllerPanelBaseAssociation extends ControllerPanelBase
         super(panel);
     }
 
+    @Override
+    protected void refresh() {
+        getPanelModeling().updateDiagram(getDiagram());
+        getPanelModeling().updateInstancePanels();
+        getPanelModeling().setSelected(getDiagram(), getAssociation().getId());
+        super.refresh();
+    }
+    
     /**
      * Method responsible for returning the Diagram.
      * @return Diagram.
      */
     protected Diagram getDiagram() {
-        return this.getPanel().getDiagram();
-    }
-    
-    @Override
-    protected void refresh() {
-        this.getPanelModeling().updateDiagram(this.getDiagram());
-        this.getPanelModeling().updateInstancePanels();
-        this.getPanelModeling().setSelected(this.getDiagram(), this.getAssociation().getId());
-        super.refresh();
+        return getPanel().getDiagram();
     }
     
     /**
@@ -43,11 +43,11 @@ public abstract class ControllerPanelBaseAssociation extends ControllerPanelBase
      * @return Element.
      */
     protected Association getAssociation() {
-        return this.getPanel().getAssociation();
+        return getPanel().getAssociation();
     }
     
     @Override
     public PanelBaseAssociation getPanel() {
-        return (PanelBaseAssociation) this.panel;
+        return (PanelBaseAssociation) panel;
     }
 }

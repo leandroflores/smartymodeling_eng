@@ -27,28 +27,28 @@ public class ControllerPanelBaseTarget extends ControllerPanelBaseAssociation {
      * @return Source Cardinality.
      */
     private void updateCardinality() {
-        String value = this.getString(this.getPanel().getCardinalityTextField());
-        if (this.checkCardinality(value)) {
-            this.getAssociation().setTargetMin(this.getMin(value));
-            this.getAssociation().setTargetMax(this.getMax(value));
+        String value = getString(getPanel().getCardinalityTextField());
+        if (checkCardinality(value)) {
+            getAssociation().setTargetMin(getMin(value));
+            getAssociation().setTargetMax(getMax(value));
         }
     }
     
     @Override
     protected void update() {
-        this.getAssociation().setTargetVisibility(this.getValue(this.getPanel().getVisibilityComboBox()));
-        this.getAssociation().setTargetName(this.getString(this.getPanel().getNameTextField()));
-        this.updateCardinality();
-        super.refresh();
+        getAssociation().setTargetVisibility(getValue(getPanel().getVisibilityComboBox()));
+        getAssociation().setTargetName(getString(getPanel().getNameTextField()));
+        updateCardinality();
+        refresh();
     }
     
     @Override
     protected AssociationUML getAssociation() {
-        return this.getPanel().getAssociation();
+        return getPanel().getAssociation();
     }
     
     @Override
     public PanelBaseTarget getPanel() {
-        return (PanelBaseTarget) this.panel;
+        return (PanelBaseTarget) panel;
     }
 }

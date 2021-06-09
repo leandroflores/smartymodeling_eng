@@ -25,38 +25,36 @@ public class ControllerPanelBaseClassUML extends ControllerPanelBaseElement {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.ready) {
-            if (this.getPanel().getAbstractCheckBox().equals(event.getSource()))
-                this.actionAbstract();
-            else if (this.getPanel().getFinalCheckBox().equals(event.getSource()))
-                this.actionFinal();
-        }
+        if (ready && getPanel().getAbstractCheckBox().equals(event.getSource()))
+            actionAbstract();
+        else if (ready && getPanel().getFinalCheckBox().equals(event.getSource()))
+            actionFinal();
     }
 
     /**
      * Method responsible for updating the Abstract.
      */
     private void actionAbstract() {
-        this.getPanel().getFinalCheckBox().setEnabled(!this.getPanel().getAbstractCheckBox().isSelected());
-        this.getPanel().getFinalCheckBox().setSelected(this.getPanel().getAbstractCheckBox().isSelected() ? false : this.getPanel().getFinalCheckBox().isSelected());
+        getPanel().getFinalCheckBox().setEnabled(!getPanel().getAbstractCheckBox().isSelected());
+        getPanel().getFinalCheckBox().setSelected(getPanel().getAbstractCheckBox().isSelected() ? false : getPanel().getFinalCheckBox().isSelected());
     }
     
     /**
      * Method responsible for updating the Final.
      */
     private void actionFinal() {
-        this.getPanel().getAbstractCheckBox().setEnabled(!this.getPanel().getFinalCheckBox().isSelected());
-        this.getPanel().getAbstractCheckBox().setSelected(this.getPanel().getFinalCheckBox().isSelected() ? false : this.getPanel().getAbstractCheckBox().isSelected());
+        getPanel().getAbstractCheckBox().setEnabled(!getPanel().getFinalCheckBox().isSelected());
+        getPanel().getAbstractCheckBox().setSelected(getPanel().getFinalCheckBox().isSelected() ? false : getPanel().getAbstractCheckBox().isSelected());
     }
     
     @Override
     protected void update() {
-        this.getClassUML().setName(this.getString(this.getPanel().getNameTextField()));
-        this.getClassUML().setAbstract(this.getPanel().getAbstractCheckBox().isSelected());
-        this.getClassUML().setFinal(this.getPanel().getFinalCheckBox().isSelected());
-        this.getClassUML().setMandatory(this.getPanel().getMandatoryCheckBox().isSelected());
-        this.getDiagram().updateStereotype(this.getClassUML());
-        super.refresh();
+        getClassUML().setName(getString(getPanel().getNameTextField()));
+        getClassUML().setAbstract(getPanel().getAbstractCheckBox().isSelected());
+        getClassUML().setFinal(getPanel().getFinalCheckBox().isSelected());
+        getClassUML().setMandatory(getPanel().getMandatoryCheckBox().isSelected());
+        getDiagram().updateStereotype(getClassUML());
+        refresh();
     }
     
     /**
@@ -64,11 +62,11 @@ public class ControllerPanelBaseClassUML extends ControllerPanelBaseElement {
      * @return Class UML.
      */
     private ClassUML getClassUML() {
-        return this.getPanel().getElement();
+        return getPanel().getElement();
     }
     
     @Override
     public PanelBaseClassUML getPanel() {
-        return (PanelBaseClassUML) this.panel;
+        return (PanelBaseClassUML) panel;
     }
 }

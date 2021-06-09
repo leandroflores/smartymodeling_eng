@@ -10,6 +10,7 @@ import view.panel.base.product.PanelBaseProduct;
  * @author Leandro
  * @since  2019-10-07
  * @see    controller.view.panel.base.ControllerPanelBase
+ * @see    model.structural.base.product.Product
  * @see    view.panel.base.product.PanelBaseProduct
  */
 public class ControllerPanelBaseProduct extends ControllerPanelBase {
@@ -24,7 +25,7 @@ public class ControllerPanelBaseProduct extends ControllerPanelBase {
 
     @Override
     protected void refresh() {
-        this.getPanelTree().updateNode(this.getProduct());
+        getPanelTree().updateNode(getProduct());
         super.refresh();
     }
     
@@ -33,8 +34,8 @@ public class ControllerPanelBaseProduct extends ControllerPanelBase {
      * @return Product checked.
      */
     protected boolean check() {
-        return    this.check(this.getPanel().getNameTextField().getText())
-               && this.check(this.getPanel().getVersionTextField().getText());
+        return    check(getPanel().getNameTextField().getText())
+               && check(getPanel().getVersionTextField().getText());
     }
     
     /**
@@ -42,11 +43,11 @@ public class ControllerPanelBaseProduct extends ControllerPanelBase {
      */
     @Override
     protected void update() {
-        if (this.check()) {
-            this.getProduct().setName(this.getString(this.getPanel().getNameTextField()));
-            this.getProduct().setVersion(this.getString(this.getPanel().getVersionTextField()));
-            this.getProduct().setDescription(this.getString(this.getPanel().getDescriptionTextArea()));
-            this.refresh();
+        if (check()) {
+            getProduct().setName(getString(getPanel().getNameTextField()));
+            getProduct().setVersion(getString(getPanel().getVersionTextField()));
+            getProduct().setDescription(getString(getPanel().getDescriptionTextArea()));
+            refresh();
         }
     }
     
@@ -55,11 +56,11 @@ public class ControllerPanelBaseProduct extends ControllerPanelBase {
      * @return Product.
      */
     private Product getProduct() {
-        return this.getPanel().getProduct();
+        return getPanel().getProduct();
     }
     
     @Override
     public PanelBaseProduct getPanel() {
-        return (PanelBaseProduct) this.panel;
+        return (PanelBaseProduct) panel;
     }
 }

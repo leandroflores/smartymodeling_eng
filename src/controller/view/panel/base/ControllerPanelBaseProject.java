@@ -22,19 +22,19 @@ public class ControllerPanelBaseProject extends ControllerPanelBase {
     
     @Override
     protected void refresh() {
-        this.getPanelTree().updateNode(this.getPanel().getProject());
+        getPanelTree().updateNode(getPanel().getProject());
         super.refresh();
     }
     
     @Override
     protected void update() {
-        this.getProject().setName(this.getPanel().getNameTextField().getText().trim());
-        this.getProject().setVersion(this.getPanel().getVersionTextField().getText().trim());
-        this.refresh();
+        getProject().setName(getPanel().getNameTextField().getText().trim());
+        getProject().setVersion(getPanel().getVersionTextField().getText().trim());
+        refresh();
     }
     
     @Override
     public PanelBaseProject getPanel() {
-        return (PanelBaseProject) this.panel;
+        return (PanelBaseProject) panel;
     }
 }

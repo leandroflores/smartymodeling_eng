@@ -27,13 +27,13 @@ public abstract class ControllerPanelBase extends controller.view.panel.base.Con
     
     @Override
     public void keyReleased(KeyEvent event) {
-        if (this.ready)
-            this.update();
+        if (ready)
+            update();
     }
     
     @Override
     protected void refresh() {
-        this.getPanelTree().updateNode(this.getMetric());
+        getPanelTree().updateNode(getMetric());
         super.refresh();
     }
     
@@ -42,11 +42,11 @@ public abstract class ControllerPanelBase extends controller.view.panel.base.Con
      * @return Metric.
      */
     protected Metric getMetric() {
-        return this.getPanel().getMetric();
+        return getPanel().getMetric();
     }
     
     @Override
     public PanelBase getPanel() {
-        return (PanelBase) this.panel;
+        return (PanelBase) panel;
     }
 }

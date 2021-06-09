@@ -25,7 +25,7 @@ public class ControllerPanelBaseMeasure extends ControllerPanelBase {
 
     @Override
     protected void refresh() {
-        this.getPanelTree().updateNode(this.getMeasure());
+        getPanelTree().updateNode(getMeasure());
         super.refresh();
     }
     
@@ -34,14 +34,14 @@ public class ControllerPanelBaseMeasure extends ControllerPanelBase {
      * @return Measure checked.
      */
     protected boolean check() {
-        return this.check(this.getPanel().getNameTextField().getText());
+        return check(getPanel().getNameTextField().getText());
     }
     
     @Override
     protected void update() {
-        if (this.check()) {
-            this.getMeasure().setName(this.getString(this.getPanel().getNameTextField()));
-            this.refresh();
+        if (check()) {
+            getMeasure().setName(getString(getPanel().getNameTextField()));
+            refresh();
         }
     }
     
@@ -50,11 +50,11 @@ public class ControllerPanelBaseMeasure extends ControllerPanelBase {
      * @return Measure.
      */
     private Measure getMeasure() {
-        return this.getPanel().getMeasure();
+        return getPanel().getMeasure();
     }
     
     @Override
     public PanelBaseMeasure getPanel() {
-        return (PanelBaseMeasure) this.panel;
+        return (PanelBaseMeasure) panel;
     }
 }

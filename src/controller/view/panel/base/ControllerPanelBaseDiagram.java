@@ -23,15 +23,15 @@ public class ControllerPanelBaseDiagram extends ControllerPanelBase {
     
     @Override
     protected void refresh() {
-        this.getPanelTree().updateNode(this.getDiagram());
-        this.getPanelModeling().updateTab(this.getDiagram());
+        getPanelTree().updateNode(getDiagram());
+        getPanelModeling().updateTab(getDiagram());
         super.refresh();
     }
     
     @Override
     protected void update() {
-        this.getDiagram().setName(this.getPanel().getNameTextField().getText().trim());
-        this.refresh();
+        getDiagram().setName(getPanel().getNameTextField().getText().trim());
+        refresh();
     }
     
     /**
@@ -39,11 +39,11 @@ public class ControllerPanelBaseDiagram extends ControllerPanelBase {
      * @return Diagram.
      */
     private Diagram getDiagram() {
-        return this.getPanel().getDiagram();
+        return getPanel().getDiagram();
     }
     
     @Override
     public PanelBaseDiagram getPanel() {
-        return (PanelBaseDiagram) this.panel;
+        return (PanelBaseDiagram) panel;
     }
 }

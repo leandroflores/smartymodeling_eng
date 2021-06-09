@@ -24,9 +24,9 @@ public class ControllerPanelBaseFeature extends ControllerPanelBaseElement {
     
     @Override
     protected void update() {
-        this.getFeature().setName(this.getString(this.getPanel().getNameTextField()));
-        this.getFeature().setAbstract(this.getPanel().getAbstractCheckBox().isSelected());
-        super.refresh();
+        getFeature().setName(getString(getPanel().getNameTextField()));
+        getFeature().setAbstract(getPanel().getAbstractCheckBox().isSelected());
+        refresh();
     }
     
     /**
@@ -34,11 +34,11 @@ public class ControllerPanelBaseFeature extends ControllerPanelBaseElement {
      * @return Feature.
      */
     private Feature getFeature() {
-        return this.getPanel().getElement();
+        return getPanel().getElement();
     }
     
     @Override
     public PanelBaseFeature getPanel() {
-        return (PanelBaseFeature) this.panel;
+        return (PanelBaseFeature) panel;
     }
 }

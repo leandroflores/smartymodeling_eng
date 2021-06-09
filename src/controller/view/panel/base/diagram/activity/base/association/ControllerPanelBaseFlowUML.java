@@ -24,10 +24,10 @@ public class ControllerPanelBaseFlowUML extends ControllerPanelBaseAssociation {
     
     @Override
     protected void update() {
-        this.getFlow().setGuard(this.getString(this.getPanel().getGuardTextField()));
-        this.getFlow().setAction(this.getString(this.getPanel().getActionTextField()));
-        this.getFlow().setWeight(this.getString(this.getPanel().getWeightTextField()));
-        super.refresh();
+        getFlow().setGuard(getString(getPanel().getGuardTextField()));
+        getFlow().setAction(getString(getPanel().getActionTextField()));
+        getFlow().setWeight(getString(getPanel().getWeightTextField()));
+        refresh();
     }
     
     /**
@@ -35,11 +35,11 @@ public class ControllerPanelBaseFlowUML extends ControllerPanelBaseAssociation {
      * @return Flow UML.
      */
     private FlowUML getFlow() {
-        return this.getPanel().getAssociation();
+        return getPanel().getAssociation();
     }
     
     @Override
     public PanelBaseFlowUML getPanel() {
-        return (PanelBaseFlowUML) this.panel;
+        return (PanelBaseFlowUML) panel;
     }
 }

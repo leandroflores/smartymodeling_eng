@@ -9,6 +9,7 @@ import view.panel.base.traceability.PanelBaseElements;
  * @author Leandro
  * @since  2019-07-22
  * @see    controller.view.panel.base.traceability.ControllerPanelBase
+ * @see    model.structural.base.traceability.Traceability
  * @see    view.panel.base.traceability.PanelBaseElements
  */
 public class ControllerPanelBaseElements extends ControllerPanelBase {
@@ -23,22 +24,22 @@ public class ControllerPanelBaseElements extends ControllerPanelBase {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.getPanel().getDiagramComboBox().equals(event.getSource()))
-            this.getPanel().updateValues();
-        else if (this.getPanel().getAddElementButton().equals(event.getSource()))
-            this.getPanel().addElement();
-        else if (this.getPanel().getDelElementButton().equals(event.getSource()))
-            this.getPanel().delElement();
-        this.update();
+        if (getPanel().getDiagramComboBox().equals(event.getSource()))
+            getPanel().updateValues();
+        else if (getPanel().getAddElementButton().equals(event.getSource()))
+            getPanel().addElement();
+        else if (getPanel().getDelElementButton().equals(event.getSource()))
+            getPanel().delElement();
+        update();
     }
     
     @Override
     protected void update() {
-        this.refresh();
+        refresh();
     }
     
     @Override
     public PanelBaseElements getPanel() {
-        return (PanelBaseElements) this.panel;
+        return (PanelBaseElements) panel;
     }
 }

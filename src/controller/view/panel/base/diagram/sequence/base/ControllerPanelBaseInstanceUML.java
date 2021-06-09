@@ -25,11 +25,11 @@ public class ControllerPanelBaseInstanceUML extends ControllerPanelBaseElement {
     
     @Override
     protected void update() {
-        this.getInstance().setName(this.getString(this.getPanel().getNameTextField()));
-        this.getInstance().setClassUML((ClassUML) this.getPanel().getClassComboBox().getSelectedItem());
-        this.getInstance().setMandatory(this.getPanel().getMandatoryCheckBox().isSelected());
-        this.getDiagram().updateStereotype(this.getInstance());
-        super.refresh();
+        getInstance().setName(getString(getPanel().getNameTextField()));
+        getInstance().setClassUML((ClassUML) getPanel().getClassComboBox().getSelectedItem());
+        getInstance().setMandatory(getPanel().getMandatoryCheckBox().isSelected());
+        getDiagram().updateStereotype(getInstance());
+        refresh();
     }
     
     /**
@@ -37,11 +37,11 @@ public class ControllerPanelBaseInstanceUML extends ControllerPanelBaseElement {
      * @return Instance UML.
      */
     private InstanceUML getInstance() {
-        return this.getPanel().getElement();
+        return getPanel().getElement();
     }
     
     @Override
     public PanelBaseInstanceUML getPanel() {
-        return (PanelBaseInstanceUML) this.panel;
+        return (PanelBaseInstanceUML) panel;
     }
 }

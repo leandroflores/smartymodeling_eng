@@ -10,6 +10,7 @@ import view.panel.base.requirement.PanelBaseRequirement;
  * @author Leandro
  * @since  2020-04-15
  * @see    controller.view.panel.base.ControllerPanelBase
+ * @see    model.structural.base.requirement.Requirement
  * @see    view.panel.base.requirement.PanelBaseRequirement
  */
 public class ControllerPanelBaseRequirement extends ControllerPanelBase {
@@ -24,17 +25,17 @@ public class ControllerPanelBaseRequirement extends ControllerPanelBase {
     
     @Override
     protected void refresh() {
-        this.getPanelTree().updateNode(this.getRequirement());
+        getPanelTree().updateNode(getRequirement());
         super.refresh();
     }
     
     @Override
     protected void update() {
-        this.getRequirement().setCode(this.getPanel().getCodeTextField().getText().trim());
-        this.getRequirement().setType(this.getPanel().getTypeComboBox().getSelectedItem().toString());
-        this.getRequirement().setName(this.getPanel().getNameTextField().getText().trim());
-        this.getRequirement().setDescription(this.getPanel().getDescriptionTextArea().getText().trim());
-        this.refresh();
+        getRequirement().setCode(getPanel().getCodeTextField().getText().trim());
+        getRequirement().setType(getPanel().getTypeComboBox().getSelectedItem().toString());
+        getRequirement().setName(getPanel().getNameTextField().getText().trim());
+        getRequirement().setDescription(getPanel().getDescriptionTextArea().getText().trim());
+        refresh();
     }
     
     /**
@@ -42,11 +43,11 @@ public class ControllerPanelBaseRequirement extends ControllerPanelBase {
      * @return Requirement.
      */
     private Requirement getRequirement() {
-        return this.getPanel().getRequirement();
+        return getPanel().getRequirement();
     }
     
     @Override
     public PanelBaseRequirement getPanel() {
-        return (PanelBaseRequirement) this.panel;
+        return (PanelBaseRequirement) panel;
     }
 }

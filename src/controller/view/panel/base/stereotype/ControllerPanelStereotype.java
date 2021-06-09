@@ -17,6 +17,7 @@ import view.panel.base.stereotype.PanelStereotype;
  * @author Leandro
  * @since  2019-05-31
  * @see    controller.view.panel.base.ControllerPanelBase
+ * @see    model.structural.base.Stereotype
  * @see    view.panel.base.stereotype.PanelStereotype
  */
 public class ControllerPanelStereotype extends ControllerPanelBase {
@@ -31,13 +32,13 @@ public class ControllerPanelStereotype extends ControllerPanelBase {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.getPanel().getNewStereotypeButton().equals(event.getSource()))
-            this.newStereotype();
-        else if (this.getPanel().getAddStereotypeButton().equals(event.getSource()))
-            this.addStereotype();
-        else if (this.getPanel().getRemoveStereotypeButton().equals(event.getSource()))
-            this.removeStereotype();
-        this.update();
+        if (getPanel().getNewStereotypeButton().equals(event.getSource()))
+            newStereotype();
+        else if (getPanel().getAddStereotypeButton().equals(event.getSource()))
+            addStereotype();
+        else if (getPanel().getRemoveStereotypeButton().equals(event.getSource()))
+            removeStereotype();
+        update();
     }
     
     /**
@@ -58,24 +59,24 @@ public class ControllerPanelStereotype extends ControllerPanelBase {
     
     @Override
     protected void update() {
-        this.updateSize(this.getPanel().getElement());
-        this.getPanel().getViewMenu().getPanelModeling().updateModelingPanels();
-        super.refresh();
+        updateSize(getPanel().getElement());
+        getPanel().getViewMenu().getPanelModeling().updateModelingPanels();
+        refresh();
     }
     
     /**
      * Method responsible for adding a new Stereotype.
      */
     private void newStereotype() {
-        String name = this.getPanel().getStereotypeTextField().getText().trim();
-        if ((this.check(name)) && (this.getPanel().getProject().getStereotypeByName(name) == null)) {
+        String name = getPanel().getStereotypeTextField().getText().trim();
+        if ((check(name)) && (getPanel().getProject().getStereotypeByName(name) == null)) {
             Stereotype stereotype = new Stereotype(name);
-            this.getPanel().getProject().addStereotype(stereotype);
-            this.getPanel().getProject().addLink(new Link(this.getPanel().getElement(), stereotype));
-            this.getPanel().updateList();
-            this.getPanel().updateComboBox();
-            this.getPanel().getStereotypeTextField().setText("");
-            this.getPanel().getStereotypeTextField().requestFocus();
+            getPanel().getProject().addStereotype(stereotype);
+            getPanel().getProject().addLink(new Link(getPanel().getElement(), stereotype));
+            getPanel().updateList();
+            getPanel().updateComboBox();
+            getPanel().getStereotypeTextField().setText("");
+            getPanel().getStereotypeTextField().requestFocus();
         }
     }
     
@@ -83,19 +84,19 @@ public class ControllerPanelStereotype extends ControllerPanelBase {
      * Method responsible for adding a Stereotype.
      */
     private void addStereotype() {
-        Stereotype stereotype = (Stereotype) this.getPanel().getStereotypeComboBox().getSelectedItem();
-        this.getPanel().getProject().addLink(new Link(this.getPanel().getElement(), stereotype));
-        this.getPanel().updateList();
+        Stereotype stereotype = (Stereotype) getPanel().getStereotypeComboBox().getSelectedItem();
+        getPanel().getProject().addLink(new Link(getPanel().getElement(), stereotype));
+        getPanel().updateList();
     }
     
     /**
      * Method responsible for removing a Stereotype.
      */
     private void removeStereotype() {
-        if (this.getPanel().getStereotypesList().getSelectedValue() != null) {
-            Stereotype stereotype = (Stereotype) this.getPanel().getStereotypesList().getSelectedValue();
-            this.getPanel().getProject().removeLink(this.getPanel().getProject().getLink(this.getPanel().getElement(), stereotype));
-            this.getPanel().updateList();
+        if (getPanel().getStereotypesList().getSelectedValue() != null) {
+            Stereotype stereotype = (Stereotype) getPanel().getStereotypesList().getSelectedValue();
+            getPanel().getProject().removeLink(getPanel().getProject().getLink(getPanel().getElement(), stereotype));
+            getPanel().updateList();
         }
     }
     

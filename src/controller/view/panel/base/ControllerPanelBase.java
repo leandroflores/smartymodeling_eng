@@ -11,14 +11,13 @@ import view.main.structural.ViewMenu;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBase</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>PanelBase</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelBase</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-16
  * @see    controller.view.panel.ControllerPanel
  * @see    view.panel.base.PanelBase
  */
 public abstract class ControllerPanelBase extends ControllerPanel {
-    protected final PanelBase panelBase;
     protected boolean ready;
 
     /**
@@ -27,21 +26,20 @@ public abstract class ControllerPanelBase extends ControllerPanel {
      */
     public ControllerPanelBase(PanelBase panel) {
         super(panel);
-        this.panelBase = panel;
-        this.ready     = false;
+        ready = false;
     }
 
     /**
      * Method responsible for setting the Ready True.
      */
     public void setReady() {
-        this.ready = true;
+        ready = true;
     }
     
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.ready)
-            this.update();
+        if (ready)
+            update();
     }
     
     @Override
@@ -49,15 +47,15 @@ public abstract class ControllerPanelBase extends ControllerPanel {
     
     @Override
     public void keyReleased(KeyEvent event) {
-        if (this.ready)
-            this.update();
+        if (ready)
+            update();
     }
     
     /**
      * Method responsible for refreshing the Panel Base.
      */
     protected void refresh() {
-        this.getViewMenu().setSave(false);
+        getViewMenu().setSave(false);
     }
     
     /**
@@ -70,7 +68,7 @@ public abstract class ControllerPanelBase extends ControllerPanel {
      * @return Panel Tree.
      */
     protected PanelTree getPanelTree() {
-        return this.getViewMenu().getPanelProject().getPanelTree();
+        return getViewMenu().getPanelProject().getPanelTree();
     }
     
     /**
@@ -78,7 +76,7 @@ public abstract class ControllerPanelBase extends ControllerPanel {
      * @return Panel Modeling.
      */
     protected PanelModeling getPanelModeling() {
-        return this.getViewMenu().getPanelModeling();
+        return getViewMenu().getPanelModeling();
     }
     
     /**
@@ -86,7 +84,7 @@ public abstract class ControllerPanelBase extends ControllerPanel {
      * @return Project.
      */
     protected Project getProject() {
-        return this.getPanel().getProject();
+        return getPanel().getProject();
     }
     
     /**
@@ -94,11 +92,11 @@ public abstract class ControllerPanelBase extends ControllerPanel {
      * @return View Menu.
      */
     protected ViewMenu getViewMenu() {
-        return this.getPanel().getViewMenu();
+        return getPanel().getViewMenu();
     }
     
     @Override
     public PanelBase getPanel() {
-        return (PanelBase) this.panel;
+        return (PanelBase) panel;
     }
 }

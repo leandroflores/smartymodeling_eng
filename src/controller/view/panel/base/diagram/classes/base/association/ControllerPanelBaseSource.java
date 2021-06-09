@@ -26,8 +26,8 @@ public class ControllerPanelBaseSource extends ControllerPanelBaseAssociation {
      * Method responsible for updating the Source Name.
      */
     private void updateName() {
-        if (!this.getAssociation().isDirection())
-            this.getAssociation().setSourceName(this.getString(this.getPanel().getNameTextField()));
+        if (!getAssociation().isDirection())
+            getAssociation().setSourceName(getString(getPanel().getNameTextField()));
     }
     
     /**
@@ -35,28 +35,28 @@ public class ControllerPanelBaseSource extends ControllerPanelBaseAssociation {
      * @return Source Cardinality.
      */
     private void updateCardinality() {
-        String value = this.getString(this.getPanel().getCardinalityTextField());
-        if (this.checkCardinality(value)) {
-            this.getAssociation().setSourceMin(this.getMin(value));
-            this.getAssociation().setSourceMax(this.getMax(value));
+        String value = getString(getPanel().getCardinalityTextField());
+        if (checkCardinality(value)) {
+            getAssociation().setSourceMin(getMin(value));
+            getAssociation().setSourceMax(getMax(value));
         }
     }
     
     @Override
     protected void update() {
-        this.getAssociation().setSourceVisibility(this.getValue(this.getPanel().getVisibilityComboBox()));
-        this.updateName();
-        this.updateCardinality();
-        super.refresh();
+        getAssociation().setSourceVisibility(getValue(getPanel().getVisibilityComboBox()));
+        updateName();
+        updateCardinality();
+        refresh();
     }
     
     @Override
     protected AssociationUML getAssociation() {
-        return this.getPanel().getAssociation();
+        return getPanel().getAssociation();
     }
     
     @Override
     public PanelBaseSource getPanel() {
-        return (PanelBaseSource) this.panel;
+        return (PanelBaseSource) panel;
     }
 }

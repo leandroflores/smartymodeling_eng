@@ -26,14 +26,14 @@ public class ControllerPanelBaseMessageUML extends ControllerPanelBaseAssociatio
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        this.update();
+        update();
     }
     
     @Override
     protected void update() {
-        this.getMessage().setName(this.getString(this.getPanel().getNameTextField()));
-        this.getMessage().setMethod((MethodUML) this.getPanel().getMethodComboBox().getSelectedItem());
-        super.refresh();
+        getMessage().setName(getString(getPanel().getNameTextField()));
+        getMessage().setMethod((MethodUML) getPanel().getMethodComboBox().getSelectedItem());
+        refresh();
     }
     
     /**
@@ -41,11 +41,11 @@ public class ControllerPanelBaseMessageUML extends ControllerPanelBaseAssociatio
      * @return Message UML.
      */
     private MessageUML getMessage() {
-        return this.getPanel().getAssociation();
+        return getPanel().getAssociation();
     }
     
     @Override
     public PanelBaseMessageUML getPanel() {
-        return (PanelBaseMessageUML) this.panel;
+        return (PanelBaseMessageUML) panel;
     }
 }

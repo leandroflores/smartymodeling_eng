@@ -25,16 +25,16 @@ public class ControllerPanelBaseMethodAbsUML extends ControllerPanelBaseElement 
 
     @Override
     protected void refresh() {
-        this.getProject().changeNames(this.getMethod());
+        getProject().changeNames(getMethod());
         super.refresh();
     }
     
     @Override
     protected void update() {
-        this.getMethod().setVisibility(this.getValue(this.getPanel().getVisibilityComboBox()));
-        this.getMethod().setName(this.getString(this.getPanel().getNameTextField()));
-        this.getMethod().setReturn((TypeUML) this.getPanel().getReturnComboBox().getSelectedItem());
-        this.refresh();
+        getMethod().setVisibility(getValue(getPanel().getVisibilityComboBox()));
+        getMethod().setName(getString(getPanel().getNameTextField()));
+        getMethod().setReturn((TypeUML) getPanel().getReturnComboBox().getSelectedItem());
+        refresh();
     }
     
     /**
@@ -42,11 +42,11 @@ public class ControllerPanelBaseMethodAbsUML extends ControllerPanelBaseElement 
      * @return Method UML.
      */
     private MethodUML getMethod() {
-        return this.getPanel().getElement();
+        return getPanel().getElement();
     }
     
     @Override
     public PanelBaseMethodAbsUML getPanel() {
-        return (PanelBaseMethodAbsUML) this.panel;
+        return (PanelBaseMethodAbsUML) panel;
     }
 }

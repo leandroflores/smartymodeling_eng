@@ -8,6 +8,7 @@ import view.panel.base.evaluation.PanelBaseMetric;
  * @author Leandro
  * @since  2019-07-23
  * @see    controller.view.panel.base.evaluation.ControllerPanelBase
+ * @see    model.structural.base.evaluation.Metric
  * @see    view.panel.base.evaluation.PanelBaseMetric
  */
 public class ControllerPanelBaseMetric extends ControllerPanelBase {
@@ -22,14 +23,14 @@ public class ControllerPanelBaseMetric extends ControllerPanelBase {
     
     @Override
     protected void update() {
-        this.getMetric().setName(this.getString(this.getPanel().getNameTextField()));
-        this.getMetric().setLabel(this.getString(this.getPanel().getLabelTextField()));
-        this.getMetric().setDescription(this.getString(this.getPanel().getDescriptionTextArea()));
-        this.refresh();
+        getMetric().setName(getString(getPanel().getNameTextField()));
+        getMetric().setLabel(getString(getPanel().getLabelTextField()));
+        getMetric().setDescription(getString(getPanel().getDescriptionTextArea()));
+        refresh();
     }
     
     @Override
     public PanelBaseMetric getPanel() {
-        return (PanelBaseMetric) this.panel;
+        return (PanelBaseMetric) panel;
     }
 }

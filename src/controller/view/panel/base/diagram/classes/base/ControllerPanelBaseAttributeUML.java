@@ -25,11 +25,11 @@ public class ControllerPanelBaseAttributeUML extends ControllerPanelBaseElement 
     
     @Override
     protected void update() {
-        this.getAttribute().setName(this.getString(this.getPanel().getNameTextField()));
-        this.getAttribute().setTypeUML((TypeUML) this.getPanel().getTypeComboBox().getSelectedItem());
-        this.getAttribute().setStatic(this.getPanel().getStaticCheckBox().isSelected());
-        this.getAttribute().setFinal(this.getPanel().getFinalCheckBox().isSelected());
-        super.refresh();
+        getAttribute().setName(getString(getPanel().getNameTextField()));
+        getAttribute().setTypeUML((TypeUML) getPanel().getTypeComboBox().getSelectedItem());
+        getAttribute().setStatic(getPanel().getStaticCheckBox().isSelected());
+        getAttribute().setFinal(getPanel().getFinalCheckBox().isSelected());
+        refresh();
     }
     
     /**
@@ -37,11 +37,11 @@ public class ControllerPanelBaseAttributeUML extends ControllerPanelBaseElement 
      * @return Attribute UML.
      */
     private AttributeUML getAttribute() {
-        return this.getPanel().getElement();
+        return getPanel().getElement();
     }
     
     @Override
     public PanelBaseAttributeUML getPanel() {
-        return (PanelBaseAttributeUML) this.panel;
+        return (PanelBaseAttributeUML) panel;
     }
 }

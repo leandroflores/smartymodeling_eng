@@ -9,6 +9,7 @@ import view.panel.base.variability.PanelBaseVariability;
  * @author Leandro
  * @since  2019-07-04
  * @see    controller.view.panel.base.variability.ControllerPanelBase
+ * @see    model.structural.base.variability.Variability
  * @see    view.panel.base.variability.PanelBaseVariability
  */
 public class ControllerPanelBaseVariability extends ControllerPanelBase {
@@ -23,29 +24,28 @@ public class ControllerPanelBaseVariability extends ControllerPanelBase {
     
     @Override
     public void setReady() {
-        this.ready = true;
-        this.getPanel().setVariationPoint();
+        ready = true;
+        getPanel().setVariationPoint();
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.ready) {
-            if (this.getPanel().getVariationPointComboBox().equals(event.getSource()))
-                this.getPanel().setVariationPoint();
-            this.update();
+        if (ready && getPanel().getVariationPointComboBox().equals(event.getSource())) {
+            getPanel().setVariationPoint();
+            update();
         }
     }
     
     @Override
     protected void update() {
-        this.getVariability().setName(this.getString(this.getPanel().getNameTextField()));
-        this.getPanel().setVariationPoint();
-        this.getVariability().setBindingTime(this.getPanel().getBindingTimeComboBox().getSelectedItem().toString());
-        this.refresh();
+        getVariability().setName(getString(getPanel().getNameTextField()));
+        getPanel().setVariationPoint();
+        getVariability().setBindingTime(getPanel().getBindingTimeComboBox().getSelectedItem().toString());
+        refresh();
     }
     
     @Override
     public PanelBaseVariability getPanel() {
-        return (PanelBaseVariability) this.panel;
+        return (PanelBaseVariability) panel;
     }
 }

@@ -24,10 +24,10 @@ public abstract class ControllerPanelBaseElement extends ControllerPanelBase {
 
     @Override
     protected void refresh() {
-        this.getPanelTree().updateNode(this.getElement());
-        this.getPanelModeling().updateDiagram(this.getDiagram());
-        this.getPanelModeling().updateInstancePanels();
-        this.getPanelModeling().setSelected(this.getDiagram(), this.getElement().getId());
+        getPanelTree().updateNode(getElement());
+        getPanelModeling().updateDiagram(getDiagram());
+        getPanelModeling().updateInstancePanels();
+        getPanelModeling().setSelected(getDiagram(), getElement().getId());
         super.refresh();
     }
     
@@ -36,7 +36,7 @@ public abstract class ControllerPanelBaseElement extends ControllerPanelBase {
      * @return Diagram.
      */
     protected Diagram getDiagram() {
-        return this.getPanel().getDiagram();
+        return getPanel().getDiagram();
     }
     
     /**
@@ -44,11 +44,11 @@ public abstract class ControllerPanelBaseElement extends ControllerPanelBase {
      * @return Element.
      */
     protected Element getElement() {
-        return this.getPanel().getElement();
+        return getPanel().getElement();
     }
     
     @Override
     public PanelBaseElement getPanel() {
-        return (PanelBaseElement) this.panel;
+        return (PanelBaseElement) panel;
     }
 }

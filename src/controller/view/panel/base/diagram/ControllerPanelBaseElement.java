@@ -22,14 +22,14 @@ public class ControllerPanelBaseElement extends controller.view.panel.base.Contr
     
     @Override
     protected void update() {
-        this.getElement().setName(this.getString(this.getPanel().getNameTextField()));
-        this.getElement().setMandatory(this.getPanel().getMandatoryCheckBox().isSelected());
-        this.getDiagram().updateStereotype(this.getElement());
-        this.refresh();
+        getElement().setName(getString(getPanel().getNameTextField()));
+        getElement().setMandatory(getPanel().getMandatoryCheckBox().isSelected());
+        getDiagram().updateStereotype(getElement());
+        refresh();
     }
     
     @Override
     public PanelBaseElement getPanel() {
-        return (PanelBaseElement) this.panel;
+        return (PanelBaseElement) panel;
     }
 }

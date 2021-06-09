@@ -10,6 +10,7 @@ import view.panel.base.product.PanelBaseInstance;
  * @author Leandro
  * @since  2019-10-25
  * @see    controller.view.panel.base.ControllerPanelBase
+ * @see    model.structural.base.product.Instance
  * @see    view.panel.base.product.PanelBaseInstance
  */
 public class ControllerPanelBaseInstance extends ControllerPanelBase {
@@ -24,8 +25,8 @@ public class ControllerPanelBaseInstance extends ControllerPanelBase {
 
     @Override
     protected void refresh() {
-        this.getPanelTree().updateNode(this.getInstance());
-        this.getPanelModeling().updateTab(this.getInstance());
+        getPanelTree().updateNode(getInstance());
+        getPanelModeling().updateTab(getInstance());
         super.refresh();
     }
     
@@ -34,14 +35,14 @@ public class ControllerPanelBaseInstance extends ControllerPanelBase {
      * @return Product checked.
      */
     protected boolean check() {
-        return this.check(this.getPanel().getNameTextField().getText());
+        return check(getPanel().getNameTextField().getText());
     }
     
     @Override
     protected void update() {
-        if (this.check()) {
-            this.getInstance().setName(this.getString(this.getPanel().getNameTextField()));
-            this.refresh();
+        if (check()) {
+            getInstance().setName(getString(getPanel().getNameTextField()));
+            refresh();
         }
     }
     
@@ -50,11 +51,11 @@ public class ControllerPanelBaseInstance extends ControllerPanelBase {
      * @return Instance.
      */
     private Instance getInstance() {
-        return this.getPanel().getInstance();
+        return getPanel().getInstance();
     }
     
     @Override
     public PanelBaseInstance getPanel() {
-        return (PanelBaseInstance) this.panel;
+        return (PanelBaseInstance) panel;
     }
 }

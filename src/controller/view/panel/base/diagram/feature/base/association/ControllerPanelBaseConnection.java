@@ -24,8 +24,8 @@ public class ControllerPanelBaseConnection extends ControllerPanelBaseAssociatio
     
     @Override
     protected void update() {
-        this.getConnection().setCategory(this.getValue(this.getPanel().getCategoryComboBox()));
-        super.refresh();
+        getConnection().setCategory(getValue(getPanel().getCategoryComboBox()));
+        refresh();
     }
     
     /**
@@ -33,11 +33,11 @@ public class ControllerPanelBaseConnection extends ControllerPanelBaseAssociatio
      * @return Connection.
      */
     private Connection getConnection() {
-        return this.getPanel().getAssociation();
+        return getPanel().getAssociation();
     }
     
     @Override
     public PanelBaseConnection getPanel() {
-        return (PanelBaseConnection) this.panel;
+        return (PanelBaseConnection) panel;
     }
 }

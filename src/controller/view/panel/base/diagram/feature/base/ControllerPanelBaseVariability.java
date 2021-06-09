@@ -24,7 +24,7 @@ public class ControllerPanelBaseVariability extends ControllerPanelBaseElement {
     
     @Override
     protected void update() {
-        super.refresh();
+        refresh();
     }
     
     /**
@@ -32,11 +32,11 @@ public class ControllerPanelBaseVariability extends ControllerPanelBaseElement {
      * @return Variability.
      */
     private Variability getVariability() {
-        return this.getPanel().getElement();
+        return getPanel().getElement();
     }
     
     @Override
     public PanelBaseVariability getPanel() {
-        return (PanelBaseVariability) this.panel;
+        return (PanelBaseVariability) panel;
     }
 }

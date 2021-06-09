@@ -7,10 +7,11 @@ import view.panel.base.variability.PanelBase;
 
 /**
  * <p>Class of Controller <b>ControllerPanelBase</b>.</p>
- * <p>Class responsible for controlling the <b>Instance Panel Base</b> Events of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>Variability Panel Base</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-16
  * @see    controller.view.panel.base.ControllerPanelBase
+ * @see    model.structural.base.variability.Variability
  * @see    view.panel.base.variability.PanelBase
  */
 public abstract class ControllerPanelBase extends controller.view.panel.base.ControllerPanelBase {
@@ -28,14 +29,14 @@ public abstract class ControllerPanelBase extends controller.view.panel.base.Con
     
     @Override
     public void keyReleased(KeyEvent event) {
-        if (this.ready)
-            this.update();
+        if (ready)
+            update();
     }
     
     @Override
     protected void refresh() {
-        this.getPanelTree().updateNode(this.getVariability());
-        this.getPanelModeling().updateDiagram(this.getPanel().getDiagram());
+        getPanelTree().updateNode(getVariability());
+        getPanelModeling().updateDiagram(getPanel().getDiagram());
         super.refresh();
     }
     
@@ -44,7 +45,7 @@ public abstract class ControllerPanelBase extends controller.view.panel.base.Con
      * @return Diagram.
      */
     protected Diagram getDiagram() {
-        return this.getPanel().getDiagram();
+        return getPanel().getDiagram();
     }
     
     /**
@@ -52,11 +53,11 @@ public abstract class ControllerPanelBase extends controller.view.panel.base.Con
      * @return Variability.
      */
     protected Variability getVariability() {
-        return this.getPanel().getVariability();
+        return getPanel().getVariability();
     }
     
     @Override
     public PanelBase getPanel() {
-        return (PanelBase) this.panel;
+        return (PanelBase) panel;
     }
 }
