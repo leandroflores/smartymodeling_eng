@@ -9,9 +9,10 @@ import view.panel.diagram.PanelDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventChange</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Changing Panel Modeling</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Controller</b> for <b>Change Event</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  27/05/2019
+ * @since  2019-05-27
+ * @see    com.mxgraph.util.mxEventSource
  * @see    com.mxgraph.util.mxEventSource.mxIEventListener
  * @see    view.panel.diagram.PanelDiagram
  */
@@ -20,24 +21,32 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
 
     /**
      * Default constructor method of Class.
-     * @param panel Panel Diagram.
+     * @param panel_ Panel Diagram.
      */
-    public ControllerEventChange(PanelDiagram panel) {
-        this.panel = panel;
+    public ControllerEventChange(PanelDiagram panel_) {
+        panel = panel_;
     }
     
     @Override
     public void invoke(Object object, mxEventObject event) {
-        Object  cell    = this.panel.getGraph().getSelectionCell();
-        String  id      = this.panel.getIdentifiers().get(cell);
-        Element element = this.panel.getDiagram().getElement(id);
+        Object  cell    = getPanel().getGraph().getSelectionCell();
+        String  id      = getPanel().getIdentifiers().get(cell);
+        Element element = getPanel().getDiagram().getElement(id);
         if (element != null) {
             mxCell vertex = (mxCell) cell;
             element.setName(vertex.getValue().toString());
-            this.panel.getViewMenu().getPanelModeling().updateInstancePanels();
+            getPanel().getViewMenu().getPanelModeling().updateInstancePanels();
         }
-        this.panel.updateGraph();
-        this.panel.getViewMenu().update();
-        this.panel.getViewMenu().setSave(false);
+        getPanel().updateGraph();
+        getPanel().getViewMenu().update();
+        getPanel().getViewMenu().setSave(false);
+    }
+    
+    /**
+     * Method responsible for returning the Panel Diagram.
+     * @return Panel Diagram.
+     */
+    public PanelDiagram getPanel() {
+        return panel;
     }
 }

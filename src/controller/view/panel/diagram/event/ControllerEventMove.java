@@ -11,9 +11,11 @@ import view.panel.diagram.PanelDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventMove</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Moving Modeling Panel</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Controller</b> for <b>Move Event</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  27/05/2019
+ * @since  2019-05-27
+ * @see    com.mxgraph.util.mxEventSource
+ * @see    com.mxgraph.util.mxEventSource.mxIEventListener
  * @see    view.panel.diagram.PanelDiagram
  */
 public class ControllerEventMove extends mxEventSource implements mxIEventListener {
@@ -21,20 +23,20 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
 
     /**
      * Default constructor method of Class.
-     * @param panel Panel Diagram.
+     * @param panel_ Panel Diagram.
      */
-    public ControllerEventMove(PanelDiagram panel) {
-        this.panel = panel;
+    public ControllerEventMove(PanelDiagram panel_) {
+        panel = panel_;
     }
     
     @Override
     public void invoke(Object object, mxEventObject event) {
-        Object cell = this.panel.getGraph().getSelectionCell();
-        String id   = this.panel.getIdentifiers().get(cell);
-        if (this.panel.getDiagram().getElement(id) != null)
-            this.move(this.panel.getDiagram().getElement(id), event);
-        else if (this.panel.getDiagram().getAssociation(id) != null)
-            this.move(this.panel.getDiagram().getAssociation(id));
+        Object cell = getPanel().getGraph().getSelectionCell();
+        String id   = getPanel().getIdentifiers().get(cell);
+        if (getPanel().getDiagram().getElement(id) != null)
+            move(getPanel().getDiagram().getElement(id), event);
+        else if (getPanel().getDiagram().getAssociation(id) != null)
+            move(getPanel().getDiagram().getAssociation(id));
     }
     
     /**
@@ -45,7 +47,7 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
     private void move(Element element, mxEventObject event) {
         element.dx(((Double) event.getProperty("dx")).intValue());
         element.dy(((Double) event.getProperty("dy")).intValue());
-        this.panel.getViewMenu().setSave(false);
+        getPanel().getViewMenu().setSave(false);
     }
     
     /**
@@ -53,8 +55,16 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      * @param association Association.
      */
     private void move(Association association) {
-        mxGeometry geometry = ((mxGraphModel) (this.panel.getGraph().getModel())).getGeometry(this.panel.getObjects().get(association.getId()));
+        mxGeometry geometry = ((mxGraphModel) (getPanel().getGraph().getModel())).getGeometry(getPanel().getObjects().get(association.getId()));
                    association.setPoints(geometry.getPoints());
-        this.panel.getViewMenu().setSave(false);
+        getPanel().getViewMenu().setSave(false);
+    }
+    
+    /**
+     * Method responsible for returning the Panel Diagram.
+     * @return Panel Diagram.
+     */
+    public PanelDiagram getPanel() {
+        return panel;
     }
 }

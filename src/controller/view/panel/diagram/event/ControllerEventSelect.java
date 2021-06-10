@@ -8,9 +8,11 @@ import view.panel.diagram.PanelDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventSelect</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Selecting Panel Modeling</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Controller</b> for <b>Select Event</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  06/11/2019
+ * @since  2019-11-06
+ * @see    com.mxgraph.util.mxEventSource
+ * @see    com.mxgraph.util.mxEventSource.mxIEventListener
  * @see    view.panel.diagram.PanelDiagram
  */
 public class ControllerEventSelect extends mxEventSource implements mxIEventListener {
@@ -18,22 +20,19 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
 
     /**
      * Default constructor method of Class.
-     * @param panel Panel Diagram.
+     * @param panel_ Panel Diagram.
      */
-    public ControllerEventSelect(PanelDiagram panel) {
-        this.panel = panel;
+    public ControllerEventSelect(PanelDiagram panel_) {
+        panel = panel_;
     }
     
     @Override
     public void invoke(Object object, mxEventObject event) {
-//        System.out.println("AA");
-        if (this.panel.getGraph().getSelectionCell() != null) {
-            if (this.panel.getGraph().getSelectionCell() instanceof mxCell) {
-//                System.out.println("Properties: " + event.getProperty("dx"));
-                
-                mxCell cell = (mxCell) this.panel.getGraph().getSelectionCell();
-                String id   = this.panel.getIdentifiers().get(cell);
-                this.select(cell, id);
+        if (getPanel().getGraph().getSelectionCell() != null) {
+            if (getPanel().getGraph().getSelectionCell() instanceof mxCell) {    
+                mxCell cell = (mxCell) getPanel().getGraph().getSelectionCell();
+                String id   = getPanel().getIdentifiers().get(cell);
+                select(cell, id);
             }
         }
     }
@@ -47,5 +46,13 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
 //        System.out.println("Id..: " + id);
 //        System.out.println("Cell: " + cell);
 //        System.out.println("Cell: " + cell.getIdentifier());
+    }
+    
+    /**
+     * Method responsible for returning the Panel Diagram.
+     * @return Panel Diagram.
+     */
+    public PanelDiagram getPanel() {
+        return panel;
     }
 }

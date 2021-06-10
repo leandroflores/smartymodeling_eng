@@ -13,14 +13,12 @@ import view.panel.diagram.types.PanelActivityDiagram;
  * <p>Class of Controller <b>ControllerEventAssociationActivity</b>.</p>
  * <p>Class responsible for defining the <b>Controller</b> for <b>Activity Diagram Association</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  18/07/2019
+ * @since  2019-07-18
  * @see    controller.view.panel.diagram.association.ControllerEventAssociation
  * @see    model.structural.diagram.ActivityDiagram
  * @see    view.panel.diagram.types.PanelActivityDiagram
  */
 public class ControllerEventAssociationActivity extends ControllerEventAssociation {
-    private final PanelActivityDiagram panelDiagram;
-    private final ActivityDiagram diagram;
     
     /**
      * Default constructor method of Class.
@@ -28,32 +26,30 @@ public class ControllerEventAssociationActivity extends ControllerEventAssociati
      */
     public ControllerEventAssociationActivity(PanelActivityDiagram panel) {
         super(panel);
-        this.panelDiagram = panel;
-        this.diagram      = this.panelDiagram.getDiagram();
     }
     
     @Override
     public void addAssociation(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
-        if (this.check(source, target))
-            this.createAssociation(association);
+        Element source = getSource(association);
+        Element target = getTarget(association);
+        if (check(source, target))
+            createAssociation(association);
     }
     
     @Override
     public void createAssociation(mxCell association) {
-        switch (this.panelDiagram.getType()) {
+        switch (getPanel().getType()) {
             case 0:
-                this.addFlowUML(association);
+                addFlowUML(association);
                 break;
             case 1:
-                this.addDependency(association);
+                addDependency(association);
                 break;
             case 2:
-                this.addRequires(association);
+                addRequires(association);
                 break;
             case 3:
-                this.addMutex(association);
+                addMutex(association);
                 break;
             default:
                 break;
@@ -65,9 +61,9 @@ public class ControllerEventAssociationActivity extends ControllerEventAssociati
      * @param association Association mxCell.
      */
     private void addFlowUML(mxCell association) {
-        FlowUML flowUML = this.createFlowUML(association);
+        FlowUML flowUML = createFlowUML(association);
         if (flowUML != null)
-            this.diagram.addFlow(flowUML);
+            getDiagram().addFlow(flowUML);
     }
     
     /**
@@ -76,11 +72,20 @@ public class ControllerEventAssociationActivity extends ControllerEventAssociati
      * @return Flow UML.
      */
     private FlowUML createFlowUML(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
-        if   ((source instanceof FinalUML == false) 
-           && (target instanceof InitialUML == false))
+        Element source = getSource(association);
+        Element target = getTarget(association);
+        if ((source instanceof FinalUML == false) && (target instanceof InitialUML == false))
             return new FlowUML(source, target);
         return null;
+    }
+    
+    @Override
+    public ActivityDiagram getDiagram() {
+        return (ActivityDiagram) diagram;
+    }
+    
+    @Override
+    public PanelActivityDiagram getPanel() {
+        return (PanelActivityDiagram) panel;
     }
 }

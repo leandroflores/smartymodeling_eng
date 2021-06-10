@@ -8,9 +8,10 @@ import view.panel.diagram.PanelDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventPoints</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Points Association</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Controller</b> for <b>Points Event</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  07/11/2019
+ * @since  2019-11-07
+ * @see    java.awt.event.MouseAdapter
  * @see    view.panel.diagram.PanelDiagram
  */
 public class ControllerEventPoints extends MouseAdapter {
@@ -18,21 +19,21 @@ public class ControllerEventPoints extends MouseAdapter {
     
     /**
      * Default constructor method of Class.
-     * @param panel Panel Diagram.
+     * @param panel_ Panel Diagram.
      */
-    public ControllerEventPoints(PanelDiagram panel) {
-        this.panel = panel;
+    public ControllerEventPoints(PanelDiagram panel_) {
+        panel = panel_;
     }
     
     @Override
     public void mouseClicked(MouseEvent event) {
-        Association association = this.getAssociation(event);
+        Association association = getAssociation(event);
         mxPoint     point       = new mxPoint(event.getX(), event.getY());
         if (association != null) {
             if (event.getClickCount() == 2)
-                this.addPoint(association, point);
+                addPoint(association, point);
             else if (event.getButton() == 3)
-                this.removePoint(association, point);
+                removePoint(association, point);
         }
     }
     
@@ -42,9 +43,9 @@ public class ControllerEventPoints extends MouseAdapter {
      * @return Association Selected.
      */
     private Association getAssociation(MouseEvent event) {
-        Object object = this.panel.getComponent().getCellAt(event.getX(), event.getY());
-        String id     = this.panel.getIdentifiers().get(object);
-        return this.panel.getDiagram().getAssociation(id);
+        Object object = getPanel().getComponent().getCellAt(event.getX(), event.getY());
+        String id     = getPanel().getIdentifiers().get(object);
+        return getPanel().getDiagram().getAssociation(id);
     }
     
     /**
@@ -54,13 +55,13 @@ public class ControllerEventPoints extends MouseAdapter {
      */
     private void addPoint(Association association, mxPoint point) {
         association.addPoint(point);
-        this.panel.updateGraph();
-//        this.panel.getViewMenu().getPanelModeling().updateUI();
-        this.panel.getViewMenu().setSave(false);
+        getPanel().updateGraph();
+//        getPanel().getViewMenu().getPanelModeling().updateUI();
+        getPanel().getViewMenu().setSave(false);
     }
     
     /**
-     * Method responsible for removing a Point from a Association.
+     * Method responsible for removing a Point of a Association.
      * @param association Association.
      * @param point Point.
      */
@@ -68,9 +69,17 @@ public class ControllerEventPoints extends MouseAdapter {
         mxPoint nearest = association.getNearestPoint(point);
         if (nearest != null) {
             association.removePoint(nearest);
-            this.panel.updateGraph();
-            this.panel.getViewMenu().getPanelModeling().updateUI();
-            this.panel.getViewMenu().setSave(false);
+            getPanel().updateGraph();
+            getPanel().getViewMenu().getPanelModeling().updateUI();
+            getPanel().getViewMenu().setSave(false);
         }
+    }
+    
+    /**
+     * Method responsible for returning the Panel Diagram.
+     * @return Panel Diagram.
+     */
+    public PanelDiagram getPanel() {
+        return panel;
     }
 }

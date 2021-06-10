@@ -13,14 +13,12 @@ import view.panel.diagram.types.PanelComponentDiagram;
  * <p>Class of Controller <b>ControllerEventAssociationComponent</b>.</p>
  * <p>Class responsible for defining the <b>Controller</b> for <b>Component Diagram Association</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  21/07/2019
+ * @since  2019-07-21
  * @see    controller.view.panel.diagram.association.ControllerEventAssociation
  * @see    model.structural.diagram.ComponentDiagram
  * @see    view.panel.diagram.types.PanelComponentDiagram
  */
 public class ControllerEventAssociationComponent extends ControllerEventAssociation {
-    private final PanelComponentDiagram panelDiagram;
-    private final ComponentDiagram diagram;
     
     /**
      * Default constructor method of Class.
@@ -28,33 +26,31 @@ public class ControllerEventAssociationComponent extends ControllerEventAssociat
      */
     public ControllerEventAssociationComponent(PanelComponentDiagram panel) {
         super(panel);
-        this.panelDiagram = panel;
-        this.diagram      = this.panelDiagram.getDiagram();
     }
     
     @Override
     public void addAssociation(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
-        if (this.check(source, target) && this.distinct(source, target))
-            this.createAssociation(association);
+        Element source = getSource(association);
+        Element target = getTarget(association);
+        if (check(source, target) && distinct(source, target))
+            createAssociation(association);
     }
     
     @Override
     public void createAssociation(mxCell association) {
-        switch (this.panelDiagram.getType()) {
+        switch (getPanel().getType()) {
             case 0:
             case 1:
-                this.addComunicationUML(association);
+                addComunicationUML(association);
                 break;
             case 2:
-                this.addDependency(association);
+                addDependency(association);
                 break;
             case 3:
-                this.addRequires(association);
+                addRequires(association);
                 break;
             case 4:
-                this.addMutex(association);
+                addMutex(association);
                 break;
             default:
                 break;
@@ -66,9 +62,9 @@ public class ControllerEventAssociationComponent extends ControllerEventAssociat
      * @param association mxCell Association.
      */
     private void addComunicationUML(mxCell association) {
-        ComunicationUML comunicationUML = this.createComunicationUML(association);
+        ComunicationUML comunicationUML = createComunicationUML(association);
         if (comunicationUML != null)
-            this.diagram.addComunication(comunicationUML);
+            getDiagram().addComunication(comunicationUML);
     }
     
     /**
@@ -77,12 +73,12 @@ public class ControllerEventAssociationComponent extends ControllerEventAssociat
      * @return Comunication UML.
      */
     private ComunicationUML createComunicationUML(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
+        Element source = getSource(association);
+        Element target = getTarget(association);
         try {
-            return new ComunicationUML((ComponentUML) source, (InterfaceUML) target, this.getCategory());
+            return new ComunicationUML((ComponentUML) source, (InterfaceUML) target, getCategory());
         }catch (ClassCastException exception) {
-            return this.createComunicationUML(source, target);
+            return createComunicationUML(source, target);
         }
     }
     
@@ -94,7 +90,7 @@ public class ControllerEventAssociationComponent extends ControllerEventAssociat
      */
     private ComunicationUML createComunicationUML(Element source, Element target) {
         try {
-            return new ComunicationUML((ComponentUML) target, (InterfaceUML) source, this.getCategory());
+            return new ComunicationUML((ComponentUML) target, (InterfaceUML) source, getCategory());
         }catch (ClassCastException exception) {
             return null;
         }
@@ -105,9 +101,18 @@ public class ControllerEventAssociationComponent extends ControllerEventAssociat
      * @return Comunication Category.
      */
     private String getCategory() {
-        System.out.println("Type: " + this.panelDiagram.getType());
-        if (this.panelDiagram.getPanelOperation().getAssociationComboBox().getSelectedIndex() == 0)
+        if (getPanel().getPanelOperation().getAssociationComboBox().getSelectedIndex() == 0)
             return "provide";
         return "require";
+    }
+    
+    @Override
+    public ComponentDiagram getDiagram() {
+        return (ComponentDiagram) diagram;
+    }
+    
+    @Override
+    public PanelComponentDiagram getPanel() {
+        return (PanelComponentDiagram) panel;
     }
 }

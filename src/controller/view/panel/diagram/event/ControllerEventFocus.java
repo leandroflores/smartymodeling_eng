@@ -9,9 +9,10 @@ import view.panel.diagram.PanelDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventFocus</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Focus Modeling Panel</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Controller</b> for <b>Focus Event</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  07/11/2019
+ * @since  2019-11-07
+ * @see    java.awt.event.MouseAdapter
  * @see    view.panel.diagram.PanelDiagram
  */
 public class ControllerEventFocus extends MouseAdapter {
@@ -19,21 +20,21 @@ public class ControllerEventFocus extends MouseAdapter {
     
     /**
      * Default constructor method of Class.
-     * @param panel Panel Diagram.
+     * @param panel_ Panel Diagram.
      */
-    public ControllerEventFocus(PanelDiagram panel) {
-        this.panel = panel;
+    public ControllerEventFocus(PanelDiagram panel_) {
+        panel = panel_;
     }
     
     @Override
     public void mouseClicked(MouseEvent event) {
-        Object object = this.panel.getComponent().getCellAt(event.getX(), event.getY());
-        String id     = this.panel.getIdentifiers().get(object);
-        if (this.panel.getDiagram().getElement(id) != null)
-            this.updatePanelEdit(this.panel.getDiagram().getElement(id)); 
-        else if (this.panel.getDiagram().getAssociation(id) != null)
-            this.updatePanelEdit(this.panel.getDiagram().getAssociation(id));
-        this.panel.updateUI();
+        Object object = getPanel().getComponent().getCellAt(event.getX(), event.getY());
+        String id     = getPanel().getIdentifiers().get(object);
+        if (getPanel().getDiagram().getElement(id) != null)
+            updatePanelEdit(getPanel().getDiagram().getElement(id)); 
+        else if (getPanel().getDiagram().getAssociation(id) != null)
+            updatePanelEdit(getPanel().getDiagram().getAssociation(id));
+        getPanel().updateUI();
     }
     
     /**
@@ -41,9 +42,9 @@ public class ControllerEventFocus extends MouseAdapter {
      * @param stereotype Stereotype.
      */
     private void updatePanelEdit(Stereotype stereotype) {
-        this.panel.getViewMenu().getPanelProject().initPanelEditStereotype(stereotype);
-        this.panel.getViewMenu().getPanelProject().updatePanelEdit();
-        this.panel.getGraph().setSelectionCell(this.panel.getObjects().get(stereotype.getId()));
+        getPanel().getViewMenu().getPanelProject().initPanelEditStereotype(stereotype);
+        getPanel().getViewMenu().getPanelProject().updatePanelEdit();
+        getPanel().getGraph().setSelectionCell(getPanel().getObjects().get(stereotype.getId()));
     }
     
     /**
@@ -51,9 +52,9 @@ public class ControllerEventFocus extends MouseAdapter {
      * @param element Element selected.
      */
     private void updatePanelEdit(Element element) {
-        this.panel.getViewMenu().getPanelProject().initPanelEditElement(this.panel.getDiagram(), element);
-        this.panel.getViewMenu().getPanelProject().updatePanelEdit();
-        this.panel.getGraph().setSelectionCell(this.panel.getObjects().get(element.getId()));
+        getPanel().getViewMenu().getPanelProject().initPanelEditElement(getPanel().getDiagram(), element);
+        getPanel().getViewMenu().getPanelProject().updatePanelEdit();
+        getPanel().getGraph().setSelectionCell(getPanel().getObjects().get(element.getId()));
     }
     
     /**
@@ -61,8 +62,16 @@ public class ControllerEventFocus extends MouseAdapter {
      * @param association Association selected.
      */
     private void updatePanelEdit(Association association) {
-        this.panel.getViewMenu().getPanelProject().initPanelEditAssociation(this.panel.getDiagram(), association);
-        this.panel.getViewMenu().getPanelProject().updatePanelEdit();
-        this.panel.getGraph().setSelectionCell(this.panel.getObjects().get(association.getId()));
+        getPanel().getViewMenu().getPanelProject().initPanelEditAssociation(getPanel().getDiagram(), association);
+        getPanel().getViewMenu().getPanelProject().updatePanelEdit();
+        getPanel().getGraph().setSelectionCell(getPanel().getObjects().get(association.getId()));
+    }
+    
+    /**
+     * Method responsible for returning the Panel Diagram.
+     * @return Panel Diagram.
+     */
+    public PanelDiagram getPanel() {
+        return panel;
     }
 }

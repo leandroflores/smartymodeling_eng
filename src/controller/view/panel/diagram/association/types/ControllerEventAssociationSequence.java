@@ -11,14 +11,12 @@ import view.panel.diagram.types.PanelSequenceDiagram;
  * <p>Class of Controller <b>ControllerEventAssociationSequence</b>.</p>
  * <p>Class responsible for defining the <b>Controller</b> for <b>Sequence Diagram Association</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  25/07/2019
+ * @since  2019-07-25
  * @see    controller.view.panel.diagram.association.ControllerEventAssociation
  * @see    model.structural.diagram.SequenceDiagram
  * @see    view.panel.diagram.types.PanelSequenceDiagram
  */
 public class ControllerEventAssociationSequence extends ControllerEventAssociation {
-    private final PanelSequenceDiagram panelDiagram;
-    private final SequenceDiagram diagram;
     
     /**
      * Default constructor method of Class.
@@ -26,33 +24,31 @@ public class ControllerEventAssociationSequence extends ControllerEventAssociati
      */
     public ControllerEventAssociationSequence(PanelSequenceDiagram panel) {
         super(panel);
-        this.panelDiagram = panel;
-        this.diagram      = this.panelDiagram.getDiagram();
     }
     
     @Override
     public void addAssociation(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
-        if (this.check(source, target))
-            this.createAssociation(association);
+        Element source = getSource(association);
+        Element target = getTarget(association);
+        if (check(source, target))
+            createAssociation(association);
     } 
     
     @Override
     public void createAssociation(mxCell association) {
-        switch (this.panelDiagram.getType()) {
+        switch (getPanel().getType()) {
             case 0:
             case 1:
-                this.addMessageUML(association);
+                addMessageUML(association);
                 break;
             case 2:
-                this.addDependency(association);
+                addDependency(association);
                 break;
             case 3:
-                this.addRequires(association);
+                addRequires(association);
                 break;
             case 4:
-                this.addMutex(association);
+                addMutex(association);
                 break;
             default:
                 break;
@@ -64,9 +60,9 @@ public class ControllerEventAssociationSequence extends ControllerEventAssociati
      * @param association mxCell Association.
      */
     private void addMessageUML(mxCell association) {
-        MessageUML messageUML = this.createMessageUML(association);
+        MessageUML messageUML = createMessageUML(association);
         if (messageUML != null)
-            this.diagram.addMessage(messageUML);
+            getDiagram().addMessage(messageUML);
     }
     
     /**
@@ -75,10 +71,10 @@ public class ControllerEventAssociationSequence extends ControllerEventAssociati
      * @return Message UML.
      */
     private MessageUML createMessageUML(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
+        Element source = getSource(association);
+        Element target = getTarget(association);
         try {
-            return new MessageUML(source, target, this.getCategory());
+            return new MessageUML(source, target, getCategory());
         }catch (ClassCastException exception) {
             return null;
         }
@@ -89,8 +85,18 @@ public class ControllerEventAssociationSequence extends ControllerEventAssociati
      * @return Message Category.
      */
     private String getCategory() {
-        if (this.panelDiagram.getPanelOperation().getAssociationComboBox().getSelectedIndex() == 0)
+        if (getPanel().getPanelOperation().getAssociationComboBox().getSelectedIndex() == 0)
             return "asynchronous";
         return "synchronous";
+    }
+    
+    @Override
+    public SequenceDiagram getDiagram() {
+        return (SequenceDiagram) diagram;
+    }
+    
+    @Override
+    public PanelSequenceDiagram getPanel() {
+        return (PanelSequenceDiagram) panel;
     }
 }

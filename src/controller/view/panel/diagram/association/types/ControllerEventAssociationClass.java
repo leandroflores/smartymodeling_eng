@@ -17,14 +17,12 @@ import view.panel.diagram.types.PanelClassDiagram;
  * <p>Class of Controller <b>ControllerEventAssociationClass</b>.</p>
  * <p>Class responsible for defining the <b>Controller</b> for <b>Class Diagram Association</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  04/06/2019
+ * @since  2019-06-04
  * @see    controller.view.panel.diagram.association.ControllerEventAssociation
  * @see    model.structural.diagram.ClassDiagram
  * @see    view.panel.diagram.types.PanelClassDiagram
  */
 public class ControllerEventAssociationClass extends ControllerEventAssociation {
-    private final PanelClassDiagram panelDiagram;
-    private final ClassDiagram diagram;
     
     /**
      * Default constructor method of Class.
@@ -32,49 +30,47 @@ public class ControllerEventAssociationClass extends ControllerEventAssociation 
      */
     public ControllerEventAssociationClass(PanelClassDiagram panel) {
         super(panel);
-        this.panelDiagram = panel;
-        this.diagram      = this.panelDiagram.getDiagram();
     }
     
     @Override
     public void addAssociation(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
-        if (this.check(source, target))
-            this.createAssociation(association);
+        Element source = getSource(association);
+        Element target = getTarget(association);
+        if (check(source, target))
+            createAssociation(association);
     }
     
     @Override
     public void createAssociation(mxCell association) {
-        switch (this.panelDiagram.getType()) {
+        switch (getPanel().getType()) {
             case 0:
             case 1:
             case 2:
             case 3:
             case 4:
             case 5:
-                this.addAssociationUML(association);
+                addAssociationUML(association);
                 break;
             case 6:
-                this.addGeneralization(association);
+                addGeneralization(association);
                 break;
             case 7:
-                this.addRealizationUML(association);
+                addRealizationUML(association);
                 break;
             case 8:
-                this.addAbstraction(association);
+                addAbstraction(association);
                 break;
             case 9:
-                this.addUsage(association);
+                addUsage(association);
                 break;
             case 10:
-                this.addDependency(association);
+                addDependency(association);
                 break;
             case 11:
-                this.addRequires(association);
+                addRequires(association);
                 break;
             case 12:
-                this.addMutex(association);
+                addMutex(association);
                 break;
             default:
                 break;
@@ -86,10 +82,10 @@ public class ControllerEventAssociationClass extends ControllerEventAssociation 
      * @param association Association mxCell.
      */
     private void addAssociationUML(mxCell association) {
-        if (this.checkAssociationUML(association)) {
-            AssociationUML associationUML = this.createAssociationUML(association);
+        if (checkAssociationUML(association)) {
+            AssociationUML associationUML = createAssociationUML(association);
             if (associationUML != null)
-                this.diagram.addAssociationUML(associationUML);
+                getDiagram().addAssociationUML(associationUML);
         }
     }
     
@@ -99,8 +95,8 @@ public class ControllerEventAssociationClass extends ControllerEventAssociation 
      * @return Elements checked.
      */
     private boolean checkAssociationUML(mxCell association) {
-        return   ((this.getSource(association) instanceof Entity)
-              &&  (this.getTarget(association) instanceof Entity));
+        return getSource(association) instanceof Entity 
+            && getTarget(association) instanceof Entity;
     }
     
     /**
@@ -109,10 +105,10 @@ public class ControllerEventAssociationClass extends ControllerEventAssociation 
      * @return Association UML.
      */
     private AssociationUML createAssociationUML(mxCell association) {
-        Entity  source    = (Entity) this.getSource(association);
-        Entity  target    = (Entity) this.getTarget(association);
-        String  category  = this.getCategory();
-        boolean direction = this.getDirection();
+        Entity  source    = (Entity) getSource(association);
+        Entity  target    = (Entity) getTarget(association);
+        String  category  = getCategory();
+        boolean direction = getDirection();
         return  new AssociationUML(source, target, category, direction);
     }
     
@@ -121,7 +117,7 @@ public class ControllerEventAssociationClass extends ControllerEventAssociation 
      * @return Association Direction Flag.
      */
     private boolean getDirection() {
-        switch (this.panelDiagram.getType()) {
+        switch (getPanel().getType()) {
             case 1:
             case 3:
             case 5:
@@ -136,7 +132,7 @@ public class ControllerEventAssociationClass extends ControllerEventAssociation 
      * @return Association Category.
      */
     private String getCategory() {
-        switch (this.panelDiagram.getType()) {
+        switch (getPanel().getType()) {
             case 2:
             case 3:
                 return "aggregation";
@@ -153,9 +149,9 @@ public class ControllerEventAssociationClass extends ControllerEventAssociation 
      * @param association Association mxCell.
      */
     private void addRealizationUML(mxCell associacao) {
-        RealizationUML realizationUML = this.createRealizationUML(associacao);
+        RealizationUML realizationUML = createRealizationUML(associacao);
         if (realizationUML != null)
-            this.diagram.addRealizationUML(realizationUML);
+            getDiagram().addRealizationUML(realizationUML);
     }
     
     /**
@@ -164,8 +160,8 @@ public class ControllerEventAssociationClass extends ControllerEventAssociation 
      * @return Realization UML.
      */
     private RealizationUML createRealizationUML(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
+        Element source = getSource(association);
+        Element target = getTarget(association);
         try {
             return new RealizationUML((ClassUML) source, (InterfaceUML) target);
         }catch (ClassCastException exception) {
@@ -178,9 +174,9 @@ public class ControllerEventAssociationClass extends ControllerEventAssociation 
      * @param association Abstraction mxCell.
      */
     private void addAbstraction(mxCell association) {
-        Abstraction abstraction = this.createAbstraction(association);
+        Abstraction abstraction = createAbstraction(association);
         if (abstraction != null)
-            this.diagram.addAbstraction(abstraction);
+            getDiagram().addAbstraction(abstraction);
     }
     
     /**
@@ -189,8 +185,8 @@ public class ControllerEventAssociationClass extends ControllerEventAssociation 
      * @return New Abstraction.
      */
     private Abstraction createAbstraction(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
+        Element source = getSource(association);
+        Element target = getTarget(association);
         try {
             return new Abstraction(source, target);
         }catch (ClassCastException exception) {
@@ -203,9 +199,9 @@ public class ControllerEventAssociationClass extends ControllerEventAssociation 
      * @param association Usage mxCell.
      */
     private void addUsage(mxCell association) {
-        Usage usage = this.createUsage(association);
+        Usage usage = createUsage(association);
         if (usage != null)
-            this.diagram.addUsage(usage);
+            getDiagram().addUsage(usage);
     }
     
     /**
@@ -214,12 +210,22 @@ public class ControllerEventAssociationClass extends ControllerEventAssociation 
      * @return New Usage.
      */
     private Usage createUsage(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
+        Element source = getSource(association);
+        Element target = getTarget(association);
         try {
             return new Usage(source, target);
         }catch (ClassCastException exception) {
             return null;
         }
+    }
+    
+    @Override
+    public ClassDiagram getDiagram() {
+        return (ClassDiagram) diagram;
+    }
+    
+    @Override
+    public PanelClassDiagram getPanel() {
+        return (PanelClassDiagram) panel;
     }
 }

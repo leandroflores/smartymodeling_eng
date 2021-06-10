@@ -16,14 +16,12 @@ import view.panel.diagram.types.PanelFeatureDiagram;
  * <p>Class of Controller <b>ControllerEventAssociationFeature</b>.</p>
  * <p>Class responsible for defining the <b>Controller</b> for <b>Feature Diagram Association</b> of SMartyModeling.</p>
  * @author Henrique
- * @since  11/02/2020
+ * @since  2020-02-11
  * @see    controller.view.panel.diagram.association.ControllerEventAssociation
  * @see    model.structural.diagram.FeatureDiagram
  * @see    view.panel.diagram.types.PanelFeatureDiagram
  */
 public class ControllerEventAssociationFeature extends ControllerEventAssociation {
-    private final PanelFeatureDiagram panelDiagram;
-    private final FeatureDiagram diagram;
     
     /**
      * Default constructor method of Class.
@@ -31,17 +29,15 @@ public class ControllerEventAssociationFeature extends ControllerEventAssociatio
      */
     public ControllerEventAssociationFeature(PanelFeatureDiagram panel) {
         super(panel);
-        this.panelDiagram = panel;
-        this.diagram      = this.panelDiagram.getDiagram();
     }
     
     @Override
     public void addAssociation(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
-        if (this.check(source, target) && this.distinct(source, target)
-         && this.containsRoot(target)  && this.isValid(target))
-            this.createAssociation(association);
+        Element source = getSource(association);
+        Element target = getTarget(association);
+        if (check(source, target) && distinct(source, target)
+                && containsRoot(target)  && isValid(target))
+            createAssociation(association);
     }
     
     /**
@@ -61,8 +57,8 @@ public class ControllerEventAssociationFeature extends ControllerEventAssociatio
      * @return Feature is Valid to Connection.
      */
     private boolean isValid(Element feature) {
-        if (!this.panelDiagram.getDiagram().getSourceAssociations("connection", feature).isEmpty()) {
-            new ViewError(this.panelDiagram.getViewMenu(), "Feature is already Connection Target!").setVisible(true);
+        if (!getDiagram().getSourceAssociations("connection", feature).isEmpty()) {
+            new ViewError(getViewMenu(), "Feature is already Connection Target!").setVisible(true);
             return false;
         }
         return true;
@@ -74,20 +70,20 @@ public class ControllerEventAssociationFeature extends ControllerEventAssociatio
      * @return Diagram contains Feature Root.
      */
     private boolean containsRoot(Element feature) {
-        List<Feature> roots = this.diagram.getRootsList();
+        List<Feature> roots = getDiagram().getRootsList();
         return  roots.size() >  1
             || (roots.size() == 1 && !roots.get(0).equals(feature));
     }
     
     @Override
     public void createAssociation(mxCell association) {
-        switch (this.panelDiagram.getType()) {
+        switch (getPanel().getType()) {
             case 0:
             case 1:
-                this.addConnection(association);
+                addConnection(association);
                 break;
             case 2:
-                this.addCombination(association);
+                addCombination(association);
                 break;
             default:
                 break;
@@ -99,9 +95,9 @@ public class ControllerEventAssociationFeature extends ControllerEventAssociatio
      * @param association Association.
      */
     private void addConnection(mxCell association) {
-        Connection connection = this.createConnection(association);
+        Connection connection = createConnection(association);
         if (connection != null)
-            this.diagram.addConnection(connection);
+            getDiagram().addConnection(connection);
     }
 
     /**
@@ -110,9 +106,9 @@ public class ControllerEventAssociationFeature extends ControllerEventAssociatio
      * @return Connection.
      */
     private Connection createConnection(mxCell association) {
-        Element source   = this.getSource(association);
-        Element target   = this.getTarget(association);
-        String  category = this.getCategory();
+        Element source   = getSource(association);
+        Element target   = getTarget(association);
+        String  category = getCategory();
         try {
             return new Connection((Feature) source, (Feature) target, category);
         }catch (ClassCastException exception) {
@@ -125,7 +121,7 @@ public class ControllerEventAssociationFeature extends ControllerEventAssociatio
      * @return Connection Category.
      */
     private String getCategory() {
-        switch (this.panelDiagram.getType()) {
+        switch (getPanel().getType()) {
             case 1:
                 return "optional";
             default:
@@ -138,11 +134,11 @@ public class ControllerEventAssociationFeature extends ControllerEventAssociatio
      * @param association Association.
      */
     private void addCombination(mxCell association) {
-        Combination combination = this.createCombination(association);
+        Combination combination = createCombination(association);
         if (combination != null) {
             Variability variability = combination.getSource();
             if (!variability.getVariationPoint().equals(combination.getTarget())) {
-                this.diagram.addCombination(combination);
+                getDiagram().addCombination(combination);
                 variability.addVariant(combination.getTarget());
             }
         }
@@ -154,13 +150,23 @@ public class ControllerEventAssociationFeature extends ControllerEventAssociatio
      * @return Combination.
      */
     private Combination createCombination(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
+        Element source = getSource(association);
+        Element target = getTarget(association);
         boolean root   = false;
         try {
             return new Combination((Variability) source, (Feature) target, root);
         }catch (ClassCastException exception) {
             return null;
         }
+    }
+    
+    @Override
+    public FeatureDiagram getDiagram() {
+        return (FeatureDiagram) diagram;
+    }
+    
+    @Override
+    public PanelFeatureDiagram getPanel() {
+        return (PanelFeatureDiagram) panel;
     }
 }

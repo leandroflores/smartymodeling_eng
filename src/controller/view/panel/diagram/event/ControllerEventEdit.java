@@ -9,9 +9,10 @@ import view.panel.diagram.PanelDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventEdit</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Editing Modeling Panel</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Controller</b> for <b>Edit Event</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  27/05/2019
+ * @since  2019-05-27
+ * @see    com.mxgraph.util.mxEventSource
  * @see    com.mxgraph.util.mxEventSource.mxIEventListener
  * @see    view.panel.diagram.PanelDiagram
  */
@@ -20,20 +21,28 @@ public class ControllerEventEdit extends mxEventSource implements mxIEventListen
 
     /**
      * Default constructor method of Class.
-     * @param panel Panel Diagram.
+     * @param panel_ Panel Diagram.
      */
-    public ControllerEventEdit(PanelDiagram panel) {
-        this.panel = panel;
+    public ControllerEventEdit(PanelDiagram panel_) {
+        panel = panel_;
     }
     
     @Override
     public void invoke(Object object, mxEventObject evento) {
-        Object   cell   = this.panel.getGraph().getSelectionCell();
-        String   id     = this.panel.getIdentifiers().get(cell);
-        Element element = this.panel.getDiagram().getElement(id);
+        Object   cell   = getPanel().getGraph().getSelectionCell();
+        String   id     = getPanel().getIdentifiers().get(cell);
+        Element element = getPanel().getDiagram().getElement(id);
         if (element != null) {
-            mxCell celula = (mxCell) cell;
-                   celula.setValue(element.getName());
+            mxCell cell_ = (mxCell) cell;
+                   cell_.setValue(element.getName());
         }
+    }
+    
+    /**
+     * Method responsible for returning the Panel Diagram.
+     * @return Panel Diagram.
+     */
+    public PanelDiagram getPanel() {
+        return panel;
     }
 }

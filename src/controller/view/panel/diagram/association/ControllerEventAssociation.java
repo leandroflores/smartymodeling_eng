@@ -10,28 +10,30 @@ import model.structural.base.association.Dependency;
 import model.structural.base.association.Generalization;
 import model.structural.base.variability.Mutex;
 import model.structural.base.variability.Requires;
+import view.main.structural.ViewMenu;
 import view.modal.message.ViewError;
 import view.panel.diagram.PanelDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventAssociation</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Association Panel Modeling</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>Association Events</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  28/05/2019
+ * @since  2019-05-28
+ * @see    com.mxgraph.util.mxEventSource
  * @see    model.structural.base.Diagram
  * @see    view.panel.diagram.PanelDiagram
  */
 public abstract class ControllerEventAssociation extends mxEventSource implements mxEventSource.mxIEventListener {
-    private final PanelDiagram panel;
-    private final Diagram diagram;
+    protected final PanelDiagram panel;
+    protected final Diagram diagram;
 
     /**
      * Default constructor method of Class.
-     * @param panel Panel Diagram.
+     * @param panel_ Panel Diagram.
      */
-    public ControllerEventAssociation(PanelDiagram panel) {
-        this.panel   = panel;
-        this.diagram = this.panel.getDiagram();
+    public ControllerEventAssociation(PanelDiagram panel_) {
+        panel   = panel_;
+        diagram = panel_.getDiagram();
     }
 
     @Override
@@ -39,8 +41,8 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
         Object element = event.getProperty("cell");
         if (element != null) {
             mxCell association = (mxCell) element;
-            this.addAssociation(association);
-            this.panel.updateGraph();
+            addAssociation(association);
+            getPanel().updateGraph();
         }
     }
     
@@ -92,7 +94,7 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
      * @return Source Element.
      */
     protected Element getSource(mxCell association) {
-        return this.getElement(this.panel.getIdentifiers().get(association.getSource()));
+        return getElement(getPanel().getIdentifiers().get(association.getSource()));
     }
     
     /**
@@ -101,7 +103,7 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
      * @return Target Element.
      */
     protected Element getTarget(mxCell association) {
-        return this.getElement(this.panel.getIdentifiers().get(association.getTarget()));
+        return getElement(getPanel().getIdentifiers().get(association.getTarget()));
     }
     
     /**
@@ -109,8 +111,9 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
      * @param association Association.
      */
     protected void addRequires(mxCell association) {
-        if (this.distinct(this.getSource(association), this.getTarget(association)))
-            this.diagram.addRequires(new Requires(this.getSource(association), this.getTarget(association)));
+        if (distinct(getSource(association), getTarget(association)))
+            getDiagram().addRequires(new Requires(getSource(association), 
+                                                  getTarget(association)));
     }
     
     /**
@@ -118,8 +121,9 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
      * @param association Association.
      */
     protected void addMutex(mxCell association) {
-        if (this.distinct(this.getSource(association), this.getTarget(association)))
-            this.diagram.addMutex(new Mutex(this.getSource(association), this.getTarget(association)));
+        if (distinct(getSource(association), getTarget(association)))
+            getDiagram().addMutex(new Mutex(getSource(association), 
+                                            getTarget(association)));
     }
     
     /**
@@ -127,8 +131,9 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
      * @param association Association.
      */
     protected void addDependency(mxCell association) {
-        if (this.distinct(this.getSource(association), this.getTarget(association)))
-            this.diagram.addDependency(new Dependency(this.getSource(association), this.getTarget(association)));
+        if (distinct(getSource(association), getTarget(association)))
+            getDiagram().addDependency(new Dependency(getSource(association), 
+                                                      getTarget(association)));
     }
     
     /**
@@ -137,10 +142,10 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
      * @return Source is Unique.
      */
     protected boolean checkSource(Generalization generalization) {
-        Element super_ = this.diagram.getSuper(generalization.getSource());
+        Element super_ = getDiagram().getSuper(generalization.getSource());
         if (super_ != null) {
             String message = generalization.getSource().getName() + " is already has a generalization with " + super_.getName() + "!";
-            new ViewError(this.panel.getViewMenu(), message).setVisible(true);
+            new ViewError(getViewMenu(), message).setVisible(true);
             return false;
         }
         return true;
@@ -152,9 +157,9 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
      * @return Generalization is Not Recursive.
      */
     protected boolean checkRecursive(Generalization generalization) {
-        List<Element> supers = this.diagram.getSupers(generalization.getTarget());
+        List<Element> supers = getDiagram().getSupers(generalization.getTarget());
         if (supers.contains(generalization.getSource())) {
-            new ViewError(this.panel.getViewMenu(), "Recursive generalization is not allowed!").setVisible(true);
+            new ViewError(getViewMenu(), "Recursive generalization is not allowed!").setVisible(true);
             return false;
         }
         return true;
@@ -165,9 +170,9 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
      * @param association Association.
      */
     protected void addGeneralization(mxCell association) {
-        Generalization generalization = this.createGeneralization(association);
-        if (generalization != null && this.checkSource(generalization) && this.checkRecursive(generalization))
-            this.diagram.addGeneralization(generalization);
+        Generalization generalization = createGeneralization(association);
+        if (generalization != null && checkSource(generalization) && checkRecursive(generalization))
+            getDiagram().addGeneralization(generalization);
     }
     
     /**
@@ -176,9 +181,9 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
      * @return Generalization.
      */
     private Generalization createGeneralization(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
-        if (this.equalClass(source, target) && this.distinct(source, target))
+        Element source = getSource(association);
+        Element target = getTarget(association);
+        if (equalClass(source, target) && distinct(source, target))
             return new Generalization(source, target);
         return null;
     }
@@ -189,6 +194,30 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
      * @return Element found.
      */
     protected Element getElement(String id) {
-        return this.panel.getDiagram().getElement(id);
+        return getDiagram().getElement(id);
+    }
+    
+    /**
+     * Method responsible for returning the Diagram.
+     * @return Diagram.
+     */
+    public Diagram getDiagram() {
+        return diagram;
+    }
+    
+    /**
+     * Method responsible for returning the View Menu.
+     * @return View Menu.
+     */
+    public ViewMenu getViewMenu() {
+        return getPanel().getViewMenu();
+    }
+    
+    /**
+     * Method responsible for returning the Panel Diagram.
+     * @return Panel Diagram.
+     */
+    public PanelDiagram getPanel() {
+        return panel;
     }
 }

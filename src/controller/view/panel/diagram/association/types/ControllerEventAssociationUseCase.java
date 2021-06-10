@@ -15,14 +15,12 @@ import view.panel.diagram.types.PanelUseCaseDiagram;
  * <p>Class of Controller <b>ControllerEventAssociationUseCase</b>.</p>
  * <p>Class responsible for defining the <b>Controller</b> for <b>Use Case Diagram Association</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  28/05/2019
+ * @since  2019-05-28
  * @see    controller.view.panel.diagram.association.ControllerEventAssociation
  * @see    model.structural.diagram.UseCaseDiagram
  * @see    view.panel.diagram.types.PanelUseCaseDiagram
  */
 public class ControllerEventAssociationUseCase extends ControllerEventAssociation {
-    private final PanelUseCaseDiagram panelDiagram;
-    private final UseCaseDiagram diagram;
     
     /**
      * Default constructor method of Class.
@@ -30,41 +28,39 @@ public class ControllerEventAssociationUseCase extends ControllerEventAssociatio
      */
     public ControllerEventAssociationUseCase(PanelUseCaseDiagram panel) {
         super(panel);
-        this.panelDiagram = panel;
-        this.diagram      = this.panelDiagram.getDiagram();
     }
     
     @Override
     public void addAssociation(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
-        if (this.check(source, target) && this.distinct(source, target))
-            this.createAssociation(association);
+        Element source = getSource(association);
+        Element target = getTarget(association);
+        if (check(source, target) && distinct(source, target))
+            createAssociation(association);
     }
     
     @Override
     public void createAssociation(mxCell association) {
-        switch (this.panelDiagram.getType()) {
+        switch (getPanel().getType()) {
             case 0:
-                this.addRealizationUML(association);
+                addRealizationUML(association);
                 break;
             case 1:
-                this.addExtendUML(association);
+                addExtendUML(association);
                 break;
             case 2:
-                this.addIncludeUML(association);
+                addIncludeUML(association);
                 break;
             case 3:
-                this.addGeneralization(association);
+                addGeneralization(association);
                 break;
             case 4:
-                this.addRequires(association);
+                addRequires(association);
                 break;
             case 5:
-                this.addMutex(association);
+                addMutex(association);
                 break;
             case 6:
-                this.addDependency(association);
+                addDependency(association);
                 break;
             default:
                 break;
@@ -76,9 +72,9 @@ public class ControllerEventAssociationUseCase extends ControllerEventAssociatio
      * @param association Association.
      */
     private void addRealizationUML(mxCell association) {
-        CommunicationUML realizationUML = this.createRealizationUML(association);
+        CommunicationUML realizationUML = createRealizationUML(association);
         if (realizationUML != null)
-            this.diagram.addCommunication(realizationUML);
+            getDiagram().addCommunication(realizationUML);
     }
     
     /**
@@ -87,12 +83,12 @@ public class ControllerEventAssociationUseCase extends ControllerEventAssociatio
      * @return Realization UML.
      */
     private CommunicationUML createRealizationUML(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
+        Element source = getSource(association);
+        Element target = getTarget(association);
         try {
             return new CommunicationUML((ActorUML) source, (UseCaseUML) target);
         }catch (ClassCastException exception) {
-            return this.createRealizationUML(source, target);
+            return createRealizationUML(source, target);
         }
     }
     
@@ -115,9 +111,9 @@ public class ControllerEventAssociationUseCase extends ControllerEventAssociatio
      * @param association mxCell Association.
      */
     private void addExtendUML(mxCell association) {
-        ExtendUML extendUML = this.createExtendUML(association);
+        ExtendUML extendUML = createExtendUML(association);
         if (extendUML != null)
-            this.diagram.addExtend(extendUML);
+            getDiagram().addExtend(extendUML);
     }
     
     /**
@@ -126,8 +122,8 @@ public class ControllerEventAssociationUseCase extends ControllerEventAssociatio
      * @return Extend UML.
      */
     private ExtendUML createExtendUML(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
+        Element source = getSource(association);
+        Element target = getTarget(association);
         try {
             return new ExtendUML((UseCaseUML) source, (UseCaseUML) target);
         }catch (ClassCastException exception) {
@@ -140,9 +136,9 @@ public class ControllerEventAssociationUseCase extends ControllerEventAssociatio
      * @param association Association.
      */
     private void addIncludeUML(mxCell association) {
-        IncludeUML includeUML = this.createIncludeUML(association);
+        IncludeUML includeUML = createIncludeUML(association);
         if (includeUML != null)
-            this.diagram.addInclude(includeUML);
+            getDiagram().addInclude(includeUML);
     }
     
     /**
@@ -151,12 +147,22 @@ public class ControllerEventAssociationUseCase extends ControllerEventAssociatio
      * @return Include UML.
      */
     private IncludeUML createIncludeUML(mxCell association) {
-        Element source = this.getSource(association);
-        Element target = this.getTarget(association);
+        Element source = getSource(association);
+        Element target = getTarget(association);
         try {
             return new IncludeUML((UseCaseUML) source, (UseCaseUML) target);
         }catch (ClassCastException exception) {
             return null;
         }
+    }
+    
+    @Override
+    public UseCaseDiagram getDiagram() {
+        return (UseCaseDiagram) diagram;
+    }
+    
+    @Override
+    public PanelUseCaseDiagram getPanel() {
+        return (PanelUseCaseDiagram) panel;
     }
 }
