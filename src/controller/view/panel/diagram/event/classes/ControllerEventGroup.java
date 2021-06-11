@@ -5,15 +5,16 @@ import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import model.structural.base.Element;
+import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.PackageUML;
 import view.panel.diagram.types.PanelClassDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventGroup</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Grouping Panel Modeling</b> on Class Diagram Panel of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Group Events</b> in <b>Class Diagram Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  10/06/2019
+ * @since  2019-06-10
  * @see    com.mxgraph.util.mxEventSource
  * @see    com.mxgraph.util.mxEventSource.mxIEventListener
  * @see    view.panel.diagram.types.PanelClassDiagram
@@ -31,13 +32,13 @@ public class ControllerEventGroup extends mxEventSource implements mxIEventListe
     
     @Override
     public void invoke(Object object, mxEventObject event) {
-        mxCell     cell    = (mxCell) this.panel.getGraph().getSelectionCell();
-        Element    element = this.getElement(cell);
-        PackageUML parent  = this.getParent(this.getId(this.getCellId(cell.getParent())));
-        if (this.getId(this.getCellId(cell.getParent())).trim().equals("1"))
-            this.updateDefaultParent(element);
+        mxCell     cell    = (mxCell) getPanel().getGraph().getSelectionCell();
+        Element    element = getElement(cell);
+        PackageUML parent  = getParent(getId(getCellId(cell.getParent())));
+        if (getId(getCellId(cell.getParent())).trim().equals("1"))
+            updateDefaultParent(element);
         else if (parent != null)
-            this.updateParent(parent, element);
+            updateParent(parent, element);
     }
     
     /**
@@ -46,15 +47,11 @@ public class ControllerEventGroup extends mxEventSource implements mxIEventListe
      * @return Element Selected.
      */
     private Element getElement(mxCell cell) {
-        Element element = this.panel.getDiagram().getElement(this.getCellId(cell));
+        Element element = getDiagram().getElement(getCellId(cell));
         if (element != null) {
-            PackageUML parent = this.getParent(this.getId(this.getCellId(cell.getParent())));
-            Integer    localX = element.getGlobalX() - this.getGlobalX(parent);
-            Integer    localY = element.getGlobalY() - this.getGlobalY(parent);
-            if (localX < 0)
-                localX = 0;
-            if (localY < 0)
-                localY = 0;
+            PackageUML parent = getParent(getId(getCellId(cell.getParent())));
+            Integer    localX = Math.max(0, element.getGlobalX() - getGlobalX(parent));
+            Integer    localY = Math.max(0, element.getGlobalY() - getGlobalY(parent));
             element.setPosition(localX, localY);
 //            element.setPosition((int) cell.getGeometry().getX(), (int) cell.getGeometry().getY());
         }
@@ -68,12 +65,12 @@ public class ControllerEventGroup extends mxEventSource implements mxIEventListe
             if (((PackageUML) element).getParent() == null)
                 return element.getX();
             else
-                return element.getX() + this.getGlobalX(((PackageUML) element).getParent());
+                return element.getX() + getGlobalX(((PackageUML) element).getParent());
         }else {
             if (((Entity) element).getPackageUML() == null)
                 return element.getX();
             else
-                return element.getX() + this.getGlobalX(((Entity) element).getPackageUML());
+                return element.getX() + getGlobalX(((Entity) element).getPackageUML());
         }
     }
     
@@ -84,12 +81,12 @@ public class ControllerEventGroup extends mxEventSource implements mxIEventListe
             if (((PackageUML) element).getParent() == null)
                 return element.getY();
             else
-                return element.getY() + this.getGlobalY(((PackageUML) element).getParent());
+                return element.getY() + getGlobalY(((PackageUML) element).getParent());
         }else {
             if (((Entity) element).getPackageUML() == null)
                 return element.getY();
             else
-                return element.getY() + this.getGlobalY(((Entity) element).getPackageUML());
+                return element.getY() + getGlobalY(((Entity) element).getPackageUML());
         }
     }
     
@@ -99,7 +96,7 @@ public class ControllerEventGroup extends mxEventSource implements mxIEventListe
      * @return Parent Package.
      */
     private PackageUML getParent(String parentId) {
-        Element parent = this.panel.getDiagram().getElement(parentId);
+        Element parent = getDiagram().getElement(parentId);
         if (parent instanceof PackageUML)
             return (PackageUML) parent;
         return null;
@@ -114,9 +111,9 @@ public class ControllerEventGroup extends mxEventSource implements mxIEventListe
             ((Entity) element).resetPackageUML();
         else if (element instanceof PackageUML)
             ((PackageUML) element).resetParent();
-        this.panel.getViewMenu().setSave(false);
-        this.panel.getViewMenu().update();
-        this.panel.updateGraph();
+        getPanel().getViewMenu().setSave(false);
+        getPanel().getViewMenu().update();
+        getPanel().updateGraph();
     }
     
     /**
@@ -125,12 +122,12 @@ public class ControllerEventGroup extends mxEventSource implements mxIEventListe
      */
     private void updateParent(PackageUML parent, Element element) {
         if (element instanceof Entity)
-            this.updateParent(parent, (Entity) element);
+            updateParent(parent, (Entity) element);
         else if (element instanceof PackageUML)
-            this.updateParent(parent, (PackageUML) element);
-        this.panel.getViewMenu().setSave(false);
-        this.panel.getViewMenu().update();
-        this.panel.updateGraph();
+            updateParent(parent, (PackageUML) element);
+        getPanel().getViewMenu().setSave(false);
+        getPanel().getViewMenu().update();
+        getPanel().updateGraph();
     }
     
     /**
@@ -173,5 +170,21 @@ public class ControllerEventGroup extends mxEventSource implements mxIEventListe
         if ((cell != null) && (cell instanceof mxCell))
             return ((mxCell) cell).getId();
         return "";
+    }
+    
+    /**
+     * Method responsible for returning the Class Diagram.
+     * @return Class Diagram.
+     */
+    public ClassDiagram getDiagram() {
+        return getPanel().getDiagram();
+    }
+    
+    /**
+     * Method responsible for returning the Panel Class Diagram.
+     * @return Panel Class Diagram.
+     */
+    public PanelClassDiagram getPanel() {
+        return panel;
     }
 }

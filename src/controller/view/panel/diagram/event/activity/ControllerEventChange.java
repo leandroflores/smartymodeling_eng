@@ -11,9 +11,11 @@ import view.panel.diagram.types.PanelActivityDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventChange</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Changing Events</b> on Activity Diagram Panel of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Change Events</b> in <b>Activity Diagram Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  03/11/2019
+ * @since  2019-11-03
+ * @see    com.mxgraph.util.mxEventSource
+ * @see    com.mxgraph.util.mxEventSource.mxIEventListener
  * @see    view.panel.diagram.types.PanelActivityDiagram
  */
 public class ControllerEventChange extends mxEventSource implements mxIEventListener {
@@ -29,11 +31,11 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     
     @Override
     public void invoke(Object object, mxEventObject event) {
-        Object cell = this.panel.getGraph().getSelectionCell();
-        String id   = this.getId(cell);
-            this.change(cell, id);
-        this.panel.updateGraph();
-        this.panel.getViewMenu().getPanelProject().updateUI();
+        Object cell = getPanel().getGraph().getSelectionCell();
+        String id   = getId(cell);
+            change(cell, id);
+        getPanel().updateGraph();
+        getPanel().getViewMenu().getPanelProject().updateUI();
     }
     
     /**
@@ -42,10 +44,10 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @param id Element Id.
      */
     private void change(Object object, String id) {
-        if (this.panel.getDiagram().getElement(id) != null)
-            this.changeElement(object, (Element) this.panel.getDiagram().getElement(id));
-        else if (this.panel.getDiagram().getAssociation(id)  != null)
-            this.changeAssociation(object, this.panel.getDiagram().getAssociation(id));
+        if (getPanel().getDiagram().getElement(id) != null)
+            changeElement(object, (Element) getPanel().getDiagram().getElement(id));
+        else if (getPanel().getDiagram().getAssociation(id)  != null)
+            changeAssociation(object, getPanel().getDiagram().getAssociation(id));
     }
     
     /**
@@ -55,10 +57,10 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private void changeElement(Object object, Element element) {
         mxCell cell = (mxCell) object;
-        if (cell.getValue().toString().equals("") == false) {
+        if (!cell.getValue().toString().equals("")) {
             element.setName(cell.getValue().toString());
-            this.panel.getViewMenu().getPanelModeling().getViewMenu().update();
-            this.panel.getViewMenu().setSave(false);
+            getPanel().getViewMenu().getPanelModeling().getViewMenu().update();
+            getPanel().getViewMenu().setSave(false);
         }
     }
     
@@ -72,9 +74,9 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
         String value = cell.getValue().toString();
         if (association instanceof FlowUML) {
             FlowUML flow = (FlowUML) association;
-                    flow.setGuard(this.getGuard(value));
-                    flow.setAction(this.getAction(value));
-                    flow.setWeight(this.getWeight(value));
+                    flow.setGuard(getGuard(value));
+                    flow.setAction(getAction(value));
+                    flow.setWeight(getWeight(value));
         }
     }
     
@@ -95,8 +97,9 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @return Guard.
      */
     private String getGuard(String signature) {
-        if (this.checkGuard(signature))
-            return signature.substring(signature.indexOf("[") + 1, signature.indexOf("]")).trim();
+        if (checkGuard(signature))
+            return signature.substring(signature.indexOf("[") + 1, 
+                                       signature.indexOf("]")).trim();
         return "";
     }
     
@@ -106,10 +109,9 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @return Action checked.
      */
     private boolean checkAction(String signature) {
-        return         signature.contains("/")
-               &&  (  !signature.contains("{")
-                   || (signature.contains("{") 
-                   &&  signature.indexOf ("{") > signature.indexOf("/")));
+        return      signature.contains("/")
+               && (!signature.contains("{") || (signature.contains("{") 
+                 && signature.indexOf ("{")  >  signature.indexOf("/")));
     }
     
     /**
@@ -118,10 +120,11 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @return Action.
      */
     private String getAction(String signature) {
-        if (this.checkAction(signature)) {
+        if (checkAction(signature)) {
             if (!signature.contains("{"))
                 return signature.substring(signature.indexOf("/"));
-            return signature.substring(signature.indexOf("/") + 1, signature.indexOf("{")).trim();
+            return signature.substring(signature.indexOf("/") + 1, 
+                                       signature.indexOf("{")).trim();
         }
         return "";
     }
@@ -143,8 +146,9 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @return Weight.
      */
     private String getWeight(String signature) {
-        if (this.checkWeight(signature))
-            return signature.substring(signature.indexOf("{") + 1, signature.indexOf("}")).trim();
+        if (checkWeight(signature))
+            return signature.substring(signature.indexOf("{") + 1, 
+                                       signature.indexOf("}")).trim();
         return "";
     }
     
@@ -154,9 +158,9 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @return Element Id.
      */
     private String getId(Object cell) {
-        if (this.panel.getIdentifiers().get(cell) != null)
-            return this.panel.getIdentifiers().get(cell);
-        return this.getCellId((mxCell) cell);
+        if (getPanel().getIdentifiers().get(cell) != null)
+            return getPanel().getIdentifiers().get(cell);
+        return getCellId((mxCell) cell);
     }
     
     /**
@@ -171,5 +175,13 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
             return cell.getId();
         }
         return "";
+    }
+    
+    /**
+     * Method responsible for returning the Panel Activity Diagram.
+     * @return Panel Activity Diagram.
+     */
+    public PanelActivityDiagram getPanel() {
+        return panel;
     }
 }

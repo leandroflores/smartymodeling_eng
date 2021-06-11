@@ -5,15 +5,16 @@ import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import model.structural.base.Element;
+import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.PackageUML;
 import view.panel.diagram.types.PanelClassDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventResize</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Resizing Panel Modeling</b> on Class Diagram Panel of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Resize Events</b> in <b>Class Diagram Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  10/06/2019
+ * @since  2019-06-10
  * @see    com.mxgraph.util.mxEventSource
  * @see    com.mxgraph.util.mxEventSource.mxIEventListener
  * @see    view.panel.diagram.types.PanelClassDiagram
@@ -31,11 +32,11 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
     
     @Override
     public void invoke(Object object, mxEventObject evento) {
-        Object  cell    = this.panel.getGraph().getSelectionCell();
-        String  id      = this.getId(cell);
-        Element element = this.panel.getDiagram().getElement(id);
+        Object  cell    = getPanel().getGraph().getSelectionCell();
+        String  id      = getId(cell);
+        Element element = getDiagram().getElement(id);
         if (element != null) 
-            this.resize(element, cell);
+            resize(element, cell);
     }
     
     /**
@@ -56,9 +57,9 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
      */
     private void resize(Element element, Object cell) {
         if (element instanceof Entity)
-            this.resize((Entity)     element, cell);
+            resize((Entity) element, cell);
         else if (element instanceof PackageUML)
-            this.resize((PackageUML) element, cell);
+            resize((PackageUML) element, cell);
     }
     
     /**
@@ -67,13 +68,13 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
      * @param cell Graph Cell.
      */
     private void resize(Entity entity, Object cell) {
-        Integer height = new Double(this.panel.getGraph().getCellGeometry(cell).getHeight()).intValue();
-        Integer width  = new Double(this.panel.getGraph().getCellGeometry(cell).getWidth()).intValue();
+        Integer height = new Double(getPanel().getGraph().getCellGeometry(cell).getHeight()).intValue();
+        Integer width  = new Double(getPanel().getGraph().getCellGeometry(cell).getWidth()).intValue();
                 entity.setHeight(height > entity.getMinHeight() ? height : entity.getMinHeight());
                 entity.setWidth( width  >  entity.getMinWidth() ?  width :  entity.getMinWidth());
                 entity.updatePackageSize();
-        this.panel.getViewMenu().setSave(false);
-        this.panel.updateGraph();
+        getPanel().getViewMenu().setSave(false);
+        getPanel().updateGraph();
     }
     
     /**
@@ -82,12 +83,28 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
      * @param cell Graph Cell.
      */
     private void resize(PackageUML packageUML, Object cell) {
-        Integer height = new Double(this.panel.getGraph().getCellGeometry(cell).getHeight()).intValue();
-        Integer width  = new Double(this.panel.getGraph().getCellGeometry(cell).getWidth()).intValue();
+        Integer height = new Double(getPanel().getGraph().getCellGeometry(cell).getHeight()).intValue();
+        Integer width  = new Double(getPanel().getGraph().getCellGeometry(cell).getWidth()).intValue();
                 packageUML.setHeight(height > packageUML.getMinHeight() ? height : packageUML.getMinHeight());
                 packageUML.setWidth( width  > packageUML.getMinWidth()  ?  width : packageUML.getMinWidth());
                 packageUML.updateParentSize();
-        this.panel.getViewMenu().setSave(false);
-        this.panel.updateGraph();
+        getPanel().getViewMenu().setSave(false);
+        getPanel().updateGraph();
+    }
+    
+    /**
+     * Method responsible for returning the Class Diagram.
+     * @return Class Diagram.
+     */
+    public ClassDiagram getDiagram() {
+        return getPanel().getDiagram();
+    }
+    
+    /**
+     * Method responsible for returning the Panel Class Diagram.
+     * @return Panel Class Diagram.
+     */
+    public PanelClassDiagram getPanel() {
+        return panel;
     }
 }

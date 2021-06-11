@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
+import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.classes.base.ParameterUML;
@@ -17,9 +18,11 @@ import view.panel.diagram.types.PanelClassDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventChange</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Changing Events</b> on Class Diagram Panel of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Change Events</b> in <b>Class Diagram Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  03/06/2019
+ * @since  2019-06-03
+ * @see    com.mxgraph.util.mxEventSource
+ * @see    com.mxgraph.util.mxEventSource.mxIEventListener
  * @see    view.panel.diagram.types.PanelClassDiagram
  */
 public class ControllerEventChange extends mxEventSource implements mxIEventListener {
@@ -35,12 +38,12 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     
     @Override
     public void invoke(Object object, mxEventObject event) {
-        Object cell = this.panel.getGraph().getSelectionCell();
-        String id   = this.getId(cell);
-            this.change(cell, id);
-        this.panel.updateGraph();
-        this.panel.getViewMenu().getPanelModeling().updateInstancePanels();
-        this.panel.getViewMenu().getPanelProject().updateUI();
+        Object cell = getPanel().getGraph().getSelectionCell();
+        String id   = getId(cell);
+            change(cell, id);
+        getPanel().updateGraph();
+        getPanel().getViewMenu().getPanelModeling().updateInstancePanels();
+        getPanel().getViewMenu().getPanelProject().updateUI();
     }
     
     /**
@@ -49,16 +52,16 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @param id Element Id.
      */
     private void change(Object object, String id) {
-        if (this.panel.getDiagram().getAssociation(id)  != null)
-            this.changeNameAssociation(object, this.panel.getDiagram().getAssociation(id));
-        else if (this.panel.getDiagram().getElement(id) instanceof AttributeUML)
-            this.changeAttribute(object, (AttributeUML) this.panel.getDiagram().getElement(id));
-        else if (this.panel.getDiagram().getElement(id) instanceof MethodUML)
-            this.changeMethod(object,    (MethodUML)    this.panel.getDiagram().getElement(id));
-        else if (this.panel.getDiagram().getElement(id) != null)
-            this.changeElement(object,   (Element)      this.panel.getDiagram().getElement(id));
+        if (getDiagram().getAssociation(id) != null)
+            changeNameAssociation(object, getDiagram().getAssociation(id));
+        else if (getDiagram().getElement(id) instanceof AttributeUML)
+            changeAttribute(object, (AttributeUML) getDiagram().getElement(id));
+        else if (getDiagram().getElement(id) instanceof MethodUML)
+            changeMethod(object, (MethodUML) getDiagram().getElement(id));
+        else if (getDiagram().getElement(id) != null)
+            changeElement(object, (Element)getDiagram().getElement(id));
         else if (id != null)
-            this.changeAssociation(object, id);
+            changeAssociation(object, id);
     }
     
     /**
@@ -69,13 +72,13 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     private void changeAttribute(Object object, AttributeUML attribute) {
         mxCell cell      = (mxCell) object;
         String signature = cell.getValue().toString().trim();
-        if (this.checkAttribute(signature)) {
-            attribute.setVisibility(this.getVisibility(signature));
-            attribute.setName(this.getName(signature, ":"));
-            attribute.setTypeUML(this.getType(signature, true));
-            this.panel.updateGraph();
-            this.panel.getViewMenu().update();
-            this.panel.getViewMenu().setSave(false);
+        if (checkAttribute(signature)) {
+            attribute.setVisibility(getVisibility(signature));
+            attribute.setName(getName(signature, ":"));
+            attribute.setTypeUML(getType(signature, true));
+            getPanel().updateGraph();
+            getPanel().getViewMenu().update();
+            getPanel().getViewMenu().setSave(false);
         }
     }
     
@@ -85,9 +88,9 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @return Attribute Signature checked.
      */
     private boolean checkAttribute(String signature) {
-        return     this.checkVisibility(signature) 
+        return     checkVisibility(signature) 
                &&  signature.contains(":")
-               && !this.getName(signature, ":").equals("");
+               && !getName(signature, ":").equals("");
     }
     
     /**
@@ -98,15 +101,15 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     private void changeMethod(Object object, MethodUML method) {
         mxCell cell      = (mxCell) object;
         String signature = cell.getValue().toString().trim();
-        if (this.checkMethod(signature)) {
-            method.setVisibility(this.getVisibility(signature));
-            method.setName(this.getName(signature, "("));
-            method.setParameters(this.getParameters(signature));
-            method.setReturn(this.getType(signature, false));
-            this.panel.updateGraph();
-            this.panel.getViewMenu().getProject().changeNames(method);
-            this.panel.getViewMenu().update();
-            this.panel.getViewMenu().setSave(false);
+        if (checkMethod(signature)) {
+            method.setVisibility(getVisibility(signature));
+            method.setName(getName(signature, "("));
+            method.setParameters(getParameters(signature));
+            method.setReturn(getType(signature, false));
+            getPanel().updateGraph();
+            getPanel().getViewMenu().getProject().changeNames(method);
+            getPanel().getViewMenu().update();
+            getPanel().getViewMenu().setSave(false);
         }
     }
     
@@ -116,11 +119,11 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @return Signature checked.
      */
     private boolean checkMethod(String signature) {
-        return     this.checkVisibility(signature) 
+        return     checkVisibility(signature) 
                &&  signature.contains("(")
                &&  signature.contains(")")
                &&  signature.indexOf("(") < signature.indexOf(")")
-               && !this.getName(signature, "(").equals("")
+               && !getName(signature, "(").equals("")
                &&  signature.contains(":");
     }
     
@@ -131,11 +134,11 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private void changeElement(Object object, Element element) {
         mxCell cell = (mxCell) object;
-        if (cell.getValue().toString().equals("") == false) {
+        if (!cell.getValue().toString().equals("")) {
             element.setName(cell.getValue().toString());
-            this.panel.updateGraph();
-            this.panel.getViewMenu().update();
-            this.panel.getViewMenu().setSave(false);
+            getPanel().updateGraph();
+            getPanel().getViewMenu().update();
+            getPanel().getViewMenu().setSave(false);
         }
     }
     
@@ -156,12 +159,12 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @param id Association Id.
      */
     private void changeAssociation(Object object, String id) {
-        Association association = this.getAssociation(id);
+        Association association = getAssociation(id);
         if (association != null) {
             if (id.endsWith("(source)"))
-                this.changeSourceAssociation((AssociationUML) association, (mxCell) object);
+                changeSourceAssociation((AssociationUML) association, (mxCell) object);
             else if (id.endsWith("(target)"))
-                this.changeTargetAssociation((AssociationUML) association, (mxCell) object);
+                changeTargetAssociation((AssociationUML) association, (mxCell) object);
         }
     }
     
@@ -172,7 +175,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private Association getAssociation(String id) {
         String newId = id.contains("(") ? id.substring(0, id.indexOf("(")) : "";
-        return this.panel.getDiagram().getAssociation(newId);
+        return getDiagram().getAssociation(newId);
     }
     
     /**
@@ -182,14 +185,14 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private void changeSourceAssociation(AssociationUML association, mxCell cell) {
         String value       = cell.getValue().toString().trim();
-        String cardinality = this.getCardinality(value);
-        String signature   = this.getSignature(value, "");
-               association.setSourceMin(this.getMin(cardinality, association.getSourceMin()));
-               association.setSourceMax(this.getMax(cardinality, association.getSourceMax()));
-               association.setSourceMax(this.getMax(cardinality, association.getSourceMax()));
-               association.setSourceVisibility(this.getVisibility(signature, association.getSourceVisibility()));
-               association.setSourceName(this.getAssociationName(signature, association.getSourceName()));
-        this.panel.getViewMenu().getPanelProject().updatePanelEdit();
+        String cardinality = getCardinality(value);
+        String signature   = getSignature(value, "");
+               association.setSourceMin(getMin(cardinality, association.getSourceMin()));
+               association.setSourceMax(getMax(cardinality, association.getSourceMax()));
+               association.setSourceMax(getMax(cardinality, association.getSourceMax()));
+               association.setSourceVisibility(getVisibility(signature, association.getSourceVisibility()));
+               association.setSourceName(getAssociationName(signature, association.getSourceName()));
+        getPanel().getViewMenu().getPanelProject().updatePanelEdit();
     }
     
     /**
@@ -199,13 +202,13 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private void changeTargetAssociation(AssociationUML association, mxCell cell) {
         String value       = cell.getValue().toString().trim();
-        String cardinality = this.getCardinality(value);
-        String signature   = this.getSignature(value, "");
-               association.setTargetMin(this.getMin(cardinality, association.getTargetMin()));
-               association.setTargetMax(this.getMax(cardinality, association.getTargetMax()));
-               association.setTargetVisibility(this.getVisibility(signature, association.getTargetVisibility()));
-               association.setTargetName(this.getAssociationName(signature, association.getTargetName()));
-        this.panel.getViewMenu().getPanelProject().getPanelEdit().updateUI();
+        String cardinality = getCardinality(value);
+        String signature   = getSignature(value, "");
+               association.setTargetMin(getMin(cardinality, association.getTargetMin()));
+               association.setTargetMax(getMax(cardinality, association.getTargetMax()));
+               association.setTargetVisibility(getVisibility(signature, association.getTargetVisibility()));
+               association.setTargetName(getAssociationName(signature, association.getTargetName()));
+        getPanel().getViewMenu().getPanelProject().getPanelEdit().updateUI();
     }
     
     /**
@@ -226,8 +229,9 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @return Signature.
      */
     private String getSignature(String value, String backup) {
-        if (this.checkSignature(value))
-            return value.substring(value.indexOf("(") + 1, value.indexOf(")")).trim();
+        if (checkSignature(value))
+            return value.substring(value.indexOf("(") + 1, 
+                                   value.indexOf(")")).trim();
         return backup;
     }
     
@@ -237,13 +241,13 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @return Signature checked.
      */
     private boolean checkSignature(String value) {
-        return value.contains("(")
-            && value.contains(")")
-            && value.indexOf("(") < value.indexOf(")");
+        return  value.contains("(")
+             && value.contains(")")
+             && value.indexOf("(") < value.indexOf(")");
     }
     
     private boolean checkAssociation(String value) {
-        return this.checkVisibility(value);
+        return checkVisibility(value);
     }
     
     /**
@@ -252,10 +256,10 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @return Signature Visibility checked.
      */
     private boolean checkVisibility(String signature) {
-        return signature.startsWith("+")
-            || signature.startsWith("-")
-            || signature.startsWith("#")
-            || signature.startsWith("~");
+        return  signature.startsWith("+")
+             || signature.startsWith("-")
+             || signature.startsWith("#")
+             || signature.startsWith("~");
     }
     
     /**
@@ -293,8 +297,8 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private TypeUML getType(String signature, boolean object) {
         if (signature.contains(":"))
-            return this.panel.getDiagram().getProject().getTypeByName(signature.substring(signature.trim().lastIndexOf(":") + 1).trim());
-        return object ? this.panel.getDiagram().getObjectType() : this.panel.getDiagram().getVoidType();
+            return getDiagram().getProject().getTypeByName(signature.substring(signature.trim().lastIndexOf(":") + 1).trim());
+        return object ? getDiagram().getObjectType() : getDiagram().getVoidType();
     }
     
     /**
@@ -303,7 +307,8 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @return Parameters Signature.
      */
     private String getParametersSignature(String signature) {
-        return signature.substring(signature.indexOf("(") + 1, signature.indexOf(")")).trim();
+        return signature.substring(signature.indexOf("(") + 1, 
+                                   signature.indexOf(")")).trim();
     }
     
     /**
@@ -312,7 +317,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @return Parameters List.
      */
     private String[] getParametersList(String signature) {
-        return this.getParametersSignature(signature).split("\\,");
+        return getParametersSignature(signature).split("\\,");
     }
     
     /**
@@ -322,8 +327,8 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private List<ParameterUML> getParameters(String signature) {
         List<ParameterUML> parameters = new ArrayList<>();
-        for (String string : this.getParametersList(signature)) {
-            ParameterUML parameter = this.getParameter(string.trim());
+        for (String string : getParametersList(signature)) {
+            ParameterUML parameter = getParameter(string.trim());
             if (!parameter.getName().equals("") && parameter.getType() != null)
                 parameters.add(parameter);
         }
@@ -337,8 +342,8 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private ParameterUML getParameter(String signature) {
         ParameterUML parameter = new ParameterUML();
-                     parameter.setName(this.getParameterName(signature));
-                     parameter.setType(this.getParameterType(signature));
+                     parameter.setName(getParameterName(signature));
+                     parameter.setType(getParameterType(signature));
         return       parameter;
     }
     
@@ -360,8 +365,8 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private TypeUML getParameterType(String signature) {
         if (signature.contains(":"))
-            return this.panel.getDiagram().getProject().getTypeByName(signature.substring(signature.lastIndexOf(":") + 1).trim());
-        return this.panel.getDiagram().getObjectType();
+            return getDiagram().getProject().getTypeByName(signature.substring(signature.lastIndexOf(":") + 1).trim());
+        return getDiagram().getObjectType();
     }
     
     /**
@@ -370,9 +375,9 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @return Element Id.
      */
     private String getId(Object cell) {
-        if (this.panel.getIdentifiers().get(cell) != null)
-            return this.panel.getIdentifiers().get(cell);
-        return this.getCellId((mxCell) cell);
+        if (getPanel().getIdentifiers().get(cell) != null)
+            return getPanel().getIdentifiers().get(cell);
+        return getCellId((mxCell) cell);
     }
     
     /**
@@ -415,7 +420,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
         if (value.equals("*"))
             return Integer.MAX_VALUE;
         if (value.matches("\\d+..\\d+"))
-            return this.getValue(value.substring(value.lastIndexOf(".") + 1));
+            return getValue(value.substring(value.lastIndexOf(".") + 1));
         if (value.matches("\\d+"))
             return Integer.parseInt(value);
         return backup;
@@ -428,8 +433,8 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @return Visibility parsed.
      */
     private String getVisibility(String value, String backup) {
-        if (this.checkAssociation(value))
-            return this.getVisibility(value);
+        if (checkAssociation(value))
+            return getVisibility(value);
         return backup;
     }
     
@@ -440,7 +445,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @return Association Name parsed. 
      */
     private String getAssociationName(String value, String backup) {
-        if (this.checkAssociation(value))
+        if (checkAssociation(value))
             return value.substring(1).trim();
         return backup;
     }
@@ -456,5 +461,21 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
         }catch (NumberFormatException exception) {
             return Integer.MAX_VALUE;
         }
+    }
+    
+    /**
+     * Method responsible for returning the Class Diagram.
+     * @return Class Diagram.
+     */
+    public ClassDiagram getDiagram() {
+        return getPanel().getDiagram();
+    }
+    
+    /**
+     * Method responsible for returning the Panel Class Diagram.
+     * @return Panel Class Diagram.
+     */
+    public PanelClassDiagram getPanel() {
+        return panel;
     }
 }

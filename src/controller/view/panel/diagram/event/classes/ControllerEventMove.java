@@ -4,6 +4,7 @@ import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import model.structural.base.Element;
+import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.PackageUML;
 import model.structural.diagram.classes.base.association.AssociationUML;
@@ -11,9 +12,11 @@ import view.panel.diagram.types.PanelClassDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventMove</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Moving Events</b> on Class Diagram Panel of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Move Events</b> in <b>Class Diagram Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  03/06/2019
+ * @since  2019-06-03
+ * @see    com.mxgraph.util.mxEventSource
+ * @see    com.mxgraph.util.mxEventSource.mxIEventListener
  * @see    view.panel.diagram.types.PanelClassDiagram
  */
 public class ControllerEventMove extends mxEventSource implements mxIEventListener {
@@ -29,10 +32,10 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
     
     @Override
     public void invoke(Object object, mxEventObject event) {
-        Object cell = this.panel.getGraph().getSelectionCell();
-        String id   = this.panel.getIdentifiers().get(cell);
+        Object cell = getPanel().getGraph().getSelectionCell();
+        String id   = getPanel().getIdentifiers().get(cell);
         if (cell != null)
-            this.move(id, event);
+            move(id, event);
     }
     
     /**
@@ -42,10 +45,10 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      * @param event Event.
      */
     private void move(String id, mxEventObject event) {
-        if (this.panel.getDiagram().getElement(id) != null) 
-            this.move(this.panel.getDiagram().getElement(id), event);
+        if (getDiagram().getElement(id) != null) 
+            move(getDiagram().getElement(id), event);
         else if (id != null)
-            this.moveCardinality(id, event);
+            moveCardinality(id, event);
     }
     
     /**
@@ -55,9 +58,9 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      */
     private void move(Element element, mxEventObject event) {
         if (element instanceof PackageUML)
-            this.move((PackageUML) element, event);
+            move((PackageUML) element, event);
         else if (element instanceof Entity)
-            this.move((Entity) element, event);
+            move((Entity) element, event);
     }
     
     /**
@@ -66,8 +69,8 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      * @param event Object Event.
      */
     private void move(PackageUML packageUML, mxEventObject event) {
-        Integer dx = this.getX(event);
-        Integer dy = this.getY(event);
+        Integer dx = getX(event);
+        Integer dy = getY(event);
                 packageUML.updateGlobalX(dx);
                 packageUML.updateGlobalY(dy);
                 packageUML.updateGlobal(dx, dy);
@@ -79,12 +82,12 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      * @param event Object Event.
      */
     private void move(Entity entity, mxEventObject event) {
-        Integer dx = this.getX(event);
-        Integer dy = this.getY(event);
+        Integer dx = getX(event);
+        Integer dy = getY(event);
                 entity.updateGlobalX(dx);
                 entity.updateGlobalY(dy);
-                this.panel.getDiagram().dx(entity, dx);
-                this.panel.getDiagram().dy(entity, dy);
+                getDiagram().dx(entity, dx);
+                getDiagram().dy(entity, dy);
     }
     
     /**
@@ -94,9 +97,9 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      */
     private void moveCardinality(String id, mxEventObject event) {
         if (id.endsWith("(source)"))
-            this.moveSourceCardinality(id, event);
+            moveSourceCardinality(id, event);
         else if (id.endsWith("(target)"))
-            this.moveTargetCardinality(id, event);
+            moveTargetCardinality(id, event);
     }
     
     /**
@@ -105,10 +108,10 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      * @param event Event.
      */
     private void moveSourceCardinality(String id, mxEventObject event) {
-        AssociationUML associationUML = (AssociationUML) this.panel.getDiagram().getAssociation(id.substring(0, id.indexOf("(")));
-                       associationUML.dxSource(this.getX(event));
-                       associationUML.dySource(this.getY(event));
-        this.panel.getViewMenu().setSave(false);
+        AssociationUML associationUML = (AssociationUML) getDiagram().getAssociation(id.substring(0, id.indexOf("(")));
+                       associationUML.dxSource(getX(event));
+                       associationUML.dySource(getY(event));
+        getPanel().getViewMenu().setSave(false);
     }
     
     /**
@@ -117,10 +120,10 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      * @param event Event.
      */
     private void moveTargetCardinality(String id, mxEventObject event) {
-        AssociationUML associationUML = (AssociationUML) this.panel.getDiagram().getAssociation(id.substring(0, id.indexOf("(")));
-                       associationUML.dxTarget(this.getX(event));
-                       associationUML.dyTarget(this.getY(event));
-        this.panel.getViewMenu().setSave(false);               
+        AssociationUML associationUML = (AssociationUML) getDiagram().getAssociation(id.substring(0, id.indexOf("(")));
+                       associationUML.dxTarget(getX(event));
+                       associationUML.dyTarget(getY(event));
+        getPanel().getViewMenu().setSave(false);               
     }
     
     /**
@@ -139,5 +142,21 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      */
     private Integer getY(mxEventObject event) {
         return ((Double) event.getProperty("dy")).intValue();
+    }
+    
+    /**
+     * Method responsible for returning the Class Diagram.
+     * @return Class Diagram.
+     */
+    public ClassDiagram getDiagram() {
+        return getPanel().getDiagram();
+    }
+    
+    /**
+     * Method responsible for returning the Panel Class Diagram.
+     * @return Panel Class Diagram.
+     */
+    public PanelClassDiagram getPanel() {
+        return panel;
     }
 }

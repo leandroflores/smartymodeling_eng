@@ -8,6 +8,7 @@ import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import model.structural.base.Stereotype;
 import model.structural.base.association.Association;
+import model.structural.diagram.ClassDiagram;
 import model.structural.diagram.classes.Entity;
 import model.structural.diagram.classes.base.AttributeUML;
 import model.structural.diagram.classes.base.MethodUML;
@@ -15,9 +16,11 @@ import view.panel.diagram.types.PanelClassDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventSelect</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Selecting Events</b> on Class Diagram Panel of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Select Events</b> in <b>Class Diagram Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  03/06/2019
+ * @since  2019-06-03
+ * @see    com.mxgraph.util.mxEventSource
+ * @see    com.mxgraph.util.mxEventSource.mxIEventListener
  * @see    view.panel.diagram.types.PanelClassDiagram
  */
 public class ControllerEventSelect extends mxEventSource implements mxIEventListener {
@@ -33,11 +36,11 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
     
     @Override
     public void invoke(Object object, mxEventObject event) {
-        if (this.panel.getGraph().getSelectionCell() != null) {
-            if (this.panel.getGraph().getSelectionCell() instanceof mxCell) {
-                mxCell cell = (mxCell) this.panel.getGraph().getSelectionCell();
-                String id   = this.panel.getIdentifiers().get(cell);
-                this.select(cell, id);
+        if (getPanel().getGraph().getSelectionCell() != null) {
+            if (getPanel().getGraph().getSelectionCell() instanceof mxCell) {
+                mxCell cell = (mxCell) getPanel().getGraph().getSelectionCell();
+                String id   = getPanel().getIdentifiers().get(cell);
+                select(cell, id);
             }
         }
     }
@@ -48,14 +51,14 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
      * @param id Element Id.
      */
     private void select(mxCell cell, String id) {
-        if (this.panel.getDiagram().getProject().getStereotype(id) != null)
-            this.updateEditPanel(this.panel.getDiagram().getProject().getStereotype(id));
+        if (getDiagram().getProject().getStereotype(id) != null)
+            updateEditPanel(getDiagram().getProject().getStereotype(id));
         else if (cell.getId().endsWith("(newAttribute)"))
-            this.newAttribute(cell, (Entity) this.panel.getDiagram().getElement(id));
+            newAttribute(cell, (Entity) getDiagram().getElement(id));
         else if (cell.getId().endsWith("(newMethod)"))
-            this.newMethod(cell, (Entity) this.panel.getDiagram().getElement(id));
-        else if (this.panel.getDiagram().getAssociation(id) != null)
-            this.updatePoints(this.panel.getDiagram().getAssociation(id), cell);
+            newMethod(cell, (Entity) getDiagram().getElement(id));
+        else if (getDiagram().getAssociation(id) != null)
+            updatePoints(getDiagram().getAssociation(id), cell);
     }
     
     /**
@@ -63,7 +66,7 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
      * @param stereotype Edit Panel Stereotype.
      */
     private void updateEditPanel(Stereotype stereotype) {
-        this.panel.getViewMenu().getPanelProject().initPanelEditStereotype(stereotype);
+        getPanel().getViewMenu().getPanelProject().initPanelEditStereotype(stereotype);
     }
     
     /**
@@ -73,15 +76,15 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
      */
     private void newAttribute(mxCell cell, Entity entity) {
         AttributeUML attribute = new AttributeUML(entity.getDiagram());
-                     this.panel.getDiagram().addAttribute(attribute);
+                     getDiagram().addAttribute(attribute);
                      attribute.setEntity(entity);
-                     attribute.setTypeUML(this.panel.getDiagram().getObjectType());
+                     attribute.setTypeUML(getDiagram().getObjectType());
                      entity.addAttribute(attribute);
                      attribute.setDefaultName();
                      entity.updateSize();
-        this.panel.updateGraph();
-        this.panel.getViewMenu().update();
-        this.panel.getViewMenu().setSave(false);
+        getPanel().updateGraph();
+        getPanel().getViewMenu().update();
+        getPanel().getViewMenu().setSave(false);
     }
     
     /**
@@ -91,16 +94,16 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
      */
     private void newMethod(mxCell cell, Entity entity) {
         MethodUML method = new MethodUML(entity.getDiagram());
-                  method.setId(this.panel.getDiagram().nextMethodId());
+                  method.setId(getDiagram().nextMethodId());
                   method.setEntity(entity);
-                  method.setReturn(this.panel.getDiagram().getVoidType());
+                  method.setReturn(getDiagram().getVoidType());
                   entity.addMethod(method);
-                  this.panel.getDiagram().addMethod(method);
+                  getDiagram().addMethod(method);
                   method.setDefaultName();
                   entity.updateSize();
-        this.panel.updateGraph();
-        this.panel.getViewMenu().update();
-        this.panel.getViewMenu().setSave(false);
+        getPanel().updateGraph();
+        getPanel().getViewMenu().update();
+        getPanel().getViewMenu().setSave(false);
     }
     
     /**
@@ -108,9 +111,9 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
      * @param association 
      */
     private void updatePoints(Association association, mxCell edge) {
-        mxGeometry geometry = ((mxGraphModel) (this.panel.getGraph().getModel())).getGeometry(edge);
+        mxGeometry geometry = ((mxGraphModel) (getPanel().getGraph().getModel())).getGeometry(edge);
                    association.setPoints(geometry.getPoints());
-        this.panel.getViewMenu().setSave(false);
+        getPanel().getViewMenu().setSave(false);
     }
      
     /**
@@ -119,8 +122,24 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
      * @param id Object Id.
      */
     private void updateEditPanel(mxCell cell) {
-        String id = this.panel.getIdentifiers().get(cell);
-        if (this.panel.getDiagram().getElement(id) != null)
-            this.panel.getViewMenu().getPanelProject().initPanelEditElement(this.panel.getDiagram(), this.panel.getDiagram().getElement(id));
+        String id = getPanel().getIdentifiers().get(cell);
+        if (getDiagram().getElement(id) != null)
+            getPanel().getViewMenu().getPanelProject().initPanelEditElement(getDiagram(), getDiagram().getElement(id));
+    }
+    
+    /**
+     * Method responsible for returning the Class Diagram.
+     * @return Class Diagram.
+     */
+    public ClassDiagram getDiagram() {
+        return getPanel().getDiagram();
+    }
+    
+    /**
+     * Method responsible for returning the Panel Class Diagram.
+     * @return Panel Class Diagram.
+     */
+    public PanelClassDiagram getPanel() {
+        return panel;
     }
 }
