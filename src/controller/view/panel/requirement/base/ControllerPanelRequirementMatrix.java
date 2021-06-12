@@ -25,7 +25,7 @@ public class ControllerPanelRequirementMatrix extends ControllerPanel {
     
     @Override
     public void actionPerformed(ActionEvent event) {
-        this.getPanel().updateMatrix();
+        getPanel().updateMatrix();
     }
     
     @Override
@@ -33,6 +33,6 @@ public class ControllerPanelRequirementMatrix extends ControllerPanel {
     
     @Override
     public PanelRequirementMatrix getPanel() {
-        return (PanelRequirementMatrix) this.panel;
+        return (PanelRequirementMatrix) panel;
     }
 }

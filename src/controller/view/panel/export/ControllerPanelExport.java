@@ -25,10 +25,10 @@ public abstract class ControllerPanelExport extends ControllerPanel {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.getPanel().getSearchDirectoryButton().equals(event.getSource()))
-            this.updateDirectoryPath();
-        else if (this.getPanel().getContextComboBox().equals(event.getSource()))
-            this.update();
+        if (getPanel().getSearchDirectoryButton().equals(event.getSource()))
+            updateDirectoryPath();
+        else if (getPanel().getContextComboBox().equals(event.getSource()))
+            update();
     }
     
     @Override
@@ -38,10 +38,10 @@ public abstract class ControllerPanelExport extends ControllerPanel {
      * Method responsible for updating the Directory Path.
      */
     protected void updateDirectoryPath() {
-        if (this.getPanel().getSearchDirectoryChooser().showSaveDialog(this.getPanel().getViewMenu()) != 1) {
-            String path = this.getPanel().getSearchDirectoryChooser().getSelectedFile().getAbsolutePath();
+        if (getPanel().getSearchDirectoryChooser().showSaveDialog(getPanel().getViewMenu()) != 1) {
+            String path = getPanel().getSearchDirectoryChooser().getSelectedFile().getAbsolutePath();
             if (!path.equals(""))
-                this.getPanel().getDirectoryTextField().setText(path);
+                getPanel().getDirectoryTextField().setText(path);
         }
     }
     
@@ -52,6 +52,6 @@ public abstract class ControllerPanelExport extends ControllerPanel {
     
     @Override
     public PanelExport getPanel() {
-        return (PanelExport) this.panel;
+        return (PanelExport) panel;
     }
 }

@@ -8,10 +8,11 @@ import view.panel.diagram.types.PanelUseCaseDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerPanelUseCaseDiagram</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>Use Case Diagram Panel</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelUseCaseDiagram</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  28/05/2019
+ * @since  2019-05-28
  * @see    controller.view.panel.diagram.ControllerPanelDiagram
+ * @see    model.structural.diagram.UseCaseDiagram
  * @see    view.panel.diagram.types.PanelUseCaseDiagram
  */
 public class ControllerPanelUseCaseDiagram extends ControllerPanelDiagram {
@@ -26,40 +27,40 @@ public class ControllerPanelUseCaseDiagram extends ControllerPanelDiagram {
     
     @Override
     public void mousePressed(MouseEvent event) {
-        if (this.getPanelDiagram().getOperation().equals("Actor"))
-            this.addActor(event);
-        else if (this.getPanelDiagram().getOperation().equals("UseCase"))
-            this.addUseCase(event);
+        if (getPanel().getOperation().equals("Actor"))
+            addActor(event);
+        else if (getPanel().getOperation().equals("UseCase"))
+            addUseCase(event);
     }
     
     /**
-     * Method responsible for adding a New Actor.
+     * Method responsible for adding a New UML Actor.
      * @param event Mouse Event.
      */
     public void addActor(MouseEvent event) {
-        ActorUML actor = new ActorUML(this.getPanelDiagram().getDiagram());
+        ActorUML actor = new ActorUML(getPanel().getDiagram());
                  actor.setPosition(event.getX(), event.getY());
-        this.getPanelDiagram().getDiagram().addActor(actor);
+                 getPanel().getDiagram().addActor(actor);
                  actor.setDefaultName();
-        this.getPanelDiagram().updateGraph();
-        this.getPanelDiagram().getViewMenu().update();
+        getPanel().updateGraph();
+        getPanel().getViewMenu().update();
     }
     
     /**
-     * Method responsible for adding a new Use Case.
+     * Method responsible for adding a New UML Use Case.
      * @param event Mouse Event.
      */
     public void addUseCase(MouseEvent event) {
-        UseCaseUML useCase = new UseCaseUML(this.getPanelDiagram().getDiagram());
+        UseCaseUML useCase = new UseCaseUML(getPanel().getDiagram());
                    useCase.setPosition(event.getX(), event.getY());
-        this.getPanelDiagram().getDiagram().addUseCase(useCase);
+                   getPanel().getDiagram().addUseCase(useCase);
                    useCase.setDefaultName();
-        this.getPanelDiagram().updateGraph();
-        this.getPanelDiagram().getViewMenu().update();
+        getPanel().updateGraph();
+        getPanel().getViewMenu().update();
     }
     
     @Override
-    protected PanelUseCaseDiagram getPanelDiagram() {
-        return (PanelUseCaseDiagram) this.panel;
+    public PanelUseCaseDiagram getPanel() {
+        return (PanelUseCaseDiagram) panel;
     }
 }

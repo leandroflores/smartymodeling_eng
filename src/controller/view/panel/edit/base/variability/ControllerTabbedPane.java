@@ -10,17 +10,18 @@ import view.panel.base.variability.PanelBaseVariants;
 
 /**
  * <p>Class of Controller <b>ControllerTabbedPane</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>Tabbed Pane</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>Tabbed Pane</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  04/12/2019
- * @see    view.panel.diagram.types.PanelActivityDiagram
+ * @since  2019-12-04
+ * @see    javax.swing.JTabbedPane
+ * @see    javax.swing.event.ChangeListener
  */
 public class ControllerTabbedPane implements ChangeListener {
     private final JTabbedPane tabbedPane;
     
     /**
      * Default constructor method of Class.
-     * @param tabbedPane 
+     * @param tabbedPane Tabbed Pane.
      */
     public ControllerTabbedPane(JTabbedPane tabbedPane) {
         this.tabbedPane = tabbedPane;

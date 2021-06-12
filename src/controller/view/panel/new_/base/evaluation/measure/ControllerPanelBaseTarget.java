@@ -25,12 +25,12 @@ public class ControllerPanelBaseTarget extends ControllerPanelBase {
     
     @Override
     public void keyReleased(KeyEvent event) {
-        this.update();
+        update();
     }
     
     @Override
     protected void return_() {
-        this.getPanel().getPanelNew().removePanelBaseTarget();
+        getPanel().getPanelNew().removePanelBaseTarget();
     }
     
     @Override
@@ -40,16 +40,16 @@ public class ControllerPanelBaseTarget extends ControllerPanelBase {
     
     @Override
     public void next() {
-        this.getPanel().getPanelNew().addPanelBaseEvaluation();
+        getPanel().getPanelNew().addPanelBaseEvaluation();
     }
     
     @Override
     public void update() {
-        Object target = this.getPanel().getTargetComboBox().getSelectedItem();
+        Object target = getPanel().getTargetComboBox().getSelectedItem();
         if (target instanceof String)
-            this.update(this.getPanel().getProject());
+            update(getPanel().getProject());
         else if (target instanceof Diagram)
-            this.update((Diagram) target);
+            update((Diagram) target);
     }
     
     /**
@@ -57,10 +57,10 @@ public class ControllerPanelBaseTarget extends ControllerPanelBase {
      * @param project Project.
      */
     private void update(Project project) {
-        this.getMeasure().setTarget("Project");
-        this.getPanel().getElementsTextField().setText(Integer.toString(project.getElementsList().size()));
-        this.getPanel().getAssociationsTextField().setText(Integer.toString(project.getAssociationsList().size()));
-        this.getPanel().getVariabilitiesTextField().setText(Integer.toString(project.getVariabilitiesList().size()));
+        getMeasure().setTarget("Project");
+        getPanel().getElementsTextField().setText(Integer.toString(project.getElementsList().size()));
+        getPanel().getAssociationsTextField().setText(Integer.toString(project.getAssociationsList().size()));
+        getPanel().getVariabilitiesTextField().setText(Integer.toString(project.getVariabilitiesList().size()));
     }
     
     /**
@@ -68,14 +68,14 @@ public class ControllerPanelBaseTarget extends ControllerPanelBase {
      * @param diagram Diagram.
      */
     private void update(Diagram diagram) {
-        this.getMeasure().setTarget(diagram.getName());
-        this.getPanel().getElementsTextField().setText(Integer.toString(diagram.getElements().size()));
-        this.getPanel().getAssociationsTextField().setText(Integer.toString(diagram.getAssociations().size()));
-        this.getPanel().getVariabilitiesTextField().setText(Integer.toString(diagram.getVariabilitiesList().size()));
+        getMeasure().setTarget(diagram.getName());
+        getPanel().getElementsTextField().setText(Integer.toString(diagram.getElements().size()));
+        getPanel().getAssociationsTextField().setText(Integer.toString(diagram.getAssociations().size()));
+        getPanel().getVariabilitiesTextField().setText(Integer.toString(diagram.getVariabilitiesList().size()));
     }
     
     @Override
     public PanelBaseTarget getPanel() {
-        return (PanelBaseTarget) this.panel;
+        return (PanelBaseTarget) panel;
     }
 }

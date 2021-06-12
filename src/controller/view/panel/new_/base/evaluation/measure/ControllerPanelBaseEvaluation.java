@@ -31,18 +31,18 @@ public class ControllerPanelBaseEvaluation extends ControllerPanelBase {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        this.refresh();
+        refresh();
         super.actionPerformed(event);
     }
     
     @Override
     protected void return_() {
-        this.getPanel().getPanelNew().removePanelBaseEvaluation();
+        getPanel().getPanelNew().removePanelBaseEvaluation();
     }
     
     @Override
     public boolean check() {
-        return !this.getPanel().getValueTextField().getText().equals("");
+        return !getPanel().getValueTextField().getText().equals("");
     }
     
     /**
@@ -50,23 +50,23 @@ public class ControllerPanelBaseEvaluation extends ControllerPanelBase {
      * @return Diagram selected.
      */
     private Diagram getDiagram() {
-        return (Diagram) this.getPanel().getTargetComboBox().getSelectedItem();
+        return (Diagram) getPanel().getTargetComboBox().getSelectedItem();
     }
     
     @Override
     public void refresh() {
         super.refresh();
-        Object target = this.getPanel().getTargetComboBox().getSelectedItem();
-        Metric metric = this.getPanel().getMeasure().getMetric();
+        Object target = getPanel().getTargetComboBox().getSelectedItem();
+        Metric metric = getPanel().getMeasure().getMetric();
         try {
             if (target.toString().equalsIgnoreCase("Project"))
-                this.evaluate(this.getProject(), metric);
+                evaluate(getProject(), metric);
             else if (target instanceof Diagram)
-                this.evaluate(this.getDiagram(), metric);
+                evaluate(getDiagram(), metric);
         }catch (ScriptException exception) {
-            new ViewError(this.getViewNew(), "Error to Apply Metric!").setVisible(true);
+            new ViewError(getViewNew(), "Error to Apply Metric!").setVisible(true);
         }catch (Exception exception) {
-            new ViewError(this.getViewNew(), "Error to Apply Metric!").setVisible(true);
+            new ViewError(getViewNew(), "Error to Apply Metric!").setVisible(true);
         }
     }
     
@@ -78,8 +78,8 @@ public class ControllerPanelBaseEvaluation extends ControllerPanelBase {
      */
     public void evaluate(Project project, Metric metric) throws ScriptException {
         EvaluationBase evaluation = new EvaluationProject(project);
-        this.getPanel().getValueTextField().setText(Double.toString(evaluation.getFinalValue(metric.getOperation())));
-        this.getPanel().updateDetails(evaluation.getResult());
+        getPanel().getValueTextField().setText(Double.toString(evaluation.getFinalValue(metric.getOperation())));
+        getPanel().updateDetails(evaluation.getResult());
     }
     
     /**
@@ -90,8 +90,8 @@ public class ControllerPanelBaseEvaluation extends ControllerPanelBase {
      */
     public void evaluate(Diagram diagram, Metric metric) throws ScriptException {
         EvaluationBase evaluation = new EvaluationDiagram(diagram);
-        this.getPanel().getValueTextField().setText(Double.toString(evaluation.getFinalValue(metric.getOperation())));
-        this.getPanel().updateDetails(evaluation.getResult());
+        getPanel().getValueTextField().setText(Double.toString(evaluation.getFinalValue(metric.getOperation())));
+        getPanel().updateDetails(evaluation.getResult());
     }
     
     @Override
@@ -99,11 +99,11 @@ public class ControllerPanelBaseEvaluation extends ControllerPanelBase {
     
     @Override
     protected void update() {
-        this.getMeasure().setValue(this.getDouble(this.getPanel().getValueTextField()));
+        getMeasure().setValue(getDouble(getPanel().getValueTextField()));
     }
     
     @Override
     public PanelBaseEvaluation getPanel() {
-        return (PanelBaseEvaluation) this.panel;
+        return (PanelBaseEvaluation) panel;
     }
 }

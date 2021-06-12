@@ -26,27 +26,27 @@ public class ControllerPanelBaseMeasure extends ControllerPanelBase {
 
     @Override
     protected boolean check() {
-        return this.check(this.getPanel().getNameTextField(),  "Name is required!")
-            && this.checkDate(this.getPanel().getDateTextField(), "Type a Date (YYYY-MM-DD)!")
-            && this.check(this.getPanel().getMetricComboBox(), "Select a Metric!");
+        return check(getPanel().getNameTextField(),  "Name is required!")
+            && checkDate(getPanel().getDateTextField(), "Type a Date (YYYY-MM-DD)!")
+            && check(getPanel().getMetricComboBox(), "Select a Metric!");
     }
     
     @Override
     public void next() {
-        this.update();
-        this.getPanel().getPanelNew().addPanelBaseTarget();
+        update();
+        getPanel().getPanelNew().addPanelBaseTarget();
     }
     
     @Override
     public void update() {
-        this.getMeasure().setName(this.getString(this.getPanel().getNameTextField()));
-        this.getMeasure().setDate(this.getString(this.getPanel().getDateTextField()));
-        this.getMeasure().setMetric((Metric) this.getPanel().getMetricComboBox().getSelectedItem());
+        getMeasure().setName(getString(getPanel().getNameTextField()));
+        getMeasure().setDate(getString(getPanel().getDateTextField()));
+        getMeasure().setMetric((Metric) getPanel().getMetricComboBox().getSelectedItem());
         super.refresh();
     }
     
     @Override
     public PanelBaseMeasure getPanel() {
-        return (PanelBaseMeasure) this.panel;
+        return (PanelBaseMeasure) panel;
     }
 }

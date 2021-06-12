@@ -4,6 +4,7 @@ import com.mxgraph.model.mxCell;
 import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
+import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
 import model.structural.diagram.sequence.base.association.MessageUML;
@@ -11,9 +12,11 @@ import view.panel.diagram.types.PanelSequenceDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventEdit</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Editing Events</b> on Sequence Diagram Panel of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Edit Events</b> in <b>Sequence Diagram Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  04/10/2019
+ * @since  2019-10-04
+ * @see    com.mxgraph.util.mxEventSource
+ * @see    com.mxgraph.util.mxEventSource.mxIEventListener
  * @see    view.panel.diagram.types.PanelSequenceDiagram
  */
 public class ControllerEventEdit extends mxEventSource implements mxIEventListener {
@@ -29,10 +32,10 @@ public class ControllerEventEdit extends mxEventSource implements mxIEventListen
     
     @Override
     public void invoke(Object object, mxEventObject event) {
-        if (this.panel.getGraph().getSelectionCell() != null) {
-            Object cell = this.panel.getGraph().getSelectionCell();
-            String id   = this.getId(cell);
-            this.edit(cell, id);
+        if (getPanel().getGraph().getSelectionCell() != null) {
+            Object cell = getPanel().getGraph().getSelectionCell();
+            String id   = getId(cell);
+            edit(cell, id);
         }
     }
     
@@ -42,12 +45,12 @@ public class ControllerEventEdit extends mxEventSource implements mxIEventListen
      * @param id Element Id.
      */
     private void edit(Object element, String id) {
-        if (this.panel.getDiagram().getElement(id) instanceof LifelineUML)
-            this.edit(element, (LifelineUML) this.panel.getDiagram().getElement(id));
-        else if (this.panel.getDiagram().getElement(id) instanceof InstanceUML)
-            this.edit(element, (InstanceUML) this.panel.getDiagram().getElement(id));
-        else if (this.panel.getDiagram().getAssociation(id) instanceof MessageUML)
-            this.edit(element, (MessageUML) this.panel.getDiagram().getAssociation(id));
+        if (getDiagram().getElement(id) instanceof LifelineUML)
+            edit(element, (LifelineUML) getDiagram().getElement(id));
+        else if (getDiagram().getElement(id) instanceof InstanceUML)
+            edit(element, (InstanceUML) getDiagram().getElement(id));
+        else if (getDiagram().getAssociation(id) instanceof MessageUML)
+            edit(element, (MessageUML) getDiagram().getAssociation(id));
     }
     
     /**
@@ -86,10 +89,26 @@ public class ControllerEventEdit extends mxEventSource implements mxIEventListen
      * @return Element Id.
      */
     private String getId(Object cell) {
-        if (this.panel.getIdentifiers().get(cell) == null) {
+        if (getPanel().getIdentifiers().get(cell) == null) {
             if (cell instanceof mxCell)
-                return this.getId(((mxCell) cell).getParent());
+                return getId(((mxCell) cell).getParent());
         }
-        return this.panel.getIdentifiers().get(cell);
+        return getPanel().getIdentifiers().get(cell);
+    }
+    
+    /**
+     * Method responsible for returning the Sequence Diagram.
+     * @return Sequence Diagram.
+     */
+    public SequenceDiagram getDiagram() {
+        return getPanel().getDiagram();
+    }
+    
+    /**
+     * Method responsible for returning the Panel Sequence Diagram.
+     * @return Panel Sequence Diagram.
+     */
+    public PanelSequenceDiagram getPanel() {
+        return panel;
     }
 }

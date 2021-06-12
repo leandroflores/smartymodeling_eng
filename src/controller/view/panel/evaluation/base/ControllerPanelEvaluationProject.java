@@ -9,10 +9,11 @@ import view.modal.message.ViewError;
 
 /**
  * <p>Class of Controller <b>ControllerPanelEvaluationProject</b>.</p>
- * <p>Class responsible for controlling the <b>PanelEvaliationProject</b> Events of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelEvaluationProject</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-03-30
  * @see    controller.view.panel.evaluation.ControllerPanelEvaluation
+ * @see    model.structural.base.Project
  * @see    view.panel.evaluation.base.PanelEvaluationProject
  */
 public class ControllerPanelEvaluationProject extends ControllerPanelEvaluation {
@@ -27,28 +28,28 @@ public class ControllerPanelEvaluationProject extends ControllerPanelEvaluation 
     
     @Override
     public void update() {
-        Object target    = this.getPanel().getTargetComboBox().getSelectedItem();
-        String operation = this.getPanel().getOperationTextField().getText().trim();
+        Object target    = getPanel().getTargetComboBox().getSelectedItem();
+        String operation = getPanel().getOperationTextField().getText().trim();
         try {
-            if (this.check()) {
+            if (check()) {
                 if (target.toString().equalsIgnoreCase("Project"))
-                    this.evaluate(this.getProject(), operation);
+                    evaluate(getProject(), operation);
                 else if (target instanceof Diagram)
-                    this.evaluate(this.getDiagram(), operation);
+                    evaluate(getDiagram(), operation);
                 else if (target instanceof Product)
-                    this.evaluate(this.getProduct(), operation);
+                    evaluate(getProduct(), operation);
             }
         }catch (ScriptException exception) {
-            new ViewError(this.getPanel().getViewEvaluation(), "Error to Apply Operation!").setVisible(true);
-            this.getPanel().getOperationTextField().requestFocus();
+            new ViewError(getPanel().getViewEvaluation(), "Error to Apply Operation!").setVisible(true);
+            getPanel().getOperationTextField().requestFocus();
         }catch (Exception exception) {
-            new ViewError(this.getPanel().getViewEvaluation(), "Invalid Operation Expression!").setVisible(true);
-            this.getPanel().getOperationTextField().requestFocus();
+            new ViewError(getPanel().getViewEvaluation(), "Invalid Operation Expression!").setVisible(true);
+            getPanel().getOperationTextField().requestFocus();
         }
     }
     
     @Override
     public PanelEvaluationProject getPanel() {
-        return (PanelEvaluationProject) this.panel;
+        return (PanelEvaluationProject) panel;
     }
 }

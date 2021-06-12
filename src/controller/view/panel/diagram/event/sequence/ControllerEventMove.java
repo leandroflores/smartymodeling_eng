@@ -4,13 +4,16 @@ import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import model.structural.base.Element;
+import model.structural.diagram.SequenceDiagram;
 import view.panel.diagram.types.PanelSequenceDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventMove</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Moving Events</b> on Sequence Diagram Panel of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Move Events</b> in <b>Sequence Diagram Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  25/07/2019
+ * @since  2019-07-25
+ * @see    com.mxgraph.util.mxEventSource
+ * @see    com.mxgraph.util.mxEventSource.mxIEventListener
  * @see    view.panel.diagram.types.PanelSequenceDiagram
  */
 public class ControllerEventMove extends mxEventSource implements mxIEventListener {
@@ -26,9 +29,9 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
     
     @Override
     public void invoke(Object object, mxEventObject event) {
-        Object cell = this.panel.getGraph().getSelectionCell();
-        String id   = this.panel.getIdentifiers().get(cell);
-        this.move(id, event);
+        Object cell = getPanel().getGraph().getSelectionCell();
+        String id   = getPanel().getIdentifiers().get(cell);
+        move(id, event);
     }
     
     /**
@@ -38,8 +41,8 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      * @param event Event.
      */
     private void move(String id, mxEventObject event) {
-        if (this.panel.getDiagram().getElement(id) != null)
-            this.moveElement(this.panel.getDiagram().getElement(id), event);
+        if (getDiagram().getElement(id) != null)
+            moveElement(getDiagram().getElement(id), event);
     }
     
     /**
@@ -50,8 +53,24 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
     private void moveElement(Element element, mxEventObject event) {
         element.dx(((Double) event.getProperty("dx")).intValue());
         element.dy(((Double) event.getProperty("dy")).intValue());
-        this.panel.getDiagram().updateY(element.getY());
-        this.panel.getViewMenu().setSave(false); 
-        this.panel.updateGraph();
-   }
+        getDiagram().updateY(element.getY());
+        getPanel().getViewMenu().setSave(false); 
+        getPanel().updateGraph();
+    }
+    
+    /**
+     * Method responsible for returning the Sequence Diagram.
+     * @return Sequence Diagram.
+     */
+    public SequenceDiagram getDiagram() {
+        return getPanel().getDiagram();
+    } 
+    
+    /**
+     * Method responsible for returning the Panel Sequence Diagram.
+     * @return Panel Sequence Diagram.
+     */
+    public PanelSequenceDiagram getPanel() {
+        return panel;
+    }
 }

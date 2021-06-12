@@ -25,7 +25,7 @@ public class ControllerPanelBaseOptional extends ControllerPanelBase {
     
     @Override
     protected void return_() {
-        this.getPanel().getPanelNew().removePanelBaseOptional();
+        getPanel().getPanelNew().removePanelBaseOptional();
     }
     
     @Override
@@ -35,26 +35,26 @@ public class ControllerPanelBaseOptional extends ControllerPanelBase {
     
     @Override
     public void next() {
-        this.update();
-        this.getPanel().getPanelNew().addPanelBaseVarPoints();
+        update();
+        getPanel().getPanelNew().addPanelBaseVarPoints();
     }
     
     @Override
     protected void update() {
-        List<Element> elements = this.getInstance().getDiagram().filterOptionalElements();
+        List<Element> elements = getInstance().getDiagram().filterOptionalElements();
         for (Element  element : elements) {
-            if (this.getPanel().getCheckBox(element).isSelected())
-                this.getPanel().getPanelNew().add(element);
+            if (getPanel().getCheckBox(element).isSelected())
+                getPanel().getPanelNew().add(element);
         }
     }
     
     @Override
     protected Instance getInstance() {
-        return this.getPanel().getInstance();
+        return getPanel().getInstance();
     }
     
     @Override
     public PanelBaseOptional getPanel() {
-        return (PanelBaseOptional) this.panel;
+        return (PanelBaseOptional) panel;
     }
 }

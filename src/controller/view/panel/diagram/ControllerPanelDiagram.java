@@ -14,7 +14,7 @@ import view.panel.diagram.PanelDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerPanelDiagram</b>.</p>
- * <p>Class responsible for controlling the <b>PanelDiagram</b> Events of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>Panel Diagram</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-05-27
  * @see    controller.view.panel.ControllerPanel
@@ -39,18 +39,18 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
         switch (event.getKeyCode()) {
             case F2:
                 edit();
-                getPanelDiagram().getViewMenu().setSave(false);
+                getPanel().getViewMenu().setSave(false);
                 break;
             case DELETE:
                 delete();
-                getPanelDiagram().getViewMenu().setSave(false);
+                getPanel().getViewMenu().setSave(false);
                 break;
             case KeyEvent.VK_DOWN:
             case KeyEvent.VK_UP:
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_RIGHT:
                 move(event);
-                getPanelDiagram().getViewMenu().setSave(false);
+                getPanel().getViewMenu().setSave(false);
                 break;
             default:
                 break;
@@ -65,7 +65,7 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
 
     @Override
     public void mouseReleased(MouseEvent event) {
-        if (getPanelDiagram().getOperation().equalsIgnoreCase("Click"))
+        if (getPanel().getOperation().equalsIgnoreCase("Click"))
             update(event);
     }
     
@@ -74,11 +74,11 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
      * @param event Mouse Event.
      */
     public void update(MouseEvent event) {
-        if (getPanelDiagram().getGraph().getSelectionCell() != null) {
-            mxCell cell = (mxCell) getPanelDiagram().getGraph().getSelectionCell();
-            String id   = getPanelDiagram().getIdentifiers().get(cell);
-            if (getPanelDiagram().getDiagram().getAssociation(id) != null)
-                updatePoints(getPanelDiagram().getDiagram().getAssociation(id), cell);
+        if (getPanel().getGraph().getSelectionCell() != null) {
+            mxCell cell = (mxCell) getPanel().getGraph().getSelectionCell();
+            String id   = getPanel().getIdentifiers().get(cell);
+            if (getPanel().getDiagram().getAssociation(id) != null)
+                updatePoints(getPanel().getDiagram().getAssociation(id), cell);
         }
     }
     
@@ -88,10 +88,10 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
      * @param cell Selected Cell.
      */
     private void updatePoints(Association association, mxCell cell) {
-        mxGeometry geometry = getPanelDiagram().getModel().getGeometry(cell);
+        mxGeometry geometry = getPanel().getModel().getGeometry(cell);
                    association.setPoints(geometry.getPoints());
-        getPanelDiagram().getViewMenu().setSave(false);
-        getPanelDiagram().updateUI();
+        getPanel().getViewMenu().setSave(false);
+        getPanel().updateUI();
     }
 
     @Override
@@ -104,23 +104,23 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
      * Method responsible for Editing the Cell Selected.
      */
     public void edit() {
-        mxCell cell = (mxCell) getPanelDiagram().getGraph().getSelectionCell();
-        String id   = getPanelDiagram().getIdentifiers().get(cell);
-        if (getPanelDiagram().getDiagram().getElement(id) != null)
-            getPanelDiagram().getComponent().startEditingAtCell(cell);
-        getPanelDiagram().setClick();
+        mxCell cell = (mxCell) getPanel().getGraph().getSelectionCell();
+        String id   = getPanel().getIdentifiers().get(cell);
+        if (getPanel().getDiagram().getElement(id) != null)
+            getPanel().getComponent().startEditingAtCell(cell);
+        getPanel().setClick();
     }
     
     /**
      * Method responsible for Deleting the Cell Selected.
      */
     public void delete() {
-        mxCell cell = (mxCell) getPanelDiagram().getGraph().getSelectionCell();
-        String id   = getPanelDiagram().getIdentifiers().get(cell);
-        if (getPanelDiagram().getDiagram().getElement(id) != null)
-            delete(getPanelDiagram().getDiagram().getElement(id));
-        else if (getPanelDiagram().getDiagram().getAssociation(id) != null)
-            delete(getPanelDiagram().getDiagram().getAssociation(id));
+        mxCell cell = (mxCell) getPanel().getGraph().getSelectionCell();
+        String id   = getPanel().getIdentifiers().get(cell);
+        if (getPanel().getDiagram().getElement(id) != null)
+            delete(getPanel().getDiagram().getElement(id));
+        else if (getPanel().getDiagram().getAssociation(id) != null)
+            delete(getPanel().getDiagram().getAssociation(id));
     }
     
     /**
@@ -128,10 +128,10 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
      * @param element Element.
      */
     private void delete(Element element) {
-        new ViewDeleteElement(getPanelDiagram().getViewMenu().getPanelModeling(), 
-                              getPanelDiagram().getDiagram(),
+        new ViewDeleteElement(getPanel().getViewMenu().getPanelModeling(), 
+                              getPanel().getDiagram(),
                               element).setVisible(true);
-        getPanelDiagram().updateGraph();
+        getPanel().updateGraph();
     }
     
     /**
@@ -139,8 +139,8 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
      * @param association Association.
      */
     private void delete(Association association) {
-        getPanelDiagram().getDiagram().removeAssociation(association);
-        getPanelDiagram().updateGraph();
+        getPanel().getDiagram().removeAssociation(association);
+        getPanel().updateGraph();
     }
     
     /**
@@ -148,13 +148,13 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
      * @param event Key Event.
      */
     public void move(KeyEvent event) {
-        mxCell  cell    = (mxCell) getPanelDiagram().getGraph().getSelectionCell();
-        String  id      = getPanelDiagram().getIdentifiers().get(cell);
-        Element element = getPanelDiagram().getDiagram().getElement(id);
+        mxCell  cell    = (mxCell) getPanel().getGraph().getSelectionCell();
+        String  id      = getPanel().getIdentifiers().get(cell);
+        Element element = getPanel().getDiagram().getElement(id);
         if (element != null) {
             move(element, event);
-            getPanelDiagram().updateGraph();
-            getPanelDiagram().getGraph().setSelectionCell(getPanelDiagram().getObjects().get(element.getId()));
+            getPanel().updateGraph();
+            getPanel().getGraph().setSelectionCell(getPanel().getObjects().get(element.getId()));
         }
     }
     
@@ -186,16 +186,13 @@ public abstract class ControllerPanelDiagram extends ControllerPanel implements 
      * Method responsible for updating the Panel Diagram.
      */
     protected void update() {
-        getPanelDiagram().updateGraph();
-        getPanelDiagram().getViewMenu().update();
-        getPanelDiagram().getViewMenu().setSave(false);
+        getPanel().updateGraph();
+        getPanel().getViewMenu().update();
+        getPanel().getViewMenu().setSave(false);
     }
     
-    /**
-     * Method responsible for returning the Panel Diagram.
-     * @return Panel Diagram.
-     */
-    protected PanelDiagram getPanelDiagram() {
+    @Override
+    public PanelDiagram getPanel() {
         return (PanelDiagram) panel;
     }
 }

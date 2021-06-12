@@ -7,10 +7,11 @@ import view.panel.evaluation.base.PanelEvaluationDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerPanelEvaluationDiagram</b>.</p>
- * <p>Class responsible for controlling the <b>PanelEvaliationDiagram</b> Events of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelEvaluationDiagram</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-01
  * @see    controller.view.panel.evaluation.ControllerPanelEvaluation
+ * @see    model.structural.base.Diagram
  * @see    view.panel.evaluation.base.PanelEvaluationDiagram
  */
 public class ControllerPanelEvaluationDiagram extends ControllerPanelEvaluation {
@@ -26,19 +27,19 @@ public class ControllerPanelEvaluationDiagram extends ControllerPanelEvaluation 
     @Override
     public void update() {
         try {
-            if (this.check())
-                this.evaluate(this.getDiagram(), this.getPanel().getOperationTextField().getText().trim());
+            if (check())
+                evaluate(getDiagram(), getPanel().getOperationTextField().getText().trim());
         }catch (ScriptException exception) {
-            new ViewError(this.getPanel().getViewEvaluation(), "Error to Apply Operation!").setVisible(true);
-            this.getPanel().getOperationTextField().requestFocus();
+            new ViewError(getPanel().getViewEvaluation(), "Error to Apply Operation!").setVisible(true);
+            getPanel().getOperationTextField().requestFocus();
         }catch (Exception exception) {
-            new ViewError(this.getPanel().getViewEvaluation(), "Invalid Operation Expression!").setVisible(true);
-            this.getPanel().getOperationTextField().requestFocus();
+            new ViewError(getPanel().getViewEvaluation(), "Invalid Operation Expression!").setVisible(true);
+            getPanel().getOperationTextField().requestFocus();
         }
     }
     
     @Override
     public PanelEvaluationDiagram getPanel() {
-        return (PanelEvaluationDiagram) this.panel;
+        return (PanelEvaluationDiagram) panel;
     }
 }

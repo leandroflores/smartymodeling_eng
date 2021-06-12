@@ -10,10 +10,11 @@ import view.panel.diagram.types.PanelActivityDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerPanelActivityDiagram</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>Activity Diagram Panel</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelActivityDiagram</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  18/07/2019
+ * @since  2019-07-18
  * @see    controller.view.panel.diagram.ControllerPanelDiagram
+ * @see    model.structural.diagram.ActivityDiagram
  * @see    view.panel.diagram.types.PanelActivityDiagram
  */
 public class ControllerPanelActivityDiagram extends ControllerPanelDiagram {
@@ -28,18 +29,18 @@ public class ControllerPanelActivityDiagram extends ControllerPanelDiagram {
 
     @Override
     public void mousePressed(MouseEvent event) {
-        switch (this.getPanelDiagram().getOperation()) {
+        switch (getPanel().getOperation()) {
             case "Initial":
-                this.addInitial(event);
+                addInitial(event);
                 break;
             case "Activity":
-                this.addActivity(event);
+                addActivity(event);
                 break;
             case "Decision":
-                this.addDecision(event);
+                addDecision(event);
                 break;
             case "Final":
-                this.addFim(event);
+                addFinal(event);
                 break;
             default:
                 break;
@@ -47,55 +48,55 @@ public class ControllerPanelActivityDiagram extends ControllerPanelDiagram {
     }
     
     /**
-     * Method responsible for adding a New Initial UML.
+     * Method responsible for adding a New UML Initial.
      * @param event Mouse Event.
      */
     public void addInitial(MouseEvent event) {
-        InitialUML initial = new InitialUML(this.getPanelDiagram().getDiagram());
+        InitialUML initial = new InitialUML(getPanel().getDiagram());
                    initial.setPosition(event.getX(), event.getY());
-        this.getPanelDiagram().getDiagram().addInitial(initial);
-        this.getPanelDiagram().updateGraph();
-        this.getPanelDiagram().getViewMenu().update();
+        getPanel().getDiagram().addInitial(initial);
+        getPanel().updateGraph();
+        getPanel().getViewMenu().update();
     }
     
     /**
-     * Method responsible for adding a New Activity UML.
+     * Method responsible for adding a New UML Activity.
      * @param event Mouse Event.
      */
     public void addActivity(MouseEvent event) {
-        ActivityUML activity = new ActivityUML(this.getPanelDiagram().getDiagram());
+        ActivityUML activity = new ActivityUML(getPanel().getDiagram());
                     activity.setPosition(event.getX(), event.getY());
-        this.getPanelDiagram().getDiagram().addActivity(activity);
-        this.getPanelDiagram().updateGraph();
-        this.getPanelDiagram().getViewMenu().update();
+        getPanel().getDiagram().addActivity(activity);
+        getPanel().updateGraph();
+        getPanel().getViewMenu().update();
     }
     
     /**
-     * Method responsible for adding a New Decision UML.
+     * Method responsible for adding a New UML Decision.
      * @param event Mouse Event.
      */
     public void addDecision(MouseEvent event) {
-        DecisionUML decision = new DecisionUML(this.getPanelDiagram().getDiagram());
+        DecisionUML decision = new DecisionUML(getPanel().getDiagram());
                     decision.setPosition(event.getX(), event.getY());
-        this.getPanelDiagram().getDiagram().addDecision(decision);
-        this.getPanelDiagram().updateGraph();
-        this.getPanelDiagram().getViewMenu().update();
+        getPanel().getDiagram().addDecision(decision);
+        getPanel().updateGraph();
+        getPanel().getViewMenu().update();
     }
     
     /**
-     * Method responsible for adding a New Final UML.
+     * Method responsible for adding a New UML Final.
      * @param event Mouse Event.
      */
-    public void addFim(MouseEvent event) {
-        FinalUML final_ = new FinalUML(this.getPanelDiagram().getDiagram());
+    public void addFinal(MouseEvent event) {
+        FinalUML final_ = new FinalUML(getPanel().getDiagram());
                  final_.setPosition(event.getX(), event.getY());
-        this.getPanelDiagram().getDiagram().addFinal(final_);
-        this.getPanelDiagram().updateGraph();
-        this.getPanelDiagram().getViewMenu().update();
+        getPanel().getDiagram().addFinal(final_);
+        getPanel().updateGraph();
+        getPanel().getViewMenu().update();
     }
     
     @Override
-    protected PanelActivityDiagram getPanelDiagram() {
-        return (PanelActivityDiagram) this.panel;
+    public PanelActivityDiagram getPanel() {
+        return (PanelActivityDiagram) panel;
     }
 }

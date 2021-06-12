@@ -6,9 +6,9 @@ import view.panel.operation.types.PanelSequenceOperation;
 
 /**
  * <p>Class of Controller <b>ControllerPanelSequenceOperation</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>Sequence Operation Panel</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelSequenceOperation</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  10/04/2020
+ * @since  2020-04-10
  * @see    controller.view.panel.operation.ControllerPanelOperation
  * @see    view.panel.operation.types.PanelSequenceOperation
  */
@@ -25,14 +25,14 @@ public class ControllerPanelSequenceOperation extends ControllerPanelOperation {
     @Override
     public void actionPerformed(ActionEvent event) {
         super.actionPerformed(event);
-        if (this.getPanelOperation().getLifelineButton().equals(event.getSource()))
-            this.setOperation(this.getPanelOperation().getLifelineButton(), "Lifeline");
-        else if (this.getPanelOperation().getInstanceButton().equals(event.getSource()))
-            this.setOperation(this.getPanelOperation().getInstanceButton(), "Instance");
+        if (getPanel().getLifelineButton().equals(event.getSource()))
+            setOperation(getPanel().getLifelineButton(), "Lifeline");
+        else if (getPanel().getInstanceButton().equals(event.getSource()))
+            setOperation(getPanel().getInstanceButton(), "Instance");
     }
     
     @Override
-    protected PanelSequenceOperation getPanelOperation() {
-        return (PanelSequenceOperation) this.panel;
+    public PanelSequenceOperation getPanel() {
+        return (PanelSequenceOperation) panel;
     }
 }

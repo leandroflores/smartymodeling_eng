@@ -28,17 +28,17 @@ public class ControllerPanelExportInstanceCode extends ControllerPanelExport {
      * @return Selected Instance.
      */
     private Instance getSelectedInstance() {
-        return (Instance) this.getPanel().getContextComboBox().getSelectedItem();
+        return (Instance) getPanel().getContextComboBox().getSelectedItem();
     }
     
     @Override
     public void update() {
-        this.getPanel().getNameTextField().setText(this.getSelectedInstance().getName());
-        this.getPanel().setInstance(this.getSelectedInstance());
+        getPanel().getNameTextField().setText(getSelectedInstance().getName());
+        getPanel().setInstance(getSelectedInstance());
     }
     
     @Override
     public PanelExportInstanceCode getPanel() {
-        return (PanelExportInstanceCode) this.panel;
+        return (PanelExportInstanceCode) panel;
     }
 }

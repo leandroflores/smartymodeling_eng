@@ -5,10 +5,10 @@ import java.awt.event.ActionEvent;
 import view.panel.operation.types.PanelActivityOperation;
 
 /**
- * <p>Class of Controller <b>ControllerPanelFeatureOperation</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>Activity Operation Panel</b> of SMartyModeling.</p>
+ * <p>Class of Controller <b>ControllerPanelActivityOperation</b>.</p>
+ * <p>Class responsible for controlling the <b>PanelActivityOperation</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  10/04/2020
+ * @since  2020-04-10
  * @see    controller.view.panel.operation.ControllerPanelOperation
  * @see    view.panel.operation.types.PanelActivityOperation
  */
@@ -25,18 +25,18 @@ public class ControllerPanelActivityOperation extends ControllerPanelOperation {
     @Override
     public void actionPerformed(ActionEvent event) {
         super.actionPerformed(event);
-        if (this.getPanelOperation().getInitialButton().equals(event.getSource()))
-            this.setOperation(this.getPanelOperation().getInitialButton(),  "Initial");
-        else if (this.getPanelOperation().getActivityButton().equals(event.getSource()))
-            this.setOperation(this.getPanelOperation().getActivityButton(), "Activity");
-        else if (this.getPanelOperation().getDecisionButton().equals(event.getSource()))
-            this.setOperation(this.getPanelOperation().getDecisionButton(), "Decision");
-        else if (this.getPanelOperation().getFinalButton().equals(event.getSource()))
-            this.setOperation(this.getPanelOperation().getFinalButton(),    "Final");
+        if (getPanel().getInitialButton().equals(event.getSource()))
+            setOperation(getPanel().getInitialButton(), "Initial");
+        else if (getPanel().getActivityButton().equals(event.getSource()))
+            setOperation(getPanel().getActivityButton(), "Activity");
+        else if (getPanel().getDecisionButton().equals(event.getSource()))
+            setOperation(getPanel().getDecisionButton(), "Decision");
+        else if (getPanel().getFinalButton().equals(event.getSource()))
+            setOperation(getPanel().getFinalButton(), "Final");
     }
 
     @Override
-    protected PanelActivityOperation getPanelOperation() {
-        return (PanelActivityOperation) this.panel;
+    public PanelActivityOperation getPanel() {
+        return (PanelActivityOperation) panel;
     }
 }

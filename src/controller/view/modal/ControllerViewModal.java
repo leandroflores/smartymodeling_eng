@@ -13,7 +13,7 @@ import view.modal.message.ViewError;
 
 /**
  * <p>Class of Controller <b>ControllerViewModal</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the ViewModals of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>Modal View</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-05-20
  * @see    controller.Controller

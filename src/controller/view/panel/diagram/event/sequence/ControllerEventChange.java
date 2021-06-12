@@ -6,6 +6,7 @@ import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import model.structural.base.Element;
 import model.structural.base.association.Association;
+import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.classes.base.ClassUML;
 import model.structural.diagram.classes.base.MethodUML;
 import model.structural.diagram.sequence.base.InstanceUML;
@@ -16,9 +17,11 @@ import view.panel.diagram.types.PanelSequenceDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventChange</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Changing Events</b> on Sequence Diagram Panel of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Change Events</b> in <b>Sequence Diagram Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  04/10/2019
+ * @since  2019-10-04
+ * @see    com.mxgraph.util.mxEventSource
+ * @see    com.mxgraph.util.mxEventSource.mxIEventListener
  * @see    view.panel.diagram.types.PanelSequenceDiagram
  */
 public class ControllerEventChange extends mxEventSource implements mxIEventListener {
@@ -34,12 +37,12 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     
     @Override
     public void invoke(Object object, mxEventObject event) {
-        Object cell = this.panel.getGraph().getSelectionCell();
-        String id   = this.getId(cell);
-            this.change(cell, id);
-        this.panel.getViewMenu().getPanelModeling().updateInstancePanels();
-        this.panel.updateGraph();
-        this.panel.getViewMenu().getPanelProject().updateUI();
+        Object cell = getPanel().getGraph().getSelectionCell();
+        String id   = getId(cell);
+            change(cell, id);
+        getPanel().getViewMenu().getPanelModeling().updateInstancePanels();
+        getPanel().updateGraph();
+        getPanel().getViewMenu().getPanelProject().updateUI();
     }
     
     /**
@@ -48,14 +51,14 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @param id Element Id.
      */
     private void change(Object object, String id) {
-        if (this.panel.getDiagram().getAssociation(id)  != null)
-            this.changeAssociation(object, this.panel.getDiagram().getAssociation(id));
-        else if (this.panel.getDiagram().getElement(id) instanceof LifelineUML)
-            this.changeLifeline(object, (LifelineUML) this.panel.getDiagram().getElement(id));
-        else if (this.panel.getDiagram().getElement(id) instanceof InstanceUML)
-            this.changeInstance(object, (InstanceUML) this.panel.getDiagram().getElement(id));
-        else if (this.panel.getDiagram().getElement(id) != null)
-            this.changeElement(object,  (Element)     this.panel.getDiagram().getElement(id));
+        if (getDiagram().getAssociation(id) != null)
+            changeAssociation(object, getDiagram().getAssociation(id));
+        else if (getDiagram().getElement(id) instanceof LifelineUML)
+            changeLifeline(object, (LifelineUML) getDiagram().getElement(id));
+        else if (getDiagram().getElement(id) instanceof InstanceUML)
+            changeInstance(object, (InstanceUML) getDiagram().getElement(id));
+        else if (getDiagram().getElement(id) != null)
+            changeElement(object, (Element) getDiagram().getElement(id));
     }
     
     /**
@@ -66,11 +69,11 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     private void changeLifeline(Object object, LifelineUML lifeline) {
         mxCell cell      = (mxCell) object;
         String signature = cell.getValue().toString().trim();
-        if (this.check(signature)) {
-            lifeline.setName(this.getName(signature, ":"));
-            lifeline.setActor(this.getActor(signature));
-            this.panel.getViewMenu().getPanelModeling().updateDiagram(this.panel.getDiagram());
-            this.panel.getViewMenu().setSave(false);
+        if (check(signature)) {
+            lifeline.setName(getName(signature, ":"));
+            lifeline.setActor(getActor(signature));
+            getPanel().getViewMenu().getPanelModeling().updateDiagram(getDiagram());
+            getPanel().getViewMenu().setSave(false);
         }
     }
     
@@ -82,11 +85,11 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     private void changeInstance(Object object, InstanceUML instance) {
         mxCell cell      = (mxCell) object;
         String signature = cell.getValue().toString().trim();
-        if (this.check(signature)) {
-            instance.setName(this.getName(signature, ":"));
-            instance.setClassUML(this.getClass(signature));
-            this.panel.getViewMenu().getPanelModeling().updateDiagram(this.panel.getDiagram());
-            this.panel.getViewMenu().setSave(false);
+        if (check(signature)) {
+            instance.setName(getName(signature, ":"));
+            instance.setClassUML(getClass(signature));
+            getPanel().getViewMenu().getPanelModeling().updateDiagram(getDiagram());
+            getPanel().getViewMenu().setSave(false);
         }
     }
     
@@ -97,7 +100,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private boolean check(String signature) {
         return     signature.contains(":")
-               && !this.getName(signature, ":").equals("");
+               && !getName(signature, ":").equals("");
     }
     
     
@@ -108,10 +111,10 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private void changeElement(Object object, Element element) {
         mxCell cell = (mxCell) object;
-        if (cell.getValue().toString().equals("") == false) {
+        if (!cell.getValue().toString().equals("")) {
             element.setName(cell.getValue().toString());
-            this.panel.getViewMenu().getPanelModeling().getViewMenu().update();
-            this.panel.getViewMenu().setSave(false);
+            getPanel().getViewMenu().getPanelModeling().getViewMenu().update();
+            getPanel().getViewMenu().setSave(false);
         }
     }
     
@@ -123,7 +126,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
     private void changeAssociation(Object object, Association association) {
         mxCell cell = (mxCell) object;
         if (association instanceof MessageUML)
-            ((MessageUML) association).setMethod(this.getMethod(cell, (MessageUML) association));
+            ((MessageUML) association).setMethod(getMethod(cell, (MessageUML) association));
     }
     
     /**
@@ -157,7 +160,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private ActorUML getActor(String signature) {
         if (signature.contains(":"))
-            return (ActorUML) this.panel.getDiagram().getProject().getByName("actor", signature.substring(signature.trim().indexOf(":") + 1).trim());
+            return (ActorUML) getDiagram().getProject().getByName("actor", signature.substring(signature.trim().indexOf(":") + 1).trim());
         return null;
     }
     
@@ -168,7 +171,7 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      */
     private ClassUML getClass(String signature) {
         if (signature.contains(":"))
-            return (ClassUML) this.panel.getDiagram().getProject().getByName("class", signature.substring(signature.trim().indexOf(":") + 1).trim());
+            return (ClassUML) getDiagram().getProject().getByName("class", signature.substring(signature.trim().indexOf(":") + 1).trim());
         return null;
     }
     
@@ -178,9 +181,9 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
      * @return Element Id.
      */
     private String getId(Object cell) {
-        if (this.panel.getIdentifiers().get(cell) != null)
-            return this.panel.getIdentifiers().get(cell);
-        return this.getCellId((mxCell) cell);
+        if (getPanel().getIdentifiers().get(cell) != null)
+            return getPanel().getIdentifiers().get(cell);
+        return getCellId((mxCell) cell);
     }
     
     /**
@@ -195,5 +198,21 @@ public class ControllerEventChange extends mxEventSource implements mxIEventList
             return cell.getId();
         }
         return "";
+    }
+    
+    /**
+     * Method responsible for returning the Sequence Diagram.
+     * @return Sequence Diagram.
+     */
+    public SequenceDiagram getDiagram() {
+        return getPanel().getDiagram();
+    }
+    
+    /**
+     * Method responsible for returning the Panel Sequence Diagram.
+     * @return Panel Sequence Diagram.
+     */
+    public PanelSequenceDiagram getPanel() {
+        return panel;
     }
 }

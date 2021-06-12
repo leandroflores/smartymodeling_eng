@@ -25,14 +25,14 @@ public class ControllerPanelExportProduct extends ControllerPanelExport {
     
     @Override
     protected void update() {
-        if (this.getPanel().getContextComboBox().getSelectedItem() != null) {
-            this.getPanel().setProduct((Product) this.getPanel().getContextComboBox().getSelectedItem());
-            this.getPanel().updateInstances();
+        if (getPanel().getContextComboBox().getSelectedItem() != null) {
+            getPanel().setProduct((Product) getPanel().getContextComboBox().getSelectedItem());
+            getPanel().updateInstances();
         }
     }
     
     @Override
     public PanelExportProduct getPanel() {
-        return (PanelExportProduct) this.panel;
+        return (PanelExportProduct) panel;
     }
 }

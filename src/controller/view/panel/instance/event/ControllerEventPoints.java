@@ -10,9 +10,10 @@ import view.panel.instance.PanelInstance;
 
 /**
  * <p>Class of Controller <b>ControllerEventPoints</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Points Relationship</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Points Events</b> in <b>Instance Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  14/11/2019
+ * @since  2019-11-14
+ * @see    java.awt.event.MouseAdapter
  * @see    view.panel.instance.PanelInstance
  */
 public class ControllerEventPoints extends MouseAdapter {
@@ -28,15 +29,14 @@ public class ControllerEventPoints extends MouseAdapter {
     
     @Override
     public void mouseClicked(MouseEvent event) {
-        Relationship relationship = this.getRelationship(event);
-        mxPoint      point        = new mxPoint(event.getX(), event.getY());
+        Relationship relationship = getRelationship(event);
         if (relationship != null) {
             if (event.getClickCount() == 1)
-                this.updatePoint(relationship);
+                updatePoint(relationship);
             else if (event.getClickCount() == 2)
-                this.addPoint(relationship, point);
+                addPoint(relationship, new mxPoint(event.getX(), event.getY()));
             else if (event.getButton() == 3)
-                this.removePoint(relationship, point);
+                removePoint(relationship, new mxPoint(event.getX(), event.getY()));
         }
     }
     
@@ -46,9 +46,9 @@ public class ControllerEventPoints extends MouseAdapter {
      * @return Relationship Selected.
      */
     private Relationship getRelationship(MouseEvent event) {
-        Object object = this.panel.getComponent().getCellAt(event.getX(), event.getY());
-        String id     = this.panel.getIdentifiers().get(object);
-        return this.panel.getInstance().getRelationship(id);
+        Object object = getPanel().getComponent().getCellAt(event.getX(), event.getY());
+        String id     = getPanel().getIdentifiers().get(object);
+        return getPanel().getInstance().getRelationship(id);
     }
     
     /**
@@ -57,9 +57,9 @@ public class ControllerEventPoints extends MouseAdapter {
      * @param point Point.
      */
     private void updatePoint(Relationship relationship) {
-        mxGeometry geometry = ((mxGraphModel) (this.panel.getGraph().getModel())).getGeometry(this.panel.getObjects().get(relationship.getId()));
+        mxGeometry geometry = ((mxGraphModel) (getPanel().getGraph().getModel())).getGeometry(getPanel().getObjects().get(relationship.getId()));
                    relationship.setPoints(geometry.getPoints());
-        this.panel.getViewMenu().setSave(false);
+        getPanel().getViewMenu().setSave(false);
     }
     
     /**
@@ -69,9 +69,9 @@ public class ControllerEventPoints extends MouseAdapter {
      */
     private void addPoint(Relationship relationship, mxPoint point) {
         relationship.addPoint(point);
-        this.panel.updateGraph();
-        this.panel.getViewMenu().update();
-        this.panel.getViewMenu().setSave(false);
+        getPanel().updateGraph();
+        getPanel().getViewMenu().update();
+        getPanel().getViewMenu().setSave(false);
     }
     
     /**
@@ -83,9 +83,17 @@ public class ControllerEventPoints extends MouseAdapter {
         mxPoint nearest = relationship.getNearestPoint(point);
         if (nearest != null) {
             relationship.removePoint(nearest);
-            this.panel.updateGraph();
-            this.panel.getViewMenu().update();
-            this.panel.getViewMenu().setSave(false);
+            getPanel().updateGraph();
+            getPanel().getViewMenu().update();
+            getPanel().getViewMenu().setSave(false);
         }
+    }
+    
+    /**
+     * Method responsible for returning the Panel Instance.
+     * @return Panel Instance.
+     */
+    public PanelInstance getPanel() {
+        return panel;
     }
 }

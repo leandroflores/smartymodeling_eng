@@ -14,9 +14,9 @@ import view.panel.operation.PanelOperation;
 
 /**
  * <p>Class of Controller <b>ControllerPanelOperation</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>Operation Panel</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>Operation Panel</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  10/04/2020
+ * @since  2020-04-10
  * @see    controller.view.panel.ControllerPanel
  * @see    view.panel.operation.PanelOperation
  */
@@ -33,17 +33,17 @@ public abstract class ControllerPanelOperation extends ControllerPanel {
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event != null) {
-            if (this.getPanelOperation().getClickButton().equals(event.getSource()))
-                this.getPanelDiagram().updateGraph();
-            else if (this.getPanelOperation().getVariabilityButton().equals(event.getSource()))
-                this.addVariability();
-            else if (this.getPanelOperation().getEditButton().equals(event.getSource()))
-                this.edit();
-            else if (this.getPanelOperation().getDeleteButton().equals(event.getSource()))
-                this.delete();
-            else if (this.getPanelOperation().getAssociationComboBox().equals(event.getSource()))
-                this.getPanelDiagram().setType(this.getPanelOperation().getAssociationComboBox().getSelectedIndex());
-            this.getPanelDiagram().getViewMenu().setSave(false);
+            if (getPanel().getClickButton().equals(event.getSource()))
+                getPanelDiagram().updateGraph();
+            else if (getPanel().getVariabilityButton().equals(event.getSource()))
+                addVariability();
+            else if (getPanel().getEditButton().equals(event.getSource()))
+                edit();
+            else if (getPanel().getDeleteButton().equals(event.getSource()))
+                delete();
+            else if (getPanel().getAssociationComboBox().equals(event.getSource()))
+                getPanelDiagram().setType(getPanel().getAssociationComboBox().getSelectedIndex());
+            getPanelDiagram().getViewMenu().setSave(false);
         }
     }
 
@@ -56,22 +56,20 @@ public abstract class ControllerPanelOperation extends ControllerPanel {
      * @param operation Button Operation.
      */
     protected void setOperation(JButton button, String operation) {
-        this.getPanelOperation().resetBackground();
-        button.setBackground(this.getFocusColor());
-        this.getPanelDiagram().setOperation(operation);
+        getPanel().resetBackground();
+        button.setBackground(getFocusColor());
+        getPanelDiagram().setOperation(operation);
     }
     
     /**
      * Method responsible for adding a New Variability.
      */
     public void addVariability() {
-        this.getPanelOperation().resetBackground();
-        this.getPanelOperation().getClickButton().setBackground(this.getDefaultColor());
-        this.getPanelDiagram().setOperation("Click");
-        if (!this.getPanelDiagram().getDiagram().getElementsList().isEmpty())
-            new ViewNewVariability(this.getPanelDiagram().getViewMenu().getPanelModeling(), 
-                                   this.getPanelDiagram().getDiagram(),
-                                   this.getVariationPoint()).setVisible(true);
+        getPanel().resetBackground();
+        getPanel().getClickButton().setBackground(getDefaultColor());
+        getPanelDiagram().setOperation("Click");
+        if (!getPanelDiagram().getDiagram().getElementsList().isEmpty())
+            new ViewNewVariability(getPanelDiagram().getViewMenu().getPanelModeling(), getPanelDiagram().getDiagram(), getVariationPoint()).setVisible(true);
     }
     
     /**
@@ -79,7 +77,7 @@ public abstract class ControllerPanelOperation extends ControllerPanel {
      * @return Variation Point.
      */
     protected Element getVariationPoint() {
-        Element element = this.getPanelDiagram().getSelectedElement();
+        Element element = getPanelDiagram().getSelectedElement();
         if (element != null && element.isDefault())
             return element;
         return null;
@@ -89,23 +87,23 @@ public abstract class ControllerPanelOperation extends ControllerPanel {
      * Method responsible for Editing the Cell Selected.
      */
     public void edit() {
-        mxCell cell = (mxCell) this.getPanelDiagram().getGraph().getSelectionCell();
-        String id   = this.getPanelDiagram().getIdentifiers().get(cell);
-        if (this.getPanelDiagram().getDiagram().getElement(id) != null)
-            this.getPanelDiagram().getComponent().startEditingAtCell(cell);
-        this.getPanelDiagram().setClick();
+        mxCell cell = (mxCell) getPanelDiagram().getGraph().getSelectionCell();
+        String id   = getPanelDiagram().getIdentifiers().get(cell);
+        if (getPanelDiagram().getDiagram().getElement(id) != null)
+            getPanelDiagram().getComponent().startEditingAtCell(cell);
+        getPanelDiagram().setClick();
     }
     
     /**
      * Method responsible for Deleting the Cell Selected.
      */
     public void delete() {
-        mxCell cell = (mxCell) this.getPanelDiagram().getGraph().getSelectionCell();
-        String id   = this.getPanelDiagram().getIdentifiers().get(cell);
-        if (this.getPanelDiagram().getDiagram().getElement(id) != null)
-            this.delete(this.getPanelDiagram().getDiagram().getElement(id));
-        else if (this.getPanelDiagram().getDiagram().getAssociation(id) != null)
-            this.delete(this.getPanelDiagram().getDiagram().getAssociation(id));
+        mxCell cell = (mxCell) getPanelDiagram().getGraph().getSelectionCell();
+        String id   = getPanelDiagram().getIdentifiers().get(cell);
+        if (getPanelDiagram().getDiagram().getElement(id) != null)
+            delete(getPanelDiagram().getDiagram().getElement(id));
+        else if (getPanelDiagram().getDiagram().getAssociation(id) != null)
+            delete(getPanelDiagram().getDiagram().getAssociation(id));
     }
     
     /**
@@ -113,10 +111,8 @@ public abstract class ControllerPanelOperation extends ControllerPanel {
      * @param element Element.
      */
     protected void delete(Element element) {
-        new ViewDeleteElement(this.getPanelDiagram().getViewMenu().getPanelModeling(),
-                              this.getPanelDiagram().getDiagram(),
-                              element).setVisible(true);
-        this.getPanelDiagram().updateGraph();
+        new ViewDeleteElement(getPanelDiagram().getViewMenu().getPanelModeling(), getPanelDiagram().getDiagram(), element).setVisible(true);
+        getPanelDiagram().updateGraph();
     }
     
     /**
@@ -124,16 +120,8 @@ public abstract class ControllerPanelOperation extends ControllerPanel {
      * @param association Association.
      */
     protected void delete(Association association) {
-        this.getPanelDiagram().getDiagram().removeAssociation(association);
-        this.getPanelDiagram().updateGraph();
-    }
-    
-    /**
-     * Method responsible for returning the Panel Operation.
-     * @return Panel Operation.
-     */
-    protected PanelOperation getPanelOperation() {
-        return (PanelOperation) this.panel;
+        getPanelDiagram().getDiagram().removeAssociation(association);
+        getPanelDiagram().updateGraph();
     }
     
     /**
@@ -141,6 +129,11 @@ public abstract class ControllerPanelOperation extends ControllerPanel {
      * @return Panel Diagram.
      */
     protected PanelDiagram getPanelDiagram() {
-        return this.getPanelOperation().getPanelDiagram();
+        return getPanel().getPanelDiagram();
+    }
+    
+    @Override
+    public PanelOperation getPanel() {
+        return (PanelOperation) panel;
     }
 }

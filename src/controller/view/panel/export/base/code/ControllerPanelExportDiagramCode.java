@@ -28,17 +28,17 @@ public class ControllerPanelExportDiagramCode extends ControllerPanelExport {
      * @return Selected Diagram.
      */
     private Diagram getSelectedDiagram() {
-        return (Diagram) this.getPanel().getContextComboBox().getSelectedItem();
+        return (Diagram) getPanel().getContextComboBox().getSelectedItem();
     }
     
     @Override
     public void update() {
-        this.getPanel().getNameTextField().setText(this.getSelectedDiagram().getName());
-        this.getPanel().setDiagram(this.getSelectedDiagram());
+        getPanel().getNameTextField().setText(getSelectedDiagram().getName());
+        getPanel().setDiagram(getSelectedDiagram());
     }
     
     @Override
     public PanelExportDiagramCode getPanel() {
-        return (PanelExportDiagramCode) this.panel;
+        return (PanelExportDiagramCode) panel;
     }
 }

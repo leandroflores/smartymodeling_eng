@@ -5,15 +5,16 @@ import com.mxgraph.util.mxEventObject;
 import com.mxgraph.util.mxEventSource;
 import com.mxgraph.util.mxEventSource.mxIEventListener;
 import model.structural.base.Element;
+import model.structural.diagram.SequenceDiagram;
 import model.structural.diagram.sequence.base.InstanceUML;
 import model.structural.diagram.sequence.base.LifelineUML;
 import view.panel.diagram.types.PanelSequenceDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerEventResize</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Resizing Panel Modeling</b> on Sequence Diagram Panel of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Resize Events</b> in <b>Sequence Diagram Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  25/07/2019
+ * @since  2019-07-25
  * @see    com.mxgraph.util.mxEventSource
  * @see    com.mxgraph.util.mxEventSource.mxIEventListener
  * @see    view.panel.diagram.types.PanelSequenceDiagram
@@ -31,11 +32,11 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
     
     @Override
     public void invoke(Object object, mxEventObject evento) {
-        Object  cell    = this.panel.getGraph().getSelectionCell();
-        String  id      = this.getId(cell);
-        Element element = this.panel.getDiagram().getElement(id);
+        Object  cell    = getPanel().getGraph().getSelectionCell();
+        String  id      = getId(cell);
+        Element element = getDiagram().getElement(id);
         if (element != null)
-            this.resize(element, cell);
+            resize(element, cell);
     }
     
     /**
@@ -56,9 +57,9 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
      */
     private void resize(Element element, Object cell) {
         if (element instanceof LifelineUML)
-            this.resize((LifelineUML) element, cell);
+            resize((LifelineUML) element, cell);
         else if (element instanceof InstanceUML)
-            this.resize((InstanceUML) element, cell);
+            resize((InstanceUML) element, cell);
     }
     
     /**
@@ -67,15 +68,15 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
      * @param cell Graph Cell.
      */
     private void resize(LifelineUML lifelineUML, Object cell) {
-        Integer height = new Double(this.panel.getGraph().getCellGeometry(cell).getHeight()).intValue();
-        Integer width  = new Double(this.panel.getGraph().getCellGeometry(cell).getWidth()).intValue();
-        if (height > this.panel.getDiagram().getMinHeigth()) {
+        Integer height = new Double(getPanel().getGraph().getCellGeometry(cell).getHeight()).intValue();
+        Integer width  = new Double(getPanel().getGraph().getCellGeometry(cell).getWidth()).intValue();
+        if (height > getDiagram().getMinHeigth()) {
             lifelineUML.setHeight(height);
             lifelineUML.setWidth( width  >  lifelineUML.getNameSize() ?  width :  lifelineUML.getNameSize());
-            this.panel.getDiagram().updateHeight(height);
-            this.panel.updateGraph();
+            getDiagram().updateHeight(height);
+            getPanel().updateGraph();
         }
-        this.panel.getViewMenu().setSave(false);
+        getPanel().getViewMenu().setSave(false);
     }
     
     /**
@@ -84,14 +85,30 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
      * @param cell Graph Cell.
      */
     private void resize(InstanceUML instanceUML, Object cell) {
-        Integer height = new Double(this.panel.getGraph().getCellGeometry(cell).getHeight()).intValue();
-        Integer width  = new Double(this.panel.getGraph().getCellGeometry(cell).getWidth()).intValue();
-        if (height > this.panel.getDiagram().getMinHeigth()) {
+        Integer height = new Double(getPanel().getGraph().getCellGeometry(cell).getHeight()).intValue();
+        Integer width  = new Double(getPanel().getGraph().getCellGeometry(cell).getWidth()).intValue();
+        if (height > getDiagram().getMinHeigth()) {
             instanceUML.setHeight(height);
             instanceUML.setWidth( width  >  instanceUML.getSignatureSize() ?  width :  instanceUML.getSignatureSize());
-            this.panel.getDiagram().updateHeight(height);
-            this.panel.updateGraph();
+            getDiagram().updateHeight(height);
+            getPanel().updateGraph();
         }
-        this.panel.getViewMenu().setSave(false);
+        getPanel().getViewMenu().setSave(false);
+    }
+    
+    /**
+     * Method responsible for returning the Sequence Diagram.
+     * @return Sequence Diagram.
+     */
+    public SequenceDiagram getDiagram() {
+        return getPanel().getDiagram();
+    } 
+    
+    /**
+     * Method responsible for returning the Panel Sequence Diagram.
+     * @return Panel Sequence Diagram.
+     */
+    public PanelSequenceDiagram getPanel() {
+        return panel;
     }
 }

@@ -6,9 +6,9 @@ import view.panel.operation.types.PanelUseCaseOperation;
 
 /**
  * <p>Class of Controller <b>ControllerPanelUseCaseOperation</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>Use Case Operation Panel</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelUseCaseOperation</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  10/04/2020
+ * @since  2020-04-10
  * @see    controller.view.panel.operation.ControllerPanelOperation
  * @see    view.panel.operation.types.PanelUseCaseOperation
  */
@@ -25,14 +25,14 @@ public class ControllerPanelUseCaseOperation extends ControllerPanelOperation {
     @Override
     public void actionPerformed(ActionEvent event) {
         super.actionPerformed(event);
-        if (this.getPanelOperation().getActorButton().equals(event.getSource()))
-            this.setOperation(this.getPanelOperation().getActorButton(),   "Actor");
-        else if (this.getPanelOperation().getUseCaseButton().equals(event.getSource()))
-            this.setOperation(this.getPanelOperation().getUseCaseButton(), "UseCase");
+        if (getPanel().getActorButton().equals(event.getSource()))
+            setOperation(getPanel().getActorButton(),   "Actor");
+        else if (getPanel().getUseCaseButton().equals(event.getSource()))
+            setOperation(getPanel().getUseCaseButton(), "UseCase");
     }
 
     @Override
-    protected PanelUseCaseOperation getPanelOperation() {
-        return (PanelUseCaseOperation) this.panel;
+    public PanelUseCaseOperation getPanel() {
+        return (PanelUseCaseOperation) panel;
     }
 }

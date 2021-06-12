@@ -52,7 +52,7 @@ import view.modal.system.ViewSystemInformation;
 
 /**
  * <p>Class of Controller <b>ControllerViewMenu</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from <b>ViewMenu</b> in SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>ViewMenu</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-05-22
  * @see    controller.view.ControllerView

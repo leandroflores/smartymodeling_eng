@@ -9,9 +9,9 @@ import view.panel.operation.types.PanelFeatureOperation;
 
 /**
  * <p>Class of Controller <b>ControllerPanelFeatureOperation</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>Feature Operation Panel</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelFeatureOperation</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  10/04/2020
+ * @since  2020-04-10
  * @see    controller.view.panel.operation.ControllerPanelOperation
  * @see    view.panel.operation.types.PanelFeatureOperation
  */
@@ -28,25 +28,25 @@ public class ControllerPanelFeatureOperation extends ControllerPanelOperation {
     @Override
     public void actionPerformed(ActionEvent event) {
         super.actionPerformed(event);
-        if (this.getPanelOperation().getFeatureButton().equals(event.getSource()))
-            this.setOperation(this.getPanelOperation().getFeatureButton(), "Feature");
-        else if (this.getPanelOperation().getInclusiveButton().equals(event.getSource()))
-            this.setOperation(this.getPanelOperation().getInclusiveButton(), "Inclusive");
-        else if (this.getPanelOperation().getExclusiveButton().equals(event.getSource()))
-            this.setOperation(this.getPanelOperation().getExclusiveButton(), "Exclusive");
+        if (getPanel().getFeatureButton().equals(event.getSource()))
+            setOperation(getPanel().getFeatureButton(), "Feature");
+        else if (getPanel().getInclusiveButton().equals(event.getSource()))
+            setOperation(getPanel().getInclusiveButton(), "Inclusive");
+        else if (getPanel().getExclusiveButton().equals(event.getSource()))
+            setOperation(getPanel().getExclusiveButton(), "Exclusive");
     }
     
     @Override
     public void delete() {
-        mxCell cell   = (mxCell) this.getPanelDiagram().getGraph().getSelectionCell();
-        String id     = this.getPanelDiagram().getIdentifiers().get(cell);
-        Object object = this.getPanelDiagram().getDiagram().getAssociation(id);
-        if (this.getPanelDiagram().getDiagram().getElement(id) != null)
-            super.delete(this.getPanelDiagram().getDiagram().getElement(id));
+        mxCell cell   = (mxCell) getPanelDiagram().getGraph().getSelectionCell();
+        String id     = getPanelDiagram().getIdentifiers().get(cell);
+        Object object = getPanelDiagram().getDiagram().getAssociation(id);
+        if (getPanelDiagram().getDiagram().getElement(id) != null)
+            super.delete(getPanelDiagram().getDiagram().getElement(id));
         else if (object != null && !(object instanceof Combination))
-            this.delete(this.getPanelDiagram().getDiagram().getAssociation(id));
+            delete(getPanelDiagram().getDiagram().getAssociation(id));
         else if (object != null && object instanceof Combination) {
-            this.delete((Combination) object);
+            delete((Combination) object);
         }
     }
     
@@ -63,7 +63,7 @@ public class ControllerPanelFeatureOperation extends ControllerPanelOperation {
     }
     
     @Override
-    protected PanelFeatureOperation getPanelOperation() {
-        return (PanelFeatureOperation) this.panel;
+    public PanelFeatureOperation getPanel() {
+        return (PanelFeatureOperation) panel;
     }
 }

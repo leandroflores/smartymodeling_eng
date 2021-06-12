@@ -7,10 +7,11 @@ import view.panel.evaluation.base.product.PanelEvaluationProduct;
 
 /**
  * <p>Class of Controller <b>ControllerPanelEvaluationProduct</b>.</p>
- * <p>Class responsible for controlling the <b>PanelEvaliationProduct</b> Events of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelEvaluationProduct</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-01
  * @see    controller.view.panel.evaluation.ControllerPanelEvaluation
+ * @see    model.structural.base.product.Product
  * @see    view.panel.evaluation.base.product.PanelEvaluationProduct
  */
 public class ControllerPanelEvaluationProduct extends ControllerPanelEvaluation {
@@ -26,16 +27,16 @@ public class ControllerPanelEvaluationProduct extends ControllerPanelEvaluation 
     @Override
     public void update() {
         try {
-            if (this.check())
-                this.evaluate(this.getProduct(), this.getPanel().getOperationTextField().getText().trim());
+            if (check())
+                evaluate(getProduct(), getPanel().getOperationTextField().getText().trim());
         }catch (ScriptException exception) {
-            new ViewError(this.getPanel().getViewEvaluation(), "Error to Apply Operation!").setVisible(true);
-            this.getPanel().getOperationTextField().requestFocus();
+            new ViewError(getPanel().getViewEvaluation(), "Error to Apply Operation!").setVisible(true);
+            getPanel().getOperationTextField().requestFocus();
         }
     }
     
     @Override
     public PanelEvaluationProduct getPanel() {
-        return (PanelEvaluationProduct) this.panel;
+        return (PanelEvaluationProduct) panel;
     }
 }

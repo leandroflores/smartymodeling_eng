@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 
 /**
  * <p>Class of Controller <b>Controller</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the Views of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>Events</b> of the Views of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-05-19
  * @see    java.awt.event.ActionListener

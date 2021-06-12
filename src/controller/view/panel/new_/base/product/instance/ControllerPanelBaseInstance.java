@@ -25,37 +25,37 @@ public class ControllerPanelBaseInstance extends ControllerPanelBase {
 
     @Override
     protected void return_() {
-        this.getViewNew().dispose();
+        getViewNew().dispose();
     }
     
     @Override
     protected boolean check() {
-        return this.check(this.getPanel().getProductComboBox(), "Select a Product!")
-            && this.check(this.getPanel().getDiagramComboBox(), "Select a Diagram!")
-            && this.check(this.getPanel().getNameTextField(),   "Name is required!");
+        return check(getPanel().getProductComboBox(), "Select a Product!")
+            && check(getPanel().getDiagramComboBox(), "Select a Diagram!")
+            && check(getPanel().getNameTextField(),   "Name is required!");
     }
     
     @Override
     public void next() {
-        this.update();
-        this.getPanel().getPanelNew().addPanelBaseOptional();
+        update();
+        getPanel().getPanelNew().addPanelBaseOptional();
     }
     
     @Override
     protected void update() {
-        this.getInstance().setProduct((Product) this.getPanel().getProductComboBox().getSelectedItem());
-        this.getInstance().setDiagram((Diagram) this.getPanel().getDiagramComboBox().getSelectedItem());
-        this.getInstance().setName(this.getString(this.getPanel().getNameTextField()));
+        getInstance().setProduct((Product) getPanel().getProductComboBox().getSelectedItem());
+        getInstance().setDiagram((Diagram) getPanel().getDiagramComboBox().getSelectedItem());
+        getInstance().setName(getString(getPanel().getNameTextField()));
         super.refresh();
     }
     
     @Override
     protected Instance getInstance() {
-        return this.getPanel().getInstance();
+        return getPanel().getInstance();
     }
     
     @Override
     public PanelBaseInstance getPanel() {
-        return (PanelBaseInstance) this.panel;
+        return (PanelBaseInstance) panel;
     }
 }

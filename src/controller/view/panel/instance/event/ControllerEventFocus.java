@@ -8,9 +8,10 @@ import view.panel.instance.PanelInstance;
 
 /**
  * <p>Class of Controller <b>ControllerEventFocus</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Focus Modeling Panel</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Focus Events</b> in <b>Instance Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  14/11/2019
+ * @since  2019-11-14
+ * @see    java.awt.event.MouseAdapter
  * @see    view.panel.instance.PanelInstance
  */
 public class ControllerEventFocus extends MouseAdapter {
@@ -26,13 +27,13 @@ public class ControllerEventFocus extends MouseAdapter {
     
     @Override
     public void mouseClicked(MouseEvent event) {
-        Object  object = this.panel.getComponent().getCellAt(event.getX(), event.getY());
+        Object  object = getPanel().getComponent().getCellAt(event.getX(), event.getY());
         if (object != null) {
-            String id = this.panel.getIdentifiers().get(object);
-            if (this.panel.getInstance().getArtifact(id) != null)
-                this.updatePanelEdit(this.panel.getInstance().getArtifact(id)); 
-            else if (this.panel.getInstance().getRelationship(id) != null)
-                this.updatePanelEdit(this.panel.getInstance().getRelationship(id));
+            String id = getPanel().getIdentifiers().get(object);
+            if (getPanel().getInstance().getArtifact(id) != null)
+                updatePanelEdit(getPanel().getInstance().getArtifact(id)); 
+            else if (getPanel().getInstance().getRelationship(id) != null)
+                updatePanelEdit(getPanel().getInstance().getRelationship(id));
         }
     }
     
@@ -41,9 +42,9 @@ public class ControllerEventFocus extends MouseAdapter {
      * @param artifact Artifact selected.
      */
     private void updatePanelEdit(Artifact artifact) {
-        this.panel.getViewMenu().getPanelProject().initPanelEditArtifact(artifact);
-        this.panel.getViewMenu().getPanelProject().updatePanelEdit();
-        this.panel.getGraph().setSelectionCell(this.panel.getObjects().get(artifact.getId()));
+        getPanel().getViewMenu().getPanelProject().initPanelEditArtifact(artifact);
+        getPanel().getViewMenu().getPanelProject().updatePanelEdit();
+        getPanel().getGraph().setSelectionCell(getPanel().getObjects().get(artifact.getId()));
     }
     
     /**
@@ -51,8 +52,16 @@ public class ControllerEventFocus extends MouseAdapter {
      * @param relationship Relationship selected.
      */
     private void updatePanelEdit(Relationship relationship) {
-        this.panel.getViewMenu().getPanelProject().initPanelRelationship(relationship);
-        this.panel.getViewMenu().getPanelProject().updatePanelEdit();
-        this.panel.getGraph().setSelectionCell(this.panel.getObjects().get(relationship.getId()));
+        getPanel().getViewMenu().getPanelProject().initPanelRelationship(relationship);
+        getPanel().getViewMenu().getPanelProject().updatePanelEdit();
+        getPanel().getGraph().setSelectionCell(getPanel().getObjects().get(relationship.getId()));
+    }
+    
+    /**
+     * Method responsible for returning the Panel Instance.
+     * @return Panel Instance.
+     */
+    public PanelInstance getPanel() {
+        return panel;
     }
 }

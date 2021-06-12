@@ -12,10 +12,11 @@ import view.panel.diagram.types.PanelSequenceDiagram;
 
 /**
  * <p>Class of Controller <b>ControllerPanelSequenceDiagram</b>.</p>
- * <p>Class responsible for controlling the <b>Events</b> from the <b>Sequence Diagram Panel</b> of SMartyModeling.</p>
+ * <p>Class responsible for controlling the <b>PanelSequenceDiagram</b> Events of SMartyModeling.</p>
  * @author Leandro
- * @since  25/07/2019
+ * @since  2019-07-25
  * @see    controller.view.panel.diagram.ControllerPanelDiagram
+ * @see    model.structural.diagram.SequenceDiagram
  * @see    view.panel.diagram.types.PanelSequenceDiagram
  */
 public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
@@ -30,25 +31,25 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
     
     @Override
     public void mousePressed(MouseEvent event) {
-        if (this.getPanelDiagram().getOperation().equals("Lifeline"))
-            this.addLifeline(event);
-        else if (this.getPanelDiagram().getOperation().equals("Instance"))
-            this.addInstance(event);
+        if (getPanel().getOperation().equals("Lifeline"))
+            addLifeline(event);
+        else if (getPanel().getOperation().equals("Instance"))
+            addInstance(event);
     }
     
     /**
-     * Method responsible for adding a New Lifeline.
+     * Method responsible for adding a New UML Lifeline.
      * @param event Mouse Event.
      */
     public void addLifeline(MouseEvent event) {
-        LifelineUML lifeline = new LifelineUML(this.getPanelDiagram().getDiagram());
-                    lifeline.setPosition(event.getX(), this.getPanelDiagram().getDiagram().getYDefault());
-                    lifeline.setHeight(this.getPanelDiagram().getDiagram().getHeightDefault());
-        this.getPanelDiagram().getDiagram().addLifeline(lifeline);
+        LifelineUML lifeline = new LifelineUML(getPanel().getDiagram());
+                    lifeline.setPosition(event.getX(), getPanel().getDiagram().getYDefault());
+                    lifeline.setHeight(getPanel().getDiagram().getHeightDefault());
+                    getPanel().getDiagram().addLifeline(lifeline);
                     lifeline.setDefaultName();
-                    lifeline.setActor(this.getDefaultActor());
-        this.getPanelDiagram().updateGraph();
-        this.getPanelDiagram().getViewMenu().update();
+                    lifeline.setActor(getDefaultActor());
+        getPanel().updateGraph();
+        getPanel().getViewMenu().update();
     }
     
     /**
@@ -56,22 +57,22 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
      * @return Default Actor.
      */
     private ActorUML getDefaultActor() {
-        return (ActorUML) this.getPanelDiagram().getViewMenu().getProject().getElements("actor").get(0);
+        return (ActorUML) getPanel().getViewMenu().getProject().getElements("actor").get(0);
     }
     
     /**
-     * Method responsible for adding a New Instance.
+     * Method responsible for adding a New UML Instance.
      * @param event Mouse Event.
      */
     public void addInstance(MouseEvent event) {
-        InstanceUML instance = new InstanceUML(this.getPanelDiagram().getDiagram());
-                    instance.setPosition(event.getX(), this.getPanelDiagram().getDiagram().getYDefault());
-                    instance.setHeight(this.getPanelDiagram().getDiagram().getHeightDefault());
-        this.getPanelDiagram().getDiagram().addInstance(instance);
+        InstanceUML instance = new InstanceUML(getPanel().getDiagram());
+                    instance.setPosition(event.getX(), getPanel().getDiagram().getYDefault());
+                    instance.setHeight(getPanel().getDiagram().getHeightDefault());
+                    getPanel().getDiagram().addInstance(instance);
                     instance.setDefaultName();
-                    instance.setClassUML(this.getDefaultClass());
-        this.getPanelDiagram().updateGraph();
-        this.getPanelDiagram().getViewMenu().update();
+                    instance.setClassUML(getDefaultClass());
+        getPanel().updateGraph();
+        getPanel().getViewMenu().update();
     }
     
     /**
@@ -79,22 +80,22 @@ public class ControllerPanelSequenceDiagram extends ControllerPanelDiagram {
      * @return Default Class.
      */
     private ClassUML getDefaultClass() {
-        return (ClassUML) this.getPanelDiagram().getViewMenu().getProject().getElements("class").get(0);
+        return (ClassUML) getPanel().getViewMenu().getProject().getElements("class").get(0);
     }
     
     @Override
     public void move(KeyEvent event) {
-        Element element = this.getPanelDiagram().getSelectedElement();
+        Element element = getPanel().getSelectedElement();
         if (element != null) {
             super.move(element, event);
-            this.getPanelDiagram().getDiagram().updateY(element.getY());
-            this.getPanelDiagram().updateGraph();
-            this.getPanelDiagram().getGraph().setSelectionCell(this.getPanelDiagram().getObjects().get(element.getId()));
+            getPanel().getDiagram().updateY(element.getY());
+            getPanel().updateGraph();
+            getPanel().getGraph().setSelectionCell(getPanel().getObjects().get(element.getId()));
         }
     }
     
     @Override
-    protected PanelSequenceDiagram getPanelDiagram() {
-        return (PanelSequenceDiagram) this.panel;
+    public PanelSequenceDiagram getPanel() {
+        return (PanelSequenceDiagram) panel;
     }
 }

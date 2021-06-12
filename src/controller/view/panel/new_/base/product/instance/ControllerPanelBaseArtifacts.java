@@ -26,18 +26,18 @@ public class ControllerPanelBaseArtifacts extends ControllerPanelBase {
     @Override
     public void actionPerformed(ActionEvent event) {
         super.actionPerformed(event);
-        if (this.getPanel().getProductComboBox().equals(event.getSource()))
-            this.getInstance().setProduct((Product) this.getPanel().getProductComboBox().getSelectedItem());
+        if (getPanel().getProductComboBox().equals(event.getSource()))
+            getInstance().setProduct((Product) getPanel().getProductComboBox().getSelectedItem());
     }
     
     @Override
     protected void return_() {
-        this.getPanel().getPanelNew().removePanelBaseArtifacts();
+        getPanel().getPanelNew().removePanelBaseArtifacts();
     }
     
     @Override
     protected boolean check() {
-        return this.check(this.getPanel().getNameTextField(), "Name is required!");
+        return check(getPanel().getNameTextField(), "Name is required!");
     }
     
     @Override
@@ -45,16 +45,16 @@ public class ControllerPanelBaseArtifacts extends ControllerPanelBase {
     
     @Override
     protected void update() {
-        this.getInstance().setName(this.getString(this.getPanel().getNameTextField()));
+        getInstance().setName(getString(getPanel().getNameTextField()));
     }
     
     @Override
     protected Instance getInstance() {
-        return this.getPanel().getInstance();
+        return getPanel().getInstance();
     }
     
     @Override
     public PanelBaseArtifacts getPanel() {
-        return (PanelBaseArtifacts) this.panel;
+        return (PanelBaseArtifacts) panel;
     }
 }

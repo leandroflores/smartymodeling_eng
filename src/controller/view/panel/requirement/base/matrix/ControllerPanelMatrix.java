@@ -30,13 +30,13 @@ public class ControllerPanelMatrix extends ControllerPanel {
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() instanceof JCheckBox)
-            this.updateValue((JCheckBox) event.getSource());
+            updateValue((JCheckBox) event.getSource());
     }
     
     @Override
     public void keyPressed(KeyEvent event) {
         if (event.getSource() instanceof JCheckBox)
-            this.updateValue((JCheckBox) event.getSource());
+            updateValue((JCheckBox) event.getSource());
     }
     
     /**
@@ -44,8 +44,8 @@ public class ControllerPanelMatrix extends ControllerPanel {
      * @param checkBox Check Box Selected.
      */
     private void updateValue(JCheckBox checkBox) {
-        Requirement requirement = this.getRequirement(checkBox.getName());
-        Element     element     = this.getElement(checkBox.getName());
+        Requirement requirement = getRequirement(checkBox.getName());
+        Element     element     = getElement(checkBox.getName());
         if (checkBox.isSelected())
             requirement.addElement(element.getDiagramType(), element);
         else
@@ -58,7 +58,7 @@ public class ControllerPanelMatrix extends ControllerPanel {
      * @return Requirement.
      */
     private Requirement getRequirement(String id) {
-        return this.getProject().getRequirement(id.substring(0, id.indexOf("|")));
+        return getProject().getRequirement(id.substring(0, id.indexOf("|")));
     }
     
     /**
@@ -67,7 +67,7 @@ public class ControllerPanelMatrix extends ControllerPanel {
      * @return Element.
      */
     private Element getElement(String id) {
-        return this.getProject().getElement(id.substring(id.indexOf("|") + 1));
+        return getProject().getElement(id.substring(id.indexOf("|") + 1));
     }
     
     /**
@@ -75,11 +75,11 @@ public class ControllerPanelMatrix extends ControllerPanel {
      * @return Project.
      */
     public Project getProject() {
-        return this.getPanel().getProject();
+        return getPanel().getProject();
     }
     
     @Override
     public PanelMatrix getPanel() {
-        return (PanelMatrix) this.panel;
+        return (PanelMatrix) panel;
     }
 }

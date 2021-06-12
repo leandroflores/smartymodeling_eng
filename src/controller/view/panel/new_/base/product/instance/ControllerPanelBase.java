@@ -14,7 +14,7 @@ import view.panel.new_.base.product.instance.PanelBase;
  * <p>Class responsible for controlling the <b>Instance Panel Base</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-16
- * @see    controller.view.panel.new_.base.product.instance.ControllerPanelBase
+ * @see    controller.view.panel.base.ControllerPanelBase
  * @see    view.panel.new_.base.product.instance.PanelBase
  */
 public abstract class ControllerPanelBase extends controller.view.panel.base.ControllerPanelBase {
@@ -29,10 +29,10 @@ public abstract class ControllerPanelBase extends controller.view.panel.base.Con
     
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.getPanel().getReturnButton().equals(event.getSource()))
-            this.return_();
-        else if (this.getPanel().getNextButton().equals(event.getSource()))
-            this.advance();
+        if (getPanel().getReturnButton().equals(event.getSource()))
+            return_();
+        else if (getPanel().getNextButton().equals(event.getSource()))
+            advance();
     }
     
     @Override
@@ -40,7 +40,7 @@ public abstract class ControllerPanelBase extends controller.view.panel.base.Con
     
     @Override
     public void keyReleased(KeyEvent event) {
-        this.update();
+        update();
     }
     
     /**
@@ -56,8 +56,8 @@ public abstract class ControllerPanelBase extends controller.view.panel.base.Con
      */
     protected boolean check(JTextComponent textComponent, String message) {
         String text = textComponent.getText().trim();
-        if (this.check(text) == false) {
-            new ViewError(this.getViewNew(), message).setVisible(true);
+        if (!check(text)) {
+            new ViewError(getViewNew(), message).setVisible(true);
             textComponent.requestFocus();
             return false;
         }
@@ -73,7 +73,7 @@ public abstract class ControllerPanelBase extends controller.view.panel.base.Con
     protected boolean check(JComboBox comboBox, String message) {
         Object selected = comboBox.getSelectedItem();
         if (selected == null) {
-            new ViewError(this.getViewNew(), message).setVisible(true);
+            new ViewError(getViewNew(), message).setVisible(true);
             comboBox.requestFocus();
             return false;
         }
@@ -95,8 +95,8 @@ public abstract class ControllerPanelBase extends controller.view.panel.base.Con
      * Method responsible for Advancing the Panel Base Instance.
      */
     protected void advance() {
-        if (this.check())
-            this.next();
+        if (check())
+            next();
     }
     
     /**
@@ -104,7 +104,7 @@ public abstract class ControllerPanelBase extends controller.view.panel.base.Con
      * @return Instance.
      */
     protected Instance getInstance() {
-        return this.getViewNew().getInstance();
+        return getViewNew().getInstance();
     }
     
     /**
@@ -112,11 +112,11 @@ public abstract class ControllerPanelBase extends controller.view.panel.base.Con
      * @return View New Instance.
      */
     protected ViewNewInstance getViewNew() {
-        return this.getPanel().getViewNew();
+        return getPanel().getViewNew();
     }
     
     @Override
     public PanelBase getPanel() {
-        return (PanelBase) this.panel;
+        return (PanelBase) panel;
     }
 }

@@ -18,7 +18,6 @@ import view.modal.system.ViewSystemInformation;
  * @see    view.panel.main.PanelMain
  */
 public class ControllerPanelMain extends ControllerPanel {
-    private final PanelMain panelMain;
 
     /**
      * Default constructor method of Class.
@@ -26,25 +25,24 @@ public class ControllerPanelMain extends ControllerPanel {
      */
     public ControllerPanelMain(PanelMain panel) {
         super(panel);
-        this.panelMain = panel;
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.panelMain.getNewProjectButton().equals(event.getSource()))
-            this.panelMain.getViewMenu().getController().showNewProject();
-        else if (this.panelMain.getOpenProjectButton().equals(event.getSource()))
-            this.panelMain.getViewMenu().getController().showOpenProject();
-        else if (this.panelMain.getSaveProjectButton().equals(event.getSource()))
-            this.panelMain.getViewMenu().getController().saveProject();
-        else if (this.panelMain.getCloseProjectButton().equals(event.getSource()))
-            this.panelMain.getViewMenu().getController().showCloseProject();
-        else if (this.panelMain.getExportImageButton().equals(event.getSource()))
+        if (getPanel().getNewProjectButton().equals(event.getSource()))
+            getPanel().getViewMenu().getController().showNewProject();
+        else if (getPanel().getOpenProjectButton().equals(event.getSource()))
+            getPanel().getViewMenu().getController().showOpenProject();
+        else if (getPanel().getSaveProjectButton().equals(event.getSource()))
+            getPanel().getViewMenu().getController().saveProject();
+        else if (getPanel().getCloseProjectButton().equals(event.getSource()))
+            getPanel().getViewMenu().getController().showCloseProject();
+        else if (getPanel().getExportImageButton().equals(event.getSource()))
             this.exportImage();
-        else if (this.panelMain.getExportPdfButton().equals(event.getSource()))
+        else if (getPanel().getExportPdfButton().equals(event.getSource()))
             this.exportPdf();
-        else if (this.panelMain.getVersionButton().equals(event.getSource()))
-            new ViewSystemInformation(this.panelMain.getViewMenu()).setVisible(true);
+        else if (getPanel().getVersionButton().equals(event.getSource()))
+            new ViewSystemInformation(getPanel().getViewMenu()).setVisible(true);
         else
             this.actionZoom(event);
     }
@@ -54,13 +52,13 @@ public class ControllerPanelMain extends ControllerPanel {
      * @param event Action Event.
      */
     private void actionZoom(ActionEvent event) {
-        if (this.panelMain.getViewMenu().getPanelModeling().getSelectedPanel() != null) {
-            if (this.panelMain.getOriginalZoomButton().equals(event.getSource()))
-                this.panelMain.getViewMenu().setOriginalZoom();
-            else if (this.panelMain.getZoomInButton().equals(event.getSource()))
-                this.panelMain.getViewMenu().zoomIn();
-            else if (this.panelMain.getZoomOutButton().equals(event.getSource()))
-                this.panelMain.getViewMenu().zoomOut();
+        if (getPanel().getViewMenu().getPanelModeling().getSelectedPanel() != null) {
+            if (getPanel().getOriginalZoomButton().equals(event.getSource()))
+                getPanel().getViewMenu().setOriginalZoom();
+            else if (getPanel().getZoomInButton().equals(event.getSource()))
+                getPanel().getViewMenu().zoomIn();
+            else if (getPanel().getZoomOutButton().equals(event.getSource()))
+                getPanel().getViewMenu().zoomOut();
         }
     }
     
@@ -69,9 +67,9 @@ public class ControllerPanelMain extends ControllerPanel {
      */
     public void exportImage() {
         try {
-            this.panelMain.getViewMenu().getController().exportImage();
+            getPanel().getViewMenu().getController().exportImage();
         } catch (DocumentException | MalformedURLException exception) {
-            new ViewError(this.panelMain.getViewMenu(), "Error to Export Image!").setVisible(true);
+            new ViewError(getPanel().getViewMenu(), "Error to Export Image!").setVisible(true);
         }
     }
     
@@ -80,12 +78,17 @@ public class ControllerPanelMain extends ControllerPanel {
      */
     public void exportPdf() {
         try {
-            this.panelMain.getViewMenu().getController().exportPdfImage();
+            getPanel().getViewMenu().getController().exportPdfImage();
         } catch (DocumentException exception) {
-            new ViewError(this.panelMain.getViewMenu(), "Error to Export Pdf!").setVisible(true);
+            new ViewError(getPanel().getViewMenu(), "Error to Export Pdf!").setVisible(true);
         }
     }
 
     @Override
     public void keyPressed(KeyEvent event) {}
+    
+    @Override
+    public PanelMain getPanel() {
+        return (PanelMain) panel;
+    }
 }

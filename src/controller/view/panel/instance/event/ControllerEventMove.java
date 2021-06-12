@@ -12,9 +12,11 @@ import view.panel.instance.PanelInstance;
 
 /**
  * <p>Class of Controller <b>ControllerEventMove</b>.</p>
- * <p>Class responsible for defining the <b>Controller</b> for <b>Moving Instance Panel</b> of SMartyModeling.</p>
+ * <p>Class responsible for defining the <b>Move Events</b> in <b>Instance Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  07/10/2019
+ * @since  2019-10-07
+ * @see    com.mxgraph.util.mxEventSource
+ * @see    com.mxgraph.util.mxEventSource.mxIEventListener
  * @see    view.panel.instance.PanelInstance
  */
 public class ControllerEventMove extends mxEventSource implements mxIEventListener {
@@ -30,14 +32,14 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
     
     @Override
     public void invoke(Object object, mxEventObject event) {
-        Object cell = this.panel.getGraph().getSelectionCell();
-        String id   = this.panel.getIdentifiers().get(cell);
-        if (this.panel.getInstance().getArtifact(id) != null)
-            this.move(this.panel.getInstance().getArtifact(id), event);
-        else if (this.panel.getInstance().getRelationship(id) != null)
-            this.move(this.panel.getInstance().getRelationship(id));
+        Object cell = getPanel().getGraph().getSelectionCell();
+        String id   = getPanel().getIdentifiers().get(cell);
+        if (getPanel().getInstance().getArtifact(id) != null)
+            move(getPanel().getInstance().getArtifact(id), event);
+        else if (getPanel().getInstance().getRelationship(id) != null)
+            move(getPanel().getInstance().getRelationship(id));
         else if (id != null)
-            this.move(id, event);
+            move(id, event);
     }
     
     /**
@@ -48,9 +50,9 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
     private void move(Artifact artifact, mxEventObject event) {
         artifact.dx(((Double) event.getProperty("dx")).intValue());
         artifact.dy(((Double) event.getProperty("dy")).intValue());
-        this.panel.getInstance().dx(artifact.getElement(), ((Double) event.getProperty("dx")).intValue());
-        this.panel.getInstance().dy(artifact.getElement(), ((Double) event.getProperty("dy")).intValue());
-        this.panel.getViewMenu().setSave(false);
+        getPanel().getInstance().dx(artifact.getElement(), ((Double) event.getProperty("dx")).intValue());
+        getPanel().getInstance().dy(artifact.getElement(), ((Double) event.getProperty("dy")).intValue());
+        getPanel().getViewMenu().setSave(false);
     }
     
     /**
@@ -58,9 +60,9 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      * @param relationship Relationship.
      */
     private void move(Relationship relationship) {
-        mxGeometry geometry = ((mxGraphModel) (this.panel.getGraph().getModel())).getGeometry(this.panel.getObjects().get(relationship.getId()));
+        mxGeometry geometry = ((mxGraphModel) (getPanel().getGraph().getModel())).getGeometry(getPanel().getObjects().get(relationship.getId()));
                    relationship.setPoints(geometry.getPoints());
-        this.panel.getViewMenu().setSave(false);
+        getPanel().getViewMenu().setSave(false);
     }
     
     /**
@@ -69,12 +71,12 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
      * @param event Graph Event.
      */
     private void move(String id, mxEventObject event) {
-        Relationship relationship = this.panel.getInstance().getRelationship(id.substring(0, id.indexOf("(")));
+        Relationship relationship = getPanel().getInstance().getRelationship(id.substring(0, id.indexOf("(")));
         if ((relationship != null) && (relationship.getAssociation() instanceof AssociationUML)) {
             if (id.endsWith("(source)"))
-                this.moveSourceCardinality(relationship, event);
+                moveSourceCardinality(relationship, event);
             else if (id.endsWith("(target)"))
-                this.moveTargetCardinality(relationship, event);
+                moveTargetCardinality(relationship, event);
         }
     }
     
@@ -86,7 +88,7 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
     private void moveSourceCardinality(Relationship relationship, mxEventObject event) {
         relationship.dxSource(((Double) event.getProperty("dx")).intValue());
         relationship.dySource(((Double) event.getProperty("dy")).intValue());
-        this.panel.getViewMenu().setSave(false);
+        getPanel().getViewMenu().setSave(false);
     }
     
     /**
@@ -97,6 +99,14 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
     private void moveTargetCardinality(Relationship relationship, mxEventObject event) {
         relationship.dxTarget(((Double) event.getProperty("dx")).intValue());
         relationship.dyTarget(((Double) event.getProperty("dy")).intValue());
-        this.panel.getViewMenu().setSave(false);
+        getPanel().getViewMenu().setSave(false);
+    }
+    
+    /**
+     * Method responsible for returning the Panel Instance.
+     * @return Panel Instance.
+     */
+    public PanelInstance getPanel() {
+        return panel;
     }
 }

@@ -25,12 +25,12 @@ public class ControllerPanelExportDiagram extends ControllerPanelExport {
     
     @Override
     protected void update() {
-        if (this.getPanel().getContextComboBox().getSelectedItem() != null)
-            this.getPanel().setDiagram((Diagram) this.getPanel().getContextComboBox().getSelectedItem());
+        if (getPanel().getContextComboBox().getSelectedItem() != null)
+            getPanel().setDiagram((Diagram) getPanel().getContextComboBox().getSelectedItem());
     }
     
     @Override
     public PanelExportDiagram getPanel() {
-        return (PanelExportDiagram) this.panel;
+        return (PanelExportDiagram) panel;
     }
 }

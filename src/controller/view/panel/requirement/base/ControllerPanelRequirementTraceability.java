@@ -25,18 +25,18 @@ public class ControllerPanelRequirementTraceability extends ControllerPanel {
     
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.getPanel().getRequirementComboBox().equals(event.getSource())) {
-            this.getPanel().updateElementsList();
-        }else if (this.getPanel().getTypeComboBox().equals(event.getSource())) {
-            this.getPanel().updateDiagramComboBox();
-            this.getPanel().updateElementsList();
-        }else if (this.getPanel().getDiagramComboBox().equals(event.getSource())) {
-            this.getPanel().updateElementComboBox();
-            this.getPanel().updateElementsList();
-        }else if (this.getPanel().getAddElementButton().equals(event.getSource())) {
-            this.getPanel().addElement();
-        }else if (this.getPanel().getDelElementButton().equals(event.getSource())) {
-            this.getPanel().delElement();
+        if (getPanel().getRequirementComboBox().equals(event.getSource())) {
+            getPanel().updateElementsList();
+        }else if (getPanel().getTypeComboBox().equals(event.getSource())) {
+            getPanel().updateDiagramComboBox();
+            getPanel().updateElementsList();
+        }else if (getPanel().getDiagramComboBox().equals(event.getSource())) {
+            getPanel().updateElementComboBox();
+            getPanel().updateElementsList();
+        }else if (getPanel().getAddElementButton().equals(event.getSource())) {
+            getPanel().addElement();
+        }else if (getPanel().getDelElementButton().equals(event.getSource())) {
+            getPanel().delElement();
         }
     }
     
@@ -45,6 +45,6 @@ public class ControllerPanelRequirementTraceability extends ControllerPanel {
     
     @Override
     public PanelRequirementTraceability getPanel() {
-        return (PanelRequirementTraceability) this.panel;
+        return (PanelRequirementTraceability) panel;
     }
 }
