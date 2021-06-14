@@ -41,7 +41,7 @@ public final class PanelBaseOperation extends PanelBase {
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Target*: "));
-        this.add(this.createComboBox("targetComboBox", ControllerMetric.TARGETS, 15, this.getSelectedItem()));
+        this.add(this.createComboBox("targetComboBox", new ControllerMetric(project).getTargets(), 15, this.getSelectedItem()));
         
         this.add(this.createLabel("Operation*: "));
         this.add(this.createTextField("operationTextField", "", 15));

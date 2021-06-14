@@ -31,13 +31,13 @@ public class ImportClassDiagram extends ImportDiagram {
     
     /**
      * Default constructor method of Class.
-     * @param project_ Project.
-     * @param element_ W3C Element.
+     * @param project Project.
+     * @param element W3C Element.
      */
-    public ImportClassDiagram(Project project_, Element element_) {
-        project = project_;
-        diagram = new ClassDiagram(project_, element_);
-        element = element_;
+    public ImportClassDiagram(Project project, Element element) {
+        this.project = project;
+        this.diagram = new ClassDiagram(project, element);
+        this.element = element;
     }
     
     @Override

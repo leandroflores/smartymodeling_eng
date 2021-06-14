@@ -12,6 +12,7 @@ import view.panel.base.diagram.classes.base.PanelBaseMethodUML;
  * @author Leandro
  * @since  2019-06-17
  * @see    controller.view.panel.base.ControllerPanelBaseElement
+ * @see    model.structural.diagram.classes.base.MethodUML
  * @see    view.panel.base.diagram.classes.base.PanelBaseMethodUML
  */
 public class ControllerPanelBaseMethodUML extends ControllerPanelBaseElement {

@@ -29,23 +29,23 @@ public class EvaluationElement extends Evaluation {
     /**
      * Default constructor method of Class.
      * @param project Project.
-     * @param type_ Element Type.
+     * @param type Element Type.
      */
-    public EvaluationElement(Project project, String type_) {
+    public EvaluationElement(Project project, String type) {
         super(project);
-        diagram = null;
-        type    = type_;
+        this.diagram = null;
+        this.type    = type;
     }
     
     /**
      * Alternative constructor method of Class.
-     * @param diagram_ Diagram.
-     * @param type_ Element Type.
+     * @param diagram Diagram.
+     * @param type Element Type.
      */
-    public EvaluationElement(Diagram diagram_, String type_) {
-        super(diagram_.getProject());
-        diagram = diagram_;
-        type    = type_;
+    public EvaluationElement(Diagram diagram, String type) {
+        super(diagram.getProject());
+        this.diagram = diagram;
+        this.type    = type;
     }
     
     @Override

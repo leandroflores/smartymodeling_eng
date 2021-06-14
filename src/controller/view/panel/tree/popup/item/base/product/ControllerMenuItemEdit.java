@@ -33,10 +33,10 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Product)
-            new ViewEditProduct(this.getPanelModeling(), (Product) object).setVisible(true);
+            new ViewEditProduct(getPanelModeling(), (Product) object).setVisible(true);
         else if (object instanceof Instance)
-            new ViewEditInstance(this.getPanelModeling(), (Instance) object).setVisible(true);
+            new ViewEditInstance(getPanelModeling(), (Instance) object).setVisible(true);
         else if (object instanceof Artifact)
-            new ViewEditArtifact(this.getPanelModeling(), (Artifact) object).setVisible(true);
+            new ViewEditArtifact(getPanelModeling(), (Artifact) object).setVisible(true);
     }
 }

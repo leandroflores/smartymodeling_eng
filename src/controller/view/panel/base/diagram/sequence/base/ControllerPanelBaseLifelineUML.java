@@ -11,6 +11,7 @@ import view.panel.base.diagram.sequence.base.PanelBaseLifelineUML;
  * @author Leandro
  * @since  2019-10-03
  * @see    controller.view.panel.base.ControllerPanelBaseElement
+ * @see    @see    model.structural.diagram.sequence.base.LifelineUML
  * @see    view.panel.base.diagram.sequence.base.PanelBaseLifelineUML
  */
 public class ControllerPanelBaseLifelineUML extends ControllerPanelBaseElement {

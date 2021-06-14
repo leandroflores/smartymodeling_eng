@@ -20,11 +20,11 @@ public class EvaluationProduct extends EvaluationBase {
     /**
      * Default constructor method of Class.
      * @param project Project.
-     * @param product_ Product.
+     * @param product Product.
      */
-    public EvaluationProduct(Project project, Product product_) {
+    public EvaluationProduct(Project project, Product product) {
         super(project);
-        product = product_;
+        this.product = product;
     }
 
     @Override

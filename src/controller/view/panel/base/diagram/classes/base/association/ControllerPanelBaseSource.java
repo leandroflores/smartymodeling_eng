@@ -10,6 +10,7 @@ import view.panel.base.diagram.classes.base.association.PanelBaseSource;
  * @author Leandro
  * @since  2019-11-16
  * @see    controller.view.panel.base.ControllerPanelBaseAssociation
+ * @see    model.structural.diagram.classes.base.association.AssociationUML
  * @see    view.panel.base.diagram.classes.base.association.PanelBaseSource
  */
 public class ControllerPanelBaseSource extends ControllerPanelBaseAssociation {

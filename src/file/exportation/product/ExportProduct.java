@@ -18,12 +18,12 @@ public class ExportProduct {
     
     /**
      * Default constructor method of Class.
-     * @param path_ Path to Export Product.
-     * @param product_ Product.
+     * @param path Path to Export Product.
+     * @param product Product.
      */
-    public ExportProduct(String path_, Product product_) {
-        path    = path_;
-        product = product_;
+    public ExportProduct(String path, Product product) {
+        this.path    = path;
+        this.product = product;
     }
     
     /**

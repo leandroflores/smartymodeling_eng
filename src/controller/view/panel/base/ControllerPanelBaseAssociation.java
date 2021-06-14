@@ -10,6 +10,7 @@ import view.panel.base.PanelBaseAssociation;
  * @author Leandro
  * @since  2019-11-07
  * @see    controller.view.panel.base.ControllerPanelBase
+ * @see    model.structural.base.association.Association
  * @see    view.panel.base.PanelBaseAssociation
  */
 public abstract class ControllerPanelBaseAssociation extends ControllerPanelBase {

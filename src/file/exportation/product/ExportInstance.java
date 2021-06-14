@@ -27,12 +27,12 @@ public class ExportInstance {
     
     /**
      * Default constructor method of Class.
-     * @param path_ Path to Export.
-     * @param instance_ Product Instance.
+     * @param path Path to Export.
+     * @param instance Product Instance.
      */
-    public ExportInstance(String path_, Instance instance_) {
-        path     = path_;
-        instance = instance_;
+    public ExportInstance(String path, Instance instance) {
+        this.path     = path;
+        this.instance = instance;
     }
     
     /**

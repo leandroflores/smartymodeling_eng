@@ -32,9 +32,9 @@ public class ControllerMenuItemDelete extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Variability)
-            new ViewDeleteVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
+            new ViewDeleteVariability(getPanelModeling(), getDiagram(node), (Variability) object).setVisible(true);
         else if (object instanceof Element)
-            this.delete((Element) object, node);
+            delete((Element) object, node);
     }
     
     /**
@@ -43,9 +43,9 @@ public class ControllerMenuItemDelete extends ControllerMenuItem {
      * @param node Tree Node.
      */
     private void delete(Element element, DefaultMutableTreeNode node) {
-        Diagram diagram = this.getDiagram(node);
-        if (this.getVariability(node) != null)
-            this.delete(diagram, this.getVariability(node), element);
+        Diagram diagram = getDiagram(node);
+        if (getVariability(node) != null)
+            delete(diagram, getVariability(node), element);
     }
     
     /**
@@ -56,11 +56,11 @@ public class ControllerMenuItemDelete extends ControllerMenuItem {
      */
     private void delete(Diagram diagram, Variability variability, Element element) {
         if (variability.getVariationPoint().equals(element))
-            new ViewError(this.getViewMenu(), "Set a New Variation Point!").setVisible(true);
+            new ViewError(getViewMenu(), "Set a New Variation Point!").setVisible(true);
         else
             variability.removeVariant(element);
         diagram.updateElementsStereotype();
-        this.getPopup().getPanel().updateTree();
+        getPopup().getPanel().updateTree();
     }
     
     /**

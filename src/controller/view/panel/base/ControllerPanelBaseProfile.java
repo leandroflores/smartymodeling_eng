@@ -8,6 +8,7 @@ import view.panel.base.PanelBaseProfile;
  * @author Leandro
  * @since  2019-07-21
  * @see    controller.view.panel.base.ControllerPanelBase
+ * @see    model.structural.base.Profile
  * @see    view.panel.base.PanelBaseProfile
  */
 public class ControllerPanelBaseProfile extends ControllerPanelBase {

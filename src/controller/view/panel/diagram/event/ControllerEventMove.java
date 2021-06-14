@@ -23,10 +23,10 @@ public class ControllerEventMove extends mxEventSource implements mxIEventListen
 
     /**
      * Default constructor method of Class.
-     * @param panel_ Panel Diagram.
+     * @param panel Panel Diagram.
      */
-    public ControllerEventMove(PanelDiagram panel_) {
-        panel = panel_;
+    public ControllerEventMove(PanelDiagram panel) {
+        this.panel = panel;
     }
     
     @Override

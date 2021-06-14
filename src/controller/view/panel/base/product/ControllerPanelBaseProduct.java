@@ -34,8 +34,8 @@ public class ControllerPanelBaseProduct extends ControllerPanelBase {
      * @return Product checked.
      */
     protected boolean check() {
-        return    check(getPanel().getNameTextField().getText())
-               && check(getPanel().getVersionTextField().getText());
+        return check(getPanel().getNameTextField().getText())
+            && check(getPanel().getVersionTextField().getText());
     }
     
     /**

@@ -38,13 +38,13 @@ public class ControllerPanelMain extends ControllerPanel {
         else if (getPanel().getCloseProjectButton().equals(event.getSource()))
             getPanel().getViewMenu().getController().showCloseProject();
         else if (getPanel().getExportImageButton().equals(event.getSource()))
-            this.exportImage();
+            exportImage();
         else if (getPanel().getExportPdfButton().equals(event.getSource()))
-            this.exportPdf();
+            exportPdf();
         else if (getPanel().getVersionButton().equals(event.getSource()))
             new ViewSystemInformation(getPanel().getViewMenu()).setVisible(true);
         else
-            this.actionZoom(event);
+            actionZoom(event);
     }
     
     /**

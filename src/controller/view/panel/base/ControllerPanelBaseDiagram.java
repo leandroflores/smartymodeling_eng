@@ -9,6 +9,7 @@ import view.panel.base.PanelBaseDiagram;
  * @author Leandro
  * @since  2019-06-12
  * @see    controller.view.panel.base.ControllerPanelBase
+ * @see    model.structural.base.Diagram
  * @see    view.panel.base.PanelBaseDiagram
  */
 public class ControllerPanelBaseDiagram extends ControllerPanelBase {

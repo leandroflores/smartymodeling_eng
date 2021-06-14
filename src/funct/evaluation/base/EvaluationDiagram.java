@@ -20,11 +20,11 @@ public class EvaluationDiagram extends EvaluationBase {
     
     /**
      * Default constructor method of Class.
-     * @param diagram_ Diagram.
+     * @param diagram Diagram.
      */
-    public EvaluationDiagram(Diagram diagram_) {
-        super(diagram_.getProject());
-        diagram = diagram_;
+    public EvaluationDiagram(Diagram diagram) {
+        super(diagram.getProject());
+        this.diagram = diagram;
     }
 
     @Override

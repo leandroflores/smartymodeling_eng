@@ -12,6 +12,7 @@ import view.panel.base.diagram.sequence.base.association.PanelBaseMessageUML;
  * @author Leandro
  * @since  2019-10-04
  * @see    controller.view.panel.base.ControllerPanelBaseAssociation
+ * @see    model.structural.diagram.sequence.base.association.MessageUML
  * @see    view.panel.base.diagram.sequence.base.association.PanelBaseMessageUML
  */
 public class ControllerPanelBaseMessageUML extends ControllerPanelBaseAssociation {

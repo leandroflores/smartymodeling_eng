@@ -25,14 +25,14 @@ public class ExportPdfImage {
     
     /**
      * Default constructor method of Class.
-     * @param image_ PDF Image.
-     * @param path_ Path to export.
+     * @param image PDF Image.
+     * @param path Path to export.
      * @throws com.itextpdf.text.BadElementException
      * @throws java.io.IOException
      */
-    public ExportPdfImage(BufferedImage image_, String path_) throws BadElementException, IOException {
-        image = Image.getInstance(image_, null);
-        path  = path_.replace(".png", ".pdf");
+    public ExportPdfImage(BufferedImage image, String path) throws BadElementException, IOException {
+        this.image = Image.getInstance(image, null);
+        this.path  = path.replace(".png", ".pdf");
     }
     
     /**

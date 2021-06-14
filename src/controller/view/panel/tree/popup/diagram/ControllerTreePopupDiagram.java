@@ -58,53 +58,53 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
     @Override
     protected void showPopup(DefaultMutableTreeNode node, MouseEvent event) {
         if (node.getUserObject() instanceof Project)
-            this.setProjectPopup();
+            setProjectPopup();
         else if (node.getUserObject() instanceof Diagram)
-            this.setDiagramPopup();
+            setDiagramPopup();
         else if (node.getUserObject() instanceof Variability)
-            this.setVariabilityPopup();
+            setVariabilityPopup();
         else if (node.getUserObject() instanceof Entity)
-            this.setEntityPopup();
+            setEntityPopup();
         else if (node.getUserObject() instanceof Element)
-            super.setPopupFlag(false, true, true);
-        this.getPopup().show(event.getComponent(), event.getX(), event.getY());
+            setPopupFlag(false, true, true);
+        getPopup().show(event.getComponent(), event.getX(), event.getY());
     }
 
     /**
      * Method responsible for setting the Project Popup.
      */
     private void setProjectPopup() {
-        super.setPopupFlag(true, true, false);
-        this.setNewDiagram(true);
-        this.setNewVariability(false);
-        this.setNewElement(false);
+        setPopupFlag(true, true, false);
+        setNewDiagram(true);
+        setNewVariability(false);
+        setNewElement(false);
     }
     
     /**
      * Method responsible for setting the Diagram Popup.
      */
     private void setDiagramPopup() {
-        super.setPopupFlag(true, true, true);
-        this.setNewDiagram(false);
-        this.setNewVariability(true);
-        this.setNewElement(false);
+        setPopupFlag(true, true, true);
+        setNewDiagram(false);
+        setNewVariability(true);
+        setNewElement(false);
     }
     
     /**
      * Method responsible for setting the Variability Popup.
      */
     private void setVariabilityPopup() {
-        super.setPopupFlag(false, true, true);
+        setPopupFlag(false, true, true);
     }
     
     /**
      * Method responsible for setting the Entity Popup.
      */
     private void setEntityPopup() {
-        super.setPopupFlag(true, true, true);
-        this.setNewDiagram(false);
-        this.setNewVariability(false);
-        this.setNewElement(true);
+        setPopupFlag(true, true, true);
+        setNewDiagram(false);
+        setNewVariability(false);
+        setNewElement(true);
     }
     
     /**
@@ -112,11 +112,11 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
      * @param flag New Diagram Flag.
      */
     private void setNewDiagram(boolean flag) {
-        this.getPopup().getUseCaseDiagramMenuItem().setVisible(flag);
-        this.getPopup().getClassDiagramMenuItem().setVisible(flag);
-        this.getPopup().getComponentDiagramMenuItem().setVisible(flag);
-        this.getPopup().getSequenceDiagramMenuItem().setVisible(flag);
-        this.getPopup().getActivityDiagramMenuItem().setVisible(flag);
+        getPopup().getUseCaseDiagramMenuItem().setVisible(flag);
+        getPopup().getClassDiagramMenuItem().setVisible(flag);
+        getPopup().getComponentDiagramMenuItem().setVisible(flag);
+        getPopup().getSequenceDiagramMenuItem().setVisible(flag);
+        getPopup().getActivityDiagramMenuItem().setVisible(flag);
     }
     
     /**
@@ -124,7 +124,7 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
      * @param flag New Variability Flag.
      */
     private void setNewVariability(boolean flag) {
-        this.getPopup().getVariabilityMenuItem().setVisible(flag);
+        getPopup().getVariabilityMenuItem().setVisible(flag);
     }
     
     /**
@@ -132,23 +132,23 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
      * @param flag New Element Flag.
      */
     private void setNewElement(boolean flag) {
-        this.getPopup().getAttributeMenuItem().setVisible(flag);
-        this.getPopup().getMethodMenuItem().setVisible(flag);
+        getPopup().getAttributeMenuItem().setVisible(flag);
+        getPopup().getMethodMenuItem().setVisible(flag);
     }
     
     @Override
     protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
-        Diagram diagram = this.getDiagram(node);
+        Diagram diagram = getDiagram(node);
         if (object instanceof Project)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditProject();
+            getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditProject();
         else if (object instanceof Diagram)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) object);
+            getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditDiagram((Diagram) object);
         else if (object instanceof Variability)
-            this.getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, (Variability) object, 0);
+            getPopup().getPanel().getViewMenu().getPanelProject().initPanelEditVariability(diagram, (Variability) object, 0);
         else if (object instanceof Element)
-            this.showPanelEdit(diagram, (Element) object);
+            showPanelEdit(diagram, (Element) object);
         else if (object instanceof Association)
-            this.showPanelEdit(diagram, (Association) object);
+            showPanelEdit(diagram, (Association) object);
     }
     
     /**
@@ -158,15 +158,15 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
      */
     private void showPanelEdit(Diagram diagram, Element element) {
         if (diagram instanceof ActivityDiagram)
-            this.getPanelProject().initPanelEditElement((ActivityDiagram) diagram, element);
+            getPanelProject().initPanelEditElement((ActivityDiagram) diagram, element);
         else if (diagram instanceof ClassDiagram)
-            this.getPanelProject().initPanelEditElement((ClassDiagram) diagram, element);
+            getPanelProject().initPanelEditElement((ClassDiagram) diagram, element);
         else if (diagram instanceof ComponentDiagram)
-            this.getPanelProject().initPanelEditElement((ComponentDiagram) diagram, element);
+            getPanelProject().initPanelEditElement((ComponentDiagram) diagram, element);
         else if (diagram instanceof UseCaseDiagram)
-            this.getPanelProject().initPanelEditElement((UseCaseDiagram)  diagram, element);
+            getPanelProject().initPanelEditElement((UseCaseDiagram)  diagram, element);
         else if (diagram instanceof SequenceDiagram)
-            this.getPanelProject().initPanelEditElement((SequenceDiagram) diagram, element);
+            getPanelProject().initPanelEditElement((SequenceDiagram) diagram, element);
     }
     
     /**
@@ -176,51 +176,51 @@ public class ControllerTreePopupDiagram extends ControllerTreePopup {
      */
     private void showPanelEdit(Diagram diagram, Association association) {
         if (diagram instanceof ActivityDiagram)
-            this.getPanelProject().initPanelEditAssociation((ActivityDiagram) diagram, association);
+            getPanelProject().initPanelEditAssociation((ActivityDiagram) diagram, association);
         else if (diagram instanceof ClassDiagram)
-            this.getPanelProject().initPanelEditAssociation((ClassDiagram)    diagram, association);
+            getPanelProject().initPanelEditAssociation((ClassDiagram)    diagram, association);
         else if (diagram instanceof SequenceDiagram)
-            this.getPanelProject().initPanelEditAssociation((SequenceDiagram) diagram, association);
+            getPanelProject().initPanelEditAssociation((SequenceDiagram) diagram, association);
     }
     
     @Override
     protected void delete(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Diagram)
-            new ViewDeleteDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
+            new ViewDeleteDiagram(getPanelModeling(), (Diagram) object).setVisible(true);
         else if (object instanceof Element)
-            new ViewDeleteElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
+            new ViewDeleteElement(getPanelModeling(), getDiagram(node), (Element) object).setVisible(true);
         else if (object instanceof Variability)
-            new ViewDeleteVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
+            new ViewDeleteVariability(getPanelModeling(), getDiagram(node), (Variability) object).setVisible(true);
     }
     
     @Override
     protected void edit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Project)
-            new ViewEditProject(this.getPanelModeling(), (Project) object).setVisible(true);
+            new ViewEditProject(getPanelModeling(), (Project) object).setVisible(true);
         else if (object instanceof Diagram)
-            new ViewEditDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
+            new ViewEditDiagram(getPanelModeling(), (Diagram) object).setVisible(true);
         else if (object instanceof Variability)
-            new ViewEditVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
+            new ViewEditVariability(getPanelModeling(), getDiagram(node), (Variability) object).setVisible(true);
         else if (object instanceof PackageUML)
-            new ViewEditPackageUML(this.getPanelModeling(),   (ClassDiagram) this.getDiagram(node), (PackageUML) object).setVisible(true);
+            new ViewEditPackageUML(getPanelModeling(),   (ClassDiagram) getDiagram(node), (PackageUML) object).setVisible(true);
         else if (object instanceof InterfaceUML)
-            new ViewEditInterfaceUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (InterfaceUML) object).setVisible(true);
+            new ViewEditInterfaceUML(getPanelModeling(), (ClassDiagram) getDiagram(node), (InterfaceUML) object).setVisible(true);
         else if (object instanceof ClassUML)
-            new ViewEditClassUML(this.getPanelModeling(),     (ClassDiagram) this.getDiagram(node), (ClassUML) object).setVisible(true);
+            new ViewEditClassUML(getPanelModeling(),     (ClassDiagram) getDiagram(node), (ClassUML) object).setVisible(true);
         else if (object instanceof AttributeUML)
-            new ViewEditAttributeUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (AttributeUML) object).setVisible(true);
+            new ViewEditAttributeUML(getPanelModeling(), (ClassDiagram) getDiagram(node), (AttributeUML) object).setVisible(true);
         else if (object instanceof MethodUML)
-            new ViewEditMethodUML(this.getPanelModeling(),    (ClassDiagram) this.getDiagram(node), (MethodUML) object).setVisible(true);
+            new ViewEditMethodUML(getPanelModeling(),    (ClassDiagram) getDiagram(node), (MethodUML) object).setVisible(true);
         else if (object instanceof LifelineUML)
-            new ViewEditLifelineUML(this.getPanelModeling(),  (SequenceDiagram) this.getDiagram(node), (LifelineUML) object).setVisible(true);
+            new ViewEditLifelineUML(getPanelModeling(),  (SequenceDiagram) getDiagram(node), (LifelineUML) object).setVisible(true);
         else if (object instanceof InstanceUML)
-            new ViewEditInstanceUML(this.getPanelModeling(),  (SequenceDiagram) this.getDiagram(node), (InstanceUML) object).setVisible(true);
+            new ViewEditInstanceUML(getPanelModeling(),  (SequenceDiagram) getDiagram(node), (InstanceUML) object).setVisible(true);
         else if (object instanceof Element)
-            new ViewEditElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
+            new ViewEditElement(getPanelModeling(), getDiagram(node), (Element) object).setVisible(true);
     }
     
     @Override
     protected TreePopupDiagram getPopup() {
-        return (TreePopupDiagram) this.popup;
+        return (TreePopupDiagram) popup;
     }
 }

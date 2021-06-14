@@ -31,22 +31,22 @@ public class ControllerTreePopupRequirement extends ControllerTreePopup {
     @Override
     protected void showPopup(DefaultMutableTreeNode node, MouseEvent event) {
         if (node.getUserObject() instanceof Project)
-            this.setPopupFlag(true, true, false);
+            setPopupFlag(true, true, false);
         else if (node.getUserObject() instanceof Requirement)
-            this.setPopupFlag(true, true, true);
+            setPopupFlag(true, true, true);
         else if (node.getUserObject() instanceof Element)
-            this.setPopupFlag(false, true, true);
-        this.getPopup().show(event.getComponent(), event.getX(), event.getY());
+            setPopupFlag(false, true, true);
+        getPopup().show(event.getComponent(), event.getX(), event.getY());
     }
     
     @Override
     protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Project)
-            this.getPanelProject().initPanelEditProject();
+            getPanelProject().initPanelEditProject();
         else if (object instanceof Requirement)
-            this.getPanelProject().initPanelEditRequirement((Requirement) object, 0);
+            getPanelProject().initPanelEditRequirement((Requirement) object, 0);
         else if (object instanceof Element)
-            this.showPanelEditElement(node, (Element) object);
+            showPanelEditElement(node, (Element) object);
     }
     
     /**
@@ -55,16 +55,16 @@ public class ControllerTreePopupRequirement extends ControllerTreePopup {
      * @param element Element.
      */
     private void showPanelEditElement(DefaultMutableTreeNode node, Element element) {
-        Requirement requirement = this.getRequirement(node);
-        this.getPanelProject().initPanelEditRequirement(requirement, element.getDiagram().getIndex());
+        Requirement requirement = getRequirement(node);
+        getPanelProject().initPanelEditRequirement(requirement, element.getDiagram().getIndex());
     }
     
     @Override
     protected void delete(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Requirement)
-            new ViewDeleteRequirement(this.getPanelModeling(), (Requirement) object).setVisible(true);
+            new ViewDeleteRequirement(getPanelModeling(), (Requirement) object).setVisible(true);
         else if (object instanceof Element)
-            this.delete(this.getRequirement(node), (Element) object);      
+            delete(getRequirement(node), (Element) object);      
     }
     
     /**
@@ -74,16 +74,14 @@ public class ControllerTreePopupRequirement extends ControllerTreePopup {
      */
     private void delete(Requirement requirement, Element element) {
         requirement.removeElement(element);
-        this.getPanelModeling().getViewMenu().updatePanelTree();
-        this.getPanelModeling().getViewMenu().setSave(false);
+        getPanelModeling().getViewMenu().updatePanelTree();
+        getPanelModeling().getViewMenu().setSave(false);
     }
     
     @Override
     protected void edit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Requirement)
-            new ViewEditRequirement(this.getPanelModeling(), (Requirement) object, 0).setVisible(true);
-//        else if (object instanceof Element)
-//            new ViewEditRequirement(this.getPanelModeling(), (Requirement) object, 0).setVisible(true);
+            new ViewEditRequirement(getPanelModeling(), (Requirement) object, 0).setVisible(true);
     }
     
     /**
@@ -100,6 +98,6 @@ public class ControllerTreePopupRequirement extends ControllerTreePopup {
     
     @Override
     protected TreePopupRequirement getPopup() {
-        return (TreePopupRequirement) this.popup;
+        return (TreePopupRequirement) popup;
     }
 }

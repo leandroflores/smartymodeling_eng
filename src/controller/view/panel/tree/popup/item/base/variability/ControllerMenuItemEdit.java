@@ -4,7 +4,6 @@ import controller.view.panel.tree.popup.item.ControllerMenuItem;
 import javax.swing.JMenuItem;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Diagram;
-import model.structural.base.Element;
 import model.structural.base.Project;
 import model.structural.base.variability.Variability;
 import view.modal.edit.base.ViewEditDiagram;
@@ -34,13 +33,10 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Project)
-            new ViewEditProject(this.getPanelModeling(), (Project) object).setVisible(true);
+            new ViewEditProject(getPanelModeling(), (Project) object).setVisible(true);
         else if (object instanceof Diagram)
-            new ViewEditDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
+            new ViewEditDiagram(getPanelModeling(), (Diagram) object).setVisible(true);
         else if (object instanceof Variability)
-            new ViewEditVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
-        else if (object instanceof Element)
-            System.out.println("Edit Variant: " + object);
-//            new ViewEditElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
+            new ViewEditVariability(getPanelModeling(), getDiagram(node), (Variability) object).setVisible(true);
     }
 }

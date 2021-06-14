@@ -8,6 +8,7 @@ import view.panel.base.PanelBaseProject;
  * @author Leandro
  * @since  2019-06-11
  * @see    controller.view.panel.base.ControllerPanelBase
+ * @see    model.structural.base.Project
  * @see    view.panel.base.PanelBaseProject
  */
 public class ControllerPanelBaseProject extends ControllerPanelBase {

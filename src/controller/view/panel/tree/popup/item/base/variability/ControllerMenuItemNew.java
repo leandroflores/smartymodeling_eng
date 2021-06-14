@@ -30,7 +30,7 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Diagram)
-            this.newVariability((Diagram) object);
+            newVariability((Diagram) object);
     }
     
     /**
@@ -39,8 +39,8 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
      */
     private void newVariability(Diagram diagram) {
         if (diagram.getElementsList().isEmpty())
-            new ViewError(this.getViewMenu(), "Diagram with no Elements!").setVisible(true);
+            new ViewError(getViewMenu(), "Diagram with no Elements!").setVisible(true);
         else
-            new ViewNewVariability(this.getViewMenu(), diagram).setVisible(true);
+            new ViewNewVariability(getViewMenu(), diagram).setVisible(true);
     }
 }

@@ -8,6 +8,7 @@ import view.panel.base.PanelBaseStereotype;
  * @author Leandro
  * @since  2020-01-17
  * @see    controller.view.panel.base.ControllerPanelBase
+ * @see    model.structural.base.Stereotype
  * @see    view.panel.base.PanelBaseStereotype
  */
 public class ControllerPanelBaseStereotype extends ControllerPanelBase {

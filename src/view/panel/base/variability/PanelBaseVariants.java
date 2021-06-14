@@ -53,7 +53,7 @@ public final class PanelBaseVariants extends PanelBase {
     @Override
     protected void addComponents() {
         this.add(this.createLabel("Constraint: "), this.createConstraints(1, 1, 0, 0));
-        this.add(this.createComboBox("constraintComboBox", ControllerVariability.TYPES, 100), this.createConstraints(2, 1, 1, 0));
+        this.add(this.createComboBox("constraintComboBox", new ControllerVariability(project).getConstraints(), 100), this.createConstraints(2, 1, 1, 0));
         this.add(this.createTextFieldNoEditable("minimumTextField", "0", 3), this.createConstraints(1, 1, 3, 0));
         this.add(this.createTextFieldNoEditable("maximumTextField", "0", 3), this.createConstraints(1, 1, 4, 0));
         

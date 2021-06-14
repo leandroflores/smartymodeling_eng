@@ -26,17 +26,17 @@ public class EvaluationInstance extends Evaluation {
      */
     public EvaluationInstance(Project project) {
         super(project);
-        product = null;
+        this.product = null;
     }
     
     /**
      * Alternative constructor method of Class.
      * @param project Project.
-     * @param product_ Product.
+     * @param product Product.
      */
-    public EvaluationInstance(Project project, Product product_) {
+    public EvaluationInstance(Project project, Product product) {
         super(project);
-        product = product_;
+        this.product = product;
     }
     
     @Override

@@ -10,6 +10,7 @@ import view.panel.base.diagram.feature.base.PanelBaseFeature;
  * @author Leandro
  * @since  2019-06-17
  * @see    controller.view.panel.base.ControllerPanelBaseElement
+ * @see    model.structural.diagram.feature.base.Feature
  * @see    view.panel.base.diagram.feature.base.PanelBaseFeature
  */
 public class ControllerPanelBaseFeature extends ControllerPanelBaseElement {

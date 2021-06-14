@@ -8,14 +8,15 @@ import model.structural.base.Element;
  * <p>Class responsible for defining the <b>Element Comparator</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-19
+ * @see    java.util.Comparator
  * @see    model.structural.base.Element
  */
 public class ComparatorElement implements Comparator<Element> {
 
     @Override
-    public int compare(Element element1, Element element2) {
-        return element1.getType().equals(element2.getType())  ?
-               element1.getName().compareTo(element2.getName()) :
-               element1.getType().compareTo(element2.getType());
+    public int compare(Element elementA, Element elementB) {
+        return elementA.getType().equals(elementB.getType())  ?
+               elementA.getName().compareTo(elementB.getName()) :
+               elementA.getType().compareTo(elementB.getType());
     }
 }

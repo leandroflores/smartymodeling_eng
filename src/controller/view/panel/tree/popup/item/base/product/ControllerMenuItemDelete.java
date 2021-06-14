@@ -33,10 +33,10 @@ public class ControllerMenuItemDelete extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Product)
-            new ViewDeleteProduct(this.getPanelModeling(),  (Product) object).setVisible(true);
+            new ViewDeleteProduct(getPanelModeling(),  (Product) object).setVisible(true);
         else if (object instanceof Instance)
-            new ViewDeleteInstance(this.getPanelModeling(), (Instance) object).setVisible(true);
+            new ViewDeleteInstance(getPanelModeling(), (Instance) object).setVisible(true);
         else if (object instanceof Artifact)
-            new ViewDeleteArtifact(this.getPanelModeling(), (Artifact) object).setVisible(true);
+            new ViewDeleteArtifact(getPanelModeling(), (Artifact) object).setVisible(true);
     }
 }

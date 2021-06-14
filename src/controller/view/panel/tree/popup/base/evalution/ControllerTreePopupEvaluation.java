@@ -13,8 +13,8 @@ import view.modal.edit.base.evaluation.ViewEditMetric;
 import view.panel.tree.popup.base.evaluation.TreePopupEvaluation;
 
 /**
- * <p>Class of Controller <b>ControllerTreePopupEvalution</b>.</p>
- * <p>Class responsible for controlling the <b>TreePopupEvalution</b> Events of SMartyModeling.</p>
+ * <p>Class of Controller <b>ControllerTreePopupEvaluation</b>.</p>
+ * <p>Class responsible for controlling the <b>TreePopupEvaluation</b> Events of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-21
  * @see    controller.view.panel.tree.popup.ControllerTreePopup
@@ -33,60 +33,60 @@ public class ControllerTreePopupEvaluation extends ControllerTreePopup {
     @Override
     protected void showPopup(DefaultMutableTreeNode node, MouseEvent event) {
         if (node.getUserObject() instanceof Project)
-            this.setProjectPopup();
+            setProjectPopup();
         else if (node.getUserObject() instanceof Metric)
-            this.setMetricPopup();
+            setMetricPopup();
         else if (node.getUserObject() instanceof Measure)
-            super.setPopupFlag(false, true, true);
-        this.getPopup().show(event.getComponent(), event.getX(), event.getY());
+            setPopupFlag(false, true, true);
+        getPopup().show(event.getComponent(), event.getX(), event.getY());
     }
     
     /**
      * Method responsible for setting the Project Popup.
      */
     private void setProjectPopup() {
-        super.setPopupFlag(true, true, false);
-        this.getPopup().getMetricMenuItem().setVisible(true);
-        this.getPopup().getMeasureMenuItem().setVisible(false);
+        setPopupFlag(true, true, false);
+        getPopup().getMetricMenuItem().setVisible(true);
+        getPopup().getMeasureMenuItem().setVisible(false);
     }
     
     /**
      * Method responsible for setting the Metric Popup.
      */
     private void setMetricPopup() {
-        super.setPopupFlag(true, true, true);
-        this.getPopup().getMetricMenuItem().setVisible(false);
-        this.getPopup().getMeasureMenuItem().setVisible(true);
+        setPopupFlag(true, true, true);
+        getPopup().getMetricMenuItem().setVisible(false);
+        getPopup().getMeasureMenuItem().setVisible(true);
     }
 
     @Override
     protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Project)
-            this.getPanelProject().initPanelEditProject();
+            getPanelProject().initPanelEditProject();
         else if (object instanceof Metric)
-            this.getPanelProject().initPanelEditMetric((Metric) object);
+            getPanelProject().initPanelEditMetric((Metric) object);
         else if (object instanceof Measure)
-            this.getPanelProject().initPanelEditMeasure((Measure) object);
+            getPanelProject().initPanelEditMeasure((Measure) object);
     }
     
     @Override
     protected void delete(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Metric)
-            new ViewDeleteMetric(this.getPanelModeling(),  (Metric)  object).setVisible(true);
+            new ViewDeleteMetric(getPanelModeling(),  (Metric)  object).setVisible(true);
         else if (object instanceof Measure)
-            new ViewDeleteMeasure(this.getPanelModeling(), (Measure) object).setVisible(true);        
+            new ViewDeleteMeasure(getPanelModeling(), (Measure) object).setVisible(true);        
     }
     
     @Override
     protected void edit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Metric)
-            new ViewEditMetric(this.getPanelModeling(),  (Metric)  object).setVisible(true);
+            new ViewEditMetric(getPanelModeling(),  (Metric)  object).setVisible(true);
         if (object instanceof Measure)
-            new ViewEditMeasure(this.getPanelModeling(), (Measure) object).setVisible(true);
+            new ViewEditMeasure(getPanelModeling(), (Measure) object).setVisible(true);
     }
     
     @Override
     protected TreePopupEvaluation getPopup() {
-        return (TreePopupEvaluation) this.popup;
+        return (TreePopupEvaluation) popup;
     }
 }

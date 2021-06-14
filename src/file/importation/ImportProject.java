@@ -55,11 +55,11 @@ public class ImportProject {
     
     /**
      * Default constructor method of Class.
-     * @param path_ File Path.
+     * @param path File Path.
      */
-    public ImportProject(String path_) {
-        path  = path_;
-        xPath = XPathFactory.newInstance().newXPath();
+    public ImportProject(String path) {
+        this.path  = path;
+        this.xPath = XPathFactory.newInstance().newXPath();
     }
     
     /**

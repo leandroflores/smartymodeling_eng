@@ -10,6 +10,7 @@ import view.panel.base.diagram.classes.base.PanelBaseDescription;
  * @author Leandro
  * @since  2020-05-11
  * @see    controller.view.panel.base.ControllerPanelBase
+ * @see    model.structural.diagram.classes.Entity
  * @see    view.panel.base.diagram.classes.base.PanelBaseDescription
  */
 public class ControllerPanelBaseDescription extends ControllerPanelBase {

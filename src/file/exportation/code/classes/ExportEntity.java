@@ -20,12 +20,12 @@ public class ExportEntity {
     
     /**
      * Default constructor method of Class.
-     * @param path_ Path to Export.
-     * @param entity_ Entity to Export.
+     * @param path Path to Export.
+     * @param entity Entity to Export.
      */
-    public ExportEntity(String path_, Entity entity_) {
-        path   = path_;
-        entity = entity_;
+    public ExportEntity(String path, Entity entity) {
+        this.path   = path;
+        this.entity = entity;
     }
     
     /**

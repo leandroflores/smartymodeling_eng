@@ -19,11 +19,11 @@ public abstract class Evaluation {
     
     /**
      * Default constructor method of Class.
-     * @param project_ Project.
+     * @param project Project.
      */
-    public Evaluation(Project project_) {
-        project = project_;
-        objects = new ArrayList<>();
+    public Evaluation(Project project) {
+        this.project = project;
+        this.objects = new ArrayList<>();
     }
     
     /**

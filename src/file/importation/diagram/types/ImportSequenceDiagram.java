@@ -24,12 +24,12 @@ public class ImportSequenceDiagram extends ImportDiagram {
     
     /**
      * Default constructor method of Class.
-     * @param project_ Project.
-     * @param element_ W3C Element.
+     * @param project Project.
+     * @param element W3C Element.
      */
-    public ImportSequenceDiagram(Project project_, Element element_) {
-        diagram = new SequenceDiagram(project_, element_);
-        element = element_;
+    public ImportSequenceDiagram(Project project, Element element) {
+        this.diagram = new SequenceDiagram(project, element);
+        this.element = element;
     }
     
     @Override

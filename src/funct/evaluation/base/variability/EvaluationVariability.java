@@ -25,23 +25,23 @@ public class EvaluationVariability extends Evaluation {
     /**
      * Default constructor method of Class.
      * @param project Project.
-     * @param type_ Variabilty Type.
+     * @param type Variabilty Type.
      */
-    public EvaluationVariability(Project project, String type_) {
+    public EvaluationVariability(Project project, String type) {
         super(project);
-        diagram = null;
-        type    = type_;
+        this.diagram = null;
+        this.type    = type;
     }
     
     /**
      * Alternative constructor method of Class.
-     * @param diagram_ Diagram.
-     * @param type_ Variabilty Type.
+     * @param diagram Diagram.
+     * @param type Variabilty Type.
      */
-    public EvaluationVariability(Diagram diagram_, String type_) {
-        super(diagram_.getProject());
-        diagram = diagram_;
-        type    = type_;
+    public EvaluationVariability(Diagram diagram, String type) {
+        super(diagram.getProject());
+        this.diagram = diagram;
+        this.type    = type;
     }
     
     @Override

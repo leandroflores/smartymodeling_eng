@@ -46,19 +46,19 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Project)
-            new ViewEditProject(this.getPanelModeling(), (Project) object).setVisible(true);
+            new ViewEditProject(getPanelModeling(), (Project) object).setVisible(true);
         else if (object instanceof Diagram)
-            new ViewEditDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
+            new ViewEditDiagram(getPanelModeling(), (Diagram) object).setVisible(true);
         else if (object instanceof AttributeUML)
-            new ViewEditAttributeUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (AttributeUML) object).setVisible(true);
+            new ViewEditAttributeUML(getPanelModeling(), (ClassDiagram) getDiagram(node), (AttributeUML) object).setVisible(true);
         else if (object instanceof MethodUML)
-            new ViewEditMethodUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (MethodUML) object).setVisible(true);
+            new ViewEditMethodUML(getPanelModeling(), (ClassDiagram) getDiagram(node), (MethodUML) object).setVisible(true);
         else if (object instanceof PackageUML)
-            new ViewEditPackageUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (PackageUML) object).setVisible(true);
+            new ViewEditPackageUML(getPanelModeling(), (ClassDiagram) getDiagram(node), (PackageUML) object).setVisible(true);
         else if (object instanceof Variability)
-            new ViewEditVariability(this.getPanelModeling(), this.getDiagram(node), (Variability) object).setVisible(true);
+            new ViewEditVariability(getPanelModeling(), getDiagram(node), (Variability) object).setVisible(true);
         else if (object instanceof Element)
-            this.edit((Element) object, node);
+            edit((Element) object, node);
     }
     
     /**
@@ -67,14 +67,12 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
      * @param node Tree Node.
      */
     private void edit(Element element, DefaultMutableTreeNode node) {
-        if (this.getVariability(node) != null)
-            System.out.println("Edit Variant: " + element);
-        else if (element instanceof ClassUML)
-            new ViewEditClassUML(this.getPanelModeling(),     (ClassDiagram) this.getDiagram(node), (ClassUML) element).setVisible(true);
+        if (element instanceof ClassUML)
+            new ViewEditClassUML(getPanelModeling(), (ClassDiagram) getDiagram(node), (ClassUML) element).setVisible(true);
         else if (element instanceof InterfaceUML)
-            new ViewEditInterfaceUML(this.getPanelModeling(), (ClassDiagram) this.getDiagram(node), (InterfaceUML) element).setVisible(true);
+            new ViewEditInterfaceUML(getPanelModeling(), (ClassDiagram) getDiagram(node), (InterfaceUML) element).setVisible(true);
         else
-            new ViewEditElement(this.getPanelModeling(), this.getDiagram(node), element).setVisible(true);
+            new ViewEditElement(getPanelModeling(), getDiagram(node), element).setVisible(true);
     }
     
     /**

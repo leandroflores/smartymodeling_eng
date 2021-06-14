@@ -31,8 +31,8 @@ public class ControllerMenuItemDelete extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Diagram)
-            new ViewDeleteDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
+            new ViewDeleteDiagram(getPanelModeling(), (Diagram) object).setVisible(true);
         else if (object instanceof Element)
-            new ViewDeleteElement(this.getPanelModeling(), this.getDiagram(node), (Element) object).setVisible(true);
+            new ViewDeleteElement(getPanelModeling(), getDiagram(node), (Element) object).setVisible(true);
     }
 }

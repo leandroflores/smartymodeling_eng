@@ -1,7 +1,7 @@
 package model.controller.structural.base;
 
 import java.util.Arrays;
-import java.util.List;
+import model.controller.Controller;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
 
@@ -10,10 +10,10 @@ import model.structural.base.Element;
  * <p>Class responsible for defining the <b>Diagram Controller</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-05-31
+ * @see    model.controller.Controller
  * @see    model.structural.base.Diagram
  */
-public class ControllerDiagram {
-    public static final String[] TYPES = {"Activity", "Class", "Components", "Sequence", "UseCases"};
+public class ControllerDiagram extends Controller {
     private final Diagram diagram;
     
     /**
@@ -21,44 +21,13 @@ public class ControllerDiagram {
      * @param diagram Diagram.
      */
     public ControllerDiagram(Diagram diagram) {
+        super(diagram.getProject());
         this.diagram = diagram;
     }
     
-    /**
-     * Method responsible for returning Elements Array.
-     * @return Elements Array.
-     */
-    public String[] getElements() {
-        List<Element> elements = this.diagram.getElementsList();
-        String[]      array    = new String[elements.size()];
-        for (int i = 0; i < elements.size(); i++)
-                    array[i] = elements.get(i).getAbstract();
-        Arrays.sort(array);
-        return      array;
-    }
-    
-    /**
-     * Method responsible for returning the Default Elements Array.
-     * @return Default Elements Array.
-     */
+    @Override
     public Element[] getDefaultElements() {
-        List      list  = this.diagram.getDefaultElements();
-        Element[] array = new Element[list.size()];
-        for (int i = 0; i < list.size(); i++)
-                  array[i] = (Element) list.get(i);
-        return    array;
-    }
-    
-    /**
-     * Method responsible for returning the Default Elements Array.
-     * @return Default Elements Array.
-     */
-    public Element[] getAllElements() {
-        List<Element> list  = this.diagram.getDefaultElements();
-        Element[]     array = new Element[list.size()];
-        for (int i = 0; i < list.size(); i++)
-                    array[i] = list.get(i);
-        Arrays.sort(array);
-        return      array;
+        Object[] array = diagram.getDefaultElements().toArray();
+        return Arrays.copyOf(array, array.length, Element[].class);
     }
 }

@@ -102,6 +102,6 @@ public class ControllerPanelStereotype extends ControllerPanelBase {
     
     @Override
     public PanelStereotype getPanel() {
-        return (PanelStereotype) this.panel;
+        return (PanelStereotype) panel;
     }
 }

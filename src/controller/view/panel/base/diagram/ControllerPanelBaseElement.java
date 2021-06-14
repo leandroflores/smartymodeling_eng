@@ -8,6 +8,7 @@ import view.panel.base.diagram.PanelBaseElement;
  * @author Leandro
  * @since  2019-06-14
  * @see    controller.view.panel.base.ControllerPanelBaseElement
+ * @see    model.structural.base.Element
  * @see    view.panel.base.diagram.PanelBaseElement
  */
 public class ControllerPanelBaseElement extends controller.view.panel.base.ControllerPanelBaseElement {

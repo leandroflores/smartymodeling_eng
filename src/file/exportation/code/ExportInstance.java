@@ -19,27 +19,27 @@ public class ExportInstance extends ExportCode {
     
     /**
      * Default constructor method of Class.
-     * @param path_ Path to Export.
-     * @param instance_ Instance to Export.
+     * @param path Path to Export.
+     * @param instance Instance to Export.
      */
-    public ExportInstance(String path_, Instance instance_) {
-        super(path_);
-        path     = path_ + "\\" + instance_.getName();
-        folder   = path_ + "\\" + instance_.getName();
-        instance = instance_;
+    public ExportInstance(String path, Instance instance) {
+        super(path);
+        this.path     = path + "\\" + instance.getName();
+        this.folder   = path + "\\" + instance.getName();
+        this.instance = instance;
     }
     
     /**
      * Alternative constructor method of Class.
-     * @param path_ Path to Export.
+     * @param path Path to Export.
      * @param name Folder Name to Export.
-     * @param instance_ Instance to Export.
+     * @param instance Instance to Export.
      */
-    public ExportInstance(String path_, String name, Instance instance_) {
-        super(path_);
-        path     = path_ + "\\" + name;
-        folder   = path_ + "\\" + name;
-        instance = instance_;
+    public ExportInstance(String path, String name, Instance instance) {
+        super(path);
+        this.path     = path + "\\" + name;
+        this.folder   = path + "\\" + name;
+        this.instance = instance;
     }
     
     @Override

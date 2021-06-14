@@ -29,6 +29,6 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Project)
-            new ViewNewRequirement(this.getPanelModeling().getViewMenu()).setVisible(true);
+            new ViewNewRequirement(getPanelModeling().getViewMenu()).setVisible(true);
     }
 }

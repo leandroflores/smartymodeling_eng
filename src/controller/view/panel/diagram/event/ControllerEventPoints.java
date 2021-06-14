@@ -19,10 +19,10 @@ public class ControllerEventPoints extends MouseAdapter {
     
     /**
      * Default constructor method of Class.
-     * @param panel_ Panel Diagram.
+     * @param panel Panel Diagram.
      */
-    public ControllerEventPoints(PanelDiagram panel_) {
-        panel = panel_;
+    public ControllerEventPoints(PanelDiagram panel) {
+        this.panel = panel;
     }
     
     @Override

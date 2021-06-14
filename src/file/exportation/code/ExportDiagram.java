@@ -18,27 +18,27 @@ public class ExportDiagram extends ExportCode {
     
     /**
      * Default constructor method of Class.
-     * @param path_ Path to Export.
-     * @param diagram_ Diagram to Export.
+     * @param path Path to Export.
+     * @param diagram Diagram to Export.
      */
-    public ExportDiagram(String path_, ClassDiagram diagram_) {
-        super(path_);
-        path    = path_ + "\\" + diagram_.getName();
-        folder  = path_ + "\\" + diagram_.getName();
-        diagram = diagram_;
+    public ExportDiagram(String path, ClassDiagram diagram) {
+        super(path);
+        this.path    = path + "\\" + diagram.getName();
+        this.folder  = path + "\\" + diagram.getName();
+        this.diagram = diagram;
     }
     
     /**
      * Alternative constructor method of Class.
-     * @param path_ Path to Export.
+     * @param path Path to Export.
      * @param name Folder Name to Export.
-     * @param diagram_ Diagram to Export.
+     * @param diagram Diagram to Export.
      */
-    public ExportDiagram(String path_, String name, ClassDiagram diagram_) {
-        super(path_);
-        path    = path_ + "\\" + name;
-        folder  = path_ + "\\" + name;
-        diagram = diagram_;
+    public ExportDiagram(String path, String name, ClassDiagram diagram) {
+        super(path);
+        this.path    = path + "\\" + name;
+        this.folder  = path + "\\" + name;
+        this.diagram = diagram;
     }
     
     @Override

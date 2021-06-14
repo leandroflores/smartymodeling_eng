@@ -10,6 +10,7 @@ import view.panel.base.diagram.activity.base.association.PanelBaseFlowUML;
  * @author Leandro
  * @since  2019-11-04
  * @see    controller.view.panel.base.ControllerPanelBaseAssociation
+ * @see    model.structural.diagram.activity.base.association.FlowUML
  * @see    view.panel.base.diagram.activity.base.association.PanelBaseFlowUML
  */
 public class ControllerPanelBaseFlowUML extends ControllerPanelBaseAssociation {

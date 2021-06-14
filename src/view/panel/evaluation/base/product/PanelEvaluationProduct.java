@@ -29,6 +29,6 @@ public final class PanelEvaluationProduct extends PanelEvaluation {
     
     @Override
     protected Object[] getTargets() {
-        return new ControllerProject(this.project).getProducts();
+        return (Object[]) new ControllerProject(this.project).getProducts();
     }
 }

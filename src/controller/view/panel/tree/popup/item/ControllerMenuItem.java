@@ -31,9 +31,9 @@ public abstract class ControllerMenuItem implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (this.getSelectedNode() != null && this.getSelectedNode().getUserObject() != null
+        if (getSelectedNode() != null && getSelectedNode().getUserObject() != null
               && event.getSource() != null && event.getSource() instanceof JMenuItem)
-            this.action(this.getSelectedNode(), (JMenuItem) event.getSource());
+            action(getSelectedNode(), (JMenuItem) event.getSource());
     }
     
     /**
@@ -72,7 +72,7 @@ public abstract class ControllerMenuItem implements ActionListener {
      * @return Selected Node.
      */
     protected DefaultMutableTreeNode getSelectedNode() {
-        return (DefaultMutableTreeNode) this.popup.getPanel().getTree().getLastSelectedPathComponent();
+        return (DefaultMutableTreeNode) popup.getPanel().getTree().getLastSelectedPathComponent();
     }
     
     /**
@@ -80,7 +80,7 @@ public abstract class ControllerMenuItem implements ActionListener {
      * @return Panel Modeling.
      */
     protected PanelModeling getPanelModeling() {
-        return this.getViewMenu().getPanelModeling();
+        return getViewMenu().getPanelModeling();
     }
     
     /**
@@ -88,7 +88,7 @@ public abstract class ControllerMenuItem implements ActionListener {
      * @return View Menu.
      */
     protected ViewMenu getViewMenu() {
-        return this.getPopup().getPanel().getViewMenu();
+        return getPopup().getPanel().getViewMenu();
     }
     
     /**
@@ -96,6 +96,6 @@ public abstract class ControllerMenuItem implements ActionListener {
      * @return Tree Popup.
      */
     public TreePopup getPopup() {
-        return this.popup;
+        return popup;
     }
 }

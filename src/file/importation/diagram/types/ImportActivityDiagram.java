@@ -23,12 +23,12 @@ public class ImportActivityDiagram extends ImportDiagram {
     
     /**
      * Default constructor method of Class.
-     * @param project_ Project.
-     * @param element_ W3C Element.
+     * @param project Project.
+     * @param element W3C Element.
      */
-    public ImportActivityDiagram(Project project_, Element element_) {
-        diagram = new ActivityDiagram(project_, element_);
-        element = element_;
+    public ImportActivityDiagram(Project project, Element element) {
+        this.diagram = new ActivityDiagram(project, element);
+        this.element = element;
     }
     
     @Override

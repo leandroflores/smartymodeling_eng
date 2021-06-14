@@ -10,6 +10,7 @@ import view.panel.base.PanelBaseElement;
  * @author Leandro
  * @since  2019-06-14
  * @see    controller.view.panel.base.ControllerPanelBase
+ * @see    model.structural.base.Element
  * @see    view.panel.base.PanelBaseElement
  */
 public abstract class ControllerPanelBaseElement extends ControllerPanelBase {

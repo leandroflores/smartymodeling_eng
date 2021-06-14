@@ -29,11 +29,11 @@ public abstract class ControllerEventAssociation extends mxEventSource implement
 
     /**
      * Default constructor method of Class.
-     * @param panel_ Panel Diagram.
+     * @param panel Panel Diagram.
      */
-    public ControllerEventAssociation(PanelDiagram panel_) {
-        panel   = panel_;
-        diagram = panel_.getDiagram();
+    public ControllerEventAssociation(PanelDiagram panel) {
+        this.panel   = panel;
+        this.diagram = panel.getDiagram();
     }
 
     @Override

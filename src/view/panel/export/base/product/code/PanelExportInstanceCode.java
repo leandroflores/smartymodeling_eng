@@ -36,7 +36,7 @@ public final class PanelExportInstanceCode extends PanelExport {
         super.addDirectoryField();
         
         this.add(this.createLabel("Instance*: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("contextComboBox", new ControllerProduct(this.project).getInstances("class"), 250), this.createConstraints(5, 1, 1, 1));
+        this.add(this.createComboBox("contextComboBox", new ControllerProduct(project).getInstances("class"), 250), this.createConstraints(5, 1, 1, 1));
         this.setInstance((Instance) this.getContextComboBox().getSelectedItem());
         
         super.addNameTextField();

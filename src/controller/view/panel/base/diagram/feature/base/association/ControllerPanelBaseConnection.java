@@ -10,6 +10,7 @@ import view.panel.base.diagram.feature.base.association.PanelBaseConnection;
  * @author Leandro
  * @since  2020-04-09
  * @see    controller.view.panel.base.ControllerPanelBaseAssociation
+ * @see    model.structural.diagram.feature.base.association.Connection
  * @see    view.panel.base.diagram.feature.base.association.PanelBaseConnection
  */
 public class ControllerPanelBaseConnection extends ControllerPanelBaseAssociation {

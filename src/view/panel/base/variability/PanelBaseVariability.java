@@ -50,7 +50,7 @@ public final class PanelBaseVariability extends PanelBase {
         this.add(this.createComboBox("variationPointComboBox", new ControllerDiagram(this.diagram).getDefaultElements(), 15, this.getSelectedItem()));
 
         this.add(this.createLabel("Binding Time*: "));
-        this.add(this.createComboBox("bindingTimeComboBox", ControllerVariability.BINDINGS, 15, this.variability.getBindingTime()));
+        this.add(this.createComboBox("bindingTimeComboBox", new ControllerVariability(project).getBindings(), 15, this.variability.getBindingTime()));
     }
     
     /**

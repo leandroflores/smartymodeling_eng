@@ -15,10 +15,10 @@ public class ExportImage {
     
     /**
      * Default constructor method of Class.
-     * @param image_ Buffered Image.
+     * @param image Buffered Image.
      */
-    public ExportImage(BufferedImage image_) {
-        image = image_;
+    public ExportImage(BufferedImage image) {
+        this.image = image;
     }
     
     /**

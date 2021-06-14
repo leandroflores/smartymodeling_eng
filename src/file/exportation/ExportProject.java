@@ -20,12 +20,12 @@ public class ExportProject {
     
     /**
      * Default constructor method of Class.
-     * @param project_ SMartyModeling Project.
-     * @param path_ Project Path.
+     * @param project SMartyModeling Project.
+     * @param path Project Path.
      */
-    public ExportProject(Project project_, String path_) {
-        project = project_;
-        path    = path_;
+    public ExportProject(Project project, String path) {
+        this.project = project;
+        this.path    = path;
     }
     
     /**

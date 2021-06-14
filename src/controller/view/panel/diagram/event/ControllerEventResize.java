@@ -21,10 +21,10 @@ public class ControllerEventResize extends mxEventSource implements mxIEventList
 
     /**
      * Default constructor method of Class.
-     * @param panel_ Panel Diagram.
+     * @param panel Panel Diagram.
      */
-    public ControllerEventResize(PanelDiagram panel_) {
-        panel = panel_;
+    public ControllerEventResize(PanelDiagram panel) {
+        this.panel = panel;
     }
     
     @Override

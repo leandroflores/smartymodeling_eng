@@ -3,7 +3,6 @@ package model.structural.base.requirement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import model.controller.structural.base.requirement.ControllerRequirement;
 import model.structural.base.Element;
 import model.structural.base.interfaces.Exportable;
 
@@ -32,7 +31,7 @@ public class Requirement implements Exportable {
      */
     public Requirement() {
         this.code        = "";
-        this.type        = ControllerRequirement.TYPES[0];
+        this.type        = "Business";
         this.name        = "";
         this.description = "";
         this.initMaps();

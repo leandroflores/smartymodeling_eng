@@ -35,12 +35,12 @@ public class ExportDiagram {
     
     /**
      * Default constructor method of Class.
-     * @param path_ Path to Export.
-     * @param diagram_ Diagram.
+     * @param path Path to Export.
+     * @param diagram Diagram.
      */
-    public ExportDiagram(String path_, Diagram diagram_) {
-        path     = path_;
-        diagram = diagram_;
+    public ExportDiagram(String path, Diagram diagram) {
+        this.path    = path;
+        this.diagram = diagram;
     }
     
     /**

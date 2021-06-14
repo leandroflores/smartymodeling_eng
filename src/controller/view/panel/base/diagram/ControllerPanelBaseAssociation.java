@@ -8,6 +8,7 @@ import view.panel.base.diagram.PanelBaseAssociation;
  * @author Leandro
  * @since  2019-11-07
  * @see    controller.view.panel.base.ControllerPanelBaseAssociation
+ * @see    model.structural.base.association.Association
  * @see    view.panel.base.diagram.PanelBaseAssociation
  */
 public class ControllerPanelBaseAssociation extends controller.view.panel.base.ControllerPanelBaseAssociation {

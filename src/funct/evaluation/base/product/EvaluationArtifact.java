@@ -26,17 +26,17 @@ public class EvaluationArtifact extends Evaluation {
      */
     public EvaluationArtifact(Project project) {
         super(project);
-        product = null;
+        this.product = null;
     }
     
     /**
      * Alternative constructor method of Class.
      * @param project Project.
-     * @param product_ Product.
+     * @param product Product.
      */
-    public EvaluationArtifact(Project project, Product product_) {
+    public EvaluationArtifact(Project project, Product product) {
         super(project);
-        product = product_;
+        this.product = product;
     }
     
     @Override

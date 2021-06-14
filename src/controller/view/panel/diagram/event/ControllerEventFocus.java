@@ -20,10 +20,10 @@ public class ControllerEventFocus extends MouseAdapter {
     
     /**
      * Default constructor method of Class.
-     * @param panel_ Panel Diagram.
+     * @param panel Panel Diagram.
      */
-    public ControllerEventFocus(PanelDiagram panel_) {
-        panel = panel_;
+    public ControllerEventFocus(PanelDiagram panel) {
+        this.panel = panel;
     }
     
     @Override

@@ -34,11 +34,11 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Project)
-            this.newDiagram(item.getText());
+            newDiagram(item.getText());
         else if (object instanceof Diagram)
-            this.newVariability((Diagram) object);
+            newVariability((Diagram) object);
         else if (object instanceof Entity)
-            this.newElement((Entity) object, item.getText());
+            newElement((Entity) object, item.getText());
     }
     
     /**
@@ -47,15 +47,15 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
      */
     private void newDiagram(String type) {
         if (type.equalsIgnoreCase("Use Case Diagram"))
-            this.getViewMenu().getController().createNewUseCaseDiagram();
+            getViewMenu().getController().createNewUseCaseDiagram();
         else if (type.equalsIgnoreCase("Class Diagram"))
-            this.getViewMenu().getController().createNewClassDiagram();
+            getViewMenu().getController().createNewClassDiagram();
         else if (type.equalsIgnoreCase("Component Diagram"))
-            this.getViewMenu().getController().createNewComponentDiagram();
+            getViewMenu().getController().createNewComponentDiagram();
         else if (type.equalsIgnoreCase("SequenceDiagram"))
-            this.getViewMenu().getController().createNewSequenceDiagram();
+            getViewMenu().getController().createNewSequenceDiagram();
         else if (type.equalsIgnoreCase("ActivityDiagram"))
-            this.getViewMenu().getController().createNewActivityDiagram();
+            getViewMenu().getController().createNewActivityDiagram();
     }
     
     /**
@@ -64,9 +64,9 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
      */
     private void newVariability(Diagram diagram) {
         if (diagram.getElementsList().isEmpty())
-            new ViewError(this.getViewMenu(), "Diagram with no Elements!").setVisible(true);
+            new ViewError(getViewMenu(), "Diagram with no Elements!").setVisible(true);
         else
-            new ViewNewVariability(this.getViewMenu(), diagram).setVisible(true);
+            new ViewNewVariability(getViewMenu(), diagram).setVisible(true);
     }
     
     /**
@@ -76,9 +76,9 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
      */
     private void newElement(Entity entity, String type) {
         if (type.equalsIgnoreCase("UML Attribute"))
-            this.newAttribute(entity);
+            newAttribute(entity);
         else if (type.equalsIgnoreCase("UML Method"))
-            this.newMethod(entity);
+            newMethod(entity);
     }
     
     /**
@@ -93,8 +93,8 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
                      entity.addAttribute(attribute);
                      attribute.setDefaultName();
                      entity.updateSize();
-        this.getViewMenu().update();
-        this.getViewMenu().setSave(false);
+        getViewMenu().update();
+        getViewMenu().setSave(false);
     }
     
     /**
@@ -110,7 +110,7 @@ public class ControllerMenuItemNew extends ControllerMenuItem {
                   entity.getDiagram().addMethod(method);
                   method.setDefaultName();
                   entity.updateSize();
-        this.getViewMenu().update();
-        this.getViewMenu().setSave(false);
+        getViewMenu().update();
+        getViewMenu().setSave(false);
     }
 }

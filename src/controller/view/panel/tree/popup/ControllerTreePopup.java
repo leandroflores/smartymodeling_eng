@@ -26,10 +26,10 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
     
     /**
      * Default constructor method of Class.
-     * @param treePopup Tree Popup.
+     * @param popup Tree Popup.
      */
-    public ControllerTreePopup(TreePopup treePopup) {
-        this.popup = treePopup;
+    public ControllerTreePopup(TreePopup popup) {
+        this.popup = popup;
     }
     
     @Override
@@ -37,14 +37,14 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
 
     @Override
     public void mouseClicked(MouseEvent event) {
-        DefaultMutableTreeNode node = this.getSelectedNode();
+        DefaultMutableTreeNode node = getSelectedNode();
         if (node != null) {
             if (!SwingUtilities.isLeftMouseButton(event))
-                this.showPopup(node, event);
+                showPopup(node, event);
             else if (event.getClickCount() == 1)
-                this.showPanelEdit(node);
+                showPanelEdit(node);
             else if (event.getClickCount() == 2)
-                this.showPanelModeling(node);
+                showPanelModeling(node);
         }
     }
     
@@ -55,9 +55,9 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
      * @param delete Delete Flag.
      */
     protected void setPopupFlag(boolean new_, boolean edit, boolean delete) {
-        this.getPopup().getNewMenu().setEnabled(new_);
-        this.getPopup().getEditMenuItem().setEnabled(edit);
-        this.getPopup().getDeleteMenuItem().setEnabled(delete);
+        getPopup().getNewMenu().setEnabled(new_);
+        getPopup().getEditMenuItem().setEnabled(edit);
+        getPopup().getDeleteMenuItem().setEnabled(delete);
     }
     
     /**
@@ -73,7 +73,7 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
      */
     protected void showPanelEdit(DefaultMutableTreeNode node) {
         if (node != null && node.getUserObject() != null)
-            this.showPanelEdit(node, node.getUserObject());
+            showPanelEdit(node, node.getUserObject());
     }
     
     /**
@@ -89,14 +89,14 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
      */
     protected void showPanelModeling(DefaultMutableTreeNode node) {
         if (node.getUserObject() instanceof Diagram) 
-            this.popup.getPanel().getViewMenu().showDiagram( (Diagram)  node.getUserObject());
+            popup.getPanel().getViewMenu().showDiagram( (Diagram)  node.getUserObject());
         else if (node.getUserObject() instanceof Instance)
-            this.popup.getPanel().getViewMenu().showInstance((Instance) node.getUserObject());
+            popup.getPanel().getViewMenu().showInstance((Instance) node.getUserObject());
     }
     
     @Override
     public void keyReleased(KeyEvent event) {
-        this.showPanelEdit(this.getSelectedNode());
+        showPanelEdit(getSelectedNode());
     }
     
     @Override
@@ -113,16 +113,16 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
 
     @Override
     public void keyPressed(KeyEvent event) {
-        DefaultMutableTreeNode node = this.getSelectedNode();
+        DefaultMutableTreeNode node = getSelectedNode();
         switch (event.getKeyCode()) {
             case KeyEvent.VK_ENTER:
-                this.showPanelModeling(node);
+                showPanelModeling(node);
                 break;
             case KeyEvent.VK_DELETE:
-                this.delete(node);
+                delete(node);
                 break;
             case KeyEvent.VK_F2:
-                this.edit(node);
+                edit(node);
                 break;
             default:
                 break;
@@ -135,7 +135,7 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
      */
     protected void delete(DefaultMutableTreeNode node) {
         if (node != null && node.getUserObject() != null)
-            this.delete(node, node.getUserObject());
+            delete(node, node.getUserObject());
     }
     
     /**
@@ -151,7 +151,7 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
      */
     protected void edit(DefaultMutableTreeNode node) {
         if (node != null && node.getUserObject() != null)
-            this.edit(node, node.getUserObject());
+            edit(node, node.getUserObject());
     }
     
     /**
@@ -178,7 +178,7 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
      * @return Selected Node.
      */
     protected DefaultMutableTreeNode getSelectedNode() {
-        return (DefaultMutableTreeNode) this.popup.getPanel().getTree().getLastSelectedPathComponent();
+        return (DefaultMutableTreeNode) popup.getPanel().getTree().getLastSelectedPathComponent();
     }
     
     /**
@@ -186,7 +186,7 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
      * @return Panel Modeling.
      */
     protected PanelModeling getPanelModeling() {
-        return this.getPopup().getPanel().getViewMenu().getPanelModeling();
+        return getPopup().getPanel().getViewMenu().getPanelModeling();
     }
     
     /**
@@ -194,7 +194,7 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
      * @return Panel Project.
      */
     protected PanelProject getPanelProject() {
-        return this.getPopup().getPanel().getViewMenu().getPanelProject();
+        return getPopup().getPanel().getViewMenu().getPanelProject();
     }
     
     /**
@@ -202,6 +202,6 @@ public abstract class ControllerTreePopup implements MouseListener, KeyListener 
      * @return Tree Popup.
      */
     protected TreePopup getPopup() {
-        return this.popup;
+        return popup;
     }
 }

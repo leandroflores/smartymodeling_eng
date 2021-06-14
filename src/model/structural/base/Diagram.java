@@ -107,7 +107,7 @@ public abstract class Diagram implements Exportable {
      * @return Diagram Project.
      */
     public Project getProject() {
-        return this.project;
+        return project;
     }
 
     /**
@@ -123,7 +123,7 @@ public abstract class Diagram implements Exportable {
      * @return Diagram Id.
      */
     public String getId() {
-        return this.id;
+        return id;
     }
 
     /**
@@ -139,7 +139,7 @@ public abstract class Diagram implements Exportable {
      * @return Diagram Name.
      */
     public String getName() {
-        return this.name;
+        return name;
     }
 
     /**
@@ -155,8 +155,8 @@ public abstract class Diagram implements Exportable {
      * Method responsible for defining Default Name.
      */
     public void setDefaultName() {
-        if (this.id != null)
-            this.setName(new FunctString().getInitUpperCase(this.id.replaceAll("#", "").replaceAll("-", "")));
+        if (id != null)
+            setName(new FunctString().getInitUpperCase(id.replaceAll("#", "").replaceAll("-", "")));
     }
     
     /**
@@ -164,7 +164,7 @@ public abstract class Diagram implements Exportable {
      * @return Diagram Type.
      */
     public String getType() {
-        return this.type;
+        return type;
     }
     
     /**
@@ -172,7 +172,7 @@ public abstract class Diagram implements Exportable {
      * @return Diagram Index.
      */
     public Integer getIndex() {
-        switch (this.type.toLowerCase().trim()) {
+        switch (type.toLowerCase().trim()) {
             case "feature":
                 return 1;
             case "usecase":
@@ -204,7 +204,7 @@ public abstract class Diagram implements Exportable {
      * @return Next Id.
      */
     public String nextId(String label) {
-        return this.project.nextId(label);
+        return project.nextId(label);
     }
     
     /**
@@ -212,7 +212,7 @@ public abstract class Diagram implements Exportable {
      * @return Elements HashMap.
      */
     public HashMap<String, Element> getElements() {
-        return this.elements;
+        return elements;
     }
     
     /**
@@ -220,7 +220,7 @@ public abstract class Diagram implements Exportable {
      * @return Tree Elements List.
      */
     public List<Element> getTreeElementsList() {
-        return this.getElementsList();
+        return getElementsList();
     }
     
     /**
@@ -228,7 +228,7 @@ public abstract class Diagram implements Exportable {
      * @return Elements List.
      */
     public List<Element> getElementsList() {
-        List   list = new ArrayList<>(this.elements.values());
+        List   list = new ArrayList<>(elements.values());
                list.sort(new ComparatorElement());
         return list;
     }
@@ -239,7 +239,7 @@ public abstract class Diagram implements Exportable {
      */
     public List<Element> getDefaultElements() {
         List<Element> filter  = new ArrayList<>();
-        for (Element  element : this.getElementsList()) {
+        for (Element  element : getElementsList()) {
             if (element.isDefault())
                 filter.add(element);
         }
@@ -252,11 +252,10 @@ public abstract class Diagram implements Exportable {
      * @return Elements by Mandatory Flag.
      */
     public List<Element> filterElements(boolean mandatory) {
-        List<Element> list   = this.getElementsList();
-        List<Element> filter = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).isMandatory() == mandatory)
-                filter.add(list.get(i));
+        List   filter = new ArrayList<>();
+        for (Element element : getElementsList()) {
+            if (element.isMandatory() == mandatory)
+               filter.add(element);
         }
         return filter;
     }
@@ -267,7 +266,7 @@ public abstract class Diagram implements Exportable {
      * @return Entity found.
      */
     public Entity filterEntityByName(String name) {
-        for (Element element : this.getElementsList()) {
+        for (Element element : getElementsList()) {
             if (element instanceof Entity &&
                 element.getName().equalsIgnoreCase(name))
                 return (Entity) element;
@@ -281,7 +280,7 @@ public abstract class Diagram implements Exportable {
      * @return Package UML found.
      */
     public PackageUML filterPackageUMLByName(String name) {
-        for (Element element : this.getElementsList()) {
+        for (Element element : getElementsList()) {
             if (element instanceof PackageUML &&
                 element.getName().equalsIgnoreCase(name))
                 return (PackageUML) element;
@@ -294,11 +293,10 @@ public abstract class Diagram implements Exportable {
      * @return Optional Elements.
      */
     public List<Element> filterOptionalElements() {
-        List<Element> list   = this.getElementsList();
-        List<Element> filter = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if ((list.get(i).isDefault()) && (this.filterVariants(list.get(i), "").isEmpty()))
-                filter.add(list.get(i));
+        List   filter = new ArrayList<>();
+        for (Element element : getElementsList()) {
+            if (element.isDefault() && filterVariants(element, "").isEmpty())
+               filter.add(element);
         }
         return filter;
     }
@@ -309,7 +307,7 @@ public abstract class Diagram implements Exportable {
      * @return New Element Id.
      */
     protected String nextId(Element element) {
-        return this.nextId(element.getType().toUpperCase().trim() + "#");
+        return nextId(element.getType().toUpperCase().trim() + "#");
     }
     
     /**
@@ -317,9 +315,9 @@ public abstract class Diagram implements Exportable {
      * @param element Element.
      */
     public void addElement(Element element) {
-        this.elements.put(element.getId(), element);
-        this.project.objects.put(element.getId(), element);
-        this.project.addElementStereotype(element);
+        elements.put(element.getId(), element);
+        project.objects.put(element.getId(), element);
+        project.addElementStereotype(element);
     }
     
     /**
@@ -328,7 +326,7 @@ public abstract class Diagram implements Exportable {
      * @return Element found.
      */
     public Element getElement(String id) {
-        return (Element) this.elements.get(id);
+        return (Element) elements.get(id);
     }
     
     /**
@@ -336,14 +334,14 @@ public abstract class Diagram implements Exportable {
      * @param element Element.
      */
     public void removeElement(Element element) {
-        this.removeAssociation(element);
-        this.removeVariability(element);
-        this.project.removeRequirement(element);
-        this.project.removeTraceability(element);
-        this.project.removeProduct(element);
-        this.project.removeLinks(element);
-        this.project.objects.remove(element.getId());
-        this.elements.remove(element.getId());
+        removeAssociation(element);
+        removeVariability(element);
+        project.removeRequirement(element);
+        project.removeTraceability(element);
+        project.removeProduct(element);
+        project.removeLinks(element);
+        project.objects.remove(element.getId());
+        elements.remove(element.getId());
     }
     
     /**
@@ -360,12 +358,12 @@ public abstract class Diagram implements Exportable {
      * @return Associations List.
      */
     private List filterAssociations(Class class_) {
-        List    list = new ArrayList();
+        List    filter = new ArrayList();
         for (Association association : this.getAssociationsList()) {
             if (association.getClass().equals(class_))
-                list.add(association);
+                filter.add(association);
         }
-        return  list;
+        return  filter;
     }
     
     /**
@@ -375,41 +373,12 @@ public abstract class Diagram implements Exportable {
      * @return Associations List.
      */
     public List filterAssociations(Element element, Class class_) {
-        List<Association> list   = this.getAssociationsList();
-        List<Association> filter = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getClass().equals(class_)
-            &&  list.get(i).contains(element))
-                filter.add(list.get(i));
+        List    filter = new ArrayList<>();
+        for (Association association : getAssociationsList()) {
+            if (association.getClass().equals(class_) && association.contains(element))
+                filter.add(association);
         }
-        return filter;
-    }
-    
-    /**
-     * Method responsible for returning a New Association Id.
-     * @param  association Association.
-     * @return New Association Id.
-     */
-    protected String nextId(Association association) {
-        return this.nextId(association.getType().toUpperCase().trim() + "#");
-    }
-    
-    /**
-     * Method responsible for returning Associations HashMap.
-     * @return Associations HashMap.
-     */
-    public HashMap<String, Association> getAssociations() {
-        return this.associations;
-    }
-    
-    /**
-     * Method responsible for returning Associations List.
-     * @return Associations List.
-     */
-    public List<Association> getAssociationsList() {
-        List   list = new ArrayList<>(this.associations.values());
-               list.sort(new ComparatorAssociation());
-        return list;
+        return  filter;
     }
     
     /**
@@ -419,11 +388,38 @@ public abstract class Diagram implements Exportable {
      */
     public List getAssociations(String type) {
         List    filter = new ArrayList<>();
-        for (Association association : this.getAssociationsList()) {
+        for (Association association : getAssociationsList()) {
             if (association.getType().equalsIgnoreCase(type))
                 filter.add(association);
         }
         return  filter;
+    }
+    
+    /**
+     * Method responsible for returning a New Association Id.
+     * @param  association Association.
+     * @return New Association Id.
+     */
+    protected String nextId(Association association) {
+        return nextId(association.getType().toUpperCase().trim() + "#");
+    }
+    
+    /**
+     * Method responsible for returning Associations HashMap.
+     * @return Associations HashMap.
+     */
+    public HashMap<String, Association> getAssociations() {
+        return associations;
+    }
+    
+    /**
+     * Method responsible for returning Associations List.
+     * @return Associations List.
+     */
+    public List<Association> getAssociationsList() {
+        List   list = new ArrayList<>(associations.values());
+               list.sort(new ComparatorAssociation());
+        return list;
     }
     
     /**
@@ -446,7 +442,7 @@ public abstract class Diagram implements Exportable {
      */
     public List<Association> getSourceAssociations(String type, Element target) {
         List    filter = new ArrayList<>();
-        for (Association association : this.getAssociationsList()) {
+        for (Association association : getAssociationsList()) {
             if (association.getType().equalsIgnoreCase(type) && association.isTarget(target))
                 filter.add(association);
         }
@@ -461,7 +457,7 @@ public abstract class Diagram implements Exportable {
      */
     public List<Association> getTargetAssociations(String type, Element source) {
         List    filter = new ArrayList<>();
-        for (Association association : this.getAssociationsList()) {
+        for (Association association : getAssociationsList()) {
             if (association.getType().equalsIgnoreCase(type) && association.isSource(source))
                 filter.add(association);
         }
@@ -473,9 +469,9 @@ public abstract class Diagram implements Exportable {
      * @param requires Requires.
      */
     public void addRequires(Requires requires) {
-        requires.setId(this.nextId(requires));
-        if (this.associations.containsKey(requires.getId()) == false)
-            this.addAssociation(requires);
+        requires.setId(nextId(requires));
+        if (!associations.containsKey(requires.getId()))
+            addAssociation(requires);
     }
     
     /**
@@ -483,7 +479,7 @@ public abstract class Diagram implements Exportable {
      * @param requires Requires.
      */
     public void removeRequires(Requires requires) {
-        this.removeAssociation(requires);
+        removeAssociation(requires);
     }
     
     /**
@@ -491,7 +487,7 @@ public abstract class Diagram implements Exportable {
      * @return Requires List.
      */
     public List<Requires> getRequiresList() {
-        return (List<Requires>) this.filterAssociations(Requires.class);
+        return (List<Requires>) filterAssociations(Requires.class);
     }
     
     /**
@@ -500,7 +496,7 @@ public abstract class Diagram implements Exportable {
      * @return Requires List.
      */
     public List<Association> getRequiresList(Element element) {
-        return this.filterAssociations(element, Requires.class);
+        return filterAssociations(element, Requires.class);
     }
     
     /**
@@ -508,9 +504,9 @@ public abstract class Diagram implements Exportable {
      * @param mutex Mutex.
      */
     public void addMutex(Mutex mutex) {
-        mutex.setId(this.nextId(mutex));
-        if (this.associations.containsKey(mutex.getId()) == false)
-            this.addAssociation(mutex);
+        mutex.setId(nextId(mutex));
+        if (!associations.containsKey(mutex.getId()))
+            addAssociation(mutex);
     }
     
     /**
@@ -518,7 +514,7 @@ public abstract class Diagram implements Exportable {
      * @param mutex Mutex.
      */
     public void removeMutex(Mutex mutex) {
-        this.removeAssociation(mutex);
+        removeAssociation(mutex);
     }
     
     /**
@@ -526,7 +522,7 @@ public abstract class Diagram implements Exportable {
      * @return Mutex List.
      */
     public List<Mutex> getMutexList() {
-        return (List<Mutex>) this.filterAssociations(Requires.class);
+        return (List<Mutex>) filterAssociations(Requires.class);
     }
     
     /**
@@ -535,7 +531,7 @@ public abstract class Diagram implements Exportable {
      * @return Mutex List.
      */
     public List<Association> getMutexList(Element element) {
-        return this.filterAssociations(element, Mutex.class);
+        return filterAssociations(element, Mutex.class);
     }
     
     /**
@@ -543,9 +539,9 @@ public abstract class Diagram implements Exportable {
      * @param generalization Generalization.
      */
     public void addGeneralization(Generalization generalization) {
-        generalization.setId(this.nextId(generalization));
-        if (!this.associations.containsKey(generalization.getId()))
-             this.addAssociation(generalization);
+        generalization.setId(nextId(generalization));
+        if (!associations.containsKey(generalization.getId()))
+             addAssociation(generalization);
     }
     
     /**
@@ -553,7 +549,7 @@ public abstract class Diagram implements Exportable {
      * @param generalization Generalization.
      */
     public void removeGeneralization(Generalization generalization) {
-        this.removeAssociation(generalization);
+        removeAssociation(generalization);
     }
     
     /**

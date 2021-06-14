@@ -20,10 +20,10 @@ public class ControllerEventSelect extends mxEventSource implements mxIEventList
 
     /**
      * Default constructor method of Class.
-     * @param panel_ Panel Diagram.
+     * @param panel Panel Diagram.
      */
-    public ControllerEventSelect(PanelDiagram panel_) {
-        panel = panel_;
+    public ControllerEventSelect(PanelDiagram panel) {
+        this.panel = panel;
     }
     
     @Override

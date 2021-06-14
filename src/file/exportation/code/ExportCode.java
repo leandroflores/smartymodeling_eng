@@ -22,10 +22,10 @@ public abstract class ExportCode {
     
     /**
      * Default constructor method of Class.
-     * @param path_ Path to Export.
+     * @param path Path to Export.
      */
-    public ExportCode(String path_) {
-        path = path_;
+    public ExportCode(String path) {
+        this.path = path;
     }
     
     /**

@@ -36,68 +36,68 @@ public class ControllerTreePopupProduct extends ControllerTreePopup {
     @Override
     protected void showPopup(DefaultMutableTreeNode node, MouseEvent event) {
         if (node.getUserObject() instanceof Project)
-            this.setProjectPopup();
+            setProjectPopup();
         else if (node.getUserObject() instanceof Product)
-            this.setProductPopup();
+            setProductPopup();
         else if (node.getUserObject() instanceof Instance)
-            super.setPopupFlag(false, true, true);
+            setPopupFlag(false, true, true);
         else if (node.getUserObject() instanceof Artifact)
-            super.setPopupFlag(false, true, true);
-        this.getPopup().show(event.getComponent(), event.getX(), event.getY());
+            setPopupFlag(false, true, true);
+        getPopup().show(event.getComponent(), event.getX(), event.getY());
     }
 
     /**
      * Method responsible for setting the Project Popup.
      */
     private void setProjectPopup() {
-        super.setPopupFlag(true, true, false);
-        this.getPopup().getProductMenuItem().setVisible(true);
-        this.getPopup().getInstanceMenuItem().setVisible(false);
+        setPopupFlag(true, true, false);
+        getPopup().getProductMenuItem().setVisible(true);
+        getPopup().getInstanceMenuItem().setVisible(false);
     }
     
     /**
      * Method responsible for setting the Product Popup.
      */
     private void setProductPopup() {
-        super.setPopupFlag(true, true, true);
-        this.getPopup().getProductMenuItem().setVisible(false);
-        this.getPopup().getInstanceMenuItem().setVisible(true);
+        setPopupFlag(true, true, true);
+        getPopup().getProductMenuItem().setVisible(false);
+        getPopup().getInstanceMenuItem().setVisible(true);
     }
     
     @Override
     protected void showPanelEdit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Project)
-            this.getPanelProject().initPanelEditProject();
+            getPanelProject().initPanelEditProject();
         else if (object instanceof Product)
-            this.getPanelProject().initPanelEditProduct((Product) object);
+            getPanelProject().initPanelEditProduct((Product) object);
         else if (object instanceof Instance)
-            this.getPanelProject().initPanelEditInstance((Instance) object);
+            getPanelProject().initPanelEditInstance((Instance) object);
         else if (object instanceof Artifact)
-            this.getPanelProject().initPanelEditArtifact((Artifact) object);
+            getPanelProject().initPanelEditArtifact((Artifact) object);
     }
     
     @Override
     protected void delete(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Product)
-            new ViewDeleteProduct(this.getPanelModeling(),  (Product) object).setVisible(true);
+            new ViewDeleteProduct(getPanelModeling(), (Product) object).setVisible(true);
         else if (object instanceof Instance)
-            new ViewDeleteInstance(this.getPanelModeling(), (Instance) object).setVisible(true);        
+            new ViewDeleteInstance(getPanelModeling(), (Instance) object).setVisible(true);        
         else if (object instanceof Artifact)
-            new ViewDeleteArtifact(this.getPanelModeling(), (Artifact) object).setVisible(true);        
+            new ViewDeleteArtifact(getPanelModeling(), (Artifact) object).setVisible(true);        
     }
     
     @Override
     protected void edit(DefaultMutableTreeNode node, Object object) {
         if (object instanceof Product)
-            new ViewEditProduct(this.getPanelModeling(),  (Product) object).setVisible(true);
+            new ViewEditProduct(getPanelModeling(), (Product) object).setVisible(true);
         else if (object instanceof Instance)
-            new ViewEditInstance(this.getPanelModeling(), (Instance) object).setVisible(true);
+            new ViewEditInstance(getPanelModeling(), (Instance) object).setVisible(true);
         else if (object instanceof Artifact)
-            new ViewEditArtifact(this.getPanelModeling(), (Artifact) object).setVisible(true);
+            new ViewEditArtifact(getPanelModeling(), (Artifact) object).setVisible(true);
     }
     
     @Override
     protected TreePopupProduct getPopup() {
-        return (TreePopupProduct) this.popup;
+        return (TreePopupProduct) popup;
     }
 }

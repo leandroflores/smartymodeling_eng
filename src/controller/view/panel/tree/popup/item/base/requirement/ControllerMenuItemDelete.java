@@ -31,9 +31,9 @@ public class ControllerMenuItemDelete extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Requirement)
-            new ViewDeleteRequirement(this.getPanelModeling(), (Requirement) object).setVisible(true);
+            new ViewDeleteRequirement(getPanelModeling(), (Requirement) object).setVisible(true);
         else if (object instanceof Element)
-            this.delete(this.getRequirement(node), (Element) object);
+            delete(getRequirement(node), (Element) object);
     }
 
     /**
@@ -43,8 +43,8 @@ public class ControllerMenuItemDelete extends ControllerMenuItem {
      */
     private void delete(Requirement requirement, Element element) {
         requirement.removeElement(element);
-        this.getPanelTree().getViewMenu().updatePanelTree();
-        this.getPanelTree().getViewMenu().setSave(false);
+        getPanelTree().getViewMenu().updatePanelTree();
+        getPanelTree().getViewMenu().setSave(false);
     }
     
     /**
@@ -52,6 +52,6 @@ public class ControllerMenuItemDelete extends ControllerMenuItem {
      * @return Panel Tree.
      */
     protected PanelTreeRequirement getPanelTree() {
-        return (PanelTreeRequirement) this.getPopup().getPanel();
+        return (PanelTreeRequirement) getPopup().getPanel();
     }
 }

@@ -32,11 +32,11 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Project)
-            new ViewEditProject(this.getPanelModeling(), (Project) object).setVisible(true);
+            new ViewEditProject(getPanelModeling(), (Project) object).setVisible(true);
         else if (object instanceof Requirement)
-            new ViewEditRequirement(this.getPanelModeling(), (Requirement) object, 0).setVisible(true);
+            new ViewEditRequirement(getPanelModeling(), (Requirement) object, 0).setVisible(true);
         else if (object instanceof Element)
-            this.edit(this.getRequirement(node), (Element) object);
+            edit(getRequirement(node), (Element) object);
     }
     
     /**
@@ -45,6 +45,6 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
      * @param element Element.
      */
     private void edit(Requirement requirement, Element element) {
-        new ViewEditRequirement(this.getPanelModeling(), requirement, element.getDiagram().getIndex()).setVisible(true);
+        new ViewEditRequirement(getPanelModeling(), requirement, element.getDiagram().getIndex()).setVisible(true);
     }
 }

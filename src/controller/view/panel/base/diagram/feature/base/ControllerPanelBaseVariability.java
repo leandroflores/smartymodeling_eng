@@ -10,6 +10,7 @@ import view.panel.base.diagram.feature.base.PanelBaseVariability;
  * @author Leandro
  * @since  2020-06-29
  * @see    controller.view.panel.base.ControllerPanelBaseElement
+ * @see    model.structural.diagram.feature.base.Variability
  * @see    view.panel.base.diagram.feature.base.PanelBaseVariability
  */
 public class ControllerPanelBaseVariability extends ControllerPanelBaseElement {

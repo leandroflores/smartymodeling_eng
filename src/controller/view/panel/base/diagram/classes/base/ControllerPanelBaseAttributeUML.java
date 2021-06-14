@@ -11,6 +11,7 @@ import view.panel.base.diagram.classes.base.PanelBaseAttributeUML;
  * @author Leandro
  * @since  2019-06-06
  * @see    controller.view.panel.base.ControllerPanelBaseElement
+ * @see    model.structural.diagram.classes.base.AttributeUML
  * @see    view.panel.base.diagram.classes.base.PanelBaseAttributeUML
  */
 public class ControllerPanelBaseAttributeUML extends ControllerPanelBaseElement {

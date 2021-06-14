@@ -1,37 +1,31 @@
 package model.controller.structural.base.evaluation;
 
-import java.util.List;
+import model.controller.Controller;
 import model.structural.base.Project;
-import model.structural.base.evaluation.Metric;
 
 /**
  * <p>Class of Controller <b>ControllerMetric</b>.</p>
  * <p>Class responsible for defining the <b>Metric Controller</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  23/07/2019
+ * @since  2019-07-23
+ * @see    model.controller.Controller
  * @see    model.structural.base.evaluation.Metric
  */
-public class ControllerMetric {
-    public static final String[] TARGETS  = {"Project", "Activity", "Class", "Component", "Sequence", "UseCase", "Product Line", "Variability"};
-    private final Project project;
+public class ControllerMetric extends Controller {
     
     /**
      * Default constructor method of Class.
      * @param project Project.
      */
     public ControllerMetric(Project project) {
-        this.project = project;
+        super(project);
     }
     
     /**
-     * Method responsible for returning the Metrics Array.
-     * @return Metrics Array.
+     * Method responsible for returning the Metric Targets Array.
+     * @return Metric Targets Array.
      */
-    public Metric[] getMetrics() {
-        List<Metric> list   = this.project.getMetricsList();
-        Metric[] metrics    = new Metric[list.size()];
-        for (int i = 0; i < list.size(); i++)
-                 metrics[i] = list.get(i);
-        return   metrics;
+    public String[] getTargets() {
+        return new String[]{"Project", "Activity", "Class", "Component", "Sequence", "UseCase", "Product Line", "Variability"};
     }
 }

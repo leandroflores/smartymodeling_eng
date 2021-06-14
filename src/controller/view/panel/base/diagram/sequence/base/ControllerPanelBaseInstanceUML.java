@@ -11,6 +11,7 @@ import view.panel.base.diagram.sequence.base.PanelBaseInstanceUML;
  * @author Leandro
  * @since  2019-10-03
  * @see    controller.view.panel.base.ControllerPanelBaseElement
+ * @see    model.structural.diagram.sequence.base.InstanceUML
  * @see    view.panel.base.diagram.sequence.base.PanelBaseInstanceUML
  */
 public class ControllerPanelBaseInstanceUML extends ControllerPanelBaseElement {

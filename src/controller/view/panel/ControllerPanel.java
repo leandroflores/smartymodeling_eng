@@ -25,10 +25,10 @@ public abstract class ControllerPanel extends Controller {
     
     /**
      * Default constructor method of Class.
-     * @param panel_ Panel.
+     * @param panel Panel.
      */
-    public ControllerPanel(Panel panel_) {
-        panel = panel_;
+    public ControllerPanel(Panel panel) {
+        this.panel = panel;
     }
     
     @Override

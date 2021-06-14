@@ -24,7 +24,7 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
     
     /**
      * Default constructor method of Class.
-     * @param popup Tree Popup pFeature.
+     * @param popup Tree Popup Feature.
      */
     public ControllerMenuItemEdit(TreePopupFeature popup) {
         super(popup);
@@ -34,10 +34,10 @@ public class ControllerMenuItemEdit extends ControllerMenuItem {
     protected void action(DefaultMutableTreeNode node, JMenuItem item) {
         Object object = node.getUserObject();
         if (object instanceof Project)
-            new ViewEditProject(this.getPanelModeling(), (Project) object).setVisible(true);
+            new ViewEditProject(getPanelModeling(), (Project) object).setVisible(true);
         else if (object instanceof Diagram)
-            new ViewEditDiagram(this.getPanelModeling(), (Diagram) object).setVisible(true);
+            new ViewEditDiagram(getPanelModeling(), (Diagram) object).setVisible(true);
         else if (object instanceof Feature)
-            new ViewEditFeature(this.getPanelModeling(), (FeatureDiagram) this.getDiagram(node), (Feature) object).setVisible(true);
+            new ViewEditFeature(getPanelModeling(), (FeatureDiagram) getDiagram(node), (Feature) object).setVisible(true);
     }
 }

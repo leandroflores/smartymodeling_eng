@@ -50,7 +50,7 @@ public final class PanelRequirementTraceability extends PanelRequirement {
         this.add(this.createComboBox("requirementComboBox", new ControllerRequirement(this.getProject()).getRequirements(), 400), this.createConstraints(4, 1, 1, 1));
         
         this.add(this.createLabel("Type: "), this.createConstraints(1, 1, 0, 2));
-        this.add(this.createComboBox("typeComboBox", new ControllerProject(this.getProject()).getDiagramsTypes(), 400), this.createConstraints(4, 1, 1, 2));
+        this.add(this.createComboBox("typeComboBox", new ControllerProject(this.getProject()).getDiagramTypes(), 400), this.createConstraints(4, 1, 1, 2));
         
         this.add(this.createLabel("Diagram: "), this.createConstraints(1, 1, 0, 3));
         this.add(this.createComboBox("diagramComboBox", new ControllerProject(this.getProject()).getDiagrams(this.getType()), 400), this.createConstraints(4, 1, 1, 3));
