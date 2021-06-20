@@ -30,38 +30,27 @@ public final class ViewEditMeasure extends ViewEdit {
         this.measure    = measure;
         this.controller = new ControllerViewEditMeasure(this);
         this.title      = "Edit Measure Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(new Dimension(650, 430));
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(650, 430);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelBaseMeasure();
-        this.addLines(1);
+    protected PanelEditMeasure createPanelEdit() {
+        return new PanelEditMeasure(view, measure);
     }
     
-    /**
-     * Method responsible for adding the Panel Base Measure.
-     */
-    private void addPanelBaseMeasure() {
-        this.addPanel("panelEditMeasure", new PanelEditMeasure(this.view, this.measure));
-        this.getPanel("panelEditMeasure").setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanel("panelEditMeasure"));
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 300);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Measure.
-     * @return Panel Edit Measure.
-     */
-    public PanelEditMeasure getPanelEditMeasure() {
-        return (PanelEditMeasure) this.getPanel("panelEditMeasure");
+    @Override
+    public PanelEditMeasure getPanelEdit() {
+        return (PanelEditMeasure) super.getPanelEdit();
     }
     
     /**
@@ -69,7 +58,7 @@ public final class ViewEditMeasure extends ViewEdit {
      * @return Panel Base Measure.
      */
     public PanelBaseMeasure getPanelBaseMeasure() {
-        return this.getPanelEditMeasure().getPanelBaseMeasure();
+        return getPanelEdit().getPanelBaseMeasure();
     }
     
     /**
@@ -77,6 +66,6 @@ public final class ViewEditMeasure extends ViewEdit {
      * @return Measure.
      */
     public Measure getMeasure() {
-        return this.measure;
+        return measure;
     }
 }

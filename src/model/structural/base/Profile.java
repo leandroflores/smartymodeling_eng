@@ -24,7 +24,7 @@ public class Profile implements Exportable {
      * @return Mandatory Stereotype.
      */
     public Stereotype getMandatory() {
-        return this.mandatory;
+        return mandatory;
     }
 
     /**
@@ -40,7 +40,7 @@ public class Profile implements Exportable {
      * @return Optional Stereotype.
      */
     public Stereotype getOptional() {
-        return this.optional;
+        return optional;
     }
 
     /**
@@ -56,7 +56,7 @@ public class Profile implements Exportable {
      * @return Variation Point Stereotype.
      */
     public Stereotype getVariationPoint() {
-        return this.variationPoint;
+        return variationPoint;
     }
     
     /**
@@ -72,7 +72,7 @@ public class Profile implements Exportable {
      * @return Inclusive Stereotype.
      */
     public Stereotype getInclusive() {
-        return this.inclusive;
+        return inclusive;
     }
     
     /**
@@ -88,7 +88,7 @@ public class Profile implements Exportable {
      * @return Exclusive Stereotype.
      */
     public Stereotype getExclusive() {
-        return this.exclusive;
+        return exclusive;
     }
     
     /**
@@ -104,7 +104,7 @@ public class Profile implements Exportable {
      * @return Requires Stereotype.
      */
     public Stereotype getRequires() {
-        return this.requires;
+        return requires;
     }
 
     /**
@@ -120,7 +120,7 @@ public class Profile implements Exportable {
      * @return Mutex Stereotype.
      */
     public Stereotype getMutex() {
-        return this.mutex;
+        return mutex;
     }
 
     /**
@@ -134,26 +134,26 @@ public class Profile implements Exportable {
     @Override
     public String export() {
         String export  = "  <profile";
-               export += " mandatory=\""      + this.mandatory.getId()      + "\"";
-               export += " optional=\""       + this.optional.getId()       + "\"";
-               export += " variationPoint=\"" + this.variationPoint.getId() + "\"";
-               export += " inclusive=\""      + this.inclusive.getId()      + "\"";
-               export += " exclusive=\""      + this.exclusive.getId()      + "\"";
-               export += " requires=\""       + this.requires.getId()       + "\"";
-               export += " mutex=\""          + this.mutex.getId()          + "\"";
+               export += " mandatory=\""      + mandatory.getId()      + "\"";
+               export += " optional=\""       + optional.getId()       + "\"";
+               export += " variationPoint=\"" + variationPoint.getId() + "\"";
+               export += " inclusive=\""      + inclusive.getId()      + "\"";
+               export += " exclusive=\""      + exclusive.getId()      + "\"";
+               export += " requires=\""       + requires.getId()       + "\"";
+               export += " mutex=\""          + mutex.getId()          + "\"";
                export += "/>\n";
         return export;
     }
     
     @Override
     public String toString() {
-        String profile  = "Mandatory       = " + this.mandatory      + "\n";
-               profile += "Optional        = " + this.optional       + "\n";
-               profile += "Variation Point = " + this.variationPoint + "\n";
-               profile += "Inclusive       = " + this.inclusive      + "\n";
-               profile += "Exclusive       = " + this.exclusive      + "\n";
-               profile += "Requires        = " + this.requires       + "\n";
-               profile += "Mutex           = " + this.mutex          + "\n";
+        String profile  = "Mandatory       = " + mandatory      + "\n";
+               profile += "Optional        = " + optional       + "\n";
+               profile += "Variation Point = " + variationPoint + "\n";
+               profile += "Inclusive       = " + inclusive      + "\n";
+               profile += "Exclusive       = " + exclusive      + "\n";
+               profile += "Requires        = " + requires       + "\n";
+               profile += "Mutex           = " + mutex          + "\n";
         return profile;
     }
 }

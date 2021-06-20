@@ -35,38 +35,27 @@ public final class ViewEditInterfaceUML extends ViewEdit {
         this.interface_ = interface_;
         this.controller = new ControllerViewEditInterfaceUML(this);
         this.title      = "Edit Interface Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(600, 445);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 445);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditInterfaceUML();
-        this.addLines(1);
+    protected PanelEditInterfaceUML createPanelEdit() {
+        return new PanelEditInterfaceUML(view, diagram, interface_);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Interface UML.
-     */
-    private void addPanelEditInterfaceUML() {
-        this.addPanel("panelEditInterface", new PanelEditInterfaceUML(this.view, this.diagram, this.interface_));
-        this.getPanelEditInterface().setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanelEditInterface());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 300);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Interface UML.
-     * @return Panel Edit Interface UML.
-     */
-    private PanelEditInterfaceUML getPanelEditInterface() {
-        return (PanelEditInterfaceUML) this.getPanel("panelEditInterface");
+    @Override
+    public PanelEditInterfaceUML getPanelEdit() {
+        return (PanelEditInterfaceUML) super.getPanelEdit();
     }
     
     /**
@@ -74,7 +63,7 @@ public final class ViewEditInterfaceUML extends ViewEdit {
      * @return Panel Base Element.
      */
     public PanelBaseElement getPanelBaseInterfaceUML() {
-        return this.getPanelEditInterface().getPanelBaseElement();
+        return getPanelEdit().getPanelBaseElement();
     }
     
     /**
@@ -82,6 +71,6 @@ public final class ViewEditInterfaceUML extends ViewEdit {
      * @return Panel Stereotype.
      */
     public PanelStereotype getPanelStereotype() {
-        return this.getPanelEditInterface().getPanelStereotype();
+        return getPanelEdit().getPanelStereotype();
     }
 }

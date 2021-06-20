@@ -11,7 +11,7 @@ import org.w3c.dom.Element;
  * <p>Class of Model <b>Stereotype</b>.</p>
  * <p>Class responsible for representing <b>Stereotype</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    model.structural.base.interfaces.Exportable
  */
 public final class Stereotype implements Exportable {
@@ -23,9 +23,9 @@ public final class Stereotype implements Exportable {
      * Default constructor method of Class.
      */
     public Stereotype() {
-        this.id        = "";
-        this.primitive = false;
-        this.name      = "stereotype";
+        id        = "";
+        primitive = false;
+        name      = "stereotype";
     }
     
     /**
@@ -33,9 +33,9 @@ public final class Stereotype implements Exportable {
      * @param element W3C Element.
      */
     public Stereotype(Element element) {
-        this.id        = element.getAttribute("id").trim();
-        this.primitive = element.getAttribute("primitive").trim().toLowerCase().equals("true");
-        this.setName(element.getAttribute("name"));
+        id        = element.getAttribute("id").trim();
+        primitive = element.getAttribute("primitive").trim().toLowerCase().equals("true");
+        setName(element.getAttribute("name"));
     }
     
     /**
@@ -47,7 +47,7 @@ public final class Stereotype implements Exportable {
     public Stereotype(String id, String name, boolean primitive) {
         this.id        = id.trim();
         this.primitive = primitive;
-        this.setName(name);
+        setName(name);
     }
     
     /**
@@ -55,9 +55,9 @@ public final class Stereotype implements Exportable {
      * @param name Stereotype Name.
      */
     public Stereotype(String name) {
-        this.id        = null;
-        this.primitive = false;
-        this.setName(name);
+        id        = null;
+        primitive = false;
+        setName(name);
     }
 
     /**
@@ -65,7 +65,7 @@ public final class Stereotype implements Exportable {
      * @return Stereotype Id.
      */
     public String getId() {
-        return this.id;
+        return id;
     }
 
     /**
@@ -81,7 +81,7 @@ public final class Stereotype implements Exportable {
      * @return Stereotype Name.
      */
     public String getName() {
-        return this.name;
+        return name;
     }
 
     /**
@@ -89,7 +89,7 @@ public final class Stereotype implements Exportable {
      * @param name Stereotype Name.
      */
     public void setName(String name) {
-        this.name = this.primitive ? name.trim() : name.toLowerCase().trim();
+        this.name = primitive ? name.trim() : name.toLowerCase().trim();
     }
 
     /**
@@ -97,7 +97,7 @@ public final class Stereotype implements Exportable {
      * @return Stereotype Primitive Flag.
      */
     public boolean isPrimitive() {
-        return this.primitive;
+        return primitive;
     }
 
     /**
@@ -132,25 +132,25 @@ public final class Stereotype implements Exportable {
 
     @Override
     public String export() {
-        return "    <stereotype id=\"" + this.id + "\" name=\"" + this.name + "\"" + " primitive=\"" + this.primitive + "\"/>\n";
+        return "    <stereotype id=\"" + id + "\" name=\"" + name + "\"" + " primitive=\"" + primitive + "\"/>\n";
     }
     
     @Override
     public boolean equals(Object object) {
         if (object instanceof Stereotype == false)
             return false;
-        return Objects.equals(this.id, ((Stereotype) object).getId());
+        return Objects.equals(id, ((Stereotype) object).getId());
     }
 
     @Override
     public int hashCode() {
         int    hash = 7;
-               hash = 97 * hash + Objects.hashCode(this.id);
+               hash = 97 * hash + Objects.hashCode(id);
         return hash;
     }
     
     @Override
     public String toString() {
-        return "<<" + this.name + ">>";
+        return "<<" + name + ">>";
     }
 }

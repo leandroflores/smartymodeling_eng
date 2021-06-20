@@ -30,38 +30,27 @@ public final class ViewEditDiagram extends ViewEdit {
         this.diagram    = diagram;
         this.controller = new ControllerViewEditDiagram(this);
         this.title      = "Edit Diagram Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(600, 325);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 325);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditDiagram();
-        this.addLines(1);
+    protected PanelEditDiagram createPanelEdit() {
+        return new PanelEditDiagram(view, diagram);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Diagram.
-     */
-    private void addPanelEditDiagram() {
-        this.addPanel("panelEditDiagram", new PanelEditDiagram(this.view, this.diagram));
-        this.getPanelEditDiagram().setPreferredSize(new Dimension(500, 200));
-        this.add(this.getPanelEditDiagram());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 200);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Diagram.
-     * @return Panel Edit Diagram.
-     */
-    private PanelEditDiagram getPanelEditDiagram() {
-        return (PanelEditDiagram) this.getPanel("panelEditDiagram");
+    @Override
+    public PanelEditDiagram getPanelEdit() {
+        return (PanelEditDiagram) super.getPanelEdit();
     }
     
     /**
@@ -69,7 +58,7 @@ public final class ViewEditDiagram extends ViewEdit {
      * @return Panel Base Diagram.
      */
     public PanelBaseDiagram getPanelBaseDiagram() {
-        return this.getPanelEditDiagram().getPanelBaseDiagram();
+        return getPanelEdit().getPanelBaseDiagram();
     }
     
     /**
@@ -77,6 +66,6 @@ public final class ViewEditDiagram extends ViewEdit {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
 }

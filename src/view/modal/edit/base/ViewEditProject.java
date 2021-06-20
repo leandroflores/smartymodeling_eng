@@ -28,38 +28,27 @@ public final class ViewEditProject extends ViewEdit {
         super(panel.getViewMenu());
         this.controller = new ControllerViewEditProject(this);
         this.title      = "Edit Project Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(new Dimension(620, 350));
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(620, 350);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditProject();
-        this.addLines(1);
+    protected PanelEditProject createPanelEdit() {
+        return new PanelEditProject(view);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Element.
-     */
-    private void addPanelEditProject() {
-        this.addPanel("panelEditProject", new PanelEditProject(this.view));
-        this.getPanelEditProject().setPreferredSize(new Dimension(500, 225));
-        this.add(this.getPanelEditProject());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 225);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Project.
-     * @return Panel Edit Project.
-     */
-    private PanelEditProject getPanelEditProject() {
-        return (PanelEditProject) this.getPanel("panelEditProject");
+    @Override
+    public PanelEditProject getPanelEdit() {
+        return (PanelEditProject) super.getPanelEdit();
     }
     
     /**
@@ -67,6 +56,6 @@ public final class ViewEditProject extends ViewEdit {
      * @return Panel Base Project.
      */
     public PanelBaseProject getPanelBaseProject() {
-        return this.getPanelEditProject().getPanelBaseProject();
+        return getPanelEdit().getPanelBaseProject();
     }
 }

@@ -30,13 +30,13 @@ public final class ViewDeleteArtifact extends ViewDelete {
         this.artifact   = artifact;
         this.controller = new ControllerViewDeleteArtifact(this);
         this.title      = "Delete Artifact";
-        this.initComponents();
-        this.addComponents();
+        initComponents();
+        addComponents();
     }
 
     @Override
     public void addComponents() {
-        super.addComponents(this.artifact.getElement().getName());
+        super.addComponents(artifact.getElement().getName());
     }
     
     /**
@@ -44,7 +44,7 @@ public final class ViewDeleteArtifact extends ViewDelete {
      * @return Artifact.
      */
     public Artifact getArtifact() {
-        return this.artifact;
+        return artifact;
     }
     
     /**
@@ -52,6 +52,6 @@ public final class ViewDeleteArtifact extends ViewDelete {
      * @return Instance.
      */
     public Instance getInstance() {
-        return this.instance;
+        return instance;
     }
 }

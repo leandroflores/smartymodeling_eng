@@ -45,32 +45,32 @@ public abstract class View extends JFrame {
      */
     public View() {
         super();
-        this.init();
-        this.setDefaultProperties();
+        init();
+        setDefaultProperties();
     }
     
     /**
      * Method responsible for initializing the Component Maps.
      */
     private void init() {
-        this.buttons      = new HashMap<>();
-        this.fileChoosers = new HashMap<>();
-        this.menus        = new HashMap<>();
-        this.menuItems    = new HashMap<>();
-        this.scrollPanes  = new HashMap<>();
+        buttons      = new HashMap<>();
+        fileChoosers = new HashMap<>();
+        menus        = new HashMap<>();
+        menuItems    = new HashMap<>();
+        scrollPanes  = new HashMap<>();
     }
     
     /**
      * Method responsible for setting the Default Properties for the View.
      */
     private void setDefaultProperties() {
-        this.setSize(new Dimension(this.getXAxis(), this.getYAxis()));
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setLocation(5, 5);
-        this.setIconImage(new ImageIcon(getClass().getResource("/images/icon.png")).getImage());
-        this.setLayout(new FlowLayout(FlowLayout.CENTER));
-        this.setResizable(true);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setSize(new Dimension(getXAxis(), getYAxis()));
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocation(5, 5);
+        setIconImage(new ImageIcon(getClass().getResource("/images/icon.png")).getImage());
+        setLayout(new FlowLayout(FlowLayout.CENTER));
+        setResizable(true);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     
     /**
@@ -96,7 +96,7 @@ public abstract class View extends JFrame {
      */
     protected JLabel createLabel(String title) {
         JLabel label = new JLabel(title);
-               label.addKeyListener(this.controller);
+               label.addKeyListener(controller);
                label.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
         return label;
     }
@@ -108,7 +108,7 @@ public abstract class View extends JFrame {
      * @return New Label.
      */
     protected JLabel createLabel(String title, int size) {
-        JLabel label = this.createLabel(title);
+        JLabel label = createLabel(title);
                label.setHorizontalAlignment(SwingConstants.RIGHT);
                label.setPreferredSize(new Dimension(size, ViewStyle.HEIGHT));
         return label;
@@ -134,11 +134,11 @@ public abstract class View extends JFrame {
         JButton button = new JButton(new FunctView().createImage("icons/" + path));
                 button.setText(title);
                 button.setToolTipText(title);
-                button.addActionListener(this.controller);
-                button.addKeyListener(this.controller);
+                button.addActionListener(controller);
+                button.addKeyListener(controller);
                 button.setPreferredSize(new Dimension(75, 30));
                 button.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
-                this.buttons.put(id, button);
+                buttons.put(id, button);
         return  button;
     }
     
@@ -148,7 +148,7 @@ public abstract class View extends JFrame {
      * @return Button found.
      */
     protected JButton getButton(String id) {
-        return (JButton) this.buttons.get(id);
+        return (JButton) buttons.get(id);
     }
     
     /**
@@ -162,7 +162,7 @@ public abstract class View extends JFrame {
         JFileChooser fileChooser = new JFileChooser();
                      fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                      fileChooser.setFileFilter(new SMartyFilter());
-                     this.fileChoosers.put(id, fileChooser);
+                     fileChoosers.put(id, fileChooser);
         return       fileChooser;
     }
     
@@ -175,7 +175,7 @@ public abstract class View extends JFrame {
         JFileChooser fileChooser = new JFileChooser();
                      fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                      fileChooser.setFileFilter(new FileNameExtensionFilter("PNG", "png", "png"));
-                     this.fileChoosers.put(id, fileChooser);
+                     fileChoosers.put(id, fileChooser);
         return       fileChooser;
     }
     
@@ -188,7 +188,7 @@ public abstract class View extends JFrame {
         JFileChooser fileChooser = new JFileChooser();
                      fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                      fileChooser.setFileFilter(new FileNameExtensionFilter("PDF", "pdf", "pdf"));
-                     this.fileChoosers.put(id, fileChooser);
+                     fileChoosers.put(id, fileChooser);
         return       fileChooser;
     }
     
@@ -198,7 +198,7 @@ public abstract class View extends JFrame {
      * @return File Chooser found.
      */
     protected JFileChooser getFileChooser(String id) {
-        return (JFileChooser) this.fileChoosers.get(id);
+        return (JFileChooser) fileChoosers.get(id);
     }
     
     /**
@@ -209,9 +209,9 @@ public abstract class View extends JFrame {
      */
     protected JMenu createMenu(String id, String title) {
         JMenu  menu = new JMenu(title);
-               menu.addActionListener(this.controller);
+               menu.addActionListener(controller);
                menu.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
-               this.menus.put(id, menu);
+               menus.put(id, menu);
         return menu;
     }
     
@@ -221,7 +221,7 @@ public abstract class View extends JFrame {
      * @return Menu found.
      */
     protected JMenu getMenu(String id) {
-        return (JMenu) this.menus.get(id);
+        return (JMenu) menus.get(id);
     }
     
     /**
@@ -233,10 +233,10 @@ public abstract class View extends JFrame {
      */
     protected JMenuItem createMenuItem(String id, String title, String path) {
         JMenuItem menuItem = new JMenuItem(title, new FunctView().createImage("icons/" + path));
-                  menuItem.addActionListener(this.controller);
-                  menuItem.addKeyListener(this.controller);
+                  menuItem.addActionListener(controller);
+                  menuItem.addKeyListener(controller);
                   menuItem.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
-                  this.menuItems.put(id, menuItem);
+                  menuItems.put(id, menuItem);
         return    menuItem;
     }
     
@@ -249,7 +249,7 @@ public abstract class View extends JFrame {
      * @return New Menu Item.
      */
     protected JMenuItem createMenuItem(String id, String title, String path, int keychar) {
-        JMenuItem menuItem = this.createMenuItem(id, title, path);
+        JMenuItem menuItem = createMenuItem(id, title, path);
                   menuItem.setAccelerator(KeyStroke.getKeyStroke(keychar, InputEvent.CTRL_MASK));
                   menuItem.setMnemonic(keychar);
         return    menuItem;
@@ -264,7 +264,7 @@ public abstract class View extends JFrame {
      * @return New Menu Item.
      */
     protected JMenuItem createMenuItemAlt(String id, String title, String path, int keychar) {
-        JMenuItem menuItem = this.createMenuItem(id, title, path);
+        JMenuItem menuItem = createMenuItem(id, title, path);
                   menuItem.setAccelerator(KeyStroke.getKeyStroke(keychar, InputEvent.ALT_MASK));
                   menuItem.setMnemonic(keychar);
         return    menuItem;
@@ -279,7 +279,7 @@ public abstract class View extends JFrame {
      * @return New Menu Item.
      */
     protected JMenuItem createMenuItemShift(String id, String title, String path, int keychar) {
-        JMenuItem menuItem = this.createMenuItem(id, title, path);
+        JMenuItem menuItem = createMenuItem(id, title, path);
                   menuItem.setAccelerator(KeyStroke.getKeyStroke(keychar, InputEvent.SHIFT_MASK));
                   menuItem.setMnemonic(keychar);
         return    menuItem;
@@ -291,7 +291,7 @@ public abstract class View extends JFrame {
      * @return Menu Item found.
      */
     protected JMenuItem getMenuItem(String id) {
-        return (JMenuItem) this.menuItems.get(id);
+        return (JMenuItem) menuItems.get(id);
     }
     
     /**
@@ -299,7 +299,7 @@ public abstract class View extends JFrame {
      * @return Menu Items Map.
      */
     protected HashMap getMenuItems() {
-        return new HashMap(this.menuItems);
+        return new HashMap(menuItems);
     }
     
     /**
@@ -309,10 +309,10 @@ public abstract class View extends JFrame {
      */
     protected JScrollPane createScrollPane(String id) {
         JScrollPane scrollPane = new JScrollPane();
-                    scrollPane.addKeyListener(this.controller);
+                    scrollPane.addKeyListener(controller);
                     scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
                     scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-                    this.scrollPanes.put(id, scrollPane);
+                    scrollPanes.put(id, scrollPane);
         return scrollPane;
     }
     
@@ -322,6 +322,6 @@ public abstract class View extends JFrame {
      * @return Scroll Pane found.
      */
     protected JScrollPane getScrollPane(String id) {
-        return (JScrollPane) this.scrollPanes.get(id);
+        return (JScrollPane) scrollPanes.get(id);
     }
 }

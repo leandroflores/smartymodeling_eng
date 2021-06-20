@@ -36,38 +36,27 @@ public final class ViewEditElement extends ViewEdit {
         this.element    = element;
         this.controller = new ControllerViewEditElement(this);
         this.title      = "Edit Element Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(600, 375);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 375);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditElement();
-        this.addLines(1);
+    protected PanelEditElement createPanelEdit() {
+        return new PanelEditElement(view, diagram, element);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Element.
-     */
-    private void addPanelEditElement() {
-        this.addPanel("panelEditElement", new PanelEditElement(this.view, this.diagram, this.element));
-        this.getPanelEditElement().setPreferredSize(new Dimension(500, 250));
-        this.add(this.getPanelEditElement());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 200);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Element.
-     * @return Panel Edit Element.
-     */
-    private PanelEditElement getPanelEditElement() {
-        return (PanelEditElement) this.getPanel("panelEditElement");
+    @Override
+    public PanelEditElement getPanelEdit() {
+        return (PanelEditElement) super.getPanelEdit();
     }
     
     /**
@@ -75,7 +64,7 @@ public final class ViewEditElement extends ViewEdit {
      * @return Panel Base Element.
      */
     public PanelBaseElement getPanelBaseElement() {
-        return this.getPanelEditElement().getPanelBaseElement();
+        return getPanelEdit().getPanelBaseElement();
     }
     
     /**
@@ -83,7 +72,7 @@ public final class ViewEditElement extends ViewEdit {
      * @return Panel Stereotype.
      */
     public PanelStereotype getPanelStereotype() {
-        return this.getPanelEditElement().getPanelStereotype();
+        return getPanelEdit().getPanelStereotype();
     }
     
     /**
@@ -91,7 +80,7 @@ public final class ViewEditElement extends ViewEdit {
      * @return Panel Dependency.
      */
     public PanelDependency getPanelDependency() {
-        return this.getPanelEditElement().getPanelDependency();
+        return getPanelEdit().getPanelDependency();
     }
     
     /**
@@ -99,7 +88,7 @@ public final class ViewEditElement extends ViewEdit {
      * @return Element.
      */
     public Element getElement() {
-        return this.element;
+        return element;
     }
     
     /**
@@ -107,6 +96,6 @@ public final class ViewEditElement extends ViewEdit {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
 }

@@ -21,9 +21,7 @@ public class StyleSequenceAssociation extends StyleAssociation {
      * @return Icon Style.
      */
     public String getIconStyle(Element element) {
-        return element.getType().equalsIgnoreCase("instance") ? 
-               "classIconStyle" : 
-               "actorIconStyle";
+        return element.getType().equalsIgnoreCase("instance") ? "classIconStyle" : "actorIconStyle";
     }
     
     /**
@@ -32,7 +30,7 @@ public class StyleSequenceAssociation extends StyleAssociation {
      * @param synchronous Synchronous Flag.
      */
     public void setMessageStyle(Map style, boolean synchronous) {
-        this.setDefault(style);
+        setDefault(style);
         style.put(mxConstants.STYLE_DASHED,   "0");
         style.put(mxConstants.STYLE_ENDARROW, synchronous ? mxConstants.ARROW_OPEN : mxConstants.ARROW_SPACING);
     }

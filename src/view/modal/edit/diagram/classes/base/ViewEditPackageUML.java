@@ -35,38 +35,27 @@ public final class ViewEditPackageUML extends ViewEdit {
         this.package_   = package_;
         this.controller = new ControllerViewEditPackageUML(this);
         this.title      = "Edit Package Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(600, 445);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 445);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditPackageUML();
-        this.addLines(1);
+    protected PanelEditPackageUML createPanelEdit() {
+        return new PanelEditPackageUML(view, diagram, package_);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Package UML.
-     */
-    private void addPanelEditPackageUML() {
-        this.addPanel("panelEditPackage", new PanelEditPackageUML(this.view, this.diagram, this.package_));
-        this.getPanelEditPackage().setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanelEditPackage());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 300);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Package UML.
-     * @return Panel Edit Package UML.
-     */
-    private PanelEditPackageUML getPanelEditPackage() {
-        return (PanelEditPackageUML) this.getPanel("panelEditPackage");
+    @Override
+    public PanelEditPackageUML getPanelEdit() {
+        return (PanelEditPackageUML) super.getPanelEdit();
     }
     
     /**
@@ -74,7 +63,7 @@ public final class ViewEditPackageUML extends ViewEdit {
      * @return Panel Base Package.
      */
     public PanelBaseElement getPanelBasePackageUML() {
-        return this.getPanelEditPackage().getPanelBaseElement();
+        return getPanelEdit().getPanelBaseElement();
     }
     
     /**
@@ -82,6 +71,6 @@ public final class ViewEditPackageUML extends ViewEdit {
      * @return Panel Stereotype.
      */
     public PanelStereotype getPanelStereotype() {
-        return this.getPanelEditPackage().getPanelStereotype();
+        return getPanelEdit().getPanelStereotype();
     }
 }

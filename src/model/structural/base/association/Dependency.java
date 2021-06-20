@@ -9,7 +9,7 @@ import model.structural.base.Element;
  * <p>Class of Model <b>Dependency</b>.</p>
  * <p>Class responsible for representing the <b>Dependency</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  23/05/2019
+ * @since  2019-05-23
  * @see    model.structural.base.association.Association
  * @see    model.structural.base.Element
  */

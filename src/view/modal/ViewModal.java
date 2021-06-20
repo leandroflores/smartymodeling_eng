@@ -48,8 +48,8 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      */
     public ViewModal(View view) {
         super(view, "", true);
-        this.init();
-        this.setSettings();
+        init();
+        setSettings();
     }
     
     /**
@@ -58,44 +58,44 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      */
     public ViewModal(ViewModal view) {
         super(view, "", true);
-        this.init();
-        this.setSettings();
+        init();
+        setSettings();
     }
     
     /**
      * Method responsible for initializing the Maps.
      */
     private void init() {
-        this.buttons     = new HashMap<>();
-        this.scrollPanes = new HashMap<>();
-        this.tables      = new HashMap<>();
-        this.textFields  = new HashMap<>();   
-        this.panels      = new HashMap<>();
+        buttons     = new HashMap<>();
+        scrollPanes = new HashMap<>();
+        tables      = new HashMap<>();
+        textFields  = new HashMap<>();   
+        panels      = new HashMap<>();
     }
     
     /**
      * Method responsible for defining the settings for the View Modal.
      */
     private void setSettings() {
-        this.setSize(220, 120);
-        this.setLocation(350, 400);
-        this.setIconImage(new ImageIcon(getClass().getResource("/images/icon.png")).getImage());
-        this.setResizable(false);
-        this.setLayout(new FlowLayout(FlowLayout.CENTER));
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setSize(220, 120);
+        setLocation(350, 400);
+        setIconImage(new ImageIcon(getClass().getResource("/images/icon.png")).getImage());
+        setResizable(false);
+        setLayout(new FlowLayout(FlowLayout.CENTER));
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     
     @Override
     public void addHeader() {
-        this.updateTitle();
-        this.addLines(1);
+        updateTitle();
+        addLines(1);
     }
     
     /**
      * Method responsible for updating the View Title.
      */
     protected void updateTitle() {
-        this.setTitle(ViewStyle.SYSTEM + this.title);
+        setTitle(ViewStyle.SYSTEM + title);
     }
     
     /**
@@ -104,7 +104,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      */
     protected void addLines(int number) {
         for (int i = 0; i < number; i++)
-            this.add(new JLabel(new FunctString().getSpaces(1000)));
+            add(new JLabel(new FunctString().getSpaces(1000)));
     }
     
     /**
@@ -114,7 +114,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      */
     protected JLabel createLabel(String title) {
         JLabel label = new JLabel(title);
-               label.addKeyListener(this.controller);
+               label.addKeyListener(controller);
                label.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
         return label;
     }
@@ -126,7 +126,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      * @return New Label.
      */
     protected JLabel createLabel(String title, int size) {
-        JLabel label = this.createLabel(title);
+        JLabel label = createLabel(title);
                label.setHorizontalAlignment(SwingConstants.RIGHT);
                label.setPreferredSize(new Dimension(size, ViewStyle.HEIGHT));
         return label;
@@ -152,10 +152,10 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
         JButton button = new JButton(new FunctView().createImage("icons/" + path + ".png"));
                 button.setText(title);
                 button.setToolTipText(title);
-                button.addActionListener(this.controller);
-                button.addKeyListener(this.controller);
+                button.addActionListener(controller);
+                button.addKeyListener(controller);
                 button.setFont(new Font(ViewStyle.STYLE, ViewStyle.CENTER, ViewStyle.SIZE));
-                this.buttons.put(id, button);
+                buttons.put(id, button);
         return  button;
     }
     
@@ -165,7 +165,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      * @return Button found.
      */
     public JButton getButton(String id) {
-        return (JButton) this.buttons.get(id);
+        return (JButton) buttons.get(id);
     }
     
     /**
@@ -175,8 +175,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      */
     public JScrollPane createScrollPane(String id) {
         JScrollPane scrollPane = new JScrollPane();
-//                    scrollPane.setPreferredSize(new Dimension(390, 120));
-                    this.scrollPanes.put(id, scrollPane);
+                    scrollPanes.put(id, scrollPane);
         return      scrollPane;
     }
     
@@ -191,7 +190,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
                     scrollPane.setPreferredSize(new Dimension(390, 120));
                     scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
                     scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-                    this.scrollPanes.put(id, scrollPane);
+                    scrollPanes.put(id, scrollPane);
         return      scrollPane;
     }
     
@@ -201,7 +200,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      * @return Scroll Pane found.
      */
     public JScrollPane getScrollPane(String id) {
-        return (JScrollPane) this.scrollPanes.get(id);
+        return (JScrollPane) scrollPanes.get(id);
     }
     
     /**
@@ -214,11 +213,11 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
     protected JTextField createTextField(String id, String title, int size) {
         JTextField textField = new JTextField(size);
                    textField.setText(title);
-                   textField.addActionListener(this.controller);
-                   textField.addKeyListener(this.controller);
+                   textField.addActionListener(controller);
+                   textField.addKeyListener(controller);
                    textField.setPreferredSize(new Dimension(ViewStyle.WIDTH, ViewStyle.HEIGHT));
                    textField.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
-                   this.textFields.put(id, textField);
+                   textFields.put(id, textField);
         return     textField;
     }
     
@@ -229,7 +228,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      * @return New Date Text Field.
      */
     protected JTextField createTextFieldDate(String id, Date date) {
-        return this.createTextField(id, new FunctDate().getFormattedUSDate(date), 8);
+        return createTextField(id, new FunctDate().getFormattedUSDate(date), 8);
     }
     
     /**
@@ -240,7 +239,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      * @return New No Editable Text Field.
      */
     protected JTextField createTextFieldNoEditable(String id, String title, int size) {
-        JTextField textField = this.createTextField(id, title, size);
+        JTextField textField = createTextField(id, title, size);
                    textField.setEditable(false);
         return     textField;
     }
@@ -251,7 +250,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      * @return Text Field found.
      */
     public JTextField getTextField(String id) {
-        return (JTextField) this.textFields.get(id);
+        return (JTextField) textFields.get(id);
     }
     
     /**
@@ -260,7 +259,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      * @param panel Panel.
      */
     protected void addPanel(String id, Panel panel) {
-        this.panels.put(id, panel);
+        panels.put(id, panel);
     }
     
     /**
@@ -269,7 +268,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      * @return Panel found.
      */
     protected Panel getPanel(String id) {
-        return (Panel) this.panels.get(id);
+        return (Panel) panels.get(id);
     }
     
     /**
@@ -277,7 +276,7 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
      * @param id Panel Id.
      */
     protected void removePanel(String id) {
-        this.panels.remove(id);
+        panels.remove(id);
     }
     
     /**
@@ -306,6 +305,6 @@ public abstract class ViewModal extends JDialog implements InterfaceView {
     @Override
     public void setSize(int y, int x) {
         super.setSize(y, x);
-        this.setLocationRelativeTo(this.getParent());
+        setLocationRelativeTo(getParent());
     }
 }

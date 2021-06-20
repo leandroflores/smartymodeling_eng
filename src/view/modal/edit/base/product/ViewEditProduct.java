@@ -30,38 +30,27 @@ public final class ViewEditProduct extends ViewEdit {
         this.product    = product;
         this.controller = new ControllerViewEditProduct(this);
         this.title      = "Edit Product Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(600, 350);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 350);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditProduct();
-        this.addLines(1);
+    protected PanelEditProduct createPanelEdit() {
+        return new PanelEditProduct(view, product);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Product.
-     */
-    private void addPanelEditProduct() {
-        this.addPanel("panelEditProduct", new PanelEditProduct(this.view, this.product));
-        this.getPanelEditProduct().setPreferredSize(new Dimension(500, 225));
-        this.add(this.getPanelEditProduct());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 225);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Product.
-     * @return Panel Edit Product.
-     */
-    private PanelEditProduct getPanelEditProduct() {
-        return (PanelEditProduct) this.getPanel("panelEditProduct");
+    @Override
+    public PanelEditProduct getPanelEdit() {
+        return (PanelEditProduct) super.getPanelEdit();
     }
     
     /**
@@ -69,7 +58,7 @@ public final class ViewEditProduct extends ViewEdit {
      * @return Panel Base Product.
      */
     public PanelBaseProduct getPanelBaseProduct() {
-        return this.getPanelEditProduct().getPanelBaseProduct();
+        return getPanelEdit().getPanelBaseProduct();
     }
     
     /**
@@ -77,6 +66,6 @@ public final class ViewEditProduct extends ViewEdit {
      * @return Product.
      */
     public Product getProduct() {
-        return this.product;
+        return product;
     }
 }

@@ -34,38 +34,27 @@ public final class ViewEditInstanceUML extends ViewEdit {
         this.instance   = instance;
         this.controller = new ControllerViewEditInstanceUML(this);
         this.title      = "Edit Instance Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(new Dimension(600, 425));
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 425);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditInstanceUML();
-        this.addLines(1);
+    protected PanelEditInstanceUML createPanelEdit() {
+        return new PanelEditInstanceUML(view, diagram, instance);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Instance UML.
-     */
-    private void addPanelEditInstanceUML() {
-        this.addPanel("panelEditInstance", new PanelEditInstanceUML(this.view, this.diagram, this.instance));
-        this.getPanelEditInstance().setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanelEditInstance());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 300);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Instance.
-     * @return Panel Edit Instance.
-     */
-    private PanelEditInstanceUML getPanelEditInstance() {
-        return (PanelEditInstanceUML) this.getPanel("panelEditInstance");
+    @Override
+    public PanelEditInstanceUML getPanelEdit() {
+        return (PanelEditInstanceUML) super.getPanelEdit();
     }
     
     /**
@@ -73,7 +62,7 @@ public final class ViewEditInstanceUML extends ViewEdit {
      * @return Panel Base Instance UML.
      */
     public PanelBaseInstanceUML getPanelBaseInstanceUML() {
-        return this.getPanelEditInstance().getPanelBaseInstanceUML();
+        return getPanelEdit().getPanelBaseInstanceUML();
     }
     
     /**
@@ -81,6 +70,6 @@ public final class ViewEditInstanceUML extends ViewEdit {
      * @return Instance UML.
      */
     public InstanceUML getInstanceUML() {
-        return this.instance;
+        return instance;
     }
 }

@@ -30,38 +30,27 @@ public final class ViewEditInstance extends ViewEdit {
         this.instance    = instance;
         this.controller = new ControllerViewEditInstance(this);
         this.title      = "Edit Instance Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(600, 350);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 350);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditInstance();
-        this.addLines(1);
+    protected PanelEditInstance createPanelEdit() {
+        return new PanelEditInstance(view, instance);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Instance.
-     */
-    private void addPanelEditInstance() {
-        this.addPanel("panelEditInstance", new PanelEditInstance(this.view, this.instance));
-        this.getPanelEditInstance().setPreferredSize(new Dimension(500, 225));
-        this.add(this.getPanelEditInstance());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 225);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Instance.
-     * @return Panel Edit Instance.
-     */
-    private PanelEditInstance getPanelEditInstance() {
-        return (PanelEditInstance) this.getPanel("panelEditInstance");
+    @Override
+    public PanelEditInstance getPanelEdit() {
+        return (PanelEditInstance) super.getPanelEdit();
     }
     
     /**
@@ -69,7 +58,7 @@ public final class ViewEditInstance extends ViewEdit {
      * @return Panel Base Instance.
      */
     public PanelBaseInstance getPanelBaseInstance() {
-        return this.getPanelEditInstance().getPanelBaseInstance();
+        return getPanelEdit().getPanelBaseInstance();
     }
     
     /**
@@ -77,6 +66,6 @@ public final class ViewEditInstance extends ViewEdit {
      * @return Instance.
      */
     public Instance getInstance() {
-        return this.instance;
+        return instance;
     }
 }

@@ -36,7 +36,7 @@ public class StyleAssociation {
      * @param style Edge Style.
      */
     public void setDefaultStyle(Map style) {
-        this.setDefault(style);
+        setDefault(style);
         style.put(mxConstants.STYLE_DASHED, "0");
     }
     
@@ -45,7 +45,7 @@ public class StyleAssociation {
      * @param style Edge Style.
      */
     public void setDependencyStyle(Map style) {
-        this.setDefault(style);
+        setDefault(style);
         style.put(mxConstants.STYLE_DASHED, "1");
         style.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_OPEN);
     }
@@ -55,7 +55,7 @@ public class StyleAssociation {
      * @param style Edge Style.
      */
     public void setGeneralizationStyle(Map style) {
-        this.setDefault(style);
+        setDefault(style);
         style.put(mxConstants.STYLE_DASHED,   "0");
         style.put(mxConstants.STYLE_ENDFILL,  "0");
         style.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_BLOCK);

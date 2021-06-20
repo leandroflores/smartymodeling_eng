@@ -30,38 +30,27 @@ public final class ViewEditArtifact extends ViewEdit {
         this.artifact   = artifact;
         this.controller = new ControllerViewEditArtifact(this);
         this.title      = "Edit Artifact Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(600, 350);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 350);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditArtifact();
-        this.addLines(1);
+    protected PanelEditArtifact createPanelEdit() {
+        return new PanelEditArtifact(view, artifact);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Artifact.
-     */
-    private void addPanelEditArtifact() {
-        this.addPanel("panelEditArtifact", new PanelEditArtifact(this.view, this.artifact));
-        this.getPanelEditArtifact().setPreferredSize(new Dimension(500, 225));
-        this.add(this.getPanelEditArtifact());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 225);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Artifact.
-     * @return Panel Edit Artifact.
-     */
-    private PanelEditArtifact getPanelEditArtifact() {
-        return (PanelEditArtifact) this.getPanel("panelEditArtifact");
+    @Override
+    public PanelEditArtifact getPanelEdit() {
+        return (PanelEditArtifact) super.getPanelEdit();
     }
     
     /**
@@ -69,7 +58,7 @@ public final class ViewEditArtifact extends ViewEdit {
      * @return Panel Base Artifact.
      */
     public PanelBaseArtifact getPanelBaseArtifact() {
-        return this.getPanelEditArtifact().getPanelBaseArtifact();
+        return getPanelEdit().getPanelBaseArtifact();
     }
     
     /**
@@ -77,6 +66,6 @@ public final class ViewEditArtifact extends ViewEdit {
      * @return Artifact.
      */
     public Artifact getArtifact() {
-        return this.artifact;
+        return artifact;
     }
 }

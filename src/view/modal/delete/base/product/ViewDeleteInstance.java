@@ -30,13 +30,13 @@ public final class ViewDeleteInstance extends ViewDelete {
         this.instance   = instance;
         this.controller = new ControllerViewDeleteInstance(this);
         this.title      = "Delete Instance";
-        this.initComponents();
-        this.addComponents();
+        initComponents();
+        addComponents();
     }
 
     @Override
     public void addComponents() {
-        super.addComponents(this.instance.getName());
+        super.addComponents(instance.getName());
     }
     
     /**
@@ -44,7 +44,7 @@ public final class ViewDeleteInstance extends ViewDelete {
      * @return Instance.
      */
     public Instance getInstance() {
-        return this.instance;
+        return instance;
     }
     
     /**
@@ -52,6 +52,6 @@ public final class ViewDeleteInstance extends ViewDelete {
      * @return Product.
      */
     public Product getProduct() {
-        return this.product;
+        return product;
     }
 }

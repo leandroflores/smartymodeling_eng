@@ -35,38 +35,27 @@ public final class ViewEditMethodUML extends ViewEdit {
         this.method     = method;
         this.controller = new ControllerViewEditMethodUML(this);
         this.title      = "Edit Method Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(600, 445);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 445);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditMethodUML();
-        this.addLines(1);
+    protected PanelEditMethodUML createPanelEdit() {
+        return new PanelEditMethodUML(view, diagram, method);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Method UML.
-     */
-    private void addPanelEditMethodUML() {
-        this.addPanel("panelEditMethod", new PanelEditMethodUML(this.view, this.diagram, this.method));
-        this.getPanelEditMethod().setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanelEditMethod());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 300);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Method UML.
-     * @return Panel Edit Method UML.
-     */
-    private PanelEditMethodUML getPanelEditMethod() {
-        return (PanelEditMethodUML) this.getPanel("panelEditMethod");
+    @Override
+    public PanelEditMethodUML getPanelEdit() {
+        return (PanelEditMethodUML) super.getPanelEdit();
     }
     
     /**
@@ -74,7 +63,7 @@ public final class ViewEditMethodUML extends ViewEdit {
      * @return Panel Base Method UML.
      */
     public PanelBaseMethodUML getPanelBaseMethodUML() {
-        return this.getPanelEditMethod().getPanelBaseMethodUML();
+        return getPanelEdit().getPanelBaseMethodUML();
     }
     
     /**
@@ -82,6 +71,6 @@ public final class ViewEditMethodUML extends ViewEdit {
      * @return Panel Stereotype.
      */
     public PanelStereotype getPanelStereotype() {
-        return this.getPanelEditMethod().getPanelStereotype();
+        return getPanelEdit().getPanelStereotype();
     }
 }

@@ -19,7 +19,7 @@ public class StyleComponentAssociation extends StyleAssociation {
      * @param style Edge Style.
      */
     public void setProvideStyle(Map style) {
-        this.setDefault(style);
+        setDefault(style);
         style.put(mxConstants.STYLE_DASHED, "0");
     }
     
@@ -28,7 +28,7 @@ public class StyleComponentAssociation extends StyleAssociation {
      * @param style Edge Style.
      */
     public void setRequireStyle(Map style) {
-        this.setDefault(style);
+        setDefault(style);
         style.put(mxConstants.STYLE_DASHED, "1");
         style.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_OPEN);
     }

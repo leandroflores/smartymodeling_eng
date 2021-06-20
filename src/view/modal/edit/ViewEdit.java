@@ -1,9 +1,11 @@
 package view.modal.edit;
 
+import java.awt.Dimension;
 import javax.swing.JButton;
 import model.structural.base.Project;
 import view.modal.ViewModal;
 import view.main.structural.ViewMenu;
+import view.panel.edit.PanelEdit;
 
 /**
  * <p>Class of View <b>ViewEdit</b>.</p>
@@ -28,9 +30,51 @@ public abstract class ViewEdit extends ViewModal {
     }
     
     @Override
+    public void initComponents() {
+        addHeader();
+        addComponents();
+        addFooter();
+        setSize(getViewDimension());
+    }
+    
+    /**
+     * Method responsible for returning the View Dimension.
+     * @return View Dimension.
+     */
+    protected abstract Dimension getViewDimension();
+    
+    @Override
+    public void addComponents() {
+        addPanel("edit", createPanelEdit());
+        getPanelEdit().setPreferredSize(getPanelDimension());
+        add(getPanelEdit());
+        addLines(1);
+    }
+    
+    /**
+     * Method responsible for creating the Panel Edit.
+     * @return Panel Edit.
+     */
+    protected abstract PanelEdit createPanelEdit();
+    
+    /**
+     * Method responsible for returning the Panel Dimension.
+     * @return Panel Dimension.
+     */
+    protected abstract Dimension getPanelDimension();
+    
+    @Override
     public void addFooter() {
-        this.add(this.createButton("saveButton",   "  Save  ", "save"));
-        this.add(this.createButton("cancelButton", " Cancel ", "cancel"));
+        add(createButton("save",   "  Save  ", "save"));
+        add(createButton("cancel", " Cancel ", "cancel"));
+    }
+    
+    /**
+     * Method responsible for returning the Panel Edit.
+     * @return Panel Edit.
+     */
+    protected PanelEdit getPanelEdit() {
+        return (PanelEdit) getPanel("edit");
     }
     
     /**
@@ -38,7 +82,7 @@ public abstract class ViewEdit extends ViewModal {
      * @return Save Button.
      */
     public JButton getSaveButton() {
-        return this.getButton("saveButton");
+        return getButton("save");
     }
     
     /**
@@ -46,7 +90,7 @@ public abstract class ViewEdit extends ViewModal {
      * @return Cancel Button.
      */
     public JButton getCancelButton() {
-        return this.getButton("cancelButton");
+        return getButton("cancel");
     }
     
     /**
@@ -54,7 +98,7 @@ public abstract class ViewEdit extends ViewModal {
      * @return Project.
      */
     public Project getProject() {
-        return this.project;
+        return project;
     }
     
     /**
@@ -62,6 +106,6 @@ public abstract class ViewEdit extends ViewModal {
      * @return View Menu.
      */
     public ViewMenu getViewMenu() {
-        return this.view;
+        return view;
     }
 }

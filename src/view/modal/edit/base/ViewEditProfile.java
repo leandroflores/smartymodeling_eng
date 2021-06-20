@@ -30,38 +30,27 @@ public final class ViewEditProfile extends ViewEdit {
         this.profile    = profile;
         this.controller = new ControllerViewEditProfile(this);
         this.title      = "Edit Profile Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(new Dimension(650, 450));
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(650, 450);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditProfile();
-        this.addLines(1);
+    protected PanelEditProfile createPanelEdit() {
+        return new PanelEditProfile(view, profile);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Profile.
-     */
-    private void addPanelEditProfile() {
-        this.addPanel("panelEditProfile", new PanelEditProfile(this.view, this.profile));
-        this.getPanelEditProfile().setPreferredSize(new Dimension(500, 325));
-        this.add(this.getPanelEditProfile());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 325);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Profile.
-     * @return Panel Edit Profile.
-     */
-    private PanelEditProfile getPanelEditProfile() {
-        return (PanelEditProfile) this.getPanel("panelEditProfile");
+    @Override
+    public PanelEditProfile getPanelEdit() {
+        return (PanelEditProfile) super.getPanelEdit();
     }
     
     /**
@@ -69,7 +58,7 @@ public final class ViewEditProfile extends ViewEdit {
      * @return Panel Base Profile.
      */
     public PanelBaseProfile getPanelBaseProfile() {
-        return this.getPanelEditProfile().getPanelBaseProfile();
+        return getPanelEdit().getPanelBaseProfile();
     }
     
     /**
@@ -77,6 +66,6 @@ public final class ViewEditProfile extends ViewEdit {
      * @return Profile.
      */
     public Profile getProfile() {
-        return this.profile;
+        return profile;
     }
 }

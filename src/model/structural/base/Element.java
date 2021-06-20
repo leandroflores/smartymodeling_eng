@@ -10,7 +10,7 @@ import model.structural.base.interfaces.Modelable;
  * <p>Class of Model <b>Element</b>.</p>
  * <p>Class responsible for representing the <b>Element</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    model.structural.base.interfaces.Exportable
  * @see    model.structural.base.interfaces.Modelable
  */
@@ -58,9 +58,9 @@ public abstract class Element implements Exportable, Modelable {
      */
     public Element(org.w3c.dom.Element element, Diagram diagram, boolean position) {
         this(element, diagram);
-        this.setPosition(element);
-        this.setGlobalPosition(element);
-        this.setSize(element);
+        setPosition(element);
+        setGlobalPosition(element);
+        setSize(element);
     }
     
     /**
@@ -68,7 +68,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Diagram Element.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
 
     /**
@@ -76,7 +76,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Diagram Type.
      */
     public String getDiagramType() {
-        return this.diagram.getType();
+        return diagram.getType();
     }
     
     /**
@@ -92,7 +92,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Element Id.
      */
     public String getId() {
-        return this.id;
+        return id;
     }
 
     /**
@@ -100,7 +100,7 @@ public abstract class Element implements Exportable, Modelable {
      * @param id Element Id.
      */
     public void setId(String id) {
-        this.id = (this.id == null) ? id : this.id;
+        this.id = this.id == null ? id : this.id;
     }
 
     /**
@@ -108,7 +108,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Element Name.
      */
     public String getName() {
-        return this.name;
+        return name;
     }
 
     /**
@@ -117,7 +117,7 @@ public abstract class Element implements Exportable, Modelable {
      */
     public String getHTMLCode() {
         String html  = "<html>";
-        for (String string : this.name.split(""))
+        for (String string : name.split(""))
                html += string + "<br>";
         return html += "</html>";
     }
@@ -126,8 +126,8 @@ public abstract class Element implements Exportable, Modelable {
      * Method responsible for defining Default Name.
      */
     public void setDefaultName() {
-        if ((this.id != null) && (this.id.contains("#")))
-            this.setName(new FunctString().getInitUpperCase(this.id.replaceAll("#", "").replaceAll("-", "")));
+        if ((id != null) && (id.contains("#")))
+            setName(new FunctString().getInitUpperCase(id.replaceAll("#", "").replaceAll("-", "")));
     }
     
     /**
@@ -144,7 +144,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Element Type.
      */
     public String getType() {
-        return this.type;
+        return type;
     }
     
     /**
@@ -160,7 +160,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Element Mandatory.
      */
     public boolean isMandatory() {
-        return this.mandatory;
+        return mandatory;
     }
 
     /**
@@ -184,11 +184,11 @@ public abstract class Element implements Exportable, Modelable {
      * @return Element Default Flag.
      */
     public boolean isDefault() {
-        return !this.getType().toLowerCase().trim().equals("attribute")
-            && !this.getType().toLowerCase().trim().equals("method")
-            && !this.getType().toLowerCase().trim().equals("package")
-            && !this.getType().toLowerCase().trim().equals("initial")
-            && !this.getType().toLowerCase().trim().equals("final");
+        return !getType().toLowerCase().trim().equals("attribute")
+            && !getType().toLowerCase().trim().equals("method")
+            && !getType().toLowerCase().trim().equals("package")
+            && !getType().toLowerCase().trim().equals("initial")
+            && !getType().toLowerCase().trim().equals("final");
     }
     
     /**
@@ -196,7 +196,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Element Position.
      */
     public Point getPosition() {
-        return this.position;
+        return position;
     }
 
     /**
@@ -204,7 +204,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Element X Position.
      */
     public Integer getX() {
-        return this.position.x;
+        return position.x;
     }
     
     /**
@@ -212,10 +212,7 @@ public abstract class Element implements Exportable, Modelable {
      * @param distance Distance.
      */
     public void dx(Integer distance) {
-        if (this.position.x + distance < 0)
-            this.position.x  = 0;
-        else
-            this.position.x += distance;
+        position.x = Math.max(0, position.x + distance);
     }
     
     /**
@@ -223,7 +220,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Element Y Position.
      */
     public Integer getY() {
-        return this.position.y;
+        return position.y;
     }
     
     /**
@@ -231,10 +228,7 @@ public abstract class Element implements Exportable, Modelable {
      * @param distance Distance.
      */
     public void dy(Integer distance) {
-        if (this.position.y + distance < 0)
-            this.position.y  = 0;
-        else
-            this.position.y += distance;
+        position.y = Math.max(0, position.y + distance);
     }
     
     /**
@@ -248,7 +242,7 @@ public abstract class Element implements Exportable, Modelable {
             x = Double.parseDouble(element.getAttribute("x"));
             y = Double.parseDouble(element.getAttribute("y"));
         }catch (NumberFormatException exception) {}
-        this.setPosition(new Point(x.intValue(), y.intValue()));
+        setPosition(new Point(x.intValue(), y.intValue()));
     }
     
     /**
@@ -257,7 +251,7 @@ public abstract class Element implements Exportable, Modelable {
      * @param y Y Position.
      */
     public void setPosition(Integer x, Integer y) {
-        this.position = new Point(x, y);
+        position = new Point(x, y);
     }
     
     /**
@@ -273,7 +267,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Element Global Position.
      */
     public Point getGlobalPosition() {
-        return this.global;
+        return global;
     }
     
     /**
@@ -287,7 +281,7 @@ public abstract class Element implements Exportable, Modelable {
             x = Double.parseDouble(element.getAttribute("globalX"));
             y = Double.parseDouble(element.getAttribute("globalY"));
         }catch (NumberFormatException exception) {}
-        this.setGlobalPosition(new Point(x.intValue(), y.intValue()));
+        setGlobalPosition(new Point(x.intValue(), y.intValue()));
     }
     
     /**
@@ -296,7 +290,7 @@ public abstract class Element implements Exportable, Modelable {
      * @param y Y Position.
      */
     public void setGlobalPosition(Integer x, Integer y) {
-        this.global = new Point(x, y);
+        global = new Point(x, y);
     }
     
     /**
@@ -312,7 +306,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Element X Global Position.
      */
     public Integer getGlobalX() {
-        return this.global.x;
+        return global.x;
     }
     
     /**
@@ -320,10 +314,7 @@ public abstract class Element implements Exportable, Modelable {
      * @param distance Distance.
      */
     public void dxGlobal(Integer distance) {
-        if (this.getGlobalX() + distance < 0)
-            this.global.x  = 0;
-        else
-            this.global.x += distance;
+        global.x = Math.max(0, global.x + distance);
     }
     
     /**
@@ -331,7 +322,7 @@ public abstract class Element implements Exportable, Modelable {
      * @param x Element X Global Position.
      */
     public void setGlobalX(Integer x) {
-        this.global.x = x;
+        global.x = x;
     }
     
     /**
@@ -339,7 +330,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Element Y Global Position.
      */
     public Integer getGlobalY() {
-        return this.global.y;
+        return global.y;
     }
     
     /**
@@ -347,10 +338,7 @@ public abstract class Element implements Exportable, Modelable {
      * @param distance Distance.
      */
     public void dyGlobal(Integer distance) {
-        if (this.getGlobalY() + distance < 0)
-            this.global.y  = 0;
-        else
-            this.global.y += distance;
+        global.y = Math.max(0, global.y + distance);
     }
     
     /**
@@ -358,7 +346,7 @@ public abstract class Element implements Exportable, Modelable {
      * @param y Element Y Global Position.
      */
     public void setGlobalY(Integer y) {
-        this.global.y = y;
+        global.y = y;
     }
     
     /**
@@ -366,7 +354,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return X Center.
      */
     public Integer getXCenter() {
-        return this.getX() + (this.getWidth() / 2);
+        return getX() + (getWidth() / 2);
     }
     
     /**
@@ -374,7 +362,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Y Center.
      */
     public Integer getYCenter() {
-        return this.getY() + (this.getHeight() / 2);
+        return getY() + (getHeight() / 2);
     }
     
     /**
@@ -382,7 +370,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Element Size.
      */
     public Point getSize() {
-        return this.size;
+        return size;
     }
 
     /**
@@ -390,7 +378,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Element Height.
      */
     public Integer getHeight() {
-        return this.size.y;
+        return size.y;
     }
     
     /**
@@ -398,7 +386,7 @@ public abstract class Element implements Exportable, Modelable {
      * @param height Element Height.
      */
     public void setHeight(Integer height) {
-        this.size.y = height;
+        size.y = height;
     }
     
     /**
@@ -406,7 +394,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Element Width.
      */
     public Integer getWidth() {
-        return this.size.x;
+        return size.x;
     }
     
     /**
@@ -414,7 +402,7 @@ public abstract class Element implements Exportable, Modelable {
      * @param width Element Width.
      */
     public void setWidth(Integer width) {
-        this.size.x = width;
+        size.x = width;
     }
     
     /**
@@ -428,7 +416,7 @@ public abstract class Element implements Exportable, Modelable {
             height = Double.parseDouble(element.getAttribute("height"));
             width  = Double.parseDouble(element.getAttribute("width"));
         }catch (NumberFormatException exception) {}
-        this.setSize(new Point(width.intValue(), height.intValue()));
+        setSize(new Point(width.intValue(), height.intValue()));
     }
     
     /**
@@ -437,7 +425,7 @@ public abstract class Element implements Exportable, Modelable {
      * @param height Element Height.
      */
     public void setSize(Integer width, Integer height) {
-        this.size = new Point(height, width);
+        size = new Point(height, width);
     }
     
     /**
@@ -450,7 +438,7 @@ public abstract class Element implements Exportable, Modelable {
     
     @Override
     public String getTitle() {
-        return this.name;
+        return name;
     }
     
     /**
@@ -458,7 +446,7 @@ public abstract class Element implements Exportable, Modelable {
      * @return Element Abstract.
      */
     public String getAbstract() {
-        return "[" + this.getId() + "] " + this.getName();
+        return "[" + getId() + "] " + getName();
     }
     
     /**
@@ -480,42 +468,42 @@ public abstract class Element implements Exportable, Modelable {
      * @return Element Summary.
      */
     public String getSummary() {
-        return new FunctString().getInitUpperCase(this.type) + ": " + this.name;
+        return new FunctString().getInitUpperCase(type) + ": " + name;
     }
     
     @Override
     public String export() {
-        String export  = "    <"         + this.type;
-               export += " id=\""        + this.id           + "\"";
-               export += " name=\""      + this.name         + "\"";
-               export += " mandatory=\"" + this.mandatory    + "\"";
-               export += " x=\""         + this.getX()       + "\"";
-               export += " y=\""         + this.getY()       + "\"";
-               export += " globalX=\""   + this.getGlobalX() + "\"";
-               export += " globalY=\""   + this.getGlobalY() + "\"";
-               export += " height=\""    + this.getHeight()  + "\"";
-               export += " width=\""     + this.getWidth()   + "\"";
+        String export  = "    <"         + type;
+               export += " id=\""        + id           + "\"";
+               export += " name=\""      + name         + "\"";
+               export += " mandatory=\"" + mandatory    + "\"";
+               export += " x=\""         + getX()       + "\"";
+               export += " y=\""         + getY()       + "\"";
+               export += " globalX=\""   + getGlobalX() + "\"";
+               export += " globalY=\""   + getGlobalY() + "\"";
+               export += " height=\""    + getHeight()  + "\"";
+               export += " width=\""     + getWidth()   + "\"";
                export += "/>\n";
         return export;
     }
     
     @Override
     public boolean equals(Object object) {
-        if (object instanceof Element == false)
+        if (!(object instanceof Element))
             return false;
-        return Objects.equals(this.id, ((Element) object).getId());
+        return Objects.equals(id, ((Element) object).getId());
     }
 
     @Override
     public int hashCode() {
         int    hash = 5;
-               hash = 61 * hash + Objects.hashCode(this.id);
-               hash = 61 * hash + Objects.hashCode(this.type);
+               hash = 61 * hash + Objects.hashCode(id);
+               hash = 61 * hash + Objects.hashCode(type);
         return hash;
     }
     
     @Override
     public String toString() {
-        return this.getSummary();
+        return getSummary();
     }
 }

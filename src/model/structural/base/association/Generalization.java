@@ -9,7 +9,7 @@ import model.structural.base.Element;
  * <p>Class of Model <b>Generalization</b>.</p>
  * <p>Class responsible for representing the <b>Generalization</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    model.structural.base.association.Association
  * @see    model.structural.base.Element
  */
@@ -32,7 +32,7 @@ public class Generalization extends Association {
      * @return Generalization Source.
      */
     public Element getSource(Element element) {
-        return this.target.equals(element) ? this.source : null;
+        return target.equals(element) ? source : null;
     }
     
     /**
@@ -41,7 +41,7 @@ public class Generalization extends Association {
      * @return Generalization Target.
      */
     public Element getTarget(Element element) {
-        return this.source.equals(element) ? this.target : null;
+        return source.equals(element) ? target : null;
     }
     
     @Override

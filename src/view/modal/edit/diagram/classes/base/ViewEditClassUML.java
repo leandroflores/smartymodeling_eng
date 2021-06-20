@@ -35,38 +35,27 @@ public final class ViewEditClassUML extends ViewEdit {
         this.class_     = class_;
         this.controller = new ControllerViewEditClassUML(this);
         this.title      = "Edit Class Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(600, 445);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 445);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditClassUML();
-        this.addLines(1);
+    protected PanelEditClassUML createPanelEdit() {
+        return new PanelEditClassUML(view, diagram, class_);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Class UML.
-     */
-    private void addPanelEditClassUML() {
-        this.addPanel("panelEditClass", new PanelEditClassUML(this.view, this.diagram, this.class_));
-        this.getPanelEditClass().setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanelEditClass());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 300);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Class UML.
-     * @return Panel Edit Class UML.
-     */
-    private PanelEditClassUML getPanelEditClass() {
-        return (PanelEditClassUML) this.getPanel("panelEditClass");
+    @Override
+    public PanelEditClassUML getPanelEdit() {
+        return (PanelEditClassUML) super.getPanelEdit();
     }
     
     /**
@@ -74,7 +63,7 @@ public final class ViewEditClassUML extends ViewEdit {
      * @return Panel Base Class UML.
      */
     public PanelBaseClassUML getPanelBaseClassUML() {
-        return this.getPanelEditClass().getPanelBaseClassUML();
+        return getPanelEdit().getPanelBaseClassUML();
     }
     
     /**
@@ -82,6 +71,6 @@ public final class ViewEditClassUML extends ViewEdit {
      * @return Panel Stereotype.
      */
     public PanelStereotype getPanelStereotype() {
-        return this.getPanelEditClass().getPanelStereotype();
+        return getPanelEdit().getPanelStereotype();
     }
 }

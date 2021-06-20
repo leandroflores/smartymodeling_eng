@@ -9,7 +9,7 @@ import view.panel.modeling.PanelModeling;
  * <p>Class of View <b>ViewDeleteProduct</b>.</p>
  * <p>Class responsible for defining the <b>Product Delete View</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  2019-10-1
+ * @since  2019-10-10
  * @see    controller.view.modal.delete.base.product.ControllerViewDeleteProduct
  * @see    model.structural.base.product.Product
  * @see    view.modal.delete.ViewDelete
@@ -27,13 +27,13 @@ public final class ViewDeleteProduct extends ViewDelete {
         this.product    = product;
         this.controller = new ControllerViewDeleteProduct(this);
         this.title      = "Delete Product";
-        this.initComponents();
-        this.addComponents();
+        initComponents();
+        addComponents();
     }
 
     @Override
     public void addComponents() {
-        super.addComponents(this.product.getName());
+        super.addComponents(product.getName());
     }
     
     /**
@@ -41,6 +41,6 @@ public final class ViewDeleteProduct extends ViewDelete {
      * @return Product.
      */
     public Product getProduct() {
-        return this.product;
+        return product;
     }
 }

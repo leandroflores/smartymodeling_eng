@@ -19,7 +19,7 @@ public class StyleActivityAssociation extends StyleAssociation {
      * @param style Edge Style.
      */
     public void setFlowStyle(Map style) {
-        this.setDefault(style);
+        setDefault(style);
         style.put(mxConstants.STYLE_DASHED,   "0");
         style.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_OPEN);
     }

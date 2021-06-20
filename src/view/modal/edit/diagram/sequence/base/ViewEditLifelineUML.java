@@ -34,38 +34,27 @@ public final class ViewEditLifelineUML extends ViewEdit {
         this.lifeline   = lifeline;
         this.controller = new ControllerViewEditLifelineUML(this);
         this.title      = "Edit Lifeline Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(new Dimension(600, 425));
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 425);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditLifelineUML();
-        this.addLines(1);
+    protected PanelEditLifelineUML createPanelEdit() {
+        return new PanelEditLifelineUML(view, diagram, lifeline);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Lifeline UML.
-     */
-    private void addPanelEditLifelineUML() {
-        this.addPanel("panelEditLifeline", new PanelEditLifelineUML(this.view, this.diagram, this.lifeline));
-        this.getPanelEditLifeline().setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanelEditLifeline());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 300);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Lifeline.
-     * @return Panel Edit Lifeline.
-     */
-    private PanelEditLifelineUML getPanelEditLifeline() {
-        return (PanelEditLifelineUML) this.getPanel("panelEditLifeline");
+    @Override
+    public PanelEditLifelineUML getPanelEdit() {
+        return (PanelEditLifelineUML) super.getPanelEdit();
     }
     
     /**
@@ -73,7 +62,7 @@ public final class ViewEditLifelineUML extends ViewEdit {
      * @return Panel Base Lifeline UML.
      */
     public PanelBaseLifelineUML getPanelBaseLifelineUML() {
-        return this.getPanelEditLifeline().getPanelBaseLifelineUML();
+        return getPanelEdit().getPanelBaseLifelineUML();
     }
     
     /**
@@ -81,6 +70,6 @@ public final class ViewEditLifelineUML extends ViewEdit {
      * @return Lifeline UML.
      */
     public LifelineUML getLifelineUML() {
-        return this.lifeline;
+        return lifeline;
     }
 }

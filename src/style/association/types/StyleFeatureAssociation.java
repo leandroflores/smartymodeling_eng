@@ -21,7 +21,7 @@ public class StyleFeatureAssociation extends StyleAssociation {
      * @param fill Fill Flag.
      */
     public void setConnectionStyle(Map style, boolean oval, boolean fill) {
-        this.setDefault(style);
+        setDefault(style);
         style.put(mxConstants.STYLE_DASHED, "0");
         style.put(mxConstants.STYLE_ENDFILL,   fill ? "1" : "0");
         style.put(mxConstants.STYLE_STARTFILL, fill ? "1" : "0");
@@ -35,6 +35,6 @@ public class StyleFeatureAssociation extends StyleAssociation {
      * @param style Edge Style.
      */
     public void setCombinationStyle(Map style) {
-        this.setDefault(style);
+        setDefault(style);
     }
 }

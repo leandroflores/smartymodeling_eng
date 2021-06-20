@@ -6,7 +6,7 @@ import java.util.Map;
  * <p>Inteface of Model <b>Modelable</b>.</p>
  * <p>Inteface responsible for defining the <b>Element Modeling</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  */
 public interface Modelable {
     

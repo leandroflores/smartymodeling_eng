@@ -6,7 +6,7 @@ import model.structural.base.interfaces.Exportable;
  * <p>Class of Model <b>Metric</b>.</p>
  * <p>Class responsible for representing the <b>Metric</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  23/07/2019
+ * @since  2019-07-23
  * @see    model.structural.base.interfaces.Exportable
  */
 public class Metric implements Exportable {
@@ -27,12 +27,12 @@ public class Metric implements Exportable {
      * @param element W3C Element.
      */
     public Metric(org.w3c.dom.Element element) {
-        this.id          = element.getAttribute("id");
-        this.name        = element.getAttribute("name");
-        this.label       = element.getAttribute("label");
-        this.target      = element.getAttribute("target");
-        this.description = "";
-        this.operation   = "";
+        id          = element.getAttribute("id");
+        name        = element.getAttribute("name");
+        label       = element.getAttribute("label");
+        target      = element.getAttribute("target");
+        description = "";
+        operation   = "";
     }
     
     /**
@@ -40,7 +40,7 @@ public class Metric implements Exportable {
      * @return Metric Id.
      */
     public String getId() {
-        return this.id;
+        return id;
     }
 
     /**
@@ -48,7 +48,7 @@ public class Metric implements Exportable {
      * @param id Metric Id.
      */
     public void setId(String id) {
-        this.id = ((this.id == null) || (this.id.trim().equals(""))) ? id : this.id;
+        this.id = (this.id == null || this.id.trim().equals("")) ? id : this.id;
     }
 
     /**
@@ -56,7 +56,7 @@ public class Metric implements Exportable {
      * @return Metric Name.
      */
     public String getName() {
-        return this.name;
+        return name;
     }
 
     /**
@@ -72,7 +72,7 @@ public class Metric implements Exportable {
      * @return Metric Label.
      */
     public String getLabel() {
-        return this.label;
+        return label;
     }
 
     /**
@@ -88,7 +88,7 @@ public class Metric implements Exportable {
      * @return Metric Description.
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -104,7 +104,7 @@ public class Metric implements Exportable {
      * @return Metric Target.
      */
     public String getTarget() {
-        return this.target;
+        return target;
     }
 
     /**
@@ -120,7 +120,7 @@ public class Metric implements Exportable {
      * @return Metric Operation.
      */
     public String getOperation() {
-        return this.operation;
+        return operation;
     }
 
     /**
@@ -142,18 +142,18 @@ public class Metric implements Exportable {
     @Override
     public String export() {
         String export  = "  <metric";
-               export += " id=\""     + this.id     + "\"";
-               export += " name=\""   + this.name   + "\"";
-               export += " label=\""  + this.label  + "\"";
-               export += " target=\"" + this.target + "\">\n";
-               export += "    <description>" + this.description + "</description>\n";
-               export += "    <operation>"   + this.operation   + "</operation>\n";
+               export += " id=\""     + id     + "\"";
+               export += " name=\""   + name   + "\"";
+               export += " label=\""  + label  + "\"";
+               export += " target=\"" + target + "\">\n";
+               export += "    <description>" + description + "</description>\n";
+               export += "    <operation>"   + operation   + "</operation>\n";
                export += "  </metric>\n";
         return export;
     }
     
     @Override
     public String toString() {
-        return this.name;
+        return name;
     }
 }

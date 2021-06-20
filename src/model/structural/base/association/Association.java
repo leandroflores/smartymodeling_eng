@@ -13,7 +13,7 @@ import model.structural.base.interfaces.Modelable;
  * <p>Class of Model <b>Association</b>.</p>
  * <p>Class responsible for representing <b>Association</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    model.structural.base.Element
  * @see    model.structural.base.interfaces.Exportable
  * @see    model.structural.base.interfaces.Modelable
@@ -29,7 +29,7 @@ public abstract class Association implements Modelable, Exportable {
      * Default constructor method of Class.
      */
     public Association() {
-        this.points = new ArrayList();
+        points = new ArrayList();
     }
     
     /**
@@ -38,7 +38,7 @@ public abstract class Association implements Modelable, Exportable {
      */
     public Association(org.w3c.dom.Element element) {
         this();
-        this.id = element.getAttribute("id");
+        id = element.getAttribute("id");
     }
     
     /**
@@ -46,7 +46,7 @@ public abstract class Association implements Modelable, Exportable {
      * @return Association Id.
      */
     public String getId() {
-        return this.id;
+        return id;
     }
 
     /**
@@ -54,7 +54,7 @@ public abstract class Association implements Modelable, Exportable {
      * @param id Association Id.
      */
     public void setId(String id) {
-        this.id = ((this.id == null) || (this.id.trim().equals(""))) ? id : this.id;
+        this.id = (this.id == null || this.id.trim().equals("")) ? id : this.id;
     }
     
     /**
@@ -63,7 +63,7 @@ public abstract class Association implements Modelable, Exportable {
      * @return Element is Source.
      */
     public boolean isSource(Element element) {
-        return this.source.equals(element);
+        return source.equals(element);
     }
     
     /**
@@ -72,7 +72,7 @@ public abstract class Association implements Modelable, Exportable {
      * @return String Name is Source.
      */
     public boolean isSource(String name) {
-        return this.source.getName().equalsIgnoreCase(name);
+        return source.getName().equalsIgnoreCase(name);
     }
     
     /**
@@ -81,7 +81,7 @@ public abstract class Association implements Modelable, Exportable {
      * @return Element is Target.
      */
     public boolean isTarget(Element element) {
-        return this.target.equals(element);
+        return target.equals(element);
     }
     
     /**
@@ -90,7 +90,7 @@ public abstract class Association implements Modelable, Exportable {
      * @return String Name is Target.
      */
     public boolean isTarget(String name) {
-        return this.target.getName().equalsIgnoreCase(name);
+        return target.getName().equalsIgnoreCase(name);
     }
     
     /**
@@ -99,8 +99,7 @@ public abstract class Association implements Modelable, Exportable {
      * @return Element is part of Association.
      */
     public boolean contains(Element element) {
-        return    this.isSource(element)
-               || this.isTarget(element);
+        return isSource(element) || isTarget(element);
     }
     
     /**
@@ -109,8 +108,7 @@ public abstract class Association implements Modelable, Exportable {
      * @return String Name is part of Association.
      */
     public boolean contains(String name) {
-        return    this.isSource(name)
-               || this.isTarget(name);
+        return isSource(name) || isTarget(name);
     }
             
     /**
@@ -118,7 +116,7 @@ public abstract class Association implements Modelable, Exportable {
      * @return Source Element.
      */
     public Element getSource() {
-        return this.source;
+        return source;
     }
     
     /**
@@ -134,7 +132,7 @@ public abstract class Association implements Modelable, Exportable {
      * @return Target Element.
      */
     public Element getTarget() {
-        return this.target;
+        return target;
     }
     
     /**
@@ -150,7 +148,7 @@ public abstract class Association implements Modelable, Exportable {
      * @return Association Type.
      */
     public String getType() {
-        return this.type;
+        return type;
     }
 
     /**
@@ -158,7 +156,7 @@ public abstract class Association implements Modelable, Exportable {
      * @return Association Points.
      */
     public List<mxPoint> getPoints() {
-        return this.points;
+        return points;
     }
     
     /**
@@ -167,9 +165,9 @@ public abstract class Association implements Modelable, Exportable {
      * @param pointB Point B.
      */
     public void addDefaultPoint(mxPoint pointA, mxPoint pointB) {
-        if (this.points.isEmpty()) {
-            this.addPoint(pointA);
-            this.addPoint(pointB);
+        if (points.isEmpty()) {
+            addPoint(pointA);
+            addPoint(pointB);
         }
     }
     
@@ -178,8 +176,8 @@ public abstract class Association implements Modelable, Exportable {
      * @param point New Point.
      */
     public void addPoint(mxPoint point) {
-        if (!this.points.contains(point))
-            this.points.add(point);
+        if (!points.contains(point))
+             points.add(point);
     }
     
     /**
@@ -187,7 +185,7 @@ public abstract class Association implements Modelable, Exportable {
      * @param point Point.
      */
     public void removePoint(mxPoint point) {
-        this.points.remove(point);
+        points.remove(point);
     }
     
     /**
@@ -211,8 +209,8 @@ public abstract class Association implements Modelable, Exportable {
     public mxPoint getNearestPoint(mxPoint point) {
         mxPoint nearest  = null;
         Double  distance = Double.MAX_VALUE;
-        for (mxPoint current : this.getPoints()) {
-            Double value = this.distance(point, current);
+        for (mxPoint current : getPoints()) {
+            Double value = distance(point, current);
             if (value    < distance) {
                 distance = value;
                 nearest  = current;
@@ -225,9 +223,9 @@ public abstract class Association implements Modelable, Exportable {
      * Method responsible for setting the Default Points.
      */
     public void setDefaultPoints() {
-        this.points = new ArrayList();
-        if (this.source.equals(this.target))
-            this.setLoopPoints();
+        points = new ArrayList();
+        if (source.equals(target))
+            setLoopPoints();
     }
     
     /**
@@ -235,9 +233,9 @@ public abstract class Association implements Modelable, Exportable {
      * @param distance Distance.
      */
     public void dx(Integer distance) {
-        if (this.points != null) {
-            for (mxPoint point : this.getPoints())
-                point.setX(this.getValue(new Double(point.getX()).intValue(), distance));
+        if (points != null) {
+            for (mxPoint point : getPoints())
+                point.setX(getValue(new Double(point.getX()).intValue(), distance));
         }
     }
     
@@ -246,9 +244,9 @@ public abstract class Association implements Modelable, Exportable {
      * @param distance Distance.
      */
     public void dy(Integer distance) {
-        if (this.points != null) {
-            for (mxPoint point : this.getPoints())
-                point.setY(this.getValue(new Double(point.getY()).intValue(), distance));
+        if (points != null) {
+            for (mxPoint point : getPoints())
+                point.setY(getValue(new Double(point.getY()).intValue(), distance));
         }
     }
     
@@ -267,8 +265,8 @@ public abstract class Association implements Modelable, Exportable {
      * Method responsible for setting the Loop Points.
      */
     public void setLoopPoints() {
-        this.points.add(new mxPoint(this.source.getGlobalX() + this.source.getWidth() + 150, this.source.getGlobalY() + 20));
-        this.points.add(new mxPoint(this.source.getGlobalX() + this.source.getWidth() + 150, this.source.getGlobalY() + 70));
+        points.add(new mxPoint(source.getGlobalX() + source.getWidth() + 150, source.getGlobalY() + 20));
+        points.add(new mxPoint(source.getGlobalX() + source.getWidth() + 150, source.getGlobalY() + 70));
     }
     
     /**
@@ -284,7 +282,7 @@ public abstract class Association implements Modelable, Exportable {
      * @return Association Summary.
      */
     public String getSummary() {
-        return new FunctString().getInitUpperCase(this.type) + ": " + this.source.getName() + " - " + this.target.getName();
+        return new FunctString().getInitUpperCase(type) + ": " + source.getName() + " - " + target.getName();
     }
     
     /**
@@ -293,7 +291,7 @@ public abstract class Association implements Modelable, Exportable {
      */
     public String exportPoints() {
         String export  = "";
-        for (mxPoint point : this.getPoints())
+        for (mxPoint point : getPoints())
                export += "      <point x=\"" + point.getX() + "\" y=\"" + point.getY() + "\"/>\n";
         return export;
     }
@@ -303,10 +301,10 @@ public abstract class Association implements Modelable, Exportable {
      * @return Association Header.
      */
     protected String exportHeader() {
-        String header  = "    <"      + this.type;
-               header += " id=\""     + this.id             + "\"";
-               header += " source=\"" + this.source.getId() + "\"";
-               header += " target=\"" + this.target.getId() + "\"";
+        String header  = "    <"      + type;
+               header += " id=\""     + id             + "\"";
+               header += " source=\"" + source.getId() + "\"";
+               header += " target=\"" + target.getId() + "\"";
                header += ">\n";
         return header;
     }
@@ -316,7 +314,7 @@ public abstract class Association implements Modelable, Exportable {
      * @return Association Body.
      */
     protected String exportBody() {
-        return this.exportPoints();
+        return exportPoints();
     }
     
     /**
@@ -324,14 +322,14 @@ public abstract class Association implements Modelable, Exportable {
      * @return Association Footer.
      */
     protected String exportFooter() {
-        return "    </" + this.type + ">\n";
+        return "    </" + type + ">\n";
     }
     
     @Override
     public String export() {
-        String export  = this.exportHeader();
-               export += this.exportBody();
-               export += this.exportFooter();
+        String export  = exportHeader();
+               export += exportBody();
+               export += exportFooter();
         return export;
     }
     
@@ -339,19 +337,19 @@ public abstract class Association implements Modelable, Exportable {
     public boolean equals(Object object) {
         if (object instanceof Association == false)
             return false;
-        return Objects.equals(this.id, ((Association) object).getId());
+        return Objects.equals(id, ((Association) object).getId());
     }
 
     @Override
     public int hashCode() {
         int    hash = 3;
-               hash = 41 * hash + Objects.hashCode(this.id);
-               hash = 41 * hash + Objects.hashCode(this.type);
+               hash = 41 * hash + Objects.hashCode(id);
+               hash = 41 * hash + Objects.hashCode(type);
         return hash;
     }
     
     @Override
     public String toString() {
-        return this.source.getName() + " - " + this.target.getName();
+        return source.getName() + " - " + target.getName();
     }
 }

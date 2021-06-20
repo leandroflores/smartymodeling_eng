@@ -31,13 +31,13 @@ public final class ViewDeleteElement extends ViewDelete {
         this.element    = element;
         this.controller = new ControllerViewDeleteElement(this);
         this.title      = "Delete Element";
-        this.initComponents();
-        this.addComponents();
+        initComponents();
+        addComponents();
     }
 
     @Override
     public void addComponents() {
-        super.addComponents(this.element.toString());
+        super.addComponents(element.toString());
     }
     
     /**
@@ -45,7 +45,7 @@ public final class ViewDeleteElement extends ViewDelete {
      * @return Element.
      */
     public Element getElement() {
-        return this.element;
+        return element;
     }
     
     /**
@@ -53,6 +53,6 @@ public final class ViewDeleteElement extends ViewDelete {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
 }

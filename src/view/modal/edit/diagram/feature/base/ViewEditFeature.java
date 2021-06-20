@@ -34,38 +34,27 @@ public final class ViewEditFeature extends ViewEdit {
         this.feature    = feature;
         this.controller = new ControllerViewEditFeature(this);
         this.title      = "Edit Feature Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(new Dimension(600, 425));
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 445);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelBaseFeature();
-        this.addLines(1);
+    protected PanelEditFeature createPanelEdit() {
+        return new PanelEditFeature(view, diagram, feature);
     }
     
-    /**
-     * Method responsible for adding the Panel Base Feature.
-     */
-    private void addPanelBaseFeature() {
-        this.addPanel("panelEditFeature", new PanelEditFeature(this.view, this.diagram, this.feature));
-        this.getPanelEditFeature().setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanelEditFeature());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 300);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Feature.
-     * @return Panel Edit Feature.
-     */
-    private PanelEditFeature getPanelEditFeature() {
-        return (PanelEditFeature) this.getPanel("panelEditFeature");
+    @Override
+    public PanelEditFeature getPanelEdit() {
+        return (PanelEditFeature) super.getPanelEdit();
     }
     
     /**
@@ -73,7 +62,7 @@ public final class ViewEditFeature extends ViewEdit {
      * @return Panel Base Feature.
      */
     public PanelBaseFeature getPanelBaseFeature() {
-        return this.getPanelEditFeature().getPanelBaseFeature();
+        return getPanelEdit().getPanelBaseFeature();
     }
     
     /**
@@ -81,6 +70,6 @@ public final class ViewEditFeature extends ViewEdit {
      * @return Feature.
      */
     public Feature getFeature() {
-        return this.feature;
+        return feature;
     }
 }

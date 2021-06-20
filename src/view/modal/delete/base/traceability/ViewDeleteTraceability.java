@@ -9,7 +9,7 @@ import view.panel.modeling.PanelModeling;
  * <p>Class of View <b>ViewDeleteTraceability</b>.</p>
  * <p>Class responsible for defining the <b>Traceability Delete View</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  23-07-2019
+ * @since  2019-07-21
  * @see    controller.view.modal.delete.base.traceability.ControllerViewDeleteTraceability
  * @see    model.structural.base.traceability.Traceability
  * @see    view.modal.delete.ViewDelete
@@ -27,13 +27,13 @@ public final class ViewDeleteTraceability extends ViewDelete {
         this.traceability = traceability;
         this.controller   = new ControllerViewDeleteTraceability(this);
         this.title        = "Delete Traceability";
-        this.initComponents();
-        this.addComponents();
+        initComponents();
+        addComponents();
     }
 
     @Override
     public void addComponents() {
-        super.addComponents(this.traceability.getName());
+        super.addComponents(traceability.getName());
     }
     
     /**
@@ -41,6 +41,6 @@ public final class ViewDeleteTraceability extends ViewDelete {
      * @return Traceability.
      */
     public Traceability getTraceability() {
-        return this.traceability;
+        return traceability;
     }
 }

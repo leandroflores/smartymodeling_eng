@@ -6,7 +6,7 @@ import view.modal.delete.ViewDelete;
 import view.panel.modeling.PanelModeling;
 
 /**
- * <p>Class of View <b>ViewDeleteTraceability</b>.</p>
+ * <p>Class of View <b>ViewDeleteRequirement</b>.</p>
  * <p>Class responsible for defining the <b>Requirement Delete View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-17
@@ -27,13 +27,13 @@ public final class ViewDeleteRequirement extends ViewDelete {
         this.requirement = requirement;
         this.controller  = new ControllerViewDeleteRequirement(this);
         this.title       = "Delete Requirement";
-        this.initComponents();
-        this.addComponents();
+        initComponents();
+        addComponents();
     }
 
     @Override
     public void addComponents() {
-        super.addComponents(this.requirement.toString());
+        super.addComponents(requirement.toString());
     }
     
     /**
@@ -41,6 +41,6 @@ public final class ViewDeleteRequirement extends ViewDelete {
      * @return Requirement.
      */
     public Requirement getRequirement() {
-        return this.requirement;
+        return requirement;
     }
 }

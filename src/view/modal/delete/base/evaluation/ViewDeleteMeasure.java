@@ -27,13 +27,13 @@ public final class ViewDeleteMeasure extends ViewDelete {
         this.measure    = measure;
         this.controller = new ControllerViewDeleteMeasure(this);
         this.title      = "Delete Measure";
-        this.initComponents();
-        this.addComponents();
+        initComponents();
+        addComponents();
     }
 
     @Override
     public void addComponents() {
-        super.addComponents(this.measure.getName());
+        super.addComponents(measure.getName());
     }
     
     /**
@@ -41,6 +41,6 @@ public final class ViewDeleteMeasure extends ViewDelete {
      * @return Measure.
      */
     public Measure getMeasure() {
-        return this.measure;
+        return measure;
     }
 }

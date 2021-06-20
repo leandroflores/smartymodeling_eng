@@ -35,38 +35,27 @@ public final class ViewEditVariability extends ViewEdit {
         this.variability = variability;
         this.controller  = new ControllerViewEditVariability(this);
         this.title       = "Edit Variability Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(new Dimension(650, 450));
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(650, 450);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditVariability();
-        this.addLines(1);
+    protected PanelEditVariability createPanelEdit() {
+        return new PanelEditVariability(view, diagram, variability, 0);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Variability.
-     */
-    private void addPanelEditVariability() {
-        this.addPanel("panelEditVariability", new PanelEditVariability(this.view, this.diagram, this.variability, 0));
-        this.getPanelEditVariability().setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanelEditVariability());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 300);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Variability.
-     * @return Panel Edit Variability.
-     */
-    private PanelEditVariability getPanelEditVariability() {
-        return (PanelEditVariability) this.getPanel("panelEditVariability");
+    @Override
+    public PanelEditVariability getPanelEdit() {
+        return (PanelEditVariability) super.getPanelEdit();
     }
     
     /**
@@ -74,7 +63,7 @@ public final class ViewEditVariability extends ViewEdit {
      * @return Panel Base Variability.
      */
     public PanelBaseVariability getPanelBaseVariability() {
-        return this.getPanelEditVariability().getPanelBaseVariability();
+        return getPanelEdit().getPanelBaseVariability();
     }
     
     /**
@@ -82,7 +71,7 @@ public final class ViewEditVariability extends ViewEdit {
      * @return Panel Base Variants.
      */
     public PanelBaseVariants getPanelBaseVariants() {
-        return this.getPanelEditVariability().getPanelBaseVariants();
+        return getPanelEdit().getPanelBaseVariants();
     }
     
     /**
@@ -90,7 +79,7 @@ public final class ViewEditVariability extends ViewEdit {
      * @return Variability.
      */
     public Variability getVariability() {
-        return this.variability;
+        return variability;
     }
     
     /**
@@ -98,6 +87,6 @@ public final class ViewEditVariability extends ViewEdit {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
 }

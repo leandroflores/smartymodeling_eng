@@ -21,7 +21,7 @@ public class StyleClassAssociation extends StyleAssociation {
      * @param direction Direction Flag.
      */
     public void setAssociationStyle(Map style, boolean direction) {
-        this.setDefault(style);
+        setDefault(style);
         style.put(mxConstants.STYLE_DASHED,   "0");
         style.put(mxConstants.STYLE_ENDARROW, direction ? mxConstants.ARROW_OPEN : mxConstants.ARROW_SPACING);
     }
@@ -32,7 +32,7 @@ public class StyleClassAssociation extends StyleAssociation {
      * @param direction Direction Flag.
      */
     public void setAggregationStyle(Map style, boolean direction) {
-        this.setDefault(style);
+        setDefault(style);
         style.put(mxConstants.STYLE_DASHED, "0");
         style.put(mxConstants.STYLE_STARTFILL,  "0");
         style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_DIAMOND);
@@ -45,7 +45,7 @@ public class StyleClassAssociation extends StyleAssociation {
      * @param direction Direction Flag.
      */
     public void setCompositionStyle(Map style, boolean direction) {
-        this.setAggregationStyle(style, direction);
+        setAggregationStyle(style, direction);
         style.put(mxConstants.STYLE_STARTFILL, "1");
     }
     
@@ -54,7 +54,7 @@ public class StyleClassAssociation extends StyleAssociation {
      * @param style Edge Style.
      */
     public void setRealizationStyle(Map style) {
-        this.setDefault(style);
+        setDefault(style);
         style.put(mxConstants.STYLE_DASHED, "1");
         style.put(mxConstants.STYLE_ENDFILL,  "0");
         style.put(mxConstants.STYLE_ENDSIZE,  "10");

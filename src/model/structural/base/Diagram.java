@@ -558,7 +558,7 @@ public abstract class Diagram implements Exportable {
      * @return Super Element.
      */
     public Element getSuper(Element element) {
-        for (Generalization generalization : this.getGeneralizationsList()) {
+        for (Generalization generalization : getGeneralizationsList()) {
             if (generalization.isSource(element))
                 return generalization.getTarget(element);
         }
@@ -572,10 +572,10 @@ public abstract class Diagram implements Exportable {
      */
     public List<Element> getSupers(Element element) {
         List    list    = new ArrayList<>();
-        Element super_  = this.getSuper(element);
+        Element super_  = getSuper(element);
         while  (super_ != null) {
                 list.add(super_);
-                super_  = this.getSuper(super_);
+                super_  = getSuper(super_);
         }    
         return  list;
     }
@@ -585,7 +585,7 @@ public abstract class Diagram implements Exportable {
      * @return Generalization List.
      */
     public List<Generalization> getGeneralizationsList() {
-        return (List<Generalization>) this.filterAssociations(Generalization.class);
+        return (List<Generalization>) filterAssociations(Generalization.class);
     }
     
     /**
@@ -593,9 +593,9 @@ public abstract class Diagram implements Exportable {
      * @param dependency Dependency.
      */
     public void addDependency(Dependency dependency) {
-        dependency.setId(this.nextId(dependency));
-        if (this.associations.containsKey(dependency.getId()) == false)
-            this.addAssociation(dependency);
+        dependency.setId(nextId(dependency));
+        if (!associations.containsKey(dependency.getId()))
+            addAssociation(dependency);
     }
     
     /**
@@ -604,7 +604,7 @@ public abstract class Diagram implements Exportable {
      * @return Dependencies found.
      */
     public List<Dependency> filterDependency(Element element) {
-        return (List<Dependency>) this.filterAssociations(element, Dependency.class);
+        return (List<Dependency>) filterAssociations(element, Dependency.class);
     }
     
     /**
@@ -612,7 +612,7 @@ public abstract class Diagram implements Exportable {
      * @param dependency Dependency.
      */
     public void removeDependency(Dependency dependency) {
-        this.removeAssociation(dependency);
+        removeAssociation(dependency);
     }
     
     /**
@@ -628,8 +628,8 @@ public abstract class Diagram implements Exportable {
      * @param association Association.
      */
     public void addAssociation(Association association) {
-        this.associations.put(association.getId(), association);
-        this.project.objects.put(association.getId(), association);
+        associations.put(association.getId(), association);
+        project.objects.put(association.getId(), association);
     }
     
     /**
@@ -638,7 +638,7 @@ public abstract class Diagram implements Exportable {
      * @return Association found.
      */
     public Association getAssociation(String id) {
-        return (Association) this.associations.get(id);
+        return (Association) associations.get(id);
     }
     
     /**
@@ -646,9 +646,9 @@ public abstract class Diagram implements Exportable {
      * @param association Association.
      */
     public void removeAssociation(Association association) {
-        this.project.removeProduct(association);
-        this.project.objects.remove(association.getId());
-        this.associations.remove(association.getId());
+        project.removeProduct(association);
+        project.objects.remove(association.getId());
+        associations.remove(association.getId());
     }
     
     /**
@@ -656,9 +656,9 @@ public abstract class Diagram implements Exportable {
      * @param element Element.
      */
     private void removeAssociation(Element element) {
-        for (Association association : this.getAssociationsList()) {
+        for (Association association : getAssociationsList()) {
             if (association.contains(element))
-                this.removeAssociation(association);
+                removeAssociation(association);
         }
     }
     
@@ -670,7 +670,7 @@ public abstract class Diagram implements Exportable {
     protected void removeAssociation(Element element, Map<String, Association> map) {
         for (Association association : new ArrayList<>(map.values())) {
             if (association.contains(element))
-                this.removeAssociation(association);
+                removeAssociation(association);
         }
     }
     
@@ -687,7 +687,7 @@ public abstract class Diagram implements Exportable {
      * @return Variabilities HashMap.
      */
     public HashMap<String, Variability> getVariabilities() {
-        return this.variabilities;
+        return variabilities;
     }
     
     /**
@@ -695,7 +695,7 @@ public abstract class Diagram implements Exportable {
      * @return Variabilities List.
      */
     public List<Variability> getVariabilitiesList() {
-        List   list = new ArrayList<>(this.variabilities.values());
+        List   list = new ArrayList<>(variabilities.values());
                list.sort(new ComparatorVariability());
         return list;
     }
@@ -705,10 +705,10 @@ public abstract class Diagram implements Exportable {
      * @param variability Variability.
      */
     public void addVariability(Variability variability) {
-        variability.setId(this.project.nextVariabilityId());
-        if (this.variabilities.get(variability.getId()) == null) {
-            this.project.addVariability(variability);
-            this.variabilities.put(variability.getId(), variability);
+        variability.setId(project.nextVariabilityId());
+        if (variabilities.get(variability.getId()) == null) {
+            project.addVariability(variability);
+            variabilities.put(variability.getId(), variability);
         }
     }
     
@@ -718,7 +718,7 @@ public abstract class Diagram implements Exportable {
      * @return Variability found.
      */
     public Variability getVariability(String id) {
-        return (Variability) this.variabilities.get(id);
+        return (Variability) variabilities.get(id);
     }
     
     /**
@@ -726,8 +726,8 @@ public abstract class Diagram implements Exportable {
      * @param variability Variability.
      */
     public void removeVariability(Variability variability) {
-        this.project.variabilities.remove(variability.getId());
-        this.variabilities.remove(variability.getId());
+        project.variabilities.remove(variability.getId());
+        variabilities.remove(variability.getId());
     }
     
     /**
@@ -735,8 +735,8 @@ public abstract class Diagram implements Exportable {
      * @param element Element.
      */
     private void removeVariability(Element element) {
-        this.removeVariationPoint(element);
-        this.removeVariants(element);
+        removeVariationPoint(element);
+        removeVariants(element);
     }
     
     /**
@@ -744,8 +744,8 @@ public abstract class Diagram implements Exportable {
      * @param element Variation Point.
      */
     private void removeVariationPoint(Element element) {
-        for (Variability variability : this.getVariationPoints(element))
-            this.removeVariability(variability);
+        for (Variability variability : getVariationPoints(element))
+            removeVariability(variability);
     }
     
     /**
@@ -753,10 +753,10 @@ public abstract class Diagram implements Exportable {
      * @param element Element.
      */
     private void removeVariants(Element element) {
-        for (Variability variability : this.filterVariants(element, "")) {
+        for (Variability variability : filterVariants(element, "")) {
             variability.removeVariant(element);
             if (variability.emptyVariants())
-                this.removeVariability(variability);
+                removeVariability(variability);
         }
     }
     
@@ -773,7 +773,7 @@ public abstract class Diagram implements Exportable {
      * @return Object Type.
      */
     public TypeUML getObjectType() {
-        return this.project.getObjectType();
+        return project.getObjectType();
     }
     
     /**
@@ -781,7 +781,7 @@ public abstract class Diagram implements Exportable {
      * @return Void Type.
      */
     public TypeUML getVoidType() {
-        return this.project.getVoidType();
+        return project.getVoidType();
     }
     
     /**
@@ -789,10 +789,10 @@ public abstract class Diagram implements Exportable {
      * @param element Element.
      */
     public void resetProfileStereotypes(Element element) {
-        List<Link> links = this.project.getLinksByElement(element);
+        List<Link> links = project.getLinksByElement(element);
         for (int i = links.size() - 1; i >= 0; i--) {
             if (links.get(i).getStereotype().isPrimitive())
-                this.project.removeLink(links.get(i));
+                project.removeLink(links.get(i));
         }
     }
     
@@ -800,8 +800,8 @@ public abstract class Diagram implements Exportable {
      * Method responsible for updating the Stereotype Elements.
      */
     public void updateElementsStereotype() {
-        for (Element element : this.getElementsList())
-            this.updateStereotype(element);
+        for (Element element : getElementsList())
+            updateStereotype(element);
     }
     
     /**
@@ -809,13 +809,12 @@ public abstract class Diagram implements Exportable {
      * @param element Element.
      */
     public void updateStereotype(Element element) {
-        this.resetProfileStereotypes(element);
-        boolean varPoint  = this.updateVariationPointStereotype(element);
-        boolean inclusive = this.updateInclusiveStereotype(element);
-        boolean exclusive = this.updateExclusiveStereotype(element);
-//        if (!varPoint && !inclusive && !exclusive)
+        resetProfileStereotypes(element);
+        boolean varPoint  = updateVariationPointStereotype(element);
+        boolean inclusive = updateInclusiveStereotype(element);
+        boolean exclusive = updateExclusiveStereotype(element);
         if (!inclusive && !exclusive)
-            this.updateDefaultStereotype(element);
+            updateDefaultStereotype(element);
     }
     
     /**
@@ -824,9 +823,9 @@ public abstract class Diagram implements Exportable {
      */
     public void updateDefaultStereotype(Element element) {
         if (element.isDefault()) {
-            this.project.removeLink(new Link(element, this.project.getProfile().getMandatory()));
-            this.project.removeLink(new Link(element, this.project.getProfile().getOptional()));
-            this.project.addElementStereotype(element);
+            project.removeLink(new Link(element, project.getProfile().getMandatory()));
+            project.removeLink(new Link(element, project.getProfile().getOptional()));
+            project.addElementStereotype(element);
         }
     }
     
@@ -836,9 +835,9 @@ public abstract class Diagram implements Exportable {
      * @return Variation Point Stereotype.
      */
     public boolean updateVariationPointStereotype(Element element) {
-        Stereotype stereotype = this.getVariationPointStereotype(element);
+        Stereotype stereotype = getVariationPointStereotype(element);
         if (stereotype != null) {
-            this.project.addLink(new Link(element, stereotype));
+            project.addLink(new Link(element, stereotype));
             return true;
         }
         return false;
@@ -850,9 +849,9 @@ public abstract class Diagram implements Exportable {
      * @return Inclusive Stereotype.
      */
     public boolean updateInclusiveStereotype(Element element) {
-        Stereotype stereotype = this.getInclusiveStereotype(element);
+        Stereotype stereotype = getInclusiveStereotype(element);
         if (stereotype != null) {
-            this.project.addLink(new Link(element, stereotype));
+            project.addLink(new Link(element, stereotype));
             return true;
         }
         return false;
@@ -864,9 +863,9 @@ public abstract class Diagram implements Exportable {
      * @return Exclusive Stereotype.
      */
     public boolean updateExclusiveStereotype(Element element) {
-        Stereotype stereotype = this.getExclusiveStereotype(element);
+        Stereotype stereotype = getExclusiveStereotype(element);
         if (stereotype != null) {
-            this.project.addLink(new Link(element, stereotype));
+            project.addLink(new Link(element, stereotype));
             return true;
         }
         return false;
@@ -880,7 +879,7 @@ public abstract class Diagram implements Exportable {
      */
     public String getStereotypes(Element element, String delimiter) {
         String stereotype  = "";
-        for (Stereotype current : this.getStereotypesList(element))
+        for (Stereotype current : getStereotypesList(element))
                stereotype += current.toString() + delimiter;
         return stereotype;
     }
@@ -892,9 +891,8 @@ public abstract class Diagram implements Exportable {
      */
     public List<Stereotype> getStereotypesList(Element element) {
         List   stereotypes = new ArrayList<>();
-        List<Link> links   = this.project.getLinksByElement(element);
-        for (int i = 0; i <    links.size(); i++)
-               stereotypes.add(links.get(i).getStereotype());
+        for (Link link : project.getLinksByElement(element))
+               stereotypes.add(link.getStereotype());
         return stereotypes;
     }
     
@@ -904,7 +902,7 @@ public abstract class Diagram implements Exportable {
      * @return Variation Point Steretype.
      */
     public Stereotype getVariationPointStereotype(Element element) {
-        return this.getVariationPoints(element).isEmpty() ? null : this.getProject().getProfile().getVariationPoint();
+        return getVariationPoints(element).isEmpty() ? null : getProject().getProfile().getVariationPoint();
     }
     
     /**
@@ -913,13 +911,12 @@ public abstract class Diagram implements Exportable {
      * @return Variation Points.
      */
     public List<Variability> getVariationPoints(Element element) {
-        List<Variability> list   = this.getVariabilitiesList();
-        List<Variability> filter = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getVariationPoint().equals(element))
-                filter.add(list.get(i));
+        List    filter = new ArrayList<>();
+        for (Variability variability : getVariabilitiesList()) {
+            if (variability.getVariationPoint().equals(element))
+                filter.add(variability);
         }
-        return filter;
+        return  filter;
     }
     
     /**
@@ -929,14 +926,13 @@ public abstract class Diagram implements Exportable {
      * @return Variants List.
      */
     public List<Variability> filterVariants(Element element, String constraint) {
-        List<Variability> list   = this.getVariabilitiesList();
-        List<Variability> filter = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getConstraint().toLowerCase().contains(constraint)
-            &&  list.get(i).isVariant(element))
-                filter.add(list.get(i));
+        List    filter = new ArrayList<>();
+        for (Variability variability : getVariabilitiesList()) {
+            if (variability.getConstraint().toLowerCase().contains(constraint)
+            &&  variability.isVariant(element))
+                filter.add(variability);
         }
-        return filter;
+        return  filter;
     }
     
     /**
@@ -945,7 +941,7 @@ public abstract class Diagram implements Exportable {
      * @return Inclusive Stereotype.
      */
     public Stereotype getInclusiveStereotype(Element element) {
-        return this.filterVariants(element, "inclusive").isEmpty() ? null : this.getProject().getProfile().getInclusive();
+        return filterVariants(element, "inclusive").isEmpty() ? null : getProject().getProfile().getInclusive();
     }
     
     /**
@@ -954,7 +950,7 @@ public abstract class Diagram implements Exportable {
      * @return Exclusive Stereotype.
      */
     public Stereotype getExclusiveStereotype(Element element) {
-        return this.filterVariants(element, "exclusive").isEmpty() ? null : this.getProject().getProfile().getExclusive();
+        return filterVariants(element, "exclusive").isEmpty() ? null : getProject().getProfile().getExclusive();
     }
     
     /**
@@ -983,13 +979,13 @@ public abstract class Diagram implements Exportable {
      * @return Elements to export.
      */
     protected String exportElements() {
-        String export  = "";
-        for (Element element : this.getElementsList()) {
-            if   ((element.getType().equals("attribute") == false)
-              &&  (element.getType().equals("method")    == false))
-               export += element.export();
+        String  export  = "";
+        for (Element element : getElementsList()) {
+            if (!element.getType().equals("attribute") 
+             && !element.getType().equals("method"))
+                export += element.export();
         }
-        return export;
+        return  export;
     }
     
     /**
@@ -998,7 +994,7 @@ public abstract class Diagram implements Exportable {
      */
     protected String exportAssociations() {
         String export  = "";
-        for (Association association : this.getAssociationsList())
+        for (Association association : getAssociationsList())
                export += association.export();
         return export;
     }
@@ -1009,23 +1005,23 @@ public abstract class Diagram implements Exportable {
      */
     protected String exportVariabilities() {
         String export  = "";
-        for (Variability variability : this.getVariabilitiesList())
+        for (Variability variability : getVariabilitiesList())
                export += variability.export();
         return export;
     }
     
     @Override
     public String export() {
-        String export  = "  <diagram id=\"" + this.id + "\" name=\"" + this.name + "\" type=\"" + this.type + "\">\n";
-               export += this.exportElements();
-               export += this.exportAssociations();
-               export += this.exportVariabilities();
+        String export  = "  <diagram id=\"" + id + "\" name=\"" + name + "\" type=\"" + type + "\">\n";
+               export += exportElements();
+               export += exportAssociations();
+               export += exportVariabilities();
                export += "  </diagram>\n";
         return export;
     }
     
     @Override
     public String toString() {
-        return this.name + " (" + this.type + ")";
+        return name + " (" + type + ")";
     }
 }

@@ -23,12 +23,12 @@ public final class Measure implements Exportable {
      * Default constructor method of Class.
      */
     public Measure() {
-        this.id     = "";
-        this.name   = "NewMeasure";
-        this.date   = new FunctDate().getCurrentUSFormattedDate();
-        this.metric = null;
-        this.target = "Project";
-        this.value  = 0.0d;
+        id     = "";
+        name   = "NewMeasure";
+        date   = new FunctDate().getCurrentUSFormattedDate();
+        metric = null;
+        target = "Project";
+        value  = 0.0d;
     }
     
     /**
@@ -36,12 +36,12 @@ public final class Measure implements Exportable {
      * @param element W3C Element.
      */
     public Measure(org.w3c.dom.Element element) {
-        this.id     = element.getAttribute("id");
-        this.name   = element.getAttribute("name");
-        this.date   = new FunctDate().getCurrentUSFormattedDate();
-        this.metric = null;
-        this.target = element.getAttribute("target");
-        this.setValue(element);
+        id     = element.getAttribute("id");
+        name   = element.getAttribute("name");
+        date   = new FunctDate().getCurrentUSFormattedDate();
+        metric = null;
+        target = element.getAttribute("target");
+        setValue(element);
     }
     
     /**
@@ -49,7 +49,7 @@ public final class Measure implements Exportable {
      * @return Measure Id.
      */
     public String getId() {
-        return this.id;
+        return id;
     }
 
     /**
@@ -57,7 +57,7 @@ public final class Measure implements Exportable {
      * @param id Measure Id.
      */
     public void setId(String id) {
-        this.id = ((this.id == null) || (this.id.trim().equals(""))) ? id : this.id;
+        this.id = (this.id == null || this.id.trim().equals("")) ? id : this.id;
     }
 
     /**
@@ -65,7 +65,7 @@ public final class Measure implements Exportable {
      * @return Measure Name.
      */
     public String getName() {
-        return this.name;
+        return name;
     }
 
     /**
@@ -81,7 +81,7 @@ public final class Measure implements Exportable {
      * @return Measure Date.
      */
     public String getDate() {
-        return this.date;
+        return date;
     }
 
     /**
@@ -97,7 +97,7 @@ public final class Measure implements Exportable {
      * @return Measure Metric.
      */
     public Metric getMetric() {
-        return this.metric;
+        return metric;
     }
 
     /**
@@ -113,7 +113,7 @@ public final class Measure implements Exportable {
      * @return Measure Target.
      */
     public String getTarget() {
-        return this.target;
+        return target;
     }
 
     /**
@@ -129,7 +129,7 @@ public final class Measure implements Exportable {
      * @return Measure Value.
      */
     public Double getValue() {
-        return this.value;
+        return value;
     }
 
     /**
@@ -138,9 +138,9 @@ public final class Measure implements Exportable {
      */
     public void setValue(org.w3c.dom.Element element) {
         try {
-            this.value = Double.parseDouble(element.getAttribute("valor").trim());
+            value = Double.parseDouble(element.getAttribute("valor").trim());
         }catch (NumberFormatException exception) {
-            this.value = 0.0d;
+            value = 0.0d;
         }
     }
     
@@ -163,17 +163,17 @@ public final class Measure implements Exportable {
     @Override
     public String export() {
         String export  = "  <measure";
-               export += " id=\""     + this.id             + "\"";
-               export += " name=\""   + this.name           + "\"";
-               export += " date=\""   + this.date           + "\"";
-               export += " metric=\"" + this.metric.getId() + "\"";
-               export += " target=\"" + this.target         + "\"";
-               export += " value=\""  + this.value          + "\"/>\n";
+               export += " id=\""     + id             + "\"";
+               export += " name=\""   + name           + "\"";
+               export += " date=\""   + date           + "\"";
+               export += " metric=\"" + metric.getId() + "\"";
+               export += " target=\"" + target         + "\"";
+               export += " value=\""  + value          + "\"/>\n";
         return export;
     }
     
     @Override
     public String toString() {
-        return this.id + " - " + this.name + " = " + this.value;
+        return id + " - " + name + " = " + value;
     }
 }

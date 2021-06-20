@@ -47,13 +47,13 @@ public abstract class ViewDelete extends ViewModal {
     
     @Override
     public void initComponents() {
-        this.setSize(650, 150);
+        setSize(650, 150);
     }
     
     @Override
     public void addHeader() {
-        this.setTitle(ViewStyle.SYSTEM + this.title);
-        this.add(new JLabel(new FunctView().createImage("icons/delete.png")));
+        setTitle(ViewStyle.SYSTEM + title);
+        add(new JLabel(new FunctView().createImage("icons/delete.png")));
     }
     
     /**
@@ -61,20 +61,17 @@ public abstract class ViewDelete extends ViewModal {
      * @param message Delete Message.
      */
     protected void addComponents(String message) {
-        this.addLines(1);
-        
-        this.addHeader();
-        this.add(new JLabel("Confirm Delete: " +  message + "?"));
-        
-        this.addLines(1);
-        
-        this.addFooter();
+        addLines(1);
+        addHeader();
+        add(new JLabel("Confirm Delete: " +  message + "?"));
+        addLines(1);
+        addFooter();
     }
     
     @Override
     public void addFooter() {
-        this.add(this.createButton("yesButton", "   Yes   ", "yes"));
-        this.add(this.createButton("notButton", "   No    ", "not"));
+        add(createButton("yes", "   Yes   ", "yes"));
+        add(createButton("not", "   No    ", "not"));
     }
     
     /**
@@ -82,7 +79,7 @@ public abstract class ViewDelete extends ViewModal {
      * @return Yes Button.
      */
     public JButton getYesButton() {
-        return this.getButton("yesButton");
+        return getButton("yes");
     }
 
     /**
@@ -90,7 +87,7 @@ public abstract class ViewDelete extends ViewModal {
      * @return Not Button.
      */
     public JButton getNotButton() {
-        return this.getButton("notButton");
+        return getButton("not");
     }
     
     /**
@@ -98,7 +95,7 @@ public abstract class ViewDelete extends ViewModal {
      * @return Project.
      */
     public Project getProject() {
-        return this.project;
+        return project;
     }
     
     /**
@@ -106,7 +103,7 @@ public abstract class ViewDelete extends ViewModal {
      * @return Panel Modeling.
      */
     public PanelModeling getPanelModeling() {
-        return this.panel;
+        return panel;
     }
     
     /**
@@ -114,6 +111,6 @@ public abstract class ViewDelete extends ViewModal {
      * @return View Menu.
      */
     public View getViewMenu() {
-        return this.panel.getViewMenu();
+        return panel.getViewMenu();
     }
 }

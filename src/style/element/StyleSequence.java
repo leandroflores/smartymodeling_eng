@@ -71,7 +71,7 @@ public class StyleSequence {
      * @return Instance Style.
      */
     public Map getInstanceStyle() {
-        Map    style = this.getNameStyle();
+        Map    style = getNameStyle();
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
         return style;
     }

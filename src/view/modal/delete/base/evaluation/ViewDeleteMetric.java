@@ -27,13 +27,13 @@ public final class ViewDeleteMetric extends ViewDelete {
         this.metric     = metric;
         this.controller = new ControllerViewDeleteMetric(this);
         this.title      = "Delete Metric";
-        this.initComponents();
-        this.addComponents();
+        initComponents();
+        addComponents();
     }
 
     @Override
     public void addComponents() {
-        super.addComponents(this.metric.getName());
+        super.addComponents(metric.getName());
     }
     
     /**
@@ -41,6 +41,6 @@ public final class ViewDeleteMetric extends ViewDelete {
      * @return Metric.
      */
     public Metric getMetric() {
-        return this.metric;
+        return metric;
     }
 }

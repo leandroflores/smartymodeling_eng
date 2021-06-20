@@ -48,7 +48,7 @@ public final class PanelBaseRequirement extends PanelBase {
         this.add(this.createTextField("codeTextField", this.requirement.getCode(), 10),  this.createConstraints(4, 1, 1, 0));
         
         this.add(this.createLabel("Type*: "), this.createConstraints(1, 1, 0, 1));
-        add(createComboBox("typeComboBox", new ControllerRequirement(project).getTypes(), 10, this.requirement.getType()), this.createConstraints(4, 1, 1, 1));
+        add(createComboBox("typeComboBox", new ControllerRequirement(project).getTargets(), 10, this.requirement.getType()), this.createConstraints(4, 1, 1, 1));
         
         this.add(this.createLabel("Name*: "), this.createConstraints(1, 1, 0, 2));
         this.add(this.createTextField("nameTextField", this.requirement.getName(), 15), this.createConstraints(4, 1, 1, 2));

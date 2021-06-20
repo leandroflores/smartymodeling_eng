@@ -31,13 +31,13 @@ public final class ViewDeleteVariability extends ViewDelete {
         this.variability = variability;
         this.controller  = new ControllerViewDeleteVariability(this);
         this.title       = "Delete Variability";
-        this.initComponents();
-        this.addComponents();
+        initComponents();
+        addComponents();
     }
 
     @Override
     public void addComponents() {
-        super.addComponents(this.variability.getName());
+        super.addComponents(variability.getName());
     }
     
     /**
@@ -45,7 +45,7 @@ public final class ViewDeleteVariability extends ViewDelete {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
     
     /**
@@ -53,6 +53,6 @@ public final class ViewDeleteVariability extends ViewDelete {
      * @return Variability.
      */
     public Variability getVariability() {
-        return this.variability;
+        return variability;
     }
 }

@@ -33,38 +33,27 @@ public final class ViewEditRequirement extends ViewEdit {
         this.controller  = new ControllerViewEditRequirement(this);
         this.title       = "Edit Requirement Data";
         this.index       = index;
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(new Dimension(600, 425));
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 425);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditRequirement();
-        this.addLines(1);
+    protected PanelEditRequirement createPanelEdit() {
+        return new PanelEditRequirement(view, requirement, index);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Requirement.
-     */
-    private void addPanelEditRequirement() {
-        this.addPanel("panelEditRequirement", new PanelEditRequirement(this.view, this.requirement, this.index));
-        this.getPanelEditRequirement().setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanelEditRequirement());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 300);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Requirement.
-     * @return Panel Edit Requirement.
-     */
-    private PanelEditRequirement getPanelEditRequirement() {
-        return (PanelEditRequirement) this.getPanel("panelEditRequirement");
+    @Override
+    public PanelEditRequirement getPanelEdit() {
+        return (PanelEditRequirement) super.getPanelEdit();
     }
     
     /**
@@ -72,7 +61,7 @@ public final class ViewEditRequirement extends ViewEdit {
      * @return Panel Base Requirement.
      */
     public PanelBaseRequirement getPanelBaseRequirement() {
-        return this.getPanelEditRequirement().getPanelBaseRequirement();
+        return getPanelEdit().getPanelBaseRequirement();
     }
     
     /**
@@ -80,6 +69,6 @@ public final class ViewEditRequirement extends ViewEdit {
      * @return Requirement.
      */
     public Requirement getRequirement() {
-        return this.requirement;
+        return requirement;
     }
 }

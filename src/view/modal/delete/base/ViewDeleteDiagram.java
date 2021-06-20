@@ -27,13 +27,13 @@ public final class ViewDeleteDiagram extends ViewDelete {
         this.diagram    = diagram;
         this.controller = new ControllerViewDeleteDiagram(this);
         this.title      = "Delete Diagram";
-        this.initComponents();
-        this.addComponents();
+        initComponents();
+        addComponents();
     }
 
     @Override
     public void addComponents() {
-        super.addComponents(this.diagram.getName());
+        super.addComponents(diagram.getName());
     }
     
     /**
@@ -41,6 +41,6 @@ public final class ViewDeleteDiagram extends ViewDelete {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
 }

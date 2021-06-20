@@ -31,38 +31,27 @@ public final class ViewEditMetric extends ViewEdit {
         this.metric     = metric;
         this.controller = new ControllerViewEditMetric(this);
         this.title      = "Edit Metric Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(new Dimension(650, 430));
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(650, 430);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelBaseMetric();
-        this.addLines(1);
+    protected PanelEditMetric createPanelEdit() {
+        return new PanelEditMetric(view, metric);
     }
     
-    /**
-     * Method responsible for adding the Panel Base Metric.
-     */
-    private void addPanelBaseMetric() {
-        this.addPanel("panelEditMetric", new PanelEditMetric(this.view, this.metric));
-        this.getPanel("panelEditMetric").setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanel("panelEditMetric"));
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 300);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Metric.
-     * @return Panel Edit Metric.
-     */
-    public PanelEditMetric getPanelEditMetric() {
-        return (PanelEditMetric) this.getPanel("panelEditMetric");
+    @Override
+    public PanelEditMetric getPanelEdit() {
+        return (PanelEditMetric) super.getPanelEdit();
     }
     
     /**
@@ -70,7 +59,7 @@ public final class ViewEditMetric extends ViewEdit {
      * @return Panel Base Metric.
      */
     public PanelBaseMetric getPanelBaseMetric() {
-        return this.getPanelEditMetric().getPanelBaseMetric();
+        return getPanelEdit().getPanelBaseMetric();
     }
     
     /**
@@ -78,7 +67,7 @@ public final class ViewEditMetric extends ViewEdit {
      * @return Panel Base Operation.
      */
     public PanelBaseOperation getPanelBaseOperation() {
-        return this.getPanelEditMetric().getPanelBaseOperation();
+        return getPanelEdit().getPanelBaseOperation();
     }
     
     /**
@@ -86,6 +75,6 @@ public final class ViewEditMetric extends ViewEdit {
      * @return Metric.
      */
     public Metric getMetric() {
-        return this.metric;
+        return metric;
     }
 }

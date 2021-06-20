@@ -31,38 +31,27 @@ public final class ViewEditTraceability extends ViewEdit {
         this.traceability = traceability;
         this.controller  = new ControllerViewEditTraceability(this);
         this.title       = "Edit Traceability Data";
-        this.initComponents();
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(new Dimension(600, 350));
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 350);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditTraceability();
-        this.addLines(1);
+    protected PanelEditTraceability createPanelEdit() {
+        return new PanelEditTraceability(view, traceability);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Traceability.
-     */
-    private void addPanelEditTraceability() {
-        this.addPanel("panelEditTraceability", new PanelEditTraceability(this.view, this.traceability));
-        this.getPanelEditTraceability().setPreferredSize(new Dimension(500, 300));
-        this.add(this.getPanelEditTraceability());
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 300);
     }
     
-    /**
-     * Method responsible for returning the Panel Edit Traceability.
-     * @return Panel Edit Traceability.
-     */
-    private PanelEditTraceability getPanelEditTraceability() {
-        return (PanelEditTraceability) this.getPanel("panelEditTraceability");
+    @Override
+    public PanelEditTraceability getPanelEdit() {
+        return (PanelEditTraceability) super.getPanelEdit();
     }
     
     /**
@@ -70,7 +59,7 @@ public final class ViewEditTraceability extends ViewEdit {
      * @return Panel Base Traceability.
      */
     public PanelBaseTraceability getPanelBaseTraceability() {
-        return this.getPanelEditTraceability().getPanelBaseTraceability();
+        return getPanelEdit().getPanelBaseTraceability();
     }
     
     /**
@@ -78,7 +67,7 @@ public final class ViewEditTraceability extends ViewEdit {
      * @return Panel Base Elements.
      */
     public PanelBaseElements getPanelBaseElements() {
-        return this.getPanelEditTraceability().getPanelBaseElements();
+        return getPanelEdit().getPanelBaseElements();
     }
     
     /**
@@ -86,6 +75,6 @@ public final class ViewEditTraceability extends ViewEdit {
      * @return Traceability.
      */
     public Traceability getTraceability() {
-        return this.traceability;
+        return traceability;
     }
 }
