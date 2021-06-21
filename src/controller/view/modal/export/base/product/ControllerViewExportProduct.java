@@ -29,13 +29,13 @@ public class ControllerViewExportProduct extends ControllerViewExport {
     
     @Override
     public boolean check() {
-        return check(getView().getPanelExportProduct().getDirectoryTextField(), "Select a Directory!");
+        return check(getView().getPanelExport().getDirectoryTextField(), "Select a Directory!");
     }
 
     @Override
     public void export() {
-        String  path    = getView().getPanelExportProduct().getDirectoryTextField().getText().trim();
-        Product product = getView().getPanelExportProduct().getProduct();
+        String  path    = getView().getPanelExport().getDirectoryTextField().getText().trim();
+        Product product = getView().getPanelExport().getProduct();
         try {
             new ExportProduct(path, product).export();
         } catch (IOException ex) {

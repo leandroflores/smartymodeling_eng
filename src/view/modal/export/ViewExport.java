@@ -1,9 +1,11 @@
 package view.modal.export;
 
+import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 import view.modal.ViewModal;
 import view.main.structural.ViewMenu;
+import view.panel.export.PanelExport;
 
 /**
  * <p>Class of View <b>ViewExport</b>.</p>
@@ -14,7 +16,7 @@ import view.main.structural.ViewMenu;
  * @see    view.modal.ViewModal
  */
 public abstract class ViewExport extends ViewModal {
-    protected final ViewMenu viewMenu;
+    protected final ViewMenu view;
     protected JTabbedPane tabbedPane;
     
     /**
@@ -23,21 +25,62 @@ public abstract class ViewExport extends ViewModal {
      */
     public ViewExport(ViewMenu view) {
         super(view);
-        this.viewMenu = view;
+        this.view = view;
     }
     
     @Override
-    public void addFooter() {
-        this.add(this.createButton("exportButton", " Export ", "export"));
-        this.add(this.createButton("cancelButton", " Cancel ", "cancel"));
+    public void initComponents() {
+        setSize(new Dimension(600, 420));
+        addHeader();
+        addComponents();
+        addFooter();
+    }
+    
+    @Override
+    public void addComponents() {
+        addTabbedPane();
+        addPanelExport();
+        addLines(1);
     }
     
     /**
-     * Method responsible for returning the View Menu.
-     * @return View Menu.
+     * Method responsible for adding the Export Tabbed Pane.
      */
-    public ViewMenu getViewMenu() {
-        return this.viewMenu;
+    protected void addTabbedPane() {
+        tabbedPane = new JTabbedPane();
+        tabbedPane.setPreferredSize(new Dimension(550, 300));
+        add(tabbedPane);
+    }
+    
+    /**
+     * Method responsible for adding the Export Panel.
+     */
+    protected void addPanelExport() {
+        addPanel("export", createPanelExport());
+        createScrollPane("export", getPanelExport());
+        getScrollPane("export").setViewportView(getPanelExport());
+        tabbedPane.removeAll();
+        tabbedPane.add(title, getScrollPane("export"));
+    }
+        
+    /**
+     * Method responsible for creating the Export Panel.
+     * @return Export Panel.
+     */
+    protected abstract PanelExport createPanelExport();
+    
+    @Override
+    public void addFooter() {
+        add(createButton("export", " Export ", "export"));
+        add(createButton("cancel", " Cancel ", "cancel"));
+    }
+    
+    /**
+     * Method responsible for creating the Panel Export.
+     * @return Panel Export.
+     */
+    public PanelExport getPanelExport() {
+        return (PanelExport) getPanel("export");
     }
     
     /**
@@ -45,7 +88,7 @@ public abstract class ViewExport extends ViewModal {
      * @return Export Button.
      */
     public JButton getExportButton() {
-        return this.getButton("exportButton");
+        return getButton("export");
     }
     
     /**
@@ -53,6 +96,14 @@ public abstract class ViewExport extends ViewModal {
      * @return Cancel Button.
      */
     public JButton getCancelButton() {
-        return this.getButton("cancelButton");
+        return getButton("cancel");
+    }
+    
+    /**
+     * Method responsible for returning the View Menu.
+     * @return View Menu.
+     */
+    public ViewMenu getView() {
+        return view;
     }
 }

@@ -1,8 +1,6 @@
 package view.modal.evaluation.base;
 
 import controller.view.modal.evaluation.base.ControllerViewEvaluationDiagram;
-import java.awt.Dimension;
-import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import view.modal.evaluation.ViewEvaluation;
 import view.panel.evaluation.base.PanelEvaluationDiagram;
@@ -13,9 +11,9 @@ import view.main.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Evaluation Diagram View</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-01
- * @see    controller.view.modal.evaluation.ControllerViewEvaluationDiagram
+ * @see    controller.view.modal.evaluation.base.ControllerViewEvaluationDiagram
+ * @see    model.structural.base.Diagram
  * @see    view.modal.evaluation.ViewEvaluation
- * @see    view.panel.evaluation.base.PanelEvaluationDiagram
  */
 public final class ViewEvaluationDiagram extends ViewEvaluation {
     
@@ -26,51 +24,18 @@ public final class ViewEvaluationDiagram extends ViewEvaluation {
      */
     public ViewEvaluationDiagram(ViewMenu view, Project project) {
         super(view);
-        this.controller = new ControllerViewEvaluationDiagram(this);
-        this.title      = "Evaluation Diagram";
-        this.initComponents();
+        controller = new ControllerViewEvaluationDiagram(this);
+        title      = "Evaluation Diagram";
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(600, 520);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected PanelEvaluationDiagram createPanelEvaluation() {
+        return new PanelEvaluationDiagram(this);
     }
     
     @Override
-    public void addComponents() {
-        this.addTabbedPane();
-            this.addPanelEvaluationDiagram();
-        this.addLines(1);
-    }
-    
-    /**
-     * Method responsible for adding the Tabbed Pane.
-     */
-    private void addTabbedPane() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(500, 400));
-        this.add(this.tabbedPane);
-    }
-    
-    /**
-     * Method responsible for adding the Panel Evaluation Diagram.
-     */
-    public void addPanelEvaluationDiagram() {
-        this.addPanel("panelEvaluationDiagram", new PanelEvaluationDiagram(this));
-        this.tabbedPane.removeAll();
-        this.createScrollPane("scrollPanelEvaluationDiagram",  this.getPanelEvaluationDiagram());
-        this.getScrollPane("scrollPanelEvaluationDiagram").setViewportView(this.getPanelEvaluationDiagram());
-        this.tabbedPane.add("Evaluation", this.getScrollPane("scrollPanelEvaluationDiagram"));
-    }
-    
-    /**
-     * Method responsible for returning the Panel Evaluation Diagram.
-     * @return Panel Evaluation Diagram.
-     */
-    public PanelEvaluationDiagram getPanelEvaluationDiagram() {
-        return (PanelEvaluationDiagram) this.getPanel("panelEvaluationDiagram");
+    public PanelEvaluationDiagram getPanelEvaluation() {
+        return (PanelEvaluationDiagram) super.getPanelEvaluation();
     }
 }

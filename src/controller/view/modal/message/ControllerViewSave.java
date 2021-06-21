@@ -44,7 +44,7 @@ public class ControllerViewSave extends ControllerViewModal {
      * Method responsible for Saving the Project.
      */
     private void save() {
-        getView().getViewMenu().getController().exportProject();
+        getView().getView().getController().exportProject();
         nextOperation();
     }
     
@@ -55,19 +55,19 @@ public class ControllerViewSave extends ControllerViewModal {
         if (null != getView().getCode()) { 
             switch (getView().getCode()) {
                 case 1:
-                    getView().getViewMenu().getController().createNewProject();
+                    getView().getView().getController().createNewProject();
                     getView().dispose();
                     break;
                 case 2:
-                    getView().getViewMenu().getController().openProject();
+                    getView().getView().getController().openProject();
                     getView().dispose();
                     break;
                 case 3:
-                    getView().getViewMenu().getController().closeProject();
+                    getView().getView().getController().closeProject();
                     getView().dispose();
                     break;
                 case 4:
-                    getView().getViewMenu().dispose();
+                    getView().getView().dispose();
                     getView().dispose();
                     break;
                 default:

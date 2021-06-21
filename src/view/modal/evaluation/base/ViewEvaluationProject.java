@@ -1,8 +1,6 @@
 package view.modal.evaluation.base;
 
 import controller.view.modal.evaluation.base.ControllerViewEvaluationProject;
-import java.awt.Dimension;
-import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import view.modal.evaluation.ViewEvaluation;
 import view.panel.evaluation.base.PanelEvaluationProject;
@@ -14,6 +12,7 @@ import view.main.structural.ViewMenu;
  * @author Leandro
  * @since  2020-03-28
  * @see    controller.view.modal.evaluation.base.ControllerViewEvaluationProject
+ * @see    model.structural.base.Project
  * @see    view.modal.evaluation.ViewEvaluation
  */
 public final class ViewEvaluationProject extends ViewEvaluation {
@@ -25,51 +24,18 @@ public final class ViewEvaluationProject extends ViewEvaluation {
      */
     public ViewEvaluationProject(ViewMenu view, Project project) {
         super(view);
-        this.controller = new ControllerViewEvaluationProject(this);
-        this.title      = "Evaluation Project";
-        this.initComponents();
+        controller = new ControllerViewEvaluationProject(this);
+        title      = "Evaluation Project";
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(600, 520);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected PanelEvaluationProject createPanelEvaluation() {
+        return new PanelEvaluationProject(this);
     }
     
     @Override
-    public void addComponents() {
-        this.addTabbedPane();
-            this.addPanelEvaluationProject();
-        this.addLines(1);
-    }
-    
-    /**
-     * Method responsible for adding the Tabbed Pane.
-     */
-    private void addTabbedPane() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(500, 400));
-        this.add(this.tabbedPane);
-    }
-    
-    /**
-     * Method responsible for adding the Panel Evaluate Project.
-     */
-    public void addPanelEvaluationProject() {
-        this.addPanel("panelEvaluationProject", new PanelEvaluationProject(this));
-        this.tabbedPane.removeAll();
-        this.createScrollPane("scrollPanelEvaluationProject",  this.getPanelEvaluationProject());
-        this.getScrollPane("scrollPanelEvaluationProject").setViewportView(this.getPanelEvaluationProject());
-        this.tabbedPane.add("Evaluation", this.getScrollPane("scrollPanelEvaluationProject"));
-    }
-    
-    /**
-     * Method responsible for returning the Panel Evaluation Project.
-     * @return Panel Evaluation Project.
-     */
-    public PanelEvaluationProject getPanelEvaluationProject() {
-        return (PanelEvaluationProject) this.getPanel("panelEvaluationProject");
+    public PanelEvaluationProject getPanelEvaluation() {
+        return (PanelEvaluationProject) super.getPanelEvaluation();
     }
 }

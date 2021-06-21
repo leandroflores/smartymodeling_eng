@@ -29,8 +29,8 @@ public class ControllerViewExportInstanceCode extends ControllerViewExport {
     
     @Override
     public boolean check() {
-        return check(getView().getPanelExportInstanceCode().getDirectoryTextField(), "Select a Directory!")
-            && check(getView().getPanelExportInstanceCode().getNameTextField(), "Name is required!")
+        return check(getView().getPanelExport().getDirectoryTextField(), "Select a Directory!")
+            && check(getView().getPanelExport().getNameTextField(), "Name is required!")
             && checkInstance();
     }
     
@@ -39,7 +39,7 @@ public class ControllerViewExportInstanceCode extends ControllerViewExport {
      * @return Instance is selected.
      */
     private boolean checkInstance() {
-        if (getView().getPanelExportInstanceCode().getInstance() == null) {
+        if (getView().getPanelExport().getInstance() == null) {
             new ViewError(getView(), "Select a Class Instance!").setVisible(true);
             return false;
         }
@@ -48,9 +48,9 @@ public class ControllerViewExportInstanceCode extends ControllerViewExport {
     
     @Override
     public void export() {
-        String   path     = getView().getPanelExportInstanceCode().getDirectoryTextField().getText().trim();
-        Instance instance = getView().getPanelExportInstanceCode().getInstance();
-        String   name     = getView().getPanelExportInstanceCode().getNameTextField().getText().trim();
+        String   path     = getView().getPanelExport().getDirectoryTextField().getText().trim();
+        Instance instance = getView().getPanelExport().getInstance();
+        String   name     = getView().getPanelExport().getNameTextField().getText().trim();
         try {
             new ExportInstance(path, name, instance).export();
         } catch (IOException exception) {

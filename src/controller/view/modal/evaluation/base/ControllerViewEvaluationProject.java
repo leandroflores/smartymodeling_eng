@@ -24,12 +24,12 @@ public class ControllerViewEvaluationProject extends ControllerViewEvaluation {
     
     @Override
     public void refresh() {
-        getView().getPanelEvaluationProject().getController().update();
+        getView().getPanelEvaluation().getController().update();
     }
 
     @Override
     public void clear() {
-        getView().getPanelEvaluationProject().clear();
+        getView().getPanelEvaluation().clear();
     }
     
     @Override

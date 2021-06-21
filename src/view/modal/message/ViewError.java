@@ -1,6 +1,7 @@
 package view.modal.message;
 
 import controller.view.modal.message.ControllerViewError;
+import java.awt.Dimension;
 import javax.swing.JButton;
 import view.View;
 import view.modal.ViewModal;
@@ -10,9 +11,8 @@ import view.style.ViewStyle;
  * <p>Class of View <b>ViewError</b>.</p>
  * <p>Class responsible for defining the <b>Error View</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    controller.view.modal.message.ControllerViewError
- * @see    view.View
  * @see    view.modal.ViewModal
  */
 public final class ViewError extends ViewModal {
@@ -27,45 +27,45 @@ public final class ViewError extends ViewModal {
         super(view);
         this.message    = message;
         this.controller = new ControllerViewError(this);
-        this.initComponents();
+        initComponents();
     }
     
     /**
      * Alternative constructor method of Class.
-     * @param viewModal View Modal.
+     * @param view View Modal.
      * @param message Error Message.
      */
-    public ViewError(ViewModal viewModal, String message) {
-        super(viewModal);
+    public ViewError(ViewModal view, String message) {
+        super(view);
         this.message    = message;
         this.controller = new ControllerViewError(this);
-        this.initComponents();
+        initComponents();
     }
 
     @Override
     public void initComponents() {
-        this.setTitle(ViewStyle.SYSTEM + "Error");
-        this.setSize(this.message.length() + 500, 150);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+        setTitle(ViewStyle.SYSTEM + "Error");
+        setSize(new Dimension(message.length() + 500, 150));
+        addHeader();
+        addComponents();
+        addFooter();
     }
     
     @Override
     public void addHeader() {
-        this.addLines(1);
-        this.add(this.createLabelImage("icons/delete.png"));
+        addLines(1);
+        add(createLabelImage("icons/delete.png"));
     }
     
     @Override
     public void addComponents() {
-        this.add(this.createLabel(this.message));
-        this.addLines(1);
+        add(createLabel(message));
+        addLines(1);
     }
     
     @Override
     public void addFooter() {
-        this.add(this.createButton("buttonOk", "   Ok   ", "yes"));
+        add(createButton("ok", "   Ok   ", "yes"));
     }
 
     /**
@@ -73,6 +73,6 @@ public final class ViewError extends ViewModal {
      * @return JButton Ok.
      */
     public JButton getButtonOk() {
-        return this.getButton("buttonOk");
+        return getButton("ok");
     }
 }

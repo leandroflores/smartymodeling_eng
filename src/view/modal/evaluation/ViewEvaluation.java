@@ -1,12 +1,14 @@
 package view.modal.evaluation;
 
 import controller.view.modal.evaluation.ControllerViewEvaluation;
+import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 import model.structural.base.Project;
 import view.modal.ViewModal;
 import view.panel.modeling.PanelModeling;
 import view.main.structural.ViewMenu;
+import view.panel.evaluation.PanelEvaluation;
 
 /**
  * <p>Class of View <b>ViewEvaluation</b>.</p>
@@ -45,10 +47,59 @@ public abstract class ViewEvaluation extends ViewModal {
     }
     
     @Override
+    public void initComponents() {
+        setSize(new Dimension(600, 520));
+        addHeader();
+        addComponents();
+        addFooter();
+    }
+    
+    @Override
+    public void addComponents() {
+        addTabbedPane();
+        addPanelEvaluation();
+        addLines(1);
+    }
+    
+    /**
+     * Method responsible for adding the Evaluation Tabbed Pane.
+     */
+    protected void addTabbedPane() {
+        tabbedPane = new JTabbedPane();
+        tabbedPane.setPreferredSize(new Dimension(500, 400));
+        add(tabbedPane);
+    }
+    
+    /**
+     * Method responsible for adding the Evaluation Panel.
+     */
+    protected void addPanelEvaluation() {
+        addPanel("evaluation", createPanelEvaluation());
+        createScrollPane("evaluation", getPanelEvaluation());
+        getScrollPane("evaluation").setViewportView(getPanelEvaluation());
+        tabbedPane.removeAll();
+        tabbedPane.add("Evaluation", getScrollPane("evaluation"));
+    }
+    
+    /**
+     * Method responsible for creating the Evaluation Panel.
+     * @return Evaluation Panel.
+     */
+    protected abstract PanelEvaluation createPanelEvaluation();
+    
+    @Override
     public void addFooter() {
-        this.add(this.createButton("refreshButton", " Refresh ", "refresh"));
-        this.add(this.createButton("clearButton",   "  Clear  ", "clear"));
-        this.add(this.createButton("cancelButton",  "  Cancel ", "back"));
+        add(createButton("refresh", " Refresh ", "refresh"));
+        add(createButton("clear",   "  Clear  ", "clear"));
+        add(createButton("cancel",  "  Cancel ", "back"));
+    }
+    
+    /**
+     * Method responsible for creating the Panel Evaluation.
+     * @return Panel Evaluation.
+     */
+    public PanelEvaluation getPanelEvaluation() {
+        return (PanelEvaluation) getPanel("evaluation");
     }
     
     /**
@@ -56,7 +107,7 @@ public abstract class ViewEvaluation extends ViewModal {
      * @return Refresh Button.
      */
     public JButton getRefreshButton() {
-        return this.getButton("refreshButton");
+        return getButton("refresh");
     }
     
     /**
@@ -64,7 +115,7 @@ public abstract class ViewEvaluation extends ViewModal {
      * @return Clear Button.
      */
     public JButton getClearButton() {
-        return this.getButton("clearButton");
+        return getButton("clear");
     }
     
     /**
@@ -72,7 +123,7 @@ public abstract class ViewEvaluation extends ViewModal {
      * @return Cancel Button.
      */
     public JButton getCancelButton() {
-        return this.getButton("cancelButton");
+        return getButton("cancel");
     }
     
     /**
@@ -80,7 +131,7 @@ public abstract class ViewEvaluation extends ViewModal {
      * @return Controller.
      */
     public ControllerViewEvaluation getController() {
-        return (ControllerViewEvaluation) this.controller;
+        return (ControllerViewEvaluation) controller;
     }
     
     /**
@@ -88,7 +139,7 @@ public abstract class ViewEvaluation extends ViewModal {
      * @return Project.
      */
     public Project getProject() {
-        return this.project;
+        return project;
     }
     
     /**
@@ -96,6 +147,6 @@ public abstract class ViewEvaluation extends ViewModal {
      * @return View Menu.
      */
     public ViewMenu getViewMenu() {
-        return this.view;
+        return view;
     }
 }

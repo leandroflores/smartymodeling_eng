@@ -30,8 +30,8 @@ public class ControllerViewExportDiagramCode extends ControllerViewExport {
     
     @Override
     public boolean check() {
-        return check(getView().getPanelExportDiagramCode().getDirectoryTextField(), "Select a Directory!")
-            && check(getView().getPanelExportDiagramCode().getNameTextField(), "Name is required!")
+        return check(getView().getPanelExport().getDirectoryTextField(), "Select a Directory!")
+            && check(getView().getPanelExport().getNameTextField(), "Name is required!")
             && checkDiagram();
     }
     
@@ -40,7 +40,7 @@ public class ControllerViewExportDiagramCode extends ControllerViewExport {
      * @return Diagram is selected.
      */
     private boolean checkDiagram() {
-        if (getView().getPanelExportDiagramCode().getDiagram() == null) {
+        if (getView().getPanelExport().getDiagram() == null) {
             new ViewError(getView(), "Select a Class Diagram!").setVisible(true);
             return false;
         }
@@ -49,9 +49,9 @@ public class ControllerViewExportDiagramCode extends ControllerViewExport {
     
     @Override
     public void export() {
-        String  path    = getView().getPanelExportDiagramCode().getDirectoryTextField().getText().trim();
-        Diagram diagram = getView().getPanelExportDiagramCode().getDiagram();
-        String  name    = getView().getPanelExportDiagramCode().getNameTextField().getText().trim();
+        String  path    = getView().getPanelExport().getDirectoryTextField().getText().trim();
+        Diagram diagram = getView().getPanelExport().getDiagram();
+        String  name    = getView().getPanelExport().getNameTextField().getText().trim();
         try {
             new ExportDiagram(path, name, (ClassDiagram) diagram).export();
         } catch (IOException exception) {

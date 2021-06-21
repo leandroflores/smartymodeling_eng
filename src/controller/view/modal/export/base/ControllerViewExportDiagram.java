@@ -29,13 +29,13 @@ public class ControllerViewExportDiagram extends ControllerViewExport {
     
     @Override
     public boolean check() {
-        return check(getView().getPanelExportDiagram().getDirectoryTextField(), "Select a Directory!");
+        return check(getView().getPanelExport().getDirectoryTextField(), "Select a Directory!");
     }
 
     @Override
     public void export() {
-        String  path    = getView().getPanelExportDiagram().getDirectoryTextField().getText().trim();
-        Diagram diagram = getView().getPanelExportDiagram().getDiagram();
+        String  path    = getView().getPanelExport().getDirectoryTextField().getText().trim();
+        Diagram diagram = getView().getPanelExport().getDiagram();
         try {
             new ExportDiagram(path, diagram).export();
         } catch (IOException exception) {

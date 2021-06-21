@@ -1,8 +1,6 @@
 package view.modal.export.base.product;
 
 import controller.view.modal.export.base.product.ControllerViewExportProduct;
-import java.awt.Dimension;
-import javax.swing.JTabbedPane;
 import model.structural.base.product.Product;
 import view.modal.export.ViewExport;
 import view.panel.export.base.product.PanelExportProduct;
@@ -26,44 +24,19 @@ public final class ViewExportProduct extends ViewExport {
      */
     public ViewExportProduct(ViewMenu viewMenu) {
         super(viewMenu);
-        this.controller = new ControllerViewExportProduct(this);
-        this.title      = "Export Product";
-        this.initComponents();
+        controller = new ControllerViewExportProduct(this);
+        title      = "Export Product";
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(600, 420);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected PanelExportProduct createPanelExport() {
+        return new PanelExportProduct(getView());
     }
     
     @Override
-    public void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 300));
-            this.addPanelExportProduct();
-        this.add(this.tabbedPane);
-        this.addLines(1);
-    }
-    
-    /**
-     * Method responsible for adding the Panel Export Product.
-     */
-    private void addPanelExportProduct() {
-        this.addPanel("panelExportProduct", new PanelExportProduct(this.getViewMenu()));
-        this.createScrollPane("scrollPanelExportProduct",  this.getPanelExportProduct());
-        this.getScrollPane("scrollPanelExportProduct").setViewportView(this.getPanelExportProduct());
-        this.tabbedPane.add("Export Product", this.getScrollPane("scrollPanelExportProduct"));
-    }
-    
-    /**
-     * Method responsible for returning the Panel Export Product.
-     * @return Panel Export Product.
-     */
-    public PanelExportProduct getPanelExportProduct() {
-        return (PanelExportProduct) this.getPanel("panelExportProduct");
+    public PanelExportProduct getPanelExport() {
+        return (PanelExportProduct) getPanel("export");
     }
     
     /**
@@ -71,14 +44,6 @@ public final class ViewExportProduct extends ViewExport {
      * @return Product.
      */
     public Product getProduct() {
-        return this.product;
-    }
-
-    /**
-     * Method responsible for setting the Product.
-     * @param product Product.
-     */
-    public void setProduct(Product product) {
-        this.product = product;
+        return product;
     }
 }
