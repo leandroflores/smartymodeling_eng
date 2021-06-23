@@ -19,25 +19,25 @@ import java.util.Map;
  */
 public abstract class PanelGraph extends Panel {
     protected Double  zoom;
+    protected HashMap objects;
+    protected HashMap identifiers;
     protected Object  parent;
     protected mxGraph graph;
     protected mxGraphLayout layout;
     protected mxGraphComponent component;
-    protected HashMap identifiers;
-    protected HashMap objects;
     
     /**
      * Default constructor of Class.
      */
     public PanelGraph() {
-        this.zoom = 1.0d;
+        zoom = 1.0d;
     }
     
     /**
      * Method responsible for cleaning the Graph.
      */
     public void clearGraph() {
-        this.graph.removeCells(this.graph.getChildCells(this.parent, true, true));
+        graph.removeCells(graph.getChildCells(parent, true, true));
     }
     
     /**
@@ -59,20 +59,20 @@ public abstract class PanelGraph extends Panel {
      * Method responsible for initializing the Graph.
      */
     protected void initGraph() {
-        this.graph  = this.createMxGraph();
-        this.parent = this.graph.getDefaultParent();
+        graph  = createMxGraph();
+        parent = graph.getDefaultParent();
         
-        this.graph.getModel().beginUpdate();
-            this.updateGraph();
-        this.graph.getModel().endUpdate();
-        this.graph.refresh();
+        graph.getModel().beginUpdate();
+            updateGraph();
+        graph.getModel().endUpdate();
+        graph.refresh();
         
-        this.graph.setAllowDanglingEdges(false);
-        this.graph.setAllowNegativeCoordinates(false);
-        this.graph.setAllowLoops(true);
-        this.graph.setSplitEnabled(false);
-        this.graph.setDisconnectOnMove(false);
-        this.graph.setCellsDisconnectable(false);
+        graph.setAllowDanglingEdges(false);
+        graph.setAllowNegativeCoordinates(false);
+        graph.setAllowLoops(true);
+        graph.setSplitEnabled(false);
+        graph.setDisconnectOnMove(false);
+        graph.setCellsDisconnectable(false);
     }
     
     /**
@@ -85,7 +85,7 @@ public abstract class PanelGraph extends Panel {
             public boolean isValidDropTarget(Object cell, Object[] cells) {
                 return      isCellsMovable() 
                         && !isCellLocked(cell) 
-                        && this.isValidParent(cell, cells);
+                        && isValidParent(cell, cells);
             }
             
             public boolean isValidParent(Object cell, Object[] cells) {
@@ -96,7 +96,7 @@ public abstract class PanelGraph extends Panel {
                 
                 if  (((mxCell) cell).getParent() == null)
                     return true;
-                return this.isValidParent(((mxCell) cell).getParent(), cells);
+                return isValidParent(((mxCell) cell).getParent(), cells);
             }
         };
     }
@@ -115,18 +115,18 @@ public abstract class PanelGraph extends Panel {
      * Method responsible for initializing the Graph Component.
      */
     protected void initGraphComponent() {
-        this.component = new mxGraphComponent(this.graph);
-        this.component.setEnterStopsCellEditing(true); 
-        this.component.getViewport().setOpaque(true);
-        this.component.getViewport().setBackground(Color.WHITE);
+        component = new mxGraphComponent(graph);
+        component.setEnterStopsCellEditing(true); 
+        component.getViewport().setOpaque(true);
+        component.getViewport().setBackground(Color.WHITE);
     }
     
     /**
      * Method responsible for initializing the Graph Layout.
      */
     protected void initGraphLayout() {
-        this.layout = new mxParallelEdgeLayout(this.graph);
-        this.layout.execute(this.graph.getDefaultParent());
+        layout = new mxParallelEdgeLayout(graph);
+        layout.execute(graph.getDefaultParent());
     }
     
     /**
@@ -135,7 +135,7 @@ public abstract class PanelGraph extends Panel {
      * @param properties Style Properties.
      */
     protected void addStyle(String id, Map properties) {
-        this.graph.getStylesheet().putCellStyle(id, properties);
+        graph.getStylesheet().putCellStyle(id, properties);
     }
     
     /**
@@ -143,7 +143,7 @@ public abstract class PanelGraph extends Panel {
      * @return Default Edge Style.
      */
     protected Map<String, Object> getEdgeStyle() {
-        return this.getGraph().getStylesheet().getStyles().get("defaultEdge");
+        return getGraph().getStylesheet().getStyles().get("defaultEdge");
     }
     
     /**
@@ -151,7 +151,7 @@ public abstract class PanelGraph extends Panel {
      * @return Panel Zoom.
      */
     public Double getZoom() {
-        return this.zoom;
+        return zoom;
     }
     
     /**
@@ -160,7 +160,7 @@ public abstract class PanelGraph extends Panel {
      */
     public void setZoom(Double zoom) {
         this.zoom = zoom;
-        this.graph.getView().setScale(zoom);
+        graph.getView().setScale(zoom);
     }
     
     /**
@@ -168,7 +168,7 @@ public abstract class PanelGraph extends Panel {
      * @return Parent Cell.
      */
     public Object getParentCell() {
-        return this.parent;
+        return parent;
     }
     
     /**
@@ -176,7 +176,7 @@ public abstract class PanelGraph extends Panel {
      * @return Graph.
      */
     public mxGraph getGraph() {
-        return this.graph;
+        return graph;
     }
 
     /**
@@ -184,7 +184,7 @@ public abstract class PanelGraph extends Panel {
      * @return Graph Layout.
      */
     public mxGraphLayout getGraphLayout() {
-        return this.layout;
+        return layout;
     }
     
     /**
@@ -192,7 +192,7 @@ public abstract class PanelGraph extends Panel {
      * @return Graph Model.
      */
     public mxGraphModel getModel() {
-        return (mxGraphModel) this.graph.getModel();
+        return (mxGraphModel) graph.getModel();
     }
     
     /**
@@ -200,6 +200,6 @@ public abstract class PanelGraph extends Panel {
      * @return Graph Component.
      */
     public mxGraphComponent getComponent() {
-        return this.component;
+        return component;
     }
 }

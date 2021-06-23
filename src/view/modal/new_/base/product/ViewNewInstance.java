@@ -28,42 +28,36 @@ public final class ViewNewInstance extends ViewNew {
      */
     public ViewNewInstance(ViewMenu view) {
         super(view);
-        this.instance   = new Instance();
-        this.controller = new ControllerViewNewInstance(this);
-        this.title      = "New Instance";
-        this.initComponents();
+        instance   = new Instance();
+        controller = new ControllerViewNewInstance(this);
+        title      = "New Instance";
+        initComponents();
     }
     
     @Override
     public void initComponents() {
-        this.setSize(585, 520);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
-        this.getInsertButton().setEnabled(false);
+        super.initComponents();
+        getInsertButton().setEnabled(false);
     }
 
     @Override
-    public void addComponents() {
-        this.addPanelNewInstance();
-        this.addLines(1);
+    protected Dimension getViewDimension() {
+        return new Dimension(585, 520);
     }
     
-    /**
-     * Method responsible for adding the Panel New Instance.
-     */
-    private void addPanelNewInstance() {
-        this.addPanel("panelNewInstance", new PanelNewInstance(this, this.instance));
-        this.getPanelNewInstance().setPreferredSize(new Dimension(500, 400));
-        this.add(this.getPanelNewInstance());
+    @Override
+    protected PanelNewInstance createPanelNew() {
+        return new PanelNewInstance(this, instance);
     }
     
-    /**
-     * Method responsible for returning the Panel New Instance.
-     * @return Panel New Instance.
-     */
-    private PanelNewInstance getPanelNewInstance() {
-        return (PanelNewInstance) this.getPanel("panelNewInstance");
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 400);
+    }
+    
+    @Override
+    protected PanelNewInstance getPanelNew() {
+        return (PanelNewInstance) super.getPanelNew();
     }
     
     /**
@@ -71,7 +65,7 @@ public final class ViewNewInstance extends ViewNew {
      * @return Panel Base Instance.
      */
     public PanelBaseInstance getPanelBaseInstance() {
-        return this.getPanelNewInstance().getPanelBaseInstance();
+        return getPanelNew().getPanelBaseInstance();
     }
     
     /**
@@ -79,7 +73,7 @@ public final class ViewNewInstance extends ViewNew {
      * @return Panel Base Artifacts.
      */
     public PanelBaseArtifacts getPanelBaseArtifacts() {
-        return this.getPanelNewInstance().getPanelBaseArtifacts();
+        return getPanelNew().getPanelBaseArtifacts();
     }
     
     /**
@@ -87,7 +81,7 @@ public final class ViewNewInstance extends ViewNew {
      * @return Elements HashMap.
      */
     public HashMap<String, Integer> getElements() {
-        return this.getPanelNewInstance().getElements();
+        return getPanelNew().getElements();
     }
     
     /**
@@ -95,7 +89,7 @@ public final class ViewNewInstance extends ViewNew {
      * @return Controller.
      */
     public ControllerViewNewInstance getController() {
-        return (ControllerViewNewInstance) this.controller;
+        return (ControllerViewNewInstance) controller;
     }
     
     /**
@@ -103,6 +97,6 @@ public final class ViewNewInstance extends ViewNew {
      * @return Instance.
      */
     public Instance getInstance() {
-        return this.instance;
+        return instance;
     }
 }

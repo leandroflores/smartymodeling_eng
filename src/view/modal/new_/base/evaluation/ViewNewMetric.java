@@ -27,33 +27,30 @@ public final class ViewNewMetric extends ViewNew {
      */
     public ViewNewMetric(ViewMenu view) {
         super(view);
-        this.metric     = new Metric();
-        this.controller = new ControllerViewNewMetric(this);
-        this.title      = "New Metric";
-        this.initComponents();
+        metric     = new Metric();
+        controller = new ControllerViewNewMetric(this);
+        title      = "New Metric";
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(600, 445);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 445);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditMetric();
-        this.addLines(1);
+    protected PanelEditMetric createPanelNew() {
+        return new PanelEditMetric(view, metric);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Metric.
-     */
-    private void addPanelEditMetric() {
-        this.addPanel("panelEditMetric", new PanelEditMetric(this.view, this.metric));
-        this.getPanel("panelEditMetric").setPreferredSize(new Dimension(500, 325));
-        this.add(this.getPanel("panelEditMetric"));
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 325);
+    }
+    
+    @Override
+    protected PanelEditMetric getPanelNew() {
+        return (PanelEditMetric) super.getPanelNew();
     }
     
     /**
@@ -61,7 +58,7 @@ public final class ViewNewMetric extends ViewNew {
      * @return Panel Base Metric.
      */
     public PanelBaseMetric getPanelBaseMetric() {
-        return ((PanelEditMetric) this.getPanel("panelEditMetric")).getPanelBaseMetric();
+        return getPanelNew().getPanelBaseMetric();
     }
     
     /**
@@ -69,7 +66,7 @@ public final class ViewNewMetric extends ViewNew {
      * @return Panel Base Operation.
      */
     public PanelBaseOperation getPanelBaseOperation() {
-        return ((PanelEditMetric) this.getPanel("panelEditMetric")).getPanelBaseOperation();
+        return getPanelNew().getPanelBaseOperation();
     }
     
     /**
@@ -77,6 +74,6 @@ public final class ViewNewMetric extends ViewNew {
      * @return Metric.
      */
     public Metric getMetric() {
-        return this.metric;
+        return metric;
     }
 }

@@ -2,7 +2,6 @@ package view.modal.new_.base.product;
 
 import controller.view.modal.new_.base.product.ControllerViewNewProduct;
 import java.awt.Dimension;
-import javax.swing.JTabbedPane;
 import model.structural.base.product.Product;
 import view.panel.base.product.PanelBaseProduct;
 import view.modal.new_.ViewNew;
@@ -27,33 +26,30 @@ public final class ViewNewProduct extends ViewNew {
      */
     public ViewNewProduct(ViewMenu view) {
         super(view);
-        this.product    = new Product();
-        this.controller = new ControllerViewNewProduct(this);
-        this.title      = "New Product";
-        this.initComponents();
+        product    = new Product();
+        controller = new ControllerViewNewProduct(this);
+        title      = "New Product";
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(600, 445);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 445);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditProduct();
-        this.addLines(1);
+    protected PanelEditProduct createPanelNew() {
+        return new PanelEditProduct(view, product);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Product.
-     */
-    private void addPanelEditProduct() {
-        this.addPanel("panelEditProduct", new PanelEditProduct(this.view, this.product));
-        this.getPanel("panelEditProduct").setPreferredSize(new Dimension(500, 325));
-        this.add(this.getPanel("panelEditProduct"));
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 325);
+    }
+    
+    @Override
+    protected PanelEditProduct getPanelNew() {
+        return (PanelEditProduct) super.getPanelNew();
     }
     
     /**
@@ -61,7 +57,7 @@ public final class ViewNewProduct extends ViewNew {
      * @return Panel Base Product.
      */
     public PanelBaseProduct getPanelBaseProduct() {
-        return ((PanelEditProduct) this.getPanel("panelEditProduct")).getPanelBaseProduct();
+        return getPanelNew().getPanelBaseProduct();
     }
     
     /**
@@ -69,6 +65,6 @@ public final class ViewNewProduct extends ViewNew {
      * @return Product.
      */
     public Product getProduct() {
-        return this.product;
+        return product;
     }
 }

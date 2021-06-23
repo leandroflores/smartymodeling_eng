@@ -29,7 +29,7 @@ public abstract class ControllerViewNew extends ControllerViewModal {
     public void actionPerformed(ActionEvent event) {
         if (getView().getInsertButton().equals(event.getSource()))
             insert();
-        else if (getView().getBackButton().equals(event.getSource()))
+        else if (getView().getCancelButton().equals(event.getSource()))
             getView().dispose();
     }
     

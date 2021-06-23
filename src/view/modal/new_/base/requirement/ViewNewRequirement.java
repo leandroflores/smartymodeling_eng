@@ -26,33 +26,30 @@ public final class ViewNewRequirement extends ViewNew {
      */
     public ViewNewRequirement(ViewMenu view) {
         super(view);
-        this.requirement = new Requirement();
-        this.controller  = new ControllerViewNewRequirement(this);
-        this.title       = "New Requirement";
-        this.initComponents();
+        requirement = new Requirement();
+        controller  = new ControllerViewNewRequirement(this);
+        title       = "New Requirement";
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(new Dimension(600, 450));
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 450);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditRequirement();
-        this.addLines(1);
+    protected PanelEditRequirement createPanelNew() {
+        return new PanelEditRequirement(view, requirement, 0);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Requirement.
-     */
-    private void addPanelEditRequirement() {
-        this.addPanel("panelEditRequirement", new PanelEditRequirement(this.view, this.requirement, 0));
-        this.getPanel("panelEditRequirement").setPreferredSize(new Dimension(500, 325));
-        this.add(this.getPanel("panelEditRequirement"));
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 325);
+    }
+    
+    @Override
+    protected PanelEditRequirement getPanelNew() {
+        return (PanelEditRequirement) super.getPanelNew();
     }
     
     /**
@@ -60,7 +57,7 @@ public final class ViewNewRequirement extends ViewNew {
      * @return Panel Base Requirement.
      */
     public PanelBaseRequirement getPanelBaseRequirement() {
-        return ((PanelEditRequirement) this.getPanel("panelEditRequirement")).getPanelBaseRequirement();
+        return getPanelNew().getPanelBaseRequirement();
     }
     
     /**
@@ -68,6 +65,6 @@ public final class ViewNewRequirement extends ViewNew {
      * @return Requirement.
      */
     public Requirement getRequirement() {
-        return this.requirement;
+        return requirement;
     }
 }

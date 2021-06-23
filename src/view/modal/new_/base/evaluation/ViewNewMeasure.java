@@ -28,42 +28,36 @@ public final class ViewNewMeasure extends ViewNew {
      */
     public ViewNewMeasure(ViewMenu view) {
         super(view);
-        this.measure    = new Measure();
-        this.controller = new ControllerViewNewMeasure(this);
-        this.title      = "New Measure";
-        this.initComponents();
+        measure    = new Measure();
+        controller = new ControllerViewNewMeasure(this);
+        title      = "New Measure";
+        initComponents();
     }
     
     @Override
     public void initComponents() {
-        this.setSize(new Dimension(600, 525));
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
-        this.getInsertButton().setEnabled(false);
+        super.initComponents();
+        getInsertButton().setEnabled(false);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelNewMeasure();
-        this.addLines(1);
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 525);
     }
     
-    /**
-     * Method responsible for adding the Panel New Measure.
-     */
-    private void addPanelNewMeasure() {
-        this.addPanel("panelNewMeasure", new PanelNewMeasure(this, this.measure));
-        this.getPanelNewMeasure().setPreferredSize(new Dimension(500, 400));
-        this.add(this.getPanelNewMeasure());
+    @Override
+    protected PanelNewMeasure createPanelNew() {
+        return new PanelNewMeasure(this, measure);
     }
     
-    /**
-     * Method responsible for returning the Panel New Measure.
-     * @return Panel New Measure.
-     */
-    private PanelNewMeasure getPanelNewMeasure() {
-        return (PanelNewMeasure) this.getPanel("panelNewMeasure");
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 400);
+    }
+    
+    @Override
+    protected PanelNewMeasure getPanelNew() {
+        return (PanelNewMeasure) super.getPanelNew();
     }
     
     /**
@@ -71,7 +65,7 @@ public final class ViewNewMeasure extends ViewNew {
      * @return Panel Base Measure.
      */
     public PanelBaseMeasure getPanelBaseMeasure() {
-        return this.getPanelNewMeasure().getPanelBaseMeasure();
+        return getPanelNew().getPanelBaseMeasure();
     }
     
     /**
@@ -79,7 +73,7 @@ public final class ViewNewMeasure extends ViewNew {
      * @return Panel Base Target.
      */
     public PanelBaseTarget getPanelBaseTarget() {
-        return this.getPanelNewMeasure().getPanelBaseTarget();
+        return getPanelNew().getPanelBaseTarget();
     }
     
     /**
@@ -87,7 +81,7 @@ public final class ViewNewMeasure extends ViewNew {
      * @return Panel Base Evaluation.
      */
     public PanelBaseEvaluation getPanelBaseEvaluation() {
-        return this.getPanelNewMeasure().getPanelBaseEvaluation();
+        return getPanelNew().getPanelBaseEvaluation();
     }
     
     /**
@@ -95,7 +89,7 @@ public final class ViewNewMeasure extends ViewNew {
      * @return Controller.
      */
     public ControllerViewNewMeasure getController() {
-        return (ControllerViewNewMeasure) this.controller;
+        return (ControllerViewNewMeasure) controller;
     }
     
     /**
@@ -103,6 +97,6 @@ public final class ViewNewMeasure extends ViewNew {
      * @return Measure.
      */
     public Measure getMeasure() {
-        return this.measure;
+        return measure;
     }
 }

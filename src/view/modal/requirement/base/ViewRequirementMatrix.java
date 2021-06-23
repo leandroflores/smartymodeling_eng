@@ -22,32 +22,23 @@ public final class ViewRequirementMatrix extends ViewRequirement {
      */
     public ViewRequirementMatrix(ViewMenu view) {
         super(view);
-        this.controller = new ControllerViewRequirementMatrix(this);
-        this.title      = "Requirement Matrix";
-        this.initComponents();
+        controller = new ControllerViewRequirementMatrix(this);
+        title      = "Requirement Matrix";
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(new Dimension(700, 550));
-        this.updateTitle();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(700, 550);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelRequirementMatrix();
-        this.addLines(1);
+    protected PanelRequirementMatrix createPanelRequirement() {
+        return new PanelRequirementMatrix(this);
     }
     
-    /**
-     * Method responsible for adding the Panel Requirement Matrix.
-     */
-    private void addPanelRequirementMatrix() {
-        this.addPanel("panelRequirementMatrix", new PanelRequirementMatrix(this));
-        this.getPanel("panelRequirementMatrix").setPreferredSize(new Dimension(650, 450));
-        this.getPanel("panelRequirementMatrix").setMinimumSize(new Dimension(650, 450));
-        this.add(this.getPanel("panelRequirementMatrix"));
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(650, 450);
     }
 }

@@ -1,6 +1,7 @@
 package view.modal.system;
 
 import controller.view.modal.system.ControllerViewSystemInformation;
+import java.awt.Dimension;
 import javax.swing.JButton;
 import view.modal.ViewModal;
 import view.style.ViewStyle;
@@ -23,35 +24,35 @@ public final class ViewSystemInformation extends ViewModal {
      */
     public ViewSystemInformation(ViewMenu view) {
         super(view);
-        this.controller = new ControllerViewSystemInformation(this);
-        this.initComponents();
+        controller = new ControllerViewSystemInformation(this);
+        initComponents();
     }
     
     @Override
     public void initComponents() {
-        this.setTitle(ViewStyle.SYSTEM + "Information");
-        this.setSize(900, 300);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+        setTitle(ViewStyle.SYSTEM + "Information");
+        setSize(new Dimension(900, 300));
+        addHeader();
+        addComponents();
+        addFooter();
     }
     
     @Override
     public void addHeader() {
-        this.addLines(1);
-        this.add(this.createLabelImage("system/information.png"));
-        this.addLines(1);
+        addLines(1);
+        add(createLabelImage("system/information.png"));
+        addLines(1);
     }
     
     @Override
     public void addComponents() {
-        this.add(new PanelInformation());
+        add(new PanelInformation());
         
     }
     
     @Override
     public void addFooter() {
-        this.add(this.createButton("buttonOk", "   Ok   ", "yes"));
+        add(createButton("ok", "   Ok   ", "yes"));
     }
 
     /**
@@ -59,6 +60,6 @@ public final class ViewSystemInformation extends ViewModal {
      * @return JButton Ok.
      */
     public JButton getButtonOk() {
-        return this.getButton("buttonOk");
+        return getButton("ok");
     }
 }

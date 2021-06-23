@@ -22,32 +22,23 @@ public final class ViewRequirementTraceability extends ViewRequirement {
      */
     public ViewRequirementTraceability(ViewMenu view) {
         super(view);
-        this.controller = new ControllerViewRequirementTraceability(this);
-        this.title      = "Requirement Traceability";
-        this.initComponents();
+        controller = new ControllerViewRequirementTraceability(this);
+        title      = "Requirement Traceability";
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(new Dimension(700, 560));
-        this.updateTitle();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(700, 560);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelRequirementTraceability();
-        this.addLines(1);
+    protected PanelRequirementTraceability createPanelRequirement() {
+        return new PanelRequirementTraceability(this);
     }
     
-    /**
-     * Method responsible for adding the Panel Requirement Traceability.
-     */
-    private void addPanelRequirementTraceability() {
-        this.addPanel("panelRequirementTraceability", new PanelRequirementTraceability(this));
-        this.getPanel("panelRequirementTraceability").setPreferredSize(new Dimension(650, 450));
-        this.getPanel("panelRequirementTraceability").setMinimumSize(new Dimension(650, 450));
-        this.add(this.getPanel("panelRequirementTraceability"));
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(650, 450);
     }
 }

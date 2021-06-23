@@ -57,26 +57,26 @@ public abstract class Panel extends JPanel {
      */
     public Panel() {
         super();
-        this.init();
-        this.setSettings();
+        init();
+        setSettings();
     }
     
     /**
      * Method responsible for initializing the Component Maps.
      */
     private void init() {
-        this.buttons      = new HashMap<>();
-        this.checkBoxes   = new HashMap<>();
-        this.comboBoxes   = new HashMap<>();
-        this.fileChoosers = new HashMap<>();
-        this.lists        = new HashMap<>();
-        this.panels       = new HashMap<>();
-        this.scrollPanes  = new HashMap<>();
-        this.tables       = new HashMap<>();
-        this.tableColums  = new HashMap<>();
-        this.tableModels  = new HashMap<>();
-        this.textAreas    = new HashMap<>();
-        this.textFields   = new HashMap<>();
+        buttons      = new HashMap<>();
+        checkBoxes   = new HashMap<>();
+        comboBoxes   = new HashMap<>();
+        fileChoosers = new HashMap<>();
+        lists        = new HashMap<>();
+        panels       = new HashMap<>();
+        scrollPanes  = new HashMap<>();
+        tables       = new HashMap<>();
+        tableColums  = new HashMap<>();
+        tableModels  = new HashMap<>();
+        textAreas    = new HashMap<>();
+        textFields   = new HashMap<>();
     }
     
     /**
@@ -89,7 +89,7 @@ public abstract class Panel extends JPanel {
      * @return Default Color.
      */
     protected Color getDefaultColor() {
-        return this.getBackground();
+        return getBackground();
     }
     
     /**
@@ -104,7 +104,7 @@ public abstract class Panel extends JPanel {
      * Method responsible for defining the settings for the Panel.
      */
     private void setSettings() {
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
     
     /**
@@ -114,7 +114,7 @@ public abstract class Panel extends JPanel {
      */
     protected JLabel createLabel(String title) {
         JLabel label = new JLabel(title);
-               label.addKeyListener(this.controller);
+               label.addKeyListener(controller);
                label.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
         return label;
     }
@@ -126,7 +126,7 @@ public abstract class Panel extends JPanel {
      * @return New Label.
      */
     protected JLabel createLabel(String title, int size) {
-        JLabel label = this.createLabel(title);
+        JLabel label = createLabel(title);
                label.setHorizontalAlignment(SwingConstants.RIGHT);
                label.setPreferredSize(new Dimension(size, ViewStyle.HEIGHT));
         return label;
@@ -139,7 +139,7 @@ public abstract class Panel extends JPanel {
      * @return New Center JLabel.
      */
     protected JLabel createCenterLabel(String title, int size) {
-        JLabel label = this.createLabel(title, size);
+        JLabel label = createLabel(title, size);
                label.setAlignmentX(Component.CENTER_ALIGNMENT);
         return label;
     }
@@ -163,11 +163,11 @@ public abstract class Panel extends JPanel {
         JButton button = new JButton();
                 button.setText(title);
                 button.setToolTipText(title);
-                button.addActionListener(this.controller);
-                button.addKeyListener(this.controller);
+                button.addActionListener(controller);
+                button.addKeyListener(controller);
                 button.setPreferredSize(new Dimension(75, 30));
                 button.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
-                this.buttons.put(id, button);
+                buttons.put(id, button);
         return  button;
     }
     
@@ -179,7 +179,7 @@ public abstract class Panel extends JPanel {
      * @return New Button.
      */
     protected JButton createButton(String id, String title, String path) {
-        JButton button = this.createButton(id, title);
+        JButton button = createButton(id, title);
                 button.setIcon(new FunctView().createImage("icons/" + path));
         return  button;
     }
@@ -193,7 +193,7 @@ public abstract class Panel extends JPanel {
      * @return New Button.
      */
     protected JButton createButton(String id, String title, String focus, String path) {
-        JButton button = this.createButton(id, title, path);
+        JButton button = createButton(id, title, path);
                 button.setToolTipText(focus);
         return  button;
     }
@@ -208,7 +208,7 @@ public abstract class Panel extends JPanel {
      * @return New Button.
      */
     protected JButton createButton(String id, String title, String focus, String path, Dimension dimension) {
-        JButton button = this.createButton(id, title, focus, path);
+        JButton button = createButton(id, title, focus, path);
                 button.setPreferredSize(dimension);
         return  button;
     }
@@ -219,7 +219,7 @@ public abstract class Panel extends JPanel {
      * @return Button found.
      */
     protected JButton getButton(String id) {
-        return (JButton) this.buttons.get(id);
+        return (JButton) buttons.get(id);
     }
     
     /**
@@ -227,7 +227,7 @@ public abstract class Panel extends JPanel {
      * @return Buttons Map.
      */
     protected HashMap getButtons() {
-        return new HashMap(this.buttons);
+        return new HashMap(buttons);
     }
     
     /**
@@ -240,10 +240,10 @@ public abstract class Panel extends JPanel {
     protected JCheckBox createCheckBox(String id, String title, boolean selected) {
         JCheckBox checkBox = new JCheckBox(title);
                   checkBox.setSelected(selected);
-                  checkBox.addActionListener(this.controller);
-                  checkBox.addKeyListener(this.controller);
+                  checkBox.addActionListener(controller);
+                  checkBox.addKeyListener(controller);
                   checkBox.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
-                  this.checkBoxes.put(id, checkBox);
+                  checkBoxes.put(id, checkBox);
         return    checkBox;
     }
     
@@ -253,7 +253,7 @@ public abstract class Panel extends JPanel {
      * @return Check Box found.
      */
     protected JCheckBox getCheckBox(String id) {
-        return (JCheckBox) this.checkBoxes.get(id);
+        return (JCheckBox) checkBoxes.get(id);
     }
     
     /**
@@ -265,13 +265,13 @@ public abstract class Panel extends JPanel {
      */
     protected JComboBox createComboBox(String id, Object[] values, int size) {
         JComboBox comboBox = new JComboBox(values);
-                  comboBox.addActionListener(this.controller);
-                  comboBox.addKeyListener(this.controller);
+                  comboBox.addActionListener(controller);
+                  comboBox.addKeyListener(controller);
                   comboBox.setAlignmentX(CENTER_ALIGNMENT);
                   comboBox.setAlignmentY(CENTER_ALIGNMENT);
                   comboBox.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
                   comboBox.setPreferredSize(new Dimension(size, ViewStyle.HEIGHT));
-                  this.comboBoxes.put(id, comboBox);
+                  comboBoxes.put(id, comboBox);
         return    comboBox;
     }
     
@@ -284,7 +284,7 @@ public abstract class Panel extends JPanel {
      * @return New Combo Box.
      */
     protected JComboBox createComboBox(String id, Object[] values, int size, Object object) {
-        JComboBox comboBox = this.createComboBox(id, values, size);
+        JComboBox comboBox = createComboBox(id, values, size);
                   comboBox.setSelectedItem(object);
         return    comboBox;
     }
@@ -295,7 +295,7 @@ public abstract class Panel extends JPanel {
      * @return Combo Box found.
      */
     protected JComboBox getComboBox(String id) {
-        return (JComboBox) this.comboBoxes.get(id);
+        return (JComboBox) comboBoxes.get(id);
     }
     
     /**
@@ -307,7 +307,7 @@ public abstract class Panel extends JPanel {
         JFileChooser fileChooser = new JFileChooser();
                      fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                      fileChooser.setFileFilter(new FileNameExtensionFilter("SMARTY", "smty", "smty"));
-                     this.fileChoosers.put(id, fileChooser);
+                     fileChoosers.put(id, fileChooser);
         return       fileChooser;
     }
     
@@ -319,7 +319,7 @@ public abstract class Panel extends JPanel {
     protected JFileChooser createDirectoryChooser(String id) {
         JFileChooser fileChooser = new JFileChooser();
                      fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                     this.fileChoosers.put(id, fileChooser);
+                     fileChoosers.put(id, fileChooser);
         return       fileChooser;
     }
     
@@ -329,7 +329,7 @@ public abstract class Panel extends JPanel {
      * @return File Chooser found.
      */
     protected JFileChooser getFileChooser(String id) {
-        return (JFileChooser) this.fileChoosers.get(id);
+        return (JFileChooser) fileChoosers.get(id);
     }
     
     /**
@@ -341,9 +341,9 @@ public abstract class Panel extends JPanel {
         JList  list = new JList();
                list.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                list.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
-               list.addKeyListener(this.controller);
-               this.createScrollPane(id, list);
-               this.lists.put(id, list);
+               list.addKeyListener(controller);
+               createScrollPane(id, list);
+               lists.put(id, list);
         return list;
     }
     
@@ -353,7 +353,7 @@ public abstract class Panel extends JPanel {
      * @return List found.
      */
     protected JList getList(String id) {
-        return (JList) this.lists.get(id);
+        return (JList) lists.get(id);
     }
     
     /**
@@ -362,7 +362,7 @@ public abstract class Panel extends JPanel {
      * @param panel Panel.
      */
     protected void addPanel(String id, Panel panel) {
-        this.panels.put(id, panel);
+        panels.put(id, panel);
     }
     
     /**
@@ -371,7 +371,7 @@ public abstract class Panel extends JPanel {
      * @return Panel found.
      */
     protected Panel getPanel(String id) {
-        return (Panel) this.panels.get(id);
+        return (Panel) panels.get(id);
     }
     
     /**
@@ -379,7 +379,7 @@ public abstract class Panel extends JPanel {
      * @param id Panel Id.
      */
     protected void removePanel(String id) {
-        this.panels.remove(id);
+        panels.remove(id);
     }
     
     /**
@@ -391,7 +391,7 @@ public abstract class Panel extends JPanel {
         JScrollPane scrollPane = new JScrollPane();
                     scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
                     scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-                    this.scrollPanes.put(id, scrollPane);
+                    scrollPanes.put(id, scrollPane);
         return      scrollPane;
     }
     
@@ -402,7 +402,7 @@ public abstract class Panel extends JPanel {
      * @return New Scroll Pane of a Panel.
      */
     protected JScrollPane createScrollPane(String id, JPanel panel) {
-        JScrollPane scrollPane = this.createScrollPane(id);
+        JScrollPane scrollPane = createScrollPane(id);
                     scrollPane.setPreferredSize(new Dimension(390, 120));
                     scrollPane.setViewportView(panel);
         return      scrollPane;
@@ -415,7 +415,7 @@ public abstract class Panel extends JPanel {
      * @return New Scroll Pane of a JList.
      */
     private JScrollPane createScrollPane(String id, JList list) {
-        JScrollPane scrollPane = this.createScrollPane(id);
+        JScrollPane scrollPane = createScrollPane(id);
                     scrollPane.setViewportView(list);
                     scrollPane.setPreferredSize(new Dimension(390, 120));
         return      scrollPane;
@@ -428,7 +428,7 @@ public abstract class Panel extends JPanel {
      * @return New Scroll Pane of a Text Area.
      */
     private JScrollPane createScrollPane(String id, JTextArea textArea) {
-        JScrollPane scrollPane = this.createScrollPane(id);
+        JScrollPane scrollPane = createScrollPane(id);
                     scrollPane.setViewportView(textArea);
                     scrollPane.setPreferredSize(new Dimension(200, 100));
         return      scrollPane;
@@ -441,7 +441,7 @@ public abstract class Panel extends JPanel {
      * @return New Scroll Pane of a Table.
      */
     private JScrollPane createScrollPane(String id, JTable table) {
-        JScrollPane scrollPane = this.createScrollPane(id);
+        JScrollPane scrollPane = createScrollPane(id);
                     scrollPane.setViewportView(table);
                     scrollPane.setPreferredSize(new Dimension(380, 150));
         return      scrollPane;
@@ -453,7 +453,7 @@ public abstract class Panel extends JPanel {
      * @return Scroll Pane found.
      */
     protected JScrollPane getScrollPane(String id) {
-        return (JScrollPane) this.scrollPanes.get(id);
+        return (JScrollPane) scrollPanes.get(id);
     }
     
     /**
@@ -462,12 +462,12 @@ public abstract class Panel extends JPanel {
      * @return New Table.
      */
     protected JTable createTable(String id) {
-        JTable table = new JTable(this.createTableModel());
-               table.addKeyListener(this.controller);
-               this.createScrollPane(id, table);
-               this.tableModels.put(id, table.getModel());
-               this.tableColums.put(id, table.getColumnModel());
-               this.tables.put(id, table);
+        JTable table = new JTable(createTableModel());
+               table.addKeyListener(controller);
+               createScrollPane(id, table);
+               tableModels.put(id, table.getModel());
+               tableColums.put(id, table.getColumnModel());
+               tables.put(id, table);
         return table;
     }
     
@@ -491,7 +491,7 @@ public abstract class Panel extends JPanel {
      */
     protected void addColumns(String id, String[] values) {
         for (String value : values)
-            ((DefaultTableModel) this.tableModels.get(id)).addColumn(value);
+            ((DefaultTableModel) tableModels.get(id)).addColumn(value);
     }
     
     /**
@@ -501,7 +501,7 @@ public abstract class Panel extends JPanel {
      */
     protected void setColumnsSize(String id, int[] size) {
         for (int i = 0; i < size.length; i++)
-            this.getTable(id).getColumnModel().getColumn(i).setPreferredWidth(size[i]);
+            getTable(id).getColumnModel().getColumn(i).setPreferredWidth(size[i]);
     }
     
     /**
@@ -509,9 +509,9 @@ public abstract class Panel extends JPanel {
      * @param id Table Id.
      */
     protected void clearTable(String id) {
-        while (this.getTableModel(id).getRowCount() > 0)
-            this.getTableModel(id).removeRow(0);
-        this.getTable(id).removeAll();
+        while (getTableModel(id).getRowCount() > 0)
+            getTableModel(id).removeRow(0);
+        getTable(id).removeAll();
     }
     
     /**
@@ -520,11 +520,11 @@ public abstract class Panel extends JPanel {
      * @param values Line Values.
      */
     protected void addRows(String id, Object[][] values) {
-        this.clearTable(id);
+        clearTable(id);
         for (Object[] value : values) {
-            this.getTableModel(id).addRow(value);
-            this.getTable(id).setEditingRow(JTable.AUTO_RESIZE_NEXT_COLUMN);
-            this.getTable(id).setEditingRow(0);
+            getTableModel(id).addRow(value);
+            getTable(id).setEditingRow(JTable.AUTO_RESIZE_NEXT_COLUMN);
+            getTable(id).setEditingRow(0);
         }
     }
     
@@ -534,7 +534,7 @@ public abstract class Panel extends JPanel {
      * @return Table found.
      */
     protected JTable getTable(String id) {
-        return (JTable) this.tables.get(id);
+        return (JTable) tables.get(id);
     }
     
     /**
@@ -543,7 +543,7 @@ public abstract class Panel extends JPanel {
      * @return Table Model found.
      */
     protected DefaultTableModel getTableModel(String id) {
-        return (DefaultTableModel) this.tableModels.get(id);
+        return (DefaultTableModel) tableModels.get(id);
     }
     
     /**
@@ -552,7 +552,7 @@ public abstract class Panel extends JPanel {
      * @return Table Column found.
      */
     protected TableColumnModel getTableColumn(String id) {
-        return (TableColumnModel) this.tableColums.get(id);
+        return (TableColumnModel) tableColums.get(id);
     }
     
     /**
@@ -562,10 +562,10 @@ public abstract class Panel extends JPanel {
      */
     protected JTextArea createTextArea(String id) {
         JTextArea textArea = new JTextArea(5, 10);
-                  textArea.addKeyListener(this.controller);
+                  textArea.addKeyListener(controller);
                   textArea.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
-                  this.textAreas.put(id, textArea);
-                  this.createScrollPane(id, textArea);
+                  textAreas.put(id, textArea);
+                  createScrollPane(id, textArea);
         return    textArea;
     }
     
@@ -576,7 +576,7 @@ public abstract class Panel extends JPanel {
      * @return New Text Area.
      */
     protected JTextArea createTextArea(String id, String text) {
-        JTextArea textArea = this.createTextArea(id);
+        JTextArea textArea = createTextArea(id);
                   textArea.setText(text);
         return    textArea;
     }
@@ -587,7 +587,7 @@ public abstract class Panel extends JPanel {
      * @return Text Area found.
      */
     protected JTextArea getTextArea(String id) {
-        return (JTextArea) this.textAreas.get(id);
+        return (JTextArea) textAreas.get(id);
     }
     
     /**
@@ -600,11 +600,11 @@ public abstract class Panel extends JPanel {
     protected JTextField createTextField(String id, String value, int size) {
         JTextField textField = new JTextField(size);
                    textField.setText(value);
-                   textField.addActionListener(this.controller);
-                   textField.addKeyListener(this.controller);
+                   textField.addActionListener(controller);
+                   textField.addKeyListener(controller);
                    textField.setPreferredSize(new Dimension(ViewStyle.WIDTH, ViewStyle.HEIGHT));
                    textField.setFont(new Font(ViewStyle.STYLE, ViewStyle.STANDARD, ViewStyle.SIZE));
-                   this.textFields.put(id, textField);
+                   textFields.put(id, textField);
         return     textField;
     }
     
@@ -616,7 +616,7 @@ public abstract class Panel extends JPanel {
      * @return New No Editable JTextField.
      */
     protected JTextField createTextFieldNoEditable(String id, String value, int size) {
-        JTextField textField = this.createTextField(id, value, size);
+        JTextField textField = createTextField(id, value, size);
                    textField.setEditable(false);
         return     textField;
     }
@@ -627,7 +627,7 @@ public abstract class Panel extends JPanel {
      * @return Text Field found.
      */
     protected JTextField getTextField(String id) {
-        return (JTextField) this.textFields.get(id);
+        return (JTextField) textFields.get(id);
     }
     
     /**
@@ -653,7 +653,7 @@ public abstract class Panel extends JPanel {
      * @return New Start Constraint.
      */
     protected GridBagConstraints createStartConstraint() {
-        return this.setStartConstraint(new GridBagConstraints());
+        return setStartConstraint(new GridBagConstraints());
     }
     
     /**
@@ -676,7 +676,7 @@ public abstract class Panel extends JPanel {
      * @return New Body Constraint.
      */
     protected GridBagConstraints createBodyConstraint() {
-        return this.setBodyConstraint(new GridBagConstraints());
+        return setBodyConstraint(new GridBagConstraints());
     }
     
     /**

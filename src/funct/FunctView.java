@@ -28,9 +28,9 @@ public class FunctView {
     }
     
     /**
-     * Method responsible for returns an Image JLabel.
+     * Method responsible for returns an Image Label.
      * @param  imageURL Image URL.
-     * @return New Image JLabel.
+     * @return New Image Label.
      */
     public JLabel getLabelImage(String imageURL) {
         return new JLabel((Icon) createImage(imageURL));

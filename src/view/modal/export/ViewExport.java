@@ -30,10 +30,10 @@ public abstract class ViewExport extends ViewModal {
     
     @Override
     public void initComponents() {
-        setSize(new Dimension(600, 420));
         addHeader();
         addComponents();
         addFooter();
+        setSize(new Dimension(600, 420));
     }
     
     @Override

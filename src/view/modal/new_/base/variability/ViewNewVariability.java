@@ -28,53 +28,50 @@ public final class ViewNewVariability extends ViewNew {
     /**
      * Default constructor method of Class.
      * @param view View Menu.
-     * @param diagram Diagram.
+     * @param diagram_ Diagram.
      */
-    public ViewNewVariability(ViewMenu view, Diagram diagram) {
+    public ViewNewVariability(ViewMenu view, Diagram diagram_) {
         super(view);
-        this.diagram     = diagram;
-        this.variability = new Variability();
-        this.controller  = new ControllerViewNewVariability(this);
-        this.title       = "New Variability";
-        this.initComponents();
+        diagram     = diagram_;
+        variability = new Variability();
+        controller  = new ControllerViewNewVariability(this);
+        title       = "New Variability";
+        initComponents();
     }
     
     /**
      * Alternative constructor method of Class.
      * @param panel Panel Modeling.
-     * @param diagram Diagram.
+     * @param diagram_ Diagram.
      * @param variationPoint Variation Point.
      */
-    public ViewNewVariability(PanelModeling panel, Diagram diagram, Element variationPoint) {
+    public ViewNewVariability(PanelModeling panel, Diagram diagram_, Element variationPoint) {
         super(panel.getViewMenu());
-        this.diagram     = diagram;
-        this.variability = new Variability(variationPoint);
-        this.controller  = new ControllerViewNewVariability(this);
-        this.title       = "New Variability";
-        this.initComponents();
+        diagram     = diagram_;
+        variability = new Variability(variationPoint);
+        controller  = new ControllerViewNewVariability(this);
+        title       = "New Variability";
+        initComponents();
     }
     
     @Override
-    public void initComponents() {
-        this.setSize(600, 445);
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+    protected Dimension getViewDimension() {
+        return new Dimension(600, 445);
     }
     
     @Override
-    public void addComponents() {
-        this.addPanelEditVariability();
-        this.addLines(1);
+    protected PanelEditVariability createPanelNew() {
+        return new PanelEditVariability(getViewMenu(), diagram, variability, 0);
     }
     
-    /**
-     * Method responsible for adding the Panel Edit Variability.
-     */
-    private void addPanelEditVariability() {
-        this.addPanel("panelEditVariability", new PanelEditVariability(this.getViewMenu(), this.diagram, this.variability, 0));
-        this.getPanel("panelEditVariability").setPreferredSize(new Dimension(500, 325));
-        this.add(this.getPanel("panelEditVariability"));
+    @Override
+    protected Dimension getPanelDimension() {
+        return new Dimension(500, 325);
+    }
+    
+    @Override
+    protected PanelEditVariability getPanelNew() {
+        return (PanelEditVariability) super.getPanelNew();
     }
     
     /**
@@ -82,7 +79,7 @@ public final class ViewNewVariability extends ViewNew {
      * @return Panel Base Variability.
      */
     public PanelBaseVariability getPanelBaseVariability() {
-        return ((PanelEditVariability) this.getPanel("panelEditVariability")).getPanelBaseVariability();
+        return getPanelNew().getPanelBaseVariability();
     }
     
     /**
@@ -90,7 +87,7 @@ public final class ViewNewVariability extends ViewNew {
      * @return Panel Base Variants.
      */
     public PanelBaseVariants getPanelBaseVariants() {
-        return ((PanelEditVariability) this.getPanel("panelEditVariability")).getPanelBaseVariants();
+        return getPanelNew().getPanelBaseVariants();
     }
     
     /**
@@ -98,7 +95,7 @@ public final class ViewNewVariability extends ViewNew {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
     
     /**
@@ -106,6 +103,6 @@ public final class ViewNewVariability extends ViewNew {
      * @return Variability.
      */
     public Variability getVariability() {
-        return this.variability;
+        return variability;
     }
 }
