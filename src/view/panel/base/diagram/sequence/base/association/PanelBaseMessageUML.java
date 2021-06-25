@@ -34,33 +34,33 @@ public final class PanelBaseMessageUML extends PanelBaseAssociation {
      */
     public PanelBaseMessageUML(ViewMenu view, SequenceDiagram diagram, MessageUML message) {
         super(view, diagram, message);
-        this.controller = new ControllerPanelBaseMessageUML(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.setValues();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseMessageUML(this);
+        setDefaultProperties();
+        addComponents();
+        setValues();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(4, 2, 2, 5));
         super.setDefaultProperties();
+        setLayout(new GridLayout(4, 2, 2, 5));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Source: "));
-        this.add(this.createTextFieldNoEditable("sourceTextField", "", 25));
+        add(createLabel("Source: "));
+        add(createTextFieldNoEditable("source", "", 25));
         
-        this.add(this.createLabel("Target: "));
-        this.add(this.createTextFieldNoEditable("targetTextField", "", 25));
+        add(createLabel("Target: "));
+        add(createTextFieldNoEditable("target", "", 25));
         
-        this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.getAssociation().getName(), 25));
+        add(createLabel("Name*: "));
+        add(createTextField("name", getAssociation().getName(), 25));
         
-        this.add(this.createLabel("Method: "));
-        this.add(this.createComboBox("methodComboBox", this.getMethodsList().toArray(), 30));
-        this.getMethodComboBox().setPreferredSize(new Dimension(325, 30));
+        add(createLabel("Method: "));
+        add(createComboBox("method", getMethodsList().toArray(), 30));
+        getMethodComboBox().setPreferredSize(new Dimension(325, 30));
     }
     
     /**
@@ -68,8 +68,8 @@ public final class PanelBaseMessageUML extends PanelBaseAssociation {
      * @return Methods List.
      */
     private List<MethodUML> getMethodsList() {
-        if (this.getAssociation().getTarget() instanceof InstanceUML)
-            return this.getMethodsList((InstanceUML) this.getAssociation().getTarget());
+        if (getAssociation().getTarget() instanceof InstanceUML)
+            return getMethodsList((InstanceUML) getAssociation().getTarget());
         return new ArrayList<>();
     }
     
@@ -80,7 +80,7 @@ public final class PanelBaseMessageUML extends PanelBaseAssociation {
      */
     private List<MethodUML> getMethodsList(InstanceUML instance) {
         if (instance.getClassUML() != null)
-            return new ArrayList<>(((InstanceUML) this.getAssociation().getTarget()).getClassUML().getAllMethods());
+            return new ArrayList<>(((InstanceUML) getAssociation().getTarget()).getClassUML().getAllMethods());
         return new ArrayList<>();
     }
     
@@ -88,38 +88,38 @@ public final class PanelBaseMessageUML extends PanelBaseAssociation {
      * Method responsible for setting the Lifeline UML Values.
      */
     public void setValues() {
-        this.setSource();
-        this.setTarget();
-        this.getNameTextField().setText(this.getAssociation().getName());
-        this.setMethodUML();
+        setSource();
+        setTarget();
+        getNameTextField().setText(getAssociation().getName());
+        setMethodUML();
     }
     
     /**
      * Method responsible for setting the Source.
      */
     private void setSource() {
-        if (this.getAssociation().getSource() instanceof LifelineUML)
-            this.getSourceTextField().setText(((LifelineUML) this.getAssociation().getSource()).getSignature());
+        if (getAssociation().getSource() instanceof LifelineUML)
+            getSourceTextField().setText(((LifelineUML) getAssociation().getSource()).getSignature());
         else 
-            this.getSourceTextField().setText(((InstanceUML) this.getAssociation().getSource()).getSignature());
+            getSourceTextField().setText(((InstanceUML) getAssociation().getSource()).getSignature());
     }
     
     /**
      * Method responsible for setting the Target.
      */
     private void setTarget() {
-        if (this.getAssociation().getTarget() instanceof LifelineUML)
-            this.getTargetTextField().setText(((LifelineUML) this.getAssociation().getTarget()).getSignature());
+        if (getAssociation().getTarget() instanceof LifelineUML)
+            getTargetTextField().setText(((LifelineUML) getAssociation().getTarget()).getSignature());
         else 
-            this.getTargetTextField().setText(((InstanceUML) this.getAssociation().getTarget()).getSignature());
+            getTargetTextField().setText(((InstanceUML) getAssociation().getTarget()).getSignature());
     }
     
     /**
      * Method responsible for setting the Method UML.
      */
     private void setMethodUML() {
-        if (this.getAssociation().getMethod() != null)
-            this.getMethodComboBox().setSelectedItem(this.getAssociation().getMethod());
+        if (getAssociation().getMethod() != null)
+            getMethodComboBox().setSelectedItem(getAssociation().getMethod());
     }
     
     /**
@@ -127,7 +127,7 @@ public final class PanelBaseMessageUML extends PanelBaseAssociation {
      * @return Source Text Field.
      */
     public JTextField getSourceTextField() {
-        return this.getTextField("sourceTextField");
+        return getTextField("source");
     }
     
     /**
@@ -135,7 +135,7 @@ public final class PanelBaseMessageUML extends PanelBaseAssociation {
      * @return Target Text Field.
      */
     public JTextField getTargetTextField() {
-        return this.getTextField("targetTextField");
+        return getTextField("target");
     }
     
     /**
@@ -143,7 +143,7 @@ public final class PanelBaseMessageUML extends PanelBaseAssociation {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -151,16 +151,16 @@ public final class PanelBaseMessageUML extends PanelBaseAssociation {
      * @return Method Combo Box.
      */
     public JComboBox getMethodComboBox() {
-        return this.getComboBox("methodComboBox");
+        return getComboBox("method");
     }
     
     @Override
     public SequenceDiagram getDiagram() {
-        return (SequenceDiagram) this.diagram;
+        return (SequenceDiagram) diagram;
     }
     
     @Override
     public MessageUML getAssociation() {
-        return (MessageUML) this.association;
+        return (MessageUML) association;
     }
 }

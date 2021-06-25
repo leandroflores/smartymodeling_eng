@@ -29,9 +29,9 @@ public class TreeRendererEvaluation extends TreeRenderer {
      * @param metric Metric.
      */
     public void setMetricIcon(Metric metric) {
-        this.setText(metric.getName());
-        this.setToolTipText(metric.getName());
-        this.setIcon(this.getImage(metric.getIcon()));
+        setText(metric.getName());
+        setToolTipText(metric.getName());
+        setIcon(getImage(metric.getIcon()));
     }
     
     /**
@@ -39,9 +39,9 @@ public class TreeRendererEvaluation extends TreeRenderer {
      * @param measure Measure.
      */
     public void setMeasureIcon(Measure measure) {
-        this.setText(measure.getName());
-        this.setToolTipText(measure.getName());
-        this.setIcon(this.getImage(measure.getIcon()));
+        setText(measure.getName());
+        setToolTipText(measure.getName());
+        setIcon(getImage(measure.getIcon()));
     }
     
     @Override
@@ -51,9 +51,9 @@ public class TreeRendererEvaluation extends TreeRenderer {
         DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
         Object object = node.getUserObject();
         if (object instanceof Metric)
-            this.setMetricIcon((Metric) object);
+            setMetricIcon((Metric) object);
         else if (object instanceof Measure)
-            this.setMeasureIcon((Measure) object);
+            setMeasureIcon((Measure) object);
         return this;
     }
 }

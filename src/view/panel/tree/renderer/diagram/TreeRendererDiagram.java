@@ -33,9 +33,9 @@ public class TreeRendererDiagram extends TreeRenderer {
      * @param parent Parent Node.
      */
     public void setElementIcon(Element element, DefaultMutableTreeNode parent) {
-        this.setText(element.getName());
-        this.setToolTipText(element.getName());
-        this.setIcon(this.getImage(this.getIconPath(element, parent.getUserObject())));
+        setText(element.getName());
+        setToolTipText(element.getName());
+        setIcon(getImage(getIconPath(element, parent.getUserObject())));
     }
     
     /**
@@ -55,9 +55,9 @@ public class TreeRendererDiagram extends TreeRenderer {
      * @param attribute Attribute UML.
      */
     public void setAttributeIcon(AttributeUML attribute) {
-        this.setText(attribute.getName());
-        this.setToolTipText(attribute.getName());
-        this.setIcon(this.getImage(attribute.getIcon()));
+        setText(attribute.getName());
+        setToolTipText(attribute.getName());
+        setIcon(getImage(attribute.getIcon()));
     }
     
     /**
@@ -65,9 +65,9 @@ public class TreeRendererDiagram extends TreeRenderer {
      * @param method Method UML.
      */
     public void setMethodIcon(MethodUML method) {
-        this.setText(method.getName());
-        this.setToolTipText(method.getName());
-        this.setIcon(this.getImage(method.getIcon()));
+        setText(method.getName());
+        setToolTipText(method.getName());
+        setIcon(getImage(method.getIcon()));
     }
     
     /**
@@ -75,10 +75,10 @@ public class TreeRendererDiagram extends TreeRenderer {
      * @param variability Variability.
      */
     public void setVariabilityIcon(Variability variability) {
-        this.setText("<html><b>" + variability.getName() + "</b></html>");
-        this.setToolTipText(variability.getName());
-        this.setIcon(this.getImage(variability.getIcon()));
-        this.setForeground(new Color(13, 57 ,115));
+        setText("<html><b>" + variability.getName() + "</b></html>");
+        setToolTipText(variability.getName());
+        setIcon(getImage(variability.getIcon()));
+        setForeground(new Color(13, 57 ,115));
     }
     
     @Override
@@ -88,11 +88,11 @@ public class TreeRendererDiagram extends TreeRenderer {
         DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
         Object object = node.getUserObject();
         if (object instanceof AttributeUML)
-            this.setAttributeIcon((AttributeUML) object);
+            setAttributeIcon((AttributeUML) object);
         else if (object instanceof MethodUML)
-            this.setMethodIcon((MethodUML) object);
+            setMethodIcon((MethodUML) object);
         else if (object instanceof Variability)
-            this.setVariabilityIcon((Variability) object);
+            setVariabilityIcon((Variability) object);
         return this;
     }
 }

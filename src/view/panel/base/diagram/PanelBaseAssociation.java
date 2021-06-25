@@ -1,7 +1,6 @@
 package view.panel.base.diagram;
 
 import controller.view.panel.base.diagram.ControllerPanelBaseAssociation;
-import java.awt.GridLayout;
 import javax.swing.JTextField;
 import model.structural.base.Diagram;
 import model.structural.base.association.Association;
@@ -26,28 +25,22 @@ public final class PanelBaseAssociation extends view.panel.base.PanelBaseAssocia
      */
     public PanelBaseAssociation(ViewMenu view, Diagram diagram, Association association) {
         super(view, diagram, association);
-        this.controller = new ControllerPanelBaseAssociation(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
-    }
-    
-    @Override
-    protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(3, 2));
-        super.setDefaultProperties();
+        controller = new ControllerPanelBaseAssociation(this);
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Source: ", 120));
-        this.add(this.createTextFieldNoEditable("sourceTextField", this.getAssociation().getSource().getName(), 20));
+        add(createLabel("Source: ", 120));
+        add(createTextFieldNoEditable("source", getAssociation().getSource().getName(), 20));
         
-        this.add(this.createLabel("Target: ", 120));
-        this.add(this.createTextFieldNoEditable("targetTextField", this.getAssociation().getTarget().getName(), 20));
+        add(createLabel("Target: ", 120));
+        add(createTextFieldNoEditable("target", getAssociation().getTarget().getName(), 20));
         
-        this.add(this.createLabel("Type: ", 120));
-        this.add(this.createTextFieldNoEditable("typeTextField", this.getAssociation().getType(), 20));
+        add(createLabel("Type: ", 120));
+        add(createTextFieldNoEditable("type", getAssociation().getType(), 20));
     }
     
     /**
@@ -55,7 +48,7 @@ public final class PanelBaseAssociation extends view.panel.base.PanelBaseAssocia
      * @return Source Text Field.
      */
     public JTextField getSourceTextField() {
-        return this.getTextField("sourceTextField");
+        return getTextField("source");
     }
     
     /**
@@ -63,7 +56,7 @@ public final class PanelBaseAssociation extends view.panel.base.PanelBaseAssocia
      * @return Target Text Field.
      */
     public JTextField getTargetTextField() {
-        return this.getTextField("targetTextField");
+        return getTextField("target");
     }
     
     /**
@@ -71,6 +64,6 @@ public final class PanelBaseAssociation extends view.panel.base.PanelBaseAssocia
      * @return Type Text Field.
      */
     public JTextField getTypeTextField() {
-        return this.getTextField("typeTextField");
+        return getTextField("type");
     }
 }

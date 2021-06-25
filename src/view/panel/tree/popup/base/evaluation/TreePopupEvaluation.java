@@ -25,34 +25,34 @@ public final class TreePopupEvaluation extends TreePopup {
      */
     public TreePopupEvaluation(PanelTreeEvaluation panel) {
         super(panel);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void createMenuItems() {
         super.createMenuItems();
-        this.createMenuItem("metric",  "Metric",  "menu/evaluation/metric",  KeyEvent.VK_M, InputEvent.ALT_MASK);
-        this.createMenuItem("measure", "Measure", "menu/evaluation/measure", KeyEvent.VK_S, InputEvent.ALT_MASK);
+        createMenuItem("metric",  "Metric",  "menu/evaluation/metric",  KeyEvent.VK_M, InputEvent.ALT_MASK);
+        createMenuItem("measure", "Measure", "menu/evaluation/measure", KeyEvent.VK_S, InputEvent.ALT_MASK);
         
-        this.getNewMenu().add(this.getMetricMenuItem());
-        this.getNewMenu().add(this.getMeasureMenuItem());
+        getNewMenu().add(getMetricMenuItem());
+        getNewMenu().add(getMeasureMenuItem());
     }
     
     @Override
     protected void setControllers() {
-        this.getMetricMenuItem().addActionListener(new ControllerMenuItemNew(this));
-        this.getMeasureMenuItem().addActionListener(new ControllerMenuItemNew(this));
-        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
-        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
+        getMetricMenuItem().addActionListener(new ControllerMenuItemNew(this));
+        getMeasureMenuItem().addActionListener(new ControllerMenuItemNew(this));
+        getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
+        getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
     }
     
     @Override
     protected void addMenuItems() {
-        this.add(this.getNewMenu());
-        this.addSeparator();
-        this.add(getEditMenuItem());
-        this.addSeparator();
-        this.add(getDeleteMenuItem());
+        add(getNewMenu());
+        addSeparator();
+        add(getEditMenuItem());
+        addSeparator();
+        add(getDeleteMenuItem());
     }
     
     /**
@@ -60,7 +60,7 @@ public final class TreePopupEvaluation extends TreePopup {
      * @return Metric Menu Item.
      */
     public JMenuItem getMetricMenuItem() {
-        return this.getItems().get("metric");
+        return getItems().get("metric");
     }
     
     /**
@@ -68,6 +68,6 @@ public final class TreePopupEvaluation extends TreePopup {
      * @return Measure Menu Item.
      */
     public JMenuItem getMeasureMenuItem() {
-        return this.getItems().get("measure");
+        return getItems().get("measure");
     }
 }

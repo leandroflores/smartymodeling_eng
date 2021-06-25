@@ -16,7 +16,7 @@ import view.main.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Variability Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-14
- * @see    view.panel.tree1.PanelTree
+ * @see    view.panel.tree.PanelTree
  * @see    view.panel.tree.popup.base.variability.TreePopupVariability
  * @see    view.panel.tree.renderer.base.variability.TreeRendererVariability
  */
@@ -28,30 +28,30 @@ public final class PanelTreeVariability extends PanelTree {
      */
     public PanelTreeVariability(ViewMenu view) {
         super(view);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void initTreeRenderer() {
-        this.getTree().setCellRenderer(new TreeRendererVariability(this.getTree()));
+        getTree().setCellRenderer(new TreeRendererVariability(getTree()));
     }
     
     @Override
     protected void initTreePopup() {
-        this.popup = new TreePopupVariability(this);
+        popup = new TreePopupVariability(this);
     }
     
     @Override
     protected void setControllers() {
-        this.tree.addMouseListener(new ControllerTreePopupVariability(this.getPopup()));
-        this.tree.addKeyListener(new ControllerTreePopupVariability(this.getPopup()));
+        tree.addMouseListener(new ControllerTreePopupVariability(getPopup()));
+        tree.addKeyListener(new ControllerTreePopupVariability(getPopup()));
     }
     
     @Override
     protected DefaultMutableTreeNode createNode(Project project) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(project);
-               this.addDiagrams(node);
-               super.addNode(project, node);
+               addDiagrams(node);
+               addNode(project, node);
         return node;
     }
     
@@ -60,8 +60,8 @@ public final class PanelTreeVariability extends PanelTree {
      * @param node Project Node.
      */
     protected void addDiagrams(DefaultMutableTreeNode node) {
-        for (Diagram diagram : this.getProject().getVariabilityDiagramsList())
-            node.add(this.createNode(diagram));
+        for (Diagram diagram : getProject().getVariabilityDiagramsList())
+            node.add(createNode(diagram));
     }
     
     /**
@@ -71,8 +71,8 @@ public final class PanelTreeVariability extends PanelTree {
      */
     protected DefaultMutableTreeNode createNode(Diagram diagram) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(diagram);
-               this.addVariabilities(diagram, node);
-               super.addNode(diagram, node);
+               addVariabilities(diagram, node);
+               addNode(diagram, node);
         return node;
     }
     
@@ -83,7 +83,7 @@ public final class PanelTreeVariability extends PanelTree {
      */
     protected void addVariabilities(Diagram diagram, DefaultMutableTreeNode node) {
         for (Variability variability : diagram.getVariabilitiesList())
-            node.add(this.createNode(variability));
+            node.add(createNode(variability));
     }
     
     /**
@@ -93,9 +93,9 @@ public final class PanelTreeVariability extends PanelTree {
      */
     protected DefaultMutableTreeNode createNode(Variability variability) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(variability);
-               this.addVariationPoint(variability, node);
-               this.addVariants(variability, node);
-               super.addNode(variability, node);
+               addVariationPoint(variability, node);
+               addVariants(variability, node);
+               addNode(variability, node);
         return node;
     }
     
@@ -123,12 +123,12 @@ public final class PanelTreeVariability extends PanelTree {
      * @param variability 
      */
     public void updateNode(Variability variability) {
-        if (this.getNode(variability) != null) {
-            DefaultMutableTreeNode node = this.getNode(variability);
+        if (getNode(variability) != null) {
+            DefaultMutableTreeNode node = getNode(variability);
                                    node.removeAllChildren();
-            this.addVariationPoint(variability, node);
-            this.addVariants(variability, node);
-            this.getTreeModel().reload(node);
+            addVariationPoint(variability, node);
+            addVariants(variability, node);
+            getTreeModel().reload(node);
         }
     }
     
@@ -137,12 +137,12 @@ public final class PanelTreeVariability extends PanelTree {
      * @param element Element.
      */
     public void updateVariability(Element element) {
-        if (this.getNode(element) != null) {
-            DefaultMutableTreeNode node   = this.getNode(element);
-            DefaultMutableTreeNode parent = this.getParentNode(node);
+        if (getNode(element) != null) {
+            DefaultMutableTreeNode node   = getNode(element);
+            DefaultMutableTreeNode parent = getParentNode(node);
             if (parent != null && parent.getUserObject() != null && parent.getUserObject() instanceof Diagram) {
-                this.updateVariationPoints((Diagram) parent.getUserObject(), element);
-                this.updateVariants((Diagram) parent.getUserObject(), element);
+                updateVariationPoints((Diagram) parent.getUserObject(), element);
+                updateVariants((Diagram) parent.getUserObject(), element);
             }
         }
     }
@@ -154,7 +154,7 @@ public final class PanelTreeVariability extends PanelTree {
      */
     private void updateVariationPoints(Diagram diagram, Element element) {
         for (Variability variability : diagram.getVariationPoints(element))
-            this.updateNode(variability);
+            updateNode(variability);
     }
     
     /**
@@ -164,11 +164,11 @@ public final class PanelTreeVariability extends PanelTree {
      */
     private void updateVariants(Diagram diagram, Element element) {
         for (Variability variability : diagram.filterVariants(element, ""))
-            this.updateNode(variability);
+            updateNode(variability);
     }
     
     @Override
     public TreePopupVariability getPopup() {
-        return (TreePopupVariability) this.popup;
+        return (TreePopupVariability) popup;
     }
 }

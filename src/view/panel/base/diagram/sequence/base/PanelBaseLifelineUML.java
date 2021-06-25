@@ -30,38 +30,38 @@ public final class PanelBaseLifelineUML extends PanelBaseElement {
      */
     public PanelBaseLifelineUML(ViewMenu view, SequenceDiagram diagram, LifelineUML lifeline) {
         super(view, diagram, lifeline);
-        this.controller = new ControllerPanelBaseLifelineUML(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.setActorUML();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseLifelineUML(this);
+        setDefaultProperties();
+        addComponents();
+        setActorUML();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(3, 2, 2, 5));
-        this.setPreferredSize(new Dimension(50, 50));
+        setLayout(new GridLayout(3, 2, 2, 5));
+        setPreferredSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.getElement().getName(), 25));
+        add(createLabel("Name*: "));
+        add(createTextField("name", getElement().getName(), 25));
         
-        this.add(this.createLabel("Actor: "));
-        this.add(this.createComboBox("actorComboBox", this.getProject().getElements("actor").toArray(), 30));
-        this.getActorComboBox().setPreferredSize(new Dimension(325, 30));
+        add(createLabel("Actor: "));
+        add(createComboBox("actor", getProject().getElements("actor").toArray(), 30));
+        getActorComboBox().setPreferredSize(new Dimension(325, 30));
         
-        this.add(this.createLabel("Mandatory: "));
-        this.add(this.createCheckBox("mandatoryCheckBox", "", this.getElement().isMandatory()));
+        add(createLabel("Mandatory: "));
+        add(createCheckBox("mandatory", "", getElement().isMandatory()));
     }
     
     /**
      * Method responsible for setting the Actor UML.
      */
     private void setActorUML() {
-        if (this.getElement().getActor() != null)
-            this.getActorComboBox().setSelectedItem(this.getElement().getActor());
+        if (getElement().getActor() != null)
+            getActorComboBox().setSelectedItem(getElement().getActor());
     }
     
     /**
@@ -69,7 +69,7 @@ public final class PanelBaseLifelineUML extends PanelBaseElement {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -77,7 +77,7 @@ public final class PanelBaseLifelineUML extends PanelBaseElement {
      * @return Actor Combo Box.
      */
     public JComboBox getActorComboBox() {
-        return this.getComboBox("actorComboBox");
+        return getComboBox("actor");
     }
     
     /**
@@ -85,16 +85,16 @@ public final class PanelBaseLifelineUML extends PanelBaseElement {
      * @return Mandatory Check Box.
      */
     public JCheckBox getMandatoryCheckBox() {
-        return this.getCheckBox("mandatoryCheckBox");
+        return getCheckBox("mandatory");
     }
     
     @Override
     public SequenceDiagram getDiagram() {
-        return (SequenceDiagram) this.diagram;
+        return (SequenceDiagram) diagram;
     }
     
     @Override
     public LifelineUML getElement() {
-        return (LifelineUML) this.element;
+        return (LifelineUML) element;
     }
 }

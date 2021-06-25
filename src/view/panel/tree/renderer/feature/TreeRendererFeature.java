@@ -26,9 +26,9 @@ public class TreeRendererFeature extends TreeRenderer {
     public void setElementIcon(Element element) {
         super.setElementIcon(element);
         if (element instanceof Variability) {
-            this.setText(element.getTitle());
-            this.setToolTipText(element.getTitle());
-            this.setIcon(this.getImage(element.getIcon()));
+            setText(element.getTitle());
+            setToolTipText(element.getTitle());
+            setIcon(getImage(element.getIcon()));
         }
     }
 }

@@ -29,63 +29,63 @@ public final class PanelBaseSource extends PanelBaseAssociation {
      */
     public PanelBaseSource(ViewMenu view, ClassDiagram diagram, AssociationUML association) {
         super(view, diagram, association);
-        this.controller = new ControllerPanelBaseSource(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.setValues();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseSource(this);
+        setDefaultProperties();
+        addComponents();
+        setValues();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
         super.setDefaultProperties();
-        this.setLayout(new GridLayout(4, 2));
-        this.setSize(new Dimension(50, 50));
+        setLayout(new GridLayout(4, 2));
+        setSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Source: ", 120));
-        this.add(this.createTextFieldNoEditable("sourceTextField", "", 20));
+        add(createLabel("Source: ", 120));
+        add(createTextFieldNoEditable("source", "", 20));
         
-        this.add(this.createLabel("Visibility: ", 120));
-        this.add(this.createComboBox("visibilityComboBox", this.getDiagram().getVisibilities(), 30));
-        this.getVisibilityComboBox().setEnabled(!this.getAssociation().isDirection());
+        add(createLabel("Visibility: ", 120));
+        add(createComboBox("visibility", getDiagram().getVisibilities(), 30));
+        getVisibilityComboBox().setEnabled(!getAssociation().isDirection());
         
-        this.add(this.createLabel("Name: ", 120));
-        this.add(this.createTextField("nameTextField", "", 20));
-        this.getNameTextField().setEnabled(!this.getAssociation().isDirection());
+        add(createLabel("Name: ", 120));
+        add(createTextField("name", "", 20));
+        getNameTextField().setEnabled(!getAssociation().isDirection());
         
-        this.add(this.createLabel("Cardinality: ", 120));
-        this.add(this.createTextField("cardinalityTextField", "", 20));
-        this.getCardinalityTextField().setEnabled(!this.getAssociation().isDirection());
+        add(createLabel("Cardinality: ", 120));
+        add(createTextField("cardinality", "", 20));
+        getCardinalityTextField().setEnabled(!getAssociation().isDirection());
     }
     
      /**
      * Method responsible for updating the Target Values.
      */
     public void updateValues() {
-        this.updateEnabled();
-        this.setValues();
+        updateEnabled();
+        setValues();
     }
     
     /**
      * Method responsible for updating the Elements Enabled.
      */
     private void updateEnabled() {
-        this.getVisibilityComboBox().setEnabled(!this.getAssociation().isDirection());
-        this.getNameTextField().setEnabled(!this.getAssociation().isDirection());
-        this.getCardinalityTextField().setEnabled(!this.getAssociation().isDirection());
+        getVisibilityComboBox().setEnabled(!getAssociation().isDirection());
+        getNameTextField().setEnabled(!getAssociation().isDirection());
+        getCardinalityTextField().setEnabled(!getAssociation().isDirection());
     }
     
     /**
      * Method responsible for setting the Source Association Values.
      */
     public void setValues() {
-        this.getNameTextField().setText(this.getAssociation().isDirection() ? "" : this.getAssociation().getSourceName());
-        this.getSourceTextField().setText(this.getAssociation().getSource().getName());
-        this.getVisibilityComboBox().setSelectedItem(this.getAssociation().getSourceVisibility());
-        this.getCardinalityTextField().setText(this.getAssociation().isDirection() ? "" : this.getAssociation().getCardinalitySourceLabel());
+        getNameTextField().setText(getAssociation().isDirection() ? "" : getAssociation().getSourceName());
+        getSourceTextField().setText(getAssociation().getSource().getName());
+        getVisibilityComboBox().setSelectedItem(getAssociation().getSourceVisibility());
+        getCardinalityTextField().setText(getAssociation().isDirection() ? "" : getAssociation().getCardinalitySourceLabel());
     }
     
     /**
@@ -93,7 +93,7 @@ public final class PanelBaseSource extends PanelBaseAssociation {
      * @return Source Text Field.
      */
     public JTextField getSourceTextField() {
-        return this.getTextField("sourceTextField");
+        return getTextField("source");
     }
     
     /**
@@ -101,7 +101,7 @@ public final class PanelBaseSource extends PanelBaseAssociation {
      * @return Visibility Combo Box.
      */
     public JComboBox getVisibilityComboBox() {
-        return this.getComboBox("visibilityComboBox");
+        return getComboBox("visibility");
     }
     
     /**
@@ -109,7 +109,7 @@ public final class PanelBaseSource extends PanelBaseAssociation {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -117,16 +117,16 @@ public final class PanelBaseSource extends PanelBaseAssociation {
      * @return Cardinality Text Field.
      */
     public JTextField getCardinalityTextField() {
-        return this.getTextField("cardinalityTextField");
+        return getTextField("cardinality");
     }
     
     @Override
     public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+        return (ClassDiagram) diagram;
     }
     
     @Override
     public AssociationUML getAssociation() {
-        return (AssociationUML) this.association;
+        return (AssociationUML) association;
     }
 }

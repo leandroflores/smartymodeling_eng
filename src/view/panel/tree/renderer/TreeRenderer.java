@@ -17,6 +17,7 @@ import model.structural.base.Project;
  * <p>Class responsible for defining the <b>Tree Renderer</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-13
+ * @see    javax.swing.JTree
  * @see    javax.swing.tree.DefaultTreeCellRenderer
  */
 public abstract class TreeRenderer extends DefaultTreeCellRenderer {
@@ -44,10 +45,10 @@ public abstract class TreeRenderer extends DefaultTreeCellRenderer {
      * @param project Project.
      */
     public void setProjectIcon(Project project) {
-        this.setText("<html><b>" + project.getName() + "</b></html>");
-        this.setToolTipText(project.getName());
-        this.setIcon(this.getImage(project.getIcon()));
-        this.setForeground(new Color(13, 57 ,115));
+        setText("<html><b>" + project.getName() + "</b></html>");
+        setToolTipText(project.getName());
+        setIcon(getImage(project.getIcon()));
+        setForeground(new Color(13, 57 ,115));
     }
     
     /**
@@ -55,9 +56,9 @@ public abstract class TreeRenderer extends DefaultTreeCellRenderer {
      * @param diagram Diagrama.
      */
     public void setDiagramIcon(Diagram diagram) {
-        this.setText(diagram.getName());
-        this.setToolTipText(diagram.getName());
-        this.setIcon(this.getImage(diagram.getIcon()));
+        setText(diagram.getName());
+        setToolTipText(diagram.getName());
+        setIcon(getImage(diagram.getIcon()));
     }
     
     /**
@@ -65,9 +66,9 @@ public abstract class TreeRenderer extends DefaultTreeCellRenderer {
      * @param element Element.
      */
     public void setElementIcon(Element element) {
-        this.setText(element.getName());
-        this.setToolTipText(element.getName());
-        this.setIcon(this.getImage(element.getIcon()));
+        setText(element.getName());
+        setToolTipText(element.getName());
+        setIcon(getImage(element.getIcon()));
     }
     
     @Override
@@ -77,11 +78,11 @@ public abstract class TreeRenderer extends DefaultTreeCellRenderer {
         DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
         Object object = node.getUserObject();
         if (object instanceof Project)
-            this.setProjectIcon((Project) object);
+            setProjectIcon((Project) object);
         else if (object instanceof Diagram)
-            this.setDiagramIcon((Diagram) object);
+            setDiagramIcon((Diagram) object);
         else if (object instanceof Element)
-            this.setElementIcon((Element) object);
+            setElementIcon((Element) object);
         return this;
     }
     
@@ -97,7 +98,7 @@ public abstract class TreeRenderer extends DefaultTreeCellRenderer {
                label.setIcon(new FunctView().createImage("icons/" + url));
                label.setToolTipText(title);
                label.setOpaque(true);
-               label.addMouseListener(this.tree.getMouseListeners()[0]);
+               label.addMouseListener(tree.getMouseListeners()[0]);
         return label;
     }
     

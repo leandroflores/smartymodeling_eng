@@ -25,30 +25,30 @@ public final class TreePopupFeature extends TreePopup {
      */
     public TreePopupFeature(PanelTreeFeature panel) {
         super(panel);
-        this.addComponents();
+        addComponents();
     }
 
     @Override
     protected void createMenuItems() {
         super.createMenuItems();
-        this.createMenuItem("feature_diagram",  "Feature Diagram",  "menu/diagram/feature",  KeyEvent.VK_F, InputEvent.CTRL_MASK);
-        this.getNewMenu().add(this.getFeatureDiagramMenuItem());
+        createMenuItem("feature_diagram",  "Feature Diagram",  "menu/diagram/feature",  KeyEvent.VK_F, InputEvent.CTRL_MASK);
+        getNewMenu().add(getFeatureDiagramMenuItem());
     }
     
     @Override
     protected void setControllers() {
-        this.getFeatureDiagramMenuItem().addActionListener(new ControllerMenuItemNew(this));
-        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
-        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
+        getFeatureDiagramMenuItem().addActionListener(new ControllerMenuItemNew(this));
+        getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
+        getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
     }
     
     @Override
     protected void addMenuItems() {
-        this.add(getNewMenu());
-        this.addSeparator();
-        this.add(getEditMenuItem());
-        this.addSeparator();
-        this.add(getDeleteMenuItem());
+        add(getNewMenu());
+        addSeparator();
+        add(getEditMenuItem());
+        addSeparator();
+        add(getDeleteMenuItem());
     }
     
     /**
@@ -56,6 +56,6 @@ public final class TreePopupFeature extends TreePopup {
      * @return Feature Diagram Menu Item.
      */
     public JMenuItem getFeatureDiagramMenuItem() {
-        return this.getItems().get("feature_diagram");
+        return getItems().get("feature_diagram");
     }
 }

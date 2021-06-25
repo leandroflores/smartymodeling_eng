@@ -13,7 +13,7 @@ import view.panel.modeling.PanelModeling;
  * <p>Class of View <b>PanelTabbed</b>.</p>
  * <p>Class responsible for defining the <b>Tabbed Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  27/05/2019
+ * @since  2019-05-27
  * @see    javax.swing.JTabbedPane
  */
 public class PanelTabbed extends JTabbedPane {
@@ -33,19 +33,19 @@ public class PanelTabbed extends JTabbedPane {
     @Override
     public void addTab(String title, Icon icon, Component component, String id) {
         super.addTab(title, icon, component, id);
-        Panel tab = new PanelTabTitle(this.panel, component, title, icon);
-        this.tabs.put(id, tab);
-        this.setTabComponentAt(this.getTabCount() - 1, tab);
+        Panel tab = new PanelTabTitle(panel, component, title, icon);
+        tabs.put(id, tab);
+        setTabComponentAt(getTabCount() - 1, tab);
     }
 
     @Override
     public void addTab(String title, Icon icon, Component component) {
-        this.addTab(title, icon, component, null);
+        addTab(title, icon, component, null);
     }
 
     @Override
     public void addTab(String title, Component component) {
-        this.addTab(title, null, component);
+        addTab(title, null, component);
     }
     
     /**
@@ -53,7 +53,7 @@ public class PanelTabbed extends JTabbedPane {
      * @param diagram Diagram.
      */
     public void updateTab(Diagram diagram) {
-        this.getTab(diagram.getId()).setTitle(diagram.getName());
+        getTab(diagram.getId()).setTitle(diagram.getName());
     }
     
     /**
@@ -61,7 +61,7 @@ public class PanelTabbed extends JTabbedPane {
      * @param instance Instance.
      */
     public void updateTab(Instance instance) {
-        this.getTab(instance.getCompleteId()).setTitle(instance.getName());
+        getTab(instance.getCompleteId()).setTitle(instance.getName());
     }
     
     /**
@@ -71,7 +71,7 @@ public class PanelTabbed extends JTabbedPane {
      */
     public void remove(String id, Component component) {
         super.remove(component);
-        this.tabs.remove(id);
+        tabs.remove(id);
     }
     
     /**
@@ -80,6 +80,6 @@ public class PanelTabbed extends JTabbedPane {
      * @return Tab found.
      */
     public PanelTabTitle getTab(String id) {
-        return (PanelTabTitle) this.tabs.get(id);
+        return (PanelTabTitle) tabs.get(id);
     }
 }

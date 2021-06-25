@@ -30,9 +30,9 @@ public class TreeRendererRequirement extends TreeRenderer {
      * @param requirement Requirement.
      */
     public void setRequirementIcon(Requirement requirement) {
-        this.setText(requirement.toString());
-        this.setToolTipText(requirement.toString());
-        this.setIcon(this.getImage(requirement.getIcon()));
+        setText(requirement.toString());
+        setToolTipText(requirement.toString());
+        setIcon(getImage(requirement.getIcon()));
     }
     
     /**
@@ -40,9 +40,9 @@ public class TreeRendererRequirement extends TreeRenderer {
      * @param traceability Traceability.
      */
     public void setTraceabilityIcon(Traceability traceability) {
-        this.setText(traceability.getName());
-        this.setToolTipText(traceability.getName());
-        this.setIcon(this.getImage(traceability.getIcon()));
+        setText(traceability.getName());
+        setToolTipText(traceability.getName());
+        setIcon(getImage(traceability.getIcon()));
     }
     
     /**
@@ -51,9 +51,9 @@ public class TreeRendererRequirement extends TreeRenderer {
      * @param parent Parent Node.
      */
     public void setElementIcon(Element element, DefaultMutableTreeNode parent) {
-        this.setText(element.getName());
-        this.setToolTipText(element.getName());
-        this.setIcon(this.getImage(element.getIcon()));
+        setText(element.getName());
+        setToolTipText(element.getName());
+        setIcon(getImage(element.getIcon()));
     }
     
     @Override
@@ -61,9 +61,9 @@ public class TreeRendererRequirement extends TreeRenderer {
         super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
         Object object = ((DefaultMutableTreeNode) value).getUserObject();
         if (object instanceof Requirement)
-            this.setRequirementIcon((Requirement) object);
+            setRequirementIcon((Requirement) object);
         else if (object instanceof Traceability)
-            this.setTraceabilityIcon((Traceability) object);
+            setTraceabilityIcon((Traceability) object);
         return this;
     }
 }

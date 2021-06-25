@@ -30,34 +30,34 @@ public final class PanelBaseMethodAbsUML extends PanelBaseElement {
      */
     public PanelBaseMethodAbsUML(ViewMenu view, ClassDiagram diagram, MethodUML method) {
         super(view, diagram, method);
-        this.controller = new ControllerPanelBaseMethodAbsUML(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseMethodAbsUML(this);
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(7, 2, 2, 5));
-        this.setPreferredSize(new Dimension(50, 50));
+        setLayout(new GridLayout(7, 2, 2, 5));
+        setPreferredSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Visibility*: "));
-        this.add(this.createComboBox("visibilityComboBox", this.getDiagram().getAbstractVisibilites(), 30, this.getElement().getVisibility()));
-        this.getVisibilityComboBox().setPreferredSize(new Dimension(325, 30));
+        add(createLabel("Visibility*: "));
+        add(createComboBox("visibility", getDiagram().getAbstractVisibilites(), 30, getElement().getVisibility()));
+        getVisibilityComboBox().setPreferredSize(new Dimension(325, 30));
         
-        this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.getElement().getName(), 25));
+        add(createLabel("Name*: "));
+        add(createTextField("name", getElement().getName(), 25));
         
-        this.add(this.createLabel("Return: "));
-        this.add(this.createComboBox("returnComboBox", this.getProject().getTypesList().toArray(), 30, this.getElement().getReturn()));
-        this.getReturnComboBox().setPreferredSize(new Dimension(200, 30));
+        add(createLabel("Return: "));
+        add(createComboBox("return", getProject().getTypesList().toArray(), 30, getElement().getReturn()));
+        getReturnComboBox().setPreferredSize(new Dimension(200, 30));
         
-        this.add(this.createLabel("Abstract: "));
-        this.add(this.createCheckBox("abstractCheckBox", "", this.getElement().isAbstract()));
-        this.getAbstractCheckBox().setEnabled(false);
+        add(createLabel("Abstract: "));
+        add(createCheckBox("abstract", "", getElement().isAbstract()));
+        getAbstractCheckBox().setEnabled(false);
     }
     
     /**
@@ -65,7 +65,7 @@ public final class PanelBaseMethodAbsUML extends PanelBaseElement {
      * @return Visibility Combo Box.
      */
     public JComboBox getVisibilityComboBox() {
-        return this.getComboBox("visibilityComboBox");
+        return getComboBox("visibility");
     }
     
     /**
@@ -73,7 +73,7 @@ public final class PanelBaseMethodAbsUML extends PanelBaseElement {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -81,7 +81,7 @@ public final class PanelBaseMethodAbsUML extends PanelBaseElement {
      * @return Return Combo Box.
      */
     public JComboBox getReturnComboBox() {
-        return this.getComboBox("returnComboBox");
+        return getComboBox("return");
     }
     
     /**
@@ -89,16 +89,16 @@ public final class PanelBaseMethodAbsUML extends PanelBaseElement {
      * @return Abstract Check Box.
      */
     public JCheckBox getAbstractCheckBox() {
-        return this.getCheckBox("abstractCheckBox");
+        return getCheckBox("abstract");
     }
     
     @Override
     public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+        return (ClassDiagram) diagram;
     }
     
     @Override
     public MethodUML getElement() {
-        return (MethodUML) this.element;
+        return (MethodUML) element;
     }
 }

@@ -25,34 +25,34 @@ public final class TreePopupProduct extends TreePopup {
      */
     public TreePopupProduct(PanelTreeProduct panel) {
         super(panel);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void createMenuItems() {
         super.createMenuItems();
-        this.createMenuItem("product",  "Product",  "menu/product_line/product",  KeyEvent.VK_P, InputEvent.CTRL_MASK);
-        this.createMenuItem("instance", "Instance", "menu/product_line/instance", KeyEvent.VK_I, InputEvent.CTRL_MASK);
+        createMenuItem("product",  "Product",  "menu/product_line/product",  KeyEvent.VK_P, InputEvent.CTRL_MASK);
+        createMenuItem("instance", "Instance", "menu/product_line/instance", KeyEvent.VK_I, InputEvent.CTRL_MASK);
         
-        this.getNewMenu().add(this.getProductMenuItem());
-        this.getNewMenu().add(this.getInstanceMenuItem());
+        getNewMenu().add(getProductMenuItem());
+        getNewMenu().add(getInstanceMenuItem());
     }
     
     @Override
     protected void setControllers() {
-        this.getProductMenuItem().addActionListener(new ControllerMenuItemNew(this));
-        this.getInstanceMenuItem().addActionListener(new ControllerMenuItemNew(this));
-        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
-        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
+        getProductMenuItem().addActionListener(new ControllerMenuItemNew(this));
+        getInstanceMenuItem().addActionListener(new ControllerMenuItemNew(this));
+        getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
+        getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
     }
     
     @Override
     protected void addMenuItems() {
-        this.add(this.getNewMenu());
-        this.addSeparator();
-        this.add(getEditMenuItem());
-        this.addSeparator();
-        this.add(getDeleteMenuItem());
+        add(getNewMenu());
+        addSeparator();
+        add(getEditMenuItem());
+        addSeparator();
+        add(getDeleteMenuItem());
     }
     
     /**
@@ -60,7 +60,7 @@ public final class TreePopupProduct extends TreePopup {
      * @return Product Menu Item.
      */
     public JMenuItem getProductMenuItem() {
-        return this.getItems().get("product");
+        return getItems().get("product");
     }
     
     /**
@@ -68,6 +68,6 @@ public final class TreePopupProduct extends TreePopup {
      * @return Instance Menu Item.
      */
     public JMenuItem getInstanceMenuItem() {
-        return this.getItems().get("instance");
+        return getItems().get("instance");
     }
 }

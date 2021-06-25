@@ -23,31 +23,31 @@ public final class TreePopupVariability extends TreePopup {
      */
     public TreePopupVariability(PanelTreeVariability panel) {
         super(panel);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void createMenuItems() {
         super.createMenuItems();
-        this.createMenuItem("variability", "Variability", "variability");
+        createMenuItem("variability", "Variability", "variability");
         
-        this.getNewMenu().add(this.getVariabilityMenuItem());
+        getNewMenu().add(getVariabilityMenuItem());
     }
     
     @Override
     protected void setControllers() {
-        this.getVariabilityMenuItem().addActionListener(new ControllerMenuItemNew(this));
-        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
-        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
+        getVariabilityMenuItem().addActionListener(new ControllerMenuItemNew(this));
+        getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
+        getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
     }
     
     @Override
     protected void addMenuItems() {
-        this.add(this.getNewMenu());
-        this.addSeparator();
-        this.add(getEditMenuItem());
-        this.addSeparator();
-        this.add(getDeleteMenuItem());
+        add(getNewMenu());
+        addSeparator();
+        add(getEditMenuItem());
+        addSeparator();
+        add(getDeleteMenuItem());
     }
     
     /**
@@ -55,6 +55,6 @@ public final class TreePopupVariability extends TreePopup {
      * @return Variability Menu Item.
      */
     public JMenuItem getVariabilityMenuItem() {
-        return this.getItems().get("variability");
+        return getItems().get("variability");
     }
 }

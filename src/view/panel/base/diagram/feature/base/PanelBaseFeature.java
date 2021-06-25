@@ -15,7 +15,7 @@ import view.main.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Feature Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-06-16
- * @see    controller.view.panel.base.feature.base.ControllerPanelBaseFeature
+ * @see    controller.view.panel.base.diagram.feature.base.ControllerPanelBaseFeature
  * @see    model.structural.diagram.feature.base.Feature
  * @see    view.panel.base.PanelBaseElement
  */
@@ -29,25 +29,25 @@ public final class PanelBaseFeature extends PanelBaseElement {
      */
     public PanelBaseFeature(ViewMenu view, FeatureDiagram diagram, Feature feature) {
         super(view, diagram, feature);
-        this.controller = new ControllerPanelBaseFeature(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseFeature(this);
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(2, 2));
-        this.setPreferredSize(new Dimension(50, 50));
+        setLayout(new GridLayout(2, 2));
+        setPreferredSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.getElement().getName(), 25));        
+        add(createLabel("Name*: "));
+        add(createTextField("name", getElement().getName(), 25));        
         
-        this.add(this.createLabel("Abstract: "));
-        this.add(this.createCheckBox("abstractCheckBox", "", this.getElement().isAbstract()));
+        add(createLabel("Abstract: "));
+        add(createCheckBox("abstract", "", getElement().isAbstract()));
     }
     
     /**
@@ -55,7 +55,7 @@ public final class PanelBaseFeature extends PanelBaseElement {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -63,16 +63,16 @@ public final class PanelBaseFeature extends PanelBaseElement {
      * @return Abstract Check Box.
      */
     public JCheckBox getAbstractCheckBox() {
-        return this.getCheckBox("abstractCheckBox");
+        return getCheckBox("abstract");
     }
     
     @Override
     public FeatureDiagram getDiagram() {
-        return (FeatureDiagram) this.diagram;
+        return (FeatureDiagram) diagram;
     }
     
     @Override
     public Feature getElement() {
-        return (Feature) this.element;
+        return (Feature) element;
     }
 }

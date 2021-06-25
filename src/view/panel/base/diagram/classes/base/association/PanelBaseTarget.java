@@ -29,43 +29,43 @@ public final class PanelBaseTarget extends PanelBaseAssociation {
      */
     public PanelBaseTarget(ViewMenu view, ClassDiagram diagram, AssociationUML association) {
         super(view, diagram, association);
-        this.controller = new ControllerPanelBaseTarget(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.setValues();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseTarget(this);
+        setDefaultProperties();
+        addComponents();
+        setValues();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
         super.setDefaultProperties();
-        this.setLayout(new GridLayout(4, 2));
-        this.setSize(new Dimension(50, 50));
+        setLayout(new GridLayout(4, 2));
+        setSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Target: ", 120));
-        this.add(this.createTextFieldNoEditable("targetTextField", "", 20));
+        add(createLabel("Target: ", 120));
+        add(createTextFieldNoEditable("target", "", 20));
         
-        this.add(this.createLabel("Visibility: ", 120));
-        this.add(this.createComboBox("visibilityComboBox", this.getDiagram().getVisibilities(), 30, this.getAssociation().getTargetVisibility()));
+        add(createLabel("Visibility: ", 120));
+        add(createComboBox("visibility", getDiagram().getVisibilities(), 30, getAssociation().getTargetVisibility()));
         
-        this.add(this.createLabel("Name: ", 120));
-        this.add(this.createTextField("nameTextField", this.getAssociation().getTargetName(), 20));
+        add(createLabel("Name: ", 120));
+        add(createTextField("name", getAssociation().getTargetName(), 20));
         
-        this.add(this.createLabel("Cardinality: ", 120));
-        this.add(this.createTextField("cardinalityTextField", "", 20));
+        add(createLabel("Cardinality: ", 120));
+        add(createTextField("cardinality", "", 20));
     }
     
     /**
      * Method responsible for setting the Target Association Values.
      */
     public void setValues() {
-        this.getTargetTextField().setText(this.getAssociation().getTarget().getName());
-        this.getVisibilityComboBox().setSelectedItem(this.getAssociation().getTargetVisibility());
-        this.getNameTextField().setText(this.getAssociation().getTargetName());
-        this.getCardinalityTextField().setText(this.getAssociation().getCardinalityTargetLabel());
+        getTargetTextField().setText(getAssociation().getTarget().getName());
+        getVisibilityComboBox().setSelectedItem(getAssociation().getTargetVisibility());
+        getNameTextField().setText(getAssociation().getTargetName());
+        getCardinalityTextField().setText(getAssociation().getCardinalityTargetLabel());
     }
     
     /**
@@ -73,7 +73,7 @@ public final class PanelBaseTarget extends PanelBaseAssociation {
      * @return Target Text Field.
      */
     public JTextField getTargetTextField() {
-        return this.getTextField("targetTextField");
+        return getTextField("target");
     }
     
     /**
@@ -81,7 +81,7 @@ public final class PanelBaseTarget extends PanelBaseAssociation {
      * @return Visibility Combo Box.
      */
     public JComboBox getVisibilityComboBox() {
-        return this.getComboBox("visibilityComboBox");
+        return getComboBox("visibility");
     }
     
     /**
@@ -89,7 +89,7 @@ public final class PanelBaseTarget extends PanelBaseAssociation {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -97,16 +97,16 @@ public final class PanelBaseTarget extends PanelBaseAssociation {
      * @return Cardinality Text Field.
      */
     public JTextField getCardinalityTextField() {
-        return this.getTextField("cardinalityTextField");
+        return getTextField("cardinality");
     }
     
     @Override
     public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+        return (ClassDiagram) diagram;
     }
     
     @Override
     public AssociationUML getAssociation() {
-        return (AssociationUML) this.association;
+        return (AssociationUML) association;
     }
 }

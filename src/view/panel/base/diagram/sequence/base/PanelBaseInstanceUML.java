@@ -30,38 +30,38 @@ public final class PanelBaseInstanceUML extends PanelBaseElement {
      */
     public PanelBaseInstanceUML(ViewMenu view, SequenceDiagram diagram, InstanceUML instance) {
         super(view, diagram, instance);
-        this.controller = new ControllerPanelBaseInstanceUML(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.setClassUML();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseInstanceUML(this);
+        setDefaultProperties();
+        addComponents();
+        setClassUML();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(3, 2, 2, 5));
-        this.setPreferredSize(new Dimension(50, 50));
+        setLayout(new GridLayout(3, 2, 2, 5));
+        setPreferredSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.getElement().getName(), 25));
+        add(createLabel("Name*: "));
+        add(createTextField("name", getElement().getName(), 25));
         
-        this.add(this.createLabel("Class: "));
-        this.add(this.createComboBox("classComboBox", this.getProject().getElements("class").toArray(), 30));
-        this.getClassComboBox().setPreferredSize(new Dimension(325, 30));
+        add(createLabel("Class: "));
+        add(createComboBox("class", getProject().getElements("class").toArray(), 30));
+        getClassComboBox().setPreferredSize(new Dimension(325, 30));
         
-        this.add(this.createLabel("Mandatory: "));
-        this.add(this.createCheckBox("mandatoryCheckBox", "", this.getElement().isMandatory()));
+        add(createLabel("Mandatory: "));
+        add(createCheckBox("mandatory", "", getElement().isMandatory()));
     }
     
     /**
      * Method responsible for setting the Class UML.
      */
     public void setClassUML() {
-        if (this.getElement().getClassUML() != null)
-            this.getClassComboBox().setSelectedItem(this.getElement().getClassUML());
+        if (getElement().getClassUML() != null)
+            getClassComboBox().setSelectedItem(getElement().getClassUML());
     }
     
     /**
@@ -69,7 +69,7 @@ public final class PanelBaseInstanceUML extends PanelBaseElement {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -77,7 +77,7 @@ public final class PanelBaseInstanceUML extends PanelBaseElement {
      * @return Class Combo Box.
      */
     public JComboBox getClassComboBox() {
-        return this.getComboBox("classComboBox");
+        return getComboBox("class");
     }
     
     /**
@@ -85,16 +85,16 @@ public final class PanelBaseInstanceUML extends PanelBaseElement {
      * @return Mandatory Check Box.
      */
     public JCheckBox getMandatoryCheckBox() {
-        return this.getCheckBox("mandatoryCheckBox");
+        return getCheckBox("mandatory");
     }
     
     @Override
     public SequenceDiagram getDiagram() {
-        return (SequenceDiagram) this.diagram;
+        return (SequenceDiagram) diagram;
     }
     
     @Override
     public InstanceUML getElement() {
-        return (InstanceUML) this.element;
+        return (InstanceUML) element;
     }
 }

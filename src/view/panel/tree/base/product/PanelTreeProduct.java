@@ -18,7 +18,7 @@ import view.main.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Product Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-14
- * @see    view.panel.tree1.PanelTree
+ * @see    view.panel.tree.PanelTree
  * @see    view.panel.tree.popup.base.product.TreePopupProduct
  * @see    view.panel.tree.renderer.base.product.TreeRendererProduct
  */
@@ -30,30 +30,30 @@ public final class PanelTreeProduct extends PanelTree {
      */
     public PanelTreeProduct(ViewMenu view) {
         super(view);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void initTreeRenderer() {
-        this.getTree().setCellRenderer(new TreeRendererProduct(this.getTree()));
+        getTree().setCellRenderer(new TreeRendererProduct(getTree()));
     }
     
     @Override
     protected void initTreePopup() {
-        this.popup = new TreePopupProduct(this);
+        popup = new TreePopupProduct(this);
     }
     
     @Override
     protected void setControllers() {
-        this.tree.addMouseListener(new ControllerTreePopupProduct(this.getPopup()));
-        this.tree.addKeyListener(new ControllerTreePopupProduct(this.getPopup()));
+        tree.addMouseListener(new ControllerTreePopupProduct(getPopup()));
+        tree.addKeyListener(new ControllerTreePopupProduct(getPopup()));
     }
     
     @Override
     protected DefaultMutableTreeNode createNode(Project project) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(project);
-               this.addProducts(node);
-               super.addNode(project, node);
+               addProducts(node);
+               addNode(project, node);
         return node;
     }
     
@@ -62,8 +62,8 @@ public final class PanelTreeProduct extends PanelTree {
      * @param node Project Node.
      */
     protected void addProducts(DefaultMutableTreeNode node) {
-        for (Product product : this.getProject().getProductsList())
-            node.add(this.createNode(product));
+        for (Product product : getProject().getProductsList())
+            node.add(createNode(product));
     }
     
     /**
@@ -73,8 +73,8 @@ public final class PanelTreeProduct extends PanelTree {
      */
     protected DefaultMutableTreeNode createNode(Product product) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(product);
-               this.addInstances(product, node);
-               super.addNode(product, node);
+               addInstances(product, node);
+               addNode(product, node);
         return node;
     }
     
@@ -85,7 +85,7 @@ public final class PanelTreeProduct extends PanelTree {
      */
     protected void addInstances(Product product, DefaultMutableTreeNode node) {
         for (Instance instance : product.getInstancesList())
-            node.add(this.createNode(instance));
+            node.add(createNode(instance));
     }
     
     /**
@@ -95,8 +95,8 @@ public final class PanelTreeProduct extends PanelTree {
      */
     protected DefaultMutableTreeNode createNode(Instance instance) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(instance);
-            this.addArtifacts(instance, node);
-            super.addNode(instance, node);
+               addArtifacts(instance, node);
+               addNode(instance, node);
         return node;
     }
     
@@ -107,7 +107,7 @@ public final class PanelTreeProduct extends PanelTree {
      */
     protected void addArtifacts(Instance instance, DefaultMutableTreeNode node) {
         for (Artifact artifact : instance.getTreeArtifactsList())
-            node.add(this.createNode(instance, artifact));
+            node.add(createNode(instance, artifact));
     }
     
     /**
@@ -119,10 +119,10 @@ public final class PanelTreeProduct extends PanelTree {
     protected DefaultMutableTreeNode createNode(Instance instance, Artifact artifact) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(artifact);
         if (artifact.isPackage()) {
-            this.addEntities(instance, (PackageUML) artifact.getElement(), node);
-            this.addPackages(instance, (PackageUML) artifact.getElement(), node);
+            addEntities(instance, (PackageUML) artifact.getElement(), node);
+            addPackages(instance, (PackageUML) artifact.getElement(), node);
         }
-        super.addNode(artifact, node);
+               addNode(artifact, node);
         return node;
     }
     
@@ -135,7 +135,7 @@ public final class PanelTreeProduct extends PanelTree {
     private void addEntities(Instance instance, PackageUML package_, DefaultMutableTreeNode node) {
         for (Entity artifact : package_.getEntitiesList()) {
             if (instance.contains(artifact))
-                node.add(this.createNode(instance, instance.getArtifact(artifact)));
+                node.add(createNode(instance, instance.getArtifact(artifact)));
         }
     }
     
@@ -148,7 +148,7 @@ public final class PanelTreeProduct extends PanelTree {
     private void addPackages(Instance instance, PackageUML package_, DefaultMutableTreeNode node) {
         for (PackageUML artifact : package_.getPackagesList()) {
             if (instance.contains(artifact))
-                node.add(this.createNode(instance, instance.getArtifact(artifact)));
+                node.add(createNode(instance, instance.getArtifact(artifact)));
         }
     }
     
@@ -157,8 +157,8 @@ public final class PanelTreeProduct extends PanelTree {
      * @param product Diagram. 
      */
     public void updateNode(Product product) {
-        if (this.getNode(product) != null)
-            this.getTreeModel().reload(this.getNode(product));
+        if (getNode(product) != null)
+            getTreeModel().reload(getNode(product));
     }
     
     /**
@@ -166,12 +166,12 @@ public final class PanelTreeProduct extends PanelTree {
      * @param instance Instance. 
      */
     public void updateNode(Instance instance) {
-        if (this.getNode(instance) != null)
-            this.getTreeModel().reload(this.getNode(instance));
+        if (getNode(instance) != null)
+            getTreeModel().reload(getNode(instance));
     }
     
     @Override
     public TreePopupProduct getPopup() {
-        return (TreePopupProduct) this.popup;
+        return (TreePopupProduct) popup;
     }
 }

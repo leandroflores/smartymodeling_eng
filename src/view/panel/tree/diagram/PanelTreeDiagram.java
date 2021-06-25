@@ -20,7 +20,7 @@ import view.main.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Diagram Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-14
- * @see    view.panel.tree1.PanelTree
+ * @see    view.panel.tree.PanelTree
  * @see    view.panel.tree.popup.diagram.TreePopupDiagram
  * @see    view.panel.tree.renderer.diagram.TreeRendererDiagram
  */
@@ -32,30 +32,30 @@ public final class PanelTreeDiagram extends PanelTree {
      */
     public PanelTreeDiagram(ViewMenu view) {
         super(view);
-        super.addComponents();
+        addComponents();
     }
     
     @Override
     protected void initTreeRenderer() {
-        this.getTree().setCellRenderer(new TreeRendererDiagram(this.getTree()));
+        getTree().setCellRenderer(new TreeRendererDiagram(getTree()));
     }
     
     @Override
     protected void initTreePopup() {
-        this.popup = new TreePopupDiagram(this);
+        popup = new TreePopupDiagram(this);
     }
     
     @Override
     protected void setControllers() {
-        this.tree.addMouseListener(new ControllerTreePopupDiagram(this.getPopup()));
-        this.tree.addKeyListener(new ControllerTreePopupDiagram(this.getPopup()));
+        tree.addMouseListener(new ControllerTreePopupDiagram(getPopup()));
+        tree.addKeyListener(new ControllerTreePopupDiagram(getPopup()));
     }
     
     @Override
     protected DefaultMutableTreeNode createNode(Project project) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(project);
-               this.addDiagrams(node);
-               super.addNode(project, node);
+               addDiagrams(node);
+               addNode(project, node);
         return node;
     }
     
@@ -64,8 +64,8 @@ public final class PanelTreeDiagram extends PanelTree {
      * @param node Project Node.
      */
     protected void addDiagrams(DefaultMutableTreeNode node) {
-        for (Diagram diagram : this.getProject().getUMLDiagramsList())
-            node.add(this.createNode(diagram));
+        for (Diagram diagram : getProject().getUMLDiagramsList())
+            node.add(createNode(diagram));
     }
     
     /**
@@ -75,9 +75,9 @@ public final class PanelTreeDiagram extends PanelTree {
      */
     protected DefaultMutableTreeNode createNode(Diagram diagram) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(diagram);
-               this.addElements(diagram, node);
-               this.addVariabilities(diagram, node);
-            super.addNode(diagram, node);
+               addElements(diagram, node);
+               addVariabilities(diagram, node);
+               addNode(diagram, node);
         return node;
     }
     
@@ -100,12 +100,12 @@ public final class PanelTreeDiagram extends PanelTree {
         for (Element  element : diagram.getTreeElementsList()) {
             DefaultMutableTreeNode new_ = null;
             if (element instanceof PackageUML)
-                new_ = this.createNode((PackageUML) element);
+                new_ = createNode((PackageUML) element);
             else if (element instanceof Entity)
-                new_ = this.createNode((Entity) element);
-            else if (!this.isLeaf(element))
-                new_ = this.createNode(element);
-            super.addElement(element, new_, node);
+                new_ = createNode((Entity) element);
+            else if (!isLeaf(element))
+                new_ = createNode(element);
+            addElement(element, new_, node);
         }
     }
     
@@ -116,8 +116,8 @@ public final class PanelTreeDiagram extends PanelTree {
      */
     protected DefaultMutableTreeNode createNode(PackageUML package_) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(package_);
-            this.addEntities(package_, node);
-            this.addPackages(package_, node);
+               addEntities(package_, node);
+               addPackages(package_, node);
         return node;
     }
     
@@ -128,7 +128,7 @@ public final class PanelTreeDiagram extends PanelTree {
      */
     protected void addEntities(PackageUML package_, DefaultMutableTreeNode node) {
         for (Entity entity : package_.getEntitiesList())
-            node.add(this.createNode(entity));
+            node.add(createNode(entity));
     }
     
     /**
@@ -138,7 +138,7 @@ public final class PanelTreeDiagram extends PanelTree {
      */
     protected void addPackages(PackageUML package_, DefaultMutableTreeNode node) {
         for (PackageUML current : package_.getPackagesList())
-            node.add(this.createNode(current));
+            node.add(createNode(current));
     }
     
     /**
@@ -148,8 +148,8 @@ public final class PanelTreeDiagram extends PanelTree {
      */
     protected DefaultMutableTreeNode createNode(Entity entity) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(entity);
-            this.addAttributes(entity, node);
-            this.addMethods(entity, node);
+               addAttributes(entity, node);
+               addMethods(entity, node);
         return node;
     }
     
@@ -162,7 +162,7 @@ public final class PanelTreeDiagram extends PanelTree {
         for (AttributeUML attribute : entity.getAttributesList()) {
             DefaultMutableTreeNode new_ = new DefaultMutableTreeNode(attribute);
             node.add(new_);
-            super.addNode(attribute, new_);
+            addNode(attribute, new_);
         }
     }
     
@@ -175,7 +175,7 @@ public final class PanelTreeDiagram extends PanelTree {
         for (MethodUML method : entity.getMethodsList()) {
             DefaultMutableTreeNode new_ = new DefaultMutableTreeNode(method);
             node.add(new_);
-            super.addNode(method, new_);
+            addNode(method, new_);
         }
     }
     
@@ -186,7 +186,7 @@ public final class PanelTreeDiagram extends PanelTree {
      */
     protected void addVariabilities(Diagram diagram, DefaultMutableTreeNode node) {
         for (Variability variability : diagram.getVariabilitiesList())
-            node.add(this.createNode(variability));
+            node.add(createNode(variability));
     }
     
     /**
@@ -196,9 +196,9 @@ public final class PanelTreeDiagram extends PanelTree {
      */
     protected DefaultMutableTreeNode createNode(Variability variability) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(variability);
-               this.addVariationPoint(variability, node);
-               this.addVariants(variability, node);
-               super.addNode(variability, node);
+               addVariationPoint(variability, node);
+               addVariants(variability, node);
+               addNode(variability, node);
         return node;
     }
     
@@ -226,12 +226,12 @@ public final class PanelTreeDiagram extends PanelTree {
      * @param variability 
      */
     public void updateNode(Variability variability) {
-        if (this.getNode(variability) != null) {
-            DefaultMutableTreeNode node = this.getNode(variability);
+        if (getNode(variability) != null) {
+            DefaultMutableTreeNode node = getNode(variability);
                                    node.removeAllChildren();
-            this.addVariationPoint(variability, node);
-            this.addVariants(variability, node);
-            this.getTreeModel().reload(node);
+            addVariationPoint(variability, node);
+            addVariants(variability, node);
+            getTreeModel().reload(node);
         }
     }
     
@@ -240,12 +240,12 @@ public final class PanelTreeDiagram extends PanelTree {
      * @param element Element.
      */
     public void updateVariability(Element element) {
-        if (this.getNode(element) != null) { 
-            DefaultMutableTreeNode node   = this.getNode(element);
-            DefaultMutableTreeNode parent = this.getParentNode(node);
+        if (getNode(element) != null) { 
+            DefaultMutableTreeNode node   = getNode(element);
+            DefaultMutableTreeNode parent = getParentNode(node);
             if (parent != null && parent.getUserObject() != null && parent.getUserObject() instanceof Diagram) {
-                this.updateVariationPoints((Diagram) parent.getUserObject(), element);
-                this.updateVariants((Diagram) parent.getUserObject(), element);
+                updateVariationPoints((Diagram) parent.getUserObject(), element);
+                updateVariants((Diagram) parent.getUserObject(), element);
             }
         }
     }
@@ -257,7 +257,7 @@ public final class PanelTreeDiagram extends PanelTree {
      */
     private void updateVariationPoints(Diagram diagram, Element element) {
         for (Variability variability : diagram.getVariationPoints(element))
-            this.updateNode(variability);
+            updateNode(variability);
     }
     
     /**
@@ -267,11 +267,11 @@ public final class PanelTreeDiagram extends PanelTree {
      */
     private void updateVariants(Diagram diagram, Element element) {
         for (Variability variability : diagram.filterVariants(element, ""))
-            this.updateNode(variability);
+            updateNode(variability);
     }
     
     @Override
     public TreePopupDiagram getPopup() {
-        return (TreePopupDiagram) this.popup;
+        return (TreePopupDiagram) popup;
     }
 }

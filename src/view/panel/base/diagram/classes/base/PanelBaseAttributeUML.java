@@ -30,47 +30,47 @@ public final class PanelBaseAttributeUML extends PanelBaseElement {
      */
     public PanelBaseAttributeUML(ViewMenu view, ClassDiagram diagram, AttributeUML attribute) {
         super(view, diagram, attribute);
-        this.controller = new ControllerPanelBaseAttributeUML(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseAttributeUML(this);
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(5, 2, 2, 5));
-        this.setPreferredSize(new Dimension(50, 50));
+        setLayout(new GridLayout(5, 2, 2, 5));
+        setPreferredSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Visibility: "));
-        this.add(this.createComboBox("visibilityComboBox", this.getDiagram().getVisibilities(), 30, this.getElement().getVisibility()));
-        this.getVisibilityComboBox().setPreferredSize(new Dimension(325, 30));
+        add(createLabel("Visibility: "));
+        add(createComboBox("visibility", getDiagram().getVisibilities(), 30, getElement().getVisibility()));
+        getVisibilityComboBox().setPreferredSize(new Dimension(325, 30));
         
-        this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.getElement().getName(), 25));
+        add(createLabel("Name*: "));
+        add(createTextField("name", getElement().getName(), 25));
         
-        this.add(this.createLabel("Type: "));
-        this.add(this.createComboBox("typeComboBox", this.getProject().getTypesList().toArray(), 30, this.getElement().getTypeUML()));
-        this.getTypeComboBox().setPreferredSize(new Dimension(325, 30));
+        add(createLabel("Type: "));
+        add(createComboBox("type", getProject().getTypesList().toArray(), 30, getElement().getTypeUML()));
+        getTypeComboBox().setPreferredSize(new Dimension(325, 30));
         
-        this.add(this.createLabel("Static: "));
-        this.add(this.createCheckBox("staticCheckBox", "", this.getElement().isStatic()));
+        add(createLabel("Static: "));
+        add(createCheckBox("static", "", getElement().isStatic()));
         
-        this.add(this.createLabel("Final: "));
-        this.add(this.createCheckBox("finalCheckBox",  "", this.getElement().isFinal()));
+        add(createLabel("Final: "));
+        add(createCheckBox("final",  "", getElement().isFinal()));
     }
     
     /**
      * Method responsible for setting the Attribute Values.
      */
     public void setValues() {
-        this.getVisibilityComboBox().setSelectedItem(this.getElement().getVisibility());
-        this.getNameTextField().setText(this.getElement().getName());
-        this.getTypeComboBox().setSelectedItem(this.getElement().getTypeUML());
-        this.getStaticCheckBox().setSelected(this.getElement().isStatic());
-        this.getFinalCheckBox().setSelected(this.getElement().isFinal());
+        getVisibilityComboBox().setSelectedItem(getElement().getVisibility());
+        getNameTextField().setText(getElement().getName());
+        getTypeComboBox().setSelectedItem(getElement().getTypeUML());
+        getStaticCheckBox().setSelected(getElement().isStatic());
+        getFinalCheckBox().setSelected(getElement().isFinal());
     }
     
     /**
@@ -78,7 +78,7 @@ public final class PanelBaseAttributeUML extends PanelBaseElement {
      * @return Visibility Combo Box.
      */
     public JComboBox getVisibilityComboBox() {
-        return this.getComboBox("visibilityComboBox");
+        return getComboBox("visibility");
     }
     
     /**
@@ -86,7 +86,7 @@ public final class PanelBaseAttributeUML extends PanelBaseElement {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -94,7 +94,7 @@ public final class PanelBaseAttributeUML extends PanelBaseElement {
      * @return Type Combo Box.
      */
     public JComboBox getTypeComboBox() {
-        return this.getComboBox("typeComboBox");
+        return getComboBox("type");
     }
     
     /**
@@ -102,7 +102,7 @@ public final class PanelBaseAttributeUML extends PanelBaseElement {
      * @return Static Check Box.
      */
     public JCheckBox getStaticCheckBox() {
-        return this.getCheckBox("staticCheckBox");
+        return getCheckBox("static");
     }
     
     /**
@@ -110,16 +110,16 @@ public final class PanelBaseAttributeUML extends PanelBaseElement {
      * @return Final Check Box.
      */
     public JCheckBox getFinalCheckBox() {
-        return this.getCheckBox("finalCheckBox");
+        return getCheckBox("final");
     }
     
     @Override
     public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+        return (ClassDiagram) diagram;
     }
     
     @Override
     public AttributeUML getElement() {
-        return (AttributeUML) this.element;
+        return (AttributeUML) element;
     }
 }

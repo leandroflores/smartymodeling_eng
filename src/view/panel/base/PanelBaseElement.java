@@ -32,7 +32,7 @@ public abstract class PanelBaseElement extends PanelBase {
     
     @Override
     protected void setDefaultProperties() {
-        this.setPreferredSize(new Dimension(100, 100));
+        setPreferredSize(new Dimension(100, 100));
     }
     
     /**
@@ -40,7 +40,7 @@ public abstract class PanelBaseElement extends PanelBase {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
     
     /**
@@ -48,6 +48,6 @@ public abstract class PanelBaseElement extends PanelBase {
      * @return Element.
      */
     public Element getElement() {
-        return this.element;
+        return element;
     }
 }

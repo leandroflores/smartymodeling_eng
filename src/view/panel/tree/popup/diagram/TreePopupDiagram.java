@@ -26,36 +26,36 @@ public final class TreePopupDiagram extends TreePopup {
      */
     public TreePopupDiagram(PanelTreeDiagram panel) {
         super(panel);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void createMenuItems() {
         super.createMenuItems();
-        this.createMenuItem("use-case_diagram",  "Use Case Diagram",  "menu/diagram/use-case",  KeyEvent.VK_U, InputEvent.CTRL_MASK);
-        this.createMenuItem("class_diagram",     "Class Diagram",     "menu/diagram/class",     KeyEvent.VK_C, InputEvent.CTRL_MASK);
-        this.createMenuItem("component_diagram", "Component Diagram", "menu/diagram/component", KeyEvent.VK_M, InputEvent.CTRL_MASK);
-        this.createMenuItem("sequence_diagram",  "Sequence Diagram",  "menu/diagram/sequence",  KeyEvent.VK_E, InputEvent.CTRL_MASK);
-        this.createMenuItem("activity_diagram",  "Activity Diagram",  "menu/diagram/activity",  KeyEvent.VK_A, InputEvent.CTRL_MASK);
-        this.createMenuItem("variability",       "Variability",       "variability");
-        this.createMenuItem("attribute",         "UML Attribute",     "diagram/classes/attribute");
-        this.createMenuItem("method",            "UML Method",        "diagram/classes/method");
+        createMenuItem("use_case_diagram",  "Use Case Diagram",  "menu/diagram/use-case",  KeyEvent.VK_U, InputEvent.CTRL_MASK);
+        createMenuItem("class_diagram",     "Class Diagram",     "menu/diagram/class",     KeyEvent.VK_C, InputEvent.CTRL_MASK);
+        createMenuItem("component_diagram", "Component Diagram", "menu/diagram/component", KeyEvent.VK_M, InputEvent.CTRL_MASK);
+        createMenuItem("sequence_diagram",  "Sequence Diagram",  "menu/diagram/sequence",  KeyEvent.VK_E, InputEvent.CTRL_MASK);
+        createMenuItem("activity_diagram",  "Activity Diagram",  "menu/diagram/activity",  KeyEvent.VK_A, InputEvent.CTRL_MASK);
+        createMenuItem("variability",       "Variability",       "variability");
+        createMenuItem("attribute",         "UML Attribute",     "diagram/classes/attribute");
+        createMenuItem("method",            "UML Method",        "diagram/classes/method");
         
-        this.getNewMenu().add(this.getUseCaseDiagramMenuItem());
-        this.getNewMenu().add(this.getClassDiagramMenuItem());
-        this.getNewMenu().add(this.getComponentDiagramMenuItem());
-        this.getNewMenu().add(this.getSequenceDiagramMenuItem());
-        this.getNewMenu().add(this.getActivityDiagramMenuItem());
-        this.getNewMenu().add(this.getVariabilityMenuItem());
-        this.getNewMenu().add(this.getAttributeMenuItem());
-        this.getNewMenu().add(this.getMethodMenuItem());
+        getNewMenu().add(getUseCaseDiagramMenuItem());
+        getNewMenu().add(getClassDiagramMenuItem());
+        getNewMenu().add(getComponentDiagramMenuItem());
+        getNewMenu().add(getSequenceDiagramMenuItem());
+        getNewMenu().add(getActivityDiagramMenuItem());
+        getNewMenu().add(getVariabilityMenuItem());
+        getNewMenu().add(getAttributeMenuItem());
+        getNewMenu().add(getMethodMenuItem());
     }
     
     @Override
     protected void setControllers() {
-        this.setNewControllers();
-        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
-        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
+        setNewControllers();
+        getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
+        getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
     }
     
     /**
@@ -63,23 +63,23 @@ public final class TreePopupDiagram extends TreePopup {
      */
     private void setNewControllers() {
         ControllerMenuItem controller = new ControllerMenuItemNew(this);
-        this.getUseCaseDiagramMenuItem().addActionListener(controller);
-        this.getClassDiagramMenuItem().addActionListener(controller);
-        this.getComponentDiagramMenuItem().addActionListener(controller);
-        this.getSequenceDiagramMenuItem().addActionListener(controller);
-        this.getActivityDiagramMenuItem().addActionListener(controller);
-        this.getVariabilityMenuItem().addActionListener(controller);
-        this.getAttributeMenuItem().addActionListener(controller);
-        this.getMethodMenuItem().addActionListener(controller);
+        getUseCaseDiagramMenuItem().addActionListener(controller);
+        getClassDiagramMenuItem().addActionListener(controller);
+        getComponentDiagramMenuItem().addActionListener(controller);
+        getSequenceDiagramMenuItem().addActionListener(controller);
+        getActivityDiagramMenuItem().addActionListener(controller);
+        getVariabilityMenuItem().addActionListener(controller);
+        getAttributeMenuItem().addActionListener(controller);
+        getMethodMenuItem().addActionListener(controller);
     }
     
     @Override
     protected void addMenuItems() {
-        this.add(this.getNewMenu());
-        this.addSeparator();
-        this.add(getEditMenuItem());
-        this.addSeparator();
-        this.add(getDeleteMenuItem());
+        add(getNewMenu());
+        addSeparator();
+        add(getEditMenuItem());
+        addSeparator();
+        add(getDeleteMenuItem());
     }
     
     /**
@@ -87,7 +87,7 @@ public final class TreePopupDiagram extends TreePopup {
      * @return Use Case Diagram Menu Item.
      */
     public JMenuItem getUseCaseDiagramMenuItem() {
-        return this.getItems().get("use-case_diagram");
+        return getItems().get("use_case_diagram");
     }
     
     /**
@@ -95,7 +95,7 @@ public final class TreePopupDiagram extends TreePopup {
      * @return Class Diagram Menu Item.
      */
     public JMenuItem getClassDiagramMenuItem() {
-        return this.getItems().get("class_diagram");
+        return getItems().get("class_diagram");
     }
     
     /**
@@ -103,7 +103,7 @@ public final class TreePopupDiagram extends TreePopup {
      * @return Component Diagram Menu Item.
      */
     public JMenuItem getComponentDiagramMenuItem() {
-        return this.getItems().get("component_diagram");
+        return getItems().get("component_diagram");
     }
     
     /**
@@ -111,7 +111,7 @@ public final class TreePopupDiagram extends TreePopup {
      * @return Sequence Diagram Menu Item.
      */
     public JMenuItem getSequenceDiagramMenuItem() {
-        return this.getItems().get("sequence_diagram");
+        return getItems().get("sequence_diagram");
     }
     
     /**
@@ -119,7 +119,7 @@ public final class TreePopupDiagram extends TreePopup {
      * @return Activity Diagram Menu Item.
      */
     public JMenuItem getActivityDiagramMenuItem() {
-        return this.getItems().get("activity_diagram");
+        return getItems().get("activity_diagram");
     }
     
     /**
@@ -127,7 +127,7 @@ public final class TreePopupDiagram extends TreePopup {
      * @return Variability Menu Item.
      */
     public JMenuItem getVariabilityMenuItem() {
-        return this.getItems().get("variability");
+        return getItems().get("variability");
     }
     
     /**
@@ -135,7 +135,7 @@ public final class TreePopupDiagram extends TreePopup {
      * @return Attribute Menu Item.
      */
     public JMenuItem getAttributeMenuItem() {
-        return this.getItems().get("attribute");
+        return getItems().get("attribute");
     }
     
     /**
@@ -143,6 +143,6 @@ public final class TreePopupDiagram extends TreePopup {
      * @return Method Menu Item.
      */
     public JMenuItem getMethodMenuItem() {
-        return this.getItems().get("method");
+        return getItems().get("method");
     }
 }

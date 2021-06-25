@@ -17,39 +17,39 @@ import view.style.ViewStyle;
  * @author Leandro
  * @since  2019-05-20
  * @see    javax.swing.JPopupMenu
- * @see    view.panel.tree1.PanelTree
+ * @see    view.panel.tree.PanelTree
  */
 public abstract class TreePopup extends JPopupMenu {
     protected final PanelTree panel;
-    protected final HashMap   menus;
-    protected final HashMap   items;
+    protected final HashMap menus;
+    protected final HashMap items;
     
     /**
      * Default constructor method of Class.
-     * @param panel Panel Tree.
+     * @param panelTree Panel Tree.
      */
-    public TreePopup(PanelTree panel) {
-        this.panel = panel;
-        this.menus = new HashMap<>();
-        this.items = new HashMap<>();
+    public TreePopup(PanelTree panelTree) {
+        panel = panelTree;
+        menus = new HashMap<>();
+        items = new HashMap<>();
     }
     
     /**
      * Method responsible for adding the Components.
      */
     protected void addComponents() {
-        this.createMenuItems();
-        this.setControllers();
-        this.addMenuItems();
+        createMenuItems();
+        setControllers();
+        addMenuItems();
     }
     
     /**
      * Method responsible for creating the Menu Items.
      */
     protected void createMenuItems() {
-        this.createMenu("new_menu", "New");
-        this.createMenuItem("editMenuItem",   "Edit",   "edit",   KeyEvent.VK_F2, 0);
-        this.createMenuItem("deleteMenuItem", "Delete", "delete", KeyEvent.VK_DELETE, 0);
+        createMenu("new", "New");
+        createMenuItem("edit",   "Edit",   "edit",   KeyEvent.VK_F2, 0);
+        createMenuItem("delete", "Delete", "delete", KeyEvent.VK_DELETE, 0);
     }
     
     /**
@@ -71,7 +71,7 @@ public abstract class TreePopup extends JPopupMenu {
     protected JMenu createMenu(String id, String title) {
         JMenu  menu = new JMenu(title);
                menu.setFont(new Font(ViewStyle.STYLE, ViewStyle.BOLD, ViewStyle.SIZE));
-               this.menus.put(id, menu);
+               menus.put(id, menu);
         return menu;
     }
     
@@ -81,7 +81,7 @@ public abstract class TreePopup extends JPopupMenu {
      * @return Menu found.
      */
     protected JMenu getMenu(String id) {
-        return (JMenu) this.menus.get(id);
+        return (JMenu) menus.get(id);
     }
     
     /**
@@ -96,7 +96,7 @@ public abstract class TreePopup extends JPopupMenu {
                   menuItem.setText(title);
                   menuItem.setIcon(new FunctView().createImage("icons/" + url + ".png"));
                   menuItem.setFont(new Font("Arial", Font.BOLD, 15));
-        this.items.put(id, menuItem);
+                  items.put(id, menuItem);
         return    menuItem;
     }
     
@@ -110,7 +110,7 @@ public abstract class TreePopup extends JPopupMenu {
      * @return New Menu Item.
      */
     protected JMenuItem createMenuItem(String id, String title, String path, int keychar, int mask) {
-        JMenuItem menuItem = this.createMenuItem(id, title, path);
+        JMenuItem menuItem = createMenuItem(id, title, path);
                   menuItem.setAccelerator(KeyStroke.getKeyStroke(keychar, mask));
                   menuItem.setMnemonic(keychar);
         return    menuItem;
@@ -121,7 +121,7 @@ public abstract class TreePopup extends JPopupMenu {
      * @return New Menu.
      */
     public JMenu getNewMenu() {
-        return this.getMenu("new_menu");
+        return getMenu("new");
     }
     
     /**
@@ -129,7 +129,7 @@ public abstract class TreePopup extends JPopupMenu {
      * @return Edit Menu Item.
      */
     public JMenuItem getEditMenuItem() {
-        return this.getItems().get("editMenuItem");
+        return getItems().get("edit");
     }
 
     /**
@@ -137,7 +137,7 @@ public abstract class TreePopup extends JPopupMenu {
      * @return Delete Menu Item.
      */
     public JMenuItem getDeleteMenuItem() {
-        return this.getItems().get("deleteMenuItem");
+        return getItems().get("delete");
     }
 
     /**
@@ -145,7 +145,7 @@ public abstract class TreePopup extends JPopupMenu {
      * @return Itens Map.
      */
     public HashMap<String, JMenuItem> getItems() {
-        return this.items;
+        return items;
     }
     
     /**
@@ -153,6 +153,6 @@ public abstract class TreePopup extends JPopupMenu {
      * @return Panel Tree.
      */
     public PanelTree getPanel() {
-        return this.panel;
+        return panel;
     }
 }

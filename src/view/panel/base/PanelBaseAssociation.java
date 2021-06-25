@@ -33,8 +33,8 @@ public abstract class PanelBaseAssociation extends PanelBase {
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(3, 2));
-        this.setPreferredSize(new Dimension(50, 50));
+        setLayout(new GridLayout(3, 2));
+        setPreferredSize(new Dimension(50, 50));
     }
     
     /**
@@ -42,7 +42,7 @@ public abstract class PanelBaseAssociation extends PanelBase {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
     
     /**
@@ -50,6 +50,6 @@ public abstract class PanelBaseAssociation extends PanelBase {
      * @return Association.
      */
     public Association getAssociation() {
-        return this.association;
+        return association;
     }
 }

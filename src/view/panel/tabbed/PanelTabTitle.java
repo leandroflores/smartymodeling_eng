@@ -41,33 +41,33 @@ public final class PanelTabTitle extends Panel {
         this.panel      = panel;
         this.component  = component;
         this.title      = title;
-        this.addComponents();
+        addComponents();
     }
        
     @Override
     protected void addComponents() {
-        this.setOpaque(false);
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, 3, 3));
-        this.addTitleLabel();
-        this.addCloseButton();
+        setOpaque(false);
+        setLayout(new FlowLayout(FlowLayout.CENTER, 3, 3));
+        addTitleLabel();
+        addCloseButton();
     }
     
     /**
      * Method responsible for adding the Title Label.
      */
     private void addTitleLabel() {
-        this.titleLabel = this.createLabel(this.title);
-        this.add(this.titleLabel);
+        titleLabel = createLabel(title);
+        add(titleLabel);
     }
         
     /**
      * Method responsible for adding the Close Button.
      */
     private void addCloseButton() {
-        this.closeButton = new JButton("X");
-        this.closeButton.setMargin(new Insets(0, 0, 0, 0));
-        this.closeButton.addActionListener(this.controller);
-        this.add(this.closeButton);
+        closeButton = new JButton("X");
+        closeButton.setMargin(new Insets(0, 0, 0, 0));
+        closeButton.addActionListener(controller);
+        add(closeButton);
     }
     
     /**
@@ -76,7 +76,7 @@ public final class PanelTabTitle extends Panel {
      */
     public void setTitle(String title) {
         this.title = title;
-        this.titleLabel.setText(this.title);
+        titleLabel.setText(title);
     }
     
     /**
@@ -84,8 +84,8 @@ public final class PanelTabTitle extends Panel {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        if (this.getComponent() instanceof PanelDiagram)
-            return ((PanelDiagram) this.getComponent()).getDiagram();
+        if (getComponent() instanceof PanelDiagram)
+            return ((PanelDiagram) getComponent()).getDiagram();
         return null;
     }
     
@@ -94,8 +94,8 @@ public final class PanelTabTitle extends Panel {
      * @return Instance.
      */
     public Instance getInstance() {
-        if (this.getComponent() instanceof PanelInstance)
-            return ((PanelInstance) this.getComponent()).getInstance();
+        if (getComponent() instanceof PanelInstance)
+            return ((PanelInstance) getComponent()).getInstance();
         return null;
     }
     
@@ -104,7 +104,7 @@ public final class PanelTabTitle extends Panel {
      * @return Panel Modeling.
      */
     public PanelModeling getPanelModeling() {
-        return this.panel;
+        return panel;
     }
     
     /**
@@ -112,7 +112,7 @@ public final class PanelTabTitle extends Panel {
      * @return Component.
      */
     public Component getComponent() {
-        return this.component;
+        return component;
     }
     
     /**
@@ -120,6 +120,6 @@ public final class PanelTabTitle extends Panel {
      * @return Close Button.
      */
     public JButton getCloseButton() {
-        return this.closeButton;
+        return closeButton;
     }
 }

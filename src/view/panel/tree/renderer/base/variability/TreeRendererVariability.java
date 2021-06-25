@@ -31,9 +31,9 @@ public class TreeRendererVariability extends TreeRenderer {
      * @param parent Parent Node.
      */
     public void setElementIcon(Element element, DefaultMutableTreeNode parent) {
-        this.setText(element.getName());
-        this.setToolTipText(element.getName());
-        this.setIcon(this.getImage(this.getIconPath(element, parent.getUserObject())));
+        setText(element.getName());
+        setToolTipText(element.getName());
+        setIcon(getImage(getIconPath(element, parent.getUserObject())));
     }
     
     /**
@@ -53,10 +53,10 @@ public class TreeRendererVariability extends TreeRenderer {
      * @param variability Variability.
      */
     public void setVariabilityIcon(Variability variability) {
-        this.setText("<html><b>" + variability.getName() + "</b></html>");
-        this.setToolTipText(variability.getName());
-        this.setIcon(this.getImage(variability.getIcon()));
-        this.setForeground(new Color(13, 57 ,115));
+        setText("<html><b>" + variability.getName() + "</b></html>");
+        setToolTipText(variability.getName());
+        setIcon(getImage(variability.getIcon()));
+        setForeground(new Color(13, 57 ,115));
     }
     
     @Override
@@ -66,7 +66,7 @@ public class TreeRendererVariability extends TreeRenderer {
         DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
         Object object = node.getUserObject();
         if (object instanceof Variability)
-            this.setVariabilityIcon((Variability) object);
+            setVariabilityIcon((Variability) object);
         return this;
     }
 }

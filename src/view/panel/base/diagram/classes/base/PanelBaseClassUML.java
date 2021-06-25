@@ -29,31 +29,31 @@ public final class PanelBaseClassUML extends PanelBaseElement {
      */
     public PanelBaseClassUML(ViewMenu view, ClassDiagram diagram, ClassUML class_) {
         super(view, diagram, class_);
-        this.controller = new ControllerPanelBaseClassUML(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseClassUML(this);
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(5, 2, 2, 5));
-        this.setPreferredSize(new Dimension(50, 50));
+        setLayout(new GridLayout(5, 2, 2, 5));
+        setPreferredSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.getElement().getName(), 25));
+        add(createLabel("Name*: "));
+        add(createTextField("name", getElement().getName(), 25));
         
-        this.add(this.createLabel("Abstract: "));
-        this.add(this.createCheckBox("abstractCheckBox",  "", this.getElement().isAbstract()));
+        add(createLabel("Abstract: "));
+        add(createCheckBox("abstract",  "", getElement().isAbstract()));
         
-        this.add(this.createLabel("Final: "));
-        this.add(this.createCheckBox("finalCheckBox",     "", this.getElement().isFinal()));
+        add(createLabel("Final: "));
+        add(createCheckBox("final", "", getElement().isFinal()));
         
-        this.add(this.createLabel("Mandatory: "));
-        this.add(this.createCheckBox("mandatoryCheckBox", "", this.getElement().isMandatory()));
+        add(createLabel("Mandatory: "));
+        add(createCheckBox("mandatory", "", getElement().isMandatory()));
     }
     
     /**
@@ -61,7 +61,7 @@ public final class PanelBaseClassUML extends PanelBaseElement {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -69,7 +69,7 @@ public final class PanelBaseClassUML extends PanelBaseElement {
      * @return Abstract Check Box.
      */
     public JCheckBox getAbstractCheckBox() {
-        return this.getCheckBox("abstractCheckBox");
+        return getCheckBox("abstract");
     }
     
     /**
@@ -77,7 +77,7 @@ public final class PanelBaseClassUML extends PanelBaseElement {
      * @return Final Check Box.
      */
     public JCheckBox getFinalCheckBox() {
-        return this.getCheckBox("finalCheckBox");
+        return getCheckBox("final");
     }
     
     /**
@@ -85,16 +85,16 @@ public final class PanelBaseClassUML extends PanelBaseElement {
      * @return Mandatory Check Box.
      */
     public JCheckBox getMandatoryCheckBox() {
-        return this.getCheckBox("mandatoryCheckBox");
+        return getCheckBox("mandatory");
     }
     
     @Override
     public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+        return (ClassDiagram) diagram;
     }
     
     @Override
     public ClassUML getElement() {
-        return (ClassUML) this.element;
+        return (ClassUML) element;
     }
 }

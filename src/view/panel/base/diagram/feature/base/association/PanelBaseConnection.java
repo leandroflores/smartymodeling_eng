@@ -2,7 +2,6 @@ package view.panel.base.diagram.feature.base.association;
 
 import controller.view.panel.base.diagram.feature.base.association.ControllerPanelBaseConnection;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import model.structural.diagram.FeatureDiagram;
@@ -24,36 +23,35 @@ public final class PanelBaseConnection extends PanelBaseAssociation {
     
     /**
      * Default constructor method of Class.
-     * @param panelEdit View Edit Connection.
+     * @param panel View Edit Connection.
      * @param diagram Feature Diagram.
      * @param connection Connection.
      */
-    public PanelBaseConnection(PanelEditConnection panelEdit, FeatureDiagram diagram, Connection connection) {
-        super(panelEdit.getViewMenu(), diagram, connection);
-        this.panelEdit  = panelEdit;
-        this.controller = new ControllerPanelBaseConnection(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+    public PanelBaseConnection(PanelEditConnection panel, FeatureDiagram diagram, Connection connection) {
+        super(panel.getViewMenu(), diagram, connection);
+        panelEdit  = panel;
+        controller = new ControllerPanelBaseConnection(this);
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(3, 2));
         super.setDefaultProperties();
-        this.setSize(new Dimension(50, 50));
+        setSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Source: ", 120));
-        this.add(this.createTextFieldNoEditable("sourceTextField", this.getAssociation().getSource().getName(), 20));
+        add(createLabel("Source: ", 120));
+        add(createTextFieldNoEditable("source", getAssociation().getSource().getName(), 20));
         
-        this.add(this.createLabel("Target: ", 120));
-        this.add(this.createTextFieldNoEditable("targetTextField", this.getAssociation().getTarget().getName(), 20));
+        add(createLabel("Target: ", 120));
+        add(createTextFieldNoEditable("target", getAssociation().getTarget().getName(), 20));
         
-        this.add(this.createLabel("Category: ", 120));
-        this.add(this.createComboBox("categoryComboBox", this.getDiagram().getCategories(), 20, this.getAssociation().getCategory()));
+        add(createLabel("Category: ", 120));
+        add(createComboBox("category", getDiagram().getCategories(), 20, getAssociation().getCategory()));
     }
     
     /**
@@ -61,7 +59,7 @@ public final class PanelBaseConnection extends PanelBaseAssociation {
      * @return Source Text Field.
      */
     public JTextField getSourceTextField() {
-        return this.getTextField("sourceTextField");
+        return getTextField("source");
     }
     
     /**
@@ -69,7 +67,7 @@ public final class PanelBaseConnection extends PanelBaseAssociation {
      * @return Target Text Field.
      */
     public JTextField getTargetTextField() {
-        return this.getTextField("targetTextField");
+        return getTextField("target");
     }
     
     /**
@@ -77,16 +75,16 @@ public final class PanelBaseConnection extends PanelBaseAssociation {
      * @return Category Combo Box.
      */
     public JComboBox getCategoryComboBox() {
-        return this.getComboBox("categoryComboBox");
+        return getComboBox("category");
     }
     
     @Override
     public FeatureDiagram getDiagram() {
-        return (FeatureDiagram) this.diagram;
+        return (FeatureDiagram) diagram;
     }
     
     @Override
     public Connection getAssociation() {
-        return (Connection) this.association;
+        return (Connection) association;
     }
 }

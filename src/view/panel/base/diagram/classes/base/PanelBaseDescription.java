@@ -29,21 +29,21 @@ public final class PanelBaseDescription extends PanelBase {
         super(view);
         this.entity     = entity;
         this.controller = new ControllerPanelBaseDescription(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
     }
     
     @Override
     protected void addComponents() {
-        this.createTextArea("descriptionTextArea", this.entity.getDescription());
-        this.add(this.createLabel("Description: "), this.createConstraints(1, 1, 0, 0));
-        this.add(this.getDescriptionScrollPane(), this.createConstraints(4, 5, 1, 0));
+        createTextArea("description", entity.getDescription());
+        add(createLabel("Description: "), createConstraints(1, 1, 0, 0));
+        add(getDescriptionScrollPane(), createConstraints(4, 5, 1, 0));
     }
     
     /**
@@ -51,7 +51,7 @@ public final class PanelBaseDescription extends PanelBase {
      * @return Entity.
      */
     public Entity getEntity() {
-        return this.entity;
+        return entity;
     }
     
     /**
@@ -59,7 +59,7 @@ public final class PanelBaseDescription extends PanelBase {
      * @return Description Text Area.
      */
     public JTextArea getDescriptionTextArea() {
-        return this.getTextArea("descriptionTextArea");
+        return getTextArea("description");
     }
     
     /**
@@ -67,6 +67,6 @@ public final class PanelBaseDescription extends PanelBase {
      * @return Description Scroll Pane.
      */
     public JScrollPane getDescriptionScrollPane() {
-        return this.getScrollPane("descriptionTextArea");
+        return getScrollPane("description");
     }
 }

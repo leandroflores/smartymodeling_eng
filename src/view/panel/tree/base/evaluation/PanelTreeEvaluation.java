@@ -15,7 +15,7 @@ import view.main.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Evaluation Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-14
- * @see    view.panel.tree1.PanelTree
+ * @see    view.panel.tree.PanelTree
  * @see    view.panel.tree.popup.base.evaluation.TreePopupEvaluation
  * @see    view.panel.tree.renderer.base.evaluation.TreeRendererEvaluation
  */
@@ -27,30 +27,30 @@ public final class PanelTreeEvaluation extends PanelTree {
      */
     public PanelTreeEvaluation(ViewMenu view) {
         super(view);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void initTreeRenderer() {
-        this.getTree().setCellRenderer(new TreeRendererEvaluation(this.getTree()));
+        getTree().setCellRenderer(new TreeRendererEvaluation(getTree()));
     }
     
     @Override
     protected void initTreePopup() {
-        this.popup = new TreePopupEvaluation(this);
+        popup = new TreePopupEvaluation(this);
     }
     
     @Override
     protected void setControllers() {
-        this.tree.addMouseListener(new ControllerTreePopupEvaluation(this.getPopup()));
-        this.tree.addKeyListener(new ControllerTreePopupEvaluation(this.getPopup()));
+        tree.addMouseListener(new ControllerTreePopupEvaluation(getPopup()));
+        tree.addKeyListener(new ControllerTreePopupEvaluation(getPopup()));
     }
     
     @Override
     protected DefaultMutableTreeNode createNode(Project project) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(project);
-               this.addMetrics(node);
-               super.addNode(project, node);
+               addMetrics(node);
+               addNode(project, node);
         return node;
     }
     
@@ -59,8 +59,8 @@ public final class PanelTreeEvaluation extends PanelTree {
      * @param node Project Node.
      */
     protected void addMetrics(DefaultMutableTreeNode node) {
-        for (Metric metric : this.getProject().getMetricsList())
-            node.add(this.createNode(metric));
+        for (Metric metric : getProject().getMetricsList())
+            node.add(createNode(metric));
     }
     
     /**
@@ -70,8 +70,8 @@ public final class PanelTreeEvaluation extends PanelTree {
      */
     protected DefaultMutableTreeNode createNode(Metric metric) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(metric);
-               this.addMeasures(metric, node);
-               super.addNode(metric, node);
+               addMeasures(metric, node);
+               addNode(metric, node);
         return node;
     }
     
@@ -81,8 +81,8 @@ public final class PanelTreeEvaluation extends PanelTree {
      * @param node Metric Node.
      */
     protected void addMeasures(Metric metric, DefaultMutableTreeNode node) {
-        for (Measure measure : this.getProject().getMeasuresByMetric(metric))
-            node.add(this.createNode(measure));
+        for (Measure measure : getProject().getMeasuresByMetric(metric))
+            node.add(createNode(measure));
     }
     
     /**
@@ -92,7 +92,7 @@ public final class PanelTreeEvaluation extends PanelTree {
      */
     protected DefaultMutableTreeNode createNode(Measure measure) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(measure);
-            super.addNode(measure, node);
+               addNode(measure, node);
         return node;
     }
     
@@ -101,8 +101,8 @@ public final class PanelTreeEvaluation extends PanelTree {
      * @param metric Metric. 
      */
     public void updateNode(Metric metric) {
-        if (this.getNode(metric) != null)
-            this.getTreeModel().reload(this.createNode(metric));
+        if (getNode(metric) != null)
+            getTreeModel().reload(createNode(metric));
     }
     
     /**
@@ -110,12 +110,12 @@ public final class PanelTreeEvaluation extends PanelTree {
      * @param measure Measure. 
      */
     public void updateNode(Measure measure) {
-        if (this.getNode(measure) != null)
-            this.getTreeModel().reload(this.getNode(measure));
+        if (getNode(measure) != null)
+            getTreeModel().reload(getNode(measure));
     }
     
     @Override
     public TreePopupEvaluation getPopup() {
-        return (TreePopupEvaluation) this.popup;
+        return (TreePopupEvaluation) popup;
     }
 }

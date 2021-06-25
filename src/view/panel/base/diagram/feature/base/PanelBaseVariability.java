@@ -27,34 +27,34 @@ public final class PanelBaseVariability extends PanelBaseElement {
      */
     public PanelBaseVariability(ViewMenu view, FeatureDiagram diagram, Variability variability) {
         super(view, diagram, variability);
-        this.controller = new ControllerPanelBaseVariability(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseVariability(this);
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(2, 2));
-        this.setPreferredSize(new Dimension(50, 50));
+        setLayout(new GridLayout(2, 2));
+        setPreferredSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Category: "));
-        this.add(this.createTextFieldNoEditable("typeTextField",    this.getElement().getCategory(), 25));
+        add(createLabel("Category: "));
+        add(createTextFieldNoEditable("category", getElement().getCategory(), 25));
         
-        this.add(this.createLabel("Var. Point: "));
-        this.add(this.createTextFieldNoEditable("varPointTextField", this.getElement().getVariationPoint().getName(), 25));
+        add(createLabel("Var. Point: "));
+        add(createTextFieldNoEditable("var_point", getElement().getVariationPoint().getName(), 25));
     }
     
     @Override
     public FeatureDiagram getDiagram() {
-        return (FeatureDiagram) this.diagram;
+        return (FeatureDiagram) diagram;
     }
     
     @Override
     public Variability getElement() {
-        return (Variability) this.element;
+        return (Variability) element;
     }
 }

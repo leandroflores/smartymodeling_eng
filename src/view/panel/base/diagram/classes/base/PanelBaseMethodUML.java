@@ -30,56 +30,56 @@ public final class PanelBaseMethodUML extends PanelBaseElement {
      */
     public PanelBaseMethodUML(ViewMenu view, ClassDiagram diagram, MethodUML method) {
         super(view, diagram, method);
-        this.controller = new ControllerPanelBaseMethodUML(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseMethodUML(this);
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(7, 2, 2, 5));
-        this.setPreferredSize(new Dimension(50, 50));
+        setLayout(new GridLayout(7, 2, 2, 5));
+        setPreferredSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Visibility*: "));
-        this.add(this.createComboBox("visibilityComboBox", this.getDiagram().getVisibilities(), 30, this.getElement().getVisibility()));
-        this.getVisibilityComboBox().setPreferredSize(new Dimension(325, 30));
+        add(createLabel("Visibility*: "));
+        add(createComboBox("visibility", getDiagram().getVisibilities(), 30, getElement().getVisibility()));
+        getVisibilityComboBox().setPreferredSize(new Dimension(325, 30));
         
-        this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.getElement().getName(), 25));
+        add(createLabel("Name*: "));
+        add(createTextField("name", getElement().getName(), 25));
         
-        this.add(this.createLabel("Constructor: "));
-        this.add(this.createCheckBox("constructorCheckBox", "", this.getElement().isConstructor()));
+        add(createLabel("Constructor: "));
+        add(createCheckBox("constructor", "", getElement().isConstructor()));
         
-        this.add(this.createLabel("Return: "));
-        this.add(this.createComboBox("returnComboBox", this.diagram.getProject().getTypesList().toArray(), 30, this.getElement().getReturn()));
-        this.getReturnComboBox().setPreferredSize(new Dimension(200, 30));
+        add(createLabel("Return: "));
+        add(createComboBox("return", diagram.getProject().getTypesList().toArray(), 30, getElement().getReturn()));
+        getReturnComboBox().setPreferredSize(new Dimension(200, 30));
         
-        this.add(this.createLabel("Abstract: "));
-        this.add(this.createCheckBox("abstractCheckBox", "", this.getElement().isAbstract()));
+        add(createLabel("Abstract: "));
+        add(createCheckBox("abstract", "", getElement().isAbstract()));
         
-        this.add(this.createLabel("Static: "));
-        this.add(this.createCheckBox("staticCheckBox",   "", this.getElement().isStatic()));
+        add(createLabel("Static: "));
+        add(createCheckBox("static", "", getElement().isStatic()));
         
-        this.add(this.createLabel("Final: "));
-        this.add(this.createCheckBox("finalCheckBox",    "", this.getElement().isFinal()));
+        add(createLabel("Final: "));
+        add(createCheckBox("final", "", getElement().isFinal()));
     }
     
     /**
      * Method responsible for setting the Method Values.
      */
     public void setValues() {
-        this.getVisibilityComboBox().setSelectedItem(this.getElement().getVisibility());
-        this.getNameTextField().setText(this.getElement().getName());
-        this.getConstructorCheckBox().setSelected(this.getElement().isConstructor());
-        this.getReturnComboBox().setSelectedItem(this.getElement().getReturn());
-        this.getReturnComboBox().setEnabled(!this.getElement().isConstructor());
-        this.getAbstractCheckBox().setSelected(this.getElement().isAbstract());
-        this.getStaticCheckBox().setSelected(this.getElement().isStatic());
-        this.getFinalCheckBox().setSelected(this.getElement().isFinal());
+        getVisibilityComboBox().setSelectedItem(getElement().getVisibility());
+        getNameTextField().setText(getElement().getName());
+        getConstructorCheckBox().setSelected(getElement().isConstructor());
+        getReturnComboBox().setSelectedItem(getElement().getReturn());
+        getReturnComboBox().setEnabled(!getElement().isConstructor());
+        getAbstractCheckBox().setSelected(getElement().isAbstract());
+        getStaticCheckBox().setSelected(getElement().isStatic());
+        getFinalCheckBox().setSelected(getElement().isFinal());
     }
     
     /**
@@ -87,7 +87,7 @@ public final class PanelBaseMethodUML extends PanelBaseElement {
      * @return Visibility Combo Box.
      */
     public JComboBox getVisibilityComboBox() {
-        return this.getComboBox("visibilityComboBox");
+        return getComboBox("visibility");
     }
     
     /**
@@ -95,7 +95,7 @@ public final class PanelBaseMethodUML extends PanelBaseElement {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -103,7 +103,7 @@ public final class PanelBaseMethodUML extends PanelBaseElement {
      * @return Constructor Check Box.
      */
     public JCheckBox getConstructorCheckBox() {
-        return this.getCheckBox("constructorCheckBox");
+        return getCheckBox("constructor");
     }
     
     /**
@@ -111,7 +111,7 @@ public final class PanelBaseMethodUML extends PanelBaseElement {
      * @return Return Combo Box.
      */
     public JComboBox getReturnComboBox() {
-        return this.getComboBox("returnComboBox");
+        return getComboBox("return");
     }
     
     /**
@@ -119,7 +119,7 @@ public final class PanelBaseMethodUML extends PanelBaseElement {
      * @return Abstract Check Box.
      */
     public JCheckBox getAbstractCheckBox() {
-        return this.getCheckBox("abstractCheckBox");
+        return getCheckBox("abstract");
     }
     
     /**
@@ -127,7 +127,7 @@ public final class PanelBaseMethodUML extends PanelBaseElement {
      * @return Static Check Box.
      */
     public JCheckBox getStaticCheckBox() {
-        return this.getCheckBox("staticCheckBox");
+        return getCheckBox("static");
     }
     
     /**
@@ -135,16 +135,16 @@ public final class PanelBaseMethodUML extends PanelBaseElement {
      * @return Final Check Box.
      */
     public JCheckBox getFinalCheckBox() {
-        return this.getCheckBox("finalCheckBox");
+        return getCheckBox("final");
     }
     
     @Override
     public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+        return (ClassDiagram) diagram;
     }
     
     @Override
     public MethodUML getElement() {
-        return (MethodUML) this.element;
+        return (MethodUML) element;
     }
 }

@@ -27,34 +27,34 @@ public final class PanelBaseFlowUML extends PanelBaseAssociation {
      */
     public PanelBaseFlowUML(ViewMenu view, ActivityDiagram diagram, FlowUML flow) {
         super(view, diagram, flow);
-        this.controller = new ControllerPanelBaseFlowUML(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseFlowUML(this);
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(5, 2, 2, 5));
         super.setDefaultProperties();
+        setLayout(new GridLayout(5, 2, 2, 5));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Source: "));
-        this.add(this.createTextFieldNoEditable("sourceTextField", this.getAssociation().getSource().getName(), 25));
+        add(createLabel("Source: "));
+        add(createTextFieldNoEditable("source", getAssociation().getSource().getName(), 25));
         
-        this.add(this.createLabel("Target: "));
-        this.add(this.createTextFieldNoEditable("targetTextField", this.getAssociation().getTarget().getName(), 25));
+        add(createLabel("Target: "));
+        add(createTextFieldNoEditable("target", getAssociation().getTarget().getName(), 25));
         
-        this.add(this.createLabel("Guard: "));
-        this.add(this.createTextField("guardTextField",  this.getAssociation().getGuard(), 25));
+        add(createLabel("Guard: "));
+        add(createTextField("guard",  getAssociation().getGuard(), 25));
         
-        this.add(this.createLabel("Action: "));
-        this.add(this.createTextField("actionTextField", this.getAssociation().getAction(), 25));
+        add(createLabel("Action: "));
+        add(createTextField("action", getAssociation().getAction(), 25));
         
-        this.add(this.createLabel("Weight: "));
-        this.add(this.createTextField("weightTextField", this.getAssociation().getWeight(), 25));
+        add(createLabel("Weight: "));
+        add(createTextField("weight", getAssociation().getWeight(), 25));
     }
     
     /**
@@ -62,7 +62,7 @@ public final class PanelBaseFlowUML extends PanelBaseAssociation {
      * @return Source Text Field.
      */
     public JTextField getSourceTextField() {
-        return this.getTextField("sourceTextField");
+        return getTextField("source");
     }
     
     /**
@@ -70,7 +70,7 @@ public final class PanelBaseFlowUML extends PanelBaseAssociation {
      * @return Target Text Field.
      */
     public JTextField getTargetTextField() {
-        return this.getTextField("targetTextField");
+        return getTextField("target");
     }
     
     /**
@@ -78,7 +78,7 @@ public final class PanelBaseFlowUML extends PanelBaseAssociation {
      * @return Guard Text Field.
      */
     public JTextField getGuardTextField() {
-        return this.getTextField("guardTextField");
+        return getTextField("guard");
     }
     
     /**
@@ -86,7 +86,7 @@ public final class PanelBaseFlowUML extends PanelBaseAssociation {
      * @return Action Text Field.
      */
     public JTextField getActionTextField() {
-        return this.getTextField("actionTextField");
+        return getTextField("action");
     }
     
     /**
@@ -94,16 +94,16 @@ public final class PanelBaseFlowUML extends PanelBaseAssociation {
      * @return Weight Text Field.
      */
     public JTextField getWeightTextField() {
-        return this.getTextField("weightTextField");
+        return getTextField("weight");
     }
     
     @Override
     public ActivityDiagram getDiagram() {
-        return (ActivityDiagram) this.diagram;
+        return (ActivityDiagram) diagram;
     }
     
     @Override
     public FlowUML getAssociation() {
-        return (FlowUML) this.association;
+        return (FlowUML) association;
     }
 }

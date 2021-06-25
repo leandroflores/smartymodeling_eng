@@ -30,43 +30,43 @@ public final class PanelBaseAssociationUML extends PanelBaseAssociation {
      */
     public PanelBaseAssociationUML(PanelEditAssociationUML panel, ClassDiagram diagram, AssociationUML association) {
         super(panel.getViewMenu(), diagram, association);
-        this.panelEdit  = panel;
-        this.controller = new ControllerPanelBaseAssociationUML(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        panelEdit  = panel;
+        controller = new ControllerPanelBaseAssociationUML(this);
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
         super.setDefaultProperties();
-        this.setLayout(new GridLayout(5, 2));
-        this.setSize(new Dimension(50, 50));
+        setLayout(new GridLayout(5, 2));
+        setSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Source: ", 120));
-        this.add(this.createTextFieldNoEditable("sourceTextField", this.getAssociation().getSource().getName(), 20));
+        add(createLabel("Source: ", 120));
+        add(createTextFieldNoEditable("source", getAssociation().getSource().getName(), 20));
         
-        this.add(this.createLabel("Target: ", 120));
-        this.add(this.createTextFieldNoEditable("targetTextField", this.getAssociation().getTarget().getName(), 20));
+        add(createLabel("Target: ", 120));
+        add(createTextFieldNoEditable("target", getAssociation().getTarget().getName(), 20));
         
-        this.add(this.createLabel("Name: ", 120));
-        this.add(this.createTextField("nameTextField", this.getAssociation().getName(), 20));
+        add(createLabel("Name: ", 120));
+        add(createTextField("name", getAssociation().getName(), 20));
         
-        this.add(this.createLabel("Category: ", 120));
-        this.add(this.createTextFieldNoEditable("categoryTextField", this.getAssociation().getCategory(), 20));
+        add(createLabel("Category: ", 120));
+        add(createTextFieldNoEditable("category", getAssociation().getCategory(), 20));
         
-        this.add(this.createLabel("Directed: ", 120));
-        this.add(this.createCheckBox("directedCheckBox", "Yes", this.getAssociation().isDirection()));
+        add(createLabel("Directed: ", 120));
+        add(createCheckBox("directed", "Yes", getAssociation().isDirection()));
     }
     
     /**
      * Method responsible for updating the Panel Base Source.
      */
     public void updatePanelBaseSource() {
-        this.panelEdit.getPanelBaseSource().updateValues();
+        panelEdit.getPanelBaseSource().updateValues();
     }
     
     /**
@@ -74,7 +74,7 @@ public final class PanelBaseAssociationUML extends PanelBaseAssociation {
      * @return Source Text Field.
      */
     public JTextField getSourceTextField() {
-        return this.getTextField("sourceTextField");
+        return getTextField("source");
     }
     
     /**
@@ -82,7 +82,7 @@ public final class PanelBaseAssociationUML extends PanelBaseAssociation {
      * @return Target Text Field.
      */
     public JTextField getTargetTextField() {
-        return this.getTextField("targetTextField");
+        return getTextField("target");
     }
     
     /**
@@ -90,7 +90,7 @@ public final class PanelBaseAssociationUML extends PanelBaseAssociation {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -98,7 +98,7 @@ public final class PanelBaseAssociationUML extends PanelBaseAssociation {
      * @return Category Text Field.
      */
     public JTextField getCategoryTextField() {
-        return this.getTextField("categoryTextField");
+        return getTextField("category");
     }
     
     /**
@@ -106,16 +106,16 @@ public final class PanelBaseAssociationUML extends PanelBaseAssociation {
      * @return Directed Check Box.
      */
     public JCheckBox getDirectedCheckBox() {
-        return this.getCheckBox("directedCheckBox");
+        return getCheckBox("directed");
     }
     
     @Override
     public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+        return (ClassDiagram) diagram;
     }
     
     @Override
     public AssociationUML getAssociation() {
-        return (AssociationUML) this.association;
+        return (AssociationUML) association;
     }
 }

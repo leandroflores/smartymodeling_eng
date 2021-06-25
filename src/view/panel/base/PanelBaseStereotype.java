@@ -28,24 +28,24 @@ public final class PanelBaseStereotype extends PanelBase {
         super(view);
         this.stereotype = stereotype;
         this.controller = new ControllerPanelBaseStereotype(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(2, 2));
+        setLayout(new GridLayout(2, 2));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField",  this.stereotype.getName(), 20));
+        add(createLabel("Name*: "));
+        add(createTextField("name",  stereotype.getName(), 20));
         
-        this.add(this.createLabel("Primitive: "));
-        this.add(this.createCheckBox("primitiveCheckBox", "", this.stereotype.isPrimitive()));
-        this.getPrimitiveCheckBox().setEnabled(false);
+        add(createLabel("Primitive: "));
+        add(createCheckBox("primitive", "", stereotype.isPrimitive()));
+        getPrimitiveCheckBox().setEnabled(false);
     }
     
     /**
@@ -53,7 +53,7 @@ public final class PanelBaseStereotype extends PanelBase {
      * @return Stereotype.
      */
     public Stereotype getStereotype() {
-        return this.stereotype;
+        return stereotype;
     }
     
     /**
@@ -61,7 +61,7 @@ public final class PanelBaseStereotype extends PanelBase {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -69,6 +69,6 @@ public final class PanelBaseStereotype extends PanelBase {
      * @return Primitive Check Box.
      */
     public JCheckBox getPrimitiveCheckBox() {
-        return this.getCheckBox("primitiveCheckBox");
+        return getCheckBox("primitive");
     }
 }

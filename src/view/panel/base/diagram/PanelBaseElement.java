@@ -27,25 +27,25 @@ public final class PanelBaseElement extends view.panel.base.PanelBaseElement {
      */
     public PanelBaseElement(ViewMenu view, Diagram diagram, Element element) {
         super(view, diagram, element);
-        this.controller = new ControllerPanelBaseElement(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseElement(this);
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
         super.setDefaultProperties();
-        this.setLayout(new GridLayout(2, 2));
+        setLayout(new GridLayout(2, 2));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name*: ", 120));
-        this.add(this.createTextField("nameTextField", this.element.getName(), 20));
+        add(createLabel("Name*: ", 120));
+        add(createTextField("name", element.getName(), 20));
         
-        this.add(this.createLabel("Mandatory: ", 120));
-        this.add(this.createCheckBox("mandatoryCheckBox", "", this.element.isMandatory()));
+        add(createLabel("Mandatory: ", 120));
+        add(createCheckBox("mandatory", "", element.isMandatory()));
     }
     
     /**
@@ -53,7 +53,7 @@ public final class PanelBaseElement extends view.panel.base.PanelBaseElement {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -61,6 +61,6 @@ public final class PanelBaseElement extends view.panel.base.PanelBaseElement {
      * @return Mandatory Check Box.
      */
     public JCheckBox getMandatoryCheckBox() {
-        return this.getCheckBox("mandatoryCheckBox");
+        return getCheckBox("mandatory");
     }
 }

@@ -27,23 +27,23 @@ public final class PanelBaseDiagram extends PanelBase {
         super(view);
         this.diagram    = diagram;
         this.controller = new ControllerPanelBaseDiagram(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(5, 2));
+        setLayout(new GridLayout(5, 2));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.diagram.getName(), 15));
+        add(createLabel("Name*: "));
+        add(createTextField("name", diagram.getName(), 15));
         
-        this.add(this.createLabel("Type: "));
-        this.add(this.createTextFieldNoEditable("typeTextField", this.diagram.getType(), 15));
+        add(createLabel("Type: "));
+        add(createTextFieldNoEditable("type", diagram.getType(), 15));
     }
     
     /**
@@ -51,7 +51,7 @@ public final class PanelBaseDiagram extends PanelBase {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -59,7 +59,7 @@ public final class PanelBaseDiagram extends PanelBase {
      * @return Type Text Field.
      */
     public JTextField getTypeTextField() {
-        return this.getTextField("typeTextField");
+        return getTextField("type");
     }
     
     /**
@@ -67,6 +67,6 @@ public final class PanelBaseDiagram extends PanelBase {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
 }

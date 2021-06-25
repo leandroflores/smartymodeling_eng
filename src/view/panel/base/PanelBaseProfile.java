@@ -27,39 +27,38 @@ public final class PanelBaseProfile extends PanelBase {
         super(view);
         this.profile    = profile;
         this.controller = new ControllerPanelBaseProfile(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
-//        this.setLayout(new GridLayout(7, 2));
+        setLayout(new GridBagLayout());
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Mandatory*: "),  this.createConstraints(1, 1, 0, 0));
-        this.add(this.createTextField("mandatoryTextField", this.profile.getMandatory().getName(), 20), this.createConstraints(4, 1, 1, 0));
+        add(createLabel("Mandatory*: "), createConstraints(1, 1, 0, 0));
+        add(createTextField("mandatory", profile.getMandatory().getName(), 20), createConstraints(4, 1, 1, 0));
         
-        this.add(this.createLabel("Optional*: "),   this.createConstraints(1, 1, 0, 1));
-        this.add(this.createTextField("optionalTextField",  this.profile.getOptional().getName(), 20), this.createConstraints(4, 1, 1, 1));
+        add(createLabel("Optional*: "), createConstraints(1, 1, 0, 1));
+        add(createTextField("optional", profile.getOptional().getName(), 20), createConstraints(4, 1, 1, 1));
         
-        this.add(this.createLabel("Var. Point*: "), this.createConstraints(1, 1, 0, 2));
-        this.add(this.createTextField("varPointTextField",  this.profile.getVariationPoint().getName(), 20), this.createConstraints(4, 1, 1, 2));
+        add(createLabel("Var. Point*: "), createConstraints(1, 1, 0, 2));
+        add(createTextField("var_point", profile.getVariationPoint().getName(), 20), createConstraints(4, 1, 1, 2));
         
-        this.add(this.createLabel("Inclusive*: "),  this.createConstraints(1, 1, 0, 3));
-        this.add(this.createTextField("inclusiveTextField", this.profile.getInclusive().getName(), 20), this.createConstraints(4, 1, 1, 3));
+        add(createLabel("Inclusive*: "), createConstraints(1, 1, 0, 3));
+        add(createTextField("inclusive", profile.getInclusive().getName(), 20), createConstraints(4, 1, 1, 3));
         
-        this.add(this.createLabel("Exclusive*: "),  this.createConstraints(1, 1, 0, 4));
-        this.add(this.createTextField("exclusiveTextField", this.profile.getExclusive().getName(), 20), this.createConstraints(4, 1, 1, 4));
+        add(createLabel("Exclusive*: "), createConstraints(1, 1, 0, 4));
+        add(createTextField("exclusive", profile.getExclusive().getName(), 20), createConstraints(4, 1, 1, 4));
         
-        this.add(this.createLabel("Requires*: "),   this.createConstraints(1, 1, 0, 5));
-        this.add(this.createTextField("requiresTextField", this.profile.getRequires().getName(), 20), this.createConstraints(4, 1, 1, 5));
+        add(createLabel("Requires*: "), createConstraints(1, 1, 0, 5));
+        add(createTextField("requires", profile.getRequires().getName(), 20), createConstraints(4, 1, 1, 5));
         
-        this.add(this.createLabel("Mutex*: "),      this.createConstraints(1, 1, 0, 6));
-        this.add(this.createTextField("mutexTextField", this.profile.getMutex().getName(), 20), this.createConstraints(4, 1, 1, 6));
+        add(createLabel("Mutex*: "), createConstraints(1, 1, 0, 6));
+        add(createTextField("mutex", profile.getMutex().getName(), 20), createConstraints(4, 1, 1, 6));
     }
     
     /**
@@ -67,7 +66,7 @@ public final class PanelBaseProfile extends PanelBase {
      * @return Profile.
      */
     public Profile getProfile() {
-        return this.profile;
+        return profile;
     }
     
     /**
@@ -75,7 +74,7 @@ public final class PanelBaseProfile extends PanelBase {
      * @return Mandatory Text Field.
      */
     public JTextField getMandatoryTextField() {
-        return this.getTextField("mandatoryTextField");
+        return getTextField("mandatory");
     }
     
     /**
@@ -83,7 +82,7 @@ public final class PanelBaseProfile extends PanelBase {
      * @return Optional Text Field.
      */
     public JTextField getOptionalTextField() {
-        return this.getTextField("optionalTextField");
+        return getTextField("optional");
     }
     
     /**
@@ -91,7 +90,7 @@ public final class PanelBaseProfile extends PanelBase {
      * @return Variation Point Text Field.
      */
     public JTextField getVarPointTextField() {
-        return this.getTextField("varPointTextField");
+        return getTextField("var_point");
     }
     
     /**
@@ -99,7 +98,7 @@ public final class PanelBaseProfile extends PanelBase {
      * @return Inclusive Text Field.
      */
     public JTextField getInclusiveTextField() {
-        return this.getTextField("inclusiveTextField");
+        return getTextField("inclusive");
     }
     
     /**
@@ -107,7 +106,7 @@ public final class PanelBaseProfile extends PanelBase {
      * @return Exclusive Text Field.
      */
     public JTextField getExclusiveTextField() {
-        return this.getTextField("exclusiveTextField");
+        return getTextField("exclusive");
     }
     
     /**
@@ -115,7 +114,7 @@ public final class PanelBaseProfile extends PanelBase {
      * @return Requires Text Field.
      */
     public JTextField getRequiresTextField() {
-        return this.getTextField("requiresTextField");
+        return getTextField("requires");
     }
     
     /**
@@ -123,6 +122,6 @@ public final class PanelBaseProfile extends PanelBase {
      * @return Mutex Text Field.
      */
     public JTextField getMutexTextField() {
-        return this.getTextField("mutexTextField");
+        return getTextField("mutex");
     }
 }

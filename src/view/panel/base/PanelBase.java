@@ -22,8 +22,8 @@ public abstract class PanelBase extends Panel {
      * @param view View Menu.
      */
     public PanelBase(ViewMenu view) {
-        this.viewMenu = view;
-        this.project  = view.getProject();
+        viewMenu = view;
+        project  = view.getProject();
     }
     
     /**
@@ -36,7 +36,7 @@ public abstract class PanelBase extends Panel {
      * @return View Menu.
      */
     public ViewMenu getViewMenu() {
-        return this.viewMenu;
+        return viewMenu;
     }
     
     /**
@@ -44,7 +44,7 @@ public abstract class PanelBase extends Panel {
      * @return Project.
      */
     public Project getProject() {
-        return this.project;
+        return project;
     }
     
     /**
@@ -52,6 +52,6 @@ public abstract class PanelBase extends Panel {
      * @return Panel Base Controller.
      */
     public ControllerPanelBase getController() {
-        return (ControllerPanelBase) this.controller;
+        return (ControllerPanelBase) controller;
     }
 }

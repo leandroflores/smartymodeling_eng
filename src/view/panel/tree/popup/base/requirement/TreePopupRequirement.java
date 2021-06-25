@@ -25,31 +25,31 @@ public final class TreePopupRequirement extends TreePopup {
      */
     public TreePopupRequirement(PanelTreeRequirement panel) {
         super(panel);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void createMenuItems() {
         super.createMenuItems();
-        this.createMenuItem("new_requirement", "New Requirement", "menu/requirement/requirement", KeyEvent.VK_R, InputEvent.CTRL_MASK);
-        this.createMenuItem("new_element",     "Add Element",     "add");
-        this.getNewMenu().add(this.getNewRequirementMenuItem());
+        createMenuItem("new_requirement", "New Requirement", "menu/requirement/requirement", KeyEvent.VK_R, InputEvent.CTRL_MASK);
+        createMenuItem("new_element",     "Add Element",     "add");
+        getNewMenu().add(getNewRequirementMenuItem());
     }
     
     @Override
     protected void setControllers() {
-        this.getNewRequirementMenuItem().addActionListener(new ControllerMenuItemNew(this));
-        this.getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
-        this.getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
+        getNewRequirementMenuItem().addActionListener(new ControllerMenuItemNew(this));
+        getEditMenuItem().addActionListener(new ControllerMenuItemEdit(this));
+        getDeleteMenuItem().addActionListener(new ControllerMenuItemDelete(this));
     }
     
     @Override
     protected void addMenuItems() {
-        this.add(this.getNewMenu());
-        this.addSeparator();
-        this.add(this.getEditMenuItem());
-        this.addSeparator();
-        this.add(this.getDeleteMenuItem());
+        add(getNewMenu());
+        addSeparator();
+        add(getEditMenuItem());
+        addSeparator();
+        add(getDeleteMenuItem());
     }
     
     /**
@@ -57,6 +57,6 @@ public final class TreePopupRequirement extends TreePopup {
      * @return New Requirement Menu Item.
      */
     public JMenuItem getNewRequirementMenuItem() {
-        return this.getItems().get("new_requirement");
+        return getItems().get("new_requirement");
     }
 }

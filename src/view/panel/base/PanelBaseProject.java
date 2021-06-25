@@ -22,27 +22,27 @@ public final class PanelBaseProject extends PanelBase {
      */
     public PanelBaseProject(ViewMenu view) {
         super(view);
-        this.controller = new ControllerPanelBaseProject(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseProject(this);
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(5, 1, 2, 5));
+        setLayout(new GridLayout(5, 1, 2, 5));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.project.getName(), 5));
+        add(createLabel("Name*: "));
+        add(createTextField("name", project.getName(), 5));
         
-        this.add(this.createLabel("Path: "));
-        this.add(this.createTextFieldNoEditable("pathTextField", this.project.getPath(), 5));
+        add(createLabel("Path: "));
+        add(createTextFieldNoEditable("path", project.getPath(), 5));
         
-        this.add(this.createLabel("Version: "));
-        this.add(this.createTextField("versionTextField", this.project.getVersion(), 5));
+        add(createLabel("Version: "));
+        add(createTextField("version", project.getVersion(), 5));
     }
     
     /**
@@ -50,7 +50,7 @@ public final class PanelBaseProject extends PanelBase {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -58,7 +58,7 @@ public final class PanelBaseProject extends PanelBase {
      * @return Path Text Field.
      */
     public JTextField getPathTextField() {
-        return this.getTextField("pathTextField");
+        return getTextField("path");
     }
     
     /**
@@ -66,6 +66,6 @@ public final class PanelBaseProject extends PanelBase {
      * @return Version Text Field.
      */
     public JTextField getVersionTextField() {
-        return this.getTextField("versionTextField");
+        return getTextField("version");
     }
 }

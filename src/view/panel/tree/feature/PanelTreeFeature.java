@@ -18,7 +18,7 @@ import view.main.structural.ViewMenu;
  * <p>Class responsible for defining the <b>Feature Tree Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-06
- * @see    view.panel.tree1.PanelTree
+ * @see    view.panel.tree.PanelTree
  * @see    view.panel.tree.popup.feature.TreePopupFeature
  * @see    view.panel.tree.renderer.feature.TreeRendererFeature
  */
@@ -30,30 +30,30 @@ public final class PanelTreeFeature extends PanelTree {
      */
     public PanelTreeFeature(ViewMenu view) {
         super(view);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void initTreeRenderer() {
-        this.getTree().setCellRenderer(new TreeRendererFeature(this.getTree()));
+        getTree().setCellRenderer(new TreeRendererFeature(getTree()));
     }
     
     @Override
     protected void initTreePopup() {
-        this.popup = new TreePopupFeature(this);
+        popup = new TreePopupFeature(this);
     }
     
     @Override
     protected void setControllers() {
-        this.tree.addMouseListener(new ControllerTreePopupFeature(this.getPopup()));
-        this.tree.addKeyListener(new ControllerTreePopupFeature(this.getPopup()));
+        tree.addMouseListener(new ControllerTreePopupFeature(getPopup()));
+        tree.addKeyListener(new ControllerTreePopupFeature(getPopup()));
     }
     
     @Override
     protected DefaultMutableTreeNode createNode(Project project) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(project);
-               this.addDiagrams(node);
-               super.addNode(project, node);
+               addDiagrams(node);
+               addNode(project, node);
         return node;
     }
     
@@ -62,8 +62,8 @@ public final class PanelTreeFeature extends PanelTree {
      * @param node Project Node.
      */
     protected void addDiagrams(DefaultMutableTreeNode node) {
-        for (Diagram diagram : this.getProject().getFeatureDiagramsList())
-            node.add(this.createNode(diagram));
+        for (Diagram diagram : getProject().getFeatureDiagramsList())
+            node.add(createNode(diagram));
     }
     
     /**
@@ -73,9 +73,9 @@ public final class PanelTreeFeature extends PanelTree {
      */
     protected DefaultMutableTreeNode createNode(Diagram diagram) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(diagram);
-               this.addFeatures(diagram, node);
-               this.addVariabilities(diagram, node);
-            super.addNode(diagram, node);
+               addFeatures(diagram, node);
+               addVariabilities(diagram, node);
+               addNode(diagram, node);
         return node;
     }
     
@@ -86,7 +86,7 @@ public final class PanelTreeFeature extends PanelTree {
      */
     protected void addFeatures(Diagram diagram, DefaultMutableTreeNode node) {
         for (Feature feature : ((FeatureDiagram) diagram).getFeaturesList())
-            super.addElement(feature, super.createNode(feature), node);
+            addElement(feature, createNode(feature), node);
     }
     
     /**
@@ -96,7 +96,7 @@ public final class PanelTreeFeature extends PanelTree {
      */
     protected void addVariabilities(Diagram diagram, DefaultMutableTreeNode node) {
         for (Variability variability : ((FeatureDiagram) diagram).getVariability())
-            node.add(this.createNode(variability));
+            node.add(createNode(variability));
     }
     
     /**
@@ -106,9 +106,9 @@ public final class PanelTreeFeature extends PanelTree {
      */
     protected DefaultMutableTreeNode createNode(Variability variability) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(variability);
-               this.addVariationPoint(variability, node);
-               this.addVariants(variability, node);
-               super.addNode(variability, node);
+               addVariationPoint(variability, node);
+               addVariants(variability, node);
+               addNode(variability, node);
         return node;
     }
     
@@ -133,6 +133,6 @@ public final class PanelTreeFeature extends PanelTree {
     
     @Override
     public TreePopupFeature getPopup() {
-        return (TreePopupFeature) this.popup;
+        return (TreePopupFeature) popup;
     }
 }

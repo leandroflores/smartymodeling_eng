@@ -30,9 +30,9 @@ public class TreeRendererProduct extends TreeRenderer {
      * @param product Product.
      */
     public void setProductIcon(Product product) {
-        this.setText(product.getName());
-        this.setToolTipText(product.getName());
-        this.setIcon(this.getImage(product.getIcon()));
+        setText(product.getName());
+        setToolTipText(product.getName());
+        setIcon(getImage(product.getIcon()));
     }
     
     /**
@@ -40,9 +40,9 @@ public class TreeRendererProduct extends TreeRenderer {
      * @param instance Instance.
      */
     public void setInstanceIcon(Instance instance) {
-        this.setText(instance.getName());
-        this.setToolTipText(instance.getName());
-        this.setIcon(this.getImage(instance.getIcon()));
+        setText(instance.getName());
+        setToolTipText(instance.getName());
+        setIcon(getImage(instance.getIcon()));
     }
     
     /**
@@ -50,9 +50,9 @@ public class TreeRendererProduct extends TreeRenderer {
      * @param artifact Artifact.
      */
     public void setArtifactIcon(Artifact artifact) {
-        this.setText(artifact.getElement().getName());
-        this.setToolTipText(artifact.getElement().getName());
-        this.setIcon(this.getImage(artifact.getIcon()));
+        setText(artifact.getElement().getName());
+        setToolTipText(artifact.getElement().getName());
+        setIcon(getImage(artifact.getIcon()));
     }
     
     @Override
@@ -62,11 +62,11 @@ public class TreeRendererProduct extends TreeRenderer {
         DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
         Object object = node.getUserObject();
         if (object instanceof Product)
-            this.setProductIcon((Product) object);
+            setProductIcon((Product) object);
         else if (object instanceof Instance)
-            this.setInstanceIcon((Instance) object);
+            setInstanceIcon((Instance) object);
         else if (object instanceof Artifact)
-            this.setArtifactIcon((Artifact) object);
+            setArtifactIcon((Artifact) object);
         return this;
     }
 }
