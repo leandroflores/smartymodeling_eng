@@ -21,6 +21,7 @@ import view.panel.base.PanelBase;
  * @author Leandro
  * @since  2019-05-29
  * @see    controller.view.panel.base.stereotype.ControllerPanelStereotype
+ * @see    model.structural.base.Stereotype
  * @see    view.panel.base.PanelBase
  */
 public final class PanelStereotype extends PanelBase {
@@ -35,30 +36,30 @@ public final class PanelStereotype extends PanelBase {
         super(view);
         this.element    = element;
         this.controller = new ControllerPanelStereotype(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.update();
+        setDefaultProperties();
+        addComponents();
+        update();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
-        this.setPreferredSize(new Dimension(50, 50));
+        setLayout(new GridBagLayout());
+        setPreferredSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("New: "), this.createConstraints(1, 1, 0, 0));
-        this.add(this.createTextField("stereotypeTextField", "", 10), this.createConstraints(2, 1, 1, 0));
-        this.add(this.createButton("newStereotypeButton", "New Stereotype"), this.createConstraints(2, 1, 3, 0));
+        add(createLabel("New: "), createConstraints(1, 1, 0, 0));
+        add(createTextField("stereotype", "", 10), createConstraints(2, 1, 1, 0));
+        add(createButton("newStereotype", "New Stereotype"), createConstraints(2, 1, 3, 0));
       
-        this.add(this.createComboBox("stereotypeComboBox", this.getValues(), 100), this.createConstraints(3, 1, 0, 1));
-        this.add(this.createButton("addStereotypeButton",    "", "Add Stereotype",    "add.png"),    this.createConstraints(1, 1, 3, 1));
-        this.add(this.createButton("removeStereotypeButton", "", "Remove Stereotype", "remove.png"), this.createConstraints(1, 1, 4, 1));
+        add(createComboBox("stereotype", getValues(), 100), createConstraints(3, 1, 0, 1));
+        add(createButton("addStereotype", "", "Add Stereotype", "add.png"), createConstraints(1, 1, 3, 1));
+        add(createButton("delStereotype", "", "Del Stereotype", "remove.png"), createConstraints(1, 1, 4, 1));
         
-        this.createList("stereotypesList");
-        this.add(this.getScrollPane("stereotypesList"), this.createConstraints(5, 10, 0, 2));
-        this.getScrollPane("stereotypesList").setMinimumSize(new Dimension(150, 150));
+        createList("stereotypes");
+        add(getScrollPane("stereotypes"), createConstraints(5, 10, 0, 2));
+        getScrollPane("stereotypes").setMinimumSize(new Dimension(150, 150));
     }
     
     /**
@@ -66,36 +67,36 @@ public final class PanelStereotype extends PanelBase {
      * @return Stereotypes.
      */
     public Stereotype[] getValues() {
-        return new ControllerProject(this.project).getStereotypes();
+        return new ControllerProject(project).getStereotypes();
     }
     
     /**
      * Method responsible for updating the Panel.
      */
     private void update() {
-        this.updateComboBox();
-        this.updateList();
+        updateComboBox();
+        updateList();
     }
     
     /**
      * Method responsible for updating the Stereotype Combo Box.
      */
     public void updateComboBox() {
-        this.getStereotypeComboBox().removeAllItems();
-        for (Stereotype stereotype : this.project.getStereotypesList(false))
-            this.getStereotypeComboBox().addItem(stereotype);
-        this.getStereotypeComboBox().setPreferredSize(new Dimension(285, 30));
+        getStereotypeComboBox().removeAllItems();
+        for (Stereotype stereotype : project.getStereotypesList(false))
+            getStereotypeComboBox().addItem(stereotype);
+        getStereotypeComboBox().setPreferredSize(new Dimension(285, 30));
     }
     
     /**
      * Method responsible for updating the Stereotype List.
      */
     public void updateList() {
-        this.getStereotypesList().removeAll();
+        getStereotypesList().removeAll();
         DefaultListModel model = new DefaultListModel();
-        for (Link link : this.project.getLinksByElement(this.element))
+        for (Link link : project.getLinksByElement(element))
             model.addElement(link.getStereotype());
-        this.getStereotypesList().setModel(model);
+        getStereotypesList().setModel(model);
     }
     
     /**
@@ -103,7 +104,7 @@ public final class PanelStereotype extends PanelBase {
      * @return Stereotype Text Field.
      */
     public JTextField getStereotypeTextField() {
-        return this.getTextField("stereotypeTextField");
+        return getTextField("stereotype");
     }
     
     /**
@@ -111,7 +112,7 @@ public final class PanelStereotype extends PanelBase {
      * @return New Stereotype Button.
      */
     public JButton getNewStereotypeButton() {
-        return this.getButton("newStereotypeButton");
+        return getButton("newStereotype");
     }
     
     /**
@@ -119,7 +120,7 @@ public final class PanelStereotype extends PanelBase {
      * @return Stereotype Combo Box.
      */
     public JComboBox getStereotypeComboBox() {
-        return this.getComboBox("stereotypeComboBox");
+        return getComboBox("stereotype");
     }
     
     /**
@@ -127,7 +128,7 @@ public final class PanelStereotype extends PanelBase {
      * @return Stereotypes List.
      */
     public JList getStereotypesList() {
-        return this.getList("stereotypesList");
+        return getList("stereotypes");
     }
     
     /**
@@ -135,7 +136,7 @@ public final class PanelStereotype extends PanelBase {
      * @return Add Stereotype Button.
      */
     public JButton getAddStereotypeButton() {
-        return this.getButton("addStereotypeButton");
+        return getButton("addStereotype");
     }
     
     /**
@@ -143,7 +144,7 @@ public final class PanelStereotype extends PanelBase {
      * @return Remove Stereotype Button.
      */
     public JButton getRemoveStereotypeButton() {
-        return this.getButton("removeStereotypeButton");
+        return getButton("delStereotype");
     }
     
     /**
@@ -151,6 +152,6 @@ public final class PanelStereotype extends PanelBase {
      * @return Element.
      */
     public Element getElement() {
-        return this.element;
+        return element;
     }
 }

@@ -24,22 +24,22 @@ public final class PanelEditDiagram extends PanelEdit {
     public PanelEditDiagram(ViewMenu view, Diagram diagram) {
         super(view);
         this.diagram = diagram;
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseDiagram();
+        addPanelBaseDiagram();
     }
     
     /**
      * Method responsible for adding the Panel Base Diagram.
      */
     protected void addPanelBaseDiagram() {
-        this.addPanel("panelBaseDiagram", new PanelBaseDiagram(this.viewMenu, this.diagram));
-        this.createScrollPane("scrollPanelBaseDiagram",  this.getPanelBaseDiagram());
-        this.getScrollPane("scrollPanelBaseDiagram").setViewportView(this.getPanelBaseDiagram());
-        this.tabbedPane.add("Diagram", this.getScrollPane("scrollPanelBaseDiagram"));
+        addPanel("base_diagram", new PanelBaseDiagram(viewMenu, diagram));
+        createScrollPane("base_diagram", getPanelBaseDiagram());
+        getScrollPane("base_diagram").setViewportView(getPanelBaseDiagram());
+        tabbedPane.add("Diagram", getScrollPane("base_diagram"));
     }
     
     /**
@@ -47,7 +47,7 @@ public final class PanelEditDiagram extends PanelEdit {
      * @return Panel Base Diagram.
      */
     public PanelBaseDiagram getPanelBaseDiagram() {
-        return (PanelBaseDiagram) this.getPanel("panelBaseDiagram");
+        return (PanelBaseDiagram) getPanel("base_diagram");
     }
     
     /**
@@ -55,6 +55,6 @@ public final class PanelEditDiagram extends PanelEdit {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
 }

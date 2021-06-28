@@ -23,21 +23,21 @@ public final class PanelEditDecisionUML extends PanelEditElement {
      */
     public PanelEditDecisionUML(ViewMenu view, ActivityDiagram diagram, DecisionUML decision) {
         super(view, diagram, decision);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        super.addPanels("Decision");
+        addPanels("Decision");
     }
     
     @Override
     public ActivityDiagram getDiagram() {
-        return (ActivityDiagram) this.diagram;
+        return (ActivityDiagram) diagram;
     }
     
     @Override
     public DecisionUML getElement() {
-        return (DecisionUML) this.element;
+        return (DecisionUML) element;
     }
 }

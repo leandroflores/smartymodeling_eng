@@ -26,33 +26,33 @@ public final class PanelEditMetric extends PanelEdit {
     public PanelEditMetric(ViewMenu view, Metric metric) {
         super(view);
         this.metric = metric;
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseMetric();
-        this.addPanelBaseOperation();
+        addPanelBaseMetric();
+        addPanelBaseOperation();
     }
     
     /**
      * Method responsible for adding the Panel Base Metric.
      */
     protected void addPanelBaseMetric() {
-        this.addPanel("panelBaseMetric", new PanelBaseMetric(this.viewMenu, this.metric));
-        this.createScrollPane("scrollPanelBaseMetric",  this.getPanelBaseMetric());
-        this.getScrollPanelBaseMetric().setViewportView(this.getPanelBaseMetric());
-        this.tabbedPane.add("Metric", this.getScrollPanelBaseMetric());
+        addPanel("base_metric", new PanelBaseMetric(viewMenu, metric));
+        createScrollPane("base_metric", getPanelBaseMetric());
+        getScrollPanelBaseMetric().setViewportView(getPanelBaseMetric());
+        tabbedPane.add("Metric", getScrollPanelBaseMetric());
     }
     
     /**
      * Method responsible for adding the Panel Base Operation.
      */
     protected void addPanelBaseOperation() {
-        this.addPanel("panelBaseOperation", new PanelBaseOperation(this.viewMenu, this.metric));
-        this.createScrollPane("scrollPanelBaseOperation",  this.getPanelBaseOperation());
-        this.getScrollPanelBaseOperation().setViewportView(this.getPanelBaseOperation());
-        this.tabbedPane.add("Operation", this.getScrollPanelBaseOperation());
+        addPanel("base_operation", new PanelBaseOperation(viewMenu, metric));
+        createScrollPane("base_operation",  getPanelBaseOperation());
+        getScrollPanelBaseOperation().setViewportView(getPanelBaseOperation());
+        tabbedPane.add("Operation", getScrollPanelBaseOperation());
     }
     
     /**
@@ -60,7 +60,7 @@ public final class PanelEditMetric extends PanelEdit {
      * @return Panel Base Metric.
      */
     public PanelBaseMetric getPanelBaseMetric() {
-        return (PanelBaseMetric) this.getPanel("panelBaseMetric");
+        return (PanelBaseMetric) getPanel("base_metric");
     }
     
     /**
@@ -68,7 +68,7 @@ public final class PanelEditMetric extends PanelEdit {
      * @return Scroll Panel Base Metric.
      */
     public JScrollPane getScrollPanelBaseMetric() {
-        return this.getScrollPane("scrollPanelBaseMetric");
+        return getScrollPane("base_metric");
     }
     
     /**
@@ -76,7 +76,7 @@ public final class PanelEditMetric extends PanelEdit {
      * @return Panel Base Operation.
      */
     public PanelBaseOperation getPanelBaseOperation() {
-        return (PanelBaseOperation) this.getPanel("panelBaseOperation");
+        return (PanelBaseOperation) getPanel("base_operation");
     }
     
     /**
@@ -84,7 +84,7 @@ public final class PanelEditMetric extends PanelEdit {
      * @return Scroll Panel Base Operation.
      */
     public JScrollPane getScrollPanelBaseOperation() {
-        return this.getScrollPane("scrollPanelBaseOperation");
+        return getScrollPane("base_operation");
     }
     
     /**
@@ -92,6 +92,6 @@ public final class PanelEditMetric extends PanelEdit {
      * @return Metric.
      */
     public Metric getMetric() {
-        return this.metric;
+        return metric;
     }
 }

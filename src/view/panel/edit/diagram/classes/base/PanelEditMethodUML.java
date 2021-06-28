@@ -26,55 +26,55 @@ public final class PanelEditMethodUML extends PanelEditElement {
      */
     public PanelEditMethodUML(ViewMenu view, ClassDiagram diagram, MethodUML method_) {
         super(view, diagram, method_);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseMethod();
-        super.addPanelStereotype();
-        super.addPanelDependency();
-        this.addPanelParametersUML();
+        addPanelBaseMethod();
+        addPanelStereotype();
+        addPanelDependency();
+        addPanelParametersUML();
     }
     
     /**
      * Method responsible for adding the Panel Base Method.
      */
     private void addPanelBaseMethod() {
-        if (this.getElement().getEntity().isClass())
-            this.addPanelBaseMethodUML();
+        if (getElement().getEntity().isClass())
+            addPanelBaseMethodUML();
         else
-            this.addPanelBaseMethodAbstractUML();
+            addPanelBaseMethodAbstractUML();
     }
     
     /**
      * Method responsible for adding the Panel Base Method UML.
      */
     protected void addPanelBaseMethodUML() {
-        this.addPanel("panelBaseMethodUML", new PanelBaseMethodUML(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelBaseMethodUML",  this.getPanelBaseMethodUML());
-        this.getScrollPane("scrollPanelBaseMethodUML").setViewportView(this.getPanelBaseMethodUML());
-        this.tabbedPane.add("Method", this.getScrollPane("scrollPanelBaseMethodUML"));
+        addPanel("base_method", new PanelBaseMethodUML(viewMenu, getDiagram(), getElement()));
+        createScrollPane("base_method", getPanelBaseMethodUML());
+        getScrollPane("base_method").setViewportView(getPanelBaseMethodUML());
+        tabbedPane.add("Method", getScrollPane("base_method"));
     }
     
     /**
      * Method responsible for adding the Panel Base Method Abstract UML.
      */
     protected void addPanelBaseMethodAbstractUML() {
-        this.addPanel("panelBaseMethodUML", new PanelBaseMethodAbsUML(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelBaseMethodUML",  this.getPanelBaseMethodAbsUML());
-        this.getScrollPane("scrollPanelBaseMethodUML").setViewportView(this.getPanelBaseMethodAbsUML());
-        this.tabbedPane.add("Method", this.getScrollPane("scrollPanelBaseMethodUML"));
+        addPanel("base_method", new PanelBaseMethodAbsUML(viewMenu, getDiagram(), getElement()));
+        createScrollPane("base_method", getPanelBaseMethodAbsUML());
+        getScrollPane("base_method").setViewportView(getPanelBaseMethodAbsUML());
+        tabbedPane.add("Method", getScrollPane("base_method"));
     }
     
     /**
      * Method responsible for adding the Panel Parameters UML.
      */
     protected void addPanelParametersUML() {
-        this.addPanel("panelBaseParametersUML", new PanelParametersUML(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelParametersUML",  this.getPanelParametersUML());
-        this.getScrollPane("scrollPanelParametersUML").setViewportView(this.getPanelParametersUML());
-        this.tabbedPane.add("Parameters", this.getScrollPane("scrollPanelParametersUML"));
+        addPanel("parameters", new PanelParametersUML(viewMenu, getDiagram(), getElement()));
+        createScrollPane("parameters", getPanelParametersUML());
+        getScrollPane("parameters").setViewportView(getPanelParametersUML());
+        tabbedPane.add("Parameters", getScrollPane("parameters"));
     }
     
     /**
@@ -82,7 +82,7 @@ public final class PanelEditMethodUML extends PanelEditElement {
      * @return Panel Base Method UML.
      */
     public PanelBaseMethodUML getPanelBaseMethodUML() {
-        return (PanelBaseMethodUML) this.getPanel("panelBaseMethodUML");
+        return (PanelBaseMethodUML) getPanel("base_method");
     }
     
     /**
@@ -90,7 +90,7 @@ public final class PanelEditMethodUML extends PanelEditElement {
      * @return Panel Base Method Abs UML.
      */
     public PanelBaseMethodAbsUML getPanelBaseMethodAbsUML() {
-        return (PanelBaseMethodAbsUML) this.getPanel("panelBaseMethodUML");
+        return (PanelBaseMethodAbsUML) getPanel("base_method");
     }
     
     /**
@@ -98,16 +98,16 @@ public final class PanelEditMethodUML extends PanelEditElement {
      * @return Panel Parameters UML.
      */
     public PanelParametersUML getPanelParametersUML() {
-        return (PanelParametersUML) this.getPanel("panelParametersUML");
+        return (PanelParametersUML) getPanel("parameters");
     }
     
     @Override
     public MethodUML getElement() {
-        return (MethodUML) this.element;
+        return (MethodUML) element;
     }
     
     @Override
     public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+        return (ClassDiagram) diagram;
     }
 }

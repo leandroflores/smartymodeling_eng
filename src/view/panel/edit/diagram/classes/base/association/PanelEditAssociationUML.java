@@ -26,44 +26,44 @@ public final class PanelEditAssociationUML extends PanelEditAssociation {
      */
     public PanelEditAssociationUML(ViewMenu view, ClassDiagram diagram, AssociationUML association) {
         super(view, diagram, association);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseAssociationUML();
-        this.addPanelBaseSource();
-        this.addPanelBaseTarget();
+        addPanelBaseAssociationUML();
+        addPanelBaseSource();
+        addPanelBaseTarget();
     }
     
     /**
      * Method responsible for adding the Panel Base Association UML.
      */
     protected void addPanelBaseAssociationUML() {
-        this.addPanel("panelBaseAssociationUML", new PanelBaseAssociationUML(this, this.getDiagram(), this.getAssociation()));
-        this.createScrollPane("scrollPanelBaseAssociationUML",  this.getPanelBaseAssociationUML());
-        this.getScrollPane("scrollPanelBaseAssociationUML").setViewportView(this.getPanelBaseAssociationUML());
-        this.tabbedPane.add("Association", this.getScrollPane("scrollPanelBaseAssociationUML"));
+        addPanel("base_association", new PanelBaseAssociationUML(this, getDiagram(), getAssociation()));
+        createScrollPane("base_association", getPanelBaseAssociationUML());
+        getScrollPane("base_association").setViewportView(getPanelBaseAssociationUML());
+        tabbedPane.add("Association", getScrollPane("base_association"));
     }
     
     /**
      * Method responsible for adding the Panel Base Source.
      */
     protected void addPanelBaseSource() {
-        this.addPanel("panelBaseSource", new PanelBaseSource(this.viewMenu, this.getDiagram(), this.getAssociation()));
-        this.createScrollPane("scrollPanelBaseSource",  this.getPanelBaseSource());
-        this.getScrollPane("scrollPanelBaseSource").setViewportView(this.getPanelBaseSource());
-        this.tabbedPane.add("Source", this.getScrollPane("scrollPanelBaseSource"));
+        addPanel("source", new PanelBaseSource(viewMenu, getDiagram(), getAssociation()));
+        createScrollPane("source",  getPanelBaseSource());
+        getScrollPane("source").setViewportView(getPanelBaseSource());
+        tabbedPane.add("Source", getScrollPane("source"));
     }
     
     /**
      * Method responsible for adding the Panel Base Target.
      */
     protected void addPanelBaseTarget() {
-        this.addPanel("panelBaseTarget", new PanelBaseTarget(this.viewMenu, this.getDiagram(), this.getAssociation()));
-        this.createScrollPane("scrollPanelBaseTarget",  this.getPanelBaseTarget());
-        this.getScrollPane("scrollPanelBaseTarget").setViewportView(this.getPanelBaseTarget());
-        this.tabbedPane.add("Target", this.getScrollPane("scrollPanelBaseTarget"));
+        addPanel("target", new PanelBaseTarget(viewMenu, getDiagram(), getAssociation()));
+        createScrollPane("target",  getPanelBaseTarget());
+        getScrollPane("target").setViewportView(getPanelBaseTarget());
+        tabbedPane.add("Target", getScrollPane("target"));
     }
     
     /**
@@ -71,7 +71,7 @@ public final class PanelEditAssociationUML extends PanelEditAssociation {
      * @return Panel Base Association UML.
      */
     public PanelBaseAssociationUML getPanelBaseAssociationUML() {
-        return (PanelBaseAssociationUML) this.getPanel("panelBaseAssociationUML");
+        return (PanelBaseAssociationUML) getPanel("base_association");
     }
     
     /**
@@ -79,7 +79,7 @@ public final class PanelEditAssociationUML extends PanelEditAssociation {
      * @return Panel Base Source.
      */
     public PanelBaseSource getPanelBaseSource() {
-        return (PanelBaseSource) this.getPanel("panelBaseSource");
+        return (PanelBaseSource) getPanel("source");
     }
     
     /**
@@ -87,16 +87,16 @@ public final class PanelEditAssociationUML extends PanelEditAssociation {
      * @return Panel Base Target.
      */
     public PanelBaseTarget getPanelBaseTarget() {
-        return (PanelBaseTarget) this.getPanel("panelBaseTarget");
+        return (PanelBaseTarget) getPanel("target");
     }
     
     @Override
     public AssociationUML getAssociation() {
-        return (AssociationUML) this.association;
+        return (AssociationUML) association;
     }
     
     @Override
     public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+        return (ClassDiagram) diagram;
     }
 }

@@ -25,23 +25,23 @@ public final class PanelEditArtifact extends PanelEdit {
     public PanelEditArtifact(ViewMenu view, Artifact artifact) {
         super(view);
         this.artifact = artifact;
-        this.setPreferredSize(new Dimension(200, 100));
-        this.addComponents();
+        setPreferredSize(new Dimension(200, 100));
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseArtifact();
+        addPanelBaseArtifact();
     }
     
     /**
      * Method responsible for adding the Panel Base Artifact.
      */
     private void addPanelBaseArtifact() {
-        this.addPanel("panelBaseArtifact", new PanelBaseArtifact(this.viewMenu, this.artifact));
-        this.createScrollPane("scrollPanelBaseArtifact",  this.getPanelBaseArtifact());
-        this.getScrollPane("scrollPanelBaseArtifact").setViewportView(this.getPanelBaseArtifact());
-        this.tabbedPane.add("Artifact", this.getScrollPane("scrollPanelBaseArtifact"));
+        addPanel("base_artifact", new PanelBaseArtifact(viewMenu, artifact));
+        createScrollPane("base_artifact", getPanelBaseArtifact());
+        getScrollPane("base_artifact").setViewportView(getPanelBaseArtifact());
+        tabbedPane.add("Artifact", getScrollPane("base_artifact"));
     }
     
     /**
@@ -49,7 +49,7 @@ public final class PanelEditArtifact extends PanelEdit {
      * @return Panel Base Artifact.
      */
     public PanelBaseArtifact getPanelBaseArtifact() {
-        return (PanelBaseArtifact) this.getPanel("panelBaseArtifact");
+        return (PanelBaseArtifact) getPanel("base_artifact");
     }
     
     /**
@@ -57,6 +57,6 @@ public final class PanelEditArtifact extends PanelEdit {
      * @return Artifact.
      */
     public Artifact getArtifact() {
-        return this.artifact;
+        return artifact;
     }
 }

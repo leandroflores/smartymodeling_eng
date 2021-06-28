@@ -23,21 +23,21 @@ public final class PanelEditActivityUML extends PanelEditElement {
      */
     public PanelEditActivityUML(ViewMenu view, ActivityDiagram diagram, ActivityUML activity) {
         super(view, diagram, activity);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        super.addPanels("Activity");
+        addPanels("Activity");
     }
     
     @Override
     public ActivityDiagram getDiagram() {
-        return (ActivityDiagram) this.diagram;
+        return (ActivityDiagram) diagram;
     }
     
     @Override
     public ActivityUML getElement() {
-        return (ActivityUML) this.element;
+        return (ActivityUML) element;
     }
 }

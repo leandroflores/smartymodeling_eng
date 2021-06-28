@@ -19,7 +19,7 @@ import view.main.structural.ViewMenu;
  * <p>Class of View <b>PanelActivityDiagram</b>.</p>
  * <p>Class responsible for defining the <b>Activity Diagram Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  18/07/2019
+ * @since  2019-07-18
  * @see    controller.view.panel.diagram.types.ControllerPanelActivityDiagram
  * @see    model.structural.diagram.ActivityDiagram
  * @see    view.panel.diagram.PanelDiagram
@@ -33,58 +33,58 @@ public final class PanelActivityDiagram extends PanelDiagram {
      */
     public PanelActivityDiagram(ViewMenu view, ActivityDiagram diagram) {
         super(view, diagram);
-        this.controller = new ControllerPanelActivityDiagram(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.setClick();
+        controller = new ControllerPanelActivityDiagram(this);
+        setDefaultProperties();
+        addComponents();
+        setClick();
     }
     
     @Override
     public void initPanelOperation() {
-        this.panel = new PanelActivityOperation(this);
+        panel = new PanelActivityOperation(this);
     }
     
     @Override
     public void initStyleAssociation() {
-        this.style = new StyleActivityAssociation();
+        style = new StyleActivityAssociation();
     }
     
     @Override
     public void setStyle() {
-        switch (this.getType()) {
+        switch (getType()) {
             case 0:
-                this.getStyle().setFlowStyle(this.getEdgeStyle());
+                getStyle().setFlowStyle(getEdgeStyle());
                 break;
             default:
-                this.setDependencyStyle();
+                setDependencyStyle();
                 break;
         }
     }
     
     @Override
     public void addControllers() {
-        this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationActivity(this));
-        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
-        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
-        this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
-        this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
+        component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationActivity(this));
+        component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
+        component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
+        component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
+        component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
         
-        this.component.getGraphControl().addMouseListener(new ControllerEventFocus(this));
-        this.component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
+        component.getGraphControl().addMouseListener(new ControllerEventFocus(this));
+        component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
     }
     
     @Override
     public ActivityDiagram getDiagram() {
-        return (ActivityDiagram) this.diagram;
+        return (ActivityDiagram) diagram;
     }
     
     @Override
     public PanelActivityOperation getPanelOperation() {
-        return (PanelActivityOperation) this.panel;
+        return (PanelActivityOperation) panel;
     }
     
     @Override
     public StyleActivityAssociation getStyle() {
-        return (StyleActivityAssociation) this.style;
+        return (StyleActivityAssociation) style;
     }
 }

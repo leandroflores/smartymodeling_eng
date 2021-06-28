@@ -23,12 +23,12 @@ public final class PanelEditElement extends view.panel.edit.base.PanelEditElemen
      */
     public PanelEditElement(ViewMenu view, Diagram diagram, Element element) {
         super(view, diagram, element);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        super.addPanels(this.getTitle());
+        addPanels(getTitle());
     }
     
     /**
@@ -36,6 +36,6 @@ public final class PanelEditElement extends view.panel.edit.base.PanelEditElemen
      * @return Element Tab Title.
      */
     private String getTitle() {
-        return new FunctString().initUpperCase(this.getElement().getType());
+        return new FunctString().initUpperCase(getElement().getType());
     }
 }

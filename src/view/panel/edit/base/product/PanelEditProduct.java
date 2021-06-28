@@ -25,23 +25,23 @@ public final class PanelEditProduct extends PanelEdit {
     public PanelEditProduct(ViewMenu view, Product product) {
         super(view);
         this.product = product;
-        this.setPreferredSize(new Dimension(200, 100));
-        this.addComponents();
+        setPreferredSize(new Dimension(200, 100));
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseProduct();
+        addPanelBaseProduct();
     }
     
     /**
      * Method responsible for adding the Panel Base Product.
      */
     private void addPanelBaseProduct() {
-        this.addPanel("panelBaseProduct", new PanelBaseProduct(this.viewMenu, this.product));
-        this.createScrollPane("scrollPanelBaseProduct",  this.getPanelBaseProduct());
-        this.getScrollPane("scrollPanelBaseProduct").setViewportView(this.getPanelBaseProduct());
-        this.tabbedPane.add("Product", this.getScrollPane("scrollPanelBaseProduct"));
+        addPanel("base_product", new PanelBaseProduct(viewMenu, product));
+        createScrollPane("base_product", getPanelBaseProduct());
+        getScrollPane("base_product").setViewportView(getPanelBaseProduct());
+        tabbedPane.add("Product", getScrollPane("base_product"));
     }
     
     /**
@@ -49,7 +49,7 @@ public final class PanelEditProduct extends PanelEdit {
      * @return Panel Base Product.
      */
     public PanelBaseProduct getPanelBaseProduct() {
-        return (PanelBaseProduct) this.getPanel("panelBaseProduct");
+        return (PanelBaseProduct) getPanel("base_product");
     }
     
     /**
@@ -57,6 +57,6 @@ public final class PanelEditProduct extends PanelEdit {
      * @return Product.
      */
     public Product getProduct() {
-        return this.product;
+        return product;
     }
 }

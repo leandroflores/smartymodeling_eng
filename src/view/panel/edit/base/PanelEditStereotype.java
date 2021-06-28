@@ -24,22 +24,22 @@ public final class PanelEditStereotype extends PanelEdit {
     public PanelEditStereotype(ViewMenu view, Stereotype stereotype) {
         super(view);
         this.stereotype = stereotype;
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseStereotype();
+        addPanelBaseStereotype();
     }
     
     /**
      * Method responsible for adding the Panel Base Stereotype.
      */
     private void addPanelBaseStereotype() {
-        this.addPanel("panelBaseStereotype", new PanelBaseStereotype(this.viewMenu, this.stereotype));
-        this.createScrollPane("scrollPanelBaseStereotype",  this.getPanelBaseStereotype());
-        this.getScrollPane("scrollPanelBaseStereotype").setViewportView(this.getPanelBaseStereotype());
-        this.tabbedPane.add("Stereotype", this.getScrollPane("scrollPanelBaseStereotype"));
+        addPanel("base_stereotype", new PanelBaseStereotype(viewMenu, stereotype));
+        createScrollPane("base_stereotype", getPanelBaseStereotype());
+        getScrollPane("base_stereotype").setViewportView(getPanelBaseStereotype());
+        tabbedPane.add("Stereotype", getScrollPane("base_stereotype"));
     }
     
     /**
@@ -47,7 +47,7 @@ public final class PanelEditStereotype extends PanelEdit {
      * @return Panel Base Stereotype.
      */
     public PanelBaseStereotype getPanelBaseStereotype() {
-        return (PanelBaseStereotype) this.getPanel("panelBaseStereotype");
+        return (PanelBaseStereotype) getPanel("base_stereotype");
     }
     
     /**
@@ -55,6 +55,6 @@ public final class PanelEditStereotype extends PanelEdit {
      * @return Stereotype.
      */
     public Stereotype getStereotype() {
-        return this.stereotype;
+        return stereotype;
     }
 }

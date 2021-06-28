@@ -24,22 +24,22 @@ public final class PanelEditFeature extends PanelEditElement {
      */
     public PanelEditFeature(ViewMenu viewMenu, FeatureDiagram diagram, Feature feature) {
         super(viewMenu, diagram, feature);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseFeature();
+        addPanelBaseFeature();
     }
     
     /**
      * Method responsible for adding the Panel Base Feature.
      */
     protected void addPanelBaseFeature() {
-        this.addPanel("panelBaseFeature", new PanelBaseFeature(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelBaseFeature",  this.getPanelBaseFeature());
-        this.getScrollPane("scrollPanelBaseFeature").setViewportView(this.getPanelBaseFeature());
-        this.tabbedPane.add("Feature", this.getScrollPane("scrollPanelBaseFeature"));
+        addPanel("base_feature", new PanelBaseFeature(viewMenu, getDiagram(), getElement()));
+        createScrollPane("base_feature", getPanelBaseFeature());
+        getScrollPane("base_feature").setViewportView(getPanelBaseFeature());
+        tabbedPane.add("Feature", getScrollPane("base_feature"));
     }
     
     /**
@@ -47,16 +47,16 @@ public final class PanelEditFeature extends PanelEditElement {
      * @return Panel Base Feature.
      */
     public PanelBaseFeature getPanelBaseFeature() {
-        return (PanelBaseFeature) this.getPanel("panelBaseFeature");
+        return (PanelBaseFeature) getPanel("base_feature");
     }
     
     @Override
     public Feature getElement() {
-        return (Feature) this.element;
+        return (Feature) element;
     }
     
     @Override
     public FeatureDiagram getDiagram() {
-        return (FeatureDiagram) this.diagram;
+        return (FeatureDiagram) diagram;
     }
 }

@@ -28,32 +28,32 @@ public final class PanelBaseMeasure extends PanelBase {
         super(view);
         this.measure    = measure;
         this.controller = new ControllerPanelBaseMeasure(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(5, 2));
+        setLayout(new GridLayout(5, 2));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.getMeasure().getName(), 15));
+        add(createLabel("Name*: "));
+        add(createTextField("name", getMeasure().getName(), 15));
         
-        this.add(this.createLabel("Date: "));
-        this.add(this.createTextFieldNoEditable("dateTextField",   this.getMeasure().getDate(), 15));
+        add(createLabel("Date: "));
+        add(createTextFieldNoEditable("date", getMeasure().getDate(), 15));
         
-        this.add(this.createLabel("Metric: "));
-        this.add(this.createTextFieldNoEditable("metricTextField", this.getMeasure().getMetric().toString(), 15));
+        add(createLabel("Metric: "));
+        add(createTextFieldNoEditable("metric", getMeasure().getMetric().toString(), 15));
         
-        this.add(this.createLabel("Target: "));
-        this.add(this.createTextFieldNoEditable("targetTextField", this.getMeasure().getTarget(), 15));
+        add(createLabel("Target: "));
+        add(createTextFieldNoEditable("target", getMeasure().getTarget(), 15));
         
-        this.add(this.createLabel("Value: "));
-        this.add(this.createTextFieldNoEditable("valueTextField",  this.getMeasure().getValue().toString(), 15));
+        add(createLabel("Value: "));
+        add(createTextFieldNoEditable("value", getMeasure().getValue().toString(), 15));
     }
     
     /**
@@ -61,7 +61,7 @@ public final class PanelBaseMeasure extends PanelBase {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -69,6 +69,6 @@ public final class PanelBaseMeasure extends PanelBase {
      * @return Measure.
      */
     public Measure getMeasure() {
-        return this.measure;
+        return measure;
     }
 }

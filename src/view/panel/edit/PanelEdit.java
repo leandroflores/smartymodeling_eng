@@ -26,14 +26,15 @@ public abstract class PanelEdit extends Panel {
         this.viewMenu   = view;
         this.project    = view.getProject();
         this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 200));
+        tabbedPane.setPreferredSize(new Dimension(550, 200));
     }
     
     @Override
     protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-            this.addPanels();
-        this.add(this.tabbedPane);
+        tabbedPane = new JTabbedPane();
+        tabbedPane.setPreferredSize(new Dimension(550, 200));
+            addPanels();
+        add(tabbedPane);
     }
     
     /**
@@ -46,7 +47,7 @@ public abstract class PanelEdit extends Panel {
      * @return View Menu.
      */
     public ViewMenu getViewMenu() {
-        return this.viewMenu;
+        return viewMenu;
     }
     
     /**
@@ -54,6 +55,6 @@ public abstract class PanelEdit extends Panel {
      * @return Project.
      */
     public Project getProject() {
-        return this.project;
+        return project;
     }
 }

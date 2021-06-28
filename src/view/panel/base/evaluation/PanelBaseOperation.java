@@ -26,25 +26,25 @@ public final class PanelBaseOperation extends PanelBase {
      */
     public PanelBaseOperation(ViewMenu view, Metric metric) {
         super(view, metric);
-        this.controller = new ControllerPanelBaseOperation(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.setValues();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseOperation(this);
+        setDefaultProperties();
+        addComponents();
+        setValues();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(5, 2));
+        setLayout(new GridLayout(5, 2));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Target*: "));
-        this.add(this.createComboBox("targetComboBox", new ControllerMetric(project).getTargets(), 15, this.getSelectedItem()));
+        add(createLabel("Target*: "));
+        add(createComboBox("target", new ControllerMetric(project).getTargets(), 15, getSelectedItem()));
         
-        this.add(this.createLabel("Operation*: "));
-        this.add(this.createTextField("operationTextField", "", 15));
+        add(createLabel("Operation*: "));
+        add(createTextField("operation", "", 15));
     }
     
     /**
@@ -52,8 +52,8 @@ public final class PanelBaseOperation extends PanelBase {
      * @return Selected Item.
      */
     private Object getSelectedItem() {
-        if (this.metric.getTarget() != null)
-            return this.metric.getTarget();
+        if (metric.getTarget() != null)
+            return metric.getTarget();
         return "";
     }
     
@@ -61,15 +61,15 @@ public final class PanelBaseOperation extends PanelBase {
      * Method responsible for setting the Operation Values.
      */
     public void setValues() {
-        this.setTarget();
-        this.getOperationTextField().setText(this.metric.getOperation());
+        setTarget();
+        getOperationTextField().setText(metric.getOperation());
     }
     
     /**
      * Method responsible for setting the Target.
      */
     public void setTarget() {
-        this.metric.setTarget(this.getTargetComboBox().getSelectedItem().toString());
+        metric.setTarget(getTargetComboBox().getSelectedItem().toString());
     }
     
     /**
@@ -77,7 +77,7 @@ public final class PanelBaseOperation extends PanelBase {
      * @return Target Combo Box.
      */
     public JComboBox getTargetComboBox() {
-        return this.getComboBox("targetComboBox");
+        return getComboBox("target");
     }
     
     /**
@@ -85,6 +85,6 @@ public final class PanelBaseOperation extends PanelBase {
      * @return Operation Text Field.
      */
     public JTextField getOperationTextField() {
-        return this.getTextField("operationTextField");
+        return getTextField("operation");
     }
 }

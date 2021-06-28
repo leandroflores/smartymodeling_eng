@@ -24,23 +24,23 @@ public final class PanelEditInstanceUML extends PanelEditElement {
      */
     public PanelEditInstanceUML(ViewMenu view, SequenceDiagram diagram, InstanceUML instance) {
         super(view, diagram, instance);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseInstanceUML();
-        this.addPanelDependency();
+        addPanelBaseInstanceUML();
+        addPanelDependency();
     }
     
     /**
      * Method responsible for adding the Panel Base Instance UML.
      */
     protected void addPanelBaseInstanceUML() {
-        this.addPanel("panelBaseInstanceUML", new PanelBaseInstanceUML(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelBaseInstanceUML",  this.getPanelBaseInstanceUML());
-        this.getScrollPane("scrollPanelBaseInstanceUML").setViewportView(this.getPanelBaseInstanceUML());
-        this.tabbedPane.add("Instance", this.getScrollPane("scrollPanelBaseInstanceUML"));
+        addPanel("base_instance", new PanelBaseInstanceUML(viewMenu, getDiagram(), getElement()));
+        createScrollPane("base_instance", getPanelBaseInstanceUML());
+        getScrollPane("base_instance").setViewportView(getPanelBaseInstanceUML());
+        tabbedPane.add("Instance", getScrollPane("base_instance"));
     }
     
     /**
@@ -48,16 +48,16 @@ public final class PanelEditInstanceUML extends PanelEditElement {
      * @return Panel Base Instance UML.
      */
     public PanelBaseInstanceUML getPanelBaseInstanceUML() {
-        return (PanelBaseInstanceUML) this.getPanel("panelBaseInstanceUML");
+        return (PanelBaseInstanceUML) getPanel("base_instance");
     }
     
     @Override
     public InstanceUML getElement() {
-        return (InstanceUML) this.element;
+        return (InstanceUML) element;
     }
     
     @Override
     public SequenceDiagram getDiagram() {
-        return (SequenceDiagram) this.diagram;
+        return (SequenceDiagram) diagram;
     }
 }

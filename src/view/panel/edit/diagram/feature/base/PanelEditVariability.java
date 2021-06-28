@@ -24,22 +24,22 @@ public final class PanelEditVariability extends PanelEditElement {
      */
     public PanelEditVariability(ViewMenu viewMenu, FeatureDiagram diagram, Variability variability) {
         super(viewMenu, diagram, variability);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseVariability();
+        addPanelBaseVariability();
     }
     
     /**
      * Method responsible for adding the Panel Base Variability.
      */
     protected void addPanelBaseVariability() {
-        this.addPanel("panelBaseVariability", new PanelBaseVariability(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelBaseVariability",  this.getPanelBaseVariability());
-        this.getScrollPane("scrollPanelBaseVariability").setViewportView(this.getPanelBaseVariability());
-        this.tabbedPane.add("Variability", this.getScrollPane("scrollPanelBaseVariability"));
+        addPanel("base_variability", new PanelBaseVariability(viewMenu, getDiagram(), getElement()));
+        createScrollPane("base_variability",  getPanelBaseVariability());
+        getScrollPane("base_variability").setViewportView(getPanelBaseVariability());
+        tabbedPane.add("Variability", getScrollPane("base_variability"));
     }
     
     /**
@@ -47,16 +47,16 @@ public final class PanelEditVariability extends PanelEditElement {
      * @return Panel Base Variability.
      */
     public PanelBaseVariability getPanelBaseVariability() {
-        return (PanelBaseVariability) this.getPanel("panelBaseVariability");
+        return (PanelBaseVariability) getPanel("base_variability");
     }
     
     @Override
     public Variability getElement() {
-        return (Variability) this.element;
+        return (Variability) element;
     }
     
     @Override
     public FeatureDiagram getDiagram() {
-        return (FeatureDiagram) this.diagram;
+        return (FeatureDiagram) diagram;
     }
 }

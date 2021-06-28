@@ -30,27 +30,27 @@ public final class PanelBaseVariability extends PanelBase {
      */
     public PanelBaseVariability(ViewMenu view, Diagram diagram, Variability variability) {
         super(view, diagram, variability);
-        this.controller = new ControllerPanelBaseVariability(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseVariability(this);
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(5, 2));
+        setLayout(new GridLayout(5, 2));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.variability.getName(), 15));
+        add(createLabel("Name*: "));
+        add(createTextField("name", variability.getName(), 15));
         
-        this.add(this.createLabel("Variation Point*: "));
-        this.add(this.createComboBox("variationPointComboBox", new ControllerDiagram(this.diagram).getDefaultElements(), 15, this.getSelectedItem()));
+        add(createLabel("Variation Point*: "));
+        add(createComboBox("variation_point", new ControllerDiagram(diagram).getDefaultElements(), 15, getSelectedItem()));
 
-        this.add(this.createLabel("Binding Time*: "));
-        this.add(this.createComboBox("bindingTimeComboBox", new ControllerVariability(project).getBindings(), 15, this.variability.getBindingTime()));
+        add(createLabel("Binding Time*: "));
+        add(createComboBox("binding_time", new ControllerVariability(project).getBindings(), 15, variability.getBindingTime()));
     }
     
     /**
@@ -58,8 +58,8 @@ public final class PanelBaseVariability extends PanelBase {
      * @return Selected Item.
      */
     private Object getSelectedItem() {
-        if (this.variability.getVariationPoint() != null)
-            return this.variability.getVariationPoint();
+        if (variability.getVariationPoint() != null)
+            return variability.getVariationPoint();
         return "";
     }
     
@@ -67,27 +67,27 @@ public final class PanelBaseVariability extends PanelBase {
      * Method responsible for setting the Diagram Values.
      */
     public void setValues() {
-        this.getNameTextField().setText(this.variability.getName());
-        this.setVariationPoint();
-        this.getBindingTimeComboBox().setSelectedItem(this.variability.getBindingTime());
+        getNameTextField().setText(variability.getName());
+        setVariationPoint();
+        getBindingTimeComboBox().setSelectedItem(variability.getBindingTime());
     }
     
     /**
      * Method responsible for setting the Variation Point.
      */
     public void setVariationPoint() {
-        Element element = (Element) this.getVariationPointComboBox().getSelectedItem();
-        this.variability.setVariationPoint(element);
-        this.setVariantes();
-        this.diagram.updateElementsStereotype();
+        Element element = (Element) getVariationPointComboBox().getSelectedItem();
+        variability.setVariationPoint(element);
+        setVariants();
+        diagram.updateElementsStereotype();
     }
     
     /**
      * Method responsible for setting the Variants.
      */
-    private void setVariantes() {
-        if (this.variability.getVariationPoint() != null)
-            this.variability.getVariants().remove(this.variability.getVariationPoint());
+    private void setVariants() {
+        if (variability.getVariationPoint() != null)
+            variability.getVariants().remove(variability.getVariationPoint());
     }
     
     /**
@@ -95,7 +95,7 @@ public final class PanelBaseVariability extends PanelBase {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -103,7 +103,7 @@ public final class PanelBaseVariability extends PanelBase {
      * @return Variation Point Combo Box.
      */
     public JComboBox getVariationPointComboBox() {
-        return this.getComboBox("variationPointComboBox");
+        return getComboBox("variation_point");
     }
     
     /**
@@ -111,6 +111,6 @@ public final class PanelBaseVariability extends PanelBase {
      * @return Binding Time Combo Box.
      */
     public JComboBox getBindingTimeComboBox() {
-        return this.getComboBox("bindingTimeComboBox");
+        return getComboBox("binding_time");
     }
 }

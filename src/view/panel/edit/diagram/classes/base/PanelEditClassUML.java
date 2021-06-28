@@ -25,35 +25,35 @@ public final class PanelEditClassUML extends PanelEditElement {
      */
     public PanelEditClassUML(ViewMenu view, ClassDiagram diagram, ClassUML class_) {
         super(view, diagram, class_);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseClassUML();
-        super.addPanelStereotype();
-        super.addPanelDependency();
-        this.addPanelBaseDescription();
+        addPanelBaseClassUML();
+        addPanelStereotype();
+        addPanelDependency();
+        addPanelBaseDescription();
     }
     
     /**
      * Method responsible for adding the Panel Base Class UML.
      */
     protected void addPanelBaseClassUML() {
-        this.addPanel("panelBaseClassUML", new PanelBaseClassUML(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelBaseClassUML",  this.getPanelBaseClassUML());
-        this.getScrollPane("scrollPanelBaseClassUML").setViewportView(this.getPanelBaseClassUML());
-        this.tabbedPane.add("Class", this.getScrollPane("scrollPanelBaseClassUML"));
+        addPanel("base_class", new PanelBaseClassUML(viewMenu, getDiagram(), getElement()));
+        createScrollPane("base_class",  getPanelBaseClassUML());
+        getScrollPane("base_class").setViewportView(getPanelBaseClassUML());
+        tabbedPane.add("Class", getScrollPane("base_class"));
     }
     
     /**
      * Method responsible for adding the Panel Base Description.
      */
     protected void addPanelBaseDescription() {
-        this.addPanel("panelBaseDescription", new PanelBaseDescription(this.viewMenu, this.getElement()));
-        this.createScrollPane("scrollPanelBaseDescription",  this.getPanelBaseDescription());
-        this.getScrollPane("scrollPanelBaseDescription").setViewportView(this.getPanelBaseDescription());
-        this.tabbedPane.add("Description", this.getScrollPane("scrollPanelBaseDescription"));
+        addPanel("description", new PanelBaseDescription(viewMenu, getElement()));
+        createScrollPane("description", getPanelBaseDescription());
+        getScrollPane("description").setViewportView(getPanelBaseDescription());
+        tabbedPane.add("Description", getScrollPane("description"));
     }
     
     /**
@@ -61,7 +61,7 @@ public final class PanelEditClassUML extends PanelEditElement {
      * @return Panel Base Class UML.
      */
     public PanelBaseClassUML getPanelBaseClassUML() {
-        return (PanelBaseClassUML) this.getPanel("panelBaseClassUML");
+        return (PanelBaseClassUML) getPanel("base_class");
     }
     
     /**
@@ -69,16 +69,16 @@ public final class PanelEditClassUML extends PanelEditElement {
      * @return Panel Base Description.
      */
     public PanelBaseDescription getPanelBaseDescription() {
-        return (PanelBaseDescription) this.getPanel("panelBaseDescription");
+        return (PanelBaseDescription) getPanel("description");
     }
     
     @Override
     public ClassUML getElement() {
-        return (ClassUML) this.element;
+        return (ClassUML) element;
     }
     
     @Override
     public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+        return (ClassDiagram) diagram;
     }
 }

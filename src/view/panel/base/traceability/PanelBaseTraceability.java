@@ -24,23 +24,23 @@ public final class PanelBaseTraceability extends PanelBase {
      */
     public PanelBaseTraceability(ViewMenu view, Traceability traceability) {
         super(view, traceability);
-        this.controller = new ControllerPanelBaseTraceability(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        controller = new ControllerPanelBaseTraceability(this);
+        setDefaultProperties();
+        addComponents();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(2, 2));
+        setLayout(new GridLayout(2, 2));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.traceability.getName(), 15));
+        add(createLabel("Name*: "));
+        add(createTextField("name", traceability.getName(), 15));
         
-        this.add(this.createLabel("Description*: "));
-        this.add(this.createTextField("descriptionTextField", this.traceability.getDescription(), 15));
+        add(createLabel("Description*: "));
+        add(createTextField("description", traceability.getDescription(), 15));
     }
     
     /**
@@ -48,7 +48,7 @@ public final class PanelBaseTraceability extends PanelBase {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -56,6 +56,6 @@ public final class PanelBaseTraceability extends PanelBase {
      * @return Description Text Field.
      */
     public JTextField getDescriptionTextField() {
-        return this.getTextField("descriptionTextField");
+        return getTextField("description");
     }
 }

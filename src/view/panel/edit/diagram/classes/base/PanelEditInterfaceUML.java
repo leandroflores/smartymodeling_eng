@@ -24,23 +24,23 @@ public final class PanelEditInterfaceUML extends PanelEditElement {
      */
     public PanelEditInterfaceUML(ViewMenu view, ClassDiagram diagram, InterfaceUML interface_) {
         super(view, diagram, interface_);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        super.addPanels("Interface");
-        this.addPanelBaseDescription();
+        addPanels("Interface");
+        addPanelBaseDescription();
     }
     
     /**
      * Method responsible for adding the Panel Base Description.
      */
     protected void addPanelBaseDescription() {
-        this.addPanel("panelBaseDescription", new PanelBaseDescription(this.viewMenu, this.getElement()));
-        this.createScrollPane("scrollPanelBaseDescription",  this.getPanelBaseDescription());
-        this.getScrollPane("scrollPanelBaseDescription").setViewportView(this.getPanelBaseDescription());
-        this.tabbedPane.add("Description", this.getScrollPane("scrollPanelBaseDescription"));
+        addPanel("description", new PanelBaseDescription(viewMenu, getElement()));
+        createScrollPane("description",  getPanelBaseDescription());
+        getScrollPane("description").setViewportView(getPanelBaseDescription());
+        tabbedPane.add("Description", getScrollPane("description"));
     }
     
     /**
@@ -48,16 +48,16 @@ public final class PanelEditInterfaceUML extends PanelEditElement {
      * @return Panel Base Description.
      */
     public PanelBaseDescription getPanelBaseDescription() {
-        return (PanelBaseDescription) this.getPanel("panelBaseDescription");
+        return (PanelBaseDescription) getPanel("description");
     }
     
     @Override
     public InterfaceUML getElement() {
-        return (InterfaceUML) this.element;
+        return (InterfaceUML) element;
     }
     
     @Override
     public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+        return (ClassDiagram) diagram;
     }
 }

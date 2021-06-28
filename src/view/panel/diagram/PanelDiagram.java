@@ -27,10 +27,10 @@ import view.main.structural.ViewMenu;
 public abstract class PanelDiagram extends PanelGraph {
     protected final ViewMenu   viewMenu;
     protected final Diagram    diagram;
-    protected PanelOperation   panel;
-    protected StyleAssociation style;
     protected String  operation;
     protected Integer type;
+    protected PanelOperation panel;
+    protected StyleAssociation style;
     
     /**
      * Default constructor method of Class.
@@ -47,25 +47,25 @@ public abstract class PanelDiagram extends PanelGraph {
      * Method responsible for setting the Default Properties.
      */
     protected void setDefaultProperties() {
-        this.setOperation("Click");
-        this.setLayout(new GridBagLayout());
-        this.type = 0;
+        setOperation("Click");
+        setLayout(new GridBagLayout());
+        type = 0;
     }
     
     /**
      * Method responsible for setting Click Operation.
      */
     public void setClick() {
-        this.getPanelOperation().resetBackground();
-        this.setOperation("Click");
-        this.getPanelOperation().getClickButton().setBackground(this.getFocusColor());
+        getPanelOperation().resetBackground();
+        setOperation("Click");
+        getPanelOperation().getClickButton().setBackground(getFocusColor());
     }
     
     @Override
     protected void addComponents() {
-        this.initPanelOperation();
-        this.addModelingPanel();
-        this.addControllers();
+        initPanelOperation();
+        addModelingPanel();
+        addControllers();
     }
     
     /**
@@ -77,7 +77,7 @@ public abstract class PanelDiagram extends PanelGraph {
      * Method responsible for initializing the Style Association.
      */
     protected void initStyleAssociation() {
-        this.style = new StyleAssociation();
+        style = new StyleAssociation();
     }
     
     /**
@@ -87,53 +87,53 @@ public abstract class PanelDiagram extends PanelGraph {
     
     @Override
     public void addModelingPanel() {
-        this.identifiers = new HashMap<>();
-        this.objects     = new HashMap<>();
-            super.initGraph();
-            this.loadDefaultStyles();
-            this.initStyleAssociation();
-            this.initGraphComponent();
-            super.initGraphLayout();
-            this.addGraphPanel();
-        this.component.refresh();
-        this.setStyle();
+        identifiers = new HashMap<>();
+        objects     = new HashMap<>();
+            initGraph();
+            loadDefaultStyles();
+            initStyleAssociation();
+            initGraphComponent();
+            initGraphLayout();
+            addGraphPanel();
+        component.refresh();
+        setStyle();
     }
     
     @Override
     protected void initGraphComponent() {
         super.initGraphComponent();
-        this.component.getGraphControl().addMouseListener((ControllerPanelDiagram) this.controller);
-        this.component.getGraphControl().getGraphContainer().addKeyListener((ControllerPanelDiagram) this.controller);
+        component.getGraphControl().addMouseListener((ControllerPanelDiagram) controller);
+        component.getGraphControl().getGraphContainer().addKeyListener((ControllerPanelDiagram) controller);
     }
     
     @Override
     protected void addGraphPanel() {
-        this.createScrollPane("scrollPaneDiagram");
-        this.getScrollPaneDiagram().setViewportView(this.component);
-        this.getScrollPaneDiagram().setPreferredSize(new Dimension(100, 100));
-        this.add(this.getPanelOperation(), this.createStartConstraint());
-        this.add(this.getScrollPaneDiagram(), this.createBodyConstraint());
+        createScrollPane("diagram");
+        getScrollPaneDiagram().setViewportView(component);
+        getScrollPaneDiagram().setPreferredSize(new Dimension(100, 100));
+        add(getPanelOperation(), createStartConstraint());
+        add(getScrollPaneDiagram(), createBodyConstraint());
     }
     
     @Override
     public void updateGraph() {
-        this.clearGraph();
-        this.identifiers = new HashMap<>();
-        this.objects     = new HashMap<>();
+        clearGraph();
+        identifiers = new HashMap<>();
+        objects     = new HashMap<>();
         
-        this.setClick();
+        setClick();
         
-        this.addElements();
-        this.addAssociations();
-        this.setZoom(this.zoom);
+        addElements();
+        addAssociations();
+        setZoom(zoom);
     }
     
     /**
      * Method responsible for adding the Diagram Elements.
      */
     public void addElements() {
-        for (Element element : this.getDiagram().getElementsList())
-            this.addElement(element);
+        for (Element element : getDiagram().getElementsList())
+            addElement(element);
     }
     
     /**
@@ -141,11 +141,11 @@ public abstract class PanelDiagram extends PanelGraph {
      * @param element Element.
      */
     protected void addElement(Element element) {
-        this.addStyle(element.getStyleLabel(), element.getStyle());
-        String title = this.getTitle(element);
-        mxCell cell  = (mxCell) this.getGraph().insertVertex(this.getParentCell(), element.getId(), title, element.getPosition().x, element.getPosition().y, element.getSize().x, element.getSize().y, element.getStyleLabel());
+        addStyle(element.getStyleLabel(), element.getStyle());
+        String title = getTitle(element);
+        mxCell cell  = (mxCell) getGraph().insertVertex(getParentCell(), element.getId(), title, element.getPosition().x, element.getPosition().y, element.getSize().x, element.getSize().y, element.getStyleLabel());
                cell.setConnectable(true);
-        this.addElementCell(element, cell);
+        addElementCell(element, cell);
     }
     
     /**
@@ -154,7 +154,7 @@ public abstract class PanelDiagram extends PanelGraph {
      * @return Element Title.
      */
     protected String getTitle(Element element) {
-        return this.diagram.getStereotypes(element, "\n") + element.getName();
+        return diagram.getStereotypes(element, "\n") + element.getName();
     }
     
     /**
@@ -163,8 +163,8 @@ public abstract class PanelDiagram extends PanelGraph {
      * @param cell mxCell.
      */
     protected void addElementCell(Element element, mxCell cell) {
-        this.identifiers.put(cell, element.getId());
-        this.objects.put(element.getId(), cell);
+        identifiers.put(cell, element.getId());
+        objects.put(element.getId(), cell);
     }
     
     /**
@@ -172,9 +172,9 @@ public abstract class PanelDiagram extends PanelGraph {
      * @param id Cell Id.
      */
     public void setSelected(String id) {
-        mxCell cell = (mxCell) this.objects.get(id);
+        mxCell cell = (mxCell) objects.get(id);
         if (cell != null)
-            this.getGraph().setSelectionCell(cell);
+            getGraph().setSelectionCell(cell);
     }
     
     /**
@@ -182,9 +182,9 @@ public abstract class PanelDiagram extends PanelGraph {
      * @return Selected Element.
      */
     public Element getSelectedElement() {
-        mxCell cell = (mxCell) this.graph.getSelectionCell();
-        String id   = this.getIdentifiers().get(cell);
-        return this.getDiagram().getElement(id);
+        mxCell cell = (mxCell) graph.getSelectionCell();
+        String id   = getIdentifiers().get(cell);
+        return getDiagram().getElement(id);
     }
     
     /**
@@ -193,7 +193,7 @@ public abstract class PanelDiagram extends PanelGraph {
      * @param id Identifier.
      */
     protected void addIdentifier(Object object, String id) {
-        this.identifiers.put(object, id);
+        identifiers.put(object, id);
     }
     
     /**
@@ -202,15 +202,15 @@ public abstract class PanelDiagram extends PanelGraph {
      * @return Identifier by Object.
      */
     public String getIdentifier(Object object) {
-        return this.getIdentifiers().get(object);
+        return getIdentifiers().get(object);
     }
     
     /**
      * Method responsible for adding the Diagram Associations.
      */
     public void addAssociations() {
-        for (Association association : this.getDiagram().getAssociationsList())
-            this.addAssociation(association);
+        for (Association association : getDiagram().getAssociationsList())
+            addAssociation(association);
     }
     
     /**
@@ -218,11 +218,11 @@ public abstract class PanelDiagram extends PanelGraph {
      * @param association Association.
      */
     protected void addAssociation(Association association) {
-        this.addStyle(association.getStyleLabel(), association.getStyle());
-        String title = this.getTitle(association);
-        mxCell edge  = (mxCell) this.getGraph().insertEdge(this.parent, association.getId(), title, this.objects.get(association.getSource().getId()), this.objects.get(association.getTarget().getId()), association.getStyleLabel());
-        this.updatePoints(association, edge);
-        this.addAssociationCell(association, edge);
+        addStyle(association.getStyleLabel(), association.getStyle());
+        String title = getTitle(association);
+        mxCell edge  = (mxCell) getGraph().insertEdge(parent, association.getId(), title, objects.get(association.getSource().getId()), objects.get(association.getTarget().getId()), association.getStyleLabel());
+        updatePoints(association, edge);
+        addAssociationCell(association, edge);
     }
     
     /**
@@ -231,9 +231,9 @@ public abstract class PanelDiagram extends PanelGraph {
      * @param edge Edge Cell.
      */
     public void updatePoints(Association association, mxCell edge) {
-        mxGeometry geometry = this.getModel().getGeometry(edge);
+        mxGeometry geometry = getModel().getGeometry(edge);
                    geometry.setPoints(association.getPoints());
-        this.getModel().setGeometry(edge, geometry);
+        getModel().setGeometry(edge, geometry);
     }
     
     /**
@@ -251,8 +251,8 @@ public abstract class PanelDiagram extends PanelGraph {
      * @param cell mxCell.
      */
     protected void addAssociationCell(Association association, mxCell cell) {
-        this.identifiers.put(cell, association.getId());
-        this.objects.put(association.getId(), cell);
+        identifiers.put(cell, association.getId());
+        objects.put(association.getId(), cell);
     }
     
     /**
@@ -260,30 +260,30 @@ public abstract class PanelDiagram extends PanelGraph {
      * @return Selected Association.
      */
     public Association getSelectedAssociation() {
-        mxCell cell = (mxCell) this.graph.getSelectionCell();
-        String id   = this.getIdentifiers().get(cell);
-        return this.getDiagram().getAssociation(id);
+        mxCell cell = (mxCell) graph.getSelectionCell();
+        String id   = getIdentifiers().get(cell);
+        return getDiagram().getAssociation(id);
     }
     
     /**
      * Method responsible for setting the Default Style.
      */
     public void setDefaultStyle() {
-        this.getStyle().setDefaultStyle(this.getEdgeStyle());
+        getStyle().setDefaultStyle(getEdgeStyle());
     }
     
     /**
      * Method responsible for setting the Dependency Style.
      */
     public void setDependencyStyle() {
-        this.getStyle().setDependencyStyle(this.getEdgeStyle());
+        getStyle().setDependencyStyle(getEdgeStyle());
     }
     
     /**
      * Method responsible for setting the Generalization Style.
      */
     public void setGeneralizationStyle() {
-        this.getStyle().setGeneralizationStyle(this.getEdgeStyle());
+        getStyle().setGeneralizationStyle(getEdgeStyle());
     }
     
     /**
@@ -291,7 +291,7 @@ public abstract class PanelDiagram extends PanelGraph {
      * @return View Menu.
      */
     public ViewMenu getViewMenu() {
-        return this.viewMenu;
+        return viewMenu;
     }
     
     /**
@@ -299,7 +299,7 @@ public abstract class PanelDiagram extends PanelGraph {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
     
     /**
@@ -313,7 +313,7 @@ public abstract class PanelDiagram extends PanelGraph {
      * @return Style Association.
      */
     public StyleAssociation getStyle() {
-        return this.style;
+        return style;
     }
     
     /**
@@ -321,7 +321,7 @@ public abstract class PanelDiagram extends PanelGraph {
      * @return Operation.
      */
     public String getOperation() {
-        return this.operation;
+        return operation;
     }
     
     /**
@@ -337,7 +337,7 @@ public abstract class PanelDiagram extends PanelGraph {
      * @return Type.
      */
     public Integer getType() {
-        return this.type;
+        return type;
     }
 
     /**
@@ -346,7 +346,7 @@ public abstract class PanelDiagram extends PanelGraph {
      */
     public void setType(Integer type) {
         this.type = type;
-        this.setStyle();
+        setStyle();
     }
     
     /**
@@ -354,7 +354,7 @@ public abstract class PanelDiagram extends PanelGraph {
      * @return Identifiers HashMap.
      */
     public HashMap<Object, String> getIdentifiers() {
-        return this.identifiers;
+        return identifiers;
     }
     
     /**
@@ -362,7 +362,7 @@ public abstract class PanelDiagram extends PanelGraph {
      * @return Objects HashMap.
      */
     public HashMap<String, Object> getObjects() {
-        return this.objects;
+        return objects;
     }
     
     /**
@@ -370,6 +370,6 @@ public abstract class PanelDiagram extends PanelGraph {
      * @return Scroll Pane Diagram.
      */
     public JScrollPane getScrollPaneDiagram() {
-        return this.getScrollPane("scrollPaneDiagram");
+        return getScrollPane("diagram");
     }
 }

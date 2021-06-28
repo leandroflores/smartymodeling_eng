@@ -25,23 +25,23 @@ public final class PanelEditInstance extends PanelEdit {
     public PanelEditInstance(ViewMenu view, Instance instance) {
         super(view);
         this.instance = instance;
-        this.setPreferredSize(new Dimension(200, 100));
-        this.addComponents();
+        setPreferredSize(new Dimension(200, 100));
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseInstance();
+        addPanelBaseInstance();
     }
     
     /**
      * Method responsible for adding the Panel Base Instance.
      */
     private void addPanelBaseInstance() {
-        this.addPanel("panelBaseInstance", new PanelBaseInstance(this.viewMenu, this.instance));
-        this.createScrollPane("scrollPanelBaseInstance",  this.getPanelBaseInstance());
-        this.getScrollPane("scrollPanelBaseInstance").setViewportView(this.getPanelBaseInstance());
-        this.tabbedPane.add("Instance", this.getScrollPane("scrollPanelBaseInstance"));
+        addPanel("base_instance", new PanelBaseInstance(viewMenu, instance));
+        createScrollPane("base_instance", getPanelBaseInstance());
+        getScrollPane("base_instance").setViewportView(getPanelBaseInstance());
+        tabbedPane.add("Instance", getScrollPane("base_instance"));
     }
     
     /**
@@ -49,7 +49,7 @@ public final class PanelEditInstance extends PanelEdit {
      * @return Panel Base Instance.
      */
     public PanelBaseInstance getPanelBaseInstance() {
-        return (PanelBaseInstance) this.getPanel("panelBaseInstance");
+        return (PanelBaseInstance) getPanel("base_instance");
     }
     
     /**
@@ -57,6 +57,6 @@ public final class PanelEditInstance extends PanelEdit {
      * @return Instance.
      */
     public Instance getInstance() {
-        return this.instance;
+        return instance;
     }
 }

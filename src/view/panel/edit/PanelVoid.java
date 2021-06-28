@@ -7,7 +7,7 @@ import view.main.structural.ViewMenu;
  * <p>Class responsible for defining a <b>Void Edit Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-24
- * @see    view.panel.Panel
+ * @see    view.panel.edit.PanelEdit
  */
 public class PanelVoid extends PanelEdit {
     

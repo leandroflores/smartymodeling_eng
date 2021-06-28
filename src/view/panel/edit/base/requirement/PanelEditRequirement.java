@@ -27,25 +27,25 @@ public final class PanelEditRequirement extends PanelEdit {
     public PanelEditRequirement(ViewMenu view, Requirement requirement, Integer index) {
         super(view);
         this.requirement = requirement;
-        this.setPreferredSize(new Dimension(200, 100));
-        this.addComponents();
-        this.tabbedPane.setSelectedIndex(index);
+        setPreferredSize(new Dimension(200, 100));
+        addComponents();
+        tabbedPane.setSelectedIndex(index);
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseRequirement();
-        this.addPanelBaseRequirementDiagrams();
+        addPanelBaseRequirement();
+        addPanelBaseRequirementDiagrams();
     }
     
     /**
      * Method responsible for adding the Panel Base Requirement.
      */
     private void addPanelBaseRequirement() {
-        this.addPanel("panelBaseRequirement", new PanelBaseRequirement(this.getViewMenu(), this.requirement));
-        this.createScrollPane("scrollPanelBaseRequirement", this.getPanelBaseRequirement());
-        this.getScrollPane("scrollPanelBaseRequirement").setViewportView(this.getPanelBaseRequirement());
-        this.tabbedPane.add("Requirement", this.getScrollPane("scrollPanelBaseRequirement"));
+        addPanel("base_requirement", new PanelBaseRequirement(getViewMenu(), requirement));
+        createScrollPane("base_requirement", getPanelBaseRequirement());
+        getScrollPane("base_requirement").setViewportView(getPanelBaseRequirement());
+        tabbedPane.add("Requirement", getScrollPane("base_requirement"));
     }
     
     /**
@@ -55,13 +55,13 @@ public final class PanelEditRequirement extends PanelEdit {
         String[] types = {"Feature", "UseCase", "Class", "Component", "Sequence", "Activity"};
         for (int i = 0; i < types.length; i++) {
             String type      = types[i];
-            String panel_id  = "panelBaseRequirement" + type;
-            String scroll_id = "scrollPanelBaseRequirement" + type;
-            this.addPanel(panel_id, new PanelBaseRequirementDiagram(this.getViewMenu(), this.requirement, type));
-            this.createScrollPane(scroll_id, this.getPanel(panel_id));
-            this.getScrollPane(scroll_id).setViewportView(this.getPanel(panel_id));
-            this.tabbedPane.add(type, this.getScrollPane(scroll_id));
-            this.tabbedPane.setEnabledAt(i + 1, this.getPanelBaseRequirement(panel_id).existsDiagram());
+            String panel_id  = "base_requirement" + type;
+            String scroll_id = "base_requirement" + type;
+            addPanel(panel_id, new PanelBaseRequirementDiagram(getViewMenu(), requirement, type));
+            createScrollPane(scroll_id, getPanel(panel_id));
+            getScrollPane(scroll_id).setViewportView(getPanel(panel_id));
+            tabbedPane.add(type, getScrollPane(scroll_id));
+            tabbedPane.setEnabledAt(i + 1, getPanelBaseRequirement(panel_id).existsDiagram());
         }
     }
     
@@ -70,7 +70,7 @@ public final class PanelEditRequirement extends PanelEdit {
      * @return Panel Base Requirement.
      */
     public PanelBaseRequirement getPanelBaseRequirement() {
-        return (PanelBaseRequirement) this.getPanel("panelBaseRequirement");
+        return (PanelBaseRequirement) getPanel("base_requirement");
     }
     
     /**
@@ -79,7 +79,7 @@ public final class PanelEditRequirement extends PanelEdit {
      * @return Panel Base Requirement Traceability.
      */
     public PanelBaseRequirementDiagram getPanelBaseRequirement(String id) {
-        return (PanelBaseRequirementDiagram) this.getPanel(id);
+        return (PanelBaseRequirementDiagram) getPanel(id);
     }
     
     /**
@@ -87,6 +87,6 @@ public final class PanelEditRequirement extends PanelEdit {
      * @return Requirement.
      */
     public Requirement getRequirement() {
-        return this.requirement;
+        return requirement;
     }
 }

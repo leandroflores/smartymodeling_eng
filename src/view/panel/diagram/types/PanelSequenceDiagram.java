@@ -42,31 +42,31 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      */
     public PanelSequenceDiagram(ViewMenu view, SequenceDiagram diagram) {
         super(view, diagram);
-        this.controller = new ControllerPanelSequenceDiagram(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.setClick();
+        controller = new ControllerPanelSequenceDiagram(this);
+        setDefaultProperties();
+        addComponents();
+        setClick();
     }
     
     @Override
     public void initPanelOperation() {
-        this.panel = new PanelSequenceOperation(this);
+        panel = new PanelSequenceOperation(this);
     }
     
     @Override
     public void initStyleAssociation() {
-        this.style = new StyleSequenceAssociation();
+        style = new StyleSequenceAssociation();
     }
     
     @Override
     protected void addElement(Element element) {
-        this.addStyle(element.getStyleLabel(), element.getStyle());
-        mxCell cell = (mxCell) this.getGraph().insertVertex(this.parent, element.getId(), "", element.getPosition().x, element.getPosition().y, element.getSize().x, element.getSize().y, element.getStyleLabel());
+        addStyle(element.getStyleLabel(), element.getStyle());
+        mxCell cell = (mxCell) getGraph().insertVertex(parent, element.getId(), "", element.getPosition().x, element.getPosition().y, element.getSize().x, element.getSize().y, element.getStyleLabel());
                cell.setConnectable(true);
-            this.addHeaderCell(cell, element);
-            this.addEndPointCell(cell, element);
-            this.addLineCell(cell, element);
-        this.addElementCell(element, cell);
+            addHeaderCell(cell, element);
+            addEndPointCell(cell, element);
+            addLineCell(cell, element);
+        addElementCell(element, cell);
     }
     
     /**
@@ -75,14 +75,14 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      * @param element Element.
      */
     private void addHeaderCell(mxCell parent, Element element) {
-        mxCell cell = (mxCell) this.getGraph().insertVertex(parent, element.getId() + "(header)", "", 2, 0, element.getWidth() - 4, 90, "headerStyle");
+        mxCell cell = (mxCell) getGraph().insertVertex(parent, element.getId() + "(header)", "", 2, 0, element.getWidth() - 4, 90, "headerStyle");
                cell.setConnectable(false);
-            this.addStereotypeCells(cell, element);
-            this.addIconCell(cell, element);
-            this.addNameCell(cell, element);
-            this.addStartPointCell(cell, element);
-        this.identifiers.put(cell.getId(), element.getId());
-        this.objects.put(element.getId() + "(header)", cell);
+            addStereotypeCells(cell, element);
+            addIconCell(cell, element);
+            addNameCell(cell, element);
+            addStartPointCell(cell, element);
+        addIdentifier(cell.getId(), element.getId());
+        objects.put(element.getId() + "(header)", cell);
     }
     
     /**
@@ -92,7 +92,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      */
     private void addIconCell(mxCell parent, Element element) {
         String style_ = element.getType().equals("instance") ? "classIconStyle" : "actorIconStyle";
-        mxCell cell   = (mxCell) this.getGraph().insertVertex(parent, null, "", 2, 22, 20, 20, style_);
+        mxCell cell   = (mxCell) getGraph().insertVertex(parent, null, "", 2, 22, 20, 20, style_);
                cell.setConnectable(false);
     }
     
@@ -103,14 +103,14 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      */
     private void addStereotypeCells(mxCell parent, Element element) {
         Integer index = 0;
-        for (Stereotype stereotype : this.getDiagram().getStereotypesList(element)) {
-            this.addStyle("stereotypeStyle", stereotype.getStyle());
-            mxCell cell   = (mxCell) this.getGraph().insertVertex(parent, "LINK#" + element.getId() + "-" + stereotype.getId(), stereotype.toString(), 5, (index * 21) + 5, element.getWidth() - 10, 20, "stereotypeStyle");
+        for (Stereotype stereotype : getDiagram().getStereotypesList(element)) {
+            addStyle("stereotypeStyle", stereotype.getStyle());
+            mxCell cell   = (mxCell) getGraph().insertVertex(parent, "LINK#" + element.getId() + "-" + stereotype.getId(), stereotype.toString(), 5, (index * 21) + 5, element.getWidth() - 10, 20, "stereotypeStyle");
                    cell.setConnectable(false);
                    cell.setId(stereotype.getId());
-                   index += 1; 
-            this.addIdentifier(cell, stereotype.getId());
-            this.addIdentifier(cell.getId(), element.getId());
+                   index++; 
+            addIdentifier(cell, stereotype.getId());
+            addIdentifier(cell.getId(), element.getId());
         }
     }
     
@@ -120,11 +120,11 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      * @param element Element.
      */
     private void addNameCell(mxCell parent, Element element) {
-        mxCell cell = (mxCell) this.getGraph().insertVertex(parent, element.getId() + "(name)", this.getSignature(element), 4, 68, element.getWidth() - 10, 20, "nameStyle");
+        mxCell cell = (mxCell) getGraph().insertVertex(parent, element.getId() + "(name)", getSignature(element), 4, 68, element.getWidth() - 10, 20, "nameStyle");
                cell.setConnectable(false);
                cell.setId(element.getId() + "(name)");
-        this.addIdentifier(cell.getId(), element.getId());
-        this.objects.put(element.getId() + "(name)", cell);
+        addIdentifier(cell.getId(), element.getId());
+        objects.put(element.getId() + "(name)", cell);
     }
     
     /**
@@ -146,11 +146,11 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     private void addStartPointCell(mxCell parent, Element element) {
         Integer x   = (element.getWidth()  / 2);
         Integer y   =  89;
-        mxCell cell = (mxCell) this.getGraph().insertVertex(parent, element.getId() + "(start)", "", x, y, 1, 1, "startPointStyle");
+        mxCell cell = (mxCell) getGraph().insertVertex(parent, element.getId() + "(start)", "", x, y, 1, 1, "startPointStyle");
                cell.setConnectable(false);
                cell.setId(element.getId() + "(start)");
-        this.addIdentifier(cell.getId(), element.getId());
-        this.objects.put(element.getId()  + "(start)", cell);
+        addIdentifier(cell.getId(), element.getId());
+        objects.put(element.getId()  + "(start)", cell);
     }
     
     /**
@@ -161,11 +161,11 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     private void addEndPointCell(mxCell parent, Element element) {
         Integer x   = (element.getWidth()  / 2) - 5;
         Integer y   = element.getHeight() - 10;
-        mxCell cell = (mxCell) this.getGraph().insertVertex(parent, element.getId() + "(point)", "", x, y, 10, 10, "endPointStyle");
+        mxCell cell = (mxCell) getGraph().insertVertex(parent, element.getId() + "(point)", "", x, y, 10, 10, "endPointStyle");
                cell.setConnectable(false);
                cell.setId(element.getId() + "(point)");
-        this.addIdentifier(cell.getId(), element.getId());
-        this.objects.put(element.getId() + "(point)", cell);
+        addIdentifier(cell.getId(), element.getId());
+        objects.put(element.getId() + "(point)", cell);
     }
     
     /**
@@ -174,16 +174,16 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      * @param element Element.
      */
     private void addLineCell(mxCell parent, Element element) {
-        Object source  = this.objects.get(element.getId() + "(name)");
-        Object target  = this.objects.get(element.getId() + "(point)");
-        mxCell edge    = (mxCell) this.getGraph().insertEdge(this.parent, element.getId(), "", source, target, "lineStyle");
-        this.addIdentifier(edge, element.getId());
+        Object source  = objects.get(element.getId() + "(name)");
+        Object target  = objects.get(element.getId() + "(point)");
+        mxCell edge    = (mxCell) getGraph().insertEdge(parent, element.getId(), "", source, target, "lineStyle");
+        addIdentifier(edge, element.getId());
     }
     
     @Override
     protected void addAssociation(Association association) {
         if (association instanceof MessageUML)
-            this.addAssociation((MessageUML) association);
+            addAssociation((MessageUML) association);
         else 
             super.addAssociation(association);
     }
@@ -193,11 +193,11 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      * @param message Message.
      */
     protected void addAssociation(MessageUML message) {
-        this.addStyle(message.getStyleLabel(), message.getStyle());
+        addStyle(message.getStyleLabel(), message.getStyle());
         if (!message.isLoop())
-            this.addMessage(message);
+            addMessage(message);
         else
-            this.addLoopMessage(message);
+            addLoopMessage(message);
     }
      
     /**
@@ -205,11 +205,11 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      * @param message Message UML.
      */
     private void addMessage(MessageUML message) {
-        Object source = this.addPoint(message, message.getSource());
-        Object target = this.addPoint(message, message.getTarget());
-        mxCell edge   = (mxCell) this.getGraph().insertEdge(this.parent, message.getId(), message.getTitle(), source, target, message.getStyleLabel());
-        this.updatePoints(message, edge);
-        this.addAssociationCell(message, edge);
+        Object source = addPoint(message, message.getSource());
+        Object target = addPoint(message, message.getTarget());
+        mxCell edge   = (mxCell) getGraph().insertEdge(parent, message.getId(), message.getTitle(), source, target, message.getStyleLabel());
+        updatePoints(message, edge);
+        addAssociationCell(message, edge);
     }
      
     /**
@@ -217,12 +217,12 @@ public final class PanelSequenceDiagram extends PanelDiagram {
      * @param message Message UML.
      */
     private void addLoopMessage(MessageUML message) {
-        Object source = this.addPoint(message, message.getSource());
-        Object target = this.addSelfPoint(message, message.getTarget());
-        Object object = this.objects.get(message.getSource().getId());
-        mxCell edge   = (mxCell) this.getGraph().insertEdge(object, message.getId(), message.getTitle(), source, target, message.getStyleLabel());
-        this.updatePoints(message, edge);
-        this.addAssociationCell(message, edge);
+        Object source = addPoint(message, message.getSource());
+        Object target = addSelfPoint(message, message.getTarget());
+        Object object = objects.get(message.getSource().getId());
+        mxCell edge   = (mxCell) getGraph().insertEdge(object, message.getId(), message.getTitle(), source, target, message.getStyleLabel());
+        updatePoints(message, edge);
+        addAssociationCell(message, edge);
     }
     
     /**
@@ -234,7 +234,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     private mxCell addPoint(MessageUML message, Element element) {
         Integer x = element.getWidth() / 2;
         Integer y = 80 + (message.getSequence() * 35);
-        mxCell cell = (mxCell) this.graph.insertVertex(this.objects.get(element.getId()), null, "", x, y, 5, 5, "pointStyle");
+        mxCell cell = (mxCell) graph.insertVertex(objects.get(element.getId()), null, "", x, y, 5, 5, "pointStyle");
                cell.setConnectable(false);
         return cell;
     }
@@ -249,7 +249,7 @@ public final class PanelSequenceDiagram extends PanelDiagram {
         Integer x = element.getWidth() / 2;
         Integer y = 80 + (message.getSequence() * 35) + 25;
         message.addDefaultPoint(new mxPoint(x + 80, y - 25), new mxPoint(x + 80, y));
-        mxCell cell = (mxCell) this.graph.insertVertex(this.objects.get(element.getId()), null, "", x, y, 5, 5, "pointStyle");
+        mxCell cell = (mxCell) graph.insertVertex(objects.get(element.getId()), null, "", x, y, 5, 5, "pointStyle");
                cell.setConnectable(false);
         return cell;
     }
@@ -257,28 +257,28 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     @Override
     protected void loadDefaultStyles() {
         StyleSequence newStyle = new StyleSequence();
-        this.addStyle("actorIconStyle", newStyle.getImageStyle("usecase/actor.png"));
-        this.addStyle("classIconStyle", newStyle.getImageStyle("classes/class.png"));
-        this.addStyle("headerStyle",    newStyle.getHeaderStyle());
-        this.addStyle("nameStyle",      newStyle.getNameStyle());
-        this.addStyle("lineStyle",      newStyle.getLineStyle());
-        this.addStyle("pointStyle",     newStyle.getPointStyle());
-        this.addStyle("endPointStyle",  newStyle.getEndPointStyle());
+        addStyle("actorIconStyle", newStyle.getImageStyle("usecase/actor.png"));
+        addStyle("classIconStyle", newStyle.getImageStyle("classes/class.png"));
+        addStyle("headerStyle",    newStyle.getHeaderStyle());
+        addStyle("nameStyle",      newStyle.getNameStyle());
+        addStyle("lineStyle",      newStyle.getLineStyle());
+        addStyle("pointStyle",     newStyle.getPointStyle());
+        addStyle("endPointStyle",  newStyle.getEndPointStyle());
     }
     
     @Override
     public void setStyle() {
-        switch (this.getType()) {
+        switch (getType()) {
             case 0:
-                this.getStyle().setMessageStyle(this.getEdgeStyle(), true);
+                getStyle().setMessageStyle(getEdgeStyle(), true);
                 break;
             case 1:
-                this.getStyle().setMessageStyle(this.getEdgeStyle(), false);
+                getStyle().setMessageStyle(getEdgeStyle(), false);
                 break;
             case 2:
             case 3:
             case 4:
-                this.setDependencyStyle();
+                setDependencyStyle();
                 break;
             default:
                 break;
@@ -287,28 +287,28 @@ public final class PanelSequenceDiagram extends PanelDiagram {
     
     @Override
      public void addControllers() {
-        this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationSequence(this));
-        this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
-        this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
-        this.component.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventMove(this));
-        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
+        component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationSequence(this));
+        component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
+        component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
+        component.getGraph().addListener(mxEvent.MOVE_CELLS, new ControllerEventMove(this));
+        component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
         
-        this.component.getGraphControl().addMouseListener(new ControllerEventFocus(this));
-        this.component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
+        component.getGraphControl().addMouseListener(new ControllerEventFocus(this));
+        component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
      }
     
     @Override
     public SequenceDiagram getDiagram() {
-        return (SequenceDiagram) this.diagram;
+        return (SequenceDiagram) diagram;
     }
     
     @Override
     public PanelSequenceOperation getPanelOperation() {
-        return (PanelSequenceOperation) this.panel;
+        return (PanelSequenceOperation) panel;
     }
     
     @Override
     public StyleSequenceAssociation getStyle() {
-        return (StyleSequenceAssociation) this.style;
+        return (StyleSequenceAssociation) style;
     }
 }

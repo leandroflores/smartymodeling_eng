@@ -10,6 +10,7 @@ import view.main.structural.ViewMenu;
  * @author Leandro
  * @since  2020-04-17
  * @see    controller.view.panel.base.variability.ControllerPanelBase
+ * @see    model.structural.base.variability.Variability
  * @see    view.panel.base.PanelBase
  */
 public abstract class PanelBase extends view.panel.base.PanelBase {
@@ -33,7 +34,7 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
     
     /**
@@ -41,6 +42,6 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Variability.
      */
     public Variability getVariability() {
-        return this.variability;
+        return variability;
     }
 }

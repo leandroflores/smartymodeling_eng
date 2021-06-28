@@ -27,31 +27,31 @@ public final class PanelBaseRelationship extends PanelBase {
         super(view);
         this.relationship = relationship;
         this.controller   = new ControllerPanelBaseRelationship(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        setDefaultProperties();
+        addComponents();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(5, 2));
+        setLayout(new GridLayout(5, 2));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Product: "));
-        this.add(this.createTextFieldNoEditable("productTextField",  this.relationship.getInstance().getProduct().getName(), 15));
+        add(createLabel("Product: "));
+        add(createTextFieldNoEditable("product", relationship.getInstance().getProduct().getName(), 15));
         
-        this.add(this.createLabel("Instance: "));
-        this.add(this.createTextFieldNoEditable("instanceTextField", this.relationship.getInstance().getName(), 15));
+        add(createLabel("Instance: "));
+        add(createTextFieldNoEditable("instance", relationship.getInstance().getName(), 15));
         
-        this.add(this.createLabel("Diagram: "));
-        this.add(this.createTextFieldNoEditable("diagramTextField",  this.relationship.getInstance().getDiagram().toString(), 15));
+        add(createLabel("Diagram: "));
+        add(createTextFieldNoEditable("diagram", relationship.getInstance().getDiagram().toString(), 15));
         
-        this.add(this.createLabel("Source: "));
-        this.add(this.createTextFieldNoEditable("sourceTextField",  this.relationship.getAssociation().getSource().getName(), 15));
+        add(createLabel("Source: "));
+        add(createTextFieldNoEditable("source", relationship.getAssociation().getSource().getName(), 15));
         
-        this.add(this.createLabel("Target: "));
-        this.add(this.createTextFieldNoEditable("targetTextField",  this.relationship.getAssociation().getTarget().getName(), 15));
+        add(createLabel("Target: "));
+        add(createTextFieldNoEditable("target", relationship.getAssociation().getTarget().getName(), 15));
     }
     
     /**
@@ -59,6 +59,6 @@ public final class PanelBaseRelationship extends PanelBase {
      * @return Relationship.
      */
     public Relationship getRelationship() {
-        return this.relationship;
+        return relationship;
     }
 }

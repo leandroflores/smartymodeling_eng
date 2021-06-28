@@ -13,7 +13,7 @@ import view.main.structural.ViewMenu;
  * <p>Class of View <b>PanelEditVariability</b>.</p> 
  * <p>Class responsible for defining a Panel for Edit the <b>Variability</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  05/07/2019
+ * @since  2019-07-05
  * @see    model.structural.base.Diagram
  * @see    model.structural.base.variability.Variability
  * @see    view.panel.edit.PanelEdit
@@ -33,36 +33,36 @@ public final class PanelEditVariability extends PanelEdit {
         super(view);
         this.diagram     = diagram;
         this.variability = variability;
-        this.setPreferredSize(new Dimension(200, 100));
-        this.addComponents();
-        this.tabbedPane.setSelectedIndex(index);
+        setPreferredSize(new Dimension(200, 100));
+        addComponents();
+        tabbedPane.setSelectedIndex(index);
     }
     
     @Override
     protected void addPanels() {
-        this.tabbedPane.addChangeListener(new ControllerTabbedPane(this.tabbedPane));
-        this.addPanelBaseVariability();
-        this.addPanelBaseVariants();
+        tabbedPane.addChangeListener(new ControllerTabbedPane(tabbedPane));
+        addPanelBaseVariability();
+        addPanelBaseVariants();
     }
     
     /**
      * Method responsible for adding the Panel Base Variability.
      */
     private void addPanelBaseVariability() {
-        this.addPanel("panelBaseVariability", new PanelBaseVariability(this.viewMenu, this.diagram, this.variability));
-        this.createScrollPane("scrollPanelBaseVariability",  this.getPanelBaseVariability());
-        this.getScrollPane("scrollPanelBaseVariability").setViewportView(this.getPanelBaseVariability());
-        this.tabbedPane.add("Variability", this.getScrollPane("scrollPanelBaseVariability"));
+        addPanel("base_variability", new PanelBaseVariability(viewMenu, diagram, variability));
+        createScrollPane("base_variability", getPanelBaseVariability());
+        getScrollPane("base_variability").setViewportView(getPanelBaseVariability());
+        tabbedPane.add("Variability", getScrollPane("base_variability"));
     }
     
     /**
      * Method responsible for adding the Panel Base Variants.
      */
     private void addPanelBaseVariants() {
-        this.addPanel("panelBaseVariants", new PanelBaseVariants(this.viewMenu, this.diagram, this.variability));
-        this.createScrollPane("scrollPanelBaseVariants",  this.getPanelBaseVariants());
-        this.getScrollPane("scrollPanelBaseVariants").setViewportView(this.getPanelBaseVariants());
-        this.tabbedPane.add("Variants", this.getScrollPane("scrollPanelBaseVariants"));
+        addPanel("variants", new PanelBaseVariants(viewMenu, diagram, variability));
+        createScrollPane("variants",  getPanelBaseVariants());
+        getScrollPane("variants").setViewportView(getPanelBaseVariants());
+        tabbedPane.add("Variants", getScrollPane("variants"));
     }
     
     /**
@@ -70,7 +70,7 @@ public final class PanelEditVariability extends PanelEdit {
      * @return Panel Base Variability.
      */
     public PanelBaseVariability getPanelBaseVariability() {
-        return (PanelBaseVariability) this.getPanel("panelBaseVariability");
+        return (PanelBaseVariability) getPanel("base_variability");
     }
     
     /**
@@ -78,7 +78,7 @@ public final class PanelEditVariability extends PanelEdit {
      * @return Panel Base Variants.
      */
     public PanelBaseVariants getPanelBaseVariants() {
-        return (PanelBaseVariants) this.getPanel("panelBaseVariants");
+        return (PanelBaseVariants) getPanel("variants");
     }
     
     /**
@@ -86,7 +86,7 @@ public final class PanelEditVariability extends PanelEdit {
      * @return Variability.
      */
     public Variability getVariability() {
-        return this.variability;
+        return variability;
     }
     
     /**
@@ -94,6 +94,6 @@ public final class PanelEditVariability extends PanelEdit {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
 }

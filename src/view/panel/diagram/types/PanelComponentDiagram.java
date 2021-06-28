@@ -23,7 +23,7 @@ import view.main.structural.ViewMenu;
  * <p>Class of View <b>PanelComponentDiagram</b>.</p>
  * <p>Class responsible for defining the <b>Component Diagram Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  21/07/2019
+ * @since  2019-07-21
  * @see    controller.view.panel.diagram.types.ControllerPanelComponentDiagram
  * @see    model.structural.diagram.ComponentDiagram
  * @see    view.panel.diagram.PanelDiagram
@@ -37,26 +37,26 @@ public final class PanelComponentDiagram extends PanelDiagram {
      */
     public PanelComponentDiagram(ViewMenu view, ComponentDiagram diagram) {
         super(view, diagram);
-        this.controller = new ControllerPanelComponentDiagram(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.setClick();
+        controller = new ControllerPanelComponentDiagram(this);
+        setDefaultProperties();
+        addComponents();
+        setClick();
     }
     
     @Override
     public void initPanelOperation() {
-        this.panel = new PanelComponentOperation(this);
+        panel = new PanelComponentOperation(this);
     }
     
     @Override
     public void initStyleAssociation() {
-        this.style = new StyleComponentAssociation();
+        style = new StyleComponentAssociation();
     }
     
     @Override
     protected void addElement(Element element) {
         if (element instanceof ComponentUML)
-            this.addComponent((ComponentUML) element);
+            addComponent((ComponentUML) element);
         else 
             super.addElement(element);
     }
@@ -66,63 +66,63 @@ public final class PanelComponentDiagram extends PanelDiagram {
      * @param component Component UML.
      */
     protected void addComponent(ComponentUML component) {
-        this.addStyle(component.getStyleLabel(), component.getStyle());
-            String title = this.getTitle(component);
-            mxCell cell  = (mxCell) this.getGraph().insertVertex(this.parent, component.getId(), title, component.getPosition().x, component.getPosition().y, component.getSize().x, component.getSize().y, component.getStyleLabel());
+        addStyle(component.getStyleLabel(), component.getStyle());
+            String title = getTitle(component);
+            mxCell cell  = (mxCell) getGraph().insertVertex(parent, component.getId(), title, component.getPosition().x, component.getPosition().y, component.getSize().x, component.getSize().y, component.getStyleLabel());
                    cell.setConnectable(true);
-            this.getGraph().insertVertex(cell, component.getId(), "", 10, 10, 20, 20, "styleImageComponent");
-            this.addElementCell(component, cell);
+            getGraph().insertVertex(cell, component.getId(), "", 10, 10, 20, 20, "styleImageComponent");
+            addElementCell(component, cell);
     }
     
     @Override
     protected void loadDefaultStyles() {
-        this.addStyle("styleImageComponent", new StyleComponent().getImageComponentStyle());
+        addStyle("styleImageComponent", new StyleComponent().getImageComponentStyle());
     }
     
     @Override
     public void setStyle() {
-        switch (this.getType()) {
+        switch (getType()) {
             case 0:
-                this.getStyle().setProvideStyle(this.getEdgeStyle());
+                getStyle().setProvideStyle(getEdgeStyle());
                 break;
             case 1:
-                this.getStyle().setRequireStyle(this.getEdgeStyle());
+                getStyle().setRequireStyle(getEdgeStyle());
                 break;
             case 2:
             case 3:
             case 4:
-                this.setDependencyStyle();
+                setDependencyStyle();
                 break;
             default:
-                this.getStyle().setProvideStyle(this.getEdgeStyle());
+                getStyle().setProvideStyle(getEdgeStyle());
                 break;
         }
     }
     
     @Override
      public void addControllers() {
-        this.component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationComponent(this));
-        this.component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
-        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
-        this.component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
-        this.component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
+        component.getConnectionHandler().addListener(mxEvent.CONNECT, new ControllerEventAssociationComponent(this));
+        component.getGraph().addListener(mxEvent.CELLS_MOVED, new ControllerEventMove(this));
+        component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
+        component.addListener(mxEvent.START_EDITING, new ControllerEventEdit(this));
+        component.addListener(mxEvent.LABEL_CHANGED, new ControllerEventChange(this));
         
-        this.component.getGraphControl().addMouseListener(new ControllerEventFocus(this));
-        this.component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
+        component.getGraphControl().addMouseListener(new ControllerEventFocus(this));
+        component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
      }
     
     @Override
     public ComponentDiagram getDiagram() {
-        return (ComponentDiagram) this.diagram;
+        return (ComponentDiagram) diagram;
     }
     
     @Override
     public PanelComponentOperation getPanelOperation() {
-        return (PanelComponentOperation) this.panel;
+        return (PanelComponentOperation) panel;
     }
     
     @Override
     public StyleComponentAssociation getStyle() {
-        return (StyleComponentAssociation) this.style;
+        return (StyleComponentAssociation) style;
     }
 }

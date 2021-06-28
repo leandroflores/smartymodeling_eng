@@ -25,7 +25,7 @@ import view.main.structural.ViewMenu;
  * @since  2019-07-04
  * @see    controller.view.panel.base.variability.ControllerPanelBaseVariants
  * @see    model.structural.base.variability.Variability
- * @see    view.panel.base.PanelBase
+ * @see    view.panel.base.variability.PanelBase
  */
 public final class PanelBaseVariants extends PanelBase {
     
@@ -37,33 +37,33 @@ public final class PanelBaseVariants extends PanelBase {
      */
     public PanelBaseVariants(ViewMenu view, Diagram diagram, Variability variability) {
         super(view, diagram, variability);
-        this.controller = new ControllerPanelBaseVariants(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.setValues();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseVariants(this);
+        setDefaultProperties();
+        addComponents();
+        setValues();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
-        this.setMinimumSize(new Dimension(150, 150));
+        setLayout(new GridBagLayout());
+        setMinimumSize(new Dimension(150, 150));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Constraint: "), this.createConstraints(1, 1, 0, 0));
-        this.add(this.createComboBox("constraintComboBox", new ControllerVariability(project).getConstraints(), 100), this.createConstraints(2, 1, 1, 0));
-        this.add(this.createTextFieldNoEditable("minimumTextField", "0", 3), this.createConstraints(1, 1, 3, 0));
-        this.add(this.createTextFieldNoEditable("maximumTextField", "0", 3), this.createConstraints(1, 1, 4, 0));
+        add(createLabel("Constraint: "), createConstraints(1, 1, 0, 0));
+        add(createComboBox("constraint", new ControllerVariability(project).getConstraints(), 100), createConstraints(2, 1, 1, 0));
+        add(createTextFieldNoEditable("min", "0", 3), createConstraints(1, 1, 3, 0));
+        add(createTextFieldNoEditable("max", "0", 3), createConstraints(1, 1, 4, 0));
         
-        this.add(this.createLabel("Variant: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("variantComboBox", new ControllerDiagram(this.diagram).getDefaultElements(), 175), this.createConstraints(4, 1, 1, 1));
+        add(createLabel("Variant: "), createConstraints(1, 1, 0, 1));
+        add(createComboBox("variant", new ControllerDiagram(diagram).getDefaultElements(), 175), createConstraints(4, 1, 1, 1));
         
-        this.addButtons();
+        addButtons();
         
-        this.createList("variantsList");
-        this.add(this.getVariantsScrollPane(), this.createConstraints(5, 10, 0, 3));
+        createList("variants");
+        add(getVariantsScrollPane(), createConstraints(5, 10, 0, 3));
     }
     
     /**
@@ -72,30 +72,30 @@ public final class PanelBaseVariants extends PanelBase {
     private void addButtons() {
         JPanel panel = new JPanel();
                panel.setLayout(new GridLayout(1, 2));
-               panel.add(this.createButton("addVariantButton", "", "add.png"));
-               panel.add(this.createButton("delVariantButton", "", "not.png"));
-        this.add(panel, this.createConstraints(5, 1, 0, 2));
+               panel.add(createButton("addVariant", "", "add.png"));
+               panel.add(createButton("delVariant", "", "not.png"));
+        add(panel, createConstraints(5, 1, 0, 2));
     }
     
     /**
      * Method responsible for setting the Diagram Values.
      */
     public void setValues() {
-        this.getConstraintComboBox().setSelectedItem(this.variability.getConstraint());
-        this.updateValues();
-        this.updateVariantsList();
+        getConstraintComboBox().setSelectedItem(variability.getConstraint());
+        updateValues();
+        updateVariantsList();
     }
     
     /**
      * Method responsible for adding a Variant.
      */
     public void addVariant() {
-        Element variant = this.getVariant();
-        if    ((!this.variability.getVariants().contains(variant)) 
-            && (!this.variability.getVariationPoint().equals(variant))) {
-            this.variability.getVariants().add(variant);
-            this.updateValues();
-            this.updateVariantsList();
+        Element variant = getVariant();
+        if (!variability.getVariants().contains(variant)
+         && !variability.getVariationPoint().equals(variant)) {
+            variability.getVariants().add(variant);
+            updateValues();
+            updateVariantsList();
         }
     }
     
@@ -103,29 +103,29 @@ public final class PanelBaseVariants extends PanelBase {
      * Method responsible for deleting a Variant.
      */
     public void delVariant() {
-        this.variability.getVariants().remove((Element) this.getVariantsList().getSelectedValue());
-        this.updateValues();
-        this.updateVariantsList();
+        variability.getVariants().remove((Element) getVariantsList().getSelectedValue());
+        updateValues();
+        updateVariantsList();
     }
     
     /**
      * Method responsible for updating the Variabilty Values.
      */
     public void updateValues() {
-        String constraint = this.getConstraintComboBox().getSelectedItem().toString().trim();
-        this.getMinimumTextField().setText(this.variability.getVariants().isEmpty() ? "0" : "1");
-        this.getMaximumTextField().setText(constraint.toLowerCase().equals("inclusive") ? Integer.toString(this.variability.getVariants().size()) : "1");
+        String constraint = getConstraintComboBox().getSelectedItem().toString().trim();
+        getMinimumTextField().setText(variability.getVariants().isEmpty() ? "0" : "1");
+        getMaximumTextField().setText(constraint.toLowerCase().equals("inclusive") ? Integer.toString(variability.getVariants().size()) : "1");
     }
     
     /**
      * Method responsible for updating the Variants List.
      */
     public void updateVariantsList() {
-        this.getVariantsList().removeAll();
+        getVariantsList().removeAll();
         DefaultListModel model = new DefaultListModel();
-        for (Element element :  this.variability.getVariants())
+        for (Element element :  variability.getVariants())
             model.addElement(element);
-        this.getVariantsList().setModel(model);
+        getVariantsList().setModel(model);
     }
     
     /**
@@ -133,7 +133,7 @@ public final class PanelBaseVariants extends PanelBase {
      * @return Variant Element.
      */
     public Element getVariant() {
-        return (Element) this.getVariantComboBox().getSelectedItem();
+        return (Element) getVariantComboBox().getSelectedItem();
     }
     
     /**
@@ -141,7 +141,7 @@ public final class PanelBaseVariants extends PanelBase {
      * @return Constraint Combo Box.
      */
     public JComboBox getConstraintComboBox() {
-        return this.getComboBox("constraintComboBox");
+        return getComboBox("constraint");
     }
     
     /**
@@ -149,7 +149,7 @@ public final class PanelBaseVariants extends PanelBase {
      * @return Minimum Text Field.
      */
     public JTextField getMinimumTextField() {
-        return this.getTextField("minimumTextField");
+        return getTextField("min");
     }
     
     /**
@@ -157,7 +157,7 @@ public final class PanelBaseVariants extends PanelBase {
      * @return Maximum Text Field.
      */
     public JTextField getMaximumTextField() {
-        return this.getTextField("maximumTextField");
+        return getTextField("max");
     }
     
     /**
@@ -165,7 +165,7 @@ public final class PanelBaseVariants extends PanelBase {
      * @return Variant Combo Box.
      */
     public JComboBox getVariantComboBox() {
-        return this.getComboBox("variantComboBox");
+        return getComboBox("variant");
     }
     
     /**
@@ -173,7 +173,7 @@ public final class PanelBaseVariants extends PanelBase {
      * @return Add Variant Button.
      */
     public JButton getAddVariantButton() {
-        return this.getButton("addVariantButton");
+        return getButton("addVariant");
     }
     
     /**
@@ -181,7 +181,7 @@ public final class PanelBaseVariants extends PanelBase {
      * @return Del Variant Button.
      */
     public JButton getDelVariantButton() {
-        return this.getButton("delVariantButton");
+        return getButton("delVariant");
     }
     
     /**
@@ -189,7 +189,7 @@ public final class PanelBaseVariants extends PanelBase {
      * @return Variants List.
      */
     public JList getVariantsList() {
-        return this.getList("variantsList");
+        return getList("variants");
     }
     
     /**
@@ -197,6 +197,6 @@ public final class PanelBaseVariants extends PanelBase {
      * @return Variants Scroll Pane.
      */
     public JScrollPane getVariantsScrollPane() {
-        return this.getScrollPane("variantsList");
+        return getScrollPane("variants");
     }
 }

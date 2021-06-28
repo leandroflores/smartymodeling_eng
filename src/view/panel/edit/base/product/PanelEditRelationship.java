@@ -25,23 +25,23 @@ public final class PanelEditRelationship extends PanelEdit {
     public PanelEditRelationship(ViewMenu view, Relationship relationship) {
         super(view);
         this.relationship = relationship;
-        this.setPreferredSize(new Dimension(200, 100));
-        this.addComponents();
+        setPreferredSize(new Dimension(200, 100));
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseRelationship();
+        addPanelBaseRelationship();
     }
     
     /**
      * Method responsible for adding the Panel Base Relationship.
      */
     private void addPanelBaseRelationship() {
-        this.addPanel("panelBaseRelationship", new PanelBaseRelationship(this.viewMenu, this.relationship));
-        this.createScrollPane("scrollPanelBaseRelationship",  this.getPanelBaseRelationship());
-        this.getScrollPane("scrollPanelBaseRelationship").setViewportView(this.getPanelBaseRelationship());
-        this.tabbedPane.add("Relationship", this.getScrollPane("scrollPanelBaseRelationship"));
+        addPanel("base_relationship", new PanelBaseRelationship(viewMenu, relationship));
+        createScrollPane("base_relationship", getPanelBaseRelationship());
+        getScrollPane("base_relationship").setViewportView(getPanelBaseRelationship());
+        tabbedPane.add("Relationship", getScrollPane("base_relationship"));
     }
     
     /**
@@ -49,7 +49,7 @@ public final class PanelEditRelationship extends PanelEdit {
      * @return Panel Base Relationship.
      */
     public PanelBaseRelationship getPanelBaseRelationship() {
-        return (PanelBaseRelationship) this.getPanel("panelBaseRelationship");
+        return (PanelBaseRelationship) getPanel("base_relationship");
     }
     
     /**
@@ -57,6 +57,6 @@ public final class PanelEditRelationship extends PanelEdit {
      * @return Relationship.
      */
     public Relationship getRelationship() {
-        return this.relationship;
+        return relationship;
     }
 }

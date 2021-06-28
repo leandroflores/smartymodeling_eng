@@ -24,22 +24,22 @@ public final class PanelEditProfile extends PanelEdit {
     public PanelEditProfile(ViewMenu view, Profile profile) {
         super(view);
         this.profile = profile;
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseProfile();
+        addPanelBaseProfile();
     }
     
     /**
      * Method responsible for adding the Panel Base Profile.
      */
     private void addPanelBaseProfile() {
-        this.addPanel("panelBaseProfile", new PanelBaseProfile(this.viewMenu, this.profile));
-        this.createScrollPane("scrollPanelBaseProfile",  this.getPanelBaseProfile());
-        this.getScrollPane("scrollPanelBaseProfile").setViewportView(this.getPanelBaseProfile());
-        this.tabbedPane.add("Profile", this.getScrollPane("scrollPanelBaseProfile"));
+        addPanel("base_profile", new PanelBaseProfile(viewMenu, profile));
+        createScrollPane("base_profile", getPanelBaseProfile());
+        getScrollPane("base_profile").setViewportView(getPanelBaseProfile());
+        tabbedPane.add("Profile", getScrollPane("base_profile"));
     }
     
     /**
@@ -47,7 +47,7 @@ public final class PanelEditProfile extends PanelEdit {
      * @return Panel Base Profile.
      */
     public PanelBaseProfile getPanelBaseProfile() {
-        return (PanelBaseProfile) this.getPanel("panelBaseProfile");
+        return (PanelBaseProfile) getPanel("base_profile");
     }
     
     /**
@@ -55,6 +55,6 @@ public final class PanelEditProfile extends PanelEdit {
      * @return Profile.
      */
     public Profile getProfile() {
-        return this.profile;
+        return profile;
     }
 }

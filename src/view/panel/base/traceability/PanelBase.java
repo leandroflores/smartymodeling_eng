@@ -1,8 +1,6 @@
 package view.panel.base.traceability;
 
-import model.structural.base.Diagram;
 import model.structural.base.traceability.Traceability;
-import model.structural.base.variability.Variability;
 import view.main.structural.ViewMenu;
 
 /**
@@ -10,7 +8,8 @@ import view.main.structural.ViewMenu;
  * <p>Class responsible for defining a Abstract Model for <b>Traceability Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-22
- * @see    controller.view.panel.base.traceability.
+ * @see    controller.view.panel.base.traceability.ControllerPanelBase
+ * @see    model.structural.base.traceability.Traceability
  * @see    view.panel.base.PanelBase
  */
 public abstract class PanelBase extends view.panel.base.PanelBase {
@@ -31,6 +30,6 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Traceability.
      */
     public Traceability getTraceability() {
-        return this.traceability;
+        return traceability;
     }
 }

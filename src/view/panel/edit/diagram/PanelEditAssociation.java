@@ -22,11 +22,11 @@ public final class PanelEditAssociation extends view.panel.edit.base.PanelEditAs
      */
     public PanelEditAssociation(ViewMenu view, Diagram diagram, Association association) {
         super(view, diagram, association);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        super.addPanels("Association");
+        addPanels("Association");
     }
 }

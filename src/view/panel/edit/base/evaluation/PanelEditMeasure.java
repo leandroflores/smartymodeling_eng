@@ -24,21 +24,21 @@ public final class PanelEditMeasure extends PanelEdit {
     public PanelEditMeasure(ViewMenu view, Measure measure) {
         super(view);
         this.measure = measure;
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseMeasure();
+        addPanelBaseMeasure();
     }
     
     /**
      * Method responsible for adding the Panel Base Measure.
      */
     protected void addPanelBaseMeasure() {
-        this.addPanel("panelBaseMeasure", new PanelBaseMeasure(this.viewMenu, this.measure));
-        this.createScrollPane("scrollPanelBaseMeasure", this.getPanelBaseMeasure());
-        this.tabbedPane.add("Measure", this.getScrollPane("scrollPanelBaseMeasure"));
+        addPanel("base_measure", new PanelBaseMeasure(viewMenu, measure));
+        createScrollPane("base_measure", getPanelBaseMeasure());
+        tabbedPane.add("Measure", getScrollPane("base_measure"));
     }
     
     /**
@@ -46,7 +46,7 @@ public final class PanelEditMeasure extends PanelEdit {
      * @return Panel Base Measure.
      */
     public PanelBaseMeasure getPanelBaseMeasure() {
-        return (PanelBaseMeasure) this.getPanel("panelBaseMeasure");
+        return (PanelBaseMeasure) getPanel("base_measure");
     }
     
     /**
@@ -54,6 +54,6 @@ public final class PanelEditMeasure extends PanelEdit {
      * @return Measure.
      */
     public Measure getMeasure() {
-        return this.measure;
+        return measure;
     }
 }

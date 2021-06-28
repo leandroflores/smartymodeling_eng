@@ -35,7 +35,7 @@ public abstract class PanelEditAssociation extends PanelEdit {
      * @param title Tab Element Title.
      */
     protected void addPanels(String title) {
-        this.addPanelBaseAssociation(title);
+        addPanelBaseAssociation(title);
     }
     
     /**
@@ -43,10 +43,10 @@ public abstract class PanelEditAssociation extends PanelEdit {
      * @param title Tab Title.
      */
     protected void addPanelBaseAssociation(String title) {
-        this.addPanel("panelBaseAssociation", new PanelBaseAssociation(this.viewMenu, this.getDiagram(), this.getAssociation()));
-        this.createScrollPane("scrollPanelBaseAssociation",  this.getPanelBaseAssociation());
-        this.getScrollPane("scrollPanelBaseAssociation").setViewportView(this.getPanelBaseAssociation());
-        this.tabbedPane.add(title, this.getScrollPane("scrollPanelBaseAssociation"));
+        addPanel("base_association", new PanelBaseAssociation(viewMenu, getDiagram(), getAssociation()));
+        createScrollPane("base_association",  getPanelBaseAssociation());
+        getScrollPane("base_association").setViewportView(getPanelBaseAssociation());
+        tabbedPane.add(title, getScrollPane("base_association"));
     }
     
     /**
@@ -54,7 +54,7 @@ public abstract class PanelEditAssociation extends PanelEdit {
      * @return Panel Base Association.
      */
     public PanelBaseAssociation getPanelBaseAssociation() {
-        return (PanelBaseAssociation) this.getPanel("panelBaseAssociation");
+        return (PanelBaseAssociation) getPanel("base_association");
     }
     
     /**
@@ -62,7 +62,7 @@ public abstract class PanelEditAssociation extends PanelEdit {
      * @return Association.
      */
     public Association getAssociation() {
-        return this.association;
+        return association;
     }
     
     /**
@@ -70,6 +70,6 @@ public abstract class PanelEditAssociation extends PanelEdit {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
 }

@@ -26,34 +26,34 @@ public final class PanelEditTraceability extends PanelEdit {
     public PanelEditTraceability(ViewMenu view, Traceability traceability) {
         super(view);
         this.traceability = traceability;
-        this.setPreferredSize(new Dimension(200, 100));
-        this.addComponents();
+        setPreferredSize(new Dimension(200, 100));
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseTraceability();
-        this.addPanelBaseElements();
+        addPanelBaseTraceability();
+        addPanelBaseElements();
     }
     
     /**
      * Method responsible for adding the Panel Base Traceability.
      */
     private void addPanelBaseTraceability() {
-        this.addPanel("panelBaseTraceability", new PanelBaseTraceability(this.getViewMenu(), this.traceability));
-        this.createScrollPane("scrollPanelBaseTraceability",  this.getPanelBaseTraceability());
-        this.getScrollPane("scrollPanelBaseTraceability").setViewportView(this.getPanelBaseTraceability());
-        this.tabbedPane.add("Traceability", this.getScrollPane("scrollPanelBaseTraceability"));
+        addPanel("base_traceability", new PanelBaseTraceability(getViewMenu(), traceability));
+        createScrollPane("base_traceability", getPanelBaseTraceability());
+        getScrollPane("base_traceability").setViewportView(getPanelBaseTraceability());
+        tabbedPane.add("Traceability", getScrollPane("base_traceability"));
     }
     
     /**
      * Method responsible for adding the Panel Base Elements.
      */
     private void addPanelBaseElements() {
-        this.addPanel("panelBaseElements", new PanelBaseElements(this.getViewMenu(), this.traceability));
-        this.createScrollPane("scrollPanelBaseElements",  this.getPanelBaseElements());
-        this.getScrollPane("scrollPanelBaseElements").setViewportView(this.getPanelBaseElements());
-        this.tabbedPane.add("Elements", this.getScrollPane("scrollPanelBaseElements"));
+        addPanel("elements", new PanelBaseElements(getViewMenu(), traceability));
+        createScrollPane("elements", getPanelBaseElements());
+        getScrollPane("elements").setViewportView(getPanelBaseElements());
+        tabbedPane.add("Elements", getScrollPane("elements"));
     }
     
     /**
@@ -61,7 +61,7 @@ public final class PanelEditTraceability extends PanelEdit {
      * @return Panel Base Traceability.
      */
     public PanelBaseTraceability getPanelBaseTraceability() {
-        return (PanelBaseTraceability) this.getPanel("panelBaseTraceability");
+        return (PanelBaseTraceability) getPanel("base_traceability");
     }
     
     /**
@@ -69,7 +69,7 @@ public final class PanelEditTraceability extends PanelEdit {
      * @return Panel Base Elements.
      */
     public PanelBaseElements getPanelBaseElements() {
-        return (PanelBaseElements) this.getPanel("panelBaseElements");
+        return (PanelBaseElements) getPanel("elements");
     }
     
     /**
@@ -77,6 +77,6 @@ public final class PanelEditTraceability extends PanelEdit {
      * @return Traceability.
      */
     public Traceability getTraceability() {
-        return this.traceability;
+        return traceability;
     }
 }

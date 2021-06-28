@@ -20,22 +20,22 @@ public final class PanelEditProject extends PanelEdit {
      */
     public PanelEditProject(ViewMenu view) {
         super(view);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseProject();
+        addPanelBaseProject();
     }
     
     /**
      * Method responsible for adding the Panel Base Project.
      */
     private void addPanelBaseProject() {
-        this.addPanel("panelBaseProject", new PanelBaseProject(this.viewMenu));
-        this.createScrollPane("scrollPanelBaseProject",  this.getPanelBaseProject());
-        this.getScrollPane("scrollPanelBaseProject").setViewportView(this.getPanelBaseProject());
-        this.tabbedPane.add("Project", this.getScrollPane("scrollPanelBaseProject"));
+        addPanel("base_project", new PanelBaseProject(viewMenu));
+        createScrollPane("base_project", getPanelBaseProject());
+        getScrollPane("base_project").setViewportView(getPanelBaseProject());
+        tabbedPane.add("Project", getScrollPane("base_project"));
     }
     
     /**
@@ -43,6 +43,6 @@ public final class PanelEditProject extends PanelEdit {
      * @return Panel Base Project.
      */
     public PanelBaseProject getPanelBaseProject() {
-        return (PanelBaseProject) this.getPanel("panelBaseProject");
+        return (PanelBaseProject) getPanel("base_project");
     }
 }

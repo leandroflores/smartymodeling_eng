@@ -8,7 +8,7 @@ import view.main.structural.ViewMenu;
  * <p>Class responsible for defining a Abstract Model for <b>Metric Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-22
- * @see    controller.view.panel.base.
+ * @see    controller.view.panel.base.evaluation.ControllerPanelBase
  * @see    view.panel.base.PanelBase
  */
 public abstract class PanelBase extends view.panel.base.PanelBase {
@@ -29,6 +29,6 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Metric.
      */
     public Metric getMetric() {
-        return this.metric;
+        return metric;
     }
 }

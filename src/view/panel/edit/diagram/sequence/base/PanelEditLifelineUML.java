@@ -24,23 +24,23 @@ public final class PanelEditLifelineUML extends PanelEditElement {
      */
     public PanelEditLifelineUML(ViewMenu view, SequenceDiagram diagram, LifelineUML lifeline) {
         super(view, diagram, lifeline);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseLifelineUML();
-        this.addPanelDependency();
+        addPanelBaseLifelineUML();
+        addPanelDependency();
     }
     
     /**
      * Method responsible for adding the Panel Base Lifeline UML.
      */
     protected void addPanelBaseLifelineUML() {
-        this.addPanel("panelBaseLifelineUML", new PanelBaseLifelineUML(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelBaseLifelineUML",  this.getPanelBaseLifelineUML());
-        this.getScrollPane("scrollPanelBaseLifelineUML").setViewportView(this.getPanelBaseLifelineUML());
-        this.tabbedPane.add("Lifeline", this.getScrollPane("scrollPanelBaseLifelineUML"));
+        addPanel("base_lifeline", new PanelBaseLifelineUML(viewMenu, getDiagram(), getElement()));
+        createScrollPane("base_lifeline", getPanelBaseLifelineUML());
+        getScrollPane("base_lifeline").setViewportView(getPanelBaseLifelineUML());
+        tabbedPane.add("Lifeline", getScrollPane("base_lifeline"));
     }
     
     /**
@@ -48,16 +48,16 @@ public final class PanelEditLifelineUML extends PanelEditElement {
      * @return Panel Base Lifeline UML.
      */
     public PanelBaseLifelineUML getPanelBaseLifelineUML() {
-        return (PanelBaseLifelineUML) this.getPanel("panelBaseLifelineUML");
+        return (PanelBaseLifelineUML) getPanel("base_lifeline");
     }
     
     @Override
     public LifelineUML getElement() {
-        return (LifelineUML) this.element;
+        return (LifelineUML) element;
     }
     
     @Override
     public SequenceDiagram getDiagram() {
-        return (SequenceDiagram) this.diagram;
+        return (SequenceDiagram) diagram;
     }
 }

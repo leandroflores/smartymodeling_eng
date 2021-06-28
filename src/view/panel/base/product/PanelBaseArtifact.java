@@ -28,28 +28,28 @@ public final class PanelBaseArtifact extends PanelBase {
         super(view);
         this.artifact   = artifact;
         this.controller = new ControllerPanelBaseArtifact(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        setDefaultProperties();
+        addComponents();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(4, 2));
+        setLayout(new GridLayout(4, 2));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Product: "));
-        this.add(this.createTextFieldNoEditable("productTextField",  this.getInstance().getProduct().getName(), 15));
+        add(createLabel("Product: "));
+        add(createTextFieldNoEditable("product",  getInstance().getProduct().getName(), 15));
         
-        this.add(this.createLabel("Instance: "));
-        this.add(this.createTextFieldNoEditable("instanceTextField", this.getInstance().getName(), 15));
+        add(createLabel("Instance: "));
+        add(createTextFieldNoEditable("instance", getInstance().getName(), 15));
         
-        this.add(this.createLabel("Diagram: "));
-        this.add(this.createTextFieldNoEditable("diagramTextField",  this.getInstance().getDiagram().toString(), 15));
+        add(createLabel("Diagram: "));
+        add(createTextFieldNoEditable("diagram",  getInstance().getDiagram().toString(), 15));
         
-        this.add(this.createLabel("Element: "));
-        this.add(this.createTextFieldNoEditable("elementTextField",  this.getArtifact().getElement().getName(), 15));
+        add(createLabel("Element: "));
+        add(createTextFieldNoEditable("element",  getArtifact().getElement().getName(), 15));
     }
     
     /**
@@ -57,7 +57,7 @@ public final class PanelBaseArtifact extends PanelBase {
      * @return Instance.
      */
     public Instance getInstance() {
-        return this.artifact.getInstance();
+        return artifact.getInstance();
     }
     
     /**
@@ -65,6 +65,6 @@ public final class PanelBaseArtifact extends PanelBase {
      * @return Artifact.
      */
     public Artifact getArtifact() {
-        return this.artifact;
+        return artifact;
     }
 }

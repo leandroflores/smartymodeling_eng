@@ -23,21 +23,21 @@ public final class PanelEditUseCaseUML extends PanelEditElement {
      */
     public PanelEditUseCaseUML(ViewMenu view, UseCaseDiagram diagram, UseCaseUML useCase) {
         super(view, diagram, useCase);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        super.addPanels("Use Case");
+        addPanels("Use Case");
     }
     
     @Override
     public UseCaseUML getElement() {
-        return (UseCaseUML) this.element;
+        return (UseCaseUML) element;
     }
     
     @Override
     public UseCaseDiagram getDiagram() {
-        return (UseCaseDiagram) this.diagram;
+        return (UseCaseDiagram) diagram;
     }
 }

@@ -25,28 +25,28 @@ public final class PanelBaseMetric extends PanelBase {
      */
     public PanelBaseMetric(ViewMenu view, Metric metric) {
         super(view, metric);
-        this.controller = new ControllerPanelBaseMetric(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        controller = new ControllerPanelBaseMetric(this);
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name*: "),  this.createConstraints(1, 1, 0, 0));
-        this.add(this.createTextField("nameTextField", this.metric.getName(), 10),  this.createConstraints(2, 1, 1, 0));
+        add(createLabel("Name*: "),  createConstraints(1, 1, 0, 0));
+        add(createTextField("name", metric.getName(), 10), createConstraints(2, 1, 1, 0));
         
-        this.add(this.createLabel("Label*: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createTextField("labelTextField", this.metric.getLabel(), 10), this.createConstraints(2, 1, 1, 1));
+        add(createLabel("Label*: "), createConstraints(1, 1, 0, 1));
+        add(createTextField("label", metric.getLabel(), 10), createConstraints(2, 1, 1, 1));
         
-        this.createTextArea("descriptionTextArea", this.metric.getDescription());
-        this.add(this.createLabel("Description: "), this.createConstraints(1, 1, 0, 2));
-        this.add(this.getScrollPane("descriptionTextArea"), this.createConstraints(2, 5, 1, 2));
+        createTextArea("description", metric.getDescription());
+        add(createLabel("Description: "), createConstraints(1, 1, 0, 2));
+        add(getScrollPane("description"), createConstraints(2, 5, 1, 2));
     }
     
     /**
@@ -54,7 +54,7 @@ public final class PanelBaseMetric extends PanelBase {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -62,7 +62,7 @@ public final class PanelBaseMetric extends PanelBase {
      * @return Label Text Field.
      */
     public JTextField getLabelTextField() {
-        return this.getTextField("labelTextField");
+        return getTextField("label");
     }
     
     /**
@@ -70,6 +70,6 @@ public final class PanelBaseMetric extends PanelBase {
      * @return Description Text Area.
      */
     public JTextArea getDescriptionTextArea() {
-        return this.getTextArea("descriptionTextArea");
+        return getTextArea("description");
     }
 }

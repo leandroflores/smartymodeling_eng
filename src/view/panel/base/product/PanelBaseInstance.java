@@ -28,26 +28,26 @@ public final class PanelBaseInstance extends PanelBase {
         super(view);
         this.instance   = instance;
         this.controller = new ControllerPanelBaseInstance(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(3, 2));
+        setLayout(new GridLayout(3, 2));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Product: "));
-        this.add(this.createTextFieldNoEditable("productTextField", this.instance.getProduct().getName(), 15));
+        add(createLabel("Product: "));
+        add(createTextFieldNoEditable("product", instance.getProduct().getName(), 15));
         
-        this.add(this.createLabel("Diagram: "));
-        this.add(this.createTextFieldNoEditable("diagramTextField", this.instance.getDiagram().getName(), 15));
+        add(createLabel("Diagram: "));
+        add(createTextFieldNoEditable("diagram", instance.getDiagram().getName(), 15));
         
-        this.add(this.createLabel("Name*: "));
-        this.add(this.createTextField("nameTextField", this.instance.getName(), 15));
+        add(createLabel("Name*: "));
+        add(createTextField("name", instance.getName(), 15));
     }
     
     /**
@@ -55,7 +55,7 @@ public final class PanelBaseInstance extends PanelBase {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -63,6 +63,6 @@ public final class PanelBaseInstance extends PanelBase {
      * @return Instance.
      */
     public Instance getInstance() {
-        return this.instance;
+        return instance;
     }
 }

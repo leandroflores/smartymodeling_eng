@@ -24,22 +24,22 @@ public final class PanelEditFlowUML extends PanelEditAssociation {
      */
     public PanelEditFlowUML(ViewMenu view, ActivityDiagram diagram, FlowUML flow) {
         super(view, diagram, flow);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseFlowUML();
+        addPanelBaseFlowUML();
     }
     
     /**
      * Method responsible for adding the Panel Base Flow UML.
      */
     protected void addPanelBaseFlowUML() {
-        this.addPanel("panelBaseFlowUML", new PanelBaseFlowUML(this.viewMenu, this.getDiagram(), this.getAssociation()));
-        this.createScrollPane("scrollPanelBaseFlowUML",  this.getPanelBaseFlowUML());
-        this.getScrollPane("scrollPanelBaseFlowUML").setViewportView(this.getPanelBaseFlowUML());
-        this.tabbedPane.add("Flow", this.getScrollPane("scrollPanelBaseFlowUML"));
+        addPanel("base_flow", new PanelBaseFlowUML(viewMenu, getDiagram(), getAssociation()));
+        createScrollPane("base_flow", getPanelBaseFlowUML());
+        getScrollPane("base_flow").setViewportView(getPanelBaseFlowUML());
+        tabbedPane.add("Flow", getScrollPane("base_flow"));
     }
     
     /**
@@ -47,16 +47,16 @@ public final class PanelEditFlowUML extends PanelEditAssociation {
      * @return Panel Base Flow UML.
      */
     public PanelBaseFlowUML getPanelBaseFlowUML() {
-        return (PanelBaseFlowUML) this.getPanel("panelBaseFlowUML");
+        return (PanelBaseFlowUML) getPanel("base_flow");
     }
     
     @Override
     public FlowUML getAssociation() {
-        return (FlowUML) this.association;
+        return (FlowUML) association;
     }
     
     @Override
     public ActivityDiagram getDiagram() {
-        return (ActivityDiagram) this.diagram;
+        return (ActivityDiagram) diagram;
     }
 }

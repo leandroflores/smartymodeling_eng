@@ -23,21 +23,21 @@ public final class PanelEditPackageUML extends PanelEditElement {
      */
     public PanelEditPackageUML(ViewMenu view, ClassDiagram diagram, PackageUML package_) {
         super(view, diagram, package_);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        super.addPanels("Package");
+        addPanels("Package");
     }
     
     @Override
     public PackageUML getElement() {
-        return (PackageUML) this.element;
+        return (PackageUML) element;
     }
     
     @Override
     public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+        return (ClassDiagram) diagram;
     }
 }

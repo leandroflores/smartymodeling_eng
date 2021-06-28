@@ -32,38 +32,30 @@ public final class PanelBaseRequirement extends PanelBase {
         super(view);
         this.requirement = requirement;
         this.controller  = new ControllerPanelBaseRequirement(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Id*: "), this.createConstraints(1, 1, 0, 0));
-        this.add(this.createTextField("codeTextField", this.requirement.getCode(), 10),  this.createConstraints(4, 1, 1, 0));
+        add(createLabel("Id*: "), createConstraints(1, 1, 0, 0));
+        add(createTextField("code", requirement.getCode(), 10),  createConstraints(4, 1, 1, 0));
         
-        this.add(this.createLabel("Type*: "), this.createConstraints(1, 1, 0, 1));
-        add(createComboBox("typeComboBox", new ControllerRequirement(project).getTargets(), 10, this.requirement.getType()), this.createConstraints(4, 1, 1, 1));
+        add(createLabel("Type*: "), createConstraints(1, 1, 0, 1));
+        add(createComboBox("type", new ControllerRequirement(project).getTargets(), 10, requirement.getType()), createConstraints(4, 1, 1, 1));
         
-        this.add(this.createLabel("Name*: "), this.createConstraints(1, 1, 0, 2));
-        this.add(this.createTextField("nameTextField", this.requirement.getName(), 15), this.createConstraints(4, 1, 1, 2));
+        add(createLabel("Name*: "), createConstraints(1, 1, 0, 2));
+        add(createTextField("name", requirement.getName(), 15), createConstraints(4, 1, 1, 2));
         
-        this.createTextArea("descriptionTextArea", this.requirement.getDescription());
-        this.add(this.createLabel("Description*: "), this.createConstraints(1, 1, 0, 3));
-        this.add(this.getDescriptionScrollPane(), this.createConstraints(4, 5, 1, 3));
-    }
-    
-    /**
-     * Method responsible for return the Requirement.
-     * @return Requirement.
-     */
-    public Requirement getRequirement() {
-        return this.requirement;
+        createTextArea("description", requirement.getDescription());
+        add(createLabel("Description*: "), createConstraints(1, 1, 0, 3));
+        add(getDescriptionScrollPane(), createConstraints(4, 5, 1, 3));
     }
     
     /**
@@ -71,7 +63,7 @@ public final class PanelBaseRequirement extends PanelBase {
      * @return Code Text Field.
      */
     public JTextField getCodeTextField() {
-        return this.getTextField("codeTextField");
+        return getTextField("code");
     }
     
     /**
@@ -79,7 +71,7 @@ public final class PanelBaseRequirement extends PanelBase {
      * @return Type Combo Box.
      */
     public JComboBox getTypeComboBox() {
-        return this.getComboBox("typeComboBox");
+        return getComboBox("type");
     }
     
     /**
@@ -87,7 +79,7 @@ public final class PanelBaseRequirement extends PanelBase {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -95,7 +87,7 @@ public final class PanelBaseRequirement extends PanelBase {
      * @return Description Text Area.
      */
     public JTextArea getDescriptionTextArea() {
-        return this.getTextArea("descriptionTextArea");
+        return getTextArea("description");
     }
     
     /**
@@ -103,6 +95,14 @@ public final class PanelBaseRequirement extends PanelBase {
      * @return Description Scroll Pane.
      */
     public JScrollPane getDescriptionScrollPane() {
-        return this.getScrollPane("descriptionTextArea");
+        return getScrollPane("description");
+    }
+    
+    /**
+     * Method responsible for return the Requirement.
+     * @return Requirement.
+     */
+    public Requirement getRequirement() {
+        return requirement;
     }
 }

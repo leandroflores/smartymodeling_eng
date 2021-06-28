@@ -43,30 +43,30 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
         this.requirement = requirement;
         this.type        = type;
         this.controller  = new ControllerPanelBaseRequirementDiagram(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
-        this.setMinimumSize(new Dimension(150, 150));
+        setLayout(new GridBagLayout());
+        setMinimumSize(new Dimension(150, 150));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Diagram: "), this.createConstraints(1, 1, 0, 0));
-        this.add(this.createComboBox("diagramComboBox", this.getDiagrams(), 100), this.createConstraints(4, 1, 1, 0));
+        add(createLabel("Diagram: "), createConstraints(1, 1, 0, 0));
+        add(createComboBox("diagram", getDiagrams(), 100), createConstraints(4, 1, 1, 0));
         
-        this.add(this.createLabel("Element: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("elementComboBox", this.getElements(), 175), this.createConstraints(4, 1, 1, 1));
+        add(createLabel("Element: "), createConstraints(1, 1, 0, 1));
+        add(createComboBox("element", getElements(), 175), createConstraints(4, 1, 1, 1));
         
-        this.add(this.createButtonsPanel(), this.createConstraints(5, 1, 0, 2));
+        add(createButtonsPanel(), createConstraints(5, 1, 0, 2));
         
-        this.createList("elementsList");
-        this.add(this.getElementsScrollPane(), this.createConstraints(5, 10, 0, 3));
-        this.updateElementsList();
+        createList("elements");
+        add(getElementsScrollPane(), createConstraints(5, 10, 0, 3));
+        updateElementsList();
     }
     
     /**
@@ -76,8 +76,8 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
     private JPanel createButtonsPanel() {
         JPanel panel = new JPanel();
                panel.setLayout(new GridLayout(1, 2));
-               panel.add(this.createButton("addElementButton", "", "Add Element", "add.png"));
-               panel.add(this.createButton("delElementButton", "", "Del Element", "not.png"));
+               panel.add(createButton("addElement", "", "Add Element", "add.png"));
+               panel.add(createButton("delElement", "", "Del Element", "not.png"));
         return panel;
     }
     
@@ -86,8 +86,8 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
      * @return Diagrams Array.
      */
     public Object[] getDiagrams() {
-        List   diagrams = this.getProject().getDiagrams(this.type);
-          this.diagram  = diagrams.isEmpty() ? null : (Diagram) diagrams.get(0);
+        List   diagrams = getProject().getDiagrams(type);
+               diagram  = diagrams.isEmpty() ? null : (Diagram) diagrams.get(0);
         return diagrams.toArray();
     }
     
@@ -96,8 +96,8 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
      * @return Elements Array.
      */
     private Element[] getElements() {
-        if (this.diagram != null)
-            return new ControllerDiagram(this.diagram).getDefaultElements();
+        if (diagram != null)
+            return new ControllerDiagram(diagram).getDefaultElements();
         return new Element[0];
     }
     
@@ -105,11 +105,11 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
      * Method responsible for updating the Element Combo Box.
      */
     public void updateElementComboBox() {
-        this.getElementComboBox().removeAllItems();
-        this.diagram = (Diagram) this.getDiagramComboBox().getSelectedItem();
-        if (this.diagram != null) {
-            for (Element element : this.diagram.getDefaultElements())
-                this.getElementComboBox().addItem(element);
+        getElementComboBox().removeAllItems();
+        diagram = (Diagram) getDiagramComboBox().getSelectedItem();
+        if (diagram != null) {
+            for (Element element : diagram.getDefaultElements())
+                getElementComboBox().addItem(element);
         }
     }
     
@@ -117,22 +117,22 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
      * Method responsible for updating the Elements List.
      */
     public void updateElementsList() {
-        this.getElementsList().removeAll();
+        getElementsList().removeAll();
         DefaultListModel model = new DefaultListModel();
-        for (Element element :  this.requirement.getElements(this.type))
+        for (Element element : requirement.getElements(type))
             model.addElement(element);
-        this.getElementsList().setModel(model);
+        getElementsList().setModel(model);
     }
     
     /**
      * Method responsible for adding a Element.
      */
     public void addElement() {
-        Element element = this.getElement();
+        Element element = getElement();
         if (element != null) {
-            this.requirement.addElement(this.type, element);
-            this.updateElementsList();
-            this.getViewMenu().updatePanelTree();
+            requirement.addElement(type, element);
+            updateElementsList();
+            getViewMenu().updatePanelTree();
         }
     }
     
@@ -140,11 +140,11 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
      * Method responsible for deleting a Element.
      */
     public void delElement() {
-        Element element = (Element) this.getElementsList().getSelectedValue();
+        Element element = (Element) getElementsList().getSelectedValue();
         if (element != null) {
-            this.requirement.removeElement(element);
-            this.updateElementsList();
-            this.getViewMenu().updatePanelTree();
+            requirement.removeElement(element);
+            updateElementsList();
+            getViewMenu().updatePanelTree();
         }
     }
     
@@ -153,7 +153,7 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
      * @return Variant Element.
      */
     public Element getElement() {
-        return (Element) this.getElementComboBox().getSelectedItem();
+        return (Element) getElementComboBox().getSelectedItem();
     }
     
     /**
@@ -161,7 +161,7 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
      * @return Exists Diagram.
      */
     public boolean existsDiagram() {
-        return this.diagram != null;
+        return diagram != null;
     }
     
     /**
@@ -170,7 +170,7 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
      */
     public void setRequirement(Requirement requirement) {
         this.requirement = requirement;
-        this.updateElementsList();
+        updateElementsList();
     }
     
     /**
@@ -178,7 +178,7 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
      * @return Diagram Combo Box.
      */
     public JComboBox getDiagramComboBox() {
-        return this.getComboBox("diagramComboBox");
+        return getComboBox("diagram");
     }
     
     /**
@@ -186,7 +186,7 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
      * @return Element Combo Box.
      */
     public JComboBox getElementComboBox() {
-        return this.getComboBox("elementComboBox");
+        return getComboBox("element");
     }
     
     /**
@@ -194,7 +194,7 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
      * @return Add Element Button.
      */
     public JButton getAddElementButton() {
-        return this.getButton("addElementButton");
+        return getButton("addElement");
     }
     
     /**
@@ -202,7 +202,7 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
      * @return Del Element Button.
      */
     public JButton getDelElementButton() {
-        return this.getButton("delElementButton");
+        return getButton("delElement");
     }
     
     /**
@@ -210,7 +210,7 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
      * @return Elements List.
      */
     public JList getElementsList() {
-        return this.getList("elementsList");
+        return getList("elements");
     }
     
     /**
@@ -218,6 +218,6 @@ public final class PanelBaseRequirementDiagram extends PanelBase {
      * @return Elements Scroll Pane.
      */
     public JScrollPane getElementsScrollPane() {
-        return this.getScrollPane("elementsList");
+        return getScrollPane("elements");
     }
 }

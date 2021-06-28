@@ -37,9 +37,9 @@ public abstract class PanelEditElement extends PanelEdit {
      * @param title Tab Element Title.
      */
     protected void addPanels(String title) {
-        this.addPanelBaseElement(title);
-        this.addPanelStereotype();
-        this.addPanelDependency();
+        addPanelBaseElement(title);
+        addPanelStereotype();
+        addPanelDependency();
     }
     
     /**
@@ -47,30 +47,30 @@ public abstract class PanelEditElement extends PanelEdit {
      * @param title Tab Title.
      */
     protected void addPanelBaseElement(String title) {
-        this.addPanel("panelBaseElement", new PanelBaseElement(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelBaseElement",  this.getPanelBaseElement());
-        this.getScrollPane("scrollPanelBaseElement").setViewportView(this.getPanelBaseElement());
-        this.tabbedPane.add(title, this.getScrollPane("scrollPanelBaseElement"));
+        addPanel("base_element", new PanelBaseElement(viewMenu, getDiagram(), getElement()));
+        createScrollPane("base_element", getPanelBaseElement());
+        getScrollPane("base_element").setViewportView(getPanelBaseElement());
+        tabbedPane.add(title, getScrollPane("base_element"));
     }
     
     /**
      * Method responsible for adding the Panel Stereotype.
      */
     protected void addPanelStereotype() {
-        this.addPanel("panelStereotype", new PanelStereotype(this.getViewMenu(), this.element));
-        this.createScrollPane("scrollPanelStereotype",  this.getPanelStereotype());
-        this.getScrollPane("scrollPanelStereotype").setViewportView(this.getPanelStereotype());
-        this.tabbedPane.add("Stereotype", this.getScrollPane("scrollPanelStereotype"));
+        addPanel("stereotype", new PanelStereotype(getViewMenu(), element));
+        createScrollPane("stereotype", getPanelStereotype());
+        getScrollPane("stereotype").setViewportView(getPanelStereotype());
+        tabbedPane.add("Stereotype", getScrollPane("stereotype"));
     }
     
     /**
      * Method responsible for adding the Panel Dependency.
      */
     protected void addPanelDependency() {
-        this.addPanel("panelDependency", new PanelDependency(this.getViewMenu(), this.element));
-        this.createScrollPane("scrollPanelDependency",  this.getPanelDependency());
-        this.getScrollPane("scrollPanelDependency").setViewportView(this.getPanelDependency());
-        this.tabbedPane.add("Dependency", this.getScrollPane("scrollPanelDependency"));
+        addPanel("dependency", new PanelDependency(getViewMenu(), element));
+        createScrollPane("dependency", getPanelDependency());
+        getScrollPane("dependency").setViewportView(getPanelDependency());
+        tabbedPane.add("Dependency", getScrollPane("dependency"));
     }
     
     /**
@@ -78,7 +78,7 @@ public abstract class PanelEditElement extends PanelEdit {
      * @return Panel Base Element.
      */
     public PanelBaseElement getPanelBaseElement() {
-        return (PanelBaseElement) this.getPanel("panelBaseElement");
+        return (PanelBaseElement) getPanel("base_element");
     }
     
     /**
@@ -86,7 +86,7 @@ public abstract class PanelEditElement extends PanelEdit {
      * @return Panel Stereotype.
      */
     public PanelStereotype getPanelStereotype() {
-        return (PanelStereotype) this.getPanel("panelStereotype");
+        return (PanelStereotype) getPanel("stereotype");
     }
     
     /**
@@ -94,7 +94,7 @@ public abstract class PanelEditElement extends PanelEdit {
      * @return Panel Dependency.
      */
     public PanelDependency getPanelDependency() {
-        return (PanelDependency) this.getPanel("panelDependency");
+        return (PanelDependency) getPanel("dependency");
     }
     
     /**
@@ -102,7 +102,7 @@ public abstract class PanelEditElement extends PanelEdit {
      * @return Element.
      */
     public Element getElement() {
-        return this.element;
+        return element;
     }
     
     /**
@@ -110,6 +110,6 @@ public abstract class PanelEditElement extends PanelEdit {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
 }

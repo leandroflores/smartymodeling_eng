@@ -24,22 +24,22 @@ public final class PanelEditConnection extends PanelEditAssociation {
      */
     public PanelEditConnection(ViewMenu view, FeatureDiagram diagram, Connection connection) {
         super(view, diagram, connection);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseConnection();
+        addPanelBaseConnection();
     }
     
     /**
      * Method responsible for adding the Panel Base Connection.
      */
     protected void addPanelBaseConnection() {
-        this.addPanel("panelBaseConnection", new PanelBaseConnection(this, this.getDiagram(), this.getAssociation()));
-        this.createScrollPane("scrollPanelBaseConnection",  this.getPanelBaseConnection());
-        this.getScrollPane("scrollPanelBaseConnection").setViewportView(this.getPanelBaseConnection());
-        this.tabbedPane.add("Connection", this.getScrollPane("scrollPanelBaseConnection"));
+        addPanel("base_connection", new PanelBaseConnection(this, getDiagram(), getAssociation()));
+        createScrollPane("base_connection", getPanelBaseConnection());
+        getScrollPane("base_connection").setViewportView(getPanelBaseConnection());
+        tabbedPane.add("Connection", getScrollPane("base_connection"));
     }
     
     /**
@@ -47,16 +47,16 @@ public final class PanelEditConnection extends PanelEditAssociation {
      * @return Panel Base Connection.
      */
     public PanelBaseConnection getPanelBaseConnection() {
-        return (PanelBaseConnection) this.getPanel("panelBaseConnection");
+        return (PanelBaseConnection) getPanel("base_connection");
     }
     
     @Override
     public Connection getAssociation() {
-        return (Connection) this.association;
+        return (Connection) association;
     }
     
     @Override
     public FeatureDiagram getDiagram() {
-        return (FeatureDiagram) this.diagram;
+        return (FeatureDiagram) diagram;
     }
 }

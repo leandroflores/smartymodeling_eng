@@ -24,24 +24,24 @@ public final class PanelEditAttributeUML extends PanelEditElement {
      */
     public PanelEditAttributeUML(ViewMenu view, ClassDiagram diagram, AttributeUML attribute) {
         super(view, diagram, attribute);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseAttributeUML();
-        super.addPanelStereotype();
-        super.addPanelDependency();
+        addPanelBaseAttributeUML();
+        addPanelStereotype();
+        addPanelDependency();
     }
     
     /**
      * Method responsible for adding the Panel Base Attribute UML.
      */
     protected void addPanelBaseAttributeUML() {
-        this.addPanel("panelBaseAttributeUML", new PanelBaseAttributeUML(this.viewMenu, this.getDiagram(), this.getElement()));
-        this.createScrollPane("scrollPanelBaseAttributeUML",  this.getPanelBaseAttributeUML());
-        this.getScrollPane("scrollPanelBaseAttributeUML").setViewportView(this.getPanelBaseAttributeUML());
-        this.tabbedPane.add("Attribute", this.getScrollPane("scrollPanelBaseAttributeUML"));
+        addPanel("base_attribute", new PanelBaseAttributeUML(viewMenu, getDiagram(), getElement()));
+        createScrollPane("base_attribute", getPanelBaseAttributeUML());
+        getScrollPane("base_attribute").setViewportView(getPanelBaseAttributeUML());
+        tabbedPane.add("Attribute", getScrollPane("base_attribute"));
     }
     
     /**
@@ -49,16 +49,16 @@ public final class PanelEditAttributeUML extends PanelEditElement {
      * @return Panel Base Attribute UML.
      */
     public PanelBaseAttributeUML getPanelBaseAttributeUML() {
-        return (PanelBaseAttributeUML) this.getPanel("panelBaseAttributeUML");
+        return (PanelBaseAttributeUML) getPanel("base_attribute");
     }
     
     @Override
     public AttributeUML getElement() {
-        return (AttributeUML) this.element;
+        return (AttributeUML) element;
     }
     
     @Override
     public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+        return (ClassDiagram) diagram;
     }
 }

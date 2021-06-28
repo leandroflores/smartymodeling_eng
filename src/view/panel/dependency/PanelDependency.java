@@ -16,7 +16,7 @@ import view.main.structural.ViewMenu;
  * @see    view.panel.Panel
  */
 public final class PanelDependency extends Panel {
-    private final ViewMenu viewMenu;
+    private final ViewMenu view;
     private final Element element;
     
     /**
@@ -25,38 +25,29 @@ public final class PanelDependency extends Panel {
      * @param element Element.
      */
     public PanelDependency(ViewMenu view, Element element) {
-        this.viewMenu = view;
-        this.element  = element;
-        this.setSettings();
-        this.addComponents();
+        this.view    = view;
+        this.element = element;
+        setSettings();
+        addComponents();
     }
     
     /**
      * Method responsible for defining the Settings.
      */
     private void setSettings() {
-        this.setLayout(new GridLayout(2, 0));
-        this.setMinimumSize(new Dimension(150, 150));
-        this.setPreferredSize(new Dimension(150, 150));
+        setLayout(new GridLayout(2, 0));
+        setMinimumSize(new Dimension(150, 150));
+        setPreferredSize(new Dimension(150, 150));
     }
     
     @Override
     protected void addComponents() {
-//        this.addLines(1);
+        createTable("dependency");
+        addColumns("dependency", new String[] {"Name", "Source", "Target", "Type"});
+        setColumnsSize("dependency", new int[] {50, 200, 150, 50});
+        add(getScrollDependencyTable());
         
-        this.createTable("dependencyTable");
-        
-        String[] columns = {"Name", "Source", "Target", "Type"};
-        this.addColumns("dependencyTable", columns);
-        
-        int[]    size    = {50, 200, 150, 50};
-        this.setColumnsSize("dependencyTable",size);
-        
-        this.add(this.getScrollDependencyTable());
-        
-//        this.addLines(1);
-        
-        this.add(this.createButton("deleteButton", "Delete", "delete.png"));
+        add(createButton("delete", "Delete", "delete.png"));
     }
     
     /**
@@ -64,7 +55,7 @@ public final class PanelDependency extends Panel {
      * @return Dependency Table.
      */
     public JTable getDependencyTable() {
-        return this.getTable("dependencyTable");
+        return getTable("dependency");
     }
     
     /**
@@ -72,6 +63,6 @@ public final class PanelDependency extends Panel {
      * @return Scroll Dependency Table.
      */
     public JScrollPane getScrollDependencyTable() {
-        return this.getScrollPane("dependencyTable");
+        return getScrollPane("dependency");
     }
 }

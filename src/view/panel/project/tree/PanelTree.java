@@ -39,43 +39,43 @@ public final class PanelTree extends Panel {
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      */
-    public PanelTree(ViewMenu viewMenu) {
-        this.viewMenu = viewMenu;
-        this.project  = this.viewMenu.getProject();
-        this.complete = true;
-        this.addComponents();
+    public PanelTree(ViewMenu view) {
+        viewMenu = view;
+        project  = view.getProject();
+        complete = true;
+        addComponents();
     }
     
     @Override
     public void addComponents() {
-        this.setLayout(new GridLayout(1, 1));
-        this.initTabbedPane();
-        this.addProjectPanels();
-        this.add(this.tabbedPane);
+        setLayout(new GridLayout(1, 1));
+        initTabbedPane();
+        addProjectPanels();
+        add(tabbedPane);
     }
     
     /**
      * Method responsible for initializing the Tabbed Pane.
      */
     protected void initTabbedPane() {
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(275, 260));
+        tabbedPane = new JTabbedPane();
+        tabbedPane.setPreferredSize(new Dimension(275, 260));
     }
     
     /**
      * Method responsible for adding the Project Panels.
      */
     protected void addProjectPanels() {
-        if (this.project != null) {
-            this.addPanelTreeRequirement();
-            this.addPanelTreeFeature();
-            this.addPanelTreeDiagram();
-            this.addPanelTreeVariability();
-            this.addPanelTreeProduct();
-            this.addPanelTreeEvaluation();
-            this.setUMLVersion();
+        if (project != null) {
+            addPanelTreeRequirement();
+            addPanelTreeFeature();
+            addPanelTreeDiagram();
+            addPanelTreeVariability();
+            addPanelTreeProduct();
+            addPanelTreeEvaluation();
+            setUMLVersion();
         }
     }
     
@@ -83,81 +83,81 @@ public final class PanelTree extends Panel {
      * Method responsible for setting the UML Version Tab.
      */
     private void setUMLVersion() {
-        if (!this.complete) {
-            this.getTabbedPane().remove(5);
-            this.getTabbedPane().remove(4);
-            this.getTabbedPane().remove(3);
-            this.getTabbedPane().remove(1);
-            this.getTabbedPane().remove(0);
+        if (!complete) {
+            getTabbedPane().remove(5);
+            getTabbedPane().remove(4);
+            getTabbedPane().remove(3);
+            getTabbedPane().remove(1);
+            getTabbedPane().remove(0);
         }
     }
     
-    
+    /**
+     * Method responsible for setting the Tab Index.
+     * @param index Tab Index.
+     */
     public void setTabIndex(int index) {
-        if (this.complete)
-            this.tabbedPane.setSelectedIndex(index);
-        else
-            this.tabbedPane.setSelectedIndex(0); 
+        tabbedPane.setSelectedIndex(complete ? index : 0);
     }
     
     /**
      * Method responsible for adding the Panel Tree Requirement.
      */
     protected void addPanelTreeRequirement() {
-        this.addPanel("panelTreeRequirement", new PanelTreeRequirement(this.viewMenu));
-        this.createScrollPane("scrollPanelTreeRequirement",  this.getPanelTreeRequirement());
-        this.getScrollPanelTreeRequirement().setViewportView(this.getPanelTreeRequirement());
-        this.tabbedPane.add("Requirements", this.getScrollPanelTreeRequirement());
+        addPanel("panelTreeRequirement", new PanelTreeRequirement(viewMenu));
+        createScrollPane("scrollPanelTreeRequirement",  getPanelTreeRequirement());
+        getScrollPanelTreeRequirement().setViewportView(getPanelTreeRequirement());
+        tabbedPane.add("Requirements", getScrollPanelTreeRequirement());
     }
     
     /**
      * Method responsible for adding the Panel Tree Feature.
      */
     protected void addPanelTreeFeature() {
-        this.addPanel("panelTreeFeature", new PanelTreeFeature(this.viewMenu));
-        this.createScrollPane("scrollPanelTreeFeature",  this.getPanelTreeFeature());
-        this.getScrollPanelTreeFeature().setViewportView(this.getPanelTreeFeature());
-        this.tabbedPane.add("Features", this.getScrollPanelTreeFeature());
+        addPanel("panelTreeFeature", new PanelTreeFeature(viewMenu));
+        createScrollPane("scrollPanelTreeFeature",  getPanelTreeFeature());
+        getScrollPanelTreeFeature().setViewportView(getPanelTreeFeature());
+        tabbedPane.add("Features", getScrollPanelTreeFeature());
     }
     
     /**
      * Method responsible for adding the Panel Tree Diagram.
      */
     protected void addPanelTreeDiagram() {
-        this.addPanel("panelTreeDiagram", new PanelTreeDiagram(this.viewMenu));
-        this.createScrollPane("scrollPanelTreeDiagram",  this.getPanelTreeDiagram());
-        this.getScrollPanelTreeDiagram().setViewportView(this.getPanelTreeDiagram());
-        this.tabbedPane.add("UML", this.getScrollPanelTreeDiagram());
+        addPanel("panelTreeDiagram", new PanelTreeDiagram(viewMenu));
+        createScrollPane("scrollPanelTreeDiagram",  getPanelTreeDiagram());
+        getScrollPanelTreeDiagram().setViewportView(getPanelTreeDiagram());
+        tabbedPane.add("UML", getScrollPanelTreeDiagram());
     }
     
     /**
      * Method responsible for adding the Panel Tree Variability.
      */
     protected void addPanelTreeVariability() {
-        this.addPanel("panelTreeVariability", new PanelTreeVariability(this.viewMenu));
-        this.createScrollPane("scrollPanelTreeVariability",  this.getPanelTreeVariability());
-        this.getScrollPanelTreeVariability().setViewportView(this.getPanelTreeVariability());
-        this.tabbedPane.add("Variability View", this.getScrollPanelTreeVariability());
+        addPanel("panelTreeVariability", new PanelTreeVariability(viewMenu));
+        createScrollPane("scrollPanelTreeVariability",  getPanelTreeVariability());
+        getScrollPanelTreeVariability().setViewportView(getPanelTreeVariability());
+        tabbedPane.add("Variability View", getScrollPanelTreeVariability());
     }
     
     /**
      * Method responsible for adding the Panel Tree Product.
      */
     protected void addPanelTreeProduct() {
-        this.addPanel("panelTreeProduct", new PanelTreeProduct(this.viewMenu));
-        this.createScrollPane("scrollPanelTreeProduct",  this.getPanelTreeProduct());
-        this.getScrollPanelTreeProduct().setViewportView(this.getPanelTreeProduct());
-        this.tabbedPane.add("Product View", this.getScrollPanelTreeProduct());
+        addPanel("panelTreeProduct", new PanelTreeProduct(viewMenu));
+        createScrollPane("scrollPanelTreeProduct",  getPanelTreeProduct());
+        getScrollPanelTreeProduct().setViewportView(getPanelTreeProduct());
+        tabbedPane.add("Product View", getScrollPanelTreeProduct());
     }
     
     /**
      * Method responsible for adding the Panel Tree Evaluation.
      */
     protected void addPanelTreeEvaluation() {
-        this.addPanel("panelTreeEvaluation", new PanelTreeEvaluation(this.viewMenu));
-        this.createScrollPane("scrollPanelTreeEvaluation",  this.getPanelTreeEvaluation());
-        this.getScrollPanelTreeEvaluation().setViewportView(this.getPanelTreeEvaluation());
-        this.tabbedPane.add("Evaluation", this.getScrollPanelTreeEvaluation());
+        addPanel("panelTreeEvaluation", new PanelTreeEvaluation(viewMenu));
+        createScrollPane("scrollPanelTreeEvaluation",  getPanelTreeEvaluation());
+        getScrollPanelTreeEvaluation().setViewportView(getPanelTreeEvaluation());
+        tabbedPane.add("Evaluation", getScrollPanelTreeEvaluation());
     }
     
     /**
@@ -165,12 +165,12 @@ public final class PanelTree extends Panel {
      * @param project Project.
      */
     public void updateNode(Project project) {
-        this.getPanelTreeRequirement().updateNode(project);
-        this.getPanelTreeFeature().updateNode(project);
-        this.getPanelTreeDiagram().updateNode(project);
-        this.getPanelTreeVariability().updateNode(project);
-        this.getPanelTreeProduct().updateNode(project);
-        this.getPanelTreeEvaluation().updateNode(project);
+        getPanelTreeRequirement().updateNode(project);
+        getPanelTreeFeature().updateNode(project);
+        getPanelTreeDiagram().updateNode(project);
+        getPanelTreeVariability().updateNode(project);
+        getPanelTreeProduct().updateNode(project);
+        getPanelTreeEvaluation().updateNode(project);
     }
     
     /**
@@ -178,7 +178,7 @@ public final class PanelTree extends Panel {
      * @param requirement Requirement.
      */
     public void updateNode(Requirement requirement) {
-        this.getPanelTreeRequirement().updateNode(requirement);
+        getPanelTreeRequirement().updateNode(requirement);
     }
     
     /**
@@ -187,10 +187,10 @@ public final class PanelTree extends Panel {
      */
     public void updateNode(Diagram diagram) {
         if (diagram.getType().equalsIgnoreCase("Feature")) {
-            this.getPanelTreeFeature().updateNode(diagram);
+            getPanelTreeFeature().updateNode(diagram);
         }else {
-            this.getPanelTreeDiagram().updateNode(diagram);
-            this.getPanelTreeVariability().updateNode(diagram);
+            getPanelTreeDiagram().updateNode(diagram);
+            getPanelTreeVariability().updateNode(diagram);
         }
     }
     
@@ -199,14 +199,14 @@ public final class PanelTree extends Panel {
      * @param element Element.
      */
     public void updateNode(Element element) {
-        this.getPanelTreeRequirement().updateNode(element);
-        this.getPanelTreeFeature().updateNode(element);
-        this.getPanelTreeDiagram().updateNode(element);
-        this.getPanelTreeVariability().updateNode(element);
-        this.getPanelTreeProduct().updateNode(element);
+        getPanelTreeRequirement().updateNode(element);
+        getPanelTreeFeature().updateNode(element);
+        getPanelTreeDiagram().updateNode(element);
+        getPanelTreeVariability().updateNode(element);
+        getPanelTreeProduct().updateNode(element);
         
-        this.getPanelTreeDiagram().updateVariability(element);
-        this.getPanelTreeVariability().updateVariability(element);
+        getPanelTreeDiagram().updateVariability(element);
+        getPanelTreeVariability().updateVariability(element);
     }
     
     /**
@@ -214,8 +214,8 @@ public final class PanelTree extends Panel {
      * @param variability Variability.
      */
     public void updateNode(Variability variability) {
-        this.getPanelTreeDiagram().updateNode(variability);
-        this.getPanelTreeVariability().updateNode(variability);
+        getPanelTreeDiagram().updateNode(variability);
+        getPanelTreeVariability().updateNode(variability);
     }
     
     
@@ -224,7 +224,7 @@ public final class PanelTree extends Panel {
      * @param product Product.
      */
     public void updateNode(Product product) {
-        this.getPanelTreeProduct().updateNode(product);
+        getPanelTreeProduct().updateNode(product);
     }
     
     /**
@@ -232,7 +232,7 @@ public final class PanelTree extends Panel {
      * @param instance Instance.
      */
     public void updateNode(Instance instance) {
-        this.getPanelTreeProduct().updateNode(instance);
+        getPanelTreeProduct().updateNode(instance);
     }
 
     /**
@@ -240,7 +240,7 @@ public final class PanelTree extends Panel {
      * @param metric Metric.
      */
     public void updateNode(Metric metric) {
-        this.getPanelTreeEvaluation().updateNode(metric);
+        getPanelTreeEvaluation().updateNode(metric);
     }
     
     /**
@@ -248,7 +248,7 @@ public final class PanelTree extends Panel {
      * @param measure Measure.
      */
     public void updateNode(Measure measure) {
-        this.getPanelTreeEvaluation().updateNode(measure);
+        getPanelTreeEvaluation().updateNode(measure);
     }
     
     /**
@@ -256,7 +256,7 @@ public final class PanelTree extends Panel {
      * @return Tabbed Pane.
      */
     public JTabbedPane getTabbedPane() {
-        return this.tabbedPane;
+        return tabbedPane;
     }
     
     /**
@@ -264,7 +264,7 @@ public final class PanelTree extends Panel {
      * @return Panel Tree Requirement.
      */
     public PanelTreeRequirement getPanelTreeRequirement() {
-        return (PanelTreeRequirement) this.getPanel("panelTreeRequirement");
+        return (PanelTreeRequirement) getPanel("panelTreeRequirement");
     }
     
     /**
@@ -272,7 +272,7 @@ public final class PanelTree extends Panel {
      * @return Scroll Panel Tree Requirement.
      */
     public JScrollPane getScrollPanelTreeRequirement() {
-        return this.getScrollPane("scrollPanelTreeRequirement");
+        return getScrollPane("scrollPanelTreeRequirement");
     }
     
     /**
@@ -280,7 +280,7 @@ public final class PanelTree extends Panel {
      * @return Panel Tree Feature.
      */
     public PanelTreeFeature getPanelTreeFeature() {
-        return (PanelTreeFeature) this.getPanel("panelTreeFeature");
+        return (PanelTreeFeature) getPanel("panelTreeFeature");
     }
     
     /**
@@ -288,7 +288,7 @@ public final class PanelTree extends Panel {
      * @return Scroll Panel Tree Feature.
      */
     public JScrollPane getScrollPanelTreeFeature() {
-        return this.getScrollPane("scrollPanelTreeFeature");
+        return getScrollPane("scrollPanelTreeFeature");
     }
     
     /**
@@ -296,7 +296,7 @@ public final class PanelTree extends Panel {
      * @return Panel Tree Diagram.
      */
     public PanelTreeDiagram getPanelTreeDiagram() {
-        return (PanelTreeDiagram) this.getPanel("panelTreeDiagram");
+        return (PanelTreeDiagram) getPanel("panelTreeDiagram");
     }
     
     /**
@@ -304,7 +304,7 @@ public final class PanelTree extends Panel {
      * @return Scroll Panel Tree Diagram.
      */
     public JScrollPane getScrollPanelTreeDiagram() {
-        return this.getScrollPane("scrollPanelTreeDiagram");
+        return getScrollPane("scrollPanelTreeDiagram");
     }
     
     /**
@@ -312,7 +312,7 @@ public final class PanelTree extends Panel {
      * @return Panel Tree Variability.
      */
     public PanelTreeVariability getPanelTreeVariability() {
-        return (PanelTreeVariability) this.getPanel("panelTreeVariability");
+        return (PanelTreeVariability) getPanel("panelTreeVariability");
     }
     
     /**
@@ -320,7 +320,7 @@ public final class PanelTree extends Panel {
      * @return Scroll Panel Tree Variability.
      */
     public JScrollPane getScrollPanelTreeVariability() {
-        return this.getScrollPane("scrollPanelTreeVariability");
+        return getScrollPane("scrollPanelTreeVariability");
     }
     
     /**
@@ -328,7 +328,7 @@ public final class PanelTree extends Panel {
      * @return Panel Tree Product.
      */
     public PanelTreeProduct getPanelTreeProduct() {
-        return (PanelTreeProduct) this.getPanel("panelTreeProduct");
+        return (PanelTreeProduct) getPanel("panelTreeProduct");
     }
     
     /**
@@ -336,7 +336,7 @@ public final class PanelTree extends Panel {
      * @return Scroll Panel Tree Product.
      */
     public JScrollPane getScrollPanelTreeProduct() {
-        return this.getScrollPane("scrollPanelTreeProduct");
+        return getScrollPane("scrollPanelTreeProduct");
     }
     
     /**
@@ -344,7 +344,7 @@ public final class PanelTree extends Panel {
      * @return Panel Tree Evaluation.
      */
     public PanelTreeEvaluation getPanelTreeEvaluation() {
-        return (PanelTreeEvaluation) this.getPanel("panelTreeEvaluation");
+        return (PanelTreeEvaluation) getPanel("panelTreeEvaluation");
     }
     
     /**
@@ -352,6 +352,6 @@ public final class PanelTree extends Panel {
      * @return Scroll Panel Tree Evaluation.
      */
     public JScrollPane getScrollPanelTreeEvaluation() {
-        return this.getScrollPane("scrollPanelTreeEvaluation");
+        return getScrollPane("scrollPanelTreeEvaluation");
     }
 }

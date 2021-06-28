@@ -31,30 +31,30 @@ public final class PanelBaseProduct extends PanelBase {
         super(view);
         this.product    = product;
         this.controller = new ControllerPanelBaseProduct(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().setReady();
+        setDefaultProperties();
+        addComponents();
+        getController().setReady();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
-        this.setPreferredSize(new Dimension(50, 50));
-        this.setSize(new Dimension(50, 50));
+        setLayout(new GridBagLayout());
+        setPreferredSize(new Dimension(50, 50));
+        setSize(new Dimension(50, 50));
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name*: "),  this.createConstraints(1, 1, 0, 0));
-        this.add(this.createTextField("nameTextField",  this.product.getName(), 10),  this.createConstraints(2, 1, 1, 0));
+        add(createLabel("Name*: "), createConstraints(1, 1, 0, 0));
+        add(createTextField("name", product.getName(), 10), createConstraints(2, 1, 1, 0));
         
-        this.add(this.createLabel("Version*: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createTextField("versionTextField", this.product.getVersion(), 10), this.createConstraints(2, 1, 1, 1));
+        add(createLabel("Version*: "), createConstraints(1, 1, 0, 1));
+        add(createTextField("version", product.getVersion(), 10), createConstraints(2, 1, 1, 1));
         
-        this.createTextArea("descriptionTextArea");
-        this.getDescriptionTextArea().setText(this.product.getDescription());
-        this.add(this.createLabel("Description: "), this.createConstraints(1, 1, 0, 2));
-        this.add(this.getDescriptionScrollPane(), this.createConstraints(2, 5, 1, 2));
+        createTextArea("description");
+        getDescriptionTextArea().setText(product.getDescription());
+        add(createLabel("Description: "), createConstraints(1, 1, 0, 2));
+        add(getDescriptionScrollPane(), createConstraints(2, 5, 1, 2));
     }
     
     /**
@@ -62,7 +62,7 @@ public final class PanelBaseProduct extends PanelBase {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -70,7 +70,7 @@ public final class PanelBaseProduct extends PanelBase {
      * @return Version Text Field.
      */
     public JTextField getVersionTextField() {
-        return this.getTextField("versionTextField");
+        return getTextField("version");
     }
     
     /**
@@ -78,7 +78,7 @@ public final class PanelBaseProduct extends PanelBase {
      * @return Description Text Area.
      */
     public JTextArea getDescriptionTextArea() {
-        return this.getTextArea("descriptionTextArea");
+        return getTextArea("description");
     }
     
     /**
@@ -86,7 +86,7 @@ public final class PanelBaseProduct extends PanelBase {
      * @return Description Scroll Pane.
      */
     public JScrollPane getDescriptionScrollPane() {
-        return this.getScrollPane("descriptionTextArea");
+        return getScrollPane("description");
     }
     
     /**
@@ -94,6 +94,6 @@ public final class PanelBaseProduct extends PanelBase {
      * @return Product.
      */
     public Product getProduct() {
-        return this.product;
+        return product;
     }
 }

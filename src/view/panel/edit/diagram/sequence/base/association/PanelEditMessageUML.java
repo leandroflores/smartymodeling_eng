@@ -24,22 +24,22 @@ public final class PanelEditMessageUML extends PanelEditAssociation {
      */
     public PanelEditMessageUML(ViewMenu view, SequenceDiagram diagram, MessageUML message) {
         super(view, diagram, message);
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseMessageUML();
+        addPanelBaseMessageUML();
     }
     
     /**
      * Method responsible for adding the Panel Base Message UML.
      */
     protected void addPanelBaseMessageUML() {
-        this.addPanel("panelBaseMessageUML", new PanelBaseMessageUML(this.viewMenu, this.getDiagram(), this.getAssociation()));
-        this.createScrollPane("scrollPanelBaseMessageUML",  this.getPanelBaseMessageUML());
-        this.getScrollPane("scrollPanelBaseMessageUML").setViewportView(this.getPanelBaseMessageUML());
-        this.tabbedPane.add("Message", this.getScrollPane("scrollPanelBaseMessageUML"));
+        addPanel("base_message", new PanelBaseMessageUML(viewMenu, getDiagram(), getAssociation()));
+        createScrollPane("base_message",  getPanelBaseMessageUML());
+        getScrollPane("base_message").setViewportView(getPanelBaseMessageUML());
+        tabbedPane.add("Message", getScrollPane("base_message"));
     }
     
     /**
@@ -47,16 +47,16 @@ public final class PanelEditMessageUML extends PanelEditAssociation {
      * @return Panel Base Message UML.
      */
     public PanelBaseMessageUML getPanelBaseMessageUML() {
-        return (PanelBaseMessageUML) this.getPanel("panelBaseMessageUML");
+        return (PanelBaseMessageUML) getPanel("base_message");
     }
     
     @Override
     public MessageUML getAssociation() {
-        return (MessageUML) this.association;
+        return (MessageUML) association;
     }
     
     @Override
     public SequenceDiagram getDiagram() {
-        return (SequenceDiagram) this.diagram;
+        return (SequenceDiagram) diagram;
     }
 }
