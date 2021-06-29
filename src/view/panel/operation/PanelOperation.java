@@ -21,61 +21,61 @@ import view.panel.diagram.PanelDiagram;
  * @see    view.panel.diagram.PanelDiagram
  */
 public abstract class PanelOperation extends Panel {
-    protected final PanelDiagram panelDiagram;
+    protected final PanelDiagram panel;
     
     /**
      * Default constructor method of Class.
      * @param panel Panel Diagram.
      */
     public PanelOperation(PanelDiagram panel) {
-        this.panelDiagram = panel;
+        this.panel = panel;
     }
     
     /**
      * Method responsible for setting the Default Properties.
      */
     protected void setDefaultProperties() {
-        this.setLayout(new FlowLayout(FlowLayout.LEFT));
-        this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
-        this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        setLayout(new FlowLayout(FlowLayout.LEFT));
+        setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+        setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
     
     @Override
     protected void addComponents() {
-        this.addClickButton();
-        this.addDiagramButtons();
-        this.addVariabilityButton();
-        this.addEditButton();
-        this.addDeleteButton();
-        this.addAssociationComboBox();
+        addClickButton();
+        addDiagramButtons();
+        addVariabilityButton();
+        addEditButton();
+        addDeleteButton();
+        addAssociationComboBox();
     }
     
     /**
      * Method responsible for adding the Click Button.
      */
     protected void addClickButton() {
-        this.add(this.createButton("clickButton", "", "Select", "click.png"));
+        add(createButton("click", "", "Select", "click.png"));
     }
     
     /**
      * Method responsible for adding the Variability Button.
      */
     protected void addVariabilityButton() {
-        this.add(this.createButton("variabilityButton", "", "", "variability.png"));
+        add(createButton("variability", "", "", "variability.png"));
     }
     
     /**
      * Method responsible for adding the Edit Button.
      */
     protected void addEditButton() {
-        this.add(this.createButton("editButton", "", "Edit", "edit.png"));
+        add(createButton("edit", "", "Edit", "edit.png"));
     }
     
     /**
      * Method responsible for adding the Delete Button.
      */
     protected void addDeleteButton() {
-        this.add(this.createButton("deleteButton", "", "Delete","delete.png"));
+        add(createButton("delete", "", "Delete", "delete.png"));
     }
     
     /**
@@ -87,7 +87,7 @@ public abstract class PanelOperation extends Panel {
      * Method responsible for adding the Association Combo Box.
      */
     protected void addAssociationComboBox() {
-        this.add(this.createComboBox("associationComboBox", this.getAssociationsIcons(), 50));
+        add(createComboBox("association", getAssociationsIcons(), 50));
     }
     
     /**
@@ -121,7 +121,7 @@ public abstract class PanelOperation extends Panel {
      * @return Click Button.
      */
     public JButton getClickButton() {
-        return this.getButton("clickButton");
+        return getButton("click");
     }
     
     /**
@@ -129,7 +129,7 @@ public abstract class PanelOperation extends Panel {
      * @return Variability Button.
      */
     public JButton getVariabilityButton() {
-        return this.getButton("variabilityButton");
+        return getButton("variability");
     }
     
     /**
@@ -137,7 +137,7 @@ public abstract class PanelOperation extends Panel {
      * @return Edit Button.
      */
     public JButton getEditButton() {
-        return this.getButton("editButton");
+        return getButton("edit");
     }
     
     /**
@@ -145,7 +145,7 @@ public abstract class PanelOperation extends Panel {
      * @return Delete Button.
      */
     public JButton getDeleteButton() {
-        return this.getButton("deleteButton");
+        return getButton("delete");
     }
     
     /**
@@ -153,6 +153,6 @@ public abstract class PanelOperation extends Panel {
      * @return Association ComboBox.
      */
     public JComboBox getAssociationComboBox() {
-        return this.getComboBox("associationComboBox");
+        return getComboBox("association");
     }
 }

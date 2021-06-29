@@ -26,67 +26,67 @@ public final class PanelNewMeasure extends PanelNew {
     public PanelNewMeasure(ViewNewMeasure view, Measure measure) {
         super(view);
         this.measure = measure;
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseMeasure();
+        addPanelBaseMeasure();
     }
     
     /**
      * Method responsible for adding the Panel Base Measure.
      */
     public void addPanelBaseMeasure() {
-        this.addPanel("panelBaseMeasure", new PanelBaseMeasure(this, this.measure));
-        this.tabbedPane.removeAll();
-        this.createScrollPane("scrollPanelBaseMeasure",  this.getPanelBaseMeasure());
-        this.getScrollPane("scrollPanelBaseMeasure").setViewportView(this.getPanelBaseMeasure());
-        this.tabbedPane.add("Measure", this.getScrollPane("scrollPanelBaseMeasure"));
+        addPanel("base_measure", new PanelBaseMeasure(this, measure));
+        tabbedPane.removeAll();
+        createScrollPane("base_measure",  getPanelBaseMeasure());
+        getScrollPane("base_measure").setViewportView(getPanelBaseMeasure());
+        tabbedPane.add("Measure", getScrollPane("base_measure"));
     }
     
     /**
      * Method responsible for adding the Panel Base Target.
      */
     public void addPanelBaseTarget() {
-        this.addPanel("panelBaseTarget", new PanelBaseTarget(this, this.measure));
-        this.createScrollPane("scrollPanelTarget",  this.getPanelBaseTarget());
-        this.getScrollPane("scrollPanelTarget").setViewportView(this.getPanelBaseTarget());
-        this.tabbedPane.add("Target", this.getScrollPane("scrollPanelTarget"));
-        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(1));
-        this.tabbedPane.setEnabledAt(0, false);
+        addPanel("target", new PanelBaseTarget(this, measure));
+        createScrollPane("target",  getPanelBaseTarget());
+        getScrollPane("target").setViewportView(getPanelBaseTarget());
+        tabbedPane.add("Target", getScrollPane("target"));
+        tabbedPane.setSelectedComponent(tabbedPane.getComponentAt(1));
+        tabbedPane.setEnabledAt(0, false);
     }
     
     /**
      * Method responsible for removing the Panel Base Target.
      */
     public void removePanelBaseTarget() {
-        this.tabbedPane.getComponent(0).setEnabled(true);
-        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(0));
-        this.tabbedPane.remove(1);
+        tabbedPane.getComponent(0).setEnabled(true);
+        tabbedPane.setSelectedComponent(tabbedPane.getComponent(0));
+        tabbedPane.remove(1);
     }
     
     /**
      * Method responsible for adding the Panel Base Evaluation.
      */
     public void addPanelBaseEvaluation() {
-        this.addPanel("panelBaseEvaluation", new PanelBaseEvaluation(this, this.measure));
-        this.createScrollPane("scrollPanelEvaluation",  this.getPanelBaseEvaluation());
-        this.getScrollPane("scrollPanelEvaluation").setViewportView(this.getPanelBaseEvaluation());
-        this.tabbedPane.add("Evaluation", this.getScrollPane("scrollPanelEvaluation"));
-        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(2));
-        this.tabbedPane.setEnabledAt(1, false);
-        this.getView().getInsertButton().setEnabled(true);
+        addPanel("evaluation", new PanelBaseEvaluation(this, measure));
+        createScrollPane("evaluation",  getPanelBaseEvaluation());
+        getScrollPane("evaluation").setViewportView(getPanelBaseEvaluation());
+        tabbedPane.add("Evaluation", getScrollPane("evaluation"));
+        tabbedPane.setSelectedComponent(tabbedPane.getComponentAt(2));
+        tabbedPane.setEnabledAt(1, false);
+        getView().getInsertButton().setEnabled(true);
     }
     
     /**
      * Method responsible for removing the Panel Base Evaluation.
      */
     public void removePanelBaseEvaluation() {
-        this.tabbedPane.getComponent(1).setEnabled(true);
-        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(1));
-        this.tabbedPane.remove(2);
-        this.getView().getInsertButton().setEnabled(false);
+        tabbedPane.getComponent(1).setEnabled(true);
+        tabbedPane.setSelectedComponent(tabbedPane.getComponent(1));
+        tabbedPane.remove(2);
+        getView().getInsertButton().setEnabled(false);
     }
     
     /**
@@ -94,7 +94,7 @@ public final class PanelNewMeasure extends PanelNew {
      * @return Panel Base Measure.
      */
     public PanelBaseMeasure getPanelBaseMeasure() {
-        return (PanelBaseMeasure) this.getPanel("panelBaseMeasure");
+        return (PanelBaseMeasure) getPanel("base_measure");
     }
     
     /**
@@ -102,7 +102,7 @@ public final class PanelNewMeasure extends PanelNew {
      * @return Panel Base Target.
      */
     public PanelBaseTarget getPanelBaseTarget() {
-        return (PanelBaseTarget) this.getPanel("panelBaseTarget");
+        return (PanelBaseTarget) getPanel("target");
     }
     
     /**
@@ -110,7 +110,7 @@ public final class PanelNewMeasure extends PanelNew {
      * @return Panel Base Evaluation.
      */
     public PanelBaseEvaluation getPanelBaseEvaluation() {
-        return (PanelBaseEvaluation) this.getPanel("panelBaseEvaluation");
+        return (PanelBaseEvaluation) getPanel("evaluation");
     }
     
     /**
@@ -118,11 +118,11 @@ public final class PanelNewMeasure extends PanelNew {
      * @return Measure.
      */
     public Measure getMeasure() {
-        return this.measure;
+        return measure;
     }
     
     @Override
     public ViewNewMeasure getView() {
-        return (ViewNewMeasure) this.viewNew;
+        return (ViewNewMeasure) viewNew;
     }
 }

@@ -60,8 +60,8 @@ public final class PanelBaseElements extends PanelBase {
         
         add(createLabel("Element: "), createConstraints(1, 1, 0, 1));
         add(createComboBox("element", new ControllerDiagram(diagram).getDefaultElements(), 250), createConstraints(2, 1, 1, 1));
-        add(createButton("addElement", "", "add.png"), createConstraints(1, 1, 3, 1));
-        add(createButton("delElement", "", "not.png"), createConstraints(1, 1, 4, 1));
+        add(createButton("add_element", "", "add.png"), createConstraints(1, 1, 3, 1));
+        add(createButton("del_element", "", "not.png"), createConstraints(1, 1, 4, 1));
         
         createList("elements");
         add(getScrollPane("elements"), createConstraints(5, 10, 0, 2));
@@ -147,7 +147,7 @@ public final class PanelBaseElements extends PanelBase {
      * @return Add Element Button.
      */
     public JButton getAddElementButton() {
-        return getButton("addElement");
+        return getButton("add_element");
     }
     
     /**
@@ -155,7 +155,7 @@ public final class PanelBaseElements extends PanelBase {
      * @return Del Element Button.
      */
     public JButton getDelElementButton() {
-        return getButton("delElement");
+        return getButton("del_element");
     }
     
     /**

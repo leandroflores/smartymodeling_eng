@@ -24,19 +24,19 @@ public final class PanelExportDiagram extends PanelExport {
      */
     public PanelExportDiagram(ViewMenu view) {
         super(view);
-        this.diagram    = null;
-        this.controller = new ControllerPanelExportDiagram(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        diagram    = null;
+        controller = new ControllerPanelExportDiagram(this);
+        setDefaultProperties();
+        addComponents();
     }
     
     @Override
     protected void addComponents() {
-        super.addDirectoryField();
+        addDirectoryField();
         
-        this.add(this.createLabel("Diagram*: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("contextComboBox", new ControllerProject(this.project).getDiagrams(), 250), this.createConstraints(4, 1, 1, 1));
-        this.setDiagram((Diagram) this.getContextComboBox().getSelectedItem());
+        add(createLabel("Diagram*: "), createConstraints(1, 1, 0, 1));
+        add(createComboBox("context", new ControllerProject(project).getDiagrams(), 250), createConstraints(4, 1, 1, 1));
+        setDiagram((Diagram) getContextComboBox().getSelectedItem());
     }
     
     /**
@@ -44,7 +44,7 @@ public final class PanelExportDiagram extends PanelExport {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
     
     /**
@@ -57,6 +57,6 @@ public final class PanelExportDiagram extends PanelExport {
     
     @Override
     public ControllerPanelExportDiagram getController() {
-        return (ControllerPanelExportDiagram) this.controller;
+        return (ControllerPanelExportDiagram) controller;
     }
 }

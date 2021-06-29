@@ -40,10 +40,10 @@ public class ControllerPanelEvaluationProject extends ControllerPanelEvaluation 
                     evaluate(getProduct(), operation);
             }
         }catch (ScriptException exception) {
-            new ViewError(getPanel().getViewEvaluation(), "Error to Apply Operation!").setVisible(true);
+            new ViewError(getPanel().getView(), "Error to Apply Operation!").setVisible(true);
             getPanel().getOperationTextField().requestFocus();
         }catch (Exception exception) {
-            new ViewError(getPanel().getViewEvaluation(), "Invalid Operation Expression!").setVisible(true);
+            new ViewError(getPanel().getView(), "Invalid Operation Expression!").setVisible(true);
             getPanel().getOperationTextField().requestFocus();
         }
     }

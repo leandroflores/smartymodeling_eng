@@ -22,7 +22,7 @@ import view.modal.evaluation.ViewEvaluation;
  * @see    view.modal.evaluation.ViewEvaluation
  */
 public abstract class PanelEvaluation extends Panel {
-    protected final ViewEvaluation viewEvaluation;
+    protected final ViewEvaluation view;
     protected final Project project;
     
     /**
@@ -30,31 +30,31 @@ public abstract class PanelEvaluation extends Panel {
      * @param view View Evaluation.
      */
     public PanelEvaluation(ViewEvaluation view) {
-        this.viewEvaluation = view;
-        this.project        = view.getViewMenu().getProject();
+        this.view    = view;
+        this.project = view.getViewMenu().getProject();
     }
     
     /**
      * Method responsible for setting the Default Properties.
      */
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Target*: "), this.createConstraints(1, 1, 0, 0));
-        this.add(this.createComboBox("targetComboBox", this.getTargets(), 15), this.createConstraints(5, 1, 1, 0));
+        add(createLabel("Target*: "), createConstraints(1, 1, 0, 0));
+        add(createComboBox("target", getTargets(), 15), createConstraints(5, 1, 1, 0));
         
-        this.add(this.createLabel("Operation*: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createTextField("operationTextField", "", 15), this.createConstraints(4, 1, 1, 1));
-        this.add(this.createButton("applyButton", "", "apply.png"), this.createConstraints(1, 1, 5, 1));
+        add(createLabel("Operation*: "), createConstraints(1, 1, 0, 1));
+        add(createTextField("operation", "", 15), createConstraints(4, 1, 1, 1));
+        add(createButton("apply", "", "apply.png"), createConstraints(1, 1, 5, 1));
         
-        this.add(this.createLabel("Value: "), this.createConstraints(1, 1, 0, 2));
-        this.add(this.createTextFieldNoEditable("valueTextField", "", 15), this.createConstraints(5, 1, 1, 2));
+        add(createLabel("Value: "), createConstraints(1, 1, 0, 2));
+        add(createTextFieldNoEditable("value", "", 15), createConstraints(5, 1, 1, 2));
         
-        this.createList("detailsList");
-        this.add(this.getScrollPane("detailsList"), this.createConstraints(6, 1, 0, 3));
+        createList("details");
+        add(getScrollPane("details"), createConstraints(6, 1, 0, 3));
     }
     
     /**
@@ -67,20 +67,20 @@ public abstract class PanelEvaluation extends Panel {
      * Method responsible for clearing the Panel.
      */
     public void clear() {
-        this.getTargetComboBox().setSelectedIndex(0);
-        this.getOperationTextField().setText("");
-        this.getValueTextField().setText("");
-        this.clearDetails();
+        getTargetComboBox().setSelectedIndex(0);
+        getOperationTextField().setText("");
+        getValueTextField().setText("");
+        clearDetails();
         
-        this.getOperationTextField().requestFocus();
+        getOperationTextField().requestFocus();
     }
     
     /**
      * Method responsible for clearing the Details List.
      */
     private void clearDetails() {
-        this.getDetailsList().removeAll();
-        this.getDetailsList().setModel(new DefaultListModel());
+        getDetailsList().removeAll();
+        getDetailsList().setModel(new DefaultListModel());
     }
     
     /**
@@ -88,11 +88,11 @@ public abstract class PanelEvaluation extends Panel {
      * @param list Objects List.
      */
     public void updateDetails(List<Object> list) {
-        this.getDetailsList().removeAll();
+        getDetailsList().removeAll();
         DefaultListModel model = new DefaultListModel();
         for (Object object :  list)
             model.addElement(object);
-        this.getDetailsList().setModel(model);
+        getDetailsList().setModel(model);
     }
     
     /**
@@ -100,7 +100,7 @@ public abstract class PanelEvaluation extends Panel {
      * @return Target Combo Box.
      */
     public JComboBox getTargetComboBox() {
-        return this.getComboBox("targetComboBox");
+        return getComboBox("target");
     }
     
     /**
@@ -108,7 +108,7 @@ public abstract class PanelEvaluation extends Panel {
      * @return Operation Text Field.
      */
     public JTextField getOperationTextField() {
-        return this.getTextField("operationTextField");
+        return getTextField("operation");
     }
     
     /**
@@ -116,7 +116,7 @@ public abstract class PanelEvaluation extends Panel {
      * @return Apply Button.
      */
     public JButton getApplyButton() {
-        return this.getButton("applyButton");
+        return getButton("apply");
     }
     
     /**
@@ -124,7 +124,7 @@ public abstract class PanelEvaluation extends Panel {
      * @return Value Text Field.
      */
     public JTextField getValueTextField() {
-        return this.getTextField("valueTextField");
+        return getTextField("value");
     }
     
     /**
@@ -132,7 +132,7 @@ public abstract class PanelEvaluation extends Panel {
      * @return Details List.
      */
     public JList getDetailsList() {
-        return this.getList("detailsList");
+        return getList("details");
     }
     
     /**
@@ -140,15 +140,15 @@ public abstract class PanelEvaluation extends Panel {
      * @return Project.
      */
     public Project getProject() {
-        return this.project;
+        return project;
     }
     
     /**
      * Method responsible for returning the View Evaluation.
      * @return View Evaluation.
      */
-    public ViewEvaluation getViewEvaluation() {
-        return this.viewEvaluation;
+    public ViewEvaluation getView() {
+        return view;
     }
     
     /**
@@ -156,6 +156,6 @@ public abstract class PanelEvaluation extends Panel {
      * @return Controller.
      */
     public ControllerPanelEvaluation getController() {
-        return (ControllerPanelEvaluation) this.controller;
+        return (ControllerPanelEvaluation) controller;
     }
 }

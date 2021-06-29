@@ -52,29 +52,36 @@ public final class PanelModeling extends Panel {
      */
     public PanelModeling(ViewMenu view) {
         super();
-        this.viewMenu = view;
-        this.panels   = new HashMap<>();
-        this.addComponents();
-        this.clear();
+        viewMenu = view;
+        panels   = new HashMap<>();
+        addComponents();
+        clear();
     }
     
     @Override
     protected void addComponents() {
-        this.panelTabbed = new PanelTabbed(this);
-        this.add(this.panelTabbed);
+        panelTabbed = new PanelTabbed(this);
+        add(panelTabbed);
     }
     
     /**
      * Method responsible for updating the Panel Main.
      */
     public void updatePanelMain() {
-        if (this.viewMenu.getProject() == null
-         || this.panelTabbed.getTabCount() == 0) {
-            this.viewMenu.getPanelMain().setModeling(false);
-        }else {
-            this.viewMenu.getPanelMain().setModeling(true);
-//            this.viewMenu.getPanelMain().setOriginalZoom(this.getSelectedPanel().getZoom() != 1.0d);
-        }
+        viewMenu.getPanelMain().setModeling(!isVoid());
+        /*if (isVoid())
+            viewMenu.getPanelMain().setModeling(false);
+        else 
+            viewMenu.getPanelMain().setModeling(true);
+            viewMenu.getPanelMain().setOriginalZoom(getSelectedPanel().getZoom() != 1.0d);*/
+    }
+    
+    /**
+     * Method responsible for returning if Panel Modeling is Void.
+     * @return Panel Modeling is Void.
+     */
+    private boolean isVoid() {
+        return viewMenu.getProject() == null || panelTabbed.getTabCount() == 0;
     }
     
     /**
@@ -84,14 +91,14 @@ public final class PanelModeling extends Panel {
      * @param component Tab Component.
      */
     private void addTab(String id, String title, Component component) {
-        Component get = this.getPanels().get(id);
+        Component get = getPanels().get(id);
         if (get == null) {
-            this.panelTabbed.addTab(title, null, component, id);
-            this.panels.put(id, component);
+            panelTabbed.addTab(title, null, component, id);
+            panels.put(id, component);
             get = component;
         }
-        this.updatePanelMain();
-        this.panelTabbed.setSelectedComponent(get);
+        updatePanelMain();
+        panelTabbed.setSelectedComponent(get);
     }
     
     /**
@@ -99,7 +106,7 @@ public final class PanelModeling extends Panel {
      * @param diagram Diagram.
      */
     public void addDiagram(Diagram diagram) {
-        this.addTab(diagram.getId(), diagram.getName(), this.createPanelDiagram(diagram));
+        addTab(diagram.getId(), diagram.getName(), createPanelDiagram(diagram));
     }
     
     /**
@@ -110,17 +117,17 @@ public final class PanelModeling extends Panel {
     private PanelDiagram createPanelDiagram(Diagram diagram) {
         switch (diagram.getType()) {
             case "Feature":
-                return new PanelFeatureDiagram(this.viewMenu,   (FeatureDiagram) diagram);
+                return new PanelFeatureDiagram(viewMenu, (FeatureDiagram) diagram);
             case "Activity":
-                return new PanelActivityDiagram(this.viewMenu,  (ActivityDiagram) diagram);
+                return new PanelActivityDiagram(viewMenu, (ActivityDiagram) diagram);
             case "Class":
-                return new PanelClassDiagram(this.viewMenu,     (ClassDiagram)   diagram);
+                return new PanelClassDiagram(viewMenu, (ClassDiagram)   diagram);
             case "Component":
-                return new PanelComponentDiagram(this.viewMenu, (ComponentDiagram) diagram);
+                return new PanelComponentDiagram(viewMenu, (ComponentDiagram) diagram);
             case "Sequence":
-                return new PanelSequenceDiagram(this.viewMenu,  (SequenceDiagram) diagram);
+                return new PanelSequenceDiagram(viewMenu, (SequenceDiagram) diagram);
             case "UseCase":
-                return new PanelUseCaseDiagram(this.viewMenu,   (UseCaseDiagram) diagram);
+                return new PanelUseCaseDiagram(viewMenu, (UseCaseDiagram) diagram);
             default:
                 break;
         }
@@ -132,12 +139,12 @@ public final class PanelModeling extends Panel {
      * @param diagram Diagram.
      */
     public void updateDiagram(Diagram diagram) {
-        if (this.panels.get(diagram.getId()) != null) {
-            PanelDiagram panel = this.getPanelDiagram(diagram);
+        if (panels.get(diagram.getId()) != null) {
+            PanelDiagram panel = getPanelDiagram(diagram);
                          panel.updateGraph();
-            this.getViewMenu().setZoom(panel.getZoom());
-            this.panelTabbed.updateUI();
-            this.updateUI();
+            getViewMenu().setZoom(panel.getZoom());
+            panelTabbed.updateUI();
+            updateUI();
         }
     }
     
@@ -147,8 +154,8 @@ public final class PanelModeling extends Panel {
      * @param id Object Id.
      */
     public void setSelected(Diagram diagram, String id) {
-        if (this.getPanelDiagram(diagram) != null) 
-            this.getPanelDiagram(diagram).setSelected(id);
+        if (getPanelDiagram(diagram) != null) 
+            getPanelDiagram(diagram).setSelected(id);
     }
     
     /**
@@ -156,9 +163,8 @@ public final class PanelModeling extends Panel {
      * @param diagram Diagram.
      */
     public void updateTab(Diagram diagram) {
-        if (this.getPanels().get(diagram.getId()) != null) {
-            this.panelTabbed.updateTab(diagram);
-        }
+        if (getPanels().get(diagram.getId()) != null)
+            panelTabbed.updateTab(diagram);
     }
     
     /**
@@ -166,19 +172,19 @@ public final class PanelModeling extends Panel {
      * @param diagram Diagram.
      */
     public void removeDiagram(Diagram diagram) {
-        if (this.panels.get(diagram.getId()) != null) {
-            this.panelTabbed.remove(diagram.getId(), this.getPanels().get(diagram.getId()));
-            this.panels.remove(diagram.getId());
-            this.updateUI();
+        if (panels.get(diagram.getId()) != null) {
+            panelTabbed.remove(diagram.getId(), getPanels().get(diagram.getId()));
+            panels.remove(diagram.getId());
+            updateUI();
         }
-        this.updatePanelMain();
+        updatePanelMain();
     }
     
     /**
      * Method responsible for updating the Modeling Panels.
      */
     public void updateModelingPanels() {
-        for (Component component : this.panelTabbed.getComponents()) {
+        for (Component component : panelTabbed.getComponents()) {
             if (component instanceof PanelGraph)
                 ((PanelGraph) component).updateGraph();
         }
@@ -189,7 +195,7 @@ public final class PanelModeling extends Panel {
      * @param instance Instance.
      */
     public void addInstance(Instance instance) {
-        this.addTab(instance.getCompleteId(), instance.getName(), this.createPanelInstance(instance));
+        addTab(instance.getCompleteId(), instance.getName(), createPanelInstance(instance));
     }
     
     /**
@@ -200,15 +206,15 @@ public final class PanelModeling extends Panel {
     private PanelInstance createPanelInstance(Instance instance) {
         switch (instance.getDiagram().getType()) {
             case "Activity":
-                return new PanelActivityInstance(this.viewMenu,  instance);
+                return new PanelActivityInstance(viewMenu, instance);
             case "Class":
-                return new PanelClassInstance(this.viewMenu,     instance);
+                return new PanelClassInstance(viewMenu, instance);
             case "Component":
-                return new PanelComponentInstance(this.viewMenu, instance);
+                return new PanelComponentInstance(viewMenu, instance);
             case "Sequence":
-                return new PanelSequenceInstance(this.viewMenu,  instance);
+                return new PanelSequenceInstance(viewMenu, instance);
             case "UseCase":
-                return new PanelUseCaseInstance(this.viewMenu,   instance);
+                return new PanelUseCaseInstance(viewMenu, instance);
             default:
                 break;
         }
@@ -220,11 +226,11 @@ public final class PanelModeling extends Panel {
      * @param instance Instance.
      */
     public void updateInstance(Instance instance) {
-        if (this.panels.get(instance.getCompleteId()) != null) {
-            PanelInstance panel = this.getPanelInstance(instance);
+        if (panels.get(instance.getCompleteId()) != null) {
+            PanelInstance panel = getPanelInstance(instance);
                           panel.updateGraph();
-            this.panelTabbed.setTitleAt(this.getIndex(panel), "Test");
-            this.updateUI();
+            panelTabbed.setTitleAt(getIndex(panel), "Test");
+            updateUI();
         }
     }
     
@@ -233,8 +239,8 @@ public final class PanelModeling extends Panel {
      * @param instance Instance.
      */
     public void updateTab(Instance instance) {
-        if (this.panels.get(instance.getCompleteId()) != null) {
-            this.panelTabbed.updateTab(instance);
+        if (panels.get(instance.getCompleteId()) != null) {
+            panelTabbed.updateTab(instance);
         }
     }
     
@@ -243,22 +249,22 @@ public final class PanelModeling extends Panel {
      * @param instance Instance.
      */
     public void removeInstance(Instance instance) {
-        if (this.panels.get(instance.getCompleteId()) != null) {
-            this.panelTabbed.remove(instance.getCompleteId(), this.getPanels().get(instance.getCompleteId()));
-            this.panels.remove(instance.getCompleteId());
-            this.updateUI();
+        if (panels.get(instance.getCompleteId()) != null) {
+            panelTabbed.remove(instance.getCompleteId(), getPanels().get(instance.getCompleteId()));
+            panels.remove(instance.getCompleteId());
+            updateUI();
         }
-        this.updatePanelMain();
+        updatePanelMain();
     }
     
     /**
      * Method responsible for updating the Instance Panels.
      */
     public void updateInstancePanels() {
-        for (Component component : this.panelTabbed.getComponents()) {
+        for (Component component : panelTabbed.getComponents()) {
             if (component instanceof PanelInstance) {
                 if (((PanelInstance) component).getInstance().isEmpty())
-                    this.removeInstance(((PanelInstance) component).getInstance());
+                    removeInstance(((PanelInstance) component).getInstance());
                 else
                     ((PanelInstance) component).updateGraph();
             }
@@ -270,8 +276,8 @@ public final class PanelModeling extends Panel {
      * @param zoom Zoom Value.
      */
     public void setZoom(Double zoom) {
-        if (this.getSelectedPanel() != null)
-            this.getSelectedPanel().setZoom(zoom);
+        if (getSelectedPanel() != null)
+            getSelectedPanel().setZoom(zoom);
     }
     
     /**
@@ -281,10 +287,10 @@ public final class PanelModeling extends Panel {
     public BufferedImage getImage() {
 //        Color color = new Color(0.925f, 0.925f, 0.925f, 1.00f);
         Color color = Color.WHITE;
-        if (this.getPanelDiagram() != null)
-            return mxCellRenderer.createBufferedImage(this.getPanelDiagram().getGraph(),  null, 1, color, true, null);
-        else if (this.getPanelInstance() != null)
-            return mxCellRenderer.createBufferedImage(this.getPanelInstance().getGraph(), null, 1, color, true, null);
+        if (getPanelDiagram() != null)
+            return mxCellRenderer.createBufferedImage(getPanelDiagram().getGraph(),  null, 1, color, true, null);
+        else if (getPanelInstance() != null)
+            return mxCellRenderer.createBufferedImage(getPanelInstance().getGraph(), null, 1, color, true, null);
         return null;
     }
     
@@ -292,11 +298,11 @@ public final class PanelModeling extends Panel {
      * Method responsible for clearing the Diagrams.
      */
     public void clear() {
-        this.panels = new HashMap<>();
-        this.panelTabbed.removeAll();
-        if (this.viewMenu.getProject() == null)
-            this.addTab("Start", "Start", new PanelLogo(this.viewMenu));
-        this.updatePanelMain();
+        panels = new HashMap<>();
+        panelTabbed.removeAll();
+        if (viewMenu.getProject() == null)
+            addTab("Start", "Start", new PanelLogo(viewMenu));
+        updatePanelMain();
     }
     
     /**
@@ -305,8 +311,8 @@ public final class PanelModeling extends Panel {
      * @return Component Index.
      */
     public Integer getIndex(Component component) {
-        for (int i = 0; i < this.panelTabbed.getComponents().length; i++) {
-            if (this.panelTabbed.getComponents()[i].equals(component))
+        for (int i = 0; i < panelTabbed.getComponents().length; i++) {
+            if (panelTabbed.getComponents()[i].equals(component))
                 return i - 1;
         }
         return -1;
@@ -317,9 +323,9 @@ public final class PanelModeling extends Panel {
      * @return Selected Panel.
      */
     public PanelGraph getSelectedPanel() {
-        if (this.getPanelDiagram() != null)
-            return this.getPanelDiagram();
-        return this.getPanelInstance();
+        if (getPanelDiagram() != null)
+            return getPanelDiagram();
+        return getPanelInstance();
     }
     
     /**
@@ -328,7 +334,7 @@ public final class PanelModeling extends Panel {
      * @return Panel Diagram.
      */
     public PanelDiagram getPanelDiagram(Diagram diagram) {
-        return (PanelDiagram) this.panels.get(diagram.getId());
+        return (PanelDiagram) panels.get(diagram.getId());
     }
     
     /**
@@ -336,7 +342,7 @@ public final class PanelModeling extends Panel {
      * @return Panel Diagram.
      */
     public PanelDiagram getPanelDiagram() {
-        Component component = this.panelTabbed.getSelectedComponent();
+        Component component = panelTabbed.getSelectedComponent();
         if (component instanceof PanelDiagram)
             return (PanelDiagram) component;
         return null;
@@ -348,7 +354,7 @@ public final class PanelModeling extends Panel {
      * @return Panel Instance.
      */
     public PanelInstance getPanelInstance(Instance instance) {
-        return (PanelInstance) this.panels.get(instance.getCompleteId());
+        return (PanelInstance) panels.get(instance.getCompleteId());
     }
     
     /**
@@ -356,7 +362,7 @@ public final class PanelModeling extends Panel {
      * @return Panel Instance.
      */
     public PanelInstance getPanelInstance() {
-        Component component = this.panelTabbed.getSelectedComponent();
+        Component component = panelTabbed.getSelectedComponent();
         if (component instanceof PanelInstance)
             return (PanelInstance) component;
         return null;
@@ -367,7 +373,7 @@ public final class PanelModeling extends Panel {
      * @return View Menu.
      */
     public ViewMenu getViewMenu() {
-        return this.viewMenu;
+        return viewMenu;
     }
     
     /**
@@ -375,7 +381,7 @@ public final class PanelModeling extends Panel {
      * @return Panel Tabbed.
      */
     public PanelTabbed getPanelTabbed() {
-        return this.panelTabbed;
+        return panelTabbed;
     }
     
     /**
@@ -383,6 +389,6 @@ public final class PanelModeling extends Panel {
      * @return Map Panels.
      */
     public Map<String, Component> getPanels() {
-        return this.panels;
+        return panels;
     }
 }

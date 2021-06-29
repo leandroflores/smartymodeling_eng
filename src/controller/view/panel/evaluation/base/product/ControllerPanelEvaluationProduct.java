@@ -30,7 +30,7 @@ public class ControllerPanelEvaluationProduct extends ControllerPanelEvaluation 
             if (check())
                 evaluate(getProduct(), getPanel().getOperationTextField().getText().trim());
         }catch (ScriptException exception) {
-            new ViewError(getPanel().getViewEvaluation(), "Error to Apply Operation!").setVisible(true);
+            new ViewError(getPanel().getView(), "Error to Apply Operation!").setVisible(true);
             getPanel().getOperationTextField().requestFocus();
         }
     }

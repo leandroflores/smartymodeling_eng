@@ -10,7 +10,7 @@ import view.main.structural.ViewMenu;
  * <p>Class of View <b>PanelExportInstanceCode</b>.</p> 
  * <p>Class responsible for defining a <b>Export Instance Code Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  2010-01-29
+ * @since  2020-01-29
  * @see    controller.view.panel.export.base.product.code.ControllerPanelExportInstanceCode
  * @see    model.structural.base.product.Instance
  * @see    view.panel.export.PanelExport
@@ -24,22 +24,22 @@ public final class PanelExportInstanceCode extends PanelExport {
      */
     public PanelExportInstanceCode(ViewMenu view) {
         super(view);
-        this.instance   = null;
-        this.controller = new ControllerPanelExportInstanceCode(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.getController().update();
+        instance   = null;
+        controller = new ControllerPanelExportInstanceCode(this);
+        setDefaultProperties();
+        addComponents();
+        getController().update();
     }
     
     @Override
     protected void addComponents() {
-        super.addDirectoryField();
+        addDirectoryField();
         
-        this.add(this.createLabel("Instance*: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("contextComboBox", new ControllerProduct(project).getInstances("class"), 250), this.createConstraints(5, 1, 1, 1));
-        this.setInstance((Instance) this.getContextComboBox().getSelectedItem());
+        add(createLabel("Instance*: "), createConstraints(1, 1, 0, 1));
+        add(createComboBox("context", new ControllerProduct(project).getInstances("class"), 250), createConstraints(5, 1, 1, 1));
+        setInstance((Instance) getContextComboBox().getSelectedItem());
         
-        super.addNameTextField();
+        addNameTextField();
     }
     
     /**
@@ -47,7 +47,7 @@ public final class PanelExportInstanceCode extends PanelExport {
      * @return Instance.
      */
     public Instance getInstance() {
-        return this.instance;
+        return instance;
     }
     
     /**
@@ -60,6 +60,6 @@ public final class PanelExportInstanceCode extends PanelExport {
     
     @Override
     public ControllerPanelExportInstanceCode getController() {
-        return (ControllerPanelExportInstanceCode) this.controller;
+        return (ControllerPanelExportInstanceCode) controller;
     }
 }

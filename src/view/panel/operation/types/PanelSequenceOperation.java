@@ -9,7 +9,7 @@ import view.panel.operation.PanelOperation;
  * <p>Class of View <b>PanelSequenceOperation</b>.</p> 
  * <p>Class responsible for defining a Panel for <b>Sequence Operation Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  09/04/2019
+ * @since  2019-04-09
  * @see    controller.view.panel.operation.types.ControllerPanelSequenceOperation
  * @see    view.panel.operation.PanelOperation
  * @see    view.panel.diagram.types.PanelSequenceDiagram
@@ -22,37 +22,37 @@ public final class PanelSequenceOperation extends PanelOperation {
      */
     public PanelSequenceOperation(PanelSequenceDiagram panel) {
         super(panel);
-        this.controller = new ControllerPanelSequenceOperation(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        controller = new ControllerPanelSequenceOperation(this);
+        setDefaultProperties();
+        addComponents();
     }
     
     @Override
     protected void addDiagramButtons() {
-        this.add(this.createButton("lifelineButton", "", "New Actor Lifeline", "diagram/sequence/lifeline.png"));
-        this.add(this.createButton("instanceButton", "", "New Class Instance", "diagram/sequence/instance.png"));
+        add(createButton("lifeline", "", "New Actor Lifeline", "diagram/sequence/lifeline.png"));
+        add(createButton("instance", "", "New Class Instance", "diagram/sequence/instance.png"));
     }
     
     @Override
     public Object[] getAssociationsIcons() {
-        Object[] icons = {this.getAssociationImage("sequence/message-a"),
-                          this.getAssociationImage("sequence/message-s"),
-                          this.getAssociationImage("dependency"),
-                          this.getAssociationImage("requires"),
-                          this.getAssociationImage("mutex")};
+        Object[] icons = {getAssociationImage("sequence/message-a"),
+                          getAssociationImage("sequence/message-s"),
+                          getAssociationImage("dependency"),
+                          getAssociationImage("requires"),
+                          getAssociationImage("mutex")};
         return   icons;
     }
 
     @Override
     public void resetBackground() {
-        this.getClickButton().setBackground(this.getDefaultColor());
-        this.getLifelineButton().setBackground(this.getDefaultColor());
-        this.getInstanceButton().setBackground(this.getDefaultColor());
+        getClickButton().setBackground(getDefaultColor());
+        getLifelineButton().setBackground(getDefaultColor());
+        getInstanceButton().setBackground(getDefaultColor());
     }
     
     @Override
     public PanelSequenceDiagram getPanelDiagram() {
-        return (PanelSequenceDiagram) this.panelDiagram;
+        return (PanelSequenceDiagram) panel;
     }
     
     /**
@@ -60,7 +60,7 @@ public final class PanelSequenceOperation extends PanelOperation {
      * @return Lifeline Button.
      */
     public JButton getLifelineButton() {
-        return this.getButton("lifelineButton");
+        return getButton("lifeline");
     }
     
     /**
@@ -68,6 +68,6 @@ public final class PanelSequenceOperation extends PanelOperation {
      * @return Instance Button.
      */
     public JButton getInstanceButton() {
-        return this.getButton("instanceButton");
+        return getButton("instance");
     }
 }

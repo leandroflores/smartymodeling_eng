@@ -9,7 +9,7 @@ import view.panel.operation.PanelOperation;
  * <p>Class of View <b>PanelActivityOperation</b>.</p> 
  * <p>Class responsible for defining a Panel for <b>Activity Operation</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  09/04/2019
+ * @since  2019-04-09
  * @see    controller.view.panel.operation.types.ControllerPanelActivityOperation
  * @see    view.panel.operation.PanelOperation
  * @see    view.panel.diagram.types.PanelActivityDiagram
@@ -22,40 +22,40 @@ public final class PanelActivityOperation extends PanelOperation {
      */
     public PanelActivityOperation(PanelActivityDiagram panel) {
         super(panel);
-        this.controller = new ControllerPanelActivityOperation(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        controller = new ControllerPanelActivityOperation(this);
+        setDefaultProperties();
+        addComponents();
     }
     
     @Override
     protected void addDiagramButtons() {
-        this.add(this.createButton("initialButton",  "", "New Initial",  "diagram/activity/initial.png"));
-        this.add(this.createButton("activityButton", "", "New Activity", "diagram/activity/activity.png"));
-        this.add(this.createButton("decisionButton", "", "New Decision", "diagram/activity/decision.png"));
-        this.add(this.createButton("finalButton",    "", "New Final",    "diagram/activity/final.png"));
+        add(createButton("initial",  "", "New Initial",  "diagram/activity/initial.png"));
+        add(createButton("activity", "", "New Activity", "diagram/activity/activity.png"));
+        add(createButton("decision", "", "New Decision", "diagram/activity/decision.png"));
+        add(createButton("final",    "", "New Final",    "diagram/activity/final.png"));
     }
     
     @Override
     public Object[] getAssociationsIcons() {
-        Object[] icons = {this.getAssociationImage("activity/flow"),
-                          this.getAssociationImage("dependency"),
-                          this.getAssociationImage("requires"),
-                          this.getAssociationImage("mutex")};
+        Object[] icons = {getAssociationImage("activity/flow"),
+                          getAssociationImage("dependency"),
+                          getAssociationImage("requires"),
+                          getAssociationImage("mutex")};
         return   icons;
     }
 
     @Override
     public void resetBackground() {
-        this.getClickButton().setBackground(this.getDefaultColor());
-        this.getInitialButton().setBackground(this.getDefaultColor());
-        this.getActivityButton().setBackground(this.getDefaultColor());
-        this.getDecisionButton().setBackground(this.getDefaultColor());
-        this.getFinalButton().setBackground(this.getDefaultColor());
+        getClickButton().setBackground(getDefaultColor());
+        getInitialButton().setBackground(getDefaultColor());
+        getActivityButton().setBackground(getDefaultColor());
+        getDecisionButton().setBackground(getDefaultColor());
+        getFinalButton().setBackground(getDefaultColor());
     }
     
     @Override
     public PanelActivityDiagram getPanelDiagram() {
-        return (PanelActivityDiagram) this.panelDiagram;
+        return (PanelActivityDiagram) panel;
     }
     
     /**
@@ -63,7 +63,7 @@ public final class PanelActivityOperation extends PanelOperation {
      * @return Initial Button.
      */
     public JButton getInitialButton() {
-        return this.getButton("initialButton");
+        return getButton("initial");
     }
     
     /**
@@ -71,7 +71,7 @@ public final class PanelActivityOperation extends PanelOperation {
      * @return Activity Button.
      */
     public JButton getActivityButton() {
-        return this.getButton("activityButton");
+        return getButton("activity");
     }
     
     /**
@@ -79,7 +79,7 @@ public final class PanelActivityOperation extends PanelOperation {
      * @return Decision Button.
      */
     public JButton getDecisionButton() {
-        return this.getButton("decisionButton");
+        return getButton("decision");
     }
     
     /**
@@ -87,6 +87,6 @@ public final class PanelActivityOperation extends PanelOperation {
      * @return Final Button.
      */
     public JButton getFinalButton() {
-        return this.getButton("finalButton");
+        return getButton("final");
     }
 }

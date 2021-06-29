@@ -82,7 +82,7 @@ import view.panel.edit.base.evaluation.PanelEditMeasure;
  * <p>Class of View <b>PanelProject</b>.</p> 
  * <p>Class responsible for defining a Panel for the <b>Project</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  11/06/2019
+ * @since  2019-06-11
  * @see    view.panel.Panel
  */
 public final class PanelProject extends Panel {
@@ -94,72 +94,72 @@ public final class PanelProject extends Panel {
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      */
-    public PanelProject(ViewMenu viewMenu) {
-        this.viewMenu = viewMenu;
-        this.project  = this.viewMenu.getProject();
-        this.initComponents();
-        this.addComponents();
+    public PanelProject(ViewMenu view) {
+        viewMenu = view;
+        project  = view.getProject();
+        initComponents();
+        addComponents();
     }
 
     /**
      * Method responsible for initializing the Components.
      */
     private void initComponents() {
-        this.setLayout(new GridBagLayout());
-        this.setPreferredSize(new Dimension(300, 250));
-        this.setMinimumSize(new Dimension(300, 250));
+        setLayout(new GridBagLayout());
+        setPreferredSize(new Dimension(300, 250));
+        setMinimumSize(new Dimension(300, 250));
     }
     
     @Override
     protected void addComponents() {
-        this.initVerticalSplitPane();
-        this.initPanelTree();
-        this.initPanelEdit();
+        initVerticalSplitPane();
+        initPanelTree();
+        initPanelEdit();
         
-        this.splitPane.setTopComponent(this.getScrollPanelTree());
-        this.splitPane.setBottomComponent(this.getScrollPanelEdit());
+        splitPane.setTopComponent(getScrollPanelTree());
+        splitPane.setBottomComponent(getScrollPanelEdit());
         
-        this.add(this.splitPane, this.getConstraints());
+        add(splitPane, getConstraints());
     }
     
     /**
      * Method responsible for initializing the Vertical Split Pane.
      */
     private void initVerticalSplitPane() {
-        this.splitPane = new JSplitPane();
-        this.splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+        splitPane = new JSplitPane();
+        splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
     }
     
     /**
      * Method responsible for initializing the Panel Tree.
      */
     public void initPanelTree() {
-        this.panelTree = new PanelTree(this.viewMenu);
-        this.createScrollPane("scrollPanelTree");
-        this.getScrollPanelTree().setViewportView(this.panelTree);
-        this.getScrollPanelTree().setMinimumSize(new Dimension(250, 275));
-        this.getScrollPanelTree().setPreferredSize(new Dimension(250, 275));
+        panelTree = new PanelTree(viewMenu);
+        createScrollPane("tree");
+        getScrollPanelTree().setViewportView(panelTree);
+        getScrollPanelTree().setMinimumSize(new Dimension(250, 275));
+        getScrollPanelTree().setPreferredSize(new Dimension(250, 275));
     }
     
     /**
      * Method responsible for initializing the Panel Edit.
      */
     public void initPanelEdit() {
-        this.panelEdit = new PanelVoid(this.viewMenu);
-        this.createScrollPane("scrollPanelEdit");
-        this.getScrollPanelEdit().setViewportView(this.panelEdit);
-        this.getScrollPanelEdit().setMinimumSize(new Dimension(200, 200));
-        this.getScrollPanelEdit().setPreferredSize(new Dimension(200, 200));
+        panelEdit = new PanelVoid(viewMenu);
+        createScrollPane("edit");
+        getScrollPanelEdit().setViewportView(panelEdit);
+        getScrollPanelEdit().setMinimumSize(new Dimension(200, 200));
+        getScrollPanelEdit().setPreferredSize(new Dimension(200, 200));
     }
     
     /**
      * Method responsible for initializing the Panel Edit Project.
      */
     public void initPanelEditProject() {
-        this.panelEdit = new PanelEditProject(this.viewMenu);
-        this.updatePanelEdit();
+        panelEdit = new PanelEditProject(viewMenu);
+        updatePanelEdit();
     }
     
     /**
@@ -167,8 +167,8 @@ public final class PanelProject extends Panel {
      * @param diagram Diagram.
      */
     public void initPanelEditDiagram(Diagram diagram) {
-        this.panelEdit = new PanelEditDiagram(this.viewMenu, diagram);
-        this.updatePanelEdit();
+        panelEdit = new PanelEditDiagram(viewMenu, diagram);
+        updatePanelEdit();
     }
     
     /**
@@ -178,17 +178,17 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditElement(Diagram diagram, Element element) {
         if (diagram instanceof FeatureDiagram)
-            this.initPanelEditElement((FeatureDiagram)   diagram, element);
+            initPanelEditElement((FeatureDiagram)   diagram, element);
         else if (diagram instanceof ActivityDiagram)
-            this.initPanelEditElement((ActivityDiagram)  diagram, element);
+            initPanelEditElement((ActivityDiagram)  diagram, element);
         else if (diagram instanceof ClassDiagram)
-            this.initPanelEditElement((ClassDiagram)     diagram, element);
+            initPanelEditElement((ClassDiagram)     diagram, element);
         else if (diagram instanceof ComponentDiagram)
-            this.initPanelEditElement((ComponentDiagram) diagram, element);
+            initPanelEditElement((ComponentDiagram) diagram, element);
         else if (diagram instanceof SequenceDiagram)
-            this.initPanelEditElement((SequenceDiagram)  diagram, element);
+            initPanelEditElement((SequenceDiagram)  diagram, element);
         else if (diagram instanceof UseCaseDiagram)
-            this.initPanelEditElement((UseCaseDiagram)   diagram, element);
+            initPanelEditElement((UseCaseDiagram)   diagram, element);
     }
     
     /**
@@ -198,10 +198,10 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditElement(FeatureDiagram diagram, Element element) {
         if (element instanceof Feature)
-            this.panelEdit = new PanelEditFeature(this.viewMenu, diagram, (Feature) element);
+            panelEdit = new PanelEditFeature(viewMenu, diagram, (Feature) element);
         else if (element instanceof model.structural.diagram.feature.base.Variability)
-            this.panelEdit = new view.panel.edit.diagram.feature.base.PanelEditVariability(this.viewMenu, diagram, (model.structural.diagram.feature.base.Variability) element);
-        this.updatePanelEdit();
+            panelEdit = new view.panel.edit.diagram.feature.base.PanelEditVariability(viewMenu, diagram, (model.structural.diagram.feature.base.Variability) element);
+        updatePanelEdit();
     }
     
     /**
@@ -211,10 +211,10 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditElement(ActivityDiagram diagram, Element element) {
         if (element instanceof ActivityUML)
-            this.panelEdit = new PanelEditActivityUML(this.viewMenu, diagram, (ActivityUML) element);
+            panelEdit = new PanelEditActivityUML(viewMenu, diagram, (ActivityUML) element);
         else if (element instanceof DecisionUML)
-            this.panelEdit = new PanelEditDecisionUML(this.viewMenu, diagram, (DecisionUML) element);
-        this.updatePanelEdit();
+            panelEdit = new PanelEditDecisionUML(viewMenu, diagram, (DecisionUML) element);
+        updatePanelEdit();
     }
     
     /**
@@ -224,16 +224,16 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditElement(ClassDiagram diagram, Element element) {
         if (element instanceof AttributeUML)
-            this.panelEdit = new PanelEditAttributeUML(this.viewMenu, diagram, (AttributeUML) element);
+            panelEdit = new PanelEditAttributeUML(viewMenu, diagram, (AttributeUML) element);
         else if (element instanceof MethodUML)
-            this.panelEdit = new PanelEditMethodUML(this.viewMenu, diagram, (MethodUML) element);
+            panelEdit = new PanelEditMethodUML(viewMenu, diagram, (MethodUML) element);
         else if (element instanceof ClassUML)
-            this.panelEdit = new PanelEditClassUML(this.viewMenu, diagram, (ClassUML) element);
+            panelEdit = new PanelEditClassUML(viewMenu, diagram, (ClassUML) element);
         else if (element instanceof InterfaceUML)
-            this.panelEdit = new PanelEditInterfaceUML(this.viewMenu, diagram, (InterfaceUML) element);
+            panelEdit = new PanelEditInterfaceUML(viewMenu, diagram, (InterfaceUML) element);
         else if (element instanceof PackageUML)
-            this.panelEdit = new PanelEditPackageUML(this.viewMenu, diagram, (PackageUML) element);
-        this.updatePanelEdit();
+            panelEdit = new PanelEditPackageUML(viewMenu, diagram, (PackageUML) element);
+        updatePanelEdit();
     }
     
     /**
@@ -243,10 +243,10 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditElement(ComponentDiagram diagram, Element element) {
         if (element instanceof ComponentUML)
-            this.panelEdit = new PanelEditComponentUML(this.viewMenu, diagram, (ComponentUML) element);
+            panelEdit = new PanelEditComponentUML(viewMenu, diagram, (ComponentUML) element);
         else if (element instanceof model.structural.diagram.component.base.InterfaceUML)
-            this.panelEdit = new view.panel.edit.diagram.component.base.PanelEditInterfaceUML(this.viewMenu, diagram, (model.structural.diagram.component.base.InterfaceUML) element);
-        this.updatePanelEdit();
+            panelEdit = new view.panel.edit.diagram.component.base.PanelEditInterfaceUML(viewMenu, diagram, (model.structural.diagram.component.base.InterfaceUML) element);
+        updatePanelEdit();
     }
     
     /**
@@ -256,10 +256,10 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditElement(UseCaseDiagram diagram, Element element) {
         if (element instanceof ActorUML)
-            this.panelEdit = new PanelEditActorUML(this.viewMenu, diagram, (ActorUML) element);
+            panelEdit = new PanelEditActorUML(viewMenu, diagram, (ActorUML) element);
         else if (element instanceof UseCaseUML)
-            this.panelEdit = new PanelEditUseCaseUML(this.viewMenu, diagram, (UseCaseUML) element);
-        this.updatePanelEdit();
+            panelEdit = new PanelEditUseCaseUML(viewMenu, diagram, (UseCaseUML) element);
+        updatePanelEdit();
     }
     
     /**
@@ -269,10 +269,10 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditElement(SequenceDiagram diagram, Element element) {
         if (element instanceof LifelineUML)
-            this.panelEdit = new PanelEditLifelineUML(this.viewMenu, diagram, (LifelineUML) element);
+            panelEdit = new PanelEditLifelineUML(viewMenu, diagram, (LifelineUML) element);
         else if (element instanceof InstanceUML)
-            this.panelEdit = new PanelEditInstanceUML(this.viewMenu, diagram, (InstanceUML) element);
-        this.updatePanelEdit();
+            panelEdit = new PanelEditInstanceUML(viewMenu, diagram, (InstanceUML) element);
+        updatePanelEdit();
     }
     
     /**
@@ -282,16 +282,16 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditAssociation(Diagram diagram, Association association) {
         if (diagram instanceof FeatureDiagram)
-            this.initPanelEditAssociation((FeatureDiagram) diagram, association);
+            initPanelEditAssociation((FeatureDiagram) diagram, association);
         else if (diagram instanceof ActivityDiagram)
-            this.initPanelEditAssociation((ActivityDiagram) diagram, association);
+            initPanelEditAssociation((ActivityDiagram) diagram, association);
         else if (diagram instanceof ClassDiagram)
-            this.initPanelEditAssociation((ClassDiagram)    diagram, association);
+            initPanelEditAssociation((ClassDiagram)    diagram, association);
         else if (diagram instanceof SequenceDiagram)
-            this.initPanelEditAssociation((SequenceDiagram) diagram, association);
+            initPanelEditAssociation((SequenceDiagram) diagram, association);
         else {
-            this.panelEdit = new PanelEditAssociation(this.viewMenu, diagram, association);
-            this.updatePanelEdit();
+            panelEdit = new PanelEditAssociation(viewMenu, diagram, association);
+            updatePanelEdit();
         }
     }
     
@@ -302,8 +302,8 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditAssociation(FeatureDiagram diagram, Association association) {
         if (association instanceof Connection)
-            this.panelEdit = new PanelEditConnection(this.viewMenu, diagram, (Connection) association);
-        this.updatePanelEdit();
+            panelEdit = new PanelEditConnection(viewMenu, diagram, (Connection) association);
+        updatePanelEdit();
     }
     
     /**
@@ -313,8 +313,8 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditAssociation(ActivityDiagram diagram, Association association) {
         if (association instanceof FlowUML)
-            this.panelEdit = new PanelEditFlowUML(this.viewMenu, diagram, (FlowUML) association);
-        this.updatePanelEdit();
+            panelEdit = new PanelEditFlowUML(viewMenu, diagram, (FlowUML) association);
+        updatePanelEdit();
     }
     
     /**
@@ -324,10 +324,10 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditAssociation(ClassDiagram diagram, Association association) {
         if (association instanceof AssociationUML)
-            this.panelEdit = new PanelEditAssociationUML(this.viewMenu, diagram, (AssociationUML) association);
+            panelEdit = new PanelEditAssociationUML(viewMenu, diagram, (AssociationUML) association);
         else 
-            this.panelEdit = new PanelEditAssociation(this.viewMenu, diagram, association);
-        this.updatePanelEdit();
+            panelEdit = new PanelEditAssociation(viewMenu, diagram, association);
+        updatePanelEdit();
     }
     
     /**
@@ -337,8 +337,8 @@ public final class PanelProject extends Panel {
      */
     public void initPanelEditAssociation(SequenceDiagram diagram, Association association) {
         if (association instanceof MessageUML)
-            this.panelEdit = new PanelEditMessageUML(this.viewMenu, diagram, (MessageUML) association);
-        this.updatePanelEdit();
+            panelEdit = new PanelEditMessageUML(viewMenu, diagram, (MessageUML) association);
+        updatePanelEdit();
     }
     
     /**
@@ -348,8 +348,8 @@ public final class PanelProject extends Panel {
      * @param index Tab Index.
      */
     public void initPanelEditVariability(Diagram diagram, Variability variability, Integer index) {
-        this.panelEdit = new PanelEditVariability(this.viewMenu, diagram, variability, index);
-        this.updatePanelEdit();
+        panelEdit = new PanelEditVariability(viewMenu, diagram, variability, index);
+        updatePanelEdit();
     }
     
     /**
@@ -357,8 +357,8 @@ public final class PanelProject extends Panel {
      * @param stereotype Stereotype.
      */
     public void initPanelEditStereotype(Stereotype stereotype) {
-        this.panelEdit = new PanelEditStereotype(this.viewMenu, stereotype);
-        this.updatePanelEdit();
+        panelEdit = new PanelEditStereotype(viewMenu, stereotype);
+        updatePanelEdit();
     }
     
     /**
@@ -367,8 +367,8 @@ public final class PanelProject extends Panel {
      * @param index Tab Index.
      */
     public void initPanelEditRequirement(Requirement requirement, Integer index) {
-        this.panelEdit = new PanelEditRequirement(this.viewMenu, requirement, index);
-        this.updatePanelEdit();
+        panelEdit = new PanelEditRequirement(viewMenu, requirement, index);
+        updatePanelEdit();
     }
     
     /**
@@ -376,8 +376,8 @@ public final class PanelProject extends Panel {
      * @param traceability Traceability.
      */
     public void initPanelEditTraceability(Traceability traceability) {
-        this.panelEdit = new PanelEditTraceability(this.viewMenu, traceability);
-        this.updatePanelEdit();
+        panelEdit = new PanelEditTraceability(viewMenu, traceability);
+        updatePanelEdit();
     }
     
     /**
@@ -385,8 +385,8 @@ public final class PanelProject extends Panel {
      * @param product Product.
      */
     public void initPanelEditProduct(Product product) {
-        this.panelEdit = new PanelEditProduct(this.viewMenu, product);
-        this.updatePanelEdit();
+        panelEdit = new PanelEditProduct(viewMenu, product);
+        updatePanelEdit();
     }
     
     /**
@@ -394,8 +394,8 @@ public final class PanelProject extends Panel {
      * @param instance Instance.
      */
     public void initPanelEditInstance(Instance instance) {
-        this.panelEdit = new PanelEditInstance(this.viewMenu, instance);
-        this.updatePanelEdit();
+        panelEdit = new PanelEditInstance(viewMenu, instance);
+        updatePanelEdit();
     }
     
     /**
@@ -403,8 +403,8 @@ public final class PanelProject extends Panel {
      * @param artifact Artifact.
      */
     public void initPanelEditArtifact(Artifact artifact) {
-        this.panelEdit = new PanelEditArtifact(this.viewMenu, artifact);
-        this.updatePanelEdit();
+        panelEdit = new PanelEditArtifact(viewMenu, artifact);
+        updatePanelEdit();
     }
     
     /**
@@ -412,8 +412,8 @@ public final class PanelProject extends Panel {
      * @param relationship Relationship.
      */
     public void initPanelRelationship(Relationship relationship) {
-        this.panelEdit = new PanelEditRelationship(this.viewMenu, relationship);
-        this.updatePanelEdit();
+        panelEdit = new PanelEditRelationship(viewMenu, relationship);
+        updatePanelEdit();
     }
     
     /**
@@ -421,8 +421,8 @@ public final class PanelProject extends Panel {
      * @param metric Metric.
      */
     public void initPanelEditMetric(Metric metric) {
-        this.panelEdit = new PanelEditMetric(this.viewMenu, metric);
-        this.updatePanelEdit();
+        panelEdit = new PanelEditMetric(viewMenu, metric);
+        updatePanelEdit();
     }
     
     /**
@@ -430,17 +430,17 @@ public final class PanelProject extends Panel {
      * @param measure Measure.
      */
     public void initPanelEditMeasure(Measure measure) {
-        this.panelEdit = new PanelEditMeasure(this.viewMenu, measure);
-        this.updatePanelEdit();
+        panelEdit = new PanelEditMeasure(viewMenu, measure);
+        updatePanelEdit();
     }
     
     /**
      * Method responsible for updating the Panel Edit.
      */
     public void updatePanelEdit() {
-        this.panelEdit.updateUI();
-        this.getScrollPanelEdit().setViewportView(this.panelEdit);
-        this.getScrollPanelEdit().updateUI();
+        panelEdit.updateUI();
+        getScrollPanelEdit().setViewportView(panelEdit);
+        getScrollPanelEdit().updateUI();
     }
     
     /**
@@ -461,7 +461,7 @@ public final class PanelProject extends Panel {
      * @return Panel Tree.
      */
     public PanelTree getPanelTree() {
-        return this.panelTree;
+        return panelTree;
     }
     
     /**
@@ -469,7 +469,7 @@ public final class PanelProject extends Panel {
      * @return Scroll Panel Tree.
      */
     public JScrollPane getScrollPanelTree() {
-        return this.getScrollPane("scrollPanelTree");
+        return getScrollPane("tree");
     }
     
     /**
@@ -477,7 +477,7 @@ public final class PanelProject extends Panel {
      * @return Panel Edit.
      */
     public PanelEdit getPanelEdit() {
-        return this.panelEdit;
+        return panelEdit;
     }
     
     /**
@@ -485,6 +485,6 @@ public final class PanelProject extends Panel {
      * @return Scroll Panel Edit
      */
     public JScrollPane getScrollPanelEdit() {
-        return this.getScrollPane("scrollPanelEdit");
+        return getScrollPane("edit");
     }
 }

@@ -26,32 +26,32 @@ public final class PanelBaseOptional extends PanelBase {
      */
     public PanelBaseOptional(PanelNewInstance panel, Instance instance) {
         super(panel, instance);
-        this.controller = new ControllerPanelBaseOptional(this);
-        this.setDefaultProperties();
-        this.addHeader();
-        this.addComponents();
-        this.addFooter();
+        controller = new ControllerPanelBaseOptional(this);
+        setDefaultProperties();
+        addHeader();
+        addComponents();
+        addFooter();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
     }
 
     /**
      * Method responsible for adding the Header.
      */
     public void addHeader() {
-        this.add(this.createLabel("Select the Elements:"), this.createConstraints(2, 1, 0, 0));
+        add(createLabel("Select the Elements:"), createConstraints(2, 1, 0, 0));
     }
     
     @Override
     protected void addComponents() {
-        this.index = 3;
-        for (Element element : this.getInstance().getDiagram().filterOptionalElements()) {
-            this.add(this.createLabel(element.getName() + ":"), this.createConstraints(1, 1, 0, this.index));
-            this.add(this.createElementCheckBox(element),       this.createConstraints(1, 1, 1, this.index));
-            this.index++;
+        index = 3;
+        for (Element element : getInstance().getDiagram().filterOptionalElements()) {
+            add(createLabel(element.getName() + ":"), createConstraints(1, 1, 0, index));
+            add(createElementCheckBox(element),       createConstraints(1, 1, 1, index));
+            index++;
         }
     }
     
@@ -61,7 +61,7 @@ public final class PanelBaseOptional extends PanelBase {
      * @return Element Check Box.
      */
     private JCheckBox createElementCheckBox(Element element) {
-        JCheckBox checkBox = this.createCheckBox("checkBox" + element.getId(), "Yes", element.isMandatory());
+        JCheckBox checkBox = createCheckBox("checkBox" + element.getId(), "Yes", element.isMandatory());
                   checkBox.setSelected(element.isMandatory());
                   checkBox.setEnabled(!element.isMandatory());
         return    checkBox;
@@ -69,8 +69,8 @@ public final class PanelBaseOptional extends PanelBase {
     
     @Override
     public void addFooter() {
-        this.index++;
-        this.add(this.getFooter(), this.createConstraints(4, 1, 0, this.index));
+        index++;
+        add(getFooter(), createConstraints(4, 1, 0, index));
     }
     
     /**
@@ -79,6 +79,6 @@ public final class PanelBaseOptional extends PanelBase {
      * @return Check Box.
      */
     public JCheckBox getCheckBox(Element element) {
-        return this.getCheckBox("checkBox" + element.getId());
+        return getCheckBox("checkBox" + element.getId());
     }
 }

@@ -27,34 +27,34 @@ public final class PanelExportProduct extends PanelExport {
      */
     public PanelExportProduct(ViewMenu view) {
         super(view);
-        this.product    = null;
-        this.controller = new ControllerPanelExportProduct(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.updateInstances();
+        product    = null;
+        controller = new ControllerPanelExportProduct(this);
+        setDefaultProperties();
+        addComponents();
+        updateInstances();
     }
     
     @Override
     protected void addComponents() {
-        super.addDirectoryField();
+        addDirectoryField();
         
-        this.add(this.createLabel("Product: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("contextComboBox", new ControllerProduct(this.project).getProducts(), 250), this.createConstraints(4, 1, 1, 1));
-        this.setProduct((Product) this.getContextComboBox().getSelectedItem());
+        add(createLabel("Product: "), createConstraints(1, 1, 0, 1));
+        add(createComboBox("context", new ControllerProduct(project).getProducts(), 250), createConstraints(4, 1, 1, 1));
+        setProduct((Product) getContextComboBox().getSelectedItem());
         
-        this.createList("instancesList");
-        this.add(this.getScrollPane("instancesList"), this.createConstraints(5, 10, 0, 2));    
+        createList("instances");
+        add(getScrollPane("instances"), createConstraints(5, 10, 0, 2));    
     }
     
     /**
      * Method responsible for updating the Instances.
      */
     public void updateInstances() {
-        this.getInstancesList().removeAll();
+        getInstancesList().removeAll();
         DefaultListModel model = new DefaultListModel();
-        for (Instance instance : this.product.getInstancesList())
+        for (Instance instance : product.getInstancesList())
             model.addElement(instance.getAbstract());
-        this.getInstancesList().setModel(model);
+        getInstancesList().setModel(model);
     }
     
     /**
@@ -62,7 +62,7 @@ public final class PanelExportProduct extends PanelExport {
      * @return Instances List.
      */
     public JList getInstancesList() {
-        return this.getList("instancesList");
+        return getList("instances");
     }
     
     /**
@@ -70,7 +70,7 @@ public final class PanelExportProduct extends PanelExport {
      * @return Product.
      */
     public Product getProduct() {
-        return this.product;
+        return product;
     }
     
     /**
@@ -83,6 +83,6 @@ public final class PanelExportProduct extends PanelExport {
     
     @Override
     public ControllerPanelExportProduct getController() {
-        return (ControllerPanelExportProduct) this.controller;
+        return (ControllerPanelExportProduct) controller;
     }
 }

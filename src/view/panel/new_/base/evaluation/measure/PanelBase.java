@@ -39,7 +39,7 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Targets Array.
      */
     protected Object[] getTargets() {
-        return new ControllerProject(this.project).getDiagramTargets(this.measure.getMetric().getTarget());
+        return new ControllerProject(project).getDiagramTargets(measure.getMetric().getTarget());
     }
     
     /**
@@ -47,7 +47,7 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Metrics Array.
      */
     protected Object[] getMetrics() {
-        return new ControllerMetric(this.project).getMetrics();
+        return new ControllerMetric(project).getMetrics();
     }
     
     /**
@@ -57,8 +57,8 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
     protected JPanel getFooter() {
         JPanel footer = new JPanel();
                footer.setLayout(new GridLayout(1, 2));
-               footer.add(this.createButton("returnButton", " Return ", "Return", "back.png", new Dimension(175, 30)));
-               footer.add(this.createButton("nextButton",   "  Next  ", " Next ", "next.png", new Dimension(175, 30)));
+               footer.add(createButton("return", " Return ", "Return", "back.png", new Dimension(175, 30)));
+               footer.add(createButton("next",   "  Next  ", " Next ", "next.png", new Dimension(175, 30)));
         return footer;
     }
     
@@ -72,7 +72,7 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Return Button.
      */
     public JButton getReturnButton() {
-        return this.getButton("returnButton");
+        return getButton("return");
     }
     
     /**
@@ -80,7 +80,7 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Next Button.
      */
     public JButton getNextButton() {
-        return this.getButton("nextButton");
+        return getButton("next");
     }
     
     /**
@@ -88,7 +88,7 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Measure.
      */
     public Measure getMeasure() {
-        return this.measure;
+        return measure;
     }
     
     /**
@@ -96,7 +96,7 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return View New Measure.
      */
     public ViewNewMeasure getViewNew() {
-        return (ViewNewMeasure) this.getPanelNew().getView();
+        return (ViewNewMeasure) getPanelNew().getView();
     }
     
     /**
@@ -104,6 +104,6 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Panel New Measure.
      */
     public PanelNewMeasure getPanelNew() {
-        return (PanelNewMeasure) this.panelNew;
+        return (PanelNewMeasure) panelNew;
     }
 }

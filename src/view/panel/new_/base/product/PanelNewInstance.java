@@ -38,92 +38,92 @@ public final class PanelNewInstance extends PanelNew {
     public PanelNewInstance(ViewNewInstance view, Instance instance) {
         super(view);
         this.instance = instance;
-        this.addComponents();
+        addComponents();
     }
     
     @Override
     protected void addPanels() {
-        this.addPanelBaseInstance();
+        addPanelBaseInstance();
     }
     
     /**
      * Method responsible for adding the Panel Base Instance.
      */
     public void addPanelBaseInstance() {
-        this.addPanel("panelBaseInstance", new PanelBaseInstance(this, this.instance));
-        this.tabbedPane.removeAll();
-        this.createScrollPane("scrollPanelBaseInstance", this.getPanelBaseInstance());
-        this.tabbedPane.add("Instance", this.getScrollPane("scrollPanelBaseInstance"));
+        addPanel("base_instance", new PanelBaseInstance(this, instance));
+        tabbedPane.removeAll();
+        createScrollPane("base_instance", getPanelBaseInstance());
+        tabbedPane.add("Instance", getScrollPane("base_instance"));
     }
     
     /**
      * Method responsible for adding the Panel Base Optional.
      */
     public void addPanelBaseOptional() {
-        this.resetElements();
-        this.instance.reset();
-        this.addPanel("panelBaseOptional", new PanelBaseOptional(this, this.instance));
-        this.createScrollPane("scrollPanelBaseOptional", this.getPanelBaseOptional());
-        this.getScrollPane("scrollPanelBaseOptional").setPreferredSize(new Dimension(600, 350));
-        this.tabbedPane.add("Optional", this.getScrollPane("scrollPanelBaseOptional"));
-        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(1));
-        this.tabbedPane.setEnabledAt(0, false);
-        this.getView().getInsertButton().setEnabled(false);
+        resetElements();
+        instance.reset();
+        addPanel("optional", new PanelBaseOptional(this, instance));
+        createScrollPane("optional", getPanelBaseOptional());
+        getScrollPane("optional").setPreferredSize(new Dimension(600, 350));
+        tabbedPane.add("Optional", getScrollPane("optional"));
+        tabbedPane.setSelectedComponent(tabbedPane.getComponentAt(1));
+        tabbedPane.setEnabledAt(0, false);
+        getView().getInsertButton().setEnabled(false);
     }
     
     /**
      * Method responsible for removing the Panel Base Optional.
      */
     public void removePanelBaseOptional() {
-        this.tabbedPane.getComponent(0).setEnabled(true);
-        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(0));
-        this.tabbedPane.remove(1);
-        this.resetElements();
+        tabbedPane.getComponent(0).setEnabled(true);
+        tabbedPane.setSelectedComponent(tabbedPane.getComponent(0));
+        tabbedPane.remove(1);
+        resetElements();
     }
     
     /**
      * Method responsible for adding the Panel Base Var Points.
      */
     public void addPanelBaseVarPoints() {
-        this.addPanel("panelBaseVarPoints", new PanelBaseVarPoints(this, this.instance));
-        this.createScrollPane("scrollPanelBaseVarPoints", this.getPanelBaseVarPoints());
-        this.getScrollPane("scrollPanelBaseVarPoints").setPreferredSize(new Dimension(600, 350));
-        this.tabbedPane.add("Variation Points", this.getScrollPane("scrollPanelBaseVarPoints"));
-        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(2));
-        this.tabbedPane.setEnabledAt(1, false);
-        this.getView().getInsertButton().setEnabled(false);
+        addPanel("variation_points", new PanelBaseVarPoints(this, instance));
+        createScrollPane("variation_points", getPanelBaseVarPoints());
+        getScrollPane("variation_points").setPreferredSize(new Dimension(600, 350));
+        tabbedPane.add("Variation Points", getScrollPane("variation_points"));
+        tabbedPane.setSelectedComponent(tabbedPane.getComponentAt(2));
+        tabbedPane.setEnabledAt(1, false);
+        getView().getInsertButton().setEnabled(false);
     }
     
     /**
      * Method responsible for removing the Panel Base Optional.
      */
     public void removePanelBaseVarPoints() {
-        this.tabbedPane.getComponent(1).setEnabled(true);
-        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(1));
-        this.tabbedPane.remove(2);
-        this.resetElements();
+        tabbedPane.getComponent(1).setEnabled(true);
+        tabbedPane.setSelectedComponent(tabbedPane.getComponent(1));
+        tabbedPane.remove(2);
+        resetElements();
     }
     
     /**
      * Method responsible for adding the Panel Base Artifacts.
      */
     public void addPanelBaseArtifacts() {
-        this.addPanel("panelBaseArtifacts", new PanelBaseArtifacts(this, this.instance));
-        this.tabbedPane.add("Artifacts", this.getPanelBaseArtifacts());
-        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponentAt(3));
-        this.tabbedPane.setEnabledAt(2, false);
-        this.getView().getInsertButton().setEnabled(true);
+        addPanel("artifacts", new PanelBaseArtifacts(this, instance));
+        tabbedPane.add("Artifacts", getPanelBaseArtifacts());
+        tabbedPane.setSelectedComponent(tabbedPane.getComponentAt(3));
+        tabbedPane.setEnabledAt(2, false);
+        getView().getInsertButton().setEnabled(true);
     }
     
     /**
      * Method responsible for removing the Panel Base Artifacts.
      */
     public void removePanelBaseArtifacts() {
-        this.tabbedPane.getComponent(2).setEnabled(true);
-        this.tabbedPane.setSelectedComponent(this.tabbedPane.getComponent(2));
-        this.tabbedPane.remove(3);
-        this.getView().getInsertButton().setEnabled(false);
-        this.resetVariants();
+        tabbedPane.getComponent(2).setEnabled(true);
+        tabbedPane.setSelectedComponent(tabbedPane.getComponent(2));
+        tabbedPane.remove(3);
+        getView().getInsertButton().setEnabled(false);
+        resetVariants();
     }
     
     /**
@@ -132,7 +132,7 @@ public final class PanelNewInstance extends PanelNew {
      * @return Element is Variation Point.
      */
     public boolean isVariationPoint(Element element) {
-        return this.getElements().get(element.getId()) > 0;
+        return getElements().get(element.getId()) > 0;
     }
     
     /**
@@ -141,8 +141,8 @@ public final class PanelNewInstance extends PanelNew {
      */
     public List<Variability> getVariabilities() {
         List<Variability> filter = new ArrayList<>();
-        for (Variability variability : this.instance.getDiagram().getVariabilitiesList()) {
-            if (this.getElements().get(variability.getVariationPoint().getId()) > 0)
+        for (Variability variability : instance.getDiagram().getVariabilitiesList()) {
+            if (getElements().get(variability.getVariationPoint().getId()) > 0)
                 filter.add(variability);
         }
         return filter;
@@ -152,18 +152,18 @@ public final class PanelNewInstance extends PanelNew {
      * Method responsible for reseting the Elements.
      */
     private void resetElements() {
-        this.elements = new HashMap();
-        for (Element element : this.instance.getDiagram().getElementsList())
-            this.elements.put(element.getId(), 0);
+        elements = new HashMap();
+        for (Element element : instance.getDiagram().getElementsList())
+            elements.put(element.getId(), 0);
     }
     
     /**
      * Method responsible for reset Variants.
      */
     private void resetVariants() {
-        List<Element> filter = this.instance.getDiagram().filterOptionalElements();
-        for (Map.Entry<String, Integer> element : this.getElements().entrySet()) {
-            if (!filter.contains(this.instance.getDiagram().getElement(element.getKey())))
+        List<Element> filter = instance.getDiagram().filterOptionalElements();
+        for (Map.Entry<String, Integer> element : getElements().entrySet()) {
+            if (!filter.contains(instance.getDiagram().getElement(element.getKey())))
                 element.setValue(0);
         }
     }
@@ -173,7 +173,7 @@ public final class PanelNewInstance extends PanelNew {
      * @param element Element.
      */
     public void add(Element element) {
-        this.elements.put(element.getId(), this.getElements().get(element.getId()) + 1);
+        elements.put(element.getId(), getElements().get(element.getId()) + 1);
     }
     
     /**
@@ -182,7 +182,7 @@ public final class PanelNewInstance extends PanelNew {
      */
     public Integer getElementsSize() {
         Integer count = 0;
-        for (Map.Entry<String, Integer> element : this.getElements().entrySet())
+        for (Map.Entry<String, Integer> element : getElements().entrySet())
                count += (element.getValue() > 0) ? 1 : 0;
         return count;
     }
@@ -193,8 +193,8 @@ public final class PanelNewInstance extends PanelNew {
      * @return Instance contains Association.
      */
     private boolean contains(Association association) {
-        return    (this.getElements().get(association.getSource().getId()) > 0)
-               && (this.getElements().get(association.getTarget().getId()) > 0);
+        return (getElements().get(association.getSource().getId()) > 0
+             && getElements().get(association.getTarget().getId()) > 0);
     }
     
     /**
@@ -203,8 +203,8 @@ public final class PanelNewInstance extends PanelNew {
      */
     public Integer getAssociationsSize() {
         Integer count  = 0;
-        for (Association association : this.getDiagram().getAssociationsList())
-                count += this.contains(association) ? 1 : 0;
+        for (Association association : getDiagram().getAssociationsList())
+                count += contains(association) ? 1 : 0;
         return  count;
     }
     
@@ -213,7 +213,7 @@ public final class PanelNewInstance extends PanelNew {
      * @return Panel Base Instance.
      */
     public PanelBaseInstance getPanelBaseInstance() {
-        return (PanelBaseInstance) this.getPanel("panelBaseInstance");
+        return (PanelBaseInstance) getPanel("base_instance");
     }
     
     /**
@@ -221,7 +221,7 @@ public final class PanelNewInstance extends PanelNew {
      * @return Panel Base Optional.
      */
     public PanelBaseOptional getPanelBaseOptional() {
-        return (PanelBaseOptional) this.getPanel("panelBaseOptional");
+        return (PanelBaseOptional) getPanel("optional");
     }
 
     /**
@@ -229,7 +229,7 @@ public final class PanelNewInstance extends PanelNew {
      * @return Panel Base Var Points.
      */
     public PanelBaseVarPoints getPanelBaseVarPoints() {
-        return (PanelBaseVarPoints) this.getPanel("panelBaseVarPoints");
+        return (PanelBaseVarPoints) getPanel("variation_points");
     }
 
     /**
@@ -237,7 +237,7 @@ public final class PanelNewInstance extends PanelNew {
      * @return Panel Base Artifats.
      */
     public PanelBaseArtifacts getPanelBaseArtifacts() {
-        return (PanelBaseArtifacts) this.getPanel("panelBaseArtifacts");
+        return (PanelBaseArtifacts) getPanel("artifacts");
     }
     
     /**
@@ -245,7 +245,7 @@ public final class PanelNewInstance extends PanelNew {
      * @return Elements Map.
      */
     public HashMap<String, Integer> getElements() {
-        return this.elements;
+        return elements;
     }
     
     /**
@@ -253,7 +253,7 @@ public final class PanelNewInstance extends PanelNew {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.getInstance().getDiagram();
+        return getInstance().getDiagram();
     }
     
     /**
@@ -261,7 +261,7 @@ public final class PanelNewInstance extends PanelNew {
      * @return Instance.
      */
     public Instance getInstance() {
-        return this.instance;
+        return instance;
     }
     
     /**
@@ -269,11 +269,11 @@ public final class PanelNewInstance extends PanelNew {
      * @return Controller.
      */
     public ControllerViewNewInstance getController() {
-        return (ControllerViewNewInstance) this.getView().getController();
+        return (ControllerViewNewInstance) getView().getController();
     }
     
     @Override
     public ViewNewInstance getView() {
-        return (ViewNewInstance) this.viewNew;
+        return (ViewNewInstance) viewNew;
     }
 }

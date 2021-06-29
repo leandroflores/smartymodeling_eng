@@ -30,20 +30,20 @@ public final class PanelSequenceInstance extends PanelInstance {
      */
     public PanelSequenceInstance(ViewMenu view, Instance instance) {
         super(view, instance);
-        this.controller = new ControllerPanelInstance(this);
-        this.addComponents();
-        this.loadDefaultStyles();
+        controller = new ControllerPanelInstance(this);
+        addComponents();
+        loadDefaultStyles();
     }
     
     @Override
     protected void addArtifact(Artifact artifact, Element element) {
-        this.addStyle(artifact.getStyleLabel(), artifact.getStyle());
-        mxCell cell = (mxCell) this.getGraph().insertVertex(this.parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
+        addStyle(artifact.getStyleLabel(), artifact.getStyle());
+        mxCell cell = (mxCell) getGraph().insertVertex(parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
                cell.setConnectable(false);
-        this.addNameCell(cell, artifact);
-        this.addIconCell(cell, artifact);
-        this.addEndPointCell(cell, artifact);
-        this.addLineCell(cell, artifact);
+        addNameCell(cell, artifact);
+        addIconCell(cell, artifact);
+        addEndPointCell(cell, artifact);
+        addLineCell(cell, artifact);
         super.addArtifactCell(artifact, cell);
     }
     
@@ -54,7 +54,7 @@ public final class PanelSequenceInstance extends PanelInstance {
      */
     private void addIconCell(mxCell parent, Artifact artifact) {
         String style_ = artifact.getElement().getType().equals("instance") ? "classIconStyle" : "actorIconStyle";
-        mxCell cell   = (mxCell) this.getGraph().insertVertex(parent, null, "", 2, 12, 20, 20, style_);
+        mxCell cell   = (mxCell) getGraph().insertVertex(parent, null, "", 2, 12, 20, 20, style_);
                cell.setConnectable(false);
     }
     
@@ -64,11 +64,11 @@ public final class PanelSequenceInstance extends PanelInstance {
      * @param artifact Artifact.
      */
     private void addNameCell(mxCell parent, Artifact artifact) {
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, artifact.getId() + "(name)", this.getSignature(artifact.getElement()), 2, 0, artifact.getWidth() - 4, 50, "nameStyle");
+        mxCell cell = (mxCell) graph.insertVertex(parent, artifact.getId() + "(name)", getSignature(artifact.getElement()), 2, 0, artifact.getWidth() - 4, 50, "nameStyle");
                cell.setConnectable(false);
                cell.setId(artifact.getId() + "(name)");
-        this.identifiers.put(cell.getId(), artifact.getId());
-        this.objects.put(artifact.getId()  + "(name)", cell);
+        identifiers.put(cell.getId(), artifact.getId());
+        objects.put(artifact.getId()  + "(name)", cell);
     }
     
     /**
@@ -88,11 +88,11 @@ public final class PanelSequenceInstance extends PanelInstance {
      * @param artifact Artifact.
      */
     private void addLineCell(mxCell parent, Artifact artifact) {
-        Object source  = this.objects.get(artifact.getId() + "(name)");
-        Object target  = this.objects.get(artifact.getId() + "(point)");
-        Object newEdge = this.graph.insertEdge(this.parent, artifact.getId(), "", source, target, "lineStyle");
+        Object source  = objects.get(artifact.getId() + "(name)");
+        Object target  = objects.get(artifact.getId() + "(point)");
+        Object newEdge = graph.insertEdge(parent, artifact.getId(), "", source, target, "lineStyle");
         mxCell newCell = (mxCell) newEdge;
-        this.identifiers.put(newEdge, artifact.getId());
+        identifiers.put(newEdge, artifact.getId());
     }
     
     /**
@@ -103,26 +103,26 @@ public final class PanelSequenceInstance extends PanelInstance {
     private void addEndPointCell(mxCell parent, Artifact artifact) {
         Integer x   = (artifact.getWidth()  / 2) - 5;
         Integer y   = artifact.getHeight() - 10;
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, artifact.getId() + "(point)", "", x, y, 10, 10, "endPointStyle");
+        mxCell cell = (mxCell) graph.insertVertex(parent, artifact.getId() + "(point)", "", x, y, 10, 10, "endPointStyle");
                cell.setConnectable(false);
                cell.setId(artifact.getId() + "(point)");
-        this.identifiers.put(cell.getId(), artifact.getId());
-        this.objects.put(artifact.getId() + "(point)", cell);
+        identifiers.put(cell.getId(), artifact.getId());
+        objects.put(artifact.getId() + "(point)", cell);
     }
     
     @Override
     protected void loadDefaultStyles() {
         StyleSequence style = new StyleSequence();
-        this.addStyle("actorIconStyle", style.getImageStyle("usecase/actor.png"));
-        this.addStyle("classIconStyle", style.getImageStyle("classes/class.png"));
-        this.addStyle("nameStyle",      style.getInstanceStyle());
-        this.addStyle("lineStyle",      style.getLineStyle());
-        this.addStyle("pointStyle",     style.getPointStyle());
-        this.addStyle("endPointStyle",  style.getEndPointStyle());
+        addStyle("actorIconStyle", style.getImageStyle("usecase/actor.png"));
+        addStyle("classIconStyle", style.getImageStyle("classes/class.png"));
+        addStyle("nameStyle",      style.getInstanceStyle());
+        addStyle("lineStyle",      style.getLineStyle());
+        addStyle("pointStyle",     style.getPointStyle());
+        addStyle("endPointStyle",  style.getEndPointStyle());
     }
     
     @Override
     public SequenceDiagram getDiagram() {
-        return (SequenceDiagram) this.instance.getDiagram();
+        return (SequenceDiagram) instance.getDiagram();
     }
 }

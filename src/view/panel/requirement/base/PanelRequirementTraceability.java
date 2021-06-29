@@ -34,36 +34,36 @@ public final class PanelRequirementTraceability extends PanelRequirement {
      */
     public PanelRequirementTraceability(ViewRequirementTraceability view) {
         super(view);
-        this.controller = new ControllerPanelRequirementTraceability(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        controller = new ControllerPanelRequirementTraceability(this);
+        setDefaultProperties();
+        addComponents();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Requirement: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("requirementComboBox", new ControllerRequirement(this.getProject()).getRequirements(), 400), this.createConstraints(4, 1, 1, 1));
+        add(createLabel("Requirement: "), createConstraints(1, 1, 0, 1));
+        add(createComboBox("requirement", new ControllerRequirement(getProject()).getRequirements(), 400), createConstraints(4, 1, 1, 1));
         
-        this.add(this.createLabel("Type: "), this.createConstraints(1, 1, 0, 2));
-        this.add(this.createComboBox("typeComboBox", new ControllerProject(this.getProject()).getDiagramTypes(), 400), this.createConstraints(4, 1, 1, 2));
+        add(createLabel("Type: "), createConstraints(1, 1, 0, 2));
+        add(createComboBox("type", new ControllerProject(getProject()).getDiagramTypes(), 400), createConstraints(4, 1, 1, 2));
         
-        this.add(this.createLabel("Diagram: "), this.createConstraints(1, 1, 0, 3));
-        this.add(this.createComboBox("diagramComboBox", new ControllerProject(this.getProject()).getDiagrams(this.getType()), 400), this.createConstraints(4, 1, 1, 3));
+        add(createLabel("Diagram: "), createConstraints(1, 1, 0, 3));
+        add(createComboBox("diagram", new ControllerProject(getProject()).getDiagrams(getType()), 400), createConstraints(4, 1, 1, 3));
         
-        this.add(this.createLabel("Element: "), this.createConstraints(1, 1, 0, 4));
-        this.add(this.createComboBox("elementComboBox", this.getElements(), 400), this.createConstraints(4, 1, 1, 4));
+        add(createLabel("Element: "), createConstraints(1, 1, 0, 4));
+        add(createComboBox("element", getElements(), 400), createConstraints(4, 1, 1, 4));
         
-        this.add(this.createButtonsPanel(), this.createConstraints(5, 1, 0, 5));
+        add(createButtonsPanel(), createConstraints(5, 1, 0, 5));
         
-        this.createList("elementsList");
-        this.add(this.getScrollPane("elementsList"), this.createConstraints(5, 10, 0, 6));
-        this.getScrollPane("elementsList").setPreferredSize(new Dimension(400, 280));
-        this.updateElementsList();
+        createList("elements");
+        add(getScrollPane("elements"), createConstraints(5, 10, 0, 6));
+        getScrollPane("elements").setPreferredSize(new Dimension(400, 280));
+        updateElementsList();
     }
     
     /**
@@ -73,8 +73,8 @@ public final class PanelRequirementTraceability extends PanelRequirement {
     private JPanel createButtonsPanel() {
         JPanel panel = new JPanel();
                panel.setLayout(new GridLayout(1, 2));
-               panel.add(this.createButton("addElementButton", "", "Add Element", "add.png"));
-               panel.add(this.createButton("delElementButton", "", "Del Element", "not.png"));
+               panel.add(createButton("add_element", "", "Add Element", "add.png"));
+               panel.add(createButton("del_element", "", "Del Element", "not.png"));
         return panel;
     }
     
@@ -83,8 +83,8 @@ public final class PanelRequirementTraceability extends PanelRequirement {
      * @return Selected Requirement.
      */
     private Requirement getSelectedRequirement() {
-        return this.getRequirementComboBox().getSelectedItem() != null ?
-               (Requirement) this.getRequirementComboBox().getSelectedItem() : null;
+        return getRequirementComboBox().getSelectedItem() != null ?
+               (Requirement) getRequirementComboBox().getSelectedItem() : null;
     }
     
     /**
@@ -92,7 +92,7 @@ public final class PanelRequirementTraceability extends PanelRequirement {
      * @return Type.
      */
     private String getType() {
-        return this.getTypeComboBox().getSelectedItem().toString();
+        return getTypeComboBox().getSelectedItem().toString();
     }
     
     /**
@@ -100,17 +100,17 @@ public final class PanelRequirementTraceability extends PanelRequirement {
      * @return Selected Diagram.
      */
     private Diagram getSelectedDiagram() {
-        return this.getDiagramComboBox().getSelectedItem() instanceof Diagram ?
-               (Diagram) this.getDiagramComboBox().getSelectedItem() : null;
+        return getDiagramComboBox().getSelectedItem() instanceof Diagram ?
+               (Diagram) getDiagramComboBox().getSelectedItem() : null;
     }
     
     /**
      * Method responsible for updating the Diagram Combo Box.
      */
     public void updateDiagramComboBox() {
-        this.getDiagramComboBox().removeAllItems();
-        for (Object diagram : new ControllerProject(this.getProject()).getDiagrams(this.getType()))
-            this.getDiagramComboBox().addItem(diagram);
+        getDiagramComboBox().removeAllItems();
+        for (Object diagram : new ControllerProject(getProject()).getDiagrams(getType()))
+            getDiagramComboBox().addItem(diagram);
         
     }
     
@@ -119,21 +119,21 @@ public final class PanelRequirementTraceability extends PanelRequirement {
      * @return Elements Array.
      */
     private Element[] getElements() {
-        Diagram diagram = this.getSelectedDiagram();
+        Diagram diagram = getSelectedDiagram();
         if (diagram != null)
             return  new ControllerDiagram(diagram).getDefaultElements();
-        return new ControllerProject(this.getProject()).getDefaultElements();
+        return new ControllerProject(getProject()).getDefaultElements();
     }
     
     /**
      * Method responsible for updating the Element Combo Box.
      */
     public void updateElementComboBox() {
-        this.getElementComboBox().removeAllItems();
-        Diagram diagram = this.getSelectedDiagram();
+        getElementComboBox().removeAllItems();
+        Diagram diagram = getSelectedDiagram();
         if (diagram != null) {
             for (Element element : diagram.getDefaultElements())
-                this.getElementComboBox().addItem(element);
+                getElementComboBox().addItem(element);
         }
     }
     
@@ -141,25 +141,25 @@ public final class PanelRequirementTraceability extends PanelRequirement {
      * Method responsible for updating the Elements List.
      */
     public void updateElementsList() {
-        this.getElementsList().removeAll();
+        getElementsList().removeAll();
         DefaultListModel model  = new DefaultListModel();
-        Requirement requirement = this.getSelectedRequirement();
+        Requirement requirement = getSelectedRequirement();
         if (requirement != null) {
-            for (Element element :  requirement.getElements(this.getType()))
+            for (Element element :  requirement.getElements(getType()))
                 model.addElement(element);
         }
-        this.getElementsList().setModel(model);
+        getElementsList().setModel(model);
     }
     
     /**
      * Method responsible for adding a Element.
      */
     public void addElement() {
-        Requirement requirement = this.getSelectedRequirement();
-        Element     element     = this.getElement();
+        Requirement requirement = getSelectedRequirement();
+        Element     element     = getElement();
         if (requirement != null && element != null) {
             requirement.addElement(element.getDiagramType(), element);
-            this.updateElementsList();
+            updateElementsList();
         }
     }
     
@@ -167,11 +167,11 @@ public final class PanelRequirementTraceability extends PanelRequirement {
      * Method responsible for deleting a Element.
      */
     public void delElement() {
-        Requirement requirement = this.getSelectedRequirement();
-        Element     element     = (Element) this.getElementsList().getSelectedValue();
+        Requirement requirement = getSelectedRequirement();
+        Element     element     = (Element) getElementsList().getSelectedValue();
         if (requirement != null && element != null) {
             requirement.removeElement(element);
-            this.updateElementsList();
+            updateElementsList();
         }
     }
     
@@ -180,7 +180,7 @@ public final class PanelRequirementTraceability extends PanelRequirement {
      * @return Variant Element.
      */
     public Element getElement() {
-        return (Element) this.getElementComboBox().getSelectedItem();
+        return (Element) getElementComboBox().getSelectedItem();
     }
     
     /**
@@ -188,7 +188,7 @@ public final class PanelRequirementTraceability extends PanelRequirement {
      * @return Requirement Combo Box.
      */
     public JComboBox getRequirementComboBox() {
-        return this.getComboBox("requirementComboBox");
+        return getComboBox("requirement");
     }
     
     /**
@@ -196,7 +196,7 @@ public final class PanelRequirementTraceability extends PanelRequirement {
      * @return Type Combo Box.
      */
     public JComboBox getTypeComboBox() {
-        return this.getComboBox("typeComboBox");
+        return getComboBox("type");
     }
     
     /**
@@ -204,7 +204,7 @@ public final class PanelRequirementTraceability extends PanelRequirement {
      * @return Diagram Combo Box.
      */
     public JComboBox getDiagramComboBox() {
-        return this.getComboBox("diagramComboBox");
+        return getComboBox("diagram");
     }
     
     /**
@@ -212,7 +212,7 @@ public final class PanelRequirementTraceability extends PanelRequirement {
      * @return Element Combo Box.
      */
     public JComboBox getElementComboBox() {
-        return this.getComboBox("elementComboBox");
+        return getComboBox("element");
     }
     
     /**
@@ -220,7 +220,7 @@ public final class PanelRequirementTraceability extends PanelRequirement {
      * @return Add Element Button.
      */
     public JButton getAddElementButton() {
-        return this.getButton("addElementButton");
+        return getButton("add_element");
     }
     
     /**
@@ -228,7 +228,7 @@ public final class PanelRequirementTraceability extends PanelRequirement {
      * @return Del Element Button.
      */
     public JButton getDelElementButton() {
-        return this.getButton("delElementButton");
+        return getButton("del_element");
     }
     
     /**
@@ -236,6 +236,6 @@ public final class PanelRequirementTraceability extends PanelRequirement {
      * @return Elements List.
      */
     public JList getElementsList() {
-        return this.getList("elementsList");
+        return getList("elements");
     }
 }

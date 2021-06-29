@@ -83,7 +83,7 @@ public abstract class ControllerPanelEvaluation extends ControllerPanel {
      */
     protected boolean check() {
         if (!check(getPanel().getOperationTextField().getText())) {
-            new ViewError(getPanel().getViewEvaluation(), "Type a Operation!").setVisible(true);
+            new ViewError(getPanel().getView(), "Type a Operation!").setVisible(true);
             getPanel().getOperationTextField().requestFocus();
             return false;
         }

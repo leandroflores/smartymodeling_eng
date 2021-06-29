@@ -29,53 +29,53 @@ public final class PanelBaseEvaluation extends PanelBase {
      */
     public PanelBaseEvaluation(PanelNewMeasure panel, Measure measure) {
         super(panel, measure);
-        this.controller = new ControllerPanelBaseEvaluation(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.addFooter();
-        this.setValues();
+        controller = new ControllerPanelBaseEvaluation(this);
+        setDefaultProperties();
+        addComponents();
+        addFooter();
+        setValues();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Operation*: "), this.createConstraints(1, 1, 0, 0));
-        this.add(this.createTextFieldNoEditable("operationTextField", "", 15), this.createConstraints(5, 1, 1, 0));
+        add(createLabel("Operation*: "), createConstraints(1, 1, 0, 0));
+        add(createTextFieldNoEditable("operation", "", 15), createConstraints(5, 1, 1, 0));
         
-        this.add(this.createLabel("Target: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("targetComboBox", this.getTargets(), 15), this.createConstraints(5, 1, 1, 1));
+        add(createLabel("Target: "), createConstraints(1, 1, 0, 1));
+        add(createComboBox("target", getTargets(), 15), createConstraints(5, 1, 1, 1));
         
-        this.add(this.createLabel("Value: "), this.createConstraints(1, 1, 0, 2));
-        this.add(this.createTextFieldNoEditable("valueTextField", "", 15), this.createConstraints(5, 1, 1, 2));
+        add(createLabel("Value: "), createConstraints(1, 1, 0, 2));
+        add(createTextFieldNoEditable("value", "", 15), createConstraints(5, 1, 1, 2));
         
-        this.createList("detailsList");
-        this.add(this.getDetailsScrollPane(), this.createConstraints(6, 1, 0, 3));
+        createList("details");
+        add(getDetailsScrollPane(), createConstraints(6, 1, 0, 3));
     }
     
     @Override
     public void addFooter() {
-        this.add(this.getFooter(), this.createConstraints(6, 1, 0, 4));
-        this.getNextButton().setEnabled(false);
+        add(getFooter(), createConstraints(6, 1, 0, 4));
+        getNextButton().setEnabled(false);
     }
     
     /**
      * Method responsible for setting the Operation Values.
      */
     public void setValues() {
-        this.getOperationTextField().setText(this.measure.getMetric().getOperation());
-        this.updateTarget();
+        getOperationTextField().setText(measure.getMetric().getOperation());
+        updateTarget();
     }
     
     /**
      * Method responsible for updating the Target Panel.
      */
     public void updateTarget() {
-        Object target = this.getViewNew().getPanelBaseTarget().getTargetComboBox().getSelectedItem();
-        this.getTargetComboBox().setSelectedItem(target);
+        Object target = getViewNew().getPanelBaseTarget().getTargetComboBox().getSelectedItem();
+        getTargetComboBox().setSelectedItem(target);
     }
     
     /**
@@ -83,11 +83,11 @@ public final class PanelBaseEvaluation extends PanelBase {
      * @param list Objects List.
      */
     public void updateDetails(List<Object> list) {
-        this.getDetailsList().removeAll();
+        getDetailsList().removeAll();
         DefaultListModel model = new DefaultListModel();
         for (Object object :  list)
             model.addElement(object);
-        this.getDetailsList().setModel(model);
+        getDetailsList().setModel(model);
     }
     
     /**
@@ -95,7 +95,7 @@ public final class PanelBaseEvaluation extends PanelBase {
      * @return Operation Text Field.
      */
     public JTextField getOperationTextField() {
-        return this.getTextField("operationTextField");
+        return getTextField("operation");
     }
     
     /**
@@ -103,7 +103,7 @@ public final class PanelBaseEvaluation extends PanelBase {
      * @return Target Combo Box.
      */
     public JComboBox getTargetComboBox() {
-        return this.getComboBox("targetComboBox");
+        return getComboBox("target");
     }
     
     /**
@@ -111,7 +111,7 @@ public final class PanelBaseEvaluation extends PanelBase {
      * @return Value Text Field.
      */
     public JTextField getValueTextField() {
-        return this.getTextField("valueTextField");
+        return getTextField("value");
     }
     
     /**
@@ -119,7 +119,7 @@ public final class PanelBaseEvaluation extends PanelBase {
      * @return Details List.
      */
     public JList getDetailsList() {
-        return this.getList("detailsList");
+        return getList("details");
     }
     
     /**
@@ -127,6 +127,6 @@ public final class PanelBaseEvaluation extends PanelBase {
      * @return Details Scroll Pane.
      */
     public JScrollPane getDetailsScrollPane() {
-        return this.getScrollPane("detailsList");
+        return getScrollPane("details");
     }
 }

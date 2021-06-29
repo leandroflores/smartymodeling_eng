@@ -25,7 +25,7 @@ public abstract class PanelRequirement extends Panel {
     public PanelRequirement(ViewRequirement view) {
         this.view       = view;
         this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 200));
+        tabbedPane.setPreferredSize(new Dimension(550, 200));
     }
     
     /**
@@ -38,7 +38,7 @@ public abstract class PanelRequirement extends Panel {
      * @return Project.
      */
     public Project getProject() {
-        return this.getView().getProject();
+        return getView().getProject();
     }
     
     /**
@@ -46,7 +46,7 @@ public abstract class PanelRequirement extends Panel {
      * @return View Menu.
      */
     public ViewMenu getViewMenu() {
-        return this.getView().getViewMenu();
+        return getView().getViewMenu();
     }
     
     /**
@@ -54,6 +54,6 @@ public abstract class PanelRequirement extends Panel {
      * @return View Requirement.
      */
     public ViewRequirement getView() {
-        return this.view;
+        return view;
     }
 }

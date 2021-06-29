@@ -9,7 +9,7 @@ import view.panel.operation.PanelOperation;
  * <p>Class of View <b>PanelUseCaseOperation</b>.</p> 
  * <p>Class responsible for defining a Panel for <b>Use Case Operation Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  09/04/2019
+ * @since  2019-04-09
  * @see    controller.view.panel.operation.types.ControllerPanelUseCaseOperation
  * @see    view.panel.operation.PanelOperation
  * @see    view.panel.diagram.types.PanelUseCaseDiagram
@@ -22,39 +22,39 @@ public final class PanelUseCaseOperation extends PanelOperation {
      */
     public PanelUseCaseOperation(PanelUseCaseDiagram panel) {
         super(panel);
-        this.controller = new ControllerPanelUseCaseOperation(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        controller = new ControllerPanelUseCaseOperation(this);
+        setDefaultProperties();
+        addComponents();
     }
     
     @Override
     protected void addDiagramButtons() {
-        this.add(this.createButton("actorButton",   "", "New Actor",    "diagram/usecase/actor.png"));
-        this.add(this.createButton("useCaseButton", "", "New Use Case", "diagram/usecase/use-case.png"));
+        add(createButton("actor",    "", "New Actor",    "diagram/usecase/actor.png"));
+        add(createButton("use_case", "", "New Use Case", "diagram/usecase/use-case.png"));
     }
     
     @Override
     public Object[] getAssociationsIcons() {
-        Object[] icons = {this.getAssociationImage("usecase/communication"),
-                          this.getAssociationImage("usecase/extend"),
-                          this.getAssociationImage("usecase/include"),
-                          this.getAssociationImage("generalization"),
-                          this.getAssociationImage("requires"),
-                          this.getAssociationImage("mutex"),
-                          this.getAssociationImage("dependency")};
+        Object[] icons = {getAssociationImage("usecase/communication"),
+                          getAssociationImage("usecase/extend"),
+                          getAssociationImage("usecase/include"),
+                          getAssociationImage("generalization"),
+                          getAssociationImage("requires"),
+                          getAssociationImage("mutex"),
+                          getAssociationImage("dependency")};
         return   icons;
     }
 
     @Override
     public void resetBackground() {
-        this.getClickButton().setBackground(this.getDefaultColor());
-        this.getActorButton().setBackground(this.getDefaultColor());
-        this.getUseCaseButton().setBackground(this.getDefaultColor());
+        getClickButton().setBackground(getDefaultColor());
+        getActorButton().setBackground(getDefaultColor());
+        getUseCaseButton().setBackground(getDefaultColor());
     }
     
     @Override
     public PanelUseCaseDiagram getPanelDiagram() {
-        return (PanelUseCaseDiagram) this.panelDiagram;
+        return (PanelUseCaseDiagram) panel;
     }
     
     /**
@@ -62,7 +62,7 @@ public final class PanelUseCaseOperation extends PanelOperation {
      * @return Actor Button.
      */
     public JButton getActorButton() {
-        return this.getButton("actorButton");
+        return getButton("actor");
     }
     
     /**
@@ -70,6 +70,6 @@ public final class PanelUseCaseOperation extends PanelOperation {
      * @return Use Case Button.
      */
     public JButton getUseCaseButton() {
-        return this.getButton("useCaseButton");
+        return getButton("use_case");
     }
 }

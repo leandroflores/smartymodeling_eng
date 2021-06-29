@@ -9,7 +9,7 @@ import view.panel.operation.PanelOperation;
  * <p>Class of View <b>PanelComponentOperation</b>.</p> 
  * <p>Class responsible for defining a Panel for <b>Component Operation</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  09/04/2019
+ * @since  2019-04-09
  * @see    controller.view.panel.operation.types.ControllerPanelComponentOperation
  * @see    view.panel.diagram.types.PanelComponentDiagram
  * @see    view.panel.operation.PanelOperation
@@ -22,37 +22,37 @@ public final class PanelComponentOperation extends PanelOperation {
      */
     public PanelComponentOperation(PanelComponentDiagram panel) {
         super(panel);
-        this.controller = new ControllerPanelComponentOperation(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        controller = new ControllerPanelComponentOperation(this);
+        setDefaultProperties();
+        addComponents();
     }
     
     @Override
     protected void addDiagramButtons() {
-        this.add(this.createButton("componentButton", "", "New Component", "diagram/component/component.png"));
-        this.add(this.createButton("interfaceButton", "", "New Interface", "diagram/component/interface.png"));
+        add(createButton("component", "", "New Component", "diagram/component/component.png"));
+        add(createButton("interface", "", "New Interface", "diagram/component/interface.png"));
     }
     
     @Override
     public Object[] getAssociationsIcons() {
-        Object[] icons = {this.getAssociationImage("component/provide"),
-                          this.getAssociationImage("component/require"),
-                          this.getAssociationImage("dependency"),
-                          this.getAssociationImage("requires"),
-                          this.getAssociationImage("mutex")};
+        Object[] icons = {getAssociationImage("component/provide"),
+                          getAssociationImage("component/require"),
+                          getAssociationImage("dependency"),
+                          getAssociationImage("requires"),
+                          getAssociationImage("mutex")};
         return   icons;
     }
 
     @Override
     public void resetBackground() {
-        this.getClickButton().setBackground(this.getDefaultColor());
-        this.getComponentButton().setBackground(this.getDefaultColor());
-        this.getInterfaceButton().setBackground(this.getDefaultColor());
+        getClickButton().setBackground(getDefaultColor());
+        getComponentButton().setBackground(getDefaultColor());
+        getInterfaceButton().setBackground(getDefaultColor());
     }
     
     @Override
     public PanelComponentDiagram getPanelDiagram() {
-        return (PanelComponentDiagram) this.panelDiagram;
+        return (PanelComponentDiagram) panel;
     }
     
     /**
@@ -60,7 +60,7 @@ public final class PanelComponentOperation extends PanelOperation {
      * @return Component Button.
      */
     public JButton getComponentButton() {
-        return this.getButton("componentButton");
+        return getButton("component");
     }
     
     /**
@@ -68,6 +68,6 @@ public final class PanelComponentOperation extends PanelOperation {
      * @return Interface Button.
      */
     public JButton getInterfaceButton() {
-        return this.getButton("interfaceButton");
+        return getButton("interface");
     }
 }

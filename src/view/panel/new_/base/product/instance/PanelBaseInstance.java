@@ -25,53 +25,53 @@ public final class PanelBaseInstance extends PanelBase {
      */
     public PanelBaseInstance(PanelNewInstance panel, Instance instance) {
         super(panel, instance);
-        this.controller = new ControllerPanelBaseInstance(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.addFooter();
-        this.setValues();
+        controller = new ControllerPanelBaseInstance(this);
+        setDefaultProperties();
+        addComponents();
+        addFooter();
+        setValues();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Product*: "), this.createConstraints(1, 1, 0, 0));
-        this.add(this.createComboBox("productComboBox", this.getProject().getProductsList().toArray(), 15),    this.createConstraints(3, 1, 1, 0));
+        add(createLabel("Product*: "), createConstraints(1, 1, 0, 0));
+        add(createComboBox("product", getProject().getProductsList().toArray(), 15), createConstraints(3, 1, 1, 0));
         
-        this.add(this.createLabel("Diagram*: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("diagramComboBox", this.getProject().getUMLDiagramsList().toArray(), 15), this.createConstraints(3, 1, 1, 1));
+        add(createLabel("Diagram*: "), createConstraints(1, 1, 0, 1));
+        add(createComboBox("diagram", getProject().getUMLDiagramsList().toArray(), 15), createConstraints(3, 1, 1, 1));
         
-        this.add(this.createLabel("Name*: "),    this.createConstraints(1, 1, 0, 2));
-        this.add(this.createTextField("nameTextField", "", 15), this.createConstraints(3, 1, 1, 2));
+        add(createLabel("Name*: "),    createConstraints(1, 1, 0, 2));
+        add(createTextField("name", "", 15), createConstraints(3, 1, 1, 2));
     }
     
     /**
      * Method responsible for setting the Instance Values.
      */
     public void setValues() {
-        this.setProduct();
-        this.setDiagram();
-        this.getNameTextField().setText(this.getInstance().getName());
+        setProduct();
+        setDiagram();
+        getNameTextField().setText(getInstance().getName());
     }
     
     /**
      * Method responsible for setting the Instance Product.
      */
     private void setProduct() {
-        if (this.getProduct() != null)
-            this.getProductComboBox().setSelectedItem(this.getProduct());
+        if (getProduct() != null)
+            getProductComboBox().setSelectedItem(getProduct());
     }
     
     /**
      * Method responsible for setting the Diagram.
      */
     private void setDiagram() {
-        if (this.getDiagram() != null)
-            this.getDiagramComboBox().setSelectedItem(this.getDiagram());
+        if (getDiagram() != null)
+            getDiagramComboBox().setSelectedItem(getDiagram());
     }
     
     /**
@@ -79,8 +79,8 @@ public final class PanelBaseInstance extends PanelBase {
      */
     @Override
     public void addFooter() {
-        this.add(this.getFooter(), this.createConstraints(4, 1, 0, 3));
-        this.getReturnButton().setEnabled(false);
+        add(getFooter(), createConstraints(4, 1, 0, 3));
+        getReturnButton().setEnabled(false);
     }
     
     /**
@@ -88,7 +88,7 @@ public final class PanelBaseInstance extends PanelBase {
      * @return Product Combo Box.
      */
     public JComboBox getProductComboBox() {
-        return this.getComboBox("productComboBox");
+        return getComboBox("product");
     }
     
     /**
@@ -96,7 +96,7 @@ public final class PanelBaseInstance extends PanelBase {
      * @return Diagram Combo Box.
      */
     public JComboBox getDiagramComboBox() {
-        return this.getComboBox("diagramComboBox");
+        return getComboBox("diagram");
     }
     
     /**
@@ -104,6 +104,6 @@ public final class PanelBaseInstance extends PanelBase {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
 }

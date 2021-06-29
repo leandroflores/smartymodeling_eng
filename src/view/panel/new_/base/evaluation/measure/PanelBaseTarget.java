@@ -25,31 +25,31 @@ public final class PanelBaseTarget extends PanelBase {
      */
     public PanelBaseTarget(PanelNewMeasure panel, Measure measure) {
         super(panel, measure);
-        this.controller = new ControllerPanelBaseTarget(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.addFooter();
-        this.setValues();
+        controller = new ControllerPanelBaseTarget(this);
+        setDefaultProperties();
+        addComponents();
+        addFooter();
+        setValues();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Target: "), this.createConstraints(1, 1, 0, 0));
-        this.add(this.createComboBox("targetComboBox", this.getTargets(), 15), this.createConstraints(3, 1, 1, 0));
+        add(createLabel("Target: "), createConstraints(1, 1, 0, 0));
+        add(createComboBox("target", getTargets(), 15), createConstraints(3, 1, 1, 0));
         
-        this.add(this.createLabel("Elements: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createTextFieldNoEditable("elementsTextField", "", 15), this.createConstraints(3, 1, 1, 1));
+        add(createLabel("Elements: "), createConstraints(1, 1, 0, 1));
+        add(createTextFieldNoEditable("elements", "", 15), createConstraints(3, 1, 1, 1));
         
-        this.add(this.createLabel("Associations: "), this.createConstraints(1, 1, 0, 2));
-        this.add(this.createTextFieldNoEditable("associationsTextField", "", 15), this.createConstraints(3, 1, 1, 2));
+        add(createLabel("Associations: "), createConstraints(1, 1, 0, 2));
+        add(createTextFieldNoEditable("associations", "", 15), createConstraints(3, 1, 1, 2));
         
-        this.add(this.createLabel("Variabilities: "), this.createConstraints(1, 1, 0, 3));
-        this.add(this.createTextFieldNoEditable("variabilitiesTextField", "", 15), this.createConstraints(3, 1, 1, 3));
+        add(createLabel("Variabilities: "), createConstraints(1, 1, 0, 3));
+        add(createTextFieldNoEditable("variabilities", "", 15), createConstraints(3, 1, 1, 3));
     }
     
     /**
@@ -57,14 +57,14 @@ public final class PanelBaseTarget extends PanelBase {
      */
     @Override
     public void addFooter() {
-        this.add(this.getFooter(), this.createConstraints(4, 1, 0, 4));
+        add(getFooter(), createConstraints(4, 1, 0, 4));
     }
     
     /**
      * Method responsible for setting the Target Values.
      */
     public void setValues() {
-        this.getController().update();
+        getController().update();
     }
     
     /**
@@ -72,7 +72,7 @@ public final class PanelBaseTarget extends PanelBase {
      * @return Target Combo Box.
      */
     public JComboBox getTargetComboBox() {
-        return this.getComboBox("targetComboBox");
+        return getComboBox("target");
     }
     
     /**
@@ -80,7 +80,7 @@ public final class PanelBaseTarget extends PanelBase {
      * @return Elements Text Field.
      */
     public JTextField getElementsTextField() {
-        return this.getTextField("elementsTextField");
+        return getTextField("elements");
     }
     
     /**
@@ -88,7 +88,7 @@ public final class PanelBaseTarget extends PanelBase {
      * @return Associations Text Field.
      */
     public JTextField getAssociationsTextField() {
-        return this.getTextField("associationsTextField");
+        return getTextField("associations");
     }
     
     /**
@@ -96,11 +96,11 @@ public final class PanelBaseTarget extends PanelBase {
      * @return Variabilities Text Field.
      */
     public JTextField getVariabilitiesTextField() {
-        return this.getTextField("variabilitiesTextField");
+        return getTextField("variabilities");
     }
     
     @Override
     public ControllerPanelBaseTarget getController() {
-        return (ControllerPanelBaseTarget) this.controller;
+        return (ControllerPanelBaseTarget) controller;
     }
 }

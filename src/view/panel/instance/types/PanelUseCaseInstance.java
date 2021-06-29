@@ -10,7 +10,7 @@ import view.main.structural.ViewMenu;
  * <p>Class of View <b>PanelUseCaseInstance</b>.</p>
  * <p>Class responsible for defining the <b>Use Case Instance Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  06/10/2019
+ * @since  2019-10-06
  * @see    controller.view.panel.instance.ControllerPanelInstance
  * @see    model.structural.base.product.Instance
  * @see    view.panel.instance.PanelInstance
@@ -24,13 +24,13 @@ public final class PanelUseCaseInstance extends PanelInstance {
      */
     public PanelUseCaseInstance(ViewMenu view, Instance instance) {
         super(view, instance);
-        this.controller = new ControllerPanelInstance(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        controller = new ControllerPanelInstance(this);
+        setDefaultProperties();
+        addComponents();
     }
     
     @Override
     public UseCaseDiagram getDiagram() {
-        return (UseCaseDiagram) this.instance.getDiagram();
+        return (UseCaseDiagram) instance.getDiagram();
     }
 }

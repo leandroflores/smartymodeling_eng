@@ -28,14 +28,14 @@ public abstract class PanelExport extends Panel {
      */
     public PanelExport(ViewMenu view) {
         this.viewMenu = view;
-        this.project  = this.viewMenu.getProject();
+        this.project  = view.getProject();
     }
     
     /**
      * Method responsible for setting the Default Properties.
      */
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
     }
     
     @Override
@@ -45,18 +45,18 @@ public abstract class PanelExport extends Panel {
      * Method responsible for adding the Directory Field.
      */
     protected void addDirectoryField() {
-        this.add(this.createLabel("Directory*: "), this.createConstraints(1, 1, 0, 0));
-        this.add(this.createTextFieldNoEditable("directoryTextField", "", 15), this.createConstraints(4, 1, 1, 0));
-        this.add(this.createButton("searchDirectoryButton", "", "Search Directory", "search.png"), this.createConstraints(1, 1, 5, 0));
-        this.createDirectoryChooser("searchDirectoryChooser");
+        add(createLabel("Directory*: "), createConstraints(1, 1, 0, 0));
+        add(createTextFieldNoEditable("directory", "", 15), createConstraints(4, 1, 1, 0));
+        add(createButton("searchDirectory", "", "Search Directory", "search.png"), createConstraints(1, 1, 5, 0));
+        createDirectoryChooser("searchDirectory");
     }
     
     /**
      * Method responsible for adding the Name Text Field.
      */
     protected void addNameTextField() {
-        this.add(this.createLabel("Name*: "), this.createConstraints(1, 1, 0, 2));
-        this.add(this.createTextField("nameTextField", "", 15), this.createConstraints(5, 1, 1, 2));
+        add(createLabel("Name*: "), createConstraints(1, 1, 0, 2));
+        add(createTextField("name", "", 15), createConstraints(5, 1, 1, 2));
     }
     
     /**
@@ -64,7 +64,7 @@ public abstract class PanelExport extends Panel {
      * @return Directory Text Field.
      */
     public JTextField getDirectoryTextField() {
-        return this.getTextField("directoryTextField");
+        return getTextField("directory");
     }
     
     /**
@@ -72,7 +72,7 @@ public abstract class PanelExport extends Panel {
      * @return Search Directory Button.
      */
     public JButton getSearchDirectoryButton() {
-        return this.getButton("searchDirectoryButton");
+        return getButton("searchDirectory");
     }
     
     /**
@@ -80,7 +80,7 @@ public abstract class PanelExport extends Panel {
      * @return Search Directory Chooser.
      */
     public JFileChooser getSearchDirectoryChooser() {
-        return this.getFileChooser("searchDirectoryChooser");
+        return getFileChooser("searchDirectory");
     }
     
     /**
@@ -88,7 +88,7 @@ public abstract class PanelExport extends Panel {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -96,7 +96,7 @@ public abstract class PanelExport extends Panel {
      * @return Context Combo Box.
      */
     public JComboBox getContextComboBox() {
-        return this.getComboBox("contextComboBox");
+        return getComboBox("context");
     }
     
     /**
@@ -104,7 +104,7 @@ public abstract class PanelExport extends Panel {
      * @return Controller.
      */
     public ControllerPanelExport getController() {
-        return (ControllerPanelExport) this.controller;
+        return (ControllerPanelExport) controller;
     }
     
     /**
@@ -112,7 +112,7 @@ public abstract class PanelExport extends Panel {
      * @return Project.
      */
     public Project getProject() {
-        return this.project;
+        return project;
     }
     
     /**
@@ -120,6 +120,6 @@ public abstract class PanelExport extends Panel {
      * @return View Menu.
      */
     public ViewMenu getViewMenu() {
-        return this.viewMenu;
+        return viewMenu;
     }
 }

@@ -38,27 +38,27 @@ public final class PanelMatrix extends PanelRequirement {
         this.diagram      = diagram;
         this.requirements = requirements;
         this.controller   = new ControllerPanelMatrix(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        setDefaultProperties();
+        addComponents();
         
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
     }
     
     @Override
     protected void addComponents() {
-        this.addMatrix();
+        addMatrix();
     }
     
     /**
      * Method responsible for adding the Matrix.
      */
     private void addMatrix() {
-        this.addMatrixHeader();
-        this.addMatrixBody();
+        addMatrixHeader();
+        addMatrixBody();
     }
     
     /**
@@ -66,22 +66,22 @@ public final class PanelMatrix extends PanelRequirement {
      */
     private void addMatrixHeader() {
         int count = 1;
-        this.add(this.createLabel(""), this.createConstraints(1, 1, 0, 0));
-        for (Element element : this.getElements())
-            this.add(this.createLabel(element.getHTMLCode()), this.createConstraints(1, 1, count++, 0));
+        add(createLabel(""), createConstraints(1, 1, 0, 0));
+        for (Element element : getElements())
+            add(createLabel(element.getHTMLCode()), createConstraints(1, 1, count++, 0));
     }
     
     /**
      * Method responsible for adding the Matrix Body.
      */
     private void addMatrixBody() {
-        this.index = 1;
-        for (Requirement requirement : this.getRequirements()) {
+        index = 1;
+        for (Requirement requirement : getRequirements()) {
             int count = 0;
-            this.add(super.createLabel(requirement.getCode()), this.createConstraints(1, 1, count++, this.index));
-            for (Element element : this.getElements())
-                this.add(this.createElementCheckBox(requirement, element), this.createConstraints(1, 1, count++, this.index));
-            this.index++;
+            add(super.createLabel(requirement.getCode()), createConstraints(1, 1, count++, index));
+            for (Element element : getElements())
+                add(createElementCheckBox(requirement, element), createConstraints(1, 1, count++, index));
+            index++;
         }
     }
     
@@ -101,9 +101,9 @@ public final class PanelMatrix extends PanelRequirement {
      * @return Elements List.
      */
     private List<Element> getElements() {
-        if (this.diagram != null)
-            return this.diagram.getDefaultElements();
-        return this.getProject().getDefaultElements();
+        if (diagram != null)
+            return diagram.getDefaultElements();
+        return getProject().getDefaultElements();
     }
     
     /**
@@ -111,7 +111,7 @@ public final class PanelMatrix extends PanelRequirement {
      * @return Requirements List.
      */
     private List<Requirement> getRequirements() {
-        return this.requirements;
+        return requirements;
     }
     
     /**
@@ -122,7 +122,7 @@ public final class PanelMatrix extends PanelRequirement {
      */
     public JCheckBox createElementCheckBox(Requirement requirement, Element element) {
         String    id       = "checkBox" + requirement.getId() + element.getId();
-        JCheckBox checkBox = this.createCheckBox(id, "", true);
+        JCheckBox checkBox = createCheckBox(id, "", true);
                   checkBox.setName(requirement.getId() + "|" + element.getId());
                   checkBox.setSelected(requirement.contains(element));
                   checkBox.setEnabled(true);

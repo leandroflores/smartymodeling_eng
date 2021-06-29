@@ -36,19 +36,19 @@ public final class PanelClassInstance extends PanelInstance {
      */
     public PanelClassInstance(ViewMenu view, Instance instance) {
         super(view, instance);
-        this.controller = new ControllerPanelInstance(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        controller = new ControllerPanelInstance(this);
+        setDefaultProperties();
+        addComponents();
     }
     
     @Override
     protected void addArtifact(Artifact artifact, Element element) {
         if (element instanceof PackageUML)
-            this.addArtifact(artifact, (PackageUML) element);
+            addArtifact(artifact, (PackageUML) element);
         else if (element instanceof ClassUML)
-            this.addArtifact(artifact, (ClassUML) element);
+            addArtifact(artifact, (ClassUML) element);
         else if (element instanceof InterfaceUML)
-            this.addArtifact(artifact, (InterfaceUML) element);
+            addArtifact(artifact, (InterfaceUML) element);
     }
     
     /**
@@ -58,7 +58,7 @@ public final class PanelClassInstance extends PanelInstance {
      */
     protected void addArtifact(Artifact artifact, PackageUML package_) {
         if (package_.getParent() == null)
-            this.addPackage(this.parent, artifact);
+            addPackage(parent, artifact);
     }
     
     /**
@@ -67,13 +67,13 @@ public final class PanelClassInstance extends PanelInstance {
      * @param artifact Artifact.
      */
     private void addPackage(Object parent, Artifact artifact) {
-        this.addStyle(artifact.getStyleLabel(), artifact.getStyle());
-        mxCell cell  = (mxCell) this.graph.insertVertex(parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
+        addStyle(artifact.getStyleLabel(), artifact.getStyle());
+        mxCell cell  = (mxCell) graph.insertVertex(parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
                cell.setConnectable(false);
-        this.insert(cell, artifact);
-        this.addPackages((PackageUML) artifact.getElement(), cell);
-        this.addEntities((PackageUML) artifact.getElement(), cell);
-        this.addArtifactCell(artifact, cell);
+        insert(cell, artifact);
+        addPackages((PackageUML) artifact.getElement(), cell);
+        addEntities((PackageUML) artifact.getElement(), cell);
+        addArtifactCell(artifact, cell);
     }
     
     /**
@@ -83,9 +83,9 @@ public final class PanelClassInstance extends PanelInstance {
      */
     private void addPackages(PackageUML package_, Object parent) {
         for (PackageUML current : package_.getPackagesList()) {
-            Artifact subpackage = this.instance.getArtifact(current);
+            Artifact subpackage = instance.getArtifact(current);
             if (subpackage != null)
-                this.addPackage(parent, subpackage);
+                addPackage(parent, subpackage);
         }
     }
     
@@ -96,12 +96,12 @@ public final class PanelClassInstance extends PanelInstance {
      */
     private void addEntities(PackageUML package_, Object parent) {
         for (Entity entity : package_.getEntitiesList()) {
-            Artifact artifact = this.getInstance().getArtifact(entity);
+            Artifact artifact = getInstance().getArtifact(entity);
             if (artifact != null) {
                 if (entity instanceof ClassUML)
-                    this.addClass(parent, artifact);
+                    addClass(parent, artifact);
                 else if (entity instanceof InterfaceUML)
-                    this.addInterface(parent, artifact);
+                    addInterface(parent, artifact);
             }
         }
     }
@@ -113,7 +113,7 @@ public final class PanelClassInstance extends PanelInstance {
      */
     protected void addArtifact(Artifact artifact, ClassUML class_) {
         if (class_.getPackageUML() == null)
-            this.addClass(this.parent, artifact);
+            addClass(parent, artifact);
     }
     
     /**
@@ -122,11 +122,11 @@ public final class PanelClassInstance extends PanelInstance {
      * @param artifact Artifact.
      */
     private void addClass(Object parent, Artifact artifact) {
-        this.addStyle(artifact.getStyleLabel(), artifact.getStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
+        addStyle(artifact.getStyleLabel(), artifact.getStyle());
+        mxCell cell = (mxCell) graph.insertVertex(parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
                cell.setConnectable(false);
-        this.insert(cell, artifact, (Entity) artifact.getElement());
-        this.addArtifactCell(artifact, cell);
+        insert(cell, artifact, (Entity) artifact.getElement());
+        addArtifactCell(artifact, cell);
     }
     
     /**
@@ -136,7 +136,7 @@ public final class PanelClassInstance extends PanelInstance {
      */
     protected void addArtifact(Artifact artifact, InterfaceUML interface_) {
         if (interface_.getPackageUML() == null)
-            this.addInterface(this.parent, artifact);
+            addInterface(parent, artifact);
     }
     
     /**
@@ -145,11 +145,11 @@ public final class PanelClassInstance extends PanelInstance {
      * @param artifact Artifact.
      */
     private void addInterface(Object parent, Artifact artifact) {
-        this.addStyle(artifact.getStyleLabel(), artifact.getStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
+        addStyle(artifact.getStyleLabel(), artifact.getStyle());
+        mxCell cell = (mxCell) graph.insertVertex(parent, artifact.getId(), "", artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
                cell.setConnectable(false);
-        this.insert(cell, artifact, (Entity) artifact.getElement());
-        this.addArtifactCell(artifact, cell);
+        insert(cell, artifact, (Entity) artifact.getElement());
+        addArtifactCell(artifact, cell);
     }
     
     /**
@@ -159,16 +159,16 @@ public final class PanelClassInstance extends PanelInstance {
      */
     private void insert(mxCell vertex, Artifact artifact) {
         PackageUML package_ = (PackageUML) artifact.getElement();
-        this.addStyle("packageHeader", package_.getPackageStyle());
-        this.addStyle("packageName",   package_.getNameStyle());
+        addStyle("packageHeader", package_.getPackageStyle());
+        addStyle("packageName",   package_.getNameStyle());
         
-        mxCell head = (mxCell) this.graph.insertVertex(vertex, artifact.getId() + "(name)", "",  0,  0, artifact.getWidth() * 0.3,                        15, "packageHeader");
-        mxCell body = (mxCell) this.graph.insertVertex(vertex, artifact.getId() + "(body)", "",  0, 15, artifact.getWidth(),       artifact.getHeight() - 15, "packageHeader");
-                    this.addNameCell(body, package_);
+        mxCell head = (mxCell) graph.insertVertex(vertex, artifact.getId() + "(name)", "",  0,  0, artifact.getWidth() * 0.3,                        15, "packageHeader");
+        mxCell body = (mxCell) graph.insertVertex(vertex, artifact.getId() + "(body)", "",  0, 15, artifact.getWidth(),       artifact.getHeight() - 15, "packageHeader");
+                    addNameCell(body, package_);
                head.setConnectable(false);
                body.setConnectable(false);
-        this.addIdentifier(head, artifact.getId());
-        this.addIdentifier(body, artifact.getId());
+        addIdentifier(head, artifact.getId());
+        addIdentifier(body, artifact.getId());
     }
     
     /**
@@ -177,10 +177,10 @@ public final class PanelClassInstance extends PanelInstance {
      * @param packageUML Package UML.
      */
     private void addNameCell(mxCell parent, PackageUML packageUML) {
-        this.addStyle("nameStyle" + packageUML.getId(), packageUML.getNameStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, packageUML.getId() + "(name)", packageUML.getName(), 5, packageUML.getNamePosition(), packageUML.getWidth() - 10, 25, "nameStyle" + packageUML.getId());
+        addStyle("nameStyle" + packageUML.getId(), packageUML.getNameStyle());
+        mxCell cell = (mxCell) graph.insertVertex(parent, packageUML.getId() + "(name)", packageUML.getName(), 5, packageUML.getNamePosition(), packageUML.getWidth() - 10, 25, "nameStyle" + packageUML.getId());
                cell.setConnectable(false);
-        this.addIdentifier(cell.getId(), packageUML.getId());
+        addIdentifier(cell.getId(), packageUML.getId());
     }
     
     /**
@@ -190,12 +190,12 @@ public final class PanelClassInstance extends PanelInstance {
      * @param entity Entity.
      */
     private void insert(mxCell vertex, Artifact artifact, Entity entity) {
-        this.addInterfaceStereotypeCell(vertex, artifact, entity);
-        this.addNameCell(vertex, artifact, entity);
-        this.addLineCell(vertex, artifact, entity, this.getFirstLinePosition(entity));
-        this.addAttributesCells(vertex, artifact, entity);
-        this.addLineCell(vertex, artifact, entity, this.getSecondLinePosition(entity));
-        this.addMethodsCells(vertex, artifact, entity);
+        addInterfaceStereotypeCell(vertex, artifact, entity);
+        addNameCell(vertex, artifact, entity);
+        addLineCell(vertex, artifact, entity, getFirstLinePosition(entity));
+        addAttributesCells(vertex, artifact, entity);
+        addLineCell(vertex, artifact, entity, getSecondLinePosition(entity));
+        addMethodsCells(vertex, artifact, entity);
     }
     
     /**
@@ -213,7 +213,7 @@ public final class PanelClassInstance extends PanelInstance {
      * @return Second Line Position.
      */
     private Integer getSecondLinePosition(Entity entity) {
-        return this.getFirstLinePosition(entity) + 5
+        return getFirstLinePosition(entity) + 5
              + entity.getAttributesList().size() * 16 
              + 5;
     }
@@ -226,10 +226,10 @@ public final class PanelClassInstance extends PanelInstance {
      */
     private void addInterfaceStereotypeCell(mxCell parent, Artifact artifact, Entity entity) {
         if (entity.isInterface()) {
-            this.addStyle("stereotypeStyle", entity.getStereotypeStyle());
-            mxCell cell = (mxCell) this.graph.insertVertex(parent, artifact.getId(), "<<interface>>", 5, 5, artifact.getWidth() - 10, 20, "stereotypeStyle");
+            addStyle("stereotypeStyle", entity.getStereotypeStyle());
+            mxCell cell = (mxCell) graph.insertVertex(parent, artifact.getId(), "<<interface>>", 5, 5, artifact.getWidth() - 10, 20, "stereotypeStyle");
                    cell.setConnectable(false);
-            this.addIdentifier(cell, artifact.getId());
+            addIdentifier(cell, artifact.getId());
         }
     }
     
@@ -240,10 +240,10 @@ public final class PanelClassInstance extends PanelInstance {
      * @param entity Entity.
      */
     private void addNameCell(mxCell parent, Artifact artifact, Entity entity) {
-        this.addStyle("nameStyle" + artifact.getId(), this.getStyle(entity.getNameStyle()));
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, artifact.getId() + "(name)", entity.getName(), 5, entity.isInterface() ? 25 : 5, artifact.getWidth() - 10, 25, "nameStyle" + artifact.getId());
+        addStyle("nameStyle" + artifact.getId(), getStyle(entity.getNameStyle()));
+        mxCell cell = (mxCell) graph.insertVertex(parent, artifact.getId() + "(name)", entity.getName(), 5, entity.isInterface() ? 25 : 5, artifact.getWidth() - 10, 25, "nameStyle" + artifact.getId());
                cell.setConnectable(false);
-        this.addIdentifier(cell.getId(), entity.getId());
+        addIdentifier(cell.getId(), entity.getId());
     }
     
     /**
@@ -254,10 +254,10 @@ public final class PanelClassInstance extends PanelInstance {
      * @param position Position.
      */
     private void addLineCell(mxCell parent, Artifact artifact, Entity entity, Integer position) {
-        this.addStyle("lineStyle", entity.getLineStyle());
-        mxCell cell = (mxCell) this.graph.insertVertex(parent, null, "", 0, position, artifact.getWidth(), 1, "lineStyle");
+        addStyle("lineStyle", entity.getLineStyle());
+        mxCell cell = (mxCell) graph.insertVertex(parent, null, "", 0, position, artifact.getWidth(), 1, "lineStyle");
                cell.setConnectable(false);
-        this.addIdentifier(cell, entity.getId());
+        addIdentifier(cell, entity.getId());
     }
     
     /**
@@ -269,11 +269,11 @@ public final class PanelClassInstance extends PanelInstance {
     private void addAttributesCells(mxCell parent, Artifact artifact, Entity entity) {
         Integer index = 0;
         for (AttributeUML attribute : entity.getAttributesList()) {
-            this.addStyle(attribute.getStyleLabel(), attribute.getStyle());
-            Integer position = this.getFirstLinePosition(entity) + (index * 16) + 5;
-            mxCell  vertex   = (mxCell) this.graph.insertVertex(parent, attribute.getId(), attribute.getCompleteSignature(), 5, position, artifact.getWidth() - 10, 15, attribute.getStyleLabel());
+            addStyle(attribute.getStyleLabel(), attribute.getStyle());
+            Integer position = getFirstLinePosition(entity) + (index * 16) + 5;
+            mxCell  vertex   = (mxCell) graph.insertVertex(parent, attribute.getId(), attribute.getCompleteSignature(), 5, position, artifact.getWidth() - 10, 15, attribute.getStyleLabel());
                     vertex.setConnectable(false);
-                    index   += 1; 
+                    index++; 
         }
     }
     
@@ -286,18 +286,18 @@ public final class PanelClassInstance extends PanelInstance {
     private void addMethodsCells(mxCell parent, Artifact artifact, Entity entity) {
         Integer index = 0;
         for (MethodUML method : entity.getMethodsList()) {
-            this.addStyle(method.getStyleLabel(), method.getStyle());
-            Integer position = this.getSecondLinePosition(entity) + (index * 16) + 5;
-            mxCell  vertex   = (mxCell) this.graph.insertVertex(parent, method.getId(), method.getCompleteSignature(), 5, position, artifact.getWidth() - 10, 15, method.getStyleLabel());
+            addStyle(method.getStyleLabel(), method.getStyle());
+            Integer position = getSecondLinePosition(entity) + (index * 16) + 5;
+            mxCell  vertex   = (mxCell) graph.insertVertex(parent, method.getId(), method.getCompleteSignature(), 5, position, artifact.getWidth() - 10, 15, method.getStyleLabel());
                     vertex.setConnectable(false);
-                    index   += 1; 
+                    index++; 
         }
     }
     
     @Override
     protected void addRelationship(Relationship relationship, Association association) {
         super.addRelationship(relationship, association);
-        this.addCardinality(association);
+        addCardinality(association);
     }
     
     /**
@@ -306,10 +306,10 @@ public final class PanelClassInstance extends PanelInstance {
      */
     private void addCardinality(Association association) {
         if (association instanceof AssociationUML) {
-            this.addStyle(((AssociationUML) association).getCardinalityLabel(), 
-                          ((AssociationUML) association).getCardinalityStyle());
-            this.addSourceLabel((AssociationUML) association);
-            this.addTargetLabel((AssociationUML) association);
+            addStyle(((AssociationUML) association).getCardinalityLabel(), 
+                     ((AssociationUML) association).getCardinalityStyle());
+            addSourceLabel((AssociationUML) association);
+            addTargetLabel((AssociationUML) association);
         }
     }
     
@@ -319,9 +319,9 @@ public final class PanelClassInstance extends PanelInstance {
      */
     private void addSourceLabel(AssociationUML association) {
         if (!association.isDirection()) {
-            mxCell source = (mxCell) this.graph.insertVertex(this.parent, association.getId() + "(source)", association.getSourceLabel(), association.getSourceX(), association.getSourceY(), 30, 20, association.getCardinalityLabel());
+            mxCell source = (mxCell) graph.insertVertex(parent, association.getId() + "(source)", association.getSourceLabel(), association.getSourceX(), association.getSourceY(), 30, 20, association.getCardinalityLabel());
                    source.setConnectable(false);
-            this.addIdentifier(source, association.getId() + "(source)");
+            addIdentifier(source, association.getId() + "(source)");
         }
     }
     
@@ -330,13 +330,13 @@ public final class PanelClassInstance extends PanelInstance {
      * @param association Association UML. 
      */
     public void addTargetLabel(AssociationUML association) {
-        mxCell target = (mxCell) this.graph.insertVertex(this.parent, association.getId() + "(target)", association.getTargetLabel(), association.getTargetX(), association.getTargetY(), 30, 20, association.getCardinalityLabel());
+        mxCell target = (mxCell) graph.insertVertex(parent, association.getId() + "(target)", association.getTargetLabel(), association.getTargetX(), association.getTargetY(), 30, 20, association.getCardinalityLabel());
                target.setConnectable(false);
-        this.addIdentifier(target, association.getId() + "(target)");
+        addIdentifier(target, association.getId() + "(target)");
     }
     
     @Override
     public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.instance.getDiagram();
+        return (ClassDiagram) instance.getDiagram();
     }
 }

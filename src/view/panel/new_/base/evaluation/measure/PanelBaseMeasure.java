@@ -26,27 +26,27 @@ public final class PanelBaseMeasure extends PanelBase {
      */
     public PanelBaseMeasure(PanelNewMeasure panel, Measure measure) {
         super(panel, measure);
-        this.controller = new ControllerPanelBaseMeasure(this);
-        this.setDefaultProperties();
-        this.addComponents();
-        this.addFooter();
+        controller = new ControllerPanelBaseMeasure(this);
+        setDefaultProperties();
+        addComponents();
+        addFooter();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
     }
     
     @Override
     protected void addComponents() {
-        this.add(this.createLabel("Name*: "),   this.createConstraints(1, 1, 0, 0));
-        this.add(this.createTextField("nameTextField", this.measure.getName(), 10), this.createConstraints(3, 1, 1, 0));
+        add(createLabel("Name*: "),   createConstraints(1, 1, 0, 0));
+        add(createTextField("name", measure.getName(), 10), createConstraints(3, 1, 1, 0));
         
-        this.add(this.createLabel("Date*: "),   this.createConstraints(1, 1, 0, 1));
-        this.add(this.createTextField("dateTextField", this.measure.getDate(), 10), this.createConstraints(3, 1, 1, 1));
+        add(createLabel("Date*: "),   createConstraints(1, 1, 0, 1));
+        add(createTextField("date", measure.getDate(), 10), createConstraints(3, 1, 1, 1));
         
-        this.add(this.createLabel("Metric*: "), this.createConstraints(1, 1, 0, 2));
-        this.add(this.createComboBox("metricComboBox", this.getMetrics(), 15, this.getSelectedItem()), this.createConstraints(3, 1, 1, 2));
+        add(createLabel("Metric*: "), createConstraints(1, 1, 0, 2));
+        add(createComboBox("metric", getMetrics(), 15, getSelectedItem()), createConstraints(3, 1, 1, 2));
     }
     
     /**
@@ -54,8 +54,8 @@ public final class PanelBaseMeasure extends PanelBase {
      */
     @Override
     public void addFooter() {
-        this.add(this.getFooter(), this.createConstraints(4, 1, 0, 3));
-        this.getReturnButton().setEnabled(false);
+        add(getFooter(), createConstraints(4, 1, 0, 3));
+        getReturnButton().setEnabled(false);
     }
     
     /**
@@ -63,8 +63,8 @@ public final class PanelBaseMeasure extends PanelBase {
      * @return Selected Item.
      */
     private Object getSelectedItem() {
-        if (this.measure.getMetric() != null)
-            return this.measure.getMetric();
+        if (measure.getMetric() != null)
+            return measure.getMetric();
         return "";
     }
     
@@ -72,7 +72,7 @@ public final class PanelBaseMeasure extends PanelBase {
      * Method responsible for setting the Metric.
      */
     public void setMetric() {
-        this.measure.setMetric((Metric) this.getMetricComboBox().getSelectedItem());
+        measure.setMetric((Metric) getMetricComboBox().getSelectedItem());
     }
     
     /**
@@ -80,7 +80,7 @@ public final class PanelBaseMeasure extends PanelBase {
      * @return Name Text Field.
      */
     public JTextField getNameTextField() {
-        return this.getTextField("nameTextField");
+        return getTextField("name");
     }
     
     /**
@@ -88,7 +88,7 @@ public final class PanelBaseMeasure extends PanelBase {
      * @return Date Text Field.
      */
     public JTextField getDateTextField() {
-        return this.getTextField("dateTextField");
+        return getTextField("date");
     }
     
     /**
@@ -96,6 +96,6 @@ public final class PanelBaseMeasure extends PanelBase {
      * @return Metric Combo Box.
      */
     public JComboBox getMetricComboBox() {
-        return this.getComboBox("metricComboBox");
+        return getComboBox("metric");
     }
 }

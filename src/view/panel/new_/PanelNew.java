@@ -23,16 +23,16 @@ public abstract class PanelNew extends Panel {
      * @param view View Menu.
      */
     public PanelNew(ViewNew view) {
-        this.viewNew    = view;
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.setPreferredSize(new Dimension(550, 200));
+        viewNew    = view;
+        tabbedPane = new JTabbedPane();
+        tabbedPane.setPreferredSize(new Dimension(550, 200));
     }
     
     @Override
     protected void addComponents() {
-        this.tabbedPane = new JTabbedPane();
-            this.addPanels();
-        this.add(this.tabbedPane);
+        tabbedPane = new JTabbedPane();
+            addPanels();
+        add(tabbedPane);
     }
     
     /**
@@ -45,7 +45,7 @@ public abstract class PanelNew extends Panel {
      * @return Project.
      */
     public Project getProject() {
-        return this.getView().getProject();
+        return getView().getProject();
     }
     
     /**
@@ -53,7 +53,7 @@ public abstract class PanelNew extends Panel {
      * @return View Menu.
      */
     public ViewMenu getViewMenu() {
-        return this.getView().getViewMenu();
+        return getView().getViewMenu();
     }
     
     /**
@@ -61,6 +61,6 @@ public abstract class PanelNew extends Panel {
      * @return View New.
      */
     public ViewNew getView() {
-        return this.viewNew;
+        return viewNew;
     }
 }

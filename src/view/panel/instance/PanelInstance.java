@@ -50,71 +50,71 @@ public abstract class PanelInstance extends PanelGraph {
      * Method responsible for setting the Default Properties.
      */
     protected void setDefaultProperties() {
-        this.setLayout(new GridLayout(1, 1));
+        setLayout(new GridLayout(1, 1));
     }
     
     @Override
     protected void addComponents() {
-        this.addModelingPanel();
-        this.addControllers();
+        addModelingPanel();
+        addControllers();
     }
     
     @Override
     public void addControllers() {
-        this.component.getGraph().addListener(mxEvent.CELLS_MOVED,   new ControllerEventMove(this));
-        this.component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
-        this.component.getGraphControl().addMouseListener(new ControllerEventFocus(this));
-        this.component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
+        component.getGraph().addListener(mxEvent.CELLS_MOVED,   new ControllerEventMove(this));
+        component.getGraph().addListener(mxEvent.CELLS_RESIZED, new ControllerEventResize(this));
+        component.getGraphControl().addMouseListener(new ControllerEventFocus(this));
+        component.getGraphControl().addMouseListener(new ControllerEventPoints(this));
     }
     
     @Override
     public void addModelingPanel() {
-        this.identifiers = new HashMap<>();
-        this.objects     = new HashMap<>();
-            super.initGraph();
-            this.loadDefaultStyles();
-            this.initGraphComponent();
-            super.initGraphLayout();
-            this.addGraphPanel();
-        this.component.refresh();
+        identifiers = new HashMap<>();
+        objects     = new HashMap<>();
+            initGraph();
+            loadDefaultStyles();
+            initGraphComponent();
+            initGraphLayout();
+            addGraphPanel();
+        component.refresh();
     }
     
     @Override
     protected void initGraph() {
         super.initGraph();
-        this.graph.setAllowLoops(false);
+        graph.setAllowLoops(false);
     }
     
     @Override
     protected void initGraphComponent() {
         super.initGraphComponent();
-        this.component.getGraphControl().addMouseListener((ControllerPanelInstance) this.controller);
-        this.component.getGraphControl().getGraphContainer().addKeyListener((ControllerPanelInstance) this.controller);
+        component.getGraphControl().addMouseListener((ControllerPanelInstance) controller);
+        component.getGraphControl().getGraphContainer().addKeyListener((ControllerPanelInstance) controller);
     }
     
     @Override
     protected void addGraphPanel() {
-        this.createScrollPane("scrollPaneInstance");
-        this.getScrollPaneInstance().setViewportView(this.component);
-        this.add(this.getScrollPaneInstance());
+        createScrollPane("instance");
+        getScrollPaneInstance().setViewportView(component);
+        add(getScrollPaneInstance());
     }
     
     @Override
     public void updateGraph() {
-        this.clearGraph();
-        this.identifiers = new HashMap<>();
-        this.objects     = new HashMap<>();
+        clearGraph();
+        identifiers = new HashMap<>();
+        objects     = new HashMap<>();
         
-        this.addArtifacts();
-        this.addRelationships();
+        addArtifacts();
+        addRelationships();
     }
     
     /**
      * Method responsible for adding the Instance Artifacts.
      */
     public void addArtifacts() {
-        for (Artifact artifact : this.getInstance().getArtifactsList())
-            this.addArtifact(artifact, artifact.getElement());
+        for (Artifact artifact : getInstance().getArtifactsList())
+            addArtifact(artifact, artifact.getElement());
     }
     
     /**
@@ -123,11 +123,11 @@ public abstract class PanelInstance extends PanelGraph {
      * @param element Element.
      */
     protected void addArtifact(Artifact artifact, Element element) {
-        this.addStyle(artifact.getStyleLabel(), artifact.getStyle());
+        addStyle(artifact.getStyleLabel(), artifact.getStyle());
         String title = element.getName();
-        mxCell cell  = (mxCell) this.graph.insertVertex(this.parent, artifact.getId(), title, artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
+        mxCell cell  = (mxCell) graph.insertVertex(parent, artifact.getId(), title, artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
                cell.setConnectable(false);
-        this.addArtifactCell(artifact, cell);
+        addArtifactCell(artifact, cell);
     }
     
     /**
@@ -136,8 +136,8 @@ public abstract class PanelInstance extends PanelGraph {
      * @param cell mxCell.
      */
     protected void addArtifactCell(Artifact artifact, mxCell cell) {
-        this.identifiers.put(cell, artifact.getId());
-        this.objects.put(artifact.getId(), cell);
+        identifiers.put(cell, artifact.getId());
+        objects.put(artifact.getId(), cell);
     }
     
     /**
@@ -146,7 +146,7 @@ public abstract class PanelInstance extends PanelGraph {
      * @param id Identifier.
      */
     protected void addIdentifier(Object object, String id) {
-        this.identifiers.put(object, id);
+        identifiers.put(object, id);
     }
     
     /**
@@ -155,7 +155,7 @@ public abstract class PanelInstance extends PanelGraph {
      * @return Artifact Id.
      */
     public String getId(Element element) {
-        for (Artifact artifact : this.instance.getArtifactsList()) {
+        for (Artifact artifact : instance.getArtifactsList()) {
             if (artifact.getElement().equals(element))
                 return artifact.getId();
         }
@@ -166,8 +166,8 @@ public abstract class PanelInstance extends PanelGraph {
      * Method responsible for adding the Instance Relationships.
      */
     public void addRelationships() {
-        for (Relationship relationship : this.instance.getRelationshipsList()) 
-            this.addRelationship(relationship, relationship.getAssociation());
+        for (Relationship relationship : instance.getRelationshipsList()) 
+            addRelationship(relationship, relationship.getAssociation());
     }
     
     /**
@@ -176,11 +176,11 @@ public abstract class PanelInstance extends PanelGraph {
      * @param association Association.
      */
     protected void addRelationship(Relationship relationship, Association association) {
-        this.addStyle(relationship.getStyleLabel(), relationship.getStyle());
-        String title = this.getTitle(relationship);
-        mxCell edge  = (mxCell) this.graph.insertEdge(this.parent, relationship.getId(), title, this.objects.get(this.getId(relationship.getAssociation().getSource())), this.objects.get(this.getId(relationship.getAssociation().getTarget())), relationship.getStyleLabel());
-        this.updatePoints(relationship, edge);
-        this.addRelationshipCell(relationship, edge);
+        addStyle(relationship.getStyleLabel(), relationship.getStyle());
+        String title = getTitle(relationship);
+        mxCell edge  = (mxCell) graph.insertEdge(parent, relationship.getId(), title, objects.get(getId(relationship.getAssociation().getSource())), objects.get(getId(relationship.getAssociation().getTarget())), relationship.getStyleLabel());
+        updatePoints(relationship, edge);
+        addRelationshipCell(relationship, edge);
     }
     
     /**
@@ -189,9 +189,9 @@ public abstract class PanelInstance extends PanelGraph {
      * @param edge Edge Cell.
      */
     public void updatePoints(Relationship relationship, mxCell edge) {
-        mxGeometry geometry = this.getModel().getGeometry(edge);
+        mxGeometry geometry = getModel().getGeometry(edge);
                    geometry.setPoints(relationship.getPoints());
-        this.getModel().setGeometry(edge, geometry);
+        getModel().setGeometry(edge, geometry);
     }
     
     /**
@@ -209,8 +209,8 @@ public abstract class PanelInstance extends PanelGraph {
      * @param cell mxCell.
      */
     protected void addRelationshipCell(Relationship relationship, mxCell cell) {
-        this.identifiers.put(cell, relationship.getId());
-        this.objects.put(relationship.getId(), cell);
+        identifiers.put(cell, relationship.getId());
+        objects.put(relationship.getId(), cell);
     }
     
     /**
@@ -229,7 +229,7 @@ public abstract class PanelInstance extends PanelGraph {
      * @return View Menu.
      */
     public ViewMenu getViewMenu() {
-        return this.viewMenu;
+        return viewMenu;
     }
     
     /**
@@ -237,7 +237,7 @@ public abstract class PanelInstance extends PanelGraph {
      * @return Instance.
      */
     public Instance getInstance() {
-        return this.instance;
+        return instance;
     }
     
     /**
@@ -245,7 +245,7 @@ public abstract class PanelInstance extends PanelGraph {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.instance.getDiagram();
+        return instance.getDiagram();
     }
     
     /**
@@ -253,9 +253,9 @@ public abstract class PanelInstance extends PanelGraph {
      * @return Selected Relationship.
      */
     public Relationship getSelectedRelationship() {
-        mxCell cell = (mxCell) this.graph.getSelectionCell();
-        String id   = this.getIdentifiers().get(cell);
-        return this.getInstance().getRelationship(id);
+        mxCell cell = (mxCell) graph.getSelectionCell();
+        String id   = getIdentifiers().get(cell);
+        return getInstance().getRelationship(id);
     }
     
     /**
@@ -263,9 +263,9 @@ public abstract class PanelInstance extends PanelGraph {
      * @return Selected Artifact.
      */
     public Artifact getSelectedArtifact() {
-        mxCell cell = (mxCell) this.graph.getSelectionCell();
-        String id   = this.getIdentifiers().get(cell);
-        return this.getInstance().getArtifact(id);
+        mxCell cell = (mxCell) graph.getSelectionCell();
+        String id   = getIdentifiers().get(cell);
+        return getInstance().getArtifact(id);
     }
     
     /**
@@ -273,7 +273,7 @@ public abstract class PanelInstance extends PanelGraph {
      * @return Identifiers HashMap.
      */
     public HashMap<Object, String> getIdentifiers() {
-        return this.identifiers;
+        return identifiers;
     }
     
     /**
@@ -281,7 +281,7 @@ public abstract class PanelInstance extends PanelGraph {
      * @return Objects HashMap.
      */
     public HashMap<String, Object> getObjects() {
-        return this.objects;
+        return objects;
     }
     
     /**
@@ -289,6 +289,6 @@ public abstract class PanelInstance extends PanelGraph {
      * @return Scroll Pane Instance.
      */
     public JScrollPane getScrollPaneInstance() {
-        return this.getScrollPane("scrollPaneInstance");
+        return getScrollPane("instance");
     }
 }

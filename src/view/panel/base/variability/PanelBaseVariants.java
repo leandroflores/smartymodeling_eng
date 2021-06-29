@@ -72,8 +72,8 @@ public final class PanelBaseVariants extends PanelBase {
     private void addButtons() {
         JPanel panel = new JPanel();
                panel.setLayout(new GridLayout(1, 2));
-               panel.add(createButton("addVariant", "", "add.png"));
-               panel.add(createButton("delVariant", "", "not.png"));
+               panel.add(createButton("add_variant", "", "add.png"));
+               panel.add(createButton("del_variant", "", "not.png"));
         add(panel, createConstraints(5, 1, 0, 2));
     }
     
@@ -173,7 +173,7 @@ public final class PanelBaseVariants extends PanelBase {
      * @return Add Variant Button.
      */
     public JButton getAddVariantButton() {
-        return getButton("addVariant");
+        return getButton("add_variant");
     }
     
     /**
@@ -181,7 +181,7 @@ public final class PanelBaseVariants extends PanelBase {
      * @return Del Variant Button.
      */
     public JButton getDelVariantButton() {
-        return getButton("delVariant");
+        return getButton("del_variant");
     }
     
     /**

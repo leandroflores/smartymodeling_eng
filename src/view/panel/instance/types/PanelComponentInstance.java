@@ -29,15 +29,15 @@ public final class PanelComponentInstance extends PanelInstance {
      */
     public PanelComponentInstance(ViewMenu view, Instance instance) {
         super(view, instance);
-        this.controller = new ControllerPanelInstance(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        controller = new ControllerPanelInstance(this);
+        setDefaultProperties();
+        addComponents();
     }
     
     @Override
     protected void addArtifact(Artifact artifact, Element element) {
         if (element instanceof ComponentUML)
-            this.addArtifact(artifact, (ComponentUML) element);
+            addArtifact(artifact, (ComponentUML) element);
         else
             super.addArtifact(artifact, element);
     }
@@ -48,21 +48,21 @@ public final class PanelComponentInstance extends PanelInstance {
      * @param component Component UML.
      */
     protected void addArtifact(Artifact artifact, ComponentUML component) {
-        this.addStyle(artifact.getStyleLabel(), artifact.getStyle());
+        addStyle(artifact.getStyleLabel(), artifact.getStyle());
         String title  = component.getName();
-        mxCell vertex = (mxCell) this.graph.insertVertex(this.parent, artifact.getId(), title, artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
+        mxCell vertex = (mxCell) graph.insertVertex(parent, artifact.getId(), title, artifact.getPosition().x, artifact.getPosition().y, artifact.getSize().x, artifact.getSize().y, artifact.getStyleLabel());
                vertex.setConnectable(false);
-               this.graph.insertVertex(vertex, null, "", 10, 10, 20, 20, "imageComponentStyle");
-        this.addArtifactCell(artifact, vertex);
+               graph.insertVertex(vertex, null, "", 10, 10, 20, 20, "imageComponentStyle");
+        addArtifactCell(artifact, vertex);
     }
     
     @Override
     protected void loadDefaultStyles() {
-        this.addStyle("styleImageComponent", new StyleComponent().getImageComponentStyle());
+        addStyle("styleImageComponent", new StyleComponent().getImageComponentStyle());
     }
     
     @Override
     public ComponentDiagram getDiagram() {
-        return (ComponentDiagram) this.instance.getDiagram();
+        return (ComponentDiagram) instance.getDiagram();
     }
 }

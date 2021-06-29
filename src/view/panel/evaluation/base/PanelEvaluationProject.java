@@ -22,13 +22,13 @@ public final class PanelEvaluationProject extends PanelEvaluation {
      */
     public PanelEvaluationProject(ViewEvaluationProject view) {
         super(view);
-        this.controller = new ControllerPanelEvaluationProject(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        controller = new ControllerPanelEvaluationProject(this);
+        setDefaultProperties();
+        addComponents();
     }
     
     @Override
     protected Object[] getTargets() {
-        return new ControllerProject(this.project).getProjectTargets();
+        return new ControllerProject(project).getProjectTargets();
     }
 }

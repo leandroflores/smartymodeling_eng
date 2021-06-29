@@ -22,24 +22,24 @@ public final class PanelMain extends Panel {
     
     /**
      * Default constructor method of Class.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      */
-    public PanelMain(ViewMenu viewMenu) {
-        this.viewMenu   = viewMenu;
-        this.controller = new ControllerPanelMain(this);
-        this.setLayout(new GridLayout(0, 18));
-        this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 35));
-        this.setMinimumSize(new Dimension(0, 35));
-        this.addComponents();
+    public PanelMain(ViewMenu view) {
+        viewMenu   = view;
+        controller = new ControllerPanelMain(this);
+        setLayout(new GridLayout(0, 18));
+        setMaximumSize(new Dimension(Integer.MAX_VALUE, 35));
+        setMinimumSize(new Dimension(0, 35));
+        addComponents();
     }
     
     @Override
     protected void addComponents() {
-        this.addProjectButtons();
-        this.addActionButtons();
-        this.addZoomButtons();
-        this.addExportButtons();
-        this.addExtraButtons();
+        addProjectButtons();
+        addActionButtons();
+        addZoomButtons();
+        addExportButtons();
+        addExtraButtons();
     }
 
     /**
@@ -55,56 +55,56 @@ public final class PanelMain extends Panel {
      * Method responsible for adding Project Buttons.
      */
     private void addProjectButtons() {
-        this.add(this.createLabel(""));
-        this.add(this.createButton("newProjectButton",   "", "New Project",   this.getPath("new-project")));
-        this.add(this.createButton("openProjectButton",  "", "Open Project",  this.getPath("open-project")));
-        this.add(this.createButton("saveProjectButton",  "", "Save Project",  this.getPath("save-project")));
-        this.add(this.createButton("closeProjectButton", "", "Close Project", this.getPath("close-project")));
+        add(createLabel(""));
+        add(createButton("new_project",   "", "New Project",   getPath("new-project")));
+        add(createButton("open_project",  "", "Open Project",  getPath("open-project")));
+        add(createButton("save_project",  "", "Save Project",  getPath("save-project")));
+        add(createButton("close_project", "", "Close Project", getPath("close-project")));
     }
     
     /**
      * Method responsible for adding Action Buttons.
      */
     private void addActionButtons() {
-        this.add(this.createLabel(""));
-        this.add(this.createButton("undoButton", "", "Undo", this.getPath("undo")));
-        this.add(this.createButton("redoButton", "", "Redo", this.getPath("redo")));
+        add(createLabel(""));
+        add(createButton("undo", "", "Undo", getPath("undo")));
+        add(createButton("redo", "", "Redo", getPath("redo")));
     }
     
     /**
      * Method responsible for adding Zoom Buttons.
      */
     private void addZoomButtons() {
-        this.add(this.createLabel(""));
-        this.add(this.createButton("originalZoomButton", "", "Zoom 100%", this.getPath("zoom-original")));
-        this.add(this.createButton("zoomInButton",       "", "Zoom +",    this.getPath("zoom-in")));
-        this.add(this.createButton("zoomOutButton",      "", "Zoom -",    this.getPath("zoom-out")));
+        add(createLabel(""));
+        add(createButton("zoom_100", "", "Zoom 100%", getPath("zoom-original")));
+        add(createButton("zoom_in",  "", "Zoom +",    getPath("zoom-in")));
+        add(createButton("zoom_out", "", "Zoom -",    getPath("zoom-out")));
     }
     
     /**
      * Method responsible for adding Export Buttons.
      */
     private void addExportButtons() {
-        this.add(this.createLabel(""));
-        this.add(this.createButton("exportImageButton", "", "Export Image", this.getPath("export-image")));
-        this.add(this.createButton("exportPdfButton",   "", "Export PDF",   this.getPath("export-pdf")));
+        add(createLabel(""));
+        add(createButton("export_image", "", "Export Image", getPath("export-image")));
+        add(createButton("export_pdf",   "", "Export PDF",   getPath("export-pdf")));
     }
     
     /**
      * Method responsible for adding Extra Buttons.
      */
     private void addExtraButtons() {
-        this.add(this.createLabel(""));
-//        this.add(this.createButton("helpButton",    "", "Help",    this.getPath("help")));
-        this.add(this.createButton("versionButton", "", "Version", this.getPath("version")));
-        this.add(this.createLabel(""));
+        add(createLabel(""));
+//        add(createButton("help",    "", "Help",    getPath("help")));
+        add(createButton("version", "", "Version", getPath("version")));
+        add(createLabel(""));
     }
     
     /**
      * Method responsible for activating Panel.
      */
     public void activate() {
-        Iterator<JButton> iterator = this.getButtons().values().iterator();
+        Iterator<JButton> iterator = getButtons().values().iterator();
         while (iterator.hasNext())
                iterator.next().setEnabled(true);
     }
@@ -113,19 +113,19 @@ public final class PanelMain extends Panel {
      * Method responsible for setting No Project properties.
      */
     public void setNoProject() {
-        this.viewMenu.getMenuItemSaveProject().setEnabled(false);
-        this.viewMenu.getMenuItemSaveAs().setEnabled(false);
-        this.viewMenu.getMenuItemCloseProject().setEnabled(false);
+        viewMenu.getMenuItemSaveProject().setEnabled(false);
+        viewMenu.getMenuItemSaveAs().setEnabled(false);
+        viewMenu.getMenuItemCloseProject().setEnabled(false);
         
-        this.getSaveProjectButton().setEnabled(false);
-        this.getCloseProjectButton().setEnabled(false);
-        this.getRedoButton().setEnabled(false);
-        this.getUndoButton().setEnabled(false);
-        this.getOriginalZoomButton().setEnabled(false);
-        this.getZoomInButton().setEnabled(false);
-        this.getZoomOutButton().setEnabled(false);
-        this.getExportImageButton().setEnabled(false);
-        this.getExportPdfButton().setEnabled(false);
+        getSaveProjectButton().setEnabled(false);
+        getCloseProjectButton().setEnabled(false);
+        getRedoButton().setEnabled(false);
+        getUndoButton().setEnabled(false);
+        getOriginalZoomButton().setEnabled(false);
+        getZoomInButton().setEnabled(false);
+        getZoomOutButton().setEnabled(false);
+        getExportImageButton().setEnabled(false);
+        getExportPdfButton().setEnabled(false);
     }
     
     /**
@@ -133,11 +133,11 @@ public final class PanelMain extends Panel {
      * @param enabled Enabled Flag.
      */
     public void setModeling(boolean enabled) {
-        this.getOriginalZoomButton().setEnabled(enabled);
-        this.getZoomInButton().setEnabled(enabled);
-        this.getZoomOutButton().setEnabled(enabled);
-        this.getExportImageButton().setEnabled(enabled);
-        this.getExportPdfButton().setEnabled(enabled);
+        getOriginalZoomButton().setEnabled(enabled);
+        getZoomInButton().setEnabled(enabled);
+        getZoomOutButton().setEnabled(enabled);
+        getExportImageButton().setEnabled(enabled);
+        getExportPdfButton().setEnabled(enabled);
     }
     
     /**
@@ -145,7 +145,7 @@ public final class PanelMain extends Panel {
      * @return View Menu.
      */
     public ViewMenu getViewMenu() {
-        return this.viewMenu;
+        return viewMenu;
     }
     
     /**
@@ -153,7 +153,7 @@ public final class PanelMain extends Panel {
      * @return New Project Button.
      */
     public JButton getNewProjectButton() {
-        return this.getButton("newProjectButton");
+        return getButton("new_project");
     }
     
     /**
@@ -161,7 +161,7 @@ public final class PanelMain extends Panel {
      * @return Open Project Button.
      */
     public JButton getOpenProjectButton() {
-        return this.getButton("openProjectButton");
+        return getButton("open_project");
     }
     
     /**
@@ -169,7 +169,7 @@ public final class PanelMain extends Panel {
      * @return Save Project Button.
      */
     public JButton getSaveProjectButton() {
-        return this.getButton("saveProjectButton");
+        return getButton("save_project");
     }
     
     /**
@@ -177,7 +177,7 @@ public final class PanelMain extends Panel {
      * @return Close Project Button.
      */
     public JButton getCloseProjectButton() {
-        return this.getButton("closeProjectButton");
+        return getButton("close_project");
     }
     
     /**
@@ -185,7 +185,7 @@ public final class PanelMain extends Panel {
      * @return Undo Button.
      */
     public JButton getUndoButton() {
-        return this.getButton("undoButton");
+        return getButton("undo");
     }
     
     /**
@@ -193,7 +193,7 @@ public final class PanelMain extends Panel {
      * @return Redo Button.
      */
     public JButton getRedoButton() {
-        return this.getButton("redoButton");
+        return getButton("redo");
     }
     
     /**
@@ -201,7 +201,7 @@ public final class PanelMain extends Panel {
      * @return Original Zoom Button.
      */
     public JButton getOriginalZoomButton() {
-        return this.getButton("originalZoomButton");
+        return getButton("zoom_100");
     }
     
     /**
@@ -209,7 +209,7 @@ public final class PanelMain extends Panel {
      * @return Zoom In Button.
      */
     public JButton getZoomInButton() {
-        return this.getButton("zoomInButton");
+        return getButton("zoom_in");
     }
     
     /**
@@ -217,7 +217,7 @@ public final class PanelMain extends Panel {
      * @return Zoom Out Button.
      */
     public JButton getZoomOutButton() {
-        return this.getButton("zoomOutButton");
+        return getButton("zoom_out");
     }
     
     /**
@@ -225,7 +225,7 @@ public final class PanelMain extends Panel {
      * @return Export Image Button.
      */
     public JButton getExportImageButton() {
-        return this.getButton("exportImageButton");
+        return getButton("export_image");
     }
     
     /**
@@ -233,7 +233,7 @@ public final class PanelMain extends Panel {
      * @return Export Pdf Button.
      */
     public JButton getExportPdfButton() {
-        return this.getButton("exportPdfButton");
+        return getButton("export_pdf");
     }
     
     /**
@@ -241,7 +241,7 @@ public final class PanelMain extends Panel {
      * @return Help Button.
      */
     public JButton getHelpButton() {
-        return this.getButton("helpButton");
+        return getButton("help");
     }
     
     /**
@@ -249,6 +249,6 @@ public final class PanelMain extends Panel {
      * @return Version Button.
      */
     public JButton getVersionButton() {
-        return this.getButton("versionButton");
+        return getButton("version");
     }
 }

@@ -11,7 +11,7 @@ import view.main.structural.ViewMenu;
  * <p>Class of View <b>PanelLogo</b>.</p>
  * <p>Class responsible for defining the <b>Logo Panel</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  27/05/2019
+ * @since  2019-05-27
  * @see    view.panel.Panel
  * @see    view.main.structural.ViewMenu
  */
@@ -20,17 +20,17 @@ public final class PanelLogo extends Panel {
     
     /**
      * Metodo construtor padrao da Classe.
-     * @param viewMenu View Menu.
+     * @param view View Menu.
      */
-    public PanelLogo(ViewMenu viewMenu) {
-        this.viewMenu   = viewMenu;
-        this.addComponents();
+    public PanelLogo(ViewMenu view) {
+        viewMenu = view;
+        addComponents();
     }
     
     @Override
     protected void addComponents() {
-        this.setLayout(new FlowLayout(FlowLayout.CENTER));
-        this.add(new JLabel(new FunctView().createImage("logo-eng.png")));
-        this.setPreferredSize(new Dimension(1000, 500));
+        setLayout(new FlowLayout(FlowLayout.CENTER));
+        add(new JLabel(new FunctView().createImage("logo-eng.png")));
+        setPreferredSize(new Dimension(1000, 500));
     }
 }

@@ -9,7 +9,7 @@ import view.panel.diagram.types.PanelFeatureDiagram;
  * <p>Class of View <b>PanelFeatureOperation</b>.</p> 
  * <p>Class responsible for defining a Panel for <b>Feature Operation</b> of SMartyModeling.</p>
  * @author Leandro
- * @since  09/04/2019
+ * @since  2019-04-09
  * @see    controller.view.panel.operation.types.ControllerPanelFeatureOperation
  * @see    view.panel.operation.PanelOperation
  * @see    view.panel.diagram.types.PanelFeatureDiagram
@@ -22,44 +22,44 @@ public final class PanelFeatureOperation extends PanelOperation {
      */
     public PanelFeatureOperation(PanelFeatureDiagram panel) {
         super(panel);
-        this.controller = new ControllerPanelFeatureOperation(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        controller = new ControllerPanelFeatureOperation(this);
+        setDefaultProperties();
+        addComponents();
     }
     
     @Override
     protected void addComponents() {
         super.addComponents();
-        this.getVariabilityButton().setVisible(false);
+        getVariabilityButton().setVisible(false);
     }
     
     @Override
     protected void addDiagramButtons() {
-        this.add(this.createButton("featureButton",   "", "New Feature",               "diagram/feature/feature.png"));
-        this.add(this.createButton("inclusiveButton", "", "New Inclusive Variability", "diagram/feature/inclusive.png"));
-        this.add(this.createButton("exclusiveButton", "", "New Exclusive Variability", "diagram/feature/exclusive.png"));
+        add(createButton("feature",   "", "New Feature",               "diagram/feature/feature.png"));
+        add(createButton("inclusive", "", "New Inclusive Variability", "diagram/feature/inclusive.png"));
+        add(createButton("exclusive", "", "New Exclusive Variability", "diagram/feature/exclusive.png"));
     }
     
     @Override
     public Object[] getAssociationsIcons() {
         Object[] icons  = {
-                 this.getAssociationImage("feature/mandatory"),
-                 this.getAssociationImage("feature/optional"),
-                 this.getAssociationImage("feature/variant")};
+                 getAssociationImage("feature/mandatory"),
+                 getAssociationImage("feature/optional"),
+                 getAssociationImage("feature/variant")};
         return   icons;
     }
 
     @Override
     public void resetBackground() {
-        this.getClickButton().setBackground(this.getDefaultColor());
-        this.getFeatureButton().setBackground(this.getDefaultColor());
-        this.getInclusiveButton().setBackground(this.getDefaultColor());
-        this.getExclusiveButton().setBackground(this.getDefaultColor());
+        getClickButton().setBackground(getDefaultColor());
+        getFeatureButton().setBackground(getDefaultColor());
+        getInclusiveButton().setBackground(getDefaultColor());
+        getExclusiveButton().setBackground(getDefaultColor());
     }
     
     @Override
     public PanelFeatureDiagram getPanelDiagram() {
-        return (PanelFeatureDiagram) this.panelDiagram;
+        return (PanelFeatureDiagram) panel;
     }
     
     /**
@@ -67,7 +67,7 @@ public final class PanelFeatureOperation extends PanelOperation {
      * @return Feature Button.
      */
     public JButton getFeatureButton() {
-        return this.getButton("featureButton");
+        return getButton("feature");
     }
     
     /**
@@ -75,7 +75,7 @@ public final class PanelFeatureOperation extends PanelOperation {
      * @return Inclusive Button.
      */
     public JButton getInclusiveButton() {
-        return this.getButton("inclusiveButton");
+        return getButton("inclusive");
     }
     
     /**
@@ -83,6 +83,6 @@ public final class PanelFeatureOperation extends PanelOperation {
      * @return Exclusive Button.
      */
     public JButton getExclusiveButton() {
-        return this.getButton("exclusiveButton");
+        return getButton("exclusive");
     }
 }

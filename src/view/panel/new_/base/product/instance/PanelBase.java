@@ -16,7 +16,6 @@ import view.panel.new_.base.product.PanelNewInstance;
  * <p>Class responsible for defining a Abstract Model for <b>Instance Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-17
- * @see    controller.view.panel.base.
  * @see    view.panel.base.PanelBase
  */
 public abstract class PanelBase extends view.panel.base.PanelBase {
@@ -41,8 +40,8 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
     protected JPanel getFooter() {
         JPanel footer = new JPanel();
                footer.setLayout(new GridLayout(1, 2));
-               footer.add(this.createButton("returnButton", " Return ", "Return", "back.png", new Dimension(175, 30)));
-               footer.add(this.createButton("nextButton",   "  Next  ", " Next ", "next.png", new Dimension(175, 30)));
+               footer.add(createButton("return", " Return ", "Return", "back.png", new Dimension(175, 30)));
+               footer.add(createButton("next",   "  Next  ", " Next ", "next.png", new Dimension(175, 30)));
         return footer;
     }
     
@@ -56,7 +55,7 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Return Button.
      */
     public JButton getReturnButton() {
-        return this.getButton("returnButton");
+        return getButton("return");
     }
     
     /**
@@ -64,7 +63,7 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Next Button.
      */
     public JButton getNextButton() {
-        return this.getButton("nextButton");
+        return getButton("next");
     }
     
     /**
@@ -72,7 +71,7 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Product.
      */
     public Product getProduct() {
-        return this.getInstance().getProduct();
+        return getInstance().getProduct();
     }
     
     /**
@@ -80,7 +79,7 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Diagram.
      */
     public Diagram getDiagram() {
-        return this.getInstance().getDiagram();
+        return getInstance().getDiagram();
     }
     
     /**
@@ -88,7 +87,7 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Instance.
      */
     public Instance getInstance() {
-        return this.instance;
+        return instance;
     }
     
     /**
@@ -96,7 +95,7 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return View New Instance.
      */
     public ViewNewInstance getViewNew() {
-        return (ViewNewInstance) this.getPanelNew().getView();
+        return (ViewNewInstance) getPanelNew().getView();
     }
     
     /**
@@ -104,6 +103,6 @@ public abstract class PanelBase extends view.panel.base.PanelBase {
      * @return Panel New Instance.
      */
     public PanelNewInstance getPanelNew() {
-        return (PanelNewInstance) this.panelNew;
+        return (PanelNewInstance) panelNew;
     }
 }

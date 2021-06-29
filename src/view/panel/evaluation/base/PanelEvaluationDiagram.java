@@ -22,13 +22,13 @@ public final class PanelEvaluationDiagram extends PanelEvaluation {
      */
     public PanelEvaluationDiagram(ViewEvaluationDiagram view) {
         super(view);
-        this.controller = new ControllerPanelEvaluationDiagram(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        controller = new ControllerPanelEvaluationDiagram(this);
+        setDefaultProperties();
+        addComponents();
     }
     
     @Override
     protected Object[] getTargets() {
-        return new ControllerProject(this.project).getDiagrams();
+        return new ControllerProject(project).getDiagrams();
     }
 }

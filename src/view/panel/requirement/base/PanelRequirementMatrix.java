@@ -32,52 +32,52 @@ public final class PanelRequirementMatrix extends PanelRequirement {
      */
     public PanelRequirementMatrix(ViewRequirementMatrix view) {
         super(view);
-        this.controller = new ControllerPanelRequirementMatrix(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        controller = new ControllerPanelRequirementMatrix(this);
+        setDefaultProperties();
+        addComponents();
     }
     
     @Override
     protected void setDefaultProperties() {
-        this.setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
     }
     
     @Override
     protected void addComponents() {
-        this.addFilters();
-        this.addMatrix();
+        addFilters();
+        addMatrix();
     }
     
     /**
      * Method responsible for adding the Filters.
      */
     private void addFilters() {
-        this.add(this.createLabel("Requirement: "), this.createConstraints(1, 1, 0, 1));
-        this.add(this.createComboBox("requirementComboBox", new ControllerRequirement(this.getProject()).getRequirementsTarget(), 400), this.createConstraints(4, 1, 1, 1));
+        add(createLabel("Requirement: "), createConstraints(1, 1, 0, 1));
+        add(createComboBox("requirement", new ControllerRequirement(getProject()).getRequirementsTarget(), 400), createConstraints(4, 1, 1, 1));
         
         
-        this.add(this.createLabel("Diagram: "), this.createConstraints(1, 1, 0, 2));
-        this.add(this.createComboBox("diagramComboBox", new ControllerProject(this.getProject()).getProjectTargets(), 400), this.createConstraints(4, 1, 1, 2));
+        add(createLabel("Diagram: "), createConstraints(1, 1, 0, 2));
+        add(createComboBox("diagram", new ControllerProject(getProject()).getProjectTargets(), 400), createConstraints(4, 1, 1, 2));
     }
     
     /**
      * Method responsible for adding the Matrix.
      */
     private void addMatrix() {
-        this.addPanel("panelMatrix", new PanelMatrix(this, this.getSelectedDiagram(), this.getRequirements()));
-        this.createScrollPane("scrollPanelMatrix",  this.getPanelMatrix());
-        this.getScrollPane("scrollPanelMatrix").setMinimumSize(new Dimension(540, 360));
-        this.getScrollPane("scrollPanelMatrix").setPreferredSize(new Dimension(540, 360));
-        this.add(this.getScrollPane("scrollPanelMatrix"), this.createConstraints(5, 15, 0, 3));
+        addPanel("matrix", new PanelMatrix(this, getSelectedDiagram(), getRequirements()));
+        createScrollPane("matrix",  getPanelMatrix());
+        getScrollPane("matrix").setMinimumSize(new Dimension(540, 360));
+        getScrollPane("matrix").setPreferredSize(new Dimension(540, 360));
+        add(getScrollPane("matrix"), createConstraints(5, 15, 0, 3));
     }
     
     /**
      * Method responsible for updating the Matrix.
      */
     public void updateMatrix() {
-        this.getScrollPane("scrollPanelMatrix").setViewportView(new PanelMatrix(this, this.getSelectedDiagram(), this.getRequirements()));
-        this.getScrollPane("scrollPanelMatrix").setMinimumSize(new Dimension(540, 360));
-        this.getScrollPane("scrollPanelMatrix").setPreferredSize(new Dimension(540, 360));
+        getScrollPane("matrix").setViewportView(new PanelMatrix(this, getSelectedDiagram(), getRequirements()));
+        getScrollPane("matrix").setMinimumSize(new Dimension(540, 360));
+        getScrollPane("matrix").setPreferredSize(new Dimension(540, 360));
     }
     
     /**
@@ -85,9 +85,9 @@ public final class PanelRequirementMatrix extends PanelRequirement {
      * @return Requirements List.
      */
     private List<Requirement> getRequirements() {
-        return this.getRequirementComboBox().getSelectedItem() instanceof Requirement ?
-               this.getList((Requirement) this.getRequirementComboBox().getSelectedItem()) :
-               this.getProject().getRequirementsList();
+        return getRequirementComboBox().getSelectedItem() instanceof Requirement ?
+               getList((Requirement) getRequirementComboBox().getSelectedItem()) :
+               getProject().getRequirementsList();
     }
     
     /**
@@ -106,8 +106,8 @@ public final class PanelRequirementMatrix extends PanelRequirement {
      * @return Selected Diagram.
      */
     private Diagram getSelectedDiagram() {
-        return this.getDiagramComboBox().getSelectedItem() instanceof Diagram ?
-               (Diagram) this.getDiagramComboBox().getSelectedItem() : null;
+        return getDiagramComboBox().getSelectedItem() instanceof Diagram ?
+               (Diagram) getDiagramComboBox().getSelectedItem() : null;
     }
     
     /**
@@ -115,7 +115,7 @@ public final class PanelRequirementMatrix extends PanelRequirement {
      * @return Requirement Combo Box.
      */
     public JComboBox getRequirementComboBox() {
-        return this.getComboBox("requirementComboBox");
+        return getComboBox("requirement");
     }
     
     /**
@@ -123,7 +123,7 @@ public final class PanelRequirementMatrix extends PanelRequirement {
      * @return Diagram Combo Box.
      */
     public JComboBox getDiagramComboBox() {
-        return this.getComboBox("diagramComboBox");
+        return getComboBox("diagram");
     }
     
     /**
@@ -131,6 +131,6 @@ public final class PanelRequirementMatrix extends PanelRequirement {
      * @return Panel Matrix.
      */
     public PanelMatrix getPanelMatrix() {
-        return (PanelMatrix) this.getPanel("panelMatrix");
+        return (PanelMatrix) getPanel("matrix");
     }
 }

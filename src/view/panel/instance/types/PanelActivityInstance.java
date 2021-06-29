@@ -23,8 +23,8 @@ public final class PanelActivityInstance extends PanelInstance {
      */
     public PanelActivityInstance(ViewMenu view, Instance instance) {
         super(view, instance);
-        this.controller = new ControllerPanelInstance(this);
-        this.setDefaultProperties();
-        this.addComponents();
+        controller = new ControllerPanelInstance(this);
+        setDefaultProperties();
+        addComponents();
     }
 }
