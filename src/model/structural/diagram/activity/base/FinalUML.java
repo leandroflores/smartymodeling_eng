@@ -22,9 +22,9 @@ public class FinalUML extends Element {
      */
     public FinalUML(Diagram diagram) {
         super(diagram);
-        this.name = "";
-        this.size = new Point(30, 30);
-        this.type = "final";
+        name = "";
+        size = new Point(30, 30);
+        type = "final";
     }
     
     /**
@@ -34,7 +34,7 @@ public class FinalUML extends Element {
      */
     public FinalUML(org.w3c.dom.Element element, Diagram diagram) {
         super(element, diagram, true);
-        this.type = "final";
+        type = "final";
     }
     
     @Override
@@ -44,7 +44,7 @@ public class FinalUML extends Element {
 
     @Override
     public String getIcon() {
-        return super.getFolder() + "activity/final.png";
+        return getFolder() + "activity/final.png";
     }
     
     @Override

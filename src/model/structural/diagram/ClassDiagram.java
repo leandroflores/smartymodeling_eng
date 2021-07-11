@@ -23,7 +23,7 @@ import model.structural.diagram.classes.base.association.Usage;
  * <p>Class of Model <b>ClassDiagram</b>.</p>
  * <p>Class responsible for representing the <b>Class Diagram</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  03/06/2019
+ * @since  2019-06-03
  * @see    model.structural.base.Diagram
  * @see    model.structural.base.association.Association
  * @see    model.structural.diagram.classes.base.AttributeUML
@@ -49,7 +49,7 @@ public final class ClassDiagram extends Diagram {
      */
     public ClassDiagram(Project project) {
         super(project);
-        this.init();
+        init();
     }
     
     /**
@@ -59,21 +59,21 @@ public final class ClassDiagram extends Diagram {
      */
     public ClassDiagram(Project project, org.w3c.dom.Element element) {
         super(project, element);
-        this.init();
+        init();
     }
     
     @Override
     public void init() {
-        this.type          = "Class";
-        this.packages      = new HashMap<>();
-        this.classes       = new HashMap<>();
-        this.interfaces    = new HashMap<>();
-        this.attributes    = new HashMap<>();
-        this.methods       = new HashMap<>();
-        this.associations_ = new HashMap<>();
-        this.realizations  = new HashMap<>();
-        this.abstractions  = new HashMap<>();
-        this.usages        = new HashMap<>();
+        type          = "Class";
+        packages      = new HashMap<>();
+        classes       = new HashMap<>();
+        interfaces    = new HashMap<>();
+        attributes    = new HashMap<>();
+        methods       = new HashMap<>();
+        associations_ = new HashMap<>();
+        realizations  = new HashMap<>();
+        abstractions  = new HashMap<>();
+        usages        = new HashMap<>();
     }
     
     /**
@@ -82,8 +82,8 @@ public final class ClassDiagram extends Diagram {
      * @param newType New Type.
      */
     public void changeTypeUML(TypeUML oldType, TypeUML newType) {
-        this.changeClassTypes(oldType, newType);
-        this.changeInterfaceTypes(oldType, newType);
+        changeClassTypes(oldType, newType);
+        changeInterfaceTypes(oldType, newType);
     }
     
     /**
@@ -91,7 +91,7 @@ public final class ClassDiagram extends Diagram {
      * @return Next Package Id.
      */
     private String nextPackageId() {
-        return this.nextId("PACKAGE#");
+        return nextId("PACKAGE#");
     }
     
     /**
@@ -99,10 +99,10 @@ public final class ClassDiagram extends Diagram {
      * @param package_ Package UML.
      */
     public void addPackage(PackageUML package_) {
-        package_.setId(this.nextPackageId());
-        if (this.packages.get(package_.getId()) == null) {
-            this.packages.put(package_.getId(), package_);
-            this.addElement(package_);
+        package_.setId(nextPackageId());
+        if (packages.get(package_.getId()) == null) {
+            packages.put(package_.getId(), package_);
+            addElement(package_);
             package_.setDiagram(this);
         }
     }
@@ -112,12 +112,12 @@ public final class ClassDiagram extends Diagram {
      * @param packageUML Package UML.
      */
     public void removePackage(PackageUML packageUML) {
-        this.updateParents(packageUML);
-        this.removePackages(packageUML);
-        this.removeEntities(packageUML);
-        this.removeAssociations(packageUML);
-        this.removeElement(packageUML);
-        this.packages.remove(packageUML.getId());
+        updateParents(packageUML);
+        removePackages(packageUML);
+        removeEntities(packageUML);
+        removeAssociations(packageUML);
+        removeElement(packageUML);
+        packages.remove(packageUML.getId());
     }
     
     /**
@@ -134,7 +134,7 @@ public final class ClassDiagram extends Diagram {
      * @param packageUML Package UML.
      */
     private void updateParents(PackageUML packageUML) {
-        for (PackageUML current : this.getPackagesList())
+        for (PackageUML current : getPackagesList())
             current.removePackage(packageUML);
     }
     
@@ -144,7 +144,7 @@ public final class ClassDiagram extends Diagram {
      */
     private void removePackages(PackageUML packageUML) {
         for (PackageUML current : packageUML.getPackagesList())
-            this.removePackage(current);
+            removePackage(current);
     }
     
     /**
@@ -154,9 +154,9 @@ public final class ClassDiagram extends Diagram {
     private void removeEntities(PackageUML packageUML) {
         for (Entity current : packageUML.getEntitiesList()) {
             if (current instanceof ClassUML)
-                this.removeClass((ClassUML) current);
+                removeClass((ClassUML) current);
             else
-                this.removeInterface((InterfaceUML) current);
+                removeInterface((InterfaceUML) current);
         }
     }
     
@@ -165,7 +165,7 @@ public final class ClassDiagram extends Diagram {
      * @return Packages List.
      */
     public List<PackageUML> getPackagesList() {
-        return new ArrayList<>(this.packages.values());
+        return new ArrayList<>(packages.values());
     }
     
     /**
@@ -173,7 +173,7 @@ public final class ClassDiagram extends Diagram {
      * @return Next Class Id.
      */
     private String nextClassId() {
-        return this.nextId("CLASS#");
+        return nextId("CLASS#");
     }
     
     /**
@@ -181,11 +181,11 @@ public final class ClassDiagram extends Diagram {
      * @param class_ Class UML.
      */
     public void addClass(ClassUML class_) {
-        class_.setId(this.nextClassId());
-        if (this.classes.get(class_.getId()) == null) {
-            this.classes.put(class_.getId(), class_);
-            this.addElement(class_);
-            this.project.addEntityType(class_);
+        class_.setId(nextClassId());
+        if (classes.get(class_.getId()) == null) {
+            classes.put(class_.getId(), class_);
+            addElement(class_);
+            project.addEntityType(class_);
             class_.setDiagram(this);
         }
     }
@@ -195,14 +195,14 @@ public final class ClassDiagram extends Diagram {
      * @param class_ Class UML.
      */
     public void removeClass(ClassUML class_) {
-        this.project.removeEntityType(class_);
-        this.project.reset(class_);
-        this.removeAttributes(class_);
-        this.removeMethods(class_);
-        this.removeAssociations(class_);
-        this.removeElement(class_);
-        this.resetPackage(class_);
-        this.classes.remove(class_.getId());
+        project.removeEntityType(class_);
+        project.reset(class_);
+        removeAttributes(class_);
+        removeMethods(class_);
+        removeAssociations(class_);
+        removeElement(class_);
+        resetPackage(class_);
+        classes.remove(class_.getId());
     }
     
     /**
@@ -211,9 +211,8 @@ public final class ClassDiagram extends Diagram {
      * @param newType New Type.
      */
     private void changeClassTypes(TypeUML oldType, TypeUML newType) {
-        List<ClassUML> list = this.getClassesList();
-        for (int i = 0; i < list.size(); i++)
-            list.get(i).changeType(oldType, newType);
+        for (ClassUML classUML : getClassesList())
+             classUML.changeType(oldType, newType);
     }
     
     /**
@@ -221,7 +220,7 @@ public final class ClassDiagram extends Diagram {
      * @return Classes List.
      */
     public List<ClassUML> getClassesList() {
-        return new ArrayList<>(this.classes.values());
+        return new ArrayList<>(classes.values());
     }
     
     /**
@@ -229,7 +228,7 @@ public final class ClassDiagram extends Diagram {
      * @return Next Interface Id.
      */
     private String nextInterfaceId() {
-        return this.nextId("INTERFACE#");
+        return nextId("INTERFACE#");
     }
     
     /**
@@ -237,11 +236,11 @@ public final class ClassDiagram extends Diagram {
      * @param interface_ Interface UML.
      */
     public void addInterface(InterfaceUML interface_) {
-        interface_.setId(this.nextInterfaceId());
-        if (this.interfaces.get(interface_.getId()) == null) {
-            this.interfaces.put(interface_.getId(), interface_);
-            this.addElement(interface_);
-            this.project.addEntityType(interface_);
+        interface_.setId(nextInterfaceId());
+        if (interfaces.get(interface_.getId()) == null) {
+            interfaces.put(interface_.getId(), interface_);
+            addElement(interface_);
+            project.addEntityType(interface_);
             interface_.setDiagram(this);
         }
     }
@@ -251,13 +250,13 @@ public final class ClassDiagram extends Diagram {
      * @param interface_ Interface UML.
      */
     public void removeInterface(InterfaceUML interface_) {
-        this.project.removeEntityType(interface_);
-        this.removeAttributes(interface_);
-        this.removeMethods(interface_);
-        this.removeAssociations(interface_);
-        this.removeElement(interface_);
-        this.resetPackage(interface_);
-        this.interfaces.remove(interface_.getId());
+        project.removeEntityType(interface_);
+        removeAttributes(interface_);
+        removeMethods(interface_);
+        removeAssociations(interface_);
+        removeElement(interface_);
+        resetPackage(interface_);
+        interfaces.remove(interface_.getId());
     }
     
     /**
@@ -266,7 +265,7 @@ public final class ClassDiagram extends Diagram {
      * @param newType New Type.
      */
     private void changeInterfaceTypes(TypeUML oldType, TypeUML newType) {
-        for (InterfaceUML interfaceUML : this.getInterfacesList())
+        for (InterfaceUML interfaceUML : getInterfacesList())
            interfaceUML.changeType(oldType, newType);
     }
     
@@ -275,7 +274,7 @@ public final class ClassDiagram extends Diagram {
      * @return Interfaces List.
      */
     public List<InterfaceUML> getInterfacesList() {
-        return new ArrayList<>(this.interfaces.values());
+        return new ArrayList<>(interfaces.values());
     }
     
     /**
@@ -284,7 +283,7 @@ public final class ClassDiagram extends Diagram {
      */
     private void removeAttributes(Entity entity) {
         for (AttributeUML attribute : entity.getAttributesList())
-            this.removeAttribute(attribute);
+            removeAttribute(attribute);
     }
     
     /**
@@ -293,8 +292,8 @@ public final class ClassDiagram extends Diagram {
      */
     public List<Entity> getEntitiesList() {
         List   entities = new ArrayList<>();
-               entities.addAll(this.getClassesList());
-               entities.addAll(this.getInterfacesList());
+               entities.addAll(getClassesList());
+               entities.addAll(getInterfacesList());
         return entities;
     }
     
@@ -303,7 +302,7 @@ public final class ClassDiagram extends Diagram {
      * @return Next Attribute Id.
      */
     public String nextAttributeId() {
-        return this.nextId("ATTRIBUTE#");
+        return nextId("ATTRIBUTE#");
     }
     
     /**
@@ -311,10 +310,10 @@ public final class ClassDiagram extends Diagram {
      * @param attribute Attribute UML.
      */
     public void addAttribute(AttributeUML attribute) {
-        attribute.setId(this.nextAttributeId());
-        if (this.attributes.get(attribute.getId()) == null) {
-            this.attributes.put(attribute.getId(), attribute);
-            this.addElement(attribute);
+        attribute.setId(nextAttributeId());
+        if (attributes.get(attribute.getId()) == null) {
+            attributes.put(attribute.getId(), attribute);
+            addElement(attribute);
         }
     }
     
@@ -324,8 +323,8 @@ public final class ClassDiagram extends Diagram {
      */
     public void removeAttribute(AttributeUML attribute) {
         attribute.getEntity().removeAttribute(attribute);
-        this.removeElement(attribute);
-        this.attributes.remove(attribute.getId());
+        removeElement(attribute);
+        attributes.remove(attribute.getId());
     }
     
     /**
@@ -333,7 +332,7 @@ public final class ClassDiagram extends Diagram {
      * @return Attributes List.
      */
     public List<AttributeUML> getAttributesList() {
-        return new ArrayList<>(this.attributes.values());
+        return new ArrayList<>(attributes.values());
     }
     
     /**
@@ -342,7 +341,7 @@ public final class ClassDiagram extends Diagram {
      */
     private void removeMethods(Entity entity) {
         for (MethodUML method : entity.getMethodsList())
-            this.removeMethod(method);
+            removeMethod(method);
     }
     
     /**
@@ -350,7 +349,7 @@ public final class ClassDiagram extends Diagram {
      * @return Next Method Id.
      */
     public String nextMethodId() {
-        return this.nextId("METHOD#");
+        return nextId("METHOD#");
     }
     
     /**
@@ -358,10 +357,10 @@ public final class ClassDiagram extends Diagram {
      * @param method Method UML.
      */
     public void addMethod(MethodUML method) {
-        method.setId(this.nextMethodId());
-        if (this.methods.get(method.getId()) == null) {
-            this.methods.put(method.getId(), method);
-            this.addElement(method);
+        method.setId(nextMethodId());
+        if (methods.get(method.getId()) == null) {
+            methods.put(method.getId(), method);
+            addElement(method);
         }
     }
     
@@ -371,9 +370,9 @@ public final class ClassDiagram extends Diagram {
      */
     public void removeMethod(MethodUML method) {
         method.getEntity().removeMethod(method);
-        this.project.reset(method);
-        this.removeElement(method);
-        this.methods.remove(method.getId());
+        project.reset(method);
+        removeElement(method);
+        methods.remove(method.getId());
     }
     
     /**
@@ -381,7 +380,7 @@ public final class ClassDiagram extends Diagram {
      * @return Methods List.
      */
     public List<MethodUML> getMethodsList() {
-        return new ArrayList<>(this.methods.values());
+        return new ArrayList<>(methods.values());
     }
     
     /**
@@ -389,10 +388,10 @@ public final class ClassDiagram extends Diagram {
      * @param realization Realization UML.
      */
     public void addRealizationUML(RealizationUML realization) {
-        realization.setId(this.nextId(realization));
-        if (this.realizations.get(realization.getId()) == null) {
-            this.realizations.put(realization.getId(), realization);
-            this.addAssociation(realization);
+        realization.setId(nextId(realization));
+        if (realizations.get(realization.getId()) == null) {
+            realizations.put(realization.getId(), realization);
+            addAssociation(realization);
         }
     }
     
@@ -403,7 +402,7 @@ public final class ClassDiagram extends Diagram {
      */
     public List<Association> getRealizations(Entity entity) {
         if (entity.isClass())
-            return this.getRealizations((ClassUML) entity);
+            return getRealizations((ClassUML) entity);
         return new ArrayList<>();
     }
     
@@ -413,7 +412,7 @@ public final class ClassDiagram extends Diagram {
      * @return Realizations List.
      */
     public List<Association> getRealizations(ClassUML class_) {
-        return this.getTargetAssociations("realization", class_);
+        return getTargetAssociations("realization", class_);
     }
     
     /**
@@ -422,7 +421,7 @@ public final class ClassDiagram extends Diagram {
      */
     public void removeRealizationUML(RealizationUML realization) {
         super.removeAssociation(realization);
-        this.realizations.remove(realization.getId());
+        realizations.remove(realization.getId());
     }
     
     /**
@@ -430,10 +429,10 @@ public final class ClassDiagram extends Diagram {
      * @param association Association UML.
      */
     public void addAssociationUML(AssociationUML association) {
-        association.setId(this.nextId(association));
-        if (this.associations_.get(association .getId()) == null) {
-            this.associations_.put(association .getId(), association);
-            this.addAssociation(association);
+        association.setId(nextId(association));
+        if (associations_.get(association .getId()) == null) {
+            associations_.put(association .getId(), association);
+            addAssociation(association);
         }
     }
     
@@ -443,7 +442,7 @@ public final class ClassDiagram extends Diagram {
      */
     public void removeAssociationUML(AssociationUML association) {
         super.removeAssociation(association);
-        this.associations_.remove(association.getId());
+        associations_.remove(association.getId());
     }
     
     /**
@@ -451,10 +450,10 @@ public final class ClassDiagram extends Diagram {
      * @param abstraction Abstraction.
      */
     public void addAbstraction(Abstraction abstraction) {
-        abstraction.setId(this.nextId(abstraction));
-        if (this.abstractions.get(abstraction .getId()) == null) {
-            this.abstractions.put(abstraction .getId(), abstraction);
-            this.addAssociation(abstraction);
+        abstraction.setId(nextId(abstraction));
+        if (abstractions.get(abstraction .getId()) == null) {
+            abstractions.put(abstraction .getId(), abstraction);
+            addAssociation(abstraction);
         }
     }
     
@@ -464,7 +463,7 @@ public final class ClassDiagram extends Diagram {
      */
     public void removeAbstraction(Abstraction abstraction) {
         super.removeAssociation(abstraction);
-        this.abstractions.remove(abstraction.getId());
+        abstractions.remove(abstraction.getId());
     }
     
     /**
@@ -472,10 +471,10 @@ public final class ClassDiagram extends Diagram {
      * @param usage Usage.
      */
     public void addUsage(Usage usage) {
-        usage.setId(this.nextId(usage));
-        if (this.usages.get(usage .getId()) == null) {
-            this.usages.put(usage .getId(), usage);
-            this.addAssociation(usage);
+        usage.setId(nextId(usage));
+        if (usages.get(usage .getId()) == null) {
+            usages.put(usage .getId(), usage);
+            addAssociation(usage);
         }
     }
     
@@ -485,7 +484,7 @@ public final class ClassDiagram extends Diagram {
      */
     public void removeAbstraction(Usage usage) {
         super.removeAssociation(usage);
-        this.usages.remove(usage.getId());
+        usages.remove(usage.getId());
     }
     
     /**
@@ -493,18 +492,18 @@ public final class ClassDiagram extends Diagram {
      * @param element Element.
      */
     private void removeAssociations(Element element) {
-        this.removeAssociation(element, this.associations_);
-        this.removeAssociation(element, this.realizations);
-        this.removeAssociation(element, this.abstractions);
-        this.removeAssociation(element, this.usages);
+        removeAssociation(element, associations_);
+        removeAssociation(element, realizations);
+        removeAssociation(element, abstractions);
+        removeAssociation(element, usages);
     }
     
     @Override
     public void removeAssociation(Association association) {
         if (association instanceof AssociationUML)
-            this.removeAssociationUML((AssociationUML) association);
+            removeAssociationUML((AssociationUML) association);
         else if (association instanceof RealizationUML)
-            this.removeRealizationUML((RealizationUML) association);
+            removeRealizationUML((RealizationUML) association);
         else
             super.removeAssociation(association);
     }
@@ -531,7 +530,7 @@ public final class ClassDiagram extends Diagram {
      * @param distance Shift Distance.
      */
     public void dx(Element element, Integer distance) {
-        List<AssociationUML> filter = this.getAssociations("association");
+        List<AssociationUML> filter = getAssociations("association");
         for (AssociationUML association : filter) {
             association.dxSource(association.isSource(element) ? distance : 0);
             association.dxTarget(association.isTarget(element) ? distance : 0);
@@ -544,7 +543,7 @@ public final class ClassDiagram extends Diagram {
      * @param distance Shift Distance.
      */
     public void dy(Element element, Integer distance) {
-        List<AssociationUML> filter = this.getAssociations("association");
+        List<AssociationUML> filter = getAssociations("association");
         for (AssociationUML association : filter) {
             association.dySource(association.isSource(element) ? distance : 0);
             association.dyTarget(association.isTarget(element) ? distance : 0);
@@ -557,22 +556,22 @@ public final class ClassDiagram extends Diagram {
      */
     private String exportReferences() {
         String  export  = "";
-        for (PackageUML current : this.getPackagesList()) {
+        for (PackageUML current : getPackagesList()) {
             if (current.getParent() != null)
-                export += "    <reference package=\"" + current.getId() + "\" parent=\"" + current.getParent().getId() + "\"/>\n";
+                export += "    <nested package=\"" + current.getId() + "\" parent=\"" + current.getParent().getId() + "\"/>\n";
         }
         return  export;
     }
     
     @Override
     public String export() {
-        String export  = "  <diagram id=\"" + this.id + "\" name=\"" + this.name + "\" type=\"" + this.type + "\">\n";
-               export += this.export((List<Element>) this.getList(this.packages));
-               export += this.export((List<Element>) this.getList(this.classes));
-               export += this.export((List<Element>) this.getList(this.interfaces));
-               export += this.exportAssociations();
-               export += this.exportReferences();
-               export += this.exportVariabilities();
+        String export  = "  <diagram id=\"" + id + "\" name=\"" + name + "\" type=\"" + type + "\">\n";
+               export += export((List<Element>) getList(packages));
+               export += export((List<Element>) getList(classes));
+               export += export((List<Element>) getList(interfaces));
+               export += exportAssociations();
+               export += exportReferences();
+               export += exportVariabilities();
                export += "  </diagram>\n";
         return export;
     }
@@ -580,7 +579,7 @@ public final class ClassDiagram extends Diagram {
     @Override
     public List<Element> getTreeElementsList() {
         List<Element> filter  = new ArrayList<>();
-        for (Element  element : this.getElementsList()) {
+        for (Element  element : getElementsList()) {
             if ((element instanceof PackageUML)  && ((PackageUML) element).getParent() == null)
                 filter.add(element);
             else if ((element instanceof Entity) && ((Entity) element).getPackageUML() == null)
@@ -603,18 +602,12 @@ public final class ClassDiagram extends Diagram {
     public ClassDiagram getClone() {
         try {
             ClassDiagram diagram = (ClassDiagram) super.clone();
-                         diagram.setElements(new HashMap<>(this.elements));
-                         diagram.setAssociations(new HashMap<>(this.associations_));
-                         diagram.setVariabilities(new HashMap<>(this.variabilities));
+                         diagram.setElements(new HashMap<>(elements));
+                         diagram.setAssociations(new HashMap<>(associations_));
+                         diagram.setVariabilities(new HashMap<>(variabilities));
             return       diagram;
         } catch (CloneNotSupportedException exception) {
-            System.out.println("Error");
             return null;
         }
-    }
-    
-    @Override
-    public String toString() {
-        return super.toString();
     }
 }

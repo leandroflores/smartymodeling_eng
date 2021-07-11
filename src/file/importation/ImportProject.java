@@ -28,7 +28,7 @@ import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.base.product.Relationship;
 import model.structural.base.requirement.Requirement;
-import model.structural.base.traceability.Traceability;
+import model.structural.base.traceability.Reference;
 import model.structural.diagram.classes.base.TypeUML;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -105,7 +105,7 @@ public class ImportProject {
             importProfile();
             importDiagrams();
             importRequirements();
-            importTraceabilities();
+            importReferences();
             importLinks();
             importProducts();
             importMetrics();
@@ -241,31 +241,31 @@ public class ImportProject {
     }
     
     /**
-     * Method responsible for importing the Project Traceabilities.
+     * Method responsible for importing the Project References.
      * throws XPathExpressionException XPath Exception.
      */
-    private void importTraceabilities() throws XPathExpressionException {
-        expression = "/project/traceability";
+    private void importReferences() throws XPathExpressionException {
+        expression = "/project/reference";
         nodeList   = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
         for (int i = 0; i < nodeList.getLength(); i++) {
-            Element      current      = (Element) nodeList.item(i);
-            Traceability traceability = new Traceability(current);
-                         traceability.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
-                addElements(traceability, current);
-            project.addTraceability(traceability);
+            Element     current   = (Element) nodeList.item(i);
+            Reference   reference = new Reference(current);
+                        reference.setDescription(current.getElementsByTagName("description").item(0).getTextContent());
+            addElements(reference, current);
+            project.addReference(reference);
         }
     }
     
     /**
-     * Method responsible for adding the Requirement Traceabilities.
+     * Method responsible for adding the Reference Elements.
      * @param current W3C Element.
-     * @param traceability Traceability.
+     * @param reference Reference.
      * @throws XPathExpressionException XPath Exception.
      */
-    private void addElements(Traceability traceability, Element current) throws XPathExpressionException {
+    private void addElements(Reference reference, Element current) throws XPathExpressionException {
         NodeList list = current.getElementsByTagName("element");
         for (int i = 0; i < list.getLength(); i++)
-            traceability.addElement(getElement(((Element) list.item(i)).getAttribute("id")));
+            reference.addElement(getElement(((Element) list.item(i)).getAttribute("id")));
     }
     
     /**

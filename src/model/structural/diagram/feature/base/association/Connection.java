@@ -38,13 +38,13 @@ public class Connection extends Association {
      */
     public Connection(Element element) {
         super(element);
-        this.type     = "connection";
-        this.category = element.getAttribute("category");
+        category = element.getAttribute("category");
+        type     = "connection";
     }
     
     @Override
     public Feature getSource() {
-        return (Feature) this.source;
+        return (Feature) source;
     }
 
     /**
@@ -57,7 +57,7 @@ public class Connection extends Association {
 
     @Override
     public Feature getTarget() {
-        return (Feature) this.target;
+        return (Feature) target;
     }
 
     /**
@@ -73,7 +73,7 @@ public class Connection extends Association {
      * @return Connection Category.
      */
     public String getCategory() {
-        return this.category;
+        return category;
     }
 
     /**
@@ -91,7 +91,7 @@ public class Connection extends Association {
     
     @Override
     public String getStyleLabel() {
-        return "styleConnection" + this.id;
+        return "styleConnection" + id;
     }
     
     /**
@@ -99,8 +99,8 @@ public class Connection extends Association {
      * @return Connection End Size.
      */
     private Object getEndSize() {
-        return (this.category.equalsIgnoreCase("mandatory") 
-             || this.category.equalsIgnoreCase("optional")) ?
+        return (category.equalsIgnoreCase("mandatory") 
+             || category.equalsIgnoreCase("optional")) ?
                 "10" : "20";
     }
     
@@ -109,8 +109,8 @@ public class Connection extends Association {
      * @return Connection End Arrow.
      */
     private Object getEndArrow() {
-        return (this.category.equalsIgnoreCase("mandatory") 
-             || this.category.equalsIgnoreCase("optional")) ?
+        return (category.equalsIgnoreCase("mandatory") 
+             || category.equalsIgnoreCase("optional")) ?
                 mxConstants.ARROW_OVAL :
                 mxConstants.ARROW_BLOCK;
     }
@@ -120,8 +120,8 @@ public class Connection extends Association {
      * @return Connection End Fill.
      */
     private Object getEndFill() {
-        return (this.category.equalsIgnoreCase("mandatory") 
-             || this.category.equalsIgnoreCase("exclusive")) ?
+        return (category.equalsIgnoreCase("mandatory") 
+             || category.equalsIgnoreCase("exclusive")) ?
                 "1" : "0";
     }
     
@@ -130,23 +130,23 @@ public class Connection extends Association {
         Map    style = new HashMap<>();
                style.put(mxConstants.STYLE_DASHED,   "0");
                style.put(mxConstants.STYLE_EDITABLE, "0");
-               style.put(mxConstants.STYLE_ENDSIZE,  this.getEndSize());
+               style.put(mxConstants.STYLE_ENDSIZE,  getEndSize());
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);
-               style.put(mxConstants.STYLE_ENDARROW,   this.getEndArrow());
-               style.put(mxConstants.STYLE_ENDFILL,    this.getEndFill());
+               style.put(mxConstants.STYLE_ENDARROW,   getEndArrow());
+               style.put(mxConstants.STYLE_ENDFILL,    getEndFill());
                style.put(mxConstants.STYLE_SHAPE,      mxConstants.SHAPE_CONNECTOR);
         return style;
     }
     
     @Override
     protected String exportHeader() {
-        String header  = "    <"        + this.type;
-               header += " id=\""       + this.id              + "\"";
-               header += " source=\""   + this.source.getId()  + "\"";
-               header += " target=\""   + this.target.getId()  + "\"";
-               header += " category=\"" + this.category.trim() + "\"";
+        String header  = "    <"        + type;
+               header += " id=\""       + id              + "\"";
+               header += " source=\""   + source.getId()  + "\"";
+               header += " target=\""   + target.getId()  + "\"";
+               header += " category=\"" + category.trim() + "\"";
                header += ">\n";
         return header;
     }

@@ -10,7 +10,7 @@ import model.controller.structural.base.ControllerDiagram;
 import model.controller.structural.base.ControllerProject;
 import model.structural.base.Diagram;
 import model.structural.base.Element;
-import model.structural.base.traceability.Traceability;
+import model.structural.base.traceability.Reference;
 import view.main.structural.ViewMenu;
 
 /**
@@ -19,7 +19,7 @@ import view.main.structural.ViewMenu;
  * @author Leandro
  * @since  2019-07-22
  * @see    controller.view.panel.base.traceability.ControllerPanelBaseElements
- * @see    model.structural.base.traceability.Traceability
+ * @see    model.structural.base.traceability.Reference
  * @see    view.panel.base.traceability.PanelBase
  */
 public final class PanelBaseElements extends PanelBase {
@@ -28,9 +28,9 @@ public final class PanelBaseElements extends PanelBase {
     /**
      * Default constructor method of Class.
      * @param viewMenu View Menu.
-     * @param traceability Traceability.
+     * @param traceability Reference.
      */
-    public PanelBaseElements(ViewMenu viewMenu, Traceability traceability) {
+    public PanelBaseElements(ViewMenu viewMenu, Reference traceability) {
         super(viewMenu, traceability);
         controller = new ControllerPanelBaseElements(this);
         setDefaultProperties();
@@ -80,8 +80,8 @@ public final class PanelBaseElements extends PanelBase {
      */
     public void addElement() {
         Element element = getElement();
-        if (!traceability.getElements().contains(element)) {
-            traceability.addElement(element);
+        if (!reference.getElements().contains(element)) {
+            reference.addElement(element);
             updateValues();
             updateElementsList();
         }
@@ -91,13 +91,13 @@ public final class PanelBaseElements extends PanelBase {
      * Method responsible for deleting a Element.
      */
     public void delElement() {
-        traceability.removeElement((Element) getElementsList().getSelectedValue());
+        reference.removeElement((Element) getElementsList().getSelectedValue());
         updateValues();
         updateElementsList();
     }
     
     /**
-     * Method responsible for updating the Traceability Values.
+     * Method responsible for updating the Reference Values.
      */
     public void updateValues() {
         diagram = (Diagram) getDiagramComboBox().getSelectedItem();
@@ -113,8 +113,8 @@ public final class PanelBaseElements extends PanelBase {
     public void updateElementsList() {
         getElementsList().removeAll();
         DefaultListModel model = new DefaultListModel();
-        for (int i = 0; i <  traceability.getElements().size(); i++)
-            model.addElement(traceability.getElements().get(i));
+        for (Element element : reference.getElements())
+            model.addElement(element);
         getElementsList().setModel(model);
     }
     

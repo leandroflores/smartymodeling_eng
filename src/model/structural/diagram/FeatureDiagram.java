@@ -16,7 +16,7 @@ import model.structural.diagram.feature.base.association.Connection;
  * <p>Class of Model <b>FeatureDiagram</b>.</p>
  * <p>Class responsible for representing the <b>Feature Diagram</b> in SMartyModeling.</p>
  * @author Henrique
- * @since  13/02/2020
+ * @since  2020-02-13
  * @see    model.structural.base.association.Association
  * @see    model.structural.base.Diagram
  * @see    model.structural.diagram.feature.base.Feature
@@ -25,7 +25,7 @@ import model.structural.diagram.feature.base.association.Connection;
  */
 public final class FeatureDiagram extends Diagram {
     private HashMap<String, Feature>     features;
-    private HashMap<String, Variability> variability;
+    private HashMap<String, Variability> variabilities_;
     private HashMap<String, Connection>  connections;
     private HashMap<String, Combination> combinations;
     
@@ -35,7 +35,7 @@ public final class FeatureDiagram extends Diagram {
      */
     public FeatureDiagram(Project project) {
         super(project);
-        this.init();
+        init();
     }
     
     /**
@@ -45,16 +45,16 @@ public final class FeatureDiagram extends Diagram {
      */
     public FeatureDiagram(Project project, org.w3c.dom.Element element) {
         super(project, element);
-        this.init();
+        init();
     }
 
     @Override
     public void init() {
-        this.type         = "Feature";
-        this.features     = new HashMap<>();
-        this.variability  = new HashMap<>();
-        this.connections  = new HashMap<>();
-        this.combinations = new HashMap<>();
+        type           = "Feature";
+        features       = new HashMap<>();
+        variabilities_ = new HashMap<>();
+        connections    = new HashMap<>();
+        combinations   = new HashMap<>();
     }
 
     /**
@@ -62,10 +62,10 @@ public final class FeatureDiagram extends Diagram {
      * @param feature Feature.
      */
     public void addFeature(Feature feature) {
-        feature.setId(this.nextId(feature));
-        if (this.features.get(feature.getId()) == null) {
-            this.features.put(feature.getId(), feature);
-            this.addElement(feature);
+        feature.setId(nextId(feature));
+        if (features.get(feature.getId()) == null) {
+            features.put(feature.getId(), feature);
+            addElement(feature);
         }
     }
     
@@ -74,10 +74,10 @@ public final class FeatureDiagram extends Diagram {
      * @param feature Feature.
      */
     public void removeFeature(Feature feature) {
-        this.removeVariationPoint(feature);
-        this.removeAssociations(feature);
-        this.removeElement(feature);
-        this.features.remove(feature.getId());
+        removeVariationPoint(feature);
+        removeAssociations(feature);
+        removeElement(feature);
+        features.remove(feature.getId());
     }
     
     /**
@@ -85,7 +85,7 @@ public final class FeatureDiagram extends Diagram {
      * @return Features List.
      */
     public List<Feature> getFeaturesList() {
-        return new ArrayList<>(this.features.values());
+        return new ArrayList<>(features.values());
     }
     
     /**
@@ -93,10 +93,10 @@ public final class FeatureDiagram extends Diagram {
      * @param variability Variability.
      */
     public void addVariability(Variability variability) {
-        variability.setId(this.nextId(variability));
-        if (this.variability.get(variability.getId()) == null) {
-            this.variability.put(variability.getId(), variability);
-            this.addElement(variability);
+        variability.setId(nextId(variability));
+        if (variabilities_.get(variability.getId()) == null) {
+            variabilities_.put(variability.getId(), variability);
+            addElement(variability);
         }
     }
     
@@ -105,9 +105,9 @@ public final class FeatureDiagram extends Diagram {
      * @param variability Variability.
      */
     public void removeVariability(Variability variability) {
-        this.removeAssociations(variability);
-        this.removeElement(variability);
-        this.variability.remove(variability.getId());
+        removeAssociations(variability);
+        removeElement(variability);
+        variabilities_.remove(variability.getId());
     }
     
     /**
@@ -115,8 +115,8 @@ public final class FeatureDiagram extends Diagram {
      * @param feature Variation Point.
      */
     private void removeVariationPoint(Feature feature) {
-        for (Variability variability_ : this.getVariationPoints(feature))
-            this.removeVariability(variability_);
+        for (Variability variability_ : getVariationPoints(feature))
+            removeVariability(variability_);
     }
     
     /**
@@ -125,11 +125,10 @@ public final class FeatureDiagram extends Diagram {
      * @return Variation Points.
      */
     public List<Variability> getVariationPoints(Feature feature) {
-        List<Variability> list   = this.getVariability();
         List<Variability> filter = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getVariationPoint().equals(feature))
-                filter.add(list.get(i));
+        for (Variability variability : getVariability()) {
+            if (variability.getVariationPoint().equals(feature))
+                filter.add(variability);
         }
         return filter;
     } 
@@ -139,7 +138,7 @@ public final class FeatureDiagram extends Diagram {
      * @return Variability List.
      */
     public List<Variability> getVariability() {
-        return new ArrayList<>(this.variability.values());
+        return new ArrayList<>(variabilities_.values());
     }
     
     /**
@@ -148,7 +147,7 @@ public final class FeatureDiagram extends Diagram {
      * @return Feature is Root.
      */
     public boolean isRoot(Feature feature) {
-        return this.getTargetAssociations("connection", feature).isEmpty();
+        return getTargetAssociations("connection", feature).isEmpty();
     }
     
     /**
@@ -157,8 +156,8 @@ public final class FeatureDiagram extends Diagram {
      */
     public List<Feature> getRootsList() {
         List   roots = new ArrayList<>();
-        for (Feature feature : this.getFeaturesList()) {
-            if (this.isRoot(feature))
+        for (Feature feature : getFeaturesList()) {
+            if (isRoot(feature))
                roots.add(feature);
         }
         return roots;
@@ -171,10 +170,10 @@ public final class FeatureDiagram extends Diagram {
      * @param connection Connection.
      */
     public void addConnection(Connection connection) {
-        connection.setId(this.nextId(connection));
-        if (this.connections.get(connection.getId()) == null) {
-            this.connections.put(connection.getId(), connection);
-            this.addAssociation(connection);
+        connection.setId(nextId(connection));
+        if (connections.get(connection.getId()) == null) {
+            connections.put(connection.getId(), connection);
+            addAssociation(connection);
         }
     }
     
@@ -184,7 +183,7 @@ public final class FeatureDiagram extends Diagram {
      */
     public void removeConnection(Connection connection) {
         super.removeAssociation(connection);
-        this.connections.remove(connection.getId());
+        connections.remove(connection.getId());
     }
     
     /**
@@ -192,7 +191,7 @@ public final class FeatureDiagram extends Diagram {
      * @return Connections List.
      */
     public List<Connection> getConnectionsList() {
-        return new ArrayList(this.connections.values());
+        return new ArrayList(connections.values());
     }
     
     /**
@@ -200,10 +199,10 @@ public final class FeatureDiagram extends Diagram {
      * @param combination Combination.
      */
     public void addCombination(Combination combination) {
-        combination.setId(this.nextId(combination));
-        if (this.combinations.get(combination.getId()) == null) {
-            this.combinations.put(combination.getId(), combination);
-            this.addAssociation(combination);
+        combination.setId(nextId(combination));
+        if (combinations.get(combination.getId()) == null) {
+            combinations.put(combination.getId(), combination);
+            addAssociation(combination);
         }
     }
     
@@ -213,7 +212,7 @@ public final class FeatureDiagram extends Diagram {
      */
     public void removeCombination(Combination combination) {
         super.removeAssociation(combination);
-        this.combinations.remove(combination.getId());
+        combinations.remove(combination.getId());
     }
     
     /**
@@ -221,7 +220,7 @@ public final class FeatureDiagram extends Diagram {
      * @return Combinations List.
      */
     public List<Combination> getCombinationsList() {
-        return new ArrayList(this.combinations.values());
+        return new ArrayList(combinations.values());
     }
     
     /**
@@ -229,16 +228,16 @@ public final class FeatureDiagram extends Diagram {
      * @param element Element.
      */
     private void removeAssociations(Element element) {
-        this.removeAssociation(element, this.createMap(this.connections.values().toArray()));
-        this.removeAssociation(element, this.createMap(this.combinations.values().toArray()));
+        removeAssociation(element, createMap(connections.values().toArray()));
+        removeAssociation(element, createMap(combinations.values().toArray()));
     }
     
     @Override
     public void removeAssociation(Association association) {
         if (association instanceof Connection)
-            this.removeConnection((Connection) association);
+            removeConnection((Connection) association);
         if (association instanceof Combination)
-            this.removeCombination((Combination) association);
+            removeCombination((Combination) association);
         super.removeAssociation(association);
     }
     
@@ -264,18 +263,12 @@ public final class FeatureDiagram extends Diagram {
     public FeatureDiagram getClone() {
         try {
             FeatureDiagram diagram = (FeatureDiagram) super.clone();
-                           diagram.setElements(new HashMap<>(this.elements));
-                           diagram.setAssociations(new HashMap<>(this.associations));
-                           diagram.setVariabilities(new HashMap<>(this.variabilities));
+                           diagram.setElements(new HashMap<>(elements));
+                           diagram.setAssociations(new HashMap<>(associations));
+                           diagram.setVariabilities(new HashMap<>(variabilities));
             return         diagram;
         } catch (CloneNotSupportedException exception) {
-            System.out.println("Error");
             return null;
         }
-    }
-    
-    @Override
-    public String toString() {
-        return super.toString();
     }
 }

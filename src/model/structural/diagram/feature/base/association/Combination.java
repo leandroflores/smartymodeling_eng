@@ -40,8 +40,8 @@ public class Combination extends Association {
      */
     public Combination(Element element) {
         super(element);
-        this.root = element.getAttribute("root").equals("true");
-        this.type = "combination";
+        root = element.getAttribute("root").equals("true");
+        type = "combination";
     }
     
     /**
@@ -49,7 +49,7 @@ public class Combination extends Association {
      * @return Root Flag.
      */
     public boolean isRoot() {
-        return this.root;
+        return root;
     }
     
     /**
@@ -62,7 +62,7 @@ public class Combination extends Association {
     
     @Override
     public Variability getSource() {
-        return (Variability) this.source;
+        return (Variability) source;
     }
 
     /**
@@ -75,7 +75,7 @@ public class Combination extends Association {
 
     @Override
     public Feature getTarget() {
-        return (Feature) this.target;
+        return (Feature) target;
     }
 
     /**
@@ -93,7 +93,7 @@ public class Combination extends Association {
     
     @Override
     public String getStyleLabel() {
-        return "styleCombination" + this.id;
+        return "styleCombination" + id;
     }
     
     @Override
@@ -111,11 +111,11 @@ public class Combination extends Association {
     
     @Override
     protected String exportHeader() {
-        String header  = "    <"      + this.type;
-               header += " id=\""     + this.id             + "\"";
-               header += " source=\"" + this.source.getId() + "\"";
-               header += " target=\"" + this.target.getId() + "\"";
-               header += " root=\""   + this.root           + "\"";
+        String header  = "    <"      + type;
+               header += " id=\""     + id             + "\"";
+               header += " source=\"" + source.getId() + "\"";
+               header += " target=\"" + target.getId() + "\"";
+               header += " root=\""   + root           + "\"";
                header += ">\n";
         return header;
     }

@@ -31,14 +31,14 @@ public class AttributeUML extends Element implements Encodable {
      */
     public AttributeUML(Diagram diagram) {
         super(diagram);
-        this.id         = null;
-        this.name       = "attribute";
-        this.entity     = null;
-        this.typeUML    = null;
-        this.visibility = "private";
-        this.static_    = false;
-        this.final_     = false;
-        this.type       = "attribute";
+        id         = null;
+        name       = "attribute";
+        entity     = null;
+        typeUML    = null;
+        visibility = "private";
+        static_    = false;
+        final_     = false;
+        type       = "attribute";
     }
     
     /**
@@ -48,28 +48,28 @@ public class AttributeUML extends Element implements Encodable {
      */
     public AttributeUML(org.w3c.dom.Element element, Diagram diagram) {
         super(element, diagram);
-        this.id         = element.getAttribute("id");
-        this.name       = element.getAttribute("name");
-        this.entity     = null;
-        this.typeUML    = null;
-        this.visibility = element.getAttribute("visibility");
-        this.static_    = element.getAttribute("static").trim().equals("true");
-        this.final_     = element.getAttribute("final").trim().equals("true");
-        this.type       = "attribute";
+        id         = element.getAttribute("id");
+        name       = element.getAttribute("name");
+        entity     = null;
+        typeUML    = null;
+        visibility = element.getAttribute("visibility");
+        static_    = element.getAttribute("static").trim().equals("true");
+        final_     = element.getAttribute("final").trim().equals("true");
+        type       = "attribute";
     }
 
     @Override
     public void setDefaultName() {
         super.setDefaultName();
-        this.name = this.name.toLowerCase().trim();
-        this.entity.setMinWidth();
+        name = name.toLowerCase().trim();
+        entity.setMinWidth();
     }
     
     @Override
     public void setName(String name) {
         super.setName(name);
-        this.name = this.getName().replaceAll(" ", "");
-        this.entity.setMinWidth();
+        this.name = getName().replaceAll(" ", "");
+        entity.setMinWidth();
     }
     
     /**
@@ -77,7 +77,7 @@ public class AttributeUML extends Element implements Encodable {
      * @return Entity.
      */
     public Entity getEntity() {
-        return this.entity;
+        return entity;
     }
 
     /**
@@ -93,7 +93,7 @@ public class AttributeUML extends Element implements Encodable {
      * @return Type UML.
      */
     public TypeUML getTypeUML() {
-        return this.typeUML;
+        return typeUML;
     }
 
     /**
@@ -110,13 +110,13 @@ public class AttributeUML extends Element implements Encodable {
      * @param newType New Type.
      */
     public void changeTypeUML(TypeUML oldType, TypeUML newType) {
-        if (this.typeUML.equals(oldType))
-            this.typeUML = newType;
+        if (typeUML.equals(oldType))
+            typeUML = newType;
     }
 
     @Override
     public String getVisibility() {
-        return this.visibility;
+        return visibility;
     }
 
     /**
@@ -129,7 +129,7 @@ public class AttributeUML extends Element implements Encodable {
 
     @Override
     public Boolean isStatic() {
-        return this.static_;
+        return static_;
     }
 
     /**
@@ -142,7 +142,7 @@ public class AttributeUML extends Element implements Encodable {
     
     @Override
     public Boolean isFinal() {
-        return this.final_;
+        return final_;
     }
 
     /**
@@ -160,11 +160,11 @@ public class AttributeUML extends Element implements Encodable {
     
     @Override
     public String exportCode() {
-        String code  = this.printVisibility();
-               code += (this.static_)  ? " static" : "";
-               code += (this.final_)   ? " final"  : "";
-               code += " " + this.printTypeUML();
-               code += " " + this.name + ";";
+        String code  = printVisibility();
+               code += (static_)  ? " static" : "";
+               code += (final_)   ? " final"  : "";
+               code += " " + printTypeUML();
+               code += " " + name + ";";
         return code;
     }
     
@@ -173,11 +173,11 @@ public class AttributeUML extends Element implements Encodable {
      * @return Visibility.
      */
     private String printVisibility() {
-        if (this.visibility.equals("package"))
+        if (visibility.equals("package"))
             return "";
-        if (this.visibility.equals("default"))
+        if (visibility.equals("default"))
             return "";
-        return this.visibility;
+        return visibility;
     }
     
     /**
@@ -185,8 +185,8 @@ public class AttributeUML extends Element implements Encodable {
      * @return Import.
      */
     public String printImport() {
-        if (this.typeUML.getPath().contains("."))
-            return this.typeUML.getPath();
+        if (typeUML.getPath().contains("."))
+            return typeUML.getPath();
         return "";
     }
     
@@ -195,9 +195,9 @@ public class AttributeUML extends Element implements Encodable {
      * @return Type UML.
      */
     private String printTypeUML() {
-        if (this.typeUML == null)
+        if (typeUML == null)
             return "Object";
-        return this.typeUML.getName();
+        return typeUML.getName();
     }
     
     /**
@@ -205,11 +205,11 @@ public class AttributeUML extends Element implements Encodable {
      * @return Visibility Symbol.
      */
     private String getVisibilitySymbol() {
-        if (this.visibility.equals("public"))
+        if (visibility.equals("public"))
             return "+";
-        if (this.visibility.equals("protected"))
+        if (visibility.equals("protected"))
             return "#";
-        if (this.visibility.equals("private"))
+        if (visibility.equals("private"))
             return "-";
         return "~";
     }
@@ -219,7 +219,7 @@ public class AttributeUML extends Element implements Encodable {
      * @return Complete Signature.
      */
     public String getCompleteSignature() {
-        return (this.entity.getStereotypes(this) + this.getSignature()).trim();
+        return (entity.getStereotypes(this) + getSignature()).trim();
     }
     
     /**
@@ -227,22 +227,22 @@ public class AttributeUML extends Element implements Encodable {
      * @return Signature.
      */
     public String getSignature() {
-        return this.getVisibilitySymbol() + " " + this.name + " : " + this.printTypeUML();
+        return getVisibilitySymbol() + " " + name + " : " + printTypeUML();
     }
     
     @Override
     public String getIcon() {
-        return super.getFolder() + "classes/attribute.png";
+        return getFolder() + "classes/attribute.png";
     }
     
     @Override
     public String getTitle() {
-        return this.getSignature();
+        return getSignature();
     }
     
     @Override
     public String getStyleLabel() {
-        return "styleAttributeUML" + this.id;
+        return "styleAttributeUML" + id;
     }
     
     @Override
@@ -255,7 +255,7 @@ public class AttributeUML extends Element implements Encodable {
                style.put(mxConstants.STYLE_FILLCOLOR,   mxConstants.NONE);
 //               style.put(mxConstants.STYLE_STROKECOLOR, "#9999FF");
                style.put(mxConstants.STYLE_STROKECOLOR,mxConstants.NONE);
-               style.put(mxConstants.STYLE_FONTSTYLE, this.static_ ? 1 : mxConstants.FONT_UNDERLINE);
+               style.put(mxConstants.STYLE_FONTSTYLE, static_ ? 1 : mxConstants.FONT_UNDERLINE);
                style.put(mxConstants.STYLE_EDITABLE,  "1");
                style.put(mxConstants.STYLE_FONTSIZE,  "12");
                style.put(mxConstants.STYLE_RESIZABLE, "0");
@@ -269,26 +269,26 @@ public class AttributeUML extends Element implements Encodable {
      * @return Type UML.
      */
     private String exportType() {
-        if (this.typeUML == null)
+        if (typeUML == null)
             return " type=\"TYPE#21\"";
-        return " type=\"" + this.typeUML.getId() + "\"";
+        return " type=\"" + typeUML.getId() + "\"";
     }
     
     @Override
     public String export() {
-        String export  = "      <"        + this.type;
-               export += " id=\""         + this.id          + "\"";
-               export += " name=\""       + this.name        + "\"";
-               export += this.exportType();
-               export += " visibility=\"" + this.visibility + "\"";
-               export += " static=\""     + this.static_    + "\"";
-               export += " final=\""      + this.final_     + "\"";
+        String export  = "      <"        + type;
+               export += " id=\""         + id          + "\"";
+               export += " name=\""       + name        + "\"";
+               export += exportType();
+               export += " visibility=\"" + visibility + "\"";
+               export += " static=\""     + static_    + "\"";
+               export += " final=\""      + final_     + "\"";
                export += "/>\n";
         return export;
     }
     
     @Override
     public String toString() {
-        return this.getSignature();
+        return getSignature();
     }
 }

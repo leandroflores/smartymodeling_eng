@@ -22,9 +22,9 @@ public class InitialUML extends Element {
      */
     public InitialUML(Diagram diagram) {
         super(diagram);
-        this.name = "";
-        this.size = new Point(30, 30);
-        this.type = "initial";
+        name = "";
+        size = new Point(30, 30);
+        type = "initial";
     }
     
     /**
@@ -34,7 +34,7 @@ public class InitialUML extends Element {
      */
     public InitialUML(org.w3c.dom.Element element, Diagram diagram) {
         super(element, diagram, true);
-        this.type = "initial";
+        type = "initial";
     }
 
     @Override
@@ -44,7 +44,7 @@ public class InitialUML extends Element {
     
     @Override
     public String getIcon() {
-        return super.getFolder() + "activity/initial.png";
+        return getFolder() + "activity/initial.png";
     }
     
     @Override

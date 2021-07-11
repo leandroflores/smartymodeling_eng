@@ -19,7 +19,7 @@ import model.structural.diagram.usecase.base.ActorUML;
  * <p>Class of Model <b>SequenceDiagram</b>.</p>
  * <p>Class responsible for representing the <b>Sequence Diagram</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  25/07/2019
+ * @since  2019-07-25
  * @see    model.structural.base.Diagram
  * @see    model.structural.base.association.Association
  * @see    model.structural.diagram.sequence.base.LifelineUML
@@ -36,7 +36,7 @@ public final class SequenceDiagram extends Diagram {
      */
     public SequenceDiagram(Project project) {
         super(project);
-        this.init();
+        init();
     }
     
     /**
@@ -46,15 +46,15 @@ public final class SequenceDiagram extends Diagram {
      */
     public SequenceDiagram(Project project, org.w3c.dom.Element element) {
         super(project, element);
-        this.init();
+        init();
     }
     
     @Override
     public void init() {
-        this.type      = "Sequence";
-        this.lifelines = new HashMap<>();
-        this.instances = new HashMap<>();
-        this.messages  = new HashMap<>();
+        type      = "Sequence";
+        lifelines = new HashMap<>();
+        instances = new HashMap<>();
+        messages  = new HashMap<>();
     }
     
     /**
@@ -62,7 +62,7 @@ public final class SequenceDiagram extends Diagram {
      * @return Min Height.
      */
     public Integer getMinHeigth() {
-        return Math.max(250, 140 + (this.messages.size() * 30));
+        return Math.max(250, 140 + (messages.size() * 30));
     }
     
     /**
@@ -70,7 +70,7 @@ public final class SequenceDiagram extends Diagram {
      * @return Max Height.
      */
     public Integer getMaxHeight() {
-        return Math.max(this.getMaxLifelinesHeight(), this.getMaxInstancesHeight());
+        return Math.max(getMaxLifelinesHeight(), getMaxInstancesHeight());
     }
     
     /**
@@ -78,10 +78,10 @@ public final class SequenceDiagram extends Diagram {
      * @return Y Default.
      */
     public Integer getYDefault() {
-        if (!this.lifelines.isEmpty())
-            return this.getLifelinesList().get(0).getY();
-        else if (!this.instances.isEmpty())
-            return this.getInstancesList().get(0).getY();
+        if (!lifelines.isEmpty())
+            return getLifelinesList().get(0).getY();
+        else if (!instances.isEmpty())
+            return getInstancesList().get(0).getY();
         return 20;
     }
     
@@ -90,10 +90,10 @@ public final class SequenceDiagram extends Diagram {
      * @return Height Default.
      */
     public Integer getHeightDefault() {
-        if (!this.lifelines.isEmpty())
-            return this.getLifelinesList().get(0).getHeight();
-        else if (!this.instances.isEmpty())
-            return this.getInstancesList().get(0).getHeight();
+        if (!lifelines.isEmpty())
+            return getLifelinesList().get(0).getHeight();
+        else if (!instances.isEmpty())
+            return getInstancesList().get(0).getHeight();
         return 350;
     }
     
@@ -102,8 +102,8 @@ public final class SequenceDiagram extends Diagram {
      * @param heigth Height.
      */
     public void updateHeight(Integer heigth) {
-        this.updateLifelinesHeight(heigth);
-        this.updateInstancesHeight(heigth);
+        updateLifelinesHeight(heigth);
+        updateInstancesHeight(heigth);
     }
     
     /**
@@ -111,8 +111,8 @@ public final class SequenceDiagram extends Diagram {
      * @param y Y Coordinate.
      */
     public void updateY(Integer y) {
-        this.updateLifelinesY(y);
-        this.updateInstancesY(y);
+        updateLifelinesY(y);
+        updateInstancesY(y);
     }
     
     /**
@@ -120,10 +120,10 @@ public final class SequenceDiagram extends Diagram {
      * @param lifeline Lifeline UML.
      */
     public void addLifeline(LifelineUML lifeline) {
-        lifeline.setId(this.nextId(lifeline));
-        if (this.lifelines.get(lifeline.getId()) == null) {
-            this.lifelines.put(lifeline.getId(), lifeline);
-            this.addElement(lifeline);
+        lifeline.setId(nextId(lifeline));
+        if (lifelines.get(lifeline.getId()) == null) {
+            lifelines.put(lifeline.getId(), lifeline);
+            addElement(lifeline);
         }
     }
     
@@ -133,7 +133,7 @@ public final class SequenceDiagram extends Diagram {
      */
     public void resetLifeline(Element element) {
         if (element instanceof ActorUML) {
-            for (LifelineUML lifeline : this.getLifelinesList()) {
+            for (LifelineUML lifeline : getLifelinesList()) {
                 if ((lifeline.getActor() != null) && (lifeline.getActor().equals(element)))
                     lifeline.setActor(null);
             }
@@ -145,9 +145,9 @@ public final class SequenceDiagram extends Diagram {
      * @param lifeline Lifeline UML.
      */
     public void removeLifeline(LifelineUML lifeline) {
-        this.removeAssociations(lifeline);
-        this.removeElement(lifeline);
-        this.lifelines.remove(lifeline.getId());
+        removeAssociations(lifeline);
+        removeElement(lifeline);
+        lifelines.remove(lifeline.getId());
     }
     
     /**
@@ -155,8 +155,8 @@ public final class SequenceDiagram extends Diagram {
      * @return Max Lifelines Height.
      */
     public Integer getMaxLifelinesHeight() {
-        Integer max = Math.max(350, this.getMinHeigth());
-        for (LifelineUML lifeline : this.getLifelinesList())
+        Integer max = Math.max(350, getMinHeigth());
+        for (LifelineUML lifeline : getLifelinesList())
                 max = Math.max(lifeline.getHeight(), max);
         return  max;
     }
@@ -166,7 +166,7 @@ public final class SequenceDiagram extends Diagram {
      * @param height Height.
      */
     public void updateLifelinesHeight(Integer height) {
-        for (LifelineUML lifeline : this.getLifelinesList())
+        for (LifelineUML lifeline : getLifelinesList())
             lifeline.setHeight(height);
     }
     
@@ -175,7 +175,7 @@ public final class SequenceDiagram extends Diagram {
      * @param y Y Coordinate.
      */
     public void updateLifelinesY(Integer y) {
-        for (LifelineUML lifeline : this.getLifelinesList())
+        for (LifelineUML lifeline : getLifelinesList())
             lifeline.getPosition().y = y;
     }
     
@@ -184,7 +184,7 @@ public final class SequenceDiagram extends Diagram {
      * @return Lifelines List.
      */
     public List<LifelineUML> getLifelinesList() {
-        return new ArrayList<>(this.lifelines.values());
+        return new ArrayList<>(lifelines.values());
     }
     
     /**
@@ -192,10 +192,10 @@ public final class SequenceDiagram extends Diagram {
      * @param instance Instance UML.
      */
     public void addInstance(InstanceUML instance) {
-        instance.setId(this.nextId(instance));
-        if (this.instances.get(instance.getId()) == null) {
-            this.instances.put(instance.getId(), instance);
-            this.addElement(instance);
+        instance.setId(nextId(instance));
+        if (instances.get(instance.getId()) == null) {
+            instances.put(instance.getId(), instance);
+            addElement(instance);
         }
     }
     
@@ -205,7 +205,7 @@ public final class SequenceDiagram extends Diagram {
      */
     public void resetInstance(Element element) {
         if (element instanceof ClassUML) {
-            for (InstanceUML instance : this.getInstancesList()) {
+            for (InstanceUML instance : getInstancesList()) {
                 if ((instance.getClassUML() != null) && (instance.getClassUML().equals(element)))
                     instance.setClassUML(null);
             }
@@ -217,9 +217,9 @@ public final class SequenceDiagram extends Diagram {
      * @param instance Instance UML.
      */
     public void removeInstance(InstanceUML instance) {
-        this.removeAssociations(instance);
-        this.removeElement(instance);
-        this.instances.remove(instance.getId());
+        removeAssociations(instance);
+        removeElement(instance);
+        instances.remove(instance.getId());
     }
     
     /**
@@ -227,8 +227,8 @@ public final class SequenceDiagram extends Diagram {
      * @return Max Instances Height.
      */
     public Integer getMaxInstancesHeight() {
-        Integer max = Math.max(350, this.getMinHeigth());
-        for (InstanceUML instance : this.getInstancesList())
+        Integer max = Math.max(350, getMinHeigth());
+        for (InstanceUML instance : getInstancesList())
                 max = Math.max(instance.getHeight(), max);
         return  max;
     }
@@ -238,7 +238,7 @@ public final class SequenceDiagram extends Diagram {
      * @param height Height.
      */
     public void updateInstancesHeight(Integer height) {
-        for (InstanceUML instance : this.getInstancesList())
+        for (InstanceUML instance : getInstancesList())
             instance.setHeight(height);
     }
     
@@ -247,7 +247,7 @@ public final class SequenceDiagram extends Diagram {
      * @param y Y Coordinate.
      */
     public void updateInstancesY(Integer y) {
-        for (InstanceUML instance : this.getInstancesList())
+        for (InstanceUML instance : getInstancesList())
             instance.getPosition().y = y;
     }
     
@@ -256,7 +256,7 @@ public final class SequenceDiagram extends Diagram {
      * @return Instances List.
      */
     public List<InstanceUML> getInstancesList() {
-        return new ArrayList<>(this.instances.values());
+        return new ArrayList<>(instances.values());
     }
     
     /**
@@ -264,13 +264,13 @@ public final class SequenceDiagram extends Diagram {
      * @param message Message UML.
      */
     public void addMessage(MessageUML message) {
-        message.setId(this.nextId(message));
-        message.setSequence(this.nextSequence());
-        if (this.messages.get(message.getId()) == null) {
-            this.messages.put(message.getId(), message);
-            this.addAssociation(message);
-            this.updateHeight(this.getMinHeigth());
-            this.updateSequence();
+        message.setId(nextId(message));
+        message.setSequence(nextSequence());
+        if (messages.get(message.getId()) == null) {
+            messages.put(message.getId(), message);
+            addAssociation(message);
+            updateHeight(getMinHeigth());
+            updateSequence();
         }
     }
     
@@ -279,7 +279,7 @@ public final class SequenceDiagram extends Diagram {
      * @param method Method changed.
      */
     public void changeNames(MethodUML method) {
-        for (MessageUML message : this.getMessageList())
+        for (MessageUML message : getMessageList())
             message.changeName(method);
     }
     
@@ -288,7 +288,7 @@ public final class SequenceDiagram extends Diagram {
      * @param message Message to be removed.
      */
     public void updateNextMessages(MessageUML message) {
-        for (MessageUML current : this.getMessageList()) {
+        for (MessageUML current : getMessageList()) {
             if (current.getSequence() > message.getSequence())
                 current.dy(-40);
         }
@@ -300,7 +300,7 @@ public final class SequenceDiagram extends Diagram {
      */
     public void resetMessage(Element element) {
         if (element instanceof MethodUML) {
-            for (MessageUML message : this.getMessageList()) {
+            for (MessageUML message : getMessageList()) {
                 if (message.getMethod().equals(element))
                     message.setMethod(null);
             }
@@ -313,9 +313,9 @@ public final class SequenceDiagram extends Diagram {
      */
     public void removeMessage(MessageUML message) {
         super.removeAssociation(message);
-        this.updateNextMessages(message);
-        this.messages.remove(message.getId());
-        this.updateSequence();
+        updateNextMessages(message);
+        messages.remove(message.getId());
+        updateSequence();
     }
     
     /**
@@ -323,13 +323,13 @@ public final class SequenceDiagram extends Diagram {
      * @param element Element.
      */
     private void removeAssociations(Element element) {
-        this.removeAssociation(element, this.messages);
+        removeAssociation(element, messages);
     }
     
     @Override
     public void removeAssociation(Association association) {
         if (association instanceof MessageUML)
-            this.removeMessage((MessageUML) association);
+            removeMessage((MessageUML) association);
         else
             super.removeAssociation(association);
     }
@@ -339,14 +339,14 @@ public final class SequenceDiagram extends Diagram {
      * @return Next Sequence.
      */
     public Integer nextSequence() {
-        return this.getMessageList().size() + 1;
+        return getMessageList().size() + 1;
     }
     
     /**
      * Method responsible for updating the Sequence.
      */
     public void updateSequence() {
-        List<MessageUML> list = this.getMessageList();
+        List<MessageUML> list = getMessageList();
         for (int i = 0; i < list.size(); i++)
             list.get(i).changeSequence(i + 1);
     }
@@ -356,8 +356,8 @@ public final class SequenceDiagram extends Diagram {
      * @return Message List.
      */
     public List<MessageUML> getMessageList() {
-        ArrayList list = new ArrayList<>(this.messages.values());
-                  list.sort(this.getMessageComparator());
+        ArrayList list = new ArrayList<>(messages.values());
+                  list.sort(getMessageComparator());
         return    list;
     }
     
@@ -388,18 +388,12 @@ public final class SequenceDiagram extends Diagram {
     public Diagram getClone() {
         try {
             SequenceDiagram diagram = (SequenceDiagram) super.clone();
-                            diagram.setElements(new HashMap<>(this.elements));
-                            diagram.setAssociations(new HashMap<>(this.associations));
-                            diagram.setVariabilities(new HashMap<>(this.variabilities));
+                            diagram.setElements(new HashMap<>(elements));
+                            diagram.setAssociations(new HashMap<>(associations));
+                            diagram.setVariabilities(new HashMap<>(variabilities));
             return          diagram;
         } catch (CloneNotSupportedException exception) {
-            System.out.println("Error");
             return null;
         }
-    }
-    
-    @Override
-    public String toString() {
-        return super.toString();
     }
 }

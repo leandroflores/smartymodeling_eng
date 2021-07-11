@@ -19,7 +19,7 @@ import model.structural.diagram.classes.base.PackageUML;
  * <p>Class of Model <b>Instance</b>.</p>
  * <p>Class responsible for representing the <b>Instance</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  06/10/2019
+ * @since  2019-10-06
  * @see    model.structural.base.interfaces.Exportable
  */
 public class Instance implements Exportable {
@@ -34,11 +34,11 @@ public class Instance implements Exportable {
      * Default constructor method of Class.
      */
     public Instance() {
-        this.name          = "NewInstance";
-        this.product       = null;
-        this.diagram       = null;
-        this.artifacts     = new HashMap<>();
-        this.relationships = new HashMap<>();
+        name          = "NewInstance";
+        product       = null;
+        diagram       = null;
+        artifacts     = new HashMap<>();
+        relationships = new HashMap<>();
     }
     
     /**
@@ -47,8 +47,8 @@ public class Instance implements Exportable {
      */
     public Instance(org.w3c.dom.Element element) {
         this();
-        this.id   = element.getAttribute("id");
-        this.name = element.getAttribute("name");
+        id   = element.getAttribute("id");
+        name = element.getAttribute("name");
     }
     
     /**
@@ -56,7 +56,7 @@ public class Instance implements Exportable {
      * @return Instance Id.
      */
     public String getId() {
-        return this.id;
+        return id;
     }
     
     /**
@@ -64,7 +64,7 @@ public class Instance implements Exportable {
      * @return Instance Complete Id.
      */
     public String getCompleteId() {
-        return this.product.getId() + " - " + this.id;
+        return product.getId() + " - " + id;
     }
 
     /**
@@ -80,7 +80,7 @@ public class Instance implements Exportable {
      * @return Instance Name.
      */
     public String getName() {
-        return this.name;
+        return name;
     }
 
     /**
@@ -97,7 +97,7 @@ public class Instance implements Exportable {
      * @return Instance Product.
      */
     public Product getProduct() {
-        return this.product;
+        return product;
     }
 
     /**
@@ -113,7 +113,7 @@ public class Instance implements Exportable {
      * @return Instance Diagram.
      */
     public Diagram getDiagram() {
-        return this.diagram;
+        return diagram;
     }
 
     /**
@@ -129,7 +129,7 @@ public class Instance implements Exportable {
      * @return Instance Artifacts.
      */
     public HashMap<String, Artifact> getArtifacts() {
-        return this.artifacts;
+        return artifacts;
     }
     
     /**
@@ -137,7 +137,7 @@ public class Instance implements Exportable {
      * @return Artifacts List.
      */
     public List<Artifact> getArtifactsList() {
-        return new ArrayList<>(this.artifacts.values());
+        return new ArrayList<>(artifacts.values());
     }
     
     /**
@@ -145,9 +145,9 @@ public class Instance implements Exportable {
      * @return Next Artifact Id.
      */
     public String nextArtifactId() {
-        Integer index  = this.artifacts.size() + 1;
+        Integer index  = artifacts.size() + 1;
         String  nextId = "ARTIFACT#" + index;
-        while (this.artifacts.get(nextId) != null)
+        while (artifacts.get(nextId) != null)
                 nextId = "ARTIFACT#" + ++index;
         return  nextId;
     }
@@ -157,9 +157,9 @@ public class Instance implements Exportable {
      * @param artifact Artifact.
      */
     public void addArtifact(Artifact artifact) {
-        artifact.setId(this.nextArtifactId());
+        artifact.setId(nextArtifactId());
         artifact.setInstance(this);
-        this.artifacts.put(artifact.getId(), artifact);
+        artifacts.put(artifact.getId(), artifact);
     }
     
     /**
@@ -168,7 +168,7 @@ public class Instance implements Exportable {
      * @return Artifact found.
      */
     public Artifact getArtifact(String id) {
-        return (Artifact) this.artifacts.get(id);
+        return (Artifact) artifacts.get(id);
     }
     
     /**
@@ -177,7 +177,7 @@ public class Instance implements Exportable {
      * @return Artifact found.
      */
     public Artifact getArtifact(Element element) {
-        for (Artifact  artifact : this.getArtifactsList()) {
+        for (Artifact  artifact : getArtifactsList()) {
             if (artifact.getElement().equals(element))
                 return artifact;
         }
@@ -189,9 +189,9 @@ public class Instance implements Exportable {
      * @param element Element.
      */
     public void remove(Element element) {
-        Artifact artifact = this.getArtifact(element);
+        Artifact artifact = getArtifact(element);
         if (artifact != null)
-            this.removeArtifact(artifact);
+            removeArtifact(artifact);
     }
     
     /**
@@ -200,7 +200,7 @@ public class Instance implements Exportable {
      * @return Instance contains Element.
      */
     public boolean contains(Element element) {
-        for (Artifact artefact : this.getArtifactsList()) {
+        for (Artifact artefact : getArtifactsList()) {
             if (artefact.getElement().equals(element))
                 return true;
         }
@@ -212,8 +212,8 @@ public class Instance implements Exportable {
      * @param  artifact Artifact.
      */
     public void removeArtifact(Artifact artifact) {
-        this.removeRelationships(artifact);
-        this.artifacts.remove(artifact.getId());
+        removeRelationships(artifact);
+        artifacts.remove(artifact.getId());
     }
     
     /**
@@ -222,7 +222,7 @@ public class Instance implements Exportable {
      * @param distance Shift Distance.
      */
     public void dx(Element element, Integer distance) {
-        List<Relationship> filter = this.getAssociations("association");
+        List<Relationship> filter = getAssociations("association");
         for (Relationship relationship : filter) {
             relationship.dxSource(relationship.getAssociation().isSource(element) ? distance : 0);
             relationship.dxTarget(relationship.getAssociation().isTarget(element) ? distance : 0);
@@ -235,7 +235,7 @@ public class Instance implements Exportable {
      * @param distance Shift Distance.
      */
     public void dy(Element element, Integer distance) {
-        List<Relationship> filter = this.getAssociations("association");
+        List<Relationship> filter = getAssociations("association");
         for (Relationship relationship : filter) {
             relationship.dySource(relationship.getAssociation().isSource(element) ? distance : 0);
             relationship.dyTarget(relationship.getAssociation().isTarget(element) ? distance : 0);
@@ -255,7 +255,7 @@ public class Instance implements Exportable {
      * @return Instance Relationships.
      */
     public HashMap<String, Relationship> getRelationships() {
-        return this.relationships;
+        return relationships;
     }
     
     /**
@@ -263,9 +263,9 @@ public class Instance implements Exportable {
      * @return Next Relationship Id.
      */
     public String nextRelationshipId() {
-        Integer index  = this.relationships.size() + 1;
+        Integer index  = relationships.size() + 1;
         String  nextId = "RELATIONSHIP#" + index;
-        while (this.relationships.get(nextId) != null)
+        while (relationships.get(nextId) != null)
                 nextId = "RELATIONSHIP#" + ++index;
         return  nextId;
     }
@@ -275,10 +275,10 @@ public class Instance implements Exportable {
      * @param relationship Relationship.
      */
     public void addRelationship(Relationship relationship) {
-        relationship.setId(this.nextRelationshipId());
+        relationship.setId(nextRelationshipId());
         relationship.setInstance(this);
-        if (this.relationships.get(relationship.getId()) == null)
-            this.relationships.put(relationship.getId(), relationship);
+        if (relationships.get(relationship.getId()) == null)
+            relationships.put(relationship.getId(), relationship);
     }
     
     /**
@@ -287,7 +287,7 @@ public class Instance implements Exportable {
      * @return Relationship found.
      */
     public Relationship getRelationship(String id) {
-        return (Relationship) this.relationships.get(id);
+        return (Relationship) relationships.get(id);
     }
     
     /**
@@ -296,7 +296,7 @@ public class Instance implements Exportable {
      * @return Relationship found.
      */
     public Relationship getRelationship(Association association) {
-        for (Relationship relationship : this.getRelationshipsList()) {
+        for (Relationship relationship : getRelationshipsList()) {
             if (relationship.getAssociation().equals(association))
                 return relationship;
         }
@@ -308,7 +308,7 @@ public class Instance implements Exportable {
      * @return Relationships List.
      */
     public List<Relationship> getRelationshipsList() {
-        return new ArrayList<>(this.relationships.values());
+        return new ArrayList<>(relationships.values());
     }
     
     /**
@@ -316,7 +316,7 @@ public class Instance implements Exportable {
      * @param  relationship Relationship.
      */
     public void removeRelationship(Relationship relationship) {
-        this.relationships.remove(relationship.getId());
+        relationships.remove(relationship.getId());
     }
     
     /**
@@ -332,15 +332,15 @@ public class Instance implements Exportable {
      * @return Instance is Empty.
      */
     public boolean isEmpty() {
-        return this.getArtifactsList().isEmpty();
+        return getArtifactsList().isEmpty();
     }
     
     /**
      * Method responsible for reseting the Instance.
      */
     public void reset() {
-        this.artifacts     = new HashMap();
-        this.relationships = new HashMap();
+        artifacts     = new HashMap();
+        relationships = new HashMap();
     }
     
     /**
@@ -348,9 +348,9 @@ public class Instance implements Exportable {
      * @param association Association.
      */
     public void remove(Association association) {
-        for (Relationship relationship : this.getRelationshipsList()) {
+        for (Relationship relationship : getRelationshipsList()) {
             if (relationship.getAssociation().equals(association))
-                this.removeRelationship(relationship);
+                removeRelationship(relationship);
         }
     }
     
@@ -359,9 +359,9 @@ public class Instance implements Exportable {
      * @param artefact Artifact.
      */
     public void removeRelationships(Artifact artefact) {
-        for (Relationship relationship : this.getRelationshipsList()) {
+        for (Relationship relationship : getRelationshipsList()) {
             if (relationship.getAssociation().contains(artefact.getElement()))
-                this.removeRelationship(relationship);
+                removeRelationship(relationship);
         }
     }
     
@@ -369,18 +369,18 @@ public class Instance implements Exportable {
      * Method responsible for updating the Instance Artifacts and Relationships.
      */
     public void update() {
-        this.addPackages();
-        this.addRelationships();
-        this.removeRelationships();
+        addPackages();
+        addRelationships();
+        removeRelationships();
     }
     
     /**
      * Method responsible for adding the Packages from a Class Diagram.
      */
     private void addPackages() {
-        if (this.diagram instanceof ClassDiagram) {
-            for (PackageUML packageUML : ((ClassDiagram) this.diagram).getPackagesList())
-                this.addArtifact(new Artifact(packageUML));
+        if (diagram instanceof ClassDiagram) {
+            for (PackageUML packageUML : ((ClassDiagram) diagram).getPackagesList())
+                addArtifact(new Artifact(packageUML));
         }
     }
     
@@ -388,10 +388,10 @@ public class Instance implements Exportable {
      * Method responsible for adding the Instance Relationships.
      */
     public void addRelationships() {
-        for (Association association : this.diagram.getAssociationsList()) {
-            if ((this.contains(association.getSource()))
-             && (this.contains(association.getTarget())))
-                    this.addRelationship(new Relationship(this, association));
+        for (Association association : diagram.getAssociationsList()) {
+            if ((contains(association.getSource()))
+             && (contains(association.getTarget())))
+                    addRelationship(new Relationship(this, association));
         }
     }
     
@@ -399,10 +399,10 @@ public class Instance implements Exportable {
      * Method responsible for removing the Mutex and Requires Relationships.
      */
     private void removeRelationships() {
-        for (Relationship relationship : this.getRelationshipsList()) {
+        for (Relationship relationship : getRelationshipsList()) {
             if (relationship.getAssociation() instanceof Requires
              || relationship.getAssociation() instanceof Mutex)
-                this.removeRelationship(relationship);
+                removeRelationship(relationship);
         }
     }
     
@@ -411,7 +411,7 @@ public class Instance implements Exportable {
      * @return Abstract.
      */
     public String getAbstract() {
-        return this.name + " (" + this.diagram.getType() + ")";
+        return name + " (" + diagram.getType() + ")";
     }
     
     /**
@@ -419,11 +419,11 @@ public class Instance implements Exportable {
      * @return Tree Artifacts List.
      */
     public List<Artifact> getTreeArtifactsList() {
-        if (this.diagram instanceof ClassDiagram)
-            return this.getClassArtifactsList();
-        if (this.diagram instanceof ActivityDiagram)
-            return this.getActivityArtifactsList();
-        return this.getArtifactsList();
+        if (diagram instanceof ClassDiagram)
+            return getClassArtifactsList();
+        if (diagram instanceof ActivityDiagram)
+            return getActivityArtifactsList();
+        return getArtifactsList();
     }
     
     /**
@@ -432,7 +432,7 @@ public class Instance implements Exportable {
      */
     public List<Artifact> getClassArtifactsList() {
         List<Artifact> filter  = new ArrayList<>();
-        for (Artifact  artifact : this.getArtifactsList()) {
+        for (Artifact  artifact : getArtifactsList()) {
             if (artifact.isPackage()  && ((PackageUML) artifact.getElement()).getParent() == null)
                 filter.add(artifact);
             if (artifact.isEntity()   && ((Entity) artifact.getElement()).getPackageUML() == null)
@@ -447,7 +447,7 @@ public class Instance implements Exportable {
      */
     public List<Artifact> getActivityArtifactsList() {
         List<Artifact> filter  = new ArrayList<>();
-        for (Artifact  artifact : this.getArtifactsList()) {
+        for (Artifact  artifact : getArtifactsList()) {
             if (artifact.getElement().getType().equalsIgnoreCase("activity"))
                 filter.add(artifact);
         }
@@ -459,7 +459,7 @@ public class Instance implements Exportable {
      * @return Instance Icon.
      */
     public String getIcon() {
-        return this.diagram.getInstanceIcon();
+        return diagram.getInstanceIcon();
     }
     
     /**
@@ -468,7 +468,7 @@ public class Instance implements Exportable {
      */
     private String exportArtifacts() {
         String export  = "";
-        for (Artifact artifact : this.getArtifactsList())
+        for (Artifact artifact : getArtifactsList())
                export += artifact.export();
         return export;
     }
@@ -479,7 +479,7 @@ public class Instance implements Exportable {
      */
     private String exportRelationships() {
         String export  = "";
-        for (Relationship relationship : this.getRelationshipsList())
+        for (Relationship relationship : getRelationshipsList())
                export +=  relationship.export();
         return export;
     }
@@ -491,7 +491,7 @@ public class Instance implements Exportable {
      */
     public List getAssociations(String type) {
         List    filter = new ArrayList<>();
-        for (Relationship relationship : this.getRelationshipsList()) {
+        for (Relationship relationship : getRelationshipsList()) {
             if (relationship.getAssociation().getType().equalsIgnoreCase(type))
                 filter.add(relationship);
         }
@@ -503,20 +503,20 @@ public class Instance implements Exportable {
      * @return Instance Summary.
      */
     public String getSummary() {
-        return "Instance: " + this.getName() + " (" + this.diagram.getName() + ")";
+        return "Instance: " + getName() + " (" + diagram.getName() + ")";
     }
         
     @Override
     public String export() {
-        String export  = "      <instance id=\"" + this.id + "\" name=\"" + this.name + "\"" + " diagram=\"" + this.diagram.getId() + "\">\n";
-               export += this.exportArtifacts();
-               export += this.exportRelationships();
+        String export  = "      <instance id=\"" + id + "\" name=\"" + name + "\"" + " diagram=\"" + diagram.getId() + "\">\n";
+               export += exportArtifacts();
+               export += exportRelationships();
                export += "      </instance>\n";
         return export;
     }
     
     @Override
     public String toString() {
-        return this.name + " (" + this.diagram.getType() + ")";
+        return name + " (" + diagram.getType() + ")";
     }
 }

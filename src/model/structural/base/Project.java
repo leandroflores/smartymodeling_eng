@@ -25,7 +25,7 @@ import model.structural.base.product.Artifact;
 import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.base.requirement.Requirement;
-import model.structural.base.traceability.Traceability;
+import model.structural.base.traceability.Reference;
 import model.structural.diagram.classes.base.TypeUML;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ClassDiagram;
@@ -52,7 +52,7 @@ public class Project implements Exportable {
     public  HashMap types;
     public  HashMap variabilities;
     private HashMap requirements;
-    public  HashMap traceabilities;
+    public  HashMap references;
     public  HashMap metrics;
     public  HashMap measures;
     public  HashMap products;
@@ -94,7 +94,7 @@ public class Project implements Exportable {
         types          = new LinkedHashMap();
         variabilities  = new LinkedHashMap();
         requirements   = new LinkedHashMap();
-        traceabilities = new LinkedHashMap();
+        references = new LinkedHashMap();
         metrics        = new LinkedHashMap();
         measures       = new LinkedHashMap();
         products       = new LinkedHashMap();
@@ -828,80 +828,80 @@ public class Project implements Exportable {
     }
     
     /**
-     * Method responsible for returning the Next Traceability Id.
-     * @return Next Traceability Id.
+     * Method responsible for returning the Next Reference Id.
+     * @return Next Reference Id.
      */
-    public String nextTraceabilityId() {
-        return nextId(traceabilities, "TRACEABILITY#");
+    public String nextReferenceId() {
+        return nextId(references, "REFERENCE#");
     }
     
     /**
-     * Method responsible for adding a Traceability.
-     * @param traceability Traceability.
+     * Method responsible for adding a Reference.
+     * @param reference Reference.
      */
-    public void addTraceability(Traceability traceability) {
-        traceability.setId(nextTraceabilityId());
-        traceabilities.put(traceability.getId(), traceability);
+    public void addReference(Reference reference) {
+        reference.setId(nextReferenceId());
+        references.put(reference.getId(), reference);
     }
     
     /**
-     * Method responsible for returning a Traceability by Id.
-     * @param  id Traceability Id.
-     * @return Traceability found.
+     * Method responsible for returning a Reference by Id.
+     * @param  id Reference Id.
+     * @return Reference found.
      */
-    public Traceability getTraceability(String id) {
-        return (Traceability) traceabilities.get(id);
+    public Reference getReference(String id) {
+        return (Reference) references.get(id);
     }
     
     /**
-     * Method responsible for returning the Traceabilities by Element.
+     * Method responsible for returning the References by Element.
      * @param  element Element.
-     * @return Traceabilities found.
+     * @return References found.
      */
-    public List<Traceability> getTraceabilities(Element element) {
+    public List<Reference> getReferences(Element element) {
         List   filter = new ArrayList<>();
-        for (Traceability traceability : getTraceabilitiesList()) {
-            if (traceability.contains(element))
-               filter.add(traceability);
+        for (Reference reference : getReferencesList()) {
+            if (reference.contains(element))
+               filter.add(reference);
         }
         return filter;
     }
     
     /**
-     * Method responsible for removing a Traceability.
-     * @param traceability Traceability.
+     * Method responsible for removing a Reference.
+     * @param reference Reference.
      */
-    public void removeTraceability(Traceability traceability) {
-        traceabilities.remove(traceability.getId());
+    public void removeReference(Reference reference) {
+        references.remove(reference.getId());
     }
     
     /**
-     * Method responsible for removing a Traceability by Element.
+     * Method responsible for removing a Reference by Element.
      * @param element Element.
      */
-    public void removeTraceability(Element element) {
-        for (Traceability traceability : getTraceabilitiesList()) {
-            if (traceability.contains(element))
-                traceability.removeElement(element);
+    public void removeReference(Element element) {
+        for (Reference reference : getReferencesList()) {
+            if (reference.contains(element))
+                reference.removeElement(element);
         }
     }
     
     /**
-     * Method responsible for returning Traceabilities List.
-     * @return Traceabilities List.
+     * Method responsible for returning References List.
+     * @return References List.
      */
-    public List<Traceability> getTraceabilitiesList() {
-        return new ArrayList<>(traceabilities.values());
+    public List<Reference> getReferencesList() {
+        return new ArrayList<>(references.values());
     }
     
     /**
-     * Method responsible for exporting the Traceabilities.
-     * @return Traceabilities.
+     * Method responsible for exporting the References.
+     * @return References.
      */
-    private String exportTraceabilities() {
+    private String exportReferences() {
         String export  = "";
-        for (Traceability traceability : getTraceabilitiesList())
-               export += traceability.export();
+        for (Reference reference : getReferencesList())
+               export += reference.export();
         return export;
     }
     
@@ -1486,7 +1486,7 @@ public class Project implements Exportable {
                export += exportFeatureDiagrams();
                export += exportUMLDiagrams();
                export += exportRequirements();
-               export += exportTraceabilities();
+               export += exportReferences();
                export += exportLinks();
                export += exportProducts();
                export += exportMetrics();
@@ -1535,7 +1535,7 @@ public class Project implements Exportable {
                project += "Types          = " + types          + "\n";
                project += "Variabilities  = " + variabilities  + "\n";
                project += "Requirements   = " + requirements   + "\n";
-               project += "Traceabilities = " + traceabilities + "\n";
+               project += "Traceabilities = " + references + "\n";
                project += "Metrics        = " + metrics        + "\n";
                project += "Measures       = " + measures       + "\n";
                project += "Stereotypes    = " + stereotypes    + "\n";

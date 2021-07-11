@@ -13,7 +13,7 @@ import model.structural.base.interfaces.Exportable;
  * <p>Class of Model <b>Product</b>.</p>
  * <p>Class responsible for representing the <b>Product</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  06/10/2019
+ * @since  2019-10-06
  * @see    model.structural.base.interfaces.Exportable
  */
 public class Product implements Exportable {
@@ -27,9 +27,9 @@ public class Product implements Exportable {
      * Default constructor method of Class.
      */
     public Product() {
-        this.version     = "1.0";
-        this.description = "";
-        this.instances   = new HashMap<>();
+        version     = "1.0";
+        description = "";
+        instances   = new HashMap<>();
     }
     
     /**
@@ -38,10 +38,9 @@ public class Product implements Exportable {
      */
     public Product(org.w3c.dom.Element element) {
         this();
-        this.id          = element.getAttribute("id");
-        this.name        = element.getAttribute("name");
-        this.version     = element.getAttribute("version");
-        this.description = "";
+        id      = element.getAttribute("id");
+        name    = element.getAttribute("name");
+        version = element.getAttribute("version");
     }
     
     /**
@@ -49,7 +48,7 @@ public class Product implements Exportable {
      * @return Product Id.
      */
     public String getId() {
-        return this.id;
+        return id;
     }
 
     /**
@@ -65,7 +64,7 @@ public class Product implements Exportable {
      * @return Product Name.
      */
     public String getName() {
-        return this.name;
+        return name;
     }
 
     /**
@@ -82,7 +81,7 @@ public class Product implements Exportable {
      * @return Product Version.
      */
     public String getVersion() {
-        return this.version;
+        return version;
     }
 
     /**
@@ -98,7 +97,7 @@ public class Product implements Exportable {
      * @return Product Description.
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -114,7 +113,7 @@ public class Product implements Exportable {
      * @return Product is Empty.
      */
     public boolean isEmpty() {
-        return this.getInstances().isEmpty();
+        return getInstances().isEmpty();
     }
     
     /**
@@ -122,16 +121,16 @@ public class Product implements Exportable {
      * @return Instances List.
      */
     public HashMap<String, Instance> getInstances() {
-        return this.instances;
+        return instances;
     }
     
     /**
      * Method responsible for updating the Instances.
      */
     public void updateInstances() {
-        for (Instance instance : this.getInstancesList()) {
+        for (Instance instance : getInstancesList()) {
             if (instance.isEmpty())
-                this.removeInstance(instance);
+                removeInstance(instance);
         }
     }
     
@@ -142,7 +141,7 @@ public class Product implements Exportable {
      */
     public List<Instance> getInstances(String type) {
         List   list = new ArrayList();
-        for (Instance instance : this.getInstancesList()) {
+        for (Instance instance : getInstancesList()) {
             if (instance.getDiagram().getType().equalsIgnoreCase(type))
                list.add(instance);
         }
@@ -154,7 +153,7 @@ public class Product implements Exportable {
      * @return Instances List.
      */
     public List<Instance> getInstancesList() {
-        return new ArrayList<>(this.instances.values());
+        return new ArrayList<>(instances.values());
     }
     
     /**
@@ -163,7 +162,7 @@ public class Product implements Exportable {
      */
     public List<Artifact> getArtifactsList() {
         List   list = new ArrayList<>();
-        for (Instance instance : this.getInstancesList())
+        for (Instance instance : getInstancesList())
                list.addAll(instance.getArtifactsList());
         return list;
     }
@@ -173,9 +172,9 @@ public class Product implements Exportable {
      * @return Next Instance Id.
      */
     public String nextInstanceId() {
-        Integer index  = this.instances.size();
+        Integer index  = instances.size();
         String  nextId = "INSTANCE#" + ++index;
-        while (this.instances.get(nextId) != null)
+        while (instances.get(nextId) != null)
                 nextId = "INSTANCE#" + ++index;
         return  nextId;
     }
@@ -185,9 +184,9 @@ public class Product implements Exportable {
      * @param instance Instance.
      */
     public void addInstance(Instance instance) {
-        instance.setId(this.nextInstanceId());
+        instance.setId(nextInstanceId());
         instance.setProduct(this);
-        this.instances.put(instance.getId(), instance);
+        instances.put(instance.getId(), instance);
     }
     
     /**
@@ -195,7 +194,7 @@ public class Product implements Exportable {
      * @param instance Instance.
      */
     public void removeInstance(Instance instance) {
-        this.instances.remove(instance.getId());
+        instances.remove(instance.getId());
     }
     
     /**
@@ -204,7 +203,7 @@ public class Product implements Exportable {
      * @return Product contains a Element.
      */
     public boolean contains(Element element) {
-        for (Instance instance : this.getInstancesList()) {
+        for (Instance instance : getInstancesList()) {
             if (instance.contains(element))
                 return true;
         }
@@ -216,9 +215,9 @@ public class Product implements Exportable {
      * @param diagram Diagram.
      */
     public void remove(Diagram diagram) {
-        for (Instance instance : this.getInstancesList()) {
+        for (Instance instance : getInstancesList()) {
             if (instance.getDiagram().equals(diagram))
-                this.removeInstance(instance);
+                removeInstance(instance);
         }
     }
     
@@ -227,7 +226,7 @@ public class Product implements Exportable {
      * @param element Element.
      */
     public void remove(Element element) {
-        for (Instance instance : this.getInstancesList())
+        for (Instance instance : getInstancesList())
             instance.remove(element);
     }
     
@@ -236,7 +235,7 @@ public class Product implements Exportable {
      * @param association Association.
      */
     public void remove(Association association) {
-        for (Instance instance : this.getInstancesList())
+        for (Instance instance : getInstancesList())
             instance.remove(association);
     }
     
@@ -246,7 +245,7 @@ public class Product implements Exportable {
      */
     private String exportInstances() {
         String export  = "";
-        for (Instance instance : this.getInstancesList())
+        for (Instance instance : getInstancesList())
                export += instance.export();
         return export;
     }
@@ -269,15 +268,15 @@ public class Product implements Exportable {
     
     @Override
     public String export() {
-        String export  = "    <product id=\""  + this.id + "\" name=\"" + this.name + "\" version=\"" + this.version + "\">\n";
-               export += "      <description>" + this.description + "</description>\n";
-               export += this.exportInstances();
+        String export  = "    <product id=\""  + id + "\" name=\"" + name + "\" version=\"" + version + "\">\n";
+               export += "      <description>" + description + "</description>\n";
+               export += exportInstances();
                export += "    </product>\n";
         return export;
     }
     
     @Override
     public String toString() {
-        return this.name + " (" + this.version + ")";
+        return name + " (" + version + ")";
     }
 }

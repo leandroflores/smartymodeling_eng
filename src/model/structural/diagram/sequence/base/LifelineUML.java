@@ -24,10 +24,10 @@ public class LifelineUML extends Element {
      */
     public LifelineUML(Diagram diagram) {
         super(diagram);
-        this.name  = "Lifeline";
-        this.size  = new Point(200, 350);
-        this.actor = null;
-        this.type  = "lifeline";
+        name  = "Lifeline";
+        size  = new Point(200, 350);
+        actor = null;
+        type  = "lifeline";
     }
     
     /**
@@ -37,21 +37,21 @@ public class LifelineUML extends Element {
      */
     public LifelineUML(org.w3c.dom.Element element, Diagram diagram) {
         super(element, diagram, true);
-        this.type = "lifeline";
+        type = "lifeline";
     }
     
     @Override
     public void setName(String name) {
         super.setName(name);
-        this.setMinWidth();
+        setMinWidth();
     }
 
     /**
      * Method responsible for updating the Name.
      */
     public void updateName() {
-        if (this.name.trim().equals(""))
-            this.setName((this.actor == null) ? "lifeline" : this.actor.getName().toLowerCase().trim());
+        if (name.trim().equals(""))
+            setName((actor == null) ? "lifeline" : actor.getName().toLowerCase().trim());
     }
     
     /**
@@ -59,7 +59,7 @@ public class LifelineUML extends Element {
      * @return Signature Size.
      */
     public Integer getSignatureSize() {
-        return 10 * this.getSignature().length();
+        return getSignature().length() * 10;
     }
     
     /**
@@ -67,15 +67,15 @@ public class LifelineUML extends Element {
      * @return Min Width.
      */
     public Integer getMinWidth() {
-        return Math.max(200, this.getSignatureSize());
+        return Math.max(200, getSignatureSize());
     }
     
     /**
      * Method responsible for setting the Min Width.
      */
     public void setMinWidth() {
-        Integer width = this.getMinWidth();
-        this.setWidth(width  >  this.getWidth() ?  width : this.getWidth());
+        Integer  width = getMinWidth();
+        setWidth(width > getWidth() ? width : getWidth());
     }
     
     /**
@@ -83,7 +83,7 @@ public class LifelineUML extends Element {
      * @return Actor UML.
      */
     public ActorUML getActor() {
-        return this.actor;
+        return actor;
     }
 
     /**
@@ -92,8 +92,8 @@ public class LifelineUML extends Element {
      */
     public void setActor(ActorUML actor) {
         if (actor != null)
-            this.actor =  actor;
-        this.updateName();
+            this.actor = actor;
+        updateName();
     }
 
     /**
@@ -101,7 +101,7 @@ public class LifelineUML extends Element {
      * @return Name Size.
      */
     public Integer getNameSize() {
-        return 10 * this.name.length();
+        return name.length() * 10;
     }
     
     /**
@@ -109,7 +109,7 @@ public class LifelineUML extends Element {
      * @return Signature.
      */
     public String getSignature() {
-        return this.name + " : " + this.getActorName();
+        return name + " : " + getActorName();
     }
     
     /**
@@ -117,14 +117,20 @@ public class LifelineUML extends Element {
      * @return Actor Name.
      */
     public String getActorName() {
-        if (this.actor != null)
-            return this.actor.getName();
-        return "Actor";
+        return actor != null ? actor.getName() : "Actor";
+    }
+    
+    /**
+     * Method responsible for returning the Actor Id.
+     * @return Actor Id.
+     */
+    private String getActorId() {
+        return actor != null ? actor.getId() : "";
     }
     
     @Override
     public String getIcon() {
-        return super.getFolder() + "sequence/lifeline.png";
+        return getFolder() + "sequence/lifeline.png";
     }
     
     @Override
@@ -196,27 +202,17 @@ public class LifelineUML extends Element {
         return style;
     }
     
-    /**
-     * Method responsible for returning the Actor Id.
-     * @return Actor Id.
-     */
-    private String getActorId() {
-        if (this.actor != null)
-            return this.actor.getId();
-        return "";
-    }
-    
     @Override
     public String export() {
-        String export  = "    <"         + this.type;
-               export += " id=\""        + this.id           + "\"";
-               export += " name=\""      + this.name         + "\"";
-               export += " actor=\""     + this.getActorId() + "\"";
-               export += " mandatory=\"" + this.mandatory    + "\"";
-               export += " x=\""         + this.getX()       + "\"";
-               export += " y=\""         + this.getY()       + "\"";
-               export += " height=\""    + this.getHeight()  + "\"";
-               export += " width=\""     + this.getWidth()   + "\"";
+        String export  = "    <"         + type;
+               export += " id=\""        + id           + "\"";
+               export += " name=\""      + name         + "\"";
+               export += " actor=\""     + getActorId() + "\"";
+               export += " mandatory=\"" + mandatory    + "\"";
+               export += " x=\""         + getX()       + "\"";
+               export += " y=\""         + getY()       + "\"";
+               export += " height=\""    + getHeight()  + "\"";
+               export += " width=\""     + getWidth()   + "\"";
                export += "/>\n";
         return export;
     }

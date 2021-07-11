@@ -11,7 +11,7 @@ import model.structural.diagram.usecase.base.UseCaseUML;
  * <p>Class of Model <b>CommunicationUML</b>.</p>
  * <p>Class responsible for representing <b>Use Case Realization UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  22/05/2019
+ * @since  2019-05-22
  * @see    model.structural.base.association.Association
  * @see    model.structural.diagram.usecase.base.ActorUML
  * @see    model.structural.diagram.usecase.base.UseCaseUML
@@ -25,9 +25,9 @@ public class CommunicationUML extends Association {
      */
     public CommunicationUML(ActorUML actor, UseCaseUML useCase) {
         super();
-        this.source = actor;
-        this.target = useCase;
-        this.type   = "communication";
+        source = actor;
+        target = useCase;
+        type   = "communication";
     }
     
     /**
@@ -36,12 +36,12 @@ public class CommunicationUML extends Association {
      */
     public CommunicationUML(org.w3c.dom.Element element) {
         super(element);
-        this.type = "communication";
+        type = "communication";
     }
 
     @Override
     public ActorUML getSource() {
-        return (ActorUML) this.source;
+        return (ActorUML) source;
     }
 
     /**
@@ -49,20 +49,20 @@ public class CommunicationUML extends Association {
      * @param actor Actor UML.
      */
     public void setSource(ActorUML actor) {
-        this.source = actor;
+        source = actor;
     }
 
     @Override
     public UseCaseUML getTarget() {
-        return (UseCaseUML) this.target;
+        return (UseCaseUML) target;
     }
 
     /**
      * Method responsible for setting Target.
-     * @param target Use Case UML.
+     * @param useCase Use Case UML.
      */
-    public void setTarget(UseCaseUML target) {
-        this.target = target;
+    public void setTarget(UseCaseUML useCase) {
+        target = useCase;
     }
     
     @Override
@@ -89,10 +89,10 @@ public class CommunicationUML extends Association {
     
     @Override
     protected String exportHeader() {
-        String export  = "    <"       + this.type;
-               export += " id=\""      + this.id             + "\"";
-               export += " actor=\""   + this.source.getId() + "\"";
-               export += " useCase=\"" + this.target.getId() + "\">\n";
+        String export  = "    <"       + type;
+               export += " id=\""      + id             + "\"";
+               export += " actor=\""   + source.getId() + "\"";
+               export += " useCase=\"" + target.getId() + "\">\n";
         return export;
     }
 }

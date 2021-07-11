@@ -32,14 +32,14 @@ import model.structural.diagram.classes.base.association.AssociationUML;
  * <p>Class of Model <b>Entity</b>.</p>
  * <p>Class responsible for representing the <b>Entity</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    model.structural.base.Element
  * @see    model.structural.diagram.classes.Encodable
  */
 public abstract class Entity extends Element implements Encodable {
     protected String description;
-    protected PackageUML packageUML;
     protected TypeUML typeUML;
+    protected PackageUML packageUML;
     protected final LinkedHashMap attributes;
     protected final LinkedHashMap methods;
     
@@ -49,11 +49,11 @@ public abstract class Entity extends Element implements Encodable {
      */
     public Entity(ClassDiagram diagram) {
         super(diagram);
-        this.description = "";
-        this.packageUML  = null;
-        this.size        = new Point(200, 120);
-        this.attributes  = new LinkedHashMap();
-        this.methods     = new LinkedHashMap();
+        description = "";
+        packageUML  = null;
+        size        = new Point(200, 120);
+        attributes  = new LinkedHashMap();
+        methods     = new LinkedHashMap();
     }
 
     /**
@@ -63,10 +63,10 @@ public abstract class Entity extends Element implements Encodable {
      */
     public Entity(org.w3c.dom.Element element, Diagram diagram) {
         super(element, diagram, true);
-        this.description = "";
-        this.packageUML  = null;
-        this.attributes  = new LinkedHashMap();
-        this.methods     = new LinkedHashMap();
+        description = "";
+        packageUML  = null;
+        attributes  = new LinkedHashMap();
+        methods     = new LinkedHashMap();
     }
     
     /**
@@ -109,9 +109,9 @@ public abstract class Entity extends Element implements Encodable {
      * Method responsible for updating the Entity Size.
      */
     public void updateSize() {
-        this.setMinHeight();
-        this.setMinWidth();
-        this.updatePackageSize();
+        setMinHeight();
+        setMinWidth();
+        updatePackageSize();
     }
     
     /**
@@ -120,16 +120,16 @@ public abstract class Entity extends Element implements Encodable {
      */
     public Integer getMinHeight() {
         return    5
-               + 21 * this.getStereotypesList().size()
+               + 21 * getStereotypesList().size()
                +  5
-               + (this.type.equals("interface") ? 22 : 0)
+               + (type.equals("interface") ? 22 : 0)
                + 25
                +  3
                +  5
-               + 16 * this.getAttributesList().size()
+               + 16 * getAttributesList().size()
                +  3
                +  5
-               + 16 * this.getMethodsList().size()
+               + 16 * getMethodsList().size()
                + 5;
     }
     
@@ -137,8 +137,8 @@ public abstract class Entity extends Element implements Encodable {
      * Method responsible for setting the Min Height.
      */
     public void setMinHeight() {
-        Integer height = this.getMinHeight();
-        this.setHeight(height > this.getHeight() ? height : this.getHeight());
+        Integer height = getMinHeight();
+        setHeight(height > getHeight() ? height : getHeight());
     }
     
     /**
@@ -146,7 +146,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Min Width.
      */
     public Integer getMinWidth() {
-        Integer[]   sizes = new Integer[]{this.getStereotypeSize(), this.getNameSize(), this.getAttributeSize(), this.getMethodSize(), 200};
+        Integer[]   sizes = new Integer[]{getStereotypeSize(), getNameSize(), getAttributeSize(), getMethodSize(), 200};
         Arrays.sort(sizes);
         return sizes[4];
     }
@@ -155,8 +155,8 @@ public abstract class Entity extends Element implements Encodable {
      * Method responsible for setting the Min Width.
      */
     public void setMinWidth() {
-        Integer width = this.getMinWidth();
-        this.setWidth(width  >  this.getWidth() ?  width : this.getWidth());
+        Integer width = getMinWidth();
+        setWidth(width  >  getWidth() ?  width : getWidth());
     }
 
     /**
@@ -164,7 +164,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Absolute Height.
      */
     public Integer getAbsoluteHeight() {
-        return this.getY() + this.getHeight() + 10;
+        return getY() + getHeight() + 10;
     }
     
     /**
@@ -172,7 +172,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Absolute Width.
      */
     public Integer getAbsoluteWidth() {
-        return this.getX() + this.getWidth()  + 10;
+        return getX() + getWidth()  + 10;
     }
     
     /**
@@ -181,49 +181,49 @@ public abstract class Entity extends Element implements Encodable {
      * @param newType New Type.
      */
     public void changeType(TypeUML oldType, TypeUML newType) {
-         this.changeAttributeTypes(oldType, newType);
-         this.changeMethodTypes(oldType, newType);
+         changeAttributeTypes(oldType, newType);
+         changeMethodTypes(oldType, newType);
     }
     
     @Override
     public void setName(String name) {
         super.setName(name);
-        this.typeUML.setName(this.getName());
-        this.setMinWidth();
+        typeUML.setName(getName());
+        setMinWidth();
     }
 
     /**
      * Method responsible for updating the Y Position.
      */
     private void updateYPosition() {
-        if (this.packageUML != null)
-            this.position.y = Math.max(15, this.position.y);
+        if (packageUML != null)
+            position.y = Math.max(15, position.y);
     }
     
     @Override
     public void dx(Integer distance) {
         super.dx(distance);
-        this.updatePackageSize();
+        updatePackageSize();
     }
 
     @Override
     public void dy(Integer distance) {
         super.dy(distance);
-        this.updateYPosition();
-        this.updatePackageSize();
+        updateYPosition();
+        updatePackageSize();
     }
     
     /**
      * Method responsible for updating the Package Size.
      */
     public void updatePackageSize() {
-        if (this.packageUML != null)
-            this.packageUML.updateSize();
+        if (packageUML != null)
+            packageUML.updateSize();
     }
     
     @Override
     public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+        return (ClassDiagram) diagram;
     }
 
     /**
@@ -239,7 +239,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Entity Description.
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -255,16 +255,16 @@ public abstract class Entity extends Element implements Encodable {
      * @return Package UML.
      */
     public PackageUML getPackageUML() {
-        return this.packageUML;
+        return packageUML;
     }
     
     /**
      * Method responsible for reseting the Package UML.
      */
     public void resetPackageUML() {
-        if (this.packageUML != null)
-            this.packageUML.removeEntity(this);
-        this.packageUML = null;
+        if (packageUML != null)
+            packageUML.removeEntity(this);
+        packageUML = null;
     }
     
     /**
@@ -272,11 +272,11 @@ public abstract class Entity extends Element implements Encodable {
      * @param newPackageUML New Package.
      */
     public void changePackageUML(PackageUML newPackageUML) {
-        if (this.packageUML != null)
-            this.packageUML.removeEntity(this);
-        if (newPackageUML   != null)
+        if (packageUML != null)
+            packageUML.removeEntity(this);
+        if (newPackageUML != null)
             newPackageUML.addEntity(this);
-        this.setPackageUML(newPackageUML);
+        setPackageUML(newPackageUML);
     }
     
     /**
@@ -292,7 +292,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Stereotypes List.
      */
     public List<Stereotype> getStereotypesList() {
-        return this.diagram.getStereotypesList(this);
+        return diagram.getStereotypesList(this);
     }
     
     /**
@@ -302,7 +302,7 @@ public abstract class Entity extends Element implements Encodable {
     public Integer getStereotypeSize() {
         Integer lenght  = 0;
         Integer current;
-        for (Stereotype stereotype : this.getStereotypesList()) {
+        for (Stereotype stereotype : getStereotypesList()) {
                 current = stereotype.toString().length() * 8;
                 lenght  = lenght > current ? lenght : current;
         }
@@ -315,7 +315,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Stereotypes.
      */
     public String getStereotypes(Element element) {
-        return this.diagram.getStereotypes(element, " ");
+        return diagram.getStereotypes(element, " ");
     }
     
     /**
@@ -323,7 +323,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Interface Position.
      */
     public Integer getInterfacePosition() {
-        return this.getStereotypesList().size() * 21 + 5;
+        return getStereotypesList().size() * 21 + 5;
     }
     
     /**
@@ -331,7 +331,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Name Position.
      */
     public Integer getNamePosition() {
-        return this.getStereotypesList().size() * 21 + ((this.getType().equals("interface")) ? 20 : 0) + 5;
+        return getStereotypesList().size() * 21 + ((getType().equals("interface")) ? 20 : 0) + 5;
     }
     
     /**
@@ -339,7 +339,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Name Size.
      */
     private Integer getNameSize() {
-        return 10 * this.name.length();
+        return 10 * name.length();
     }
     
     /**
@@ -347,7 +347,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Type UML.
      */
     public TypeUML getTypeUML() {
-        return this.typeUML;
+        return typeUML;
     }
 
     /**
@@ -363,7 +363,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Attributes HashMap.
      */
     public HashMap getAttributes() {
-        return this.attributes;
+        return attributes;
     }
     
     /**
@@ -371,7 +371,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Attributes List.
      */
     public List<AttributeUML> getAttributesList() {
-        return new ArrayList<>(this.attributes.values());
+        return new ArrayList<>(attributes.values());
     }
     
     /**
@@ -380,9 +380,8 @@ public abstract class Entity extends Element implements Encodable {
      * @param newType New Type.
      */
     private void changeAttributeTypes(TypeUML oldType, TypeUML newType) {
-        List<AttributeUML>  list = this.getAttributesList();
-        for (int i = 0; i < list.size(); i++)
-            list.get(i).changeTypeUML(oldType, newType);
+        for (AttributeUML attribute : getAttributesList())
+            attribute.changeTypeUML(oldType, newType);
     }
     
     /**
@@ -390,7 +389,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Attributes Position.
      */
     public Integer getAttributesPosition() {
-        return this.getNamePosition() + 30;
+        return getNamePosition() + 30;
     }
     
     /**
@@ -400,11 +399,11 @@ public abstract class Entity extends Element implements Encodable {
     public Integer getAttributeSize() {
         Integer lenght  = 0;
         Integer current;
-        for (AttributeUML attribute : this.getAttributesList()) {
-                current = attribute.getCompleteSignature().length() * 7;
-                lenght  = lenght > current ? lenght : current;
+        for (AttributeUML attribute : getAttributesList()) {
+            current = attribute.getCompleteSignature().length() * 7;
+            lenght  = lenght > current ? lenght : current;
         }
-        return  lenght;
+        return lenght;
     }
     
     /**
@@ -413,7 +412,7 @@ public abstract class Entity extends Element implements Encodable {
      */
     public List<String> getAttributesNames() {
         List   names = new ArrayList();
-        for (AttributeUML attribute : this.getAttributesList())
+        for (AttributeUML attribute : getAttributesList())
                names.add(attribute.getName());
         return names;
     }
@@ -423,8 +422,8 @@ public abstract class Entity extends Element implements Encodable {
      * @param attribute Attribute UML.
      */
     public void addAttribute(AttributeUML attribute) {
-        this.attributes.put(attribute.getId(), attribute);
-//        this.updateSize();
+        attributes.put(attribute.getId(), attribute);
+        //updateSize();
     }
     
     /**
@@ -432,7 +431,7 @@ public abstract class Entity extends Element implements Encodable {
      * @param attribute Attribute UML.
      */
     public void removeAttribute(AttributeUML attribute) {
-        this.attributes.remove(attribute.getId());
+        attributes.remove(attribute.getId());
     }
 
     /**
@@ -440,7 +439,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Methods HashMap.
      */
     public HashMap getMethods() {
-        return this.methods;
+        return methods;
     }
     
     /**
@@ -472,11 +471,11 @@ public abstract class Entity extends Element implements Encodable {
      * @return Inherited Methods Set.
      */
     public Set<MethodUML> getInheritedMethods() {
-        Set    set = new HashSet<>();
-        if (this.getSuper() != null)
-            set.addAll(this.getSuper().getInheritedMethods());
-               set.addAll(this.getVisibleMethods());
-               set.addAll(this.getImplementsMethods());
+        Set set = new HashSet<>();
+        if (getSuper() != null)
+            set.addAll(getSuper().getInheritedMethods());
+        set.addAll(getVisibleMethods());
+        set.addAll(getImplementsMethods());
         return set;
     }
     
@@ -491,12 +490,12 @@ public abstract class Entity extends Element implements Encodable {
      * @return Abstract Inherited Methods Set.
      */
     public Set<MethodUML> getAbstractInheritedMethods() {
-        Set    set = new HashSet<>();
-        for (MethodUML method : this.getInheritedMethods()) {
-            if (this.isFirstConcrete() && method.isAbstract())
-               set.add(method);
+        Set set = new HashSet<>();
+        for (MethodUML method : getInheritedMethods()) {
+            if (isFirstConcrete() && method.isAbstract())
+                set.add(method);
         }
-        return set;
+        return  set;
     }
     
     /**
@@ -505,9 +504,9 @@ public abstract class Entity extends Element implements Encodable {
      */
     public List<MethodUML> getVisibleMethods() {
         List   list = new ArrayList<>();
-               list.addAll(this.getMethods("public"));
-               list.addAll(this.getMethods("protected"));
-               list.addAll(this.getMethods("default"));
+               list.addAll(getMethods("public"));
+               list.addAll(getMethods("protected"));
+               list.addAll(getMethods("default"));
         return list;
     }
     
@@ -517,12 +516,12 @@ public abstract class Entity extends Element implements Encodable {
      * @return Methods List filtered.
      */
     public List<MethodUML> getMethods(String visibility) {
-        List   list = new ArrayList<>();
-        for (MethodUML method : this.getMethodsList()) {
+        List    list = new ArrayList<>();
+        for (MethodUML method : getMethodsList()) {
             if (method.getVisibility().trim().equalsIgnoreCase(visibility.trim()))
-               list.add(method);
+                list.add(method);
         }
-        return list;
+        return  list;
     }
     
     /**
@@ -530,7 +529,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Methods List.
      */
     public List<MethodUML> getMethodsList() {
-        return new ArrayList<>(this.methods.values());
+        return new ArrayList<>(methods.values());
     }
     
     /**
@@ -539,9 +538,8 @@ public abstract class Entity extends Element implements Encodable {
      * @param newType New Type.
      */
     private void changeMethodTypes(TypeUML oldType, TypeUML newType) {
-        List<MethodUML>     list = this.getMethodsList();
-        for (int i = 0; i < list.size(); i++)
-            list.get(i).changeTypeUML(oldType, newType);
+        for (MethodUML method : getMethodsList())
+            method.changeTypeUML(oldType, newType);
     }
 
     /**
@@ -549,10 +547,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Methods Position.
      */
     public Integer getMethodsPosition() {
-        return this.getAttributesPosition() 
-             +  5 
-             + 16 * this.getAttributesList().size()
-             +  3;
+        return getAttributesPosition() + 16 * getAttributesList().size() + 8;
     }
     
     /**
@@ -561,7 +556,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Method found.
      */
     public MethodUML getMethodByName(String name) {
-        for (MethodUML method : this.getMethodsList()) {
+        for (MethodUML method : getMethodsList()) {
             if (method.getName().equalsIgnoreCase(name))
                 return method;
         }
@@ -575,9 +570,9 @@ public abstract class Entity extends Element implements Encodable {
     public Integer getMethodSize() {
         Integer lenght  = 0;
         Integer current;
-        for (MethodUML method : this.getMethodsList()) {
-                current = method.getCompleteSignature().length() * 7;
-                lenght  = lenght > current ? lenght : current;
+        for (MethodUML method : getMethodsList()) {
+            current = method.getCompleteSignature().length() * 7;
+            lenght  = lenght > current ? lenght : current;
         }
         return  lenght;
     }
@@ -587,8 +582,8 @@ public abstract class Entity extends Element implements Encodable {
      * @param method Method UML.
      */
     public void addMethod(MethodUML method) {
-        this.methods.put(method.getId(), method);
-//        this.updateSize();
+        methods.put(method.getId(), method);
+        //updateSize();
     }
     
     /**
@@ -596,7 +591,7 @@ public abstract class Entity extends Element implements Encodable {
      * @param method Method UML.
      */
     public void removeMethod(MethodUML method) {
-        this.methods.remove(method.getId());
+        methods.remove(method.getId());
     }
     
     /**
@@ -617,7 +612,7 @@ public abstract class Entity extends Element implements Encodable {
      * @param distance Distance.
      */
     public void updateGlobalX(Integer distance) {
-        this.setGlobalX(this.getAbsoluteX() + distance);
+        setGlobalX(getAbsoluteX() + distance);
     }
     
     /**
@@ -625,9 +620,9 @@ public abstract class Entity extends Element implements Encodable {
      * @return Absolute X.
      */
     public Integer getAbsoluteX() {
-        if (this.packageUML == null)
-            return this.getX();
-        return this.getX() + this.packageUML.getAbsoluteX();
+        if (packageUML == null)
+            return getX();
+        return getX() + packageUML.getAbsoluteX();
     }
     
     /**
@@ -635,8 +630,8 @@ public abstract class Entity extends Element implements Encodable {
      * @param distance Distance.
      */
     public void updateGlobalY(Integer distance) {
-        this.setGlobalY(this.getAbsoluteY() + distance);
-        this.updateYPosition();
+        setGlobalY(getAbsoluteY() + distance);
+        updateYPosition();
     }
     
     /**
@@ -644,9 +639,9 @@ public abstract class Entity extends Element implements Encodable {
      * @return Absolute Y.
      */
     public Integer getAbsoluteY() {
-        if (this.packageUML == null)
-            return this.getY();
-        return this.getY() + this.packageUML.getAbsoluteY();
+        if (packageUML == null)
+            return getY();
+        return getY() + packageUML.getAbsoluteY();
     }
 
     @Override
@@ -760,7 +755,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Entity Super.
      */
     public Entity getSuper() {
-        Element element  = this.diagram.getSuper(this);
+        Element element  = diagram.getSuper(this);
         return  element != null ? (Entity) element : null;
     }
     
@@ -769,9 +764,9 @@ public abstract class Entity extends Element implements Encodable {
      * @return Package Code.
      */
     protected String getPackageCode() {
-        if (this.packageUML == null)
+        if (packageUML == null)
             return "";
-        return "package " + this.packageUML.getPath() + ";\n\n";
+        return "package " + packageUML.getPath() + ";\n\n";
     }
     
     /**
@@ -780,7 +775,7 @@ public abstract class Entity extends Element implements Encodable {
      */
     protected String getImportsCode() {
         String code  = "";
-        for (String string : this.getImportations())
+        for (String string : getImportations())
                code += "import " + string + ";\n";
         return code + "\n";
     }
@@ -791,12 +786,12 @@ public abstract class Entity extends Element implements Encodable {
      */
     protected List<String> getImportations() {
         Set<String> set  = new HashSet<>();
-                    this.addSuperPackage(set);
-                    this.addInterfacesPackages(set);
-                    this.addAttributesPackages(set);
-                    this.addAssociationsPackages(set);
-                    this.addMethodsPackages(set);
-        return      this.getImportationsList(set);
+                    addSuperPackage(set);
+                    addInterfacesPackages(set);
+                    addAttributesPackages(set);
+                    addAssociationsPackages(set);
+                    addMethodsPackages(set);
+        return      getImportationsList(set);
     }
     
     /**
@@ -805,7 +800,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Importations List.
      */
     private List<String> getImportationsList(Set<String> set) {
-        List<String> list = this.filterImportations(set);
+        List<String> list = filterImportations(set);
         Collections.sort(list);
         return list;
     }
@@ -818,7 +813,7 @@ public abstract class Entity extends Element implements Encodable {
     private List<String> filterImportations(Set<String> set) {
         List<String> filter = new ArrayList<>();
         for (String  string : new ArrayList<>(set)) {
-            if ((!string.equals("")) && (string.contains(".")) && (!string.startsWith(this.getPackagePath())))
+            if ((!string.equals("")) && (string.contains(".")) && (!string.startsWith(getPackagePath())))
                 filter.add(string);
         }
         return filter;
@@ -829,8 +824,8 @@ public abstract class Entity extends Element implements Encodable {
      * @param set Packages Set.
      */
     private void addSuperPackage(Set<String> set) {
-        Entity  super_ = this.getSuper();
-        String  path   = super_ != null ? this.setPath(super_.getFullPath()) : "";
+        Entity  super_ = getSuper();
+        String  path   = super_ != null ? setPath(super_.getFullPath()) : "";
         set.add(path);
     }
     
@@ -848,8 +843,8 @@ public abstract class Entity extends Element implements Encodable {
      * @param set Packages Set.
      */
     protected void addAttributesPackages(Set<String> set) {
-        for (AttributeUML attribute : this.getAttributesList())
-            set.add(this.setPath(attribute.getTypeUML().getSignature()));
+        for (AttributeUML attribute : getAttributesList())
+            set.add(setPath(attribute.getTypeUML().getSignature()));
     }
     
     /**
@@ -857,8 +852,8 @@ public abstract class Entity extends Element implements Encodable {
      * @param set Packages Set.
      */
     protected void addAssociationsPackages(Set<String> set) {
-        this.addSourceAssociationsPackages(set);
-        this.addTargetAssociationsPackages(set);
+        addSourceAssociationsPackages(set);
+        addTargetAssociationsPackages(set);
     }
     
     /**
@@ -866,7 +861,7 @@ public abstract class Entity extends Element implements Encodable {
      * @param set Packages Set.
      */
     protected void addSourceAssociationsPackages(Set<String> set) {
-        for (Association association : this.diagram.getTargetAssociations("association", this))
+        for (Association association : diagram.getTargetAssociations("association", this))
             set.add(((AssociationUML) association).getSource().getFullPath());
     }
     
@@ -875,7 +870,7 @@ public abstract class Entity extends Element implements Encodable {
      * @param set Packages Set.
      */
     protected void addTargetAssociationsPackages(Set<String> set) {
-        for (Association association : this.diagram.getSourceAssociations("association", this)) {
+        for (Association association : diagram.getSourceAssociations("association", this)) {
             if (!((AssociationUML) association).isDirection())
                 set.add(((AssociationUML) association).getTarget().getFullPath());
         }
@@ -886,8 +881,8 @@ public abstract class Entity extends Element implements Encodable {
      * @param set Packages Set.
      */
     protected void addMethodsPackages(Set<String> set) {
-        for (MethodUML method : this.getMethodsList()) {
-            set.add(this.setPath(method.getReturn().getSignature()));
+        for (MethodUML method : getMethodsList()) {
+            set.add(setPath(method.getReturn().getSignature()));
             method.addParametersPackages(set);
         }
     }
@@ -897,10 +892,10 @@ public abstract class Entity extends Element implements Encodable {
      * @return Java Doc.
      */
     private String getJavaDocCode() {
-        String entity = new FunctString().getInitUpperCase(this.type);
+        String entity = new FunctString().getInitUpperCase(type);
         String date   = new FunctDate().getFormattedDate("MM-dd-yyyy", new Date());
         String code   = "/**\n";
-               code  += " * <p>" + entity + " <b>" + this.name + "</b>.</p>\n";
+               code  += " * <p>" + entity + " <b>" + name + "</b>.</p>\n";
                code  += " * <p>Source code of <b>" + entity + "</b> automatically generated by <b>SMartyModeling</b>.</p>\n";
                code  += " * @author SMartyModeling\n";
                code  += " * @since  " + date + "\n";
@@ -919,7 +914,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Extends Code.
      */
     protected String getExtendsCode() {
-        Entity entity  = this.getSuper();
+        Entity entity  = getSuper();
         return entity != null ? "extends " + entity.getName() + " " : "";
     }
     
@@ -929,7 +924,7 @@ public abstract class Entity extends Element implements Encodable {
      */
     protected String getAttributesCode() {
         String code  = "";
-        for (AttributeUML attribute : this.getAttributesList())
+        for (AttributeUML attribute : getAttributesList())
                code += "    " + attribute.exportCode() + "\n";
         return code;
     }
@@ -939,8 +934,8 @@ public abstract class Entity extends Element implements Encodable {
      * @return Associations Code.
      */
     protected String getAssociationsCode() {
-        return this.getAssociationsSourceCode()
-             + this.getAssociationsTargetCode();
+        return getAssociationsSourceCode()
+             + getAssociationsTargetCode();
     }
     
     /**
@@ -949,7 +944,7 @@ public abstract class Entity extends Element implements Encodable {
      */
     protected String getAssociationsSourceCode() {
         String code  = "";
-        for (Association association : this.diagram.getTargetAssociations("association", this))
+        for (Association association : diagram.getTargetAssociations("association", this))
                code += "    " + ((AssociationUML) association).getSourceCode() + "\n";
         return code;
     }
@@ -960,7 +955,7 @@ public abstract class Entity extends Element implements Encodable {
      */
     protected String getAssociationsTargetCode() {
         String code  = "";
-        for (Association association : this.diagram.getSourceAssociations("association", this)) {
+        for (Association association : diagram.getSourceAssociations("association", this)) {
             if (((AssociationUML) association).isTarget(this) && !((AssociationUML) association).isDirection())
                code += "    " + ((AssociationUML) association).getTargetCode() + "\n";
         }
@@ -973,20 +968,20 @@ public abstract class Entity extends Element implements Encodable {
      */
     protected String getMethodsCode() {
         String code  = "";
-        for (MethodUML method : this.getMethodsList())
+        for (MethodUML method : getMethodsList())
                code += "    " + method.exportCode() + "\n";
         return code;
     }
     
     @Override
     public String exportCode() {
-        String export  = this.getPackageCode();
-               export += this.getImportsCode();
-               export += this.getJavaDocCode();
-               export += this.getSignatureCode()    + "{\n";
-               export += this.getAttributesCode();
-               export += this.getAssociationsCode() + "\n";
-               export += this.getMethodsCode();
+        String export  = getPackageCode();
+               export += getImportsCode();
+               export += getJavaDocCode();
+               export += getSignatureCode()    + "{\n";
+               export += getAttributesCode();
+               export += getAssociationsCode() + "\n";
+               export += getMethodsCode();
         return export + "}";
     }
     
@@ -1001,9 +996,9 @@ public abstract class Entity extends Element implements Encodable {
      * @return Parent.
      */
     protected String exportParent() {
-        if (this.packageUML == null)
+        if (packageUML == null)
             return " parent=\"\"";
-        return " parent=\"" + this.getPackageUML().getId() + "\"";
+        return " parent=\"" + getPackageUML().getId() + "\"";
     }
     
     /**
@@ -1013,7 +1008,7 @@ public abstract class Entity extends Element implements Encodable {
     public String exportDescription() {
         String export  = "      ";
                export += "<description>";
-               export += this.description;
+               export += description;
                export +=  "</description>\n";
         return export;
     }
@@ -1024,7 +1019,7 @@ public abstract class Entity extends Element implements Encodable {
      */
     public String exportAttributes() {
         String export  = "";
-        for (AttributeUML attribute : this.getAttributesList())
+        for (AttributeUML attribute : getAttributesList())
                export +=  attribute.export();
         return export;
     }
@@ -1035,7 +1030,7 @@ public abstract class Entity extends Element implements Encodable {
      */
     public String exportMethods() {
         String export  = "";
-        for (MethodUML   method : this.getMethodsList())
+        for (MethodUML   method : getMethodsList())
                export += method.export();
         return export;
     }
@@ -1045,16 +1040,16 @@ public abstract class Entity extends Element implements Encodable {
      * @return Footer.
      */
     public String exportFooter() {
-        return "    </" + this.type + ">\n";
+        return "    </" + type + ">\n";
     }
     
     @Override
     public String export() {
-        return   this.exportHeader()
-               + this.exportDescription()
-               + this.exportAttributes()
-               + this.exportMethods()
-               + this.exportFooter();
+        return   exportHeader()
+               + exportDescription()
+               + exportAttributes()
+               + exportMethods()
+               + exportFooter();
     }
     
     /**
@@ -1063,7 +1058,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Same Package.
      */
     public boolean samePackage(Entity entity) {
-        return this.getPackagePath().equals(entity.getPackagePath());
+        return getPackagePath().equals(entity.getPackagePath());
     }
     
     /**
@@ -1071,7 +1066,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Package Path.
      */
     public String getPackagePath() {
-        return this.packageUML == null ? this.name : this.packageUML.getPath();
+        return packageUML == null ? name : packageUML.getPath();
     }
     
     /**
@@ -1079,7 +1074,7 @@ public abstract class Entity extends Element implements Encodable {
      * @return Full Path.
      */
     public String getFullPath() {
-        return (this.packageUML != null ? this.packageUML.getPath() + "." : "") + this.name;
+        return (packageUML != null ? packageUML.getPath() + "." : "") + name;
     }
     
     /**
@@ -1095,6 +1090,6 @@ public abstract class Entity extends Element implements Encodable {
     
     @Override
     public String toString() {
-        return this.getFullPath();
+        return getFullPath();
     }
 }

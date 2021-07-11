@@ -24,10 +24,10 @@ public class InstanceUML extends Element {
      */
     public InstanceUML(Diagram diagram) {
         super(diagram);
-        this.name     = "Instance";
-        this.size     = new Point(200, 380);
-        this.classUML = null;
-        this.type     = "instance";
+        name     = "Instance";
+        size     = new Point(200, 380);
+        classUML = null;
+        type     = "instance";
     }
     
     /**
@@ -37,22 +37,22 @@ public class InstanceUML extends Element {
      */
     public InstanceUML(org.w3c.dom.Element element, Diagram diagram) {
         super(element, diagram, true);
-        this.classUML = null;
-        this.type     = "instance";
+        classUML = null;
+        type     = "instance";
     }
     
     @Override
     public void setName(String name) {
         super.setName(name);
-        this.setMinWidth();
+        setMinWidth();
     }
 
     /**
      * Method responsible for updating the Name.
      */
     public void updateName() {
-        if (this.name.trim().equals(""))
-            this.setName((this.classUML == null) ? "instance" : this.classUML.getName().toLowerCase().trim());
+        if (name.trim().equals(""))
+            setName((classUML == null) ? "instance" : classUML.getName().toLowerCase().trim());
     }
     
     /**
@@ -60,7 +60,7 @@ public class InstanceUML extends Element {
      * @return Signature Size.
      */
     public Integer getSignatureSize() {
-        return 10 * this.getSignature().length();
+        return getSignature().length() * 10;
     }
     
     /**
@@ -68,15 +68,15 @@ public class InstanceUML extends Element {
      * @return Min Width.
      */
     public Integer getMinWidth() {
-        return Math.max(200, this.getSignatureSize());
+        return Math.max(200, getSignatureSize());
     }
     
     /**
      * Method responsible for setting the Min Width.
      */
     public void setMinWidth() {
-        Integer width = this.getMinWidth();
-        this.setWidth(width  >  this.getWidth() ?  width : this.getWidth());
+        Integer  width = getMinWidth();
+        setWidth(width > getWidth() ? width : getWidth());
     }
     
     /**
@@ -84,7 +84,7 @@ public class InstanceUML extends Element {
      * @return Class UML.
      */
     public ClassUML getClassUML() {
-        return this.classUML;
+        return classUML;
     }
 
     /**
@@ -93,8 +93,8 @@ public class InstanceUML extends Element {
      */
     public void setClassUML(ClassUML classUML) {
         if (classUML != null)
-            this.classUML =  classUML;
-        this.updateName();
+            this.classUML = classUML;
+        updateName();
     }
     
     /**
@@ -102,7 +102,7 @@ public class InstanceUML extends Element {
      * @return Signature.
      */
     public String getSignature() {
-        return this.name + " : " + this.getClassName();
+        return name + " : " + getClassName();
     }
     
     /**
@@ -110,14 +110,20 @@ public class InstanceUML extends Element {
      * @return Class Name.
      */
     public String getClassName() {
-        if (this.classUML != null)
-            return this.classUML.getName();
-        return "";
+        return classUML != null ? classUML.getName() : "";
+    }
+    
+    /**
+     * Method responsible for returning the Class Id.
+     * @return Class Id.
+     */
+    private String getClassId() {
+        return classUML != null ? classUML.getId() : "";
     }
 
     @Override
     public String getIcon() {
-        return super.getFolder() + "sequence/instance.png";
+        return getFolder() + "sequence/instance.png";
     }
     
     @Override
@@ -139,27 +145,17 @@ public class InstanceUML extends Element {
         return style;
     }
     
-    /**
-     * Method responsible for returning the Class Id.
-     * @return Class Id.
-     */
-    private String getClassId() {
-        if (this.classUML != null)
-            return this.classUML.getId();
-        return "";
-    }
-    
     @Override
     public String export() {
-        String export  = "    <"         + this.type;
-               export += " id=\""        + this.id           + "\"";
-               export += " name=\""      + this.name         + "\"";
-               export += " class=\""     + this.getClassId() + "\"";
-               export += " mandatory=\"" + this.mandatory    + "\"";
-               export += " x=\""         + this.getX()       + "\"";
-               export += " y=\""         + this.getY()       + "\"";
-               export += " height=\""    + this.getHeight()  + "\"";
-               export += " width=\""     + this.getWidth()   + "\"";
+        String export  = "    <"         + type;
+               export += " id=\""        + id           + "\"";
+               export += " name=\""      + name         + "\"";
+               export += " class=\""     + getClassId() + "\"";
+               export += " mandatory=\"" + mandatory    + "\"";
+               export += " x=\""         + getX()       + "\"";
+               export += " y=\""         + getY()       + "\"";
+               export += " height=\""    + getHeight()  + "\"";
+               export += " width=\""     + getWidth()   + "\"";
                export += "/>\n";
         return export;
     }

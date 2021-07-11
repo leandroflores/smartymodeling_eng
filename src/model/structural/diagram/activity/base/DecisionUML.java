@@ -22,9 +22,9 @@ public class DecisionUML extends Element {
      */
     public DecisionUML(Diagram diagram) {
         super(diagram);
-        this.name = "";
-        this.size = new Point(140, 60);
-        this.type = "decision";
+        name = "";
+        size = new Point(140, 60);
+        type = "decision";
     }
     
     /**
@@ -34,7 +34,7 @@ public class DecisionUML extends Element {
      */
     public DecisionUML(org.w3c.dom.Element element, Diagram diagram) {
         super(element, diagram, true);
-        this.type = "decision";
+        type = "decision";
     }
 
     @Override
@@ -44,7 +44,7 @@ public class DecisionUML extends Element {
     
     @Override
     public String getIcon() {
-        return super.getFolder() + "activity/decision.png";
+        return getFolder() + "activity/decision.png";
     }
     
     @Override

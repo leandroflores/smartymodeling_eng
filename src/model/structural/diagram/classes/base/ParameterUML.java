@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
  * <p>Class of Model <b>ParameterUML</b>.</p>
  * <p>Class responsible for representing <b>Parameter UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    model.structural.base.interfaces.Exportable
  * @see    model.structural.diagram.classes.Encodable
  * @see    model.structural.diagram.classes.base.TypeUML
@@ -37,7 +37,7 @@ public class ParameterUML implements Exportable, Encodable {
      * @param element W3C Element W3C.
      */
     public ParameterUML(Element element) {
-        this.name = element.getAttribute("name");
+        name = element.getAttribute("name");
     }
 
     @Override
@@ -65,7 +65,7 @@ public class ParameterUML implements Exportable, Encodable {
      * @return Parameter Type UML.
      */
     public TypeUML getType() {
-        return this.type;
+        return type;
     }
 
     /**
@@ -74,8 +74,8 @@ public class ParameterUML implements Exportable, Encodable {
      * @param newType New Type.
      */
     public void changeTypeUML(TypeUML oldType, TypeUML newType) {
-        if (this.type.equals(oldType))
-            this.type = newType;
+        if (type.equals(oldType))
+            type = newType;
     }
     
     /**
@@ -91,7 +91,7 @@ public class ParameterUML implements Exportable, Encodable {
      * @return Parameter Name.
      */
     public String getName() {
-        return this.name;
+        return name;
     }
 
     /**
@@ -107,7 +107,7 @@ public class ParameterUML implements Exportable, Encodable {
      * @return Parameter Title.
      */
     public String getTitle() {
-        return this.name + " : " + this.type.getName();
+        return name + " : " + type.getName();
     }
     
     /**
@@ -115,19 +115,19 @@ public class ParameterUML implements Exportable, Encodable {
      * @return Parameter Values.
      */
     public Object[] getValues() {
-        return new Object[] {this.name, this.type};
+        return new Object[] {name, type};
     }
     
     @Override
     public String exportCode() {
-        return this.type.getName() + " " + this.name;
+        return type.getName() + " " + name;
     }
 
     @Override
     public String export() {
         String export  = "        <parameter";
-               export += " type=\"" + this.type.getId() + "\"";
-               export += " name=\"" + this.name         + "\"";
+               export += " type=\"" + type.getId() + "\"";
+               export += " name=\"" + name         + "\"";
                export += "/>\n";
         return export;
     }
@@ -142,13 +142,13 @@ public class ParameterUML implements Exportable, Encodable {
     public boolean equals(Object object) {
         if (object == null)
             return false;
-        if (object instanceof ParameterUML == false)
+        if (!(object instanceof ParameterUML))
             return false;
-        return this.name.equals(((ParameterUML) object).getName());
+        return name.equals(((ParameterUML) object).getName());
     }
 
     @Override
     public String toString() {
-        return this.type + " " + this.name;
+        return type + " " + name;
     }
 }

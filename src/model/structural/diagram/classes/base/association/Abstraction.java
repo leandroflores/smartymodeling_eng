@@ -33,7 +33,7 @@ public class Abstraction extends Association {
      */
     public Abstraction(org.w3c.dom.Element element) {
         super(element);
-        this.type = "abstraction";
+        type = "abstraction";
     }
     
     @Override

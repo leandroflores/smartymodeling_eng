@@ -22,9 +22,9 @@ public class UseCaseUML extends Element {
      */
     public UseCaseUML(Diagram diagram) {
         super(diagram);
-        this.name = "UseCase";
-        this.size = new Point(200, 100);
-        this.type = "useCase";
+        name = "UseCase";
+        size = new Point(200, 100);
+        type = "useCase";
     }
     
     /**
@@ -34,21 +34,20 @@ public class UseCaseUML extends Element {
      */
     public UseCaseUML(org.w3c.dom.Element element, Diagram diagram) {
         super(element, diagram, true);
-        this.type = "useCase";
+        type = "useCase";
     }
 
     
     @Override
     public void setDefaultName() {
-        if ((this.id != null) && (this.id.contains("#")))
-            this.setName("Use Case " + this.id.substring(this.id.indexOf("#") + 1));
-        else
-            this.setName("Use Case");
+        setName("Use Case");
+        if (id != null && id.contains("#"))
+            setName("Use Case " + id.substring(id.indexOf("#") + 1));
     }
     
     @Override
     public String getIcon() {
-        return super.getFolder() + "usecase/use-case.png";
+        return getFolder() + "usecase/use-case.png";
     }
     
     @Override
@@ -71,6 +70,6 @@ public class UseCaseUML extends Element {
     
     @Override
     public String toString() {
-        return "Use Case: " + this.name;
+        return "Use Case: " + name;
     }
 }

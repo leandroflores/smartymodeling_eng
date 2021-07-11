@@ -10,7 +10,7 @@ import model.structural.diagram.usecase.base.UseCaseUML;
  * <p>Class of Model <b>IncludeUML</b>.</p>
  * <p>Class responsible for representing <b>Include UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  22/05/2019
+ * @since  2019-05-22
  * @see    model.structural.base.association.Association
  * @see    model.structural.diagram.usecase.base.UseCaseUML
  */
@@ -34,12 +34,12 @@ public class IncludeUML extends Association {
      */
     public IncludeUML(org.w3c.dom.Element element) {
         super(element);
-        this.type = "include";
+        type = "include";
     }
     
     @Override
     public UseCaseUML getSource() {
-        return (UseCaseUML) this.source;
+        return (UseCaseUML) source;
     }
 
     /**
@@ -52,7 +52,7 @@ public class IncludeUML extends Association {
 
     @Override
     public UseCaseUML getTarget() {
-        return (UseCaseUML) this.target;
+        return (UseCaseUML) target;
     }
 
     /**

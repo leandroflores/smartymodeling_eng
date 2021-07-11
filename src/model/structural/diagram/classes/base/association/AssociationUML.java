@@ -12,7 +12,7 @@ import org.w3c.dom.Element;
  * <p>Class of Model <b>AssociationUML</b>.</p>
  * <p>Class responsible for representing <b>Association UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  03/06/2019
+ * @since  2019-06-03
  * @see    model.structural.base.association.Association
  * @see    model.structural.diagram.classes.Entity
  */
@@ -44,7 +44,7 @@ public class AssociationUML extends Association {
         this.category  = "normal";
         this.direction = false;
         this.type      = "association";
-        this.setDefault();
+        setDefault();
     }
     
     /**
@@ -53,10 +53,10 @@ public class AssociationUML extends Association {
      */
     public AssociationUML(Element element) {
         super(element);
-        this.name      = element.getAttribute("name");
-        this.category  = element.getAttribute("category");
-        this.direction = element.getAttribute("direction").contains("true");
-        this.type      = "association";
+        name      = element.getAttribute("name");
+        category  = element.getAttribute("category");
+        direction = element.getAttribute("direction").contains("true");
+        type      = "association";
     }
     
     /**
@@ -74,7 +74,7 @@ public class AssociationUML extends Association {
         this.name      = "";
         this.category  = category;
         this.direction = direction;
-        this.setDefault();
+        setDefault();
     }
 
     /**
@@ -82,21 +82,21 @@ public class AssociationUML extends Association {
      * @return Complete Id.
      */
     public String getCompleteId() {
-        return this.category.toUpperCase().trim() + "#" + this.source.getId() + "-" + this.target.getId();
+        return category.toUpperCase().trim() + "#" + source.getId() + "-" + target.getId();
     }
     
     /**
      * Method responsible for setting the Default Parameters.
      */
     private void setDefault() {
-        this.setDefaultSource();
-        this.setDefaultTarget();
-        this.setDefaultPoints();
+        setDefaultSource();
+        setDefaultTarget();
+        setDefaultPoints();
     }
     
     @Override
     public Entity getSource() {
-        return (Entity) this.source;
+        return (Entity) source;
     }
 
     /**
@@ -109,7 +109,7 @@ public class AssociationUML extends Association {
 
     @Override
     public Entity getTarget() {
-        return (Entity) this.target;
+        return (Entity) target;
     }
 
     /**
@@ -125,7 +125,7 @@ public class AssociationUML extends Association {
      * @return Name.
      */
     public String getName() {
-        return this.name;
+        return name;
     }
     
     /**
@@ -141,7 +141,7 @@ public class AssociationUML extends Association {
      * @return Category.
      */
     public String getCategory() {
-        return this.category;
+        return category;
     }
 
     /**
@@ -157,7 +157,7 @@ public class AssociationUML extends Association {
      * @return Direction Flag.
      */
     public boolean isDirection() {
-        return this.direction;
+        return direction;
     }
 
     /**
@@ -173,11 +173,11 @@ public class AssociationUML extends Association {
      * @param element W3C Element.
      */
     public void setSource(Element element) {
-        this.setSourceVisibility(element.getAttribute("sourceVisibility"));
-        this.setSourceName(element.getAttribute("sourceName"));
-        this.setSourceMin(element);
-        this.setSourceMax(element);
-        this.setSourcePosition(element);
+        setSourceVisibility(element.getAttribute("sourceVisibility"));
+        setSourceName(element.getAttribute("sourceName"));
+        setSourceMin(element);
+        setSourceMax(element);
+        setSourcePosition(element);
     }
     
     /**
@@ -185,7 +185,7 @@ public class AssociationUML extends Association {
      * @return Source Visibility.
      */
     public String getSourceVisibility() {
-        return this.sourceVisibility;
+        return sourceVisibility;
     }
 
     /**
@@ -201,7 +201,7 @@ public class AssociationUML extends Association {
      * @return Default Source Name.
      */
     public String getDefaultSourceName() {
-        return this.target.getName().toLowerCase() + (this.targetMax == 1 ? "" : "s");
+        return target.getName().toLowerCase() + (targetMax == 1 ? "" : "s");
     }
     
     /**
@@ -209,7 +209,7 @@ public class AssociationUML extends Association {
      * @return Source Name.
      */
     public String getSourceName() {
-        return this.sourceName;
+        return sourceName;
     }
 
     /**
@@ -225,7 +225,7 @@ public class AssociationUML extends Association {
      * @return Source Min.
      */
     public Integer getSourceMin() {
-        return this.sourceMin;
+        return sourceMin;
     }
 
     /**
@@ -241,8 +241,8 @@ public class AssociationUML extends Association {
      * @param element W3C Element.
      */
     public void setSourceMin(Element element) {
-        String value   = element.getAttribute("sourceMin").trim();
-        this.sourceMin = (value.equals("*")) ? 0 : Integer.parseInt(value);
+        String value = element.getAttribute("sourceMin").trim();
+        sourceMin    = (value.equals("*")) ? 0 : Integer.parseInt(value);
     }
 
     /**
@@ -250,7 +250,7 @@ public class AssociationUML extends Association {
      * @return Source Max.
      */
     public Integer getSourceMax() {
-        return this.sourceMax;
+        return sourceMax;
     }
 
     /**
@@ -266,8 +266,8 @@ public class AssociationUML extends Association {
      * @param element W3C Element.
      */
     public void setSourceMax(Element element) {
-        String value   = element.getAttribute("sourceMax").trim();
-        this.sourceMax = (value.equals("*")) ? Integer.MAX_VALUE : Integer.parseInt(value);
+        String value = element.getAttribute("sourceMax").trim();
+        sourceMax    = (value.equals("*")) ? Integer.MAX_VALUE : Integer.parseInt(value);
     }
     
     /**
@@ -275,7 +275,7 @@ public class AssociationUML extends Association {
      * @return Source Position.
      */
     public Point getSourcePosition() {
-        return this.sourcePos;
+        return sourcePos;
     }
 
     /**
@@ -283,7 +283,7 @@ public class AssociationUML extends Association {
      * @return Source X Position.
      */
     public Integer getSourceX() {
-        return this.sourcePos.x;
+        return sourcePos.x;
     }
     
     /**
@@ -291,7 +291,7 @@ public class AssociationUML extends Association {
      * @param distance Distance.
      */
     public void dxSource(Integer distance) {
-        this.dx(this.sourcePos, distance);
+        dx(sourcePos, distance);
     }
     
     /**
@@ -299,7 +299,7 @@ public class AssociationUML extends Association {
      * @return Source Y Position.
      */
     public Integer getSourceY() {
-        return this.sourcePos.y;
+        return sourcePos.y;
     }
     
     /**
@@ -307,7 +307,7 @@ public class AssociationUML extends Association {
      * @param distance Distance.
      */
     public void dySource(Integer distance) {
-        this.dy(this.sourcePos, distance);
+        dy(sourcePos, distance);
     }
     
     /**
@@ -321,7 +321,7 @@ public class AssociationUML extends Association {
             x = Double.parseDouble(element.getAttribute("sourceX"));
             y = Double.parseDouble(element.getAttribute("sourceY"));
         }catch (NumberFormatException exception) {}
-        this.setSourcePosition(new Point(x.intValue(), y.intValue()));
+        setSourcePosition(new Point(x.intValue(), y.intValue()));
     }
     
     /**
@@ -330,7 +330,7 @@ public class AssociationUML extends Association {
      * @param y Y Position.
      */
     public void setSourcePosition(Integer x, Integer y) {
-        this.sourcePos = new Point(x, y);
+        sourcePos = new Point(x, y);
     }
     
     /**
@@ -345,11 +345,11 @@ public class AssociationUML extends Association {
      * Method responsible for setting the Default Source.
      */
     public void setDefaultSource() {
-        this.sourceVisibility = "private";
-        this.sourceName       = "";
-        this.sourceMin        = 1;
-        this.sourceMax        = 1;
-        this.sourcePos        = new Point(this.source.getXCenter(), this.source.getYCenter());
+        sourceVisibility = "private";
+        sourceName = "";
+        sourceMin  = 1;
+        sourceMax  = 1;
+        sourcePos  = new Point(source.getXCenter(), source.getYCenter());
     }
     
     /**
@@ -357,8 +357,7 @@ public class AssociationUML extends Association {
      * @return Source Label.
      */
     public String getSourceLabel() {
-        return this.getCardinalitySourceLabel() 
-             + this.getNameSourceLabel();
+        return getCardinalitySourceLabel() + getNameSourceLabel();
     }
     
     /**
@@ -366,11 +365,11 @@ public class AssociationUML extends Association {
      * @return Cardinality Source Label.
      */
     public String getCardinalitySourceLabel() {
-        if (this.sourceMin.equals(0) && this.sourceMax.equals(Integer.MAX_VALUE))
+        if (sourceMin.equals(0) && sourceMax.equals(Integer.MAX_VALUE))
             return "*";
-        if (this.sourceMin.equals(this.sourceMax))
-            return Integer.toString(this.sourceMin);
-        return this.sourceMin + ".." + (this.sourceMax.equals(Integer.MAX_VALUE) ? "*" : this.sourceMax);
+        if (sourceMin.equals(sourceMax))
+            return Integer.toString(sourceMin);
+        return sourceMin + ".." + (sourceMax.equals(Integer.MAX_VALUE) ? "*" : sourceMax);
     }
     
     /**
@@ -378,9 +377,7 @@ public class AssociationUML extends Association {
      * @return Name Source Label.
      */
     public String getNameSourceLabel() {
-        if (this.sourceName.equals(""))
-            return this.sourceName;
-        return " (" + this.getSourceSignature() + ")";
+        return sourceName.equals("") ? sourceName : " (" + getSourceSignature() + ")";
     }
     
     /**
@@ -388,8 +385,7 @@ public class AssociationUML extends Association {
      * @return Source Signature.
      */
     public String getSourceSignature() {
-        return this.getVisibilitySymbol(this.sourceVisibility) 
-               + " " + this.sourceName;
+        return getVisibilitySymbol(sourceVisibility) + " " + sourceName;
     }
     
     /**
@@ -397,11 +393,11 @@ public class AssociationUML extends Association {
      * @param element W3C Element.
      */
     public void setTarget(Element element) {
-        this.setTargetVisibility(element.getAttribute("targetVisibility"));
-        this.setTargetName(element.getAttribute("targetName"));
-        this.setTargetMin(element);
-        this.setTargetMax(element);
-        this.setTargetPosition(element);
+        setTargetVisibility(element.getAttribute("targetVisibility"));
+        setTargetName(element.getAttribute("targetName"));
+        setTargetMin(element);
+        setTargetMax(element);
+        setTargetPosition(element);
     }
     
     /**
@@ -409,7 +405,7 @@ public class AssociationUML extends Association {
      * @return Target Visibility.
      */
     public String getTargetVisibility() {
-        return this.targetVisibility;
+        return targetVisibility;
     }
 
     /**
@@ -425,7 +421,7 @@ public class AssociationUML extends Association {
      * @return Default Target Name.
      */
     public String getDefaultTargetName() {
-        return this.source.getName().toLowerCase() + (this.sourceMax == 1 ? "" : "s");
+        return source.getName().toLowerCase() + (sourceMax == 1 ? "" : "s");
     }
     
     /**
@@ -433,7 +429,7 @@ public class AssociationUML extends Association {
      * @return Target Name.
      */
     public String getTargetName() {
-        return this.targetName;
+        return targetName;
     }
 
     /**
@@ -449,7 +445,7 @@ public class AssociationUML extends Association {
      * @return Target Min.
      */
     public Integer getTargetMin() {
-        return this.targetMin;
+        return targetMin;
     }
 
     /**
@@ -465,8 +461,8 @@ public class AssociationUML extends Association {
      * @param element W3C Element.
      */
     public void setTargetMin(Element element) {
-        String value   = element.getAttribute("targetMin").trim();
-        this.targetMin = (value.equals("*")) ? 0 : Integer.parseInt(value);
+        String value = element.getAttribute("targetMin").trim();
+        targetMin    = (value.equals("*")) ? 0 : Integer.parseInt(value);
     }
 
     /**
@@ -474,7 +470,7 @@ public class AssociationUML extends Association {
      * @return Target Max.
      */
     public Integer getTargetMax() {
-        return this.targetMax;
+        return targetMax;
     }
 
     /**
@@ -490,8 +486,8 @@ public class AssociationUML extends Association {
      * @param element W3C Element.
      */
     public void setTargetMax(Element element) {
-        String value   = element.getAttribute("targetMax").trim();
-        this.targetMax = (value.equals("*")) ? Integer.MAX_VALUE : Integer.parseInt(value);
+        String value = element.getAttribute("targetMax").trim();
+        targetMax    = (value.equals("*")) ? Integer.MAX_VALUE : Integer.parseInt(value);
     }
     
     /**
@@ -499,7 +495,7 @@ public class AssociationUML extends Association {
      * @return Target Position.
      */
     public Point getTargetPosition() {
-        return this.targetPos;
+        return targetPos;
     }
 
     /**
@@ -507,7 +503,7 @@ public class AssociationUML extends Association {
      * @return Target X Position.
      */
     public Integer getTargetX() {
-        return this.targetPos.x;
+        return targetPos.x;
     }
     
     /**
@@ -515,7 +511,7 @@ public class AssociationUML extends Association {
      * @param distance Distance.
      */
     public void dxTarget(Integer distance) {
-        this.dx(this.targetPos, distance);
+        dx(targetPos, distance);
     }
     
     /**
@@ -523,7 +519,7 @@ public class AssociationUML extends Association {
      * @return Target Y Position.
      */
     public Integer getTargetY() {
-        return this.targetPos.y;
+        return targetPos.y;
     }
     
     /**
@@ -531,7 +527,7 @@ public class AssociationUML extends Association {
      * @param distance Distance.
      */
     public void dyTarget(Integer distance) {
-        this.dy(this.targetPos, distance);
+        dy(targetPos, distance);
     }
     
     /**
@@ -545,7 +541,7 @@ public class AssociationUML extends Association {
             x = Double.parseDouble(element.getAttribute("targetX"));
             y = Double.parseDouble(element.getAttribute("targetY"));
         }catch (NumberFormatException exception) {}
-        this.setTargetPosition(new Point(x.intValue(), y.intValue()));
+        setTargetPosition(new Point(x.intValue(), y.intValue()));
     }
     
     /**
@@ -554,7 +550,7 @@ public class AssociationUML extends Association {
      * @param y Y Position.
      */
     public void setTargetPosition(Integer x, Integer y) {
-        this.targetPos = new Point(x, y);
+        targetPos = new Point(x, y);
     }
     
     /**
@@ -569,11 +565,11 @@ public class AssociationUML extends Association {
      * Method responsible for setting the Default Target.
      */
     public void setDefaultTarget() {
-        this.targetVisibility = "private";
-        this.targetName       = "";
-        this.targetMin        = 1;
-        this.targetMax        = 1;
-        this.targetPos        = new Point(this.target.getXCenter(), this.target.getYCenter());
+        targetName = "";
+        targetMin  = 1;
+        targetMax  = 1;
+        targetPos  = new Point(target.getXCenter(), target.getYCenter());
+        targetVisibility = "private";
     }
     
     /**
@@ -581,8 +577,7 @@ public class AssociationUML extends Association {
      * @return Target Label.
      */
     public String getTargetLabel() {
-        return this.getCardinalityTargetLabel() 
-             + this.getNameTargetLabel();
+        return getCardinalityTargetLabel() + getNameTargetLabel();
     }
     
     /**
@@ -590,11 +585,11 @@ public class AssociationUML extends Association {
      * @return Cardinality Target Label.
      */
     public String getCardinalityTargetLabel() {
-        if (this.targetMin.equals(0) && this.targetMax.equals(Integer.MAX_VALUE))
+        if (targetMin.equals(0) && targetMax.equals(Integer.MAX_VALUE))
             return "*";
-        if (this.targetMin.equals(this.targetMax))
-            return Integer.toString(this.targetMin);
-        return this.targetMin + ".." + (this.targetMax.equals(Integer.MAX_VALUE) ? "*" : this.targetMax);
+        if (targetMin.equals(targetMax))
+            return Integer.toString(targetMin);
+        return targetMin + ".." + (targetMax.equals(Integer.MAX_VALUE) ? "*" : targetMax);
     }
     
     /**
@@ -602,9 +597,7 @@ public class AssociationUML extends Association {
      * @return Name Target Label.
      */
     public String getNameTargetLabel() {
-        if (this.targetName.equals(""))
-            return this.targetName;
-        return " (" + this.getTargetSignature() + ")";
+        return targetName.equals("") ? targetName : " (" + getTargetSignature() + ")";
     }
     
     /**
@@ -612,8 +605,7 @@ public class AssociationUML extends Association {
      * @return Target Signature.
      */
     public String getTargetSignature() {
-        return this.getVisibilitySymbol(this.targetVisibility) 
-               + " " + this.targetName;
+        return getVisibilitySymbol(targetVisibility) + " " + targetName;
     }
     
     /**
@@ -654,7 +646,7 @@ public class AssociationUML extends Association {
      * @return Start Arrow.
      */
     private Object getStartArrow() {
-        return (this.category.toLowerCase().trim().equals("normal")) ? mxConstants.ARROW_SPACING : mxConstants.ARROW_DIAMOND;
+        return (category.toLowerCase().trim().equals("normal")) ? mxConstants.ARROW_SPACING : mxConstants.ARROW_DIAMOND;
     }
     
     /**
@@ -662,7 +654,7 @@ public class AssociationUML extends Association {
      * @return Start Fill.
      */
     private Object getStartFill() {
-        return (this.category.equalsIgnoreCase("aggregation")) ? "0" : "1";
+        return (category.equalsIgnoreCase("aggregation")) ? "0" : "1";
     }
     
     /**
@@ -670,7 +662,7 @@ public class AssociationUML extends Association {
      * @return End Arrow.
      */
     private Object getEndArrow() {
-        return (this.direction) ? mxConstants.ARROW_OPEN : mxConstants.ARROW_SPACING;
+        return (direction) ? mxConstants.ARROW_OPEN : mxConstants.ARROW_SPACING;
     }
     
     /**
@@ -702,12 +694,12 @@ public class AssociationUML extends Association {
     
     @Override
     public String getTitle() {
-        return this.name;
+        return name;
     }
     
     @Override
     public String getStyleLabel() {
-        return "styleAssociationUML" + this.getId();
+        return "styleAssociationUML" + getId();
     }
     
     @Override
@@ -720,9 +712,9 @@ public class AssociationUML extends Association {
                style.put(mxConstants.STYLE_MOVABLE,   "0");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
-               style.put(mxConstants.STYLE_ENDARROW,    this.getEndArrow());
-               style.put(mxConstants.STYLE_STARTARROW,  this.getStartArrow());
-               style.put(mxConstants.STYLE_STARTFILL,   this.getStartFill());
+               style.put(mxConstants.STYLE_ENDARROW,    getEndArrow());
+               style.put(mxConstants.STYLE_STARTARROW,  getStartArrow());
+               style.put(mxConstants.STYLE_STARTFILL,   getStartFill());
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_CONNECTOR);
         return style;
     }
@@ -732,9 +724,9 @@ public class AssociationUML extends Association {
      * @return Source Code.
      */
     public String getSourceCode() {
-        String code  = this.getSourceVisibility()      + " ";
-               code += this.getSourceCardinalityCode() + " ";
-               code += this.getSourceNameCode()        + ";";
+        String code  = getSourceVisibility() + " ";
+               code += getSourceCardinalityCode() + " ";
+               code += getSourceNameCode()   + ";";
         return code;
     }
     
@@ -743,7 +735,7 @@ public class AssociationUML extends Association {
      * @return Source Cardinality Code.
      */
     private String getSourceCardinalityCode() {
-        return this.targetMax == 1 ? this.target.getName() : "List<" + this.target.getName() + ">";
+        return targetMax == 1 ? target.getName() : "List<" + target.getName() + ">";
     }
     
     /**
@@ -751,7 +743,7 @@ public class AssociationUML extends Association {
      * @return Source Name Code.
      */
     private String getSourceNameCode() {
-        return this.targetName.trim().isEmpty() ? this.getDefaultSourceName() : this.targetName;
+        return targetName.trim().isEmpty() ? getDefaultSourceName() : targetName;
     }
     
     /**
@@ -759,9 +751,9 @@ public class AssociationUML extends Association {
      * @return Target Code.
      */
     public String getTargetCode() {
-        String code  = this.getTargetVisibility()      + " ";
-               code += this.getTargetCardinalityCode() + " ";
-               code += this.getTargetNameCode()        + ";";
+        String code  = getTargetVisibility() + " ";
+               code += getTargetCardinalityCode() + " ";
+               code += getTargetNameCode()   + ";";
         return code;
     }
     
@@ -770,7 +762,7 @@ public class AssociationUML extends Association {
      * @return Target Cardinality Code.
      */
     private String getTargetCardinalityCode() {
-        return this.sourceMax == 1 ? this.source.getName() : "List<" + this.source.getName() + ">";
+        return sourceMax == 1 ? source.getName() : "List<" + source.getName() + ">";
     }
     
     /**
@@ -778,7 +770,7 @@ public class AssociationUML extends Association {
      * @return Target Name Code.
      */
     private String getTargetNameCode() {
-        return this.sourceName.trim().isEmpty() ? this.getDefaultTargetName() : this.sourceName;
+        return sourceName.trim().isEmpty() ? getDefaultTargetName() : sourceName;
     }
     
     /**
@@ -787,13 +779,13 @@ public class AssociationUML extends Association {
      */
     public String exportSource() {
         String export  = "      <source";
-               export += " entity=\""           + this.source.getId()   + "\"";
-               export += " sourceVisibility=\"" + this.sourceVisibility + "\"";
-               export += " sourceName=\""       + this.sourceName       + "\"";
-               export += " sourceMin=\""        + this.sourceMin        + "\"";
-               export += " sourceMax=\""        + this.sourceMax        + "\"";
-               export += " sourceX=\""          + this.getSourceX()     + "\"";
-               export += " sourceY=\""          + this.getSourceY()     + "\"/>\n";
+               export += " entity=\""           + source.getId()   + "\"";
+               export += " sourceVisibility=\"" + sourceVisibility + "\"";
+               export += " sourceName=\""       + sourceName       + "\"";
+               export += " sourceMin=\""        + sourceMin        + "\"";
+               export += " sourceMax=\""        + sourceMax        + "\"";
+               export += " sourceX=\""          + getSourceX()     + "\"";
+               export += " sourceY=\""          + getSourceY()     + "\"/>\n";
         return export;
     }
     
@@ -803,26 +795,26 @@ public class AssociationUML extends Association {
      */
     public String exportTarget() {
         String export  = "      <target";
-               export += " entity=\""           + this.target.getId()   + "\"";
-               export += " targetVisibility=\"" + this.targetVisibility + "\"";
-               export += " targetName=\""       + this.targetName       + "\"";
-               export += " targetMin=\""        + this.targetMin        + "\"";
-               export += " targetMax=\""        + this.targetMax        + "\"";
-               export += " targetX=\""          + this.getTargetX()     + "\"";
-               export += " targetY=\""          + this.getTargetY()     + "\"/>\n";
+               export += " entity=\""           + target.getId()   + "\"";
+               export += " targetVisibility=\"" + targetVisibility + "\"";
+               export += " targetName=\""       + targetName       + "\"";
+               export += " targetMin=\""        + targetMin        + "\"";
+               export += " targetMax=\""        + targetMax        + "\"";
+               export += " targetX=\""          + getTargetX()     + "\"";
+               export += " targetY=\""          + getTargetY()     + "\"/>\n";
         return export;
     }
     
     @Override
     protected String exportHeader() {
-        String export  = "    <"         + this.type;
-               export += " id=\""        + this.id.trim()       + "\"";
-               export += " name=\""      + this.name.trim()     + "\"";
-               export += " category=\""  + this.category.trim() + "\"";
-               export += " direction=\"" + this.direction       + "\"";
+        String export  = "    <"         + type;
+               export += " id=\""        + id.trim()       + "\"";
+               export += " name=\""      + name.trim()     + "\"";
+               export += " category=\""  + category.trim() + "\"";
+               export += " direction=\"" + direction       + "\"";
                export += ">\n";
-               export += this.exportSource();
-               export += this.exportTarget();
+               export += exportSource();
+               export += exportTarget();
         return export;
     }
 }

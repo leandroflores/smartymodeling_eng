@@ -27,13 +27,13 @@ public class Variability extends Element {
      */
     public Variability(Diagram diagram) {
         super(diagram);
-        this.name           = "";
-        this.mandatory      = false;
-        this.category       = "inclusive";
-        this.variationPoint = null;
-        this.variants       = new ArrayList<>();
-        this.size           = new Point(50, 50);
-        this.type           = "variability";
+        name           = "";
+        mandatory      = false;
+        category       = "inclusive";
+        variationPoint = null;
+        variants       = new ArrayList<>();
+        size           = new Point(50, 50);
+        type           = "variability";
     }
     
     /**
@@ -46,7 +46,6 @@ public class Variability extends Element {
         this(diagram);
         this.category       = category;
         this.variationPoint = variationPoint;
-        this.variants       = new ArrayList<>();
     }
     
     /**
@@ -56,19 +55,19 @@ public class Variability extends Element {
      */
     public Variability(org.w3c.dom.Element element, Diagram diagram) {
         super(element, diagram, true);
-        this.category  = element.getAttribute("category").trim();
-        this.variants  = new ArrayList<>();
-        this.type      = "feature";
+        category  = element.getAttribute("category").trim();
+        variants  = new ArrayList<>();
+        type      = "feature";
     }
     
     @Override
     public String getTitle() {
-        return this.category.equalsIgnoreCase("inclusive") ? "OR" : "XOR";
+        return category.equalsIgnoreCase("inclusive") ? "OR" : "XOR";
     }
     
     @Override
     public void setName(String name) {
-        this.name = "";
+        name = "";
     }
     
     /**
@@ -76,7 +75,7 @@ public class Variability extends Element {
      * @return Variability Category.
      */
     public String getCategory() {
-        return this.category;
+        return category;
     }
 
     /**
@@ -92,7 +91,7 @@ public class Variability extends Element {
      * @return Variability Variation Point.
      */
     public Feature getVariationPoint() {
-        return this.variationPoint;
+        return variationPoint;
     }
 
     /**
@@ -108,7 +107,7 @@ public class Variability extends Element {
      * @return Variants.
      */
     public List<Feature> getVariants() {
-        return this.variants;
+        return variants;
     }
     
     /**
@@ -116,13 +115,13 @@ public class Variability extends Element {
      * @return Variants List.
      */
     public String getVariantsList() {
-        if (this.variants.size() == 1)
-            return "{" + this.variants.get(0).getName() + "}";
-        String toReturn  = "{" + this.variants.get(0) + ", \n";
-        for (int i = 1; i < this.variants.size() - 1; i++)
-            toReturn += this.variants.get(i).getName() + ", \n";
-               toReturn += this.variants.get(this.variants.size() - 1).getName() + "}";
-        return toReturn;
+        if (variants.size() == 1)
+            return "{" + variants.get(0).getName() + "}";
+        String list = "{" + variants.get(0) + ", \n";
+        for (int i = 1; i < variants.size() - 1; i++)
+            list += variants.get(i).getName() + ", \n";
+        list += variants.get(variants.size() - 1).getName() + "}";
+        return list;
     }
     
     /**
@@ -130,8 +129,8 @@ public class Variability extends Element {
      * @param variant Variant.
      */
     public void addVariant(Feature variant) {
-        if (this.variants.contains(variant) == false)
-            this.variants.add(variant);
+        if (!variants.contains(variant))
+             variants.add(variant);
     }
     
     /**
@@ -140,7 +139,7 @@ public class Variability extends Element {
      * @return Feature is Variant.
      */
     public boolean isVariant(Feature feature) {
-        return this.variants.contains(feature);
+        return variants.contains(feature);
     }
     
     /**
@@ -149,7 +148,7 @@ public class Variability extends Element {
      * @return Feature is Variant.
      */
     public boolean isVariant(String feature) {
-        for (Feature variant : this.variants) {
+        for (Feature variant : variants) {
             if (variant.getName().equalsIgnoreCase(feature))
                 return true;
         }
@@ -161,8 +160,8 @@ public class Variability extends Element {
      * @param variant Variant.
      */
     public void removeVariant(Feature variant) {
-        if (this.variants.contains(variant))
-            this.variants.remove(variant);
+        if (variants.contains(variant))
+            variants.remove(variant);
     }
     
     /**
@@ -170,7 +169,7 @@ public class Variability extends Element {
      * @return No Variants.
      */
     public boolean emptyVariants() {
-        return this.variants.isEmpty();
+        return variants.isEmpty();
     }
     
     /**
@@ -183,14 +182,14 @@ public class Variability extends Element {
     
     @Override
     public String getIcon() {
-        return this.category.equalsIgnoreCase("inclusive") ?
+        return category.equalsIgnoreCase("inclusive") ?
                "icons/diagram/feature/inclusive.png" :
                "icons/diagram/feature/exclusive.png";
     }
     
     @Override
     public String getStyleLabel() {
-        return "styleVariability" + this.id;
+        return "styleVariability" + id;
     }
     
     /**
@@ -198,7 +197,7 @@ public class Variability extends Element {
      * @return Fill Color Style.
      */
     private String getFillColor() {
-        return this.getCategory().equalsIgnoreCase("inclusive") ? "#FFFFFF" : "#000000";
+        return getCategory().equalsIgnoreCase("inclusive") ? "#FFFFFF" : "#000000";
     }
     
     /**
@@ -206,7 +205,7 @@ public class Variability extends Element {
      * @return Font Color Style.
      */
     private String getFontColor() {
-        return this.getCategory().equalsIgnoreCase("inclusive") ? "#000000" : "#FFFFFF";
+        return getCategory().equalsIgnoreCase("inclusive") ? "#000000" : "#FFFFFF";
     }
     
     @Override
@@ -215,8 +214,8 @@ public class Variability extends Element {
                style.put(mxConstants.STYLE_FONTSIZE, "15");
                style.put(mxConstants.STYLE_EDITABLE, "0");
 //               style.put(mxConstants.STYLE_FILLCOLOR,   mxConstants.NONE);
-               style.put(mxConstants.STYLE_FILLCOLOR,   this.getFillColor());
-               style.put(mxConstants.STYLE_FONTCOLOR,   this.getFontColor());
+               style.put(mxConstants.STYLE_FILLCOLOR,   getFillColor());
+               style.put(mxConstants.STYLE_FONTCOLOR,   getFontColor());
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
                style.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_CENTER);
@@ -228,7 +227,7 @@ public class Variability extends Element {
      * @return Variation Point String.
      */
     private String exportVariationPoint() {
-        return " variationPoint=\"" + this.variationPoint.getId() + "\"";
+        return " variationPoint=\"" + variationPoint.getId() + "\"";
     }
     
     /**
@@ -237,7 +236,7 @@ public class Variability extends Element {
      */
     private String exportVariants() {
         String export  = "";
-        for (Feature variant : this.variants)
+        for (Feature variant : variants)
                export += "      <variant id=\"" + variant.getId() + "\"/>\n";
         return export;
     }
@@ -245,25 +244,25 @@ public class Variability extends Element {
     @Override
     public String export() {
         String export  = "    <variability";
-               export += " id=\""        + this.id           + "\"";
-               export += " name=\""      + this.name         + "\"";
-               export += " category=\""  + this.category     + "\"";
-               export += this.exportVariationPoint();
-               export += " mandatory=\"" + this.mandatory    + "\"";
-               export += " x=\""         + this.getX()       + "\"";
-               export += " y=\""         + this.getY()       + "\"";
-               export += " globalX=\""   + this.getGlobalX() + "\"";
-               export += " globalY=\""   + this.getGlobalY() + "\"";
-               export += " height=\""    + this.getHeight()  + "\"";
-               export += " width=\""     + this.getWidth()   + "\"";
+               export += " id=\""        + id           + "\"";
+               export += " name=\""      + name         + "\"";
+               export += " category=\""  + category     + "\"";
+               export += exportVariationPoint();
+               export += " mandatory=\"" + mandatory    + "\"";
+               export += " x=\""         + getX()       + "\"";
+               export += " y=\""         + getY()       + "\"";
+               export += " globalX=\""   + getGlobalX() + "\"";
+               export += " globalY=\""   + getGlobalY() + "\"";
+               export += " height=\""    + getHeight()  + "\"";
+               export += " width=\""     + getWidth()   + "\"";
                export += ">\n";
-               export += this.exportVariants();
+               export += exportVariants();
                export += "    </variability>\n";
         return export;
     }
     
     @Override
     public String toString() {
-        return "Variability: " + this.name;
+        return name;
     }
 }

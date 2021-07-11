@@ -30,11 +30,11 @@ public class Requirement implements Exportable {
      * Default constructor method of Class.
      */
     public Requirement() {
-        this.code        = "";
-        this.type        = "Business";
-        this.name        = "";
-        this.description = "";
-        this.initMaps();
+        code        = "";
+        type        = "Business";
+        name        = "";
+        description = "";
+        initMaps();
     }
     
     /**
@@ -42,24 +42,24 @@ public class Requirement implements Exportable {
      * @param element W3C Element.
      */
     public Requirement(org.w3c.dom.Element element) {
-        this.id          = element.getAttribute("id");
-        this.code        = element.getAttribute("code");
-        this.type        = element.getAttribute("type");
-        this.name        = element.getAttribute("name");
-        this.description = "";
-        this.initMaps();
+        id          = element.getAttribute("id");
+        code        = element.getAttribute("code");
+        type        = element.getAttribute("type");
+        name        = element.getAttribute("name");
+        description = "";
+        initMaps();
     }
     
     /**
      * Method responsible for initializing the Traceability Maps.
      */
     private void initMaps() {
-        this.features  = new HashMap();
-        this.use_case  = new HashMap();
-        this.classes   = new HashMap();
-        this.component = new HashMap();
-        this.sequence  = new HashMap();
-        this.activity  = new HashMap();
+        features  = new HashMap();
+        use_case  = new HashMap();
+        classes   = new HashMap();
+        component = new HashMap();
+        sequence  = new HashMap();
+        activity  = new HashMap();
     }
     
     /**
@@ -67,7 +67,7 @@ public class Requirement implements Exportable {
      * @return Requirement Id.
      */
     public String getId() {
-        return this.id;
+        return id;
     }
 
     /**
@@ -83,12 +83,12 @@ public class Requirement implements Exportable {
      * @return Requirement Code.
      */
     public String getCode() {
-        return this.code;
+        return code;
     }
     
     public String getHtmlCode() {
         String html  = "<html>";
-        for (String string : this.code.split(""))
+        for (String string : code.split(""))
                html += string + "<br>";
         return html += "</html>";
     }
@@ -106,7 +106,7 @@ public class Requirement implements Exportable {
      * @return Requirement Type.
      */
     public String getType() {
-        return this.type;
+        return type;
     }
 
     /**
@@ -122,7 +122,7 @@ public class Requirement implements Exportable {
      * @return Requirement Name.
      */
     public String getName() {
-        return this.name;
+        return name;
     }
 
     /**
@@ -138,7 +138,7 @@ public class Requirement implements Exportable {
      * @return Requirement Description.
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -156,17 +156,17 @@ public class Requirement implements Exportable {
      */
     public void addElement(String type, Element element) {
         if (type.equalsIgnoreCase("Feature"))
-            this.features.put(element.getId(), element);
+            features.put(element.getId(), element);
         else if (type.equalsIgnoreCase("UseCase"))
-            this.use_case.put(element.getId(), element);
+            use_case.put(element.getId(), element);
         else if (type.equalsIgnoreCase("Class"))
-            this.classes.put(element.getId(), element);
+            classes.put(element.getId(), element);
         else if (type.equalsIgnoreCase("Component"))
-            this.component.put(element.getId(), element);
+            component.put(element.getId(), element);
         else if (type.equalsIgnoreCase("Sequence"))
-            this.sequence.put(element.getId(), element);
+            sequence.put(element.getId(), element);
         else if (type.equalsIgnoreCase("Activity"))
-            this.activity.put(element.getId(), element);
+            activity.put(element.getId(), element);
     }
     
     /**
@@ -175,7 +175,7 @@ public class Requirement implements Exportable {
      * @return Requirement contains a Element.
      */
     public boolean contains(Element element) {
-        return this.getAllElements().contains(element);
+        return getAllElements().contains(element);
     }
     
     /**
@@ -183,12 +183,12 @@ public class Requirement implements Exportable {
      * @param element Element.
      */
     public void removeElement(Element element) {
-        this.features.remove(element.getId());
-        this.use_case.remove(element.getId());
-        this.classes.remove(element.getId());
-        this.component.remove(element.getId());
-        this.sequence.remove(element.getId());
-        this.activity.remove(element.getId());
+        features.remove(element.getId());
+        use_case.remove(element.getId());
+        classes.remove(element.getId());
+        component.remove(element.getId());
+        sequence.remove(element.getId());
+        activity.remove(element.getId());
     }
     
     /**
@@ -198,17 +198,17 @@ public class Requirement implements Exportable {
      */
     public List<Element> getElements(String type) {
         if (type.equalsIgnoreCase("Feature"))
-            return new ArrayList<>(this.features.values());
+            return new ArrayList<>(features.values());
         else if (type.equalsIgnoreCase("UseCase"))
-            return new ArrayList<>(this.use_case.values());
+            return new ArrayList<>(use_case.values());
         else if (type.equalsIgnoreCase("Class"))
-            return new ArrayList<>(this.classes.values());
+            return new ArrayList<>(classes.values());
         else if (type.equalsIgnoreCase("Component"))
-            return new ArrayList<>(this.component.values());
+            return new ArrayList<>(component.values());
         else if (type.equalsIgnoreCase("Sequence"))
-            return new ArrayList<>(this.sequence.values());
+            return new ArrayList<>(sequence.values());
         else if (type.equalsIgnoreCase("Activity"))
-            return new ArrayList<>(this.activity.values());
+            return new ArrayList<>(activity.values());
         return new ArrayList<>();
     }
     
@@ -218,12 +218,12 @@ public class Requirement implements Exportable {
      */
     public List<Element> getAllElements() {
         List   elements = new ArrayList<>();
-               elements.addAll(this.features.values());
-               elements.addAll(this.use_case.values());
-               elements.addAll(this.classes.values());
-               elements.addAll(this.component.values());
-               elements.addAll(this.sequence.values());
-               elements.addAll(this.activity.values());
+               elements.addAll(features.values());
+               elements.addAll(use_case.values());
+               elements.addAll(classes.values());
+               elements.addAll(component.values());
+               elements.addAll(sequence.values());
+               elements.addAll(activity.values());
         return elements;
     }
     
@@ -232,7 +232,7 @@ public class Requirement implements Exportable {
      * @return Requirement Icon.
      */
     public String getIcon() {
-        return "icons/requirement/types/" + this.type.toLowerCase().trim() + ".png";
+        return "icons/requirement/types/" + type.toLowerCase().trim() + ".png";
     }
     
     /**
@@ -241,12 +241,12 @@ public class Requirement implements Exportable {
      */
     private String exportTraceability() {
         String export  = "";
-               export += this.exportTraceability("Feature");
-               export += this.exportTraceability("UseCase");
-               export += this.exportTraceability("Class");
-               export += this.exportTraceability("Component");
-               export += this.exportTraceability("Sequence");
-               export += this.exportTraceability("Activity");
+               export += exportTraceability("Feature");
+               export += exportTraceability("UseCase");
+               export += exportTraceability("Class");
+               export += exportTraceability("Component");
+               export += exportTraceability("Sequence");
+               export += exportTraceability("Activity");
         return export;
     }
     
@@ -257,7 +257,7 @@ public class Requirement implements Exportable {
      */
     private String exportTraceability(String type) {
         String export  = "";
-        for (Element element : this.getElements(type))
+        for (Element element : getElements(type))
                export += "    <"       + type.toLowerCase().trim() 
                       +  " element=\"" + element.getId() +  "\"/>\n";
         return export;
@@ -266,18 +266,18 @@ public class Requirement implements Exportable {
     @Override
     public String export() {
         String export  = "  <requirement";
-               export += " id=\""   + this.id   + "\"";
-               export += " code=\"" + this.code + "\"";
-               export += " type=\"" + this.type + "\"";
-               export += " name=\"" + this.name + "\">\n";
-               export += "    <description>" + this.description + "</description>\n";
-               export += this.exportTraceability();
+               export += " id=\""   + id   + "\"";
+               export += " code=\"" + code + "\"";
+               export += " type=\"" + type + "\"";
+               export += " name=\"" + name + "\">\n";
+               export += "    <description>" + description + "</description>\n";
+               export += exportTraceability();
                export += "  </requirement>\n";
         return export;
     }
     
     @Override
     public String toString() {
-        return this.code + " - " + this.name;
+        return code + " - " + name;
     }
 }

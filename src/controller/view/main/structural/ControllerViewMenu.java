@@ -42,7 +42,7 @@ import view.modal.new_.base.evaluation.ViewNewMeasure;
 import view.modal.new_.base.evaluation.ViewNewMetric;
 import view.modal.new_.base.product.ViewNewInstance;
 import view.modal.new_.base.product.ViewNewProduct;
-import view.modal.new_.base.traceability.ViewNewTraceability;
+import view.modal.new_.base.traceability.ViewNewReference;
 import view.modal.evaluation.base.ViewEvaluationProject;
 import view.modal.new_.base.requirement.ViewNewRequirement;
 import view.main.structural.ViewMenu;
@@ -386,8 +386,8 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
             showNewProductView();
         else if (viewMenu.getMenuItemNewInstance().equals(event.getSource()))
             showNewInstanceView();
-        else if (viewMenu.getMenuItemNewTraceability().equals(event.getSource()))
-            showManualTraceabilityView();
+        else if (viewMenu.getMenuItemNewReference().equals(event.getSource()))
+            showNewReferenceView();
         else
             flag = true;
     }
@@ -414,11 +414,11 @@ public class ControllerViewMenu extends ControllerView implements ComponentListe
     }
     
     /**
-     * Method responsible for showing the New Manual Traceability.
+     * Method responsible for showing the New Reference.
      */
-    public void showManualTraceabilityView() {
+    public void showNewReferenceView() {
         if (!viewMenu.getProject().getDiagrams().isEmpty())
-            new ViewNewTraceability(viewMenu).setVisible(true);
+            new ViewNewReference(viewMenu).setVisible(true);
         else
             new ViewMessage(viewMenu, "Project with no Elements!").setVisible(true);
     }

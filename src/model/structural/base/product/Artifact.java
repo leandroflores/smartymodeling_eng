@@ -15,7 +15,7 @@ import model.structural.diagram.classes.base.PackageUML;
  * <p>Class of Model <b>Artifact</b>.</p>
  * <p>Class responsible for representing the <b>Artifact</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  06/10/2019
+ * @since  2019-10-06
  * @see    model.structural.base.interfaces.Exportable
  * @see    model.structural.base.interfaces.Modelable
  */
@@ -53,8 +53,8 @@ public class Artifact implements Exportable, Modelable {
      * @param element W3C Element.
      */
     public Artifact(org.w3c.dom.Element element) {
-        this.id     = element.getAttribute("id");
-        this.global = new Point(0, 0);
+        id     = element.getAttribute("id");
+        global = new Point(0, 0);
     }
     
     /**
@@ -64,8 +64,8 @@ public class Artifact implements Exportable, Modelable {
      */
     public Artifact(org.w3c.dom.Element element, boolean position) {
         this(element);
-        this.setPosition(element);
-        this.setSize(element);
+        setPosition(element);
+        setSize(element);
     }
     
     /**
@@ -73,7 +73,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Artifact Id.
      */
     public String getId() {
-        return this.id;
+        return id;
     }
 
     /**
@@ -89,7 +89,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Artifact Instance.
      */
     public Instance getInstance() {
-        return this.instance;
+        return instance;
     }
 
     /**
@@ -105,7 +105,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Artifact Element.
      */
     public Element getElement() {
-        return this.element;
+        return element;
     }
 
     /**
@@ -113,7 +113,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Artifact is a Package.
      */
     public boolean isPackage() {
-        return this.element instanceof PackageUML;
+        return element instanceof PackageUML;
     }
     
     /**
@@ -121,7 +121,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Artifact is a Entity.
      */
     public boolean isEntity() {
-        return this.element instanceof Entity;
+        return element instanceof Entity;
     }
     
     /**
@@ -137,7 +137,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Artifact Position.
      */
     public Point getPosition() {
-        return this.position;
+        return position;
     }
 
     /**
@@ -145,7 +145,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Element X Position.
      */
     public Integer getX() {
-        return this.position.x;
+        return position.x;
     }
     
     /**
@@ -153,10 +153,7 @@ public class Artifact implements Exportable, Modelable {
      * @param distance Distance.
      */
     public void dx(Integer distance) {
-        if (this.position.x + distance < 0)
-            this.position.x  = 0;
-        else
-            this.position.x += distance;
+        position.x = Math.max(0, position.x + distance);
     }
     
     /**
@@ -164,7 +161,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Artifact Y Position.
      */
     public Integer getY() {
-        return this.position.y;
+        return position.y;
     }
     
     /**
@@ -172,10 +169,7 @@ public class Artifact implements Exportable, Modelable {
      * @param distance Distance.
      */
     public void dy(Integer distance) {
-        if (this.position.y + distance < 0)
-            this.position.y  = 0;
-        else
-            this.position.y += distance;
+        position.y = Math.max(0, position.y + distance);
     }
     
     /**
@@ -189,7 +183,7 @@ public class Artifact implements Exportable, Modelable {
             x = Double.parseDouble(element.getAttribute("x"));
             y = Double.parseDouble(element.getAttribute("y"));
         }catch (NumberFormatException exception) {}
-        this.setPosition(new Point(x.intValue(), y.intValue()));
+        setPosition(new Point(x.intValue(), y.intValue()));
     }
     
     /**
@@ -198,7 +192,7 @@ public class Artifact implements Exportable, Modelable {
      * @param y Y Position.
      */
     public void setPosition(Integer x, Integer y) {
-        this.position = new Point(x, y);
+        position = new Point(x, y);
     }
     
     /**
@@ -214,7 +208,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Artifact Global Position.
      */
     public Point getGlobal() {
-        return this.global;
+        return global;
     }
     
     /**
@@ -230,7 +224,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Artifact X Global Position.
      */
     public Integer getGlobalX() {
-        return this.global.x;
+        return global.x;
     }
     
     /**
@@ -238,7 +232,7 @@ public class Artifact implements Exportable, Modelable {
      * @param x Artifact X Global Position.
      */
     public void setGlobalX(Integer x) {
-        this.global.x = x;
+        global.x = x;
     }
     
     /**
@@ -246,7 +240,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Artifact Y Global Position.
      */
     public Integer getGlobalY() {
-        return this.global.y;
+        return global.y;
     }
     
     /**
@@ -254,7 +248,7 @@ public class Artifact implements Exportable, Modelable {
      * @param y Artifact Y Global Position.
      */
     public void setGlobalY(Integer y) {
-        this.global.y = y;
+        global.y = y;
     }
 
     /**
@@ -262,7 +256,7 @@ public class Artifact implements Exportable, Modelable {
      * @return X Center.
      */
     public Integer getXCenter() {
-        return this.getX() + (this.getWidth() / 2);
+        return getX() + (getWidth() / 2);
     }
     
     /**
@@ -270,7 +264,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Y Center.
      */
     public Integer getYCenter() {
-        return this.getY() + (this.getHeight() / 2);
+        return getY() + (getHeight() / 2);
     }
     
     /**
@@ -278,7 +272,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Artifact Size.
      */
     public Point getSize() {
-        return this.size;
+        return size;
     }
 
     /**
@@ -286,7 +280,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Artifact Height.
      */
     public Integer getHeight() {
-        return this.size.y;
+        return size.y;
     }
     
     /**
@@ -294,7 +288,7 @@ public class Artifact implements Exportable, Modelable {
      * @param height Artifact Height.
      */
     public void setHeight(Integer height) {
-        this.size.y = height;
+        size.y = height;
     }
     
     /**
@@ -302,7 +296,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Artifact Width.
      */
     public Integer getWidth() {
-        return this.size.x;
+        return size.x;
     }
     
     /**
@@ -310,7 +304,7 @@ public class Artifact implements Exportable, Modelable {
      * @param width Artifact Width.
      */
     public void setWidth(Integer width) {
-        this.size.x = width;
+        size.x = width;
     }
     
     /**
@@ -324,7 +318,7 @@ public class Artifact implements Exportable, Modelable {
             height = Double.parseDouble(element.getAttribute("height"));
             width  = Double.parseDouble(element.getAttribute("width"));
         }catch (NumberFormatException exception) {}
-        this.setSize(new Point(width.intValue(), height.intValue()));
+        setSize(new Point(width.intValue(), height.intValue()));
     }
     
     /**
@@ -333,7 +327,7 @@ public class Artifact implements Exportable, Modelable {
      * @param height Artifact Height.
      */
     public void setSize(Integer width, Integer height) {
-        this.size = new Point(height, width);
+        size = new Point(height, width);
     }
     
     /**
@@ -346,7 +340,7 @@ public class Artifact implements Exportable, Modelable {
     
     @Override
     public String getTitle() {
-        return this.element.getName();
+        return element.getName();
     }
     
     /**
@@ -354,7 +348,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Artifact Abstract.
      */
     public String getAbstract() {
-        return "[" + this.getId() + "] " + this.element.getName();
+        return "[" + getId() + "] " + element.getName();
     }
     
     /**
@@ -362,7 +356,7 @@ public class Artifact implements Exportable, Modelable {
      * @return Artifact Summary.
      */
     public String getSummary() {
-        return "Artifact: " + this.element.getName();
+        return "Artifact: " + element.getName();
     }
     
     /**
@@ -370,17 +364,17 @@ public class Artifact implements Exportable, Modelable {
      * @return Artifact Icon.
      */
     public String getIcon() {
-        return this.element.getIcon();
+        return element.getIcon();
     }
     
     @Override
     public String getStyleLabel() {
-        return this.element.getStyleLabel();
+        return element.getStyleLabel();
     }
 
     @Override
     public Map getStyle() {
-        Map    style = new HashMap(this.element.getStyle());
+        Map    style = new HashMap(element.getStyle());
                style.put(mxConstants.STYLE_EDITABLE, "0");
         return style;
     }
@@ -389,12 +383,12 @@ public class Artifact implements Exportable, Modelable {
     public String export() {
         String export  = "        "; 
                export += "<artifact"; 
-               export += " id=\""        + this.id              + "\"";
-               export += " element=\""   + this.element.getId() + "\"";
-               export += " x=\""         + this.getX()          + "\"";
-               export += " y=\""         + this.getY()          + "\"";
-               export += " height=\""    + this.getHeight()     + "\"";
-               export += " width=\""     + this.getWidth()      + "\"";
+               export += " id=\""        + id              + "\"";
+               export += " element=\""   + element.getId() + "\"";
+               export += " x=\""         + getX()          + "\"";
+               export += " y=\""         + getY()          + "\"";
+               export += " height=\""    + getHeight()     + "\"";
+               export += " width=\""     + getWidth()      + "\"";
                export += "/>\n";
         return export;
     }
@@ -403,18 +397,18 @@ public class Artifact implements Exportable, Modelable {
     public boolean equals(Object object) {
         if (object instanceof Artifact == false)
             return false;
-        return Objects.equals(this.id, ((Artifact) object).getId());
+        return Objects.equals(id, ((Artifact) object).getId());
     }
 
     @Override
     public int hashCode() {
         int    hash = 5;
-               hash = 61 * hash + Objects.hashCode(this.id);
+               hash = 61 * hash + Objects.hashCode(id);
         return hash;
     }
     
     @Override
     public String toString() {
-        return this.element.toString();
+        return element.toString();
     }
 }

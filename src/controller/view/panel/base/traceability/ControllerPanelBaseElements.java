@@ -9,7 +9,7 @@ import view.panel.base.traceability.PanelBaseElements;
  * @author Leandro
  * @since  2019-07-22
  * @see    controller.view.panel.base.traceability.ControllerPanelBase
- * @see    model.structural.base.traceability.Traceability
+ * @see    model.structural.base.traceability.Reference
  * @see    view.panel.base.traceability.PanelBaseElements
  */
 public class ControllerPanelBaseElements extends ControllerPanelBase {

@@ -17,7 +17,7 @@ import model.structural.diagram.activity.base.association.FlowUML;
  * <p>Class of Model <b>ActivityDiagram</b>.</p>
  * <p>Class responsible for representing the <b>Activity Diagram</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  17/07/2019
+ * @since  2019-07-17
  * @see    model.structural.base.Diagram
  * @see    model.structural.base.association.Association
  * @see    model.structural.diagram.activity.base.ActivityUML
@@ -39,7 +39,7 @@ public final class ActivityDiagram extends Diagram {
      */
     public ActivityDiagram(Project project) {
         super(project);
-        this.init();
+        init();
     }
     
     /**
@@ -49,17 +49,17 @@ public final class ActivityDiagram extends Diagram {
      */
     public ActivityDiagram(Project project, org.w3c.dom.Element element) {
         super(project, element);
-        this.init();
+        init();
     }
     
     @Override
     public void init() {
-        this.type       = "Activity";
-        this.activities = new HashMap<>();
-        this.decisions  = new HashMap<>();
-        this.initials   = new HashMap<>();
-        this.finals     = new HashMap<>();
-        this.flows      = new HashMap<>();
+        type       = "Activity";
+        activities = new HashMap<>();
+        decisions  = new HashMap<>();
+        initials   = new HashMap<>();
+        finals     = new HashMap<>();
+        flows      = new HashMap<>();
     }
     
     /**
@@ -67,10 +67,10 @@ public final class ActivityDiagram extends Diagram {
      * @param activity Activity UML.
      */
     public void addActivity(ActivityUML activity) {
-        activity.setId(this.nextId(activity));
-        if (this.activities.get(activity.getId()) == null) {
-            this.activities.put(activity.getId(), activity);
-            this.addElement(activity);
+        activity.setId(nextId(activity));
+        if (activities.get(activity.getId()) == null) {
+            activities.put(activity.getId(), activity);
+            addElement(activity);
         }
     }
     
@@ -79,9 +79,9 @@ public final class ActivityDiagram extends Diagram {
      * @param activity Activity UML.
      */
     public void removeActivity(ActivityUML activity) {
-        this.removeAssociations(activity);
-        this.removeElement(activity);
-        this.activities.remove(activity.getId());
+        removeAssociations(activity);
+        removeElement(activity);
+        activities.remove(activity.getId());
     }
     
     /**
@@ -89,7 +89,7 @@ public final class ActivityDiagram extends Diagram {
      * @return Activities List.
      */
     public List<ActivityUML> getActivitiesList() {
-        return new ArrayList<>(this.activities.values());
+        return new ArrayList<>(activities.values());
     }
     
     /**
@@ -97,10 +97,10 @@ public final class ActivityDiagram extends Diagram {
      * @param decision Decision UML.
      */
     public void addDecision(DecisionUML decision) {
-        decision.setId(this.nextId(decision));
-        if (this.decisions.get(decision.getId()) == null) {
-            this.decisions.put(decision.getId(), decision);
-            this.addElement(decision);
+        decision.setId(nextId(decision));
+        if (decisions.get(decision.getId()) == null) {
+            decisions.put(decision.getId(), decision);
+            addElement(decision);
         }
     }
     
@@ -109,9 +109,9 @@ public final class ActivityDiagram extends Diagram {
      * @param decision Decision UML.
      */
     public void removeDecision(DecisionUML decision) {
-        this.removeAssociations(decision);
-        this.removeElement(decision);
-        this.decisions.remove(decision.getId());
+        removeAssociations(decision);
+        removeElement(decision);
+        decisions.remove(decision.getId());
     }
     
     /**
@@ -119,7 +119,7 @@ public final class ActivityDiagram extends Diagram {
      * @return Decisions List.
      */
     public List<DecisionUML> getDecisionsList() {
-        return new ArrayList<>(this.decisions.values());
+        return new ArrayList<>(decisions.values());
     }
     
     /**
@@ -127,10 +127,10 @@ public final class ActivityDiagram extends Diagram {
      * @param initial Initial UML.
      */
     public void addInitial(InitialUML initial) {
-        initial.setId(this.nextId(initial));
-        if (this.initials.get(initial.getId()) == null) {
-            this.initials.put(initial.getId(), initial);
-            this.addElement(initial);
+        initial.setId(nextId(initial));
+        if (initials.get(initial.getId()) == null) {
+            initials.put(initial.getId(), initial);
+            addElement(initial);
         }
     }
     
@@ -139,9 +139,9 @@ public final class ActivityDiagram extends Diagram {
      * @param initial Initial UML.
      */
     public void removeInitial(InitialUML initial) {
-        this.removeAssociations(initial);
-        this.removeElement(initial);
-        this.initials.remove(initial.getId());
+        removeAssociations(initial);
+        removeElement(initial);
+        initials.remove(initial.getId());
     }
     
     /**
@@ -149,10 +149,10 @@ public final class ActivityDiagram extends Diagram {
      * @param final_ Final UML.
      */
     public void addFinal(FinalUML final_) {
-        final_.setId(this.nextId(final_));
-        if (this.finals.get(final_.getId()) == null) {
-            this.finals.put(final_.getId(), final_);
-            this.addElement(final_);
+        final_.setId(nextId(final_));
+        if (finals.get(final_.getId()) == null) {
+            finals.put(final_.getId(), final_);
+            addElement(final_);
         }
     }
     
@@ -161,9 +161,9 @@ public final class ActivityDiagram extends Diagram {
      * @param final_ Final UML.
      */
     public void removeFinal(FinalUML final_) {
-        this.removeAssociations(final_);
-        this.removeElement(final_);
-        this.finals.remove(final_.getId());
+        removeAssociations(final_);
+        removeElement(final_);
+        finals.remove(final_.getId());
     }
     
     /**
@@ -171,10 +171,10 @@ public final class ActivityDiagram extends Diagram {
      * @param flow Flow UML.
      */
     public void addFlow(FlowUML flow) {
-        flow.setId(this.nextId(flow));
-        if (this.flows.get(flow.getId()) == null) {
-            this.flows.put(flow.getId(), flow);
-            this.addAssociation(flow);
+        flow.setId(nextId(flow));
+        if (flows.get(flow.getId()) == null) {
+            flows.put(flow.getId(), flow);
+            addAssociation(flow);
         }
     }
     
@@ -183,8 +183,8 @@ public final class ActivityDiagram extends Diagram {
      * @param flow Flow UML.
      */
     public void removeFlow(FlowUML flow) {
-        super.removeAssociation(flow);
-        this.flows.remove(flow.getId());
+        removeAssociation(flow);
+        flows.remove(flow.getId());
     }
     
     /**
@@ -193,7 +193,7 @@ public final class ActivityDiagram extends Diagram {
      */
     public List<FlowUML> getFlowsList() {
         ArrayList<FlowUML> list = new ArrayList<>();
-        for (Association association : this.flows.values())
+        for (Association association : flows.values())
                list.add((FlowUML) association);
         return list;
     }
@@ -203,13 +203,13 @@ public final class ActivityDiagram extends Diagram {
      * @param element Element.
      */
     private void removeAssociations(Element element) {
-        this.removeAssociation(element, this.flows);
+        removeAssociation(element, flows);
     }
     
     @Override
     public void removeAssociation(Association association) {
         if (association instanceof FlowUML)
-            this.removeFlow((FlowUML) association);
+            removeFlow((FlowUML) association);
         else
             super.removeAssociation(association);
     }
@@ -217,7 +217,7 @@ public final class ActivityDiagram extends Diagram {
     @Override
     public List<Element> getTreeElementsList() {
         List<Element> filter  = new ArrayList<>();
-        for (Element  element : this.getElementsList()) {
+        for (Element  element : getElementsList()) {
             if (element.getType().equals("activity"))
                 filter.add(element);
         }
@@ -238,18 +238,13 @@ public final class ActivityDiagram extends Diagram {
     public Diagram getClone() {
         try {
             ActivityDiagram diagram = (ActivityDiagram) super.clone();
-                            diagram.setElements(new HashMap<>(this.elements));
-                            diagram.setAssociations(new HashMap<>(this.associations));
-                            diagram.setVariabilities(new HashMap<>(this.variabilities));
+                            diagram.setElements(new HashMap<>(elements));
+                            diagram.setAssociations(new HashMap<>(associations));
+                            diagram.setVariabilities(new HashMap<>(variabilities));
             return          diagram;
         } catch (CloneNotSupportedException exception) {
             System.out.println("Error");
             return null;
         }
-    }
-    
-    @Override
-    public String toString() {
-        return super.toString();
     }
 }

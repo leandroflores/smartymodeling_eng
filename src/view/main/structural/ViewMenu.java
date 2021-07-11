@@ -176,16 +176,16 @@ public final class ViewMenu extends View implements Operation {
     private void createProductLineMenu() {
         createMenu("productLine", "SPL Profile");
         
-        createMenuItem("edit_profile",     "Edit Profile",     "menu/product_line/profile.png",      KeyEvent.VK_L);
-        createMenuItem("new_product",      "New Product",      "menu/product_line/product.png",      KeyEvent.VK_P);
-        createMenuItem("new_instance",     "New Instance",     "menu/product_line/instance.png",     KeyEvent.VK_I);
-        createMenuItem("new_traceability", "New Traceability", "menu/product_line/traceability.png", KeyEvent.VK_Y);
+        createMenuItem("edit_profile",  "Edit Profile",  "menu/product_line/profile.png",      KeyEvent.VK_L);
+        createMenuItem("new_product",   "New Product",   "menu/product_line/product.png",      KeyEvent.VK_P);
+        createMenuItem("new_instance",  "New Instance",  "menu/product_line/instance.png",     KeyEvent.VK_I);
+        createMenuItem("new_reference", "New Reference", "menu/product_line/reference.png", KeyEvent.VK_Y);
         
         getMenu("productLine").add(getMenuItemEditProfile());
         getMenu("productLine").addSeparator();
         getMenu("productLine").add(getMenuItemNewProduct());
         getMenu("productLine").add(getMenuItemNewInstance());
-        getMenu("productLine").add(getMenuItemNewTraceability());
+        getMenu("productLine").add(getMenuItemNewReference());
     }
     
     /**
@@ -386,7 +386,7 @@ public final class ViewMenu extends View implements Operation {
         getMenuItemEditProfile().setEnabled(flag);
         getMenuItemNewProduct().setEnabled(flag);
         getMenuItemNewInstance().setEnabled(flag);
-        getMenuItemNewTraceability().setEnabled(flag);
+        getMenuItemNewReference().setEnabled(flag);
         
         getMenuItemExportDiagram().setEnabled(flag);
         getMenuItemExportProduct().setEnabled(flag);
@@ -726,11 +726,11 @@ public final class ViewMenu extends View implements Operation {
     }
     
     /**
-     * Method responsible for returning the Menu Item New Traceability.
-     * @return Menu Item New Traceability.
+     * Method responsible for returning the Menu Item New Reference.
+     * @return Menu Item New Reference.
      */
-    public JMenuItem getMenuItemNewTraceability() {
-        return getMenuItem("new_traceability");
+    public JMenuItem getMenuItemNewReference() {
+        return getMenuItem("new_reference");
     }
     
     /**

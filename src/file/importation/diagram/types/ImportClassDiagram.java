@@ -273,7 +273,7 @@ public class ImportClassDiagram extends ImportDiagram {
      * Method responsible for importing the References.
      */
     protected void importReferences() {
-        NodeList list =  element.getElementsByTagName("reference");
+        NodeList list =  element.getElementsByTagName("nested");
         for (int i = 0; i < list.getLength(); i++) {
             Element    current  = (Element)    list.item(i);
             PackageUML package_ = (PackageUML) getElement(current.getAttribute("package"));

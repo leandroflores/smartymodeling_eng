@@ -22,9 +22,9 @@ public class ComponentUML extends Element {
      */
     public ComponentUML(Diagram diagram) {
         super(diagram);
-        this.name = "Component";
-        this.size = new Point(200, 100);
-        this.type = "component";
+        name = "Component";
+        size = new Point(200, 100);
+        type = "component";
     }
     
     /**
@@ -34,12 +34,12 @@ public class ComponentUML extends Element {
      */
     public ComponentUML(org.w3c.dom.Element element, Diagram diagram) {
         super(element, diagram, true);
-        this.type = "component";
+        type = "component";
     }
     
     @Override
     public String getIcon() {
-        return super.getFolder() + "component/component.png";
+        return getFolder() + "component/component.png";
     }
     
     @Override

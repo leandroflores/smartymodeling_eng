@@ -72,10 +72,10 @@ public final class PanelParametersUML extends Panel {
      * @return 
      */
     private Object[][] getParametersUML() {
-        Object[][] values    = new Object[method.getParameters().size()][2];
-        for (int i = 0;   i  < method.getParameters().size(); i++)
-                   values[i] = method.getParameters().get(i).getValues();
-        return     values;
+        Object[][] values = new Object[method.getParameters().size()][2];
+        for (int i = 0; i < method.getParameters().size(); i++)
+            values[i] = method.getParameters().get(i).getValues();
+        return values;
     }
     
     /**

@@ -22,8 +22,8 @@ public class InterfaceUML extends Entity {
      */
     public InterfaceUML(ClassDiagram diagram) {
         super(diagram);
-        this.name = "Interface";
-        this.type = "interface";
+        name = "Interface";
+        type = "interface";
         super.updateSize();
     }
     
@@ -34,7 +34,7 @@ public class InterfaceUML extends Entity {
      */
     public InterfaceUML(Element element, Diagram diagram) {
         super(element, diagram);
-        this.type = "interface";
+        type = "interface";
     }
     
     @Override
@@ -45,14 +45,14 @@ public class InterfaceUML extends Entity {
     @Override
     public Set<MethodUML> getAllMethods() {
         Set    set = new HashSet();
-               set.addAll(this.getMethodsList());
-               set.addAll(this.getInheritedMethods());
+               set.addAll(getMethodsList());
+               set.addAll(getInheritedMethods());
         return set;
     }
     
     @Override
     public Set<MethodUML> getExportableMethods() {
-        return new HashSet<>(this.getMethodsList());
+        return new HashSet<>(getMethodsList());
     }
     
     @Override
@@ -85,8 +85,8 @@ public class InterfaceUML extends Entity {
     
     @Override
     public String getSignatureCode() {
-        String signature  = "public interface " + this.name + " ";
-               signature += this.getExtendsCode();
+        String signature  = "public interface " + name + " ";
+               signature += getExtendsCode();
         return signature;
     }
     
@@ -97,23 +97,23 @@ public class InterfaceUML extends Entity {
     
     @Override
     public String exportHeader() {
-        String export  = "    <"         + this.type;
-               export += " id=\""        + this.id           + "\"";
-               export += " name=\""      + this.name         + "\"";
-               export += " mandatory=\"" + this.mandatory    + "\"";
-               export += " x=\""         + this.getX()       + "\"";
-               export += " y=\""         + this.getY()       + "\"";
-               export += " globalX=\""   + this.getGlobalX() + "\"";
-               export += " globalY=\""   + this.getGlobalY() + "\"";
-               export += " height=\""    + this.getHeight()  + "\"";
-               export += " width=\""     + this.getWidth()   + "\"";
-               export += this.exportParent();
+        String export  = "    <"         + type;
+               export += " id=\""        + id           + "\"";
+               export += " name=\""      + name         + "\"";
+               export += " mandatory=\"" + mandatory    + "\"";
+               export += " x=\""         + getX()       + "\"";
+               export += " y=\""         + getY()       + "\"";
+               export += " globalX=\""   + getGlobalX() + "\"";
+               export += " globalY=\""   + getGlobalY() + "\"";
+               export += " height=\""    + getHeight()  + "\"";
+               export += " width=\""     + getWidth()   + "\"";
+               export += exportParent();
                export += ">\n";
         return export;
     }
     
     @Override
     public String toString() {
-        return this.name;
+        return name;
     }
 }

@@ -17,7 +17,7 @@ import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.base.product.Relationship;
 import model.structural.base.requirement.Requirement;
-import model.structural.base.traceability.Traceability;
+import model.structural.base.traceability.Reference;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ActivityDiagram;
 import model.structural.diagram.ClassDiagram;
@@ -69,7 +69,7 @@ import view.panel.edit.base.requirement.PanelEditRequirement;
 import view.panel.edit.diagram.sequence.base.PanelEditInstanceUML;
 import view.panel.edit.diagram.sequence.base.PanelEditLifelineUML;
 import view.panel.edit.diagram.sequence.base.association.PanelEditMessageUML;
-import view.panel.edit.base.traceability.PanelEditTraceability;
+import view.panel.edit.base.traceability.PanelEditReference;
 import view.panel.edit.diagram.usecase.base.PanelEditActorUML;
 import view.panel.edit.diagram.usecase.base.PanelEditUseCaseUML;
 import view.panel.edit.base.variability.PanelEditVariability;
@@ -372,11 +372,11 @@ public final class PanelProject extends Panel {
     }
     
     /**
-     * Method responsible for initializing the Panel Edit Traceability.
-     * @param traceability Traceability.
+     * Method responsible for initializing the Panel Edit Reference.
+     * @param reference Reference.
      */
-    public void initPanelEditTraceability(Traceability traceability) {
-        panelEdit = new PanelEditTraceability(viewMenu, traceability);
+    public void initPanelEditReference(Reference reference) {
+        panelEdit = new PanelEditReference(viewMenu, reference);
         updatePanelEdit();
     }
     

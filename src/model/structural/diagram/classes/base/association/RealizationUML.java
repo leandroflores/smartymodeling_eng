@@ -11,7 +11,7 @@ import model.structural.diagram.classes.base.InterfaceUML;
  * <p>Class of Model <b>RealizationUML</b>.</p>
  * <p>Class responsible for representing <b>Realization UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  03/06/2019
+ * @since  2019-06-03
  * @see    model.structural.base.association.Association
  * @see    model.structural.diagram.classes.base.ClassUML
  * @see    model.structural.diagram.classes.base.InterfaceUML
@@ -25,9 +25,9 @@ public class RealizationUML extends Association {
      */
     public RealizationUML(ClassUML class_, InterfaceUML interface_) {
         super();
-        this.source = class_;
-        this.target = interface_;
-        this.type   = "realization";
+        source = class_;
+        target = interface_;
+        type   = "realization";
     }
     
     /**
@@ -36,12 +36,12 @@ public class RealizationUML extends Association {
      */
     public RealizationUML(org.w3c.dom.Element element) {
         super(element);
-        this.type = "realization";
+        type = "realization";
     }
 
     @Override
     public ClassUML getSource() {
-        return (ClassUML) this.source;
+        return (ClassUML) source;
     }
 
     /**
@@ -54,7 +54,7 @@ public class RealizationUML extends Association {
 
     @Override
     public InterfaceUML getTarget() {
-        return (InterfaceUML) this.target;
+        return (InterfaceUML) target;
     }
 
     /**
@@ -91,10 +91,10 @@ public class RealizationUML extends Association {
     
     @Override
     protected String exportHeader() {
-        String export  = "    <" + this.type;
-               export += " id=\""        + this.id.trim()      + "\"";
-               export += " class=\""     + this.source.getId() + "\"";
-               export += " interface=\"" + this.target.getId() + "\"";
+        String export  = "    <"  + type;
+               export += " id=\"" + id.trim() + "\"";
+               export += " class=\""     + source.getId() + "\"";
+               export += " interface=\"" + target.getId() + "\"";
                export += ">\n";
         return export;
     }

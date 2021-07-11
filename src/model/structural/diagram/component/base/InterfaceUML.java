@@ -22,9 +22,9 @@ public class InterfaceUML extends Element {
      */
     public InterfaceUML(Diagram diagram) {
         super(diagram);
-        this.name = "Interface";
-        this.size = new Point(30, 30);
-        this.type = "interface";
+        name = "Interface";
+        size = new Point(30, 30);
+        type = "interface";
     }
     
     /**
@@ -34,12 +34,12 @@ public class InterfaceUML extends Element {
      */
     public InterfaceUML(org.w3c.dom.Element element, Diagram diagram) {
         super(element, diagram, true);
-        this.type = "interface";
+        type = "interface";
     }
     
     @Override
     public String getIcon() {
-        return super.getFolder() + "component/interface.png";
+        return getFolder() + "component/interface.png";
     }
     
     @Override

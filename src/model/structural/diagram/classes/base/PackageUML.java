@@ -30,10 +30,10 @@ public class PackageUML extends Element {
      */
     public PackageUML(ClassDiagram diagram) {
         super(diagram);
-        this.name = "package";
-        this.size = new Point(250, 100);
-        this.type = "package";
-        this.init();
+        name = "package";
+        size = new Point(250, 100);
+        type = "package";
+        init();
     }
     
     /**
@@ -43,56 +43,56 @@ public class PackageUML extends Element {
      */
     public PackageUML(org.w3c.dom.Element element, Diagram diagram) {
         super(element, diagram, true);
-        this.type = "package";
-        this.init();
+        type = "package";
+        init();
     }
 
     /**
      * Method responsible for initializing the Maps.
      */
     private void init() {
-        this.parent   = null;
-        this.packages = new HashMap<>();
-        this.entities = new HashMap<>();
+        parent   = null;
+        packages = new HashMap<>();
+        entities = new HashMap<>();
     }
     
     @Override
     public void setDefaultName() {
         super.setDefaultName();
-        this.name = this.name.toLowerCase();
+        name = name.toLowerCase();
     }
     
     /**
      * Method responsible for updating the Package Size.
      */
     public void updateSize() {
-        this.setMinHeight();
-        this.setMinWidth();
-        this.updateParentSize();
+        setMinHeight();
+        setMinWidth();
+        updateParentSize();
     }
     
     /**
      * Method responsible for updating the Parent Size.
      */
     public void updateParentSize() {
-        if ((this.parent != null) && (!this.parent.equals(this)))
-             this.parent.updateSize();
+        if ((parent != null) && (!parent.equals(this)))
+             parent.updateSize();
     }
     
     /**
      * Method responsible for setting the Min Height.
      */
     public void setMinHeight() {
-        Integer height = this.getMinHeight();
-        this.setHeight(height > this.getHeight() ? height : this.getHeight());
+        Integer height = getMinHeight();
+        setHeight(height > getHeight() ? height : getHeight());
     }
     
     /**
      * Method responsible for setting the Min Width.
      */
     public void setMinWidth() {
-        Integer width = this.getMinWidth();
-        this.setWidth(width  >  this.getWidth() ?  width : this.getWidth());
+        Integer width = getMinWidth();
+        setWidth(width  >  getWidth() ?  width : getWidth());
     }
     
     /**
@@ -100,9 +100,9 @@ public class PackageUML extends Element {
      * @return Min Height.
      */
     public Integer getMinHeight() {
-        Integer minStereotypes = this.getStereotypesList().size() * 21 + 50;
-        Integer minPackages    = this.getPackagesMinHeight();
-        Integer minEntities    = this.getEntitiesMinHeight();
+        Integer minStereotypes = getStereotypesList().size() * 21 + 50;
+        Integer minPackages    = getPackagesMinHeight();
+        Integer minEntities    = getEntitiesMinHeight();
         return  minPackages > minEntities ? minPackages : minEntities;
     }
     
@@ -112,9 +112,9 @@ public class PackageUML extends Element {
      */
     public Integer getPackagesMinHeight() {
         Integer minimum = 100;
-        for (PackageUML packageUML : this.getPackagesList()) {
-            if (packageUML.getAbsoluteHeight() > minimum)
-                minimum = packageUML.getAbsoluteHeight();
+        for (PackageUML package_ : getPackagesList()) {
+            if (package_.getAbsoluteHeight() > minimum)
+                minimum = package_.getAbsoluteHeight();
         }
         return  minimum;
     }
@@ -125,7 +125,7 @@ public class PackageUML extends Element {
      */
     public Integer getEntitiesMinHeight() {
         Integer minimum = 100;
-        for (Entity entity : this.getEntitiesList()) {
+        for (Entity entity : getEntitiesList()) {
             if (entity.getAbsoluteHeight() > minimum)
                 minimum = entity.getAbsoluteHeight();
         }
@@ -137,8 +137,8 @@ public class PackageUML extends Element {
      * @return Min Width.
      */
     public Integer getMinWidth() {
-        Integer minPackages = this.getPackagesMinWidth() + 10;
-        Integer minEntities = this.getEntitiesMinWidth() + 10;
+        Integer minPackages = getPackagesMinWidth() + 10;
+        Integer minEntities = getEntitiesMinWidth() + 10;
         return  minPackages > minEntities ? minPackages : minEntities;
     }
     
@@ -148,7 +148,7 @@ public class PackageUML extends Element {
      */
     public Integer getPackagesMinWidth() {
         Integer minimum = 100;
-        for (PackageUML packageUML : this.getPackagesList()) {
+        for (PackageUML packageUML : getPackagesList()) {
             if (packageUML.getAbsoluteWidth() > minimum)
                 minimum = packageUML.getAbsoluteWidth();
         }
@@ -161,7 +161,7 @@ public class PackageUML extends Element {
      */
     public Integer getEntitiesMinWidth() {
         Integer minimum = 100;
-        for (Entity entity : this.getEntitiesList()) {
+        for (Entity entity : getEntitiesList()) {
             if (entity.getAbsoluteWidth() > minimum)
                 minimum = entity.getAbsoluteWidth();
         }
@@ -173,13 +173,13 @@ public class PackageUML extends Element {
      * @return Name Position.
      */
     public Integer getNamePosition() {
-        return (this.getStereotypesList().size() * 21) + 5;
+        return (getStereotypesList().size() * 21) + 5;
     }
     
     @Override
     public void dx(Integer distance) {
         super.dx(distance);
-        this.updateSize();
+        updateSize();
     }
     
     /**
@@ -187,7 +187,7 @@ public class PackageUML extends Element {
      * @param distance Distance.
      */
     public void dxPackages(Integer distance) {
-        for (PackageUML packageUML : this.getPackagesList()) {
+        for (PackageUML packageUML : getPackagesList()) {
             packageUML.dx(distance);
         }
     }
@@ -197,14 +197,14 @@ public class PackageUML extends Element {
      * @param distance Distance.
      */
     public void dxEntities(Integer distance) {
-        for (Entity entity : this.getEntitiesList())
+        for (Entity entity : getEntitiesList())
             entity.dx(distance);
     }
     
     @Override
     public void dy(Integer distance) {
         super.dy(distance);
-        this.updateSize();
+        updateSize();
     }
     
     /**
@@ -212,7 +212,7 @@ public class PackageUML extends Element {
      * @param distance Distance.
      */
     public void dyPackages(Integer distance) {
-        for (PackageUML packageUML : this.getPackagesList())
+        for (PackageUML packageUML : getPackagesList())
             packageUML.dy(distance);
     }
     
@@ -221,7 +221,7 @@ public class PackageUML extends Element {
      * @param distance Distance.
      */
     public void dyEntities(Integer distance) {
-        for (Entity entity : this.getEntitiesList())
+        for (Entity entity : getEntitiesList())
             entity.dy(distance);
     }
     
@@ -230,7 +230,7 @@ public class PackageUML extends Element {
      * @return Absolute Height.
      */
     public Integer getAbsoluteHeight() {
-        return this.getY() + this.getHeight() + 10;
+        return getY() + getHeight() + 10;
     }
     
     /**
@@ -238,7 +238,7 @@ public class PackageUML extends Element {
      * @return Absolute Width.
      */
     public Integer getAbsoluteWidth() {
-        return this.getX() + this.getWidth()  + 10;
+        return getX() + getWidth()  + 10;
     }
     
     /**
@@ -246,12 +246,12 @@ public class PackageUML extends Element {
      * @return Stereotypes List.
      */
     public List<Stereotype> getStereotypesList() {
-        return this.diagram.getStereotypesList(this);
+        return diagram.getStereotypesList(this);
     }
     
     @Override
     public ClassDiagram getDiagram() {
-        return (ClassDiagram) this.diagram;
+        return (ClassDiagram) diagram;
     }
 
     /**
@@ -267,16 +267,16 @@ public class PackageUML extends Element {
      * @return Parent Package.
      */
     public PackageUML getParent() {
-        return this.parent;
+        return parent;
     }
 
     /**
      * Method responsible for reseting the Parent.
      */
     public void resetParent() {
-        if (this.parent != null)
-            this.parent.removePackage(this);
-        this.parent = null;
+        if (parent != null)
+            parent.removePackage(this);
+        parent = null;
     }
     
     /**
@@ -284,13 +284,13 @@ public class PackageUML extends Element {
      * @param newPackageUML New Package.
      */
     public void changePackageUML(PackageUML newPackageUML) {
-        if (this.parent   != null)
-            this.parent.removePackage(this);
+        if (parent != null)
+            parent.removePackage(this);
         if (newPackageUML != null) {
             newPackageUML.addPackage(this);
             newPackageUML.updateSize();
         }
-        this.setParent(newPackageUML);
+        setParent(newPackageUML);
     }
     
     /**
@@ -306,7 +306,7 @@ public class PackageUML extends Element {
      * @return Packages HashMap.
      */
     public HashMap getPackages() {
-        return this.packages;
+        return packages;
     }
     
     /**
@@ -314,7 +314,7 @@ public class PackageUML extends Element {
      * @return Packages List.
      */
     public List<PackageUML> getPackagesList() {
-        return new ArrayList<>(this.packages.values());
+        return new ArrayList<>(packages.values());
     }
     
     /**
@@ -323,7 +323,7 @@ public class PackageUML extends Element {
      */
     public void addPackage(PackageUML package_) {
         if (!package_.equals(this))
-            this.packages.put(package_.getId(), package_);
+            packages.put(package_.getId(), package_);
     }
     
     /**
@@ -331,7 +331,7 @@ public class PackageUML extends Element {
      * @param package_ Package UML.
      */
     public void removePackage(PackageUML package_) {
-        this.packages.remove(package_.getId());
+        packages.remove(package_.getId());
     }
     
     /**
@@ -347,7 +347,7 @@ public class PackageUML extends Element {
      * @return Entity HashMap.
      */
     public HashMap getEntities() {
-        return this.entities;
+        return entities;
     }
     
     /**
@@ -355,7 +355,7 @@ public class PackageUML extends Element {
      * @return Entities List.
      */
     public List<Entity> getEntitiesList() {
-        return new ArrayList<>(this.entities.values());
+        return new ArrayList<>(entities.values());
     }
     
     /**
@@ -363,7 +363,7 @@ public class PackageUML extends Element {
      * @param entity Entity.
      */
     public void addEntity(Entity entity) {
-        this.entities.put(entity.getId(), entity);
+        entities.put(entity.getId(), entity);
     }
     
     /**
@@ -371,7 +371,7 @@ public class PackageUML extends Element {
      * @param entity Entity.
      */
     public void removeEntity(Entity entity) {
-        this.entities.remove(entity.getId());
+        entities.remove(entity.getId());
     }
     
     /**
@@ -387,7 +387,7 @@ public class PackageUML extends Element {
      * @param distance Distance.
      */
     public void updateGlobalX(Integer distance) {
-        this.setGlobalX(this.getAbsoluteX() + distance);
+        setGlobalX(getAbsoluteX() + distance);
     }
     
     /**
@@ -396,8 +396,8 @@ public class PackageUML extends Element {
      * @param y Y Value.
      */
     public void updateGlobal(Integer x, Integer y) {
-        this.updateGlobalPackages(x, y);
-        this.updateGlobalEntities(x, y);
+        updateGlobalPackages(x, y);
+        updateGlobalEntities(x, y);
     }
     
     /**
@@ -406,9 +406,9 @@ public class PackageUML extends Element {
      * @param y Y Value.
      */
     private void updateGlobalPackages(Integer x, Integer y) {
-        for (PackageUML packageUML : this.getPackagesList()) {
+        for (PackageUML packageUML : getPackagesList()) {
             packageUML.updateGlobal(x, y);
-            this.updateGlobalEntities(x, y);
+            updateGlobalEntities(x, y);
             packageUML.dxGlobal(x);
             packageUML.dyGlobal(y);
         }
@@ -420,7 +420,7 @@ public class PackageUML extends Element {
      * @param y Y Value.
      */
     private void updateGlobalEntities(Integer x, Integer y) {
-        for (Entity entity : this.getEntitiesList()) {
+        for (Entity entity : getEntitiesList()) {
             entity.dxGlobal(x);
             entity.dyGlobal(y);
         }
@@ -431,9 +431,9 @@ public class PackageUML extends Element {
      * @return Absolute X.
      */
     public Integer getAbsoluteX() {
-        if (this.parent == null)
-            return this.getX();
-        return this.getX() + this.parent.getAbsoluteX();
+        if (parent == null)
+            return getX();
+        return getX() + parent.getAbsoluteX();
     }
     
     /**
@@ -441,7 +441,7 @@ public class PackageUML extends Element {
      * @param distance Distance.
      */
     public void updateGlobalY(Integer distance) {
-        this.setGlobalY(this.getAbsoluteY() + distance);
+        setGlobalY(getAbsoluteY() + distance);
     }
     
     /**
@@ -449,19 +449,19 @@ public class PackageUML extends Element {
      * @return Absolute Y.
      */
     public Integer getAbsoluteY() {
-        if (this.parent == null)
-            return this.getY();
-        return this.getY() + this.parent.getAbsoluteY();
+        if (parent == null)
+            return getY();
+        return getY() + parent.getAbsoluteY();
     }
     
     @Override
     public String getIcon() {
-        return super.getFolder() + "classes/package.png";
+        return getFolder() + "classes/package.png";
     }
     
     @Override
     public String getStyleLabel() {
-        return "stylePackageUML" + this.id;
+        return "stylePackageUML" + id;
     }
     
     @Override
@@ -518,11 +518,11 @@ public class PackageUML extends Element {
      * @return Package Path.
      */
     public String getPath() {
-        if (this.parent == null)
-            return this.name;
-        if (this.parent.getParent() == null)
-            return this.parent.getName() + "." + this.name;
-        return this.parent.getPath() + "." + this.name;
+        if (parent == null)
+            return name;
+        if (parent.getParent() == null)
+            return parent.getName() + "." + name;
+        return parent.getPath() + "." + name;
     }
     
     /**
@@ -530,11 +530,11 @@ public class PackageUML extends Element {
      * @return Folder Path.
      */
     public String getFolderPath() {
-        return this.getPath().replace(".", "\\");
+        return getPath().replace(".", "\\");
     }
     
     @Override
     public String toString() {
-        return this.name;
+        return name;
     }
 }

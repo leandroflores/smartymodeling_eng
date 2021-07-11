@@ -22,9 +22,9 @@ public class ActorUML extends Element {
      */
     public ActorUML(Diagram diagram) {
         super(diagram);
-        this.name = "Actor";
-        this.size = new Point(75, 50);
-        this.type = "actor";
+        name = "Actor";
+        size = new Point(75, 50);
+        type = "actor";
     }
     
     /**
@@ -34,12 +34,12 @@ public class ActorUML extends Element {
      */
     public ActorUML(org.w3c.dom.Element element, Diagram diagram) {
         super(element, diagram, true);
-        this.type = "actor";
+        type = "actor";
     }
 
     @Override
     public String getIcon() {
-        return super.getFolder() + "usecase/actor.png";
+        return getFolder() + "usecase/actor.png";
     }
     
     @Override

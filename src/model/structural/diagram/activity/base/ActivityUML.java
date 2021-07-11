@@ -22,9 +22,9 @@ public class ActivityUML extends Element {
      */
     public ActivityUML(Diagram diagram) {
         super(diagram);
-        this.name = "Activity";
-        this.size = new Point(200, 80);
-        this.type = "activity";
+        name = "Activity";
+        size = new Point(200, 80);
+        type = "activity";
     }
     
     /**
@@ -34,12 +34,12 @@ public class ActivityUML extends Element {
      */
     public ActivityUML(org.w3c.dom.Element element, Diagram diagram) {
         super(element, diagram, true);
-        this.type = "activity";
+        type = "activity";
     }
 
     @Override
     public String getIcon() {
-        return super.getFolder() + "activity/activity.png";
+        return getFolder() + "activity/activity.png";
     }
     
     @Override

@@ -73,7 +73,7 @@ public final class Stereotype implements Exportable {
      * @param id Stereotype Id.
      */
     public void setId(String id) {
-        this.id = ((this.id == null) || (this.id.trim().equals(""))) ? id : this.id;
+        this.id = (getId() == null || getId().trim().equals("")) ? id : getId();
     }
 
     /**
@@ -137,7 +137,7 @@ public final class Stereotype implements Exportable {
     
     @Override
     public boolean equals(Object object) {
-        if (object instanceof Stereotype == false)
+        if (!(object instanceof Stereotype))
             return false;
         return Objects.equals(id, ((Stereotype) object).getId());
     }

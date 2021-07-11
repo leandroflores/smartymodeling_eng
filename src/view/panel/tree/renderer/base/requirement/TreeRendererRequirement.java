@@ -5,7 +5,7 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import model.structural.base.Element;
 import model.structural.base.requirement.Requirement;
-import model.structural.base.traceability.Traceability;
+import model.structural.base.traceability.Reference;
 import view.panel.tree.renderer.TreeRenderer;
 
 /**
@@ -36,13 +36,13 @@ public class TreeRendererRequirement extends TreeRenderer {
     }
     
     /**
-     * Method responsible for setting the Traceability.
-     * @param traceability Traceability.
+     * Method responsible for setting the Reference.
+     * @param reference Reference.
      */
-    public void setTraceabilityIcon(Traceability traceability) {
-        setText(traceability.getName());
-        setToolTipText(traceability.getName());
-        setIcon(getImage(traceability.getIcon()));
+    public void setReferenceIcon(Reference reference) {
+        setText(reference.getName());
+        setToolTipText(reference.getName());
+        setIcon(getImage(reference.getIcon()));
     }
     
     /**
@@ -62,8 +62,8 @@ public class TreeRendererRequirement extends TreeRenderer {
         Object object = ((DefaultMutableTreeNode) value).getUserObject();
         if (object instanceof Requirement)
             setRequirementIcon((Requirement) object);
-        else if (object instanceof Traceability)
-            setTraceabilityIcon((Traceability) object);
+        else if (object instanceof Reference)
+            setReferenceIcon((Reference) object);
         return this;
     }
 }

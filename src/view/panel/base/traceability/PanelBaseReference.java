@@ -1,30 +1,30 @@
 package view.panel.base.traceability;
 
-import controller.view.panel.base.traceability.ControllerPanelBaseTraceability;
+import controller.view.panel.base.traceability.ControllerPanelBaseReference;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
-import model.structural.base.traceability.Traceability;
+import model.structural.base.traceability.Reference;
 import view.main.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelBaseTraceability</b>.</p>
- * <p>Class responsible for defining a <b>Traceability Base Panel</b> of SMartyModeling.</p>
+ * <p>Class of View <b>PanelBaseReference</b>.</p>
+ * <p>Class responsible for defining a <b>Reference Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2019-07-22
- * @see    controller.view.panel.base.traceability.ControllerPanelBaseTraceability
- * @see    model.structural.base.traceability.Traceability
+ * @see    controller.view.panel.base.traceability.ControllerPanelBaseReference
+ * @see    model.structural.base.traceability.Reference
  * @see    view.panel.base.traceability.PanelBase
  */
-public final class PanelBaseTraceability extends PanelBase {
+public final class PanelBaseReference extends PanelBase {
     
     /**
      * Default constructor method of Class.
      * @param view View Menu.
-     * @param traceability Traceability.
+     * @param reference Reference.
      */
-    public PanelBaseTraceability(ViewMenu view, Traceability traceability) {
-        super(view, traceability);
-        controller = new ControllerPanelBaseTraceability(this);
+    public PanelBaseReference(ViewMenu view, Reference reference) {
+        super(view, reference);
+        controller = new ControllerPanelBaseReference(this);
         setDefaultProperties();
         addComponents();
     }
@@ -37,10 +37,10 @@ public final class PanelBaseTraceability extends PanelBase {
     @Override
     protected void addComponents() {
         add(createLabel("Name*: "));
-        add(createTextField("name", traceability.getName(), 15));
+        add(createTextField("name", reference.getName(), 15));
         
         add(createLabel("Description*: "));
-        add(createTextField("description", traceability.getDescription(), 15));
+        add(createTextField("description", reference.getDescription(), 15));
     }
     
     /**

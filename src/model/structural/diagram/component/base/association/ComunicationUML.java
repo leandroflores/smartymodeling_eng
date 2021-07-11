@@ -11,7 +11,7 @@ import model.structural.diagram.component.base.InterfaceUML;
  * <p>Class of Model <b>ComunicationUML</b>.</p>
  * <p>Class responsible for representing the <b>Comunication UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  20/07/2019
+ * @since  2019-07-20
  * @see    model.structural.base.association.Association
  * @see    model.structural.diagram.component.base.ComponentUML
  * @see    model.structural.diagram.component.base.InterfaceUML
@@ -50,13 +50,13 @@ public class ComunicationUML extends Association {
      */
     public ComunicationUML(org.w3c.dom.Element element) {
         super(element);
-        this.category = element.getAttribute("category");
-        this.type     = "comunication";
+        category = element.getAttribute("category");
+        type     = "comunication";
     }
 
     @Override
     public ComponentUML getSource() {
-        return (ComponentUML) this.source;
+        return (ComponentUML) source;
     }
 
     /**
@@ -69,7 +69,7 @@ public class ComunicationUML extends Association {
 
     @Override
     public InterfaceUML getTarget() {
-        return (InterfaceUML) this.target;
+        return (InterfaceUML) target;
     }
 
     /**
@@ -85,7 +85,7 @@ public class ComunicationUML extends Association {
      * @return Category.
      */
     public String getCategory() {
-        return this.category;
+        return category;
     }
 
     /**
@@ -103,7 +103,7 @@ public class ComunicationUML extends Association {
     
     @Override
     public String getStyleLabel() {
-        return "styleComunicationUML(" + this.category + ")";
+        return "styleComunicationUML(" + category + ")";
     }
     
     /**
@@ -111,7 +111,7 @@ public class ComunicationUML extends Association {
      * @return Dashed.
      */
     private Object getDashed() {
-        return this.category.equalsIgnoreCase("provide") ? "0" : "1";
+        return category.equalsIgnoreCase("provide") ? "0" : "1";
     }
     
     /**
@@ -119,31 +119,32 @@ public class ComunicationUML extends Association {
      * @return End Arrow.
      */
     private Object getEndArrow() {
-        return this.category.equalsIgnoreCase("provide") ?  
-               mxConstants.ARROW_SPACING : mxConstants.ARROW_OPEN;
+        return category.equalsIgnoreCase("provide") ?  
+               mxConstants.ARROW_SPACING : 
+               mxConstants.ARROW_OPEN;
     }
     
     @Override
     public Map getStyle() {
         Map    style = new HashMap<>();
-               style.put(mxConstants.STYLE_DASHED,   this.getDashed());
+               style.put(mxConstants.STYLE_DASHED, getDashed());
                style.put(mxConstants.STYLE_MOVABLE,  "0");
                style.put(mxConstants.STYLE_EDITABLE, "0");
                style.put(mxConstants.STYLE_ENDSIZE,  "15");
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);
-               style.put(mxConstants.STYLE_ENDARROW,   this.getEndArrow());
+               style.put(mxConstants.STYLE_ENDARROW,   getEndArrow());
         return style;
     }
     
     @Override
     protected String exportHeader() {
-        String export  = "    <"         + this.type;
-               export += " id=\""        + this.id.trim()       + "\"";
-               export += " component=\"" + this.source.getId()  + "\"";
-               export += " interface=\"" + this.target.getId()  + "\"";
-               export += " category=\""  + this.category.trim() + "\"";
+        String export  = "    <" + type;
+               export += " id=\""        + id.trim()       + "\"";
+               export += " component=\"" + source.getId()  + "\"";
+               export += " interface=\"" + target.getId()  + "\"";
+               export += " category=\""  + category.trim() + "\"";
                export += ">\n";
         return export;
     }

@@ -10,7 +10,7 @@ import model.structural.base.Element;
  * <p>Class of Model <b>Mutex</b>.</p>
  * <p>Class responsible for representing <b>Mutex</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    model.structural.base.association.Association
  * @see    model.structural.base.Element
  */

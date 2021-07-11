@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
  * <p>Class of Model <b>TypeUML</b>.</p>
  * <p>Class responsible for representing <b>Type UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  20/05/2019
+ * @since  2019-05-20
  * @see    model.structural.base.interfaces.Exportable
  */
 public class TypeUML implements Comparable<TypeUML>, Exportable {
@@ -23,9 +23,9 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
      * Default constructor method of Class.
      */
     public TypeUML() {
-        this.primitive = false;
-        this.standard  = false;
-        this.value     = "null";
+        primitive = false;
+        standard  = false;
+        value     = "null";
     }
     
     /**
@@ -62,12 +62,12 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
      * @param element W3C Element.
      */
     public TypeUML(Element element) {
-        this.id        = element.getAttribute("id");
-        this.path      = element.getAttribute("path");
-        this.name      = element.getAttribute("name");
-        this.value     = element.getAttribute("value");
-        this.primitive = element.getAttribute("primitive").trim().toLowerCase().equals("true");
-        this.standard  = element.getAttribute("standard").trim().toLowerCase().equals("true");
+        id        = element.getAttribute("id");
+        path      = element.getAttribute("path");
+        name      = element.getAttribute("name");
+        value     = element.getAttribute("value");
+        primitive = element.getAttribute("primitive").trim().toLowerCase().equals("true");
+        standard  = element.getAttribute("standard").trim().toLowerCase().equals("true");
     }
     
     /**
@@ -76,9 +76,9 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
      */
     public TypeUML(Entity entity) {
         this();
-        this.id   = entity.getId();
-        this.path = entity.getFullPath();
-        this.name = entity.getName();
+        id   = entity.getId();
+        path = entity.getFullPath();
+        name = entity.getName();
     }
 
     /**
@@ -86,7 +86,7 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
      * @return Type Id.
      */
     public String getId() {
-        return this.id;
+        return id;
     }
 
     /**
@@ -102,7 +102,7 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
      * @return Type Path.
      */
     public String getPath() {
-        return this.path;
+        return path;
     }
 
     /**
@@ -118,7 +118,7 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
      * @return Type Name.
      */
     public String getName() {
-        return this.name;
+        return name;
     }
 
     /**
@@ -134,7 +134,7 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
      * @return Type Primitive.
      */
     public boolean isPrimitive() {
-        return this.primitive;
+        return primitive;
     }
 
     /**
@@ -150,7 +150,7 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
      * @return Type Standard.
      */
     public boolean isStandard() {
-        return this.standard;
+        return standard;
     }
 
     /**
@@ -166,9 +166,9 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
      * @return Type Signature.
      */
     public String getSignature() {
-        if (this.primitive)
+        if (primitive)
             return "";
-        return this.path.equals("") ? "" : this.path + "." + this.name;
+        return path.equals("") ? "" : path + "." + name;
     }
     
     /**
@@ -176,7 +176,7 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
      * @return Type is Void.
      */
     public boolean isVoid() {
-        return this.getName().trim().equalsIgnoreCase("void");
+        return getName().trim().equalsIgnoreCase("void");
     }
     
     /**
@@ -184,24 +184,24 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
      * @return Body Code.
      */
     public String getBodyCode() {
-        return "return " + this.value + ";";
+        return "return " + value + ";";
     }
     
     @Override
     public String export() {
         String export  = "    <type ";
-               export += "id=\""        + this.id        + "\" ";
-               export += "path=\""      + this.path      + "\" ";
-               export += "name=\""      + this.name      + "\" ";
-               export += "value=\""     + this.value     + "\" ";
-               export += "primitive=\"" + this.primitive + "\" ";
-               export += "standard=\""  + this.standard  + "\"/>\n";
+               export += "id=\""        + id        + "\" ";
+               export += "path=\""      + path      + "\" ";
+               export += "name=\""      + name      + "\" ";
+               export += "value=\""     + value     + "\" ";
+               export += "primitive=\"" + primitive + "\" ";
+               export += "standard=\""  + standard  + "\"/>\n";
         return export;
     }
     
     @Override
     public int compareTo(TypeUML type) {
-        return this.getName().compareTo(type.getName());
+        return getName().compareTo(type.getName());
     }
     
     @Override
@@ -214,17 +214,17 @@ public class TypeUML implements Comparable<TypeUML>, Exportable {
     public boolean equals(Object object) {
         if (object == null)
             return false;
-        if (object instanceof TypeUML == false)
+        if (!(object instanceof TypeUML))
             return false;
-        return this.id.equals(((TypeUML) object).getId());
+        return id.equals(((TypeUML) object).getId());
     }
     
     @Override
     public String toString() {
-        if (this.primitive)
-            return this.name;
-        if (this.path.equals(""))
-            return this.name + " - Model";
-        return this.name + " - " + this.path + "." + this.name;
+        if (primitive)
+            return name;
+        if (path.equals(""))
+            return name + " - Model";
+        return name + " - " + path + "." + name;
     }
 }

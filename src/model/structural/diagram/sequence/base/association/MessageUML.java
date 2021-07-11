@@ -12,7 +12,7 @@ import model.structural.diagram.classes.base.MethodUML;
  * <p>Class of Model <b>MessageUML</b>.</p>
  * <p>Class responsible for representing the <b>Message UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  25/07/2019
+ * @since  2019-07-25
  * @see    model.structural.base.association.Association
  * @see    model.structural.diagram.sequence.base.LifelineUML
  */
@@ -59,11 +59,11 @@ public class MessageUML extends Association implements Comparator<MessageUML> {
      */
     public MessageUML(org.w3c.dom.Element element) {
         super(element);
-        this.category = element.getAttribute("category");
-        this.name     = "";
-        this.sequence = Integer.parseInt(element.getAttribute("sequence"));
-        this.method   = null;
-        this.type     = "message";
+        category = element.getAttribute("category");
+        name     = "";
+        sequence = Integer.parseInt(element.getAttribute("sequence"));
+        method   = null;
+        type     = "message";
     }
     
     /**
@@ -71,7 +71,7 @@ public class MessageUML extends Association implements Comparator<MessageUML> {
      * @return Message is a Loop.
      */
     public boolean isLoop() {
-        return this.source.equals(this.target);
+        return source.equals(target);
     }
     
     /**
@@ -79,7 +79,7 @@ public class MessageUML extends Association implements Comparator<MessageUML> {
      * @return Category.
      */
     public String getCategory() {
-        return this.category;
+        return category;
     }
 
     /**
@@ -95,7 +95,7 @@ public class MessageUML extends Association implements Comparator<MessageUML> {
      * @return Name.
      */
     public String getName() {
-        return this.name;
+        return name;
     }
 
     /**
@@ -103,8 +103,8 @@ public class MessageUML extends Association implements Comparator<MessageUML> {
     * @param method Method.
      */
     public void changeName(MethodUML method) {
-        if ((this.method != null) && (this.method.equals(method)))
-            this.name = "." + method.getShortSignature();
+        if (method != null && method.equals(method))
+            name = "." + method.getShortSignature();
     }
     
     /**
@@ -120,7 +120,7 @@ public class MessageUML extends Association implements Comparator<MessageUML> {
      * @return Sequence.
      */
     public Integer getSequence() {
-        return this.sequence;
+        return sequence;
     }
     
     /**
@@ -149,7 +149,7 @@ public class MessageUML extends Association implements Comparator<MessageUML> {
      * @return Method UML.
      */
     public MethodUML getMethod() {
-        return this.method;
+        return method;
     }
 
     /**
@@ -166,19 +166,17 @@ public class MessageUML extends Association implements Comparator<MessageUML> {
      * @return Signature.
      */
     private String getSignature() {
-        if (this.method == null)
-            return ". operation()";
-        return ". " + method.getShortSignature();
+        return method == null ? ". operation()" : ". " + method.getShortSignature();
     }
     
     @Override
     public String getTitle() {
-        return this.sequence + this.getSignature();
+        return sequence + getSignature();
     }
     
     @Override
     public String getStyleLabel() {
-        return "styleMessageUML" + this.getId();
+        return "styleMessageUML" + getId();
     }
 
     /**
@@ -186,9 +184,7 @@ public class MessageUML extends Association implements Comparator<MessageUML> {
      * @return End Arrow.
      */
     private String getEndArrow() {
-        if (this.category.equals("asynchronous"))
-            return mxConstants.ARROW_OPEN;
-        return mxConstants.ARROW_BLOCK;
+        return category.equals("asynchronous") ? mxConstants.ARROW_OPEN : mxConstants.ARROW_BLOCK;
             
     }
     
@@ -197,9 +193,7 @@ public class MessageUML extends Association implements Comparator<MessageUML> {
      * @return Method Id.
      */
     private String getMethodId() {
-        if (this.method != null) 
-            return this.method.getId();
-        return "";
+        return method != null ? method.getId() : "";
     }
     
     @Override
@@ -212,27 +206,27 @@ public class MessageUML extends Association implements Comparator<MessageUML> {
                style.put(mxConstants.STYLE_FONTCOLOR,   "#000000");
                style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
                style.put(mxConstants.STYLE_SHAPE,      mxConstants.SHAPE_CONNECTOR);
-               style.put(mxConstants.STYLE_ENDARROW,   this.getEndArrow());
+               style.put(mxConstants.STYLE_ENDARROW,   getEndArrow());
                style.put(mxConstants.STYLE_STARTARROW, mxConstants.ARROW_SPACING);
         return style;
     }
     
     @Override
     protected String exportHeader() {
-        String export  = "    <"        + this.type;
-               export += " id=\""       + this.id.trim()       + "\"";
-               export += " source=\""   + this.source.getId()  + "\"";
-               export += " target=\""   + this.target.getId()  + "\"";
-               export += " name=\""     + this.name.trim()     + "\"";
-               export += " category=\"" + this.category.trim() + "\"";
-               export += " sequence=\"" + this.sequence        + "\"";
-               export += " method=\""   + this.getMethodId()   + "\"";
+        String export  = "    <"        + type;
+               export += " id=\""       + id.trim()       + "\"";
+               export += " source=\""   + source.getId()  + "\"";
+               export += " target=\""   + target.getId()  + "\"";
+               export += " name=\""     + name.trim()     + "\"";
+               export += " category=\"" + category.trim() + "\"";
+               export += " sequence=\"" + sequence        + "\"";
+               export += " method=\""   + getMethodId()   + "\"";
                export += ">\n";
         return export;
     }
     
     @Override
     public String toString() {
-        return this.sequence + " - " + this.name + " (" + this.id + ")";
+        return sequence + " - " + name + " (" + id + ")";
     }
 }

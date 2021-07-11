@@ -33,7 +33,7 @@ public class Usage extends Association {
      */
     public Usage(org.w3c.dom.Element element) {
         super(element);
-        this.type = "usage";
+        type = "usage";
     }
     
     @Override

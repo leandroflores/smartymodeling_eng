@@ -18,7 +18,7 @@ import org.w3c.dom.Element;
  * <p>Class of Model <b>Relationship</b>.</p>
  * <p>Class responsible for representing the <b>Relationship</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  08/11/2019
+ * @since  2019-11-08
  * @see    model.structural.base.interfaces.Exportable
  * @see    model.structural.base.interfaces.Modelable
  */
@@ -46,10 +46,10 @@ public class Relationship implements Exportable, Modelable {
      * @param association Association.
      */
     public Relationship(Instance instance, Association association) {
-        this.instance     = instance;
-        this.association  = association;
-        this.updatePositions(association);
-        this.points       = new ArrayList<>(association.getPoints());
+        this.instance    = instance;
+        this.association = association;
+        updatePositions(association);
+        points = new ArrayList<>(association.getPoints());
     }
     
     /**
@@ -57,10 +57,10 @@ public class Relationship implements Exportable, Modelable {
      * @param element W3C Element.
      */
     public Relationship(org.w3c.dom.Element element) {
-        this.id     = element.getAttribute("id");
-        this.setSourcePosition(element);
-        this.setTargetPosition(element);
-        this.points = new ArrayList<>();
+        id = element.getAttribute("id");
+        setSourcePosition(element);
+        setTargetPosition(element);
+        points = new ArrayList<>();
     }
     
     /**
@@ -69,13 +69,13 @@ public class Relationship implements Exportable, Modelable {
      */
     private void updatePositions(Association association) {
         if (association instanceof AssociationUML) {
-            this.setSourcePosition(new Point(((AssociationUML) association).getSourceX(), 
-                                             ((AssociationUML) association).getSourceY()));
-            this.setTargetPosition(new Point(((AssociationUML) association).getTargetX(), 
-                                             ((AssociationUML) association).getTargetY()));
+            setSourcePosition(new Point(((AssociationUML) association).getSourceX(), 
+                                        ((AssociationUML) association).getSourceY()));
+            setTargetPosition(new Point(((AssociationUML) association).getTargetX(), 
+                                        ((AssociationUML) association).getTargetY()));
         }else {
-            this.sourcePos = new Point(0, 0);
-            this.targetPos = new Point(0, 0);
+            sourcePos = new Point(0, 0);
+            targetPos = new Point(0, 0);
         }
     }
     
@@ -84,7 +84,7 @@ public class Relationship implements Exportable, Modelable {
      * @return Relationship Id.
      */
     public String getId() {
-        return this.id;
+        return id;
     }
 
     /**
@@ -100,7 +100,7 @@ public class Relationship implements Exportable, Modelable {
      * @return Relationship Instance.
      */
     public Instance getInstance() {
-        return this.instance;
+        return instance;
     }
 
     /**
@@ -116,18 +116,18 @@ public class Relationship implements Exportable, Modelable {
      * @return Relationship Association.
      */
     public Association getAssociation() {
-        return this.association;
+        return association;
     }
 
     /**
      * Method responsible for updating the Positions.
      */
     public void updatePositions() {
-        if (this.association instanceof AssociationUML) {
-            if ((this.getSourceX().equals(0) && (this.getSourceY().equals(0))))
-                this.setSourcePosition(new Point(((AssociationUML) this.association).getSourcePosition()));
-            if ((this.getTargetX().equals(0) && (this.getTargetY().equals(0))))
-                this.setTargetPosition(new Point(((AssociationUML) this.association).getTargetPosition()));
+        if (association instanceof AssociationUML) {
+            if ((getSourceX().equals(0) && (getSourceY().equals(0))))
+                setSourcePosition(new Point(((AssociationUML) association).getSourcePosition()));
+            if ((getTargetX().equals(0) && (getTargetY().equals(0))))
+                setTargetPosition(new Point(((AssociationUML) association).getTargetPosition()));
         }
     }
     
@@ -137,7 +137,7 @@ public class Relationship implements Exportable, Modelable {
      */
     public void setAssociation(Association association) {
         this.association = association;
-        this.updatePositions();
+        updatePositions();
     }
     
     /**
@@ -145,7 +145,7 @@ public class Relationship implements Exportable, Modelable {
      * @return Source Position.
      */
     public Point getSourcePosition() {
-        return this.sourcePos;
+        return sourcePos;
     }
 
     /**
@@ -153,7 +153,7 @@ public class Relationship implements Exportable, Modelable {
      * @return Source X Position.
      */
     public Integer getSourceX() {
-        return this.sourcePos.x;
+        return sourcePos.x;
     }
     
     /**
@@ -161,7 +161,7 @@ public class Relationship implements Exportable, Modelable {
      * @param distance Distance.
      */
     public void dxSource(Integer distance) {
-        this.dx(this.sourcePos, distance);
+        dx(sourcePos, distance);
     }
     
     /**
@@ -169,7 +169,7 @@ public class Relationship implements Exportable, Modelable {
      * @return Source Y Position.
      */
     public Integer getSourceY() {
-        return this.sourcePos.y;
+        return sourcePos.y;
     }
     
     /**
@@ -177,7 +177,7 @@ public class Relationship implements Exportable, Modelable {
      * @param distance Distance.
      */
     public void dySource(Integer distance) {
-        this.dy(this.sourcePos, distance);
+        dy(sourcePos, distance);
     }
     
     /**
@@ -191,7 +191,7 @@ public class Relationship implements Exportable, Modelable {
             x = Double.parseDouble(element.getAttribute("sourceX"));
             y = Double.parseDouble(element.getAttribute("sourceY"));
         }catch (NumberFormatException exception) {}
-        this.setSourcePosition(new Point(x.intValue(), y.intValue()));
+        setSourcePosition(new Point(x.intValue(), y.intValue()));
     }
     
     /**
@@ -200,7 +200,7 @@ public class Relationship implements Exportable, Modelable {
      * @param y Y Position.
      */
     public void setSourcePosition(Integer x, Integer y) {
-        this.sourcePos = new Point(x, y);
+        sourcePos = new Point(x, y);
     }
     
     /**
@@ -225,7 +225,7 @@ public class Relationship implements Exportable, Modelable {
      * @return Target Position.
      */
     public Point getTargetPosition() {
-        return this.targetPos;
+        return targetPos;
     }
 
     /**
@@ -233,7 +233,7 @@ public class Relationship implements Exportable, Modelable {
      * @return Target X Position.
      */
     public Integer getTargetX() {
-        return this.targetPos.x;
+        return targetPos.x;
     }
     
     /**
@@ -241,7 +241,7 @@ public class Relationship implements Exportable, Modelable {
      * @param distance Distance.
      */
     public void dxTarget(Integer distance) {
-        this.dx(this.targetPos, distance);
+        dx(targetPos, distance);
     }
     
     /**
@@ -249,7 +249,7 @@ public class Relationship implements Exportable, Modelable {
      * @return Target Y Position.
      */
     public Integer getTargetY() {
-        return this.targetPos.y;
+        return targetPos.y;
     }
     
     /**
@@ -257,7 +257,7 @@ public class Relationship implements Exportable, Modelable {
      * @param distance Distance.
      */
     public void dyTarget(Integer distance) {
-        this.dy(this.targetPos, distance);
+        dy(targetPos, distance);
     }
     
     /**
@@ -271,7 +271,7 @@ public class Relationship implements Exportable, Modelable {
             x = Double.parseDouble(element.getAttribute("targetX"));
             y = Double.parseDouble(element.getAttribute("targetY"));
         }catch (NumberFormatException exception) {}
-        this.setTargetPosition(new Point(x.intValue(), y.intValue()));
+        setTargetPosition(new Point(x.intValue(), y.intValue()));
     }
     
     /**
@@ -280,7 +280,7 @@ public class Relationship implements Exportable, Modelable {
      * @param y Y Position.
      */
     public void setTargetPosition(Integer x, Integer y) {
-        this.targetPos = new Point(x, y);
+        targetPos = new Point(x, y);
     }
     
     /**
@@ -305,7 +305,7 @@ public class Relationship implements Exportable, Modelable {
      * @return Relationship Points.
      */
     public List<mxPoint> getPoints() {
-        return this.points;
+        return points;
     }
 
     /**
@@ -313,8 +313,8 @@ public class Relationship implements Exportable, Modelable {
      * @param point New Point.
      */
     public void addPoint(mxPoint point) {
-        if (!this.points.contains(point))
-            this.points.add(point);
+        if (!points.contains(point))
+             points.add(point);
     }
     
     /**
@@ -322,7 +322,7 @@ public class Relationship implements Exportable, Modelable {
      * @param point Point.
      */
     public void removePoint(mxPoint point) {
-        this.points.remove(point);
+        points.remove(point);
     }
     
     /**
@@ -346,8 +346,8 @@ public class Relationship implements Exportable, Modelable {
     public mxPoint getNearestPoint(mxPoint point) {
         mxPoint nearest  = null;
         Double  distance = Double.MAX_VALUE;
-        for (mxPoint current : this.getPoints()) {
-            Double value = this.distance(point, current);
+        for (mxPoint current : getPoints()) {
+            Double value = distance(point, current);
             if (value    < distance) {
                 distance = value;
                 nearest  = current;
@@ -370,24 +370,24 @@ public class Relationship implements Exportable, Modelable {
      */
     public String exportPoints() {
         String export  = "";
-        for (mxPoint point : this.getPoints())
+        for (mxPoint point : getPoints())
                export += "          <point x=\"" + point.getX() + "\" y=\"" + point.getY() + "\"/>\n";
         return export;
     }
     
     @Override
     public String getTitle() {
-        return this.association.getTitle();
+        return association.getTitle();
     }
     
     @Override
     public String getStyleLabel() {
-        return this.association.getStyleLabel();
+        return association.getStyleLabel();
     }
 
     @Override
     public Map getStyle() {
-        Map    style = new HashMap(this.association.getStyle());
+        Map    style = new HashMap(association.getStyle());
                style.put(mxConstants.STYLE_EDITABLE, "0");
         return style;
     }
@@ -395,14 +395,14 @@ public class Relationship implements Exportable, Modelable {
     @Override
     public String export() {
         String export  = "        <relationship ";
-               export += " id=\""          + this.id                  + "\"";
-               export += " association=\"" + this.association.getId() + "\"";
-               export += " sourceX=\""     + this.sourcePos.getX()    + "\"";
-               export += " sourceY=\""     + this.sourcePos.getY()    + "\"";
-               export += " targetX=\""     + this.targetPos.getX()    + "\"";
-               export += " targetY=\""     + this.targetPos.getY()    + "\"";
+               export += " id=\""          + id                  + "\"";
+               export += " association=\"" + association.getId() + "\"";
+               export += " sourceX=\""     + sourcePos.getX()    + "\"";
+               export += " sourceY=\""     + sourcePos.getY()    + "\"";
+               export += " targetX=\""     + targetPos.getX()    + "\"";
+               export += " targetY=\""     + targetPos.getY()    + "\"";
                export += ">\n";
-               export += this.exportPoints();
+               export += exportPoints();
                export += "        </relationship>\n";
         return export;
     }
@@ -411,18 +411,18 @@ public class Relationship implements Exportable, Modelable {
     public boolean equals(Object object) {
         if (object instanceof Relationship == false)
             return false;
-        return Objects.equals(this.id, ((Relationship) object).getId());
+        return Objects.equals(id, ((Relationship) object).getId());
     }
 
     @Override
     public int hashCode() {
         int    hash = 5;
-               hash = 61 * hash + Objects.hashCode(this.id);
+               hash = 61 * hash + Objects.hashCode(id);
         return hash;
     }
     
     @Override
     public String toString() {
-        return this.association.toString();
+        return association.toString();
     }
 }

@@ -10,7 +10,7 @@ import model.structural.base.association.Association;
  * <p>Class of Model <b>FlowUML</b>.</p>
  * <p>Class responsible for representing the <b>Flow UML</b> in SMartyModeling.</p>
  * @author Leandro
- * @since  17/07/2019
+ * @since  2019-07-17
  * @see    model.structural.base.association.Association
  * @see    model.structural.base.Element
  */
@@ -39,10 +39,10 @@ public class FlowUML extends Association {
      */
     public FlowUML(org.w3c.dom.Element element) {
         super(element);
-        this.guard  = element.getAttribute("guard");
-        this.action = element.getAttribute("action");
-        this.weight = element.getAttribute("weight");
-        this.type   = "flow";
+        guard  = element.getAttribute("guard");
+        action = element.getAttribute("action");
+        weight = element.getAttribute("weight");
+        type   = "flow";
     }
 
     /**
@@ -50,7 +50,7 @@ public class FlowUML extends Association {
      * @return Guard.
      */
     public String getGuard() {
-        return this.guard;
+        return guard;
     }
 
     /**
@@ -58,8 +58,8 @@ public class FlowUML extends Association {
      * @return Formatted Guard.
      */
     public String getFormattedGuard() {
-        if (!this.guard.trim().equals(""))
-            return "[" + this.guard + "]";
+        if (!guard.trim().equals(""))
+            return "[" + guard + "]";
         return "";
     }
     
@@ -76,7 +76,7 @@ public class FlowUML extends Association {
      * @return Action.
      */
     public String getAction() {
-        return this.action;
+        return action;
     }
 
     /**
@@ -84,8 +84,8 @@ public class FlowUML extends Association {
      * @return Formatted Action.
      */
     public String getFormattedAction() {
-        if (!this.action.trim().equals(""))
-            return " / " + this.action;
+        if (!action.trim().equals(""))
+            return " / " + action;
         return "";
     }
     
@@ -102,7 +102,7 @@ public class FlowUML extends Association {
      * @return Weight.
      */
     public String getWeight() {
-        return this.weight;
+        return weight;
     }
     
     /**
@@ -110,8 +110,8 @@ public class FlowUML extends Association {
      * @return Formatted Weight.
      */
     public String getFormattedWeight() {
-        if (!this.weight.trim().equals(""))
-            return " {" + this.weight + "}";
+        if (!weight.trim().equals(""))
+            return " {" + weight + "}";
         return "";
     }
 
@@ -125,9 +125,7 @@ public class FlowUML extends Association {
     
     @Override
     public String getTitle() {
-        return (this.getFormattedGuard()
-              + this.getFormattedAction()
-              + this.getFormattedWeight()).trim();
+        return (getFormattedGuard() + getFormattedAction() + getFormattedWeight()).trim();
     }
     
     @Override
@@ -152,13 +150,13 @@ public class FlowUML extends Association {
     
     @Override
     protected String exportHeader() {
-        String export  = "    <"      + this.type;
-               export += " id=\""     + this.id.trim()      + "\"";
-               export += " source=\"" + this.source.getId() + "\"";
-               export += " target=\"" + this.target.getId() + "\"";
-               export += " guard=\""  + this.getGuard()     + "\"";
-               export += " action=\"" + this.getAction()    + "\"";
-               export += " weight=\"" + this.getWeight()    + "\"";
+        String export  = "    <"      + type;
+               export += " id=\""     + id.trim()      + "\"";
+               export += " source=\"" + source.getId() + "\"";
+               export += " target=\"" + target.getId() + "\"";
+               export += " guard=\""  + getGuard()     + "\"";
+               export += " action=\"" + getAction()    + "\"";
+               export += " weight=\"" + getWeight()    + "\"";
                export += ">\n";
         return export;
     }
