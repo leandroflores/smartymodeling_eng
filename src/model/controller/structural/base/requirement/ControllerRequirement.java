@@ -26,7 +26,15 @@ public class ControllerRequirement extends Controller {
      * @return Metric Targets Array.
      */
     public String[] getTargets() {
-        return new String[]{"Business", "Functional", "Non-Functional", "User Interface"};
+        return new String[] {"Business", "Functional", "Non-Functional", "User Interface"};
+    }
+    
+    /**
+     *  Method responsible for returning the Priority Types.
+     * @return Priority Types.
+     */
+    public String[] getPriorityTypes() {
+        return new String[] {"Essential", "Important", "Desirable"};
     }
     
     /**

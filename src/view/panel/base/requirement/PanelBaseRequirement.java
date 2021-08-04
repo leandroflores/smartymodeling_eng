@@ -2,9 +2,8 @@ package view.panel.base.requirement;
 
 import controller.view.panel.base.requirement.ControllerPanelBaseRequirement;
 import java.awt.GridBagLayout;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import model.controller.structural.base.requirement.ControllerRequirement;
 import model.structural.base.requirement.Requirement;
@@ -12,7 +11,7 @@ import view.panel.base.PanelBase;
 import view.main.structural.ViewMenu;
 
 /**
- * <p>Class of View <b>PanelBaseRequirement</b>.</p> 
+ * <p>Class of View <b>PanelBaseRequirement</b>.</p>
  * <p>Class responsible for defining a <b>Requirement Base Panel</b> of SMartyModeling.</p>
  * @author Leandro
  * @since  2020-04-15
@@ -22,16 +21,19 @@ import view.main.structural.ViewMenu;
  */
 public final class PanelBaseRequirement extends PanelBase {
     private final Requirement requirement;
+    private final boolean traceability;
     
     /**
      * Default constructor method of Class.
      * @param view View Menu.
      * @param requirement Requirement.
+     * @param traceability Traceability Flag.
      */
-    public PanelBaseRequirement(ViewMenu view, Requirement requirement) {
+    public PanelBaseRequirement(ViewMenu view, Requirement requirement, boolean traceability) {
         super(view);
-        this.requirement = requirement;
-        this.controller  = new ControllerPanelBaseRequirement(this);
+        this.requirement  = requirement;
+        this.traceability = traceability;
+        this.controller   = new ControllerPanelBaseRequirement(this);
         setDefaultProperties();
         addComponents();
         getController().setReady();
@@ -53,9 +55,17 @@ public final class PanelBaseRequirement extends PanelBase {
         add(createLabel("Name*: "), createConstraints(1, 1, 0, 2));
         add(createTextField("name", requirement.getName(), 15), createConstraints(4, 1, 1, 2));
         
-        createTextArea("description", requirement.getDescription());
         add(createLabel("Description*: "), createConstraints(1, 1, 0, 3));
-        add(getDescriptionScrollPane(), createConstraints(4, 5, 1, 3));
+        add(createTextField("description", requirement.getDescription(), 15), createConstraints(4, 1, 1, 3));
+
+        add(createLabel("Priority*: "), createConstraints(1, 1, 0, 4));
+        add(createComboBox("priority", new ControllerRequirement(project).getPriorityTypes(), 10, requirement.getPriority()), createConstraints(4, 1, 1, 4));
+        
+        add(createLabel("History*: "), createConstraints(1, 1, 0, 6));
+        add(createTextField("history", requirement.getHistory(), 15), createConstraints(4, 1, 1, 6));
+        
+        add(createButton("traceability" ,"Traceability"), createConstraints(4, 1, 1, 7));
+        getTraceabilityButton().setVisible(traceability);
     }
     
     /**
@@ -82,20 +92,20 @@ public final class PanelBaseRequirement extends PanelBase {
         return getTextField("name");
     }
     
-    /**
-     * Method responsible for returning the Description Text Area.
-     * @return Description Text Area.
-     */
-    public JTextArea getDescriptionTextArea() {
-        return getTextArea("description");
+    public JTextField getDescriptionTextField() {
+        return getTextField("description");
     }
     
-    /**
-     * Method responsible for return the Description Scroll Pane.
-     * @return Description Scroll Pane.
-     */
-    public JScrollPane getDescriptionScrollPane() {
-        return getScrollPane("description");
+    public JComboBox getPriorityComboBox() {
+        return getComboBox("priority");
+    }
+    
+    public JTextField getHistoryTextField() {
+        return getTextField("history");
+    }
+    
+    public JButton getTraceabilityButton(){
+        return getButton("traceability");
     }
     
     /**

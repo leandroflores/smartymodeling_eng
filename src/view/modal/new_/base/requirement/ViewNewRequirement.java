@@ -39,7 +39,7 @@ public final class ViewNewRequirement extends ViewNew {
     
     @Override
     protected PanelEditRequirement createPanelNew() {
-        return new PanelEditRequirement(view, requirement, 0);
+        return new PanelEditRequirement(view, requirement, 0, false);
     }
     
     @Override

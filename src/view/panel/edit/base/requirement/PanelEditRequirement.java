@@ -17,16 +17,19 @@ import view.main.structural.ViewMenu;
  */
 public final class PanelEditRequirement extends PanelEdit {
     private final Requirement requirement;
+    private final boolean traceability;
     
     /**
      * Default constructor method of Class.
      * @param view View Menu.
      * @param requirement Requirement.
      * @param index Tab Index.
+     * @param traceability Traceability Flag.
      */
-    public PanelEditRequirement(ViewMenu view, Requirement requirement, Integer index) {
+    public PanelEditRequirement(ViewMenu view, Requirement requirement, Integer index, boolean traceability) {
         super(view);
-        this.requirement = requirement;
+        this.requirement  = requirement;
+        this.traceability = traceability;
         setPreferredSize(new Dimension(200, 100));
         addComponents();
         tabbedPane.setSelectedIndex(index);
@@ -42,7 +45,7 @@ public final class PanelEditRequirement extends PanelEdit {
      * Method responsible for adding the Panel Base Requirement.
      */
     private void addPanelBaseRequirement() {
-        addPanel("base_requirement", new PanelBaseRequirement(getViewMenu(), requirement));
+        addPanel("base_requirement", new PanelBaseRequirement(getViewMenu(), requirement, traceability));
         createScrollPane("base_requirement", getPanelBaseRequirement());
         getScrollPane("base_requirement").setViewportView(getPanelBaseRequirement());
         tabbedPane.add("Requirement", getScrollPane("base_requirement"));

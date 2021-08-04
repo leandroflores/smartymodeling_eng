@@ -19,6 +19,8 @@ public class Requirement implements Exportable {
     private String  type;
     private String  name;
     private String  description;
+    private String  priority;
+    private String  history;
     private HashMap features;
     private HashMap use_case;
     private HashMap classes;
@@ -34,6 +36,7 @@ public class Requirement implements Exportable {
         type        = "Business";
         name        = "";
         description = "";
+        priority    = "Essential";
         initMaps();
     }
     
@@ -42,11 +45,12 @@ public class Requirement implements Exportable {
      * @param element W3C Element.
      */
     public Requirement(org.w3c.dom.Element element) {
-        id          = element.getAttribute("id");
-        code        = element.getAttribute("code");
-        type        = element.getAttribute("type");
-        name        = element.getAttribute("name");
-        description = "";
+        id           = element.getAttribute("id");
+        code         = element.getAttribute("code");
+        type         = element.getAttribute("type");
+        name         = element.getAttribute("name");
+        priority     = element.getAttribute("priority");
+        description  = "";
         initMaps();
     }
     
@@ -147,6 +151,38 @@ public class Requirement implements Exportable {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    /**
+     * Method responsible for returning the Requirement Priority.
+     * @return Requirement Priority.
+     */
+    public String getPriority() {
+        return priority;
+    }
+    
+    /**
+     * Method responsible for setting the Requirement Priority.
+     * @param priority Requirement Priority.
+     */
+    public void setPriority(String priority){
+        this.priority = priority;
+    }
+    
+    /**
+     * Method responsible for returning the Requirement History.
+     * @return Requirement History.
+     */
+    public String getHistory(){
+        return history;
+    }
+    
+    /**
+     * Method responsible for setting the Requirement History.
+     * @param history Requirement History.
+     */
+    public void setHistory(String history){
+        this.history = history;
     }
     
     /**
@@ -266,11 +302,13 @@ public class Requirement implements Exportable {
     @Override
     public String export() {
         String export  = "  <requirement";
-               export += " id=\""   + id   + "\"";
-               export += " code=\"" + code + "\"";
-               export += " type=\"" + type + "\"";
-               export += " name=\"" + name + "\">\n";
-               export += "    <description>" + description + "</description>\n";
+               export += " id=\""       + id       + "\"";
+               export += " code=\""     + code     + "\"";
+               export += " type=\""     + type     + "\"";
+               export += " name=\""     + name     + "\"";
+               export += " priority=\"" + priority + "\"";
+               export += " history=\""  + history  + "\">\n";
+               export += "    <description>" + description  + "</description>\n";
                export += exportTraceability();
                export += "  </requirement>\n";
         return export;

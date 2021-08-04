@@ -29,6 +29,7 @@ import model.structural.base.product.Product;
 import model.structural.base.product.Relationship;
 import model.structural.base.requirement.Requirement;
 import model.structural.base.traceability.Reference;
+import model.structural.base.traceability.Traceability;
 import model.structural.diagram.classes.base.TypeUML;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -106,6 +107,7 @@ public class ImportProject {
             importDiagrams();
             importRequirements();
             importReferences();
+            importTraceabilities();
             importLinks();
             importProducts();
             importMetrics();
@@ -266,6 +268,35 @@ public class ImportProject {
         NodeList list = current.getElementsByTagName("element");
         for (int i = 0; i < list.getLength(); i++)
             reference.addElement(getElement(((Element) list.item(i)).getAttribute("id")));
+    }
+    
+    /**
+     * Method responsible for importing the Project Traceabilities.
+     * throws XPathExpressionException XPath Exception.
+     */
+    private void importTraceabilities() throws XPathExpressionException {
+        expression = "/project/traceability";
+        nodeList   = (NodeList) xPath.compile(expression).evaluate(document, XPathConstants.NODESET);
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Element      current      = (Element) nodeList.item(i);
+            Traceability traceability = new Traceability(current);
+            Requirement  owner        = project.getRequirement(current.getAttribute("owner"));
+                         traceability.setOwner(owner);
+                         addDestination(traceability, current);
+            project.addTraceability(traceability);
+        }
+    }
+    
+    /**
+     * Method responsible for adding the Traceability Destination.
+     * @param current W3C Element.
+     * @param traceability Traceability.
+     * @throws XPathExpressionException XPath Exception.
+     */
+    private void addDestination(Traceability traceability, Element current) throws XPathExpressionException {
+        NodeList list = current.getElementsByTagName("destination");
+        for (int i = 0; i < list.getLength(); i++)
+            traceability.addDestination(project.getRequirement(((Element) list.item(i)).getAttribute("id")));
     }
     
     /**

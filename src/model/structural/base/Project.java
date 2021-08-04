@@ -26,6 +26,7 @@ import model.structural.base.product.Instance;
 import model.structural.base.product.Product;
 import model.structural.base.requirement.Requirement;
 import model.structural.base.traceability.Reference;
+import model.structural.base.traceability.Traceability;
 import model.structural.diagram.classes.base.TypeUML;
 import model.structural.base.variability.Variability;
 import model.structural.diagram.ClassDiagram;
@@ -52,6 +53,7 @@ public class Project implements Exportable {
     public  HashMap types;
     public  HashMap variabilities;
     private HashMap requirements;
+    public  HashMap traceabilities;
     public  HashMap references;
     public  HashMap metrics;
     public  HashMap measures;
@@ -94,7 +96,8 @@ public class Project implements Exportable {
         types          = new LinkedHashMap();
         variabilities  = new LinkedHashMap();
         requirements   = new LinkedHashMap();
-        references = new LinkedHashMap();
+        traceabilities = new LinkedHashMap();
+        references     = new LinkedHashMap();
         metrics        = new LinkedHashMap();
         measures       = new LinkedHashMap();
         products       = new LinkedHashMap();
@@ -906,6 +909,97 @@ public class Project implements Exportable {
     }
     
     /**
+     * Method responsible for returning the Next Traceability Id.
+     * @return Next Traceability Id.
+     */
+    public String nextTraceabilityId() {
+        return nextId(traceabilities, "TRACEABILITY#");
+    }
+
+    /**
+     * Method responsible for adding a Traceability.
+     * @param traceability Traceability.
+     */
+    public void addTraceability(Traceability traceability) {
+        traceability.setId(nextTraceabilityId());
+        traceabilities.put(traceability.getId(), traceability);
+    }
+    
+    /**
+     * Method responsible for returning a Traceability by Id.
+     * @param  id Traceability Id.
+     * @return Traceability by Id.
+     */
+    public Traceability getTraceability(String id) {
+        return (Traceability) traceabilities.get(id);
+    }
+    
+    /**
+     * Method responsible for returning a Traceability by Owner.
+     * @param  requirement Traceability Owner.
+     * @return Traceability by Owner.
+     */
+    public Traceability getTraceability(Requirement requirement) {
+        for (Traceability traceability : getTraceabilitiesList()) {
+            if (traceability.getOwner().equals(requirement))
+                return traceability;
+        }
+        return null;
+    }
+    
+    /**
+     * Method responsible for returning the Traceabilities by Destination.
+     * @param requirement Requirement.
+     * @return Traceabilities by Requirement.
+     */
+    public List<Traceability> getTraceabilities(Requirement requirement) {
+        List   filter = new ArrayList<>();
+        for (Traceability traceability : getTraceabilitiesList()) {
+            if (traceability.contains(requirement))
+               filter.add(traceability);
+        }
+        return filter;
+    }
+    
+    /**
+     * Method responsible for removing a Traceability.
+     * @param traceability Traceability.
+     */
+    public void removeTraceability(Traceability traceability) {
+        traceabilities.remove(traceability.getId());
+    }
+
+    /**
+     * Method responsible for removing a Requirement Destination.
+     * @param requirement Requirement.
+     */
+    public void removeTraceability(Requirement requirement) {
+        for (Traceability traceability : getTraceabilitiesList()) {
+            if (traceability.contains(requirement))
+                traceability.removeDestination(requirement);
+        }
+    }
+
+    /**
+     * Method responsible for returning the Traceabilities List.
+     * @return Traceabilities List.
+     */
+    public List<Traceability> getTraceabilitiesList() {
+        return new ArrayList<>(traceabilities.values());
+    }
+    
+    /**
+     * Method responsible for exporting the Traceabilities.
+     * @return Traceabilities.
+     */
+    private String exportTraceability() {
+        String export  = "";
+        for (Traceability traceability : getTraceabilitiesList())
+               export +=  traceability.export();
+        return export;
+    }
+    
+    /**
      * Method responsible for returning the Next Metric Id.
      * @return Next Metric Id.
      */
@@ -1487,6 +1581,7 @@ public class Project implements Exportable {
                export += exportUMLDiagrams();
                export += exportRequirements();
                export += exportReferences();
+               export += exportTraceability();
                export += exportLinks();
                export += exportProducts();
                export += exportMetrics();

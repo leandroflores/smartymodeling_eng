@@ -43,7 +43,7 @@ public final class ViewEditRequirement extends ViewEdit {
     
     @Override
     protected PanelEditRequirement createPanelEdit() {
-        return new PanelEditRequirement(view, requirement, index);
+        return new PanelEditRequirement(view, requirement, index, false);
     }
     
     @Override

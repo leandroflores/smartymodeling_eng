@@ -367,7 +367,7 @@ public final class PanelProject extends Panel {
      * @param index Tab Index.
      */
     public void initPanelEditRequirement(Requirement requirement, Integer index) {
-        panelEdit = new PanelEditRequirement(viewMenu, requirement, index);
+        panelEdit = new PanelEditRequirement(viewMenu, requirement, index, true);
         updatePanelEdit();
     }
     
