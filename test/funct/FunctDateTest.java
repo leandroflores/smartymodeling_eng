@@ -49,7 +49,10 @@ public class FunctDateTest {
      * Method responsible for testing the getCurrentUSFormattedDate() method.
      */
     @Test
-    public void testGetCurrentUSFormattedDate() {}
+    public void testGetCurrentUSFormattedDate() {
+        assertEquals(FUNCT_DATE.getCurrentUSFormattedDate(), 
+                     FUNCT_DATE.getFormattedUSDate(new Date()));
+    }
     
     /**
      * Method responsible for testing the getFormattedDate(String, String) method.

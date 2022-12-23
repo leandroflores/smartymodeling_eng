@@ -41,7 +41,7 @@ public class FunctStringTest {
      * Method responsible for testing the getString(char, int) method.
      */
     @Test
-    public void testGetString_char_int() {
+    public void testGetStringWithParameters() {
         assertEquals(FUNCT_STRING.getString('a', -2), "");
         assertEquals(FUNCT_STRING.getString(' ', 0), "");
         assertEquals(FUNCT_STRING.getString(' ', 1), " ");

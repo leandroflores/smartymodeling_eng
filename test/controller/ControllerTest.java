@@ -8,8 +8,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * <p>Class of Test <b>ControllerTest</b>.</p>
+ * <p>Class responsible for testing the <b>Controller</b> class.</p>
  * @author Leandro
+ * @date   2022-12-22
+ * @see    controller.Controller
  */
 public class ControllerTest {
     private static ControllerMock INSTANCE;
@@ -26,64 +29,54 @@ public class ControllerTest {
     }
 
     /**
-     * Test of actionPerformed method, of class Controller.
+     * Method responsible for testing the actionPerformed(ActionEvent) method.
      */
     @Test
     public void testActionPerformed() {
-        System.out.println("actionPerformed");
         ActionEvent event = null;
         Controller instance = new ControllerMock();
         instance.actionPerformed(event);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(event);
     }
 
     /**
-     * Test of keyPressed method, of class Controller.
+     * Method responsible for testing the keyPressed(KeyEvent) method.
      */
     @Test
     public void testKeyPressed() {
-        System.out.println("keyPressed");
         KeyEvent event = null;
         Controller instance = new ControllerMock();
         instance.keyPressed(event);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(event);
     }
 
     /**
-     * Test of keyTyped method, of class Controller.
+     * Method responsible for testing the keyTyped(KeyEvent) method.
      */
     @Test
     public void testKeyTyped() {
-        System.out.println("keyTyped");
         KeyEvent event = null;
         Controller instance = new ControllerMock();
         instance.keyTyped(event);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(event);
     }
 
     /**
-     * Test of keyReleased method, of class Controller.
+     * Method responsible for testing the keyReleased(KeyEvent) method.
      */
     @Test
     public void testKeyReleased() {
-        System.out.println("keyReleased");
         KeyEvent event = null;
         Controller instance = new ControllerMock();
         instance.keyReleased(event);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(event);
     }
 
     /**
-     * Test of check method, of class Controller.
+     * Method responsible for testing the check(String) method.
      */
     @Test
     public void testCheck() {
-        System.out.println("* ControllerTest: testCheck()");
-        
         assertFalse(INSTANCE.check(""));
         assertFalse(INSTANCE.check(" "));
         assertTrue(INSTANCE.check(" a "));
@@ -92,12 +85,10 @@ public class ControllerTest {
     }
 
     /**
-     * Test of checkYear method, of class Controller.
+     * Method responsible for testing the checkYear(String) method.
      */
     @Test
     public void testCheckYear() {
-        System.out.println("* ControllerTest: testCheckYear()");
-        
         assertTrue(INSTANCE.checkYear("2000"));
         assertFalse(INSTANCE.checkYear("2"));
         assertTrue(INSTANCE.checkYear("2022"));
@@ -108,12 +99,10 @@ public class ControllerTest {
     }
 
     /**
-     * Test of checkDate method, of class Controller.
+     * Method responsible for testing the checkDate(String) method.
      */
     @Test
     public void testCheckDate() {
-        System.out.println("* ControllerTest: testCheckDate()");
-        
         assertTrue(INSTANCE.checkDate("20/01/2022"));
         assertFalse(INSTANCE.checkDate("2O/01/2010"));
         assertFalse(INSTANCE.checkDate("20/01/222"));
@@ -123,33 +112,27 @@ public class ControllerTest {
     }
 
     /**
-     * Test of checkUSDate method, of class Controller.
+     * Method responsible for testing the checkUSDate(String) method.
      */
     @Test
     public void testCheckUSDate() {
-        System.out.println("checkUSDate");
-        String string = "";
-        Controller instance = new ControllerMock();
-        boolean expResult = false;
-        boolean result = instance.checkUSDate(string);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertFalse(INSTANCE.checkUSDate("20/01/2022"));
+        assertFalse(INSTANCE.checkUSDate("2O/01/2010"));
+        assertTrue(INSTANCE.checkUSDate("2222-01-22"));
+        assertFalse(INSTANCE.checkUSDate("20/01/22"));
+        assertTrue(INSTANCE.checkUSDate("9999-99-99"));
     }
 
     /**
-     * Test of checkNumbers method, of class Controller.
+     * Method responsible for testing the checkNumbers(String) method.
      */
     @Test
     public void testCheckNumbers() {
-        System.out.println("checkNumbers");
-        String string = "";
-        Controller instance = new ControllerMock();
-        boolean expResult = false;
-        boolean result = instance.checkNumbers(string);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(INSTANCE.checkNumbers("0"));
+        assertFalse(INSTANCE.checkNumbers("-3"));
+        assertFalse(INSTANCE.checkNumbers("0.43"));
+        assertTrue(INSTANCE.checkNumbers("10"));
+        assertTrue(INSTANCE.checkNumbers("180"));
     }
 
     public class ControllerMock extends Controller {
@@ -159,6 +142,12 @@ public class ControllerTest {
 
         @Override
         public void keyPressed(KeyEvent event) {}
+        
+        @Override
+        public void keyTyped(KeyEvent event) {}
+
+        @Override
+        public void keyReleased(KeyEvent event) {}
     }
     
 }
