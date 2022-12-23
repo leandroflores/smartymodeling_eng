@@ -29,7 +29,7 @@ public class FunctString {
                      .replaceAll("/", "")
                      .replaceAll("\\.", "")
                      .replaceAll("%", "")
-                     .replaceAll("$", "")
+                     .replaceAll("\\$", "")
                      .replaceAll("!", "")
                      .replaceAll("\\?", "").trim();
     }
@@ -57,70 +57,6 @@ public class FunctString {
     }
     
     /**
-     * Method responsible for returning a String right aligned.
-     * @param  string String initial.
-     * @param  size String size.
-     * @return String right aligned.
-     */
-    public String toRight(String string, int size) {
-        if (string.length() > size) 
-            return string;
-        return getSpaces(size - string.length()) + string;
-    }
-    
-    /**
-     * Method responsible for returning a String left aligned.
-     * @param  string String initial.
-     * @param  size String size.
-     * @return String left aligned.
-     */
-    public String toLeft(String string, int size) {
-        if (string.length() > size) 
-            return string;
-        return string + getSpaces(size - string.length());
-    }
-    
-    /**
-     * Method responsible for returning a String center aligned.
-     * @param  string String initial.
-     * @param  size String size.
-     * @return String center aligned.
-     */
-    public String toCenter(String string, int size) {
-        String gap = getSpaces((size - string.length()) / 2);
-        if (string.length() > size) 
-            return string;
-        return gap + string + gap;
-    }
-    
-    /**
-     * Method responsible for returning the Frequency of a Character in a String.
-     * @param  string String.
-     * @param  character Character.
-     * @return Frequency of Character in a String.
-     */
-    public Integer countChar(String string, char character) {
-        Integer count = 0;
-        for (int i = 0; i < string.length(); i++) {
-            if (string.charAt(i) == character)
-                count += 1;
-        }
-        return count;
-    }
-    
-    /**
-     * Method responsible for returning a String in reverse order.
-     * @param  string String.
-     * @return String in reverse order.
-     */
-    public String reverse(String string) {
-        String reverse  = "";
-        for (int i = string.length() - 1; i >= 0; i--)
-               reverse += string.charAt(i);
-        return reverse;
-    }
-    
-    /**
      * Method responsible for returning a String with the Upper First Character.
      * @param  string String.
      * @return String with the Upper First Character.
@@ -144,19 +80,6 @@ public class FunctString {
         for (int i = 0; i < wordsList.length; ++i)
                  initUpper += initUpperCase(wordsList[i]) + " ";
         return   initUpper.trim();
-    }
-    
-    /**
-     * Method responsible for returning the Numbers of a String.
-     * @param  string String.
-     * @return Numbers of a String.
-     */
-    public String getNumbers(String string) {
-        String numbers    = "0123456789";
-        String newString  = "";
-        for (int i = 0; i < string.length(); i++)
-               newString += numbers.contains(Character.toString(string.charAt(i))) ? string.charAt(i) : "";
-        return newString;
     }
     
     /**
@@ -239,59 +162,6 @@ public class FunctString {
             default:
                 return character;
         }
-    }
-    
-    /**
-     * Method responsible for returning a List of Longs.
-     * @param  values String with values separated by space.
-     * @return List of Longs.
-     */
-    public List<Long> createList(String values) {
-        List<Long> list  = new ArrayList<>();
-        String[]   array = values.split("\\ ");
-        for (String current : array)
-                   list.add(Long.parseLong(current.trim()));
-        return     list;
-    }
-    
-    /**
-     * Method responsible for returning a List of Strings.
-     * @param  values String with values separated by space.
-     * @return List of Strings.
-     */
-    public List<String> stringToList(String values) {
-        List<String> list  = new ArrayList<>();
-        String[]     array = values.split("\\ ");
-        for (String current : array)
-                     list.add(current.trim());
-        return       list;
-    }
-    
-    /**
-     * Method responsible for returning a String with List values.
-     * @param  list List.
-     * @return String with List values.
-     */
-    public String listToString(List<String> list) {
-        String values = "";
-        for (String current : list)
-               values += current + "\n";
-        return values;
-    }
-    
-    /**
-     * 
-     * Method responsible for checking if a mask is valid.
-     * @param  string String.
-     * @param  mask   Mask.
-     * @return String matches Mask.
-     */
-    public boolean checkMask(String string, String mask) {
-        for (int i = 0; i < string.length(); i++) {
-            if (!mask.contains(Character.toString(string.charAt(i)))) 
-                return false;
-        }
-        return true;
     }
     
     /**
