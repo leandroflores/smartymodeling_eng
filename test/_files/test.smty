@@ -1,0 +1,207 @@
+<project id="5cd76055e871c74709f357356cf0fa2c" name="Project0" version="1.0">
+  <types>
+    <type id="TYPE#29" path="java.util" name="Arrays" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#10" path="java.lang" name="Boolean" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#11" path="java.lang" name="Byte" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#12" path="java.lang" name="Character" value="null" primitive="false" standard="true"/>
+    <type id="CLASS#15" path="Class15" name="Class15" value="null" primitive="false" standard="false"/>
+    <type id="TYPE#30" path="java.util" name="Collections" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#31" path="java.util" name="Date" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#13" path="java.lang" name="Double" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#14" path="java.lang" name="Enum" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#32" path="java.util" name="EnumMap" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#33" path="java.util" name="EnumSet" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#34" path="java.util" name="EventListener" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#15" path="java.lang" name="Exception" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#16" path="java.lang" name="Float" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#35" path="java.util" name="HashMap" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#36" path="java.util" name="HashSet" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#37" path="java.util" name="HashTable" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#17" path="java.lang" name="Integer" value="null" primitive="false" standard="true"/>
+    <type id="INTERFACE#25" path="Interface25" name="Interface25" value="null" primitive="false" standard="false"/>
+    <type id="TYPE#38" path="java.util" name="LinkedHashMap" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#39" path="java.util" name="LinkedHashSet" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#40" path="java.util" name="LinkedList" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#41" path="java.util" name="List" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#18" path="java.lang" name="Long" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#42" path="java.util" name="Map" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#19" path="java.lang" name="Math" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#20" path="java.lang" name="Number" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#21" path="java.lang" name="Object" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#22" path="java.lang" name="Package" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#43" path="java.util" name="Queue" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#44" path="java.util" name="Random" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#45" path="java.util" name="Scanner" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#46" path="java.util" name="Set" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#23" path="java.lang" name="Short" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#47" path="java.util" name="Stack" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#24" path="java.lang" name="String" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#25" path="java.lang" name="StringBuffer" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#26" path="java.lang" name="StringBuilder" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#27" path="java.lang" name="Thread" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#48" path="java.util" name="Timer" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#49" path="java.util" name="TreeMap" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#50" path="java.util" name="TreeSet" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#51" path="java.util" name="Vector" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#28" path="java.lang" name="Void" value="null" primitive="false" standard="true"/>
+    <type id="TYPE#1" path="" name="boolean" value="false" primitive="true" standard="true"/>
+    <type id="TYPE#2" path="" name="byte" value="'0'" primitive="true" standard="true"/>
+    <type id="TYPE#3" path="" name="char" value="' '" primitive="true" standard="true"/>
+    <type id="TYPE#4" path="" name="double" value="0.0d" primitive="true" standard="true"/>
+    <type id="TYPE#5" path="" name="float" value="0.0f" primitive="true" standard="true"/>
+    <type id="TYPE#6" path="" name="int" value="0" primitive="true" standard="true"/>
+    <type id="TYPE#7" path="" name="long" value="0.0l" primitive="true" standard="true"/>
+    <type id="TYPE#8" path="" name="short" value="0" primitive="true" standard="true"/>
+    <type id="TYPE#9" path="" name="void" value="" primitive="true" standard="true"/>
+  </types>
+  <stereotypes>
+    <stereotype id="STEREOTYPE#4" name="alternative_OR" primitive="true"/>
+    <stereotype id="STEREOTYPE#5" name="alternative_XOR" primitive="true"/>
+    <stereotype id="STEREOTYPE#1" name="mandatory" primitive="true"/>
+    <stereotype id="STEREOTYPE#7" name="mutex" primitive="true"/>
+    <stereotype id="STEREOTYPE#2" name="optional" primitive="true"/>
+    <stereotype id="STEREOTYPE#6" name="requires" primitive="true"/>
+    <stereotype id="STEREOTYPE#8" name="stereotype" primitive="false"/>
+    <stereotype id="STEREOTYPE#3" name="variationPoint" primitive="true"/>
+  </stereotypes>
+  <profile mandatory="STEREOTYPE#1" optional="STEREOTYPE#2" variationPoint="STEREOTYPE#3" inclusive="STEREOTYPE#4" exclusive="STEREOTYPE#5" requires="STEREOTYPE#6" mutex="STEREOTYPE#7"/>
+  <diagram id="DIAGRAM#1" name="Diagram1AA" type="Feature">
+    <variability id="VARIABILITY#4" name="" category="Exclusive" variationPoint="FEATURE#1" mandatory="false" x="340" y="180" globalX="0" globalY="0" height="50" width="50">
+      <variant id="FEATURE#3"/>
+      <variant id="FEATURE#2"/>
+    </variability>
+    <feature id="FEATURE#1" name="Feature A" mandatory="false" abstract="false" x="260" y="50" globalX="0" globalY="0" height="50" width="150"/>
+    <feature id="FEATURE#2" name="Feature B" mandatory="false" abstract="false" x="140" y="271" globalX="0" globalY="0" height="50" width="170"/>
+    <feature id="FEATURE#3" name="Feature C" mandatory="false" abstract="false" x="480" y="280" globalX="0" globalY="0" height="50" width="150"/>
+    <feature id="FEATURE#28" name="Feature28" mandatory="false" abstract="false" x="430" y="400" globalX="0" globalY="0" height="50" width="150"/>
+    <combination id="COMBINATION#5" source="VARIABILITY#4" target="FEATURE#1" root="true">
+    </combination>
+    <combination id="COMBINATION#6" source="VARIABILITY#4" target="FEATURE#3" root="false">
+    </combination>
+    <combination id="COMBINATION#7" source="VARIABILITY#4" target="FEATURE#2" root="false">
+    </combination>
+    <connection id="CONNECTION#29" source="FEATURE#3" target="FEATURE#28" category="mandatory">
+    </connection>
+  </diagram>
+  <diagram id="DIAGRAM#4" name="Diagram4" type="Activity">
+    <activity id="ACTIVITY#22" name="Activity" mandatory="true" x="369" y="100" globalX="0" globalY="0" height="80" width="200"/>
+    <initial id="INITIAL#21" name="" mandatory="true" x="100" y="133" globalX="0" globalY="0" height="30" width="30"/>
+    <flow id="FLOW#23" source="INITIAL#21" target="ACTIVITY#22" guard="" action="" weight="">
+    </flow>
+  </diagram>
+  <diagram id="DIAGRAM#3" name="Diagram3" type="Class">
+    <package id="PACKAGE#20" name="package20" mandatory="true" x="140" y="70" globalX="140" globalY="70" height="390" width="726"/>
+    <package id="PACKAGE#19" name="package19" mandatory="true" x="21" y="47" globalX="161" globalY="117" height="201" width="250"/>
+    <class id="CLASS#15" name="Class15" mandatory="true" x="30" y="50" globalX="102" globalY="167" abstract="true" final="false" height="141" width="200" parent="PACKAGE#19">
+      <description></description>
+      <attribute id="ATTRIBUTE#16" name="attribute16" type="TYPE#21" visibility="private" static="false" final="false"/>
+      <attribute id="ATTRIBUTE#18" name="attribute18aa" type="TYPE#21" visibility="private" static="false" final="false"/>
+      <method id="METHOD#17" name="method17" return="TYPE#9" visibility="public" constructor="false" static="false" final="false" abstract="false">
+        <parameter type="TYPE#6" name="a"/>
+      </method>
+      <method id="METHOD#24" name="Class15" return="TYPE#9" visibility="public" constructor="true" static="false" final="false" abstract="false">
+      </method>
+    </class>
+    <interface id="INTERFACE#25" name="Interface25" mandatory="true" x="410" y="180" globalX="550" globalY="250" height="120" width="238" parent="PACKAGE#20">
+      <description></description>
+      <method id="METHOD#26" name="method26" return="TYPE#9" visibility="public" constructor="false" static="false" final="false" abstract="true">
+      </method>
+    </interface>
+    <association id="ASSOCIATION#27" name="" category="aggregation" direction="true">
+      <source entity="CLASS#15" sourceVisibility="private" sourceName="dqdwe" sourceMin="1" sourceMax="3" sourceX="410" sourceY="210"/>
+      <target entity="INTERFACE#25" targetVisibility="private" targetName="yyyy" targetMin="1" targetMax="2147483647" targetX="520" targetY="260"/>
+    </association>
+    <nested package="PACKAGE#19" parent="PACKAGE#20"/>
+  </diagram>
+  <diagram id="DIAGRAM#5" name="Diagram5" type="Sequence">
+    <instance id="INSTANCE#33" name="Instance" class="CLASS#15" mandatory="true" x="0" y="0" height="380" width="200"/>
+    <lifeline id="LIFELINE#30" name="asax" actor="ACTOR#13" mandatory="true" x="123" y="70" height="350" width="200"/>
+  </diagram>
+  <diagram id="DIAGRAM#2" name="Diagram2" type="UseCase">
+    <actor id="ACTOR#13" name="Actor13" mandatory="true" x="120" y="120" globalX="0" globalY="0" height="50" width="75"/>
+    <useCase id="USECASE#10" name="Use Case 123" mandatory="true" x="460" y="260" globalX="0" globalY="0" height="100" width="200"/>
+    <useCase id="USECASE#32" name="Use Case 32" mandatory="true" x="690" y="240" globalX="0" globalY="0" height="100" width="200"/>
+    <useCase id="USECASE#8" name="Use Case A" mandatory="true" x="460" y="100" globalX="0" globalY="0" height="100" width="200"/>
+    <useCase id="USECASE#9" name="Use Case Test" mandatory="true" x="250" y="220" globalX="0" globalY="0" height="100" width="200"/>
+    <communication id="COMMUNICATION#14" actor="ACTOR#13" useCase="USECASE#8">
+    </communication>
+    <extend id="EXTEND#11" source="USECASE#10" target="USECASE#8">
+    </extend>
+    <extend id="EXTEND#12" source="USECASE#9" target="USECASE#8">
+    </extend>
+    <extend id="EXTEND#33" source="USECASE#32" target="USECASE#8">
+    </extend>
+    <variability id="VARIABILITY#1" name="Variability Use Case" variationPoint="USECASE#8" constraint="Inclusive" bindingTime="DESIGN_TIME" min="1" max="3">
+      <variant id="USECASE#9"/>
+      <variant id="USECASE#32"/>
+      <variant id="USECASE#10"/>
+    </variability>
+  </diagram>
+  <requirement id="REQUIREMENT#1" code="RQ001" type="Functional" name="Test 1" priority="Essential" history="">
+    <description></description>
+    <feature element="FEATURE#2"/>
+    <feature element="FEATURE#1"/>
+    <usecase element="ACTOR#13"/>
+  </requirement>
+  <requirement id="REQUIREMENT#2" code="RQ002" type="Business" name="Test 2" priority="Essential" history="null">
+    <description></description>
+  </requirement>
+  <requirement id="REQUIREMENT#3" code="RQ003" type="Business" name="Test 3" priority="Essential" history="">
+    <description></description>
+  </requirement>
+  <requirement id="REQUIREMENT#4" code="RQ004" type="Non-Functional" name="Test 4" priority="Important" history="">
+    <description></description>
+  </requirement>
+  <traceability id="TRACEABILITY#1" owner="REQUIREMENT#1">
+    <destination id="REQUIREMENT#2"/>
+    <destination id="REQUIREMENT#4"/>
+  </traceability>
+  <traceability id="TRACEABILITY#2" owner="REQUIREMENT#3">
+    <destination id="REQUIREMENT#4"/>
+  </traceability>
+  <traceability id="TRACEABILITY#3" owner="REQUIREMENT#4">
+  </traceability>
+  <links>
+    <link element="METHOD#26" stereotype="STEREOTYPE#8"/>
+    <link element="USECASE#10" stereotype="STEREOTYPE#4"/>
+    <link element="USECASE#32" stereotype="STEREOTYPE#4"/>
+    <link element="USECASE#9" stereotype="STEREOTYPE#4"/>
+    <link element="ACTIVITY#22" stereotype="STEREOTYPE#1"/>
+    <link element="CLASS#15" stereotype="STEREOTYPE#1"/>
+    <link element="INTERFACE#25" stereotype="STEREOTYPE#1"/>
+    <link element="INSTANCE#33" stereotype="STEREOTYPE#1"/>
+    <link element="LIFELINE#30" stereotype="STEREOTYPE#1"/>
+    <link element="ACTOR#13" stereotype="STEREOTYPE#1"/>
+    <link element="USECASE#8" stereotype="STEREOTYPE#1"/>
+    <link element="VARIABILITY#4" stereotype="STEREOTYPE#2"/>
+    <link element="FEATURE#1" stereotype="STEREOTYPE#2"/>
+    <link element="FEATURE#2" stereotype="STEREOTYPE#2"/>
+    <link element="FEATURE#3" stereotype="STEREOTYPE#2"/>
+    <link element="FEATURE#28" stereotype="STEREOTYPE#2"/>
+    <link element="USECASE#8" stereotype="STEREOTYPE#3"/>
+  </links>
+  <products>
+    <product id="PRODUCT#1" name="AAA" version="1.0">
+      <description></description>
+      <instance id="INSTANCE#1" name="Instance 1" diagram="DIAGRAM#2">
+        <artifact id="ARTIFACT#2" element="USECASE#10" x="570" y="250" height="100" width="200"/>
+        <artifact id="ARTIFACT#1" element="ACTOR#13" x="89" y="89" height="50" width="75"/>
+        <artifact id="ARTIFACT#3" element="USECASE#8" x="440" y="40" height="100" width="200"/>
+        <relationship  id="RELATIONSHIP#1" association="COMMUNICATION#14" sourceX="0.0" sourceY="0.0" targetX="0.0" targetY="0.0">
+        </relationship>
+        <relationship  id="RELATIONSHIP#2" association="EXTEND#11" sourceX="0.0" sourceY="0.0" targetX="0.0" targetY="0.0">
+        </relationship>
+      </instance>
+    </product>
+  </products>
+  <metric id="METRIC#1" name="Number of Actors" label="AAA" target="Project">
+    <description>Returns the Number of UML Actors.</description>
+    <operation>actor(*)</operation>
+  </metric>
+  <metric id="METRIC#2" name="Number of Use Cases" label="NumOfUseCases" target="Project">
+    <description></description>
+    <operation>UseCase(*)</operation>
+  </metric>
+  <measure id="MEASURE#1" name="NewMeasureAG" date="2021-08-03" metric="METRIC#1" target="Project" value="0.0"/>
+  <measure id="MEASURE#2" name="NewMeasure" date="2021-08-03" metric="METRIC#2" target="Project" value="0.0"/>
+</project>

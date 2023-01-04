@@ -70,7 +70,7 @@ public class ImportProject {
      * @throws IOException 
      */
     private void openFile() throws ParserConfigurationException, SAXException, IOException {
-        file      = new File(path);
+        file     = new File(path);
         document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(file);
         document.getDocumentElement().normalize();
     }
